@@ -20,7 +20,6 @@
             background-color: #f9f9f9;
         }
         
-        /* ============ HEADER ============ */
         header {
             background-color: #fff;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -70,7 +69,6 @@
             color: #333;
         }
         
-        /* ============ MAIN ============ */
         main {
             max-width: 1000px;
             margin: 2rem auto;
@@ -94,15 +92,42 @@
             color: #7f8c8d;
         }
         
-        .admin-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
+        .tabs {
+            display: flex;
+            gap: 1rem;
             margin-bottom: 2rem;
+            border-bottom: 2px solid #ecf0f1;
         }
         
-        /* ============ 左側：入力フォーム ============ */
-        .admin-form {
+        .tab-button {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-weight: bold;
+            color: #7f8c8d;
+            transition: all 0.3s;
+        }
+        
+        .tab-button.active {
+            color: #3498db;
+            border-bottom-color: #3498db;
+        }
+        
+        .tab-button:hover {
+            color: #2c3e50;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .form-container {
             background-color: #fff;
             padding: 2rem;
             border-radius: 8px;
@@ -120,8 +145,7 @@
             color: #2c3e50;
         }
         
-        .form-group input[type="text"],
-        .form-group input[type="file"],
+        .form-group input,
         .form-group textarea,
         .form-group select {
             width: 100%;
@@ -133,8 +157,7 @@
             transition: border-color 0.3s;
         }
         
-        .form-group input[type="text"]:focus,
-        .form-group input[type="file"]:focus,
+        .form-group input:focus,
         .form-group textarea:focus,
         .form-group select:focus {
             outline: none;
@@ -146,45 +169,41 @@
             min-height: 100px;
         }
         
-        .form-group.tags-input {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            align-items: flex-start;
-        }
-        
-        .form-group.tags-input input {
-            flex: 1;
-            min-width: 150px;
-        }
-        
-        .tags-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
-        }
-        
-        .tag-badge {
-            background-color: #3498db;
-            color: white;
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.9rem;
-        }
-        
-        .tag-badge button {
-            background: none;
+        .btn {
+            padding: 0.8rem 1.5rem;
             border: none;
-            color: white;
+            border-radius: 6px;
+            font-weight: bold;
             cursor: pointer;
-            font-size: 1.2rem;
-            padding: 0;
-            display: flex;
-            align-items: center;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background-color: #27ae60;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #229954;
+        }
+        
+        .btn-secondary {
+            background-color: #ecf0f1;
+            color: #2c3e50;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #d5dbdb;
+        }
+        
+        .btn-danger {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background-color: #c0392b;
         }
         
         .form-actions {
@@ -193,173 +212,91 @@
             margin-top: 2rem;
         }
         
-        .btn {
-            flex: 1;
-            padding: 1rem;
-            border: none;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: all 0.3s;
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
         }
         
-        .btn-register {
-            background-color: #27ae60;
-            color: white;
-        }
-        
-        .btn-register:hover {
-            background-color: #229954;
-        }
-        
-        .btn-reset {
-            background-color: #ecf0f1;
-            color: #2c3e50;
-        }
-        
-        .btn-reset:hover {
-            background-color: #d5dbdb;
-        }
-        
-        /* ============ 右側：プレビュー ============ */
-        .preview-section {
+        .material-card {
             background-color: #fff;
-            padding: 2rem;
             border-radius: 8px;
+            overflow: hidden;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
         
-        .preview-section h2 {
-            color: #2c3e50;
-            margin-bottom: 1.5rem;
-            font-size: 1.3rem;
-        }
-        
-        .preview-image {
+        .material-image {
             width: 100%;
-            height: 200px;
+            height: 120px;
             background-color: #ecf0f1;
-            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1rem;
-            overflow: hidden;
+            font-size: 2.5rem;
         }
         
-        .preview-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .preview-card {
-            border: 2px solid #ecf0f1;
-            border-radius: 8px;
-            overflow: hidden;
-            background-color: #f9f9f9;
-        }
-        
-        .preview-title {
+        .material-info {
             padding: 1rem;
-            background-color: #f9f9f9;
+        }
+        
+        .material-title {
             font-weight: bold;
             color: #2c3e50;
-            border-bottom: 1px solid #ecf0f1;
-            min-height: 50px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .preview-tags {
-            padding: 1rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-        
-        .preview-tag {
-            background-color: #e8f4f8;
-            color: #2980b9;
-            padding: 0.2rem 0.5rem;
-            font-size: 0.75rem;
-            border-radius: 3px;
-        }
-        
-        .preview-desc {
-            padding: 1rem;
-            font-size: 0.9rem;
-            color: #7f8c8d;
-            border-top: 1px solid #ecf0f1;
-            max-height: 100px;
-            overflow-y: auto;
-            background-color: #fff;
-        }
-        
-        .preview-empty {
-            padding: 2rem;
-            text-align: center;
-            color: #95a5a6;
+            margin-bottom: 0.5rem;
             font-size: 0.95rem;
         }
         
-        /* ============ JSON出力エリア ============ */
-        .json-output-section {
-            background-color: #fff;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
-            grid-column: 1 / -1;
-        }
-        
-        .json-output-section h2 {
-            color: #2c3e50;
-            margin-bottom: 1rem;
-        }
-        
-        .json-output {
-            background-color: #2c3e50;
-            color: #ecf0f1;
-            padding: 1rem;
-            border-radius: 6px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.85rem;
-            overflow-x: auto;
-            max-height: 300px;
-            overflow-y: auto;
-            white-space: pre-wrap;
-            word-break: break-all;
-            margin-bottom: 1rem;
-        }
-        
-        .copy-json-btn {
-            padding: 0.8rem 1.5rem;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-        
-        .copy-json-btn:hover {
-            background-color: #2980b9;
-        }
-        
-        .instruction {
-            background-color: #e8f4f8;
-            border-left: 4px solid #3498db;
-            padding: 1rem;
-            border-radius: 4px;
+        .material-actions {
+            display: flex;
+            gap: 0.5rem;
             margin-top: 1rem;
-            font-size: 0.9rem;
-            color: #2c3e50;
         }
         
-        /* ============ FOOTER ============ */
+        .material-actions button {
+            flex: 1;
+            padding: 0.5rem;
+            font-size: 0.8rem;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-box {
+            background-color: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #3498db;
+        }
+        
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        
+        .alert {
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+        
+        .alert-info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        
         footer {
             background-color: #2c3e50;
             color: #ecf0f1;
@@ -399,13 +336,6 @@
             font-size: 0.9rem;
         }
         
-        /* ============ レスポンシブ ============ */
-        @media (max-width: 1024px) {
-            .admin-container {
-                grid-template-columns: 1fr;
-            }
-        }
-        
         @media (max-width: 768px) {
             .navbar {
                 padding: 1rem;
@@ -439,56 +369,51 @@
             main {
                 padding: 0 1rem;
             }
-            
-            .admin-form,
-            .preview-section,
-            .json-output-section {
-                padding: 1.5rem;
-            }
-            
-            .form-actions {
-                flex-direction: column;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- ============ HEADER ============ -->
     <header>
         <div class="navbar">
-            <a href="./" class="logo">📦 Blog Material Hub</a>
+            <a href="/" class="logo">📦 Blog Material Hub</a>
             <button class="menu-toggle" id="menuToggle">☰</button>
             <nav id="navMenu">
-                <a href="./">ホーム</a>
-                <a href="./gallery.html">素材ギャラリー</a>
-                <a href="./faq.html">よくあるご質問</a>
-                <a href="./contact.html">お問い合わせ</a>
+                <a href="/">ホーム</a>
+                <a href="/gallery.html">素材ギャラリー</a>
+                <a href="/faq.html">よくあるご質問</a>
+                <a href="/contact.html">お問い合わせ</a>
             </nav>
         </div>
     </header>
 
-    <!-- ============ MAIN ============ -->
     <main>
         <div class="admin-header">
             <h1>🛠️ 素材管理</h1>
-            <p>画像をアップロードしてメタデータを入力。自動的にJSON形式に変換されます。data.jsonにコピペで追記してください。</p>
+            <p>素材を登録・管理します。登録した素材はブラウザに保存され、ギャラリーに自動表示されます。</p>
         </div>
 
-        <div class="admin-container">
-            <!-- 左側：入力フォーム -->
-            <div class="admin-form">
-                <h2>新規素材を登録</h2>
-                
+        <div class="tabs">
+            <button class="tab-button active" onclick="switchTab('register')">新規登録</button>
+            <button class="tab-button" onclick="switchTab('list')">素材一覧</button>
+            <button class="tab-button" onclick="switchTab('export')">データ管理</button>
+        </div>
+
+        <!-- タブ 1：新規登録 -->
+        <div id="register" class="tab-content active">
+            <div class="form-container">
+                <h2>新しい素材を登録</h2>
                 <form id="materialForm">
                     <div class="form-group">
-                        <label for="imageFile">📷 画像ファイル</label>
+                        <label for="emoji">📷 素材アイコン（emoji）</label>
                         <input 
-                            type="file" 
-                            id="imageFile" 
-                            accept="image/*"
+                            type="text" 
+                            id="emoji" 
+                            placeholder="例：🌿 🐱 🌅 ☕ 📱 🎨"
+                            maxlength="2"
+                            required
                         >
                         <small style="color: #7f8c8d; display: block; margin-top: 0.5rem;">
-                            ※ PNG, JPEG, WebP 対応。ドラッグ&ドロップでもOK
+                            ※ emoji 1 文字を入力
                         </small>
                     </div>
 
@@ -506,24 +431,9 @@
                         <label for="description">📄 説明文</label>
                         <textarea 
                             id="description" 
-                            placeholder="素材の説明。どんなブログで活躍するか、使用例など。"
+                            placeholder="どんなブログで活躍するか、使用例など。"
                             required
                         ></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label>🏷️ タグ</label>
-                        <div class="form-group tags-input">
-                            <input 
-                                type="text" 
-                                id="tagInput" 
-                                placeholder="タグを入力してEnter"
-                            >
-                        </div>
-                        <div class="tags-list" id="tagsList"></div>
-                        <small style="color: #7f8c8d; display: block; margin-top: 0.5rem;">
-                            ※ 入力後にEnterキーで追加。複数可。
-                        </small>
                     </div>
 
                     <div class="form-group">
@@ -540,248 +450,182 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="prompt">🤖 生成プロンプト（AI生成の場合）</label>
-                        <textarea 
-                            id="prompt" 
-                            placeholder="DALL-E等で使用したプロンプトを入力（オプション）"
-                        ></textarea>
+                        <label for="tags">🏷️ タグ</label>
+                        <input 
+                            type="text" 
+                            id="tags" 
+                            placeholder="例：植物, インテリア, 自然（カンマ区切り）"
+                        >
                     </div>
 
                     <div class="form-actions">
-                        <button type="submit" class="btn btn-register">✅ 登録用JSON生成</button>
-                        <button type="reset" class="btn btn-reset">🔄 リセット</button>
+                        <button type="submit" class="btn btn-primary">✅ 登録</button>
+                        <button type="reset" class="btn btn-secondary">🔄 リセット</button>
                     </div>
                 </form>
             </div>
-
-            <!-- 右側：プレビュー -->
-            <div class="preview-section">
-                <h2>ギャラリープレビュー</h2>
-                <div id="preview">
-                    <div class="preview-empty">
-                        画像を選択すると、<br>ここにプレビューが表示されます
-                    </div>
-                </div>
-            </div>
         </div>
 
-        <!-- JSON出力エリア -->
-        <div class="json-output-section">
-            <h2>📋 JSON形式（data.jsonに追記用）</h2>
-            <div class="json-output" id="jsonOutput">
-                登録用のJSONはここに表示されます。
+        <!-- タブ 2：素材一覧 -->
+        <div id="list" class="tab-content">
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="stat-number" id="totalCount">0</div>
+                    <div class="stat-label">登録済み素材</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number" id="dlCount">0</div>
+                    <div class="stat-label">総ダウンロード数</div>
+                </div>
             </div>
-            <button class="copy-json-btn" id="copyJsonBtn" style="display: none;">
-                📋 JSONをコピー
-            </button>
-            
-            <div class="instruction">
-                <strong>📌 使い方：</strong><br>
-                1. 上のフォームに素材情報を入力<br>
-                2. 【登録用JSON生成】ボタンをクリック<br>
-                3. 下に表示されたJSONをコピー<br>
-                4. data.json の "materials" 配列に追記<br>
-                5. git push で GitHub に反映
+            <div class="materials-grid" id="materialsList"></div>
+        </div>
+
+        <!-- タブ 3：データ管理 -->
+        <div id="export" class="tab-content">
+            <div class="form-container">
+                <h2>データ管理</h2>
+                
+                <div class="alert alert-info">
+                    <strong>💡 素材データはブラウザのローカルストレージに保存されています。</strong>
+                </div>
+
+                <h3 style="margin-top: 2rem; margin-bottom: 1rem;">📥 JSON エクスポート</h3>
+                <p style="margin-bottom: 1rem;">素材データを JSON ファイルとしてダウンロードします。</p>
+                <button class="btn btn-primary" onclick="exportJSON()">📋 エクスポート</button>
+
+                <h3 style="margin-top: 2rem; margin-bottom: 1rem;">📤 JSON インポート</h3>
+                <p style="margin-bottom: 1rem;">JSON ファイルから素材データをインポートします。</p>
+                <input type="file" id="importFile" accept=".json" />
+                <button class="btn btn-primary" onclick="importJSON()" style="margin-top: 1rem;">📥 インポート</button>
+
+                <h3 style="margin-top: 2rem; margin-bottom: 1rem;">⚠️ すべてのデータを削除</h3>
+                <p style="margin-bottom: 1rem; color: #e74c3c;">登録されたすべての素材を削除します（取り消せません）</p>
+                <button class="btn btn-danger" onclick="deleteAllData()">🗑️ 全削除</button>
             </div>
         </div>
     </main>
 
-    <!-- ============ FOOTER ============ -->
     <footer>
         <div class="footer-content">
             <div class="footer-links">
-                <a href="./privacy.html">プライバシーポリシー</a>
-                <a href="./terms.html">利用規約</a>
-                <a href="./disclaimer.html">免責事項</a>
-                <a href="./contact.html">お問い合わせ</a>
+                <a href="/privacy.html">プライバシーポリシー</a>
+                <a href="/terms.html">利用規約</a>
+                <a href="/disclaimer.html">免責事項</a>
+                <a href="/contact.html">お問い合わせ</a>
             </div>
             <div class="footer-info">
                 <p>&copy; 2026 Blog Material Hub. All rights reserved.</p>
-                <p>Powered by GitHub Pages + Cloudflare</p>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScriptロジック -->
     <script>
-        // ========== ナビゲーション ==========
+        const STORAGE_KEY = 'blog_materials';
+
         const menuToggle = document.getElementById('menuToggle');
         const navMenu = document.getElementById('navMenu');
-        
-        menuToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
-        
-        navMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-            });
-        });
+        menuToggle.addEventListener('click', () => navMenu.classList.toggle('active'));
 
-        // ========== グローバル変数 ==========
-        let tags = [];
-        let imageBase64 = null;
-        let nextMaterialId = 13; // サンプル12個の次のID
-
-        // ========== 画像ファイル処理 ==========
-        const imageFile = document.getElementById('imageFile');
-        imageFile.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (event) => {
-                    imageBase64 = event.target.result;
-                    updatePreview();
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        // ========== ドラッグ&ドロップ対応 ==========
-        document.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-        });
-
-        document.addEventListener('drop', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            const files = e.dataTransfer.files;
-            if (files.length > 0 && files[0].type.startsWith('image/')) {
-                imageFile.files = files;
-                const event = new Event('change', { bubbles: true });
-                imageFile.dispatchEvent(event);
-            }
-        });
-
-        // ========== タグ管理 ==========
-        const tagInput = document.getElementById('tagInput');
-        const tagsList = document.getElementById('tagsList');
-
-        tagInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                const tag = tagInput.value.trim();
-                if (tag && !tags.includes(tag)) {
-                    tags.push(tag);
-                    tagInput.value = '';
-                    renderTags();
-                    updatePreview();
-                }
-            }
-        });
-
-        function renderTags() {
-            tagsList.innerHTML = tags.map(tag => `
-                <div class="tag-badge">
-                    ${tag}
-                    <button type="button" onclick="removeTag('${tag}')">×</button>
-                </div>
-            `).join('');
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+            if (tabName === 'list') renderList();
         }
 
-        function removeTag(tag) {
-            tags = tags.filter(t => t !== tag);
-            renderTags();
-            updatePreview();
+        function loadMaterials() {
+            return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
         }
 
-        // ========== プレビュー更新 ==========
-        function updatePreview() {
-            const title = document.getElementById('title').value;
-            const tags_list = tags;
-            const preview = document.getElementById('preview');
-
-            if (!title || tags_list.length === 0) {
-                preview.innerHTML = `
-                    <div class="preview-empty">
-                        タイトルとタグを入力すると、<br>プレビューが表示されます
-                    </div>
-                `;
-                return;
-            }
-
-            let imageHtml = '';
-            if (imageBase64) {
-                imageHtml = `<img src="${imageBase64}" alt="${title}">`;
-            } else {
-                imageHtml = `<div style="font-size: 3rem;">🖼️</div>`;
-            }
-
-            preview.innerHTML = `
-                <div class="preview-image">${imageHtml}</div>
-                <div class="preview-card">
-                    <div class="preview-title">${title}</div>
-                    <div class="preview-tags">
-                        ${tags_list.map(tag => `<span class="preview-tag">${tag}</span>`).join('')}
-                    </div>
-                </div>
-            `;
+        function saveMaterials(m) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(m));
         }
 
-        // ========== フォーム送信 ==========
-        const materialForm = document.getElementById('materialForm');
-        materialForm.addEventListener('submit', (e) => {
+        document.getElementById('materialForm').addEventListener('submit', e => {
             e.preventDefault();
-
+            const emoji = document.getElementById('emoji').value;
             const title = document.getElementById('title').value;
             const description = document.getElementById('description').value;
             const category = document.getElementById('category').value;
-            const prompt = document.getElementById('prompt').value;
-            const today = new Date().toISOString().split('T')[0];
+            const tags = document.getElementById('tags').value.split(',').map(t => t.trim()).filter(t => t);
 
-            if (!title || !description || !category || tags.length === 0) {
-                alert('すべての必須項目を入力してください');
-                return;
-            }
-
-            // JSON形式で生成
-            const materialJson = {
-                id: nextMaterialId++,
-                title: title,
-                description: description,
-                tags: tags,
-                category: category,
-                prompt: prompt || "画像のプロンプト",
+            const m = loadMaterials();
+            m.push({
+                id: m.length + 1,
+                image: emoji,
+                title,
+                description,
+                category,
+                tags,
+                prompt: '',
                 downloadCount: 0,
-                createdDate: today
-            };
-
-            displayJsonOutput(materialJson);
+                createdDate: new Date().toISOString().split('T')[0]
+            });
+            saveMaterials(m);
+            alert(`✅ 「${title}」を登録しました`);
+            document.getElementById('materialForm').reset();
         });
 
-        // ========== JSON出力 ==========
-        function displayJsonOutput(material) {
-            const jsonOutput = document.getElementById('jsonOutput');
-            const copyJsonBtn = document.getElementById('copyJsonBtn');
-            
-            const jsonStr = JSON.stringify(material, null, 4);
-            jsonOutput.textContent = jsonStr;
-            copyJsonBtn.style.display = 'inline-block';
-
-            copyJsonBtn.onclick = () => {
-                navigator.clipboard.writeText(jsonStr).then(() => {
-                    alert('JSONをコピーしました！\n\ndata.json の "materials" 配列に追記してください。');
-                    copyJsonBtn.textContent = '✅ コピー完了！';
-                    setTimeout(() => {
-                        copyJsonBtn.textContent = '📋 JSONをコピー';
-                    }, 2000);
-                });
-            };
+        function renderList() {
+            const m = loadMaterials();
+            const html = m.length === 0 ? '<p style="grid-column:1/-1;text-align:center;color:#7f8c8d">登録済み素材なし</p>' : 
+                m.map(x => `
+                <div class="material-card">
+                    <div class="material-image">${x.image}</div>
+                    <div class="material-info">
+                        <div class="material-title">${x.title}</div>
+                        <small style="color:#7f8c8d">DL: ${x.downloadCount || 0}</small>
+                        <div class="material-actions">
+                            <button class="btn btn-danger" onclick="deleteMaterial(${x.id})">削除</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById('materialsList').innerHTML = html;
+            document.getElementById('totalCount').textContent = m.length;
+            document.getElementById('dlCount').textContent = m.reduce((s, x) => s + (x.downloadCount || 0), 0);
         }
 
-        // ========== フォームリセット ==========
-        materialForm.addEventListener('reset', () => {
-            tags = [];
-            imageBase64 = null;
-            tagsList.innerHTML = '';
-            document.getElementById('preview').innerHTML = `
-                <div class="preview-empty">
-                    画像を選択すると、<br>ここにプレビューが表示されます
-                </div>
-            `;
-        });
+        function deleteMaterial(id) {
+            if (!confirm('削除しますか？')) return;
+            const m = loadMaterials().filter(x => x.id !== id);
+            saveMaterials(m);
+            renderList();
+        }
+
+        function exportJSON() {
+            const data = { materials: loadMaterials(), exportDate: new Date().toISOString() };
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }));
+            a.download = `materials-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+        }
+
+        function importJSON() {
+            const f = document.getElementById('importFile').files[0];
+            if (!f) return alert('ファイルを選択');
+            const r = new FileReader();
+            r.onload = e => {
+                try {
+                    const d = JSON.parse(e.target.result);
+                    const m = Array.isArray(d.materials) ? d.materials : d;
+                    saveMaterials(m);
+                    alert(`✅ ${m.length}件をインポート`);
+                    renderList();
+                } catch { alert('❌ ファイル形式エラー'); }
+            };
+            r.readAsText(f);
+        }
+
+        function deleteAllData() {
+            if (!confirm('本当に削除？')) return;
+            if (!confirm('取り消せません。本当に？')) return;
+            localStorage.removeItem(STORAGE_KEY);
+            alert('✅ 削除完了');
+            renderList();
+        }
     </script>
 </body>
 </html>

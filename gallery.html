@@ -549,13 +549,13 @@
     <!-- ============ HEADER ============ -->
     <header>
         <div class="navbar">
-            <a href="./" class="logo">📦 Blog Material Hub</a>
+            <a href="/" class="logo">📦 Blog Material Hub</a>
             <button class="menu-toggle" id="menuToggle">☰</button>
             <nav id="navMenu">
-                <a href="./">ホーム</a>
-                <a href="./gallery.html">素材ギャラリー</a>
-                <a href="./faq.html">よくあるご質問</a>
-                <a href="./contact.html">お問い合わせ</a>
+                <a href="/">ホーム</a>
+                <a href="/gallery.html">素材ギャラリー</a>
+                <a href="/faq.html">よくあるご質問</a>
+                <a href="/contact.html">お問い合わせ</a>
             </nav>
         </div>
     </header>
@@ -642,14 +642,14 @@
     <footer>
         <div class="footer-content">
             <div class="footer-links">
-                <a href="./privacy.html">プライバシーポリシー</a>
-                <a href="./terms.html">利用規約</a>
-                <a href="./disclaimer.html">免責事項</a>
-                <a href="./contact.html">お問い合わせ</a>
+                <a href="/privacy.html">プライバシーポリシー</a>
+                <a href="/terms.html">利用規約</a>
+                <a href="/disclaimer.html">免責事項</a>
+                <a href="/contact.html">お問い合わせ</a>
             </div>
             <div class="footer-info">
                 <p>&copy; 2026 Blog Material Hub. All rights reserved.</p>
-                <p>Powered by GitHub Pages + Cloudflare</p>
+                
             </div>
         </div>
     </footer>
@@ -907,9 +907,46 @@
             const format = document.querySelector('input[name="format"]:checked').value;
             const material = materials.find(m => m.id === selectedMaterialId);
             
-            // ここで実際のダウンロード処理を実装
-            // 現在はアラート表示
-            alert(`ダウンロード: ${material.title}\n形式: ${format.toUpperCase()}`);
+            // Canvas で emoji を画像化
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = 1200;
+            canvas.height = 630;
+            
+            // 背景色を白に
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // emoji を描画
+            ctx.font = 'bold 300px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(material.image, canvas.width / 2, canvas.height / 2);
+            
+            // タイトルを描画
+            ctx.font = 'bold 48px Arial';
+            ctx.fillStyle = '#2c3e50';
+            ctx.fillText(material.title, canvas.width / 2, canvas.height - 80);
+            
+            // Canvas を blob に変換してダウンロード
+            const mimeType = format === 'jpeg' ? 'image/jpeg' : 
+                           format === 'webp' ? 'image/webp' : 
+                           'image/png';
+            
+            canvas.toBlob((blob) => {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${material.title}.${format}`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                // DL数をインクリメント
+                material.downloadCount = (material.downloadCount || 0) + 1;
+            }, mimeType);
+            
             modal.classList.remove('active');
         });
 
@@ -920,6 +957,10 @@
         }
 
         // ========== 初期化 ==========
+        // ローカルストレージから素材を読み込む
+        const localMaterials = JSON.parse(localStorage.getItem('blog_materials') || '[]');
+        materials.push(...localMaterials);
+        
         initializeTags();
         renderGallery();
     </script>

@@ -68,7 +68,7 @@ GitHub リポジトリの Settings → Pages で、ソースを `main` ブラン
 
 ### 3. ドメイン設定（オプション）
 
-Cloudflare で DNS を設定して、独自ドメイン（例：）で公開できます。
+Cloudflare で DNS を設定して、独自ドメイン（例：material.example.com）で公開できます。
 
 ```
 CNAME: yourusername.github.io

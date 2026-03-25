@@ -253,13 +253,13 @@
 <body>
     <header>
         <div class="navbar">
-            <a href="./" class="logo">📦 Blog Material Hub</a>
+            <a href="/" class="logo">📦 Blog Material Hub</a>
             <button class="menu-toggle" id="menuToggle">☰</button>
             <nav id="navMenu">
-                <a href="./">ホーム</a>
-                <a href="./gallery.html">素材ギャラリー</a>
-                <a href="./about.html">運営者情報</a>
-                <a href="./contact.html">お問い合わせ</a>
+                <a href="/">ホーム</a>
+                <a href="/gallery.html">素材ギャラリー</a>
+                <a href="/about.html">運営者情報</a>
+                <a href="/contact.html">お問い合わせ</a>
             </nav>
         </div>
     </header>
@@ -287,44 +287,50 @@
             <h2>お問い合わせフォーム</h2>
             <p>下のフォームに必要事項をご入力の上、送信してください。通常、1-2営業日以内にご返信いたします。</p>
 
-            <!-- Googleフォーム埋め込み -->
-            <div class="form-wrapper">
-                <iframe src="https://docs.google.com/forms/d/e/YOUR_FORM_ID_HERE/viewform?embedded=true" 
-                        frameborder="0" 
-                        marginheight="0" 
-                        marginwidth="0">
-                    読み込んでいます...
-                </iframe>
-            </div>
+            <form id="contactForm" style="margin-top: 1.5rem;">
+                <div class="form-group">
+                    <label for="name">お名前 <span style="color: #e74c3c;">*</span></label>
+                    <input type="text" id="name" name="name" required>
+                </div>
 
-            <div class="note">
-                <strong>📌 注意：</strong> 上のフォームが表示されない場合は、ブラウザの JavaScript が有効になっているかご確認ください。
+                <div class="form-group">
+                    <label for="email">メールアドレス <span style="color: #e74c3c;">*</span></label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">件名 <span style="color: #e74c3c;">*</span></label>
+                    <input type="text" id="subject" name="subject" placeholder="例：素材リクエスト、不具合報告" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">メッセージ <span style="color: #e74c3c;">*</span></label>
+                    <textarea id="message" name="message" rows="6" required></textarea>
+                </div>
+
+                <button type="submit" class="btn" style="background-color: #27ae60; color: white; width: 100%; padding: 0.8rem;">
+                    📧 送信する
+                </button>
+            </form>
+
+            <div class="note" style="margin-top: 1.5rem;">
+                <strong>💡 設定方法：</strong> このフォームを使用するには、Formspree （formspree.io）に登録してフォーム ID を取得し、JavaScriptコード内のメールアドレスを設定してください。
             </div>
         </div>
-
-        <div style="margin-top: 2rem; padding: 1.5rem; background-color: #ecf0f1; border-radius: 8px;">
-            <h3 style="color: #2c3e50; margin-bottom: 0.5rem;">📧 直接メール</h3>
-            <p style="color: #555; margin-bottom: 0.5rem;">フォーム送信が難しい場合は、直接メールでお問い合わせください：</p>
-            <p style="font-size: 1.05rem; color: #3498db;">
-                <strong><a href="./cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="03606c6d7762607743616f6c646b76612d667b626e736f662d606c6e">[email&#160;protected]</a></strong>
-            </p>
-            <p style="color: #7f8c8d; margin-top: 0.5rem; font-size: 0.9rem;">
-                ※メールアドレスはお問い合わせ用です。ご記入後は適切に管理いたします。
-            </p>
         </div>
     </main>
 
     <footer>
         <div class="footer-content">
             <div class="footer-links">
-                <a href="./privacy.html">プライバシーポリシー</a>
-                <a href="./terms.html">利用規約</a>
-                <a href="./about.html">運営者情報</a>
-                <a href="./contact.html">お問い合わせ</a>
+                <a href="/privacy.html">プライバシーポリシー</a>
+                <a href="/terms.html">利用規約</a>
+                <a href="/about.html">運営者情報</a>
+                <a href="/contact.html">お問い合わせ</a>
             </div>
             <div class="footer-info">
                 <p>&copy; 2026 Blog Material Hub. All rights reserved.</p>
-                <p>Powered by GitHub Pages + Cloudflare</p>
+                
             </div>
         </div>
     </footer>
