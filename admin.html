@@ -1,33 +1,34 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>素材管理 | Blog Material Hub</title>
     <meta name="description" content="Blog Material Hub の素材管理画面。画像をアップロードしてメタデータを登録。">
-    
+
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
             line-height: 1.6;
             color: #333;
             background-color: #f9f9f9;
         }
-        
+
         header {
             background-color: #fff;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             position: sticky;
             top: 0;
             z-index: 100;
         }
-        
+
         .navbar {
             max-width: 1200px;
             margin: 0 auto;
@@ -36,30 +37,30 @@
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .navbar .logo {
             font-size: 1.5rem;
             font-weight: bold;
             color: #2c3e50;
             text-decoration: none;
         }
-        
+
         .navbar nav {
             display: flex;
             gap: 2rem;
         }
-        
+
         .navbar nav a {
             color: #555;
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s;
         }
-        
+
         .navbar nav a:hover {
             color: #3498db;
         }
-        
+
         .menu-toggle {
             display: none;
             background: none;
@@ -68,37 +69,37 @@
             cursor: pointer;
             color: #333;
         }
-        
+
         main {
             max-width: 1000px;
             margin: 2rem auto;
             padding: 0 2rem;
         }
-        
+
         .admin-header {
             background-color: #fff;
             padding: 2rem;
             border-radius: 8px;
             margin-bottom: 2rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
-        
+
         .admin-header h1 {
             color: #2c3e50;
             margin-bottom: 0.5rem;
         }
-        
+
         .admin-header p {
             color: #7f8c8d;
         }
-        
+
         .tabs {
             display: flex;
             gap: 1rem;
             margin-bottom: 2rem;
             border-bottom: 2px solid #ecf0f1;
         }
-        
+
         .tab-button {
             padding: 1rem 1.5rem;
             background: none;
@@ -109,42 +110,42 @@
             color: #7f8c8d;
             transition: all 0.3s;
         }
-        
+
         .tab-button.active {
             color: #3498db;
             border-bottom-color: #3498db;
         }
-        
+
         .tab-button:hover {
             color: #2c3e50;
         }
-        
+
         .tab-content {
             display: none;
         }
-        
+
         .tab-content.active {
             display: block;
         }
-        
+
         .form-container {
             background-color: #fff;
             padding: 2rem;
             border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
-        
+
         .form-group {
             margin-bottom: 1.5rem;
         }
-        
+
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
             font-weight: bold;
             color: #2c3e50;
         }
-        
+
         .form-group input,
         .form-group textarea,
         .form-group select {
@@ -156,19 +157,19 @@
             font-size: 1rem;
             transition: border-color 0.3s;
         }
-        
+
         .form-group input:focus,
         .form-group textarea:focus,
         .form-group select:focus {
             outline: none;
             border-color: #3498db;
         }
-        
+
         .form-group textarea {
             resize: vertical;
             min-height: 100px;
         }
-        
+
         .btn {
             padding: 0.8rem 1.5rem;
             border: none;
@@ -178,53 +179,53 @@
             transition: all 0.3s;
             font-size: 1rem;
         }
-        
+
         .btn-primary {
             background-color: #27ae60;
             color: white;
         }
-        
+
         .btn-primary:hover {
             background-color: #229954;
         }
-        
+
         .btn-secondary {
             background-color: #ecf0f1;
             color: #2c3e50;
         }
-        
+
         .btn-secondary:hover {
             background-color: #d5dbdb;
         }
-        
+
         .btn-danger {
             background-color: #e74c3c;
             color: white;
         }
-        
+
         .btn-danger:hover {
             background-color: #c0392b;
         }
-        
+
         .form-actions {
             display: flex;
             gap: 1rem;
             margin-top: 2rem;
         }
-        
+
         .materials-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 1.5rem;
         }
-        
+
         .material-card {
             background-color: #fff;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
-        
+
         .material-image {
             width: 100%;
             height: 120px;
@@ -234,81 +235,81 @@
             justify-content: center;
             font-size: 2.5rem;
         }
-        
+
         .material-info {
             padding: 1rem;
         }
-        
+
         .material-title {
             font-weight: bold;
             color: #2c3e50;
             margin-bottom: 0.5rem;
             font-size: 0.95rem;
         }
-        
+
         .material-actions {
             display: flex;
             gap: 0.5rem;
             margin-top: 1rem;
         }
-        
+
         .material-actions button {
             flex: 1;
             padding: 0.5rem;
             font-size: 0.8rem;
         }
-        
+
         .stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem;
             margin-bottom: 2rem;
         }
-        
+
         .stat-box {
             background-color: #fff;
             padding: 1.5rem;
             border-radius: 8px;
             text-align: center;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
-        
+
         .stat-number {
             font-size: 2rem;
             font-weight: bold;
             color: #3498db;
         }
-        
+
         .stat-label {
             color: #7f8c8d;
             font-size: 0.9rem;
             margin-top: 0.5rem;
         }
-        
+
         .alert {
             padding: 1rem;
             border-radius: 6px;
             margin-bottom: 1rem;
         }
-        
+
         .alert-info {
             background-color: #d1ecf1;
             color: #0c5460;
             border: 1px solid #bee5eb;
         }
-        
+
         footer {
             background-color: #2c3e50;
             color: #ecf0f1;
             margin-top: 4rem;
             padding: 3rem 2rem;
         }
-        
+
         .footer-content {
             max-width: 1200px;
             margin: 0 auto;
         }
-        
+
         .footer-links {
             display: flex;
             gap: 2rem;
@@ -317,17 +318,17 @@
             padding-bottom: 2rem;
             border-bottom: 1px solid #34495e;
         }
-        
+
         .footer-links a {
             color: #ecf0f1;
             text-decoration: none;
             transition: color 0.3s;
         }
-        
+
         .footer-links a:hover {
             color: #3498db;
         }
-        
+
         .footer-info {
             display: flex;
             justify-content: space-between;
@@ -335,16 +336,16 @@
             gap: 1rem;
             font-size: 0.9rem;
         }
-        
+
         @media (max-width: 768px) {
             .navbar {
                 padding: 1rem;
             }
-            
+
             .menu-toggle {
                 display: block;
             }
-            
+
             .navbar nav {
                 display: none;
                 position: absolute;
@@ -354,24 +355,25 @@
                 flex-direction: column;
                 background-color: #fff;
                 gap: 0;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             }
-            
+
             .navbar nav.active {
                 display: flex;
             }
-            
+
             .navbar nav a {
                 padding: 1rem;
                 border-bottom: 1px solid #ecf0f1;
             }
-            
+
             main {
                 padding: 0 1rem;
             }
         }
     </style>
 </head>
+
 <body>
     <header>
         <div class="navbar">
@@ -405,13 +407,7 @@
                 <form id="materialForm">
                     <div class="form-group">
                         <label for="emoji">📷 素材アイコン（emoji）</label>
-                        <input 
-                            type="text" 
-                            id="emoji" 
-                            placeholder="例：🌿 🐱 🌅 ☕ 📱 🎨"
-                            maxlength="2"
-                            required
-                        >
+                        <input type="text" id="emoji" placeholder="例：🌿 🐱 🌅 ☕ 📱 🎨" maxlength="2" required>
                         <small style="color: #7f8c8d; display: block; margin-top: 0.5rem;">
                             ※ emoji 1 文字を入力
                         </small>
@@ -419,21 +415,19 @@
 
                     <div class="form-group">
                         <label for="title">📝 タイトル</label>
-                        <input 
-                            type="text" 
-                            id="title" 
-                            placeholder="例：観葉植物のある部屋"
-                            required
-                        >
+                        <input type="text" id="title" placeholder="例：観葉植物のある部屋" required>
                     </div>
 
                     <div class="form-group">
                         <label for="description">📄 説明文</label>
-                        <textarea 
-                            id="description" 
-                            placeholder="どんなブログで活躍するか、使用例など。"
-                            required
-                        ></textarea>
+                        <textarea id="description" placeholder="どんなブログで活躍するか、使用例など。" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="imageUrl">🖼 画像の場所 (パス)</label>
+                        <input type="text" id="imageUrl" placeholder="例: ./assets/images/test.webp" required>
+                        <small style="color: #7f8c8d; display: block; margin-top: 0.5rem;">
+                            ※ assets/images/ フォルダに入れたファイル名を指定してください
+                        </small>
                     </div>
 
                     <div class="form-group">
@@ -451,11 +445,7 @@
 
                     <div class="form-group">
                         <label for="tags">🏷️ タグ</label>
-                        <input 
-                            type="text" 
-                            id="tags" 
-                            placeholder="例：植物, インテリア, 自然（カンマ区切り）"
-                        >
+                        <input type="text" id="tags" placeholder="例：植物, インテリア, 自然（カンマ区切り）">
                     </div>
 
                     <div class="form-actions">
@@ -485,7 +475,7 @@
         <div id="export" class="tab-content">
             <div class="form-container">
                 <h2>データ管理</h2>
-                
+
                 <div class="alert alert-info">
                     <strong>💡 素材データはブラウザのローカルストレージに保存されています。</strong>
                 </div>
@@ -570,7 +560,7 @@
 
         function renderList() {
             const m = loadMaterials();
-            const html = m.length === 0 ? '<p style="grid-column:1/-1;text-align:center;color:#7f8c8d">登録済み素材なし</p>' : 
+            const html = m.length === 0 ? '<p style="grid-column:1/-1;text-align:center;color:#7f8c8d">登録済み素材なし</p>' :
                 m.map(x => `
                 <div class="material-card">
                     <div class="material-image">${x.image}</div>
@@ -628,4 +618,5 @@
         }
     </script>
 </body>
+
 </html>
