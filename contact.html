@@ -48,7 +48,21 @@
             display: flex;
             gap: 2rem;
         }
-        
+        /* --- ここから追加 --- */
+        .contact-form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem; /* 左右の余白を少し狭く設定 */
+        }
+
+        /* スマホ用の設定（画面幅が狭いときに余白をなくす） */
+        @media (max-width: 768px) {
+        .contact-form-container {
+        padding: 1rem 0; /* スマホでは左右の余白を 0 にして画面いっぱいに広げる */
+        }
+        }
+        /* --- ここまで追加 --- */
+
         .navbar nav a {
             color: #555;
             text-decoration: none;
@@ -284,7 +298,7 @@
 
         <div class="form-container">
             <h2>お問い合わせフォーム</h2>
-            <p>下のフォームに必要事項をご入力の上、送信してください。通常、1-2営業日以内にご返信いたします。</p>
+            <p>下のフォームに必要事項をご入力の上、送信してください。返信が必要な内容につきましては、3営業日以内にご返信いたします。</p>
 
             <!-- Google フォーム埋め込み -->
             <div style="margin-top: 2rem;">
