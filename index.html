@@ -145,6 +145,51 @@
                 display: block;
             }
 
+            /* --- ここから追加 --- */
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+                padding: 0 1rem;
+                line-height: 1.5;
+            }
+
+            .hero p br {
+                display: none;
+            }
+
+            .hero {
+                padding: 4rem 1rem;
+                margin-bottom: 2rem;
+            }
+
+            .features {
+                margin: 2rem 0;
+                gap: 1rem;
+            }
+
+            .feature-card {
+                padding: 1.5rem;
+            }
+
+            .feature-card .icon {
+                font-size: 2.2rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .feature-card h3 {
+                font-size: 1.2rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .feature-card p {
+                font-size: 0.9rem;
+            }
+
+            /* --- ここまで追加 --- */
+
             .navbar nav {
                 display: none;
                 position: absolute;
@@ -199,24 +244,28 @@
             margin: 0 auto 2rem;
         }
 
-      .btn-cta {
-    background-color: #ffcc00; /* 鮮やかなイエローに！ */
-    color: #333;               /* 文字を濃いグレーにして読みやすく */
-    padding: 1rem 2.5rem;
-    border-radius: 50px;       /* 角を丸くして今っぽく */
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 1.1rem;
-    display: inline-block;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-}
+        .btn-cta {
+            background-color: #ffcc00;
+            /* 鮮やかなイエローに！ */
+            color: #333;
+            /* 文字を濃いグレーにして読みやすく */
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            /* 角を丸くして今っぽく */
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
 
-.btn-cta:hover {
-    background-color: #ffdb4d; /* マウスを乗せると少し明るくなる */
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-}
+        .btn-cta:hover {
+            background-color: #ffdb4d;
+            /* マウスを乗せると少し明るくなる */
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
 
 
         /* ============ FEATURES (3カラム) ============ */
@@ -248,12 +297,51 @@
 
         /* スマホ対応 */
         @media (max-width: 768px) {
+
+            /* 1. 看板部分をさらにスッキリさせる */
             .hero h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
 
+            .hero p {
+                font-size: 1rem;
+                padding: 0 1rem;
+                line-height: 1.5;
+            }
+
+            .hero p br {
+                display: none;
+            }
+
+            /* スマホでは無理な改行をなくす */
             .hero {
                 padding: 4rem 1rem;
+                margin-bottom: 2rem;
+            }
+
+            /* 2. 特徴カードをギュッと小さくする */
+            .features {
+                margin: 2rem 0;
+                gap: 1rem;
+            }
+
+            .feature-card {
+                padding: 1.5rem;
+                /* 中の余白を削って高さを抑える */
+            }
+
+            .feature-card .icon {
+                font-size: 2.2rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .feature-card h3 {
+                font-size: 1.2rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .feature-card p {
+                font-size: 0.9rem;
             }
         }
     </style>
