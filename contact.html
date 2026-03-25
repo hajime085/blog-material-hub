@@ -85,12 +85,19 @@
         main {
             max-width: 900px;
             margin: 2rem auto;
-            padding: 2rem;
+            padding: 2rem 1rem; /* 左右の余白を 2rem から 1rem に減らす */
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
-        
+        /* スマホではメイン全体の左右の余白を 0 にする */
+        @media (max-width: 768px) {
+        main {
+        padding: 1.5rem 0; /* 左右を 0 にして画面いっぱいに広げる */
+        margin: 0 auto;    /* 左右の隙間をなくす */
+        border-radius: 0;  /* スマホでは角丸をなくすとスッキリします */
+        }
+        }
         main h1 {
             color: #2c3e50;
             margin-bottom: 1rem;
@@ -130,12 +137,19 @@
         
         .form-container {
             background-color: #f9f9f9;
-            padding: 2rem;
+            padding: 2rem 1rem; /* 左右の余白を少しだけ狭くする */
             border-radius: 8px;
             border: 1px solid #ecf0f1;
             margin-top: 2rem;
         }
-        
+        @media (max-width: 768px) {
+        .form-container {
+        padding: 1rem 0.5rem; /* スマホでは内側の余白を最小限にして広げる */
+        border-radius: 0;      /* 角丸をなくすと画面に馴染みます */
+        border-left: none;
+        border-right: none;
+    　　 }
+　　　　　}
         .form-container h2 {
             color: #2c3e50;
             margin-bottom: 1rem;
@@ -260,6 +274,7 @@
             
             .form-wrapper iframe {
                 height: 1000px;
+                width: 100%; /* ← これを追加！ */
             }
         }
     </style>
@@ -296,7 +311,7 @@
             </div>
         </div>
 
-        <div class="form-container">
+        <div class="form-wrapper">
             <h2>お問い合わせフォーム</h2>
             <p>下のフォームに必要事項をご入力の上、送信してください。返信が必要な内容につきましては、3営業日以内にご返信いたします。</p>
 
