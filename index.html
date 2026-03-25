@@ -199,21 +199,25 @@
             margin: 0 auto 2rem;
         }
 
-        .btn-primary {
-            backgrou nd-color: #fff;
-            color: #764ba2;
-            padding: 1rem 2.5rem;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s;
-            display: inline-block;
-        }
+      .btn-primary {
+    background-color: #ffcc00; /* 鮮やかなイエローに！ */
+    color: #333;               /* 文字を濃いグレーにして読みやすく */
+    padding: 1rem 2.5rem;
+    border-radius: 50px;       /* 角を丸くして今っぽく */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    display: inline-block;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
 
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
+.btn-primary:hover {
+    background-color: #ffdb4d; /* マウスを乗せると少し明るくなる */
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
 
         /* ============ FEATURES (3カラム) ============ */
         .features {
@@ -275,9 +279,14 @@
         <!-- 1. ヒーローセクション -->
         <section class="hero">
             <h1>Blog Material Hub</h1>
-            <p>あなたのブログを彩る、高品質な素材を。次世代形式 WebP で、美しさと速さを両立。</p>
-            <a href="./gallery.html" class="btn-primary">素材を探しに行く</a>
+            <p>
+                あなたのブログを彩る、高品質な素材を。<br>
+                次世代形式 WebP で、美しさと速さを両立。
+            </p>
+            <!-- クラス名を btn-cta に変更 -->
+            <a href="./gallery.html" class="btn-cta">素材を無料で探す</a>
         </section>
+
 
         <!-- 3. 特徴 (3カラム) -->
         <section class="features">
