@@ -158,7 +158,7 @@ python3 add_material.py --batch materials.json
 
 `base.html`, `gallery.html` 等の以下の部分を変更：
 ```html
-<a href="/" class="logo">📦 Blog Material Hub</a>
+<a href="./" class="logo">📦 Blog Material Hub</a>
 ```
 
 ### 説明文を変更
