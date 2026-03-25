@@ -606,27 +606,11 @@
             </div>
             
             <div class="format-options">
-                <div class="format-option">
-                    <input type="radio" id="format-png" name="format" value="png" checked>
-                    <label for="format-png">
-                        <span class="format-name">📄 PNG</span>
-                        <span class="format-desc">背景透過対応。ブログアイキャッチ向け</span>
-                    </label>
-                </div>
-                
-                <div class="format-option">
-                    <input type="radio" id="format-jpeg" name="format" value="jpeg">
-                    <label for="format-jpeg">
-                        <span class="format-name">🖼️ JPEG</span>
-                        <span class="format-desc">ファイルサイズ小。SNS投稿向け</span>
-                    </label>
-                </div>
-                
-                <div class="format-option">
-                    <input type="radio" id="format-webp" name="format" value="webp">
-                    <label for="format-webp">
-                        <span class="format-name">⚡ WebP</span>
-                        <span class="format-desc">最新形式。高速読み込み</span>
+                <div class="format-option" style="border: 2px solid #3498db;">
+                    <input type="radio" id="format-webp" name="format" value="webp" checked style="width: auto; margin-right: 1rem;">
+                    <label for="format-webp" style="margin: 0;">
+                        <span class="format-name">⚡ WebP 形式</span>
+                        <span class="format-desc">高画質・軽量。最新の標準形式です。必要に応じて PNG や JPEG に変換してください。</span>
                     </label>
                 </div>
             </div>
@@ -886,7 +870,6 @@
         function openDownloadModal(materialId) {
             selectedMaterialId = materialId;
             modal.classList.add('active');
-            document.getElementById('format-png').checked = true;
         }
 
         modalClose.addEventListener('click', () => {
@@ -907,37 +890,30 @@
             const format = document.querySelector('input[name="format"]:checked').value;
             const material = materials.find(m => m.id === selectedMaterialId);
             
-            // Canvas で emoji を画像化
+            // Canvas で emoji だけを画像化（文字なし）
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
-            canvas.width = 1200;
-            canvas.height = 630;
+            canvas.width = 800;
+            canvas.height = 800;
             
             // 背景色を白に
             ctx.fillStyle = '#ffffff';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-            // emoji を描画
-            ctx.font = 'bold 300px Arial';
+            // emoji を大きく描画（タイトルなし）
+            ctx.font = 'bold 400px Arial';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
             ctx.fillText(material.image, canvas.width / 2, canvas.height / 2);
             
-            // タイトルを描画
-            ctx.font = 'bold 48px Arial';
-            ctx.fillStyle = '#2c3e50';
-            ctx.fillText(material.title, canvas.width / 2, canvas.height - 80);
-            
             // Canvas を blob に変換してダウンロード
-            const mimeType = format === 'jpeg' ? 'image/jpeg' : 
-                           format === 'webp' ? 'image/webp' : 
-                           'image/png';
+            const mimeType = 'image/webp'; // WebP 形式のみ
             
             canvas.toBlob((blob) => {
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = `${material.title}.${format}`;
+                a.download = `${material.title}.webp`;
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
