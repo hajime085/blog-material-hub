@@ -2,137 +2,19 @@
   "materials": [
     {
       "id": 1,
-      "title": "観葉植物のある部屋",
-      "description": "インテリアとしての観葉植物を配置した部屋のシーン。ライフスタイルブログ、インテリアブログ、ボタニカル関連のアイキャッチに最適。",
-      "tags": ["植物", "インテリア", "自然", "部屋", "グリーン"],
-      "category": "plants",
-      "prompt": "A cozy room with potted plants on shelves, natural sunlight, modern interior design, peaceful atmosphere",
-      "downloadCount": 156,
-      "createdDate": "2026-03-24"
-    },
-    {
-      "id": 2,
-      "title": "かわいい猫のアップ",
-      "description": "かわいらしい猫の顔をクローズアップした画像。ペットブログ、動物好き向けコンテンツ、SNS投稿に活躍。",
-      "tags": ["生き物", "猫", "動物", "かわいい", "ペット"],
-      "category": "animals",
-      "prompt": "Adorable close-up of a cat's face, soft focus, warm lighting, cute expression",
-      "downloadCount": 203,
-      "createdDate": "2026-03-23"
-    },
-    {
-      "id": 3,
-      "title": "朝日と海",
-      "description": "夜明けの海に昇る太陽。風景写真、旅行ブログ、自然関連のアイキャッチ、背景素材として活用可能。",
-      "tags": ["風景", "自然", "空", "海", "朝"],
-      "category": "bg",
-      "prompt": "Sunrise over the ocean with golden light, peaceful seascape, beautiful sky colors",
-      "downloadCount": 178,
-      "createdDate": "2026-03-22"
-    },
-    {
-      "id": 4,
-      "title": "コーヒーのある机上",
-      "description": "コーヒーカップと周辺アイテムを配置した机上のシーン。カフェ紹介、ライフスタイルブログ、落ち着きのあるアイキャッチに。",
-      "tags": ["日用品", "ライフスタイル", "インテリア", "飲料", "コーヒー"],
+      "image": "./assets/images/image001.webp",
+      "title": "清涼感のある炭酸水と夏の風景",
+      "description": "美しいエメラルドグリーンの湖と山々を背景に、氷とはじける炭酸、フレッシュなレモンを添えたグラスを捉えた1枚です。夏の旅行ブログ、ライフスタイル記事、また「リフレッシュ」「清涼感」をテーマにしたアイキャッチ画像として最適です。高画質で軽量なWebP形式なので、サイトの表示速度を落とさずご利用いただけます。",
       "category": "daily",
-      "prompt": "Coffee cup on a desk with a notebook and pen, cozy workspace, warm ambiance",
-      "downloadCount": 142,
-      "createdDate": "2026-03-21"
-    },
-    {
-      "id": 5,
-      "title": "モダンなガジェット配置",
-      "description": "スマートフォン、タブレット、イヤホンなどのガジェットを配置したシーン。テックブログ、製品紹介、IT関連記事に最適。",
-      "tags": ["ガジェット", "テック", "スマートフォン", "タブレット", "電子機器"],
-      "category": "gadget",
-      "prompt": "Modern tech gadgets arranged flat-lay style, smartphone, tablet, earbuds, professional product photography",
-      "downloadCount": 124,
-      "createdDate": "2026-03-20"
-    },
-    {
-      "id": 6,
-      "title": "幾何学模様の背景",
-      "description": "シンプルな幾何学模様の背景。デザインの自由度が高く、文字やロゴを重ねやすい万能素材。",
-      "tags": ["背景", "素材", "デザイン", "シンプル", "幾何学"],
-      "category": "material",
-      "prompt": "Geometric pattern background with clean lines, modern minimalist design, neutral colors",
-      "downloadCount": 189,
-      "createdDate": "2026-03-19"
-    },
-    {
-      "id": 7,
-      "title": "花のクローズアップ",
-      "description": "美しい花をマクロで撮影したクローズアップ画像。ガーデニングブログ、フローラル関連、自然の美を伝えるコンテンツに。",
-      "tags": ["植物", "花", "自然", "カラフル", "マクロ"],
-      "category": "plants",
-      "prompt": "Close-up of a beautiful flower in full bloom, macro photography, vibrant colors, soft background",
-      "downloadCount": 167,
-      "createdDate": "2026-03-18"
-    },
-    {
-      "id": 8,
-      "title": "森の中の道",
-      "description": "緑の森を抜ける小道のシーン。自然関連ブログ、トレッキング記事、背景素材として活躍。森林浴やリラックステーマに最適。",
-      "tags": ["風景", "自然", "背景", "緑", "森"],
-      "category": "bg",
-      "prompt": "Path through a lush green forest, natural sunlight filtering through trees, peaceful woodland scene",
-      "downloadCount": 145,
-      "createdDate": "2026-03-17"
-    },
-    {
-      "id": 9,
-      "title": "調理中のキッチン",
-      "description": "キッチンで調理の準備をしている様子。料理ブログ、レシピサイト、食材紹介、ライフスタイルコンテンツに最適。",
-      "tags": ["日用品", "食事", "ライフスタイル", "料理", "キッチン"],
-      "category": "daily",
-      "prompt": "Kitchen scene with ingredients being prepared, cooking in progress, warm home kitchen atmosphere",
-      "downloadCount": 98,
-      "createdDate": "2026-03-16"
-    },
-    {
-      "id": 10,
-      "title": "本とメガネ",
-      "description": "積み重ねた本とメガネを配置した静物。読書ブログ、学習系コンテンツ、教育関連記事に適切。知識や学びを象徴する素材。",
-      "tags": ["素材", "学習", "読書", "知識", "教育"],
-      "category": "material",
-      "prompt": "Stack of books with reading glasses on top, study desk setup, educational and knowledge theme",
-      "downloadCount": 112,
-      "createdDate": "2026-03-15"
-    },
-    {
-      "id": 11,
-      "title": "野鳥のとまり木",
-      "description": "野生の鳥が枝にとまっているシーン。バードウォッチング、野生動物ブログ、自然ドキュメント、生態系紹介に活躍。",
-      "tags": ["生き物", "鳥", "自然", "野生動物", "野鳥"],
-      "category": "animals",
-      "prompt": "Wild bird perched on a branch, natural habitat, sharp detail, wildlife photography style",
-      "downloadCount": 131,
-      "createdDate": "2026-03-14"
-    },
-    {
-      "id": 12,
-      "title": "グラデーション背景",
-      "description": "複数の色が滑らかに移行するグラデーション背景。デザイン性が高く、様々なコンテンツに合わせやすい。カラーカスタマイズも容易。",
-      "tags": ["背景", "素材", "カラフル", "モダン", "グラデーション"],
-      "category": "material",
-      "prompt": "Smooth gradient background transitioning between vibrant colors, modern colorful design",
-      "downloadCount": 176,
-      "createdDate": "2026-03-13"
+      "tags": [
+        "水",
+        "レモン",
+        "ミネラルウォーター"
+      ],
+      "prompt": "",
+      "downloadCount": 0,
+      "createdDate": "2026-03-25"
     }
   ],
-  "metadata": {
-    "totalMaterials": 12,
-    "lastUpdated": "2026-03-24",
-    "updateFrequency": "daily",
-    "categories": [
-      "plants",
-      "animals",
-      "bg",
-      "daily",
-      "gadget",
-      "material"
-    ]
-  }
+  "exportDate": "2026-03-25T11:59:50.259Z"
 }
-
