@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog Material Hub - ブログ素材配信サイト</title>
     <meta name="description" content="Amazonアフィリエイト向けのブログ素材を無料配信。画像・アイキャッチを形式選択してダウンロード。">
-    
+
     <style>
         /* リセット */
         * {
@@ -13,23 +14,23 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
             line-height: 1.6;
             color: #333;
             background-color: #f9f9f9;
         }
-        
+
         /* ============ HEADER ============ */
         header {
             background-color: #fff;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             position: sticky;
             top: 0;
             z-index: 100;
         }
-        
+
         .navbar {
             max-width: 1200px;
             margin: 0 auto;
@@ -38,7 +39,7 @@
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .navbar .logo {
             font-size: 1.5rem;
             font-weight: bold;
@@ -46,28 +47,28 @@
             text-decoration: none;
             transition: color 0.3s;
         }
-        
+
         .navbar .logo:hover {
             color: #3498db;
         }
-        
+
         .navbar nav {
             display: flex;
             gap: 2rem;
             list-style: none;
         }
-        
+
         .navbar nav a {
             color: #555;
             text-decoration: none;
             transition: color 0.3s;
             font-weight: 500;
         }
-        
+
         .navbar nav a:hover {
             color: #3498db;
         }
-        
+
         /* ハンバーガーメニュー（モバイル） */
         .menu-toggle {
             display: none;
@@ -77,7 +78,7 @@
             cursor: pointer;
             color: #333;
         }
-        
+
         /* ============ MAIN ============ */
         main {
             max-width: 1200px;
@@ -85,7 +86,7 @@
             padding: 0 2rem;
             min-height: 60vh;
         }
-        
+
         /* ============ FOOTER ============ */
         footer {
             background-color: #2c3e50;
@@ -93,12 +94,12 @@
             margin-top: 4rem;
             padding: 3rem 2rem;
         }
-        
+
         .footer-content {
             max-width: 1200px;
             margin: 0 auto;
         }
-        
+
         .footer-links {
             display: flex;
             gap: 2rem;
@@ -107,17 +108,17 @@
             padding-bottom: 2rem;
             border-bottom: 1px solid #34495e;
         }
-        
+
         .footer-links a {
             color: #ecf0f1;
             text-decoration: none;
             transition: color 0.3s;
         }
-        
+
         .footer-links a:hover {
             color: #3498db;
         }
-        
+
         .footer-info {
             display: flex;
             justify-content: space-between;
@@ -125,25 +126,25 @@
             flex-wrap: wrap;
             gap: 1rem;
         }
-        
+
         .footer-info p {
             font-size: 0.9rem;
         }
-        
+
         /* ============ レスポンシブ ============ */
         @media (max-width: 768px) {
             .navbar {
                 padding: 1rem;
             }
-            
+
             .navbar .logo {
                 font-size: 1.2rem;
             }
-            
+
             .menu-toggle {
                 display: block;
             }
-            
+
             .navbar nav {
                 display: none;
                 position: absolute;
@@ -153,29 +154,107 @@
                 flex-direction: column;
                 background-color: #fff;
                 gap: 0;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             }
-            
+
             .navbar nav.active {
                 display: flex;
             }
-            
+
             .navbar nav a {
                 padding: 1rem;
                 border-bottom: 1px solid #ecf0f1;
             }
-            
+
             .footer-links {
                 flex-direction: column;
                 gap: 1rem;
             }
-            
+
             .footer-info {
                 flex-direction: column;
             }
         }
+
+        /* ============ HERO SECTION ============ */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+            border-radius: 0 0 50px 50px;
+            margin-bottom: 4rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn-primary {
+            backgrou nd-color: #fff;
+            color: #764ba2;
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* ============ FEATURES (3カラム) ============ */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-card .icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        /* スマホ対応 */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero {
+                padding: 4rem 1rem;
+            }
+        }
     </style>
 </head>
+
 <body>
     <!-- ============ HEADER ============ -->
     <header>
@@ -193,11 +272,42 @@
 
     <!-- ============ MAIN ============ -->
     <main>
-        <h1>Blog Material Hub へようこそ</h1>
-        <p>このサイトはブログ、SNS、Webサイト向けの高品質素材を無料配信しています。</p>
-        <p>植物、生き物、自然風景、日用品、ガジェット、背景素材など、様々なカテゴリから素材を探せます。</p>
-        <p>検索とタグでお好みの素材を見つけ、高画質で軽量な WebP 形式でダウンロードできます。</p>
+        <!-- 1. ヒーローセクション -->
+        <section class="hero">
+            <h1>Blog Material Hub</h1>
+            <p>あなたのブログを彩る、高品質な素材を。次世代形式 WebP で、美しさと速さを両立。</p>
+            <a href="./gallery.html" class="btn-primary">素材を探しに行く</a>
+        </section>
+
+        <!-- 3. 特徴 (3カラム) -->
+        <section class="features">
+            <div class="feature-card">
+                <span class="icon">✨</span>
+                <h3>完全無料・商用OK</h3>
+                <p>全ての素材は無料でダウンロード可能。ブログやSNSで自由にお使いいただけます。</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">⚡</span>
+                <h3>次世代 WebP 形式</h3>
+                <p>驚くほど軽量で高画質。サイトの読み込み速度を落とさず、美しいデザインを実現します。</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">🔍</span>
+                <h3>豊富なカテゴリ</h3>
+                <p>植物、自然、ガジェットなど。あなたの記事にぴったりの素材が必ず見つかります。</p>
+            </div>
+        </section>
+
+        <!-- 2. カルーセルの土台（ここに最新素材が表示されます） -->
+        <section class="latest-section">
+            <h2 style="text-align: center; margin-bottom: 2rem;">最新の素材</h2>
+            <div id="latest-materials" class="gallery-grid">
+                <!-- JavaScriptでここに素材が自動で並ぶようにします -->
+                <p style="text-align: center; color: #999;">素材を読み込み中...</p>
+            </div>
+        </section>
     </main>
+
 
     <!-- ============ FOOTER ============ -->
     <footer>
@@ -209,7 +319,7 @@
             </div>
             <div class="footer-info">
                 <p>&copy; 2026 Blog Material Hub. All rights reserved.</p>
-                
+
             </div>
         </div>
     </footer>
@@ -218,11 +328,11 @@
     <script>
         const menuToggle = document.getElementById('menuToggle');
         const navMenu = document.getElementById('navMenu');
-        
+
         menuToggle.addEventListener('click', () => {
             navMenu.classList.toggle('active');
         });
-        
+
         // ナビゲーションリンククリック時にメニュー閉じる
         navMenu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
@@ -231,4 +341,5 @@
         });
     </script>
 </body>
+
 </html>
