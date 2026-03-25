@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>デプロイガイド | Blog Material Hub</title>
+    <meta name="description" content="GitHub Pages へのデプロイ手順。">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+        
+        .navbar nav {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .navbar nav a {
+            color: #555;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .navbar nav a:hover {
+            color: #3498db;
+        }
+        
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        main h1 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+        
+        main h2 {
+            color: #34495e;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+        
+        main h3 {
+            color: #555;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        main p {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+        
+        main ul, main ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        main li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .step-box {
+            background-color: #f0f7ff;
+            border-left: 4px solid #3498db;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+        
+        .step-box strong {
+            color: #2980b9;
+            font-size: 1.1rem;
+        }
+        
+        .code-block {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+            line-height: 1.4;
+        }
+        
+        .note {
+            background-color: #e8f4f8;
+            border-left: 4px solid #3498db;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+        
+        .note strong {
+            color: #2c3e50;
+        }
+        
+        .warning {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+        
+        .success {
+            background-color: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+        
+        footer {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            margin-top: 4rem;
+            padding: 3rem 2rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #34495e;
+        }
+        
+        .footer-links a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #3498db;
+        }
+        
+        .footer-info {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .navbar nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background-color: #fff;
+                gap: 0;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
+            
+            .navbar nav.active {
+                display: flex;
+            }
+            
+            .navbar nav a {
+                padding: 1rem;
+                border-bottom: 1px solid #ecf0f1;
+            }
+            
+            main {
+                padding: 0 1rem;
+            }
+            
+            main h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <a href="/" class="logo">📦 Blog Material Hub</a>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+            <nav id="navMenu">
+                <a href="/">ホーム</a>
+                <a href="/gallery.html">素材ギャラリー</a>
+                <a href="/faq.html">よくあるご質問</a>
+                <a href="/contact.html">お問い合わせ</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h1>🚀 デプロイガイド</h1>
+        <p>Blog Material Hub を GitHub Pages で公開するための手順です。</p>
+
+        <h2>前提条件</h2>
+        <ul>
+            <li>Git がインストール済み</li>
+            <li>GitHub アカウント</li>
+            <li>ローカルの blog-material-hub フォルダ</li>
+        </ul>
+
+        <h2>ステップ 1：GitHub リポジトリを作成</h2>
+
+        <div class="step-box">
+            <strong>GitHub にログイン → 新しいリポジトリを作成</strong>
+            <p><a href="https://github.com/new" target="_blank">https://github.com/new</a></p>
+            <ul>
+                <li><strong>Repository name:</strong> blog-material-hub</li>
+                <li><strong>Description:</strong> ブログ素材配信サイト</li>
+                <li><strong>Public / Private:</strong> Public（公開）</li>
+                <li><strong>Initialize:</strong> チェックなし（後で push するため）</li>
+            </ul>
+            <p>✅【Create repository】ボタンをクリック</p>
+        </div>
+
+        <h2>ステップ 2：ローカルで Git を初期化</h2>
+
+        <p>ターミナル/コマンドプロンプトで blog-material-hub フォルダに移動：</p>
+
+        <div class="code-block">cd blog-material-hub</div>
+
+        <p>Git を初期化：</p>
+
+        <div class="code-block">git init</div>
+
+        <p>GitHub リポジトリを remote として追加（YOUR_USERNAME は自分のGitHubユーザー名に変更）：</p>
+
+        <div class="code-block">git remote add origin https://github.com/YOUR_USERNAME/blog-material-hub.git</div>
+
+        <p>例：</p>
+
+        <div class="code-block">git remote add origin https://github.com/hajime085/blog-material-hub.git</div>
+
+        <h2>ステップ 3：ファイルをステージング</h2>
+
+        <p>すべてのファイルを追加：</p>
+
+        <div class="code-block">git add .</div>
+
+        <p>確認：</p>
+
+        <div class="code-block">git status</div>
+
+        <p>追加されたファイル一覧が表示されます。</p>
+
+        <h2>ステップ 4：コミット</h2>
+
+        <div class="code-block">git commit -m "Initial commit: Blog Material Hub setup"</div>
+
+        <h2>ステップ 5：GitHub に Push</h2>
+
+        <div class="code-block">git branch -M main
+git push -u origin main</div>
+
+        <div class="note">
+            <strong>💡 注：</strong> main ブランチがデフォルトブランチになっていることを確認してください。
+        </div>
+
+        <h2>ステップ 6：GitHub Pages を有効化</h2>
+
+        <div class="step-box">
+            <strong>GitHub リポジトリページ → Settings → Pages</strong>
+            <ol>
+                <li><strong>Source</strong> セクションで「Deploy from a branch」を選択</li>
+                <li><strong>Branch</strong> を「main」に設定</li>
+                <li>Folder を「/(root)」に設定</li>
+                <li>✅【Save】ボタンをクリック</li>
+            </ol>
+        </div>
+
+        <div class="success">
+            <strong>✅ 完成！</strong><br>
+            数秒から1分で、以下の URL でサイトが公開されます：<br>
+            <code>https://YOUR_USERNAME.github.io/blog-material-hub/</code>
+        </div>
+
+        <h2>ステップ 7：カスタムドメイン設定（オプション）</h2>
+
+        <h3>Cloudflare を使用する場合</h3>
+
+        <div class="step-box">
+            <strong>Cloudflare ダッシュボード → DNS</strong>
+            <ol>
+                <li>新しいレコードを追加</li>
+                <li><strong>Type:</strong> CNAME</li>
+                <li><strong>Name:</strong> material（またはサブドメイン）</li>
+                <li><strong>Content:</strong> YOUR_USERNAME.github.io</li>
+                <li>例：<code>hajime085.github.io</code></li>
+                <li>✅ Save</li>
+            </ol>
+        </div>
+
+        <p>その後、GitHub リポジトリで：</p>
+
+        <ol>
+            <li>Settings → Pages → Custom domain</li>
+            <li>ドメインを入力（例：material.example.com）</li>
+            <li>✅ Save</li>
+        </ol>
+
+        <div class="note">
+            <strong>💡 注：</strong> DNS の反映に 24-48 時間かかる場合があります。
+        </div>
+
+        <h2>📝 今後の更新方法</h2>
+
+        <p>素材を追加したら：</p>
+
+        <div class="code-block">git add .
+git commit -m "Add new materials"
+git push</div>
+
+        <p>自動的に GitHub Pages が更新されます。</p>
+
+        <h2>🔍 デプロイ状態の確認</h2>
+
+        <div class="step-box">
+            <strong>GitHub リポジトリ → Actions</strong>
+            <p>デプロイが進行中 / 完了したかを確認できます。</p>
+            <p>✅ グリーンチェックが表示されたら成功です。</p>
+        </div>
+
+        <h2>❓ トラブルシューティング</h2>
+
+        <h3>Q. ページが表示されない</h3>
+        <p><strong>確認項目：</strong></p>
+        <ul>
+            <li>GitHub リポジトリが Public（公開）になっているか</li>
+            <li>GitHub Pages が有効になっているか（Settings → Pages）</li>
+            <li>ブランチが「main」に設定されているか</li>
+            <li>Folder が「/(root)」に設定されているか</li>
+        </ul>
+
+        <h3>Q. CSS が効かない / ページが崩れている</h3>
+        <p><strong>原因：</strong> ブラウザのキャッシュ</p>
+        <p><strong>対策：</strong> Ctrl + Shift + Delete で キャッシュをクリア</p>
+
+        <h3>Q. CNAME が機能しない</h3>
+        <p><strong>確認：</strong></p>
+        <ul>
+            <li>CNAME ファイルが GitHub に push されているか</li>
+            <li>CNAME 内容が正しいドメインか</li>
+            <li>DNS レコード（Cloudflare 等）が正しく設定されているか</li>
+            <li>DNS の反映を待つ（24-48 時間）</li>
+        </ul>
+
+        <h2>🎉 デプロイ完了！</h2>
+
+        <div class="success">
+            <strong>✅ Blog Material Hub が公開されました！</strong><br>
+            <br>
+            次は：<br>
+            1. ギャラリーで素材が表示されるか確認<br>
+            2. 素材を追加して動作確認<br>
+            3. AdSense 申請を検討<br>
+        </div>
+
+        <h2>📚 参考資料</h2>
+        <ul>
+            <li><a href="https://docs.github.com/en/pages" target="_blank">GitHub Pages ドキュメント</a></li>
+            <li><a href="https://docs.github.com/en/get-started/getting-started-with-git" target="_blank">Git 入門</a></li>
+            <li><a href="https://www.cloudflare.com/" target="_blank">Cloudflare</a></li>
+        </ul>
+
+        <h2>💬 質問・サポート</h2>
+        <p><a href="/contact.html">お問い合わせフォーム</a> からご連絡ください。</p>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/privacy.html">プライバシーポリシー</a>
+                <a href="/terms.html">利用規約</a>
+                <a href="/disclaimer.html">免責事項</a>
+                <a href="/contact.html">お問い合わせ</a>
+            </div>
+            <div class="footer-info">
+                <p>&copy; 2026 Blog Material Hub. All rights reserved.</p>
+                <p>Powered by GitHub Pages + Cloudflare</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

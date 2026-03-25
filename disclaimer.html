@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>免責事項 | Blog Material Hub</title>
+    <meta name="description" content="Blog Material Hub の免責事項。素材使用による損害などについて。">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+        
+        .navbar nav {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .navbar nav a {
+            color: #555;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .navbar nav a:hover {
+            color: #3498db;
+        }
+        
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        main h1 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+        
+        main h2 {
+            color: #34495e;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            border-bottom: 2px solid #e74c3c;
+            padding-bottom: 0.5rem;
+        }
+        
+        main p {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+        
+        main ul, main ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        main li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .warning {
+            background-color: #fadbd8;
+            border-left: 4px solid #e74c3c;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+        
+        .warning strong {
+            color: #c0392b;
+        }
+        
+        footer {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            margin-top: 4rem;
+            padding: 3rem 2rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #34495e;
+        }
+        
+        .footer-links a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #3498db;
+        }
+        
+        .footer-info {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .last-updated {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #ecf0f1;
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .navbar nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background-color: #fff;
+                gap: 0;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
+            
+            .navbar nav.active {
+                display: flex;
+            }
+            
+            .navbar nav a {
+                padding: 1rem;
+                border-bottom: 1px solid #ecf0f1;
+            }
+            
+            main {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+            
+            main h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <a href="/" class="logo">📦 Blog Material Hub</a>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+            <nav id="navMenu">
+                <a href="/">ホーム</a>
+                <a href="/gallery.html">素材ギャラリー</a>
+                <a href="/faq.html">よくあるご質問</a>
+                <a href="/contact.html">お問い合わせ</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h1>免責事項</h1>
+        
+        <div class="warning">
+            <strong>⚠️ 重要：</strong> 当サイトが提供する素材のご利用は、利用者の自己責任で行ってください。
+        </div>
+
+        <h2>1. 素材の品質について</h2>
+        <p>当サイトが提供する素材は、AI生成またはフリー素材の加工によるものです。以下の点についてご了承ください：</p>
+        <ul>
+            <li>素材の品質・完成度には個人差があり、すべてのユーザーの要望に応じるわけではありません</li>
+            <li>AI生成素材の場合、生成時期や設定により品質が変動します</li>
+            <li>素材表示時の色合いは、ブラウザ・デバイスにより異なる場合があります</li>
+            <li>素材の改変・編集は自由ですが、当サイトは完成度については責任を負いません</li>
+        </ul>
+
+        <h2>2. ダウンロード・技術的な問題について</h2>
+        <p>当サイトは、以下の事項について責任を負いません：</p>
+        <ul>
+            <li>ダウンロードの中断・遅延・失敗</li>
+            <li>ファイル破損・エラー</li>
+            <li>ブラウザ互換性の問題</li>
+            <li>デバイスの不具合に起因するトラブル</li>
+            <li>インターネット接続の問題</li>
+        </ul>
+
+        <h2>3. 著作権・知的財産権について</h2>
+        <p>当サイトは、以下の事項について責任を負いません：</p>
+        <ul>
+            <li>第三者による著作権侵害の主張</li>
+            <li>素材使用による商標権・意匠権などの紛争</li>
+            <li>素材に含まれる人物・風景・商品の権利問題</li>
+        </ul>
+
+        <div class="warning">
+            <strong>注意：</strong> 素材を使用する際は、利用者の責任において著作権等の法令遵守をお願いします。紛争が生じた場合、当サイトは一切の責任を負いません。
+        </div>
+
+        <h2>4. 使用による損害について</h2>
+        <p>素材の使用に起因して生じた以下のような損害について、当サイトは一切の責任を負いません：</p>
+        <ul>
+            <li>ブログ・ウェブサイトのアクセス低下</li>
+            <li>SNS投稿の低評価・炎上</li>
+            <li>商用利用による売上低下</li>
+            <li>データ喪失・システム障害</li>
+            <li>その他直接的・間接的な損害</li>
+        </ul>
+
+        <h2>5. 素材の予告なき削除・変更</h2>
+        <p>当サイトは、以下の場合に予告なく素材を削除・変更する場合があります：</p>
+        <ul>
+            <li>著作権問題の報告を受けた場合</li>
+            <li>不適切な内容と判断した場合</li>
+            <li>サーバー容量・システム都合</li>
+            <li>その他当サイトが必要と判断した場合</li>
+        </ul>
+        <p>削除・変更による損害についても、当サイトは責任を負いません。</p>
+
+        <h2>6. 第三者への責任</h2>
+        <p>当サイト経由でダウンロードした素材を他者に配布・販売した場合、その法的責任は配布者（利用者）にあります。当サイトは一切責任を負いません。</p>
+
+        <h2>7. 利用者の違反行為</h2>
+        <p>利用者が本免責事項・利用規約に違反する場合、当サイトは以下の措置を取ることができます：</p>
+        <ul>
+            <li>ダウンロード機能の一時停止</li>
+            <li>IP アドレスのブロック</li>
+            <li>法的措置</li>
+        </ul>
+
+        <h2>8. 外部リンク・第三者サービス</h2>
+        <p>当サイトが提供するリンク先サイト・第三者サービス（Google フォーム、Google Analytics など）について、当サイトは責任を負いません。各サービスの利用規約に従ってください。</p>
+
+        <h2>9. サービス停止・変更</h2>
+        <p>当サイトは、以下の場合に予告なくサービスを停止・変更できます：</p>
+        <ul>
+            <li>システムメンテナンス</li>
+            <li>サーバー障害</li>
+            <li>その他やむを得ない事由</li>
+        </ul>
+
+        <h2>10. 免責事項の変更</h2>
+        <p>当サイトは、必要に応じて免責事項を変更する場合があります。変更は、このページで通知します。継続的な利用をもって、変更に同意したものとみなします。</p>
+
+        <div class="warning">
+            <strong>最終確認：</strong> 素材のご利用は、本免責事項のすべての内容に同意いただいた上でお願いします。
+        </div>
+
+        <div class="last-updated">
+            <strong>最終更新日：</strong> 2026年3月24日
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/privacy.html">プライバシーポリシー</a>
+                <a href="/terms.html">利用規約</a>
+                <a href="/disclaimer.html">免責事項</a>
+                <a href="/contact.html">お問い合わせ</a>
+            </div>
+            <div class="footer-info">
+                <p>&copy; 2026 Blog Material Hub. All rights reserved.</p>
+                <p>Powered by GitHub Pages + Cloudflare</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ご利用について | Blog Material Hub</title>
+    <meta name="description" content="Blog Material Hub のご利用ガイド。素材の正しい使い方、推奨される利用シーン。">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+        
+        .navbar nav {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .navbar nav a {
+            color: #555;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .navbar nav a:hover {
+            color: #3498db;
+        }
+        
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        main h1 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+        
+        main h2 {
+            color: #34495e;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+        
+        main h3 {
+            color: #555;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        main p {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+        
+        main ul, main ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        main li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .usage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .usage-card {
+            background-color: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .usage-card h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        
+        .usage-card.ok {
+            border-left-color: #27ae60;
+        }
+        
+        .usage-card.ok h3 {
+            color: #27ae60;
+        }
+        
+        .usage-card.ng {
+            border-left-color: #e74c3c;
+            background-color: #fadbd8;
+        }
+        
+        .usage-card.ng h3 {
+            color: #c0392b;
+        }
+        
+        .format-guide {
+            background-color: #ecf0f1;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        
+        .format-guide strong {
+            color: #2c3e50;
+        }
+        
+        .format-item {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #bdc3c7;
+        }
+        
+        .format-item:last-child {
+            margin-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .format-item code {
+            background-color: #fff;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #e74c3c;
+        }
+        
+        footer {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            margin-top: 4rem;
+            padding: 3rem 2rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #34495e;
+        }
+        
+        .footer-links a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #3498db;
+        }
+        
+        .footer-info {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .navbar nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background-color: #fff;
+                gap: 0;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
+            
+            .navbar nav.active {
+                display: flex;
+            }
+            
+            .navbar nav a {
+                padding: 1rem;
+                border-bottom: 1px solid #ecf0f1;
+            }
+            
+            main {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+            
+            main h1 {
+                font-size: 1.5rem;
+            }
+            
+            .usage-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <a href="/" class="logo">📦 Blog Material Hub</a>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+            <nav id="navMenu">
+                <a href="/">ホーム</a>
+                <a href="/gallery.html">素材ギャラリー</a>
+                <a href="/faq.html">よくあるご質問</a>
+                <a href="/contact.html">お問い合わせ</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h1>ご利用について</h1>
+        
+        <p>Blog Material Hub の素材を最適にご利用いただくためのガイドです。</p>
+
+        <h2>素材の使い方</h2>
+
+        <h3>📥 ステップ 1：素材を探す</h3>
+        <ul>
+            <li>ギャラリーページから、欲しい素材を探します</li>
+            <li>タグや検索で、テーマ・カテゴリから絞り込めます</li>
+            <li>複数の素材を比較できます</li>
+        </ul>
+
+        <h3>⬇️ ステップ 2：形式を選択してダウンロード</h3>
+        <ul>
+            <li>【ダウンロード】ボタンをクリック</li>
+            <li>ファイル形式を選択（PNG/JPEG/WebP）</li>
+            <li>【DLする】で自動ダウンロード</li>
+        </ul>
+
+        <h3>✏️ ステップ 3：編集・カスタマイズ</h3>
+        <ul>
+            <li>Photoshop、Canva、GIMPなどで編集可能</li>
+            <li>色調変更、テキスト追加、トリミング、など自由にカスタマイズ</li>
+            <li>AI画像生成ツールで再生成も可</li>
+        </ul>
+
+        <h3>🚀 ステップ 4：公開</h3>
+        <ul>
+            <li>ブログのアイキャッチ、SNS投稿、Webサイトなどで利用</li>
+            <li>商用利用もOK</li>
+        </ul>
+
+        <h2>利用シーン別ガイド</h2>
+
+        <h3>🖼️ ブログのアイキャッチ画像</h3>
+        <ul>
+            <li><strong>推奨形式：</strong> PNG（背景透過対応）</li>
+            <li><strong>推奨サイズ：</strong> 1200px × 630px</li>
+            <li><strong>ポイント：</strong> クリック率を高めるため、タイトルやテキストを重ねることをおすすめします</li>
+        </ul>
+
+        <h3>📱 SNS投稿（Twitter / Instagram）</h3>
+        <ul>
+            <li><strong>推奨形式：</strong> JPEG（ファイルサイズ小）</li>
+            <li><strong>推奨サイズ：</strong> 1200px × 675px（Twitter）、1080px × 1080px（Instagram）</li>
+            <li><strong>ポイント：</strong> テキスト追加で、タップされやすくなります</li>
+        </ul>
+
+        <h3>🌐 Webサイト・ランディングページ</h3>
+        <ul>
+            <li><strong>推奨形式：</strong> WebP（高速読み込み）</li>
+            <li><strong>推奨サイズ：</strong> 1920px × 1080px</li>
+            <li><strong>ポイント：</strong> 背景透過がある場合は PNG</li>
+        </ul>
+
+        <h2>ファイル形式ガイド</h2>
+
+        <div class="format-guide">
+            <div class="format-item">
+                <strong>📄 PNG（推奨：一般的）</strong>
+                <p>ロスレス圧縮で高品質。背景透過対応。ファイルサイズやや大きい。</p>
+                <p>用途：ブログアイキャッチ、透過背景が必要な場合</p>
+                <p>拡張子：<code>.png</code></p>
+            </div>
+            <div class="format-item">
+                <strong>🖼️ JPEG（推奨：SNS）</strong>
+                <p>圧縮率高く、ファイルサイズ小さい。背景透過非対応。</p>
+                <p>用途：SNS投稿、Webサイト背景、高速表示が必要な場合</p>
+                <p>拡張子：<code>.jpg / .jpeg</code></p>
+            </div>
+            <div class="format-item">
+                <strong>⚡ WebP（推奨：最新）</strong>
+                <p>最新の圧縮形式。小ファイルサイズで高品質。背景透過対応。</p>
+                <p>用途：次世代型 Webサイト、パフォーマンス重視</p>
+                <p>拡張子：<code>.webp</code></p>
+                <p><em>注：古いブラウザ（IE等）では表示されない場合があります</em></p>
+            </div>
+        </div>
+
+        <h2>✅ 利用できる例 / ❌ 利用できない例</h2>
+
+        <div class="usage-grid">
+            <div class="usage-card ok">
+                <h3>✅ こんな使い方は OK</h3>
+                <ul>
+                    <li>ブログ記事のアイキャッチ</li>
+                    <li>SNS投稿</li>
+                    <li>会社のプレゼン資料</li>
+                    <li>YouTube動画内</li>
+                    <li>広告・販促物</li>
+                    <li>素材の編集・改変</li>
+                </ul>
+            </div>
+            <div class="usage-card ng">
+                <h3>❌ こんな使い方は NG</h3>
+                <ul>
+                    <li>素材そのもの販売</li>
+                    <li>素材の再配布</li>
+                    <li>プリント商品化</li>
+                    <li>素材バンク化</li>
+                    <li>違法・不適切利用</li>
+                    <li>素材著作権を主張</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>著作権表記について</h2>
+        
+        <p><strong>表記は推奨ですが必須ではありません。</strong> 表記していただける場合は、以下のいずれかのスタイルでお願いします：</p>
+
+        <h3>スタイル A：画像下に表記</h3>
+        <p><em>素材提供：Blog Material Hub</em></p>
+
+        <h3>スタイル B：ページフッターに記載</h3>
+        <p><em>Powered by Blog Material Hub</em></p>
+
+        <h3>スタイル C：リンク付き（最高！）</h3>
+        <p><em>素材：<a href="https://yourdomain.com" target="_blank">Blog Material Hub</a></em></p>
+
+        <h2>編集・カスタマイズのコツ</h2>
+
+        <h3>🎨 色合い調整</h3>
+        <ul>
+            <li>ブランドカラーに合わせて色調変更</li>
+            <li>彩度を下げてモダンな印象に</li>
+            <li>グラデーション合成で奥行きを出す</li>
+        </ul>
+
+        <h3>📝 テキスト追加</h3>
+        <ul>
+            <li>タイトル・見出しを重ねる</li>
+            <li>フォントサイズはメディアに合わせて調整</li>
+            <li>白・黒テキストで背景の視認性確保</li>
+        </ul>
+
+        <h3>🔄 複合利用</h3>
+        <ul>
+            <li>複数の素材を組み合わせる</li>
+            <li>レイアウトツール（Canva）で簡単合成</li>
+            <li>背景透過素材を重ねて凝ったデザイン</li>
+        </ul>
+
+        <h2>トラブル時の対応</h2>
+
+        <h3>❓ 素材が見つからない</h3>
+        <ul>
+            <li>検索キーワードを変更</li>
+            <li>タグフィルターを試す</li>
+            <li>素材をリクエスト（<a href="/faq.html">FAQ</a> 参照）</li>
+        </ul>
+
+        <h3>❓ ダウンロードできない</h3>
+        <ul>
+            <li>ブラウザリロード</li>
+            <li>別ブラウザを試す</li>
+            <li><a href="/contact.html">お問い合わせ</a> で報告</li>
+        </ul>
+
+        <h3>❓ 品質が想定と異なる</h3>
+        <ul>
+            <li>編集・加工で調整</li>
+            <li>別の素材を試す</li>
+            <li>リクエストで改善依頼</li>
+        </ul>
+
+        <h2>その他のご質問</h2>
+        <p>ご不明な点やご質問は、<a href="/faq.html">よくあるご質問</a> をご覧いただくか、<a href="/contact.html">お問い合わせ</a> からお気軽にご連絡ください。</p>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/privacy.html">プライバシーポリシー</a>
+                <a href="/terms.html">利用規約</a>
+                <a href="/disclaimer.html">免責事項</a>
+                <a href="/contact.html">お問い合わせ</a>
+            </div>
+            <div class="footer-info">
+                <p>&copy; 2026 Blog Material Hub. All rights reserved.</p>
+                <p>Powered by GitHub Pages + Cloudflare</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

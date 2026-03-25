@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プライバシーポリシー | Blog Material Hub</title>
+    <meta name="description" content="Blog Material Hub のプライバシーポリシー。個人情報の取り扱い、Cookie、Google Analytics について。">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+        
+        .navbar nav {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .navbar nav a {
+            color: #555;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .navbar nav a:hover {
+            color: #3498db;
+        }
+        
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        main h1 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+        
+        main h2 {
+            color: #34495e;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+        
+        main h3 {
+            color: #555;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        main p {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+        
+        main ul, main ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        main li {
+            margin-bottom: 0.5rem;
+        }
+        
+        main a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        main a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+        
+        footer {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            margin-top: 4rem;
+            padding: 3rem 2rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #34495e;
+        }
+        
+        .footer-links a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #3498db;
+        }
+        
+        .footer-info {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .last-updated {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #ecf0f1;
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .navbar nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background-color: #fff;
+                gap: 0;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
+            
+            .navbar nav.active {
+                display: flex;
+            }
+            
+            .navbar nav a {
+                padding: 1rem;
+                border-bottom: 1px solid #ecf0f1;
+            }
+            
+            main {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+            
+            main h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <a href="/" class="logo">📦 Blog Material Hub</a>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+            <nav id="navMenu">
+                <a href="/">ホーム</a>
+                <a href="/gallery.html">素材ギャラリー</a>
+                <a href="/about.html">運営者情報</a>
+                <a href="/contact.html">お問い合わせ</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h1>プライバシーポリシー</h1>
+        
+        <p>Blog Material Hub（以下「当サイト」）は、ユーザーの個人情報の取り扱いについて以下の通りプライバシーポリシーを定めます。</p>
+
+        <h2>1. 個人情報について</h2>
+        <p>当サイトでは、以下の情報を収集する場合があります：</p>
+        <ul>
+            <li><strong>お問い合わせフォーム経由</strong>：名前、メールアドレス、内容</li>
+            <li><strong>ダウンロード操作</strong>：ダウンロード数、ファイル形式選択（個人特定不可）</li>
+        </ul>
+
+        <h2>2. Google Analytics の使用</h2>
+        <p>当サイトでは、ユーザーのアクセス解析を目的として Google Analytics を使用しています。</p>
+        <ul>
+            <li>Google Analytics は、クッキー（Cookie）を使用してサイト利用データを収集します</li>
+            <li>収集されるデータは匿名であり、個人を特定するものではありません</li>
+            <li>詳細は <a href="https://policies.google.com/privacy" target="_blank">Google のプライバシーポリシー</a> をご覧ください</li>
+        </ul>
+
+        <h2>3. Google AdSense（広告配信）について</h2>
+        <p>当サイトでは、Google AdSense により広告を配信しています。</p>
+        <ul>
+            <li>Google AdSense は、クッキーを使用して過去のアクセス情報に基づいた広告を配信します</li>
+            <li>このプロセスの詳細は、Google AdSense のプライバシーポリシーに記載されています</li>
+            <li>詳細は <a href="https://policies.google.com/technologies/ads" target="_blank">Google 広告に関するプライバシーポリシー</a> をご覧ください</li>
+        </ul>
+
+        <h2>4. Cookie（クッキー）について</h2>
+        <p>当サイトでは、以下の目的でクッキーを使用しています：</p>
+        <ul>
+            <li>アクセス解析（Google Analytics）</li>
+            <li>広告配信（Google AdSense）</li>
+            <li>ユーザー体験の向上</li>
+        </ul>
+        <p>ブラウザの設定により、クッキーの受け入れを制限することができます。</p>
+
+        <h2>5. 外部リンク・第三者サービス</h2>
+        <p>当サイトには、外部サイトへのリンクが含まれる場合があります。当サイトは、外部サイトのプライバシーポリシーについて責任を負いません。</p>
+
+        <h2>6. 個人情報の安全管理</h2>
+        <p>当サイトが収集した個人情報は、以下の方法で保護されます：</p>
+        <ul>
+            <li>SSL/TLS 暗号化通信によるデータ保護</li>
+            <li>アクセス制限</li>
+            <li>適切なセキュリティ対策の実施</li>
+        </ul>
+
+        <h2>7. 個人情報の開示・削除要求</h2>
+        <p>個人情報の開示・削除をご希望の場合は、<a href="/contact.html">お問い合わせ</a> からご連絡ください。適切に対応させていただきます。</p>
+
+        <h2>8. プライバシーポリシーの変更</h2>
+        <p>当サイトは、必要に応じてプライバシーポリシーを変更する場合があります。変更があった場合、このページで通知します。</p>
+
+        <h2>9. お問い合わせ</h2>
+        <p>プライバシーに関するご質問・ご不明な点は、<a href="/contact.html">お問い合わせフォーム</a> よりお問い合わせください。</p>
+
+        <div class="last-updated">
+            <strong>最終更新日：</strong> 2026年3月24日
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/privacy.html">プライバシーポリシー</a>
+                <a href="/terms.html">利用規約</a>
+                <a href="/about.html">運営者情報</a>
+                <a href="/contact.html">お問い合わせ</a>
+            </div>
+            <div class="footer-info">
+                <p>&copy; 2026 Blog Material Hub. All rights reserved.</p>
+                <p>Powered by GitHub Pages + Cloudflare</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
