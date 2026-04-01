@@ -4,31 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>素材ギャラリー | Blog Material Hub</title>
-    <meta name="description" content="ブログ素材ギャラリー。Amazonアフィリエイト向けの画像をダウンロード。形式選択で便利に。">
-    
+    <meta name="description" content="ブログ・動画・SNS向けの高品質WebP素材を無料配信。カテゴリ・タグで絞り込んで素早く発見。">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
             line-height: 1.6;
             color: #333;
             background-color: #f9f9f9;
         }
-        
-        /* ============ HEADER ============ */
+
+        /* ===== HEADER ===== */
         header {
-            background-color: #fff;
+            background: #fff;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
             z-index: 100;
         }
-        
         .navbar {
             max-width: 1200px;
             margin: 0 auto;
@@ -37,30 +31,20 @@
             justify-content: space-between;
             align-items: center;
         }
-        
         .navbar .logo {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: bold;
             color: #2c3e50;
             text-decoration: none;
         }
-        
-        .navbar nav {
-            display: flex;
-            gap: 2rem;
-        }
-        
+        .navbar nav { display: flex; gap: 2rem; }
         .navbar nav a {
             color: #555;
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: color 0.2s;
         }
-        
-        .navbar nav a:hover {
-            color: #3498db;
-        }
-        
+        .navbar nav a:hover { color: #3498db; }
         .menu-toggle {
             display: none;
             background: none;
@@ -69,388 +53,268 @@
             cursor: pointer;
             color: #333;
         }
-        
-        /* ============ MAIN ============ */
+
+        /* ===== MAIN ===== */
         main {
             max-width: 1200px;
             margin: 2rem auto;
             padding: 0 2rem;
         }
-        
-        .gallery-header {
-            margin-bottom: 2rem;
-        }
-        
-        .gallery-header h1 {
-            color: #2c3e50;
-            margin-bottom: 0.5rem;
-            font-size: 2rem;
-        }
-        
-        .gallery-header p {
-            color: #7f8c8d;
-            font-size: 1.05rem;
-        }
-        
-        /* ============ 検索・フィルタセクション ============ */
+        .gallery-header { margin-bottom: 2rem; }
+        .gallery-header h1 { color: #2c3e50; margin-bottom: 0.4rem; font-size: 2rem; }
+        .gallery-header p { color: #7f8c8d; font-size: 1.05rem; }
+
+        /* ===== FILTER SECTION ===== */
         .filter-section {
-            background-color: #fff;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            background: #fff;
+            padding: 1.8rem 2rem;
+            border-radius: 10px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
             margin-bottom: 2rem;
         }
-        
-        .search-box {
-            margin-bottom: 1.5rem;
-        }
-        
+        .search-box { margin-bottom: 1.4rem; }
         .search-box input {
             width: 100%;
-            padding: 0.8rem;
+            padding: 0.8rem 1rem;
             font-size: 1rem;
             border: 2px solid #ecf0f1;
-            border-radius: 6px;
-            transition: border-color 0.3s;
-        }
-        
-        .search-box input:focus {
-            outline: none;
-            border-color: #3498db;
-        }
-        
-        .filter-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-        }
-        
-        .tag-btn {
-            padding: 0.5rem 1rem;
-            background-color: #ecf0f1;
-            border: 2px solid #bdc3c7;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 0.95rem;
-            font-weight: 500;
-        }
-        
-        .tag-btn:hover {
-            background-color: #d5dbdb;
-            border-color: #95a5a6;
-        }
-        
-        .tag-btn.active {
-            background-color: #3498db;
-            color: #fff;
-            border-color: #2980b9;
-        }
-        
-        .clear-filters {
-            margin-top: 1rem;
-        }
-        
-        .clear-filters button {
-            padding: 0.6rem 1.2rem;
-            background-color: #95a5a6;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: background-color 0.3s;
-            display: none;
-        }
-        
-        .clear-filters button.active {
-            display: inline-block;
-        }
-        
-        .clear-filters button:hover {
-            background-color: #7f8c8d;
-        }
-        
-        /* ============ ギャラリーグリッド ============ */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        
-        .gallery-item {
-            background-color: #fff;
             border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            cursor: pointer;
+            transition: border-color 0.2s;
         }
-        
-        .gallery-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-        
-        .gallery-image {
-            width: 100%;
-            height: 150px;
-            background-color: #ecf0f1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            overflow: hidden;
-        }
-        
-        .gallery-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .gallery-info {
-            padding: 1rem;
-        }
-        
-        .gallery-title {
+        .search-box input:focus { outline: none; border-color: #3498db; }
+
+        .filter-label {
+            font-size: 0.85rem;
             font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-            line-height: 1.3;
+            color: #95a5a6;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.6rem;
         }
-        
-        .gallery-tags {
+
+        /* 大分類タブ */
+        .large-cat-tabs {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.3rem;
-            margin-bottom: 0.8rem;
-        }
-        
-        .gallery-tag {
-            background-color: #e8f4f8;
-            color: #2980b9;
-            padding: 0.2rem 0.5rem;
-            font-size: 0.75rem;
-            border-radius: 3px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .gallery-tag:hover {
-            background-color: #d5e8f0;
-        }
-        
-        .gallery-actions {
-            display: flex;
             gap: 0.5rem;
+            margin-bottom: 1.2rem;
         }
-        
-        .dl-btn {
-            flex: 1;
-            padding: 0.6rem;
-            background-color: #27ae60;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 0.85rem;
-            transition: background-color 0.3s;
-        }
-        
-        .dl-btn:hover {
-            background-color: #229954;
-        }
-        
-        .detail-btn {
-            padding: 0.6rem 0.8rem;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 0.85rem;
-            transition: background-color 0.3s;
-        }
-        
-        .detail-btn:hover {
-            background-color: #2980b9;
-        }
-        
-        /* ============ 空状態 ============ */
-        .empty-state {
-            text-align: center;
-            padding: 3rem 2rem;
-            color: #7f8c8d;
-        }
-        
-        .empty-state h2 {
-            color: #34495e;
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-        
-        /* ============ ダウンロードモーダル ============ */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            animation: fadeIn 0.3s;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .modal-content {
-            background-color: #fff;
-            padding: 2rem;
+        .large-cat-btn {
+            padding: 0.5rem 1.1rem;
+            border: 2px solid #dce1e7;
             border-radius: 8px;
-            max-width: 500px;
-            width: 90%;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-            animation: slideUp 0.3s;
+            background: #fff;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #555;
+            transition: all 0.2s;
         }
-        
-        @keyframes slideUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        .large-cat-btn:hover { border-color: #3498db; color: #3498db; }
+        .large-cat-btn.active {
+            background: #3498db;
+            border-color: #3498db;
+            color: #fff;
         }
-        
-        .modal-header {
+
+        /* 中分類タグ */
+        .sub-cat-row { margin-bottom: 1.2rem; min-height: 1.5rem; }
+        .sub-cat-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .sub-cat-btn {
+            padding: 0.35rem 0.9rem;
+            border: 2px solid #dce1e7;
+            border-radius: 20px;
+            background: #fff;
+            cursor: pointer;
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: #555;
+            transition: all 0.2s;
+        }
+        .sub-cat-btn:hover { border-color: #27ae60; color: #27ae60; }
+        .sub-cat-btn.active {
+            background: #27ae60;
+            border-color: #27ae60;
+            color: #fff;
+        }
+
+        /* タグフィルタ */
+        .tag-filter-row { margin-bottom: 0.8rem; }
+        .tag-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+        .tag-chip {
+            padding: 0.25rem 0.75rem;
+            border: 1px solid #d5dbdb;
+            border-radius: 20px;
+            background: #f9f9f9;
+            cursor: pointer;
+            font-size: 0.82rem;
+            color: #555;
+            transition: all 0.2s;
+        }
+        .tag-chip:hover { background: #e8f4f8; border-color: #3498db; color: #2980b9; }
+        .tag-chip.active {
+            background: #e8f4f8;
+            border-color: #3498db;
+            color: #2980b9;
+            font-weight: 600;
+        }
+
+        /* フィルタ状況・リセット */
+        .filter-status {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
-        }
-        
-        .modal-header h2 {
-            color: #2c3e50;
-            font-size: 1.3rem;
-        }
-        
-        .modal-close {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
+            margin-top: 1rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid #f0f0f0;
+            font-size: 0.9rem;
             color: #7f8c8d;
-            transition: color 0.3s;
         }
-        
-        .modal-close:hover {
-            color: #2c3e50;
+        .reset-btn {
+            padding: 0.35rem 0.9rem;
+            background: #ecf0f1;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.88rem;
+            color: #555;
+            font-weight: 500;
+            display: none;
         }
-        
-        .format-options {
-            margin: 1.5rem 0;
+        .reset-btn.visible { display: inline-block; }
+        .reset-btn:hover { background: #d5dbdb; }
+
+        /* ===== GALLERY GRID ===== */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.4rem;
+            margin-bottom: 2rem;
         }
-        
-        .format-option {
+        .gallery-item {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .gallery-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+        }
+        .gallery-thumb {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: #ecf0f1;
+            overflow: hidden;
             display: flex;
             align-items: center;
-            padding: 0.8rem;
-            margin-bottom: 0.8rem;
-            border: 2px solid #ecf0f1;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s;
+            justify-content: center;
         }
-        
-        .format-option:hover {
-            background-color: #f9f9f9;
-            border-color: #3498db;
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s;
         }
-        
-        .format-option input[type="radio"] {
-            margin-right: 1rem;
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
+        .gallery-item:hover .gallery-thumb img { transform: scale(1.04); }
+        .gallery-thumb .no-img {
+            font-size: 2.5rem;
+            color: #bdc3c7;
         }
-        
-        .format-option label {
-            flex: 1;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            gap: 0.3rem;
-        }
-        
-        .format-name {
-            font-weight: bold;
+
+        .gallery-info { padding: 0.9rem 1rem; }
+        .gallery-title {
+            font-weight: 700;
             color: #2c3e50;
+            font-size: 0.9rem;
+            margin-bottom: 0.4rem;
+            line-height: 1.3;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
-        
-        .format-desc {
-            font-size: 0.85rem;
-            color: #7f8c8d;
+        .gallery-cats {
+            font-size: 0.78rem;
+            color: #95a5a6;
+            margin-bottom: 0.5rem;
         }
-        
-        .modal-actions {
+        .gallery-tags {
             display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
+            flex-wrap: wrap;
+            gap: 0.25rem;
+            margin-bottom: 0.8rem;
         }
-        
-        .modal-actions button {
-            flex: 1;
-            padding: 0.8rem;
+        .gallery-tag {
+            background: #eaf4fb;
+            color: #2980b9;
+            padding: 0.15rem 0.5rem;
+            font-size: 0.75rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .gallery-tag:hover { background: #d4e9f5; }
+        .dl-btn {
+            width: 100%;
+            padding: 0.55rem;
+            background: #27ae60;
+            color: #fff;
             border: none;
             border-radius: 6px;
-            font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s;
+            font-weight: 700;
+            font-size: 0.88rem;
+            transition: background 0.2s;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+        .dl-btn:hover { background: #229954; }
+
+        /* ===== LOAD MORE ===== */
+        .load-more-wrap {
+            text-align: center;
+            margin: 1rem 0 2rem;
+        }
+        .load-more-btn {
+            padding: 0.8rem 2.5rem;
+            background: #fff;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            color: #3498db;
             font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
         }
-        
-        .btn-download {
-            background-color: #27ae60;
-            color: white;
+        .load-more-btn:hover { background: #3498db; color: #fff; }
+        .load-more-count { color: #95a5a6; font-size: 0.9rem; margin-top: 0.6rem; }
+
+        /* ===== EMPTY ===== */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #7f8c8d;
+            display: none;
         }
-        
-        .btn-download:hover {
-            background-color: #229954;
+        .empty-state h2 { color: #34495e; margin-bottom: 0.8rem; font-size: 1.4rem; }
+
+        /* ===== LOADING ===== */
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: #7f8c8d;
         }
-        
-        .btn-cancel {
-            background-color: #ecf0f1;
-            color: #2c3e50;
-        }
-        
-        .btn-cancel:hover {
-            background-color: #d5dbdb;
-        }
-        
-        /* ============ FOOTER ============ */
+
+        /* ===== FOOTER ===== */
         footer {
-            background-color: #2c3e50;
+            background: #2c3e50;
             color: #ecf0f1;
             margin-top: 4rem;
             padding: 3rem 2rem;
         }
-        
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
+        .footer-content { max-width: 1200px; margin: 0 auto; }
         .footer-links {
             display: flex;
             gap: 2rem;
@@ -459,486 +323,426 @@
             padding-bottom: 2rem;
             border-bottom: 1px solid #34495e;
         }
-        
-        .footer-links a {
-            color: #ecf0f1;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer-links a:hover {
-            color: #3498db;
-        }
-        
-        .footer-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        
-        .footer-info p {
-            font-size: 0.9rem;
-        }
-        
-        /* ============ レスポンシブ ============ */
+        .footer-links a { color: #ecf0f1; text-decoration: none; transition: color 0.2s; }
+        .footer-links a:hover { color: #3498db; }
+        .footer-info { font-size: 0.9rem; }
+
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
-            .navbar {
-                padding: 1rem;
-            }
-            
-            .menu-toggle {
-                display: block;
-            }
-            
+            .navbar { padding: 1rem; }
+            .menu-toggle { display: block; }
             .navbar nav {
                 display: none;
                 position: absolute;
                 top: 100%;
-                left: 0;
-                right: 0;
+                left: 0; right: 0;
                 flex-direction: column;
-                background-color: #fff;
+                background: #fff;
                 gap: 0;
                 box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             }
-            
-            .navbar nav.active {
-                display: flex;
-            }
-            
-            .navbar nav a {
-                padding: 1rem;
-                border-bottom: 1px solid #ecf0f1;
-            }
-            
-            main {
-                padding: 0 1rem;
-            }
-            
-            .gallery-header h1 {
-                font-size: 1.5rem;
-            }
-            
-            .filter-section {
-                padding: 1.5rem;
-            }
-            
-            .gallery-grid {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-                gap: 1rem;
-            }
-            
-            .modal-content {
-                width: 95%;
-                padding: 1.5rem;
-            }
-            
-            .gallery-actions {
-                flex-direction: column;
-            }
-            
-            .detail-btn {
-                width: 100%;
-            }
+            .navbar nav.active { display: flex; }
+            .navbar nav a { padding: 1rem; border-bottom: 1px solid #ecf0f1; }
+            main { padding: 0 1rem; }
+            .gallery-header h1 { font-size: 1.5rem; }
+            .filter-section { padding: 1.2rem; }
+            .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1rem; }
         }
     </style>
 </head>
 <body>
-    <!-- ============ HEADER ============ -->
-    <header>
-        <div class="navbar">
-            <a href="./" class="logo">📦 Blog Material Hub</a>
-            <button class="menu-toggle" id="menuToggle">☰</button>
-            <nav id="navMenu">
-                <a href="./">ホーム</a>
-                <a href="./gallery.html">素材ギャラリー</a>
-                <a href="./faq.html">よくあるご質問</a>
-                <a href="./contact.html">お問い合わせ</a>
-            </nav>
-        </div>
-    </header>
 
-    <!-- ============ MAIN ============ -->
-    <main>
-        <div class="gallery-header">
-            <h1>素材ギャラリー</h1>
-            <p>ブログ、SNS、Webサイト向けの高品質素材を無料配信。検索とタグで欲しい素材を素早く発見。形式選択でどのプラットフォームにも対応。</p>
-        </div>
+<header>
+    <div class="navbar">
+        <a href="/blog-material-hub/" class="logo">📦 Blog Material Hub</a>
+        <button class="menu-toggle" id="menuToggle">☰</button>
+        <nav id="navMenu">
+            <a href="/blog-material-hub/">ホーム</a>
+            <a href="/blog-material-hub/gallery.html">素材ギャラリー</a>
+            <a href="/blog-material-hub/faq.html">よくあるご質問</a>
+            <a href="/blog-material-hub/contact.html">お問い合わせ</a>
+        </nav>
+    </div>
+</header>
 
-        <!-- 検索・フィルタセクション -->
-        <div class="filter-section">
-            <div class="search-box">
-                <input 
-                    type="text" 
-                    id="searchInput" 
-                    placeholder="例：商品比較、セール、女性、アイキャッチ..."
-                >
-            </div>
-            
-            <div>
-                <p style="margin-bottom: 0.8rem; font-weight: bold; color: #2c3e50;">タグで絞り込む：</p>
-                <div class="filter-tags" id="filterTags"></div>
-            </div>
-            
-            <div class="clear-filters">
-                <button id="clearFiltersBtn">フィルタをリセット</button>
-            </div>
+<main>
+    <div class="gallery-header">
+        <h1>素材ギャラリー</h1>
+        <p>ブログ・動画・SNS向けの高品質WebP素材を無料配信。カテゴリとタグで欲しい素材を素早く発見できます。</p>
+    </div>
+
+    <div class="filter-section">
+        <!-- 検索 -->
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="キーワードで検索（例：レモン、夏、シンプル）">
         </div>
 
-        <!-- ギャラリーグリッド -->
-        <div class="gallery-grid" id="gallery"></div>
-        
-        <!-- 空状態 -->
-        <div class="empty-state" id="emptyState" style="display: none;">
-            <h2>🔍 素材が見つかりません</h2>
-            <p>別のキーワードやタグで検索してみてください。</p>
+        <!-- 大分類 -->
+        <div class="filter-label">カテゴリ</div>
+        <div class="large-cat-tabs" id="largeCatTabs">
+            <button class="large-cat-btn active" data-cat="">すべて</button>
         </div>
-    </main>
 
-    <!-- ダウンロードモーダル -->
-    <div class="modal" id="downloadModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>ダウンロード形式を選択</h2>
-                <button class="modal-close" id="modalClose">✕</button>
-            </div>
-            
-            <div class="format-options">
-                <div class="format-option" style="border: 2px solid #3498db;">
-                    <input type="radio" id="format-webp" name="format" value="webp" checked style="width: auto; margin-right: 1rem;">
-                    <label for="format-webp" style="margin: 0;">
-                        <span class="format-name">⚡ WebP 形式</span>
-                        <span class="format-desc">高画質・軽量。最新の標準形式です。必要に応じて PNG や JPEG に変換してください。</span>
-                    </label>
-                </div>
-            </div>
-            
-            <div class="modal-actions">
-                <button class="btn-download" id="confirmDownload">ダウンロード</button>
-                <button class="btn-cancel" id="cancelDownload">キャンセル</button>
-            </div>
+        <!-- 中分類 -->
+        <div class="sub-cat-row" id="subCatRow" style="display:none;">
+            <div class="filter-label">絞り込み</div>
+            <div class="sub-cat-tags" id="subCatTags"></div>
+        </div>
+
+        <!-- タグ -->
+        <div class="tag-filter-row" id="tagFilterRow" style="display:none;">
+            <div class="filter-label">タグ</div>
+            <div class="tag-chips" id="tagChips"></div>
+        </div>
+
+        <!-- フィルタ状況 -->
+        <div class="filter-status">
+            <span id="resultCount">読み込み中...</span>
+            <button class="reset-btn" id="resetBtn">✕ フィルタをリセット</button>
         </div>
     </div>
 
-    <!-- ============ FOOTER ============ -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="./privacy.html">プライバシーポリシー</a>
-                <a href="./terms.html">利用規約</a>
-                <a href="./disclaimer.html">免責事項</a>
-                <a href="./contact.html">お問い合わせ</a>
-            </div>
-            <div class="footer-info">
-                <p>&copy; 2026 Blog Material Hub. All rights reserved.</p>
-                
-            </div>
+    <!-- ギャラリー -->
+    <div id="loadingMsg" class="loading">素材を読み込んでいます...</div>
+    <div class="gallery-grid" id="gallery"></div>
+    <div class="empty-state" id="emptyState">
+        <h2>🔍 素材が見つかりません</h2>
+        <p>別のキーワードやカテゴリで検索してみてください。</p>
+    </div>
+
+    <!-- もっと読み込む -->
+    <div class="load-more-wrap" id="loadMoreWrap" style="display:none;">
+        <button class="load-more-btn" id="loadMoreBtn">もっと読み込む</button>
+        <div class="load-more-count" id="loadMoreCount"></div>
+    </div>
+</main>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-links">
+            <a href="/blog-material-hub/privacy.html">プライバシーポリシー</a>
+            <a href="/blog-material-hub/terms.html">利用規約</a>
+            <a href="/blog-material-hub/disclaimer.html">免責事項</a>
+            <a href="/blog-material-hub/contact.html">お問い合わせ</a>
         </div>
-    </footer>
+        <div class="footer-info">
+            <p>&copy; 2026 Blog Material Hub. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
 
-    <!-- JavaScriptロジック -->
-    <script>
-        // ========== ナビゲーション ==========
-        const menuToggle = document.getElementById('menuToggle');
-        const navMenu = document.getElementById('navMenu');
-        
-        menuToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
-        
-        navMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-            });
-        });
+<script>
+// ===== NAV =====
+document.getElementById('menuToggle').addEventListener('click', () => {
+    document.getElementById('navMenu').classList.toggle('active');
+});
 
-        // ========== サンプルデータ ==========
-        const materials = [
-            {
-                id: 1,
-                title: "観葉植物のある部屋",
-                tags: ["植物", "インテリア", "自然", "部屋"],
-                category: "plants",
-                image: "🌿"
-            },
-            {
-                id: 2,
-                title: "かわいい猫のアップ",
-                tags: ["生き物", "猫", "動物", "かわいい"],
-                category: "animals",
-                image: "🐱"
-            },
-            {
-                id: 3,
-                title: "朝日と海",
-                tags: ["風景", "自然", "空", "海"],
-                category: "bg",
-                image: "🌅"
-            },
-            {
-                id: 4,
-                title: "コーヒーのある机上",
-                tags: ["日用品", "ライフスタイル", "インテリア", "飲料"],
-                category: "daily",
-                image: "☕"
-            },
-            {
-                id: 5,
-                title: "モダンなガジェット配置",
-                tags: ["ガジェット", "テック", "スマートフォン", "タブレット"],
-                category: "gadget",
-                image: "📱"
-            },
-            {
-                id: 6,
-                title: "幾何学模様の背景",
-                tags: ["背景", "素材", "デザイン", "シンプル"],
-                category: "material",
-                image: "🎨"
-            },
-            {
-                id: 7,
-                title: "花のクローズアップ",
-                tags: ["植物", "花", "自然", "カラフル"],
-                category: "plants",
-                image: "🌸"
-            },
-            {
-                id: 8,
-                title: "森の中の道",
-                tags: ["風景", "自然", "背景", "緑"],
-                category: "bg",
-                image: "🌲"
-            },
-            {
-                id: 9,
-                title: "調理中のキッチン",
-                tags: ["日用品", "食事", "ライフスタイル", "料理"],
-                category: "daily",
-                image: "🍳"
-            },
-            {
-                id: 10,
-                title: "本とメガネ",
-                tags: ["素材", "学習", "読書", "知識"],
-                category: "material",
-                image: "📚"
-            },
-            {
-                id: 11,
-                title: "野鳥のとまり木",
-                tags: ["生き物", "鳥", "自然", "野生動物"],
-                category: "animals",
-                image: "🦅"
-            },
-            {
-                id: 12,
-                title: "グラデーション背景",
-                tags: ["背景", "素材", "カラフル", "モダン"],
-                category: "material",
-                image: "🌈"
-            }
-        ];
+// ===== 定数 =====
+const PER_PAGE = 20;
 
-        // ========== グローバル変数 ==========
-        let filteredMaterials = [...materials];
-        let activeFilters = {
-            search: '',
-            tags: []
-        };
-        let selectedMaterialId = null;
+// ===== 状態 =====
+let allMaterials = [];
+let catDefs = {};
+let filtered = [];
+let shownCount = 0;
 
-        // ========== タグボタン初期化 ==========
-        function initializeTags() {
-            const allTags = new Set();
-            materials.forEach(m => m.tags.forEach(t => allTags.add(t)));
-            
-            const filterTagsContainer = document.getElementById('filterTags');
-            filterTagsContainer.innerHTML = '';
-            
-            Array.from(allTags).sort().forEach(tag => {
-                const btn = document.createElement('button');
-                btn.className = 'tag-btn';
-                btn.textContent = tag;
-                btn.addEventListener('click', () => {
-                    toggleTag(tag, btn);
-                });
-                filterTagsContainer.appendChild(btn);
-            });
+let activeFilters = {
+    search: '',
+    largeCat: '',
+    subCat: '',
+    tags: []
+};
+
+// ===== data.json 読み込み =====
+async function loadData() {
+    // ① fetch で data.json を取得（GitHub Pages / ローカルサーバー）
+    try {
+        const res = await fetch('data.json');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const json = await res.json();
+        onDataLoaded(json);
+        return;
+    } catch (e) {
+        console.warn('fetch failed:', e.message);
+    }
+
+    // ② フォールバック：admin.html でエクスポートした JSON が
+    //    localStorage に残っていれば使用（ローカル確認用）
+    try {
+        const raw = localStorage.getItem('bmh_preview_json');
+        if (raw) {
+            const json = JSON.parse(raw);
+            onDataLoaded(json);
+            document.getElementById('loadingMsg').innerHTML =
+                '⚠️ <small>ローカルプレビュー中（localStorage から読込）</small>';
+            document.getElementById('loadingMsg').style.color = '#f39c12';
+            document.getElementById('loadingMsg').style.display = 'block';
+            setTimeout(() => document.getElementById('loadingMsg').style.display = 'none', 3000);
+            return;
         }
+    } catch(_) {}
 
-        // ========== タグフィルタ ==========
-        function toggleTag(tag, element) {
-            if (activeFilters.tags.includes(tag)) {
-                activeFilters.tags = activeFilters.tags.filter(t => t !== tag);
-                element.classList.remove('active');
-            } else {
+    // ③ どちらも失敗した場合
+    document.getElementById('loadingMsg').innerHTML =
+        '⚠️ data.json を読み込めませんでした。<br>' +
+        '<small style="color:#95a5a6">GitHub Pages にデプロイ後、または <code>python3 -m http.server</code> でローカルサーバーを起動してご確認ください。</small>';
+}
+
+function onDataLoaded(json) {
+    allMaterials = json.materials || [];
+    catDefs = json.metadata?.largeCategoryDefs || {};
+    document.getElementById('loadingMsg').style.display = 'none';
+    buildCategoryUI();
+    buildTagUI();
+    applyFilters();
+}
+
+// ===== 大分類タブ構築 =====
+function buildCategoryUI() {
+    const container = document.getElementById('largeCatTabs');
+    // 既存の「すべて」ボタンはそのまま
+    Object.entries(catDefs).forEach(([key, def]) => {
+        const btn = document.createElement('button');
+        btn.className = 'large-cat-btn';
+        btn.dataset.cat = key;
+        btn.textContent = `${def.icon} ${def.label}`;
+        btn.addEventListener('click', () => selectLargeCat(key, btn));
+        container.appendChild(btn);
+    });
+    // 「すべて」ボタンのイベント
+    container.querySelector('[data-cat=""]').addEventListener('click', (e) => selectLargeCat('', e.currentTarget));
+}
+
+function selectLargeCat(cat, btn) {
+    document.querySelectorAll('.large-cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeFilters.largeCat = cat;
+    activeFilters.subCat = '';
+
+    // 中分類エリアの更新
+    const subRow = document.getElementById('subCatRow');
+    const subContainer = document.getElementById('subCatTags');
+    subContainer.innerHTML = '';
+
+    if (cat && catDefs[cat]?.subcategories) {
+        const subs = catDefs[cat].subcategories;
+        Object.entries(subs).forEach(([key, label]) => {
+            const btn2 = document.createElement('button');
+            btn2.className = 'sub-cat-btn';
+            btn2.dataset.sub = key;
+            btn2.textContent = label;
+            btn2.addEventListener('click', () => selectSubCat(key, btn2));
+            subContainer.appendChild(btn2);
+        });
+        subRow.style.display = 'block';
+    } else {
+        subRow.style.display = 'none';
+    }
+    buildTagUI();
+    applyFilters();
+}
+
+function selectSubCat(sub, btn) {
+    if (activeFilters.subCat === sub) {
+        // 同じを押したら解除
+        activeFilters.subCat = '';
+        btn.classList.remove('active');
+    } else {
+        document.querySelectorAll('.sub-cat-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeFilters.subCat = sub;
+    }
+    buildTagUI();
+    applyFilters();
+}
+
+// ===== タグ構築（現在の大/中分類に合わせて動的に生成）=====
+function buildTagUI() {
+    const relevantMaterials = allMaterials.filter(m => {
+        if (activeFilters.largeCat && m.largeCategory !== activeFilters.largeCat) return false;
+        if (activeFilters.subCat && m.category !== activeFilters.subCat) return false;
+        return true;
+    });
+
+    const tagSet = new Set();
+    relevantMaterials.forEach(m => (m.tags || []).forEach(t => tagSet.add(t)));
+
+    const container = document.getElementById('tagChips');
+    container.innerHTML = '';
+    const tagRow = document.getElementById('tagFilterRow');
+
+    if (tagSet.size === 0) {
+        tagRow.style.display = 'none';
+        return;
+    }
+
+    tagRow.style.display = 'block';
+    Array.from(tagSet).sort().forEach(tag => {
+        const chip = document.createElement('button');
+        chip.className = 'tag-chip' + (activeFilters.tags.includes(tag) ? ' active' : '');
+        chip.textContent = tag;
+        chip.addEventListener('click', () => toggleTag(tag, chip));
+        container.appendChild(chip);
+    });
+}
+
+function toggleTag(tag, chip) {
+    if (activeFilters.tags.includes(tag)) {
+        activeFilters.tags = activeFilters.tags.filter(t => t !== tag);
+        chip.classList.remove('active');
+    } else {
+        activeFilters.tags.push(tag);
+        chip.classList.add('active');
+    }
+    applyFilters();
+}
+
+// ===== フィルタ適用 =====
+function applyFilters() {
+    const q = activeFilters.search.toLowerCase();
+    filtered = allMaterials.filter(m => {
+        if (activeFilters.largeCat && m.largeCategory !== activeFilters.largeCat) return false;
+        if (activeFilters.subCat && m.category !== activeFilters.subCat) return false;
+        if (activeFilters.tags.length > 0 && !activeFilters.tags.every(t => (m.tags || []).includes(t))) return false;
+        if (q) {
+            const inTitle = (m.title || '').toLowerCase().includes(q);
+            const inDesc  = (m.description || '').toLowerCase().includes(q);
+            const inTags  = (m.tags || []).some(t => t.toLowerCase().includes(q));
+            if (!inTitle && !inDesc && !inTags) return false;
+        }
+        return true;
+    });
+
+    shownCount = 0;
+    document.getElementById('gallery').innerHTML = '';
+    renderMore();
+    updateStatus();
+    updateResetBtn();
+}
+
+// ===== 件数・リセット表示 =====
+function updateStatus() {
+    const total = filtered.length;
+    const shown = Math.min(shownCount, total);
+    document.getElementById('resultCount').textContent =
+        total === 0 ? '0 件' : `${total} 件中 ${shown} 件を表示`;
+}
+
+function updateResetBtn() {
+    const active = activeFilters.search || activeFilters.largeCat || activeFilters.subCat || activeFilters.tags.length > 0;
+    document.getElementById('resetBtn').classList.toggle('visible', active);
+}
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+    activeFilters = { search: '', largeCat: '', subCat: '', tags: [] };
+    document.getElementById('searchInput').value = '';
+    document.querySelectorAll('.large-cat-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector('.large-cat-btn[data-cat=""]').classList.add('active');
+    document.getElementById('subCatRow').style.display = 'none';
+    document.getElementById('subCatTags').innerHTML = '';
+    buildTagUI();
+    applyFilters();
+});
+
+// ===== 検索 =====
+document.getElementById('searchInput').addEventListener('input', e => {
+    activeFilters.search = e.target.value;
+    applyFilters();
+});
+
+// ===== ギャラリー描画（もっと読み込む対応）=====
+function renderMore() {
+    const gallery = document.getElementById('gallery');
+    const emptyState = document.getElementById('emptyState');
+    const loadMoreWrap = document.getElementById('loadMoreWrap');
+
+    if (filtered.length === 0) {
+        emptyState.style.display = 'block';
+        loadMoreWrap.style.display = 'none';
+        return;
+    }
+    emptyState.style.display = 'none';
+
+    const slice = filtered.slice(shownCount, shownCount + PER_PAGE);
+    slice.forEach(m => gallery.appendChild(createCard(m)));
+    shownCount += slice.length;
+
+    // もっと読み込むボタン
+    if (shownCount < filtered.length) {
+        loadMoreWrap.style.display = 'block';
+        const remaining = filtered.length - shownCount;
+        document.getElementById('loadMoreCount').textContent =
+            `残り ${remaining} 件`;
+    } else {
+        loadMoreWrap.style.display = 'none';
+    }
+    updateStatus();
+}
+
+document.getElementById('loadMoreBtn').addEventListener('click', renderMore);
+
+// ===== カード生成 =====
+function createCard(m) {
+    const imgPath = `assets/materials/${m.largeCategory}/${m.filename}`;
+    const catLabel = getCatLabel(m.largeCategory, m.category);
+
+    const div = document.createElement('div');
+    div.className = 'gallery-item';
+
+    const tagsHtml = (m.tags || []).slice(0, 4).map(t =>
+        `<span class="gallery-tag" data-tag="${escHtml(t)}">${escHtml(t)}</span>`
+    ).join('');
+
+    div.innerHTML = `
+        <div class="gallery-thumb">
+            <img
+                src="${escHtml(imgPath)}"
+                alt="${escHtml(m.title)}"
+                loading="lazy"
+                onerror="this.parentElement.innerHTML='<span class=\\'no-img\\'>🖼️</span>'"
+            >
+        </div>
+        <div class="gallery-info">
+            <div class="gallery-title" title="${escHtml(m.title)}">${escHtml(m.title)}</div>
+            <div class="gallery-cats">${escHtml(catLabel)}</div>
+            <div class="gallery-tags">${tagsHtml}</div>
+            <a class="dl-btn" href="${escHtml(imgPath)}" download="${escHtml(m.filename)}">
+                ⬇ WebPをダウンロード
+            </a>
+        </div>
+    `;
+
+    // タグクリック → フィルタに追加
+    div.querySelectorAll('.gallery-tag').forEach(chip => {
+        chip.addEventListener('click', () => {
+            const tag = chip.dataset.tag;
+            if (!activeFilters.tags.includes(tag)) {
                 activeFilters.tags.push(tag);
-                element.classList.add('active');
-            }
-            filterMaterials();
-        }
-
-        // ========== 検索・フィルタ ==========
-        function filterMaterials() {
-            filteredMaterials = materials.filter(m => {
-                // 検索ワードチェック
-                const searchMatches = !activeFilters.search || 
-                    m.title.toLowerCase().includes(activeFilters.search.toLowerCase()) ||
-                    m.tags.some(t => t.toLowerCase().includes(activeFilters.search.toLowerCase()));
-                
-                // タグチェック
-                const tagMatches = activeFilters.tags.length === 0 || 
-                    activeFilters.tags.every(tag => m.tags.includes(tag));
-                
-                return searchMatches && tagMatches;
-            });
-            
-            updateClearButton();
-            renderGallery();
-        }
-
-        // ========== クリア機能 ==========
-        function updateClearButton() {
-            const btn = document.getElementById('clearFiltersBtn');
-            if (activeFilters.search || activeFilters.tags.length > 0) {
-                btn.classList.add('active');
-            } else {
-                btn.classList.remove('active');
-            }
-        }
-
-        document.getElementById('clearFiltersBtn').addEventListener('click', () => {
-            activeFilters = { search: '', tags: [] };
-            document.getElementById('searchInput').value = '';
-            document.querySelectorAll('.tag-btn').forEach(btn => btn.classList.remove('active'));
-            filterMaterials();
-        });
-
-        // ========== 検索入力イベント ==========
-        document.getElementById('searchInput').addEventListener('input', (e) => {
-            activeFilters.search = e.target.value;
-            filterMaterials();
-        });
-
-        // ========== ギャラリー表示 ==========
-        function renderGallery() {
-            const gallery = document.getElementById('gallery');
-            const emptyState = document.getElementById('emptyState');
-            
-            gallery.innerHTML = '';
-            
-            if (filteredMaterials.length === 0) {
-                emptyState.style.display = 'block';
-                return;
-            }
-            
-            emptyState.style.display = 'none';
-            
-            filteredMaterials.forEach(material => {
-                const item = document.createElement('div');
-                item.className = 'gallery-item';
-                item.innerHTML = `
-                    <div class="gallery-image">
-                        ${material.image}
-                    </div>
-                    <div class="gallery-info">
-                        <div class="gallery-title">${material.title}</div>
-                        <div class="gallery-tags">
-                            ${material.tags.map(tag => `
-                                <span class="gallery-tag">${tag}</span>
-                            `).join('')}
-                        </div>
-                        <div class="gallery-actions">
-                            <button class="dl-btn" onclick="openDownloadModal(${material.id})">DL</button>
-                            <button class="detail-btn" onclick="showDetails(${material.id})">詳細</button>
-                        </div>
-                    </div>
-                `;
-                gallery.appendChild(item);
-            });
-        }
-
-        // ========== ダウンロードモーダル ==========
-        const modal = document.getElementById('downloadModal');
-        const modalClose = document.getElementById('modalClose');
-        const cancelDownload = document.getElementById('cancelDownload');
-        const confirmDownload = document.getElementById('confirmDownload');
-
-        function openDownloadModal(materialId) {
-            selectedMaterialId = materialId;
-            modal.classList.add('active');
-        }
-
-        modalClose.addEventListener('click', () => {
-            modal.classList.remove('active');
-        });
-
-        cancelDownload.addEventListener('click', () => {
-            modal.classList.remove('active');
-        });
-
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.remove('active');
+                buildTagUI();
+                applyFilters();
+                document.querySelector('.filter-section').scrollIntoView({ behavior: 'smooth' });
             }
         });
+    });
 
-        confirmDownload.addEventListener('click', () => {
-            const format = document.querySelector('input[name="format"]:checked').value;
-            const material = materials.find(m => m.id === selectedMaterialId);
-            
-            // Canvas で emoji だけを画像化（文字なし）
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            canvas.width = 800;
-            canvas.height = 800;
-            
-            // 背景色を白に
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // emoji を大きく描画（タイトルなし）
-            ctx.font = 'bold 400px Arial';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillText(material.image, canvas.width / 2, canvas.height / 2);
-            
-            // Canvas を blob に変換してダウンロード
-            const mimeType = 'image/webp'; // WebP 形式のみ
-            
-            canvas.toBlob((blob) => {
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `${material.title}.webp`;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-                
-                // DL数をインクリメント
-                material.downloadCount = (material.downloadCount || 0) + 1;
-            }, mimeType);
-            
-            modal.classList.remove('active');
-        });
+    return div;
+}
 
-        // ========== 詳細表示 ==========
-        function showDetails(materialId) {
-            const material = materials.find(m => m.id === materialId);
-            alert(`【${material.title}】\n\nタグ: ${material.tags.join(', ')}\n\n形式: PNG / JPEG / WebP で選択可能です。`);
-        }
+// ===== ヘルパー =====
+function getCatLabel(large, sub) {
+    const lDef = catDefs[large];
+    if (!lDef) return large || '';
+    const lLabel = lDef.label;
+    const sLabel = lDef.subcategories?.[sub] || sub;
+    return sub ? `${lLabel} › ${sLabel}` : lLabel;
+}
 
-        // ========== 初期化 ==========
-        // ローカルストレージから素材を読み込む
-        const localMaterials = JSON.parse(localStorage.getItem('blog_materials') || '[]');
-        materials.push(...localMaterials);
-        
-        initializeTags();
-        renderGallery();
-    </script>
+function escHtml(str) {
+    return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ===== 起動 =====
+loadData();
+</script>
 </body>
 </html>

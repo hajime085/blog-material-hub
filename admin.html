@@ -1,622 +1,842 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>素材管理 | Blog Material Hub</title>
-    <meta name="description" content="Blog Material Hub の素材管理画面。画像をアップロードしてメタデータを登録。">
-
+    <meta name="description" content="Blog Material Hub の素材管理画面。フォーム入力でdata.jsonを生成。">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
             line-height: 1.6;
             color: #333;
-            background-color: #f9f9f9;
+            background: #f4f6f8;
         }
 
         header {
-            background-color: #fff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
             z-index: 100;
         }
-
         .navbar {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
-        .navbar .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #2c3e50;
-            text-decoration: none;
-        }
-
-        .navbar nav {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .navbar nav a {
-            color: #555;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .navbar nav a:hover {
-            color: #3498db;
-        }
-
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #333;
-        }
+        .navbar .logo { font-size: 1.4rem; font-weight: bold; color: #2c3e50; text-decoration: none; }
+        .navbar nav { display: flex; gap: 2rem; }
+        .navbar nav a { color: #555; text-decoration: none; font-weight: 500; transition: color 0.2s; }
+        .navbar nav a:hover { color: #3498db; }
+        .menu-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #333; }
 
         main {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 2rem auto;
             padding: 0 2rem;
         }
 
-        .admin-header {
-            background-color: #fff;
-            padding: 2rem;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        /* ===== ページヘッダー ===== */
+        .page-header {
+            background: #fff;
+            padding: 1.5rem 2rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
-
-        .admin-header h1 {
-            color: #2c3e50;
-            margin-bottom: 0.5rem;
+        .page-header h1 { color: #2c3e50; font-size: 1.6rem; }
+        .page-header p { color: #7f8c8d; font-size: 0.9rem; margin-top: 0.2rem; }
+        .stat-badges { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .badge {
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.88rem;
+            font-weight: 700;
         }
+        .badge-blue { background: #eaf4fb; color: #2980b9; }
+        .badge-green { background: #eafaf1; color: #27ae60; }
 
-        .admin-header p {
-            color: #7f8c8d;
-        }
-
+        /* ===== タブ ===== */
         .tabs {
             display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            border-bottom: 2px solid #ecf0f1;
+            gap: 0;
+            margin-bottom: 1.5rem;
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
         }
-
-        .tab-button {
-            padding: 1rem 1.5rem;
+        .tab-btn {
+            flex: 1;
+            padding: 1rem;
             background: none;
             border: none;
             border-bottom: 3px solid transparent;
             cursor: pointer;
-            font-weight: bold;
+            font-weight: 700;
+            font-size: 0.95rem;
             color: #7f8c8d;
-            transition: all 0.3s;
+            transition: all 0.2s;
         }
+        .tab-btn:hover { color: #2c3e50; background: #f9f9f9; }
+        .tab-btn.active { color: #3498db; border-bottom-color: #3498db; background: #fff; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
 
-        .tab-button.active {
-            color: #3498db;
-            border-bottom-color: #3498db;
-        }
-
-        .tab-button:hover {
-            color: #2c3e50;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .form-container {
-            background-color: #fff;
+        /* ===== カード ===== */
+        .card {
+            background: #fff;
+            border-radius: 10px;
             padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-group {
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
             margin-bottom: 1.5rem;
         }
+        .card h2 { color: #2c3e50; margin-bottom: 1.5rem; font-size: 1.2rem; }
+        .card h3 { color: #34495e; margin: 1.8rem 0 0.8rem; font-size: 1rem; }
 
+        /* ===== フォーム ===== */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+        }
+        .form-group { margin-bottom: 0; }
+        .form-group.full { grid-column: 1 / -1; }
         .form-group label {
             display: block;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
+            margin-bottom: 0.4rem;
+            font-weight: 700;
+            font-size: 0.9rem;
             color: #2c3e50;
         }
-
+        .form-group .hint {
+            font-size: 0.78rem;
+            color: #95a5a6;
+            font-weight: 400;
+            margin-left: 0.4rem;
+        }
         .form-group input,
         .form-group textarea,
         .form-group select {
             width: 100%;
-            padding: 0.8rem;
-            border: 2px solid #ecf0f1;
-            border-radius: 6px;
+            padding: 0.75rem 0.9rem;
+            border: 2px solid #e8ecf0;
+            border-radius: 8px;
             font-family: inherit;
-            font-size: 1rem;
-            transition: border-color 0.3s;
+            font-size: 0.95rem;
+            transition: border-color 0.2s;
+            background: #fff;
         }
-
         .form-group input:focus,
         .form-group textarea:focus,
         .form-group select:focus {
             outline: none;
             border-color: #3498db;
         }
+        .form-group textarea { resize: vertical; min-height: 90px; }
 
-        .form-group textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .btn {
-            padding: 0.8rem 1.5rem;
-            border: none;
+        /* ファイル名プレビュー */
+        .path-preview {
+            margin-top: 0.4rem;
+            font-size: 0.82rem;
+            color: #7f8c8d;
+            background: #f4f6f8;
+            padding: 0.4rem 0.8rem;
             border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 1rem;
+            font-family: monospace;
         }
+        .path-preview.ready { color: #27ae60; }
 
-        .btn-primary {
-            background-color: #27ae60;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: #229954;
-        }
-
-        .btn-secondary {
-            background-color: #ecf0f1;
-            color: #2c3e50;
-        }
-
-        .btn-secondary:hover {
-            background-color: #d5dbdb;
-        }
-
-        .btn-danger {
-            background-color: #e74c3c;
-            color: white;
-        }
-
-        .btn-danger:hover {
-            background-color: #c0392b;
-        }
-
-        .form-actions {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .materials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .material-card {
-            background-color: #fff;
+        /* ===== ボタン ===== */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
             border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        .material-image {
-            width: 100%;
-            height: 120px;
-            background-color: #ecf0f1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-        }
-
-        .material-info {
-            padding: 1rem;
-        }
-
-        .material-title {
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 0.5rem;
+            font-weight: 700;
+            cursor: pointer;
             font-size: 0.95rem;
+            transition: all 0.2s;
+        }
+        .btn-primary { background: #3498db; color: #fff; }
+        .btn-primary:hover { background: #2980b9; }
+        .btn-success { background: #27ae60; color: #fff; }
+        .btn-success:hover { background: #229954; }
+        .btn-secondary { background: #ecf0f1; color: #2c3e50; }
+        .btn-secondary:hover { background: #d5dbdb; }
+        .btn-danger { background: #e74c3c; color: #fff; }
+        .btn-danger:hover { background: #c0392b; }
+        .btn-warning { background: #f39c12; color: #fff; }
+        .btn-warning:hover { background: #d68910; }
+        .btn-sm { padding: 0.4rem 0.9rem; font-size: 0.82rem; }
+
+        .form-actions { display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; }
+
+        /* ===== 素材リスト（タブ2） ===== */
+        .list-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.2rem;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+        .list-toolbar .count { color: #7f8c8d; font-size: 0.9rem; }
+        .list-search input {
+            padding: 0.5rem 0.9rem;
+            border: 2px solid #e8ecf0;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            width: 220px;
+            transition: border-color 0.2s;
+        }
+        .list-search input:focus { outline: none; border-color: #3498db; }
+
+        .material-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        .material-table th {
+            background: #f4f6f8;
+            padding: 0.7rem 1rem;
+            text-align: left;
+            font-weight: 700;
+            color: #555;
+            border-bottom: 2px solid #e8ecf0;
+        }
+        .material-table td {
+            padding: 0.7rem 1rem;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: middle;
+        }
+        .material-table tr:hover td { background: #f9fbfd; }
+        .material-table .filename-cell { font-family: monospace; font-size: 0.82rem; color: #7f8c8d; }
+        .cat-badge {
+            display: inline-block;
+            padding: 0.15rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            background: #eaf4fb;
+            color: #2980b9;
         }
 
-        .material-actions {
-            display: flex;
-            gap: 0.5rem;
+        /* 空状態 */
+        .empty-list {
+            text-align: center;
+            padding: 3rem;
+            color: #95a5a6;
+        }
+        .empty-list h3 { margin-bottom: 0.5rem; }
+
+        /* ===== データ管理（タブ3） ===== */
+        .data-section { margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid #ecf0f1; }
+        .data-section:last-child { border-bottom: none; margin-bottom: 0; }
+        .data-section h3 { font-size: 1.1rem; color: #2c3e50; margin-bottom: 0.5rem; }
+        .data-section p { color: #7f8c8d; font-size: 0.9rem; margin-bottom: 1rem; }
+
+        .alert {
+            padding: 0.9rem 1.2rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        .alert-info { background: #eaf4fb; color: #1a6da0; border-left: 4px solid #3498db; }
+        .alert-success { background: #eafaf1; color: #1e8449; border-left: 4px solid #27ae60; }
+        .alert-warning { background: #fef9e7; color: #7d6608; border-left: 4px solid #f39c12; }
+        .alert-danger { background: #fdedec; color: #922b21; border-left: 4px solid #e74c3c; }
+
+        /* JSON プレビュー */
+        .json-preview {
+            background: #1e2a3a;
+            color: #a8d8a8;
+            padding: 1rem 1.2rem;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.8rem;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre;
             margin-top: 1rem;
         }
 
-        .material-actions button {
-            flex: 1;
-            padding: 0.5rem;
-            font-size: 0.8rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-box {
-            background-color: #fff;
-            padding: 1.5rem;
+        /* トースト通知 */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.9rem 1.5rem;
             border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.95rem;
+            z-index: 9999;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s;
+            pointer-events: none;
         }
+        .toast.show { opacity: 1; transform: translateY(0); }
+        .toast.success { background: #27ae60; }
+        .toast.error { background: #e74c3c; }
 
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #3498db;
-        }
-
-        .stat-label {
-            color: #7f8c8d;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-        }
-
-        .alert {
-            padding: 1rem;
-            border-radius: 6px;
-            margin-bottom: 1rem;
-        }
-
-        .alert-info {
-            background-color: #d1ecf1;
-            color: #0c5460;
-            border: 1px solid #bee5eb;
-        }
-
+        /* ===== フッター ===== */
         footer {
-            background-color: #2c3e50;
+            background: #2c3e50;
             color: #ecf0f1;
             margin-top: 4rem;
-            padding: 3rem 2rem;
+            padding: 2rem;
         }
+        .footer-content { max-width: 1100px; margin: 0 auto; }
+        .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid #34495e; }
+        .footer-links a { color: #ecf0f1; text-decoration: none; font-size: 0.9rem; }
+        .footer-links a:hover { color: #3498db; }
+        .footer-info { font-size: 0.85rem; }
 
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin-bottom: 2rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid #34495e;
-        }
-
-        .footer-links a {
-            color: #ecf0f1;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: #3498db;
-        }
-
-        .footer-info {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 1rem;
-            font-size: 0.9rem;
-        }
-
+        /* ===== レスポンシブ ===== */
         @media (max-width: 768px) {
-            .navbar {
-                padding: 1rem;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
+            .navbar { padding: 1rem; }
+            .menu-toggle { display: block; }
             .navbar nav {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                flex-direction: column;
-                background-color: #fff;
-                gap: 0;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                display: none; position: absolute;
+                top: 100%; left: 0; right: 0;
+                flex-direction: column; background: #fff; gap: 0;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             }
-
-            .navbar nav.active {
-                display: flex;
-            }
-
-            .navbar nav a {
-                padding: 1rem;
-                border-bottom: 1px solid #ecf0f1;
-            }
-
-            main {
-                padding: 0 1rem;
-            }
+            .navbar nav.active { display: flex; }
+            .navbar nav a { padding: 1rem; border-bottom: 1px solid #ecf0f1; }
+            main { padding: 0 1rem; }
+            .form-grid { grid-template-columns: 1fr; }
+            .form-group.full { grid-column: 1; }
+            .page-header { flex-direction: column; align-items: flex-start; }
+            .material-table { display: block; overflow-x: auto; }
         }
     </style>
 </head>
-
 <body>
-    <header>
-        <div class="navbar">
-            <a href="./" class="logo">📦 Blog Material Hub</a>
-            <button class="menu-toggle" id="menuToggle">☰</button>
-            <nav id="navMenu">
-                <a href="./">ホーム</a>
-                <a href="./gallery.html">素材ギャラリー</a>
-                <a href="./faq.html">よくあるご質問</a>
-                <a href="./contact.html">お問い合わせ</a>
-            </nav>
-        </div>
-    </header>
 
-    <main>
-        <div class="admin-header">
+<header>
+    <div class="navbar">
+        <a href="/blog-material-hub/" class="logo">📦 Blog Material Hub</a>
+        <button class="menu-toggle" id="menuToggle">☰</button>
+        <nav id="navMenu">
+            <a href="/blog-material-hub/">ホーム</a>
+            <a href="/blog-material-hub/gallery.html">素材ギャラリー</a>
+            <a href="/blog-material-hub/faq.html">よくあるご質問</a>
+            <a href="/blog-material-hub/contact.html">お問い合わせ</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <div class="page-header">
+        <div>
             <h1>🛠️ 素材管理</h1>
-            <p>素材を登録・管理します。登録した素材はブラウザに保存され、ギャラリーに自動表示されます。</p>
+            <p>フォームで情報を入力し、data.json をエクスポートしてリポジトリに配置してください。</p>
         </div>
-
-        <div class="tabs">
-            <button class="tab-button active" onclick="switchTab('register')">新規登録</button>
-            <button class="tab-button" onclick="switchTab('list')">素材一覧</button>
-            <button class="tab-button" onclick="switchTab('export')">データ管理</button>
+        <div class="stat-badges">
+            <span class="badge badge-blue">📦 <span id="totalBadge">0</span> 件</span>
+            <span class="badge badge-green" id="pendingBadge" style="display:none;">✏️ 未保存あり</span>
         </div>
+    </div>
 
-        <!-- タブ 1：新規登録 -->
-        <div id="register" class="tab-content active">
-            <div class="form-container">
-                <h2>新しい素材を登録</h2>
-                <form id="materialForm">
-                    <div class="form-group">
-                        <label for="emoji">📷 素材アイコン（emoji）</label>
-                        <input type="text" id="emoji" placeholder="例：🌿 🐱 🌅 ☕ 📱 🎨" maxlength="2" required>
-                        <small style="color: #7f8c8d; display: block; margin-top: 0.5rem;">
-                            ※ emoji 1 文字を入力
-                        </small>
-                    </div>
+    <!-- タブ -->
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="register">➕ 新規登録</button>
+        <button class="tab-btn" data-tab="list">📋 素材一覧</button>
+        <button class="tab-btn" data-tab="datamanage">⚙️ データ管理</button>
+    </div>
 
-                    <div class="form-group">
-                        <label for="title">📝 タイトル</label>
-                        <input type="text" id="title" placeholder="例：観葉植物のある部屋" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="description">📄 説明文</label>
-                        <textarea id="description" placeholder="どんなブログで活躍するか、使用例など。" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="imageUrl">🖼 画像の場所 (パス)</label>
-                        <input type="text" id="imageUrl" placeholder="例: ./assets/images/test.webp" required>
-                        <small style="color: #7f8c8d; display: block; margin-top: 0.5rem;">
-                            ※ assets/images/ フォルダに入れたファイル名を指定してください
-                        </small>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="category">📂 カテゴリ</label>
-                        <select id="category" required>
-                            <option value="">選択してください</option>
-                            <option value="plants">🌿 植物</option>
-                            <option value="animals">🐾 生き物</option>
-                            <option value="bg">🌅 背景</option>
-                            <option value="daily">☕ 日用品</option>
-                            <option value="gadget">📱 ガジェット</option>
-                            <option value="material">🎨 素材・デザイン要素</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="tags">🏷️ タグ</label>
-                        <input type="text" id="tags" placeholder="例：植物, インテリア, 自然（カンマ区切り）">
-                    </div>
-
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">✅ 登録</button>
-                        <button type="reset" class="btn btn-secondary">🔄 リセット</button>
-                    </div>
-                </form>
+    <!-- ===== タブ1：新規登録 ===== -->
+    <div id="tab-register" class="tab-content active">
+        <div class="card">
+            <h2>新しい素材を登録</h2>
+            <div class="alert alert-info">
+                💡 ここで入力した情報は「作業リスト」に追加されます。登録後に「データ管理」タブから <strong>data.json をエクスポート</strong>し、リポジトリの data.json に上書きして git push してください。
             </div>
-        </div>
 
-        <!-- タブ 2：素材一覧 -->
-        <div id="list" class="tab-content">
-            <div class="stats">
-                <div class="stat-box">
-                    <div class="stat-number" id="totalCount">0</div>
-                    <div class="stat-label">登録済み素材</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-number" id="dlCount">0</div>
-                    <div class="stat-label">総ダウンロード数</div>
-                </div>
-            </div>
-            <div class="materials-grid" id="materialsList"></div>
-        </div>
-
-        <!-- タブ 3：データ管理 -->
-        <div id="export" class="tab-content">
-            <div class="form-container">
-                <h2>データ管理</h2>
-
-                <div class="alert alert-info">
-                    <strong>💡 素材データはブラウザのローカルストレージに保存されています。</strong>
+            <div class="form-grid">
+                <!-- タイトル -->
+                <div class="form-group full">
+                    <label for="fTitle">タイトル <span style="color:#e74c3c">*</span></label>
+                    <input type="text" id="fTitle" placeholder="例：冷たいレモン炭酸水のクローズアップ">
                 </div>
 
-                <h3 style="margin-top: 2rem; margin-bottom: 1rem;">📥 JSON エクスポート</h3>
-                <p style="margin-bottom: 1rem;">素材データを JSON ファイルとしてダウンロードします。</p>
-                <button class="btn btn-primary" onclick="exportJSON()">📋 エクスポート</button>
+                <!-- 説明文 -->
+                <div class="form-group full">
+                    <label for="fDesc">説明文</label>
+                    <textarea id="fDesc" placeholder="例：夏のドリンク特集、商品紹介ブログのアイキャッチに最適。爽やかな雰囲気。"></textarea>
+                </div>
 
-                <h3 style="margin-top: 2rem; margin-bottom: 1rem;">📤 JSON インポート</h3>
-                <p style="margin-bottom: 1rem;">JSON ファイルから素材データをインポートします。</p>
-                <input type="file" id="importFile" accept=".json" />
-                <button class="btn btn-primary" onclick="importJSON()" style="margin-top: 1rem;">📥 インポート</button>
+                <!-- 大分類 -->
+                <div class="form-group">
+                    <label for="fLargeCat">大分類（フォルダ名） <span style="color:#e74c3c">*</span></label>
+                    <select id="fLargeCat">
+                        <option value="">選択してください</option>
+                        <option value="nature">🌿 nature（自然）</option>
+                        <option value="food">🍽️ food（食）</option>
+                        <option value="objects">📦 objects（物）</option>
+                        <option value="backgrounds">🖼️ backgrounds（背景）</option>
+                    </select>
+                </div>
 
-                <h3 style="margin-top: 2rem; margin-bottom: 1rem;">⚠️ すべてのデータを削除</h3>
-                <p style="margin-bottom: 1rem; color: #e74c3c;">登録されたすべての素材を削除します（取り消せません）</p>
-                <button class="btn btn-danger" onclick="deleteAllData()">🗑️ 全削除</button>
+                <!-- 中分類 -->
+                <div class="form-group">
+                    <label for="fSubCat">中分類（カテゴリ表示） <span style="color:#e74c3c">*</span></label>
+                    <select id="fSubCat" disabled>
+                        <option value="">先に大分類を選択</option>
+                    </select>
+                </div>
+
+                <!-- ファイル名 -->
+                <div class="form-group">
+                    <label for="fFilename">ファイル名 <span style="color:#e74c3c">*</span> <span class="hint">（WebPファイル名）</span></label>
+                    <input type="text" id="fFilename" placeholder="例：drink_001.webp">
+                    <div class="path-preview" id="pathPreview">パスがここに表示されます</div>
+                </div>
+
+                <!-- タグ -->
+                <div class="form-group">
+                    <label for="fTags">タグ <span class="hint">（カンマ区切り）</span></label>
+                    <input type="text" id="fTags" placeholder="例：レモン, 炭酸水, 夏, 爽やか">
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button class="btn btn-success" id="addBtn">✅ 作業リストに追加</button>
+                <button class="btn btn-secondary" id="clearFormBtn">🔄 フォームをリセット</button>
             </div>
         </div>
-    </main>
+    </div>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="./privacy.html">プライバシーポリシー</a>
-                <a href="./terms.html">利用規約</a>
-                <a href="./disclaimer.html">免責事項</a>
-                <a href="./contact.html">お問い合わせ</a>
+    <!-- ===== タブ2：素材一覧 ===== -->
+    <div id="tab-list" class="tab-content">
+        <div class="card">
+            <div class="list-toolbar">
+                <span class="count">登録済み：<strong id="listCount">0</strong> 件</span>
+                <div class="list-search">
+                    <input type="text" id="listSearch" placeholder="タイトル・ファイル名で絞り込み">
+                </div>
             </div>
-            <div class="footer-info">
-                <p>&copy; 2026 Blog Material Hub. All rights reserved.</p>
+
+            <div id="listEmpty" class="empty-list">
+                <h3>素材が登録されていません</h3>
+                <p>「新規登録」タブから素材を追加するか、「データ管理」から data.json をインポートしてください。</p>
+            </div>
+
+            <div style="overflow-x:auto;">
+                <table class="material-table" id="materialTable" style="display:none;">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>タイトル</th>
+                            <th>カテゴリ</th>
+                            <th>ファイル名</th>
+                            <th>タグ</th>
+                            <th>登録日</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listBody"></tbody>
+                </table>
             </div>
         </div>
-    </footer>
+    </div>
 
-    <script>
-        const STORAGE_KEY = 'blog_materials';
+    <!-- ===== タブ3：データ管理 ===== -->
+    <div id="tab-datamanage" class="tab-content">
+        <div class="card">
 
-        const menuToggle = document.getElementById('menuToggle');
-        const navMenu = document.getElementById('navMenu');
-        menuToggle.addEventListener('click', () => navMenu.classList.toggle('active'));
+            <!-- インポート -->
+            <div class="data-section">
+                <h3>📥 data.json をインポート</h3>
+                <p>リポジトリにある既存の data.json を読み込んで、作業リストに追加します。新規追加の場合は不要です。</p>
+                <div style="display:flex; gap:1rem; align-items:center; flex-wrap:wrap;">
+                    <input type="file" id="importFile" accept=".json" style="font-size:0.9rem;">
+                    <button class="btn btn-primary" id="importBtn">📥 インポート実行</button>
+                </div>
+            </div>
 
-        function switchTab(tabName) {
-            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
-            document.getElementById(tabName).classList.add('active');
-            event.target.classList.add('active');
-            if (tabName === 'list') renderList();
-        }
+            <!-- エクスポート -->
+            <div class="data-section">
+                <h3>📤 data.json をエクスポート</h3>
+                <p>作業リストの内容を data.json 形式でダウンロードします。ダウンロード後、リポジトリの data.json に上書きして git push してください。</p>
+                <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:1rem;">
+                    <button class="btn btn-success" id="exportBtn">⬇ data.json をダウンロード</button>
+                    <button class="btn btn-secondary" id="previewBtn">👁 JSONプレビュー</button>
+                </div>
+                <div class="json-preview" id="jsonPreview" style="display:none;"></div>
+            </div>
 
-        function loadMaterials() {
-            return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-        }
+            <!-- ローカルプレビュー -->
+            <div class="data-section">
+                <h3>🔍 ローカルプレビュー用に保存</h3>
+                <p>ファイルを直接ブラウザで開いてギャラリーを確認したい場合に使用します。作業リストの内容を localStorage に保存し、gallery.html でプレビューできます。<br><small style="color:#e67e22;">※ git push 後の本番確認には不要です。</small></p>
+                <button class="btn btn-warning" id="savePreviewBtn">💾 ギャラリープレビュー用に保存</button>
+            </div>
 
-        function saveMaterials(m) {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(m));
-        }
+            <!-- 全削除 -->
+            <div class="data-section">
+                <h3>🗑️ 作業リストをリセット</h3>
+                <p>ブラウザ上の作業リストを全件削除します。エクスポート済みの data.json には影響しません。</p>
+                <button class="btn btn-danger" id="clearAllBtn">🗑️ 全件削除</button>
+            </div>
 
-        document.getElementById('materialForm').addEventListener('submit', e => {
-            e.preventDefault();
-            const emoji = document.getElementById('emoji').value;
-            const title = document.getElementById('title').value;
-            const description = document.getElementById('description').value;
-            const category = document.getElementById('category').value;
-            const tags = document.getElementById('tags').value.split(',').map(t => t.trim()).filter(t => t);
+        </div>
 
-            const m = loadMaterials();
-            m.push({
-                id: m.length + 1,
-                image: emoji,
-                title,
-                description,
-                category,
-                tags,
-                prompt: '',
-                downloadCount: 0,
-                createdDate: new Date().toISOString().split('T')[0]
-            });
-            saveMaterials(m);
-            alert(`✅ 「${title}」を登録しました`);
-            document.getElementById('materialForm').reset();
+        <!-- 運用ガイド -->
+        <div class="card">
+            <h2>📖 運用フロー</h2>
+            <div class="alert alert-info" style="margin-bottom:0.8rem;">
+                <strong>基本の流れ</strong>
+            </div>
+            <ol style="padding-left:1.5rem; line-height:2.2; color:#555; font-size:0.95rem;">
+                <li>PC で WebP 画像ファイルを用意する（例：<code>drink_001.webp</code>）</li>
+                <li>ファイルを <code>assets/materials/{大分類}/</code> フォルダに配置</li>
+                <li>「新規登録」タブで素材情報を入力して「作業リストに追加」</li>
+                <li>「データ管理」→「data.json をダウンロード」</li>
+                <li>リポジトリの <code>data.json</code> を上書き保存</li>
+                <li><code>git add . → git commit → git push</code></li>
+                <li>ギャラリーに反映されることを確認 🎉</li>
+            </ol>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-links">
+            <a href="/blog-material-hub/privacy.html">プライバシーポリシー</a>
+            <a href="/blog-material-hub/terms.html">利用規約</a>
+            <a href="/blog-material-hub/disclaimer.html">免責事項</a>
+            <a href="/blog-material-hub/contact.html">お問い合わせ</a>
+        </div>
+        <div class="footer-info">
+            <p>&copy; 2026 Blog Material Hub. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- トースト -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== NAV =====
+document.getElementById('menuToggle').addEventListener('click', () => {
+    document.getElementById('navMenu').classList.toggle('active');
+});
+
+// ===== タブ切り替え =====
+document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+        const tab = btn.dataset.tab;
+        document.getElementById('tab-' + tab).classList.add('active');
+        if (tab === 'list') renderList();
+        if (tab === 'datamanage') document.getElementById('jsonPreview').style.display = 'none';
+    });
+});
+
+// ===== ストレージキー =====
+const STORAGE_KEY = 'bmh_materials_v2';
+
+// ===== データ読み書き =====
+function loadData() {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+}
+function saveData(arr) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+    updateBadges();
+}
+function updateBadges() {
+    const data = loadData();
+    document.getElementById('totalBadge').textContent = data.length;
+}
+
+// ===== カテゴリ定義 =====
+const CAT_DEFS = {
+    nature:      { label: '自然', subs: { plants: '植物', sky: '空・天気', water: '水・海・川', animals: '動物' } },
+    food:        { label: '食',   subs: { fruits: '果物', drinks: '飲み物', meals: '食事・料理', sweets: 'スイーツ' } },
+    objects:     { label: '物',   subs: { gadgets: 'ガジェット', furniture: '家具・インテリア', stationery: '文具・雑貨', tools: '道具・器具' } },
+    backgrounds: { label: '背景', subs: { solid: '単色', gradient: 'グラデーション', pattern: 'パターン', texture: 'テクスチャ' } }
+};
+
+// ===== 大分類 → 中分類を連動 =====
+document.getElementById('fLargeCat').addEventListener('change', function() {
+    const subSelect = document.getElementById('fSubCat');
+    subSelect.innerHTML = '';
+    const cat = this.value;
+    if (!cat) {
+        subSelect.innerHTML = '<option value="">先に大分類を選択</option>';
+        subSelect.disabled = true;
+    } else {
+        subSelect.disabled = false;
+        subSelect.innerHTML = '<option value="">選択してください</option>';
+        Object.entries(CAT_DEFS[cat].subs).forEach(([key, label]) => {
+            const opt = document.createElement('option');
+            opt.value = key;
+            opt.textContent = label;
+            subSelect.appendChild(opt);
         });
+    }
+    updatePathPreview();
+});
 
-        function renderList() {
-            const m = loadMaterials();
-            const html = m.length === 0 ? '<p style="grid-column:1/-1;text-align:center;color:#7f8c8d">登録済み素材なし</p>' :
-                m.map(x => `
-                <div class="material-card">
-                    <div class="material-image">${x.image}</div>
-                    <div class="material-info">
-                        <div class="material-title">${x.title}</div>
-                        <small style="color:#7f8c8d">DL: ${x.downloadCount || 0}</small>
-                        <div class="material-actions">
-                            <button class="btn btn-danger" onclick="deleteMaterial(${x.id})">削除</button>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-            document.getElementById('materialsList').innerHTML = html;
-            document.getElementById('totalCount').textContent = m.length;
-            document.getElementById('dlCount').textContent = m.reduce((s, x) => s + (x.downloadCount || 0), 0);
-        }
+// ===== パスプレビュー =====
+function updatePathPreview() {
+    const large = document.getElementById('fLargeCat').value;
+    const filename = document.getElementById('fFilename').value.trim();
+    const preview = document.getElementById('pathPreview');
+    if (large && filename) {
+        preview.textContent = `assets/materials/${large}/${filename}`;
+        preview.className = 'path-preview ready';
+    } else if (large) {
+        preview.textContent = `assets/materials/${large}/（ファイル名を入力してください）`;
+        preview.className = 'path-preview';
+    } else {
+        preview.textContent = 'パスがここに表示されます';
+        preview.className = 'path-preview';
+    }
+}
+document.getElementById('fLargeCat').addEventListener('change', updatePathPreview);
+document.getElementById('fFilename').addEventListener('input', updatePathPreview);
 
-        function deleteMaterial(id) {
-            if (!confirm('削除しますか？')) return;
-            const m = loadMaterials().filter(x => x.id !== id);
-            saveMaterials(m);
-            renderList();
-        }
+// ===== 追加ボタン =====
+document.getElementById('addBtn').addEventListener('click', () => {
+    const title    = document.getElementById('fTitle').value.trim();
+    const desc     = document.getElementById('fDesc').value.trim();
+    const largeCat = document.getElementById('fLargeCat').value;
+    const subCat   = document.getElementById('fSubCat').value;
+    const filename = document.getElementById('fFilename').value.trim();
+    const tagsRaw  = document.getElementById('fTags').value.trim();
 
-        function exportJSON() {
-            const data = { materials: loadMaterials(), exportDate: new Date().toISOString() };
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }));
-            a.download = `materials-${new Date().toISOString().split('T')[0]}.json`;
-            a.click();
-        }
+    if (!title)    { toast('タイトルを入力してください', 'error'); return; }
+    if (!largeCat) { toast('大分類を選択してください', 'error'); return; }
+    if (!subCat)   { toast('中分類を選択してください', 'error'); return; }
+    if (!filename) { toast('ファイル名を入力してください', 'error'); return; }
+    if (!filename.endsWith('.webp')) { toast('ファイル名は .webp で終わる必要があります', 'error'); return; }
 
-        function importJSON() {
-            const f = document.getElementById('importFile').files[0];
-            if (!f) return alert('ファイルを選択');
-            const r = new FileReader();
-            r.onload = e => {
-                try {
-                    const d = JSON.parse(e.target.result);
-                    const m = Array.isArray(d.materials) ? d.materials : d;
-                    saveMaterials(m);
-                    alert(`✅ ${m.length}件をインポート`);
-                    renderList();
-                } catch { alert('❌ ファイル形式エラー'); }
-            };
-            r.readAsText(f);
-        }
+    const data = loadData();
 
-        function deleteAllData() {
-            if (!confirm('本当に削除？')) return;
-            if (!confirm('取り消せません。本当に？')) return;
-            localStorage.removeItem(STORAGE_KEY);
-            alert('✅ 削除完了');
-            renderList();
+    // ファイル名の重複チェック
+    if (data.some(m => m.filename === filename && m.largeCategory === largeCat)) {
+        toast(`「${filename}」は同じカテゴリにすでに登録されています`, 'error');
+        return;
+    }
+
+    const tags = tagsRaw ? tagsRaw.split(',').map(t => t.trim()).filter(t => t) : [];
+    const newId = data.length > 0 ? Math.max(...data.map(m => m.id)) + 1 : 1;
+
+    data.push({
+        id: newId,
+        title,
+        description: desc,
+        largeCategory: largeCat,
+        category: subCat,
+        filename,
+        tags,
+        createdDate: new Date().toISOString().split('T')[0]
+    });
+
+    saveData(data);
+    document.getElementById('pendingBadge').style.display = 'inline-block';
+    toast(`✅「${title}」を追加しました（ID: ${newId}）`, 'success');
+    document.getElementById('clearFormBtn').click();
+});
+
+// ===== フォームリセット =====
+document.getElementById('clearFormBtn').addEventListener('click', () => {
+    ['fTitle','fDesc','fFilename','fTags'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('fLargeCat').value = '';
+    document.getElementById('fSubCat').innerHTML = '<option value="">先に大分類を選択</option>';
+    document.getElementById('fSubCat').disabled = true;
+    updatePathPreview();
+});
+
+// ===== 素材一覧 描画 =====
+function renderList(query = '') {
+    const data = loadData();
+    const tbody = document.getElementById('listBody');
+    const table = document.getElementById('materialTable');
+    const empty = document.getElementById('listEmpty');
+    document.getElementById('listCount').textContent = data.length;
+
+    const filtered = query
+        ? data.filter(m => m.title.includes(query) || m.filename.includes(query))
+        : data;
+
+    if (filtered.length === 0) {
+        table.style.display = 'none';
+        empty.style.display = 'block';
+        return;
+    }
+
+    table.style.display = 'table';
+    empty.style.display = 'none';
+
+    tbody.innerHTML = filtered.map(m => {
+        const catLabel = getCatLabel(m.largeCategory, m.category);
+        const tagsHtml = (m.tags || []).map(t => `<span style="background:#eaf4fb;color:#2980b9;padding:0.1rem 0.4rem;border-radius:3px;font-size:0.75rem;margin-right:2px;">${escHtml(t)}</span>`).join('');
+        return `
+            <tr>
+                <td style="color:#95a5a6;font-size:0.82rem;">${m.id}</td>
+                <td style="font-weight:600;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${escHtml(m.title)}">${escHtml(m.title)}</td>
+                <td><span class="cat-badge">${escHtml(catLabel)}</span></td>
+                <td class="filename-cell">${escHtml(m.filename)}</td>
+                <td>${tagsHtml}</td>
+                <td style="color:#95a5a6;font-size:0.82rem;">${m.createdDate || ''}</td>
+                <td>
+                    <button class="btn btn-danger btn-sm" onclick="deleteMaterial(${m.id})">削除</button>
+                </td>
+            </tr>
+        `;
+    }).join('');
+}
+
+function deleteMaterial(id) {
+    if (!confirm('この素材を削除しますか？')) return;
+    const data = loadData().filter(m => m.id !== id);
+    saveData(data);
+    renderList(document.getElementById('listSearch').value);
+    toast('削除しました', 'success');
+}
+
+document.getElementById('listSearch').addEventListener('input', e => {
+    renderList(e.target.value.trim());
+});
+
+// ===== インポート =====
+document.getElementById('importBtn').addEventListener('click', () => {
+    const file = document.getElementById('importFile').files[0];
+    if (!file) { toast('ファイルを選択してください', 'error'); return; }
+    const reader = new FileReader();
+    reader.onload = e => {
+        try {
+            const json = JSON.parse(e.target.result);
+            const incoming = Array.isArray(json.materials) ? json.materials : (Array.isArray(json) ? json : null);
+            if (!incoming) throw new Error('materials 配列が見つかりません');
+
+            const current = loadData();
+            let added = 0;
+            let skipped = 0;
+            let maxId = current.length > 0 ? Math.max(...current.map(m => m.id)) : 0;
+
+            incoming.forEach(m => {
+                // ファイル名 + 大分類が同じものはスキップ
+                if (current.some(c => c.filename === m.filename && c.largeCategory === m.largeCategory)) {
+                    skipped++;
+                    return;
+                }
+                maxId++;
+                current.push({ ...m, id: maxId });
+                added++;
+            });
+
+            saveData(current);
+            document.getElementById('pendingBadge').style.display = 'inline-block';
+            toast(`✅ ${added} 件追加（${skipped} 件重複スキップ）`, 'success');
+        } catch(err) {
+            toast('❌ JSON の形式が正しくありません：' + err.message, 'error');
         }
-    </script>
+    };
+    reader.readAsText(file);
+});
+
+// ===== ローカルプレビュー保存 =====
+document.getElementById('savePreviewBtn').addEventListener('click', () => {
+    const data = loadData();
+    if (data.length === 0) { toast('素材がありません', 'error'); return; }
+    localStorage.setItem('bmh_preview_json', buildJSONString());
+    toast(`✅ ${data.length} 件をプレビュー用に保存しました。gallery.html を開いて確認できます。`, 'success');
+});
+
+// ===== エクスポート =====
+document.getElementById('exportBtn').addEventListener('click', exportJSON);
+document.getElementById('previewBtn').addEventListener('click', () => {
+    const preview = document.getElementById('jsonPreview');
+    if (preview.style.display === 'none') {
+        preview.style.display = 'block';
+        preview.textContent = buildJSONString();
+    } else {
+        preview.style.display = 'none';
+    }
+});
+
+function buildJSONString() {
+    const data = loadData();
+    const json = {
+        materials: data,
+        metadata: {
+            version: '2.0',
+            totalMaterials: data.length,
+            lastUpdated: new Date().toISOString().split('T')[0],
+            largeCategoryDefs: {
+                nature:      { label: '自然', icon: '🌿', subcategories: { plants: '植物', sky: '空・天気', water: '水・海・川', animals: '動物' } },
+                food:        { label: '食',   icon: '🍽️', subcategories: { fruits: '果物', drinks: '飲み物', meals: '食事・料理', sweets: 'スイーツ' } },
+                objects:     { label: '物',   icon: '📦', subcategories: { gadgets: 'ガジェット', furniture: '家具・インテリア', stationery: '文具・雑貨', tools: '道具・器具' } },
+                backgrounds: { label: '背景', icon: '🖼️', subcategories: { solid: '単色', gradient: 'グラデーション', pattern: 'パターン', texture: 'テクスチャ' } }
+            }
+        }
+    };
+    return JSON.stringify(json, null, 2);
+}
+
+function exportJSON() {
+    const data = loadData();
+    if (data.length === 0) {
+        toast('エクスポートする素材がありません', 'error');
+        return;
+    }
+    const blob = new Blob([buildJSONString()], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'data.json';
+    a.click();
+    URL.revokeObjectURL(a.href);
+    document.getElementById('pendingBadge').style.display = 'none';
+    toast(`✅ data.json をダウンロードしました（${data.length} 件）`, 'success');
+}
+
+// ===== 全削除 =====
+document.getElementById('clearAllBtn').addEventListener('click', () => {
+    const data = loadData();
+    if (data.length === 0) { toast('削除するデータがありません', 'error'); return; }
+    if (!confirm(`作業リストの全 ${data.length} 件を削除しますか？\nエクスポート済みの data.json には影響しません。`)) return;
+    saveData([]);
+    document.getElementById('pendingBadge').style.display = 'none';
+    toast('✅ 作業リストをリセットしました', 'success');
+});
+
+// ===== ヘルパー =====
+function getCatLabel(large, sub) {
+    const l = CAT_DEFS[large];
+    if (!l) return large || '';
+    return sub ? `${l.label} › ${l.subs[sub] || sub}` : l.label;
+}
+
+function escHtml(str) {
+    return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function toast(msg, type = 'success') {
+    const el = document.getElementById('toast');
+    el.textContent = msg;
+    el.className = `toast ${type} show`;
+    clearTimeout(el._timer);
+    el._timer = setTimeout(() => { el.classList.remove('show'); }, 3000);
+}
+
+// ===== 初期化 =====
+updateBadges();
+</script>
 </body>
-
 </html>
