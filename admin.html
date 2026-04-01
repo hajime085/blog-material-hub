@@ -17,73 +17,39 @@
             --green-dk: #219150;
             --red:      #e74c3c;
             --orange:   #f39c12;
+            --purple:   #8e44ad;
             --step-bg:  #f7f9fc;
             --radius:   10px;
         }
         * { margin:0; padding:0; box-sizing:border-box; }
-        body {
-            font-family: 'Hiragino Sans', 'Meiryo', -apple-system, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            font-size: 14px;
-            line-height: 1.5;
-        }
+        body { font-family:'Hiragino Sans','Meiryo',-apple-system,sans-serif; background:var(--bg); color:var(--text); font-size:14px; line-height:1.5; }
 
-        /* ===== HEADER ===== */
-        header {
-            background: var(--surface);
-            border-bottom: 1px solid var(--border);
-            position: sticky; top:0; z-index:200;
-        }
-        .navbar {
-            max-width: 1300px; margin:0 auto;
-            padding: .8rem 1.5rem;
-            display:flex; justify-content:space-between; align-items:center;
-        }
+        /* HEADER */
+        header { background:var(--surface); border-bottom:1px solid var(--border); position:sticky; top:0; z-index:200; }
+        .navbar { max-width:1300px; margin:0 auto; padding:.8rem 1.5rem; display:flex; justify-content:space-between; align-items:center; }
         .logo { font-size:1.1rem; font-weight:800; color:var(--text); text-decoration:none; }
-        .logo span { color: var(--blue); }
+        .logo span { color:var(--blue); }
         .nav-links { display:flex; gap:1.5rem; }
         .nav-links a { color:var(--muted); text-decoration:none; font-size:.88rem; transition:color .2s; }
         .nav-links a:hover { color:var(--blue); }
 
-        /* ===== LAYOUT ===== */
         main { max-width:1300px; margin:0 auto; padding:1.5rem; }
 
-        .page-title {
-            margin-bottom:1.5rem;
-            display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:.8rem;
-        }
+        .page-title { margin-bottom:1.5rem; display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:.8rem; }
         .page-title h1 { font-size:1.5rem; font-weight:800; }
         .page-title p { color:var(--muted); font-size:.88rem; margin-top:.2rem; }
         .status-bar { display:flex; gap:.8rem; align-items:center; flex-wrap:wrap; }
-        .badge {
-            padding:.3rem .8rem; border-radius:20px; font-size:.82rem; font-weight:700;
-        }
+        .badge { padding:.3rem .8rem; border-radius:20px; font-size:.82rem; font-weight:700; }
         .badge-blue   { background:#e8f4fb; color:var(--blue-dk); }
         .badge-green  { background:#e8f9ef; color:var(--green-dk); }
+        .badge-purple { background:#f3e8fc; color:var(--purple); }
         .badge-orange { background:#fef3e2; color:#c0780e; }
 
-        /* ===== STEP CARD ===== */
-        .step-card {
-            background:var(--surface);
-            border:1px solid var(--border);
-            border-radius:var(--radius);
-            margin-bottom:1.2rem;
-            overflow:hidden;
-        }
-        .step-header {
-            display:flex; align-items:center; gap:.8rem;
-            padding:.9rem 1.4rem;
-            background:var(--step-bg);
-            border-bottom:1px solid var(--border);
-            cursor:pointer; user-select:none;
-        }
-        .step-num {
-            width:26px; height:26px;
-            border-radius:50%; background:var(--blue); color:#fff;
-            font-size:.8rem; font-weight:800;
-            display:flex; align-items:center; justify-content:center; flex-shrink:0;
-        }
+        /* STEP CARD */
+        .step-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:1.2rem; overflow:hidden; }
+        .step-header { display:flex; align-items:center; gap:.8rem; padding:.9rem 1.4rem; background:var(--step-bg); border-bottom:1px solid var(--border); cursor:pointer; user-select:none; }
+        .step-num { width:26px; height:26px; border-radius:50%; background:var(--blue); color:#fff; font-size:.8rem; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+        .step-num.cat { background:var(--purple); }
         .step-title { font-weight:700; font-size:.95rem; flex:1; }
         .step-subtitle { font-size:.82rem; color:var(--muted); }
         .step-toggle { color:var(--muted); font-size:.8rem; transition:transform .2s; }
@@ -91,101 +57,134 @@
         .step-body { padding:1.4rem; }
         .step-body.hidden { display:none; }
 
-        /* ===== DROP ZONE ===== */
-        .drop-zone {
-            border:2.5px dashed var(--border);
-            border-radius:var(--radius);
-            padding:2.5rem;
-            text-align:center;
-            cursor:pointer;
-            transition:all .2s;
-            background:#fafbfc;
-            position:relative;
+        /* BUTTONS */
+        .btn { padding:.6rem 1.1rem; border:none; border-radius:7px; font-weight:700; font-size:.88rem; cursor:pointer; transition:all .2s; white-space:nowrap; font-family:inherit; display:inline-flex; align-items:center; gap:.4rem; }
+        .btn-primary   { background:var(--blue);   color:#fff; } .btn-primary:hover   { background:var(--blue-dk); }
+        .btn-success   { background:var(--green);  color:#fff; } .btn-success:hover   { background:var(--green-dk); }
+        .btn-secondary { background:#edf2f7; color:#4a5568; }    .btn-secondary:hover { background:#e2e8f0; }
+        .btn-danger    { background:var(--red);    color:#fff; } .btn-danger:hover    { background:#c0392b; }
+        .btn-purple    { background:var(--purple); color:#fff; } .btn-purple:hover    { background:#7d3c98; }
+        .btn-sm { padding:.35rem .7rem; font-size:.8rem; }
+        .btn:disabled { opacity:.45; cursor:not-allowed; }
+
+        /* FORMS */
+        .form-group { display:flex; flex-direction:column; gap:.35rem; }
+        .form-group label { font-size:.82rem; font-weight:700; color:#4a5568; }
+        .form-group input[type=text], .form-group select {
+            padding:.6rem .8rem; border:1.5px solid var(--border); border-radius:7px;
+            font-size:.9rem; background:#fff; transition:border-color .2s; font-family:inherit;
         }
-        .drop-zone:hover, .drop-zone.drag-over {
-            border-color:var(--blue);
-            background:#f0f7ff;
+        .form-group input[type=text]:focus, .form-group select:focus { outline:none; border-color:var(--blue); }
+
+        /* ALERT */
+        .alert { padding:.8rem 1.1rem; border-radius:8px; font-size:.88rem; margin-bottom:1rem; }
+        .alert-info    { background:#ebf8ff; color:#2b6cb0; border-left:3px solid var(--blue); }
+        .alert-success { background:#f0fff4; color:#276749; border-left:3px solid var(--green); }
+        .alert-warning { background:#fffaf0; color:#7b4f12; border-left:3px solid var(--orange); }
+        .alert-purple  { background:#f9f0fe; color:#6c3483; border-left:3px solid var(--purple); }
+
+        /* ==============================
+           カテゴリ管理 UI
+        ============================== */
+        .cat-list { display:flex; flex-direction:column; gap:.8rem; }
+
+        .large-cat-item {
+            border:1.5px solid var(--border); border-radius:8px; overflow:hidden;
         }
-        .drop-zone input[type=file] {
-            position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%;
+        .large-cat-header {
+            display:flex; align-items:center; gap:.8rem;
+            padding:.7rem 1rem; background:#f7f9fc;
+            cursor:pointer; user-select:none;
         }
+        .large-cat-header:hover { background:#edf2f7; }
+        .cat-icon  { font-size:1.3rem; flex-shrink:0; width:28px; text-align:center; }
+        .cat-key   { font-family:monospace; font-size:.82rem; color:var(--muted); background:#edf2f7; padding:.1rem .4rem; border-radius:4px; }
+        .cat-label { font-weight:700; font-size:.92rem; flex:1; }
+        .cat-count { font-size:.78rem; color:var(--muted); background:#e8ecf0; padding:.15rem .5rem; border-radius:10px; }
+        .cat-actions { display:flex; gap:.4rem; }
+        .cat-expand { color:var(--muted); font-size:.75rem; transition:transform .2s; margin-left:.3rem; }
+        .cat-expand.open { transform:rotate(180deg); }
+
+        .sub-cat-area { padding:.8rem 1rem; border-top:1px solid var(--border); background:#fff; display:none; }
+        .sub-cat-area.open { display:block; }
+
+        .sub-cat-list { display:flex; flex-direction:column; gap:.4rem; margin-bottom:.8rem; }
+        .sub-cat-row {
+            display:flex; align-items:center; gap:.6rem;
+            padding:.45rem .7rem; background:#f7f9fc;
+            border-radius:6px; border:1px solid #edf2f7;
+        }
+        .sub-cat-row:hover { background:#edf7ff; border-color:#bee3f8; }
+        .sub-key   { font-family:monospace; font-size:.8rem; color:var(--muted); background:#e2e8f0; padding:.1rem .4rem; border-radius:4px; min-width:80px; }
+        .sub-label { flex:1; font-size:.88rem; font-weight:600; }
+
+        /* インライン編集フォーム */
+        .inline-edit {
+            display:flex; gap:.5rem; align-items:center;
+            padding:.5rem .7rem; background:#f0f7ff;
+            border-radius:6px; border:1.5px solid var(--blue); flex-wrap:wrap;
+        }
+        .inline-edit input {
+            padding:.4rem .6rem; border:1.5px solid var(--border); border-radius:5px;
+            font-size:.85rem; font-family:inherit;
+        }
+        .inline-edit input:focus { outline:none; border-color:var(--blue); }
+        .inp-icon  { width:52px; text-align:center; }
+        .inp-key   { width:120px; }
+        .inp-label { flex:1; min-width:100px; }
+        .inline-edit .hint-text { font-size:.75rem; color:var(--muted); width:100%; }
+
+        .add-sub-form {
+            display:flex; gap:.5rem; align-items:center; flex-wrap:wrap;
+            padding:.5rem .7rem; background:#f0fff4;
+            border:1.5px dashed var(--green); border-radius:6px;
+        }
+        .add-sub-form input {
+            padding:.4rem .6rem; border:1.5px solid var(--border); border-radius:5px;
+            font-size:.85rem; font-family:inherit;
+        }
+        .add-sub-form input:focus { outline:none; border-color:var(--green); }
+
+        .add-large-form {
+            display:flex; gap:.8rem; align-items:flex-end; flex-wrap:wrap;
+            padding:1rem; background:#faf5ff; border:1.5px dashed var(--purple); border-radius:8px;
+            margin-top:.8rem;
+        }
+        .add-large-form input {
+            padding:.55rem .8rem; border:1.5px solid var(--border); border-radius:7px;
+            font-size:.9rem; font-family:inherit;
+        }
+        .add-large-form input:focus { outline:none; border-color:var(--purple); }
+
+        /* ==============================
+           DROP ZONE / STEP 1
+        ============================== */
+        .drop-zone { border:2.5px dashed var(--border); border-radius:var(--radius); padding:2.5rem; text-align:center; cursor:pointer; transition:all .2s; background:#fafbfc; position:relative; }
+        .drop-zone:hover, .drop-zone.drag-over { border-color:var(--blue); background:#f0f7ff; }
+        .drop-zone input[type=file] { position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%; }
         .drop-icon { font-size:2.5rem; margin-bottom:.6rem; }
         .drop-zone h3 { font-size:1rem; font-weight:700; margin-bottom:.3rem; }
         .drop-zone p { font-size:.85rem; color:var(--muted); }
         .drop-zone .hint { font-size:.78rem; color:#a0aec0; margin-top:.5rem; }
-
-        .file-counter {
-            margin-top:1rem;
-            display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:.6rem;
-        }
+        .file-counter { margin-top:1rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:.6rem; }
         .file-counter-text { font-size:.9rem; color:var(--muted); }
         .file-counter-text strong { color:var(--text); }
 
-        /* ===== BULK SETTINGS ===== */
-        .bulk-grid {
-            display:grid;
-            grid-template-columns: 1fr 1fr 1fr auto;
-            gap:1rem;
-            align-items:flex-end;
-        }
-        .form-group { display:flex; flex-direction:column; gap:.35rem; }
-        .form-group label { font-size:.82rem; font-weight:700; color:#4a5568; }
-        .form-group select,
-        .form-group input[type=text] {
-            padding:.6rem .8rem;
-            border:1.5px solid var(--border);
-            border-radius:7px;
-            font-size:.9rem;
-            background:#fff;
-            transition:border-color .2s;
-            font-family:inherit;
-        }
-        .form-group select:focus,
-        .form-group input[type=text]:focus { outline:none; border-color:var(--blue); }
+        /* STEP 2 BULK */
+        .bulk-grid { display:grid; grid-template-columns:1fr 1fr 1fr auto; gap:1rem; align-items:flex-end; }
 
-        /* ===== BUTTONS ===== */
-        .btn {
-            padding:.6rem 1.1rem; border:none; border-radius:7px;
-            font-weight:700; font-size:.88rem; cursor:pointer;
-            transition:all .2s; white-space:nowrap; font-family:inherit;
-            display:inline-flex; align-items:center; gap:.4rem;
-        }
-        .btn-primary   { background:var(--blue);   color:#fff; }
-        .btn-primary:hover   { background:var(--blue-dk); }
-        .btn-success   { background:var(--green);  color:#fff; }
-        .btn-success:hover   { background:var(--green-dk); }
-        .btn-secondary { background:#edf2f7; color:#4a5568; }
-        .btn-secondary:hover { background:#e2e8f0; }
-        .btn-danger    { background:var(--red);    color:#fff; }
-        .btn-danger:hover    { background:#c0392b; }
-        .btn-sm { padding:.4rem .75rem; font-size:.8rem; }
-        .btn:disabled { opacity:.45; cursor:not-allowed; }
-
-        /* ===== TABLE TOOLBAR ===== */
-        .table-toolbar {
-            display:flex; justify-content:space-between; align-items:center;
-            flex-wrap:wrap; gap:.8rem; margin-bottom:1rem;
-        }
+        /* TABLE */
+        .table-toolbar { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:.8rem; margin-bottom:1rem; }
         .toolbar-left  { display:flex; gap:.6rem; align-items:center; flex-wrap:wrap; }
         .toolbar-right { display:flex; gap:.6rem; align-items:center; }
-        .search-input {
-            padding:.5rem .8rem; border:1.5px solid var(--border);
-            border-radius:7px; font-size:.88rem; width:200px; font-family:inherit;
-            transition:border-color .2s;
-        }
+        .search-input { padding:.5rem .8rem; border:1.5px solid var(--border); border-radius:7px; font-size:.88rem; width:200px; font-family:inherit; transition:border-color .2s; }
         .search-input:focus { outline:none; border-color:var(--blue); }
         .sel-count { font-size:.85rem; color:var(--muted); }
 
-        /* ===== MAIN TABLE ===== */
         .table-wrap { overflow-x:auto; border:1px solid var(--border); border-radius:8px; }
         table.data-table { width:100%; border-collapse:collapse; font-size:.85rem; }
-        table.data-table thead tr {
-            background:#f7f9fc; border-bottom:2px solid var(--border);
-        }
-        table.data-table th {
-            padding:.65rem .8rem; text-align:left;
-            font-weight:700; color:#4a5568; white-space:nowrap;
-        }
+        table.data-table thead tr { background:#f7f9fc; border-bottom:2px solid var(--border); }
+        table.data-table th { padding:.65rem .8rem; text-align:left; font-weight:700; color:#4a5568; white-space:nowrap; }
         table.data-table th.col-check { width:36px; }
         table.data-table th.col-no    { width:48px; }
         table.data-table th.col-file  { min-width:150px; }
@@ -194,101 +193,52 @@
         table.data-table th.col-sub   { min-width:130px; }
         table.data-table th.col-tags  { min-width:190px; }
         table.data-table th.col-act   { width:44px; }
-
         table.data-table tbody tr { border-bottom:1px solid #f0f0f0; transition:background .1s; }
         table.data-table tbody tr:hover { background:#f9fbfd; }
         table.data-table tbody tr.selected { background:#edf7ff; }
         table.data-table td { padding:.5rem .8rem; vertical-align:middle; }
         table.data-table td.col-no { color:var(--muted); font-size:.78rem; }
-        table.data-table td.col-file {
-            font-family:monospace; font-size:.8rem; color:#5a6778;
-            max-width:170px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
-        }
+        table.data-table td.col-file { font-family:monospace; font-size:.8rem; color:#5a6778; max-width:170px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 
-        .tbl-input, .tbl-select {
-            width:100%; padding:.38rem .55rem;
-            border:1.5px solid transparent;
-            border-radius:5px; font-size:.83rem;
-            background:transparent; font-family:inherit;
-            transition:all .15s; color:var(--text);
-        }
-        .tbl-input:hover, .tbl-select:hover  { border-color:var(--border); background:#fff; }
-        .tbl-input:focus, .tbl-select:focus  { border-color:var(--blue); background:#fff; outline:none; }
-
-        .remove-btn {
-            width:26px; height:26px; border-radius:50%;
-            background:none; border:none; cursor:pointer;
-            color:#cbd5e0; font-size:1rem; line-height:1;
-            display:flex; align-items:center; justify-content:center; transition:all .15s;
-        }
+        .tbl-input, .tbl-select { width:100%; padding:.38rem .55rem; border:1.5px solid transparent; border-radius:5px; font-size:.83rem; background:transparent; font-family:inherit; transition:all .15s; color:var(--text); }
+        .tbl-input:hover, .tbl-select:hover { border-color:var(--border); background:#fff; }
+        .tbl-input:focus, .tbl-select:focus { border-color:var(--blue); background:#fff; outline:none; }
+        .remove-btn { width:26px; height:26px; border-radius:50%; background:none; border:none; cursor:pointer; color:#cbd5e0; font-size:1rem; display:flex; align-items:center; justify-content:center; transition:all .15s; }
         .remove-btn:hover { background:#fdecea; color:var(--red); }
 
-        /* ページネーション */
-        .pagination {
-            display:flex; justify-content:center; align-items:center;
-            gap:.5rem; margin-top:1rem; flex-wrap:wrap;
-        }
-        .page-btn {
-            padding:.4rem .75rem; border:1.5px solid var(--border);
-            border-radius:6px; background:#fff; cursor:pointer;
-            font-size:.83rem; font-weight:600; color:#4a5568;
-            transition:all .15s; font-family:inherit;
-        }
+        /* PAGINATION */
+        .pagination { display:flex; justify-content:center; align-items:center; gap:.5rem; margin-top:1rem; flex-wrap:wrap; }
+        .page-btn { padding:.4rem .75rem; border:1.5px solid var(--border); border-radius:6px; background:#fff; cursor:pointer; font-size:.83rem; font-weight:600; color:#4a5568; transition:all .15s; font-family:inherit; }
         .page-btn:hover { border-color:var(--blue); color:var(--blue); }
         .page-btn.active { background:var(--blue); border-color:var(--blue); color:#fff; }
         .page-btn:disabled { opacity:.4; cursor:not-allowed; }
         .page-info { font-size:.83rem; color:var(--muted); }
-
         .empty-table { text-align:center; padding:3rem; color:var(--muted); }
         .empty-table .empty-icon { font-size:2.5rem; margin-bottom:.6rem; }
 
-        /* ===== MERGE SECTION ===== */
+        /* MERGE */
         .merge-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
         .merge-box { border:1.5px solid var(--border); border-radius:8px; padding:1.2rem; }
         .merge-box h3 { font-size:.9rem; font-weight:700; margin-bottom:.8rem; color:#4a5568; }
         .merge-stat { display:flex; align-items:baseline; gap:.4rem; margin-bottom:.4rem; }
         .merge-num { font-size:2rem; font-weight:800; color:var(--blue); line-height:1; }
         .merge-label { font-size:.85rem; color:var(--muted); }
-        .merge-eq {
-            border:2px solid var(--green); border-radius:8px;
-            padding:1.2rem; background:#f0faf4; text-align:center;
-        }
+        .merge-eq { border:2px solid var(--green); border-radius:8px; padding:1.2rem; background:#f0faf4; text-align:center; }
         .merge-eq h3 { font-size:.9rem; font-weight:700; color:var(--green-dk); margin-bottom:.6rem; }
         .merge-total { font-size:2.5rem; font-weight:800; color:var(--green-dk); line-height:1; }
         .merge-total-label { font-size:.85rem; color:var(--green-dk); margin-top:.3rem; }
         .dup-warn { font-size:.8rem; color:var(--orange); margin-top:.5rem; }
         .export-actions { display:flex; gap:.8rem; margin-top:1.4rem; flex-wrap:wrap; }
+        .json-preview { background:#1a202c; color:#9ae6b4; padding:1rem 1.2rem; border-radius:8px; font-family:monospace; font-size:.78rem; max-height:250px; overflow-y:auto; white-space:pre; margin-top:1rem; display:none; }
 
-        .json-preview {
-            background:#1a202c; color:#9ae6b4;
-            padding:1rem 1.2rem; border-radius:8px;
-            font-family:monospace; font-size:.78rem;
-            max-height:250px; overflow-y:auto;
-            white-space:pre; margin-top:1rem; display:none;
-        }
-
-        /* ===== ALERT ===== */
-        .alert {
-            padding:.8rem 1.1rem; border-radius:8px;
-            font-size:.88rem; margin-bottom:1rem;
-        }
-        .alert-info    { background:#ebf8ff; color:#2b6cb0; border-left:3px solid var(--blue); }
-        .alert-success { background:#f0fff4; color:#276749; border-left:3px solid var(--green); }
-
-        /* ===== TOAST ===== */
-        .toast {
-            position:fixed; bottom:1.5rem; right:1.5rem;
-            padding:.8rem 1.4rem; border-radius:8px; color:#fff;
-            font-weight:700; font-size:.9rem; z-index:9999;
-            opacity:0; transform:translateY(8px);
-            transition:all .25s; pointer-events:none;
-        }
+        /* TOAST */
+        .toast { position:fixed; bottom:1.5rem; right:1.5rem; padding:.8rem 1.4rem; border-radius:8px; color:#fff; font-weight:700; font-size:.9rem; z-index:9999; opacity:0; transform:translateY(8px); transition:all .25s; pointer-events:none; }
         .toast.show { opacity:1; transform:translateY(0); }
         .toast.success { background:var(--green); }
         .toast.error   { background:var(--red); }
         .toast.info    { background:var(--blue); }
 
-        /* ===== FOOTER ===== */
+        /* FOOTER */
         footer { background:#2c3e50; color:#ecf0f1; padding:2rem 1.5rem; margin-top:3rem; }
         .footer-inner { max-width:1300px; margin:0 auto; }
         .footer-links { display:flex; gap:1.5rem; flex-wrap:wrap; margin-bottom:1rem; padding-bottom:1rem; border-bottom:1px solid #34495e; }
@@ -302,6 +252,7 @@
         }
         @media(max-width:600px) {
             .bulk-grid { grid-template-columns:1fr; }
+            .add-large-form { flex-direction:column; }
         }
     </style>
 </head>
@@ -325,9 +276,54 @@
             <p>複数ファイルをドロップして一括登録 → data.json をエクスポート → git push</p>
         </div>
         <div class="status-bar">
+            <span class="badge badge-purple">カテゴリ: <span id="catCount">0</span> 大分類</span>
             <span class="badge badge-blue">新規: <span id="pendingCount">0</span> 件</span>
             <span class="badge badge-green">既存: <span id="existingCount">0</span> 件</span>
             <span class="badge badge-orange" id="dupBadge" style="display:none">重複: <span id="dupCount">0</span> 件</span>
+        </div>
+    </div>
+
+    <!-- ==============================
+         STEP 0: カテゴリ管理
+    ============================== -->
+    <div class="step-card">
+        <div class="step-header" onclick="toggleStep('s0')">
+            <div class="step-num cat">⚙</div>
+            <div class="step-title">カテゴリ管理</div>
+            <div class="step-subtitle">大分類・中分類の追加・編集・削除（コード不要）</div>
+            <div class="step-toggle" id="tog-s0">▼</div>
+        </div>
+        <div class="step-body hidden" id="s0">
+            <div class="alert alert-purple">
+                💡 ここで追加・変更したカテゴリは <strong>ブラウザに自動保存</strong> され、STEP 1〜3 の選択肢にすぐ反映されます。<br>
+                STEP 4 でエクスポートする <code>data.json</code> にもカテゴリ定義が含まれるため、<strong>ギャラリーにも自動反映</strong>されます。
+            </div>
+
+            <!-- カテゴリ一覧 -->
+            <div class="cat-list" id="catList"></div>
+
+            <!-- 大分類追加フォーム -->
+            <div class="add-large-form" id="addLargeForm">
+                <div class="form-group">
+                    <label>アイコン（絵文字）</label>
+                    <input type="text" id="newLargeIcon" class="inp-icon" placeholder="🌿" maxlength="2">
+                </div>
+                <div class="form-group" style="flex:0 0 130px;">
+                    <label>キー（英数字・_）</label>
+                    <input type="text" id="newLargeKey" placeholder="例: nature" maxlength="30">
+                </div>
+                <div class="form-group" style="flex:1; min-width:120px;">
+                    <label>表示名</label>
+                    <input type="text" id="newLargeLabel" placeholder="例: 自然" maxlength="30">
+                </div>
+                <button class="btn btn-purple" onclick="addLargeCat()">＋ 大分類を追加</button>
+            </div>
+
+            <!-- リセット -->
+            <div style="margin-top:1rem; display:flex; gap:.6rem; justify-content:flex-end;">
+                <button class="btn btn-secondary btn-sm" onclick="resetCatToDefault()">🔄 デフォルトに戻す</button>
+                <button class="btn btn-secondary btn-sm" onclick="exportCatOnly()">📋 カテゴリ定義をコピー</button>
+            </div>
         </div>
     </div>
 
@@ -369,12 +365,8 @@
             <div class="bulk-grid">
                 <div class="form-group">
                     <label>大分類（フォルダ）</label>
-                    <select id="bulkLarge">
+                    <select id="bulkLarge" onchange="onBulkLargeChange()">
                         <option value="">選択してください</option>
-                        <option value="nature">🌿 nature（自然）</option>
-                        <option value="food">🍽️ food（食）</option>
-                        <option value="objects">📦 objects（物）</option>
-                        <option value="backgrounds">🖼️ backgrounds（背景）</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -452,7 +444,7 @@
             <div style="margin-bottom:1.5rem;">
                 <h3 style="font-size:.9rem;font-weight:700;color:#4a5568;margin-bottom:.6rem;">📥 既存 data.json を読み込む（任意）</h3>
                 <p style="font-size:.85rem;color:var(--muted);margin-bottom:.8rem;">すでに登録済みの素材がある場合は読み込んでください。新規追加のみの場合はスキップ可。</p>
-                <div style="display:flex;gap:.8rem;align-items:center;flex-wrap:wrap;">
+                <div style="display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;">
                     <input type="file" id="existingJsonFile" accept=".json" style="font-size:.85rem;">
                     <button class="btn btn-primary btn-sm" onclick="loadExistingJson()">📥 読み込む</button>
                     <button class="btn btn-secondary btn-sm" onclick="clearExisting()">クリア</button>
@@ -464,18 +456,12 @@
                 <div style="display:flex;flex-direction:column;gap:1rem;">
                     <div class="merge-box">
                         <h3>📂 既存データ</h3>
-                        <div class="merge-stat">
-                            <div class="merge-num" id="mergeExisting">0</div>
-                            <div class="merge-label">件</div>
-                        </div>
+                        <div class="merge-stat"><div class="merge-num" id="mergeExisting">0</div><div class="merge-label">件</div></div>
                         <div style="font-size:.82rem;color:var(--muted);">インポート済みの素材数</div>
                     </div>
                     <div class="merge-box">
                         <h3>➕ 新規追加</h3>
-                        <div class="merge-stat">
-                            <div class="merge-num" style="color:var(--green);" id="mergeNew">0</div>
-                            <div class="merge-label">件</div>
-                        </div>
+                        <div class="merge-stat"><div class="merge-num" style="color:var(--green);" id="mergeNew">0</div><div class="merge-label">件</div></div>
                         <div style="font-size:.82rem;color:var(--muted);">STEP3 の登録リスト</div>
                     </div>
                 </div>
@@ -518,26 +504,37 @@
 
 <script>
 // ============================================================
-//  カテゴリ定義
+//  ストレージキー
 // ============================================================
-const CAT = {
-    nature:      { label:'自然',  icon:'🌿', subs:{ plants:'植物', sky:'空・天気', water:'水・海・川', animals:'動物' } },
-    food:        { label:'食',    icon:'🍽️', subs:{ fruits:'果物', drinks:'飲み物', meals:'食事・料理', sweets:'スイーツ' } },
-    objects:     { label:'物',    icon:'📦', subs:{ gadgets:'ガジェット', furniture:'家具・インテリア', stationery:'文具・雑貨', tools:'道具・器具' } },
-    backgrounds: { label:'背景',  icon:'🖼️', subs:{ solid:'単色', gradient:'グラデーション', pattern:'パターン', texture:'テクスチャ' } }
+const CAT_KEY = 'bmh_cat_defs_v2';
+
+// ============================================================
+//  デフォルトカテゴリ定義
+// ============================================================
+const DEFAULT_CAT = {
+    nature:      { label:'自然',  icon:'🌿', subcategories:{ plants:'植物', sky:'空・天気', water:'水・海・川', animals:'動物' } },
+    food:        { label:'食',    icon:'🍽️', subcategories:{ fruits:'果物', drinks:'飲み物', meals:'食事・料理', sweets:'スイーツ' } },
+    objects:     { label:'物',    icon:'📦', subcategories:{ gadgets:'ガジェット', furniture:'家具・インテリア', stationery:'文具・雑貨', tools:'道具・器具' } },
+    backgrounds: { label:'背景',  icon:'🖼️', subcategories:{ solid:'単色', gradient:'グラデーション', pattern:'パターン', texture:'テクスチャ' } }
 };
 
 // ============================================================
-//  状態
+//  カテゴリ定義を localStorage から読み込む（なければデフォルト）
 // ============================================================
-let pendingItems    = [];
-let existingItems   = [];
-let existingCatDefs = {};
-let tempIdSeq       = 0;
-let currentPage     = 1;
-const PAGE_SIZE     = 50;
-let searchQuery     = '';
-const checkedSet    = new Set();
+function loadCatDefs() {
+    try {
+        const raw = localStorage.getItem(CAT_KEY);
+        if (raw) return JSON.parse(raw);
+    } catch(_) {}
+    return JSON.parse(JSON.stringify(DEFAULT_CAT)); // deep copy
+}
+
+function saveCatDefs() {
+    localStorage.setItem(CAT_KEY, JSON.stringify(CAT));
+}
+
+// ライブなカテゴリ定義（変更可能）
+let CAT = loadCatDefs();
 
 // ============================================================
 //  ステップ開閉
@@ -550,18 +547,306 @@ function toggleStep(id) {
 }
 
 // ============================================================
-//  ドロップゾーン
+//  カテゴリ管理 UI
 // ============================================================
+function renderCatList() {
+    const container = document.getElementById('catList');
+    container.innerHTML = '';
+
+    const keys = Object.keys(CAT);
+    document.getElementById('catCount').textContent = keys.length;
+
+    keys.forEach(largeKey => {
+        const def    = CAT[largeKey];
+        const subs   = def.subcategories || {};
+        const subCnt = Object.keys(subs).length;
+        const itemEl = document.createElement('div');
+        itemEl.className = 'large-cat-item';
+        itemEl.id = 'lci-' + largeKey;
+
+        // ヘッダー
+        const header = document.createElement('div');
+        header.className = 'large-cat-header';
+        header.innerHTML = `
+            <span class="cat-icon">${def.icon || '📁'}</span>
+            <span class="cat-key">${largeKey}</span>
+            <span class="cat-label">${def.label}</span>
+            <span class="cat-count">中分類 ${subCnt} 件</span>
+            <div class="cat-actions">
+                <button class="btn btn-secondary btn-sm" onclick="startEditLarge('${largeKey}',event)">✏️</button>
+                <button class="btn btn-danger btn-sm" onclick="deleteLargeCat('${largeKey}',event)">🗑</button>
+            </div>
+            <span class="cat-expand" id="exp-${largeKey}">▼</span>
+        `;
+        header.addEventListener('click', e => {
+            if (e.target.closest('.cat-actions, button')) return;
+            toggleSubArea(largeKey);
+        });
+
+        // 中分類エリア
+        const subArea = document.createElement('div');
+        subArea.className = 'sub-cat-area';
+        subArea.id = 'sub-area-' + largeKey;
+        subArea.appendChild(buildSubArea(largeKey, subs));
+
+        itemEl.appendChild(header);
+        itemEl.appendChild(subArea);
+        container.appendChild(itemEl);
+    });
+}
+
+function toggleSubArea(largeKey) {
+    const area = document.getElementById('sub-area-' + largeKey);
+    const exp  = document.getElementById('exp-' + largeKey);
+    area.classList.toggle('open');
+    exp.classList.toggle('open');
+}
+
+function buildSubArea(largeKey, subs) {
+    const wrap = document.createElement('div');
+
+    // 中分類リスト
+    const list = document.createElement('div');
+    list.className = 'sub-cat-list';
+    list.id = 'sub-list-' + largeKey;
+
+    Object.entries(subs).forEach(([subKey, subLabel]) => {
+        list.appendChild(buildSubRow(largeKey, subKey, subLabel));
+    });
+
+    // 中分類追加フォーム
+    const addForm = document.createElement('div');
+    addForm.className = 'add-sub-form';
+    addForm.innerHTML = `
+        <input type="text" placeholder="キー（例: snacks）" id="newSubKey-${largeKey}" style="width:130px;">
+        <input type="text" placeholder="表示名（例: スナック）" id="newSubLabel-${largeKey}" style="flex:1;min-width:120px;">
+        <button class="btn btn-success btn-sm" onclick="addSubCat('${largeKey}')">＋ 中分類を追加</button>
+    `;
+
+    wrap.appendChild(list);
+    wrap.appendChild(addForm);
+    return wrap;
+}
+
+function buildSubRow(largeKey, subKey, subLabel) {
+    const row = document.createElement('div');
+    row.className = 'sub-cat-row';
+    row.id = 'sub-row-' + largeKey + '-' + subKey;
+    row.innerHTML = `
+        <span class="sub-key">${subKey}</span>
+        <span class="sub-label">${subLabel}</span>
+        <button class="btn btn-secondary btn-sm" onclick="startEditSub('${largeKey}','${subKey}')">✏️</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteSubCat('${largeKey}','${subKey}')">🗑</button>
+    `;
+    return row;
+}
+
+// 大分類 追加
+function addLargeCat() {
+    const icon  = document.getElementById('newLargeIcon').value.trim() || '📁';
+    const key   = document.getElementById('newLargeKey').value.trim().toLowerCase().replace(/[^a-z0-9_-]/g,'');
+    const label = document.getElementById('newLargeLabel').value.trim();
+    if (!key)   { toast('キーを入力してください（英数字・_）', 'error'); return; }
+    if (!label) { toast('表示名を入力してください', 'error'); return; }
+    if (CAT[key]) { toast(`キー「${key}」はすでに存在します`, 'error'); return; }
+    CAT[key] = { label, icon, subcategories: {} };
+    saveCatDefs();
+    renderCatList();
+    rebuildAllCatSelects();
+    document.getElementById('newLargeIcon').value  = '';
+    document.getElementById('newLargeKey').value   = '';
+    document.getElementById('newLargeLabel').value = '';
+    toast(`大分類「${label}」を追加しました`, 'success');
+}
+
+// 大分類 編集
+function startEditLarge(key, e) {
+    e.stopPropagation();
+    const def    = CAT[key];
+    const header = document.querySelector(`#lci-${key} .large-cat-header`);
+    if (header.querySelector('.inline-edit')) return; // すでに編集中
+
+    const original = header.innerHTML;
+    header.innerHTML = `
+        <div class="inline-edit" style="flex:1;">
+            <input class="inp-icon" type="text" value="${def.icon||''}" id="ei-icon-${key}" placeholder="🌿">
+            <input class="inp-label" type="text" value="${def.label}" id="ei-label-${key}" placeholder="表示名">
+            <button class="btn btn-primary btn-sm" onclick="confirmEditLarge('${key}')">保存</button>
+            <button class="btn btn-secondary btn-sm" onclick="renderCatList()">キャンセル</button>
+            <span class="hint-text">※ キー（${key}）は変更できません</span>
+        </div>
+    `;
+}
+
+function confirmEditLarge(key) {
+    const icon  = document.getElementById('ei-icon-'+key).value.trim() || '📁';
+    const label = document.getElementById('ei-label-'+key).value.trim();
+    if (!label) { toast('表示名を入力してください', 'error'); return; }
+    CAT[key].icon  = icon;
+    CAT[key].label = label;
+    saveCatDefs();
+    renderCatList();
+    rebuildAllCatSelects();
+    toast(`大分類「${label}」を更新しました`, 'success');
+}
+
+// 大分類 削除
+function deleteLargeCat(key, e) {
+    e.stopPropagation();
+    const using = pendingItems.filter(p => p.largeCategory === key).length;
+    const msg   = using > 0
+        ? `大分類「${CAT[key].label}」を削除しますか？\n⚠ この分類を使用している素材が ${using} 件あります。`
+        : `大分類「${CAT[key].label}」を削除しますか？`;
+    if (!confirm(msg)) return;
+    delete CAT[key];
+    saveCatDefs();
+    renderCatList();
+    rebuildAllCatSelects();
+    renderTable();
+    toast(`削除しました`, 'success');
+}
+
+// 中分類 追加
+function addSubCat(largeKey) {
+    const key   = document.getElementById(`newSubKey-${largeKey}`).value.trim().toLowerCase().replace(/[^a-z0-9_-]/g,'');
+    const label = document.getElementById(`newSubLabel-${largeKey}`).value.trim();
+    if (!key)   { toast('キーを入力してください', 'error'); return; }
+    if (!label) { toast('表示名を入力してください', 'error'); return; }
+    if (CAT[largeKey].subcategories[key]) { toast(`キー「${key}」はすでに存在します`, 'error'); return; }
+    CAT[largeKey].subcategories[key] = label;
+    saveCatDefs();
+    // リスト部分だけ更新
+    const list = document.getElementById('sub-list-' + largeKey);
+    if (list) list.appendChild(buildSubRow(largeKey, key, label));
+    const cnt = document.querySelector(`#lci-${largeKey} .cat-count`);
+    if (cnt) cnt.textContent = `中分類 ${Object.keys(CAT[largeKey].subcategories).length} 件`;
+    document.getElementById(`newSubKey-${largeKey}`).value   = '';
+    document.getElementById(`newSubLabel-${largeKey}`).value = '';
+    rebuildAllCatSelects();
+    toast(`中分類「${label}」を追加しました`, 'success');
+}
+
+// 中分類 編集
+function startEditSub(largeKey, subKey) {
+    const row    = document.getElementById(`sub-row-${largeKey}-${subKey}`);
+    const label  = CAT[largeKey].subcategories[subKey];
+    row.innerHTML = `
+        <div class="inline-edit" style="flex:1;flex-wrap:nowrap;">
+            <input type="text" value="${label}" id="es-label-${largeKey}-${subKey}" style="flex:1;" placeholder="表示名">
+            <button class="btn btn-primary btn-sm" onclick="confirmEditSub('${largeKey}','${subKey}')">保存</button>
+            <button class="btn btn-secondary btn-sm" onclick="renderCatList()">キャンセル</button>
+            <span class="hint-text">※ キー（${subKey}）は変更できません</span>
+        </div>
+    `;
+}
+
+function confirmEditSub(largeKey, subKey) {
+    const label = document.getElementById(`es-label-${largeKey}-${subKey}`).value.trim();
+    if (!label) { toast('表示名を入力してください', 'error'); return; }
+    CAT[largeKey].subcategories[subKey] = label;
+    saveCatDefs();
+    renderCatList();
+    rebuildAllCatSelects();
+    renderTable();
+    toast(`中分類「${label}」を更新しました`, 'success');
+}
+
+// 中分類 削除
+function deleteSubCat(largeKey, subKey) {
+    const using = pendingItems.filter(p => p.largeCategory === largeKey && p.category === subKey).length;
+    const msg   = using > 0
+        ? `中分類「${CAT[largeKey].subcategories[subKey]}」を削除しますか？\n⚠ ${using} 件の素材がこの中分類を使用しています。`
+        : `中分類「${CAT[largeKey].subcategories[subKey]}」を削除しますか？`;
+    if (!confirm(msg)) return;
+    delete CAT[largeKey].subcategories[subKey];
+    saveCatDefs();
+    renderCatList();
+    rebuildAllCatSelects();
+    renderTable();
+    toast('削除しました', 'success');
+}
+
+// デフォルトに戻す
+function resetCatToDefault() {
+    if (!confirm('カテゴリ定義をデフォルトに戻しますか？\n追加・編集した大分類・中分類は全て失われます。')) return;
+    CAT = JSON.parse(JSON.stringify(DEFAULT_CAT));
+    saveCatDefs();
+    renderCatList();
+    rebuildAllCatSelects();
+    renderTable();
+    toast('デフォルトに戻しました', 'info');
+}
+
+// カテゴリ定義をクリップボードにコピー
+function exportCatOnly() {
+    const text = JSON.stringify(CAT, null, 2);
+    navigator.clipboard.writeText(text).then(() => {
+        toast('カテゴリ定義をクリップボードにコピーしました', 'success');
+    }).catch(() => {
+        toast('コピー失敗（ブラウザの許可が必要です）', 'error');
+    });
+}
+
+// ============================================================
+//  すべてのカテゴリセレクトを再構築
+// ============================================================
+function rebuildAllCatSelects() {
+    // STEP 2 の一括設定
+    rebuildLargeSelect(document.getElementById('bulkLarge'), '');
+    const bulkSub = document.getElementById('bulkSub');
+    bulkSub.innerHTML = '<option value="">先に大分類を選択</option>';
+    bulkSub.disabled = true;
+    // テーブル行
+    renderTable();
+}
+
+function rebuildLargeSelect(sel, current) {
+    const val = current || sel.value;
+    sel.innerHTML = '<option value="">選択してください</option>';
+    Object.entries(CAT).forEach(([k, v]) => {
+        const o = document.createElement('option');
+        o.value = k; o.textContent = `${v.icon||''} ${v.label}`;
+        if (k === val) o.selected = true;
+        sel.appendChild(o);
+    });
+}
+
+function rebuildSubSelect(sel, largeCat, current) {
+    sel.innerHTML = '';
+    if (!largeCat) {
+        sel.innerHTML = '<option value="">先に大分類を選択</option>';
+        sel.disabled = true; return;
+    }
+    sel.disabled = false;
+    sel.innerHTML = '<option value="">選択してください</option>';
+    Object.entries(CAT[largeCat]?.subcategories || {}).forEach(([k, v]) => {
+        const o = document.createElement('option');
+        o.value = k; o.textContent = v;
+        if (k === current) o.selected = true;
+        sel.appendChild(o);
+    });
+}
+
+function onBulkLargeChange() {
+    rebuildSubSelect(document.getElementById('bulkSub'), document.getElementById('bulkLarge').value, '');
+}
+
+// ============================================================
+//  素材登録 (STEP 1〜3)
+// ============================================================
+let pendingItems  = [];
+let existingItems = [];
+let tempIdSeq     = 0;
+let currentPage   = 1;
+const PAGE_SIZE   = 50;
+let searchQuery   = '';
+const checkedSet  = new Set();
+
 const dropZone  = document.getElementById('dropZone');
 const fileInput = document.getElementById('fileInput');
-
 dropZone.addEventListener('dragover',  e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
 dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
-dropZone.addEventListener('drop', e => {
-    e.preventDefault();
-    dropZone.classList.remove('drag-over');
-    addFiles(e.dataTransfer.files);
-});
+dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.remove('drag-over'); addFiles(e.dataTransfer.files); });
 fileInput.addEventListener('change', e => { addFiles(e.target.files); fileInput.value = ''; });
 
 function addFiles(fileList) {
@@ -570,83 +855,37 @@ function addFiles(fileList) {
     let added = 0, skipped = 0;
     files.forEach(f => {
         if (pendingItems.some(p => p.filename === f.name)) { skipped++; return; }
-        pendingItems.push({
-            tempId: 'tmp_' + (++tempIdSeq),
-            filename: f.name,
-            title: filenameToTitle(f.name),
-            largeCategory: '',
-            category: '',
-            tags: []
-        });
+        pendingItems.push({ tempId:'tmp_'+(++tempIdSeq), filename:f.name, title:filenameToTitle(f.name), largeCategory:'', category:'', tags:[] });
         added++;
     });
     if (skipped) toast(`${added} 件追加（${skipped} 件は重複スキップ）`, 'info');
     else toast(`${added} 件追加しました`, 'success');
-    renderTable();
-    updateCounters();
-    updateMergePreview();
+    renderTable(); updateCounters(); updateMergePreview();
 }
 
-function filenameToTitle(filename) {
-    return filename.replace(/\.[^.]+$/, '').replace(/[_-]/g, ' ');
-}
+function filenameToTitle(f) { return f.replace(/\.[^.]+$/, '').replace(/[_-]/g, ' '); }
 
 function clearPending() {
     if (!pendingItems.length) return;
     if (!confirm(`新規リストの ${pendingItems.length} 件を全てクリアしますか？`)) return;
-    pendingItems = [];
-    checkedSet.clear();
-    currentPage = 1;
-    renderTable();
-    updateCounters();
-    updateMergePreview();
+    pendingItems = []; checkedSet.clear(); currentPage = 1;
+    renderTable(); updateCounters(); updateMergePreview();
     toast('リストをクリアしました', 'info');
 }
 
 // ============================================================
 //  一括設定
 // ============================================================
-document.getElementById('bulkLarge').addEventListener('change', function() {
-    const sub = document.getElementById('bulkSub');
-    rebuildSubSelect(sub, this.value, '');
-});
-
-function rebuildSubSelect(sel, largeCat, current) {
-    sel.innerHTML = '';
-    if (!largeCat) {
-        sel.innerHTML = '<option value="">先に大分類を選択</option>';
-        sel.disabled = true;
-        return;
-    }
-    sel.disabled = false;
-    sel.innerHTML = '<option value="">選択してください</option>';
-    Object.entries(CAT[largeCat].subs).forEach(([k, v]) => {
-        const o = document.createElement('option');
-        o.value = k; o.textContent = v;
-        if (k === current) o.selected = true;
-        sel.appendChild(o);
-    });
-}
-
 function applyBulk(mode) {
     const large = document.getElementById('bulkLarge').value;
     const sub   = document.getElementById('bulkSub').value;
     const tags  = parseTags(document.getElementById('bulkTags').value);
     if (!large) { toast('大分類を選択してください', 'error'); return; }
     if (!sub)   { toast('中分類を選択してください', 'error'); return; }
-
-    const targets = mode === 'selected'
-        ? pendingItems.filter(p => checkedSet.has(p.tempId))
-        : pendingItems;
+    const targets = mode === 'selected' ? pendingItems.filter(p => checkedSet.has(p.tempId)) : pendingItems;
     if (!targets.length) { toast(mode === 'selected' ? 'チェックされた行がありません' : '素材がありません', 'error'); return; }
-
-    targets.forEach(p => {
-        p.largeCategory = large;
-        p.category      = sub;
-        if (tags.length) p.tags = tags;
-    });
-    renderTable();
-    updateMergePreview();
+    targets.forEach(p => { p.largeCategory = large; p.category = sub; if (tags.length) p.tags = tags; });
+    renderTable(); updateMergePreview();
     toast(`${targets.length} 件に適用しました`, 'success');
 }
 
@@ -660,27 +899,20 @@ function renderTable() {
     document.getElementById('addedCount').textContent = pendingItems.length;
 
     const q = searchQuery.toLowerCase();
-    const filtered = q
-        ? pendingItems.filter(p => p.filename.toLowerCase().includes(q) || p.title.toLowerCase().includes(q))
-        : pendingItems;
+    const filtered = q ? pendingItems.filter(p => p.filename.toLowerCase().includes(q) || p.title.toLowerCase().includes(q)) : pendingItems;
 
     if (!filtered.length) {
-        table.style.display = 'none';
-        empty.style.display = 'block';
+        table.style.display = 'none'; empty.style.display = 'block';
         document.getElementById('pagination').innerHTML = '';
-        updateSelCount();
-        return;
+        updateSelCount(); return;
     }
-    table.style.display = 'table';
-    empty.style.display = 'none';
+    table.style.display = 'table'; empty.style.display = 'none';
 
     const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
     if (currentPage > totalPages) currentPage = totalPages;
     const start = (currentPage - 1) * PAGE_SIZE;
-    const slice = filtered.slice(start, start + PAGE_SIZE);
-
     tbody.innerHTML = '';
-    slice.forEach((item, i) => tbody.appendChild(createRow(item, start + i + 1)));
+    filtered.slice(start, start + PAGE_SIZE).forEach((item, i) => tbody.appendChild(createRow(item, start + i + 1)));
     renderPagination(totalPages, filtered.length);
     updateSelCount();
 }
@@ -690,360 +922,201 @@ function createRow(item, idx) {
     tr.dataset.id = item.tempId;
     if (checkedSet.has(item.tempId)) tr.classList.add('selected');
 
-    // チェックボックス
-    const tdCheck = document.createElement('td');
-    tdCheck.className = 'col-check';
-    const cb = document.createElement('input');
-    cb.type = 'checkbox';
-    cb.dataset.tid = item.tempId;
-    cb.checked = checkedSet.has(item.tempId);
+    const tdCheck = mkTd('col-check');
+    const cb = document.createElement('input'); cb.type='checkbox'; cb.dataset.tid=item.tempId; cb.checked=checkedSet.has(item.tempId);
     cb.addEventListener('change', function() { onCheckChange(item.tempId, this.checked); });
     tdCheck.appendChild(cb);
 
-    // No
-    const tdNo = document.createElement('td');
-    tdNo.className = 'col-no';
-    tdNo.textContent = idx;
+    const tdNo = mkTd('col-no'); tdNo.textContent = idx;
 
-    // ファイル名
-    const tdFile = document.createElement('td');
-    tdFile.className = 'col-file';
-    tdFile.title = item.filename;
-    tdFile.textContent = item.filename;
+    const tdFile = mkTd('col-file'); tdFile.title = item.filename; tdFile.textContent = item.filename;
 
-    // タイトル
-    const tdTitle = document.createElement('td');
-    const inpTitle = document.createElement('input');
-    inpTitle.type = 'text';
-    inpTitle.className = 'tbl-input';
-    inpTitle.value = item.title;
-    inpTitle.placeholder = 'タイトルを入力';
-    inpTitle.addEventListener('change', function() { updateField(item.tempId, 'title', this.value); });
+    const tdTitle = mkTd('');
+    const inpTitle = document.createElement('input'); inpTitle.type='text'; inpTitle.className='tbl-input'; inpTitle.value=item.title; inpTitle.placeholder='タイトルを入力';
+    inpTitle.addEventListener('change', function() { updateField(item.tempId,'title',this.value); });
     tdTitle.appendChild(inpTitle);
 
-    // 大分類
-    const tdLarge = document.createElement('td');
-    tdLarge.id = 'lc-' + item.tempId;
-    tdLarge.appendChild(buildLargeSelect(item.largeCategory, item.tempId));
+    const tdLarge = mkTd(''); tdLarge.id='lc-'+item.tempId; tdLarge.appendChild(buildLargeSelectEl(item.largeCategory, item.tempId));
+    const tdSub   = mkTd(''); tdSub.id='sc-'+item.tempId;   tdSub.appendChild(buildSubSelectEl(item.largeCategory, item.category, item.tempId));
 
-    // 中分類
-    const tdSub = document.createElement('td');
-    tdSub.id = 'sc-' + item.tempId;
-    tdSub.appendChild(buildSubSelectEl(item.largeCategory, item.category, item.tempId));
-
-    // タグ
-    const tdTags = document.createElement('td');
-    const inpTags = document.createElement('input');
-    inpTags.type = 'text';
-    inpTags.className = 'tbl-input';
-    inpTags.value = item.tags.join(', ');
-    inpTags.placeholder = 'タグ1, タグ2';
-    inpTags.addEventListener('change', function() { updateField(item.tempId, 'tags', this.value); });
+    const tdTags = mkTd('');
+    const inpTags = document.createElement('input'); inpTags.type='text'; inpTags.className='tbl-input'; inpTags.value=item.tags.join(', '); inpTags.placeholder='タグ1, タグ2';
+    inpTags.addEventListener('change', function() { updateField(item.tempId,'tags',this.value); });
     tdTags.appendChild(inpTags);
 
-    // 削除
-    const tdAct = document.createElement('td');
-    const rmBtn = document.createElement('button');
-    rmBtn.className = 'remove-btn';
-    rmBtn.title = '削除';
-    rmBtn.textContent = '✕';
+    const tdAct = mkTd('');
+    const rmBtn = document.createElement('button'); rmBtn.className='remove-btn'; rmBtn.textContent='✕'; rmBtn.title='削除';
     rmBtn.addEventListener('click', () => removeItem(item.tempId));
     tdAct.appendChild(rmBtn);
 
-    [tdCheck, tdNo, tdFile, tdTitle, tdLarge, tdSub, tdTags, tdAct].forEach(td => tr.appendChild(td));
+    [tdCheck,tdNo,tdFile,tdTitle,tdLarge,tdSub,tdTags,tdAct].forEach(td => tr.appendChild(td));
     return tr;
 }
 
-function buildLargeSelect(current, tid) {
-    const sel = document.createElement('select');
-    sel.className = 'tbl-select';
-    const blank = document.createElement('option');
-    blank.value = ''; blank.textContent = '未設定';
-    sel.appendChild(blank);
-    Object.entries(CAT).forEach(([k, v]) => {
-        const o = document.createElement('option');
-        o.value = k; o.textContent = v.icon + ' ' + v.label;
-        if (k === current) o.selected = true;
-        sel.appendChild(o);
+function mkTd(cls) { const td=document.createElement('td'); if(cls) td.className=cls; return td; }
+
+function buildLargeSelectEl(current, tid) {
+    const sel = document.createElement('select'); sel.className='tbl-select';
+    const blank = document.createElement('option'); blank.value=''; blank.textContent='未設定'; sel.appendChild(blank);
+    Object.entries(CAT).forEach(([k,v]) => {
+        const o=document.createElement('option'); o.value=k; o.textContent=`${v.icon||''} ${v.label}`; if(k===current) o.selected=true; sel.appendChild(o);
     });
     sel.addEventListener('change', function() {
-        updateField(tid, 'largeCategory', this.value);
-        const item = pendingItems.find(p => p.tempId === tid);
-        if (item) item.category = '';
-        const cell = document.getElementById('sc-' + tid);
-        if (cell) { cell.innerHTML = ''; cell.appendChild(buildSubSelectEl(this.value, '', tid)); }
+        updateField(tid,'largeCategory',this.value);
+        const item = pendingItems.find(p=>p.tempId===tid); if(item) item.category='';
+        const cell = document.getElementById('sc-'+tid); if(cell){cell.innerHTML=''; cell.appendChild(buildSubSelectEl(this.value,'',tid));}
     });
     return sel;
 }
 
 function buildSubSelectEl(largeCat, current, tid) {
-    const sel = document.createElement('select');
-    sel.className = 'tbl-select';
-    if (!largeCat) {
-        const o = document.createElement('option'); o.value = ''; o.textContent = '-';
-        sel.appendChild(o); sel.disabled = true;
-    } else {
-        sel.disabled = false;
-        const blank = document.createElement('option'); blank.value = ''; blank.textContent = '未設定';
-        sel.appendChild(blank);
-        Object.entries(CAT[largeCat]?.subs || {}).forEach(([k, v]) => {
-            const o = document.createElement('option');
-            o.value = k; o.textContent = v;
-            if (k === current) o.selected = true;
-            sel.appendChild(o);
-        });
+    const sel = document.createElement('select'); sel.className='tbl-select';
+    if(!largeCat){const o=document.createElement('option');o.value='';o.textContent='-';sel.appendChild(o);sel.disabled=true;}
+    else{
+        sel.disabled=false; const blank=document.createElement('option');blank.value='';blank.textContent='未設定';sel.appendChild(blank);
+        Object.entries(CAT[largeCat]?.subcategories||{}).forEach(([k,v])=>{const o=document.createElement('option');o.value=k;o.textContent=v;if(k===current)o.selected=true;sel.appendChild(o);});
     }
-    sel.addEventListener('change', function() { updateField(tid, 'category', this.value); });
+    sel.addEventListener('change', function(){updateField(tid,'category',this.value);});
     return sel;
 }
 
 function updateField(tid, field, value) {
-    const item = pendingItems.find(p => p.tempId === tid);
-    if (!item) return;
-    item[field] = field === 'tags' ? parseTags(value) : value;
+    const item = pendingItems.find(p=>p.tempId===tid); if(!item) return;
+    item[field] = field==='tags' ? parseTags(value) : value;
     updateMergePreview();
 }
 
-function removeItem(tid) {
-    pendingItems = pendingItems.filter(p => p.tempId !== tid);
-    checkedSet.delete(tid);
-    renderTable();
-    updateCounters();
-    updateMergePreview();
-}
+function removeItem(tid) { pendingItems=pendingItems.filter(p=>p.tempId!==tid); checkedSet.delete(tid); renderTable(); updateCounters(); updateMergePreview(); }
 
 // ============================================================
 //  ページネーション
 // ============================================================
 function renderPagination(totalPages, total) {
-    const nav = document.getElementById('pagination');
-    nav.innerHTML = '';
-    if (totalPages <= 1) return;
-
-    const prev = mkPageBtn('←', currentPage <= 1, () => { currentPage--; renderTable(); });
-    const next = mkPageBtn('→', currentPage >= totalPages, () => { currentPage++; renderTable(); });
-
-    const pages = document.createElement('div');
-    pages.style.cssText = 'display:flex;gap:.4rem;';
-    const half = 2, end = Math.min(totalPages, Math.max(1, currentPage - half) + 4);
-    const start = Math.max(1, end - 4);
-    for (let p = start; p <= end; p++) {
-        const pg = p;
-        const btn = mkPageBtn(p, false, () => { currentPage = pg; renderTable(); });
-        if (p === currentPage) btn.classList.add('active');
-        pages.appendChild(btn);
-    }
-
-    const info = document.createElement('span');
-    info.className = 'page-info';
-    info.textContent = `${total} 件 / ${currentPage}/${totalPages} ページ`;
-
-    nav.append(prev, pages, next, info);
+    const nav=document.getElementById('pagination'); nav.innerHTML='';
+    if(totalPages<=1) return;
+    const prev=mkPBtn('←',currentPage<=1,()=>{currentPage--;renderTable();});
+    const next=mkPBtn('→',currentPage>=totalPages,()=>{currentPage++;renderTable();});
+    const pages=document.createElement('div'); pages.style.cssText='display:flex;gap:.4rem;';
+    const end=Math.min(totalPages,Math.max(1,currentPage-2)+4), start=Math.max(1,end-4);
+    for(let p=start;p<=end;p++){const pg=p;const b=mkPBtn(p,false,()=>{currentPage=pg;renderTable();});if(p===currentPage)b.classList.add('active');pages.appendChild(b);}
+    const info=document.createElement('span');info.className='page-info';info.textContent=`${total}件 / ${currentPage}/${totalPages}P`;
+    nav.append(prev,pages,next,info);
 }
-
-function mkPageBtn(label, disabled, onclick) {
-    const btn = document.createElement('button');
-    btn.className = 'page-btn';
-    btn.textContent = label;
-    btn.disabled = disabled;
-    btn.addEventListener('click', onclick);
-    return btn;
-}
+function mkPBtn(label,disabled,onclick){const b=document.createElement('button');b.className='page-btn';b.textContent=label;b.disabled=disabled;b.addEventListener('click',onclick);return b;}
 
 // ============================================================
-//  チェックボックス管理
+//  チェックボックス
 // ============================================================
 function onCheckChange(tid, checked) {
-    checked ? checkedSet.add(tid) : checkedSet.delete(tid);
-    const row = document.querySelector(`tr[data-id="${tid}"]`);
-    if (row) row.classList.toggle('selected', checked);
+    checked?checkedSet.add(tid):checkedSet.delete(tid);
+    const row=document.querySelector(`tr[data-id="${tid}"]`); if(row) row.classList.toggle('selected',checked);
     updateSelCount();
 }
-
 function toggleCheckAll(masterCb) {
-    document.querySelectorAll('#tableBody input[type=checkbox]').forEach(cb => {
-        const tid = cb.dataset.tid;
-        cb.checked = masterCb.checked;
-        masterCb.checked ? checkedSet.add(tid) : checkedSet.delete(tid);
-        const row = document.querySelector(`tr[data-id="${tid}"]`);
-        if (row) row.classList.toggle('selected', masterCb.checked);
-    });
-    updateSelCount();
+    document.querySelectorAll('#tableBody input[type=checkbox]').forEach(cb=>{
+        const tid=cb.dataset.tid; cb.checked=masterCb.checked;
+        masterCb.checked?checkedSet.add(tid):checkedSet.delete(tid);
+        const row=document.querySelector(`tr[data-id="${tid}"]`); if(row) row.classList.toggle('selected',masterCb.checked);
+    }); updateSelCount();
 }
-
-function selectAll(flag) {
-    flag ? pendingItems.forEach(p => checkedSet.add(p.tempId)) : checkedSet.clear();
-    renderTable();
+function selectAll(flag){ flag?pendingItems.forEach(p=>checkedSet.add(p.tempId)):checkedSet.clear(); renderTable(); }
+function updateSelCount(){const cnt=checkedSet.size; document.getElementById('selCount').textContent=cnt?`${cnt}件選択中`:''; document.getElementById('deleteSelBtn').disabled=cnt===0;}
+function deleteSelected(){
+    if(!checkedSet.size) return;
+    if(!confirm(`選択中の${checkedSet.size}件を削除しますか？`)) return;
+    pendingItems=pendingItems.filter(p=>!checkedSet.has(p.tempId)); checkedSet.clear(); currentPage=1;
+    renderTable(); updateCounters(); updateMergePreview(); toast('削除しました','success');
 }
-
-function updateSelCount() {
-    const cnt = checkedSet.size;
-    document.getElementById('selCount').textContent = cnt ? `${cnt} 件選択中` : '';
-    document.getElementById('deleteSelBtn').disabled = cnt === 0;
-}
-
-function deleteSelected() {
-    if (!checkedSet.size) return;
-    if (!confirm(`選択中の ${checkedSet.size} 件を削除しますか？`)) return;
-    pendingItems = pendingItems.filter(p => !checkedSet.has(p.tempId));
-    checkedSet.clear();
-    currentPage = 1;
-    renderTable();
-    updateCounters();
-    updateMergePreview();
-    toast('削除しました', 'success');
-}
-
-// 検索
-document.getElementById('tableSearch').addEventListener('input', e => {
-    searchQuery = e.target.value.trim();
-    currentPage = 1;
-    renderTable();
-});
+document.getElementById('tableSearch').addEventListener('input',e=>{searchQuery=e.target.value.trim();currentPage=1;renderTable();});
 
 // ============================================================
 //  既存 data.json 読み込み
 // ============================================================
-function loadExistingJson() {
-    const file = document.getElementById('existingJsonFile').files[0];
-    if (!file) { toast('ファイルを選択してください', 'error'); return; }
-    const reader = new FileReader();
-    reader.onload = e => {
-        try {
-            const json = JSON.parse(e.target.result);
-            existingItems   = Array.isArray(json.materials) ? json.materials : [];
-            existingCatDefs = json.metadata?.largeCategoryDefs || {};
-            document.getElementById('existingInfo').textContent =
-                `✅ ${existingItems.length} 件 読み込み完了（${file.name}）`;
-            updateCounters();
-            updateMergePreview();
-            toast(`既存データ ${existingItems.length} 件を読み込みました`, 'success');
-        } catch(err) { toast('JSONの形式エラー: ' + err.message, 'error'); }
+function loadExistingJson(){
+    const file=document.getElementById('existingJsonFile').files[0]; if(!file){toast('ファイルを選択してください','error');return;}
+    const reader=new FileReader();
+    reader.onload=e=>{
+        try{
+            const json=JSON.parse(e.target.result);
+            existingItems=Array.isArray(json.materials)?json.materials:[];
+            // カテゴリ定義もインポート（確認あり）
+            if(json.metadata?.largeCategoryDefs && Object.keys(json.metadata.largeCategoryDefs).length){
+                if(confirm('data.json にカテゴリ定義が含まれています。\n現在のカテゴリ設定をこのファイルの定義で上書きしますか？')){
+                    CAT=JSON.parse(JSON.stringify(json.metadata.largeCategoryDefs));
+                    saveCatDefs(); renderCatList(); rebuildAllCatSelects();
+                    toast('カテゴリ定義も更新しました','info');
+                }
+            }
+            document.getElementById('existingInfo').textContent=`✅ ${existingItems.length} 件 読み込み完了（${file.name}）`;
+            updateCounters(); updateMergePreview();
+            toast(`既存データ ${existingItems.length} 件を読み込みました`,'success');
+        }catch(err){toast('JSONの形式エラー: '+err.message,'error');}
     };
     reader.readAsText(file);
 }
-
-function clearExisting() {
-    existingItems = []; existingCatDefs = {};
-    document.getElementById('existingInfo').textContent = '';
-    document.getElementById('existingJsonFile').value = '';
-    updateCounters(); updateMergePreview();
-    toast('既存データをクリアしました', 'info');
-}
+function clearExisting(){existingItems=[];document.getElementById('existingInfo').textContent='';document.getElementById('existingJsonFile').value='';updateCounters();updateMergePreview();toast('既存データをクリアしました','info');}
 
 // ============================================================
 //  マージプレビュー
 // ============================================================
-function updateMergePreview() {
-    const eCount = existingItems.length;
-    const nCount = pendingItems.length;
-    const dupItems = pendingItems.filter(p =>
-        p.largeCategory &&
-        existingItems.some(e => e.filename === p.filename && e.largeCategory === p.largeCategory)
-    );
-    const dupCount = dupItems.length;
-    const total = eCount + nCount - dupCount;
-
-    document.getElementById('mergeExisting').textContent = eCount;
-    document.getElementById('mergeNew').textContent      = nCount;
-    document.getElementById('mergeTotal').textContent    = total;
-
-    const warn = document.getElementById('mergeWarn');
-    if (dupCount) {
-        warn.textContent = `⚠ ${dupCount} 件は重複のため上書き更新されます`;
-        warn.style.display = 'block';
-        document.getElementById('dupBadge').style.display = 'inline-block';
-        document.getElementById('dupCount').textContent = dupCount;
-    } else {
-        warn.style.display = 'none';
-        document.getElementById('dupBadge').style.display = 'none';
-    }
+function updateMergePreview(){
+    const eCount=existingItems.length, nCount=pendingItems.length;
+    const dupCount=pendingItems.filter(p=>p.largeCategory&&existingItems.some(e=>e.filename===p.filename&&e.largeCategory===p.largeCategory)).length;
+    document.getElementById('mergeExisting').textContent=eCount;
+    document.getElementById('mergeNew').textContent=nCount;
+    document.getElementById('mergeTotal').textContent=eCount+nCount-dupCount;
+    const warn=document.getElementById('mergeWarn');
+    if(dupCount){warn.textContent=`⚠ ${dupCount}件は重複のため上書き更新されます`;warn.style.display='block';document.getElementById('dupBadge').style.display='inline-block';document.getElementById('dupCount').textContent=dupCount;}
+    else{warn.style.display='none';document.getElementById('dupBadge').style.display='none';}
 }
-
-function updateCounters() {
-    document.getElementById('pendingCount').textContent  = pendingItems.length;
-    document.getElementById('existingCount').textContent = existingItems.length;
-    document.getElementById('addedCount').textContent    = pendingItems.length;
-}
+function updateCounters(){document.getElementById('pendingCount').textContent=pendingItems.length;document.getElementById('existingCount').textContent=existingItems.length;document.getElementById('addedCount').textContent=pendingItems.length;}
 
 // ============================================================
 //  エクスポート
 // ============================================================
-function buildMerged() {
-    const merged = [...existingItems];
-    let maxId = merged.length ? Math.max(...merged.map(m => m.id || 0)) : 0;
-
-    pendingItems.forEach(p => {
-        const dupIdx = merged.findIndex(e =>
-            e.filename === p.filename && e.largeCategory === p.largeCategory
-        );
-        const entry = {
-            id:            dupIdx >= 0 ? merged[dupIdx].id : ++maxId,
-            title:         p.title || p.filename.replace(/\.[^.]+$/, ''),
-            description:   '',
-            largeCategory: p.largeCategory,
-            category:      p.category,
-            filename:      p.filename,
-            tags:          p.tags,
-            createdDate:   new Date().toISOString().split('T')[0]
-        };
-        if (dupIdx >= 0) merged[dupIdx] = entry;
-        else merged.push(entry);
+function buildMerged(){
+    const merged=[...existingItems]; let maxId=merged.length?Math.max(...merged.map(m=>m.id||0)):0;
+    pendingItems.forEach(p=>{
+        const dupIdx=merged.findIndex(e=>e.filename===p.filename&&e.largeCategory===p.largeCategory);
+        const entry={id:dupIdx>=0?merged[dupIdx].id:++maxId,title:p.title||p.filename.replace(/\.[^.]+$/,''),description:'',largeCategory:p.largeCategory,category:p.category,filename:p.filename,tags:p.tags,createdDate:new Date().toISOString().split('T')[0]};
+        if(dupIdx>=0) merged[dupIdx]=entry; else merged.push(entry);
     });
-    merged.forEach((m, i) => { m.id = i + 1; });
-
+    merged.forEach((m,i)=>{m.id=i+1;});
     return {
-        materials: merged,
-        metadata: {
-            version:          '2.0',
-            totalMaterials:   merged.length,
-            lastUpdated:      new Date().toISOString().split('T')[0],
-            largeCategoryDefs: Object.keys(existingCatDefs).length ? existingCatDefs : {
-                nature:      { label:'自然',  icon:'🌿', subcategories:{ plants:'植物', sky:'空・天気', water:'水・海・川', animals:'動物' } },
-                food:        { label:'食',    icon:'🍽️', subcategories:{ fruits:'果物', drinks:'飲み物', meals:'食事・料理', sweets:'スイーツ' } },
-                objects:     { label:'物',    icon:'📦', subcategories:{ gadgets:'ガジェット', furniture:'家具・インテリア', stationery:'文具・雑貨', tools:'道具・器具' } },
-                backgrounds: { label:'背景',  icon:'🖼️', subcategories:{ solid:'単色', gradient:'グラデーション', pattern:'パターン', texture:'テクスチャ' } }
-            }
+        materials:merged,
+        metadata:{
+            version:'2.0', totalMaterials:merged.length,
+            lastUpdated:new Date().toISOString().split('T')[0],
+            largeCategoryDefs: JSON.parse(JSON.stringify(CAT))
         }
     };
 }
 
-function exportJson() {
-    const invalid = pendingItems.filter(p => !p.largeCategory || !p.category);
-    if (invalid.length && !confirm(`⚠ 大分類・中分類が未設定の素材が ${invalid.length} 件あります。このままエクスポートしますか？`)) return;
-    const json = buildMerged();
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(new Blob([JSON.stringify(json, null, 2)], { type:'application/json' }));
-    a.download = 'data.json';
-    a.click();
-    URL.revokeObjectURL(a.href);
-    toast(`✅ data.json をダウンロードしました（合計 ${json.materials.length} 件）`, 'success');
+function exportJson(){
+    const invalid=pendingItems.filter(p=>!p.largeCategory||!p.category);
+    if(invalid.length&&!confirm(`⚠ 大分類・中分類が未設定の素材が ${invalid.length} 件あります。このままエクスポートしますか？`)) return;
+    const json=buildMerged();
+    const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([JSON.stringify(json,null,2)],{type:'application/json'})); a.download='data.json'; a.click(); URL.revokeObjectURL(a.href);
+    toast(`✅ data.json をダウンロードしました（合計 ${json.materials.length} 件）`,'success');
 }
 
-function togglePreview() {
-    const el = document.getElementById('jsonPreview');
-    if (el.style.display === 'none' || !el.style.display) {
-        el.textContent = JSON.stringify(buildMerged(), null, 2);
-        el.style.display = 'block';
-    } else {
-        el.style.display = 'none';
-    }
+function togglePreview(){
+    const el=document.getElementById('jsonPreview');
+    if(el.style.display==='none'||!el.style.display){el.textContent=JSON.stringify(buildMerged(),null,2);el.style.display='block';}
+    else el.style.display='none';
 }
 
 // ============================================================
 //  ユーティリティ
 // ============================================================
-function parseTags(str) { return str.split(',').map(t => t.trim()).filter(Boolean); }
+function parseTags(str){return str.split(',').map(t=>t.trim()).filter(Boolean);}
+function toast(msg,type='success'){const el=document.getElementById('toast');el.textContent=msg;el.className=`toast ${type} show`;clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('show'),3200);}
 
-function toast(msg, type = 'success') {
-    const el = document.getElementById('toast');
-    el.textContent = msg;
-    el.className = `toast ${type} show`;
-    clearTimeout(el._t);
-    el._t = setTimeout(() => el.classList.remove('show'), 3200);
-}
-
-// 初期化
+// ============================================================
+//  初期化
+// ============================================================
+renderCatList();
+rebuildAllCatSelects();
 renderTable();
 updateCounters();
 updateMergePreview();
