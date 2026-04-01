@@ -173,6 +173,15 @@
         /* STEP 2 BULK */
         .bulk-grid { display:grid; grid-template-columns:1fr 1fr 1fr auto; gap:1rem; align-items:flex-end; }
 
+        /* グループパネル */
+        .group-panel { border:1.5px solid var(--border); border-radius:8px; overflow:hidden; margin-bottom:1rem; }
+        .group-panel-header { background:#f7f9fc; padding:.7rem 1.1rem; display:flex; align-items:center; gap:.8rem; flex-wrap:wrap; }
+        .group-folder-name { font-family:monospace; font-size:.88rem; font-weight:700; background:var(--navy2); color:#fff; padding:.2rem .7rem; border-radius:4px; }
+        .group-count { font-size:.82rem; color:var(--muted); }
+        .group-cat-ok { font-size:.78rem; color:var(--green-dk); background:#e8f9ef; padding:.15rem .6rem; border-radius:10px; font-weight:600; }
+        .group-cat-ng { font-size:.78rem; color:var(--orange); background:#fef3e2; padding:.15rem .6rem; border-radius:10px; font-weight:600; }
+        .group-panel-body { padding:.9rem 1.1rem; display:grid; grid-template-columns:1fr 1fr 1fr auto; gap:.8rem; align-items:flex-end; }
+
         /* TABLE */
         .table-toolbar { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:.8rem; margin-bottom:1rem; }
         .toolbar-left  { display:flex; gap:.6rem; align-items:center; flex-wrap:wrap; }
@@ -331,21 +340,44 @@
     <div class="step-card">
         <div class="step-header" onclick="toggleStep('s1')">
             <div class="step-num">1</div>
-            <div class="step-title">ファイルを追加</div>
-            <div class="step-subtitle">WebPファイルをドロップするか選択</div>
+            <div class="step-title">フォルダをドロップ</div>
+            <div class="step-subtitle">カテゴリ別フォルダをそのまま投入 → 大分類を自動判定</div>
             <div class="step-toggle open" id="tog-s1">▼</div>
         </div>
         <div class="step-body" id="s1">
-            <div class="drop-zone" id="dropZone">
-                <input type="file" id="fileInput" accept=".webp" multiple>
-                <div class="drop-icon">📁</div>
-                <h3>WebPファイルをここにドロップ</h3>
-                <p>または クリックしてファイルを選択</p>
-                <div class="hint">複数ファイル対応 / .webp のみ受け付けます</div>
+            <div class="alert alert-info" style="margin-bottom:1rem;">
+                📂 <strong>フォルダをそのままドロップ</strong>すると、フォルダ名を大分類として自動認識します。<br>
+                例：<code>nature/</code> フォルダ → 大分類「nature」に自動分類 / <code>food/</code> → 「food」
             </div>
+
+            <!-- ドロップゾーン（2種類） -->
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
+
+                <!-- フォルダドロップ -->
+                <div class="drop-zone" id="folderDropZone">
+                    <input type="file" id="folderInput" webkitdirectory multiple accept=".webp">
+                    <div class="drop-icon">📂</div>
+                    <h3>フォルダをドロップ（推奨）</h3>
+                    <p>フォルダ名 = 大分類として自動設定</p>
+                    <div class="hint">例: nature/ food/ objects/</div>
+                </div>
+
+                <!-- ファイル個別ドロップ（従来） -->
+                <div class="drop-zone" id="fileDropZone">
+                    <input type="file" id="fileInput" accept=".webp" multiple>
+                    <div class="drop-icon">🖼️</div>
+                    <h3>ファイルを個別ドロップ</h3>
+                    <p>大分類は後から手動設定</p>
+                    <div class="hint">複数ファイル同時 OK</div>
+                </div>
+            </div>
+
             <div class="file-counter">
                 <span class="file-counter-text"><strong id="addedCount">0</strong> 件 追加済み</span>
-                <button class="btn btn-secondary btn-sm" onclick="clearPending()">🗑 リストをクリア</button>
+                <div style="display:flex;gap:.5rem;">
+                    <span id="groupSummary" style="font-size:.82rem;color:var(--muted);"></span>
+                    <button class="btn btn-secondary btn-sm" onclick="clearPending()">🗑 リストをクリア</button>
+                </div>
             </div>
         </div>
     </div>
@@ -354,36 +386,44 @@
     <div class="step-card">
         <div class="step-header" onclick="toggleStep('s2')">
             <div class="step-num">2</div>
-            <div class="step-title">一括設定</div>
-            <div class="step-subtitle">大分類・中分類・タグをまとめて適用</div>
+            <div class="step-title">中分類・タグを設定</div>
+            <div class="step-subtitle">フォルダグループ別に一括設定 → 確認・修正</div>
             <div class="step-toggle open" id="tog-s2">▼</div>
         </div>
         <div class="step-body" id="s2">
-            <div class="alert alert-info">
-                💡 設定後「<strong>選択中に適用</strong>」または「<strong>全件に適用</strong>」を押してください。個別の修正は下の表から行えます。
+            <div class="alert alert-info" style="margin-bottom:1rem;">
+                💡 大分類はフォルダ名から<strong>自動設定済み</strong>です。中分類とタグをグループごとに設定してください。
             </div>
-            <div class="bulk-grid">
-                <div class="form-group">
-                    <label>大分類（フォルダ）</label>
-                    <select id="bulkLarge" onchange="onBulkLargeChange()">
-                        <option value="">選択してください</option>
-                    </select>
+
+            <!-- グループ別設定パネル（JS生成） -->
+            <div id="groupPanels"></div>
+
+            <!-- 全件一括設定（フォールバック） -->
+            <details style="margin-top:1rem;">
+                <summary style="cursor:pointer;font-size:.85rem;color:var(--muted);padding:.4rem 0;">▶ 全件まとめて設定する</summary>
+                <div class="bulk-grid" style="margin-top:.8rem;">
+                    <div class="form-group">
+                        <label>大分類（フォルダ）</label>
+                        <select id="bulkLarge" onchange="onBulkLargeChange()">
+                            <option value="">選択してください</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>中分類（カテゴリ）</label>
+                        <select id="bulkSub" disabled>
+                            <option value="">先に大分類を選択</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>共通タグ（カンマ区切り）</label>
+                        <input type="text" id="bulkTags" placeholder="例：夏, 爽やか">
+                    </div>
+                    <div style="display:flex;flex-direction:column;justify-content:flex-end;gap:.5rem;">
+                        <button class="btn btn-primary" onclick="applyBulk('selected')">✓ 選択中に適用</button>
+                        <button class="btn btn-secondary" onclick="applyBulk('all')">全件に適用</button>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>中分類（カテゴリ）</label>
-                    <select id="bulkSub" disabled>
-                        <option value="">先に大分類を選択</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>共通タグ（カンマ区切り）</label>
-                    <input type="text" id="bulkTags" placeholder="例：夏, 爽やか, ドリンク">
-                </div>
-                <div style="display:flex;flex-direction:column;justify-content:flex-end;gap:.5rem;">
-                    <button class="btn btn-primary" onclick="applyBulk('selected')">✓ 選択中に適用</button>
-                    <button class="btn btn-secondary" onclick="applyBulk('all')">全件に適用</button>
-                </div>
-            </div>
+            </details>
         </div>
     </div>
 
@@ -842,25 +882,225 @@ const PAGE_SIZE   = 50;
 let searchQuery   = '';
 const checkedSet  = new Set();
 
-const dropZone  = document.getElementById('dropZone');
-const fileInput = document.getElementById('fileInput');
-dropZone.addEventListener('dragover',  e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
-dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
-dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.remove('drag-over'); addFiles(e.dataTransfer.files); });
+const folderDropZone = document.getElementById('folderDropZone');
+const fileDropZone   = document.getElementById('fileDropZone');
+const folderInput    = document.getElementById('folderInput');
+const fileInput      = document.getElementById('fileInput');
+
+// フォルダドロップゾーン
+folderDropZone.addEventListener('dragover',  e => { e.preventDefault(); folderDropZone.classList.add('drag-over'); });
+folderDropZone.addEventListener('dragleave', () => folderDropZone.classList.remove('drag-over'));
+folderDropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    folderDropZone.classList.remove('drag-over');
+    addFilesWithPath(e.dataTransfer.files);
+});
+folderInput.addEventListener('change', e => { addFilesWithPath(e.target.files); folderInput.value = ''; });
+
+// ファイルドロップゾーン（個別）
+fileDropZone.addEventListener('dragover',  e => { e.preventDefault(); fileDropZone.classList.add('drag-over'); });
+fileDropZone.addEventListener('dragleave', () => fileDropZone.classList.remove('drag-over'));
+fileDropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    fileDropZone.classList.remove('drag-over');
+    addFiles(e.dataTransfer.files);
+});
 fileInput.addEventListener('change', e => { addFiles(e.target.files); fileInput.value = ''; });
 
+// フォルダドロップ → パス情報からカテゴリを自動判定
+function addFilesWithPath(fileList) {
+    const files = Array.from(fileList).filter(f => f.name.toLowerCase().endsWith('.webp'));
+    if (!files.length) { toast('WebPファイルが見つかりません', 'error'); return; }
+
+    let added = 0, skipped = 0;
+    files.forEach(f => {
+        if (pendingItems.some(p => p.filename === f.name && p._sourcePath === (f.webkitRelativePath || f.name))) {
+            skipped++; return;
+        }
+
+        // フォルダ名を大分類として抽出
+        // webkitRelativePath = "nature/sakura001.webp" → "nature"
+        const relPath = f.webkitRelativePath || f.name;
+        const parts   = relPath.split('/');
+        const detectedLarge = parts.length >= 2 ? parts[parts.length - 2].toLowerCase() : '';
+
+        pendingItems.push({
+            tempId:        'tmp_' + (++tempIdSeq),
+            filename:      f.name,
+            title:         filenameToTitle(f.name),
+            largeCategory: detectedLarge,   // フォルダ名から自動設定
+            category:      '',
+            tags:          [],
+            _sourcePath:   relPath          // 重複チェック用（内部用）
+        });
+        added++;
+    });
+
+    if (skipped) toast(`${added} 件追加（${skipped} 件は重複スキップ）`, 'info');
+    else toast(`${added} 件追加しました！大分類を自動設定しました`, 'success');
+
+    renderTable();
+    renderGroupPanels();
+    updateCounters();
+    updateMergePreview();
+}
+
+// 個別ファイルドロップ（パス情報なし）
 function addFiles(fileList) {
     const files = Array.from(fileList).filter(f => f.name.toLowerCase().endsWith('.webp'));
     if (!files.length) { toast('WebPファイルが見つかりません', 'error'); return; }
     let added = 0, skipped = 0;
     files.forEach(f => {
         if (pendingItems.some(p => p.filename === f.name)) { skipped++; return; }
-        pendingItems.push({ tempId:'tmp_'+(++tempIdSeq), filename:f.name, title:filenameToTitle(f.name), largeCategory:'', category:'', tags:[] });
+        pendingItems.push({ tempId:'tmp_'+(++tempIdSeq), filename:f.name, title:filenameToTitle(f.name), largeCategory:'', category:'', tags:[], _sourcePath:f.name });
         added++;
     });
     if (skipped) toast(`${added} 件追加（${skipped} 件は重複スキップ）`, 'info');
     else toast(`${added} 件追加しました`, 'success');
-    renderTable(); updateCounters(); updateMergePreview();
+    renderTable();
+    renderGroupPanels();
+    updateCounters();
+    updateMergePreview();
+}
+
+// ============================================================
+//  グループパネル描画（大分類ごと）
+// ============================================================
+function renderGroupPanels() {
+    const container = document.getElementById('groupPanels');
+    container.innerHTML = '';
+
+    // 大分類でグループ化
+    const groups = {};
+    pendingItems.forEach(p => {
+        const key = p.largeCategory || '__unknown__';
+        if (!groups[key]) groups[key] = [];
+        groups[key].push(p);
+    });
+
+    if (!Object.keys(groups).length) return;
+
+    Object.entries(groups).forEach(([largeKey, items]) => {
+        const isKnown  = largeKey !== '__unknown__' && !!CAT[largeKey];
+        const label    = isKnown ? (CAT[largeKey].icon + ' ' + CAT[largeKey].label) : (largeKey === '__unknown__' ? '（未分類）' : largeKey);
+        const panelId  = 'gp-' + largeKey;
+        const subId    = 'gs-' + largeKey;
+        const tagsId   = 'gt-' + largeKey;
+
+        const panel = document.createElement('div');
+        panel.className = 'group-panel';
+        panel.id = panelId;
+
+        // ヘッダー
+        const header = document.createElement('div');
+        header.className = 'group-panel-header';
+        header.innerHTML = `
+            <span class="group-folder-name">${largeKey === '__unknown__' ? '未分類' : largeKey + '/'}</span>
+            <span class="group-count">${items.length} 件</span>
+            <span class="${isKnown ? 'group-cat-ok' : 'group-cat-ng'}">
+                ${isKnown ? '✅ ' + label : '⚠ カテゴリ未登録'}
+            </span>
+        `;
+
+        // 設定フォーム
+        const body = document.createElement('div');
+        body.className = 'group-panel-body';
+
+        // 大分類（表示のみ or 変更可）
+        const largeSel = document.createElement('select');
+        largeSel.className = 'form-group';
+        largeSel.style.cssText = 'padding:.6rem .8rem;border:1.5px solid var(--border);border-radius:7px;font-size:.9rem;font-family:inherit;';
+        const blankO = document.createElement('option'); blankO.value=''; blankO.textContent='大分類を選択';
+        largeSel.appendChild(blankO);
+        Object.entries(CAT).forEach(([k,v]) => {
+            const o = document.createElement('option'); o.value=k; o.textContent=`${v.icon||''} ${v.label}`;
+            if (k === largeKey) o.selected = true;
+            largeSel.appendChild(o);
+        });
+
+        // 中分類
+        const subSel = document.createElement('select');
+        subSel.id = subId;
+        subSel.style.cssText = largeSel.style.cssText;
+        subSel.innerHTML = '<option value="">中分類を選択</option>';
+        if (isKnown) {
+            Object.entries(CAT[largeKey]?.subcategories||{}).forEach(([k,v]) => {
+                const o = document.createElement('option'); o.value=k; o.textContent=v; subSel.appendChild(o);
+            });
+            subSel.disabled = false;
+        } else {
+            subSel.disabled = true;
+        }
+
+        // 大分類変更 → 中分類を再構築
+        largeSel.addEventListener('change', function() {
+            const newLarge = this.value;
+            // このグループの全アイテムの largeCategory を更新
+            items.forEach(p => { p.largeCategory = newLarge; p.category = ''; });
+            subSel.innerHTML = '<option value="">中分類を選択</option>';
+            if (newLarge && CAT[newLarge]) {
+                Object.entries(CAT[newLarge].subcategories||{}).forEach(([k,v]) => {
+                    const o = document.createElement('option'); o.value=k; o.textContent=v; subSel.appendChild(o);
+                });
+                subSel.disabled = false;
+            } else {
+                subSel.disabled = true;
+            }
+            renderTable(); updateMergePreview();
+        });
+
+        // 中分類変更
+        subSel.addEventListener('change', function() {
+            items.forEach(p => { p.category = this.value; });
+            renderTable(); updateMergePreview();
+        });
+
+        // タグ入力
+        const tagsInp = document.createElement('input');
+        tagsInp.type = 'text'; tagsInp.id = tagsId;
+        tagsInp.placeholder = '共通タグ（カンマ区切り）例：春, 桜';
+        tagsInp.style.cssText = 'padding:.6rem .8rem;border:1.5px solid var(--border);border-radius:7px;font-size:.9rem;font-family:inherit;width:100%;';
+        tagsInp.addEventListener('change', function() {
+            const tags = parseTags(this.value);
+            items.forEach(p => { p.tags = tags; });
+            renderTable();
+        });
+
+        // 適用ボタン
+        const applyBtn = document.createElement('button');
+        applyBtn.className = 'btn btn-success';
+        applyBtn.textContent = '✅ 適用';
+        applyBtn.addEventListener('click', () => {
+            const large = largeSel.value;
+            const sub   = subSel.value;
+            const tags  = parseTags(tagsInp.value);
+            if (!large) { toast('大分類を選択してください', 'error'); return; }
+            if (!sub)   { toast('中分類を選択してください', 'error'); return; }
+            items.forEach(p => { p.largeCategory=large; p.category=sub; if(tags.length) p.tags=tags; });
+            renderTable(); updateMergePreview();
+            toast(`「${large}/」グループ ${items.length} 件に適用しました`, 'success');
+        });
+
+        const largWrap = document.createElement('div'); largWrap.className='form-group';
+        const largLabel = document.createElement('label'); largLabel.textContent='大分類'; largLabel.style.fontSize='.82rem'; largLabel.style.fontWeight='700'; largLabel.style.color='#4a5568';
+        largWrap.appendChild(largLabel); largWrap.appendChild(largeSel);
+
+        const subWrap = document.createElement('div'); subWrap.className='form-group';
+        const subLabel = document.createElement('label'); subLabel.textContent='中分類'; subLabel.style.fontSize='.82rem'; subLabel.style.fontWeight='700'; subLabel.style.color='#4a5568';
+        subWrap.appendChild(subLabel); subWrap.appendChild(subSel);
+
+        const tagWrap = document.createElement('div'); tagWrap.className='form-group';
+        const tagLabel = document.createElement('label'); tagLabel.textContent='共通タグ'; tagLabel.style.fontSize='.82rem'; tagLabel.style.fontWeight='700'; tagLabel.style.color='#4a5568';
+        tagWrap.appendChild(tagLabel); tagWrap.appendChild(tagsInp);
+
+        body.appendChild(largWrap); body.appendChild(subWrap); body.appendChild(tagWrap); body.appendChild(applyBtn);
+        panel.appendChild(header); panel.appendChild(body);
+        container.appendChild(panel);
+    });
+
+    // グループサマリー
+    const groupCount = Object.keys(groups).length;
+    document.getElementById('groupSummary').textContent = `${groupCount} グループ検出`;
 }
 
 function filenameToTitle(f) { return f.replace(/\.[^.]+$/, '').replace(/[_-]/g, ' '); }
@@ -869,7 +1109,7 @@ function clearPending() {
     if (!pendingItems.length) return;
     if (!confirm(`新規リストの ${pendingItems.length} 件を全てクリアしますか？`)) return;
     pendingItems = []; checkedSet.clear(); currentPage = 1;
-    renderTable(); updateCounters(); updateMergePreview();
+    renderTable(); renderGroupPanels(); updateCounters(); updateMergePreview();
     toast('リストをクリアしました', 'info');
 }
 
