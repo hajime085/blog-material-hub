@@ -67,11 +67,27 @@
         "はなみ"
       ],
       "createdDate": "2026-04-01"
+    },
+    {
+      "id": 5,
+      "title": "川沿いのさくらの風景",
+      "description": "",
+      "largeCategory": "nature",
+      "category": "water",
+      "filename": "back pic.webp",
+      "tags": [
+        "川",
+        "さくら",
+        "桜",
+        "自然",
+        "風景"
+      ],
+      "createdDate": "2026-04-01"
     }
   ],
   "metadata": {
     "version": "2.0",
-    "totalMaterials": 4,
+    "totalMaterials": 5,
     "lastUpdated": "2026-04-01",
     "largeCategoryDefs": {
       "nature": {
