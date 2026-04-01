@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>素材ダウンロード | Blog Material Hub</title>
+    <meta name="description" content="高品質WebP素材を無料ダウンロード。ブログ・動画・SNS制作にご活用ください。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy:   #0f1923;
+            --navy2:  #1a2740;
+            --accent: #e8520a;
+            --acc2:   #ff7340;
+            --text:   #1c1c1e;
+            --muted:  #6b7280;
+            --border: #e5e7eb;
+            --bg:     #f8f7f4;
+            --surface:#ffffff;
+            --r:      10px;
+            --green:  #059669;
+        }
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Noto Sans JP',sans-serif; background:var(--bg); color:var(--text); line-height:1.65; }
+
+        /* ===== HEADER ===== */
+        header { background:var(--navy); }
+        .navbar { max-width:1100px; margin:0 auto; padding:.85rem 2rem; display:flex; justify-content:space-between; align-items:center; }
+        .logo { font-family:'DM Sans',sans-serif; font-size:1.2rem; font-weight:600; color:#fff; text-decoration:none; }
+        .logo-dot { color:var(--acc2); }
+        .nav-links { display:flex; gap:1.8rem; }
+        .nav-links a { color:rgba(255,255,255,.7); text-decoration:none; font-size:.88rem; font-weight:500; transition:color .2s; }
+        .nav-links a:hover { color:#fff; }
+        .menu-toggle { display:none; background:none; border:none; color:#fff; font-size:1.4rem; cursor:pointer; }
+
+        /* ===== BREADCRUMB ===== */
+        .breadcrumb { background:var(--surface); border-bottom:1px solid var(--border); }
+        .breadcrumb-inner { max-width:1100px; margin:0 auto; padding:.55rem 2rem; font-size:.8rem; color:var(--muted); }
+        .breadcrumb a { color:var(--muted); text-decoration:none; } .breadcrumb a:hover { color:var(--accent); }
+        .breadcrumb span { margin:0 .4rem; }
+
+        /* ===== AD SLOT ===== */
+        /* AdSense 審査通過後、コードを貼り付けると自動で表示されます */
+        /* それまでは display:none で完全非表示（枠も余白も出ない）  */
+        .ad-slot { display: none; }
+        .ad-728 { width:100%; max-width:728px; margin:0 auto; }
+        .ad-300 { width:300px; }
+        .ad-responsive { width:100%; }
+        .ad-wrap { display:flex; justify-content:center; }
+
+        /* ===== MAIN LAYOUT ===== */
+        main { max-width:1100px; margin:0 auto; padding:1.5rem 2rem 4rem; }
+        .content-grid {
+            display:grid;
+            grid-template-columns: 1fr 320px;
+            gap: 2rem;
+            align-items:start;
+        }
+
+        /* ===== LEFT COLUMN ===== */
+        .left-col {}
+
+        h1.material-title {
+            font-family:'DM Sans',sans-serif;
+            font-size:1.65rem; font-weight:700;
+            margin-bottom:.5rem; line-height:1.3;
+        }
+        .material-meta { font-size:.85rem; color:var(--muted); margin-bottom:1.2rem; }
+        .material-meta a { color:var(--accent); text-decoration:none; }
+        .material-meta a:hover { text-decoration:underline; }
+
+        /* プレビュー画像 */
+        .preview-wrap {
+            border-radius:var(--r); overflow:hidden;
+            background:#e5e7eb; margin-bottom:1rem;
+            box-shadow: 0 4px 24px rgba(0,0,0,.1);
+        }
+        .preview-wrap img {
+            display:block; width:100%; height:auto;
+            max-height:520px; object-fit:contain;
+            background:#f3f4f6;
+        }
+        .preview-wrap .no-preview {
+            height:320px; display:flex; align-items:center; justify-content:center;
+            font-size:3rem; color:#9ca3af;
+        }
+
+        /* 画像下広告 */
+        .ad-below-img { margin-bottom:1.5rem; }
+
+        /* ===== 説明・詳細 ===== */
+        .section-title {
+            font-size:1rem; font-weight:700;
+            margin-bottom:.8rem; padding-bottom:.5rem;
+            border-bottom:2px solid var(--border);
+            display:flex; align-items:center; gap:.5rem;
+        }
+        .desc-card {
+            background:var(--surface); border-radius:var(--r);
+            padding:1.4rem; margin-bottom:1.4rem;
+            border:1px solid var(--border);
+        }
+        .desc-text { font-size:.92rem; line-height:1.8; color:#374151; }
+        .desc-text p + p { margin-top:.8rem; }
+
+        /* タグ */
+        .tags-wrap { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.8rem; }
+        .tag {
+            padding:.3rem .75rem; border-radius:20px;
+            background:#f0f9ff; border:1px solid #bae6fd;
+            color:#0369a1; font-size:.8rem; font-weight:500;
+            text-decoration:none; transition:all .18s; cursor:pointer;
+        }
+        .tag:hover { background:#0369a1; color:#fff; border-color:#0369a1; }
+
+        /* ファイル情報 */
+        .file-info { display:grid; grid-template-columns:1fr 1fr; gap:.8rem; margin-top:.6rem; }
+        .info-item { background:#f9fafb; border-radius:6px; padding:.7rem 1rem; }
+        .info-label { font-size:.72rem; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; margin-bottom:.2rem; }
+        .info-val { font-size:.88rem; font-weight:600; color:var(--text); font-family:'DM Sans',sans-serif; }
+
+        /* ===== RIGHT COLUMN ===== */
+        .right-col { position:sticky; top:72px; }
+
+        .dl-card {
+            background:var(--surface); border-radius:var(--r);
+            border:1px solid var(--border);
+            overflow:hidden; margin-bottom:1.2rem;
+            box-shadow:0 2px 12px rgba(0,0,0,.06);
+        }
+        .dl-card-header {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+            padding:1.1rem 1.4rem;
+            color:#fff;
+        }
+        .dl-card-header h2 { font-family:'DM Sans',sans-serif; font-size:1rem; font-weight:700; margin-bottom:.2rem; }
+        .dl-card-header p { font-size:.78rem; color:rgba(255,255,255,.65); }
+        .dl-card-body { padding:1.4rem; }
+
+        /* ダウンロードボタン */
+        .dl-btn {
+            width:100%; padding:.9rem 1.5rem;
+            background: linear-gradient(135deg, var(--accent), var(--acc2));
+            color:#fff; border:none; border-radius:8px;
+            font-family:'DM Sans',sans-serif;
+            font-size:1rem; font-weight:700;
+            cursor:pointer; transition:all .2s;
+            display:flex; align-items:center; justify-content:center; gap:.5rem;
+            box-shadow:0 4px 14px rgba(232,82,10,.35);
+        }
+        .dl-btn:hover { transform:translateY(-1px); box-shadow:0 6px 20px rgba(232,82,10,.45); }
+        .dl-btn:active { transform:translateY(0); }
+        .dl-btn:disabled { background:#d1d5db; box-shadow:none; cursor:not-allowed; transform:none; }
+
+        /* プログレスバー */
+        .dl-progress-wrap { display:none; margin-top:1rem; }
+        .progress-label { font-size:.82rem; color:var(--muted); margin-bottom:.5rem; text-align:center; }
+        .progress-bar-bg {
+            width:100%; height:8px; background:#e5e7eb; border-radius:4px; overflow:hidden;
+        }
+        .progress-bar-fill {
+            height:100%; width:0%; border-radius:4px;
+            background:linear-gradient(90deg, var(--accent), var(--acc2));
+            transition: width .12s linear;
+        }
+        .progress-count { font-size:.78rem; color:var(--muted); text-align:center; margin-top:.4rem; }
+
+        /* DL完了 */
+        .dl-success {
+            display:none; margin-top:1rem; padding:.8rem 1rem;
+            background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px;
+            color:var(--green); font-size:.85rem; font-weight:600; text-align:center;
+        }
+
+        /* 広告（DLカード内） */
+        .dl-ad-wrap { margin-top:1.2rem; }
+        .dl-ad-slot { width:100%; height:250px; border-radius:8px; }
+
+        .dl-note { font-size:.75rem; color:var(--muted); margin-top:1rem; line-height:1.6; }
+
+        /* ===== RELATED ===== */
+        .related-section { margin-top:2.5rem; }
+        .related-grid {
+            display:grid;
+            grid-template-columns:repeat(auto-fill, minmax(160px,1fr));
+            gap:.8rem; margin-top:.8rem;
+        }
+        .related-card {
+            border-radius:8px; overflow:hidden; position:relative;
+            background:#e5e7eb; display:block; text-decoration:none;
+            aspect-ratio:4/3;
+        }
+        .related-card img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .3s; }
+        .related-card:hover img { transform:scale(1.06); }
+        .related-card .rel-overlay {
+            position:absolute; inset:0; background:rgba(0,0,0,0); transition:background .25s;
+            display:flex; align-items:flex-end; padding:.5rem;
+        }
+        .related-card:hover .rel-overlay { background:rgba(0,0,0,.45); }
+        .rel-title { color:#fff; font-size:.72rem; font-weight:600; opacity:0; transition:opacity .25s; }
+        .related-card:hover .rel-title { opacity:1; }
+
+        /* ===== LOADING / ERROR ===== */
+        .page-loading { text-align:center; padding:5rem 2rem; color:var(--muted); }
+        .spinner { display:inline-block; width:36px; height:36px; border:3px solid var(--border); border-top-color:var(--navy); border-radius:50%; animation:spin .8s linear infinite; margin-bottom:1rem; }
+        @keyframes spin { to { transform:rotate(360deg); } }
+
+        /* ===== FOOTER ===== */
+        footer { background:var(--navy2); color:rgba(255,255,255,.7); padding:2.5rem 2rem; }
+        .footer-inner { max-width:1100px; margin:0 auto; }
+        .footer-links { display:flex; gap:2rem; flex-wrap:wrap; margin-bottom:1.5rem; padding-bottom:1.5rem; border-bottom:1px solid rgba(255,255,255,.1); }
+        .footer-links a { color:rgba(255,255,255,.65); text-decoration:none; font-size:.85rem; transition:color .2s; }
+        .footer-links a:hover { color:#fff; }
+        .footer-copy { font-size:.8rem; color:rgba(255,255,255,.4); }
+
+        /* ===== RESPONSIVE ===== */
+        @media(max-width:768px) {
+            .content-grid { grid-template-columns:1fr; }
+            .right-col { position:static; }
+            .ad-300 { width:100%; max-width:300px; }
+            .menu-toggle { display:block; }
+            .nav-links { display:none; position:absolute; top:100%; left:0; right:0; background:var(--navy); flex-direction:column; gap:0; padding:.5rem 0; z-index:100; }
+            .nav-links.open { display:flex; }
+            .nav-links a { padding:.8rem 2rem; }
+            main { padding:1rem 1rem 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="navbar">
+        <a href="/blog-material-hub/" class="logo">📦 Blog Material<span class="logo-dot">.</span>Hub</a>
+        <button class="menu-toggle" id="menuToggle">☰</button>
+        <nav class="nav-links" id="navMenu">
+            <a href="/blog-material-hub/">ホーム</a>
+            <a href="/blog-material-hub/gallery.html">素材ギャラリー</a>
+            <a href="/blog-material-hub/faq.html">よくあるご質問</a>
+            <a href="/blog-material-hub/contact.html">お問い合わせ</a>
+        </nav>
+    </div>
+</header>
+
+<div class="breadcrumb">
+    <div class="breadcrumb-inner">
+        <a href="/blog-material-hub/">ホーム</a><span>›</span>
+        <a href="/blog-material-hub/gallery.html">素材ギャラリー</a><span>›</span>
+        <span id="breadTitle">素材詳細</span>
+    </div>
+</div>
+
+<!-- トップ広告帯（728×90） -->
+<div class="ad-wrap" style="background:var(--surface);border-bottom:1px solid var(--border);">
+    <div class="ad-slot ad-728">
+        <!-- ここに Google AdSense コードを貼り付け -->
+        AdSense 728×90（リーダーボード）
+    </div>
+</div>
+
+<!-- ページローディング -->
+<div id="pageLoading" class="page-loading">
+    <div class="spinner"></div>
+    <p>素材情報を読み込んでいます…</p>
+</div>
+
+<!-- メインコンテンツ（JS で表示） -->
+<main id="mainContent" style="display:none;">
+    <div class="content-grid">
+
+        <!-- ===== 左カラム ===== -->
+        <div class="left-col">
+            <h1 class="material-title" id="matTitle">—</h1>
+            <div class="material-meta" id="matMeta"></div>
+
+            <!-- プレビュー画像 -->
+            <div class="preview-wrap" id="previewWrap">
+                <div class="no-preview">🖼️</div>
+            </div>
+
+            <!-- 画像直下 広告（レスポンシブ） -->
+            <div class="ad-below-img">
+                <div class="ad-slot ad-responsive">
+                    <!-- ここに Google AdSense コードを貼り付け -->
+                    AdSense レスポンシブ広告
+                </div>
+            </div>
+
+            <!-- 説明文 -->
+            <div class="desc-card">
+                <div class="section-title">📋 素材について</div>
+                <div class="desc-text" id="matDesc"></div>
+            </div>
+
+            <!-- タグ -->
+            <div class="desc-card">
+                <div class="section-title">🏷️ タグ</div>
+                <div class="tags-wrap" id="matTags"></div>
+            </div>
+
+            <!-- ファイル情報 -->
+            <div class="desc-card">
+                <div class="section-title">📁 ファイル情報</div>
+                <div class="file-info" id="matFileInfo"></div>
+            </div>
+
+            <!-- 下部広告 -->
+            <div class="ad-wrap" style="margin-top:1rem;">
+                <div class="ad-slot ad-728" style="max-width:100%;">
+                    <!-- ここに Google AdSense コードを貼り付け -->
+                    AdSense 728×90（コンテンツ内）
+                </div>
+            </div>
+
+            <!-- 関連素材 -->
+            <div class="related-section">
+                <div class="section-title">🔗 関連素材</div>
+                <div class="related-grid" id="relatedGrid"></div>
+            </div>
+        </div>
+
+        <!-- ===== 右カラム ===== -->
+        <div class="right-col">
+            <!-- ダウンロードカード -->
+            <div class="dl-card">
+                <div class="dl-card-header">
+                    <h2>⬇ 無料ダウンロード</h2>
+                    <p>WebP形式 / 商用・非商用利用可</p>
+                </div>
+                <div class="dl-card-body">
+                    <button class="dl-btn" id="dlBtn" onclick="startDownload()">
+                        <span>⬇</span> ダウンロード開始
+                    </button>
+
+                    <!-- プログレスバー -->
+                    <div class="dl-progress-wrap" id="dlProgress">
+                        <div class="progress-label" id="progressLabel">準備中…</div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" id="progressFill"></div>
+                        </div>
+                        <div class="progress-count" id="progressCount"></div>
+                    </div>
+
+                    <!-- 完了メッセージ -->
+                    <div class="dl-success" id="dlSuccess">
+                        ✅ ダウンロードが開始されました！
+                    </div>
+
+                    <!-- ダウンロードボタン周辺 広告（300×250） -->
+                    <div class="dl-ad-wrap">
+                        <div class="ad-slot dl-ad-slot">
+                            <!-- ここに Google AdSense コードを貼り付け -->
+                            AdSense 300×250（サイドバー）
+                        </div>
+                    </div>
+
+                    <div class="dl-note">
+                        ※ 本素材はブログ・SNS・動画制作など個人・商用問わずご利用いただけます。再配布・販売はご遠慮ください。詳しくは<a href="/blog-material-hub/terms.html" style="color:var(--accent);">利用規約</a>をご確認ください。
+                    </div>
+                </div>
+            </div>
+
+            <!-- サイドバー追加広告 -->
+            <div class="dl-card" style="padding:1rem;">
+                <div class="ad-slot dl-ad-slot">
+                    <!-- ここに Google AdSense コードを貼り付け -->
+                    AdSense 300×250（サイドバー下）
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<footer>
+    <div class="footer-inner">
+        <div class="footer-links">
+            <a href="/blog-material-hub/privacy.html">プライバシーポリシー</a>
+            <a href="/blog-material-hub/terms.html">利用規約</a>
+            <a href="/blog-material-hub/disclaimer.html">免責事項</a>
+            <a href="/blog-material-hub/contact.html">お問い合わせ</a>
+        </div>
+        <div class="footer-copy">&copy; 2026 Blog Material Hub. All rights reserved.</div>
+    </div>
+</footer>
+
+<script>
+// ===== NAV =====
+document.getElementById('menuToggle').addEventListener('click', () => {
+    document.getElementById('navMenu').classList.toggle('open');
+});
+
+// ===== 状態 =====
+let currentMaterial = null;
+let allMaterials    = [];
+let catDefs         = {};
+const WAIT_SEC      = 5; // 待機秒数
+
+// ===== URLパラメータからID取得 =====
+function getParamId() {
+    const p = new URLSearchParams(window.location.search);
+    return parseInt(p.get('id'), 10);
+}
+
+// ===== data.json 読み込み =====
+async function loadData() {
+    try {
+        const res = await fetch('data.json');
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const json = await res.json();
+        allMaterials = json.materials || [];
+        catDefs      = json.metadata?.largeCategoryDefs || {};
+    } catch(e) {
+        try {
+            const raw = localStorage.getItem('bmh_preview_json');
+            if (raw) { const j=JSON.parse(raw); allMaterials=j.materials||[]; catDefs=j.metadata?.largeCategoryDefs||{}; return; }
+        } catch(_){}
+        showError('データを読み込めませんでした。'); return;
+    }
+}
+
+// ===== メインの初期化 =====
+async function init() {
+    await loadData();
+    const id = getParamId();
+    if (!id || isNaN(id)) { showError('素材が見つかりません。URLを確認してください。'); return; }
+
+    currentMaterial = allMaterials.find(m => m.id === id);
+    if (!currentMaterial) { showError(`ID ${id} の素材が見つかりません。`); return; }
+
+    document.getElementById('pageLoading').style.display = 'none';
+    document.getElementById('mainContent').style.display = 'block';
+    renderMaterial(currentMaterial);
+}
+
+// ===== 素材レンダリング =====
+function renderMaterial(m) {
+    const imgPath  = `assets/materials/${m.largeCategory}/${m.filename}`;
+    const catLabel = getCatLabel(m.largeCategory, m.category);
+
+    // ページタイトル
+    document.title = `${m.title || m.filename} | Blog Material Hub`;
+
+    // パンくず
+    document.getElementById('breadTitle').textContent = m.title || m.filename;
+
+    // h1
+    document.getElementById('matTitle').textContent = m.title || m.filename;
+
+    // メタ
+    document.getElementById('matMeta').innerHTML =
+        `カテゴリ: <a href="gallery.html">${esc(catLabel)}</a> &nbsp;|&nbsp; 登録日: ${m.createdDate || '—'}`;
+
+    // プレビュー
+    const wrap = document.getElementById('previewWrap');
+    wrap.innerHTML = '';
+    const img = document.createElement('img');
+    img.src = imgPath;
+    img.alt = m.title || m.filename;
+    img.onerror = () => { wrap.innerHTML = '<div class="no-preview">🖼️<br><small style="font-size:.7rem;color:#9ca3af;">プレビュー画像が見つかりません</small></div>'; };
+    wrap.appendChild(img);
+
+    // 説明文
+    const descEl = document.getElementById('matDesc');
+    if (m.description) {
+        descEl.innerHTML = m.description.split('\n').map(l => `<p>${esc(l)}</p>`).join('');
+    } else {
+        // 説明文が無い場合の自動生成テキスト（SEO対策）
+        descEl.innerHTML = `
+            <p>「${esc(m.title||m.filename)}」は、ブログ・SNS・動画制作など幅広いシーンで活用できる高品質WebP素材です。</p>
+            <p>カテゴリ「${esc(catLabel)}」に分類されており、${(m.tags||[]).length > 0 ? `${m.tags.map(t=>`「${esc(t)}」`).join('・')}といったキーワードに関連した` : ''}素材を探している方に最適です。</p>
+            <p>WebP形式は、PNG・JPEGに比べて高画質かつファイルサイズが軽量なため、ウェブページの表示速度を損なわずに使用できます。ブログのアイキャッチ画像、SNS投稿のビジュアル、YouTube動画のサムネイルなど、様々な用途にお役立てください。</p>
+            <p>ダウンロードは無料で、個人・商用問わずご利用いただけます。</p>
+        `;
+    }
+
+    // タグ
+    const tagsEl = document.getElementById('matTags');
+    if ((m.tags||[]).length) {
+        m.tags.forEach(tag => {
+            const a = document.createElement('a');
+            a.className = 'tag';
+            a.textContent = tag;
+            a.href = `gallery.html?tag=${encodeURIComponent(tag)}`;
+            tagsEl.appendChild(a);
+        });
+    } else {
+        tagsEl.textContent = 'タグなし';
+    }
+
+    // ファイル情報
+    document.getElementById('matFileInfo').innerHTML = `
+        <div class="info-item"><div class="info-label">ファイル名</div><div class="info-val">${esc(m.filename)}</div></div>
+        <div class="info-item"><div class="info-label">形式</div><div class="info-val">WebP</div></div>
+        <div class="info-item"><div class="info-label">カテゴリ</div><div class="info-val">${esc(catLabel)}</div></div>
+        <div class="info-item"><div class="info-label">ライセンス</div><div class="info-val">無料・商用可</div></div>
+    `;
+
+    // 関連素材（同じカテゴリからランダムに最大8件）
+    const related = allMaterials
+        .filter(x => x.id !== m.id && x.largeCategory === m.largeCategory)
+        .sort(() => Math.random() - .5)
+        .slice(0, 8);
+    const relGrid = document.getElementById('relatedGrid');
+    if (related.length) {
+        related.forEach(r => {
+            const rPath = `assets/materials/${r.largeCategory}/${r.filename}`;
+            const a = document.createElement('a');
+            a.className = 'related-card';
+            a.href = `download.html?id=${r.id}`;
+            a.innerHTML = `
+                <img src="${esc(rPath)}" alt="${esc(r.title||r.filename)}" loading="lazy" onerror="this.style.display='none'">
+                <div class="rel-overlay"><span class="rel-title">${esc(r.title||r.filename)}</span></div>
+            `;
+            relGrid.appendChild(a);
+        });
+    } else {
+        relGrid.innerHTML = '<p style="color:var(--muted);font-size:.85rem;">関連素材はありません</p>';
+    }
+}
+
+// ===== カウントダウン付きダウンロード =====
+let dlRunning = false;
+
+function startDownload() {
+    if (dlRunning || !currentMaterial) return;
+    dlRunning = true;
+
+    const btn       = document.getElementById('dlBtn');
+    const progWrap  = document.getElementById('dlProgress');
+    const fill      = document.getElementById('progressFill');
+    const label     = document.getElementById('progressLabel');
+    const countEl   = document.getElementById('progressCount');
+    const successEl = document.getElementById('dlSuccess');
+
+    btn.disabled = true;
+    btn.innerHTML = '<span>⏳</span> 準備中…';
+    progWrap.style.display = 'block';
+    successEl.style.display = 'none';
+
+    const steps = [
+        { pct: 15, msg: '🔒 ライセンスを確認しています…' },
+        { pct: 40, msg: '📦 ファイルを準備しています…' },
+        { pct: 70, msg: '⚡ ダウンロードリンクを生成しています…' },
+        { pct: 90, msg: '✅ もうすぐ完了…' },
+    ];
+    const total  = WAIT_SEC * 1000;
+    const start  = Date.now();
+    let stepIdx  = 0;
+
+    const stepMs = [0, 1000, 2200, 3800];
+
+    function tick() {
+        const elapsed = Date.now() - start;
+        const pct     = Math.min(100, (elapsed / total) * 100);
+        fill.style.width = pct + '%';
+
+        // メッセージ切り替え
+        while (stepIdx < steps.length && elapsed >= stepMs[stepIdx]) {
+            label.textContent = steps[stepIdx].msg;
+            fill.style.width  = steps[stepIdx].pct + '%';
+            stepIdx++;
+        }
+
+        const remain = Math.max(0, Math.ceil((total - elapsed) / 1000));
+        countEl.textContent = remain > 0 ? `${remain} 秒後にダウンロード開始` : '';
+
+        if (elapsed < total) {
+            requestAnimationFrame(tick);
+        } else {
+            // 実際のダウンロード実行
+            fill.style.width = '100%';
+            label.textContent = '✅ ダウンロード開始！';
+            countEl.textContent = '';
+
+            const imgPath = `assets/materials/${currentMaterial.largeCategory}/${currentMaterial.filename}`;
+            const a = document.createElement('a');
+            a.href     = imgPath;
+            a.download = currentMaterial.filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+
+            setTimeout(() => {
+                progWrap.style.display = 'none';
+                successEl.style.display = 'block';
+                btn.disabled = false;
+                btn.innerHTML = '<span>⬇</span> もう一度ダウンロード';
+                dlRunning = false;
+            }, 800);
+        }
+    }
+
+    requestAnimationFrame(tick);
+}
+
+// ===== エラー表示 =====
+function showError(msg) {
+    document.getElementById('pageLoading').innerHTML =
+        `<div style="color:#e74c3c;font-size:1rem;">${msg}<br><br><a href="gallery.html" style="color:var(--accent);">← ギャラリーに戻る</a></div>`;
+}
+
+// ===== ヘルパー =====
+function getCatLabel(large, sub) {
+    const l = catDefs[large]; if (!l) return large||'';
+    const s = l.subcategories?.[sub] || sub;
+    return sub ? `${l.label} › ${s}` : l.label;
+}
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// ===== 起動 =====
+init();
+</script>
+</body>
+</html>
