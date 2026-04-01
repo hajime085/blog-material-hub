@@ -1,17 +1,133 @@
-[
-  {
-    "id": "item-001",
-    "title": "清涼感のある炭酸水と夏の風景",
-    "description": "美しい湖を背景に、レモンを添えた冷たい炭酸水の画像です。夏のブログ記事やアイキャッチに最適です。",
-    "category": "風景・自然",
-    "tags": [
-      "レモン",
-      "夏",
-      "湖",
-      "炭酸水",
-      "爽やか"
-    ],
-    "image": "./assets/images/sozai001.webp",
-    "date": "2026-03-25"
+{
+  "materials": [
+    {
+      "id": 1,
+      "title": "sakura001",
+      "description": "",
+      "largeCategory": "nature",
+      "category": "spring",
+      "filename": "sakura001.webp",
+      "tags": [
+        "春",
+        "桜",
+        "さくら",
+        "サクラ",
+        "お花見",
+        "はなみ"
+      ],
+      "createdDate": "2026-04-01"
+    },
+    {
+      "id": 2,
+      "title": "sakura002",
+      "description": "",
+      "largeCategory": "nature",
+      "category": "spring",
+      "filename": "sakura002.webp",
+      "tags": [
+        "春",
+        "桜",
+        "さくら",
+        "サクラ",
+        "お花見",
+        "はなみ"
+      ],
+      "createdDate": "2026-04-01"
+    },
+    {
+      "id": 3,
+      "title": "sakura003",
+      "description": "",
+      "largeCategory": "nature",
+      "category": "spring",
+      "filename": "sakura003.webp",
+      "tags": [
+        "春",
+        "桜",
+        "さくら",
+        "サクラ",
+        "お花見",
+        "はなみ"
+      ],
+      "createdDate": "2026-04-01"
+    },
+    {
+      "id": 4,
+      "title": "sakura004",
+      "description": "",
+      "largeCategory": "nature",
+      "category": "spring",
+      "filename": "sakura004.webp",
+      "tags": [
+        "春",
+        "桜",
+        "さくら",
+        "サクラ",
+        "お花見",
+        "はなみ"
+      ],
+      "createdDate": "2026-04-01"
+    }
+  ],
+  "metadata": {
+    "version": "2.0",
+    "totalMaterials": 4,
+    "lastUpdated": "2026-04-01",
+    "largeCategoryDefs": {
+      "nature": {
+        "label": "自然",
+        "icon": "🌿",
+        "subcategories": {
+          "plants": "植物",
+          "sky": "空・天気",
+          "water": "水・海・川",
+          "animals": "動物",
+          "spring": "春",
+          "summer": "夏",
+          "autumn": "秋",
+          "winter": "冬",
+          "road": "道路"
+        }
+      },
+      "food": {
+        "label": "食べ物",
+        "icon": "🍽️",
+        "subcategories": {
+          "fruits": "果物",
+          "drinks": "飲み物",
+          "meals": "食事・料理",
+          "sweets": "スイーツ",
+          "foodandother": "その他"
+        }
+      },
+      "backgrounds": {
+        "label": "背景",
+        "icon": "🖼️",
+        "subcategories": {
+          "solid": "単色",
+          "gradient": "グラデーション",
+          "pattern": "パターン",
+          "texture": "テクスチャ"
+        }
+      },
+      "home": {
+        "label": "家具・インテリア",
+        "icon": "🏠",
+        "subcategories": {
+          "kitchen": "キッチン",
+          "gadget": "ガジェット",
+          "homeappliances": "家電"
+        }
+      },
+      "person": {
+        "label": "人",
+        "icon": "👤",
+        "subcategories": {
+          "male": "男性",
+          "woman": "女性",
+          "child": "こども"
+        }
+      }
+    }
   }
-]
+}
