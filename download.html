@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>素材ダウンロード | Blog Material Hub</title>
+    <title>素材ダウンロード | ソザイノ</title>
     <meta name="description" content="高品質WebP素材を無料ダウンロード。ブログ・動画・SNS制作にご活用ください。">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
@@ -177,7 +177,33 @@
         .dl-ad-wrap { margin-top:1.2rem; }
         .dl-ad-slot { width:100%; height:250px; border-radius:8px; }
 
-        .dl-note { font-size:.75rem; color:var(--muted); margin-top:1rem; line-height:1.6; }
+        .dl-note { font-size:.88rem; color:var(--muted); margin-top:1rem; line-height:1.7; }
+
+        /* クレジット表記カード */
+        .credit-card {
+            background:#f8f7f4; border:1px solid var(--border);
+            border-radius:8px; padding:1rem 1.2rem; margin-top:1.2rem;
+        }
+        .credit-card h4 {
+            font-size:.82rem; font-weight:700; color:#4a5568;
+            margin-bottom:.5rem; display:flex; align-items:center; gap:.4rem;
+        }
+        .credit-card p { font-size:.82rem; color:var(--muted); line-height:1.65; margin-bottom:.7rem; }
+        .credit-box {
+            background:#fff; border:1px solid var(--border);
+            border-radius:6px; padding:.55rem .75rem;
+            font-size:.78rem; color:#374151; font-family:monospace;
+            word-break:break-all; margin-bottom:.6rem;
+        }
+        .copy-btn {
+            width:100%; padding:.5rem; border-radius:6px;
+            background:var(--navy); color:#fff; border:none;
+            font-size:.82rem; font-weight:700; cursor:pointer;
+            font-family:inherit; transition:all .2s;
+            display:flex; align-items:center; justify-content:center; gap:.4rem;
+        }
+        .copy-btn:hover { background:var(--navy2); }
+        .copy-btn.copied { background:var(--green); }
 
         /* ===== RELATED ===== */
         .related-section { margin-top:2.5rem; }
@@ -231,7 +257,7 @@
 
 <header>
     <div class="navbar">
-        <a href="/blog-material-hub/" class="logo">📦 Blog Material<span class="logo-dot">.</span>Hub</a>
+        <a href="/blog-material-hub/" class="logo">ソザイノ<span class="logo-dot">.</span></a>
         <button class="menu-toggle" id="menuToggle">☰</button>
         <nav class="nav-links" id="navMenu">
             <a href="/blog-material-hub/">ホーム</a>
@@ -357,6 +383,16 @@
                     <div class="dl-note">
                         ※ 本素材はブログ・SNS・動画制作など個人・商用問わずご利用いただけます。再配布・販売はご遠慮ください。詳しくは<a href="/blog-material-hub/terms.html" style="color:var(--accent);">利用規約</a>をご確認ください。
                     </div>
+
+                    <!-- クレジット表記 -->
+                    <div class="credit-card">
+                        <h4>🔗 クレジット表記（任意）</h4>
+                        <p>無料でご利用いただけます。もし記事やサイトにリンクを載せていただけると、とても励みになります！</p>
+                        <div class="credit-box" id="creditText"></div>
+                        <button class="copy-btn" id="copyBtn" onclick="copyCredit()">
+                            📋 リンクをコピーする
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -439,7 +475,7 @@ function renderMaterial(m) {
     const catLabel = getCatLabel(m.largeCategory, m.category);
 
     // ページタイトル
-    document.title = `${m.title || m.filename} | Blog Material Hub`;
+    document.title = `${m.title || m.filename} | ソザイノ`;
 
     // パンくず
     document.getElementById('breadTitle').textContent = m.title || m.filename;
@@ -450,6 +486,12 @@ function renderMaterial(m) {
     // メタ
     document.getElementById('matMeta').innerHTML =
         `カテゴリ: <a href="gallery.html">${esc(catLabel)}</a> &nbsp;|&nbsp; 登録日: ${m.createdDate || '—'}`;
+
+    // クレジットテキスト設定
+    const pageUrl = window.location.origin + window.location.pathname.replace('download.html','') + `download.html?id=${m.id}`;
+    const creditStr = `素材提供：ソザイノ「${m.title||m.filename}」${pageUrl}`;
+    const creditEl = document.getElementById('creditText');
+    if (creditEl) creditEl.textContent = creditStr;
 
     // プレビュー
     const wrap = document.getElementById('previewWrap');
@@ -607,6 +649,29 @@ function getCatLabel(large, sub) {
     return sub ? `${l.label} › ${s}` : l.label;
 }
 function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// ===== クレジットコピー =====
+function copyCredit() {
+    const text = document.getElementById('creditText')?.textContent || '';
+    const btn  = document.getElementById('copyBtn');
+    navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = '✅ コピーしました！';
+        btn.classList.add('copied');
+        setTimeout(() => {
+            btn.innerHTML = '📋 リンクをコピーする';
+            btn.classList.remove('copied');
+        }, 2200);
+    }).catch(() => {
+        // fallback
+        const ta = document.createElement('textarea');
+        ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+        document.body.appendChild(ta); ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        btn.textContent = '✅ コピーしました！';
+        setTimeout(() => { btn.innerHTML = '📋 リンクをコピーする'; }, 2200);
+    });
+}
 
 // ===== 起動 =====
 init();

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog Material Hub - ブログ・動画向け無料WebP素材</title>
-    <meta name="description" content="ブログ・動画・SNS向けの高品質WebP素材を無料配信。商用利用OK。カテゴリ・タグで欲しい素材をすぐに発見。">
+    <title>ソザイノ (SOZAINO) - とっておきの1枚が見つかる無料WebP素材</title>
+    <meta name="description" content="とっておきの1枚が見つかる。ブログ・動画を彩る高品質WebP素材を無料で。商用利用OK。">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -249,24 +249,38 @@
         }
         .cat-grid {
             display:grid;
-            grid-template-columns:repeat(auto-fill, minmax(170px,1fr));
+            grid-template-columns:repeat(auto-fill, minmax(200px,1fr));
             gap:.8rem; margin-top:1.5rem;
         }
         .cat-card {
-            background:var(--surface); border:1px solid var(--border);
-            border-radius:10px; padding:1.3rem 1rem;
-            text-align:center; text-decoration:none; color:var(--text);
-            transition:all .2s; display:block;
+            position:relative; border-radius:12px; overflow:hidden;
+            aspect-ratio:4/3; display:block; text-decoration:none;
+            background:var(--navy2);
+            cursor:pointer;
+            box-shadow:0 2px 10px rgba(0,0,0,.12);
+            transition:transform .25s, box-shadow .25s;
         }
-        .cat-card:hover {
-            border-color:var(--navy); background:var(--navy);
-            color:#fff; transform:translateY(-2px);
-            box-shadow:0 6px 20px rgba(15,25,35,.15);
+        .cat-card:hover { transform:translateY(-4px); box-shadow:0 10px 30px rgba(0,0,0,.2); }
+        .cat-card-bg {
+            position:absolute; inset:0;
+            background-size:cover; background-position:center;
+            transition:transform .4s cubic-bezier(.25,.46,.45,.94);
         }
-        .cat-icon { font-size:2rem; margin-bottom:.5rem; }
-        .cat-name { font-weight:700; font-size:.9rem; margin-bottom:.2rem; }
-        .cat-desc { font-size:.75rem; color:var(--muted); line-height:1.4; }
-        .cat-card:hover .cat-desc { color:rgba(255,255,255,.6); }
+        .cat-card:hover .cat-card-bg { transform:scale(1.06); }
+        /* 画像が無い場合のグラデーション fallback */
+        .cat-card-bg.no-img {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+        }
+        .cat-card-overlay {
+            position:absolute; inset:0;
+            background:linear-gradient(to top, rgba(5,10,20,.82) 0%, rgba(5,10,20,.25) 55%, transparent 100%);
+        }
+        .cat-card-body {
+            position:absolute; bottom:0; left:0; right:0;
+            padding:.9rem 1rem;
+        }
+        .cat-name { font-weight:700; font-size:1rem; color:#fff; line-height:1.3; }
+        .cat-icon-sm { font-size:.85rem; opacity:.75; color:rgba(255,255,255,.8); margin-bottom:.2rem; }
 
         /* ===== CTA ===== */
         .cta-section {
@@ -312,7 +326,7 @@
 
 <header>
     <div class="navbar">
-        <a href="/blog-material-hub/" class="logo">📦 Blog Material<span class="logo-dot">.</span>Hub</a>
+        <a href="/blog-material-hub/" class="logo">ソザイノ<span class="logo-dot">.</span></a>
         <button class="menu-toggle" id="menuToggle">☰</button>
         <nav class="nav-links" id="navMenu">
             <a href="/blog-material-hub/">ホーム</a>
@@ -326,9 +340,9 @@
 <!-- ===== HERO ===== -->
 <section class="hero">
     <div class="hero-inner">
-        <div class="hero-badge">✦ 完全無料・商用OK</div>
+        <div class="hero-badge">✦ とっておきの1枚が見つかる</div>
         <h1>ブログ・動画を彩る<br><em>高品質 WebP 素材</em>を無料で</h1>
-        <p>プロ品質の画像素材を、ファイルサイズを抑えた次世代 WebP 形式で配信。<br>アイキャッチ・サムネイル・SNS 投稿にすぐ使えます。</p>
+        <p>ソザイノ (SOZAINO) は、プロ品質の素材を次世代 WebP 形式で配信する<br>無料素材サービスです。アイキャッチ・サムネイル・SNS 投稿にどうぞ。</p>
         <div class="hero-btns">
             <a href="/blog-material-hub/gallery.html" class="btn-hero-primary">素材ギャラリーを見る →</a>
             <a href="/blog-material-hub/faq.html" class="btn-hero-secondary">使い方を見る</a>
@@ -364,14 +378,14 @@
 <!-- ===== FEATURES ===== -->
 <section class="features">
     <div class="section-head">
-        <h2>選ばれる 4 つの理由</h2>
+        <h2>選ばれる 3 つの理由</h2>
         <p>素材サイトに必要なものを、すべて無料で。</p>
     </div>
     <div class="feature-grid">
         <div class="feature-card">
             <div class="feature-icon">✦</div>
             <h3>完全無料・商用 OK</h3>
-            <p>全素材が登録不要で無料ダウンロード。個人ブログから法人サイトまで、商用利用可能です！</p>
+            <p>全素材が登録不要で無料ダウンロード。個人ブログから法人サイトまで、商用利用も許可しています。</p>
         </div>
         <div class="feature-card">
             <div class="feature-icon">⚡</div>
@@ -435,7 +449,7 @@
             <a href="/blog-material-hub/disclaimer.html">免責事項</a>
             <a href="/blog-material-hub/contact.html">お問い合わせ</a>
         </div>
-        <div class="footer-copy">&copy; 2026 Blog Material Hub. All rights reserved.</div>
+        <div class="footer-copy">&copy; 2026 ソザイノ (SOZAINO). All rights reserved.</div>
     </div>
 </footer>
 
@@ -487,20 +501,36 @@ async function loadData() {
         });
     }
 
-    // カテゴリカード
+    // カテゴリカード（画像背景）
     const catGrid = document.getElementById('catGrid');
     catGrid.innerHTML = '';
     Object.entries(catDefs).forEach(([key, def]) => {
-        const subCount = Object.keys(def.subcategories||{}).length;
+        // そのカテゴリの最初の素材を背景画像に使う
+        const sample = materials.find(m => m.largeCategory === key);
+        const bgPath = sample ? `assets/materials/${sample.largeCategory}/${sample.filename}` : '';
+
         const a = document.createElement('a');
         a.className = 'cat-card';
-        a.href = `gallery.html#cat-${key}`;
+
+        const bg = document.createElement('div');
+        bg.className = 'cat-card-bg' + (bgPath ? '' : ' no-img');
+        if (bgPath) {
+            // 画像をプリロードして表示
+            const testImg = new Image();
+            testImg.onload  = () => { bg.style.backgroundImage = `url(${bgPath})`; };
+            testImg.onerror = () => { bg.classList.add('no-img'); };
+            testImg.src = bgPath;
+        }
+
         a.innerHTML = `
-            <div class="cat-icon">${def.icon||'📁'}</div>
-            <div class="cat-name">${esc(def.label)}</div>
-            <div class="cat-desc">中分類 ${subCount} 種類</div>
+            <div class="cat-card-overlay"></div>
+            <div class="cat-card-body">
+                <div class="cat-icon-sm">${def.icon||''}</div>
+                <div class="cat-name">${esc(def.label)}</div>
+            </div>
         `;
-        // ギャラリーにカテゴリ絞り込みで飛ぶ
+        a.insertBefore(bg, a.firstChild);
+
         a.addEventListener('click', e => {
             e.preventDefault();
             sessionStorage.setItem('gallery_filter_large', key);

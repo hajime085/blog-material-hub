@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>素材ギャラリー | Blog Material Hub</title>
+    <title>素材ギャラリー | ソザイノ</title>
     <meta name="description" content="ブログ・動画・SNS向けの高品質WebP素材を無料配信。カテゴリとタグで欲しい素材を素早く発見できます。">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=DM+Sans:wght@400;600&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
             --bg:     #f8f7f4;
             --surface:#ffffff;
             --gap:    3px;
-            --row-h:  170px; /* デスクトップの基本行高 */
+            --row-h:  255px; /* 1.5倍に拡大 */
         }
         *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
         body {
@@ -200,7 +200,7 @@
         }
 
         @media(max-width:700px) {
-            :root { --row-h: 140px; --gap: 2px; }
+            :root { --row-h: 210px; --gap: 2px; }
             .bento { grid-template-columns: repeat(2, 1fr); }
             /* 2列: big と wide はどちらも横2=全幅になる */
             .bento-item.size-big  { grid-column: span 2; grid-row: span 2; }
@@ -229,7 +229,7 @@
         }
 
         @media(max-width:400px) {
-            :root { --row-h: 120px; }
+            :root { --row-h: 180px; }
         }
     </style>
 </head>
@@ -237,7 +237,7 @@
 
 <header>
     <div class="navbar">
-        <a href="/blog-material-hub/" class="logo">📦 Blog Material<span class="logo-dot">.</span>Hub</a>
+        <a href="/blog-material-hub/" class="logo">ソザイノ<span class="logo-dot">.</span></a>
         <button class="menu-toggle" id="menuToggle">☰</button>
         <nav class="nav-links" id="navMenu">
             <a href="/blog-material-hub/">ホーム</a>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>素材一括管理 | Blog Material Hub</title>
+    <title>素材一括管理 | ソザイノ</title>
     <style>
         :root {
             --bg:       #f0f2f5;
@@ -260,7 +260,7 @@
 
 <header>
     <div class="navbar">
-        <a href="/blog-material-hub/" class="logo">📦 Blog Material <span>Hub</span></a>
+        <a href="/blog-material-hub/" class="logo">ソザイノ<span class="logo-dot">.</span></a>
         <div class="nav-links">
             <a href="/blog-material-hub/">ホーム</a>
             <a href="/blog-material-hub/gallery.html">ギャラリー</a>
@@ -497,7 +497,7 @@
             <a href="/blog-material-hub/disclaimer.html">免責事項</a>
             <a href="/blog-material-hub/contact.html">お問い合わせ</a>
         </div>
-        <div class="footer-copy">&copy; 2026 Blog Material Hub. All rights reserved.</div>
+        <div class="footer-copy">&copy; 2026 ソザイノ (SOZAINO). All rights reserved.</div>
     </div>
 </footer>
 <div class="toast" id="toast"></div>
@@ -1113,6 +1113,45 @@ function parseTags(str){return str.split(',').map(t=>t.trim()).filter(Boolean);}
 function toast(msg,type='success'){const el=document.getElementById('toast');el.textContent=msg;el.className=`toast ${type} show`;clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('show'),3200);}
 
 // ============================================================
+//  起動時に data.json を自動フェッチして既存データを読み込む
+// ============================================================
+async function autoFetchDataJson() {
+    // 既存インポートが手動でされていたらスキップ
+    if (existingItems.length > 0) return;
+
+    try {
+        const res = await fetch('data.json');
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const json = await res.json();
+
+        const incoming = Array.isArray(json.materials) ? json.materials : [];
+        if (!incoming.length) return; // 空なら何もしない
+
+        existingItems = incoming;
+
+        // カテゴリ定義もサーバーから取得して更新（確認なしで静かに適用）
+        if (json.metadata?.largeCategoryDefs && Object.keys(json.metadata.largeCategoryDefs).length) {
+            CAT = JSON.parse(JSON.stringify(json.metadata.largeCategoryDefs));
+            saveCatDefs();
+            renderCatList();
+            rebuildAllCatSelects();
+        }
+
+        updateCounters();
+        updateMergePreview();
+
+        document.getElementById('existingInfo').textContent =
+            `✅ サーバーの data.json から ${incoming.length} 件を自動読み込みしました`;
+        document.getElementById('existingCount').textContent = incoming.length;
+
+        toast(`📥 既存データ ${incoming.length} 件を自動取得しました`, 'success');
+    } catch(e) {
+        // fetch失敗（ローカルファイル直接開いた場合など）は静かに無視
+        console.info('data.json auto-fetch skipped:', e.message);
+    }
+}
+
+// ============================================================
 //  初期化
 // ============================================================
 renderCatList();
@@ -1120,6 +1159,9 @@ rebuildAllCatSelects();
 renderTable();
 updateCounters();
 updateMergePreview();
+
+// 起動時に自動フェッチ
+autoFetchDataJson();
 </script>
 </body>
 </html>
