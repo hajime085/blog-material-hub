@@ -83,11 +83,79 @@
         "風景"
       ],
       "createdDate": "2026-04-01"
+    },
+    {
+      "id": 6,
+      "title": "一面に広がるお花畑a",
+      "description": "",
+      "largeCategory": "nature",
+      "category": "plants",
+      "filename": "flower01.webp",
+      "tags": [
+        "花",
+        "お花",
+        "flower",
+        "ユーリップ",
+        "風景",
+        "自然"
+      ],
+      "createdDate": "2026-04-01"
+    },
+    {
+      "id": 7,
+      "title": "一面に広がるお花畑b",
+      "description": "",
+      "largeCategory": "nature",
+      "category": "plants",
+      "filename": "flower02.webp",
+      "tags": [
+        "花",
+        "お花",
+        "flower",
+        "ユーリップ",
+        "風景",
+        "自然"
+      ],
+      "createdDate": "2026-04-01"
+    },
+    {
+      "id": 8,
+      "title": "一面に広がるお花畑（斜めアングル）",
+      "description": "",
+      "largeCategory": "nature",
+      "category": "plants",
+      "filename": "flower03.webp",
+      "tags": [
+        "花",
+        "お花",
+        "flower",
+        "ユーリップ",
+        "風景",
+        "自然"
+      ],
+      "createdDate": "2026-04-01"
+    },
+    {
+      "id": 9,
+      "title": "一面に広がるお花畑（イラスト調）",
+      "description": "",
+      "largeCategory": "nature",
+      "category": "plants",
+      "filename": "flower04.webp",
+      "tags": [
+        "花",
+        "お花",
+        "flower",
+        "ユーリップ",
+        "風景",
+        "自然"
+      ],
+      "createdDate": "2026-04-01"
     }
   ],
   "metadata": {
     "version": "2.0",
-    "totalMaterials": 5,
+    "totalMaterials": 9,
     "lastUpdated": "2026-04-01",
     "largeCategoryDefs": {
       "nature": {
