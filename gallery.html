@@ -102,15 +102,15 @@
 
         /* ===== MASONRY GRID ===== */
         .masonry {
-            columns: 5 180px;
-            column-gap: 8px;
+            columns: 4 240px;
+            column-gap: 4px;
         }
         .masonry-item {
             break-inside: avoid;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
             display: block;
             position: relative;
-            border-radius: var(--r);
+            border-radius: 6px;
             overflow: hidden;
             cursor: pointer;
             background: #e5e7eb;
@@ -186,11 +186,11 @@
         .footer-copy { font-size:.8rem; color:rgba(255,255,255,.4); }
 
         /* ===== RESPONSIVE ===== */
-        @media(max-width:1100px) { .masonry { columns: 4 160px; } }
-        @media(max-width:800px)  { .masonry { columns: 3 140px; } }
+        @media(max-width:1200px) { .masonry { columns: 3 220px; } }
+        @media(max-width:800px)  { .masonry { columns: 3 160px; } }
         @media(max-width:560px)  {
-            .masonry { columns: 2 120px; column-gap:5px; }
-            .masonry-item { margin-bottom:5px; }
+            .masonry { columns: 2 140px; column-gap:3px; }
+            .masonry-item { margin-bottom:3px; }
             .menu-toggle { display:block; }
             .nav-links { display:none; position:absolute; top:100%; left:0; right:0; background:var(--navy); flex-direction:column; gap:0; padding:.5rem 0; }
             .nav-links.open { display:flex; }
@@ -478,6 +478,22 @@ function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;'
 
 // ===== 起動 =====
 loadData();
+
+// トップページのカテゴリカードから飛んできた場合、フィルタを引き継ぐ
+function applyStoredFilter() {
+    const large = sessionStorage.getItem('gallery_filter_large');
+    if (large) {
+        sessionStorage.removeItem('gallery_filter_large');
+        // buildFilters() 完了後に選択
+        const trySelect = () => {
+            const btn = document.querySelector(`#largeCatGroup [data-large="${large}"]`);
+            if (btn) selectLarge(large);
+        };
+        // data.json 読み込み後に実行されるよう少し待つ
+        setTimeout(trySelect, 600);
+    }
+}
+applyStoredFilter();
 </script>
 </body>
 </html>

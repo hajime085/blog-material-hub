@@ -1,442 +1,518 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog Material Hub - ブログ素材配信サイト</title>
-    <meta name="description" content="Amazonアフィリエイト向けのブログ素材を無料配信。画像・アイキャッチを形式選択してダウンロード。">
-
+    <title>Blog Material Hub - ブログ・動画向け無料WebP素材</title>
+    <meta name="description" content="ブログ・動画・SNS向けの高品質WebP素材を無料配信。商用利用OK。カテゴリ・タグで欲しい素材をすぐに発見。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* リセット */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --navy:   #0f1923;
+            --navy2:  #1a2740;
+            --navy3:  #243352;
+            --accent: #e8520a;
+            --acc2:   #ff7340;
+            --text:   #1c1c1e;
+            --muted:  #6b7280;
+            --border: #e5e7eb;
+            --bg:     #f8f7f4;
+            --surface:#ffffff;
         }
-
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior: smooth; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f9f9f9;
+            font-family:'Noto Sans JP', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
         }
 
-        /* ============ HEADER ============ */
+        /* ===== HEADER ===== */
         header {
-            background-color: #fff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            background: var(--navy);
+            position: sticky; top:0; z-index:300;
         }
-
         .navbar {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            max-width:1400px; margin:0 auto;
+            padding:.85rem 2rem;
+            display:flex; justify-content:space-between; align-items:center; gap:1.5rem;
         }
-
-        .navbar .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #2c3e50;
-            text-decoration: none;
-            transition: color 0.3s;
+        .logo {
+            font-family:'DM Sans',sans-serif;
+            font-size:1.2rem; font-weight:600;
+            color:#fff; text-decoration:none;
+            display:flex; align-items:center; gap:.5rem;
         }
-
-        .navbar .logo:hover {
-            color: #3498db;
+        .logo-dot { color:var(--acc2); }
+        .nav-links { display:flex; gap:1.8rem; }
+        .nav-links a {
+            color:rgba(255,255,255,.7); text-decoration:none;
+            font-size:.88rem; font-weight:500; transition:color .2s;
         }
+        .nav-links a:hover { color:#fff; }
+        .menu-toggle { display:none; background:none; border:none; color:#fff; font-size:1.4rem; cursor:pointer; }
 
-        .navbar nav {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .navbar nav a {
-            color: #555;
-            text-decoration: none;
-            transition: color 0.3s;
-            font-weight: 500;
-        }
-
-        .navbar nav a:hover {
-            color: #3498db;
-        }
-
-        /* ハンバーガーメニュー（モバイル） */
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #333;
-        }
-
-        /* ============ MAIN ============ */
-        main {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-            min-height: 60vh;
-        }
-
-        /* ============ FOOTER ============ */
-        footer {
-            background-color: #2c3e50;
-            color: #ecf0f1;
-            margin-top: 4rem;
-            padding: 3rem 2rem;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin-bottom: 2rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid #34495e;
-        }
-
-        .footer-links a {
-            color: #ecf0f1;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: #3498db;
-        }
-
-        .footer-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .footer-info p {
-            font-size: 0.9rem;
-        }
-
-        /* ============ レスポンシブ ============ */
-        @media (max-width: 768px) {
-            .navbar {
-                padding: 1rem;
-            }
-
-            .navbar .logo {
-                font-size: 1.2rem;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            /* --- ここから追加 --- */
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-                padding: 0 1rem;
-                line-height: 1.5;
-            }
-
-            .hero p br {
-                display: none;
-            }
-
-            .hero {
-                padding: 4rem 1rem;
-                margin-bottom: 2rem;
-            }
-
-            .features {
-                margin: 2rem 0;
-                gap: 1rem;
-            }
-
-            .feature-card {
-                padding: 1.5rem;
-            }
-
-            .feature-card .icon {
-                font-size: 2.2rem;
-                margin-bottom: 0.5rem;
-            }
-
-            .feature-card h3 {
-                font-size: 1.2rem;
-                margin-bottom: 0.5rem;
-            }
-
-            .feature-card p {
-                font-size: 0.9rem;
-            }
-
-            /* --- ここまで追加 --- */
-
-            .navbar nav {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                flex-direction: column;
-                background-color: #fff;
-                gap: 0;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            }
-
-            .navbar nav.active {
-                display: flex;
-            }
-
-            .navbar nav a {
-                padding: 1rem;
-                border-bottom: 1px solid #ecf0f1;
-            }
-
-            .footer-links {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .footer-info {
-                flex-direction: column;
-            }
-        }
-
-        /* ============ HERO SECTION ============ */
+        /* ===== HERO ===== */
         .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 6rem 2rem;
+            background: var(--navy);
+            padding: 5rem 2rem 4rem;
             text-align: center;
-            border-radius: 0 0 50px 50px;
-            margin-bottom: 4rem;
+            position: relative;
+            overflow: hidden;
         }
-
+        /* 背景の装飾グラデーション */
+        .hero::before {
+            content:'';
+            position:absolute; inset:0;
+            background:
+                radial-gradient(ellipse 70% 60% at 20% 50%, rgba(232,82,10,.12) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 80% at 80% 30%, rgba(26,39,64,.6) 0%, transparent 60%);
+            pointer-events:none;
+        }
+        /* グリッドパターン */
+        .hero::after {
+            content:'';
+            position:absolute; inset:0;
+            background-image: linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events:none;
+        }
+        .hero-inner { position:relative; z-index:1; max-width:700px; margin:0 auto; }
+        .hero-badge {
+            display:inline-flex; align-items:center; gap:.4rem;
+            background:rgba(232,82,10,.15); border:1px solid rgba(232,82,10,.35);
+            color:var(--acc2); border-radius:20px;
+            padding:.3rem 1rem; font-size:.8rem; font-weight:700;
+            margin-bottom:1.5rem; letter-spacing:.04em;
+        }
         .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            font-family:'DM Sans',sans-serif;
+            font-size:clamp(2rem, 5vw, 3.2rem);
+            font-weight:700; color:#fff; line-height:1.2;
+            margin-bottom:1.2rem;
         }
-
+        .hero h1 em {
+            font-style:normal; color:var(--acc2);
+        }
         .hero p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto 2rem;
+            font-size:clamp(.95rem, 2vw, 1.1rem);
+            color:rgba(255,255,255,.7);
+            margin-bottom:2.2rem;
+            line-height:1.8;
         }
-
-        .btn-cta {
-            background-color: #ffcc00;
-            /* 鮮やかなイエローに！ */
-            color: #333;
-            /* 文字を濃いグレーにして読みやすく */
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
-            /* 角を丸くして今っぽく */
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1rem;
-            display: inline-block;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        .hero-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+        .btn-hero-primary {
+            padding:.85rem 2.2rem;
+            background:linear-gradient(135deg, var(--accent), var(--acc2));
+            color:#fff; border:none; border-radius:8px;
+            font-family:'DM Sans',sans-serif;
+            font-size:1rem; font-weight:700; cursor:pointer;
+            text-decoration:none;
+            box-shadow:0 4px 20px rgba(232,82,10,.4);
+            transition:all .25s;
         }
-
-        .btn-cta:hover {
-            background-color: #ffdb4d;
-            /* マウスを乗せると少し明るくなる */
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        .btn-hero-primary:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(232,82,10,.5); }
+        .btn-hero-secondary {
+            padding:.85rem 2.2rem;
+            background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.2);
+            color:#fff; border-radius:8px;
+            font-family:'DM Sans',sans-serif;
+            font-size:1rem; font-weight:600; cursor:pointer;
+            text-decoration:none; transition:all .25s;
         }
+        .btn-hero-secondary:hover { background:rgba(255,255,255,.14); }
 
+        /* ヒーロー下の数字バー */
+        .stats-bar {
+            background: var(--navy2);
+            border-top: 1px solid rgba(255,255,255,.07);
+            border-bottom: 1px solid rgba(255,255,255,.07);
+        }
+        .stats-inner {
+            max-width:1400px; margin:0 auto;
+            padding:1.1rem 2rem;
+            display:flex; justify-content:center; gap:3rem; flex-wrap:wrap;
+        }
+        .stat {
+            display:flex; align-items:center; gap:.7rem;
+        }
+        .stat-num {
+            font-family:'DM Sans',sans-serif;
+            font-size:1.4rem; font-weight:700; color:#fff;
+        }
+        .stat-label { font-size:.8rem; color:rgba(255,255,255,.5); line-height:1.3; }
+        .stat-div { width:1px; height:28px; background:rgba(255,255,255,.1); }
 
-        /* ============ FEATURES (3カラム) ============ */
+        /* ===== FEATURES ===== */
         .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 4rem 0;
+            max-width:1400px; margin:0 auto;
+            padding:4rem 2rem;
         }
+        .section-head {
+            text-align:center; margin-bottom:2.5rem;
+        }
+        .section-head h2 {
+            font-family:'DM Sans',sans-serif;
+            font-size:1.8rem; font-weight:700; color:var(--text);
+            margin-bottom:.5rem;
+        }
+        .section-head p { color:var(--muted); font-size:.95rem; }
 
+        .feature-grid {
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(240px,1fr));
+            gap:1.2rem;
+        }
         .feature-card {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s;
+            background:var(--surface);
+            border:1px solid var(--border);
+            border-radius:12px; padding:1.8rem 1.5rem;
+            transition:all .25s;
         }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
+        .feature-card:hover { box-shadow:0 8px 32px rgba(0,0,0,.08); transform:translateY(-3px); }
+        .feature-icon {
+            width:48px; height:48px; border-radius:12px;
+            background:linear-gradient(135deg, var(--navy), var(--navy3));
+            display:flex; align-items:center; justify-content:center;
+            font-size:1.5rem; margin-bottom:1.1rem;
         }
-
-        .feature-card .icon {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            display: block;
+        .feature-card h3 {
+            font-family:'DM Sans',sans-serif;
+            font-size:1rem; font-weight:700; margin-bottom:.5rem;
         }
+        .feature-card p { font-size:.88rem; color:var(--muted); line-height:1.7; }
 
-        /* スマホ対応 */
-        @media (max-width: 768px) {
+        /* ===== LATEST SECTION ===== */
+        .latest {
+            background: var(--navy);
+            padding: 4rem 2rem;
+        }
+        .latest-inner { max-width:1400px; margin:0 auto; }
+        .latest-head {
+            display:flex; justify-content:space-between; align-items:center;
+            margin-bottom:1.8rem; flex-wrap:wrap; gap:1rem;
+        }
+        .latest-head h2 {
+            font-family:'DM Sans',sans-serif;
+            font-size:1.5rem; font-weight:700; color:#fff;
+        }
+        .latest-head a {
+            color:var(--acc2); text-decoration:none; font-size:.88rem; font-weight:600;
+            display:flex; align-items:center; gap:.3rem; transition:gap .2s;
+        }
+        .latest-head a:hover { gap:.6rem; }
 
-            /* 1. 看板部分をさらにスッキリさせる */
-            .hero h1 {
-                font-size: 2.2rem;
-            }
+        /* ミニマソングリッド */
+        .latest-grid {
+            display:grid;
+            grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));
+            gap:6px;
+        }
+        .latest-card {
+            border-radius:8px; overflow:hidden;
+            aspect-ratio:4/3; position:relative;
+            background:#1a2740; display:block; text-decoration:none;
+        }
+        .latest-card img {
+            width:100%; height:100%; object-fit:cover; display:block;
+            transition:transform .35s cubic-bezier(.25,.46,.45,.94);
+        }
+        .latest-card:hover img { transform:scale(1.06); }
+        .latest-card .lc-overlay {
+            position:absolute; inset:0;
+            background:linear-gradient(to top, rgba(10,15,25,.8) 0%, transparent 55%);
+            opacity:0; transition:opacity .3s;
+            display:flex; align-items:flex-end; padding:.7rem;
+        }
+        .latest-card:hover .lc-overlay { opacity:1; }
+        .lc-title { color:#fff; font-size:.75rem; font-weight:600; }
+        .latest-loading { text-align:center; padding:2rem; color:rgba(255,255,255,.4); font-size:.9rem; }
 
-            .hero p {
-                font-size: 1rem;
-                padding: 0 1rem;
-                line-height: 1.5;
-            }
+        .latest-cta {
+            text-align:center; margin-top:2rem;
+        }
+        .btn-outline {
+            display:inline-block; padding:.75rem 2rem;
+            border:1.5px solid rgba(255,255,255,.25); border-radius:8px;
+            color:#fff; text-decoration:none; font-size:.9rem; font-weight:600;
+            transition:all .25s; font-family:'DM Sans',sans-serif;
+        }
+        .btn-outline:hover { background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.5); }
 
-            .hero p br {
-                display: none;
-            }
+        /* ===== CATEGORIES ===== */
+        .categories {
+            max-width:1400px; margin:0 auto;
+            padding:4rem 2rem;
+        }
+        .cat-grid {
+            display:grid;
+            grid-template-columns:repeat(auto-fill, minmax(170px,1fr));
+            gap:.8rem; margin-top:1.5rem;
+        }
+        .cat-card {
+            background:var(--surface); border:1px solid var(--border);
+            border-radius:10px; padding:1.3rem 1rem;
+            text-align:center; text-decoration:none; color:var(--text);
+            transition:all .2s; display:block;
+        }
+        .cat-card:hover {
+            border-color:var(--navy); background:var(--navy);
+            color:#fff; transform:translateY(-2px);
+            box-shadow:0 6px 20px rgba(15,25,35,.15);
+        }
+        .cat-icon { font-size:2rem; margin-bottom:.5rem; }
+        .cat-name { font-weight:700; font-size:.9rem; margin-bottom:.2rem; }
+        .cat-desc { font-size:.75rem; color:var(--muted); line-height:1.4; }
+        .cat-card:hover .cat-desc { color:rgba(255,255,255,.6); }
 
-            /* スマホでは無理な改行をなくす */
-            .hero {
-                padding: 4rem 1rem;
-                margin-bottom: 2rem;
-            }
+        /* ===== CTA ===== */
+        .cta-section {
+            background:linear-gradient(135deg, var(--navy) 0%, var(--navy3) 100%);
+            padding:4rem 2rem; text-align:center;
+            position:relative; overflow:hidden;
+        }
+        .cta-section::before {
+            content:'';
+            position:absolute; inset:0;
+            background-image: linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .cta-inner { position:relative; z-index:1; max-width:560px; margin:0 auto; }
+        .cta-section h2 {
+            font-family:'DM Sans',sans-serif; font-size:1.8rem; font-weight:700;
+            color:#fff; margin-bottom:.8rem;
+        }
+        .cta-section p { color:rgba(255,255,255,.65); margin-bottom:1.8rem; }
 
-            /* 2. 特徴カードをギュッと小さくする */
-            .features {
-                margin: 2rem 0;
-                gap: 1rem;
-            }
+        /* ===== FOOTER ===== */
+        footer { background:var(--navy2); color:rgba(255,255,255,.7); padding:2.5rem 2rem; }
+        .footer-inner { max-width:1400px; margin:0 auto; }
+        .footer-links { display:flex; gap:2rem; flex-wrap:wrap; margin-bottom:1.5rem; padding-bottom:1.5rem; border-bottom:1px solid rgba(255,255,255,.1); }
+        .footer-links a { color:rgba(255,255,255,.65); text-decoration:none; font-size:.85rem; transition:color .2s; }
+        .footer-links a:hover { color:#fff; }
+        .footer-copy { font-size:.8rem; color:rgba(255,255,255,.4); }
 
-            .feature-card {
-                padding: 1.5rem;
-                /* 中の余白を削って高さを抑える */
-            }
-
-            .feature-card .icon {
-                font-size: 2.2rem;
-                margin-bottom: 0.5rem;
-            }
-
-            .feature-card h3 {
-                font-size: 1.2rem;
-                margin-bottom: 0.5rem;
-            }
-
-            .feature-card p {
-                font-size: 0.9rem;
-            }
+        /* ===== RESPONSIVE ===== */
+        @media(max-width:768px) {
+            .navbar { padding:.85rem 1rem; }
+            .menu-toggle { display:block; }
+            .nav-links { display:none; position:absolute; top:100%; left:0; right:0; background:var(--navy); flex-direction:column; gap:0; padding:.5rem 0; }
+            .nav-links.open { display:flex; }
+            .nav-links a { padding:.8rem 1.5rem; }
+            .stats-inner { gap:1.5rem; }
+            .stat-div { display:none; }
         }
     </style>
 </head>
-
 <body>
-    <!-- ============ HEADER ============ -->
-    <header>
-        <div class="navbar">
-            <a href="./" class="logo">📦 Blog Material Hub</a>
-            <button class="menu-toggle" id="menuToggle">☰</button>
-            <nav id="navMenu">
-                <a href="./">ホーム</a>
-                <a href="./gallery.html">素材ギャラリー</a>
-                <a href="./faq.html">よくあるご質問</a>
-                <a href="./contact.html">お問い合わせ</a>
-            </nav>
+
+<header>
+    <div class="navbar">
+        <a href="/blog-material-hub/" class="logo">📦 Blog Material<span class="logo-dot">.</span>Hub</a>
+        <button class="menu-toggle" id="menuToggle">☰</button>
+        <nav class="nav-links" id="navMenu">
+            <a href="/blog-material-hub/">ホーム</a>
+            <a href="/blog-material-hub/gallery.html">素材ギャラリー</a>
+            <a href="/blog-material-hub/faq.html">よくあるご質問</a>
+            <a href="/blog-material-hub/contact.html">お問い合わせ</a>
+        </nav>
+    </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+    <div class="hero-inner">
+        <div class="hero-badge">✦ 完全無料・商用OK</div>
+        <h1>ブログ・動画を彩る<br><em>高品質 WebP 素材</em>を無料で</h1>
+        <p>プロ品質の画像素材を、ファイルサイズを抑えた次世代 WebP 形式で配信。<br>アイキャッチ・サムネイル・SNS 投稿にすぐ使えます。</p>
+        <div class="hero-btns">
+            <a href="/blog-material-hub/gallery.html" class="btn-hero-primary">素材ギャラリーを見る →</a>
+            <a href="/blog-material-hub/faq.html" class="btn-hero-secondary">使い方を見る</a>
         </div>
-    </header>
+    </div>
+</section>
 
-    <!-- ============ MAIN ============ -->
-    <main>
-        <!-- 1. ヒーローセクション -->
-        <section class="hero">
-            <h1>Blog Material Hub</h1>
-            <p>
-                あなたのブログを彩る、高品質な素材を。<br>
-                次世代形式 WebP で、美しさと速さを両立。
-            </p>
-            <!-- クラス名を btn-cta に変更 -->
-            <a href="./gallery.html" class="btn-cta">素材を無料で探す</a>
-        </section>
-
-
-        <!-- 3. 特徴 (3カラム) -->
-        <section class="features">
-            <div class="feature-card">
-                <span class="icon">✨</span>
-                <h3>完全無料・商用OK</h3>
-                <p>全ての素材は無料でダウンロード可能。ブログやSNSで自由にお使いいただけます。</p>
-            </div>
-            <div class="feature-card">
-                <span class="icon">⚡</span>
-                <h3>次世代 WebP 形式</h3>
-                <p>驚くほど軽量で高画質。サイトの読み込み速度を落とさず、美しいデザインを実現します。</p>
-            </div>
-            <div class="feature-card">
-                <span class="icon">🔍</span>
-                <h3>豊富なカテゴリ</h3>
-                <p>植物、自然、ガジェットなど。あなたの記事にぴったりの素材が必ず見つかります。</p>
-            </div>
-        </section>
-
-        <!-- 2. カルーセルの土台（ここに最新素材が表示されます） -->
-        <section class="latest-section">
-            <h2 style="text-align: center; margin-bottom: 2rem;">最新の素材</h2>
-            <div id="latest-materials" class="gallery-grid">
-                <!-- JavaScriptでここに素材が自動で並ぶようにします -->
-                <p style="text-align: center; color: #999;">素材を読み込み中...</p>
-            </div>
-        </section>
-    </main>
-
-
-    <!-- ============ FOOTER ============ -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="./privacy.html">プライバシーポリシー</a>
-                <a href="./terms.html">利用規約</a>
-                <a href="./contact.html">お問い合わせ</a>
-            </div>
-            <div class="footer-info">
-                <p>&copy; 2026 Blog Material Hub. All rights reserved.</p>
-
-            </div>
+<!-- ===== STATS BAR ===== -->
+<div class="stats-bar">
+    <div class="stats-inner">
+        <div class="stat">
+            <div class="stat-num" id="statTotal">—</div>
+            <div class="stat-label">素材数<br>（随時追加中）</div>
         </div>
-    </footer>
+        <div class="stat-div"></div>
+        <div class="stat">
+            <div class="stat-num">WebP</div>
+            <div class="stat-label">次世代フォーマット<br>高画質 × 軽量</div>
+        </div>
+        <div class="stat-div"></div>
+        <div class="stat">
+            <div class="stat-num">無料</div>
+            <div class="stat-label">ダウンロード<br>商用利用 OK</div>
+        </div>
+        <div class="stat-div"></div>
+        <div class="stat">
+            <div class="stat-num" id="statCats">—</div>
+            <div class="stat-label">カテゴリ<br>（大分類）</div>
+        </div>
+    </div>
+</div>
 
-    <!-- モバイルメニュー制御 -->
-    <script>
-        const menuToggle = document.getElementById('menuToggle');
-        const navMenu = document.getElementById('navMenu');
+<!-- ===== FEATURES ===== -->
+<section class="features">
+    <div class="section-head">
+        <h2>選ばれる 3 つの理由</h2>
+        <p>素材サイトに必要なものを、すべて無料で。</p>
+    </div>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <div class="feature-icon">✦</div>
+            <h3>完全無料・商用 OK</h3>
+            <p>全素材が登録不要で無料ダウンロード。個人ブログから法人サイトまで、商用利用も許可しています。</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>次世代 WebP 形式</h3>
+            <p>PNG・JPEG より最大 30〜80% 軽量。ページ表示速度を損なわず、美しいビジュアルを実現します。</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🔍</div>
+            <h3>カテゴリ × タグ検索</h3>
+            <p>大分類・中分類・タグの 3 段階で絞り込み。欲しいイメージにすぐたどり着けます。</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">📱</div>
+            <h3>全デバイス対応</h3>
+            <p>PC・スマートフォン・タブレット、どの端末からでも快適に閲覧・ダウンロードできます。</p>
+        </div>
+    </div>
+</section>
 
-        menuToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
+<!-- ===== LATEST MATERIALS ===== -->
+<section class="latest">
+    <div class="latest-inner">
+        <div class="latest-head">
+            <h2>最新の素材</h2>
+            <a href="/blog-material-hub/gallery.html">すべて見る →</a>
+        </div>
+        <div class="latest-grid" id="latestGrid">
+            <div class="latest-loading" style="grid-column:1/-1;">素材を読み込み中…</div>
+        </div>
+        <div class="latest-cta">
+            <a href="/blog-material-hub/gallery.html" class="btn-outline">ギャラリーで全素材を見る</a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CATEGORIES ===== -->
+<section class="categories">
+    <div class="section-head">
+        <h2>カテゴリから探す</h2>
+        <p>気になるジャンルをクリックしてギャラリーへ</p>
+    </div>
+    <div class="cat-grid" id="catGrid">
+        <!-- JS で生成 -->
+    </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta-section">
+    <div class="cta-inner">
+        <h2>さっそく素材を探してみよう</h2>
+        <p>ブログのアイキャッチ、SNS 投稿、YouTube サムネイルに。<br>すべて無料でダウンロードできます。</p>
+        <a href="/blog-material-hub/gallery.html" class="btn-hero-primary">ギャラリーを開く →</a>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-inner">
+        <div class="footer-links">
+            <a href="/blog-material-hub/privacy.html">プライバシーポリシー</a>
+            <a href="/blog-material-hub/terms.html">利用規約</a>
+            <a href="/blog-material-hub/disclaimer.html">免責事項</a>
+            <a href="/blog-material-hub/contact.html">お問い合わせ</a>
+        </div>
+        <div class="footer-copy">&copy; 2026 Blog Material Hub. All rights reserved.</div>
+    </div>
+</footer>
+
+<script>
+// NAV
+document.getElementById('menuToggle').addEventListener('click', () => {
+    document.getElementById('navMenu').classList.toggle('open');
+});
+
+// data.json 読み込み
+async function loadData() {
+    let json = null;
+    try {
+        const res = await fetch('data.json');
+        if (res.ok) json = await res.json();
+    } catch(_) {}
+    if (!json) {
+        try {
+            const raw = localStorage.getItem('bmh_preview_json');
+            if (raw) json = JSON.parse(raw);
+        } catch(_) {}
+    }
+    if (!json) return;
+
+    const materials = json.materials || [];
+    const catDefs   = json.metadata?.largeCategoryDefs || {};
+
+    // 統計
+    document.getElementById('statTotal').textContent = materials.length || '—';
+    document.getElementById('statCats').textContent  = Object.keys(catDefs).length || '—';
+
+    // 最新素材（最大12枚：登録日降順）
+    const latest = [...materials].reverse().slice(0, 12);
+    const grid = document.getElementById('latestGrid');
+    grid.innerHTML = '';
+    if (!latest.length) {
+        grid.innerHTML = '<div class="latest-loading">素材はまだ登録されていません</div>';
+    } else {
+        latest.forEach(m => {
+            const path = `assets/materials/${m.largeCategory}/${m.filename}`;
+            const a = document.createElement('a');
+            a.className = 'latest-card';
+            a.href = `download.html?id=${m.id}`;
+            a.innerHTML = `
+                <img src="${esc(path)}" alt="${esc(m.title||m.filename)}" loading="lazy" onerror="this.parentElement.style.display='none'">
+                <div class="lc-overlay"><span class="lc-title">${esc(m.title||m.filename)}</span></div>
+            `;
+            grid.appendChild(a);
         });
+    }
 
-        // ナビゲーションリンククリック時にメニュー閉じる
-        navMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-            });
+    // カテゴリカード
+    const catGrid = document.getElementById('catGrid');
+    catGrid.innerHTML = '';
+    Object.entries(catDefs).forEach(([key, def]) => {
+        const subCount = Object.keys(def.subcategories||{}).length;
+        const a = document.createElement('a');
+        a.className = 'cat-card';
+        a.href = `gallery.html#cat-${key}`;
+        a.innerHTML = `
+            <div class="cat-icon">${def.icon||'📁'}</div>
+            <div class="cat-name">${esc(def.label)}</div>
+            <div class="cat-desc">中分類 ${subCount} 種類</div>
+        `;
+        // ギャラリーにカテゴリ絞り込みで飛ぶ
+        a.addEventListener('click', e => {
+            e.preventDefault();
+            sessionStorage.setItem('gallery_filter_large', key);
+            window.location.href = 'gallery.html';
         });
-    </script>
+        catGrid.appendChild(a);
+    });
+}
+
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+loadData();
+</script>
 </body>
-
 </html>
