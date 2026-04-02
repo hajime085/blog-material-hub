@@ -424,11 +424,146 @@
         "自然"
       ],
       "createdDate": "2026-04-02"
+    },
+    {
+      "id": 26,
+      "title": "桜の下で楽しむ友人たちのピクニック",
+      "description": "",
+      "largeCategory": "person",
+      "category": "group",
+      "filename": "sakura02.webp",
+      "tags": [
+        "ピクニック",
+        "桜",
+        "春",
+        "友人",
+        "グループ",
+        "アウトドア"
+      ],
+      "createdDate": "2026-04-02"
+    },
+    {
+      "id": 27,
+      "title": "春の公園でピクニックを楽しむ友人たちの風景",
+      "description": "",
+      "largeCategory": "person",
+      "category": "group",
+      "filename": "sakura03.webp",
+      "tags": [
+        "ピクニック",
+        "春",
+        "公園",
+        "友人",
+        "若者",
+        "アウトドア"
+      ],
+      "createdDate": "2026-04-02"
+    },
+    {
+      "id": 28,
+      "title": "桜の下でピクニック！友達と楽しむ春の時間",
+      "description": "",
+      "largeCategory": "person",
+      "category": "group",
+      "filename": "sakura04.webp",
+      "tags": [
+        "ピクニック",
+        "桜",
+        "春",
+        "友達",
+        "グループ",
+        "アウトドア"
+      ],
+      "createdDate": "2026-04-02"
+    },
+    {
+      "id": 29,
+      "title": "春の公園でピクニック！友達と楽しむ桜の下での思い出",
+      "description": "",
+      "largeCategory": "person",
+      "category": "group",
+      "filename": "sakura05.webp",
+      "tags": [
+        "ピクニック",
+        "春",
+        "桜",
+        "友達",
+        "公園",
+        "楽しい"
+      ],
+      "createdDate": "2026-04-02"
+    },
+    {
+      "id": 30,
+      "title": "桜の下で友人たちとピクニックを楽しむ幸せな時間",
+      "description": "",
+      "largeCategory": "person",
+      "category": "group",
+      "filename": "sakura06.webp",
+      "tags": [
+        "ピクニック",
+        "春",
+        "桜",
+        "友人",
+        "グループ",
+        "青春"
+      ],
+      "createdDate": "2026-04-02"
+    },
+    {
+      "id": 31,
+      "title": "スマートフォンアプリを確認する都市女性",
+      "description": "",
+      "largeCategory": "person",
+      "category": "woman",
+      "filename": "woman001.webp",
+      "tags": [
+        "スマートフォン",
+        "アプリ",
+        "女性",
+        "都市",
+        "モバイル",
+        "ライフスタイル"
+      ],
+      "createdDate": "2026-04-02"
+    },
+    {
+      "id": 32,
+      "title": "家事に疲れた女性のストレスと悩み",
+      "description": "",
+      "largeCategory": "person",
+      "category": "woman",
+      "filename": "woman002.webp",
+      "tags": [
+        "ストレス",
+        "疲労",
+        "家事",
+        "悩み",
+        "メンタルヘルス",
+        "日常生活"
+      ],
+      "createdDate": "2026-04-02"
+    },
+    {
+      "id": 33,
+      "title": "買ったけど後悔し見つめる女性の表情",
+      "description": "",
+      "largeCategory": "person",
+      "category": "woman",
+      "filename": "woman003.webp",
+      "tags": [
+        "女性",
+        "家計管理",
+        "節約",
+        "お金の悩み",
+        "ファイナンシャルリテラシー"
+      ],
+      "createdDate": "2026-04-02"
     }
   ],
   "metadata": {
     "version": "2.0",
-    "totalMaterials": 25,
+    "totalMaterials": 33,
     "lastUpdated": "2026-04-02",
     "largeCategoryDefs": {
       "nature": {
@@ -482,7 +617,8 @@
         "subcategories": {
           "male": "男性",
           "woman": "女性",
-          "child": "こども"
+          "child": "こども",
+          "group": "グループ"
         }
       }
     }
