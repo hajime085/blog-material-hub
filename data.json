@@ -220,11 +220,61 @@
         "ピクニック"
       ],
       "createdDate": "2026-04-02"
+    },
+    {
+      "id": 14,
+      "title": "スマートフォンアプリを使う女性",
+      "description": "",
+      "largeCategory": "person",
+      "category": "woman",
+      "filename": "woman001.webp",
+      "tags": [
+        "モバイルアプリ",
+        "スマートフォン",
+        "女性",
+        "都会",
+        "デジタル",
+        "ショッピング"
+      ],
+      "createdDate": "2026-04-02"
+    },
+    {
+      "id": 15,
+      "title": "家事に疲れた女性のストレスと疲労",
+      "description": "",
+      "largeCategory": "person",
+      "category": "woman",
+      "filename": "woman002.webp",
+      "tags": [
+        "ストレス",
+        "疲労",
+        "家事",
+        "女性",
+        "メンタルヘルス",
+        "うつ"
+      ],
+      "createdDate": "2026-04-02"
+    },
+    {
+      "id": 16,
+      "title": "衝動買いをしてしまい後悔した女性の表情",
+      "description": "",
+      "largeCategory": "person",
+      "category": "woman",
+      "filename": "woman003.webp",
+      "tags": [
+        "衝動買い",
+        "女性",
+        "家計管理",
+        "お金",
+        "悩み"
+      ],
+      "createdDate": "2026-04-02"
     }
   ],
   "metadata": {
     "version": "2.0",
-    "totalMaterials": 13,
+    "totalMaterials": 16,
     "lastUpdated": "2026-04-02",
     "largeCategoryDefs": {
       "nature": {
