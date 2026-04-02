@@ -182,6 +182,38 @@
         .group-cat-ng { font-size:.78rem; color:var(--orange); background:#fef3e2; padding:.15rem .6rem; border-radius:10px; font-weight:600; }
         .group-panel-body { padding:.9rem 1.1rem; display:grid; grid-template-columns:1fr 1fr 1fr auto; gap:.8rem; align-items:flex-end; }
 
+        /* ===== AI 生成パネル ===== */
+        .ai-panel {
+            background:linear-gradient(135deg, #0f1923 0%, #1a2740 100%);
+            border-radius:10px; padding:1.1rem 1.4rem;
+            margin-bottom:1.2rem;
+        }
+        .ai-panel-top { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:.8rem; }
+        .ai-panel-title { font-size:.95rem; font-weight:700; color:#fff; margin-bottom:.2rem; }
+        .ai-panel-desc  { font-size:.78rem; color:rgba(255,255,255,.55); }
+        .ai-panel-actions { display:flex; gap:.6rem; align-items:center; flex-shrink:0; }
+        .ai-target-sel {
+            padding:.45rem .7rem; border-radius:6px; border:1px solid rgba(255,255,255,.2);
+            background:rgba(255,255,255,.08); color:#fff; font-size:.82rem; font-family:inherit; cursor:pointer;
+        }
+        .btn-ai {
+            background:linear-gradient(135deg, #e8520a, #ff7340);
+            color:#fff; border:none; border-radius:7px;
+            padding:.55rem 1.2rem; font-weight:700; font-size:.9rem;
+            cursor:pointer; font-family:inherit; transition:all .2s;
+            box-shadow:0 3px 12px rgba(232,82,10,.4);
+        }
+        .btn-ai:hover { transform:translateY(-1px); box-shadow:0 5px 18px rgba(232,82,10,.5); }
+        .btn-ai:disabled { opacity:.45; cursor:not-allowed; transform:none; box-shadow:none; }
+        .ai-progress-wrap {
+            margin-top:.9rem; padding-top:.9rem;
+            border-top:1px solid rgba(255,255,255,.1);
+            display:flex; align-items:center; gap:.8rem; flex-wrap:wrap;
+        }
+        .ai-progress-bar-bg { flex:1; min-width:120px; height:6px; background:rgba(255,255,255,.15); border-radius:3px; overflow:hidden; }
+        .ai-progress-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,#e8520a,#ff7340); border-radius:3px; transition:width .3s; }
+        .ai-progress-label { font-size:.8rem; color:rgba(255,255,255,.7); white-space:nowrap; }
+
         /* TABLE */
         .table-toolbar { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:.8rem; margin-bottom:1rem; }
         .toolbar-left  { display:flex; gap:.6rem; align-items:center; flex-wrap:wrap; }
@@ -436,6 +468,34 @@
             <div class="step-toggle open" id="tog-s3">▼</div>
         </div>
         <div class="step-body" id="s3">
+            <!-- AI生成パネル -->
+            <div class="ai-panel" id="aiPanel">
+                <div class="ai-panel-top">
+                    <div>
+                        <div class="ai-panel-title">🤖 AIでタイトル・タグを自動生成</div>
+                        <div class="ai-panel-desc">画像をClaudeが直接読み取り、日本語タイトルと関連タグを自動生成します（Claude Haiku使用）</div>
+                    </div>
+                    <div class="ai-panel-actions">
+                        <select id="aiTargetSel" class="ai-target-sel">
+                            <option value="empty">未生成のみ</option>
+                            <option value="selected">選択中のみ</option>
+                            <option value="all">全件</option>
+                        </select>
+                        <button class="btn btn-ai" id="aiGenBtn" onclick="startAiGenerate()">
+                            ✨ 生成スタート
+                        </button>
+                    </div>
+                </div>
+                <!-- プログレス（生成中のみ表示） -->
+                <div class="ai-progress-wrap" id="aiProgressWrap" style="display:none;">
+                    <div class="ai-progress-bar-bg">
+                        <div class="ai-progress-bar-fill" id="aiProgressFill"></div>
+                    </div>
+                    <div class="ai-progress-label" id="aiProgressLabel">準備中…</div>
+                    <button class="btn btn-secondary btn-sm" id="aiStopBtn" onclick="stopAiGenerate()">⏹ 停止</button>
+                </div>
+            </div>
+
             <div class="table-toolbar">
                 <div class="toolbar-left">
                     <button class="btn btn-secondary btn-sm" onclick="selectAll(true)">全選択</button>
@@ -981,7 +1041,8 @@ function addFilesFromEntries(collected) {
             largeCategory: detectedLarge,
             category:      '',
             tags:          [],
-            _sourcePath:   relativePath
+            _sourcePath:   relativePath,
+            _fileObj:      file            // AI生成用に File オブジェクトを保持
         });
         added++;
     });
@@ -1012,7 +1073,7 @@ function addFiles(fileList) {
     let added = 0, skipped = 0;
     files.forEach(f => {
         if (pendingItems.some(p => p.filename === f.name)) { skipped++; return; }
-        pendingItems.push({ tempId:'tmp_'+(++tempIdSeq), filename:f.name, title:filenameToTitle(f.name), largeCategory:'', category:'', tags:[], _sourcePath:f.name });
+        pendingItems.push({ tempId:'tmp_'+(++tempIdSeq), filename:f.name, title:filenameToTitle(f.name), largeCategory:'', category:'', tags:[], _sourcePath:f.name, _fileObj:f });
         added++;
     });
     if (skipped) toast(`${added} 件追加（${skipped} 件は重複スキップ）`, 'info');
@@ -1407,8 +1468,145 @@ function togglePreview(){
 }
 
 // ============================================================
-//  ユーティリティ
+//  AI タイトル・タグ自動生成
 // ============================================================
+let aiRunning = false;
+let aiShouldStop = false;
+
+async function startAiGenerate() {
+    if (aiRunning) return;
+
+    const targetMode = document.getElementById('aiTargetSel').value;
+    let targets = [];
+    if (targetMode === 'empty') {
+        targets = pendingItems.filter(p => p._fileObj && (!p.title || p.title === filenameToTitle(p.filename)));
+    } else if (targetMode === 'selected') {
+        targets = pendingItems.filter(p => p._fileObj && checkedSet.has(p.tempId));
+    } else {
+        targets = pendingItems.filter(p => p._fileObj);
+    }
+
+    if (!targets.length) {
+        toast(targetMode === 'empty' ? '未生成の素材がありません' : '対象の素材がありません', 'error');
+        return;
+    }
+
+    if (!confirm(`${targets.length} 件のタイトルとタグをAIで生成します。\n（Claude Haiku使用 / 推定コスト: 約${Math.ceil(targets.length * 0.2)}円）`)) return;
+
+    aiRunning = true;
+    aiShouldStop = false;
+    document.getElementById('aiGenBtn').disabled = true;
+    document.getElementById('aiProgressWrap').style.display = 'flex';
+
+    let done = 0;
+    for (const item of targets) {
+        if (aiShouldStop) break;
+
+        setAiProgress(done, targets.length, `処理中: ${item.filename} (${done+1}/${targets.length})`);
+
+        try {
+            const result = await generateWithAI(item._fileObj);
+            if (result) {
+                item.title = result.title || item.title;
+                item.tags  = result.tags  || item.tags;
+                renderTable(); // リアルタイムで行を更新
+            }
+        } catch(e) {
+            console.warn('AI生成失敗:', item.filename, e.message);
+        }
+
+        done++;
+        // レートリミット対策：1件ごとに少し待機
+        await new Promise(r => setTimeout(r, 300));
+    }
+
+    setAiProgress(done, targets.length, aiShouldStop ? '停止しました' : `✅ ${done} 件の生成が完了しました！`);
+    setTimeout(() => {
+        document.getElementById('aiProgressWrap').style.display = 'none';
+        document.getElementById('aiGenBtn').disabled = false;
+    }, 2500);
+
+    aiRunning = false;
+    if (!aiShouldStop) toast(`✅ ${done} 件のタイトル・タグを生成しました`, 'success');
+}
+
+function stopAiGenerate() {
+    aiShouldStop = true;
+    toast('停止リクエストを送信しました…', 'info');
+}
+
+function setAiProgress(done, total, label) {
+    const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+    document.getElementById('aiProgressFill').style.width = pct + '%';
+    document.getElementById('aiProgressLabel').textContent = label;
+}
+
+// 画像を512pxに縮小してbase64化
+async function resizeToBase64(file, maxPx = 512) {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        const url = URL.createObjectURL(file);
+        img.onload = () => {
+            const scale = Math.min(1, maxPx / Math.max(img.width, img.height));
+            const w = Math.round(img.width  * scale);
+            const h = Math.round(img.height * scale);
+            const canvas = document.createElement('canvas');
+            canvas.width = w; canvas.height = h;
+            canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+            URL.revokeObjectURL(url);
+            // webpで圧縮（quality 0.75）
+            resolve(canvas.toDataURL('image/jpeg', 0.75).split(',')[1]);
+        };
+        img.onerror = reject;
+        img.src = url;
+    });
+}
+
+// Claude Haiku API に画像を送ってタイトル・タグを取得
+async function generateWithAI(file) {
+    const base64 = await resizeToBase64(file, 512);
+
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            model: 'claude-haiku-4-5-20251001',
+            max_tokens: 256,
+            messages: [{
+                role: 'user',
+                content: [
+                    {
+                        type: 'image',
+                        source: { type: 'base64', media_type: 'image/jpeg', data: base64 }
+                    },
+                    {
+                        type: 'text',
+                        text: `この画像に最適な日本語のタイトルとタグを生成してください。
+ブログや動画のアイキャッチ・サムネイル用の素材サイトで使います。
+
+以下のJSON形式のみで回答してください（他のテキスト不要）:
+{"title":"画像の内容を表す自然な日本語タイトル（15〜25文字）","tags":["タグ1","タグ2","タグ3","タグ4","タグ5","タグ6"]}`
+                    }
+                ]
+            }]
+        })
+    });
+
+    if (!res.ok) throw new Error('API error ' + res.status);
+    const data = await res.json();
+    const text = data.content?.[0]?.text || '';
+
+    // JSONを安全にパース
+    try {
+        const clean = text.replace(/```json|```/g, '').trim();
+        return JSON.parse(clean);
+    } catch(e) {
+        // JSON抽出を試みる
+        const match = text.match(/\{[\s\S]*\}/);
+        if (match) return JSON.parse(match[0]);
+        throw new Error('JSONパース失敗');
+    }
+}
 function parseTags(str){return str.split(',').map(t=>t.trim()).filter(Boolean);}
 function toast(msg,type='success'){const el=document.getElementById('toast');el.textContent=msg;el.className=`toast ${type} show`;clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('show'),3200);}
 
