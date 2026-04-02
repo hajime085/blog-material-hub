@@ -1554,8 +1554,8 @@ async function resizeToBase64(file, maxPx = 512) {
             canvas.width = w; canvas.height = h;
             canvas.getContext('2d').drawImage(img, 0, 0, w, h);
             URL.revokeObjectURL(url);
-            // webpで圧縮（quality 0.75）
-            resolve(canvas.toDataURL('image/jpeg', 0.75).split(',')[1]);
+            // webpで圧縮（quality 0.85）
+            resolve(canvas.toDataURL('image/webp', 0.85).split(',')[1]);
         };
         img.onerror = reject;
         img.src = url;
@@ -1577,7 +1577,7 @@ async function generateWithAI(file) {
                 content: [
                     {
                         type: 'image',
-                        source: { type: 'base64', media_type: 'image/jpeg', data: base64 }
+                        source: { type: 'base64', media_type: 'image/webp', data: base64 }
                     },
                     {
                         type: 'text',
