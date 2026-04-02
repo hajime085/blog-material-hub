@@ -70,90 +70,6 @@
     },
     {
       "id": 5,
-      "title": "川沿いのさくらの風景",
-      "description": "",
-      "largeCategory": "nature",
-      "category": "water",
-      "filename": "back pic.webp",
-      "tags": [
-        "川",
-        "さくら",
-        "桜",
-        "自然",
-        "風景"
-      ],
-      "createdDate": "2026-04-01"
-    },
-    {
-      "id": 6,
-      "title": "一面に広がるお花畑",
-      "description": "",
-      "largeCategory": "nature",
-      "category": "plants",
-      "filename": "flower01.webp",
-      "tags": [
-        "お花",
-        "花",
-        "flower",
-        "自然",
-        "風景",
-        "チューリップ"
-      ],
-      "createdDate": "2026-04-01"
-    },
-    {
-      "id": 7,
-      "title": "一面に広がるお花畑b",
-      "description": "",
-      "largeCategory": "nature",
-      "category": "plants",
-      "filename": "flower02.webp",
-      "tags": [
-        "お花",
-        "花",
-        "flower",
-        "自然",
-        "風景",
-        "チューリップ"
-      ],
-      "createdDate": "2026-04-01"
-    },
-    {
-      "id": 8,
-      "title": "一面に広がるお花畑（斜めアングル）",
-      "description": "",
-      "largeCategory": "nature",
-      "category": "plants",
-      "filename": "flower03.webp",
-      "tags": [
-        "お花",
-        "花",
-        "flower",
-        "自然",
-        "風景",
-        "チューリップ"
-      ],
-      "createdDate": "2026-04-01"
-    },
-    {
-      "id": 9,
-      "title": "一面に広がるお花畑（イラスト調）",
-      "description": "",
-      "largeCategory": "nature",
-      "category": "plants",
-      "filename": "flower04.webp",
-      "tags": [
-        "お花",
-        "花",
-        "flower",
-        "自然",
-        "風景",
-        "チューリップ"
-      ],
-      "createdDate": "2026-04-01"
-    },
-    {
-      "id": 10,
       "title": "木漏れ日の聖域",
       "description": "",
       "largeCategory": "nature",
@@ -169,7 +85,7 @@
       "createdDate": "2026-04-02"
     },
     {
-      "id": 11,
+      "id": 6,
       "title": "目覚めの雫",
       "description": "",
       "largeCategory": "nature",
@@ -185,7 +101,7 @@
       "createdDate": "2026-04-02"
     },
     {
-      "id": 12,
+      "id": 7,
       "title": "春色に染まる山河",
       "description": "",
       "largeCategory": "nature",
@@ -201,7 +117,7 @@
       "createdDate": "2026-04-02"
     },
     {
-      "id": 13,
+      "id": 8,
       "title": "蒼穹と桜雲",
       "description": "",
       "largeCategory": "nature",
@@ -218,7 +134,7 @@
       "createdDate": "2026-04-02"
     },
     {
-      "id": 14,
+      "id": 9,
       "title": "さくら吹雪の記憶",
       "description": "",
       "largeCategory": "nature",
@@ -235,7 +151,7 @@
       "createdDate": "2026-04-02"
     },
     {
-      "id": 15,
+      "id": 10,
       "title": "春を運ぶ屋形船 ",
       "description": "",
       "largeCategory": "nature",
@@ -252,7 +168,7 @@
       "createdDate": "2026-04-02"
     },
     {
-      "id": 16,
+      "id": 11,
       "title": "水面に映る春の回廊",
       "description": "",
       "largeCategory": "nature",
@@ -270,7 +186,7 @@
       "createdDate": "2026-04-02"
     },
     {
-      "id": 17,
+      "id": 12,
       "title": "光降る桜のトンネル ",
       "description": "",
       "largeCategory": "nature",
@@ -288,7 +204,7 @@
       "createdDate": "2026-04-02"
     },
     {
-      "id": 18,
+      "id": 13,
       "title": "満開の下で囲む春の膳",
       "description": "",
       "largeCategory": "nature",
@@ -308,7 +224,7 @@
   ],
   "metadata": {
     "version": "2.0",
-    "totalMaterials": 18,
+    "totalMaterials": 13,
     "lastUpdated": "2026-04-02",
     "largeCategoryDefs": {
       "nature": {
