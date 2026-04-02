@@ -75,11 +75,32 @@
             border-radius:var(--r); overflow:hidden;
             background:#e5e7eb; margin-bottom:1rem;
             box-shadow: 0 4px 24px rgba(0,0,0,.1);
+            position:relative;
+        }
+        /* Canvas でウォーターマーク表示 */
+        .preview-wrap canvas {
+            display:block; width:100%; height:auto;
+            max-height:520px;
+            user-select:none;
+            -webkit-user-select:none;
+            -webkit-touch-callout:none;
         }
         .preview-wrap img {
             display:block; width:100%; height:auto;
             max-height:520px; object-fit:contain;
             background:#f3f4f6;
+            user-select:none;
+            -webkit-user-select:none;
+            -webkit-touch-callout:none;
+            pointer-events:none;
+        }
+        /* 透明オーバーレイ：右クリック・長押しをブロック */
+        .preview-guard {
+            position:absolute; inset:0;
+            z-index:1;
+            cursor:default;
+            /* 透明 */
+            background:transparent;
         }
         .preview-wrap .no-preview {
             height:320px; display:flex; align-items:center; justify-content:center;
@@ -421,6 +442,80 @@
 </footer>
 
 <script>
+// ===== 透かし付きプレビュー描画 =====
+function drawWatermarkedPreview(imgSrc, container) {
+    const tempImg = new Image();
+    tempImg.crossOrigin = 'anonymous';
+
+    tempImg.onload = () => {
+        const canvas = document.createElement('canvas');
+        const W = tempImg.naturalWidth;
+        const H = tempImg.naturalHeight;
+        canvas.width  = W;
+        canvas.height = H;
+
+        const ctx = canvas.getContext('2d');
+
+        // 元画像を描画
+        ctx.drawImage(tempImg, 0, 0, W, H);
+
+        // ======== 透かし設定 ========
+        const wmText = 'sozaino.net';
+        const fontSize = Math.max(18, Math.round(W * 0.045));
+        ctx.font = `bold ${fontSize}px 'Helvetica Neue', Arial, sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+
+        // 斜め繰り返しパターン
+        const step = fontSize * 5.5;
+        ctx.save();
+        ctx.globalAlpha = 0.22;
+
+        for (let y = -step; y < H + step * 2; y += step) {
+            for (let x = -step; x < W + step * 2; x += step) {
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.rotate(-Math.PI / 6); // -30度
+
+                // 影（視認性向上）
+                ctx.fillStyle = 'rgba(0,0,0,0.35)';
+                ctx.fillText(wmText, 1, 1);
+
+                // テキスト本体（白）
+                ctx.fillStyle = 'rgba(255,255,255,0.9)';
+                ctx.fillText(wmText, 0, 0);
+
+                ctx.restore();
+            }
+        }
+        ctx.restore();
+        // ============================
+
+        // 右クリック・長押し防止
+        canvas.addEventListener('contextmenu', e => e.preventDefault());
+        canvas.addEventListener('dragstart',   e => e.preventDefault());
+        canvas.style.webkitTouchCallout = 'none';
+
+        container.innerHTML = '';
+        container.appendChild(canvas);
+    };
+
+    tempImg.onerror = () => {
+        container.innerHTML = '<div class="no-preview">🖼️<br><small style="font-size:.7rem;color:#9ca3af;">プレビュー画像が見つかりません</small></div>';
+    };
+
+    tempImg.src = imgSrc;
+}
+
+// ===== 画像保護 =====
+// ページ内の img 要素への右クリック・ドラッグをブロック
+document.addEventListener('contextmenu', e => {
+    if (e.target.tagName === 'IMG') e.preventDefault();
+});
+document.addEventListener('dragstart', e => {
+    if (e.target.tagName === 'IMG') e.preventDefault();
+});
+
 // ===== NAV =====
 document.getElementById('menuToggle').addEventListener('click', () => {
     document.getElementById('navMenu').classList.toggle('open');
@@ -493,14 +588,10 @@ function renderMaterial(m) {
     const creditEl = document.getElementById('creditText');
     if (creditEl) creditEl.textContent = creditStr;
 
-    // プレビュー
+    // プレビュー（透かし入り Canvas で表示）
     const wrap = document.getElementById('previewWrap');
-    wrap.innerHTML = '';
-    const img = document.createElement('img');
-    img.src = imgPath;
-    img.alt = m.title || m.filename;
-    img.onerror = () => { wrap.innerHTML = '<div class="no-preview">🖼️<br><small style="font-size:.7rem;color:#9ca3af;">プレビュー画像が見つかりません</small></div>'; };
-    wrap.appendChild(img);
+    wrap.innerHTML = '<div class="no-preview">🖼️</div>';
+    drawWatermarkedPreview(imgPath, wrap);
 
     // 説明文
     const descEl = document.getElementById('matDesc');
