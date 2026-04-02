@@ -182,6 +182,80 @@
         .group-cat-ng { font-size:.78rem; color:var(--orange); background:#fef3e2; padding:.15rem .6rem; border-radius:10px; font-weight:600; }
         .group-panel-body { padding:.9rem 1.1rem; display:grid; grid-template-columns:1fr 1fr 1fr auto; gap:.8rem; align-items:flex-end; }
 
+        /* ===== 登録済み素材管理 ===== */
+        .mgr-toolbar {
+            display:flex; justify-content:space-between; align-items:center;
+            flex-wrap:wrap; gap:.8rem; margin-bottom:1.2rem;
+        }
+        .mgr-toolbar-left  { display:flex; gap:.6rem; align-items:center; flex-wrap:wrap; }
+        .mgr-toolbar-right { display:flex; gap:.6rem; align-items:center; flex-wrap:wrap; }
+        .mgr-cat-sel {
+            padding:.48rem .8rem; border:1.5px solid var(--border); border-radius:7px;
+            font-size:.85rem; font-family:inherit; background:#fff;
+        }
+        .mgr-count { font-size:.82rem; color:var(--muted); white-space:nowrap; }
+
+        .mgr-grid {
+            display:grid;
+            grid-template-columns:repeat(auto-fill, minmax(180px,1fr));
+            gap:.8rem;
+        }
+        .mgr-card {
+            border-radius:8px; overflow:hidden;
+            border:2px solid var(--border); background:var(--surface);
+            transition:all .18s; position:relative; cursor:pointer;
+        }
+        .mgr-card:hover { border-color:#94a3b8; box-shadow:0 3px 12px rgba(0,0,0,.08); }
+        .mgr-card.checked { border-color:var(--red); background:#fef2f2; }
+        .mgr-card.checked .mgr-check { background:var(--red); border-color:var(--red); color:#fff; }
+
+        .mgr-thumb {
+            width:100%; aspect-ratio:4/3; background:#e5e7eb;
+            overflow:hidden; position:relative;
+        }
+        .mgr-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+        .mgr-thumb .mgr-no-img {
+            width:100%; height:100%; display:flex; align-items:center;
+            justify-content:center; font-size:2rem; color:#9ca3af;
+        }
+
+        .mgr-check {
+            position:absolute; top:6px; left:6px;
+            width:22px; height:22px; border-radius:50%;
+            border:2px solid rgba(255,255,255,.8);
+            background:rgba(0,0,0,.35); color:transparent;
+            display:flex; align-items:center; justify-content:center;
+            font-size:.75rem; font-weight:900; transition:all .15s;
+        }
+        .mgr-card.checked .mgr-check::after { content:'✓'; color:#fff; }
+
+        .mgr-edit-btn {
+            position:absolute; top:6px; right:6px;
+            width:28px; height:28px; border-radius:6px;
+            border:none; background:rgba(255,255,255,.92);
+            font-size:.85rem; cursor:pointer;
+            display:flex; align-items:center; justify-content:center;
+            opacity:0; transition:opacity .15s;
+            box-shadow:0 2px 6px rgba(0,0,0,.2);
+        }
+        .mgr-card:hover .mgr-edit-btn { opacity:1; }
+
+        .mgr-info { padding:.65rem .75rem; }
+        .mgr-title {
+            font-size:.82rem; font-weight:700; color:var(--text);
+            overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+            margin-bottom:.2rem;
+        }
+        .mgr-filename {
+            font-size:.72rem; color:var(--muted); font-family:monospace;
+            overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+        }
+        .mgr-cat-tag {
+            display:inline-block; margin-top:.3rem;
+            font-size:.7rem; padding:.1rem .45rem; border-radius:4px;
+            background:#eaf4fb; color:#2980b9; font-weight:600;
+        }
+
         /* ===== AI 生成パネル ===== */
         .ai-panel {
             background:linear-gradient(135deg, #0f1923 0%, #1a2740 100%);
@@ -587,7 +661,93 @@
             </div>
         </div>
     </div>
+
+    <!-- 登録済み素材管理 -->
+    <div class="step-card">
+        <div class="step-header" onclick="toggleStep('s5')">
+            <div class="step-num" style="background:#e74c3c;">🗑</div>
+            <div class="step-title">登録済み素材の管理・削除</div>
+            <div class="step-subtitle">サーバーに登録済みの素材を確認・削除できます</div>
+            <div class="step-toggle" id="tog-s5">▼</div>
+        </div>
+        <div class="step-body hidden" id="s5">
+            <div class="alert alert-warning" style="margin-bottom:1.2rem;">
+                ⚠ ここでの削除は <strong>data.json の記録のみ</strong>を削除します。実際のWebPファイルはVSCodeのエクスプローラーから手動で削除してください。削除後は「data.json をダウンロード」→ git push が必要です。
+            </div>
+
+            <!-- ツールバー -->
+            <div class="mgr-toolbar">
+                <div class="mgr-toolbar-left">
+                    <input type="text" class="search-input" id="mgrSearch" placeholder="🔍 タイトル・ファイル名で検索">
+                    <select id="mgrCatFilter" class="mgr-cat-sel" onchange="renderMgrGrid()">
+                        <option value="">すべてのカテゴリ</option>
+                    </select>
+                </div>
+                <div class="mgr-toolbar-right">
+                    <span class="mgr-count" id="mgrCount"></span>
+                    <button class="btn btn-secondary btn-sm" onclick="mgrSelectAll(true)">全選択</button>
+                    <button class="btn btn-secondary btn-sm" onclick="mgrSelectAll(false)">全解除</button>
+                    <button class="btn btn-danger" id="mgrDeleteBtn" onclick="mgrDeleteSelected()" disabled>
+                        🗑 選択した素材を削除
+                    </button>
+                </div>
+            </div>
+
+            <!-- カードグリッド -->
+            <div class="mgr-grid" id="mgrGrid"></div>
+            <div class="empty-table" id="mgrEmpty" style="display:none;">
+                <div class="empty-icon">📂</div>
+                <p>登録済み素材がありません。STEP4で data.json を読み込んでください。</p>
+            </div>
+
+            <!-- 削除後エクスポート -->
+            <div id="mgrExportWrap" style="display:none;margin-top:1.5rem;padding:1rem;background:#f9f9f9;border-radius:8px;border:1px solid var(--border);">
+                <div style="font-size:.88rem;font-weight:700;margin-bottom:.6rem;">✅ 削除しました。data.json をエクスポートして git push してください。</div>
+                <div id="mgrDeletedList" style="font-size:.8rem;color:var(--muted);margin-bottom:.8rem;line-height:1.8;"></div>
+                <button class="btn btn-success" onclick="exportJson()">⬇ data.json をダウンロード</button>
+            </div>
+        </div>
+    </div>
 </main>
+
+<!-- 編集モーダル -->
+<div id="editModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9000;align-items:center;justify-content:center;">
+    <div style="background:#fff;border-radius:12px;padding:1.8rem;width:90%;max-width:540px;box-shadow:0 20px 60px rgba(0,0,0,.3);position:relative;">
+        <button onclick="closeEditModal()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.4rem;cursor:pointer;color:#94a3b8;">✕</button>
+        <h2 style="font-size:1.1rem;font-weight:700;margin-bottom:1.4rem;color:#1a202c;">✏️ 素材を編集</h2>
+
+        <div style="margin-bottom:1rem;">
+            <label style="display:block;font-size:.82rem;font-weight:700;color:#4a5568;margin-bottom:.35rem;">タイトル</label>
+            <input type="text" id="editTitle" style="width:100%;padding:.65rem .8rem;border:1.5px solid #e2e6ea;border-radius:7px;font-size:.95rem;font-family:inherit;">
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:1rem;">
+            <div>
+                <label style="display:block;font-size:.82rem;font-weight:700;color:#4a5568;margin-bottom:.35rem;">大分類</label>
+                <select id="editLarge" onchange="onEditLargeChange()" style="width:100%;padding:.65rem .8rem;border:1.5px solid #e2e6ea;border-radius:7px;font-size:.88rem;font-family:inherit;background:#fff;"></select>
+            </div>
+            <div>
+                <label style="display:block;font-size:.82rem;font-weight:700;color:#4a5568;margin-bottom:.35rem;">中分類</label>
+                <select id="editSub" style="width:100%;padding:.65rem .8rem;border:1.5px solid #e2e6ea;border-radius:7px;font-size:.88rem;font-family:inherit;background:#fff;"></select>
+            </div>
+        </div>
+
+        <div style="margin-bottom:1rem;">
+            <label style="display:block;font-size:.82rem;font-weight:700;color:#4a5568;margin-bottom:.35rem;">タグ（カンマ区切り）</label>
+            <input type="text" id="editTags" placeholder="例：春, 桜, 和風" style="width:100%;padding:.65rem .8rem;border:1.5px solid #e2e6ea;border-radius:7px;font-size:.95rem;font-family:inherit;">
+        </div>
+
+        <div style="margin-bottom:1.4rem;">
+            <label style="display:block;font-size:.82rem;font-weight:700;color:#4a5568;margin-bottom:.35rem;">説明文</label>
+            <textarea id="editDesc" rows="3" style="width:100%;padding:.65rem .8rem;border:1.5px solid #e2e6ea;border-radius:7px;font-size:.88rem;font-family:inherit;resize:vertical;"></textarea>
+        </div>
+
+        <div style="display:flex;gap:.8rem;justify-content:flex-end;">
+            <button onclick="closeEditModal()" style="padding:.65rem 1.3rem;border:1.5px solid #e2e6ea;border-radius:7px;background:#fff;font-family:inherit;font-size:.9rem;font-weight:600;cursor:pointer;">キャンセル</button>
+            <button onclick="saveEdit()" style="padding:.65rem 1.5rem;border:none;border-radius:7px;background:#27ae60;color:#fff;font-family:inherit;font-size:.9rem;font-weight:700;cursor:pointer;">💾 保存</button>
+        </div>
+    </div>
+</div>
 
 <footer>
     <div class="footer-inner">
@@ -1607,6 +1767,238 @@ async function generateWithAI(file) {
         throw new Error('JSONパース失敗');
     }
 }
+// ============================================================
+//  登録済み素材管理（削除機能）
+// ============================================================
+const mgrCheckedSet = new Set();
+
+function buildMgrCatFilter() {
+    const sel = document.getElementById('mgrCatFilter');
+    const current = sel.value;
+    sel.innerHTML = '<option value="">すべてのカテゴリ</option>';
+    const largeKeys = [...new Set(existingItems.map(m => m.largeCategory).filter(Boolean))].sort();
+    largeKeys.forEach(key => {
+        const label = CAT[key] ? `${CAT[key].icon||''} ${CAT[key].label}` : key;
+        const o = document.createElement('option');
+        o.value = key; o.textContent = label;
+        if (key === current) o.selected = true;
+        sel.appendChild(o);
+    });
+}
+
+function renderMgrGrid() {
+    buildMgrCatFilter();
+    const grid  = document.getElementById('mgrGrid');
+    const empty = document.getElementById('mgrEmpty');
+    if (!grid) return;
+
+    const q   = document.getElementById('mgrSearch').value.toLowerCase().trim();
+    const cat = document.getElementById('mgrCatFilter').value;
+
+    const filtered = existingItems.filter(m => {
+        if (cat && m.largeCategory !== cat) return false;
+        if (q) {
+            const hit = (m.title||'').toLowerCase().includes(q)
+                      || (m.filename||'').toLowerCase().includes(q)
+                      || (m.tags||[]).some(t => t.toLowerCase().includes(q));
+            if (!hit) return false;
+        }
+        return true;
+    });
+
+    const countEl = document.getElementById('mgrCount');
+    if (countEl) countEl.textContent = `${existingItems.length} 件登録中 / ${filtered.length} 件表示`;
+
+    grid.innerHTML = '';
+    if (!filtered.length) { empty.style.display='block'; return; }
+    empty.style.display = 'none';
+
+    filtered.forEach(m => grid.appendChild(createMgrCard(m)));
+    updateMgrDeleteBtn();
+}
+
+function createMgrCard(m) {
+    const imgPath  = `assets/materials/${m.largeCategory}/${m.filename}`;
+    const catLabel = CAT[m.largeCategory]?.label || m.largeCategory || '—';
+    const isChecked = mgrCheckedSet.has(m.id);
+
+    const card = document.createElement('div');
+    card.className = 'mgr-card' + (isChecked ? ' checked' : '');
+    card.dataset.id = m.id;
+    card.addEventListener('click', () => toggleMgrCheck(m.id, card));
+    card.innerHTML = `
+        <div class="mgr-thumb">
+            <img src="${esc(imgPath)}" alt="${esc(m.title||m.filename)}" loading="lazy"
+                 onerror="this.parentElement.innerHTML='<div class=\\'mgr-no-img\\'>🖼️</div>'">
+            <div class="mgr-check"></div>
+            <button class="mgr-edit-btn" title="編集">✏️</button>
+        </div>
+        <div class="mgr-info">
+            <div class="mgr-title" title="${esc(m.title||m.filename)}">${esc(m.title||m.filename)}</div>
+            <div class="mgr-filename">${esc(m.filename)}</div>
+            <span class="mgr-cat-tag">${esc(catLabel)}</span>
+        </div>
+    `;
+
+    // 編集ボタン：クリックが親カード（チェック）に伝播しないよう止める
+    card.querySelector('.mgr-edit-btn').addEventListener('click', e => {
+        e.stopPropagation();
+        openEditModal(m.id);
+    });
+
+    return card;
+}
+
+function toggleMgrCheck(id, card) {
+    if (mgrCheckedSet.has(id)) { mgrCheckedSet.delete(id); card.classList.remove('checked'); }
+    else                        { mgrCheckedSet.add(id);    card.classList.add('checked');    }
+    updateMgrDeleteBtn();
+}
+
+function mgrSelectAll(flag) {
+    const cat = document.getElementById('mgrCatFilter').value;
+    const q   = document.getElementById('mgrSearch').value.toLowerCase().trim();
+    existingItems
+        .filter(m => {
+            if (cat && m.largeCategory !== cat) return false;
+            if (q) return (m.title||'').toLowerCase().includes(q) || (m.filename||'').toLowerCase().includes(q);
+            return true;
+        })
+        .forEach(m => flag ? mgrCheckedSet.add(m.id) : mgrCheckedSet.delete(m.id));
+    renderMgrGrid();
+}
+
+function updateMgrDeleteBtn() {
+    const btn = document.getElementById('mgrDeleteBtn');
+    if (!btn) return;
+    const cnt = mgrCheckedSet.size;
+    btn.disabled = cnt === 0;
+    btn.textContent = cnt > 0 ? `🗑 選択した ${cnt} 件を削除` : '🗑 選択した素材を削除';
+}
+
+function mgrDeleteSelected() {
+    if (!mgrCheckedSet.size) return;
+    const targets = existingItems.filter(m => mgrCheckedSet.has(m.id));
+    if (!confirm(`選択中の ${targets.length} 件を data.json から削除しますか？\n（実際のWebPファイルはVSCodeから別途削除してください）`)) return;
+
+    // VSCode用パスリスト
+    const deletedPaths = targets.map(m => `assets/materials/${m.largeCategory}/${m.filename}`);
+
+    // existingItems から削除 & IDを振り直し
+    existingItems = existingItems.filter(m => !mgrCheckedSet.has(m.id));
+    existingItems.forEach((m,i) => { m.id = i+1; });
+
+    mgrCheckedSet.clear();
+    updateCounters();
+    updateMergePreview();
+    renderMgrGrid();
+
+    // 削除後エクスポートエリアを表示
+    document.getElementById('mgrExportWrap').style.display = 'block';
+    document.getElementById('mgrDeletedList').innerHTML =
+        `<strong>削除した素材（VSCodeでファイルも削除してください）：</strong><br>` +
+        deletedPaths.map(p => `📄 <code>${p}</code>`).join('<br>');
+
+    toast(`✅ ${targets.length} 件を削除しました。data.json をエクスポートして git push してください。`, 'success');
+}
+
+let editingMaterialId = null;
+
+function openEditModal(id) {
+    const m = existingItems.find(x => x.id === id);
+    if (!m) return;
+    editingMaterialId = id;
+
+    // タイトル・タグ・説明文
+    document.getElementById('editTitle').value = m.title || '';
+    document.getElementById('editTags').value  = (m.tags || []).join(', ');
+    document.getElementById('editDesc').value  = m.description || '';
+
+    // 大分類セレクト
+    const largeSel = document.getElementById('editLarge');
+    largeSel.innerHTML = '<option value="">選択してください</option>';
+    Object.entries(CAT).forEach(([k,v]) => {
+        const o = document.createElement('option');
+        o.value = k; o.textContent = `${v.icon||''} ${v.label}`;
+        if (k === m.largeCategory) o.selected = true;
+        largeSel.appendChild(o);
+    });
+
+    // 中分類セレクト
+    buildEditSubSel(m.largeCategory, m.category);
+
+    // モーダル表示
+    document.getElementById('editModal').style.display = 'flex';
+    document.getElementById('editTitle').focus();
+}
+
+function buildEditSubSel(largeKey, currentSub) {
+    const subSel = document.getElementById('editSub');
+    subSel.innerHTML = '<option value="">選択してください</option>';
+    if (!largeKey || !CAT[largeKey]) { subSel.disabled = true; return; }
+    subSel.disabled = false;
+    Object.entries(CAT[largeKey].subcategories || {}).forEach(([k,v]) => {
+        const o = document.createElement('option');
+        o.value = k; o.textContent = v;
+        if (k === currentSub) o.selected = true;
+        subSel.appendChild(o);
+    });
+}
+
+function onEditLargeChange() {
+    buildEditSubSel(document.getElementById('editLarge').value, '');
+}
+
+function saveEdit() {
+    const m = existingItems.find(x => x.id === editingMaterialId);
+    if (!m) return;
+
+    const title = document.getElementById('editTitle').value.trim();
+    const large = document.getElementById('editLarge').value;
+    const sub   = document.getElementById('editSub').value;
+    const tags  = parseTags(document.getElementById('editTags').value);
+    const desc  = document.getElementById('editDesc').value.trim();
+
+    if (!title) { document.getElementById('editTitle').style.borderColor='#e74c3c'; return; }
+
+    m.title         = title;
+    m.largeCategory = large;
+    m.category      = sub;
+    m.tags          = tags;
+    m.description   = desc;
+
+    closeEditModal();
+    renderMgrGrid();
+    updateMergePreview();
+    toast(`✅「${title}」を更新しました。data.json をエクスポートして git push してください。`, 'success');
+
+    // エクスポートエリアを表示（変更があったので）
+    document.getElementById('mgrExportWrap').style.display = 'block';
+    document.getElementById('mgrDeletedList').innerHTML =
+        `<strong>内容を編集しました。data.json をエクスポートして git push してください。</strong>`;
+}
+
+function closeEditModal() {
+    document.getElementById('editModal').style.display = 'none';
+    editingMaterialId = null;
+    document.getElementById('editTitle').style.borderColor = '';
+}
+
+// モーダル外クリックで閉じる
+document.getElementById('editModal')?.addEventListener('click', e => {
+    if (e.target === document.getElementById('editModal')) closeEditModal();
+});
+document.querySelector('[onclick="toggleStep(\'s5\')"]')?.addEventListener('click', () => {
+    setTimeout(() => {
+        if (!document.getElementById('s5').classList.contains('hidden')) renderMgrGrid();
+    }, 60);
+});
+
+// mgrSearch のイベント
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('mgrSearch')?.addEventListener('input', renderMgrGrid);
+});
+
 function parseTags(str){return str.split(',').map(t=>t.trim()).filter(Boolean);}
 function toast(msg,type='success'){const el=document.getElementById('toast');el.textContent=msg;el.className=`toast ${type} show`;clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('show'),3200);}
 
@@ -1643,6 +2035,9 @@ async function autoFetchDataJson() {
         document.getElementById('existingCount').textContent = incoming.length;
 
         toast(`📥 既存データ ${incoming.length} 件を自動取得しました`, 'success');
+
+        // 管理パネルが開いていれば再描画
+        if (!document.getElementById('s5')?.classList.contains('hidden')) renderMgrGrid();
     } catch(e) {
         // fetch失敗（ローカルファイル直接開いた場合など）は静かに無視
         console.info('data.json auto-fetch skipped:', e.message);
