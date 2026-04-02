@@ -1824,26 +1824,65 @@ function createMgrCard(m) {
     const catLabel = CAT[m.largeCategory]?.label || m.largeCategory || '—';
     const isChecked = mgrCheckedSet.has(m.id);
 
+    // カード本体
     const card = document.createElement('div');
     card.className = 'mgr-card' + (isChecked ? ' checked' : '');
     card.dataset.id = m.id;
-    card.addEventListener('click', () => toggleMgrCheck(m.id, card));
-    card.innerHTML = `
-        <div class="mgr-thumb">
-            <img src="${esc(imgPath)}" alt="${esc(m.title||m.filename)}" loading="lazy"
-                 onerror="this.parentElement.innerHTML='<div class=\\'mgr-no-img\\'>🖼️</div>'">
-            <div class="mgr-check"></div>
-            <button class="mgr-edit-btn" title="編集">✏️</button>
-        </div>
-        <div class="mgr-info">
-            <div class="mgr-title" title="${esc(m.title||m.filename)}">${esc(m.title||m.filename)}</div>
-            <div class="mgr-filename">${esc(m.filename)}</div>
-            <span class="mgr-cat-tag">${esc(catLabel)}</span>
-        </div>
-    `;
 
-    // 編集ボタン：クリックが親カード（チェック）に伝播しないよう止める
-    card.querySelector('.mgr-edit-btn').addEventListener('click', e => {
+    // ── サムネイル ──
+    const thumb = document.createElement('div');
+    thumb.className = 'mgr-thumb';
+
+    const img = document.createElement('img');
+    img.src     = imgPath;
+    img.alt     = m.title || m.filename;
+    img.loading = 'lazy';
+    img.onerror = function() {
+        const placeholder = document.createElement('div');
+        placeholder.className = 'mgr-no-img';
+        placeholder.textContent = '🖼️';
+        this.parentElement.replaceChild(placeholder, this);
+    };
+
+    const checkMark = document.createElement('div');
+    checkMark.className = 'mgr-check';
+
+    const editBtn = document.createElement('button');
+    editBtn.className = 'mgr-edit-btn';
+    editBtn.title = '編集';
+    editBtn.textContent = '✏️';
+
+    thumb.appendChild(img);
+    thumb.appendChild(checkMark);
+    thumb.appendChild(editBtn);
+
+    // ── テキスト情報 ──
+    const info = document.createElement('div');
+    info.className = 'mgr-info';
+
+    const titleEl = document.createElement('div');
+    titleEl.className = 'mgr-title';
+    titleEl.title = m.title || m.filename;
+    titleEl.textContent = m.title || m.filename;
+
+    const fileEl = document.createElement('div');
+    fileEl.className = 'mgr-filename';
+    fileEl.textContent = m.filename;
+
+    const catTag = document.createElement('span');
+    catTag.className = 'mgr-cat-tag';
+    catTag.textContent = catLabel;
+
+    info.appendChild(titleEl);
+    info.appendChild(fileEl);
+    info.appendChild(catTag);
+
+    card.appendChild(thumb);
+    card.appendChild(info);
+
+    // ── イベント ──
+    card.addEventListener('click', () => toggleMgrCheck(m.id, card));
+    editBtn.addEventListener('click', e => {
         e.stopPropagation();
         openEditModal(m.id);
     });
@@ -1995,6 +2034,7 @@ document.getElementById('editModal')?.addEventListener('click', e => {
 document.getElementById('mgrSearch')?.addEventListener('input', renderMgrGrid);
 
 function parseTags(str){return str.split(',').map(t=>t.trim()).filter(Boolean);}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function toast(msg,type='success'){const el=document.getElementById('toast');el.textContent=msg;el.className=`toast ${type} show`;clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('show'),3200);}
 
 // ============================================================
