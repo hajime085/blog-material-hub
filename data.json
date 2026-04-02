@@ -2,54 +2,54 @@
   "materials": [
     {
       "id": 1,
-      "title": "sakura001",
+      "title": "朱塗りの橋と五重塔の春",
       "description": "",
       "largeCategory": "nature",
       "category": "spring",
       "filename": "sakura001.webp",
       "tags": [
-        "春",
+        "日本庭園",
+        "赤い橋",
+        "五重塔",
         "桜",
-        "さくら",
-        "サクラ",
-        "お花見",
-        "はなみ"
+        "池",
+        "錦鯉"
       ],
-      "createdDate": "2026-04-01"
+      "createdDate": "2026-04-02"
     },
     {
       "id": 2,
-      "title": "sakura002",
+      "title": "霊峰富士と桜の絶景",
       "description": "",
       "largeCategory": "nature",
       "category": "spring",
       "filename": "sakura002.webp",
       "tags": [
-        "春",
+        "富士山",
         "桜",
-        "さくら",
-        "サクラ",
-        "お花見",
-        "はなみ"
+        "日本",
+        "絶景",
+        "山岳",
+        "満開",
+        "観光"
       ],
-      "createdDate": "2026-04-01"
+      "createdDate": "2026-04-02"
     },
     {
       "id": 3,
-      "title": "sakura003",
+      "title": "春風に揺れる水辺の古都",
       "description": "",
       "largeCategory": "nature",
       "category": "spring",
       "filename": "sakura003.webp",
       "tags": [
-        "春",
         "桜",
-        "さくら",
-        "サクラ",
-        "お花見",
-        "はなみ"
+        "池",
+        "日本庭園",
+        "橋",
+        "五重塔"
       ],
-      "createdDate": "2026-04-01"
+      "createdDate": "2026-04-02"
     },
     {
       "id": 4,
@@ -151,12 +151,165 @@
         "チューリップ"
       ],
       "createdDate": "2026-04-01"
+    },
+    {
+      "id": 10,
+      "title": "木漏れ日の聖域",
+      "description": "",
+      "largeCategory": "nature",
+      "category": "plants",
+      "filename": "green.webp",
+      "tags": [
+        "自然",
+        "木",
+        "森林",
+        "木漏れ日",
+        "風景"
+      ],
+      "createdDate": "2026-04-02"
+    },
+    {
+      "id": 11,
+      "title": "目覚めの雫",
+      "description": "",
+      "largeCategory": "nature",
+      "category": "plants",
+      "filename": "green2.webp",
+      "tags": [
+        "自然",
+        "木",
+        "森林",
+        "木漏れ日",
+        "風景"
+      ],
+      "createdDate": "2026-04-02"
+    },
+    {
+      "id": 12,
+      "title": "春色に染まる山河",
+      "description": "",
+      "largeCategory": "nature",
+      "category": "water",
+      "filename": "green3.webp",
+      "tags": [
+        "自然",
+        "木",
+        "森林",
+        "木漏れ日",
+        "風景"
+      ],
+      "createdDate": "2026-04-02"
+    },
+    {
+      "id": 13,
+      "title": "蒼穹と桜雲",
+      "description": "",
+      "largeCategory": "nature",
+      "category": "sky",
+      "filename": "sakura anime.webp",
+      "tags": [
+        "自然",
+        "雲",
+        "桜",
+        "アニメ",
+        "風景",
+        "さくら"
+      ],
+      "createdDate": "2026-04-02"
+    },
+    {
+      "id": 14,
+      "title": "さくら吹雪の記憶",
+      "description": "",
+      "largeCategory": "nature",
+      "category": "spring",
+      "filename": "sakura fubuki.webp",
+      "tags": [
+        "自然",
+        "雲",
+        "桜",
+        "アニメ",
+        "風景",
+        "さくら"
+      ],
+      "createdDate": "2026-04-02"
+    },
+    {
+      "id": 15,
+      "title": "春を運ぶ屋形船 ",
+      "description": "",
+      "largeCategory": "nature",
+      "category": "spring",
+      "filename": "sakura fune.webp",
+      "tags": [
+        "自然",
+        "雲",
+        "桜",
+        "アニメ",
+        "風景",
+        "さくら"
+      ],
+      "createdDate": "2026-04-02"
+    },
+    {
+      "id": 16,
+      "title": "水面に映る春の回廊",
+      "description": "",
+      "largeCategory": "nature",
+      "category": "spring",
+      "filename": "sakura river.webp",
+      "tags": [
+        "桜",
+        "川",
+        "反射",
+        "水面",
+        "並木道",
+        "静寂",
+        "風景"
+      ],
+      "createdDate": "2026-04-02"
+    },
+    {
+      "id": 17,
+      "title": "光降る桜のトンネル ",
+      "description": "",
+      "largeCategory": "nature",
+      "category": "spring",
+      "filename": "sakura road.webp",
+      "tags": [
+        "桜",
+        "並木",
+        "木漏れ日",
+        "道",
+        "幻想的",
+        "ピンク",
+        "春"
+      ],
+      "createdDate": "2026-04-02"
+    },
+    {
+      "id": 18,
+      "title": "満開の下で囲む春の膳",
+      "description": "",
+      "largeCategory": "nature",
+      "category": "spring",
+      "filename": "sakura01.webp",
+      "tags": [
+        "お花見",
+        "弁当",
+        "桜",
+        "公園",
+        "伝統",
+        "団欒",
+        "ピクニック"
+      ],
+      "createdDate": "2026-04-02"
     }
   ],
   "metadata": {
     "version": "2.0",
-    "totalMaterials": 9,
-    "lastUpdated": "2026-04-01",
+    "totalMaterials": 18,
+    "lastUpdated": "2026-04-02",
     "largeCategoryDefs": {
       "nature": {
         "label": "自然",
