@@ -804,6 +804,8 @@ function toggleStep(id) {
     const toggle = document.getElementById('tog-' + id);
     const hidden = body.classList.toggle('hidden');
     toggle.classList.toggle('open', !hidden);
+    // s5（登録済み管理）が開かれたとき
+    if (id === 's5' && !hidden) renderMgrGrid();
 }
 
 // ============================================================
@@ -1988,16 +1990,9 @@ function closeEditModal() {
 document.getElementById('editModal')?.addEventListener('click', e => {
     if (e.target === document.getElementById('editModal')) closeEditModal();
 });
-document.querySelector('[onclick="toggleStep(\'s5\')"]')?.addEventListener('click', () => {
-    setTimeout(() => {
-        if (!document.getElementById('s5').classList.contains('hidden')) renderMgrGrid();
-    }, 60);
-});
 
-// mgrSearch のイベント
-document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('mgrSearch')?.addEventListener('input', renderMgrGrid);
-});
+// mgrSearch のイベント（DOMContentLoaded不要、scriptはbody末尾なのでそのまま登録）
+document.getElementById('mgrSearch')?.addEventListener('input', renderMgrGrid);
 
 function parseTags(str){return str.split(',').map(t=>t.trim()).filter(Boolean);}
 function toast(msg,type='success'){const el=document.getElementById('toast');el.textContent=msg;el.className=`toast ${type} show`;clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('show'),3200);}
