@@ -893,9 +893,59 @@ folderDropZone.addEventListener('dragleave', () => folderDropZone.classList.remo
 folderDropZone.addEventListener('drop', e => {
     e.preventDefault();
     folderDropZone.classList.remove('drag-over');
-    addFilesWithPath(e.dataTransfer.files);
+
+    // dataTransfer.items + webkitGetAsEntry でフォルダを再帰的に読む
+    const items = Array.from(e.dataTransfer.items || []);
+    if (!items.length) { toast('ファイルを認識できませんでした', 'error'); return; }
+
+    const collectedFiles = []; // { file, relativePath } のリスト
+    let pending = 0;
+
+    function onAllDone() {
+        if (pending > 0) return;
+        if (!collectedFiles.length) { toast('WebPファイルが見つかりません', 'error'); return; }
+        addFilesFromEntries(collectedFiles);
+    }
+
+    function readEntry(entry, pathPrefix) {
+        if (entry.isFile) {
+            if (!entry.name.toLowerCase().endsWith('.webp')) return;
+            pending++;
+            entry.file(file => {
+                collectedFiles.push({ file, relativePath: pathPrefix + entry.name });
+                pending--;
+                onAllDone();
+            });
+        } else if (entry.isDirectory) {
+            pending++;
+            const reader = entry.createReader();
+            function readAll() {
+                reader.readEntries(entries => {
+                    if (!entries.length) { pending--; onAllDone(); return; }
+                    entries.forEach(e2 => readEntry(e2, pathPrefix + entry.name + '/'));
+                    readAll(); // 100件超のフォルダ対応
+                });
+            }
+            readAll();
+        }
+    }
+
+    items.forEach(item => {
+        const entry = item.webkitGetAsEntry?.();
+        if (entry) readEntry(entry, '');
+    });
 });
-folderInput.addEventListener('change', e => { addFilesWithPath(e.target.files); folderInput.value = ''; });
+
+// ボタンクリックでフォルダを選ぶ場合（input webkitdirectory）
+folderInput.addEventListener('change', e => {
+    // input経由は webkitRelativePath が取れる
+    const files = Array.from(e.target.files);
+    const collected = files
+        .filter(f => f.name.toLowerCase().endsWith('.webp'))
+        .map(f => ({ file: f, relativePath: f.webkitRelativePath || f.name }));
+    addFilesFromEntries(collected);
+    folderInput.value = '';
+});
 
 // ファイルドロップゾーン（個別）
 fileDropZone.addEventListener('dragover',  e => { e.preventDefault(); fileDropZone.classList.add('drag-over'); });
@@ -907,42 +957,52 @@ fileDropZone.addEventListener('drop', e => {
 });
 fileInput.addEventListener('change', e => { addFiles(e.target.files); fileInput.value = ''; });
 
-// フォルダドロップ → パス情報からカテゴリを自動判定
-function addFilesWithPath(fileList) {
-    const files = Array.from(fileList).filter(f => f.name.toLowerCase().endsWith('.webp'));
-    if (!files.length) { toast('WebPファイルが見つかりません', 'error'); return; }
-
+// ============================================================
+//  フォルダエントリからアイテムを登録（パスで大分類を自動判定）
+// ============================================================
+function addFilesFromEntries(collected) {
+    // collected = [{ file, relativePath }]
+    // relativePath 例:
+    //   "nature/sakura001.webp"          → parts[-2] = "nature"
+    //   "assets/materials/nature/s.webp" → parts[-2] = "nature"（直上フォルダ）
     let added = 0, skipped = 0;
-    files.forEach(f => {
-        if (pendingItems.some(p => p.filename === f.name && p._sourcePath === (f.webkitRelativePath || f.name))) {
-            skipped++; return;
-        }
 
-        // フォルダ名を大分類として抽出
-        // webkitRelativePath = "nature/sakura001.webp" → "nature"
-        const relPath = f.webkitRelativePath || f.name;
-        const parts   = relPath.split('/');
+    collected.forEach(({ file, relativePath }) => {
+        if (pendingItems.some(p => p._sourcePath === relativePath)) { skipped++; return; }
+
+        const parts = relativePath.replace(/\\/g, '/').split('/');
+        // 直上フォルダ名（ファイルの1つ上）を大分類として使う
         const detectedLarge = parts.length >= 2 ? parts[parts.length - 2].toLowerCase() : '';
 
         pendingItems.push({
             tempId:        'tmp_' + (++tempIdSeq),
-            filename:      f.name,
-            title:         filenameToTitle(f.name),
-            largeCategory: detectedLarge,   // フォルダ名から自動設定
+            filename:      file.name,
+            title:         filenameToTitle(file.name),
+            largeCategory: detectedLarge,
             category:      '',
             tags:          [],
-            _sourcePath:   relPath          // 重複チェック用（内部用）
+            _sourcePath:   relativePath
         });
         added++;
     });
 
+    if (!added && !skipped) { toast('WebPファイルが見つかりません', 'error'); return; }
     if (skipped) toast(`${added} 件追加（${skipped} 件は重複スキップ）`, 'info');
-    else toast(`${added} 件追加しました！大分類を自動設定しました`, 'success');
+    else toast(`✅ ${added} 件追加！大分類をフォルダ名から自動設定しました`, 'success');
 
     renderTable();
     renderGroupPanels();
     updateCounters();
     updateMergePreview();
+}
+
+// フォルダドロップ → パス情報からカテゴリを自動判定（旧・互換用 削除）
+function addFilesWithPath(fileList) {
+    // input[webkitdirectory] 経由は folderInput.change で処理するため不使用
+    const collected = Array.from(fileList)
+        .filter(f => f.name.toLowerCase().endsWith('.webp'))
+        .map(f => ({ file: f, relativePath: f.webkitRelativePath || f.name }));
+    addFilesFromEntries(collected);
 }
 
 // 個別ファイルドロップ（パス情報なし）
