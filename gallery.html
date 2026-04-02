@@ -400,6 +400,16 @@ function buildSubRow(largeKey) {
 }
 
 function refreshTagRow() {
+    const row = document.getElementById('rowTag');
+    row.innerHTML = '';
+
+    // 「すべて」選択中はタグ非表示
+    if (!activeFilters.large) {
+        row.style.display = 'none';
+        row.classList.remove('has-items');
+        return;
+    }
+
     const relevant = allMaterials.filter(m => {
         if (activeFilters.large && m.largeCategory !== activeFilters.large) return false;
         if (activeFilters.sub   && m.category      !== activeFilters.sub)   return false;
@@ -407,22 +417,53 @@ function refreshTagRow() {
     });
     const tagSet = new Set();
     relevant.forEach(m => (m.tags||[]).forEach(t => tagSet.add(t)));
-    const row = document.getElementById('rowTag');
-    row.innerHTML = '';
+
     if (!tagSet.size) { row.style.display='none'; row.classList.remove('has-items'); return; }
-    row.style.display='flex'; row.classList.add('has-items');
-    Array.from(tagSet).sort().forEach(tag => {
-        const btn = document.createElement('button');
-        btn.className = 'pill tag-pill' + (activeFilters.tags.includes(tag) ? ' active' : '');
-        btn.textContent = tag;
-        btn.addEventListener('click', () => {
-            if (activeFilters.tags.includes(tag)) activeFilters.tags = activeFilters.tags.filter(t=>t!==tag);
-            else activeFilters.tags.push(tag);
-            btn.classList.toggle('active', activeFilters.tags.includes(tag));
-            applyFilters();
+
+    const allTags  = Array.from(tagSet).sort();
+    const LIMIT    = 12;
+    const showAll  = allTags.length <= LIMIT;
+    const visibleTags = showAll ? allTags : allTags.slice(0, LIMIT);
+
+    row.style.display = 'flex';
+    row.classList.add('has-items');
+
+    const renderTags = (tags) => {
+        tags.forEach(tag => {
+            const btn = document.createElement('button');
+            btn.className = 'pill tag-pill' + (activeFilters.tags.includes(tag) ? ' active' : '');
+            btn.textContent = tag;
+            btn.addEventListener('click', () => {
+                if (activeFilters.tags.includes(tag)) activeFilters.tags = activeFilters.tags.filter(t=>t!==tag);
+                else activeFilters.tags.push(tag);
+                btn.classList.toggle('active', activeFilters.tags.includes(tag));
+                applyFilters();
+            });
+            row.insertBefore(btn, row.querySelector('.tag-more-btn'));
         });
-        row.appendChild(btn);
-    });
+    };
+
+    // 「もっと見る」ボタン（先に追加しておく）
+    if (!showAll) {
+        const remaining = allTags.length - LIMIT;
+        const moreBtn = document.createElement('button');
+        moreBtn.className = 'pill tag-more-btn';
+        moreBtn.textContent = `＋${remaining}件 もっと見る`;
+        moreBtn.style.cssText = 'border-style:dashed;';
+        moreBtn.addEventListener('click', () => {
+            moreBtn.remove();
+            renderTags(allTags.slice(LIMIT));
+        });
+        row.appendChild(moreBtn);
+    } else {
+        // もっと見るなし用のダミー（insertBefore用）
+        const dummy = document.createElement('span');
+        dummy.className = 'tag-more-btn';
+        dummy.style.display = 'none';
+        row.appendChild(dummy);
+    }
+
+    renderTags(visibleTags);
 }
 
 // ===== フィルタ適用 =====
