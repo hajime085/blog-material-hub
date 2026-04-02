@@ -675,6 +675,12 @@
                 ⚠ ここでの削除は <strong>data.json の記録のみ</strong>を削除します。実際のWebPファイルはVSCodeのエクスプローラーから手動で削除してください。削除後は「data.json をダウンロード」→ git push が必要です。
             </div>
 
+            <!-- サーバー再読み込み -->
+            <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:1.2rem;padding:.8rem 1rem;background:#f0f7ff;border-radius:8px;border:1px solid #bee3f8;flex-wrap:wrap;">
+                <span style="font-size:.85rem;color:#2b6cb0;">git push 後、最新の data.json をサーバーから再取得できます（GitHub Pages の更新に1〜2分かかります）</span>
+                <button class="btn btn-primary btn-sm" onclick="reloadFromServer()">🔄 サーバーから再読み込み</button>
+            </div>
+
             <!-- ツールバー -->
             <div class="mgr-toolbar">
                 <div class="mgr-toolbar-left">
@@ -1943,6 +1949,16 @@ function mgrDeleteSelected() {
     toast(`✅ ${targets.length} 件を削除しました。data.json をエクスポートして git push してください。`, 'success');
 }
 
+// 管理画面の「再読み込み」ボタン用
+async function reloadFromServer() {
+    toast('🔄 サーバーから最新データを取得中…', 'info');
+    existingItems = []; // 一度クリアして強制再取得
+    const count = await fetchFromServer(true);
+    if (count > 0) {
+        document.getElementById('mgrExportWrap').style.display = 'none';
+    }
+}
+
 // 管理画面（削除・編集）後の専用エクスポート
 // pendingItems を混ぜず existingItems だけを書き出す
 function exportExistingOnly() {
@@ -2065,41 +2081,42 @@ function toast(msg,type='success'){const el=document.getElementById('toast');el.
 //  起動時に data.json を自動フェッチして既存データを読み込む
 // ============================================================
 async function autoFetchDataJson() {
-    // 既存インポートが手動でされていたらスキップ
     if (existingItems.length > 0) return;
+    await fetchFromServer(false); // 初回は静かに
+}
 
+// サーバーから強制取得（キャッシュ無効化・手動呼び出し対応）
+async function fetchFromServer(showToast = true) {
     try {
-        const res = await fetch('data.json');
+        const res = await fetch('data.json?t=' + Date.now(), { cache: 'no-store' });
         if (!res.ok) throw new Error('HTTP ' + res.status);
         const json = await res.json();
 
         const incoming = Array.isArray(json.materials) ? json.materials : [];
-        if (!incoming.length) return; // 空なら何もしない
 
         existingItems = incoming;
 
-        // カテゴリ定義もサーバーから取得して更新（確認なしで静かに適用）
         if (json.metadata?.largeCategoryDefs && Object.keys(json.metadata.largeCategoryDefs).length) {
             CAT = JSON.parse(JSON.stringify(json.metadata.largeCategoryDefs));
-            saveCatDefs();
-            renderCatList();
-            rebuildAllCatSelects();
+            saveCatDefs(); renderCatList(); rebuildAllCatSelects();
         }
 
         updateCounters();
         updateMergePreview();
 
         document.getElementById('existingInfo').textContent =
-            `✅ サーバーの data.json から ${incoming.length} 件を自動読み込みしました`;
+            `✅ サーバーの data.json から ${incoming.length} 件を読み込みました`;
         document.getElementById('existingCount').textContent = incoming.length;
 
-        toast(`📥 既存データ ${incoming.length} 件を自動取得しました`, 'success');
+        if (showToast) toast(`🔄 最新 data.json を取得しました（${incoming.length} 件）`, 'success');
 
-        // 管理パネルが開いていれば再描画
         if (!document.getElementById('s5')?.classList.contains('hidden')) renderMgrGrid();
+
+        return incoming.length;
     } catch(e) {
-        // fetch失敗（ローカルファイル直接開いた場合など）は静かに無視
-        console.info('data.json auto-fetch skipped:', e.message);
+        console.info('data.json fetch skipped:', e.message);
+        if (showToast) toast('サーバーからの取得に失敗しました（ローカル環境では正常です）', 'error');
+        return 0;
     }
 }
 
