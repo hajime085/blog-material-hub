@@ -270,7 +270,61 @@
             .nav-links { display:none; position:absolute; top:100%; left:0; right:0; background:var(--navy); flex-direction:column; gap:0; padding:.5rem 0; z-index:100; }
             .nav-links.open { display:flex; }
             .nav-links a { padding:.8rem 2rem; }
-            main { padding:1rem 1rem 3rem; }
+            /* 固定バーの分だけ下にスペースを確保 */
+            main { padding:1rem 1rem 6rem; }
+            /* PC用の右カラム（ダウンロードカード）はスマホで非表示 */
+            .right-col { display:none; }
+        }
+
+        /* ===== モバイル固定ダウンロードバー ===== */
+        .mobile-dl-bar {
+            display: none; /* PCでは非表示 */
+        }
+        @media(max-width:768px) {
+            .mobile-dl-bar {
+                display: flex;
+                position: fixed;
+                bottom: 0; left: 0; right: 0;
+                z-index: 500;
+                background: var(--navy);
+                padding: .75rem 1rem;
+                gap: .75rem;
+                align-items: center;
+                box-shadow: 0 -4px 20px rgba(0,0,0,.25);
+            }
+            .mobile-dl-bar .mobile-dl-info {
+                flex: 1;
+                min-width: 0;
+            }
+            .mobile-dl-bar .mobile-dl-title {
+                font-size: .78rem;
+                font-weight: 700;
+                color: #fff;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .mobile-dl-bar .mobile-dl-sub {
+                font-size: .7rem;
+                color: rgba(255,255,255,.55);
+            }
+            .mobile-dl-bar .mobile-dl-btn {
+                flex-shrink: 0;
+                padding: .7rem 1.4rem;
+                background: linear-gradient(135deg, var(--accent), var(--acc2));
+                color: #fff;
+                border: none;
+                border-radius: 8px;
+                font-size: .9rem;
+                font-weight: 700;
+                cursor: pointer;
+                font-family: inherit;
+                box-shadow: 0 3px 12px rgba(232,82,10,.4);
+                transition: all .2s;
+            }
+            .mobile-dl-bar .mobile-dl-btn:active {
+                transform: scale(.97);
+            }
         }
     </style>
 </head>
@@ -569,6 +623,10 @@ function renderMaterial(m) {
     const imgPath  = `assets/materials/${m.largeCategory}/${m.filename}`;
     const catLabel = getCatLabel(m.largeCategory, m.category);
 
+    // モバイル固定バーのタイトルを更新
+    const mobileDlTitle = document.getElementById('mobileDlTitle');
+    if (mobileDlTitle) mobileDlTitle.textContent = m.title || m.filename;
+
     // ページタイトル
     document.title = `${m.title || m.filename} | ソザイノ`;
 
@@ -767,5 +825,15 @@ function copyCredit() {
 // ===== 起動 =====
 init();
 </script>
+
+<!-- モバイル固定ダウンロードバー -->
+<div class="mobile-dl-bar" id="mobileDlBar">
+    <div class="mobile-dl-info">
+        <div class="mobile-dl-title" id="mobileDlTitle">素材をダウンロード</div>
+        <div class="mobile-dl-sub">WebP形式 / 無料・商用OK</div>
+    </div>
+    <button class="mobile-dl-btn" onclick="startDownload()">⬇ ダウンロード</button>
+</div>
+
 </body>
 </html>
