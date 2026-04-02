@@ -325,6 +325,20 @@
             .mobile-dl-bar .mobile-dl-btn:active {
                 transform: scale(.97);
             }
+            .mobile-dl-progress {
+                height: 4px;
+                background: rgba(255,255,255,.2);
+                border-radius: 2px;
+                margin-top: .4rem;
+                overflow: hidden;
+            }
+            .mobile-dl-progress-fill {
+                height: 100%;
+                width: 0%;
+                background: linear-gradient(90deg, var(--accent), var(--acc2));
+                border-radius: 2px;
+                transition: width .12s linear;
+            }
         }
     </style>
 </head>
@@ -717,6 +731,7 @@ function startDownload() {
     if (dlRunning || !currentMaterial) return;
     dlRunning = true;
 
+    // PC サイドバー側のUI要素
     const btn       = document.getElementById('dlBtn');
     const progWrap  = document.getElementById('dlProgress');
     const fill      = document.getElementById('progressFill');
@@ -724,12 +739,23 @@ function startDownload() {
     const countEl   = document.getElementById('progressCount');
     const successEl = document.getElementById('dlSuccess');
 
-    btn.disabled = true;
-    btn.innerHTML = '<span>⏳</span> 準備中…';
-    progWrap.style.display = 'block';
-    successEl.style.display = 'none';
+    // モバイル固定バー側のUI要素
+    const mBtn      = document.getElementById('mobileDlBtn');
+    const mProgress = document.getElementById('mobileDlProgress');
+    const mFill     = document.getElementById('mobileDlProgressFill');
+    const mSub      = document.getElementById('mobileDlSub');
 
-    const steps = [
+    // PC側の初期化
+    if (btn)       { btn.disabled = true; btn.innerHTML = '<span>⏳</span> 準備中…'; }
+    if (progWrap)  progWrap.style.display = 'block';
+    if (successEl) successEl.style.display = 'none';
+
+    // モバイル側の初期化
+    if (mBtn)      { mBtn.disabled = true; mBtn.textContent = '⏳ 準備中…'; }
+    if (mProgress) mProgress.style.display = 'block';
+    if (mFill)     mFill.style.width = '0%';
+
+    const steps  = [
         { pct: 15, msg: '🔒 ライセンスを確認しています…' },
         { pct: 40, msg: '📦 ファイルを準備しています…' },
         { pct: 70, msg: '⚡ ダウンロードリンクを生成しています…' },
@@ -738,45 +764,49 @@ function startDownload() {
     const total  = WAIT_SEC * 1000;
     const start  = Date.now();
     let stepIdx  = 0;
-
     const stepMs = [0, 1000, 2200, 3800];
 
     function tick() {
         const elapsed = Date.now() - start;
         const pct     = Math.min(100, (elapsed / total) * 100);
-        fill.style.width = pct + '%';
+
+        // PC側プログレス
+        if (fill) fill.style.width = pct + '%';
+
+        // モバイル側プログレス（同期）
+        if (mFill) mFill.style.width = pct + '%';
 
         // メッセージ切り替え
         while (stepIdx < steps.length && elapsed >= stepMs[stepIdx]) {
-            label.textContent = steps[stepIdx].msg;
-            fill.style.width  = steps[stepIdx].pct + '%';
+            if (label) { label.textContent = steps[stepIdx].msg; fill.style.width = steps[stepIdx].pct + '%'; }
+            if (mFill) mFill.style.width = steps[stepIdx].pct + '%';
             stepIdx++;
         }
 
         const remain = Math.max(0, Math.ceil((total - elapsed) / 1000));
-        countEl.textContent = remain > 0 ? `${remain} 秒後にダウンロード開始` : '';
+        if (countEl) countEl.textContent = remain > 0 ? `${remain} 秒後にダウンロード開始` : '';
+        if (mSub)    mSub.textContent    = remain > 0 ? `${remain} 秒後に開始` : '準備完了！';
 
         if (elapsed < total) {
             requestAnimationFrame(tick);
         } else {
-            // 実際のダウンロード実行
-            fill.style.width = '100%';
-            label.textContent = '✅ ダウンロード開始！';
-            countEl.textContent = '';
+            // ダウンロード実行
+            if (fill)  fill.style.width = '100%';
+            if (mFill) mFill.style.width = '100%';
+            if (label) label.textContent = '✅ ダウンロード開始！';
 
             const imgPath = `assets/materials/${currentMaterial.largeCategory}/${currentMaterial.filename}`;
             const a = document.createElement('a');
-            a.href     = imgPath;
-            a.download = currentMaterial.filename;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
+            a.href = imgPath; a.download = currentMaterial.filename;
+            document.body.appendChild(a); a.click(); document.body.removeChild(a);
 
             setTimeout(() => {
-                progWrap.style.display = 'none';
-                successEl.style.display = 'block';
-                btn.disabled = false;
-                btn.innerHTML = '<span>⬇</span> もう一度ダウンロード';
+                if (progWrap)  progWrap.style.display = 'none';
+                if (successEl) { successEl.style.display = 'block'; }
+                if (btn)       { btn.disabled = false; btn.innerHTML = '<span>⬇</span> もう一度ダウンロード'; }
+                if (mProgress) mProgress.style.display = 'none';
+                if (mBtn)      { mBtn.disabled = false; mBtn.textContent = '⬇ ダウンロード'; }
+                if (mSub)      mSub.textContent = 'WebP形式 / 無料・商用OK';
                 dlRunning = false;
             }, 800);
         }
@@ -830,9 +860,13 @@ init();
 <div class="mobile-dl-bar" id="mobileDlBar">
     <div class="mobile-dl-info">
         <div class="mobile-dl-title" id="mobileDlTitle">素材をダウンロード</div>
-        <div class="mobile-dl-sub">WebP形式 / 無料・商用OK</div>
+        <div class="mobile-dl-sub" id="mobileDlSub">WebP形式 / 無料・商用OK</div>
+        <!-- カウントダウンバー（処理中のみ表示） -->
+        <div class="mobile-dl-progress" id="mobileDlProgress" style="display:none;">
+            <div class="mobile-dl-progress-fill" id="mobileDlProgressFill"></div>
+        </div>
     </div>
-    <button class="mobile-dl-btn" onclick="startDownload()">⬇ ダウンロード</button>
+    <button class="mobile-dl-btn" id="mobileDlBtn" onclick="startDownload()">⬇ ダウンロード</button>
 </div>
 
 </body>
