@@ -702,9 +702,9 @@
 
             <!-- 削除後エクスポート -->
             <div id="mgrExportWrap" style="display:none;margin-top:1.5rem;padding:1rem;background:#f9f9f9;border-radius:8px;border:1px solid var(--border);">
-                <div style="font-size:.88rem;font-weight:700;margin-bottom:.6rem;">✅ 削除しました。data.json をエクスポートして git push してください。</div>
+                <div style="font-size:.88rem;font-weight:700;margin-bottom:.6rem;">✅ 変更しました。data.json をエクスポートして git push してください。</div>
                 <div id="mgrDeletedList" style="font-size:.8rem;color:var(--muted);margin-bottom:.8rem;line-height:1.8;"></div>
-                <button class="btn btn-success" onclick="exportJson()">⬇ data.json をダウンロード</button>
+                <button class="btn btn-success" onclick="exportExistingOnly()">⬇ data.json をダウンロード</button>
             </div>
         </div>
     </div>
@@ -1943,7 +1943,31 @@ function mgrDeleteSelected() {
     toast(`✅ ${targets.length} 件を削除しました。data.json をエクスポートして git push してください。`, 'success');
 }
 
-let editingMaterialId = null;
+// 管理画面（削除・編集）後の専用エクスポート
+// pendingItems を混ぜず existingItems だけを書き出す
+function exportExistingOnly() {
+    if (!existingItems.length) { toast('エクスポートするデータがありません', 'error'); return; }
+
+    // IDを1から振り直し
+    const materials = existingItems.map((m, i) => ({ ...m, id: i + 1 }));
+
+    const json = {
+        materials,
+        metadata: {
+            version:          '2.0',
+            totalMaterials:   materials.length,
+            lastUpdated:      new Date().toISOString().split('T')[0],
+            largeCategoryDefs: JSON.parse(JSON.stringify(CAT))
+        }
+    };
+
+    const a = document.createElement('a');
+    a.href     = URL.createObjectURL(new Blob([JSON.stringify(json, null, 2)], { type:'application/json' }));
+    a.download = 'data.json';
+    a.click();
+    URL.revokeObjectURL(a.href);
+    toast(`✅ data.json をダウンロードしました（${materials.length} 件）`, 'success');
+}
 
 function openEditModal(id) {
     const m = existingItems.find(x => x.id === id);
