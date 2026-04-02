@@ -1538,6 +1538,11 @@
           "child": "こども",
           "group": "グループ"
         }
+      },
+      "blog": {
+        "label": "ブログ素材",
+        "icon": "🗒",
+        "subcategories": {}
       }
     }
   }
