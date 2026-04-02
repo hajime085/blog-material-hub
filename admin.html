@@ -266,6 +266,23 @@
         .ai-panel-title { font-size:.95rem; font-weight:700; color:#fff; margin-bottom:.2rem; }
         .ai-panel-desc  { font-size:.78rem; color:rgba(255,255,255,.55); }
         .ai-panel-actions { display:flex; gap:.6rem; align-items:center; flex-shrink:0; }
+
+        /* APIキー行 */
+        .ai-key-row {
+            display:flex; align-items:center; gap:.6rem; flex-wrap:wrap;
+            padding-bottom:.9rem; margin-bottom:.9rem;
+            border-bottom:1px solid rgba(255,255,255,.12);
+        }
+        .ai-key-label { font-size:.82rem; color:rgba(255,255,255,.7); font-weight:600; white-space:nowrap; }
+        .ai-key-input {
+            flex:1; min-width:200px; padding:.45rem .75rem;
+            border:1px solid rgba(255,255,255,.25); border-radius:6px;
+            background:rgba(255,255,255,.08); color:#fff; font-size:.85rem;
+            font-family:monospace;
+        }
+        .ai-key-input::placeholder { color:rgba(255,255,255,.3); }
+        .ai-key-input:focus { outline:none; border-color:rgba(255,255,255,.5); background:rgba(255,255,255,.12); }
+        .ai-key-status { font-size:.78rem; white-space:nowrap; }
         .ai-target-sel {
             padding:.45rem .7rem; border-radius:6px; border:1px solid rgba(255,255,255,.2);
             background:rgba(255,255,255,.08); color:#fff; font-size:.82rem; font-family:inherit; cursor:pointer;
@@ -544,6 +561,13 @@
         <div class="step-body" id="s3">
             <!-- AI生成パネル -->
             <div class="ai-panel" id="aiPanel">
+                <!-- APIキー設定 -->
+                <div class="ai-key-row" id="aiKeyRow">
+                    <span class="ai-key-label">🔑 Anthropic APIキー</span>
+                    <input type="password" id="aiKeyInput" placeholder="sk-ant-..." class="ai-key-input">
+                    <button class="btn btn-sm" style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);" onclick="saveApiKey()">保存</button>
+                    <span class="ai-key-status" id="aiKeyStatus"></span>
+                </div>
                 <div class="ai-panel-top">
                     <div>
                         <div class="ai-panel-title">🤖 AIでタイトル・タグを自動生成</div>
@@ -1644,6 +1668,13 @@ let aiShouldStop = false;
 async function startAiGenerate() {
     if (aiRunning) return;
 
+    // APIキー確認
+    if (!loadApiKey()) {
+        toast('先にAPIキーを入力・保存してください', 'error');
+        document.getElementById('aiKeyInput').focus();
+        return;
+    }
+
     const targetMode = document.getElementById('aiTargetSel').value;
     let targets = [];
     if (targetMode === 'empty') {
@@ -1731,12 +1762,55 @@ async function resizeToBase64(file, maxPx = 512) {
 }
 
 // Claude Haiku API に画像を送ってタイトル・タグを取得
+// ============================================================
+//  APIキー管理
+// ============================================================
+const API_KEY_STORAGE = 'sozaino_api_key';
+
+function loadApiKey() {
+    return localStorage.getItem(API_KEY_STORAGE) || '';
+}
+
+function saveApiKey() {
+    const key = document.getElementById('aiKeyInput').value.trim();
+    if (!key.startsWith('sk-ant-')) {
+        toast('APIキーは sk-ant- から始まる文字列です', 'error');
+        return;
+    }
+    localStorage.setItem(API_KEY_STORAGE, key);
+    showApiKeyStatus();
+    toast('✅ APIキーを保存しました', 'success');
+}
+
+function showApiKeyStatus() {
+    const key = loadApiKey();
+    const inp = document.getElementById('aiKeyInput');
+    const status = document.getElementById('aiKeyStatus');
+    if (!inp || !status) return;
+    if (key) {
+        inp.value = key.slice(0, 12) + '…';
+        status.textContent = '✅ 設定済み';
+        status.style.color = '#68d391';
+    } else {
+        status.textContent = '⚠ 未設定';
+        status.style.color = '#f6ad55';
+    }
+}
+
 async function generateWithAI(file) {
+    const apiKey = loadApiKey();
+    if (!apiKey) throw new Error('APIキーが設定されていません');
+
     const base64 = await resizeToBase64(file, 512);
 
     const res = await fetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': apiKey,
+            'anthropic-version': '2023-06-01',
+            'anthropic-dangerous-direct-browser-access': 'true'
+        },
         body: JSON.stringify({
             model: 'claude-haiku-4-5-20251001',
             max_tokens: 256,
@@ -1760,19 +1834,20 @@ async function generateWithAI(file) {
         })
     });
 
-    if (!res.ok) throw new Error('API error ' + res.status);
+    if (!res.ok) {
+        const errText = await res.text().catch(() => '');
+        throw new Error(`API error ${res.status}: ${errText.slice(0, 100)}`);
+    }
     const data = await res.json();
     const text = data.content?.[0]?.text || '';
 
-    // JSONを安全にパース
     try {
         const clean = text.replace(/```json|```/g, '').trim();
         return JSON.parse(clean);
     } catch(e) {
-        // JSON抽出を試みる
         const match = text.match(/\{[\s\S]*\}/);
         if (match) return JSON.parse(match[0]);
-        throw new Error('JSONパース失敗');
+        throw new Error('JSONパース失敗: ' + text.slice(0, 80));
     }
 }
 // ============================================================
@@ -2128,6 +2203,7 @@ rebuildAllCatSelects();
 renderTable();
 updateCounters();
 updateMergePreview();
+showApiKeyStatus();
 
 // 起動時に自動フェッチ
 autoFetchDataJson();
