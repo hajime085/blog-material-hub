@@ -1562,11 +1562,62 @@
         "テクノロジー"
       ],
       "createdDate": "2026-04-02"
+    },
+    {
+      "id": 93,
+      "title": "春の和菓子と緑茶のおもてなし風景",
+      "description": "",
+      "largeCategory": "food",
+      "category": "sweets",
+      "filename": "sakura food.webp",
+      "tags": [
+        "和菓子",
+        "緑茶",
+        "春",
+        "和風",
+        "食べ物",
+        "おもてなし"
+      ],
+      "createdDate": "2026-04-02"
+    },
+    {
+      "id": 94,
+      "title": "春の優雅なティータイムｰ紅茶とお菓子でリラックス",
+      "description": "",
+      "largeCategory": "food",
+      "category": "sweets",
+      "filename": "sakura food2.webp",
+      "tags": [
+        "紅茶",
+        "春",
+        "ティータイム",
+        "リラックス",
+        "優雅",
+        "和菓子"
+      ],
+      "createdDate": "2026-04-02"
+    },
+    {
+      "id": 95,
+      "title": "優雅なティータイムの風景 桜の花とケーキ",
+      "description": "",
+      "largeCategory": "food",
+      "category": "sweets",
+      "filename": "sakura food3.webp",
+      "tags": [
+        "紅茶",
+        "ティータイム",
+        "桜",
+        "お菓子",
+        "優雅",
+        "リラックス"
+      ],
+      "createdDate": "2026-04-02"
     }
   ],
   "metadata": {
     "version": "2.0",
-    "totalMaterials": 92,
+    "totalMaterials": 95,
     "lastUpdated": "2026-04-02",
     "largeCategoryDefs": {
       "nature": {
