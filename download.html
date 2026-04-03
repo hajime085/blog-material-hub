@@ -691,7 +691,7 @@ function renderMaterial(m) {
     // 説明文が入力されている場合：おしゃれなボックスで挿入
     const customBox = m.description ? `
         <div class="desc-box">
-            <div class="desc-box-icon">💡</div>
+            <div class="desc-box-icon"></div>
             <div class="desc-box-body">${m.description.split('\n').map(l => `<p>${esc(l)}</p>`).join('')}</div>
         </div>
     ` : '';
