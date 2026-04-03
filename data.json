@@ -2668,7 +2668,7 @@
     },
     {
       "id": 158,
-      "title": "Amazonクレジットカードでオンライン決済",
+      "title": "クレジットカードでオンライン決済",
       "description": "",
       "largeCategory": "blog",
       "category": "",
@@ -2787,7 +2787,7 @@
     },
     {
       "id": 165,
-      "title": "朝食の時間を彩る Happy Belly の多彩な商品ラインアップ",
+      "title": "朝食の時間を彩る多彩な商品ラインアップ",
       "description": "",
       "largeCategory": "blog",
       "category": "",
@@ -3347,23 +3347,6 @@
     },
     {
       "id": 198,
-      "title": "洗濯物の臭いに顔をしかめる女性",
-      "description": "",
-      "largeCategory": "person",
-      "category": "woman",
-      "filename": "生乾き.webp",
-      "tags": [
-        "洗濯",
-        "部屋干し",
-        "臭い",
-        "家事",
-        "生活",
-        "困った表情"
-      ],
-      "createdDate": "2026-04-02"
-    },
-    {
-      "id": 199,
       "title": "爽やかな青空の下で干された洗濯物",
       "description": "",
       "largeCategory": "home",
@@ -3380,7 +3363,7 @@
       "createdDate": "2026-04-02"
     },
     {
-      "id": 200,
+      "id": 199,
       "title": "洗濯機の内部を上から見た様子",
       "description": "",
       "largeCategory": "home",
@@ -3397,7 +3380,7 @@
       "createdDate": "2026-04-02"
     },
     {
-      "id": 201,
+      "id": 200,
       "title": "虫よけスプレーを腕に吹きかける女性",
       "description": "",
       "largeCategory": "person",
@@ -3414,24 +3397,7 @@
       "createdDate": "2026-04-02"
     },
     {
-      "id": 202,
-      "title": "日焼け止めを腕に塗る女性",
-      "description": "",
-      "largeCategory": "person",
-      "category": "woman",
-      "filename": "虫除けスプレー.webp",
-      "tags": [
-        "日焼け止め",
-        "UVケア",
-        "スキンケア",
-        "紫外線対策",
-        "夏の肌ケア",
-        "屋外"
-      ],
-      "createdDate": "2026-04-02"
-    },
-    {
-      "id": 203,
+      "id": 201,
       "title": "シンプルな白いハンガーラックで洗濯物を干す",
       "description": "",
       "largeCategory": "home",
@@ -3446,12 +3412,28 @@
         "収納"
       ],
       "createdDate": "2026-04-02"
+    },
+    {
+      "id": 202,
+      "title": "屋外で虫除けスプレーを使う女性の様子",
+      "description": "",
+      "largeCategory": "person",
+      "category": "woman",
+      "filename": "person_115.webp",
+      "tags": [
+        "女性",
+        "虫除け",
+        "アウトドア",
+        "スプレー",
+        "半袖"
+      ],
+      "createdDate": "2026-04-03"
     }
   ],
   "metadata": {
     "version": "2.0",
-    "totalMaterials": 203,
-    "lastUpdated": "2026-04-02",
+    "totalMaterials": 202,
+    "lastUpdated": "2026-04-03",
     "largeCategoryDefs": {
       "nature": {
         "label": "自然",
