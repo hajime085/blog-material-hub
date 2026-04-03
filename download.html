@@ -242,6 +242,46 @@
 
         /* ===== RELATED ===== */
         .related-section { margin-top:2.5rem; }
+        .related-header {
+            display:flex; justify-content:space-between; align-items:flex-start;
+            margin-bottom:1rem; flex-wrap:wrap; gap:.5rem;
+        }
+        .related-sub { font-size:.82rem; color:var(--muted); margin-top:.2rem; line-height:1.5; }
+        .related-all-link {
+            font-size:.82rem; color:var(--accent); text-decoration:none;
+            font-weight:700; white-space:nowrap; flex-shrink:0;
+            transition:opacity .2s;
+        }
+        .related-all-link:hover { opacity:.75; }
+
+        /* ギャラリー誘導バナー */
+        .gallery-banner {
+            display:block; text-decoration:none;
+            margin-top:2rem;
+            background:linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+            border-radius:12px; overflow:hidden;
+            transition:transform .2s, box-shadow .2s;
+        }
+        .gallery-banner:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.15); }
+        .gallery-banner-inner {
+            display:flex; justify-content:space-between; align-items:center;
+            padding:1.4rem 1.8rem; gap:1rem; flex-wrap:wrap;
+        }
+        .gallery-banner-title {
+            font-family:'DM Sans',sans-serif;
+            font-size:1.1rem; font-weight:700; color:#fff; margin-bottom:.3rem;
+        }
+        .gallery-banner-sub { font-size:.82rem; color:rgba(255,255,255,.6); line-height:1.5; }
+        .gallery-banner-btn {
+            flex-shrink:0;
+            padding:.7rem 1.5rem;
+            background:linear-gradient(135deg, var(--accent), var(--acc2));
+            color:#fff; border-radius:8px;
+            font-size:.9rem; font-weight:700;
+            font-family:'DM Sans',sans-serif;
+            white-space:nowrap;
+            box-shadow:0 3px 12px rgba(232,82,10,.35);
+        }
         .related-grid {
             display:grid;
             grid-template-columns:repeat(auto-fill, minmax(160px,1fr));
@@ -441,11 +481,28 @@
                 </div>
             </div>
 
-            <!-- 関連素材 -->
+            <!-- 関連素材（タグ一致順） -->
             <div class="related-section">
-                <div class="section-title">🔗 関連素材</div>
+                <div class="related-header">
+                    <div>
+                        <div class="section-title" style="margin-bottom:.25rem;">🔗 この素材を見た方はこちらも</div>
+                        <p class="related-sub">タグや雰囲気が近い素材をピックアップしました。ぜひ一緒にチェックしてみてください。</p>
+                    </div>
+                    <a href="gallery.html" class="related-all-link">すべて見る →</a>
+                </div>
                 <div class="related-grid" id="relatedGrid"></div>
             </div>
+
+            <!-- ギャラリー誘導バナー -->
+            <a href="gallery.html" class="gallery-banner">
+                <div class="gallery-banner-inner">
+                    <div class="gallery-banner-text">
+                        <div class="gallery-banner-title">もっと素材を探す</div>
+                        <div class="gallery-banner-sub">200点以上の高品質WebP素材を無料配信中。ブログ・動画・SNSにご活用ください。</div>
+                    </div>
+                    <div class="gallery-banner-btn">素材ギャラリーへ →</div>
+                </div>
+            </a>
         </div>
 
         <!-- ===== 右カラム ===== -->
@@ -691,7 +748,7 @@ function renderMaterial(m) {
     // 説明文が入力されている場合：おしゃれなボックスで挿入
     const customBox = m.description ? `
         <div class="desc-box">
-            <div class="desc-box-icon"></div>
+            <div class="desc-box-icon">💡</div>
             <div class="desc-box-body">${m.description.split('\n').map(l => `<p>${esc(l)}</p>`).join('')}</div>
         </div>
     ` : '';
@@ -725,27 +782,56 @@ function renderMaterial(m) {
         <div class="info-item"><div class="info-label">ライセンス</div><div class="info-val">無料・商用可</div></div>
     `;
 
-    // 関連素材（同じカテゴリからランダムに最大8件）
+    // 関連素材（タグ一致数が多い順・最大12件）
+    const currentTags = new Set(m.tags || []);
     const related = allMaterials
-        .filter(x => x.id !== m.id && x.largeCategory === m.largeCategory)
-        .sort(() => Math.random() - .5)
-        .slice(0, 8);
+        .filter(x => x.id !== m.id)
+        .map(x => {
+            // タグ一致スコア（一致タグ数）+ 同カテゴリにボーナス
+            const tagScore = (x.tags || []).filter(t => currentTags.has(t)).length;
+            const catBonus = x.largeCategory === m.largeCategory ? 0.5 : 0;
+            return { ...x, _score: tagScore + catBonus };
+        })
+        .filter(x => x._score > 0)        // 1つもタグが一致しないものは除外
+        .sort((a, b) => b._score - a._score)
+        .slice(0, 12);
+
     const relGrid = document.getElementById('relatedGrid');
     if (related.length) {
-        related.forEach(r => {
-            const rPath = `assets/materials/${r.largeCategory}/${r.filename}`;
-            const a = document.createElement('a');
-            a.className = 'related-card';
-            a.href = `download.html?id=${r.id}`;
-            a.innerHTML = `
-                <img src="${esc(rPath)}" alt="${esc(r.title||r.filename)}" loading="lazy" onerror="this.style.display='none'">
-                <div class="rel-overlay"><span class="rel-title">${esc(r.title||r.filename)}</span></div>
-            `;
-            relGrid.appendChild(a);
-        });
+        related.forEach(r => relGrid.appendChild(createRelCard(r)));
     } else {
-        relGrid.innerHTML = '<p style="color:var(--muted);font-size:.85rem;">関連素材はありません</p>';
+        // タグ一致なし → 同カテゴリからランダムでフォールバック
+        const fallback = allMaterials
+            .filter(x => x.id !== m.id && x.largeCategory === m.largeCategory)
+            .sort(() => Math.random() - .5)
+            .slice(0, 12);
+        if (fallback.length) {
+            fallback.forEach(r => relGrid.appendChild(createRelCard(r)));
+        } else {
+            relGrid.innerHTML = '<p style="color:var(--muted);font-size:.85rem;">関連素材はありません</p>';
+        }
     }
+}
+
+function createRelCard(r) {
+    const rPath = `assets/materials/${r.largeCategory}/${r.filename}`;
+    const a = document.createElement('a');
+    a.className = 'related-card';
+    a.href = `download.html?id=${r.id}`;
+    const img = document.createElement('img');
+    img.src = esc(rPath);
+    img.alt = esc(r.title||r.filename);
+    img.loading = 'lazy';
+    img.onerror = function(){ this.style.display='none'; };
+    const overlay = document.createElement('div');
+    overlay.className = 'rel-overlay';
+    const title = document.createElement('span');
+    title.className = 'rel-title';
+    title.textContent = r.title || r.filename;
+    overlay.appendChild(title);
+    a.appendChild(img);
+    a.appendChild(overlay);
+    return a;
 }
 
 // ===== カウントダウン付きダウンロード =====
