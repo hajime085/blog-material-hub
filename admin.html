@@ -1631,7 +1631,7 @@ function buildMerged(){
     const merged=[...existingItems]; let maxId=merged.length?Math.max(...merged.map(m=>m.id||0)):0;
     pendingItems.forEach(p=>{
         const dupIdx=merged.findIndex(e=>e.filename===p.filename&&e.largeCategory===p.largeCategory);
-        const entry={id:dupIdx>=0?merged[dupIdx].id:++maxId,title:p.title||p.filename.replace(/\.[^.]+$/,''),description:'',largeCategory:p.largeCategory,category:p.category,filename:p.filename,tags:p.tags,createdDate:new Date().toISOString().split('T')[0]};
+        const entry={id:dupIdx>=0?merged[dupIdx].id:++maxId,title:p.title||p.filename.replace(/\.[^.]+$/,''),description:p.description||'',largeCategory:p.largeCategory,category:p.category,filename:p.filename,tags:p.tags,usage_guide:p.usage_guide||null,createdDate:new Date().toISOString().split('T')[0]};
         if(dupIdx>=0) merged[dupIdx]=entry; else merged.push(entry);
     });
     merged.forEach((m,i)=>{m.id=i+1;});
@@ -1706,9 +1706,10 @@ async function startAiGenerate() {
         try {
             const result = await generateWithAI(item._fileObj);
             if (result) {
-                item.title = result.title || item.title;
-                item.tags  = result.tags  || item.tags;
-                renderTable(); // リアルタイムで行を更新
+                item.title       = result.title       || item.title;
+                item.tags        = result.tags        || item.tags;
+                item.usage_guide = result.usage_guide || item.usage_guide;
+                renderTable();
             }
         } catch(e) {
             console.warn('AI生成失敗:', item.filename, e.message);
@@ -1813,7 +1814,7 @@ async function generateWithAI(file) {
         },
         body: JSON.stringify({
             model: 'claude-haiku-4-5-20251001',
-            max_tokens: 256,
+            max_tokens: 600,
             messages: [{
                 role: 'user',
                 content: [
@@ -1823,11 +1824,17 @@ async function generateWithAI(file) {
                     },
                     {
                         type: 'text',
-                        text: `この画像に最適な日本語のタイトルとタグを生成してください。
-ブログや動画のアイキャッチ・サムネイル用の素材サイトで使います。
+                        text: `この画像を分析して、ブログ・動画用素材サイト向けの情報を日本語で生成してください。
 
-以下のJSON形式のみで回答してください（他のテキスト不要）:
-{"title":"画像の内容を表す自然な日本語タイトル（15〜25文字）","tags":["タグ1","タグ2","タグ3","タグ4","タグ5","タグ6"]}`
+以下のJSON形式のみで回答してください（他のテキスト・説明文は一切不要）:
+{
+  "title": "画像の内容を表す自然な日本語タイトル（15〜25文字）",
+  "tags": ["タグ1","タグ2","タグ3","タグ4","タグ5","タグ6"],
+  "usage_guide": {
+    "scenes": ["おすすめ記事・動画ジャンル1（例：お花見スポット紹介）","おすすめ記事・動画ジャンル2","おすすめ記事・動画ジャンル3"],
+    "headlines": ["この画像に合う見出し文の例1","見出し文の例2","見出し文の例3"]
+  }
+}`
                     }
                 ]
             }]

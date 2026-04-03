@@ -139,6 +139,27 @@
         .desc-box-body { font-size:.92rem; line-height:1.8; color:#5a4200; }
         .desc-box-body p + p { margin-top:.5rem; }
 
+        /* 活用ガイド */
+        .usage-guide { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; margin-top:.6rem; }
+        .usage-block {}
+        .usage-label { font-size:.82rem; font-weight:700; color:#4a5568; margin-bottom:.6rem; }
+        .usage-list { list-style:none; display:flex; flex-direction:column; gap:.45rem; }
+        .usage-list li {
+            font-size:.88rem; color:#374151; line-height:1.55;
+            padding:.5rem .8rem;
+            background:#f8f7f4; border-radius:6px;
+            border-left:3px solid #e2e6ea;
+        }
+        .usage-headlines li {
+            background:#f0f7ff;
+            border-left-color:#93c5fd;
+            color:#1e3a5f;
+            font-style:italic;
+        }
+        .usage-headlines li::before { content:'「'; }
+        .usage-headlines li::after  { content:'」'; }
+        @media(max-width:600px) { .usage-guide { grid-template-columns:1fr; } }
+
         /* タグ */
         .tags-wrap { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.8rem; }
         .tag {
@@ -467,6 +488,21 @@
                 <div class="tags-wrap" id="matTags"></div>
             </div>
 
+            <!-- 活用ガイド -->
+            <div class="desc-card" id="usageGuideCard" style="display:none;">
+                <div class="section-title">📝 この素材の活用ガイド</div>
+                <div class="usage-guide">
+                    <div class="usage-block">
+                        <div class="usage-label">📌 おすすめ記事・動画ジャンル</div>
+                        <ul class="usage-list" id="guideScenes"></ul>
+                    </div>
+                    <div class="usage-block">
+                        <div class="usage-label">✍️ 見出し文の例</div>
+                        <ul class="usage-list usage-headlines" id="guideHeadlines"></ul>
+                    </div>
+                </div>
+            </div>
+
             <!-- ファイル情報 -->
             <div class="desc-card">
                 <div class="section-title">📁 ファイル情報</div>
@@ -759,6 +795,21 @@ function renderMaterial(m) {
     `;
 
     descEl.innerHTML = autoText + customBox + autoText2;
+
+    // 活用ガイド
+    const guideCard = document.getElementById('usageGuideCard');
+    const ug = m.usage_guide;
+    if (ug && (ug.scenes?.length || ug.headlines?.length)) {
+        guideCard.style.display = 'block';
+        const scenesEl    = document.getElementById('guideScenes');
+        const headlinesEl = document.getElementById('guideHeadlines');
+        scenesEl.innerHTML    = '';
+        headlinesEl.innerHTML = '';
+        (ug.scenes    || []).forEach(s => { const li=document.createElement('li'); li.textContent=s; scenesEl.appendChild(li); });
+        (ug.headlines || []).forEach(h => { const li=document.createElement('li'); li.textContent=h; headlinesEl.appendChild(li); });
+    } else {
+        guideCard.style.display = 'none';
+    }
 
     // タグ
     const tagsEl = document.getElementById('matTags');
