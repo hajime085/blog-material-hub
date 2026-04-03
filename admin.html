@@ -200,6 +200,22 @@
             grid-template-columns:repeat(auto-fill, minmax(180px,1fr));
             gap:.8rem;
         }
+
+        /* ページネーション */
+        .mgr-pagination {
+            display:flex; justify-content:center; align-items:center;
+            gap:.4rem; margin-top:1.5rem; flex-wrap:wrap;
+        }
+        .mgr-page-btn {
+            padding:.45rem .85rem; border-radius:7px;
+            border:1.5px solid var(--border); background:#fff;
+            font-size:.85rem; font-weight:600; cursor:pointer;
+            font-family:inherit; color:var(--text); transition:all .15s;
+        }
+        .mgr-page-btn:hover { border-color:var(--blue); color:var(--blue); }
+        .mgr-page-btn.active { background:var(--navy2); border-color:var(--navy2); color:#fff; }
+        .mgr-page-btn:disabled { opacity:.4; cursor:not-allowed; }
+        .mgr-page-info { font-size:.82rem; color:var(--muted); padding:0 .5rem; }
         .mgr-card {
             border-radius:8px; overflow:hidden;
             border:2px solid var(--border); background:var(--surface);
@@ -709,7 +725,7 @@
             <div class="mgr-toolbar">
                 <div class="mgr-toolbar-left">
                     <input type="text" class="search-input" id="mgrSearch" placeholder="🔍 タイトル・ファイル名で検索">
-                    <select id="mgrCatFilter" class="mgr-cat-sel" onchange="renderMgrGrid()">
+                    <select id="mgrCatFilter" class="mgr-cat-sel" onchange="mgrCurrentPage=1; renderMgrGrid()">
                         <option value="">すべてのカテゴリ</option>
                     </select>
                 </div>
@@ -729,6 +745,9 @@
                 <div class="empty-icon">📂</div>
                 <p>登録済み素材がありません。STEP4で data.json を読み込んでください。</p>
             </div>
+
+            <!-- ページネーション -->
+            <div class="mgr-pagination" id="mgrPagination"></div>
 
             <!-- 削除後エクスポート -->
             <div id="mgrExportWrap" style="display:none;margin-top:1.5rem;padding:1rem;background:#f9f9f9;border-radius:8px;border:1px solid var(--border);">
@@ -1884,10 +1903,14 @@ function buildMgrCatFilter() {
     });
 }
 
+const MGR_PAGE_SIZE = 100;
+let mgrCurrentPage  = 1;
+
 function renderMgrGrid() {
     buildMgrCatFilter();
-    const grid  = document.getElementById('mgrGrid');
-    const empty = document.getElementById('mgrEmpty');
+    const grid       = document.getElementById('mgrGrid');
+    const empty      = document.getElementById('mgrEmpty');
+    const pagination = document.getElementById('mgrPagination');
     if (!grid) return;
 
     const q   = document.getElementById('mgrSearch').value.toLowerCase().trim();
@@ -1904,15 +1927,50 @@ function renderMgrGrid() {
         return true;
     });
 
+    const totalPages = Math.max(1, Math.ceil(filtered.length / MGR_PAGE_SIZE));
+    if (mgrCurrentPage > totalPages) mgrCurrentPage = totalPages;
+
     const countEl = document.getElementById('mgrCount');
     if (countEl) countEl.textContent = `${existingItems.length} 件登録中 / ${filtered.length} 件表示`;
 
     grid.innerHTML = '';
-    if (!filtered.length) { empty.style.display='block'; return; }
+    if (!filtered.length) {
+        empty.style.display = 'block';
+        pagination.innerHTML = '';
+        return;
+    }
     empty.style.display = 'none';
 
-    filtered.forEach(m => grid.appendChild(createMgrCard(m)));
+    // 現在ページ分だけ表示
+    const start = (mgrCurrentPage - 1) * MGR_PAGE_SIZE;
+    filtered.slice(start, start + MGR_PAGE_SIZE).forEach(m => grid.appendChild(createMgrCard(m)));
     updateMgrDeleteBtn();
+
+    // ページネーション描画
+    pagination.innerHTML = '';
+    if (totalPages <= 1) return;
+
+    // 前へボタン
+    const prevBtn = document.createElement('button');
+    prevBtn.className = 'mgr-page-btn';
+    prevBtn.textContent = '← 前へ';
+    prevBtn.disabled = mgrCurrentPage === 1;
+    prevBtn.addEventListener('click', () => { mgrCurrentPage--; renderMgrGrid(); window.scrollTo(0, document.getElementById('s5').offsetTop); });
+    pagination.appendChild(prevBtn);
+
+    // ページ番号
+    const info = document.createElement('span');
+    info.className = 'mgr-page-info';
+    info.textContent = `${mgrCurrentPage} / ${totalPages} ページ`;
+    pagination.appendChild(info);
+
+    // 次へボタン
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'mgr-page-btn';
+    nextBtn.textContent = '次へ →';
+    nextBtn.disabled = mgrCurrentPage === totalPages;
+    nextBtn.addEventListener('click', () => { mgrCurrentPage++; renderMgrGrid(); window.scrollTo(0, document.getElementById('s5').offsetTop); });
+    pagination.appendChild(nextBtn);
 }
 
 function createMgrCard(m) {
@@ -2161,7 +2219,7 @@ document.getElementById('editModal')?.addEventListener('click', e => {
 });
 
 // mgrSearch のイベント（DOMContentLoaded不要、scriptはbody末尾なのでそのまま登録）
-document.getElementById('mgrSearch')?.addEventListener('input', renderMgrGrid);
+document.getElementById('mgrSearch')?.addEventListener('input', () => { mgrCurrentPage = 1; renderMgrGrid(); });
 
 function parseTags(str){return str.split(',').map(t=>t.trim()).filter(Boolean);}
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
