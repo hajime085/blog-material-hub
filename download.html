@@ -125,6 +125,20 @@
         .desc-text { font-size:.92rem; line-height:1.8; color:#374151; }
         .desc-text p + p { margin-top:.8rem; }
 
+        /* カスタム説明文ボックス */
+        .desc-box {
+            display:flex; gap:.9rem; align-items:flex-start;
+            background:linear-gradient(135deg, #fef9f0 0%, #fff8ec 100%);
+            border:1.5px solid #f6c96a;
+            border-left:4px solid #f39c12;
+            border-radius:8px;
+            padding:1rem 1.2rem;
+            margin:.9rem 0;
+        }
+        .desc-box-icon { font-size:1.3rem; flex-shrink:0; margin-top:.1rem; }
+        .desc-box-body { font-size:.92rem; line-height:1.8; color:#5a4200; }
+        .desc-box-body p + p { margin-top:.5rem; }
+
         /* タグ */
         .tags-wrap { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.8rem; }
         .tag {
@@ -667,17 +681,27 @@ function renderMaterial(m) {
 
     // 説明文
     const descEl = document.getElementById('matDesc');
-    if (m.description) {
-        descEl.innerHTML = m.description.split('\n').map(l => `<p>${esc(l)}</p>`).join('');
-    } else {
-        // 説明文が無い場合の自動生成テキスト（SEO対策）
-        descEl.innerHTML = `
-            <p>「${esc(m.title||m.filename)}」は、ブログ・SNS・動画制作など幅広いシーンで活用できる高品質WebP素材です。</p>
-            <p>カテゴリ「${esc(catLabel)}」に分類されており、${(m.tags||[]).length > 0 ? `${m.tags.map(t=>`「${esc(t)}」`).join('・')}といったキーワードに関連した` : ''}素材を探している方に最適です。</p>
-            <p>WebP形式は、PNG・JPEGに比べて高画質かつファイルサイズが軽量なため、ウェブページの表示速度を損なわずに使用できます。ブログのアイキャッチ画像、SNS投稿のビジュアル、YouTube動画のサムネイルなど、様々な用途にお役立てください。</p>
-            <p>ダウンロードは無料で、個人・商用問わずご利用いただけます。</p>
-        `;
-    }
+
+    // 自動生成テキスト（常に表示）
+    const autoText = `
+        <p>「${esc(m.title||m.filename)}」は、ブログ・SNS・動画制作など幅広いシーンで活用できる高品質WebP素材です。</p>
+        <p>カテゴリ「${esc(catLabel)}」に分類されており、${(m.tags||[]).length > 0 ? `${m.tags.map(t=>`「${esc(t)}」`).join('・')}といったキーワードに関連した` : ''}素材を探している方に最適です。</p>
+    `;
+
+    // 説明文が入力されている場合：おしゃれなボックスで挿入
+    const customBox = m.description ? `
+        <div class="desc-box">
+            <div class="desc-box-icon">💡</div>
+            <div class="desc-box-body">${m.description.split('\n').map(l => `<p>${esc(l)}</p>`).join('')}</div>
+        </div>
+    ` : '';
+
+    const autoText2 = `
+        <p>WebP形式は、PNG・JPEGに比べて高画質かつファイルサイズが軽量なため、ウェブページの表示速度を損なわずに使用できます。ブログのアイキャッチ画像、SNS投稿のビジュアル、YouTube動画のサムネイルなど、様々な用途にお役立てください。</p>
+        <p>ダウンロードは無料で、個人・商用問わずご利用いただけます。</p>
+    `;
+
+    descEl.innerHTML = autoText + customBox + autoText2;
 
     // タグ
     const tagsEl = document.getElementById('matTags');
