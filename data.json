@@ -10788,7 +10788,7 @@
   "metadata": {
     "version": "2.0",
     "totalMaterials": 367,
-    "lastUpdated": "2026-04-03",
+    "lastUpdated": "2026-04-04",
     "largeCategoryDefs": {
       "nature": {
         "label": "自然",
@@ -10854,6 +10854,11 @@
       "beauty": {
         "label": "美容・リラクゼーション",
         "icon": "💄",
+        "subcategories": {}
+      },
+      "outdoor": {
+        "label": "アウトドア",
+        "icon": "🏕",
         "subcategories": {}
       }
     }
