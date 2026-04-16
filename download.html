@@ -961,6 +961,9 @@ function startDownload() {
             a.href = imgPath; a.download = currentMaterial.filename;
             document.body.appendChild(a); a.click(); document.body.removeChild(a);
 
+            // ダウンロードカウント送信（裏で）
+            trackDownload(currentMaterial.id);
+
             setTimeout(() => {
                 if (progWrap)  progWrap.style.display = 'none';
                 if (successEl) { successEl.style.display = 'block'; }
@@ -1015,6 +1018,15 @@ function copyCredit() {
 
 // ===== 起動 =====
 init();
+
+// ===== ダウンロードカウント送信 =====
+function trackDownload(materialId) {
+    fetch('https://amazon-sale-api.bulibuli-mushi.workers.dev', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'download-count', id: materialId })
+    }).catch(() => {}); // エラーは無視（カウント失敗でもDLは止めない）
+}
 </script>
 
 <!-- モバイル固定ダウンロードバー -->
