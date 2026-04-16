@@ -1439,7 +1439,7 @@ function renderGroupPanels() {
     document.getElementById('groupSummary').textContent = `${groupCount} グループ検出`;
 }
 
-function filenameToTitle(f) { return f.replace(/\.[^.]+$/, '').replace(/[_-]/g, ' '); }
+function filenameToTitle(f) { return ''; }
 
 function clearPending() {
     if (!pendingItems.length) return;
