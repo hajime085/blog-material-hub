@@ -1239,6 +1239,10 @@ function addFilesFromEntries(collected) {
     let added = 0, skipped = 0;
 
     collected.forEach(({ file, relativePath }) => {
+        // 既存データと重複チェック（ファイル名で照合）
+        const alreadyExists = existingItems.some(e => e.filename === file.name);
+        if (alreadyExists) { skipped++; return; }
+
         if (pendingItems.some(p => p._sourcePath === relativePath)) { skipped++; return; }
 
         const parts = relativePath.replace(/\\/g, '/').split('/');
@@ -1259,7 +1263,7 @@ function addFilesFromEntries(collected) {
     });
 
     if (!added && !skipped) { toast('WebPファイルが見つかりません', 'error'); return; }
-    if (skipped) toast(`${added} 件追加（${skipped} 件は重複スキップ）`, 'info');
+    if (skipped) toast(`✅ ${added} 件追加（${skipped} 件は登録済みのためスキップ）`, 'info');
     else toast(`✅ ${added} 件追加！大分類をフォルダ名から自動設定しました`, 'success');
 
     renderTable();
