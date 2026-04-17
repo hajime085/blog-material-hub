@@ -271,6 +271,14 @@
             font-size:.7rem; padding:.1rem .45rem; border-radius:4px;
             background:#eaf4fb; color:#2980b9; font-weight:600;
         }
+        .mgr-sub-tag {
+            display:inline-block;
+            font-size:.7rem; padding:.1rem .45rem; border-radius:4px;
+            background:#e8f9ef; color:#27ae60; font-weight:600;
+        }
+        .mgr-sub-tag-empty {
+            background:#f3f4f6; color:#9ca3af; font-weight:400;
+        }
 
         /* ===== AI 生成パネル ===== */
         .ai-panel {
@@ -2031,9 +2039,19 @@ function createMgrCard(m) {
     catTag.className = 'mgr-cat-tag';
     catTag.textContent = catLabel;
 
+    // 中分類タグ
+    const subLabel = CAT[m.largeCategory]?.subcategories?.[m.category] || '';
+    const subTag = document.createElement('span');
+    subTag.className = 'mgr-sub-tag' + (subLabel ? '' : ' mgr-sub-tag-empty');
+    subTag.textContent = subLabel || '中分類未設定';
+
     info.appendChild(titleEl);
     info.appendChild(fileEl);
-    info.appendChild(catTag);
+    const tagWrap = document.createElement('div');
+    tagWrap.style.cssText = 'display:flex;gap:.3rem;flex-wrap:wrap;margin-top:.3rem;';
+    tagWrap.appendChild(catTag);
+    tagWrap.appendChild(subTag);
+    info.appendChild(tagWrap);
 
     card.appendChild(thumb);
     card.appendChild(info);
