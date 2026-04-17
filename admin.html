@@ -761,7 +761,16 @@
             <div id="mgrExportWrap" style="display:none;margin-top:1.5rem;padding:1rem;background:#f9f9f9;border-radius:8px;border:1px solid var(--border);">
                 <div style="font-size:.88rem;font-weight:700;margin-bottom:.6rem;">✅ 変更しました。data.json をエクスポートして git push してください。</div>
                 <div id="mgrDeletedList" style="font-size:.8rem;color:var(--muted);margin-bottom:.8rem;line-height:1.8;"></div>
-                <button class="btn btn-success" onclick="exportExistingOnly()">⬇ data.json をダウンロード</button>
+                <div style="display:flex;gap:.8rem;align-items:center;flex-wrap:wrap;">
+                    <button class="btn btn-success" onclick="exportExistingOnly()">⬇ data.json をダウンロード</button>
+                    <div style="flex:1;min-width:200px;">
+                        <div style="font-size:.78rem;color:var(--muted);margin-bottom:.3rem;">ダウンロード後、VS Code のターミナルで実行：</div>
+                        <div style="display:flex;gap:.5rem;align-items:center;">
+                            <code id="gitPushCmd" style="flex:1;background:#1e1e1e;color:#d4d4d4;padding:.5rem .8rem;border-radius:6px;font-size:.78rem;white-space:nowrap;overflow-x:auto;">git add . && git commit -m "Update" && git push origin main</code>
+                            <button class="btn btn-secondary btn-sm" onclick="copyGitCmd()" id="gitCopyBtn">📋 コピー</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -2117,6 +2126,23 @@ function mgrDeleteSelected() {
         deletedPaths.map(p => `📄 <code>${p}</code>`).join('<br>');
 
     toast(`✅ ${targets.length} 件を削除しました。data.json をエクスポートして git push してください。`, 'success');
+}
+
+function copyGitCmd() {
+    const cmd = document.getElementById('gitPushCmd').textContent;
+    const btn = document.getElementById('gitCopyBtn');
+    navigator.clipboard.writeText(cmd).then(() => {
+        btn.textContent = '✅ コピー済み';
+        setTimeout(() => { btn.textContent = '📋 コピー'; }, 2000);
+    }).catch(() => {
+        const ta = document.createElement('textarea');
+        ta.value = cmd; ta.style.position='fixed'; ta.style.opacity='0';
+        document.body.appendChild(ta); ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        btn.textContent = '✅ コピー済み';
+        setTimeout(() => { btn.textContent = '📋 コピー'; }, 2000);
+    });
 }
 
 // 管理画面の「再読み込み」ボタン用
