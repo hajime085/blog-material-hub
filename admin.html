@@ -45,6 +45,31 @@
         .badge-purple { background:#f3e8fc; color:var(--purple); }
         .badge-orange { background:#fef3e2; color:#c0780e; }
 
+        /* カテゴリ別件数パネル */
+        .cat-stats-panel {
+            background:var(--surface); border:1px solid var(--border);
+            border-radius:var(--radius); padding:1rem 1.4rem;
+            margin-bottom:1.2rem;
+        }
+        .cat-stats-title { font-size:.88rem; font-weight:700; color:#4a5568; margin-bottom:.8rem; }
+        .cat-stats-grid {
+            display:grid;
+            grid-template-columns:repeat(auto-fill, minmax(160px, 1fr));
+            gap:.6rem;
+        }
+        .cat-stat-item {
+            background:var(--step-bg); border-radius:7px;
+            padding:.6rem .9rem; display:flex;
+            justify-content:space-between; align-items:center;
+        }
+        .cat-stat-label { font-size:.83rem; color:var(--text); font-weight:600; }
+        .cat-stat-count {
+            font-size:.88rem; font-weight:800;
+            color:var(--blue); background:#e8f4fb;
+            padding:.1rem .55rem; border-radius:10px;
+        }
+        .cat-stat-zero { color:var(--muted); background:#f3f4f6; }
+
         /* STEP CARD */
         .step-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:1.2rem; overflow:hidden; }
         .step-header { display:flex; align-items:center; gap:.8rem; padding:.9rem 1.4rem; background:var(--step-bg); border-bottom:1px solid var(--border); cursor:pointer; user-select:none; }
@@ -437,6 +462,12 @@
             <span class="badge badge-green">既存: <span id="existingCount">0</span> 件</span>
             <span class="badge badge-orange" id="dupBadge" style="display:none">重複: <span id="dupCount">0</span> 件</span>
         </div>
+    </div>
+
+    <!-- カテゴリ別件数パネル -->
+    <div class="cat-stats-panel" id="catStatsPanel" style="display:none;">
+        <div class="cat-stats-title">📊 カテゴリ別登録数</div>
+        <div class="cat-stats-grid" id="catStatsGrid"></div>
     </div>
 
     <!-- ==============================
@@ -1674,7 +1705,48 @@ function updateMergePreview(){
     if(dupCount){warn.textContent=`⚠ ${dupCount}件は重複のため上書き更新されます`;warn.style.display='block';document.getElementById('dupBadge').style.display='inline-block';document.getElementById('dupCount').textContent=dupCount;}
     else{warn.style.display='none';document.getElementById('dupBadge').style.display='none';}
 }
-function updateCounters(){document.getElementById('pendingCount').textContent=pendingItems.length;document.getElementById('existingCount').textContent=existingItems.length;document.getElementById('addedCount').textContent=pendingItems.length;}
+function updateCounters(){
+    document.getElementById('pendingCount').textContent  = pendingItems.length;
+    document.getElementById('existingCount').textContent = existingItems.length;
+    document.getElementById('addedCount').textContent    = pendingItems.length;
+
+    // カテゴリ別件数パネル
+    const panel = document.getElementById('catStatsPanel');
+    const grid  = document.getElementById('catStatsGrid');
+    if (!panel || !grid) return;
+
+    if (!existingItems.length) { panel.style.display = 'none'; return; }
+    panel.style.display = 'block';
+
+    // 大分類ごとにカウント
+    const counts = {};
+    Object.keys(CAT).forEach(k => { counts[k] = 0; });
+    existingItems.forEach(m => {
+        if (m.largeCategory) counts[m.largeCategory] = (counts[m.largeCategory] || 0) + 1;
+    });
+
+    grid.innerHTML = '';
+    Object.entries(CAT).forEach(([key, def]) => {
+        const cnt = counts[key] || 0;
+        const item = document.createElement('div');
+        item.className = 'cat-stat-item';
+        item.innerHTML = `
+            <span class="cat-stat-label">${def.icon||''} ${def.label}</span>
+            <span class="cat-stat-count ${cnt === 0 ? 'cat-stat-zero' : ''}">${cnt}件</span>
+        `;
+        grid.appendChild(item);
+    });
+
+    // 合計
+    const total = document.createElement('div');
+    total.className = 'cat-stat-item';
+    total.style.cssText = 'background:#0f1923;';
+    total.innerHTML = `
+        <span class="cat-stat-label" style="color:#fff;">合計</span>
+        <span class="cat-stat-count" style="background:rgba(255,255,255,.15);color:#fff;">${existingItems.length}件</span>
+    `;
+    grid.appendChild(total);
+}
 
 // ============================================================
 //  エクスポート
