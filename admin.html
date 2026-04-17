@@ -45,6 +45,29 @@
         .badge-purple { background:#f3e8fc; color:var(--purple); }
         .badge-orange { background:#fef3e2; color:#c0780e; }
 
+        /* よく使うコマンド集 */
+        .cmd-block {
+            background:var(--step-bg); border-radius:8px;
+            padding:.9rem 1.1rem; border:1px solid var(--border);
+        }
+        .cmd-title { font-size:.9rem; font-weight:700; color:var(--text); margin-bottom:.2rem; }
+        .cmd-desc  { font-size:.8rem; color:var(--muted); margin-bottom:.6rem; line-height:1.5; }
+        .cmd-row   { display:flex; gap:.6rem; align-items:center; }
+        .cmd-code  {
+            flex:1; background:#1e1e1e; color:#d4d4d4;
+            padding:.5rem .9rem; border-radius:6px;
+            font-size:.82rem; overflow-x:auto; white-space:nowrap;
+        }
+        .cmd-copy-btn {
+            flex-shrink:0; padding:.45rem .9rem;
+            border:1.5px solid var(--border); border-radius:6px;
+            background:#fff; font-size:.8rem; font-weight:700;
+            cursor:pointer; font-family:inherit; transition:all .2s;
+            white-space:nowrap;
+        }
+        .cmd-copy-btn:hover { background:var(--navy2); color:#fff; border-color:var(--navy2); }
+        .cmd-copy-btn.copied { background:var(--green); color:#fff; border-color:var(--green); }
+
         /* カテゴリ別件数パネル */
         .cat-stats-panel {
             background:var(--surface); border:1px solid var(--border);
@@ -814,6 +837,90 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <!-- よく使うコマンド集 -->
+    <div class="step-card" style="margin-top:1.2rem;">
+        <div class="step-header" onclick="toggleStep('scmd')">
+            <div class="step-num" style="background:#4a5568;">📋</div>
+            <div class="step-title">よく使うコマンド集</div>
+            <div class="step-subtitle">ターミナルにコピペして使えます</div>
+            <div class="step-toggle" id="tog-scmd">▼</div>
+        </div>
+        <div class="step-body hidden" id="scmd">
+            <div style="display:grid;gap:1rem;">
+
+                <!-- git push -->
+                <div class="cmd-block">
+                    <div class="cmd-title">🚀 変更をサーバーに反映する（git push）</div>
+                    <div class="cmd-desc">data.jsonや画像を更新した後に実行</div>
+                    <div class="cmd-row">
+                        <code class="cmd-code">git add . && git commit -m "Update" && git push origin main</code>
+                        <button class="cmd-copy-btn" onclick="copyCmd(this)">📋 コピー</button>
+                    </div>
+                </div>
+
+                <!-- 変換スクリプト -->
+                <div class="cmd-block">
+                    <div class="cmd-title">🔄 画像を変換・振り分けする</div>
+                    <div class="cmd-desc">input/ フォルダに画像を入れてから実行。WebP変換・カテゴリ振り分け・連番リネームを一括で行う</div>
+                    <div class="cmd-row">
+                        <code class="cmd-code">python3 convert_materials.py</code>
+                        <button class="cmd-copy-btn" onclick="copyCmd(this)">📋 コピー</button>
+                    </div>
+                </div>
+
+                <!-- リネームスクリプト -->
+                <div class="cmd-block">
+                    <div class="cmd-title">✏️ 既存ファイルを連番リネームする</div>
+                    <div class="cmd-desc">ファイル名がバラバラになった時に整理する。実行前にプレビューで確認できる</div>
+                    <div class="cmd-row">
+                        <code class="cmd-code">python3 rename_materials.py</code>
+                        <button class="cmd-copy-btn" onclick="copyCmd(this)">📋 コピー</button>
+                    </div>
+                </div>
+
+                <!-- 孤立ファイル削除 -->
+                <div class="cmd-block">
+                    <div class="cmd-title">🗑 管理画面で削除した画像ファイルを消す</div>
+                    <div class="cmd-desc">管理画面で素材を削除 → data.json を更新 → このコマンドを実行。data.jsonに載っていないWebPファイルを検出して削除する</div>
+                    <div class="cmd-row">
+                        <code class="cmd-code">python3 cleanup_orphans.py</code>
+                        <button class="cmd-copy-btn" onclick="copyCmd(this)">📋 コピー</button>
+                    </div>
+                </div>
+
+                <!-- Pillow インストール -->
+                <div class="cmd-block">
+                    <div class="cmd-title">📦 Pillowをインストールする（初回のみ）</div>
+                    <div class="cmd-desc">convert_materials.py を初めて使う時に1回だけ実行</div>
+                    <div class="cmd-row">
+                        <code class="cmd-code">pip3 install Pillow</code>
+                        <button class="cmd-copy-btn" onclick="copyCmd(this)">📋 コピー</button>
+                    </div>
+                </div>
+
+                <!-- 容量確認 -->
+                <div class="cmd-block">
+                    <div class="cmd-title">💾 素材フォルダの容量を確認する</div>
+                    <div class="cmd-desc">GitHub Pages の上限（1GB）に近づいていないか確認する</div>
+                    <div class="cmd-row">
+                        <code class="cmd-code">du -sh . && du -sh assets/materials/*/</code>
+                        <button class="cmd-copy-btn" onclick="copyCmd(this)">📋 コピー</button>
+                    </div>
+                </div>
+
+                <!-- inputフォルダ作成 -->
+                <div class="cmd-block">
+                    <div class="cmd-title">📂 inputフォルダを作る（初回のみ）</div>
+                    <div class="cmd-desc">convert_materials.py を使うために最初に1回だけ実行</div>
+                    <div class="cmd-row">
+                        <code class="cmd-code">mkdir input</code>
+                        <button class="cmd-copy-btn" onclick="copyCmd(this)">📋 コピー</button>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -2271,6 +2378,24 @@ function mgrDeleteSelected() {
         deletedPaths.map(p => `📄 <code>${p}</code>`).join('<br>');
 
     toast(`✅ ${targets.length} 件を削除しました。data.json をエクスポートして git push してください。`, 'success');
+}
+
+function copyCmd(btn) {
+    const code = btn.previousElementSibling.textContent;
+    navigator.clipboard.writeText(code).then(() => {
+        btn.textContent = '✅ コピー済み';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = '📋 コピー'; btn.classList.remove('copied'); }, 2000);
+    }).catch(() => {
+        const ta = document.createElement('textarea');
+        ta.value = code; ta.style.position='fixed'; ta.style.opacity='0';
+        document.body.appendChild(ta); ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        btn.textContent = '✅ コピー済み';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = '📋 コピー'; btn.classList.remove('copied'); }, 2000);
+    });
 }
 
 function copyGitCmd() {
