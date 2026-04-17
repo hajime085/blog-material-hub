@@ -747,6 +747,18 @@
                 </div>
             </div>
 
+            <!-- 一括中分類設定バー（選択時に表示） -->
+            <div id="mgrBulkBar" style="display:none;background:#f0f7ff;border:1.5px solid #bee3f8;border-radius:8px;padding:.7rem 1rem;margin-bottom:1rem;display:none;align-items:center;gap:.8rem;flex-wrap:wrap;">
+                <span style="font-size:.85rem;font-weight:700;color:#2b6cb0;">選択中の素材に一括設定：</span>
+                <select id="mgrBulkLarge" onchange="onMgrBulkLargeChange()" style="padding:.45rem .7rem;border:1.5px solid #bee3f8;border-radius:6px;font-size:.85rem;font-family:inherit;background:#fff;">
+                    <option value="">大分類を選択</option>
+                </select>
+                <select id="mgrBulkSub" disabled style="padding:.45rem .7rem;border:1.5px solid #bee3f8;border-radius:6px;font-size:.85rem;font-family:inherit;background:#fff;">
+                    <option value="">中分類を選択</option>
+                </select>
+                <button class="btn btn-primary btn-sm" onclick="applyMgrBulkSub()">✅ 一括適用</button>
+            </div>
+
             <!-- カードグリッド -->
             <div class="mgr-grid" id="mgrGrid"></div>
             <div class="empty-table" id="mgrEmpty" style="display:none;">
@@ -2079,6 +2091,66 @@ function toggleMgrCheck(id, card) {
     if (mgrCheckedSet.has(id)) { mgrCheckedSet.delete(id); card.classList.remove('checked'); }
     else                        { mgrCheckedSet.add(id);    card.classList.add('checked');    }
     updateMgrDeleteBtn();
+    updateMgrBulkBar();
+}
+
+function updateMgrBulkBar() {
+    const bar = document.getElementById('mgrBulkBar');
+    if (!bar) return;
+    const cnt = mgrCheckedSet.size;
+    if (cnt > 0) {
+        bar.style.display = 'flex';
+        // 大分類セレクトを最新のCATで再構築
+        const largeSel = document.getElementById('mgrBulkLarge');
+        const current = largeSel.value;
+        largeSel.innerHTML = '<option value="">大分類を選択</option>';
+        Object.entries(CAT).forEach(([k,v]) => {
+            const o = document.createElement('option');
+            o.value = k; o.textContent = `${v.icon||''} ${v.label}`;
+            if (k === current) o.selected = true;
+            largeSel.appendChild(o);
+        });
+    } else {
+        bar.style.display = 'none';
+    }
+}
+
+function onMgrBulkLargeChange() {
+    const large = document.getElementById('mgrBulkLarge').value;
+    const subSel = document.getElementById('mgrBulkSub');
+    subSel.innerHTML = '<option value="">中分類を選択</option>';
+    if (large && CAT[large]) {
+        Object.entries(CAT[large].subcategories || {}).forEach(([k,v]) => {
+            const o = document.createElement('option'); o.value=k; o.textContent=v;
+            subSel.appendChild(o);
+        });
+        subSel.disabled = false;
+    } else {
+        subSel.disabled = true;
+    }
+}
+
+function applyMgrBulkSub() {
+    const large = document.getElementById('mgrBulkLarge').value;
+    const sub   = document.getElementById('mgrBulkSub').value;
+    if (!large) { toast('大分類を選択してください', 'error'); return; }
+    if (!sub)   { toast('中分類を選択してください', 'error'); return; }
+
+    const targets = existingItems.filter(m => mgrCheckedSet.has(m.id));
+    targets.forEach(m => { m.largeCategory = large; m.category = sub; });
+
+    toast(`✅ ${targets.length} 件に「${CAT[large]?.label} › ${CAT[large]?.subcategories?.[sub]}」を適用しました`, 'success');
+
+    mgrCheckedSet.clear();
+    updateMgrDeleteBtn();
+    updateMgrBulkBar();
+    renderMgrGrid();
+    updateMergePreview();
+
+    // エクスポートエリアを表示
+    document.getElementById('mgrExportWrap').style.display = 'block';
+    document.getElementById('mgrDeletedList').innerHTML =
+        `<strong>${targets.length} 件の中分類を更新しました。data.json をエクスポートして git push してください。</strong>`;
 }
 
 function mgrSelectAll(flag) {
@@ -2092,6 +2164,7 @@ function mgrSelectAll(flag) {
         })
         .forEach(m => flag ? mgrCheckedSet.add(m.id) : mgrCheckedSet.delete(m.id));
     renderMgrGrid();
+    updateMgrBulkBar();
 }
 
 function updateMgrDeleteBtn() {
