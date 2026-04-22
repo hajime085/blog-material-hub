@@ -71,19 +71,23 @@
         .material-meta a:hover { text-decoration:underline; }
 
         /* プレビュー画像 */
+        /* Canvas でウォーターマーク表示 */
+        .preview-wrap canvas {
+            display:block;
+            max-width:100%; height:auto;
+            max-height:520px;
+            margin:0 auto; /* 小さい素材は中央寄せ */
+            user-select:none;
+            -webkit-user-select:none;
+            -webkit-touch-callout:none;
+        }
         .preview-wrap {
             border-radius:var(--r); overflow:hidden;
             background:#e5e7eb; margin-bottom:1rem;
             box-shadow: 0 4px 24px rgba(0,0,0,.1);
             position:relative;
-        }
-        /* Canvas でウォーターマーク表示 */
-        .preview-wrap canvas {
-            display:block; width:100%; height:auto;
-            max-height:520px;
-            user-select:none;
-            -webkit-user-select:none;
-            -webkit-touch-callout:none;
+            display:flex; justify-content:center; align-items:center;
+            min-height:200px;
         }
         .preview-wrap img {
             display:block; width:100%; height:auto;
