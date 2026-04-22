@@ -194,6 +194,38 @@
         .dl-card-header p { font-size:.78rem; color:rgba(255,255,255,.65); }
         .dl-card-body { padding:1.4rem; }
 
+        /* 背景色スウォッチ */
+        .bg-switcher {
+            display:flex; align-items:center; gap:.8rem;
+            margin-bottom:1rem; flex-wrap:wrap;
+            padding:.65rem 1rem;
+            background:#f8f7f4; border-radius:8px;
+            border:1px solid var(--border);
+        }
+        .bg-switcher-label { font-size:.82rem; color:var(--muted); font-weight:600; white-space:nowrap; }
+        .bg-swatches { display:flex; gap:.5rem; align-items:center; }
+        .swatch {
+            width:28px; height:28px; border-radius:50%;
+            border:2px solid var(--border); cursor:pointer;
+            transition:transform .15s, border-color .15s;
+        }
+        .swatch:hover { transform:scale(1.15); }
+        .swatch.active { border-color:#374151; border-width:2.5px; }
+        .swatch-white { background:#ffffff; }
+        .swatch-gray  { background:#e5e7eb; }
+        .swatch-dark  { background:#1a1a2e; }
+        .swatch-blue  { background:#dbeafe; }
+        .swatch-green { background:#dcfce7; }
+        .swatch-check {
+            background-image: linear-gradient(45deg, #ccc 25%, transparent 25%),
+                              linear-gradient(-45deg, #ccc 25%, transparent 25%),
+                              linear-gradient(45deg, transparent 75%, #ccc 75%),
+                              linear-gradient(-45deg, transparent 75%, #ccc 75%);
+            background-size: 10px 10px;
+            background-position: 0 0, 0 5px, 5px -5px, -5px 0px;
+            background-color: white;
+        }
+
         /* ダウンロードボタン */
         .dl-btn {
             width:100%; padding:.9rem 1.5rem;
@@ -468,6 +500,19 @@
                 <div class="no-preview">🖼️</div>
             </div>
 
+            <!-- 背景色スウォッチ（キャラクターカテゴリのみ表示） -->
+            <div class="bg-switcher" id="bgSwitcher" style="display:none;">
+                <span class="bg-switcher-label">🎨 背景色を変えてプレビュー</span>
+                <div class="bg-swatches">
+                    <button class="swatch swatch-white active" onclick="setPreviewBg('white', this)" title="白"></button>
+                    <button class="swatch swatch-gray"  onclick="setPreviewBg('#e5e7eb', this)" title="グレー"></button>
+                    <button class="swatch swatch-dark"  onclick="setPreviewBg('#1a1a2e', this)" title="ダーク"></button>
+                    <button class="swatch swatch-blue"  onclick="setPreviewBg('#dbeafe', this)" title="ブルー"></button>
+                    <button class="swatch swatch-green" onclick="setPreviewBg('#dcfce7', this)" title="グリーン"></button>
+                    <button class="swatch swatch-check" onclick="setPreviewBg('checker', this)" title="チェッカー（透過確認）"></button>
+                </div>
+            </div>
+
             <!-- 画像直下 広告（レスポンシブ） -->
             <div class="ad-below-img">
                 <div class="ad-slot ad-responsive">
@@ -618,7 +663,8 @@
 
 <script>
 // ===== 透かし付きプレビュー描画 =====
-function drawWatermarkedPreview(imgSrc, container) {
+function drawWatermarkedPreview(imgSrc, container, bgColor) {
+    bgColor = bgColor || currentBgColor || 'white';
     const tempImg = new Image();
     tempImg.crossOrigin = 'anonymous';
 
@@ -630,6 +676,21 @@ function drawWatermarkedPreview(imgSrc, container) {
         canvas.height = H;
 
         const ctx = canvas.getContext('2d');
+
+        // 背景色を描画
+        if (bgColor === 'checker') {
+            // チェッカー柄（透過確認用）
+            const size = Math.max(20, Math.round(W / 30));
+            for (let y = 0; y < H; y += size) {
+                for (let x = 0; x < W; x += size) {
+                    ctx.fillStyle = ((Math.floor(x/size) + Math.floor(y/size)) % 2 === 0) ? '#ffffff' : '#cccccc';
+                    ctx.fillRect(x, y, size, size);
+                }
+            }
+        } else {
+            ctx.fillStyle = bgColor;
+            ctx.fillRect(0, 0, W, H);
+        }
 
         // 元画像を描画
         ctx.drawImage(tempImg, 0, 0, W, H);
@@ -680,6 +741,24 @@ function drawWatermarkedPreview(imgSrc, container) {
     };
 
     tempImg.src = imgSrc;
+}
+
+// ===== 背景色スウォッチ =====
+let currentBgColor = 'white';
+let currentImgPath = '';
+
+function setPreviewBg(color, btn) {
+    currentBgColor = color;
+
+    // スウォッチのactive切り替え
+    document.querySelectorAll('.swatch').forEach(s => s.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Canvas再描画
+    if (currentImgPath) {
+        const wrap = document.getElementById('previewWrap');
+        drawWatermarkedPreview(currentImgPath, wrap, color);
+    }
 }
 
 // ===== 画像保護 =====
@@ -770,7 +849,20 @@ function renderMaterial(m) {
     // プレビュー（透かし入り Canvas で表示）
     const wrap = document.getElementById('previewWrap');
     wrap.innerHTML = '<div class="no-preview">🖼️</div>';
-    drawWatermarkedPreview(imgPath, wrap);
+    currentImgPath = imgPath;
+    currentBgColor = 'white';
+    drawWatermarkedPreview(imgPath, wrap, 'white');
+
+    // キャラクターカテゴリの場合のみ背景色スウォッチを表示
+    const bgSwitcher = document.getElementById('bgSwitcher');
+    if (m.largeCategory === 'character') {
+        bgSwitcher.style.display = 'flex';
+        // スウォッチを白にリセット
+        document.querySelectorAll('.swatch').forEach(s => s.classList.remove('active'));
+        document.querySelector('.swatch-white')?.classList.add('active');
+    } else {
+        bgSwitcher.style.display = 'none';
+    }
 
     // 説明文
     const descEl = document.getElementById('matDesc');
