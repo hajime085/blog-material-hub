@@ -569,7 +569,7 @@
 
                 <!-- フォルダドロップ -->
                 <div class="drop-zone" id="folderDropZone">
-                    <input type="file" id="folderInput" webkitdirectory multiple accept=".webp">
+                    <input type="file" id="folderInput" webkitdirectory multiple accept=".webp,.png">
                     <div class="drop-icon">📂</div>
                     <h3>フォルダをドロップ（推奨）</h3>
                     <p>フォルダ名 = 大分類として自動設定</p>
@@ -578,7 +578,7 @@
 
                 <!-- ファイル個別ドロップ（従来） -->
                 <div class="drop-zone" id="fileDropZone">
-                    <input type="file" id="fileInput" accept=".webp" multiple>
+                    <input type="file" id="fileInput" accept=".webp,.png" multiple>
                     <div class="drop-icon">🖼️</div>
                     <h3>ファイルを個別ドロップ</h3>
                     <p>大分類は後から手動設定</p>
@@ -1361,7 +1361,7 @@ folderDropZone.addEventListener('drop', e => {
 
     function readEntry(entry, pathPrefix) {
         if (entry.isFile) {
-            if (!entry.name.toLowerCase().endsWith('.webp')) return;
+            if (!entry.name.toLowerCase().match(/(webp|png)$/i)) return;
             pending++;
             entry.file(file => {
                 collectedFiles.push({ file, relativePath: pathPrefix + entry.name });
@@ -1393,7 +1393,7 @@ folderInput.addEventListener('change', e => {
     // input経由は webkitRelativePath が取れる
     const files = Array.from(e.target.files);
     const collected = files
-        .filter(f => f.name.toLowerCase().endsWith('.webp'))
+        .filter(f => f.name.toLowerCase().match(/(webp|png)$/i))
         .map(f => ({ file: f, relativePath: f.webkitRelativePath || f.name }));
     addFilesFromEntries(collected);
     folderInput.value = '';
@@ -1457,14 +1457,14 @@ function addFilesFromEntries(collected) {
 function addFilesWithPath(fileList) {
     // input[webkitdirectory] 経由は folderInput.change で処理するため不使用
     const collected = Array.from(fileList)
-        .filter(f => f.name.toLowerCase().endsWith('.webp'))
+        .filter(f => f.name.toLowerCase().match(/(webp|png)$/i))
         .map(f => ({ file: f, relativePath: f.webkitRelativePath || f.name }));
     addFilesFromEntries(collected);
 }
 
 // 個別ファイルドロップ（パス情報なし）
 function addFiles(fileList) {
-    const files = Array.from(fileList).filter(f => f.name.toLowerCase().endsWith('.webp'));
+    const files = Array.from(fileList).filter(f => f.name.toLowerCase().match(/(webp|png)$/i));
     if (!files.length) { toast('WebPファイルが見つかりません', 'error'); return; }
     let added = 0, skipped = 0;
     files.forEach(f => {
@@ -2087,7 +2087,7 @@ async function generateWithAI(file) {
                 content: [
                     {
                         type: 'image',
-                        source: { type: 'base64', media_type: 'image/webp', data: base64 }
+                        source: { type: 'base64', media_type: file.name.toLowerCase().endsWith('.png') ? 'image/png' : 'image/webp', data: base64 }
                     },
                     {
                         type: 'text',
