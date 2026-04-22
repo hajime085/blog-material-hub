@@ -21757,7 +21757,7 @@
   "metadata": {
     "version": "2.0",
     "totalMaterials": 746,
-    "lastUpdated": "2026-04-17",
+    "lastUpdated": "2026-04-22",
     "largeCategoryDefs": {
       "nature": {
         "label": "自然",
@@ -21838,6 +21838,11 @@
           "fish": "フィッシング",
           "sea": "海"
         }
+      },
+      "character": {
+        "label": "キャラクター（PNG形式）",
+        "icon": "👤",
+        "subcategories": {}
       }
     }
   }
