@@ -2021,8 +2021,14 @@ async function resizeToBase64(file, maxPx = 512) {
             canvas.width = w; canvas.height = h;
             canvas.getContext('2d').drawImage(img, 0, 0, w, h);
             URL.revokeObjectURL(url);
-            // webpで圧縮（quality 0.85）
-            resolve(canvas.toDataURL('image/webp', 0.85).split(',')[1]);
+            // PNGファイルはPNGで、それ以外はWebPで送信
+            const isPng = file.name.toLowerCase().endsWith('.png');
+            const mimeType = isPng ? 'image/png' : 'image/webp';
+            const quality  = isPng ? 1.0 : 0.85;
+            resolve({
+                base64:    canvas.toDataURL(mimeType, quality).split(',')[1],
+                mediaType: mimeType
+            });
         };
         img.onerror = reject;
         img.src = url;
@@ -2069,7 +2075,7 @@ async function generateWithAI(file) {
     const apiKey = loadApiKey();
     if (!apiKey) throw new Error('APIキーが設定されていません');
 
-    const base64 = await resizeToBase64(file, 512);
+    const { base64, mediaType } = await resizeToBase64(file, 512);
 
     const res = await fetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
@@ -2087,7 +2093,7 @@ async function generateWithAI(file) {
                 content: [
                     {
                         type: 'image',
-                        source: { type: 'base64', media_type: file.name.toLowerCase().endsWith('.png') ? 'image/png' : 'image/webp', data: base64 }
+                        source: { type: 'base64', media_type: mediaType, data: base64 }
                     },
                     {
                         type: 'text',
