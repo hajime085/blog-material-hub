@@ -21752,11 +21752,27 @@
         ]
       },
       "createdDate": "2026-04-17"
+    },
+    {
+      "id": 747,
+      "title": "手を挙げて笑顔で喜ぶサラリーマンの姿",
+      "description": "",
+      "largeCategory": "character",
+      "category": "person",
+      "filename": "c_hara001-Photoroom.png",
+      "tags": [
+        "社会人",
+        "サラリーマン",
+        "ガッツポーズ",
+        "喜び"
+      ],
+      "usage_guide": null,
+      "createdDate": "2026-04-22"
     }
   ],
   "metadata": {
     "version": "2.0",
-    "totalMaterials": 746,
+    "totalMaterials": 747,
     "lastUpdated": "2026-04-22",
     "largeCategoryDefs": {
       "nature": {
@@ -21842,7 +21858,9 @@
       "character": {
         "label": "キャラクター（PNG形式）",
         "icon": "👤",
-        "subcategories": {}
+        "subcategories": {
+          "person": "人"
+        }
       }
     }
   }
