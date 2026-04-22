@@ -174,11 +174,13 @@
         }
         .feature-card:hover { box-shadow:0 8px 32px rgba(0,0,0,.08); transform:translateY(-3px); }
         .feature-icon {
-            width:48px; height:48px; border-radius:12px;
+            width:52px; height:52px; border-radius:14px;
             background:linear-gradient(135deg, var(--navy), var(--navy3));
             display:flex; align-items:center; justify-content:center;
-            font-size:1.5rem; margin-bottom:1.1rem;
+            margin-bottom:1.1rem; color:#fff;
+            box-shadow:0 4px 14px rgba(15,25,35,.25);
         }
+        .feature-icon svg { width:24px; height:24px; }
         .feature-card h3 {
             font-family:'DM Sans',sans-serif;
             font-size:1rem; font-weight:700; margin-bottom:.5rem;
@@ -340,9 +342,9 @@
 <!-- ===== HERO ===== -->
 <section class="hero">
     <div class="hero-inner">
-        <div class="hero-badge">✦ あなたのとっておきの1枚が見つかる</div>
+        <div class="hero-badge">✦ とっておきの1枚が見つかる</div>
         <h1>ブログ・動画を彩る<br><em>高品質 WebP 素材</em>を無料で</h1>
-        <p>ソザイノ (SOZAINO) は、ブログや動画で使える素材を<br>軽量な WebP 形式で配信する<br>無料素材サービスです。<br>アイキャッチ・サムネイル・SNS 投稿にどうぞ。</p>
+        <p>ソザイノ (SOZAINO) は、プロ品質の素材を次世代 WebP 形式で配信する<br>無料素材サービスです。アイキャッチ・サムネイル・SNS 投稿にどうぞ。</p>
         <div class="hero-btns">
             <a href="/blog-material-hub/gallery.html" class="btn-hero-primary">素材ギャラリーを見る →</a>
             <a href="/blog-material-hub/faq.html" class="btn-hero-secondary">使い方を見る</a>
@@ -379,28 +381,52 @@
 <section class="features">
     <div class="section-head">
         <h2>選ばれる 4 つの理由</h2>
-        <p>素材サイトに必要なものを、すべて無料で</p>
+        <p>素材サイトに必要なものを、すべて無料で。</p>
     </div>
     <div class="feature-grid">
         <div class="feature-card">
-            <div class="feature-icon">✦</div>
+            <div class="feature-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+                    <path d="M9 12l2 2 4-4"/>
+                </svg>
+            </div>
             <h3>完全無料・商用 OK</h3>
-            <p>全素材が登録不要で無料ダウンロード。<br>個人ブログから法人サイトまで、商用利用可能です。</p>
+            <p>全素材が登録不要で無料ダウンロード。個人ブログから法人サイトまで、商用利用も許可しています。</p>
         </div>
         <div class="feature-card">
-            <div class="feature-icon">⚡</div>
+            <div class="feature-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    <path d="M3 9h18"/>
+                    <path d="M9 21V9"/>
+                </svg>
+            </div>
             <h3>次世代 WebP 形式</h3>
-            <p>PNG・JPEG より最大 30〜80% 軽量。<br>ページ表示速度を損なわず、美しいビジュアルを実現します。</p>
+            <p>PNG・JPEG より最大 30〜80% 軽量。ページ表示速度を損なわず、美しいビジュアルを実現します。</p>
         </div>
         <div class="feature-card">
-            <div class="feature-icon">🔍</div>
+            <div class="feature-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="7"/>
+                    <path d="M21 21l-4.35-4.35"/>
+                    <path d="M8 11h6M11 8v6"/>
+                </svg>
+            </div>
             <h3>カテゴリ × タグ検索</h3>
             <p>大分類・中分類・タグの 3 段階で絞り込み。欲しいイメージにすぐたどり着けます。</p>
         </div>
         <div class="feature-card">
-            <div class="feature-icon">📱</div>
+            <div class="feature-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="5" y="2" width="14" height="20" rx="2"/>
+                    <path d="M12 18h.01"/>
+                    <rect x="2" y="7" width="3" height="10" rx="1"/>
+                    <rect x="19" y="7" width="3" height="10" rx="1"/>
+                </svg>
+            </div>
             <h3>全デバイス対応</h3>
-            <p>PC・スマートフォン・タブレット、<br>どの端末からでも快適に閲覧・ダウンロードできます。</p>
+            <p>PC・スマートフォン・タブレット、どの端末からでも快適に閲覧・ダウンロードできます。</p>
         </div>
     </div>
 </section>
