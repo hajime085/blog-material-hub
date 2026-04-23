@@ -648,6 +648,34 @@
                     AdSense 300×250（サイドバー下）
                 </div>
             </div>
+
+            <!-- ===== アンケート ===== -->
+            <div class="dl-card" id="surveyBox">
+                <div class="dl-card-body" style="padding:1.2rem;">
+                    <div class="section-title" style="font-size:.9rem; margin-bottom:.9rem;">
+                        📋 どのシーンで使いますか？
+                    </div>
+                    <div id="surveyOptions" style="display:flex; flex-direction:column; gap:.6rem;">
+                        <label style="display:flex; align-items:center; gap:.6rem; cursor:pointer; font-size:.88rem; padding:.5rem .7rem; border-radius:6px; border:1px solid var(--border); transition:background .15s;">
+                            <input type="radio" name="survey" value="youtube" style="accent-color:var(--accent);"> 🎬 YouTube・動画
+                        </label>
+                        <label style="display:flex; align-items:center; gap:.6rem; cursor:pointer; font-size:.88rem; padding:.5rem .7rem; border-radius:6px; border:1px solid var(--border); transition:background .15s;">
+                            <input type="radio" name="survey" value="blog" style="accent-color:var(--accent);"> ✍️ ブログ
+                        </label>
+                        <label style="display:flex; align-items:center; gap:.6rem; cursor:pointer; font-size:.88rem; padding:.5rem .7rem; border-radius:6px; border:1px solid var(--border); transition:background .15s;">
+                            <input type="radio" name="survey" value="sns" style="accent-color:var(--accent);"> 📱 SNS
+                        </label>
+                        <label style="display:flex; align-items:center; gap:.6rem; cursor:pointer; font-size:.88rem; padding:.5rem .7rem; border-radius:6px; border:1px solid var(--border); transition:background .15s;">
+                            <input type="radio" name="survey" value="other" style="accent-color:var(--accent);"> 🔖 その他
+                        </label>
+                    </div>
+                    <button id="surveySubmit" onclick="submitSurvey()"
+                        style="margin-top:.9rem; width:100%; padding:.65rem; background:var(--navy); color:#fff; border:none; border-radius:7px; cursor:pointer; font-size:.85rem; font-weight:700; font-family:inherit; transition:background .2s;">
+                        回答する
+                    </button>
+                    <p id="surveyMsg" style="display:none; margin-top:.7rem; font-size:.82rem; color:var(--green); text-align:center; font-weight:600;"></p>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -1123,6 +1151,65 @@ function trackDownload(materialId) {
         body: JSON.stringify({ action: 'download-count', id: materialId })
     }).catch(() => {}); // エラーは無視（カウント失敗でもDLは止めない）
 }
+
+// ===== アンケート =====
+function submitSurvey() {
+    const selected = document.querySelector('input[name="survey"]:checked');
+    if (!selected) { alert('選択肢を選んでください'); return; }
+
+    const params = new URLSearchParams(location.search);
+    const materialId = params.get('id');
+    if (!materialId) return;
+
+    // 重複投票チェック
+    const storageKey = `survey_voted_${materialId}`;
+    if (localStorage.getItem(storageKey)) {
+        showSurveyDone('✅ 回答済みです。ありがとうございました！');
+        return;
+    }
+
+    const choice = selected.value;
+    const btn = document.getElementById('surveySubmit');
+    btn.disabled = true;
+    btn.textContent = '送信中…';
+
+    fetch('https://amazon-sale-api.bulibuli-mushi.workers.dev', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'survey-vote', materialId, choice })
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (data.ok) {
+            localStorage.setItem(storageKey, '1');
+            showSurveyDone('✅ ありがとうございます！回答を記録しました。');
+        }
+    })
+    .catch(() => {
+        btn.disabled = false;
+        btn.textContent = '回答する';
+    });
+}
+
+function showSurveyDone(text) {
+    const opts = document.getElementById('surveyOptions');
+    const btn  = document.getElementById('surveySubmit');
+    const msg  = document.getElementById('surveyMsg');
+    if (opts) opts.style.pointerEvents = 'none';
+    if (opts) opts.style.opacity = '.45';
+    if (btn)  { btn.disabled = true; btn.textContent = '回答済み'; }
+    if (msg)  { msg.style.display = 'block'; msg.textContent = text; }
+}
+
+// ページ読み込み時：回答済みなら即ロック
+(function initSurvey() {
+    const params = new URLSearchParams(location.search);
+    const materialId = params.get('id');
+    if (!materialId) return;
+    if (localStorage.getItem(`survey_voted_${materialId}`)) {
+        showSurveyDone('✅ 回答済みです。ありがとうございました！');
+    }
+})();
 </script>
 
 <!-- モバイル固定ダウンロードバー -->
