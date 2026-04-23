@@ -364,6 +364,79 @@
         .spinner { display:inline-block; width:36px; height:36px; border:3px solid var(--border); border-top-color:var(--navy); border-radius:50%; animation:spin .8s linear infinite; margin-bottom:1rem; }
         @keyframes spin { to { transform:rotate(360deg); } }
 
+        /* ===== アンケートポップアップ ===== */
+        .survey-overlay {
+            display:none;
+            position:fixed; inset:0; z-index:1000;
+            background:rgba(0,0,0,.55);
+            align-items:center; justify-content:center;
+            padding:1.5rem;
+        }
+        .survey-overlay.active { display:flex; }
+        .survey-modal {
+            background:#fff; border-radius:16px;
+            width:100%; max-width:360px;
+            padding:1.8rem 1.6rem;
+            box-shadow:0 20px 60px rgba(0,0,0,.25);
+            animation: surveyIn .25s ease;
+        }
+        @keyframes surveyIn {
+            from { transform:translateY(24px); opacity:0; }
+            to   { transform:translateY(0);    opacity:1; }
+        }
+        .survey-title {
+            font-size:1rem; font-weight:700; color:var(--navy);
+            margin-bottom:.3rem; text-align:center;
+        }
+        .survey-sub {
+            font-size:.8rem; color:var(--muted);
+            text-align:center; margin-bottom:1.2rem;
+        }
+        .survey-choices {
+            display:grid; grid-template-columns:1fr 1fr;
+            gap:.65rem; margin-bottom:1.2rem;
+        }
+        .survey-choice {
+            display:flex; flex-direction:column;
+            align-items:center; justify-content:center;
+            gap:.45rem; padding:.85rem .5rem;
+            border:1.5px solid var(--border);
+            border-radius:10px; cursor:pointer;
+            background:#fafafa;
+            transition:all .18s; font-size:.82rem;
+            color:var(--text); font-weight:600;
+            font-family:inherit;
+            text-align:center; line-height:1.3;
+        }
+        .survey-choice svg { width:26px; height:26px; display:block; }
+        .survey-choice:hover { border-color:var(--accent); background:#fff5f0; color:var(--accent); }
+        .survey-choice.selected { border-color:var(--accent); background:var(--accent); color:#fff; }
+        .survey-choice.selected svg path, .survey-choice.selected svg rect,
+        .survey-choice.selected svg circle, .survey-choice.selected svg polyline,
+        .survey-choice.selected svg line, .survey-choice.selected svg polygon { stroke:#fff; }
+        .survey-submit {
+            width:100%; padding:.8rem;
+            background:linear-gradient(135deg, var(--accent), var(--acc2));
+            color:#fff; border:none; border-radius:9px;
+            font-size:.92rem; font-weight:700; font-family:inherit;
+            cursor:pointer; transition:all .2s;
+            box-shadow:0 4px 14px rgba(232,82,10,.3);
+        }
+        .survey-submit:hover { transform:translateY(-1px); }
+        .survey-submit:disabled { background:#d1d5db; box-shadow:none; transform:none; cursor:not-allowed; }
+        .survey-skip {
+            display:block; text-align:center; margin-top:.85rem;
+            font-size:.78rem; color:var(--muted); cursor:pointer;
+            text-decoration:underline; background:none; border:none;
+            font-family:inherit; width:100%;
+        }
+        .survey-done {
+            text-align:center; padding:1rem 0 .5rem;
+        }
+        .survey-done-icon { font-size:2.5rem; margin-bottom:.5rem; }
+        .survey-done-text { font-size:.92rem; color:var(--text); font-weight:600; }
+        .survey-done-sub { font-size:.8rem; color:var(--muted); margin-top:.3rem; }
+
         /* ===== FOOTER ===== */
         footer { background:var(--navy2); color:rgba(255,255,255,.7); padding:2.5rem 2rem; }
         .footer-inner { max-width:1100px; margin:0 auto; }
@@ -648,34 +721,6 @@
                     AdSense 300×250（サイドバー下）
                 </div>
             </div>
-
-            <!-- ===== アンケート ===== -->
-            <div class="dl-card" id="surveyBox">
-                <div class="dl-card-body" style="padding:1.2rem;">
-                    <div class="section-title" style="font-size:.9rem; margin-bottom:.9rem;">
-                        📋 どのシーンで使いますか？
-                    </div>
-                    <div id="surveyOptions" style="display:flex; flex-direction:column; gap:.6rem;">
-                        <label style="display:flex; align-items:center; gap:.6rem; cursor:pointer; font-size:.88rem; padding:.5rem .7rem; border-radius:6px; border:1px solid var(--border); transition:background .15s;">
-                            <input type="radio" name="survey" value="youtube" style="accent-color:var(--accent);"> 🎬 YouTube・動画
-                        </label>
-                        <label style="display:flex; align-items:center; gap:.6rem; cursor:pointer; font-size:.88rem; padding:.5rem .7rem; border-radius:6px; border:1px solid var(--border); transition:background .15s;">
-                            <input type="radio" name="survey" value="blog" style="accent-color:var(--accent);"> ✍️ ブログ
-                        </label>
-                        <label style="display:flex; align-items:center; gap:.6rem; cursor:pointer; font-size:.88rem; padding:.5rem .7rem; border-radius:6px; border:1px solid var(--border); transition:background .15s;">
-                            <input type="radio" name="survey" value="sns" style="accent-color:var(--accent);"> 📱 SNS
-                        </label>
-                        <label style="display:flex; align-items:center; gap:.6rem; cursor:pointer; font-size:.88rem; padding:.5rem .7rem; border-radius:6px; border:1px solid var(--border); transition:background .15s;">
-                            <input type="radio" name="survey" value="other" style="accent-color:var(--accent);"> 🔖 その他
-                        </label>
-                    </div>
-                    <button id="surveySubmit" onclick="submitSurvey()"
-                        style="margin-top:.9rem; width:100%; padding:.65rem; background:var(--navy); color:#fff; border:none; border-radius:7px; cursor:pointer; font-size:.85rem; font-weight:700; font-family:inherit; transition:background .2s;">
-                        回答する
-                    </button>
-                    <p id="surveyMsg" style="display:none; margin-top:.7rem; font-size:.82rem; color:var(--green); text-align:center; font-weight:600;"></p>
-                </div>
-            </div>
         </div>
 
     </div>
@@ -802,16 +847,14 @@ document.addEventListener('dragstart', e => {
     if (e.target.tagName === 'IMG') e.preventDefault();
 });
 
-// ===== NAV =====
-document.getElementById('menuToggle').addEventListener('click', () => {
-    document.getElementById('navMenu').classList.toggle('open');
-});
-
 // ===== 状態 =====
 let currentMaterial = null;
 let allMaterials    = [];
 let catDefs         = {};
 const WAIT_SEC      = 5; // 待機秒数
+
+// ===== 起動 =====
+init();
 
 // ===== URLパラメータからID取得 =====
 function getParamId() {
@@ -1096,6 +1139,8 @@ function startDownload() {
                 if (mBtn)      { mBtn.disabled = false; mBtn.textContent = '⬇ ダウンロード'; }
                 if (mSub)      mSub.textContent = 'WebP形式 / 無料・商用OK';
                 dlRunning = false;
+                // アンケートポップアップを表示
+                showSurveyPopup();
             }, 800);
         }
     }
@@ -1149,29 +1194,37 @@ function trackDownload(materialId) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'download-count', id: materialId })
-    }).catch(() => {}); // エラーは無視（カウント失敗でもDLは止めない）
+    }).catch(() => {});
 }
 
-// ===== アンケート =====
-function submitSurvey() {
-    const selected = document.querySelector('input[name="survey"]:checked');
-    if (!selected) { alert('選択肢を選んでください'); return; }
+// ===== アンケートポップアップ =====
+function showSurveyPopup() {
+    const params = new URLSearchParams(location.search);
+    const materialId = params.get('id');
+    if (!materialId) return;
+    if (localStorage.getItem(`survey_voted_${materialId}`)) return; // 回答済みはスキップ
+    document.getElementById('surveyOverlay').classList.add('active');
+}
 
+function closeSurvey() {
+    document.getElementById('surveyOverlay').classList.remove('active');
+}
+
+function selectSurvey(el) {
+    document.querySelectorAll('.survey-choice').forEach(b => b.classList.remove('selected'));
+    el.classList.add('selected');
+    document.getElementById('surveySubmit').disabled = false;
+}
+
+function submitSurvey() {
+    const selected = document.querySelector('.survey-choice.selected');
+    if (!selected) return;
     const params = new URLSearchParams(location.search);
     const materialId = params.get('id');
     if (!materialId) return;
 
-    // 重複投票チェック
-    const storageKey = `survey_voted_${materialId}`;
-    if (localStorage.getItem(storageKey)) {
-        showSurveyDone('✅ 回答済みです。ありがとうございました！');
-        return;
-    }
-
-    const choice = selected.value;
-    const btn = document.getElementById('surveySubmit');
-    btn.disabled = true;
-    btn.textContent = '送信中…';
+    const choice = selected.dataset.value;
+    document.getElementById('surveySubmit').disabled = true;
 
     fetch('https://amazon-sale-api.bulibuli-mushi.workers.dev', {
         method: 'POST',
@@ -1181,36 +1234,72 @@ function submitSurvey() {
     .then(r => r.json())
     .then(data => {
         if (data.ok) {
-            localStorage.setItem(storageKey, '1');
-            showSurveyDone('✅ ありがとうございます！回答を記録しました。');
+            localStorage.setItem(`survey_voted_${materialId}`, '1');
+            document.getElementById('surveyContent').style.display = 'none';
+            document.getElementById('surveyDone').style.display = 'block';
+            setTimeout(closeSurvey, 2000);
         }
     })
-    .catch(() => {
-        btn.disabled = false;
-        btn.textContent = '回答する';
+    .catch(() => { closeSurvey(); });
+}
+
+// オーバーレイ背景クリックで閉じる
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('menuToggle').addEventListener('click', () => {
+        document.getElementById('navMenu').classList.toggle('open');
     });
-}
-
-function showSurveyDone(text) {
-    const opts = document.getElementById('surveyOptions');
-    const btn  = document.getElementById('surveySubmit');
-    const msg  = document.getElementById('surveyMsg');
-    if (opts) opts.style.pointerEvents = 'none';
-    if (opts) opts.style.opacity = '.45';
-    if (btn)  { btn.disabled = true; btn.textContent = '回答済み'; }
-    if (msg)  { msg.style.display = 'block'; msg.textContent = text; }
-}
-
-// ページ読み込み時：回答済みなら即ロック
-(function initSurvey() {
-    const params = new URLSearchParams(location.search);
-    const materialId = params.get('id');
-    if (!materialId) return;
-    if (localStorage.getItem(`survey_voted_${materialId}`)) {
-        showSurveyDone('✅ 回答済みです。ありがとうございました！');
-    }
-})();
+    document.getElementById('surveyOverlay').addEventListener('click', e => {
+        if (e.target === document.getElementById('surveyOverlay')) closeSurvey();
+    });
+});
 </script>
+
+<!-- ===== アンケートポップアップ ===== -->
+<div class="survey-overlay" id="surveyOverlay">
+    <div class="survey-modal">
+        <div id="surveyContent">
+            <p class="survey-title">どのシーンで使いますか？</p>
+            <p class="survey-sub">今後の素材制作の参考にさせてください</p>
+            <div class="survey-choices">
+                <button class="survey-choice" data-value="youtube" onclick="selectSurvey(this)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="5" width="20" height="14" rx="2"/>
+                        <polygon points="10,9 16,12 10,15" fill="currentColor" stroke="none"/>
+                    </svg>
+                    YouTube・動画
+                </button>
+                <button class="survey-choice" data-value="blog" onclick="selectSurvey(this)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+                    </svg>
+                    ブログ
+                </button>
+                <button class="survey-choice" data-value="sns" onclick="selectSurvey(this)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                    </svg>
+                    SNS
+                </button>
+                <button class="survey-choice" data-value="other" onclick="selectSurvey(this)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+                    </svg>
+                    その他
+                </button>
+            </div>
+            <button class="survey-submit" id="surveySubmit" disabled onclick="submitSurvey()">回答する</button>
+            <button class="survey-skip" onclick="closeSurvey()">スキップ</button>
+        </div>
+        <div id="surveyDone" class="survey-done" style="display:none;">
+            <div class="survey-done-icon">✓</div>
+            <div class="survey-done-text">ありがとうございました！</div>
+            <div class="survey-done-sub">回答を記録しました</div>
+            <button class="survey-skip" style="margin-top:1rem;" onclick="closeSurvey()">閉じる</button>
+        </div>
+    </div>
+</div>
 
 <!-- モバイル固定ダウンロードバー -->
 <div class="mobile-dl-bar" id="mobileDlBar">
