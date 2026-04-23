@@ -25,7 +25,7 @@
         body { font-family:'Noto Sans JP',sans-serif; background:var(--bg); color:var(--text); line-height:1.65; }
 
         /* ===== HEADER ===== */
-        header { background:var(--navy); }
+        header { background:var(--navy); position:relative; z-index:200; }
         .navbar { max-width:1100px; margin:0 auto; padding:.85rem 2rem; display:flex; justify-content:space-between; align-items:center; }
         .logo { font-family:'DM Sans',sans-serif; font-size:1.2rem; font-weight:600; color:#fff; text-decoration:none; }
         .logo-dot { color:var(--acc2); }
@@ -363,6 +363,21 @@
         .page-loading { text-align:center; padding:5rem 2rem; color:var(--muted); }
         .spinner { display:inline-block; width:36px; height:36px; border:3px solid var(--border); border-top-color:var(--navy); border-radius:50%; animation:spin .8s linear infinite; margin-bottom:1rem; }
         @keyframes spin { to { transform:rotate(360deg); } }
+
+        /* サイドバーアンケート選択肢 */
+        .sidebar-survey-choice {
+            display:flex; align-items:center; gap:.6rem;
+            width:100%; padding:.55rem .8rem;
+            border:1.5px solid var(--border); border-radius:7px;
+            background:#fafafa; cursor:pointer;
+            font-size:.85rem; font-weight:500; color:var(--text);
+            font-family:inherit; text-align:left;
+            transition:all .18s;
+        }
+        .sidebar-survey-choice:hover { border-color:var(--accent); background:#fff5f0; color:var(--accent); }
+        .sidebar-survey-choice.selected { border-color:var(--accent); background:var(--accent); color:#fff; }
+        .sidebar-survey-choice.selected svg { stroke:#fff; }
+        #sidebarSurveySubmit:not([disabled]) { opacity:1; cursor:pointer; }
 
         /* ===== アンケートポップアップ ===== */
         .survey-overlay {
@@ -719,6 +734,48 @@
                 <div class="ad-slot dl-ad-slot">
                     <!-- ここに Google AdSense コードを貼り付け -->
                     AdSense 300×250（サイドバー下）
+                </div>
+            </div>
+
+            <!-- PC版アンケート（スマホはポップアップで対応） -->
+            <div class="dl-card" id="sidebarSurveyBox">
+                <div class="dl-card-body" style="padding:1.2rem 1.4rem;">
+                    <div class="section-title" style="font-size:.88rem; margin-bottom:1rem;">どのシーンで使いますか？</div>
+                    <div id="sidebarSurveyOptions" style="display:flex; flex-direction:column; gap:.5rem;">
+                        <button class="sidebar-survey-choice" data-value="youtube" onclick="selectSidebarSurvey(this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+                                <rect x="2" y="5" width="20" height="14" rx="2"/>
+                                <polygon points="10,9 16,12 10,15" fill="currentColor" stroke="none"/>
+                            </svg>
+                            YouTube・動画
+                        </button>
+                        <button class="sidebar-survey-choice" data-value="blog" onclick="selectSidebarSurvey(this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+                                <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+                            </svg>
+                            ブログ
+                        </button>
+                        <button class="sidebar-survey-choice" data-value="sns" onclick="selectSidebarSurvey(this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+                                <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+                                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                            </svg>
+                            SNS
+                        </button>
+                        <button class="sidebar-survey-choice" data-value="other" onclick="selectSidebarSurvey(this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+                            </svg>
+                            その他
+                        </button>
+                    </div>
+                    <button id="sidebarSurveySubmit" onclick="submitSidebarSurvey()"
+                        style="margin-top:.9rem; width:100%; padding:.65rem; background:var(--navy); color:#fff; border:none; border-radius:7px; cursor:pointer; font-size:.85rem; font-weight:700; font-family:inherit; transition:background .2s; opacity:.5; cursor:not-allowed;"
+                        disabled>
+                        回答する
+                    </button>
+                    <p id="sidebarSurveyMsg" style="display:none; margin-top:.7rem; font-size:.82rem; color:var(--green); text-align:center; font-weight:600;"></p>
                 </div>
             </div>
         </div>
@@ -1197,12 +1254,13 @@ function trackDownload(materialId) {
     }).catch(() => {});
 }
 
-// ===== アンケートポップアップ =====
+// ===== アンケートポップアップ（スマホのみ） =====
 function showSurveyPopup() {
+    if (window.innerWidth > 768) return; // PCはポップアップ不要
     const params = new URLSearchParams(location.search);
     const materialId = params.get('id');
     if (!materialId) return;
-    if (localStorage.getItem(`survey_voted_${materialId}`)) return; // 回答済みはスキップ
+    if (localStorage.getItem(`survey_voted_${materialId}`)) return;
     document.getElementById('surveyOverlay').classList.add('active');
 }
 
@@ -1251,7 +1309,58 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('surveyOverlay').addEventListener('click', e => {
         if (e.target === document.getElementById('surveyOverlay')) closeSurvey();
     });
+
+    // サイドバーアンケート：回答済みチェック
+    const params = new URLSearchParams(location.search);
+    const materialId = params.get('id');
+    if (materialId && localStorage.getItem(`survey_voted_${materialId}`)) {
+        lockSidebarSurvey('✅ 回答済みです。ありがとうございました！');
+    }
 });
+
+// ===== サイドバーアンケート =====
+function selectSidebarSurvey(el) {
+    document.querySelectorAll('.sidebar-survey-choice').forEach(b => b.classList.remove('selected'));
+    el.classList.add('selected');
+    const btn = document.getElementById('sidebarSurveySubmit');
+    btn.disabled = false;
+}
+
+function submitSidebarSurvey() {
+    const selected = document.querySelector('.sidebar-survey-choice.selected');
+    if (!selected) return;
+    const params = new URLSearchParams(location.search);
+    const materialId = params.get('id');
+    if (!materialId) return;
+
+    const choice = selected.dataset.value;
+    document.getElementById('sidebarSurveySubmit').disabled = true;
+
+    fetch('https://amazon-sale-api.bulibuli-mushi.workers.dev', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'survey-vote', materialId, choice })
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (data.ok) {
+            localStorage.setItem(`survey_voted_${materialId}`, '1');
+            lockSidebarSurvey('✅ ありがとうございます！回答を記録しました。');
+        }
+    })
+    .catch(() => {
+        document.getElementById('sidebarSurveySubmit').disabled = false;
+    });
+}
+
+function lockSidebarSurvey(msg) {
+    const opts = document.getElementById('sidebarSurveyOptions');
+    const btn  = document.getElementById('sidebarSurveySubmit');
+    const msgEl = document.getElementById('sidebarSurveyMsg');
+    if (opts)  { opts.style.pointerEvents = 'none'; opts.style.opacity = '.45'; }
+    if (btn)   { btn.disabled = true; btn.textContent = '回答済み'; }
+    if (msgEl) { msgEl.style.display = 'block'; msgEl.textContent = msg; }
+}
 </script>
 
 <!-- ===== アンケートポップアップ ===== -->
