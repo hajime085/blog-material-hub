@@ -687,30 +687,14 @@
                     <p>WebP形式 / 商用・非商用利用可</p>
                 </div>
                 <div class="dl-card-body">
-                    <button class="dl-btn" id="dlBtn" onclick="startDownload()">
-                        <span>⬇</span> ダウンロード開始
-                    </button>
 
-                    <!-- プログレスバー -->
-                    <div class="dl-progress-wrap" id="dlProgress">
-                        <div class="progress-label" id="progressLabel">準備中…</div>
-                        <div class="progress-bar-bg">
-                            <div class="progress-bar-fill" id="progressFill"></div>
-                        </div>
-                        <div class="progress-count" id="progressCount"></div>
-                    </div>
-
-                    <!-- 完了メッセージ -->
-                    <div class="dl-success" id="dlSuccess">
-                        ✅ ダウンロードが開始されました！
-                    </div>
-
-                    <!-- PC版アンケート（ダウンロードボタン直下・スマホはポップアップ） -->
-                    <div id="sidebarSurveyBox" style="margin-top:1rem; padding:1rem; background:#f8f7f4; border-radius:9px; border:1px solid var(--border);">
+                    <!-- PC版アンケート（回答後にDLボタン解放・スマホは非表示） -->
+                    <div id="sidebarSurveyBox" style="margin-bottom:1rem; padding:1rem; background:#f8f7f4; border-radius:9px; border:1px solid var(--border);">
                         <div style="font-size:.82rem; font-weight:700; color:#4a5568; margin-bottom:.75rem; display:flex; align-items:center; gap:.4rem;">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-                            どのシーンで使いますか？
+                            使い方を教えてください
                         </div>
+                        <p style="font-size:.78rem; color:var(--muted); margin-bottom:.75rem; line-height:1.5;">選択するとダウンロードできます</p>
                         <div id="sidebarSurveyOptions" style="display:flex; flex-direction:column; gap:.4rem;">
                             <button class="sidebar-survey-choice" data-value="youtube" onclick="selectSidebarSurvey(this)">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><rect x="2" y="5" width="20" height="14" rx="2"/><polygon points="10,9 16,12 10,15" fill="currentColor" stroke="none"/></svg>
@@ -729,10 +713,24 @@
                                 その他
                             </button>
                         </div>
-                        <button id="sidebarSurveySubmit" onclick="submitSidebarSurvey()"
-                            style="margin-top:.7rem; width:100%; padding:.55rem; background:var(--navy); color:#fff; border:none; border-radius:6px; cursor:not-allowed; font-size:.82rem; font-weight:700; font-family:inherit; opacity:.45; transition:all .2s;"
-                            disabled>回答する</button>
-                        <p id="sidebarSurveyMsg" style="display:none; margin-top:.6rem; font-size:.8rem; color:var(--green); text-align:center; font-weight:600;"></p>
+                    </div>
+
+                    <button class="dl-btn" id="dlBtn" onclick="startDownload()" disabled style="opacity:.45; cursor:not-allowed;">
+                        <span>⬇</span> ダウンロード開始
+                    </button>
+
+                    <!-- プログレスバー -->
+                    <div class="dl-progress-wrap" id="dlProgress">
+                        <div class="progress-label" id="progressLabel">準備中…</div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" id="progressFill"></div>
+                        </div>
+                        <div class="progress-count" id="progressCount"></div>
+                    </div>
+
+                    <!-- 完了メッセージ -->
+                    <div class="dl-success" id="dlSuccess">
+                        ✅ ダウンロードが開始されました！
                     </div>
 
                     <!-- ダウンロードボタン周辺 広告（300×250） -->
@@ -1244,13 +1242,23 @@ function trackDownload(materialId) {
     }).catch(() => {});
 }
 
+// ===== アンケート共通：30分タイマー制御 =====
+const SURVEY_INTERVAL_MS = 30 * 60 * 1000; // 30分
+
+function surveyAnsweredRecently() {
+    const last = localStorage.getItem('survey_last_answered');
+    if (!last) return false;
+    return (Date.now() - parseInt(last, 10)) < SURVEY_INTERVAL_MS;
+}
+
+function recordSurveyAnswer() {
+    localStorage.setItem('survey_last_answered', String(Date.now()));
+}
+
 // ===== アンケートポップアップ（スマホのみ） =====
 function showSurveyPopup() {
     if (window.innerWidth > 768) return; // PCはポップアップ不要
-    const params = new URLSearchParams(location.search);
-    const materialId = params.get('id');
-    if (!materialId) return;
-    if (localStorage.getItem(`survey_voted_${materialId}`)) return;
+    if (surveyAnsweredRecently()) return; // 30分以内に回答済みはスキップ
     document.getElementById('surveyOverlay').classList.add('active');
 }
 
@@ -1282,7 +1290,7 @@ function submitSurvey() {
     .then(r => r.json())
     .then(data => {
         if (data.ok) {
-            localStorage.setItem(`survey_voted_${materialId}`, '1');
+            recordSurveyAnswer();
             document.getElementById('surveyContent').style.display = 'none';
             document.getElementById('surveyDone').style.display = 'block';
             setTimeout(closeSurvey, 2000);
@@ -1300,55 +1308,65 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target === document.getElementById('surveyOverlay')) closeSurvey();
     });
 
-    // サイドバーアンケート：回答済みチェック
-    const params = new URLSearchParams(location.search);
-    const materialId = params.get('id');
-    if (materialId && localStorage.getItem(`survey_voted_${materialId}`)) {
-        lockSidebarSurvey('✅ 回答済みです。ありがとうございました！');
+    // サイドバーアンケート：30分以内に回答済みならDLボタン即解放
+    if (surveyAnsweredRecently()) {
+        unlockDlBtn();
+        const box = document.getElementById('sidebarSurveyBox');
+        if (box) box.style.display = 'none';
     }
 });
 
 // ===== サイドバーアンケート =====
 function selectSidebarSurvey(el) {
+    // 選択ビジュアル
     document.querySelectorAll('.sidebar-survey-choice').forEach(b => b.classList.remove('selected'));
     el.classList.add('selected');
-    const btn = document.getElementById('sidebarSurveySubmit');
-    btn.disabled = false;
-}
 
-function submitSidebarSurvey() {
-    const selected = document.querySelector('.sidebar-survey-choice.selected');
-    if (!selected) return;
+    // 選択肢をロック（連打防止）
+    document.getElementById('sidebarSurveyOptions').style.pointerEvents = 'none';
+
     const params = new URLSearchParams(location.search);
     const materialId = params.get('id');
-    if (!materialId) return;
+    const choice = el.dataset.value;
 
-    const choice = selected.dataset.value;
-    document.getElementById('sidebarSurveySubmit').disabled = true;
+    // バックグラウンドでKVに送信
+    if (materialId) {
+        fetch('https://amazon-sale-api.bulibuli-mushi.workers.dev', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'survey-vote', materialId, choice })
+        })
+        .then(r => r.json())
+        .then(data => { if (data.ok) recordSurveyAnswer(); })
+        .catch(() => {});
+    }
 
-    fetch('https://amazon-sale-api.bulibuli-mushi.workers.dev', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'survey-vote', materialId, choice })
-    })
-    .then(r => r.json())
-    .then(data => {
-        if (data.ok) {
-            localStorage.setItem(`survey_voted_${materialId}`, '1');
-            lockSidebarSurvey('✅ ありがとうございます！回答を記録しました。');
-        }
-    })
-    .catch(() => {
-        document.getElementById('sidebarSurveySubmit').disabled = false;
-    });
+    // DLボタンを解放
+    unlockDlBtn();
+
+    // アンケートをフェードアウトして非表示
+    const box = document.getElementById('sidebarSurveyBox');
+    if (box) {
+        box.style.transition = 'opacity .4s';
+        box.style.opacity = '0';
+        setTimeout(() => { box.style.display = 'none'; }, 400);
+    }
+}
+
+function unlockDlBtn() {
+    const btn = document.getElementById('dlBtn');
+    if (btn) {
+        btn.disabled = false;
+        btn.style.opacity = '1';
+        btn.style.cursor = 'pointer';
+    }
 }
 
 function lockSidebarSurvey(msg) {
+    // 後方互換用（ポップアップ側から呼ばれる場合）
     const opts = document.getElementById('sidebarSurveyOptions');
-    const btn  = document.getElementById('sidebarSurveySubmit');
     const msgEl = document.getElementById('sidebarSurveyMsg');
     if (opts)  { opts.style.pointerEvents = 'none'; opts.style.opacity = '.45'; }
-    if (btn)   { btn.disabled = true; btn.textContent = '回答済み'; }
     if (msgEl) { msgEl.style.display = 'block'; msgEl.textContent = msg; }
 }
 </script>
