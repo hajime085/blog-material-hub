@@ -893,6 +893,32 @@ function refreshTagRowForced(selectedTag) {
 
 // ===== 起動 =====
 loadData();
+
+// ===== スマホキーボード表示時のレイアウト崩れ防止 =====
+if (window.visualViewport) {
+    const header = document.querySelector('header');
+    const filterBar = document.querySelector('.filter-bar');
+    let keyboardOpen = false;
+
+    window.visualViewport.addEventListener('resize', () => {
+        const ratio = window.visualViewport.height / window.innerHeight;
+        if (ratio < 0.75) {
+            // キーボードが出た
+            if (!keyboardOpen) {
+                keyboardOpen = true;
+                if (header) header.style.display = 'none';
+                if (filterBar) filterBar.style.position = 'static';
+            }
+        } else {
+            // キーボードが閉じた
+            if (keyboardOpen) {
+                keyboardOpen = false;
+                if (header) header.style.display = '';
+                if (filterBar) filterBar.style.position = '';
+            }
+        }
+    });
+}
 </script>
 </body>
 </html>
