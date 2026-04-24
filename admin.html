@@ -2703,7 +2703,7 @@ document.getElementById('editModal')?.addEventListener('click', e => {
 // mgrSearch のイベント（DOMContentLoaded不要、scriptはbody末尾なのでそのまま登録）
 document.getElementById('mgrSearch')?.addEventListener('input', () => { mgrCurrentPage = 1; renderMgrGrid(); });
 
-function parseTags(str){return str.split(',').map(t=>t.trim()).filter(Boolean);}
+function parseTags(str){return [...new Set(str.split(',').map(t=>t.trim()).filter(Boolean))];}
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function toast(msg,type='success'){const el=document.getElementById('toast');el.textContent=msg;el.className=`toast ${type} show`;clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('show'),3200);}
 
@@ -2870,7 +2870,7 @@ function toggleListEdit(m, row, titleCol, tagsCol) {
         const titleInput = titleCol.querySelector('.mgr-list-title-input');
         const tagsInput = tagsCol.querySelector('.mgr-list-tags-input');
         m.title = titleInput.value.trim();
-        m.tags = tagsInput.value.split(',').map(t => t.trim()).filter(Boolean);
+        m.tags = [...new Set(tagsInput.value.split(',').map(t => t.trim()).filter(Boolean))];
         row.dataset.editing = '0';
         // 表示に戻す
         titleCol.innerHTML = `<div class="mgr-list-title-text" title="${m.title}">${m.title}</div>`;
