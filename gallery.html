@@ -5,7 +5,7 @@
         <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">
     <title>素材ギャラリー | ソザイノ</title>
     <meta name="description" content="ブログ・動画・SNS向けの高品質WebP素材を無料配信。カテゴリとタグで欲しい素材を素早く発見できます。">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,6 +30,7 @@
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         /* ===== HEADER ===== */
@@ -99,6 +100,60 @@
         .pill.tag-pill.active { background:#f0f9ff; border-color:#7dd3fc; color:#0369a1; }
 
         .result-info { margin-left:auto; font-size:.8rem; color:var(--muted); white-space:nowrap; flex-shrink:0; }
+
+        /* ===== 詳細検索パネル ===== */
+        .adv-toggle-btn {
+            display:flex; align-items:center; gap:.35rem;
+            padding:.32rem .8rem; border-radius:20px; font-size:.82rem; font-weight:500;
+            border:1.5px solid var(--border); background:#fff; cursor:pointer;
+            color:var(--muted); transition:all .18s; white-space:nowrap; flex-shrink:0;
+            font-family:inherit;
+        }
+        .adv-toggle-btn:hover { border-color:#94a3b8; color:var(--text); }
+        .adv-toggle-btn.open { background:var(--navy); border-color:var(--navy); color:#fff; }
+        .adv-toggle-btn .adv-arrow { transition:transform .2s; display:inline-block; }
+        .adv-toggle-btn.open .adv-arrow { transform:rotate(180deg); }
+
+        .adv-panel {
+            display:none; padding:.9rem 1rem 1rem;
+            border-top:1px solid var(--border);
+            background:#fafafa;
+        }
+        .adv-panel.open { display:block; }
+        .adv-panel-inner {
+            display:grid; grid-template-columns:1fr 1fr 1fr;
+            gap:1rem; max-width:900px;
+        }
+        .adv-section { display:flex; flex-direction:column; gap:.45rem; }
+        .adv-label { font-size:.78rem; font-weight:700; color:#4a5568; }
+        .adv-sort-group { display:flex; flex-direction:column; gap:.3rem; }
+        .adv-sort-option {
+            display:flex; align-items:center; gap:.5rem;
+            font-size:.84rem; color:var(--text); cursor:pointer;
+        }
+        .adv-sort-option input { accent-color:var(--accent); }
+        .adv-cat-select, .adv-tag-select {
+            font-size:.84rem; padding:.4rem .6rem;
+            border:1.5px solid var(--border); border-radius:7px;
+            background:#fff; font-family:inherit; color:var(--text);
+            cursor:pointer;
+        }
+        .adv-apply-btn {
+            margin-top:.8rem; padding:.55rem 1.4rem;
+            background:var(--accent); color:#fff; border:none;
+            border-radius:7px; font-size:.88rem; font-weight:700;
+            font-family:inherit; cursor:pointer; transition:background .2s;
+        }
+        .adv-apply-btn:hover { background:#d4470a; }
+        .adv-reset-btn {
+            margin-top:.8rem; margin-left:.5rem; padding:.55rem 1rem;
+            background:#fff; color:var(--muted); border:1.5px solid var(--border);
+            border-radius:7px; font-size:.88rem; font-weight:600;
+            font-family:inherit; cursor:pointer;
+        }
+        @media(max-width:680px) {
+            .adv-panel-inner { grid-template-columns:1fr; }
+        }
 
         /* ===== MAIN ===== */
         main { padding:var(--gap); }
@@ -266,8 +321,49 @@
         <div class="filter-sep"></div>
         <button class="pill active" data-large="" id="pillAll">すべて</button>
         <!-- 大分類ボタンはJS生成 -->
+        <button class="adv-toggle-btn" id="advToggleBtn" onclick="toggleAdvPanel()">
+            詳細検索 <span class="adv-arrow">▼</span>
+        </button>
         <span class="result-info" id="resultInfo"></span>
     </div>
+
+    <!-- 詳細検索パネル -->
+    <div class="adv-panel" id="advPanel">
+        <div class="adv-panel-inner">
+            <!-- 並び順 -->
+            <div class="adv-section">
+                <div class="adv-label">並び順</div>
+                <div class="adv-sort-group">
+                    <label class="adv-sort-option">
+                        <input type="radio" name="advSort" value="relevance" checked> 関連性の高い順
+                    </label>
+                    <label class="adv-sort-option">
+                        <input type="radio" name="advSort" value="newest"> 新着順
+                    </label>
+                    <label class="adv-sort-option">
+                        <input type="radio" name="advSort" value="popular"> 人気順
+                    </label>
+                </div>
+            </div>
+            <!-- カテゴリ -->
+            <div class="adv-section">
+                <div class="adv-label">カテゴリ</div>
+                <select class="adv-cat-select" id="advCatSelect">
+                    <option value="">すべて</option>
+                </select>
+            </div>
+            <!-- タグ（中分類） -->
+            <div class="adv-section">
+                <div class="adv-label">タグ（中分類）</div>
+                <select class="adv-tag-select" id="advTagSelect">
+                    <option value="">すべて</option>
+                </select>
+            </div>
+        </div>
+        <button class="adv-apply-btn" onclick="applyAdvSearch()">この条件で検索</button>
+        <button class="adv-reset-btn" onclick="resetAdvSearch()">リセット</button>
+    </div>
+
     <!-- 行2：中分類（選択時のみ） -->
     <div class="filter-row" id="rowSub" style="display:none;padding-top:0;padding-bottom:.5rem;"></div>
     <!-- 行3：タグ（選択時のみ） -->
@@ -334,7 +430,7 @@ let catDefs       = {};
 let filtered      = [];
 let shownCount    = 0;
 let globalCardIdx = 0; // 全体での通し番号（サイズパターン計算用）
-let activeFilters = { search:'', large:'', sub:'', tags:[] };
+let activeFilters = { search:'', large:'', sub:'', tags:[], sort:'newest' };
 
 // ===== データ読み込み =====
 async function loadData() {
@@ -501,8 +597,26 @@ function applyFilters() {
         }
         return true;
     });
-    // 新着順（ID降順）
-    filtered.sort((a, b) => (b.id || 0) - (a.id || 0));
+
+    // 並び順
+    const sort = activeFilters.sort || 'newest';
+    if (sort === 'newest') {
+        filtered.sort((a, b) => (b.id || 0) - (a.id || 0));
+    } else if (sort === 'popular') {
+        filtered.sort((a, b) => (dlCounts[b.id] || 0) - (dlCounts[a.id] || 0));
+    } else {
+        // relevance: キーワードありはタイトル一致優先、なしは新着順
+        if (q) {
+            filtered.sort((a, b) => {
+                const aTitle = (a.title||'').toLowerCase().includes(q) ? 1 : 0;
+                const bTitle = (b.title||'').toLowerCase().includes(q) ? 1 : 0;
+                return bTitle - aTitle || (b.id || 0) - (a.id || 0);
+            });
+        } else {
+            filtered.sort((a, b) => (b.id || 0) - (a.id || 0));
+        }
+    }
+
     shownCount = 0;
     globalCardIdx = 0;
     document.getElementById('bento').innerHTML = '';
@@ -581,6 +695,109 @@ function getCatLabel(large, sub) {
     return sub ? `${l.label} › ${s}` : l.label;
 }
 function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// ===== 詳細検索パネル =====
+let dlCounts = {}; // 人気順用ダウンロードカウント
+
+function toggleAdvPanel() {
+    const btn   = document.getElementById('advToggleBtn');
+    const panel = document.getElementById('advPanel');
+    const isOpen = panel.classList.toggle('open');
+    btn.classList.toggle('open', isOpen);
+
+    // 初回展開時にカテゴリ・タグのセレクトを構築
+    if (isOpen) buildAdvSelects();
+}
+
+function buildAdvSelects() {
+    const catSel = document.getElementById('advCatSelect');
+    const tagSel = document.getElementById('advTagSelect');
+
+    // カテゴリ
+    if (catSel.options.length <= 1) {
+        Object.entries(catDefs).forEach(([key, def]) => {
+            const opt = document.createElement('option');
+            opt.value = key;
+            opt.textContent = def.label;
+            catSel.appendChild(opt);
+        });
+    }
+
+    // タグ（全素材から収集）
+    if (tagSel.options.length <= 1) {
+        const tagSet = new Set();
+        allMaterials.forEach(m => (m.tags||[]).forEach(t => tagSet.add(t)));
+        Array.from(tagSet).sort().forEach(t => {
+            const opt = document.createElement('option');
+            opt.value = t; opt.textContent = t;
+            tagSel.appendChild(opt);
+        });
+    }
+
+    // カテゴリ変更でタグを絞り込む
+    catSel.addEventListener('change', () => {
+        const large = catSel.value;
+        tagSel.innerHTML = '<option value="">すべて</option>';
+        const tagSet = new Set();
+        allMaterials.filter(m => !large || m.largeCategory === large)
+            .forEach(m => (m.tags||[]).forEach(t => tagSet.add(t)));
+        Array.from(tagSet).sort().forEach(t => {
+            const opt = document.createElement('option');
+            opt.value = t; opt.textContent = t;
+            tagSel.appendChild(opt);
+        });
+    });
+}
+
+async function applyAdvSearch() {
+    const sort  = document.querySelector('input[name="advSort"]:checked')?.value || 'newest';
+    const large = document.getElementById('advCatSelect').value;
+    const tag   = document.getElementById('advTagSelect').value;
+
+    activeFilters.sort  = sort;
+    activeFilters.large = large;
+    activeFilters.tags  = tag ? [tag] : [];
+    activeFilters.sub   = '';
+
+    // 人気順の場合はダウンロードカウントを取得
+    if (sort === 'popular' && Object.keys(dlCounts).length === 0) {
+        try {
+            const ids = allMaterials.map(m => String(m.id));
+            const res = await fetch('https://amazon-sale-api.bulibuli-mushi.workers.dev', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'get-counts', ids })
+            });
+            const data = await res.json();
+            dlCounts = data.counts || {};
+        } catch(e) { dlCounts = {}; }
+    }
+
+    // カテゴリボタンのUI更新
+    document.querySelectorAll('#rowLarge .pill[data-large]').forEach(b => {
+        b.classList.toggle('active', b.dataset.large === large);
+    });
+
+    applyFilters();
+
+    // パネルを閉じる
+    document.getElementById('advPanel').classList.remove('open');
+    document.getElementById('advToggleBtn').classList.remove('open');
+}
+
+function resetAdvSearch() {
+    document.querySelector('input[name="advSort"][value="newest"]').checked = true;
+    document.getElementById('advCatSelect').value = '';
+    document.getElementById('advTagSelect').value = '';
+    activeFilters.sort  = 'newest';
+    activeFilters.large = '';
+    activeFilters.tags  = [];
+    activeFilters.sub   = '';
+    document.querySelectorAll('#rowLarge .pill[data-large]').forEach(b => {
+        b.classList.toggle('active', b.dataset.large === '');
+    });
+    applyFilters();
+}
 
 // ===== sessionStorage からフィルタ引き継ぎ =====
 function applyStoredFilter() {
