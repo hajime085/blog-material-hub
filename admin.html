@@ -45,6 +45,27 @@
         .badge-purple { background:#f3e8fc; color:var(--purple); }
         .badge-orange { background:#fef3e2; color:#c0780e; }
 
+        /* リスト表示 */
+        .mgr-list-row {
+            display:flex; align-items:center; gap:.8rem;
+            padding:.5rem .7rem; border-radius:7px;
+            border:1px solid var(--border); background:#fff;
+            margin-bottom:.4rem; transition:background .15s;
+        }
+        .mgr-list-row:hover { background:#f7f9fc; }
+        .mgr-list-row.checked { background:#fff5f0; border-color:#e8520a; }
+        .mgr-list-check { flex-shrink:0; }
+        .mgr-list-img { width:48px; height:48px; object-fit:cover; border-radius:5px; flex-shrink:0; background:#eee; }
+        .mgr-list-img-placeholder { width:48px; height:48px; border-radius:5px; background:#eee; display:flex; align-items:center; justify-content:center; font-size:1.2rem; flex-shrink:0; }
+        .mgr-list-title { flex:1; min-width:0; }
+        .mgr-list-title-text { font-size:.88rem; font-weight:600; color:#2d3748; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-bottom:.2rem; }
+        .mgr-list-title-input { width:100%; font-size:.88rem; padding:.3rem .5rem; border:1.5px solid #bee3f8; border-radius:5px; font-family:inherit; }
+        .mgr-list-tags { flex:1.5; min-width:0; }
+        .mgr-list-tag-display { display:flex; flex-wrap:wrap; gap:.3rem; }
+        .mgr-list-tag { font-size:.75rem; padding:.15rem .5rem; background:#edf2f7; border-radius:999px; color:#4a5568; }
+        .mgr-list-tags-input { width:100%; font-size:.82rem; padding:.3rem .5rem; border:1.5px solid #bee3f8; border-radius:5px; font-family:inherit; }
+        .mgr-list-actions { display:flex; gap:.4rem; flex-shrink:0; }
+
         .survey-stat-card {
             background:#f7f9fc; border:1px solid var(--border); border-radius:8px;
             padding:.9rem; text-align:center;
@@ -824,6 +845,13 @@
                 </div>
                 <div class="mgr-toolbar-right">
                     <span class="mgr-count" id="mgrCount"></span>
+                    <!-- 表示切替 -->
+                    <div style="display:flex;gap:.3rem;border:1.5px solid var(--border);border-radius:6px;overflow:hidden;">
+                        <button id="viewBtnGrid" onclick="setMgrView('grid')" title="グリッド表示"
+                            style="padding:.35rem .7rem;border:none;background:#e8520a;color:#fff;cursor:pointer;font-size:.85rem;">⊞</button>
+                        <button id="viewBtnList" onclick="setMgrView('list')" title="リスト表示"
+                            style="padding:.35rem .7rem;border:none;background:#fff;color:#666;cursor:pointer;font-size:.85rem;">☰</button>
+                    </div>
                     <button class="btn btn-secondary btn-sm" onclick="mgrSelectAll(true)">全選択</button>
                     <button class="btn btn-secondary btn-sm" onclick="mgrSelectAll(false)">全解除</button>
                     <button class="btn btn-danger" id="mgrDeleteBtn" onclick="mgrDeleteSelected()" disabled>
@@ -2285,7 +2313,13 @@ function renderMgrGrid() {
 
     // 現在ページ分だけ表示
     const start = (mgrCurrentPage - 1) * MGR_PAGE_SIZE;
-    filtered.slice(start, start + MGR_PAGE_SIZE).forEach(m => grid.appendChild(createMgrCard(m)));
+    if (mgrViewMode === 'list') {
+        grid.style.display = 'block';
+        filtered.slice(start, start + MGR_PAGE_SIZE).forEach(m => grid.appendChild(createMgrListRow(m)));
+    } else {
+        grid.style.display = '';
+        filtered.slice(start, start + MGR_PAGE_SIZE).forEach(m => grid.appendChild(createMgrCard(m)));
+    }
     updateMgrDeleteBtn();
 
     // ページネーション描画
@@ -2725,6 +2759,134 @@ renderTable();
 updateCounters();
 updateMergePreview();
 showApiKeyStatus();
+
+// ===== 表示切替 =====
+let mgrViewMode = 'grid'; // 'grid' | 'list'
+
+function setMgrView(mode) {
+    mgrViewMode = mode;
+    document.getElementById('viewBtnGrid').style.background = mode === 'grid' ? '#e8520a' : '#fff';
+    document.getElementById('viewBtnGrid').style.color = mode === 'grid' ? '#fff' : '#666';
+    document.getElementById('viewBtnList').style.background = mode === 'list' ? '#e8520a' : '#fff';
+    document.getElementById('viewBtnList').style.color = mode === 'list' ? '#fff' : '#666';
+    renderMgrGrid();
+}
+
+function createMgrListRow(m) {
+    const imgPath = `assets/materials/${m.largeCategory}/${m.filename}`;
+    const isChecked = mgrCheckedSet.has(m.id);
+
+    const row = document.createElement('div');
+    row.className = 'mgr-list-row' + (isChecked ? ' checked' : '');
+    row.dataset.id = m.id;
+
+    // チェックボックス
+    const cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.className = 'mgr-list-check';
+    cb.checked = isChecked;
+    cb.addEventListener('change', () => {
+        if (cb.checked) mgrCheckedSet.add(m.id); else mgrCheckedSet.delete(m.id);
+        row.classList.toggle('checked', cb.checked);
+        updateMgrDeleteBtn();
+    });
+
+    // サムネイル
+    const img = document.createElement('img');
+    img.className = 'mgr-list-img';
+    img.src = imgPath;
+    img.alt = m.title || m.filename;
+    img.loading = 'lazy';
+    img.onerror = function() {
+        const ph = document.createElement('div');
+        ph.className = 'mgr-list-img-placeholder';
+        ph.textContent = '🖼️';
+        this.parentElement.replaceChild(ph, this);
+    };
+
+    // タイトル列
+    const titleCol = document.createElement('div');
+    titleCol.className = 'mgr-list-title';
+    const titleText = document.createElement('div');
+    titleText.className = 'mgr-list-title-text';
+    titleText.textContent = m.title || m.filename;
+    titleText.title = m.title || m.filename;
+    titleCol.appendChild(titleText);
+
+    // タグ列
+    const tagsCol = document.createElement('div');
+    tagsCol.className = 'mgr-list-tags';
+    const tagDisplay = document.createElement('div');
+    tagDisplay.className = 'mgr-list-tag-display';
+    (m.tags || []).forEach(t => {
+        const span = document.createElement('span');
+        span.className = 'mgr-list-tag';
+        span.textContent = t;
+        tagDisplay.appendChild(span);
+    });
+    tagsCol.appendChild(tagDisplay);
+
+    // 編集ボタン
+    const editBtn = document.createElement('button');
+    editBtn.className = 'btn btn-secondary btn-sm';
+    editBtn.textContent = '✏️';
+    editBtn.title = '編集';
+    editBtn.style.flexShrink = '0';
+    editBtn.addEventListener('click', () => toggleListEdit(m, row, titleCol, tagsCol));
+
+    // 削除ボタン
+    const delBtn = document.createElement('button');
+    delBtn.className = 'btn btn-danger btn-sm';
+    delBtn.textContent = '🗑';
+    delBtn.title = '削除';
+    delBtn.style.flexShrink = '0';
+    delBtn.addEventListener('click', () => {
+        if (!confirm(`「${m.title || m.filename}」を削除しますか？`)) return;
+        existingItems = existingItems.filter(x => x.id !== m.id);
+        mgrCheckedSet.delete(m.id);
+        updateMgrDeleteBtn();
+        renderMgrGrid();
+        updateCounters();
+        toast('削除しました', 'success');
+    });
+
+    const actions = document.createElement('div');
+    actions.className = 'mgr-list-actions';
+    actions.appendChild(editBtn);
+    actions.appendChild(delBtn);
+
+    row.appendChild(cb);
+    row.appendChild(img);
+    row.appendChild(titleCol);
+    row.appendChild(tagsCol);
+    row.appendChild(actions);
+    return row;
+}
+
+function toggleListEdit(m, row, titleCol, tagsCol) {
+    const isEditing = row.dataset.editing === '1';
+    if (isEditing) {
+        // 保存
+        const titleInput = titleCol.querySelector('.mgr-list-title-input');
+        const tagsInput = tagsCol.querySelector('.mgr-list-tags-input');
+        m.title = titleInput.value.trim();
+        m.tags = tagsInput.value.split(',').map(t => t.trim()).filter(Boolean);
+        row.dataset.editing = '0';
+        // 表示に戻す
+        titleCol.innerHTML = `<div class="mgr-list-title-text" title="${m.title}">${m.title}</div>`;
+        tagsCol.innerHTML = `<div class="mgr-list-tag-display">${(m.tags||[]).map(t => `<span class="mgr-list-tag">${t}</span>`).join('')}</div>`;
+        // 編集ボタンのテキストを戻す
+        row.querySelector('.mgr-list-actions .btn-secondary').textContent = '✏️';
+        toast('更新しました', 'success');
+        updateCounters();
+    } else {
+        // 編集モード
+        row.dataset.editing = '1';
+        titleCol.innerHTML = `<input class="mgr-list-title-input" value="${(m.title||'').replace(/"/g,'&quot;')}" placeholder="タイトル">`;
+        tagsCol.innerHTML = `<input class="mgr-list-tags-input" value="${(m.tags||[]).join(', ')}" placeholder="タグ（カンマ区切り）">`;
+        row.querySelector('.mgr-list-actions .btn-secondary').textContent = '💾';
+    }
+}
 
 // ===== 集計ダッシュボード =====
 const WORKER_DASH = 'https://amazon-sale-api.bulibuli-mushi.workers.dev';
