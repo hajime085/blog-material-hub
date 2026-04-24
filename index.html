@@ -107,6 +107,37 @@
             line-height:1.8;
         }
         .hero-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+
+        /* hero 検索窓 */
+        .hero-search {
+            display:flex; align-items:center;
+            background:rgba(255,255,255,.12);
+            border:1.5px solid rgba(255,255,255,.3);
+            border-radius:50px;
+            padding:.45rem .45rem .45rem 1.2rem;
+            max-width:480px; margin:0 auto 1.4rem;
+            backdrop-filter:blur(8px);
+            transition:border-color .2s, background .2s;
+        }
+        .hero-search:focus-within {
+            border-color:var(--accent);
+            background:rgba(255,255,255,.18);
+        }
+        .hero-search svg { flex-shrink:0; opacity:.7; }
+        .hero-search input {
+            flex:1; background:none; border:none; outline:none;
+            color:#fff; font-size:.95rem; font-family:inherit;
+            padding:0 .7rem;
+        }
+        .hero-search input::placeholder { color:rgba(255,255,255,.55); }
+        .hero-search-btn {
+            background:var(--accent); color:#fff; border:none;
+            border-radius:40px; padding:.55rem 1.1rem;
+            font-size:.85rem; font-weight:700; font-family:inherit;
+            cursor:pointer; white-space:nowrap; flex-shrink:0;
+            transition:background .2s;
+        }
+        .hero-search-btn:hover { background:#d4470a; }
         .btn-hero-primary {
             padding:.85rem 2.2rem;
             background:linear-gradient(135deg, var(--accent), var(--acc2));
@@ -350,6 +381,14 @@
         <h1>ブログ・動画を彩る<br><em>高品質 WebP 素材</em>を無料で</h1>
         <p>ソザイノ (SOZAINO) は、ブログや動画で使える素材を<br>軽量な WebP 形式で配信する<br>無料素材サービスです。アイキャッチ<br>サムネイル・SNS 投稿にどうぞ。</p>
         <div class="hero-btns">
+            <!-- キーワード検索窓 -->
+            <form class="hero-search" onsubmit="heroSearch(event)" style="width:100%;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+                <input type="text" id="heroSearchInput" placeholder="キーワードで素材を検索（例：夏、ビジネス）">
+                <button type="submit" class="hero-search-btn">検索</button>
+            </form>
             <a href="gallery.html" class="btn-hero-primary">素材ギャラリーを見る →</a>
             <a href="faq.html" class="btn-hero-secondary">使い方を見る</a>
         </div>
@@ -488,6 +527,14 @@
 document.getElementById('menuToggle').addEventListener('click', () => {
     document.getElementById('navMenu').classList.toggle('open');
 });
+
+// hero検索
+function heroSearch(e) {
+    e.preventDefault();
+    const q = document.getElementById('heroSearchInput').value.trim();
+    if (!q) { window.location.href = 'gallery.html'; return; }
+    window.location.href = `gallery.html?q=${encodeURIComponent(q)}`;
+}
 
 // data.json 読み込み
 async function loadData() {

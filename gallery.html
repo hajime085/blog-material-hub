@@ -97,13 +97,6 @@
         .pill.active { background:var(--navy); border-color:var(--navy); color:#fff; }
         .pill.sub.active { background:var(--accent); border-color:var(--accent); color:#fff; }
         .pill.tag-pill.active { background:#f0f9ff; border-color:#7dd3fc; color:#0369a1; }
-        .pill-count {
-            font-size:.72rem; font-weight:700;
-            background:rgba(0,0,0,.08); color:inherit;
-            padding:.05rem .4rem; border-radius:999px;
-            line-height:1.4;
-        }
-        .pill.active .pill-count { background:rgba(255,255,255,.2); }
 
         .result-info { margin-left:auto; font-size:.8rem; color:var(--muted); white-space:nowrap; flex-shrink:0; }
 
@@ -383,23 +376,14 @@ function buildFilters() {
     };
 
     Object.entries(catDefs).forEach(([key, def]) => {
-        const count = allMaterials.filter(m => m.largeCategory === key).length;
         const btn = document.createElement('button');
         btn.className = 'pill';
         btn.dataset.large = key;
         const svgIcon = CAT_ICONS[key] || '';
-        btn.innerHTML = svgIcon
-            ? `<span class="pill-icon">${svgIcon}</span>${def.label}<span class="pill-count">${count}</span>`
-            : `${def.label}<span class="pill-count">${count}</span>`;
+        btn.innerHTML = svgIcon ? `<span class="pill-icon">${svgIcon}</span>${def.label}` : def.label;
         btn.addEventListener('click', () => selectLarge(key));
         row.querySelector('.result-info').before(btn);
     });
-    // すべてボタンに件数を追加
-    const allBtn = document.getElementById('pillAll');
-    const totalCount = allMaterials.length;
-    if (allBtn && !allBtn.querySelector('.pill-count')) {
-        allBtn.innerHTML = allBtn.innerHTML + `<span class="pill-count">${totalCount}</span>`;
-    }
     document.getElementById('pillAll').addEventListener('click', () => selectLarge(''));
     refreshTagRow();
 }
@@ -609,6 +593,17 @@ function applyStoredFilter() {
         applyFilters();
         // タグ行を表示（大分類未選択でも表示）
         refreshTagRowForced(tagParam);
+        return;
+    }
+
+    // ?q= キーワード検索（トップページの検索窓から）
+    const qParam = params.get('q');
+    if (qParam) {
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) {
+            searchInput.value = qParam;
+            searchInput.dispatchEvent(new Event('input'));
+        }
         return;
     }
 
