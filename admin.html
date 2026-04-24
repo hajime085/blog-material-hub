@@ -45,6 +45,23 @@
         .badge-purple { background:#f3e8fc; color:var(--purple); }
         .badge-orange { background:#fef3e2; color:#c0780e; }
 
+        .survey-stat-card {
+            background:#f7f9fc; border:1px solid var(--border); border-radius:8px;
+            padding:.9rem; text-align:center;
+        }
+        .stat-icon { font-size:1.4rem; margin-bottom:.3rem; }
+        .stat-label { font-size:.78rem; color:var(--muted); margin-bottom:.3rem; }
+        .stat-count { font-size:1.6rem; font-weight:800; color:#2d3748; }
+        .survey-bar-row { display:flex; align-items:center; gap:.8rem; margin-bottom:.6rem; }
+        .bar-label { font-size:.82rem; width:70px; color:#4a5568; flex-shrink:0; }
+        .bar-track { flex:1; background:#e2e8f0; border-radius:4px; height:18px; overflow:hidden; }
+        .bar-fill { height:100%; border-radius:4px; transition:width .5s ease; width:0%; }
+        .bar-num { font-size:.82rem; font-weight:700; color:#2d3748; width:30px; text-align:right; flex-shrink:0; }
+        .dl-rank-row { display:flex; align-items:center; gap:.8rem; padding:.5rem .7rem; border-radius:6px; margin-bottom:.4rem; background:#f7f9fc; border:1px solid var(--border); }
+        .dl-rank-num { font-size:.8rem; font-weight:800; color:#e8520a; width:24px; flex-shrink:0; }
+        .dl-rank-title { font-size:.85rem; flex:1; color:#2d3748; }
+        .dl-rank-count { font-size:.9rem; font-weight:700; color:#2d3748; flex-shrink:0; }
+
         /* よく使うコマンド集 */
         .cmd-block {
             background:var(--step-bg); border-radius:8px;
@@ -854,6 +871,77 @@
             </div>
         </div>
     </div>
+    <!-- 集計ダッシュボード -->
+    <div class="step-card" style="margin-top:1.2rem;">
+        <div class="step-header" onclick="toggleStep('sdash')">
+            <div class="step-num" style="background:#e8520a;">📊</div>
+            <div class="step-title">集計ダッシュボード</div>
+            <div class="step-subtitle">ダウンロード数・アンケート結果を確認できます</div>
+            <div class="step-toggle" id="tog-sdash">▼</div>
+        </div>
+        <div class="step-body hidden" id="sdash">
+            <button onclick="loadDashboard()" style="padding:.6rem 1.4rem;background:#e8520a;color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:700;font-size:.9rem;margin-bottom:1.2rem;">🔄 データを取得</button>
+
+            <!-- アンケート集計 -->
+            <div style="margin-bottom:1.5rem;">
+                <h3 style="font-size:.95rem;font-weight:700;margin-bottom:.8rem;color:#2d3748;">📋 アンケート集計（使用シーン）</h3>
+                <div id="surveyStats" style="display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem;">
+                    <div class="survey-stat-card" id="stat-youtube">
+                        <div class="stat-icon">🎬</div>
+                        <div class="stat-label">YouTube・動画</div>
+                        <div class="stat-count">-</div>
+                    </div>
+                    <div class="survey-stat-card" id="stat-blog">
+                        <div class="stat-icon">✍️</div>
+                        <div class="stat-label">ブログ</div>
+                        <div class="stat-count">-</div>
+                    </div>
+                    <div class="survey-stat-card" id="stat-sns">
+                        <div class="stat-icon">📱</div>
+                        <div class="stat-label">SNS</div>
+                        <div class="stat-count">-</div>
+                    </div>
+                    <div class="survey-stat-card" id="stat-other">
+                        <div class="stat-icon">🔖</div>
+                        <div class="stat-label">その他</div>
+                        <div class="stat-count">-</div>
+                    </div>
+                </div>
+                <!-- 棒グラフ -->
+                <div id="surveyBar" style="margin-top:1rem;display:none;">
+                    <div id="barYoutube" class="survey-bar-row">
+                        <div class="bar-label">YouTube</div>
+                        <div class="bar-track"><div class="bar-fill" style="background:#e8520a;"></div></div>
+                        <div class="bar-num"></div>
+                    </div>
+                    <div id="barBlog" class="survey-bar-row">
+                        <div class="bar-label">ブログ</div>
+                        <div class="bar-track"><div class="bar-fill" style="background:#3182ce;"></div></div>
+                        <div class="bar-num"></div>
+                    </div>
+                    <div id="barSns" class="survey-bar-row">
+                        <div class="bar-label">SNS</div>
+                        <div class="bar-track"><div class="bar-fill" style="background:#38a169;"></div></div>
+                        <div class="bar-num"></div>
+                    </div>
+                    <div id="barOther" class="survey-bar-row">
+                        <div class="bar-label">その他</div>
+                        <div class="bar-track"><div class="bar-fill" style="background:#718096;"></div></div>
+                        <div class="bar-num"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ダウンロードランキング -->
+            <div>
+                <h3 style="font-size:.95rem;font-weight:700;margin-bottom:.8rem;color:#2d3748;">⬇️ ダウンロード数ランキング（上位10件）</h3>
+                <div id="dlRanking">
+                    <p style="color:#999;font-size:.85rem;">「データを取得」を押してください</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- よく使うコマンド集 -->
     <div class="step-card" style="margin-top:1.2rem;">
         <div class="step-header" onclick="toggleStep('scmd')">
@@ -2638,8 +2726,95 @@ updateCounters();
 updateMergePreview();
 showApiKeyStatus();
 
-// 起動時に自動フェッチ
-autoFetchDataJson();
+// ===== 集計ダッシュボード =====
+const WORKER_DASH = 'https://amazon-sale-api.bulibuli-mushi.workers.dev';
+
+async function loadDashboard() {
+    toast('データを取得中...', 'info');
+
+    // existingItemsからIDを取得してget-countsで件数取得
+    if (!existingItems.length) {
+        toast('先にdata.jsonを読み込んでください', 'error');
+        return;
+    }
+
+    const ids = existingItems.map(m => String(m.id));
+
+    try {
+        const res = await fetch(WORKER_DASH, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'get-counts', ids })
+        });
+        const data = await res.json();
+        renderDlRanking(data.counts);
+
+        // アンケート集計：各素材のsurveyキーを取得
+        const survey = { youtube: 0, blog: 0, sns: 0, other: 0 };
+        const surveyRes = await Promise.all(
+            ['youtube', 'blog', 'sns', 'other'].map(choice =>
+                Promise.all(ids.map(id =>
+                    fetch(WORKER_DASH, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ action: 'survey-get', materialId: id })
+                    }).then(r => r.json()).then(d => { survey[choice] += (d[choice] || 0); }).catch(() => {})
+                ))
+            )
+        );
+        renderSurveyStats(survey);
+        toast('取得完了', 'success');
+    } catch(e) {
+        toast('取得に失敗しました', 'error');
+    }
+}
+
+function renderSurveyStats(survey) {
+    document.querySelector('#stat-youtube .stat-count').textContent = survey.youtube;
+    document.querySelector('#stat-blog .stat-count').textContent = survey.blog;
+    document.querySelector('#stat-sns .stat-count').textContent = survey.sns;
+    document.querySelector('#stat-other .stat-count').textContent = survey.other;
+
+    const total = survey.youtube + survey.blog + survey.sns + survey.other;
+    if (total > 0) {
+        document.getElementById('surveyBar').style.display = 'block';
+        const max = Math.max(survey.youtube, survey.blog, survey.sns, survey.other);
+        [
+            { id: 'barYoutube', val: survey.youtube },
+            { id: 'barBlog',    val: survey.blog },
+            { id: 'barSns',     val: survey.sns },
+            { id: 'barOther',   val: survey.other },
+        ].forEach(b => {
+            const row = document.getElementById(b.id);
+            row.querySelector('.bar-fill').style.width = max > 0 ? (b.val / max * 100) + '%' : '0%';
+            row.querySelector('.bar-num').textContent = b.val;
+        });
+    }
+}
+
+function renderDlRanking(counts) {
+    if (!counts) return;
+    const sorted = Object.entries(counts)
+        .filter(([,v]) => v > 0)
+        .sort(([,a],[,b]) => b - a)
+        .slice(0, 10);
+
+    if (!sorted.length) {
+        document.getElementById('dlRanking').innerHTML = '<p style="color:#999;font-size:.85rem;">まだダウンロードデータがありません</p>';
+        return;
+    }
+
+    document.getElementById('dlRanking').innerHTML = sorted.map(([id, count], i) => {
+        const m = existingItems.find(m => String(m.id) === String(id));
+        const title = m ? m.title : `素材ID: ${id}`;
+        return `<div class="dl-rank-row">
+            <div class="dl-rank-num">${i + 1}</div>
+            <div class="dl-rank-title">${title}</div>
+            <div class="dl-rank-count">${count}回</div>
+        </div>`;
+    }).join('');
+}
+</script>autoFetchDataJson();
 </script>
 </body>
 </html>
