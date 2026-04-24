@@ -349,14 +349,14 @@
             <div class="adv-section">
                 <div class="adv-label">カテゴリ</div>
                 <select class="adv-cat-select" id="advCatSelect">
-                    <option value="">すべて</option>
+                    <option value="">── カテゴリを選択 ──</option>
                 </select>
             </div>
             <!-- タグ（中分類） -->
             <div class="adv-section">
                 <div class="adv-label">タグ（中分類）</div>
                 <select class="adv-tag-select" id="advTagSelect">
-                    <option value="">すべて</option>
+                    <option value="">── タグを選択 ──</option>
                 </select>
             </div>
         </div>
@@ -737,7 +737,7 @@ function buildAdvSelects() {
     // カテゴリ変更でタグを絞り込む
     catSel.addEventListener('change', () => {
         const large = catSel.value;
-        tagSel.innerHTML = '<option value="">すべて</option>';
+        tagSel.innerHTML = '<option value="">── タグを選択 ──</option>';
         const tagSet = new Set();
         allMaterials.filter(m => !large || m.largeCategory === large)
             .forEach(m => (m.tags||[]).forEach(t => tagSet.add(t)));
