@@ -1235,6 +1235,7 @@ init();
 
 // ===== ダウンロードカウント送信 =====
 function trackDownload(materialId) {
+    if (localStorage.getItem('sozaino_admin')) return; // 管理者は除外
     fetch('https://amazon-sale-api.bulibuli-mushi.workers.dev', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -1257,6 +1258,7 @@ function recordSurveyAnswer() {
 
 // ===== アンケートポップアップ（スマホのみ） =====
 function showSurveyPopup() {
+    if (localStorage.getItem('sozaino_admin')) return; // 管理者は除外
     if (window.innerWidth > 768) return; // PCはポップアップ不要
     if (surveyAnsweredRecently()) return; // 30分以内に回答済みはスキップ
     document.getElementById('surveyOverlay').classList.add('active');
@@ -1308,8 +1310,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target === document.getElementById('surveyOverlay')) closeSurvey();
     });
 
-    // サイドバーアンケート：30分以内に回答済みならDLボタン即解放
-    if (surveyAnsweredRecently()) {
+    // サイドバーアンケート：管理者または30分以内に回答済みならDLボタン即解放
+    if (localStorage.getItem('sozaino_admin') || surveyAnsweredRecently()) {
         unlockDlBtn();
         const box = document.getElementById('sidebarSurveyBox');
         if (box) box.style.display = 'none';
@@ -1318,6 +1320,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ===== サイドバーアンケート =====
 function selectSidebarSurvey(el) {
+    if (localStorage.getItem('sozaino_admin')) {
+        unlockDlBtn();
+        const box = document.getElementById('sidebarSurveyBox');
+        if (box) box.style.display = 'none';
+        return;
+    }
     // 選択ビジュアル
     document.querySelectorAll('.sidebar-survey-choice').forEach(b => b.classList.remove('selected'));
     el.classList.add('selected');
