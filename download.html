@@ -114,6 +114,83 @@
         /* 画像下広告 */
         .ad-below-img { margin-bottom:1.5rem; }
 
+        /* ===== SNS シェアボタン ===== */
+        .share-buttons-section {
+            margin-bottom:1.8rem;
+            padding:0;
+        }
+        .share-buttons-label {
+            font-size:.88rem;
+            font-weight:600;
+            color:var(--muted);
+            margin-bottom:.8rem;
+            display:block;
+        }
+        .share-buttons-container {
+            display:flex; gap:1rem; justify-content:flex-start;
+            flex-wrap:wrap;
+        }
+        .share-btn {
+            width:50px; height:50px;
+            border-radius:50%;
+            border:none;
+            display:flex; align-items:center; justify-content:center;
+            cursor:pointer;
+            transition:all .2s ease;
+            color:#fff;
+            font-weight:600;
+            position:relative;
+            overflow:hidden;
+            box-shadow:0 2px 8px rgba(0,0,0,.12);
+        }
+        .share-btn::before {
+            content:'';
+            position:absolute;
+            inset:0;
+            z-index:-1;
+            transition:all .2s ease;
+        }
+        .share-btn svg {
+            width:24px; height:24px;
+            z-index:1;
+            position:relative;
+        }
+        .share-btn-x::before {
+            background:#000;
+        }
+        .share-btn-x:hover {
+            box-shadow:0 4px 12px rgba(0,0,0,.2);
+            transform:translateY(-2px);
+        }
+        .share-btn-threads::before {
+            background:#000;
+        }
+        .share-btn-threads:hover {
+            box-shadow:0 4px 12px rgba(0,0,0,.2);
+            transform:translateY(-2px);
+        }
+        .share-btn-line::before {
+            background:#00b900;
+        }
+        .share-btn-line:hover {
+            box-shadow:0 4px 12px rgba(0,180,0,.25);
+            transform:translateY(-2px);
+        }
+        .share-btn:active {
+            transform:scale(0.95);
+        }
+        @media(max-width:768px) {
+            .share-btn {
+                width:46px; height:46px;
+            }
+            .share-btn svg {
+                width:22px; height:22px;
+            }
+            .share-buttons-container {
+                gap:.8rem;
+            }
+        }
+
         /* ===== 説明・詳細 ===== */
         .section-title {
             font-size:1rem; font-weight:700;
@@ -611,6 +688,29 @@
                 <div class="ad-slot ad-responsive">
                     <!-- ここに Google AdSense コードを貼り付け -->
                     AdSense レスポンシブ広告
+                </div>
+            </div>
+
+            <!-- ===== SNS シェアボタン ===== -->
+            <div class="share-buttons-section">
+                <label class="share-buttons-label">SNSで共有する</label>
+                <div class="share-buttons-container">
+                    <button class="share-btn share-btn-x" title="Xで共有" onclick="shareToX()" aria-label="Xで共有">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.694l-5.245-6.856-6.009 6.856h-3.315l7.517-8.612L2.4 2.25h6.852l4.755 6.285L17.14 2.25h.104zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/>
+                        </svg>
+                    </button>
+                    <button class="share-btn share-btn-threads" title="Threadsで共有" onclick="shareToThreads()" aria-label="Threadsで共有">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c5.514 0 10 4.486 10 10s-4.486 10-10 10S2 17.514 2 12 6.486 2 12 2z"/>
+                            <path d="M12 6c-3.315 0-6 2.686-6 6s2.685 6 6 6 6-2.686 6-6-2.685-6-6-6zm0 2c2.21 0 4 1.79 4 4s-1.79 4-4 4-4-1.79-4-4 1.79-4 4-4z"/>
+                        </svg>
+                    </button>
+                    <button class="share-btn share-btn-line" title="LINEで共有" onclick="shareToLine()" aria-label="LINEで共有">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19.365 9.863c.349-1.82-.3-3.708-1.715-5.123-1.416-1.416-3.304-2.064-5.123-1.715-3.519.629-6.033 3.655-6.033 7.197 0 2.43 1.309 4.57 3.27 5.795.34.225.56.615.515 1.005l-.087.928c-.053.568.412 1.077.969 1.077.196 0 .392-.048.574-.152l3.996-2.256c.267-.15.58-.227.899-.227.319 0 .632.077.899.227l3.996 2.256c.182.104.378.152.574.152.557 0 1.022-.509.969-1.077l-.087-.928c-.045-.39.175-.78.515-1.005 1.961-1.225 3.27-3.365 3.27-5.795 0-1.887-.795-3.598-2.062-4.795z"/>
+                        </svg>
+                    </button>
                 </div>
             </div>
 
@@ -1374,6 +1474,44 @@ function lockSidebarSurvey(msg) {
     if (opts)  { opts.style.pointerEvents = 'none'; opts.style.opacity = '.45'; }
     if (msgEl) { msgEl.style.display = 'block'; msgEl.textContent = msg; }
 }
+
+// ===== SNS シェア機能 =====
+function getShareText() {
+    // ページのタイトルと URL を取得
+    const title = document.getElementById('matTitle')?.textContent || 'SOZAINO素材';
+    const url = window.location.href;
+    const siteName = 'ソザイノ';
+    const siteUrl = 'https://sozaino.com';
+    
+    return {
+        title,
+        url,
+        siteName,
+        siteUrl
+    };
+}
+
+function shareToX() {
+    const { title, url } = getShareText();
+    const text = `${title} - ソザイノ\n\n高品質なWebP素材を無料ダウンロード。ブログ・SNS・動画制作などで活用できます。\n\nダウンロードはこちらから\n${url}`;
+    const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+    window.open(shareUrl, '_blank', 'width=600,height=400');
+}
+
+function shareToThreads() {
+    const { title, url } = getShareText();
+    const text = `${title} - ソザイノ\n\nダウンロードはこちらから\n${url}`;
+    const shareUrl = `https://www.threads.net/intent/post?text=${encodeURIComponent(text)}`;
+    window.open(shareUrl, '_blank', 'width=600,height=400');
+}
+
+function shareToLine() {
+    const { title, url } = getShareText();
+    const text = `${title} - ソザイノ\n\n高品質なWebP素材を無料ダウンロード。ブログ・SNS・動画制作などで活用できます。\n\nダウンロードはこちらから\n${url}`;
+    const shareUrl = `https://line.me/R/msg/text/${encodeURIComponent(text)}`;
+    window.location.href = shareUrl;
+}
+
 </script>
 
 <!-- ===== アンケートポップアップ ===== -->
