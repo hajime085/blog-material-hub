@@ -178,9 +178,13 @@
         .line-icon-wrap svg { width:30px; height:30px; display:block; }
 
         @media(max-width:768px) {
-            .share-btn { font-size:.8rem; height:42px; }
-            .share-btn-line { padding:0 1rem 0 .5rem; }
-            .share-buttons-container { gap:.5rem; }
+            .share-btn { font-size:.75rem; height:40px; padding:0 .8rem; }
+            .share-btn-line { padding:0 .8rem 0 .55rem; gap:.45rem; }
+            .line-icon-wrap { width:22px; height:22px; border-radius:0; overflow:visible; }
+            .line-icon-wrap svg { width:22px; height:22px; }
+            .share-btn svg.share-icon { width:14px; height:14px; }
+            .share-buttons-container { gap:.45rem; flex-wrap:nowrap; }
+            .share-btn { flex:1; }
         }
 
         /* ===== 説明・詳細 ===== */
