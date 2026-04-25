@@ -120,75 +120,65 @@
             padding:0;
         }
         .share-buttons-label {
-            font-size:.88rem;
-            font-weight:600;
+            font-size:.82rem;
+            font-weight:700;
             color:var(--muted);
-            margin-bottom:.8rem;
-            display:block;
+            margin-bottom:.9rem;
+            display:flex;
+            align-items:center;
+            gap:.5rem;
+            letter-spacing:.04em;
+            text-transform:uppercase;
+        }
+        .share-buttons-label::before {
+            content:'';
+            display:inline-block;
+            width:3px; height:13px;
+            background:var(--accent);
+            border-radius:2px;
         }
         .share-buttons-container {
-            display:flex; gap:1rem; justify-content:flex-start;
-            flex-wrap:wrap;
+            display:flex; gap:.65rem; justify-content:flex-start;
+            flex-wrap:wrap; align-items:center;
         }
         .share-btn {
-            width:50px; height:50px;
-            border-radius:50%;
-            border:none;
-            display:flex; align-items:center; justify-content:center;
-            cursor:pointer;
-            transition:all .2s ease;
-            color:#fff;
-            font-weight:600;
-            position:relative;
-            overflow:hidden;
-            box-shadow:0 2px 8px rgba(0,0,0,.12);
+            display:inline-flex; align-items:center; gap:.55rem;
+            padding:.6rem 1.15rem;
+            border:none; border-radius:100px;
+            cursor:pointer; font-family:inherit;
+            font-size:.82rem; font-weight:700;
+            letter-spacing:.02em; color:#fff;
+            position:relative; overflow:hidden;
+            transition:transform .18s cubic-bezier(.34,1.56,.64,1), box-shadow .18s ease;
+            -webkit-font-smoothing:antialiased;
         }
-        .share-btn::before {
-            content:'';
-            position:absolute;
-            inset:0;
-            z-index:-1;
-            transition:all .2s ease;
+        .share-btn::after {
+            content:''; position:absolute; inset:0;
+            background:rgba(255,255,255,0); transition:background .18s;
         }
-        .share-btn svg {
-            width:24px; height:24px;
-            z-index:1;
-            position:relative;
-        }
-        .share-btn-x::before {
-            background:#000;
-        }
-        .share-btn-x:hover {
-            box-shadow:0 4px 12px rgba(0,0,0,.2);
-            transform:translateY(-2px);
-        }
-        .share-btn-threads::before {
-            background:#000;
-        }
-        .share-btn-threads:hover {
-            box-shadow:0 4px 12px rgba(0,0,0,.2);
-            transform:translateY(-2px);
-        }
-        .share-btn-line::before {
-            background:#00b900;
-        }
-        .share-btn-line:hover {
-            box-shadow:0 4px 12px rgba(0,180,0,.25);
-            transform:translateY(-2px);
-        }
-        .share-btn:active {
-            transform:scale(0.95);
-        }
+        .share-btn:hover { transform:translateY(-2px) scale(1.025); }
+        .share-btn:hover::after { background:rgba(255,255,255,.12); }
+        .share-btn:active { transform:translateY(0) scale(.97); }
+        .share-btn svg.share-icon { width:16px; height:16px; flex-shrink:0; }
+
+        /* X */
+        .share-btn-x { background:#0f1923; box-shadow:0 2px 10px rgba(15,25,35,.35); }
+        .share-btn-x:hover { box-shadow:0 6px 18px rgba(15,25,35,.4); }
+
+        /* Threads */
+        .share-btn-threads { background:linear-gradient(135deg,#1a1a1a,#3a3a3a); box-shadow:0 2px 10px rgba(0,0,0,.28); }
+        .share-btn-threads:hover { box-shadow:0 6px 18px rgba(0,0,0,.38); }
+
+        /* LINE */
+        .share-btn-line { background:#00b900; box-shadow:0 2px 10px rgba(0,185,0,.32); padding:.45rem 1.15rem .45rem .45rem; gap:.6rem; }
+        .share-btn-line:hover { box-shadow:0 6px 18px rgba(0,185,0,.45); }
+        .line-icon-wrap { width:28px; height:28px; border-radius:6px; overflow:hidden; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+        .line-icon-wrap svg { width:28px; height:28px; }
+
         @media(max-width:768px) {
-            .share-btn {
-                width:46px; height:46px;
-            }
-            .share-btn svg {
-                width:22px; height:22px;
-            }
-            .share-buttons-container {
-                gap:.8rem;
-            }
+            .share-btn { font-size:.78rem; padding:.55rem 1rem; }
+            .share-btn-line { padding:.4rem 1rem .4rem .4rem; }
+            .share-buttons-container { gap:.5rem; }
         }
 
         /* ===== 説明・詳細 ===== */
@@ -693,23 +683,35 @@
 
             <!-- ===== SNS シェアボタン ===== -->
             <div class="share-buttons-section">
-                <label class="share-buttons-label">SNSで共有する</label>
+                <div class="share-buttons-label">SNSで共有する</div>
                 <div class="share-buttons-container">
+                    <!-- X -->
                     <button class="share-btn share-btn-x" title="Xで共有" onclick="shareToX()" aria-label="Xで共有">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.694l-5.245-6.856-6.009 6.856h-3.315l7.517-8.612L2.4 2.25h6.852l4.755 6.285L17.14 2.25h.104zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/>
+                        <svg class="share-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                         </svg>
+                        でシェア
                     </button>
+                    <!-- Threads -->
                     <button class="share-btn share-btn-threads" title="Threadsで共有" onclick="shareToThreads()" aria-label="Threadsで共有">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c5.514 0 10 4.486 10 10s-4.486 10-10 10S2 17.514 2 12 6.486 2 12 2z"/>
-                            <path d="M12 6c-3.315 0-6 2.686-6 6s2.685 6 6 6 6-2.686 6-6-2.685-6-6-6zm0 2c2.21 0 4 1.79 4 4s-1.79 4-4 4-4-1.79-4-4 1.79-4 4-4z"/>
+                        <svg class="share-icon" viewBox="0 0 50 50" fill="currentColor">
+                            <path d="M46,9v32c0,2.757-2.243,5-5,5H9c-2.757,0-5-2.243-5-5V9c0-2.757,2.243-5,5-5h32C43.757,4,46,6.243,46,9z M33.544,35.913c2.711-2.708,2.635-6.093,1.746-8.17c-0.54-1.255-1.508-2.33-2.798-3.108l-0.223-0.138c-0.33-0.208-0.609-0.375-1.046-0.542c-0.008-0.278-0.025-0.556-0.058-0.807c-0.59-4.561-3.551-5.535-5.938-5.55c-2.154,0-3.946,0.92-5.044,2.592l1.672,1.098c0.736-1.121,1.871-1.689,3.366-1.689c2.367,0.015,3.625,1.223,3.96,3.801c-1.141-0.231-2.426-0.314-3.807-0.233c-3.924,0.226-5.561,2.591-5.442,4.836c0.134,2.486,2.278,4.222,5.216,4.222c0.13,0,0.259-0.003,0.384-0.011c2.297-0.126,5.105-1.29,5.61-6.063c0.021,0.013,0.041,0.026,0.062,0.039l0.253,0.157c0.932,0.562,1.621,1.317,1.994,2.185c0.643,1.501,0.682,3.964-1.322,5.966c-1.732,1.73-3.812,2.479-6.936,2.502c-3.47-0.026-6.099-1.145-7.812-3.325c-1.596-2.028-2.42-4.953-2.451-8.677c0.031-3.728,0.855-6.646,2.451-8.673c1.714-2.181,4.349-3.299,7.814-3.325c3.492,0.026,6.165,1.149,7.944,3.338c0.864,1.063,1.525,2.409,1.965,3.998l1.928-0.532c-0.514-1.858-1.301-3.449-2.341-4.728c-2.174-2.674-5.363-4.045-9.496-4.076c-4.12,0.031-7.278,1.406-9.387,4.089c-1.875,2.383-2.844,5.712-2.879,9.91c0.035,4.193,1.004,7.529,2.879,9.913c2.109,2.682,5.262,4.058,9.385,4.088C28.857,38.973,31.433,38.021,33.544,35.913z M28.993,25.405c0.07,0.016,0.138,0.031,0.202,0.046c-0.005,0.078-0.01,0.146-0.015,0.198c-0.314,3.928-2.295,4.489-3.761,4.569c-0.091,0.005-0.181,0.008-0.271,0.008c-1.851,0-3.144-0.936-3.218-2.329c-0.065-1.218,0.836-2.576,3.561-2.732c0.297-0.018,0.589-0.027,0.875-0.027C27.325,25.137,28.209,25.227,28.993,25.405z"/>
                         </svg>
+                        Threads
                     </button>
+                    <!-- LINE -->
                     <button class="share-btn share-btn-line" title="LINEで共有" onclick="shareToLine()" aria-label="LINEで共有">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M19.365 9.863c.349-1.82-.3-3.708-1.715-5.123-1.416-1.416-3.304-2.064-5.123-1.715-3.519.629-6.033 3.655-6.033 7.197 0 2.43 1.309 4.57 3.27 5.795.34.225.56.615.515 1.005l-.087.928c-.053.568.412 1.077.969 1.077.196 0 .392-.048.574-.152l3.996-2.256c.267-.15.58-.227.899-.227.319 0 .632.077.899.227l3.996 2.256c.182.104.378.152.574.152.557 0 1.022-.509.969-1.077l-.087-.928c-.045-.39.175-.78.515-1.005 1.961-1.225 3.27-3.365 3.27-5.795 0-1.887-.795-3.598-2.062-4.795z"/>
-                        </svg>
+                        <div class="line-icon-wrap">
+                            <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="120" height="120" rx="26" fill="#00b900"/>
+                                <path fill="#fff" d="M103.5,54.72c0-19.55-19.6-35.45-43.7-35.45S16.11,35.17,16.11,54.72c0,17.53,15.55,32.21,36.54,35,1.43.31,3.36.94,3.85,2.16a8.93,8.93,0,0,1,.14,4L56,99.55c-.19,1.1-.88,4.32,3.78,2.35S85,87.09,94.13,76.54h0c6.33-7,9.37-14,9.37-21.82"/>
+                                <path fill="#00b900" d="M50.93,45.28H47.86a.85.85,0,0,0-.85.85v19a.85.85,0,0,0,.85.85h3.07a.85.85,0,0,0,.85-.85v-19a.85.85,0,0,0-.85-.85"/>
+                                <path fill="#00b900" d="M72,45.28H69a.85.85,0,0,0-.85.85V57.44L59.38,45.65l-.06-.08h0l-.05-.05h0l0,0,0,0,0,0,0,0,0,0h0l-.05,0h0l-.05,0h-3.3a.85.85,0,0,0-.85.85v19a.85.85,0,0,0,.85.85h3.06a.86.86,0,0,0,.86-.85V53.86l8.73,11.79a.63.63,0,0,0,.22.21h0l.05,0h0l0,0,0,0h0l.06,0h0A.78.78,0,0,0,69,66H72a.85.85,0,0,0,.85-.85v-19a.85.85,0,0,0-.85-.85"/>
+                                <path fill="#00b900" d="M43.54,61.25H35.21V46.13a.85.85,0,0,0-.85-.85H31.3a.85.85,0,0,0-.85.85v19h0a.87.87,0,0,0,.23.59h0v0a.87.87,0,0,0,.59.23H43.54a.85.85,0,0,0,.85-.85V62.1a.85.85,0,0,0-.85-.85"/>
+                                <path fill="#00b900" d="M89,50a.85.85,0,0,0,.85-.85V46.13a.85.85,0,0,0-.85-.85H76.7a.85.85,0,0,0-.59.24h0v0a.83.83,0,0,0-.24.59h0v19h0a.83.83,0,0,0,.24.59h0a.85.85,0,0,0,.59.24H89a.85.85,0,0,0,.85-.85V62.1a.85.85,0,0,0-.85-.85H80.62V58H89a.85.85,0,0,0,.85-.85V54.11a.85.85,0,0,0-.85-.85H80.62V50Z"/>
+                            </svg>
+                        </div>
+                        LINEで送る
                     </button>
                 </div>
             </div>
