@@ -2321,9 +2321,17 @@ function renderMgrGrid() {
     const start = (mgrCurrentPage - 1) * MGR_PAGE_SIZE;
     if (mgrViewMode === 'list') {
         grid.style.display = 'block';
+        grid.style.maxHeight = '600px';
+        grid.style.overflowY = 'auto';
+        grid.style.border = '1px solid #e2e8f0';
+        grid.style.borderRadius = '8px';
         filtered.slice(start, start + MGR_PAGE_SIZE).forEach(m => grid.appendChild(createMgrListRow(m)));
     } else {
         grid.style.display = '';
+        grid.style.maxHeight = '';
+        grid.style.overflowY = '';
+        grid.style.border = '';
+        grid.style.borderRadius = '';
         filtered.slice(start, start + MGR_PAGE_SIZE).forEach(m => grid.appendChild(createMgrCard(m)));
     }
     updateMgrDeleteBtn();
