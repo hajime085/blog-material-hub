@@ -870,6 +870,9 @@
                     <option value="">中分類を選択</option>
                 </select>
                 <button class="btn btn-primary btn-sm" onclick="applyMgrBulkSub()">✅ 一括適用</button>
+                <span style="font-size:.85rem;color:#a0aec0;">｜</span>
+                <input type="text" id="mgrBulkTagInput" placeholder="タグを追加（例：背景透過, 春）" style="padding:.45rem .7rem;border:1.5px solid #bee3f8;border-radius:6px;font-size:.85rem;font-family:inherit;background:#fff;width:210px;" onkeydown="if(event.key==='Enter') applyMgrBulkTags()" />
+                <button class="btn btn-sm" onclick="applyMgrBulkTags()" style="background:#48bb78;color:#fff;border:none;padding:.45rem .9rem;border-radius:6px;font-size:.85rem;font-weight:700;cursor:pointer;">🏷 タグ追加</button>
             </div>
 
             <!-- カードグリッド -->
@@ -2216,6 +2219,9 @@ async function generateWithAI(file) {
                         text: `この画像を分析して、ブログ・動画用素材サイト向けの情報を日本語で生成してください。
 
 以下のJSON形式のみで回答してください（他のテキスト・説明文は一切不要）:
+
+【重要】画像の背景が透明（透過）の場合は、tagsに必ず「背景透過」を含めてください。背景が透明でない場合は含めないでください。
+
 {
   "title": "画像の内容を表す自然な日本語タイトル（15〜25文字）",
   "tags": ["タグ1","タグ2","タグ3","タグ4","タグ5","タグ6"],
@@ -2494,6 +2500,26 @@ function applyMgrBulkSub() {
     document.getElementById('mgrExportWrap').style.display = 'block';
     document.getElementById('mgrDeletedList').innerHTML =
         `<strong>${targets.length} 件の中分類を更新しました。data.json をエクスポートして git push してください。</strong>`;
+}
+
+function applyMgrBulkTags() {
+    const input = document.getElementById('mgrBulkTagInput');
+    const newTags = parseTags(input.value);
+    if (!newTags.length) { toast('追加するタグを入力してください', 'error'); return; }
+    const targets = existingItems.filter(m => mgrCheckedSet.has(m.id));
+    if (!targets.length) { toast('素材が選択されていません', 'error'); return; }
+    targets.forEach(m => {
+        const current = Array.isArray(m.tags) ? m.tags : [];
+        newTags.forEach(t => { if (!current.includes(t)) current.push(t); });
+        m.tags = current;
+    });
+    toast(`✅ ${targets.length} 件に「${newTags.join(', ')}」を追加しました`, 'success');
+    input.value = '';
+    renderMgrGrid();
+    updateMergePreview();
+    document.getElementById('mgrExportWrap').style.display = 'block';
+    document.getElementById('mgrDeletedList').innerHTML =
+        `<strong>${targets.length} 件のタグを更新しました。data.json をエクスポートして git push してください。</strong>`;
 }
 
 function mgrSelectAll(flag) {

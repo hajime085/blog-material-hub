@@ -1081,9 +1081,10 @@ function renderMaterial(m) {
     currentBgColor = 'white';
     drawWatermarkedPreview(imgPath, wrap, 'white');
 
-    // キャラクターカテゴリの場合のみ背景色スウォッチを表示
+    // 背景透過タグまたはキャラクターカテゴリの場合に背景色スウォッチを表示
     const bgSwitcher = document.getElementById('bgSwitcher');
-    if (m.largeCategory === 'character') {
+    const hasTransparentBg = (Array.isArray(m.tags) && m.tags.includes('背景透過')) || m.largeCategory === 'character';
+    if (hasTransparentBg) {
         bgSwitcher.style.display = 'flex';
         // スウォッチを白にリセット
         document.querySelectorAll('.swatch').forEach(s => s.classList.remove('active'));
