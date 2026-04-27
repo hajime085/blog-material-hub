@@ -2815,6 +2815,7 @@ function createMgrListRow(m) {
         if (cb.checked) mgrCheckedSet.add(m.id); else mgrCheckedSet.delete(m.id);
         row.classList.toggle('checked', cb.checked);
         updateMgrDeleteBtn();
+        updateMgrBulkBar();
     });
 
     // サムネイル
