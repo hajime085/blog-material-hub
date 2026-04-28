@@ -1386,7 +1386,7 @@
     },
     {
       "id": 49,
-      "title": "驚きと喜びの表情をした若い女性のポートレート",
+      "title": "驚きの表情をした若い女性のポートレートver.1",
       "description": "",
       "largeCategory": "person",
       "category": "woman",
@@ -1417,7 +1417,7 @@
     },
     {
       "id": 50,
-      "title": "驚きと喜びの表情をした女性のポートレート",
+      "title": "驚きの表情をした若い女性のポートレートver.2",
       "description": "",
       "largeCategory": "person",
       "category": "male",
@@ -1446,7 +1446,7 @@
     },
     {
       "id": 51,
-      "title": "驚きと喜びを表現する女性のポートレート",
+      "title": "驚きの表情をした若い女性のポートレートver.3",
       "description": "",
       "largeCategory": "person",
       "category": "woman",
@@ -1475,7 +1475,7 @@
     },
     {
       "id": 52,
-      "title": "驚きと喜びを表現する女性のポートレート",
+      "title": "驚きの表情をした若い女性のポートレートver.4",
       "description": "",
       "largeCategory": "person",
       "category": "woman",
@@ -4661,7 +4661,8 @@
       "category": "homeappliances",
       "filename": "home_019.webp",
       "tags": [
-        "家電"
+        "家電",
+        "汚れ"
       ],
       "usage_guide": {
         "scenes": [
@@ -22577,35 +22578,6 @@
     },
     {
       "id": 824,
-      "title": "カフェでケーキを食べる女性のイラスト",
-      "description": "",
-      "largeCategory": "character",
-      "category": "person",
-      "filename": "character_67.webp",
-      "tags": [
-        "カフェ",
-        "女性",
-        "ケーキ",
-        "食事",
-        "イラスト",
-        "ライフスタイル"
-      ],
-      "usage_guide": {
-        "scenes": [
-          "カフェ巡りやスイーツ紹介ブログのアイキャッチに最適。温かみのあるイラストタッチで、読者に心地よいカフェ時間をイメージさせ、記事への興味を引き出します。",
-          "グルメ動画やカフェレビュー動画のサムネイルとして活用。優しい画風が女性層の視聴者に親しみやすく、クリック率向上が期待できます。",
-          "ライフスタイルや自分時間の大切さを扱うコンテンツに最適。リラックスした雰囲気が記事のテーマを視覚的に強調します。"
-        ],
-        "headlines": [
-          "忙しい毎日だからこそ、週末のカフェ時間が心を満たす理由",
-          "ひとり時間を充実させる！大人女子が選ぶ癒しのカフェの過ごし方",
-          "甘いものは心の栄養？ストレスを軽くするスイーツと飲み物の選び方"
-        ]
-      },
-      "createdDate": "2026-04-25"
-    },
-    {
-      "id": 825,
       "title": "ひらめきを得た女性のイラスト",
       "description": "",
       "largeCategory": "character",
@@ -22634,7 +22606,7 @@
       "createdDate": "2026-04-25"
     },
     {
-      "id": 826,
+      "id": 825,
       "title": "パソコン作業で成功を喜ぶ女性",
       "description": "",
       "largeCategory": "character",
@@ -22663,7 +22635,7 @@
       "createdDate": "2026-04-25"
     },
     {
-      "id": 827,
+      "id": 826,
       "title": "仕事のストレスに悩む女性のイラスト",
       "description": "",
       "largeCategory": "character",
@@ -22692,15 +22664,15 @@
       "createdDate": "2026-04-25"
     },
     {
-      "id": 828,
-      "title": "パソコンで仕事をする女性のイラスト",
+      "id": 827,
+      "title": "仕事の電話をする女性のイラスト",
       "description": "",
       "largeCategory": "character",
       "category": "person",
       "filename": "character_71.webp",
       "tags": [
         "女性",
-        "パソコン",
+        "電話",
         "仕事",
         "デスク",
         "ビジネス",
@@ -22721,8 +22693,8 @@
       "createdDate": "2026-04-25"
     },
     {
-      "id": 829,
-      "title": "疲れた表情の女性会社員イラスト",
+      "id": 828,
+      "title": "疲れた表情の女性会社員の寝起きイラスト",
       "description": "",
       "largeCategory": "character",
       "category": "person",
@@ -22750,8 +22722,8 @@
       "createdDate": "2026-04-25"
     },
     {
-      "id": 830,
-      "title": "パソコンで作業する女性のイラスト",
+      "id": 829,
+      "title": "パソコンで作業する在宅勤務の女性のイラスト",
       "description": "",
       "largeCategory": "character",
       "category": "person",
@@ -22779,8 +22751,8 @@
       "createdDate": "2026-04-25"
     },
     {
-      "id": 831,
-      "title": "ビジネススーツの女性が喜びで両手を上げている",
+      "id": 830,
+      "title": "女性が喜びで両手を上げている",
       "description": "",
       "largeCategory": "character",
       "category": "person",
@@ -22808,7 +22780,7 @@
       "createdDate": "2026-04-25"
     },
     {
-      "id": 832,
+      "id": 831,
       "title": "朝のルーティン！パジャマ姿で歯磨きする女性",
       "description": "",
       "largeCategory": "character",
@@ -22837,14 +22809,13 @@
       "createdDate": "2026-04-25"
     },
     {
-      "id": 833,
-      "title": "カフェでケーキを食べる女性のイラスト",
+      "id": 832,
+      "title": "おやつ時間にケーキを食べる女性のイラスト",
       "description": "",
       "largeCategory": "character",
       "category": "person",
       "filename": "character_76.webp",
       "tags": [
-        "カフェ",
         "女性",
         "ケーキ",
         "食事",
@@ -22866,7 +22837,7 @@
       "createdDate": "2026-04-25"
     },
     {
-      "id": 834,
+      "id": 833,
       "title": "青空に泳ぐカラフルな鯉のぼり",
       "description": "",
       "largeCategory": "home",
@@ -22895,7 +22866,7 @@
       "createdDate": "2026-04-25"
     },
     {
-      "id": 835,
+      "id": 834,
       "title": "青空に泳ぐカラフルな鯉のぼり",
       "description": "",
       "largeCategory": "home",
@@ -22924,7 +22895,7 @@
       "createdDate": "2026-04-25"
     },
     {
-      "id": 836,
+      "id": 835,
       "title": "空を彩るカラフルな鯉のぼりの風景",
       "description": "",
       "largeCategory": "home",
@@ -22953,8 +22924,8 @@
       "createdDate": "2026-04-25"
     },
     {
-      "id": 837,
-      "title": "卵焼きのイラスト",
+      "id": 836,
+      "title": "ふわふわな卵焼きのイラスト",
       "description": "",
       "largeCategory": "character",
       "category": "food",
@@ -22980,7 +22951,7 @@
       "createdDate": "2026-04-27"
     },
     {
-      "id": 838,
+      "id": 837,
       "title": "新鮮な赤いリンゴと断面のイラスト",
       "description": "",
       "largeCategory": "character",
@@ -23009,8 +22980,8 @@
       "createdDate": "2026-04-27"
     },
     {
-      "id": 839,
-      "title": "新鮮なイチゴの並んだ画像",
+      "id": 838,
+      "title": "新鮮なイチゴの並んだイラスト",
       "description": "",
       "largeCategory": "character",
       "category": "food",
@@ -23038,19 +23009,19 @@
       "createdDate": "2026-04-27"
     },
     {
-      "id": 840,
-      "title": "カラフルなコーンスープ、スプーン付き",
+      "id": 839,
+      "title": "中華食堂の昔ながらの炒飯",
       "description": "",
       "largeCategory": "character",
       "category": "food",
       "filename": "character_a164.webp",
       "tags": [
-        "コーンスープ",
+        "中華料理",
         "食べ物",
         "料理",
-        "スプーン",
+        "炒飯",
         "背景透過",
-        "食事"
+        "チャーハン"
       ],
       "usage_guide": {
         "scenes": [
@@ -23067,19 +23038,18 @@
       "createdDate": "2026-04-27"
     },
     {
-      "id": 841,
-      "title": "鶏肉の甘辛炒め、カラフルな野菜添え",
+      "id": 840,
+      "title": "ゴロゴロ野菜の黒酢酢豚",
       "description": "",
       "largeCategory": "character",
       "category": "food",
       "filename": "character_a165.webp",
       "tags": [
         "中華料理",
-        "鶏肉料理",
-        "甘辛炒め",
+        "黒酢",
         "背景透過",
         "レシピ",
-        "食品写真"
+        "酢豚"
       ],
       "usage_guide": {
         "scenes": [
@@ -23096,8 +23066,8 @@
       "createdDate": "2026-04-27"
     },
     {
-      "id": 842,
-      "title": "麻婆豆腐の美しい盛り付け",
+      "id": 841,
+      "title": "中華食堂の麻婆豆腐（辛め）",
       "description": "",
       "largeCategory": "character",
       "category": "food",
@@ -23125,16 +23095,15 @@
       "createdDate": "2026-04-27"
     },
     {
-      "id": 843,
-      "title": "海老の照り焼き丼 レタス添え",
+      "id": 842,
+      "title": "ぷりぷりエビの旨辛エビチリ",
       "description": "",
       "largeCategory": "character",
       "category": "food",
       "filename": "character_a167.webp",
       "tags": [
-        "海老料理",
-        "丼物",
-        "照り焼き",
+        "海老チリ",
+        "中華料理",
         "食べ物イラスト",
         "背景透過",
         "グルメ"
@@ -23154,8 +23123,8 @@
       "createdDate": "2026-04-27"
     },
     {
-      "id": 844,
-      "title": "揚げ春巻きとサラダの盛り合わせ",
+      "id": 843,
+      "title": "具材たっぷり春巻きのイラスト",
       "description": "",
       "largeCategory": "character",
       "category": "food",
@@ -23183,8 +23152,8 @@
       "createdDate": "2026-04-27"
     },
     {
-      "id": 845,
-      "title": "焼き餃子と醤油ダレのセット画像",
+      "id": 844,
+      "title": "焼き餃子と醤油ダレのセット",
       "description": "",
       "largeCategory": "character",
       "category": "food",
@@ -23212,7 +23181,7 @@
       "createdDate": "2026-04-27"
     },
     {
-      "id": 846,
+      "id": 845,
       "title": "新鮮なオレンジとカットフルーツ",
       "description": "",
       "largeCategory": "character",
@@ -23241,7 +23210,7 @@
       "createdDate": "2026-04-27"
     },
     {
-      "id": 847,
+      "id": 846,
       "title": "新鮮なパイナップルと実のスライス",
       "description": "",
       "largeCategory": "character",
@@ -23270,7 +23239,7 @@
       "createdDate": "2026-04-27"
     },
     {
-      "id": 848,
+      "id": 847,
       "title": "スイカの丸ごと1個とカットされたスイカ",
       "description": "",
       "largeCategory": "character",
@@ -23299,7 +23268,7 @@
       "createdDate": "2026-04-27"
     },
     {
-      "id": 849,
+      "id": 848,
       "title": "メロンの断面イラスト素材",
       "description": "",
       "largeCategory": "character",
@@ -23328,7 +23297,7 @@
       "createdDate": "2026-04-27"
     },
     {
-      "id": 850,
+      "id": 849,
       "title": "ふんわりカツ丼のイラスト",
       "description": "",
       "largeCategory": "character",
@@ -23356,7 +23325,7 @@
       "createdDate": "2026-04-27"
     },
     {
-      "id": 851,
+      "id": 850,
       "title": "野菜がゴロゴロ入ったカレーライスのイラスト",
       "description": "",
       "largeCategory": "character",
@@ -23384,7 +23353,7 @@
       "createdDate": "2026-04-27"
     },
     {
-      "id": 852,
+      "id": 851,
       "title": "おにぎりと漬物の和食イラスト",
       "description": "",
       "largeCategory": "character",
@@ -23413,7 +23382,7 @@
       "createdDate": "2026-04-27"
     },
     {
-      "id": 853,
+      "id": 852,
       "title": "あったかいきつねうどんのイラスト",
       "description": "",
       "largeCategory": "character",
@@ -23442,7 +23411,7 @@
       "createdDate": "2026-04-27"
     },
     {
-      "id": 854,
+      "id": 853,
       "title": "ざるそばと薬味、つゆのセット",
       "description": "",
       "largeCategory": "character",
@@ -23471,7 +23440,7 @@
       "createdDate": "2026-04-27"
     },
     {
-      "id": 855,
+      "id": 854,
       "title": "ミートソースパスタのイラスト",
       "description": "",
       "largeCategory": "character",
@@ -23500,7 +23469,7 @@
       "createdDate": "2026-04-27"
     },
     {
-      "id": 856,
+      "id": 855,
       "title": "今年もあの冷やし中華はじまりました",
       "description": "",
       "largeCategory": "character",
@@ -23529,7 +23498,7 @@
       "createdDate": "2026-04-27"
     },
     {
-      "id": 857,
+      "id": 856,
       "title": "やきそばのイラスト素材",
       "description": "",
       "largeCategory": "character",
@@ -23558,7 +23527,7 @@
       "createdDate": "2026-04-27"
     },
     {
-      "id": 858,
+      "id": 857,
       "title": "シンプルなラーメンのイラスト",
       "description": "",
       "largeCategory": "character",
@@ -23587,7 +23556,7 @@
       "createdDate": "2026-04-27"
     },
     {
-      "id": 859,
+      "id": 858,
       "title": "タコさんウインナーのイラスト",
       "description": "",
       "largeCategory": "character",
@@ -23616,7 +23585,7 @@
       "createdDate": "2026-04-27"
     },
     {
-      "id": 860,
+      "id": 859,
       "title": "大きな海老天の乗った天丼のイラスト",
       "description": "",
       "largeCategory": "character",
@@ -23634,8 +23603,8 @@
   ],
   "metadata": {
     "version": "2.0",
-    "totalMaterials": 860,
-    "lastUpdated": "2026-04-27",
+    "totalMaterials": 859,
+    "lastUpdated": "2026-04-28",
     "largeCategoryDefs": {
       "nature": {
         "label": "自然",
