@@ -699,7 +699,7 @@ async function loadData() {
             function tick(ts) {
                 if (!startTime) startTime = ts;
                 const elapsed = (ts - startTime) / 1000;
-                pos = (elapsed * 200) % halfWidth;
+                pos = (elapsed * 40) % halfWidth;
                 tickerInner.style.transform = `translateX(-${pos}px)`;
                 requestAnimationFrame(tick);
             }
