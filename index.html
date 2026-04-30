@@ -380,10 +380,7 @@
             display:inline-flex; align-items:center; gap:.5rem;
             padding:0 2.5rem; font-size:.78rem; color:rgba(255,255,255,.75);
         }
-        .ticker-item .dot {
-            width:5px; height:5px; background:#e8520a;
-            border-radius:50%; flex-shrink:0; opacity:.8;
-        }
+        .ticker-item .dot { display:none; }
         .ticker-item a { color:rgba(255,255,255,.85); text-decoration:none; transition:color .2s; }
         .ticker-item a:hover { color:#ff7340; }
         .ticker-new {
@@ -690,7 +687,7 @@ async function loadData() {
         tickerInner.innerHTML = items;
         requestAnimationFrame(() => {
             const totalWidth = tickerInner.scrollWidth / 2;
-            const duration = Math.max(20, totalWidth / 60);
+            const duration = Math.max(10, totalWidth / 120);
             tickerInner.style.animation = `ticker-scroll ${duration}s linear infinite`;
         });
     }
