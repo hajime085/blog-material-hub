@@ -676,20 +676,35 @@ async function loadData() {
     const shuffled = recent.sort(() => Math.random() - 0.5).slice(0, 10);
     const tickerInner = document.getElementById('tickerInner');
     if (tickerInner && shuffled.length) {
-        const items = [...shuffled, ...shuffled].map((m, i) => {
-            const isFirst = i === 0;
-            return `<div class="ticker-item">
-                ${isFirst ? '<span class="ticker-new">NEW</span>' : ''}
-                <span class="dot"></span>
+        // 10件を1セットとして生成し、シームレスループのために2セット並べる
+        const buildSet = (items) => items.map((m, i) =>
+            `<div class="ticker-item">
+                ${i === 0 ? '<span class="ticker-new">NEW</span>' : ''}
                 <a href="download.html?id=${m.id}">${esc(m.title || m.filename)}</a>
-            </div>`;
-        }).join('');
-        tickerInner.innerHTML = items;
-        requestAnimationFrame(() => {
-            const totalWidth = tickerInner.scrollWidth / 2;
-            const duration = Math.max(10, totalWidth / 120);
-            tickerInner.style.animation = `ticker-scroll ${duration}s linear infinite`;
-        });
+            </div>`
+        ).join('');
+        // 2セット並べてシームレスにループ
+        tickerInner.innerHTML = buildSet(shuffled) + buildSet(shuffled);
+
+        // DOMに反映してから幅を計測
+        setTimeout(() => {
+            const fullWidth = tickerInner.scrollWidth;
+            const halfWidth = fullWidth / 2;
+            // px/秒 = 200 でスピード調整
+            const duration = halfWidth / 200;
+            tickerInner.style.animation = 'none';
+            // JS で直接アニメーション（requestAnimationFrame）
+            let startTime = null;
+            let pos = 0;
+            function tick(ts) {
+                if (!startTime) startTime = ts;
+                const elapsed = (ts - startTime) / 1000;
+                pos = (elapsed * 200) % halfWidth;
+                tickerInner.style.transform = `translateX(-${pos}px)`;
+                requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+        }, 100);
     }
 }
 
