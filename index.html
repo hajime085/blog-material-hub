@@ -356,6 +356,47 @@
             .stats-inner { gap:1.5rem; }
             .stat-div { display:none; }
         }
+
+        /* ===== TICKER ===== */
+        .ticker-wrap {
+            width:100%; background:rgba(255,255,255,.04);
+            border-bottom:1px solid rgba(255,255,255,.08);
+            overflow:hidden; height:36px; display:flex; align-items:center;
+        }
+        .ticker-label {
+            flex-shrink:0; background:#e8520a; color:#fff;
+            font-size:.72rem; font-weight:700; padding:0 .9rem;
+            height:100%; display:flex; align-items:center; gap:.4rem;
+            letter-spacing:.06em; white-space:nowrap;
+        }
+        .ticker-label svg { width:14px; height:14px; flex-shrink:0; }
+        .ticker-track {
+            flex:1; overflow:hidden; position:relative; height:100%;
+            mask-image:linear-gradient(to right, transparent 0%, black 3%, black 97%, transparent 100%);
+            -webkit-mask-image:linear-gradient(to right, transparent 0%, black 3%, black 97%, transparent 100%);
+        }
+        .ticker-inner {
+            display:flex; align-items:center; height:100%; white-space:nowrap;
+        }
+        .ticker-item {
+            display:inline-flex; align-items:center; gap:.5rem;
+            padding:0 2.5rem; font-size:.78rem; color:rgba(255,255,255,.75);
+        }
+        .ticker-item .dot {
+            width:5px; height:5px; background:#e8520a;
+            border-radius:50%; flex-shrink:0; opacity:.8;
+        }
+        .ticker-item a { color:rgba(255,255,255,.85); text-decoration:none; transition:color .2s; }
+        .ticker-item a:hover { color:#ff7340; }
+        .ticker-new {
+            color:#ff7340; font-size:.68rem; font-weight:700;
+            background:rgba(232,82,10,.2); border:1px solid rgba(232,82,10,.4);
+            border-radius:3px; padding:.1rem .35rem; letter-spacing:.04em;
+        }
+        @keyframes ticker-scroll {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2687113603921668" crossorigin="anonymous"></script>
 </head>
@@ -373,6 +414,19 @@
         </nav>
     </div>
 </header>
+
+<!-- ===== TICKER ===== -->
+<div class="ticker-wrap">
+    <div class="ticker-label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+        </svg>
+        新着素材
+    </div>
+    <div class="ticker-track">
+        <div class="ticker-inner" id="tickerInner"></div>
+    </div>
+</div>
 
 <!-- ===== HERO ===== -->
 <section class="hero">
@@ -615,6 +669,33 @@ async function loadData() {
         });
         catGrid.appendChild(a);
     });
+
+    // ティッカー生成（直近7日以内からランダム10件）
+    const cutoff = new Date();
+    cutoff.setDate(cutoff.getDate() - 7);
+    const cutoffStr = cutoff.toISOString().split('T')[0];
+    let recent = materials.filter(m => (m.createdDate || '') >= cutoffStr);
+    if (!recent.length) {
+        recent = [...materials].sort((a, b) => b.id - a.id).slice(0, 10);
+    }
+    const shuffled = recent.sort(() => Math.random() - 0.5).slice(0, 10);
+    const tickerInner = document.getElementById('tickerInner');
+    if (tickerInner && shuffled.length) {
+        const items = [...shuffled, ...shuffled].map((m, i) => {
+            const isFirst = i === 0;
+            return `<div class="ticker-item">
+                ${isFirst ? '<span class="ticker-new">NEW</span>' : ''}
+                <span class="dot"></span>
+                <a href="download.html?id=${m.id}">${esc(m.title || m.filename)}</a>
+            </div>`;
+        }).join('');
+        tickerInner.innerHTML = items;
+        requestAnimationFrame(() => {
+            const totalWidth = tickerInner.scrollWidth / 2;
+            const duration = Math.max(20, totalWidth / 60);
+            tickerInner.style.animation = `ticker-scroll ${duration}s linear infinite`;
+        });
+    }
 }
 
 function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
