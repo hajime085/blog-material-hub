@@ -359,7 +359,7 @@
 
         /* ===== TICKER ===== */
         .ticker-wrap {
-            width:100%; background:rgba(255,255,255,.04);
+            width:100%; background:var(--navy);
             border-bottom:1px solid rgba(255,255,255,.08);
             overflow:hidden; height:36px; display:flex; align-items:center;
         }
@@ -372,8 +372,6 @@
         .ticker-label svg { width:14px; height:14px; flex-shrink:0; }
         .ticker-track {
             flex:1; overflow:hidden; position:relative; height:100%;
-            mask-image:linear-gradient(to right, transparent 0%, black 3%, black 97%, transparent 100%);
-            -webkit-mask-image:linear-gradient(to right, transparent 0%, black 3%, black 97%, transparent 100%);
         }
         .ticker-inner {
             display:flex; align-items:center; height:100%; white-space:nowrap;
