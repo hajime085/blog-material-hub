@@ -421,72 +421,6 @@
             vertical-align: -.15em;
             flex-shrink: 0;
         }
-    
-        /* ===== COLUMN SECTION ===== */
-        .column-section {
-            max-width:1400px; margin:0 auto;
-            padding:4rem 2rem;
-        }
-        .column-grid {
-            display:grid;
-            grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
-            gap:1.2rem;
-            margin-top:2rem;
-        }
-        .column-card {
-            display:flex; gap:1.2rem;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius:12px;
-            padding:1.5rem;
-            text-decoration:none;
-            color: inherit;
-            transition: all .25s;
-            align-items:center;
-        }
-        .column-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(13,148,136,.10);
-        }
-        .column-card-icon {
-            width:64px; height:64px; border-radius:14px;
-            background: linear-gradient(135deg, var(--primary), var(--primary2));
-            display:flex; align-items:center; justify-content:center;
-            color:#fff; flex-shrink:0;
-            box-shadow: 0 4px 14px rgba(13,148,136,.20);
-        }
-        .column-card-icon svg { width:28px; height:28px; }
-        .column-card-body { min-width:0; flex:1; }
-        .column-card-tag {
-            display:inline-block;
-            background: #f0fdfa;
-            color: var(--primary);
-            padding:.15rem .65rem;
-            border-radius:10px;
-            font-size:.7rem; font-weight:700;
-            margin-bottom:.4rem;
-        }
-        .column-card-title {
-            font-size:1rem; font-weight:700;
-            line-height:1.5; color: var(--text);
-            margin-bottom:.3rem;
-        }
-        .column-card-desc {
-            font-size:.82rem; color: var(--muted);
-            line-height:1.6;
-        }
-        .column-section-cta {
-            text-align:center; margin-top:1.8rem;
-        }
-        .column-section-cta a {
-            color: var(--primary); text-decoration:none;
-            font-size:.9rem; font-weight:600;
-            display:inline-flex; align-items:center; gap:.3rem;
-            transition:gap .2s;
-        }
-        .column-section-cta a:hover { gap:.6rem; }
-
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2687113603921668" crossorigin="anonymous"></script>
 </head>
@@ -501,7 +435,6 @@
             <a href="gallery.html">素材ギャラリー</a>
             <a href="about.html">ソザイノについて</a>
             <a href="process.html">素材ができるまで</a>
-            <a href="column/">コラム</a>
             <a href="faq.html">よくあるご質問</a>
             <a href="contact.html">お問い合わせ</a>
         </nav>
@@ -567,46 +500,57 @@
     </div>
 </div>
 
-<!-- ===== COLUMN ===== -->
-<section class="column-section">
+<!-- ===== FEATURES ===== -->
+<section class="features">
     <div class="section-head">
-        <h2>コラム</h2>
-        <p>Web画像と素材活用にまつわる、知って得するトピックをお届けします。</p>
+        <h2>選ばれる 4 つの理由</h2>
+        <p>素材サイトに必要なものを、すべて無料で。</p>
     </div>
-    <div class="column-grid">
-
-        <a href="column/webp-guide.html" class="column-card">
-            <div class="column-card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="3" width="18" height="18" rx="2"></rect>
-                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                    <polyline points="21 15 16 10 5 21"></polyline>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <div class="feature-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+                    <path d="M9 12l2 2 4-4"/>
                 </svg>
             </div>
-            <div class="column-card-body">
-                <span class="column-card-tag">画像フォーマット</span>
-                <div class="column-card-title">WebP形式とは？PNG・JPEGとの違いと、ブログで使う5つのメリット</div>
-                <div class="column-card-desc">WebPの特徴と導入メリットを実用視点で解説。ページ速度改善とSEOに効く使い方が分かります。</div>
-            </div>
-        </a>
-
-        <a href="column/ai-image-copyright.html" class="column-card">
-            <div class="column-card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                    <polyline points="9 12 11 14 15 10"></polyline>
+            <h3>完全無料・商用 OK</h3>
+            <p>全素材が登録不要で無料ダウンロード。個人ブログから法人サイトまで、商用利用も許可しています。</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    <path d="M3 9h18"/>
+                    <path d="M9 21V9"/>
                 </svg>
             </div>
-            <div class="column-card-body">
-                <span class="column-card-tag">AI素材</span>
-                <div class="column-card-title">AI生成画像の著作権は大丈夫？ブログで使う前に知っておきたい現在地</div>
-                <div class="column-card-desc">文化庁の見解（2026年5月時点）をベースに、「学習段階」「利用段階」の2フェーズで整理します。</div>
+            <h3>次世代 WebP 形式</h3>
+            <p>PNG・JPEG より最大 30〜80% 軽量。ページ表示速度を損なわず、美しいビジュアルを実現します。</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="7"/>
+                    <path d="M21 21l-4.35-4.35"/>
+                    <path d="M8 11h6M11 8v6"/>
+                </svg>
             </div>
-        </a>
-
-    </div>
-    <div class="column-section-cta">
-        <a href="column/">すべてのコラムを見る →</a>
+            <h3>カテゴリ × タグ検索</h3>
+            <p>大分類・中分類・タグの 3 段階で絞り込み。欲しいイメージにすぐたどり着けます。</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="5" y="2" width="14" height="20" rx="2"/>
+                    <path d="M12 18h.01"/>
+                    <rect x="2" y="7" width="3" height="10" rx="1"/>
+                    <rect x="19" y="7" width="3" height="10" rx="1"/>
+                </svg>
+            </div>
+            <h3>全デバイス対応</h3>
+            <p>PC・スマートフォン・タブレット、どの端末からでも快適に閲覧・ダウンロードできます。</p>
+        </div>
     </div>
 </section>
 
@@ -651,7 +595,6 @@
         <div class="footer-links">
             <a href="about.html">ソザイノについて</a>
             <a href="process.html">素材ができるまで</a>
-            <a href="column/">コラム</a>
             <a href="privacy.html">プライバシーポリシー</a>
             <a href="terms.html">利用規約</a>
             <a href="disclaimer.html">免責事項</a>

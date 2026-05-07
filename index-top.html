@@ -230,6 +230,71 @@
         }
         .feature-card p { font-size:.88rem; color:var(--muted); line-height:1.7; }
 
+        /* ===== COLUMN SECTION (トップ用) ===== */
+        .column-section {
+            max-width:1400px; margin:0 auto;
+            padding:4rem 2rem;
+        }
+        .column-grid {
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
+            gap:1.2rem;
+            margin-top:2rem;
+        }
+        .column-card {
+            display:flex; gap:1.2rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius:12px;
+            padding:1.5rem;
+            text-decoration:none;
+            color: inherit;
+            transition: all .25s;
+            align-items:center;
+        }
+        .column-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(13,148,136,.10);
+        }
+        .column-card-icon {
+            width:64px; height:64px; border-radius:14px;
+            background: linear-gradient(135deg, var(--primary), var(--primary2));
+            display:flex; align-items:center; justify-content:center;
+            color:#fff; flex-shrink:0;
+            box-shadow: 0 4px 14px rgba(13,148,136,.20);
+        }
+        .column-card-icon svg { width:28px; height:28px; }
+        .column-card-body { min-width:0; flex:1; }
+        .column-card-tag {
+            display:inline-block;
+            background: var(--primary-bg, #f0fdfa);
+            color: var(--primary);
+            padding:.15rem .65rem;
+            border-radius:10px;
+            font-size:.7rem; font-weight:700;
+            margin-bottom:.4rem;
+        }
+        .column-card-title {
+            font-size:1rem; font-weight:700;
+            line-height:1.5; color: var(--text);
+            margin-bottom:.3rem;
+        }
+        .column-card-desc {
+            font-size:.82rem; color: var(--muted);
+            line-height:1.6;
+        }
+        .column-section-cta {
+            text-align:center; margin-top:1.8rem;
+        }
+        .column-section-cta a {
+            color: var(--primary); text-decoration:none;
+            font-size:.9rem; font-weight:600;
+            display:inline-flex; align-items:center; gap:.3rem;
+            transition:gap .2s;
+        }
+        .column-section-cta a:hover { gap:.6rem; }
+
         /* ===== LATEST SECTION ===== */
         .latest {
             background: #f8fafc;
@@ -421,72 +486,6 @@
             vertical-align: -.15em;
             flex-shrink: 0;
         }
-    
-        /* ===== COLUMN SECTION ===== */
-        .column-section {
-            max-width:1400px; margin:0 auto;
-            padding:4rem 2rem;
-        }
-        .column-grid {
-            display:grid;
-            grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
-            gap:1.2rem;
-            margin-top:2rem;
-        }
-        .column-card {
-            display:flex; gap:1.2rem;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius:12px;
-            padding:1.5rem;
-            text-decoration:none;
-            color: inherit;
-            transition: all .25s;
-            align-items:center;
-        }
-        .column-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(13,148,136,.10);
-        }
-        .column-card-icon {
-            width:64px; height:64px; border-radius:14px;
-            background: linear-gradient(135deg, var(--primary), var(--primary2));
-            display:flex; align-items:center; justify-content:center;
-            color:#fff; flex-shrink:0;
-            box-shadow: 0 4px 14px rgba(13,148,136,.20);
-        }
-        .column-card-icon svg { width:28px; height:28px; }
-        .column-card-body { min-width:0; flex:1; }
-        .column-card-tag {
-            display:inline-block;
-            background: #f0fdfa;
-            color: var(--primary);
-            padding:.15rem .65rem;
-            border-radius:10px;
-            font-size:.7rem; font-weight:700;
-            margin-bottom:.4rem;
-        }
-        .column-card-title {
-            font-size:1rem; font-weight:700;
-            line-height:1.5; color: var(--text);
-            margin-bottom:.3rem;
-        }
-        .column-card-desc {
-            font-size:.82rem; color: var(--muted);
-            line-height:1.6;
-        }
-        .column-section-cta {
-            text-align:center; margin-top:1.8rem;
-        }
-        .column-section-cta a {
-            color: var(--primary); text-decoration:none;
-            font-size:.9rem; font-weight:600;
-            display:inline-flex; align-items:center; gap:.3rem;
-            transition:gap .2s;
-        }
-        .column-section-cta a:hover { gap:.6rem; }
-
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2687113603921668" crossorigin="anonymous"></script>
 </head>
@@ -501,7 +500,6 @@
             <a href="gallery.html">素材ギャラリー</a>
             <a href="about.html">ソザイノについて</a>
             <a href="process.html">素材ができるまで</a>
-            <a href="column/">コラム</a>
             <a href="faq.html">よくあるご質問</a>
             <a href="contact.html">お問い合わせ</a>
         </nav>
