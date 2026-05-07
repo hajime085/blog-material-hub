@@ -8,13 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <style>
         html { overflow-x: hidden; width: 100%; }
-    
-        /* ===== 絵文字置換アイコン共通スタイル ===== */
-        .emoji-icon {
-            display: inline-block;
-            vertical-align: -.15em;
-            flex-shrink: 0;
-        }
     </style>
     <title>素材ギャラリー | ソザイノ</title>
     <meta name="description" content="ブログ・動画・SNS向けの高品質WebP素材を無料配信。カテゴリとタグで欲しい素材を素早く発見できます。">
@@ -336,7 +329,7 @@
     <!-- 行1：検索 + 大分類 + 件数 -->
     <div class="filter-row" id="rowLarge">
         <div class="search-wrap">
-            <span class="search-icon"><svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
+            <span class="search-icon">🔍</span>
             <input type="text" id="searchInput" placeholder="キーワードで検索…">
         </div>
         <div class="filter-sep"></div>
@@ -399,7 +392,7 @@
 <main>
     <div class="bento" id="bento"></div>
     <div class="empty" id="empty">
-        <h2><svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> 素材が見つかりません</h2>
+        <h2>🔍 素材が見つかりません</h2>
         <p>別のキーワードやカテゴリで検索してみてください。</p>
     </div>
     <div class="load-more-wrap" id="loadMoreWrap" style="display:none;">
@@ -695,7 +688,7 @@ function createCard(m, idx) {
     const overlay = document.createElement('div');
     overlay.className = 'item-overlay';
     overlay.innerHTML = `
-        <div class="overlay-icon"><svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+        <div class="overlay-icon">🔍</div>
         <div class="overlay-title">${esc(m.title || m.filename)}</div>
         <div class="overlay-cats">${esc(catLabel)}</div>
     `;

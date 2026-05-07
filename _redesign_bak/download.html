@@ -417,15 +417,13 @@
         .gallery-banner-btn {
             flex-shrink:0;
             padding:.7rem 1.5rem;
-            background: #ffffff;
-            color: var(--primary); border-radius:8px;
+            background:linear-gradient(135deg, var(--accent), var(--acc2));
+            color:#fff; border-radius:8px;
             font-size:.9rem; font-weight:700;
             font-family:'DM Sans',sans-serif;
             white-space:nowrap;
-            box-shadow:0 3px 12px rgba(0,0,0,.15);
-            transition: transform .2s, box-shadow .2s;
+            box-shadow:0 3px 12px rgba(13,148,136,.35);
         }
-        .gallery-banner:hover .gallery-banner-btn { transform: translateY(-1px); box-shadow:0 5px 16px rgba(0,0,0,.20); }
         .related-grid {
             display:grid;
             grid-template-columns:repeat(auto-fill, minmax(160px,1fr));
@@ -626,13 +624,6 @@
                 transition: width .12s linear;
             }
         }
-    
-        /* ===== 絵文字置換アイコン共通スタイル ===== */
-        .emoji-icon {
-            display: inline-block;
-            vertical-align: -.15em;
-            flex-shrink: 0;
-        }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2687113603921668" crossorigin="anonymous"></script>
 </head>
@@ -691,7 +682,7 @@
 
             <!-- 背景色スウォッチ（キャラクターカテゴリのみ表示） -->
             <div class="bg-switcher" id="bgSwitcher" style="display:none;">
-                <span class="bg-switcher-label"><svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><circle cx="13.5" cy="6.5" r="0.5" fill="currentColor"></circle><circle cx="17.5" cy="10.5" r="0.5" fill="currentColor"></circle><circle cx="8.5" cy="7.5" r="0.5" fill="currentColor"></circle><circle cx="6.5" cy="12.5" r="0.5" fill="currentColor"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"></path></svg> 背景色を変えてプレビュー</span>
+                <span class="bg-switcher-label">🎨 背景色を変えてプレビュー</span>
                 <div class="bg-swatches">
                     <button class="swatch swatch-white active" onclick="setPreviewBg('white', this)" title="白"></button>
                     <button class="swatch swatch-gray"  onclick="setPreviewBg('#e5e7eb', this)" title="グレー"></button>
@@ -747,30 +738,30 @@
 
             <!-- 説明文 -->
             <div class="desc-card">
-                <div class="section-title"><svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path></svg> 素材について</div>
+                <div class="section-title">📋 素材について</div>
                 <div class="desc-text" id="matDesc"></div>
             </div>
 
             <!-- タグ -->
             <div class="desc-card">
-                <div class="section-title"><svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg> タグ</div>
+                <div class="section-title">🏷️ タグ</div>
                 <div class="tags-wrap" id="matTags"></div>
             </div>
 
             <!-- 活用ガイド -->
             <div class="desc-card" id="usageGuideCard" style="display:none;">
-                <div class="section-title"><svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg> この素材の活用ガイド</div>
+                <div class="section-title">📝 この素材の活用ガイド</div>
                 <div class="usage-guide">
                     <div class="usage-block" id="guideDesignPointsBlock" style="display:none;">
-                        <div class="usage-label"><svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><circle cx="13.5" cy="6.5" r="0.5" fill="currentColor"></circle><circle cx="17.5" cy="10.5" r="0.5" fill="currentColor"></circle><circle cx="8.5" cy="7.5" r="0.5" fill="currentColor"></circle><circle cx="6.5" cy="12.5" r="0.5" fill="currentColor"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"></path></svg> デザイン上のポイント</div>
+                        <div class="usage-label">🎨 デザイン上のポイント</div>
                         <ul class="usage-list" id="guideDesignPoints"></ul>
                     </div>
                     <div class="usage-block">
-                        <div class="usage-label"><svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"></path></svg> おすすめ記事・動画ジャンル</div>
+                        <div class="usage-label">📌 おすすめ記事・動画ジャンル</div>
                         <ul class="usage-list" id="guideScenes"></ul>
                     </div>
                     <div class="usage-block">
-                        <div class="usage-label"><svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg> 見出し文の例</div>
+                        <div class="usage-label">✍️ 見出し文の例</div>
                         <ul class="usage-list usage-headlines" id="guideHeadlines"></ul>
                     </div>
                 </div>
@@ -778,7 +769,7 @@
 
             <!-- ファイル情報 -->
             <div class="desc-card">
-                <div class="section-title"><svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg> ファイル情報</div>
+                <div class="section-title">📁 ファイル情報</div>
                 <div class="file-info" id="matFileInfo"></div>
             </div>
 
@@ -794,7 +785,7 @@
             <div class="related-section">
                 <div class="related-header">
                     <div>
-                        <div class="section-title" style="margin-bottom:.25rem;"><svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg> この素材を見た方はこちらも</div>
+                        <div class="section-title" style="margin-bottom:.25rem;">🔗 この素材を見た方はこちらも</div>
                         <p class="related-sub">タグや雰囲気が近い素材をピックアップしました。ぜひ一緒にチェックしてみてください。</p>
                     </div>
                     <a href="gallery.html" class="related-all-link">すべて見る →</a>
@@ -866,7 +857,7 @@
 
                     <!-- 完了メッセージ -->
                     <div class="dl-success" id="dlSuccess">
-                        <svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> ダウンロードが開始されました！
+                        ✅ ダウンロードが開始されました！
                     </div>
 
                     <!-- ダウンロードボタン周辺 広告（300×250） -->
@@ -883,11 +874,11 @@
 
                     <!-- クレジット表記 -->
                     <div class="credit-card">
-                        <h4><svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg> クレジット表記（任意）</h4>
+                        <h4>🔗 クレジット表記（任意）</h4>
                         <p>無料でご利用いただけます。もし記事やサイトにリンクを載せていただけると、とても励みになります！</p>
                         <div class="credit-box" id="creditText"></div>
                         <button class="copy-btn" id="copyBtn" onclick="copyCredit()">
-                            <svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path></svg> リンクをコピーする
+                            📋 リンクをコピーする
                         </button>
                     </div>
                 </div>
@@ -1137,7 +1128,7 @@ function renderMaterial(m) {
     // 説明文が入力されている場合：おしゃれなボックスで挿入
     const customBox = m.description ? `
         <div class="desc-box">
-            <div class="desc-box-icon"><svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><line x1="9" y1="18" x2="15" y2="18"></line><line x1="10" y1="22" x2="14" y2="22"></line><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"></path></svg></div>
+            <div class="desc-box-icon">💡</div>
             <div class="desc-box-body">${m.description.split('\n').map(l => `<p>${esc(l)}</p>`).join('')}</div>
         </div>
     ` : '';
@@ -1280,10 +1271,10 @@ function startDownload() {
     if (mFill)     mFill.style.width = '0%';
 
     const steps  = [
-        { pct: 15, msg: 'ライセンスを確認しています…' },
-        { pct: 40, msg: 'ファイルを準備しています…' },
-        { pct: 70, msg: 'ダウンロードリンクを生成しています…' },
-        { pct: 90, msg: 'もうすぐ完了…' },
+        { pct: 15, msg: '🔒 ライセンスを確認しています…' },
+        { pct: 40, msg: '📦 ファイルを準備しています…' },
+        { pct: 70, msg: '⚡ ダウンロードリンクを生成しています…' },
+        { pct: 90, msg: '✅ もうすぐ完了…' },
     ];
     const total  = WAIT_SEC * 1000;
     const start  = Date.now();
@@ -1317,7 +1308,7 @@ function startDownload() {
             // ダウンロード実行
             if (fill)  fill.style.width = '100%';
             if (mFill) mFill.style.width = '100%';
-            if (label) label.textContent = '<svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> ダウンロード開始！';
+            if (label) label.textContent = '✅ ダウンロード開始！';
 
             const imgPath = `assets/materials/${currentMaterial.largeCategory}/${currentMaterial.filename}`;
             const a = document.createElement('a');
@@ -1363,10 +1354,10 @@ function copyCredit() {
     const text = document.getElementById('creditText')?.textContent || '';
     const btn  = document.getElementById('copyBtn');
     navigator.clipboard.writeText(text).then(() => {
-        btn.textContent = '<svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> コピーしました！';
+        btn.textContent = '✅ コピーしました！';
         btn.classList.add('copied');
         setTimeout(() => {
-            btn.innerHTML = '<svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path></svg> リンクをコピーする';
+            btn.innerHTML = '📋 リンクをコピーする';
             btn.classList.remove('copied');
         }, 2200);
     }).catch(() => {
@@ -1376,8 +1367,8 @@ function copyCredit() {
         document.body.appendChild(ta); ta.select();
         document.execCommand('copy');
         document.body.removeChild(ta);
-        btn.textContent = '<svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> コピーしました！';
-        setTimeout(() => { btn.innerHTML = '<svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path></svg> リンクをコピーする'; }, 2200);
+        btn.textContent = '✅ コピーしました！';
+        setTimeout(() => { btn.innerHTML = '📋 リンクをコピーする'; }, 2200);
     });
 }
 
@@ -1604,7 +1595,7 @@ function shareToLine() {
             <button class="survey-skip" onclick="closeSurvey()">スキップ</button>
         </div>
         <div id="surveyDone" class="survey-done" style="display:none;">
-            <div class="survey-done-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div class="survey-done-icon">✓</div>
             <div class="survey-done-text">ありがとうございました！</div>
             <div class="survey-done-sub">回答を記録しました</div>
             <button class="survey-skip" style="margin-top:1rem;" onclick="closeSurvey()">閉じる</button>
