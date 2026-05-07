@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ソザイノについて | ソザイノ (SOZAINO)</title>
+    <meta name="description" content="ソザイノ (SOZAINO) は、ブログ・SNS・動画制作のための高品質WebP素材を無料で提供するサイトです。運営理念、素材選定のこだわり、AI×人間による品質管理の考え方をご紹介します。">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+
+        .navbar nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .navbar nav a {
+            color: #555;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .navbar nav a:hover {
+            color: #3498db;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        main h1 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .lead {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .section {
+            margin-bottom: 2.5rem;
+        }
+
+        .section h2 {
+            color: #34495e;
+            margin-bottom: 1.2rem;
+            font-size: 1.4rem;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .section h3 {
+            color: #2c3e50;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.15rem;
+        }
+
+        .section p {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        .section ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section li {
+            margin-bottom: 0.6rem;
+            color: #555;
+        }
+
+        .section a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .section a:hover {
+            text-decoration: underline;
+        }
+
+        .icon {
+            width: 22px;
+            height: 22px;
+            stroke: #3498db;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            flex-shrink: 0;
+        }
+
+        .highlight-box {
+            background-color: #f4f9fd;
+            border-left: 4px solid #3498db;
+            padding: 1.2rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .note-box {
+            background-color: #fdf6e3;
+            border-left: 4px solid #f39c12;
+            padding: 1.2rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+
+        .note-box p {
+            margin-bottom: 0.5rem;
+        }
+
+        .note-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            margin-top: 4rem;
+            padding: 3rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #34495e;
+        }
+
+        .footer-links a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #3498db;
+        }
+
+        .footer-info {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .navbar nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background-color: #fff;
+                gap: 0;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
+
+            .navbar nav.active {
+                display: flex;
+            }
+
+            .navbar nav a {
+                padding: 1rem;
+                border-bottom: 1px solid #ecf0f1;
+            }
+
+            main {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+
+            main h1 {
+                font-size: 1.5rem;
+            }
+
+            .section h2 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2687113603921668" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <a href="/" class="logo">ソザイノ.</a>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+            <nav id="navMenu">
+                <a href="/">ホーム</a>
+                <a href="gallery.html">素材ギャラリー</a>
+                <a href="about.html">ソザイノについて</a>
+                <a href="process.html">素材ができるまで</a>
+                <a href="faq.html">よくあるご質問</a>
+                <a href="contact.html">お問い合わせ</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h1>ソザイノについて</h1>
+
+        <p class="lead">
+            ソザイノ (SOZAINO) は、ブログ・SNS・動画制作のための<strong>高品質なWebP素材を無料で配布する</strong>個人運営のサイトです。「素材選びに時間をかけず、本来やりたい創作や発信に集中してほしい」という思いから運営しています。
+        </p>
+
+        <div class="section">
+            <h2>
+                <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+                ソザイノが目指すもの
+            </h2>
+            <p>
+                ブログやSNSを運営していると、「記事の内容そのものよりも、画像探しに時間を取られている」という経験はないでしょうか。有料素材は予算の壁があり、無料素材サイトは検索のたびに似たような画像ばかりが並び、結局しっくり来るものが見つからない。多くのクリエイターが共通して抱える悩みだと思います。
+            </p>
+            <p>
+                ソザイノは、こうした「素材を探す時間」を少しでも減らすために生まれました。掲載しているのは、運営者自身が「自分のブログでもこれなら使いたい」と思える基準で選んだ素材だけです。数ではなく実用性を優先し、ブログのアイキャッチ・SNS投稿・YouTubeサムネイルなど、実際の現場ですぐ使える形で公開しています。
+            </p>
+            <div class="highlight-box">
+                <p><strong>ソザイノの基本方針</strong></p>
+                <p>・すべての素材を無料で提供（会員登録不要）</p>
+                <p>・商用利用OK、クレジット表記も不要</p>
+                <p>・ファイルはすべてWebP形式で、ページ速度を損なわない</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>
+                <svg class="icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                素材選びで大切にしていること
+            </h2>
+
+            <h3>1. 「使いやすさ」を最優先する</h3>
+            <p>
+                どれだけ美しい素材でも、ブログ記事のアイキャッチに入れたときに「文字が乗せにくい」「他の素材と色が合わない」といった理由で結局使われなければ意味がありません。ソザイノでは、配色の汎用性、背景の処理、構図の安定感など、「実際に使う場面で困らないか」を一つひとつ確認しながら公開する素材を決めています。
+            </p>
+
+            <h3>2. 軽量なWebP形式に統一する</h3>
+            <p>
+                すべての素材はWebP形式で提供しています。WebPは同じ画質でもPNG・JPEGに比べて30〜80%ほどファイルサイズが小さくなるため、ブログやSNSに貼ったときにページの読み込み速度を損ないません。これは結果として、SEO評価や読者の離脱率にも良い影響を与えます。WebP形式について詳しくは <a href="faq.html">FAQ</a> をご覧ください。
+            </p>
+
+            <h3>3. 「AI生成」と「人の判断」を組み合わせる</h3>
+            <p>
+                ソザイノの素材はAI画像生成技術を活用して制作されていますが、生成された画像をそのまま公開しているわけではありません。生成された候補の中から、「実際にブログ・SNSで使えるか」という視点で運営者が一枚ずつ選別し、必要に応じて加工や調整を行ったうえで公開しています。詳しい工程は <a href="process.html">素材ができるまで</a> をご覧ください。
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>
+                <svg class="icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                利用について
+            </h2>
+            <p>
+                ソザイノの素材は、商用・非商用を問わず無料でご利用いただけます。ブログのアイキャッチ、YouTubeのサムネイル、SNS投稿、企業・個人のWebサイトなど、幅広い用途でお使いいただけます。クレジット表記は必須ではありませんが、表記いただける場合は「素材提供：ソザイノ (SOZAINO)」としていただけると励みになります。
+            </p>
+            <p>
+                一方で、素材そのものの再配布や販売はご遠慮いただいています。詳しい利用範囲・禁止事項については <a href="terms.html">利用規約</a> および <a href="disclaimer.html">免責事項</a> をご確認ください。
+            </p>
+
+            <div class="note-box">
+                <p><strong>AI生成素材の取り扱いについて</strong></p>
+                <p>
+                    ソザイノでは、素材を公開・運営するにあたり、既存の著作物との類似や抵触が生じないよう、生成時のプロンプト設計や素材選定において十分な注意を払っています。一方で、AI生成画像の著作権に関する法的解釈は2026年現在も発展途上の領域であり、今後の判例や法改正によって扱いが変わる可能性があります。完全な保証をお約束することは難しい状況ですので、商用利用などで不安がある場合は、念のため <a href="terms.html">利用規約</a> と <a href="disclaimer.html">免責事項</a> を事前にご確認のうえご利用ください。
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>
+                <svg class="icon" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                これからのソザイノ
+            </h2>
+            <p>
+                現在、ソザイノには970点を超える素材が登録されています。今後も以下のような形で、少しずつサイトを育てていく予定です。
+            </p>
+            <ul>
+                <li>素材ライブラリの継続的な追加（毎週新しい素材を公開）</li>
+                <li>季節・トレンドに合わせたテーマ別カテゴリの拡充</li>
+                <li>素材の使い方や選び方を解説するコラムの追加</li>
+                <li>ユーザーリクエストに応じた素材制作の検討</li>
+            </ul>
+            <p>
+                「こんな素材があったら助かる」「このカテゴリをもっと増やしてほしい」といったご意見やご要望は、<a href="contact.html">お問い合わせフォーム</a> からお気軽にお寄せください。すべてに返信できるとは限りませんが、運営の参考にさせていただきます。
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>
+                <svg class="icon" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                最後に
+            </h2>
+            <p>
+                ソザイノの素材が、あなたのブログ運営や創作活動の小さな助けになれば、運営者として何より嬉しく思います。これからも「実際に使える素材を、無理なく長く配り続ける」ことを大切に、サイトを育てていきます。
+            </p>
+            <p>
+                どうぞよろしくお願いいたします。
+            </p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="about.html">ソザイノについて</a>
+                <a href="process.html">素材ができるまで</a>
+                <a href="privacy.html">プライバシーポリシー</a>
+                <a href="terms.html">利用規約</a>
+                <a href="disclaimer.html">免責事項</a>
+                <a href="contact.html">お問い合わせ</a>
+            </div>
+            <div class="footer-info">
+                <p>&copy; 2026 ソザイノ (SOZAINO). All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
