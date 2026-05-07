@@ -746,6 +746,10 @@
             <div class="desc-card" id="usageGuideCard" style="display:none;">
                 <div class="section-title">📝 この素材の活用ガイド</div>
                 <div class="usage-guide">
+                    <div class="usage-block" id="guideDesignPointsBlock" style="display:none;">
+                        <div class="usage-label">🎨 デザイン上のポイント</div>
+                        <ul class="usage-list" id="guideDesignPoints"></ul>
+                    </div>
                     <div class="usage-block">
                         <div class="usage-label">📌 おすすめ記事・動画ジャンル</div>
                         <ul class="usage-list" id="guideScenes"></ul>
@@ -1105,12 +1109,15 @@ function renderMaterial(m) {
 
     // 説明文
     const descEl = document.getElementById('matDesc');
+    const ug = m.usage_guide;
 
-    // 自動生成テキスト（常に表示）
-    const autoText = `
-        <p>「${esc(m.title||m.filename)}」は、ブログ・SNS・動画制作など幅広いシーンで活用できる高品質WebP素材です。</p>
-        <p>カテゴリ「${esc(catLabel)}」に分類されており、${(m.tags||[]).length > 0 ? `${m.tags.map(t=>`「${esc(t)}」`).join('・')}といったキーワードに関連した` : ''}素材を探している方に最適です。</p>
-    `;
+    // summary が usage_guide にあれば、それを優先表示（独自テキスト）
+    const introText = ug && ug.summary
+        ? `<p>${esc(ug.summary)}</p>`
+        : `
+            <p>「${esc(m.title||m.filename)}」は、ブログ・SNS・動画制作など幅広いシーンで活用できる高品質WebP素材です。</p>
+            <p>カテゴリ「${esc(catLabel)}」に分類されており、${(m.tags||[]).length > 0 ? `${m.tags.map(t=>`「${esc(t)}」`).join('・')}といったキーワードに関連した` : ''}素材を探している方に最適です。</p>
+        `;
 
     // 説明文が入力されている場合：おしゃれなボックスで挿入
     const customBox = m.description ? `
@@ -1125,17 +1132,27 @@ function renderMaterial(m) {
         <p>ダウンロードは無料で、個人・商用問わずご利用いただけます。</p>
     `;
 
-    descEl.innerHTML = autoText + customBox + autoText2;
+    descEl.innerHTML = introText + customBox + autoText2;
 
     // 活用ガイド
     const guideCard = document.getElementById('usageGuideCard');
-    const ug = m.usage_guide;
-    if (ug && (ug.scenes?.length || ug.headlines?.length)) {
+    if (ug && (ug.scenes?.length || ug.headlines?.length || ug.design_points?.length)) {
         guideCard.style.display = 'block';
+        const dpBlock     = document.getElementById('guideDesignPointsBlock');
+        const dpEl        = document.getElementById('guideDesignPoints');
         const scenesEl    = document.getElementById('guideScenes');
         const headlinesEl = document.getElementById('guideHeadlines');
+        dpEl.innerHTML        = '';
         scenesEl.innerHTML    = '';
         headlinesEl.innerHTML = '';
+
+        if (ug.design_points && ug.design_points.length) {
+            dpBlock.style.display = 'block';
+            ug.design_points.forEach(p => { const li=document.createElement('li'); li.textContent=p; dpEl.appendChild(li); });
+        } else {
+            dpBlock.style.display = 'none';
+        }
+
         (ug.scenes    || []).forEach(s => { const li=document.createElement('li'); li.textContent=s; scenesEl.appendChild(li); });
         (ug.headlines || []).forEach(h => { const li=document.createElement('li'); li.textContent=h; headlinesEl.appendChild(li); });
     } else {

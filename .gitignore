@@ -26,3 +26,7 @@ yarn-error.log
 *.temp
 .env
 .env.local
+_backup_*/
+data.json.bak_*
+*.py
+*.zip
