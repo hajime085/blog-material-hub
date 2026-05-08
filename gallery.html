@@ -174,73 +174,125 @@
         /* ===== MAIN ===== */
         main { padding:var(--gap); }
 
-        /* ===== BENTO GRID ===== */
-        .bento {
+        /* ===== MASONRY GRID ===== */
+        .masonry {
+            column-count: 5;
+            column-gap: var(--gap);
+            padding: var(--gap);
+        }
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: var(--gap);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            background: #f0fdfa;
+            border-radius: 6px;
+            display: block;
+            text-decoration: none;
+            /* 出現アニメーション初期状態 */
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity .45s ease, transform .45s ease,
+                        box-shadow .25s ease;
+        }
+        /* 出現済み状態 */
+        .masonry-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* ワイドカード：全列にまたがる */
+        .masonry-item.wide-card {
+            column-span: all;
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-auto-rows: var(--row-h);
-            gap: var(--gap);
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: var(--gap);
         }
-
-        /* サイズバリエーション */
-        .bento-item              { grid-column: span 1; grid-row: span 1; }
-        .bento-item.size-wide    { grid-column: span 2; grid-row: span 1; }
-        .bento-item.size-tall    { grid-column: span 1; grid-row: span 2; }
-        .bento-item.size-big     { grid-column: span 2; grid-row: span 2; }
-
-        .bento-item {
-            position:relative;
-            overflow:hidden;
-            cursor:pointer;
-            background:#d1d5db;
-            border-radius:4px;
-            display:block;
-            text-decoration:none;
+        .masonry-item.wide-card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
         }
-        .bento-item img {
-            width:100%; height:100%;
-            object-fit:cover; display:block;
+        .masonry-item.wide-card .wide-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem 2.5rem;
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-left: none;
+            border-radius: 0 10px 10px 0;
+        }
+        .masonry-item.wide-card .wide-tag {
+            display: inline-block;
+            background: #f0fdfa;
+            color: var(--primary);
+            font-size: .72rem; font-weight: 700;
+            padding: .2rem .7rem; border-radius: 10px;
+            margin-bottom: .7rem;
+        }
+        .masonry-item.wide-card .wide-title {
+            font-size: 1.1rem; font-weight: 700;
+            color: var(--text); line-height: 1.5;
+            margin-bottom: .5rem;
+        }
+        .masonry-item.wide-card .wide-desc {
+            font-size: .85rem; color: var(--muted);
+            line-height: 1.7;
+        }
+        .masonry-item.wide-card .wide-cta {
+            display: inline-flex; align-items: center; gap: .4rem;
+            margin-top: 1.2rem;
+            color: var(--primary); font-size: .88rem; font-weight: 600;
+        }
+        /* ワイドカードはホバーオーバーレイなし */
+        .masonry-item.wide-card .item-overlay { display: none; }
+        .masonry-item.wide-card:hover {
+            box-shadow: 0 8px 28px rgba(13,148,136,.15);
+            transform: translateY(-3px);
+        }
+        .masonry-item img {
+            width: 100%;
+            height: auto;
+            display: block;
             transition: transform .4s cubic-bezier(.25,.46,.45,.94);
         }
-        .bento-item:hover img { transform:scale(1.06); }
+        .masonry-item:not(.wide-card):hover img { transform: scale(1.04); }
 
         /* ホバーオーバーレイ */
         .item-overlay {
-            position:absolute; inset:0;
-            background:linear-gradient(to top, rgba(10,15,25,.88) 0%, rgba(10,15,25,.15) 55%, transparent 100%);
-            opacity:0; transition:opacity .28s;
-            display:flex; flex-direction:column; justify-content:flex-end;
-            padding:.75rem .8rem;
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(10,15,25,.88) 0%, rgba(10,15,25,.15) 55%, transparent 100%);
+            opacity: 0; transition: opacity .28s;
+            display: flex; flex-direction: column; justify-content: flex-end;
+            padding: .75rem .8rem;
         }
-        .bento-item:hover .item-overlay { opacity:1; }
+        .masonry-item:hover .item-overlay { opacity: 1; }
 
         .overlay-icon {
-            position:absolute; top:50%; left:50%;
-            transform:translate(-50%,-50%) scale(.85);
-            width:40px; height:40px; border-radius:50%;
-            background:rgba(255,255,255,.92); color:var(--primary);
-            display:flex; align-items:center; justify-content:center;
-            font-size:1rem;
-            box-shadow:0 4px 16px rgba(0,0,0,.25);
-            transition:transform .25s;
-            opacity:0;
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%,-50%) scale(.85);
+            width: 36px; height: 36px; border-radius: 50%;
+            background: rgba(255,255,255,.92); color: var(--primary);
+            display: flex; align-items: center; justify-content: center;
+            font-size: .9rem;
+            box-shadow: 0 4px 16px rgba(0,0,0,.25);
+            transition: transform .25s;
+            opacity: 0;
         }
-        .bento-item:hover .overlay-icon {
-            opacity:1;
-            transform:translate(-50%,-50%) scale(1);
+        .masonry-item:hover .overlay-icon {
+            opacity: 1;
+            transform: translate(-50%,-50%) scale(1);
         }
         .overlay-title {
-            color:#fff; font-size:.74rem; font-weight:600;
-            overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
-            text-shadow:0 1px 3px rgba(0,0,0,.6);
+            color: #fff; font-size: .72rem; font-weight: 600;
+            overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+            text-shadow: 0 1px 3px rgba(0,0,0,.6);
         }
-        .overlay-cats { color:rgba(255,255,255,.65); font-size:.68rem; margin-top:.1rem; }
-
-        /* big / wide のオーバーレイはもう少し大きく */
-        .size-big .overlay-icon,
-        .size-wide .overlay-icon { width:52px; height:52px; font-size:1.25rem; }
-        .size-big .overlay-title,
-        .size-wide .overlay-title { font-size:.85rem; }
+        .overlay-cats { color: rgba(255,255,255,.65); font-size: .66rem; margin-top: .1rem; }
 
         /* ===== EMPTY ===== */
         .empty { text-align:center; padding:5rem 2rem; color:var(--muted); display:none; }
@@ -272,17 +324,11 @@
 
         /* ===== RESPONSIVE ===== */
         @media(max-width:1100px) {
-            .bento { grid-template-columns: repeat(3, 1fr); }
-            /* 3列では big は 2×2、wide は 2×1 のまま自然に収まる */
+            .masonry { column-count: 4; }
         }
-
         @media(max-width:700px) {
-            :root { --row-h: 210px; --gap: 2px; }
-            .bento { grid-template-columns: repeat(2, 1fr); }
-            /* 2列: big と wide はどちらも横2=全幅になる */
-            .bento-item.size-big  { grid-column: span 2; grid-row: span 2; }
-            .bento-item.size-wide { grid-column: span 2; grid-row: span 1; }
-            /* tall はそのまま縦2 */
+            :root { --gap: 2px; }
+            .masonry { column-count: 3; }
 
             .navbar { padding:.75rem 1rem; }
             .menu-toggle { display:block; }
@@ -303,13 +349,11 @@
 
             .pill { padding:.28rem .65rem; font-size:.78rem; }
 
-            /* モバイルはフィルター行を非表示（検索＋大分類のみ表示、タグは折りたたむ） */
             #rowSub, #rowTag { display:none !important; }
             #rowSub.has-items, #rowTag.has-items { display:flex !important; }
         }
-
         @media(max-width:400px) {
-            :root { --row-h: 180px; }
+            .masonry { column-count: 2; }
         }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2687113603921668" crossorigin="anonymous"></script>
@@ -325,7 +369,6 @@
             <a href="gallery.html">素材ギャラリー</a>
             <a href="about.html">ソザイノについて</a>
             <a href="process.html">素材ができるまで</a>
-            <a href="column/">コラム</a>
             <a href="faq.html">よくあるご質問</a>
             <a href="contact.html">お問い合わせ</a>
         </nav>
@@ -398,7 +441,7 @@
 </div>
 
 <main>
-    <div class="bento" id="bento"></div>
+    <div class="masonry" id="bento"></div>
     <div class="empty" id="empty">
         <h2><svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> 素材が見つかりません</h2>
         <p>別のキーワードやカテゴリで検索してみてください。</p>
@@ -414,7 +457,6 @@
         <div class="footer-links">
             <a href="about.html">ソザイノについて</a>
             <a href="process.html">素材ができるまで</a>
-            <a href="column/">コラム</a>
             <a href="privacy.html">プライバシーポリシー</a>
             <a href="terms.html">利用規約</a>
             <a href="disclaimer.html">免責事項</a>
@@ -676,13 +718,21 @@ function renderMore() {
 document.getElementById('loadMoreBtn').addEventListener('click', renderMore);
 
 // ===== カード生成 =====
+// ワイドカードになるカテゴリ（写真系）
+const WIDE_CATEGORIES = ['nature', 'food', 'backgrounds', 'blog', 'home', 'outdoor', 'beauty'];
+// ワイドカードの挿入間隔（何枚に1枚）
+const WIDE_INTERVAL = 20;
+
 function createCard(m, idx) {
     const imgPath  = `assets/materials/${m.largeCategory}/${m.filename}`;
     const catLabel = getCatLabel(m.largeCategory, m.category);
-    const sizeClass = getSizeClass(idx);
+
+    // ワイドカード判定：WIDE_INTERVALの倍数かつWIDE_CATEGORIESのカテゴリ
+    const isWide = (idx > 0) && (idx % WIDE_INTERVAL === 0);
+                   WIDE_CATEGORIES.includes(m.largeCategory);
 
     const a = document.createElement('a');
-    a.className = `bento-item size-${sizeClass}`;
+    a.className = isWide ? 'masonry-item wide-card' : 'masonry-item';
     a.href = `download.html?id=${m.id}`;
 
     const img = document.createElement('img');
@@ -690,22 +740,60 @@ function createCard(m, idx) {
     img.alt     = m.title || m.filename;
     img.loading = 'lazy';
     img.onerror = function() {
-        this.parentElement.style.background = '#c9d0d8';
-        this.remove();
+        if (isWide) {
+            this.parentElement.style.display = 'none';
+        } else {
+            this.parentElement.style.background = '#e2e8f0';
+            this.remove();
+        }
     };
 
-    const overlay = document.createElement('div');
-    overlay.className = 'item-overlay';
-    overlay.innerHTML = `
-        <div class="overlay-icon"><svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
-        <div class="overlay-title">${esc(m.title || m.filename)}</div>
-        <div class="overlay-cats">${esc(catLabel)}</div>
-    `;
+    if (isWide) {
+        // ワイドカード：画像 + テキスト情報パネル
+        const info = document.createElement('div');
+        info.className = 'wide-info';
+        info.innerHTML = `
+            <span class="wide-tag">${esc(catLabel)}</span>
+            <div class="wide-title">${esc(m.title || m.filename)}</div>
+            <div class="wide-desc">${esc((m.usage_guide && m.usage_guide.summary) ? m.usage_guide.summary.slice(0, 60) + '…' : 'ソザイノの無料WebP素材です。ブログ・動画・SNSにご活用ください。')}</div>
+            <span class="wide-cta">詳細・ダウンロード →</span>
+        `;
+        a.appendChild(img);
+        a.appendChild(info);
+    } else {
+        // 通常カード
+        const overlay = document.createElement('div');
+        overlay.className = 'item-overlay';
+        overlay.innerHTML = `
+            <div class="overlay-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+            <div class="overlay-title">${esc(m.title || m.filename)}</div>
+            <div class="overlay-cats">${esc(catLabel)}</div>
+        `;
+        a.appendChild(img);
+        a.appendChild(overlay);
+    }
 
-    a.appendChild(img);
-    a.appendChild(overlay);
+    // 出現アニメーション：Intersection Observerで監視
+    cardObserver.observe(a);
+
     return a;
 }
+
+// ===== 出現アニメーション用 Intersection Observer =====
+const cardObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+            // 少しずつ遅延させてウェーブ効果
+            setTimeout(() => {
+                entry.target.classList.add('visible');
+            }, i * 40);
+            cardObserver.unobserve(entry.target);
+        }
+    });
+}, {
+    threshold: 0.05,
+    rootMargin: '0px 0px -30px 0px'
+});
 
 // ===== 検索 =====
 document.getElementById('searchInput').addEventListener('input', e => {
