@@ -1,0 +1,1631 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>素材ダウンロード | ソザイノ</title>
+    <meta name="description" content="高品質WebP素材を無料ダウンロード。ブログ・動画・SNS制作にご活用ください。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary:    #0d9488;  /* メインアクセント（ティール） */
+            --primary2:   #14b8a6;  /* 明るめティール */
+            --primary3:   #5eead4;  /* 淡ティール */
+            --primary-bg: #f0fdfa;  /* 極淡ティール */
+            --accent:     #0d9488;  /* 旧変数互換 */
+            --acc2:       #14b8a6;  /* 旧変数互換 */
+            --navy:       #ffffff;  /* ヘッダー背景は白 */
+            --navy2:      #0f172a;
+            --navy3:      #243352;
+            --text:       #0f172a;
+            --muted:      #64748b;
+            --border:     #e2e8f0;
+            --bg:         #fafafa;
+            --surface:    #ffffff;
+            --header-bg:  #ffffff;
+            --header-text:#0f172a;
+            --header-text-muted:#64748b;
+        }
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Noto Sans JP',sans-serif; background:var(--bg); color:var(--text); line-height:1.65; }
+
+        /* ===== HEADER ===== */
+        header { background: var(--header-bg); position:relative; z-index:200; border-bottom: 1px solid var(--border); box-shadow: 0 1px 3px rgba(15,23,42,.04); }
+        .navbar { max-width:1100px; margin:0 auto; padding:.85rem 2rem; display:flex; justify-content:space-between; align-items:center; }
+        .logo { font-family:'DM Sans',sans-serif; font-size:1.2rem; font-weight:600; color: var(--header-text); text-decoration:none; }
+        .logo-dot { color:var(--acc2); }
+        .nav-links { display:flex; gap:1.8rem; }
+        .nav-links a { color: var(--header-text-muted); text-decoration:none; font-size:.88rem; font-weight:500; transition:color .2s; }
+        .nav-links a:hover { color: var(--primary); }
+        .menu-toggle { display:none; background:none; border:none; color: var(--header-text); font-size:1.4rem; cursor:pointer; }
+
+        /* ===== BREADCRUMB ===== */
+        .breadcrumb { background:var(--surface); border-bottom:1px solid var(--border); }
+        .breadcrumb-inner { max-width:1100px; margin:0 auto; padding:.55rem 2rem; font-size:.8rem; color:var(--muted); }
+        .breadcrumb a { color:var(--muted); text-decoration:none; } .breadcrumb a:hover { color:var(--accent); }
+        .breadcrumb span { margin:0 .4rem; }
+
+        /* ===== AD SLOT ===== */
+        /* AdSense 審査通過後、コードを貼り付けると自動で表示されます */
+        /* それまでは display:none で完全非表示（枠も余白も出ない）  */
+        .ad-slot { display: none; }
+        .ad-728 { width:100%; max-width:728px; margin:0 auto; }
+        .ad-300 { width:300px; }
+        .ad-responsive { width:100%; }
+        .ad-wrap { display:flex; justify-content:center; }
+
+        /* ===== MAIN LAYOUT ===== */
+        main { max-width:1100px; margin:0 auto; padding:1.5rem 2rem 4rem; }
+        .content-grid {
+            display:grid;
+            grid-template-columns: 1fr 320px;
+            gap: 2rem;
+            align-items:start;
+        }
+
+        /* ===== LEFT COLUMN ===== */
+        .left-col {}
+
+        h1.material-title {
+            font-family:'DM Sans',sans-serif;
+            font-size:1.65rem; font-weight:700;
+            margin-bottom:.5rem; line-height:1.3;
+        }
+        .material-meta { font-size:.85rem; color:var(--muted); margin-bottom:1.2rem; }
+        .material-meta a { color:var(--accent); text-decoration:none; }
+        .material-meta a:hover { text-decoration:underline; }
+
+        /* プレビュー画像 */
+        /* Canvas でウォーターマーク表示 */
+        .preview-wrap canvas {
+            display:block;
+            max-width:100%; height:auto;
+            max-height:520px;
+            margin:0 auto; /* 小さい素材は中央寄せ */
+            user-select:none;
+            -webkit-user-select:none;
+            -webkit-touch-callout:none;
+        }
+        .preview-wrap {
+            border-radius:var(--r); overflow:hidden;
+            background:#e5e7eb; margin-bottom:1rem;
+            box-shadow: 0 4px 24px rgba(0,0,0,.1);
+            position:relative;
+            display:flex; justify-content:center; align-items:center;
+            min-height:200px;
+        }
+        .preview-wrap img {
+            display:block; width:100%; height:auto;
+            max-height:520px; object-fit:contain;
+            background:#f3f4f6;
+            user-select:none;
+            -webkit-user-select:none;
+            -webkit-touch-callout:none;
+            pointer-events:none;
+        }
+        /* 透明オーバーレイ：右クリック・長押しをブロック */
+        .preview-guard {
+            position:absolute; inset:0;
+            z-index:1;
+            cursor:default;
+            /* 透明 */
+            background:transparent;
+        }
+        .preview-wrap .no-preview {
+            height:320px; display:flex; flex-direction:column; align-items:center; justify-content:center;
+            gap:1rem; color:#9ca3af;
+        }
+        .preview-wrap .no-preview svg {
+            width:80px; height:80px; opacity:.6;
+        }
+        .preview-wrap .no-preview span {
+            font-size:.82rem; color:#9ca3af; text-align:center; line-height:1.7;
+        }
+
+        /* 画像下広告 */
+        .ad-below-img { margin-bottom:1.5rem; }
+
+        /* ===== SNS シェアボタン ===== */
+        .share-buttons-section {
+            margin-bottom:1.8rem;
+            padding:0;
+        }
+        .share-buttons-label {
+            font-size:.82rem;
+            font-weight:700;
+            color:var(--muted);
+            margin-bottom:.9rem;
+            display:flex;
+            align-items:center;
+            gap:.5rem;
+            letter-spacing:.04em;
+            text-transform:uppercase;
+        }
+        .share-buttons-label::before {
+            content:'';
+            display:inline-block;
+            width:3px; height:13px;
+            background:var(--accent);
+            border-radius:2px;
+        }
+        .share-buttons-container {
+            display:flex; gap:.6rem; justify-content:flex-start;
+            flex-wrap:wrap; align-items:stretch;
+        }
+        .share-btn {
+            display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+            padding:0 1.1rem;
+            height:44px;
+            border:none; border-radius:12px;
+            cursor:pointer; font-family:inherit;
+            font-size:.84rem; font-weight:700;
+            letter-spacing:.02em; color:#fff;
+            position:relative; overflow:hidden;
+            transition:transform .15s ease, box-shadow .15s ease, filter .15s ease;
+            -webkit-font-smoothing:antialiased;
+            white-space:nowrap;
+        }
+        .share-btn::after {
+            content:''; position:absolute; inset:0;
+            background:rgba(255,255,255,0); transition:background .15s;
+        }
+        .share-btn:hover { transform:translateY(-1px); filter:brightness(1.08); }
+        .share-btn:hover::after { background:rgba(255,255,255,.08); }
+        .share-btn:active { transform:translateY(0) scale(.98); filter:brightness(.96); }
+        .share-btn svg.share-icon { width:16px; height:16px; flex-shrink:0; }
+
+        /* X */
+        .share-btn-x { background:#0f1923; box-shadow:0 2px 8px rgba(15,25,35,.3); }
+        .share-btn-x:hover { box-shadow:0 4px 14px rgba(15,25,35,.4); }
+
+        /* Threads */
+        .share-btn-threads { background:#1a1a1a; box-shadow:0 2px 8px rgba(0,0,0,.25); }
+        .share-btn-threads:hover { box-shadow:0 4px 14px rgba(0,0,0,.35); }
+
+        /* LINE */
+        .share-btn-line { background:#00b900; box-shadow:0 2px 8px rgba(0,185,0,.28); padding:0 1.1rem 0 .6rem; }
+        .share-btn-line:hover { box-shadow:0 4px 14px rgba(0,185,0,.4); }
+        .line-icon-wrap { width:30px; height:30px; border-radius:7px; overflow:hidden; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+        .line-icon-wrap svg { width:30px; height:30px; display:block; }
+
+        @media(max-width:768px) {
+            .share-btn { font-size:.75rem; height:40px; padding:0 .8rem; }
+            .share-btn-line { padding:0 .8rem 0 .55rem; gap:.45rem; }
+            .line-icon-wrap { width:22px; height:22px; border-radius:0; overflow:visible; }
+            .line-icon-wrap svg { width:22px; height:22px; }
+            .share-btn svg.share-icon { width:14px; height:14px; }
+            .share-buttons-container { gap:.45rem; flex-wrap:nowrap; }
+            .share-btn { flex:1; }
+        }
+
+        /* ===== 説明・詳細 ===== */
+        .section-title {
+            font-size:1rem; font-weight:700;
+            margin-bottom:.8rem; padding-bottom:.5rem;
+            border-bottom:2px solid var(--border);
+            display:flex; align-items:center; gap:.5rem;
+        }
+        .desc-card {
+            background:var(--surface); border-radius:var(--r);
+            padding:1.4rem; margin-bottom:1.4rem;
+            border:1px solid var(--border);
+        }
+        .desc-text { font-size:.92rem; line-height:1.8; color:#374151; }
+        .desc-text p + p { margin-top:.8rem; }
+
+        /* カスタム説明文ボックス */
+        .desc-box {
+            display:flex; gap:.9rem; align-items:flex-start;
+            background:linear-gradient(135deg, #fef9f0 0%, #fff8ec 100%);
+            border:1.5px solid #f6c96a;
+            border-left:4px solid #f39c12;
+            border-radius:8px;
+            padding:1rem 1.2rem;
+            margin:.9rem 0;
+        }
+        .desc-box-icon { font-size:1.3rem; flex-shrink:0; margin-top:.1rem; }
+        .desc-box-body { font-size:.92rem; line-height:1.8; color:#5a4200; }
+        .desc-box-body p + p { margin-top:.5rem; }
+
+        /* 活用ガイド */
+        .usage-guide { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; margin-top:.6rem; }
+        .usage-block {}
+        .usage-label { font-size:.82rem; font-weight:700; color:#4a5568; margin-bottom:.6rem; }
+        .usage-list { list-style:none; display:flex; flex-direction:column; gap:.45rem; }
+        .usage-list li {
+            font-size:.88rem; color:#374151; line-height:1.55;
+            padding:.5rem .8rem;
+            background:#f8f7f4; border-radius:6px;
+            border-left:3px solid #e2e6ea;
+        }
+        .usage-headlines li {
+            background:#f0f7ff;
+            border-left-color:#93c5fd;
+            color:#1e3a5f;
+            font-style:italic;
+        }
+        .usage-headlines li::before { content:'「'; }
+        .usage-headlines li::after  { content:'」'; }
+        @media(max-width:600px) { .usage-guide { grid-template-columns:1fr; } }
+
+        /* タグ */
+        .tags-wrap { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.8rem; }
+        .tag {
+            padding:.3rem .75rem; border-radius:20px;
+            background:#f0f9ff; border:1px solid #bae6fd;
+            color:#0369a1; font-size:.8rem; font-weight:500;
+            text-decoration:none; transition:all .18s; cursor:pointer;
+        }
+        .tag:hover { background:#0369a1; color:#fff; border-color:#0369a1; }
+
+        /* ファイル情報 */
+        .file-info { display:grid; grid-template-columns:1fr 1fr; gap:.8rem; margin-top:.6rem; }
+        .info-item { background:#f9fafb; border-radius:6px; padding:.7rem 1rem; }
+        .info-label { font-size:.72rem; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; margin-bottom:.2rem; }
+        .info-val { font-size:.88rem; font-weight:600; color:var(--text); font-family:'DM Sans',sans-serif; }
+
+        /* ===== RIGHT COLUMN ===== */
+        .right-col { position:static; }
+
+        .dl-card {
+            background:var(--surface); border-radius:var(--r);
+            border:1px solid var(--border);
+            overflow:hidden; margin-bottom:1.2rem;
+            box-shadow:0 2px 12px rgba(0,0,0,.06);
+        }
+        .dl-card-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary2) 100%);
+            padding:1.1rem 1.4rem;
+            color:#fff;
+        }
+        .dl-card-header h2 { font-family:'DM Sans',sans-serif; font-size:1rem; font-weight:700; margin-bottom:.2rem; }
+        .dl-card-header p { font-size:.78rem; color:rgba(255,255,255,.65); }
+        .dl-card-body { padding:1.4rem; }
+
+        /* 背景色スウォッチ */
+        .bg-switcher {
+            display:flex; align-items:center; gap:.8rem;
+            margin-bottom:1rem; flex-wrap:wrap;
+            padding:.65rem 1rem;
+            background:#f8f7f4; border-radius:8px;
+            border:1px solid var(--border);
+        }
+        .bg-switcher-label { font-size:.82rem; color:var(--muted); font-weight:600; white-space:nowrap; }
+        .bg-swatches { display:flex; gap:.5rem; align-items:center; }
+        .swatch {
+            width:28px; height:28px; border-radius:50%;
+            border:2px solid var(--border); cursor:pointer;
+            transition:transform .15s, border-color .15s;
+        }
+        .swatch:hover { transform:scale(1.15); }
+        .swatch.active { border-color:#374151; border-width:2.5px; }
+        .swatch-white { background:#ffffff; }
+        .swatch-gray  { background:#e5e7eb; }
+        .swatch-dark  { background:#1a1a2e; }
+        .swatch-blue  { background:#dbeafe; }
+        .swatch-green { background:#dcfce7; }
+        .swatch-check {
+            background-image: linear-gradient(45deg, #ccc 25%, transparent 25%),
+                              linear-gradient(-45deg, #ccc 25%, transparent 25%),
+                              linear-gradient(45deg, transparent 75%, #ccc 75%),
+                              linear-gradient(-45deg, transparent 75%, #ccc 75%);
+            background-size: 10px 10px;
+            background-position: 0 0, 0 5px, 5px -5px, -5px 0px;
+            background-color: white;
+        }
+
+        /* ダウンロードボタン */
+        .dl-btn {
+            width:100%; padding:.9rem 1.5rem;
+            background: linear-gradient(135deg, var(--accent), var(--acc2));
+            color:#fff; border:none; border-radius:8px;
+            font-family:'DM Sans',sans-serif;
+            font-size:1rem; font-weight:700;
+            cursor:pointer; transition:all .2s;
+            display:flex; align-items:center; justify-content:center; gap:.5rem;
+            box-shadow:0 4px 14px rgba(13,148,136,.35);
+        }
+        .dl-btn:hover { transform:translateY(-1px); box-shadow:0 6px 20px rgba(13,148,136,.45); }
+        .dl-btn:active { transform:translateY(0); }
+        .dl-btn:disabled { background:#d1d5db; box-shadow:none; cursor:not-allowed; transform:none; }
+
+        /* プログレスバー */
+        .dl-progress-wrap { display:none; margin-top:1rem; }
+        .progress-label { font-size:.82rem; color:var(--muted); margin-bottom:.5rem; text-align:center; }
+        .progress-bar-bg {
+            width:100%; height:8px; background:#e5e7eb; border-radius:4px; overflow:hidden;
+        }
+        .progress-bar-fill {
+            height:100%; width:0%; border-radius:4px;
+            background:linear-gradient(90deg, var(--accent), var(--acc2));
+            transition: width .12s linear;
+        }
+        .progress-count { font-size:.78rem; color:var(--muted); text-align:center; margin-top:.4rem; }
+
+        /* DL完了 */
+        .dl-success {
+            display:none; margin-top:1rem; padding:.8rem 1rem;
+            background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px;
+            color:var(--green); font-size:.85rem; font-weight:600; text-align:center;
+        }
+
+        /* 広告（DLカード内） */
+        .dl-ad-wrap { margin-top:1.2rem; }
+        .dl-ad-slot { width:100%; height:250px; border-radius:8px; }
+
+        .dl-note { font-size:.88rem; color:var(--muted); margin-top:1rem; line-height:1.7; }
+
+        /* クレジット表記カード */
+        .credit-card {
+            background:#f8f7f4; border:1px solid var(--border);
+            border-radius:8px; padding:1rem 1.2rem; margin-top:1.2rem;
+        }
+        .credit-card h4 {
+            font-size:.82rem; font-weight:700; color:#4a5568;
+            margin-bottom:.5rem; display:flex; align-items:center; gap:.4rem;
+        }
+        .credit-card p { font-size:.82rem; color:var(--muted); line-height:1.65; margin-bottom:.7rem; }
+        .credit-box {
+            background:#fff; border:1px solid var(--border);
+            border-radius:6px; padding:.55rem .75rem;
+            font-size:.78rem; color:#374151; font-family:monospace;
+            word-break:break-all; margin-bottom:.6rem;
+        }
+        .copy-btn {
+            width:100%; padding:.5rem; border-radius:6px;
+            background: var(--text); color:#fff; border:none;
+            font-size:.82rem; font-weight:700; cursor:pointer;
+            font-family:inherit; transition:all .2s;
+            display:flex; align-items:center; justify-content:center; gap:.4rem;
+        }
+        .copy-btn:hover { background: var(--primary); }
+        .copy-btn.copied { background:var(--green); }
+
+        /* ===== RELATED ===== */
+        .related-section { margin-top:2.5rem; }
+        .related-header {
+            display:flex; justify-content:space-between; align-items:flex-start;
+            margin-bottom:1rem; flex-wrap:wrap; gap:.5rem;
+        }
+        .related-sub { font-size:.82rem; color:var(--muted); margin-top:.2rem; line-height:1.5; }
+        .related-all-link {
+            font-size:.82rem; color:var(--accent); text-decoration:none;
+            font-weight:700; white-space:nowrap; flex-shrink:0;
+            transition:opacity .2s;
+        }
+        .related-all-link:hover { opacity:.75; }
+
+        /* ギャラリー誘導バナー */
+        .gallery-banner {
+            display:block; text-decoration:none;
+            margin-top:2rem;
+            background:linear-gradient(135deg, var(--primary) 0%, var(--primary2) 100%);
+            border-radius:12px; overflow:hidden;
+            transition:transform .2s, box-shadow .2s;
+        }
+        .gallery-banner:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.15); }
+        .gallery-banner-inner {
+            display:flex; justify-content:space-between; align-items:center;
+            padding:1.4rem 1.8rem; gap:1rem; flex-wrap:wrap;
+        }
+        .gallery-banner-title {
+            font-family:'DM Sans',sans-serif;
+            font-size:1.1rem; font-weight:700; color:#fff; margin-bottom:.3rem;
+        }
+        .gallery-banner-sub { font-size:.82rem; color:rgba(255,255,255,.6); line-height:1.5; }
+        .gallery-banner-btn {
+            flex-shrink:0;
+            padding:.7rem 1.5rem;
+            background: #ffffff;
+            color: var(--primary); border-radius:8px;
+            font-size:.9rem; font-weight:700;
+            font-family:'DM Sans',sans-serif;
+            white-space:nowrap;
+            box-shadow:0 3px 12px rgba(0,0,0,.15);
+            transition: transform .2s, box-shadow .2s;
+        }
+        .gallery-banner:hover .gallery-banner-btn { transform: translateY(-1px); box-shadow:0 5px 16px rgba(0,0,0,.20); }
+        .related-grid {
+            display:grid;
+            grid-template-columns:repeat(auto-fill, minmax(160px,1fr));
+            gap:.8rem; margin-top:.8rem;
+        }
+        .related-card {
+            border-radius:8px; overflow:hidden; position:relative;
+            background:#e5e7eb; display:block; text-decoration:none;
+            aspect-ratio:4/3;
+        }
+        .related-card img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .3s; }
+        .related-card:hover img { transform:scale(1.06); }
+        .related-card .rel-overlay {
+            position:absolute; inset:0; background:rgba(0,0,0,0); transition:background .25s;
+            display:flex; align-items:flex-end; padding:.5rem;
+        }
+        .related-card:hover .rel-overlay { background:rgba(0,0,0,.45); }
+        .rel-title { color:#fff; font-size:.72rem; font-weight:600; opacity:0; transition:opacity .25s; }
+        .related-card:hover .rel-title { opacity:1; }
+
+        /* ===== LOADING / ERROR ===== */
+        .page-loading { text-align:center; padding:5rem 2rem; color:var(--muted); }
+        .spinner { display:inline-block; width:36px; height:36px; border:3px solid var(--border); border-top-color: var(--primary); border-radius:50%; animation:spin .8s linear infinite; margin-bottom:1rem; }
+        @keyframes spin { to { transform:rotate(360deg); } }
+
+        /* サイドバーアンケート選択肢 */
+        .sidebar-survey-choice {
+            display:flex; align-items:center; gap:.6rem;
+            width:100%; padding:.55rem .8rem;
+            border:1.5px solid var(--border); border-radius:7px;
+            background:#fafafa; cursor:pointer;
+            font-size:.85rem; font-weight:500; color:var(--text);
+            font-family:inherit; text-align:left;
+            transition:all .18s;
+        }
+        .sidebar-survey-choice:hover { border-color:var(--accent); background:#fff5f0; color:var(--accent); }
+        .sidebar-survey-choice.selected { border-color:var(--accent); background:var(--accent); color:#fff; }
+        .sidebar-survey-choice.selected svg { stroke:#fff; }
+        #sidebarSurveySubmit:not([disabled]) { opacity:1; cursor:pointer; }
+
+        /* ===== アンケートポップアップ ===== */
+        .survey-overlay {
+            display:none;
+            position:fixed; inset:0; z-index:1000;
+            background:rgba(0,0,0,.55);
+            align-items:center; justify-content:center;
+            padding:1.5rem;
+        }
+        .survey-overlay.active { display:flex; }
+        .survey-modal {
+            background:#fff; border-radius:16px;
+            width:100%; max-width:360px;
+            padding:1.8rem 1.6rem;
+            box-shadow:0 20px 60px rgba(0,0,0,.25);
+            animation: surveyIn .25s ease;
+        }
+        @keyframes surveyIn {
+            from { transform:translateY(24px); opacity:0; }
+            to   { transform:translateY(0);    opacity:1; }
+        }
+        .survey-title {
+            font-size:1rem; font-weight:700; color: var(--text);
+            margin-bottom:.3rem; text-align:center;
+        }
+        .survey-sub {
+            font-size:.8rem; color:var(--muted);
+            text-align:center; margin-bottom:1.2rem;
+        }
+        .survey-choices {
+            display:grid; grid-template-columns:1fr 1fr;
+            gap:.65rem; margin-bottom:1.2rem;
+        }
+        .survey-choice {
+            display:flex; flex-direction:column;
+            align-items:center; justify-content:center;
+            gap:.45rem; padding:.85rem .5rem;
+            border:1.5px solid var(--border);
+            border-radius:10px; cursor:pointer;
+            background:#fafafa;
+            transition:all .18s; font-size:.82rem;
+            color:var(--text); font-weight:600;
+            font-family:inherit;
+            text-align:center; line-height:1.3;
+        }
+        .survey-choice svg { width:26px; height:26px; display:block; }
+        .survey-choice:hover { border-color:var(--accent); background:#fff5f0; color:var(--accent); }
+        .survey-choice.selected { border-color:var(--accent); background:var(--accent); color:#fff; }
+        .survey-choice.selected svg path, .survey-choice.selected svg rect,
+        .survey-choice.selected svg circle, .survey-choice.selected svg polyline,
+        .survey-choice.selected svg line, .survey-choice.selected svg polygon { stroke:#fff; }
+        .survey-submit {
+            width:100%; padding:.8rem;
+            background:linear-gradient(135deg, var(--accent), var(--acc2));
+            color:#fff; border:none; border-radius:9px;
+            font-size:.92rem; font-weight:700; font-family:inherit;
+            cursor:pointer; transition:all .2s;
+            box-shadow:0 4px 14px rgba(13,148,136,.3);
+        }
+        .survey-submit:hover { transform:translateY(-1px); }
+        .survey-submit:disabled { background:#d1d5db; box-shadow:none; transform:none; cursor:not-allowed; }
+        .survey-skip {
+            display:block; text-align:center; margin-top:.85rem;
+            font-size:.78rem; color:var(--muted); cursor:pointer;
+            text-decoration:underline; background:none; border:none;
+            font-family:inherit; width:100%;
+        }
+        .survey-done {
+            text-align:center; padding:1rem 0 .5rem;
+        }
+        .survey-done-icon { font-size:2.5rem; margin-bottom:.5rem; }
+        .survey-done-text { font-size:.92rem; color:var(--text); font-weight:600; }
+        .survey-done-sub { font-size:.8rem; color:var(--muted); margin-top:.3rem; }
+
+        /* ===== FOOTER ===== */
+        footer { background: #1e293b; color:rgba(255,255,255,.7); padding:2.5rem 2rem; }
+        .footer-inner { max-width:1100px; margin:0 auto; }
+        .footer-links { display:flex; gap:2rem; flex-wrap:wrap; margin-bottom:1.5rem; padding-bottom:1.5rem; border-bottom:1px solid rgba(255,255,255,.1); }
+        .footer-links a { color:rgba(255,255,255,.65); text-decoration:none; font-size:.85rem; transition:color .2s; }
+        .footer-links a:hover { color:#fff; }
+        .footer-copy { font-size:.8rem; color:rgba(255,255,255,.4); }
+
+        /* ===== RESPONSIVE ===== */
+        @media(max-width:768px) {
+            .content-grid { grid-template-columns:1fr; }
+            .right-col { position:static; }
+            .ad-300 { width:100%; max-width:300px; }
+            .menu-toggle { display:block; }
+            .nav-links { display:none; position:absolute; top:100%; left:0; right:0; background: var(--header-bg); flex-direction:column; gap:0; padding:.5rem 0; box-shadow: 0 4px 12px rgba(15,23,42,.08); border-top: 1px solid var(--border); }
+            .nav-links.open { display:flex; }
+            .nav-links a { padding:.8rem 2rem; }
+            /* 固定バーの分だけ下にスペースを確保 */
+            main { padding:1rem 1rem 6rem; }
+            /* PC用の右カラム（ダウンロードカード）はスマホで非表示 */
+            .right-col { display:none; }
+        }
+
+        /* ===== モバイル固定ダウンロードバー ===== */
+        .mobile-dl-bar {
+            display: none; /* PCでは非表示 */
+        }
+        @media(max-width:768px) {
+            .mobile-dl-bar {
+                display: flex;
+                position: fixed;
+                bottom: 0; left: 0; right: 0;
+                z-index: 500;
+                background: var(--text);
+                padding: .75rem 1rem;
+                gap: .75rem;
+                align-items: center;
+                box-shadow: 0 -4px 20px rgba(0,0,0,.25);
+            }
+            .mobile-dl-bar .mobile-dl-info {
+                flex: 1;
+                min-width: 0;
+            }
+            .mobile-dl-bar .mobile-dl-title {
+                font-size: .78rem;
+                font-weight: 700;
+                color: #fff;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .mobile-dl-bar .mobile-dl-sub {
+                font-size: .7rem;
+                color: rgba(255,255,255,.55);
+            }
+            .mobile-dl-bar .mobile-dl-btn {
+                flex-shrink: 0;
+                padding: .7rem 1.4rem;
+                background: linear-gradient(135deg, var(--accent), var(--acc2));
+                color: #fff;
+                border: none;
+                border-radius: 8px;
+                font-size: .9rem;
+                font-weight: 700;
+                cursor: pointer;
+                font-family: inherit;
+                box-shadow: 0 3px 12px rgba(13,148,136,.4);
+                transition: all .2s;
+            }
+            .mobile-dl-bar .mobile-dl-btn:active {
+                transform: scale(.97);
+            }
+            .mobile-dl-progress {
+                height: 4px;
+                background: rgba(255,255,255,.2);
+                border-radius: 2px;
+                margin-top: .4rem;
+                overflow: hidden;
+            }
+            .mobile-dl-progress-fill {
+                height: 100%;
+                width: 0%;
+                background: linear-gradient(90deg, var(--accent), var(--acc2));
+                border-radius: 2px;
+                transition: width .12s linear;
+            }
+        }
+    
+        /* ===== 絵文字置換アイコン共通スタイル ===== */
+        .emoji-icon {
+            display: inline-block;
+            vertical-align: -.15em;
+            flex-shrink: 0;
+        }
+    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2687113603921668" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header>
+    <div class="navbar">
+        <a href="/" class="logo">ソザイノ<span class="logo-dot">.</span></a>
+        <button class="menu-toggle" id="menuToggle">☰</button>
+        <nav class="nav-links" id="navMenu">
+            <a href="/">ホーム</a>
+            <a href="gallery.html">素材ギャラリー</a>
+            <a href="about.html">ソザイノについて</a>
+            <a href="process.html">素材ができるまで</a>
+            <a href="column/">コラム</a>
+            <a href="faq.html">よくあるご質問</a>
+            <a href="contact.html">お問い合わせ</a>
+        </nav>
+    </div>
+</header>
+
+<div class="breadcrumb">
+    <div class="breadcrumb-inner">
+        <a href="/">ホーム</a><span>›</span>
+        <a href="gallery.html">素材ギャラリー</a><span>›</span>
+        <span id="breadTitle">素材詳細</span>
+    </div>
+</div>
+
+<!-- トップ広告帯（728×90） -->
+<div class="ad-wrap" style="background:var(--surface);border-bottom:1px solid var(--border);">
+    <div class="ad-slot ad-728">
+        <!-- ここに Google AdSense コードを貼り付け -->
+        AdSense 728×90（リーダーボード）
+    </div>
+</div>
+
+<!-- ページローディング -->
+<div id="pageLoading" class="page-loading">
+    <div class="spinner"></div>
+    <p>素材情報を読み込んでいます…</p>
+</div>
+
+<!-- メインコンテンツ（JS で表示） -->
+<main id="mainContent" style="display:none;">
+    <div class="content-grid">
+
+        <!-- ===== 左カラム ===== -->
+        <div class="left-col">
+            <h1 class="material-title" id="matTitle">—</h1>
+            <div class="material-meta" id="matMeta"></div>
+
+            <!-- プレビュー画像 -->
+            <div class="preview-wrap" id="previewWrap">
+                <div class="no-preview"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none"><rect x="8" y="16" width="64" height="48" rx="6" stroke="#d1d5db" stroke-width="2.5"/><circle cx="28" cy="32" r="5" stroke="#d1d5db" stroke-width="2.5"/><path d="M8 50l16-14 12 10 10-8 18 16" stroke="#d1d5db" stroke-width="2.5" stroke-linejoin="round"/><path d="M34 64h12M40 58v6" stroke="#d1d5db" stroke-width="2" stroke-linecap="round"/></svg><span>ただいま準備中です。<br>今しばらくお待ちください</span></div>
+            </div>
+
+            <!-- 背景色スウォッチ（キャラクターカテゴリのみ表示） -->
+            <div class="bg-switcher" id="bgSwitcher" style="display:none;">
+                <span class="bg-switcher-label"><svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><circle cx="13.5" cy="6.5" r="0.5" fill="currentColor"></circle><circle cx="17.5" cy="10.5" r="0.5" fill="currentColor"></circle><circle cx="8.5" cy="7.5" r="0.5" fill="currentColor"></circle><circle cx="6.5" cy="12.5" r="0.5" fill="currentColor"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"></path></svg> 背景色を変えてプレビュー</span>
+                <div class="bg-swatches">
+                    <button class="swatch swatch-white active" onclick="setPreviewBg('white', this)" title="白"></button>
+                    <button class="swatch swatch-gray"  onclick="setPreviewBg('#e5e7eb', this)" title="グレー"></button>
+                    <button class="swatch swatch-dark"  onclick="setPreviewBg('#1a1a2e', this)" title="ダーク"></button>
+                    <button class="swatch swatch-blue"  onclick="setPreviewBg('#dbeafe', this)" title="ブルー"></button>
+                    <button class="swatch swatch-green" onclick="setPreviewBg('#dcfce7', this)" title="グリーン"></button>
+                    <button class="swatch swatch-check" onclick="setPreviewBg('checker', this)" title="チェッカー（透過確認）"></button>
+                </div>
+            </div>
+
+            <!-- 画像直下 広告（レスポンシブ） -->
+            <div class="ad-below-img">
+                <div class="ad-slot ad-responsive">
+                    <!-- ここに Google AdSense コードを貼り付け -->
+                    AdSense レスポンシブ広告
+                </div>
+            </div>
+
+            <!-- ===== SNS シェアボタン ===== -->
+            <div class="share-buttons-section">
+                <div class="share-buttons-label">SNSで共有する</div>
+                <div class="share-buttons-container">
+                    <!-- X -->
+                    <button class="share-btn share-btn-x" title="Xで共有" onclick="shareToX()" aria-label="Xで共有">
+                        <svg class="share-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                        でシェア
+                    </button>
+                    <!-- Threads -->
+                    <button class="share-btn share-btn-threads" title="Threadsで共有" onclick="shareToThreads()" aria-label="Threadsで共有">
+                        <svg class="share-icon" viewBox="0 0 50 50" fill="currentColor">
+                            <path d="M46,9v32c0,2.757-2.243,5-5,5H9c-2.757,0-5-2.243-5-5V9c0-2.757,2.243-5,5-5h32C43.757,4,46,6.243,46,9z M33.544,35.913c2.711-2.708,2.635-6.093,1.746-8.17c-0.54-1.255-1.508-2.33-2.798-3.108l-0.223-0.138c-0.33-0.208-0.609-0.375-1.046-0.542c-0.008-0.278-0.025-0.556-0.058-0.807c-0.59-4.561-3.551-5.535-5.938-5.55c-2.154,0-3.946,0.92-5.044,2.592l1.672,1.098c0.736-1.121,1.871-1.689,3.366-1.689c2.367,0.015,3.625,1.223,3.96,3.801c-1.141-0.231-2.426-0.314-3.807-0.233c-3.924,0.226-5.561,2.591-5.442,4.836c0.134,2.486,2.278,4.222,5.216,4.222c0.13,0,0.259-0.003,0.384-0.011c2.297-0.126,5.105-1.29,5.61-6.063c0.021,0.013,0.041,0.026,0.062,0.039l0.253,0.157c0.932,0.562,1.621,1.317,1.994,2.185c0.643,1.501,0.682,3.964-1.322,5.966c-1.732,1.73-3.812,2.479-6.936,2.502c-3.47-0.026-6.099-1.145-7.812-3.325c-1.596-2.028-2.42-4.953-2.451-8.677c0.031-3.728,0.855-6.646,2.451-8.673c1.714-2.181,4.349-3.299,7.814-3.325c3.492,0.026,6.165,1.149,7.944,3.338c0.864,1.063,1.525,2.409,1.965,3.998l1.928-0.532c-0.514-1.858-1.301-3.449-2.341-4.728c-2.174-2.674-5.363-4.045-9.496-4.076c-4.12,0.031-7.278,1.406-9.387,4.089c-1.875,2.383-2.844,5.712-2.879,9.91c0.035,4.193,1.004,7.529,2.879,9.913c2.109,2.682,5.262,4.058,9.385,4.088C28.857,38.973,31.433,38.021,33.544,35.913z M28.993,25.405c0.07,0.016,0.138,0.031,0.202,0.046c-0.005,0.078-0.01,0.146-0.015,0.198c-0.314,3.928-2.295,4.489-3.761,4.569c-0.091,0.005-0.181,0.008-0.271,0.008c-1.851,0-3.144-0.936-3.218-2.329c-0.065-1.218,0.836-2.576,3.561-2.732c0.297-0.018,0.589-0.027,0.875-0.027C27.325,25.137,28.209,25.227,28.993,25.405z"/>
+                        </svg>
+                        Threads
+                    </button>
+                    <!-- LINE -->
+                    <button class="share-btn share-btn-line" title="LINEで共有" onclick="shareToLine()" aria-label="LINEで共有">
+                        <div class="line-icon-wrap">
+                            <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="120" height="120" rx="26" fill="#00b900"/>
+                                <path fill="#fff" d="M103.5,54.72c0-19.55-19.6-35.45-43.7-35.45S16.11,35.17,16.11,54.72c0,17.53,15.55,32.21,36.54,35,1.43.31,3.36.94,3.85,2.16a8.93,8.93,0,0,1,.14,4L56,99.55c-.19,1.1-.88,4.32,3.78,2.35S85,87.09,94.13,76.54h0c6.33-7,9.37-14,9.37-21.82"/>
+                                <path fill="#00b900" d="M50.93,45.28H47.86a.85.85,0,0,0-.85.85v19a.85.85,0,0,0,.85.85h3.07a.85.85,0,0,0,.85-.85v-19a.85.85,0,0,0-.85-.85"/>
+                                <path fill="#00b900" d="M72,45.28H69a.85.85,0,0,0-.85.85V57.44L59.38,45.65l-.06-.08h0l-.05-.05h0l0,0,0,0,0,0,0,0,0,0h0l-.05,0h0l-.05,0h-3.3a.85.85,0,0,0-.85.85v19a.85.85,0,0,0,.85.85h3.06a.86.86,0,0,0,.86-.85V53.86l8.73,11.79a.63.63,0,0,0,.22.21h0l.05,0h0l0,0,0,0h0l.06,0h0A.78.78,0,0,0,69,66H72a.85.85,0,0,0,.85-.85v-19a.85.85,0,0,0-.85-.85"/>
+                                <path fill="#00b900" d="M43.54,61.25H35.21V46.13a.85.85,0,0,0-.85-.85H31.3a.85.85,0,0,0-.85.85v19h0a.87.87,0,0,0,.23.59h0v0a.87.87,0,0,0,.59.23H43.54a.85.85,0,0,0,.85-.85V62.1a.85.85,0,0,0-.85-.85"/>
+                                <path fill="#00b900" d="M89,50a.85.85,0,0,0,.85-.85V46.13a.85.85,0,0,0-.85-.85H76.7a.85.85,0,0,0-.59.24h0v0a.83.83,0,0,0-.24.59h0v19h0a.83.83,0,0,0,.24.59h0a.85.85,0,0,0,.59.24H89a.85.85,0,0,0,.85-.85V62.1a.85.85,0,0,0-.85-.85H80.62V58H89a.85.85,0,0,0,.85-.85V54.11a.85.85,0,0,0-.85-.85H80.62V50Z"/>
+                            </svg>
+                        </div>
+                        LINEで送る
+                    </button>
+                </div>
+            </div>
+
+            <!-- 説明文 -->
+            <div class="desc-card">
+                <div class="section-title"><svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path></svg> 素材について</div>
+                <div class="desc-text" id="matDesc"></div>
+            </div>
+
+            <!-- タグ -->
+            <div class="desc-card">
+                <div class="section-title"><svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg> タグ</div>
+                <div class="tags-wrap" id="matTags"></div>
+            </div>
+
+            <!-- 活用ガイド -->
+            <div class="desc-card" id="usageGuideCard" style="display:none;">
+                <div class="section-title"><svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg> この素材の活用ガイド</div>
+                <div class="usage-guide">
+                    <div class="usage-block" id="guideDesignPointsBlock" style="display:none;">
+                        <div class="usage-label"><svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><circle cx="13.5" cy="6.5" r="0.5" fill="currentColor"></circle><circle cx="17.5" cy="10.5" r="0.5" fill="currentColor"></circle><circle cx="8.5" cy="7.5" r="0.5" fill="currentColor"></circle><circle cx="6.5" cy="12.5" r="0.5" fill="currentColor"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"></path></svg> デザイン上のポイント</div>
+                        <ul class="usage-list" id="guideDesignPoints"></ul>
+                    </div>
+                    <div class="usage-block">
+                        <div class="usage-label"><svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"></path></svg> おすすめ記事・動画ジャンル</div>
+                        <ul class="usage-list" id="guideScenes"></ul>
+                    </div>
+                    <div class="usage-block">
+                        <div class="usage-label"><svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg> 見出し文の例</div>
+                        <ul class="usage-list usage-headlines" id="guideHeadlines"></ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ファイル情報 -->
+            <div class="desc-card">
+                <div class="section-title"><svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg> ファイル情報</div>
+                <div class="file-info" id="matFileInfo"></div>
+            </div>
+
+            <!-- 下部広告 -->
+            <div class="ad-wrap" style="margin-top:1rem;">
+                <div class="ad-slot ad-728" style="max-width:100%;">
+                    <!-- ここに Google AdSense コードを貼り付け -->
+                    AdSense 728×90（コンテンツ内）
+                </div>
+            </div>
+
+            <!-- 関連素材（タグ一致順） -->
+            <div class="related-section">
+                <div class="related-header">
+                    <div>
+                        <div class="section-title" style="margin-bottom:.25rem;"><svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg> この素材を見た方はこちらも</div>
+                        <p class="related-sub">タグや雰囲気が近い素材をピックアップしました。ぜひ一緒にチェックしてみてください。</p>
+                    </div>
+                    <a href="gallery.html" class="related-all-link">すべて見る →</a>
+                </div>
+                <div class="related-grid" id="relatedGrid"></div>
+            </div>
+
+            <!-- ギャラリー誘導バナー -->
+            <a href="gallery.html" class="gallery-banner">
+                <div class="gallery-banner-inner">
+                    <div class="gallery-banner-text">
+                        <div class="gallery-banner-title">もっと素材を探す</div>
+                        <div class="gallery-banner-sub">200点以上の高品質WebP素材を無料配信中。ブログ・動画・SNSにご活用ください。</div>
+                    </div>
+                    <div class="gallery-banner-btn">素材ギャラリーへ →</div>
+                </div>
+            </a>
+        </div>
+
+        <!-- ===== 右カラム ===== -->
+        <div class="right-col">
+            <!-- ダウンロードカード -->
+            <div class="dl-card">
+                <div class="dl-card-header">
+                    <h2>⬇ 無料ダウンロード</h2>
+                    <p>WebP形式 / 商用・非商用利用可</p>
+                </div>
+                <div class="dl-card-body">
+
+                    <!-- PC版アンケート（回答後にDLボタン解放・スマホは非表示） -->
+                    <div id="sidebarSurveyBox" style="margin-bottom:1rem; padding:1rem; background:#f8f7f4; border-radius:9px; border:1px solid var(--border);">
+                        <div style="font-size:.82rem; font-weight:700; color:#4a5568; margin-bottom:.75rem; display:flex; align-items:center; gap:.4rem;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                            使い方を教えてください
+                        </div>
+                        <p style="font-size:.78rem; color:var(--muted); margin-bottom:.75rem; line-height:1.5;">選択するとダウンロードできます</p>
+                        <div id="sidebarSurveyOptions" style="display:flex; flex-direction:column; gap:.4rem;">
+                            <button class="sidebar-survey-choice" data-value="youtube" onclick="selectSidebarSurvey(this)">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><rect x="2" y="5" width="20" height="14" rx="2"/><polygon points="10,9 16,12 10,15" fill="currentColor" stroke="none"/></svg>
+                                YouTube・動画
+                            </button>
+                            <button class="sidebar-survey-choice" data-value="blog" onclick="selectSidebarSurvey(this)">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+                                ブログ
+                            </button>
+                            <button class="sidebar-survey-choice" data-value="sns" onclick="selectSidebarSurvey(this)">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                                SNS
+                            </button>
+                            <button class="sidebar-survey-choice" data-value="other" onclick="selectSidebarSurvey(this)">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                                その他
+                            </button>
+                        </div>
+                    </div>
+
+                    <button class="dl-btn" id="dlBtn" onclick="startDownload()" disabled style="opacity:.45; cursor:not-allowed;">
+                        <span>⬇</span> ダウンロード開始
+                    </button>
+
+                    <!-- プログレスバー -->
+                    <div class="dl-progress-wrap" id="dlProgress">
+                        <div class="progress-label" id="progressLabel">準備中…</div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" id="progressFill"></div>
+                        </div>
+                        <div class="progress-count" id="progressCount"></div>
+                    </div>
+
+                    <!-- 完了メッセージ -->
+                    <div class="dl-success" id="dlSuccess">
+                        <svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> ダウンロードが開始されました！
+                    </div>
+
+                    <!-- ダウンロードボタン周辺 広告（300×250） -->
+                    <div class="dl-ad-wrap">
+                        <div class="ad-slot dl-ad-slot">
+                            <!-- ここに Google AdSense コードを貼り付け -->
+                            AdSense 300×250（サイドバー）
+                        </div>
+                    </div>
+
+                    <div class="dl-note">
+                        ※ 本素材はブログ・SNS・動画制作など個人・商用問わずご利用いただけます。再配布・販売はご遠慮ください。<br>詳しくは<a href="terms.html" style="color:var(--accent);">利用規約</a>をご確認ください。
+                    </div>
+
+                    <!-- クレジット表記 -->
+                    <div class="credit-card">
+                        <h4><svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg> クレジット表記（任意）</h4>
+                        <p>無料でご利用いただけます。もし記事やサイトにリンクを載せていただけると、とても励みになります！</p>
+                        <div class="credit-box" id="creditText"></div>
+                        <button class="copy-btn" id="copyBtn" onclick="copyCredit()">
+                            <svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path></svg> リンクをコピーする
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- サイドバー追加広告 -->
+            <div class="dl-card" style="padding:1rem;">
+                <div class="ad-slot dl-ad-slot">
+                    <!-- ここに Google AdSense コードを貼り付け -->
+                    AdSense 300×250（サイドバー下）
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</main>
+
+<footer>
+    <div class="footer-inner">
+        <div class="footer-links">
+            <a href="about.html">ソザイノについて</a>
+            <a href="process.html">素材ができるまで</a>
+            <a href="column/">コラム</a>
+            <a href="privacy.html">プライバシーポリシー</a>
+            <a href="terms.html">利用規約</a>
+            <a href="disclaimer.html">免責事項</a>
+            <a href="contact.html">お問い合わせ</a>
+        </div>
+        <div class="footer-copy">&copy; 2026 ソザイノ (SOZAINO). All rights reserved.</div>
+    </div>
+</footer>
+
+<script>
+// ===== 透かし付きプレビュー描画 =====
+function drawWatermarkedPreview(imgSrc, container, bgColor) {
+    bgColor = bgColor || currentBgColor || 'white';
+    const tempImg = new Image();
+    tempImg.crossOrigin = 'anonymous';
+
+    tempImg.onload = () => {
+        const canvas = document.createElement('canvas');
+        const W = tempImg.naturalWidth;
+        const H = tempImg.naturalHeight;
+        canvas.width  = W;
+        canvas.height = H;
+
+        const ctx = canvas.getContext('2d');
+
+        // 背景色を描画
+        if (bgColor === 'checker') {
+            // チェッカー柄（透過確認用）
+            const size = Math.max(20, Math.round(W / 30));
+            for (let y = 0; y < H; y += size) {
+                for (let x = 0; x < W; x += size) {
+                    ctx.fillStyle = ((Math.floor(x/size) + Math.floor(y/size)) % 2 === 0) ? '#ffffff' : '#cccccc';
+                    ctx.fillRect(x, y, size, size);
+                }
+            }
+        } else {
+            ctx.fillStyle = bgColor;
+            ctx.fillRect(0, 0, W, H);
+        }
+
+        // 元画像を描画
+        ctx.drawImage(tempImg, 0, 0, W, H);
+
+        // ======== 透かし設定 ========
+        const wmText = 'sozaino.net';
+        const fontSize = Math.max(18, Math.round(W * 0.045));
+        ctx.font = `bold ${fontSize}px 'Helvetica Neue', Arial, sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+
+        // 斜め繰り返しパターン
+        const step = fontSize * 5.5;
+        ctx.save();
+        ctx.globalAlpha = 0.22;
+
+        for (let y = -step; y < H + step * 2; y += step) {
+            for (let x = -step; x < W + step * 2; x += step) {
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.rotate(-Math.PI / 6); // -30度
+
+                // 影（視認性向上）
+                ctx.fillStyle = 'rgba(0,0,0,0.35)';
+                ctx.fillText(wmText, 1, 1);
+
+                // テキスト本体（白）
+                ctx.fillStyle = 'rgba(255,255,255,0.9)';
+                ctx.fillText(wmText, 0, 0);
+
+                ctx.restore();
+            }
+        }
+        ctx.restore();
+        // ============================
+
+        // 右クリック・長押し防止
+        canvas.addEventListener('contextmenu', e => e.preventDefault());
+        canvas.addEventListener('dragstart',   e => e.preventDefault());
+        canvas.style.webkitTouchCallout = 'none';
+
+        container.innerHTML = '';
+        container.appendChild(canvas);
+    };
+
+    tempImg.onerror = () => {
+        container.innerHTML = '<div class="no-preview"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none"><rect x="8" y="16" width="64" height="48" rx="6" stroke="#d1d5db" stroke-width="2.5"/><circle cx="28" cy="32" r="5" stroke="#d1d5db" stroke-width="2.5"/><path d="M8 50l16-14 12 10 10-8 18 16" stroke="#d1d5db" stroke-width="2.5" stroke-linejoin="round"/><path d="M34 64h12M40 58v6" stroke="#d1d5db" stroke-width="2" stroke-linecap="round"/></svg><span>ただいま準備中です。<br>今しばらくお待ちください</span></div>';
+    };
+
+    tempImg.src = imgSrc;
+}
+
+// ===== 背景色スウォッチ =====
+let currentBgColor = 'white';
+let currentImgPath = '';
+
+function setPreviewBg(color, btn) {
+    currentBgColor = color;
+
+    // スウォッチのactive切り替え
+    document.querySelectorAll('.swatch').forEach(s => s.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Canvas再描画
+    if (currentImgPath) {
+        const wrap = document.getElementById('previewWrap');
+        drawWatermarkedPreview(currentImgPath, wrap, color);
+    }
+}
+
+// ===== 画像保護 =====
+// ページ内の img 要素への右クリック・ドラッグをブロック
+document.addEventListener('contextmenu', e => {
+    if (e.target.tagName === 'IMG') e.preventDefault();
+});
+document.addEventListener('dragstart', e => {
+    if (e.target.tagName === 'IMG') e.preventDefault();
+});
+
+// ===== 状態 =====
+let currentMaterial = null;
+let allMaterials    = [];
+let catDefs         = {};
+const WAIT_SEC      = 5; // 待機秒数
+
+// ===== 起動 =====
+init();
+
+// ===== URLパラメータからID取得 =====
+function getParamId() {
+    const p = new URLSearchParams(window.location.search);
+    return parseInt(p.get('id'), 10);
+}
+
+// ===== data.json 読み込み =====
+async function loadData() {
+    try {
+        const res = await fetch('data.json');
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const json = await res.json();
+        allMaterials = json.materials || [];
+        catDefs      = json.metadata?.largeCategoryDefs || {};
+    } catch(e) {
+        try {
+            const raw = localStorage.getItem('bmh_preview_json');
+            if (raw) { const j=JSON.parse(raw); allMaterials=j.materials||[]; catDefs=j.metadata?.largeCategoryDefs||{}; return; }
+        } catch(_){}
+        showError('データを読み込めませんでした。'); return;
+    }
+}
+
+// ===== メインの初期化 =====
+async function init() {
+    await loadData();
+    const id = getParamId();
+    if (!id || isNaN(id)) { showError('素材が見つかりません。URLを確認してください。'); return; }
+
+    currentMaterial = allMaterials.find(m => m.id === id);
+    if (!currentMaterial) { showError(`ID ${id} の素材が見つかりません。`); return; }
+
+    document.getElementById('pageLoading').style.display = 'none';
+    document.getElementById('mainContent').style.display = 'block';
+    renderMaterial(currentMaterial);
+}
+
+// ===== 素材レンダリング =====
+function renderMaterial(m) {
+    const imgPath  = `assets/materials/${m.largeCategory}/${m.filename}`;
+    const catLabel = getCatLabel(m.largeCategory, m.category);
+
+    // モバイル固定バーのタイトルを更新
+    const mobileDlTitle = document.getElementById('mobileDlTitle');
+    if (mobileDlTitle) mobileDlTitle.textContent = m.title || m.filename;
+
+    // ページタイトル
+    document.title = `${m.title || m.filename} | ソザイノ`;
+
+    // パンくず
+    document.getElementById('breadTitle').textContent = m.title || m.filename;
+
+    // h1
+    document.getElementById('matTitle').textContent = m.title || m.filename;
+
+    // メタ
+    document.getElementById('matMeta').innerHTML =
+        `カテゴリ: <a href="gallery.html">${esc(catLabel)}</a> &nbsp;|&nbsp; 登録日: ${m.createdDate || '—'}`;
+
+    // クレジットテキスト設定
+    const pageUrl = window.location.origin + window.location.pathname.replace('download.html','') + `download.html?id=${m.id}`;
+    const creditStr = `素材提供：ソザイノ「${m.title||m.filename}」${pageUrl}`;
+    const creditEl = document.getElementById('creditText');
+    if (creditEl) creditEl.textContent = creditStr;
+
+    // プレビュー（透かし入り Canvas で表示）
+    const wrap = document.getElementById('previewWrap');
+    wrap.innerHTML = '<div class="no-preview"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none"><rect x="8" y="16" width="64" height="48" rx="6" stroke="#d1d5db" stroke-width="2.5"/><circle cx="28" cy="32" r="5" stroke="#d1d5db" stroke-width="2.5"/><path d="M8 50l16-14 12 10 10-8 18 16" stroke="#d1d5db" stroke-width="2.5" stroke-linejoin="round"/><path d="M34 64h12M40 58v6" stroke="#d1d5db" stroke-width="2" stroke-linecap="round"/></svg><span>ただいま準備中です。<br>今しばらくお待ちください</span></div>';
+    currentImgPath = imgPath;
+    currentBgColor = 'white';
+    drawWatermarkedPreview(imgPath, wrap, 'white');
+
+    // 背景透過タグまたはキャラクターカテゴリの場合に背景色スウォッチを表示
+    const bgSwitcher = document.getElementById('bgSwitcher');
+    const hasTransparentBg = (Array.isArray(m.tags) && m.tags.includes('背景透過')) || m.largeCategory === 'character';
+    if (hasTransparentBg) {
+        bgSwitcher.style.display = 'flex';
+        // スウォッチを白にリセット
+        document.querySelectorAll('.swatch').forEach(s => s.classList.remove('active'));
+        document.querySelector('.swatch-white')?.classList.add('active');
+    } else {
+        bgSwitcher.style.display = 'none';
+    }
+
+    // 説明文
+    const descEl = document.getElementById('matDesc');
+    const ug = m.usage_guide;
+
+    // summary が usage_guide にあれば、それを優先表示（独自テキスト）
+    const introText = ug && ug.summary
+        ? `<p>${esc(ug.summary)}</p>`
+        : `
+            <p>「${esc(m.title||m.filename)}」は、ブログ・SNS・動画制作など幅広いシーンで活用できる高品質WebP素材です。</p>
+            <p>カテゴリ「${esc(catLabel)}」に分類されており、${(m.tags||[]).length > 0 ? `${m.tags.map(t=>`「${esc(t)}」`).join('・')}といったキーワードに関連した` : ''}素材を探している方に最適です。</p>
+        `;
+
+    // 説明文が入力されている場合：おしゃれなボックスで挿入
+    const customBox = m.description ? `
+        <div class="desc-box">
+            <div class="desc-box-icon"><svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><line x1="9" y1="18" x2="15" y2="18"></line><line x1="10" y1="22" x2="14" y2="22"></line><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"></path></svg></div>
+            <div class="desc-box-body">${m.description.split('\n').map(l => `<p>${esc(l)}</p>`).join('')}</div>
+        </div>
+    ` : '';
+
+    const autoText2 = `
+        <p>WebP形式は、PNG・JPEGに比べて高画質かつファイルサイズが軽量なため、ウェブページの表示速度を損なわずに使用できます。ブログのアイキャッチ画像、SNS投稿のビジュアル、YouTube動画のサムネイルなど、様々な用途にお役立てください。</p>
+        <p>ダウンロードは無料で、個人・商用問わずご利用いただけます。</p>
+    `;
+
+    descEl.innerHTML = introText + customBox + autoText2;
+
+    // 活用ガイド
+    const guideCard = document.getElementById('usageGuideCard');
+    if (ug && (ug.scenes?.length || ug.headlines?.length || ug.design_points?.length)) {
+        guideCard.style.display = 'block';
+        const dpBlock     = document.getElementById('guideDesignPointsBlock');
+        const dpEl        = document.getElementById('guideDesignPoints');
+        const scenesEl    = document.getElementById('guideScenes');
+        const headlinesEl = document.getElementById('guideHeadlines');
+        dpEl.innerHTML        = '';
+        scenesEl.innerHTML    = '';
+        headlinesEl.innerHTML = '';
+
+        if (ug.design_points && ug.design_points.length) {
+            dpBlock.style.display = 'block';
+            ug.design_points.forEach(p => { const li=document.createElement('li'); li.textContent=p; dpEl.appendChild(li); });
+        } else {
+            dpBlock.style.display = 'none';
+        }
+
+        (ug.scenes    || []).forEach(s => { const li=document.createElement('li'); li.textContent=s; scenesEl.appendChild(li); });
+        (ug.headlines || []).forEach(h => { const li=document.createElement('li'); li.textContent=h; headlinesEl.appendChild(li); });
+    } else {
+        guideCard.style.display = 'none';
+    }
+
+    // タグ
+    const tagsEl = document.getElementById('matTags');
+    if ((m.tags||[]).length) {
+        m.tags.forEach(tag => {
+            const a = document.createElement('a');
+            a.className = 'tag';
+            a.textContent = tag;
+            a.href = `gallery.html?tag=${encodeURIComponent(tag)}`;
+            tagsEl.appendChild(a);
+        });
+    } else {
+        tagsEl.textContent = 'タグなし';
+    }
+
+    // ファイル情報
+    document.getElementById('matFileInfo').innerHTML = `
+        <div class="info-item"><div class="info-label">ファイル名</div><div class="info-val">${esc(m.filename)}</div></div>
+        <div class="info-item"><div class="info-label">形式</div><div class="info-val">WebP</div></div>
+        <div class="info-item"><div class="info-label">カテゴリ</div><div class="info-val">${esc(catLabel)}</div></div>
+        <div class="info-item"><div class="info-label">ライセンス</div><div class="info-val">無料・商用可</div></div>
+    `;
+
+    // 関連素材（タグ一致数が多い順・最大12件）
+    const currentTags = new Set(m.tags || []);
+    const related = allMaterials
+        .filter(x => x.id !== m.id)
+        .map(x => {
+            // タグ一致スコア（一致タグ数）+ 同カテゴリにボーナス
+            const tagScore = (x.tags || []).filter(t => currentTags.has(t)).length;
+            const catBonus = x.largeCategory === m.largeCategory ? 0.5 : 0;
+            return { ...x, _score: tagScore + catBonus };
+        })
+        .filter(x => x._score > 0)        // 1つもタグが一致しないものは除外
+        .sort((a, b) => b._score - a._score)
+        .slice(0, 12);
+
+    const relGrid = document.getElementById('relatedGrid');
+    if (related.length) {
+        related.forEach(r => relGrid.appendChild(createRelCard(r)));
+    } else {
+        // タグ一致なし → 同カテゴリからランダムでフォールバック
+        const fallback = allMaterials
+            .filter(x => x.id !== m.id && x.largeCategory === m.largeCategory)
+            .sort(() => Math.random() - .5)
+            .slice(0, 12);
+        if (fallback.length) {
+            fallback.forEach(r => relGrid.appendChild(createRelCard(r)));
+        } else {
+            relGrid.innerHTML = '<p style="color:var(--muted);font-size:.85rem;">関連素材はありません</p>';
+        }
+    }
+}
+
+function createRelCard(r) {
+    const rPath = `assets/materials/${r.largeCategory}/${r.filename}`;
+    const a = document.createElement('a');
+    a.className = 'related-card';
+    a.href = `download.html?id=${r.id}`;
+    const img = document.createElement('img');
+    img.src = esc(rPath);
+    img.alt = esc(r.title||r.filename);
+    img.loading = 'lazy';
+    img.onerror = function(){ this.style.display='none'; };
+    const overlay = document.createElement('div');
+    overlay.className = 'rel-overlay';
+    const title = document.createElement('span');
+    title.className = 'rel-title';
+    title.textContent = r.title || r.filename;
+    overlay.appendChild(title);
+    a.appendChild(img);
+    a.appendChild(overlay);
+    return a;
+}
+
+// ===== カウントダウン付きダウンロード =====
+let dlRunning = false;
+
+function startDownload() {
+    if (dlRunning || !currentMaterial) return;
+    dlRunning = true;
+
+    // PC サイドバー側のUI要素
+    const btn       = document.getElementById('dlBtn');
+    const progWrap  = document.getElementById('dlProgress');
+    const fill      = document.getElementById('progressFill');
+    const label     = document.getElementById('progressLabel');
+    const countEl   = document.getElementById('progressCount');
+    const successEl = document.getElementById('dlSuccess');
+
+    // モバイル固定バー側のUI要素
+    const mBtn      = document.getElementById('mobileDlBtn');
+    const mProgress = document.getElementById('mobileDlProgress');
+    const mFill     = document.getElementById('mobileDlProgressFill');
+    const mSub      = document.getElementById('mobileDlSub');
+
+    // PC側の初期化
+    if (btn)       { btn.disabled = true; btn.innerHTML = '<span>⏳</span> 準備中…'; }
+    if (progWrap)  progWrap.style.display = 'block';
+    if (successEl) successEl.style.display = 'none';
+
+    // モバイル側の初期化
+    if (mBtn)      { mBtn.disabled = true; mBtn.textContent = '⏳ 準備中…'; }
+    if (mProgress) mProgress.style.display = 'block';
+    if (mFill)     mFill.style.width = '0%';
+
+    const steps  = [
+        { pct: 15, msg: 'ライセンスを確認しています…' },
+        { pct: 40, msg: 'ファイルを準備しています…' },
+        { pct: 70, msg: 'ダウンロードリンクを生成しています…' },
+        { pct: 90, msg: 'もうすぐ完了…' },
+    ];
+    const total  = WAIT_SEC * 1000;
+    const start  = Date.now();
+    let stepIdx  = 0;
+    const stepMs = [0, 1000, 2200, 3800];
+
+    function tick() {
+        const elapsed = Date.now() - start;
+        const pct     = Math.min(100, (elapsed / total) * 100);
+
+        // PC側プログレス
+        if (fill) fill.style.width = pct + '%';
+
+        // モバイル側プログレス（同期）
+        if (mFill) mFill.style.width = pct + '%';
+
+        // メッセージ切り替え
+        while (stepIdx < steps.length && elapsed >= stepMs[stepIdx]) {
+            if (label) { label.textContent = steps[stepIdx].msg; fill.style.width = steps[stepIdx].pct + '%'; }
+            if (mFill) mFill.style.width = steps[stepIdx].pct + '%';
+            stepIdx++;
+        }
+
+        const remain = Math.max(0, Math.ceil((total - elapsed) / 1000));
+        if (countEl) countEl.textContent = remain > 0 ? `${remain} 秒後にダウンロード開始` : '';
+        if (mSub)    mSub.textContent    = remain > 0 ? `${remain} 秒後に開始` : '準備完了！';
+
+        if (elapsed < total) {
+            requestAnimationFrame(tick);
+        } else {
+            // ダウンロード実行
+            if (fill)  fill.style.width = '100%';
+            if (mFill) mFill.style.width = '100%';
+            if (label) label.textContent = '<svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> ダウンロード開始！';
+
+            const imgPath = `assets/materials/${currentMaterial.largeCategory}/${currentMaterial.filename}`;
+            const a = document.createElement('a');
+            a.href = imgPath; a.download = currentMaterial.filename;
+            document.body.appendChild(a); a.click(); document.body.removeChild(a);
+
+            // ダウンロードカウント送信（裏で）
+            trackDownload(currentMaterial.id);
+
+            setTimeout(() => {
+                if (progWrap)  progWrap.style.display = 'none';
+                if (successEl) { successEl.style.display = 'block'; }
+                if (btn)       { btn.disabled = false; btn.innerHTML = '<span>⬇</span> もう一度ダウンロード'; }
+                if (mProgress) mProgress.style.display = 'none';
+                if (mBtn)      { mBtn.disabled = false; mBtn.textContent = '⬇ ダウンロード'; }
+                if (mSub)      mSub.textContent = 'WebP形式 / 無料・商用OK';
+                dlRunning = false;
+                // アンケートポップアップを表示
+                showSurveyPopup();
+            }, 800);
+        }
+    }
+
+    requestAnimationFrame(tick);
+}
+
+// ===== エラー表示 =====
+function showError(msg) {
+    document.getElementById('pageLoading').innerHTML =
+        `<div style="color:#e74c3c;font-size:1rem;">${msg}<br><br><a href="gallery.html" style="color:var(--accent);">← ギャラリーに戻る</a></div>`;
+}
+
+// ===== ヘルパー =====
+function getCatLabel(large, sub) {
+    const l = catDefs[large]; if (!l) return large||'';
+    const s = l.subcategories?.[sub] || sub;
+    return sub ? `${l.label} › ${s}` : l.label;
+}
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// ===== クレジットコピー =====
+function copyCredit() {
+    const text = document.getElementById('creditText')?.textContent || '';
+    const btn  = document.getElementById('copyBtn');
+    navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = '<svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> コピーしました！';
+        btn.classList.add('copied');
+        setTimeout(() => {
+            btn.innerHTML = '<svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path></svg> リンクをコピーする';
+            btn.classList.remove('copied');
+        }, 2200);
+    }).catch(() => {
+        // fallback
+        const ta = document.createElement('textarea');
+        ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+        document.body.appendChild(ta); ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        btn.textContent = '<svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> コピーしました！';
+        setTimeout(() => { btn.innerHTML = '<svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path></svg> リンクをコピーする'; }, 2200);
+    });
+}
+
+// ===== ダウンロードカウント送信 =====
+function trackDownload(materialId) {
+    if (localStorage.getItem('sozaino_admin')) return; // 管理者は除外
+    fetch('https://amazon-sale-api.bulibuli-mushi.workers.dev', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'download-count', id: materialId })
+    }).catch(() => {});
+}
+
+// ===== アンケート共通：30分タイマー制御 =====
+const SURVEY_INTERVAL_MS = 30 * 60 * 1000; // 30分
+
+function surveyAnsweredRecently() {
+    const last = localStorage.getItem('survey_last_answered');
+    if (!last) return false;
+    return (Date.now() - parseInt(last, 10)) < SURVEY_INTERVAL_MS;
+}
+
+function recordSurveyAnswer() {
+    localStorage.setItem('survey_last_answered', String(Date.now()));
+}
+
+// ===== アンケートポップアップ（スマホのみ） =====
+function showSurveyPopup() {
+    if (localStorage.getItem('sozaino_admin')) return; // 管理者は除外
+    if (window.innerWidth > 768) return; // PCはポップアップ不要
+    if (surveyAnsweredRecently()) return; // 30分以内に回答済みはスキップ
+    document.getElementById('surveyOverlay').classList.add('active');
+}
+
+function closeSurvey() {
+    document.getElementById('surveyOverlay').classList.remove('active');
+}
+
+function selectSurvey(el) {
+    document.querySelectorAll('.survey-choice').forEach(b => b.classList.remove('selected'));
+    el.classList.add('selected');
+    document.getElementById('surveySubmit').disabled = false;
+}
+
+function submitSurvey() {
+    const selected = document.querySelector('.survey-choice.selected');
+    if (!selected) return;
+    const params = new URLSearchParams(location.search);
+    const materialId = params.get('id');
+    if (!materialId) return;
+
+    const choice = selected.dataset.value;
+    document.getElementById('surveySubmit').disabled = true;
+
+    fetch('https://amazon-sale-api.bulibuli-mushi.workers.dev', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'survey-vote', materialId, choice })
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (data.ok) {
+            recordSurveyAnswer();
+            document.getElementById('surveyContent').style.display = 'none';
+            document.getElementById('surveyDone').style.display = 'block';
+            setTimeout(closeSurvey, 2000);
+        }
+    })
+    .catch(() => { closeSurvey(); });
+}
+
+// オーバーレイ背景クリックで閉じる
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('menuToggle').addEventListener('click', () => {
+        document.getElementById('navMenu').classList.toggle('open');
+    });
+    document.getElementById('surveyOverlay').addEventListener('click', e => {
+        if (e.target === document.getElementById('surveyOverlay')) closeSurvey();
+    });
+
+    // サイドバーアンケート：管理者または30分以内に回答済みならDLボタン即解放
+    if (localStorage.getItem('sozaino_admin') || surveyAnsweredRecently()) {
+        unlockDlBtn();
+        const box = document.getElementById('sidebarSurveyBox');
+        if (box) box.style.display = 'none';
+    }
+});
+
+// ===== サイドバーアンケート =====
+function selectSidebarSurvey(el) {
+    if (localStorage.getItem('sozaino_admin')) {
+        unlockDlBtn();
+        const box = document.getElementById('sidebarSurveyBox');
+        if (box) box.style.display = 'none';
+        return;
+    }
+    // 選択ビジュアル
+    document.querySelectorAll('.sidebar-survey-choice').forEach(b => b.classList.remove('selected'));
+    el.classList.add('selected');
+
+    // 選択肢をロック（連打防止）
+    document.getElementById('sidebarSurveyOptions').style.pointerEvents = 'none';
+
+    const params = new URLSearchParams(location.search);
+    const materialId = params.get('id');
+    const choice = el.dataset.value;
+
+    // バックグラウンドでKVに送信
+    if (materialId) {
+        fetch('https://amazon-sale-api.bulibuli-mushi.workers.dev', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'survey-vote', materialId, choice })
+        })
+        .then(r => r.json())
+        .then(data => { if (data.ok) recordSurveyAnswer(); })
+        .catch(() => {});
+    }
+
+    // DLボタンを解放
+    unlockDlBtn();
+
+    // アンケートをフェードアウトして非表示
+    const box = document.getElementById('sidebarSurveyBox');
+    if (box) {
+        box.style.transition = 'opacity .4s';
+        box.style.opacity = '0';
+        setTimeout(() => { box.style.display = 'none'; }, 400);
+    }
+}
+
+function unlockDlBtn() {
+    const btn = document.getElementById('dlBtn');
+    if (btn) {
+        btn.disabled = false;
+        btn.style.opacity = '1';
+        btn.style.cursor = 'pointer';
+    }
+}
+
+function lockSidebarSurvey(msg) {
+    // 後方互換用（ポップアップ側から呼ばれる場合）
+    const opts = document.getElementById('sidebarSurveyOptions');
+    const msgEl = document.getElementById('sidebarSurveyMsg');
+    if (opts)  { opts.style.pointerEvents = 'none'; opts.style.opacity = '.45'; }
+    if (msgEl) { msgEl.style.display = 'block'; msgEl.textContent = msg; }
+}
+
+// ===== SNS シェア機能 =====
+function getShareText() {
+    // ページのタイトルと URL を取得
+    const title = document.getElementById('matTitle')?.textContent || 'SOZAINO素材';
+    const url = window.location.href;
+    const siteName = 'ソザイノ';
+    const siteUrl = 'https://sozaino.com';
+    
+    return {
+        title,
+        url,
+        siteName,
+        siteUrl
+    };
+}
+
+function shareToX() {
+    const { title, url } = getShareText();
+    const text = `${title} - ソザイノ\n\n高品質なWebP素材を無料ダウンロード。ブログ・SNS・動画制作などで活用できます。\n\nダウンロードはこちらから\n${url}`;
+    const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+    window.open(shareUrl, '_blank', 'width=600,height=400');
+}
+
+function shareToThreads() {
+    const { title, url } = getShareText();
+    const text = `${title} - ソザイノ\n\nダウンロードはこちらから\n${url}`;
+    const shareUrl = `https://www.threads.net/intent/post?text=${encodeURIComponent(text)}`;
+    window.open(shareUrl, '_blank', 'width=600,height=400');
+}
+
+function shareToLine() {
+    const { title, url } = getShareText();
+    const text = `${title} - ソザイノ\n\n高品質なWebP素材を無料ダウンロード。ブログ・SNS・動画制作などで活用できます。\n\nダウンロードはこちらから\n${url}`;
+    const shareUrl = `https://line.me/R/msg/text/${encodeURIComponent(text)}`;
+    window.location.href = shareUrl;
+}
+
+</script>
+
+<!-- ===== アンケートポップアップ ===== -->
+<div class="survey-overlay" id="surveyOverlay">
+    <div class="survey-modal">
+        <div id="surveyContent">
+            <p class="survey-title">どのシーンで使いますか？</p>
+            <p class="survey-sub">今後の素材制作の参考にさせてください</p>
+            <div class="survey-choices">
+                <button class="survey-choice" data-value="youtube" onclick="selectSurvey(this)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="5" width="20" height="14" rx="2"/>
+                        <polygon points="10,9 16,12 10,15" fill="currentColor" stroke="none"/>
+                    </svg>
+                    YouTube・動画
+                </button>
+                <button class="survey-choice" data-value="blog" onclick="selectSurvey(this)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+                    </svg>
+                    ブログ
+                </button>
+                <button class="survey-choice" data-value="sns" onclick="selectSurvey(this)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                    </svg>
+                    SNS
+                </button>
+                <button class="survey-choice" data-value="other" onclick="selectSurvey(this)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+                    </svg>
+                    その他
+                </button>
+            </div>
+            <button class="survey-submit" id="surveySubmit" disabled onclick="submitSurvey()">回答する</button>
+            <button class="survey-skip" onclick="closeSurvey()">スキップ</button>
+        </div>
+        <div id="surveyDone" class="survey-done" style="display:none;">
+            <div class="survey-done-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div class="survey-done-text">ありがとうございました！</div>
+            <div class="survey-done-sub">回答を記録しました</div>
+            <button class="survey-skip" style="margin-top:1rem;" onclick="closeSurvey()">閉じる</button>
+        </div>
+    </div>
+</div>
+
+<!-- モバイル固定ダウンロードバー -->
+<div class="mobile-dl-bar" id="mobileDlBar">
+    <div class="mobile-dl-info">
+        <div class="mobile-dl-title" id="mobileDlTitle">素材をダウンロード</div>
+        <div class="mobile-dl-sub" id="mobileDlSub">WebP形式 / 無料・商用OK</div>
+        <!-- カウントダウンバー（処理中のみ表示） -->
+        <div class="mobile-dl-progress" id="mobileDlProgress" style="display:none;">
+            <div class="mobile-dl-progress-fill" id="mobileDlProgressFill"></div>
+        </div>
+    </div>
+    <button class="mobile-dl-btn" id="mobileDlBtn" onclick="startDownload()">⬇ ダウンロード</button>
+</div>
+
+</body>
+</html>
