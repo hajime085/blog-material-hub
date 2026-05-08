@@ -487,6 +487,34 @@
         }
         .column-section-cta a:hover { gap:.6rem; }
 
+
+        @media(max-width:768px) {
+            .latest-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 4px;
+            }
+            .cat-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+            .latest-card:nth-child(n+7) {
+                display: none;
+            }
+        }
+
+        @media(max-width:480px) {
+            .latest-grid {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 4px !important;
+            }
+            .cat-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 8px !important;
+            }
+            .latest-card:nth-child(n+7) {
+                display: none !important;
+            }
+        }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2687113603921668" crossorigin="anonymous"></script>
 </head>
