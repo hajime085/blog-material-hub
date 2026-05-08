@@ -15,35 +15,6 @@
             vertical-align: -.15em;
             flex-shrink: 0;
         }
-
-        /* スマホではワイドカードをコンパクトな縦積みに */
-        @media(max-width:700px) {
-            .masonry-item.wide-card {
-                grid-template-columns: 1fr;
-                border-radius: 8px;
-            }
-            .masonry-item.wide-card img {
-                height: 160px;
-                border-radius: 8px 8px 0 0;
-            }
-            .masonry-item.wide-card .wide-info {
-                padding: 1rem 1.2rem;
-                border: 1px solid var(--border);
-                border-top: none;
-                border-radius: 0 0 8px 8px;
-            }
-            .masonry-item.wide-card .wide-title {
-                font-size: .95rem;
-            }
-            .masonry-item.wide-card .wide-desc {
-                display: none;
-            }
-            .masonry-item.wide-card .wide-cta {
-                margin-top: .8rem;
-                font-size: .8rem;
-                padding: .45rem 1rem;
-            }
-        }
     </style>
     <title>素材ギャラリー | ソザイノ</title>
     <meta name="description" content="ブログ・動画・SNS向けの高品質WebP素材を無料配信。カテゴリとタグで欲しい素材を素早く発見できます。">
@@ -274,20 +245,8 @@
         }
         .masonry-item.wide-card .wide-cta {
             display: inline-flex; align-items: center; gap: .4rem;
-            align-self: flex-start;
             margin-top: 1.2rem;
-            background: var(--primary);
-            color: #fff;
-            font-size: .85rem; font-weight: 700;
-            padding: .55rem 1.2rem;
-            border-radius: 6px;
-            text-decoration: none;
-            transition: background .2s, transform .2s;
-            box-shadow: 0 3px 10px rgba(13,148,136,.25);
-        }
-        .masonry-item.wide-card:hover .wide-cta {
-            background: #0b827a;
-            transform: translateY(-1px);
+            color: var(--primary); font-size: .88rem; font-weight: 600;
         }
         /* ワイドカードはホバーオーバーレイなし */
         .masonry-item.wide-card .item-overlay { display: none; }
