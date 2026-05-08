@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ソザイノ (SOZAINO) - 無料WebP素材配布サイト</title>
+    <link>https://sozaino.com</link>
+    <description>ブログ・動画・SNSで使える高品質WebP素材を無料配布。商用利用OK・登録不要。</description>
+    <language>ja</language>
+    <lastBuildDate>Wed, 07 May 2026 00:00:00 +0900</lastBuildDate>
+    <atom:link href="https://sozaino.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>AI生成画像の著作権は大丈夫？ブログで使う前に知っておきたい現在地（2026年5月時点）</title>
+      <link>https://sozaino.com/column/ai-image-copyright.html</link>
+      <description>AI生成画像をブログやSNSで使うとき、著作権で気をつけるべきポイントを2026年5月時点の文化庁見解に沿って整理。「学習段階」「利用段階」の2つのフェーズで考える実用ガイドです。</description>
+      <pubDate>Wed, 07 May 2026 09:00:00 +0900</pubDate>
+      <guid>https://sozaino.com/column/ai-image-copyright.html</guid>
+    </item>
+
+    <item>
+      <title>WebP形式とは？PNG・JPEGとの違いと、ブログで使う5つのメリット</title>
+      <link>https://sozaino.com/column/webp-guide.html</link>
+      <description>WebP形式の特徴、PNG・JPEGとの違い、ブログ運営者が知っておきたい導入メリットと注意点を、実例ベースで解説します。ページ速度改善とSEOにも効くWebPの使い方が分かります。</description>
+      <pubDate>Wed, 07 May 2026 08:00:00 +0900</pubDate>
+      <guid>https://sozaino.com/column/webp-guide.html</guid>
+    </item>
+
+  </channel>
+</rss>
