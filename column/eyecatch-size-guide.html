@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ブログのアイキャッチ画像サイズ、正解はこれ。用途別の推奨サイズと選び方 | ソザイノ</title>
+    <meta name="description" content="WordPress・はてなブログ・noteなど主要プラットフォーム別のアイキャッチ推奨サイズを整理。OGP・SNSシェア時に切れないための設定ポイントも解説します。">
+    <link rel="canonical" href="https://sozaino.com/column/eyecatch-size-guide.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="ブログのアイキャッチ画像サイズ、正解はこれ。用途別の推奨サイズと選び方">
+    <meta property="og:description" content="WordPress・はてなブログ・noteなど主要プラットフォーム別のアイキャッチ推奨サイズを整理。OGP・SNSシェア時に切れないための設定ポイントも解説します。">
+    <meta property="og:url" content="https://sozaino.com/column/eyecatch-size-guide.html">
+    <meta property="og:site_name" content="ソザイノ (SOZAINO)">
+
+    <style>
+        :root {
+            --primary:    #0d9488;
+            --primary2:   #14b8a6;
+            --primary-bg: #f0fdfa;
+            --text:       #0f172a;
+            --muted:      #64748b;
+            --border:     #e2e8f0;
+            --bg:         #fafafa;
+            --surface:    #ffffff;
+            --header-bg:  #ffffff;
+            --header-text:#0f172a;
+            --header-text-muted:#64748b;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.85;
+            color: var(--text);
+            background-color: var(--bg);
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            background: var(--header-bg);
+            position: sticky; top:0; z-index:100;
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(15,23,42,.04);
+        }
+        .navbar {
+            max-width:1200px; margin:0 auto;
+            padding:.85rem 2rem;
+            display:flex; justify-content:space-between; align-items:center;
+        }
+        .logo {
+            font-size:1.3rem; font-weight:700;
+            color: var(--header-text); text-decoration:none;
+        }
+        .logo span { color: var(--primary); }
+        .nav-links { display:flex; gap:1.8rem; }
+        .nav-links a {
+            color: var(--header-text-muted); text-decoration:none;
+            font-size:.92rem; font-weight:500;
+            transition: color .2s;
+        }
+        .nav-links a:hover { color: var(--primary); }
+        .menu-toggle { display:none; background:none; border:none; color: var(--header-text); font-size:1.4rem; cursor:pointer; }
+
+        /* ===== ARTICLE ===== */
+        .article-hero {
+            background: linear-gradient(180deg, var(--primary-bg) 0%, #ffffff 100%);
+            padding: 3rem 2rem 2rem;
+        }
+        .breadcrumb {
+            max-width: 800px; margin: 0 auto 1.2rem;
+            font-size: .85rem; color: var(--muted);
+        }
+        .breadcrumb a { color: var(--muted); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--primary); }
+        .breadcrumb .sep { margin: 0 .4rem; opacity: .5; }
+
+        .article-meta-top {
+            max-width: 800px; margin: 0 auto;
+            display: flex; gap: 1rem; align-items: center;
+            font-size: .82rem; color: var(--muted);
+            margin-bottom: 1rem;
+        }
+        .article-tag {
+            display: inline-block;
+            background: var(--primary-bg);
+            color: var(--primary);
+            padding: .2rem .8rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: .78rem;
+        }
+
+        h1.article-title {
+            max-width: 800px; margin: 0 auto;
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            font-weight: 700;
+            line-height: 1.4;
+            letter-spacing: -.01em;
+            color: var(--text);
+        }
+
+        .article-author {
+            max-width: 800px; margin: 1.5rem auto 0;
+            display: flex; align-items: center; gap: .8rem;
+            font-size: .85rem; color: var(--muted);
+        }
+        .author-icon {
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary2));
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-weight: 700; font-size: .9rem;
+            flex-shrink: 0;
+        }
+
+        article {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2.5rem 2rem;
+            background: var(--surface);
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(15,23,42,.04);
+        }
+
+        article p {
+            margin-bottom: 1.4rem;
+            font-size: 1rem;
+            line-height: 1.9;
+        }
+
+        article h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 2.5rem 0 1.2rem;
+            padding-bottom: .5rem;
+            border-bottom: 2px solid var(--primary);
+            color: var(--text);
+            line-height: 1.4;
+        }
+        article h2:first-of-type { margin-top: 0; }
+
+        article h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin: 2rem 0 .8rem;
+            color: var(--text);
+            padding-left: .8rem;
+            border-left: 4px solid var(--primary);
+            line-height: 1.5;
+        }
+
+        article ul, article ol {
+            margin: 0 0 1.4rem 1.5rem;
+        }
+        article li {
+            margin-bottom: .5rem;
+            line-height: 1.85;
+        }
+
+        article a {
+            color: var(--primary);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+        article a:hover { opacity: .75; }
+
+        article strong { font-weight: 700; color: var(--text); }
+
+        article code {
+            background: #f1f5f9;
+            padding: .15em .45em;
+            border-radius: 4px;
+            font-size: .88em;
+            font-family: 'SFMono-Regular', Consolas, monospace;
+        }
+
+        /* テーブル */
+        article table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: .92rem;
+        }
+        article th, article td {
+            padding: .8rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        article th {
+            background: var(--primary-bg);
+            color: var(--text);
+            font-weight: 700;
+        }
+        article tbody tr:hover { background: #fafafa; }
+
+        /* infoボックス */
+        .info-box {
+            background: var(--primary-bg);
+            border-left: 4px solid var(--primary);
+            padding: 1.2rem 1.4rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+        .info-box p:last-child { margin-bottom: 0; }
+        .info-box-title {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: .5rem;
+            display: flex; align-items: center; gap: .4rem;
+        }
+
+        /* 注意ボックス */
+        .warn-box {
+            background: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            padding: 1.2rem 1.4rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+        .warn-box p:last-child { margin-bottom: 0; }
+        .warn-box-title {
+            font-weight: 700;
+            color: #b45309;
+            margin-bottom: .5rem;
+        }
+
+        /* 素材紹介カード */
+        .material-feature {
+            margin: 1.8rem 0;
+            background: #fafafa;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform .2s, box-shadow .2s;
+        }
+        .material-feature:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(15,23,42,.08);
+        }
+        .material-feature a {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+        .material-feature-img {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #f0fdfa;
+            object-fit: contain;
+            padding: 1rem;
+            display: block;
+        }
+        .material-feature-caption {
+            padding: .9rem 1.2rem;
+            display: flex; justify-content: space-between; align-items: center;
+            gap: 1rem;
+        }
+        .material-feature-text { flex: 1; min-width: 0; }
+        .material-feature-title {
+            font-size: .92rem; font-weight: 600; color: var(--text);
+            margin-bottom: .15rem;
+            overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+        }
+        .material-feature-sub { font-size: .78rem; color: var(--muted); }
+        .material-feature-arrow {
+            flex-shrink: 0; color: var(--primary);
+            font-size: .85rem; font-weight: 600; white-space: nowrap;
+        }
+
+        /* 記事末 */
+        .article-footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+        .article-footer h3 {
+            font-size: 1.1rem; margin-bottom: 1rem;
+            border: none; padding: 0;
+        }
+        .related-articles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem; margin-bottom: 2rem;
+        }
+        .related-article-card {
+            display: block; padding: 1rem 1.2rem;
+            border: 1px solid var(--border); border-radius: 8px;
+            text-decoration: none; color: inherit; transition: all .2s;
+        }
+        .related-article-card:hover { border-color: var(--primary); transform: translateY(-2px); }
+        .related-article-card .label {
+            font-size: .72rem; color: var(--primary); font-weight: 700;
+            margin-bottom: .3rem; text-transform: uppercase; letter-spacing: .04em;
+        }
+        .related-article-card .title {
+            font-size: .92rem; font-weight: 600; color: var(--text); line-height: 1.5;
+        }
+
+        .gallery-cta {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary2) 100%);
+            border-radius: 12px; padding: 1.8rem; text-align: center;
+            margin-top: 2rem; color: #fff;
+        }
+        .gallery-cta h3 {
+            color: #fff !important; font-size: 1.15rem; margin-bottom: .5rem;
+            border: none !important; padding: 0 !important;
+        }
+        .gallery-cta p { color: rgba(255,255,255,.9); margin-bottom: 1.2rem; font-size: .92rem; }
+        .gallery-cta-btn {
+            display: inline-block; background: #fff; color: var(--primary);
+            padding: .7rem 1.6rem; border-radius: 8px; text-decoration: none;
+            font-weight: 700; font-size: .92rem;
+            box-shadow: 0 3px 12px rgba(0,0,0,.15);
+            transition: transform .2s, box-shadow .2s;
+        }
+        .gallery-cta-btn:hover { transform: translateY(-1px); box-shadow: 0 5px 16px rgba(0,0,0,.2); }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #1e293b; color: rgba(255,255,255,.7);
+            margin-top: 4rem; padding: 3rem 2rem;
+        }
+        .footer-content { max-width: 1200px; margin: 0 auto; }
+        .footer-links {
+            display: flex; gap: 2rem; flex-wrap: wrap;
+            margin-bottom: 1.5rem; padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,.1);
+        }
+        .footer-links a {
+            color: rgba(255,255,255,.65); text-decoration: none;
+            font-size: .85rem; transition: color .2s;
+        }
+        .footer-links a:hover { color: var(--primary2); }
+        .footer-info { font-size: .8rem; color: rgba(255,255,255,.4); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .navbar { padding: .85rem 1rem; }
+            .menu-toggle { display: block; }
+            .nav-links {
+                display: none; position: absolute;
+                top: 100%; left: 0; right: 0;
+                background: var(--header-bg);
+                flex-direction: column; gap: 0;
+                padding: .5rem 0;
+                box-shadow: 0 4px 12px rgba(15,23,42,.08);
+                border-top: 1px solid var(--border);
+            }
+            .nav-links.open { display: flex; }
+            .nav-links a { padding: .8rem 1.5rem; border-bottom: 1px solid var(--border); }
+            .nav-links a:last-child { border-bottom: none; }
+            .article-hero { padding: 2rem 1rem 1.5rem; }
+            article { margin: 1rem; padding: 1.8rem 1.4rem; }
+            article h2 { font-size: 1.3rem; }
+            article h3 { font-size: 1.05rem; }
+            article table { font-size: .82rem; }
+            article th, article td { padding: .6rem .7rem; }
+        }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "ブログのアイキャッチ画像サイズ、正解はこれ。用途別の推奨サイズと選び方",
+      "description": "WordPress・はてなブログ・noteなど主要プラットフォーム別のアイキャッチ推奨サイズを整理。OGP・SNSシェア時に切れないための設定ポイントも解説します。",
+      "image": "https://sozaino.com/favicon-192.png",
+      "datePublished": "2026-05-11",
+      "dateModified": "2026-05-11",
+      "author": {
+        "@type": "Organization",
+        "name": "ソザイノ編集部"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "ソザイノ (SOZAINO)",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://sozaino.com/favicon-192.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://sozaino.com/column/eyecatch-size-guide.html"
+      }
+    }
+    </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2687113603921668" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header>
+    <div class="navbar">
+        <a href="/" class="logo">ソザイノ<span>.</span></a>
+        <button class="menu-toggle" id="menuToggle">☰</button>
+        <nav class="nav-links" id="navMenu">
+            <a href="/">ホーム</a>
+            <a href="../gallery.html">素材ギャラリー</a>
+            <a href="../about.html">ソザイノについて</a>
+            <a href="../process.html">素材ができるまで</a>
+            <a href="../column/">コラム</a>
+            <a href="../faq.html">よくあるご質問</a>
+            <a href="../contact.html">お問い合わせ</a>
+        </nav>
+    </div>
+</header>
+
+<div class="article-hero">
+    <div class="breadcrumb">
+        <a href="/">ホーム</a>
+        <span class="sep">›</span>
+        <a href="index.html">コラム</a>
+        <span class="sep">›</span>
+        <span>アイキャッチ画像のサイズ</span>
+    </div>
+    <div class="article-meta-top">
+        <span class="article-tag">画像・デザイン</span>
+        <span>公開日：2026年5月11日</span>
+        <span>最終更新：2026年5月11日</span>
+    </div>
+    <h1 class="article-title">ブログのアイキャッチ画像サイズ、正解はこれ。用途別の推奨サイズと選び方</h1>
+    <div class="article-author">
+        <div class="author-icon">編</div>
+        <div>
+            <strong style="color:var(--text);">ソザイノ編集部</strong><br>
+            <span style="font-size:.78rem;">ブログ・SNS向け素材の配信を通じて、コンテンツ制作の現場をサポートしています。</span>
+        </div>
+    </div>
+</div>
+
+<article>
+
+<p>ブログ記事を書いたあと、アイキャッチ画像のサイズに迷ったことはありませんか。「1200×630にしておけばいい」という話を聞いたことがある方も多いと思いますが、実際にはプラットフォームや表示場所によって最適なサイズが異なります。</p>
+
+<p>本記事では、主要なブログプラットフォームごとの推奨サイズ、SNSシェア時にトリミングされないためのポイント、そして素材を選ぶ際の考え方を整理します。「なんとなく適当なサイズで設定していた」という方も、一度この機会に整理してみてください。</p>
+
+<h2>アイキャッチ画像が重要な理由</h2>
+
+<p>アイキャッチ画像は、記事の「顔」です。ブログの一覧ページではサムネイルとして表示され、SNSでシェアされると自動的にOGP画像として使われます。適切なサイズで用意しておかないと、<strong>SNSシェア時に肝心な部分が切れる・余白だらけになる・ぼやける</strong>といった問題が起きます。</p>
+
+<p>また、アイキャッチはクリック率（CTR）にも影響します。検索結果やSNSのタイムラインでは、記事タイトルと並んでアイキャッチが読者の目に最初に触れる要素です。内容に合った画像を、正しいサイズで設定するだけで、同じ記事でも印象が大きく変わります。</p>
+
+<!-- 素材1: ブログ・PC作業系イメージ（プレースホルダ） -->
+<div class="material-feature">
+    <a href="../download.html?id=1052">
+        <img class="material-feature-img" src="../assets/materials/blog/blog_184.webp" alt="ソザイノの素材サンプル" loading="lazy">
+        <div class="material-feature-caption">
+            <div class="material-feature-text">
+                <div class="material-feature-title">素材サンプル（blog_184）</div>
+                <div class="material-feature-sub">ソザイノで無料ダウンロード可能</div>
+            </div>
+            <div class="material-feature-arrow">詳細を見る →</div>
+        </div>
+    </a>
+</div>
+
+<h2>まず知っておきたい：アスペクト比と実寸の違い</h2>
+
+<p>アイキャッチのサイズを考えるとき、<strong>アスペクト比（縦横の比率）</strong>と<strong>実寸（ピクセル数）</strong>は別の概念です。</p>
+
+<p>アスペクト比は「16:9」「1.91:1」のように表現され、画像の形（横長・正方形など）を決めます。実寸はピクセル数で、同じ16:9でも「1280×720」と「1920×1080」では解像度が異なります。Webの場合、表示サイズより大きい画像を用意しておけばブラウザ側で縮小されるため、<strong>推奨サイズ以上のピクセル数で用意するのが基本</strong>です。</p>
+
+<div class="info-box">
+    <div class="info-box-title">💡 ポイント</div>
+    <p>「推奨サイズ = 最小サイズ」と考えると分かりやすいです。それより小さいと引き伸ばされてぼやけ、同じかそれ以上であれば縮小表示されるため品質は保たれます。ただし極端に大きすぎると読み込みが遅くなるため、WebP形式で適切に圧縮しておくことが重要です。</p>
+</div>
+
+<h2>プラットフォーム別の推奨アイキャッチサイズ</h2>
+
+<p>主要なブログ・メディアプラットフォームごとの推奨サイズをまとめました。</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>プラットフォーム</th>
+            <th>推奨サイズ</th>
+            <th>アスペクト比</th>
+            <th>備考</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>WordPress</td>
+            <td>1200×630 px</td>
+            <td>1.91:1</td>
+            <td>OGPと兼用しやすい定番サイズ</td>
+        </tr>
+        <tr>
+            <td>はてなブログ</td>
+            <td>1200×630 px</td>
+            <td>1.91:1</td>
+            <td>カード表示・OGPともに対応</td>
+        </tr>
+        <tr>
+            <td>note</td>
+            <td>1280×670 px</td>
+            <td>約1.91:1</td>
+            <td>公式推奨。ヘッダー画像と兼用も可</td>
+        </tr>
+        <tr>
+            <td>Ameba ブログ</td>
+            <td>1200×630 px</td>
+            <td>1.91:1</td>
+            <td>SNSシェア時のOGPに準拠</td>
+        </tr>
+        <tr>
+            <td>Wix / Squarespace</td>
+            <td>1200×628 px 以上</td>
+            <td>約1.91:1</td>
+            <td>テーマによってトリミングあり</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>表のとおり、<strong>1200×630 px（アスペクト比 1.91:1）が事実上の共通標準</strong>になっています。プラットフォームを複数使っている場合や、どれか一つに統一したい場合は、このサイズを基準にすると間違いありません。</p>
+
+<h2>SNSシェア時のサイズ：OGP画像として最適化する</h2>
+
+<p>ブログ記事がSNSでシェアされると、アイキャッチ画像はOGP（Open Graph Protocol）画像として表示されます。SNSごとに表示されるサイズや比率が異なるため、それぞれの仕様を把握しておくと安心です。</p>
+
+<h3>X（旧Twitter）でのOGP表示</h3>
+
+<p>Xでは、リンクカードに含まれる画像として表示されます。推奨は<strong>1200×628 px以上、アスペクト比 1.91:1</strong>です。これより縦長の画像は上下がトリミングされ、横長が足りない場合は左右に余白が入ることがあります。重要な要素（テキストやキャラクター）は画像の中央寄りに配置しておくと、トリミングされても見切れにくくなります。</p>
+
+<h3>Facebookでのリンクシェア</h3>
+
+<p>Facebookのリンクシェアでは、<strong>1200×630 px</strong>が推奨されています。Xとほぼ同じ比率のため、1200×630で統一しておけばどちらにも対応できます。600×315 px以上であれば表示されますが、高解像度ディスプレイでのぼやけを防ぐためにも1200×630以上が現実的です。</p>
+
+<h3>LINEのリンクシェア</h3>
+
+<p>LINEでリンクを共有すると、OGP画像がプレビューとして表示されます。比率は<strong>1.91:1</strong>（横長）が基本ですが、正方形（1:1）で設定すると中央部分がトリミングされて表示される場合があります。1200×630のサイズであれば問題なく表示されます。</p>
+
+<!-- 素材2: SNS・コミュニケーション系イメージ（プレースホルダ） -->
+<div class="material-feature">
+    <a href="../download.html?id=1057">
+        <img class="material-feature-img" src="../assets/materials/blog/blog_189.webp" alt="ソザイノの素材サンプル" loading="lazy">
+        <div class="material-feature-caption">
+            <div class="material-feature-text">
+                <div class="material-feature-title">素材サンプル（blog_189）</div>
+                <div class="material-feature-sub">ソザイノで無料ダウンロード可能</div>
+            </div>
+            <div class="material-feature-arrow">詳細を見る →</div>
+        </div>
+    </a>
+</div>
+
+<h2>アイキャッチ画像を選ぶときの3つの基準</h2>
+
+<p>サイズの問題をクリアしたあとは、「どんな画像を選ぶか」という内容の問題になります。アイキャッチとして機能する画像には、次の3つの要素が揃っていると効果的です。</p>
+
+<h3>1. 記事の内容と関係がある</h3>
+
+<p>アイキャッチは記事の予告編です。画像を見た読者が「この記事には何が書いてあるか」をある程度予測できるものが理想です。「なんとなく雰囲気が合っている」程度でも構いませんが、内容と全くかけ離れた画像は読者の期待を裏切り、直帰率の上昇につながることがあります。</p>
+
+<h3>2. 文字を入れる場合は余白を意識する</h3>
+
+<p>アイキャッチにタイトルや説明文を入れるケースでは、<strong>画像の端から10〜15%程度の余白（セーフゾーン）</strong>を確保することをおすすめします。SNSでシェアされた際にプラットフォーム側でわずかにトリミングされることがあるため、重要なテキストが端に寄りすぎると切れてしまうことがあります。</p>
+
+<h3>3. 著作権・利用規約を確認する</h3>
+
+<p>インターネット上の画像を無断でアイキャッチに使うことは著作権侵害になります。フリー素材サイトを利用する場合も、「商用利用OK」かどうか、「クレジット表記が必要かどうか」を利用規約で確認する必要があります。ソザイノの素材は商用利用・登録不要で使えますが、どのサイトを利用する場合も利用規約の確認を習慣にしておくと安心です。</p>
+
+<div class="warn-box">
+    <div class="warn-box-title">⚠️ 注意</div>
+    <p>GoogleやBingの画像検索で「著作権フリー」フィルターをかけても、完全に安全とは言えないケースがあります。素材の出所が不明な画像は使用を避け、信頼できる素材サイトを利用するのが確実です。</p>
+</div>
+
+<h2>WordPress でアイキャッチサイズを最適化する設定</h2>
+
+<p>WordPressには、アップロードした画像を自動的に複数サイズに変換する機能があります。「設定 → メディア」から「大」「中」「サムネイル」のサイズを変更できますが、アイキャッチとして使いたいサイズを明示的に指定しておくと、テーマ側が適切なサイズを選択してくれます。</p>
+
+<p>また、WordPressで利用できるプラグイン「EWWW Image Optimizer」や「Converter for Media」を使えば、JPEGやPNG形式でアップロードした画像を自動でWebPに変換することができます。アイキャッチを1200×630のJPEGで用意しても、プラグインがWebPに変換して配信してくれるため、ページ読み込み速度を落とさずに済みます。</p>
+
+<!-- 素材3: アイキャッチ・デザイン作業系イメージ（プレースホルダ） -->
+<div class="material-feature">
+    <a href="../download.html?id=954">
+        <img class="material-feature-img" src="../assets/materials/character/character_329.webp" alt="ソザイノの素材サンプル" loading="lazy">
+        <div class="material-feature-caption">
+            <div class="material-feature-text">
+                <div class="material-feature-title">素材サンプル（character_329）</div>
+                <div class="material-feature-sub">ソザイノで無料ダウンロード可能</div>
+            </div>
+            <div class="material-feature-arrow">詳細を見る →</div>
+        </div>
+    </a>
+</div>
+
+<h2>まとめ：迷ったら1200×630 px、WebP形式で</h2>
+
+<p>アイキャッチ画像のサイズは、プラットフォームやSNSによって細かく異なりますが、<strong>1200×630 px（アスペクト比 1.91:1）</strong>を基準にしておけば、主要なすべての環境で問題なく表示されます。</p>
+
+<p>サイズと合わせて、ファイル形式もWebPで用意するとページ速度への影響を最小限に抑えられます。ソザイノではすべての素材をWebP形式・1200×630 pxを含む複数サイズで配信しており、ダウンロードしてそのままアイキャッチとして使える素材を揃えています。</p>
+
+<p>アイキャッチ選びに毎回時間をかけるのが手間だと感じている方は、ぜひ素材ギャラリーを覗いてみてください。カテゴリ・タグで絞り込めるので、記事の内容に合った素材をすぐに見つけられます。</p>
+
+<div class="article-footer">
+    <h3>関連コラム</h3>
+    <div class="related-articles">
+        <a href="webp-guide.html" class="related-article-card">
+            <div class="label">画像フォーマット</div>
+            <div class="title">WebP形式とは？PNG・JPEGとの違いと、ブログで使う5つのメリット</div>
+        </a>
+        <a href="ai-image-copyright.html" class="related-article-card">
+            <div class="label">AI素材</div>
+            <div class="title">AI生成画像の著作権は大丈夫？クリエイターが知っておきたい現在地</div>
+        </a>
+    </div>
+
+    <div class="gallery-cta">
+        <h3>アイキャッチに使える素材を探す</h3>
+        <p>1200×630 pxに対応したWebP素材を無料配信中。商用利用OK、登録不要です。</p>
+        <a href="../gallery.html" class="gallery-cta-btn">素材ギャラリーへ →</a>
+    </div>
+</div>
+
+</article>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-links">
+            <a href="../about.html">ソザイノについて</a>
+            <a href="../process.html">素材ができるまで</a>
+            <a href="index.html">コラム</a>
+            <a href="../privacy.html">プライバシーポリシー</a>
+            <a href="../terms.html">利用規約</a>
+            <a href="../disclaimer.html">免責事項</a>
+            <a href="../contact.html">お問い合わせ</a>
+        </div>
+        <div style="margin-top:1rem;">
+            <a href="https://design.blogmura.com/freesozai/ranking/in?p_cid=11214708" target="_blank">
+                <img src="https://b.blogmura.com/design/freesozai/88_31.gif" width="88" height="31" border="0" alt="にほんブログ村 デザインブログ フリー素材へ">
+            </a>
+        </div>
+        <div class="footer-info">
+            <p>&copy; 2026 ソザイノ (SOZAINO). All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+    menuToggle.addEventListener('click', () => navMenu.classList.toggle('open'));
+    navMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => navMenu.classList.remove('open'));
+    });
+</script>
+
+</body>
+</html>

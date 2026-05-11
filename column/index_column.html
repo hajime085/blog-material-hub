@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>コラム | ソザイノ (SOZAINO) - WebP素材の活用と画像知識</title>
+    <meta name="description" content="ソザイノ編集部によるコラム記事一覧。画像フォーマット、AI生成画像と著作権、ブログでの素材活用など、Web画像にまつわるトピックをお届けします。">
+    <link rel="canonical" href="https://sozaino.com/column/">
+
+    <style>
+        :root {
+            --primary:    #0d9488;
+            --primary2:   #14b8a6;
+            --primary-bg: #f0fdfa;
+            --text:       #0f172a;
+            --muted:      #64748b;
+            --border:     #e2e8f0;
+            --bg:         #fafafa;
+            --surface:    #ffffff;
+            --header-bg:  #ffffff;
+            --header-text:#0f172a;
+            --header-text-muted:#64748b;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background-color: var(--bg);
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            background: var(--header-bg);
+            position: sticky; top:0; z-index:100;
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(15,23,42,.04);
+        }
+        .navbar {
+            max-width:1200px; margin:0 auto;
+            padding:.85rem 2rem;
+            display:flex; justify-content:space-between; align-items:center;
+        }
+        .logo {
+            font-size:1.3rem; font-weight:700;
+            color: var(--header-text); text-decoration:none;
+        }
+        .logo span { color: var(--primary); }
+        .nav-links { display:flex; gap:1.8rem; }
+        .nav-links a {
+            color: var(--header-text-muted); text-decoration:none;
+            font-size:.92rem; font-weight:500;
+            transition: color .2s;
+        }
+        .nav-links a:hover { color: var(--primary); }
+        .menu-toggle { display:none; background:none; border:none; color: var(--header-text); font-size:1.4rem; cursor:pointer; }
+
+        /* ===== HERO ===== */
+        .page-hero {
+            background: linear-gradient(180deg, var(--primary-bg) 0%, #ffffff 100%);
+            padding: 3.5rem 2rem 2.5rem;
+            text-align: center;
+        }
+        .breadcrumb {
+            max-width: 1000px; margin: 0 auto 1.2rem;
+            font-size: .85rem; color: var(--muted);
+            text-align: left;
+        }
+        .breadcrumb a { color: var(--muted); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--primary); }
+        .breadcrumb .sep { margin: 0 .4rem; opacity: .5; }
+
+        .page-hero h1 {
+            font-size: clamp(1.8rem, 4vw, 2.4rem);
+            font-weight: 700;
+            margin-bottom: .8rem;
+            color: var(--text);
+        }
+        .page-hero p {
+            font-size: 1rem;
+            color: var(--muted);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* ===== ARTICLE LIST ===== */
+        main {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .article-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .article-card {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 2rem;
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid var(--border);
+            transition: all .25s;
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        .article-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(13,148,136,.10);
+        }
+
+        .article-card-icon {
+            width: 100px; height: 100px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary2) 100%);
+            display: flex; align-items: center; justify-content: center;
+            color: #fff;
+            flex-shrink: 0;
+        }
+        .article-card-icon svg {
+            width: 44px;
+            height: 44px;
+        }
+
+        .article-card-body { min-width: 0; }
+        .article-card-meta {
+            display: flex; gap: .8rem; align-items: center;
+            font-size: .78rem; color: var(--muted);
+            margin-bottom: .6rem;
+            flex-wrap: wrap;
+        }
+        .article-card-tag {
+            display: inline-block;
+            background: var(--primary-bg);
+            color: var(--primary);
+            padding: .15rem .7rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: .72rem;
+        }
+        .article-card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            line-height: 1.5;
+            margin-bottom: .5rem;
+            color: var(--text);
+        }
+        .article-card-desc {
+            font-size: .9rem;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #1e293b;
+            color: rgba(255,255,255,.7);
+            margin-top: 4rem;
+            padding: 3rem 2rem;
+        }
+        .footer-content { max-width: 1200px; margin: 0 auto; }
+        .footer-links {
+            display: flex; gap: 2rem; flex-wrap: wrap;
+            margin-bottom: 1.5rem; padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,.1);
+        }
+        .footer-links a {
+            color: rgba(255,255,255,.65);
+            text-decoration: none;
+            font-size: .85rem;
+            transition: color .2s;
+        }
+        .footer-links a:hover { color: var(--primary2); }
+        .footer-info { font-size: .8rem; color: rgba(255,255,255,.4); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .navbar { padding: .85rem 1rem; }
+            .menu-toggle { display: block; }
+            .nav-links {
+                display: none; position: absolute;
+                top: 100%; left: 0; right: 0;
+                background: var(--header-bg);
+                flex-direction: column; gap: 0;
+                padding: .5rem 0;
+                box-shadow: 0 4px 12px rgba(15,23,42,.08);
+                border-top: 1px solid var(--border);
+            }
+            .nav-links.open { display: flex; }
+            .nav-links a { padding: .8rem 1.5rem; border-bottom: 1px solid var(--border); }
+            .nav-links a:last-child { border-bottom: none; }
+            main { padding: 0 1rem; }
+            .article-card {
+                grid-template-columns: 1fr;
+                padding: 1.5rem;
+                gap: 1rem;
+            }
+            .article-card-icon { width: 64px; height: 64px; }
+            .article-card-icon svg { width: 32px; height: 32px; }
+            .article-card-title { font-size: 1.05rem; }
+        }
+    </style>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2687113603921668" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header>
+    <div class="navbar">
+        <a href="/" class="logo">ソザイノ<span>.</span></a>
+        <button class="menu-toggle" id="menuToggle">☰</button>
+        <nav class="nav-links" id="navMenu">
+            <a href="/">ホーム</a>
+            <a href="../gallery.html">素材ギャラリー</a>
+            <a href="../about.html">ソザイノについて</a>
+            <a href="../process.html">素材ができるまで</a>
+            <a href="../column/">コラム</a>
+            <a href="../faq.html">よくあるご質問</a>
+            <a href="../contact.html">お問い合わせ</a>
+        </nav>
+    </div>
+</header>
+
+<div class="page-hero">
+    <div class="breadcrumb">
+        <a href="/">ホーム</a>
+        <span class="sep">›</span>
+        <span>コラム</span>
+    </div>
+    <h1>コラム</h1>
+    <p>画像フォーマット、AI生成画像と著作権、ブログでの素材活用など、Web画像にまつわるトピックをソザイノ編集部がお届けします。</p>
+</div>
+
+<main>
+
+<div class="article-list">
+
+    <a href="eyecatch-size-guide.html" class="article-card">
+        <div class="article-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                <path d="M3 9h18"></path>
+                <path d="M9 21V9"></path>
+            </svg>
+        </div>
+        <div class="article-card-body">
+            <div class="article-card-meta">
+                <span class="article-card-tag">画像・デザイン</span>
+                <span>2026年5月11日</span>
+            </div>
+            <div class="article-card-title">ブログのアイキャッチ画像サイズ、正解はこれ。用途別の推奨サイズと選び方</div>
+            <div class="article-card-desc">WordPress・はてなブログ・noteなど主要プラットフォーム別の推奨サイズを整理。SNSシェア時に画像が切れないためのポイントも解説します。</div>
+        </div>
+    </a>
+
+    <a href="ai-image-copyright.html" class="article-card">
+        <div class="article-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <polyline points="9 12 11 14 15 10"></polyline>
+            </svg>
+        </div>
+        <div class="article-card-body">
+            <div class="article-card-meta">
+                <span class="article-card-tag">AI素材</span>
+                <span>2026年5月7日</span>
+            </div>
+            <div class="article-card-title">AI生成画像の著作権は大丈夫？ブログで使う前に知っておきたい現在地（2026年5月時点）</div>
+            <div class="article-card-desc">AI生成画像の著作権で気をつけるべきポイントを、文化庁の見解（2026年5月時点）をベースに「学習段階」「利用段階」の2フェーズで整理します。</div>
+        </div>
+    </a>
+
+    <a href="webp-guide.html" class="article-card">
+        <div class="article-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+            </svg>
+        </div>
+        <div class="article-card-body">
+            <div class="article-card-meta">
+                <span class="article-card-tag">画像フォーマット</span>
+                <span>2026年5月7日</span>
+            </div>
+            <div class="article-card-title">WebP形式とは？PNG・JPEGとの違いと、ブログで使う5つのメリット</div>
+            <div class="article-card-desc">WebPの特徴、PNG・JPEGとの違い、ブログ運営者が知っておきたい導入メリットと注意点を実例ベースで解説します。</div>
+        </div>
+    </a>
+
+</div>
+
+</main>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-links">
+            <a href="../about.html">ソザイノについて</a>
+            <a href="../process.html">素材ができるまで</a>
+            <a href="index.html">コラム</a>
+            <a href="../privacy.html">プライバシーポリシー</a>
+            <a href="../terms.html">利用規約</a>
+            <a href="../disclaimer.html">免責事項</a>
+            <a href="../contact.html">お問い合わせ</a>
+        </div>
+        <div style="margin-top:1rem;">
+            <a href="https://design.blogmura.com/freesozai/ranking/in?p_cid=11214708" target="_blank">
+                <img src="https://b.blogmura.com/design/freesozai/88_31.gif" width="88" height="31" border="0" alt="にほんブログ村 デザインブログ フリー素材へ">
+            </a>
+        </div>
+        <div class="footer-info">
+            <p>&copy; 2026 ソザイノ (SOZAINO). All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+    menuToggle.addEventListener('click', () => navMenu.classList.toggle('open'));
+    navMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => navMenu.classList.remove('open'));
+    });
+</script>
+
+</body>
+</html>
