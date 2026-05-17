@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>素材ダウンロード | ソザイノ</title>
     <meta name="description" content="高品質WebP素材を無料ダウンロード。ブログ・動画・SNS制作にご活用ください。">
+    <link rel="canonical" href="https://sozaino.com/download.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -45,16 +46,6 @@
         .breadcrumb-inner { max-width:1100px; margin:0 auto; padding:.55rem 2rem; font-size:.8rem; color:var(--muted); }
         .breadcrumb a { color:var(--muted); text-decoration:none; } .breadcrumb a:hover { color:var(--accent); }
         .breadcrumb span { margin:0 .4rem; }
-
-        /* ===== AD SLOT ===== */
-        /* AdSense 審査通過後、コードを貼り付けると自動で表示されます */
-        /* それまでは display:none で完全非表示（枠も余白も出ない）  */
-        .ad-slot { display: none; }
-        .ad-728 { width:100%; max-width:728px; margin:0 auto; }
-        .ad-300 { width:300px; }
-        .ad-responsive { width:100%; }
-        .ad-wrap { display:flex; justify-content:center; }
-
         /* ===== MAIN LAYOUT ===== */
         main { max-width:1100px; margin:0 auto; padding:1.5rem 2rem 4rem; }
         .content-grid {
@@ -350,10 +341,6 @@
             color:var(--green); font-size:.85rem; font-weight:600; text-align:center;
         }
 
-        /* 広告（DLカード内） */
-        .dl-ad-wrap { margin-top:1.2rem; }
-        .dl-ad-slot { width:100%; height:250px; border-radius:8px; }
-
         .dl-note { font-size:.88rem; color:var(--muted); margin-top:1rem; line-height:1.7; }
 
         /* クレジット表記カード */
@@ -451,94 +438,6 @@
         .spinner { display:inline-block; width:36px; height:36px; border:3px solid var(--border); border-top-color: var(--primary); border-radius:50%; animation:spin .8s linear infinite; margin-bottom:1rem; }
         @keyframes spin { to { transform:rotate(360deg); } }
 
-        /* サイドバーアンケート選択肢 */
-        .sidebar-survey-choice {
-            display:flex; align-items:center; gap:.6rem;
-            width:100%; padding:.55rem .8rem;
-            border:1.5px solid var(--border); border-radius:7px;
-            background:#fafafa; cursor:pointer;
-            font-size:.85rem; font-weight:500; color:var(--text);
-            font-family:inherit; text-align:left;
-            transition:all .18s;
-        }
-        .sidebar-survey-choice:hover { border-color:var(--accent); background:#fff5f0; color:var(--accent); }
-        .sidebar-survey-choice.selected { border-color:var(--accent); background:var(--accent); color:#fff; }
-        .sidebar-survey-choice.selected svg { stroke:#fff; }
-        #sidebarSurveySubmit:not([disabled]) { opacity:1; cursor:pointer; }
-
-        /* ===== アンケートポップアップ ===== */
-        .survey-overlay {
-            display:none;
-            position:fixed; inset:0; z-index:1000;
-            background:rgba(0,0,0,.55);
-            align-items:center; justify-content:center;
-            padding:1.5rem;
-        }
-        .survey-overlay.active { display:flex; }
-        .survey-modal {
-            background:#fff; border-radius:16px;
-            width:100%; max-width:360px;
-            padding:1.8rem 1.6rem;
-            box-shadow:0 20px 60px rgba(0,0,0,.25);
-            animation: surveyIn .25s ease;
-        }
-        @keyframes surveyIn {
-            from { transform:translateY(24px); opacity:0; }
-            to   { transform:translateY(0);    opacity:1; }
-        }
-        .survey-title {
-            font-size:1rem; font-weight:700; color: var(--text);
-            margin-bottom:.3rem; text-align:center;
-        }
-        .survey-sub {
-            font-size:.8rem; color:var(--muted);
-            text-align:center; margin-bottom:1.2rem;
-        }
-        .survey-choices {
-            display:grid; grid-template-columns:1fr 1fr;
-            gap:.65rem; margin-bottom:1.2rem;
-        }
-        .survey-choice {
-            display:flex; flex-direction:column;
-            align-items:center; justify-content:center;
-            gap:.45rem; padding:.85rem .5rem;
-            border:1.5px solid var(--border);
-            border-radius:10px; cursor:pointer;
-            background:#fafafa;
-            transition:all .18s; font-size:.82rem;
-            color:var(--text); font-weight:600;
-            font-family:inherit;
-            text-align:center; line-height:1.3;
-        }
-        .survey-choice svg { width:26px; height:26px; display:block; }
-        .survey-choice:hover { border-color:var(--accent); background:#fff5f0; color:var(--accent); }
-        .survey-choice.selected { border-color:var(--accent); background:var(--accent); color:#fff; }
-        .survey-choice.selected svg path, .survey-choice.selected svg rect,
-        .survey-choice.selected svg circle, .survey-choice.selected svg polyline,
-        .survey-choice.selected svg line, .survey-choice.selected svg polygon { stroke:#fff; }
-        .survey-submit {
-            width:100%; padding:.8rem;
-            background:linear-gradient(135deg, var(--accent), var(--acc2));
-            color:#fff; border:none; border-radius:9px;
-            font-size:.92rem; font-weight:700; font-family:inherit;
-            cursor:pointer; transition:all .2s;
-            box-shadow:0 4px 14px rgba(13,148,136,.3);
-        }
-        .survey-submit:hover { transform:translateY(-1px); }
-        .survey-submit:disabled { background:#d1d5db; box-shadow:none; transform:none; cursor:not-allowed; }
-        .survey-skip {
-            display:block; text-align:center; margin-top:.85rem;
-            font-size:.78rem; color:var(--muted); cursor:pointer;
-            text-decoration:underline; background:none; border:none;
-            font-family:inherit; width:100%;
-        }
-        .survey-done {
-            text-align:center; padding:1rem 0 .5rem;
-        }
-        .survey-done-icon { font-size:2.5rem; margin-bottom:.5rem; }
-        .survey-done-text { font-size:.92rem; color:var(--text); font-weight:600; }
-        .survey-done-sub { font-size:.8rem; color:var(--muted); margin-top:.3rem; }
-
         /* ===== FOOTER ===== */
         footer { background: #1e293b; color:rgba(255,255,255,.7); padding:2.5rem 2rem; }
         .footer-inner { max-width:1100px; margin:0 auto; }
@@ -634,7 +533,6 @@
             flex-shrink: 0;
         }
     </style>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2687113603921668" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -659,14 +557,6 @@
         <a href="/">ホーム</a><span>›</span>
         <a href="gallery.html">素材ギャラリー</a><span>›</span>
         <span id="breadTitle">素材詳細</span>
-    </div>
-</div>
-
-<!-- トップ広告帯（728×90） -->
-<div class="ad-wrap" style="background:var(--surface);border-bottom:1px solid var(--border);">
-    <div class="ad-slot ad-728">
-        <!-- ここに Google AdSense コードを貼り付け -->
-        AdSense 728×90（リーダーボード）
     </div>
 </div>
 
@@ -700,14 +590,6 @@
                     <button class="swatch swatch-blue"  onclick="setPreviewBg('#dbeafe', this)" title="ブルー"></button>
                     <button class="swatch swatch-green" onclick="setPreviewBg('#dcfce7', this)" title="グリーン"></button>
                     <button class="swatch swatch-check" onclick="setPreviewBg('checker', this)" title="チェッカー（透過確認）"></button>
-                </div>
-            </div>
-
-            <!-- 画像直下 広告（レスポンシブ） -->
-            <div class="ad-below-img">
-                <div class="ad-slot ad-responsive">
-                    <!-- ここに Google AdSense コードを貼り付け -->
-                    AdSense レスポンシブ広告
                 </div>
             </div>
 
@@ -783,14 +665,6 @@
                 <div class="file-info" id="matFileInfo"></div>
             </div>
 
-            <!-- 下部広告 -->
-            <div class="ad-wrap" style="margin-top:1rem;">
-                <div class="ad-slot ad-728" style="max-width:100%;">
-                    <!-- ここに Google AdSense コードを貼り付け -->
-                    AdSense 728×90（コンテンツ内）
-                </div>
-            </div>
-
             <!-- 関連素材（タグ一致順） -->
             <div class="related-section">
                 <div class="related-header">
@@ -808,7 +682,7 @@
                 <div class="gallery-banner-inner">
                     <div class="gallery-banner-text">
                         <div class="gallery-banner-title">もっと素材を探す</div>
-                        <div class="gallery-banner-sub">200点以上の高品質WebP素材を無料配信中。ブログ・動画・SNSにご活用ください。</div>
+                        <div class="gallery-banner-sub">1000点以上の高品質WebP素材を無料配信中。ブログ・動画・SNSにご活用ください。</div>
                     </div>
                     <div class="gallery-banner-btn">素材ギャラリーへ →</div>
                 </div>
@@ -825,34 +699,7 @@
                 </div>
                 <div class="dl-card-body">
 
-                    <!-- PC版アンケート（回答後にDLボタン解放・スマホは非表示） -->
-                    <div id="sidebarSurveyBox" style="margin-bottom:1rem; padding:1rem; background:#f8f7f4; border-radius:9px; border:1px solid var(--border);">
-                        <div style="font-size:.82rem; font-weight:700; color:#4a5568; margin-bottom:.75rem; display:flex; align-items:center; gap:.4rem;">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-                            使い方を教えてください
-                        </div>
-                        <p style="font-size:.78rem; color:var(--muted); margin-bottom:.75rem; line-height:1.5;">選択するとダウンロードできます</p>
-                        <div id="sidebarSurveyOptions" style="display:flex; flex-direction:column; gap:.4rem;">
-                            <button class="sidebar-survey-choice" data-value="youtube" onclick="selectSidebarSurvey(this)">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><rect x="2" y="5" width="20" height="14" rx="2"/><polygon points="10,9 16,12 10,15" fill="currentColor" stroke="none"/></svg>
-                                YouTube・動画
-                            </button>
-                            <button class="sidebar-survey-choice" data-value="blog" onclick="selectSidebarSurvey(this)">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
-                                ブログ
-                            </button>
-                            <button class="sidebar-survey-choice" data-value="sns" onclick="selectSidebarSurvey(this)">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-                                SNS
-                            </button>
-                            <button class="sidebar-survey-choice" data-value="other" onclick="selectSidebarSurvey(this)">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                                その他
-                            </button>
-                        </div>
-                    </div>
-
-                    <button class="dl-btn" id="dlBtn" onclick="startDownload()" disabled style="opacity:.45; cursor:not-allowed;">
+                    <button class="dl-btn" id="dlBtn" onclick="startDownload()">
                         <span>⬇</span> ダウンロード開始
                     </button>
 
@@ -870,14 +717,6 @@
                         <svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> ダウンロードが開始されました！
                     </div>
 
-                    <!-- ダウンロードボタン周辺 広告（300×250） -->
-                    <div class="dl-ad-wrap">
-                        <div class="ad-slot dl-ad-slot">
-                            <!-- ここに Google AdSense コードを貼り付け -->
-                            AdSense 300×250（サイドバー）
-                        </div>
-                    </div>
-
                     <div class="dl-note">
                         ※ 本素材はブログ・SNS・動画制作など個人・商用問わずご利用いただけます。再配布・販売はご遠慮ください。<br>詳しくは<a href="terms.html" style="color:var(--accent);">利用規約</a>をご確認ください。
                     </div>
@@ -891,14 +730,6 @@
                             <svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path></svg> リンクをコピーする
                         </button>
                     </div>
-                </div>
-            </div>
-
-            <!-- サイドバー追加広告 -->
-            <div class="dl-card" style="padding:1rem;">
-                <div class="ad-slot dl-ad-slot">
-                    <!-- ここに Google AdSense コードを貼り付け -->
-                    AdSense 300×250（サイドバー下）
                 </div>
             </div>
 
@@ -957,7 +788,7 @@ function drawWatermarkedPreview(imgSrc, container, bgColor) {
         ctx.drawImage(tempImg, 0, 0, W, H);
 
         // ======== 透かし設定 ========
-        const wmText = 'sozaino.net';
+        const wmText = 'sozaino.com';
         const fontSize = Math.max(18, Math.round(W * 0.045));
         ctx.font = `bold ${fontSize}px 'Helvetica Neue', Arial, sans-serif`;
         ctx.textAlign = 'center';
@@ -1035,7 +866,7 @@ document.addEventListener('dragstart', e => {
 let currentMaterial = null;
 let allMaterials    = [];
 let catDefs         = {};
-const WAIT_SEC      = 5; // 待機秒数
+const WAIT_SEC      = 0; // 審査中は待機なしで直接ダウンロード
 
 // ===== 起動 =====
 init();
@@ -1088,6 +919,12 @@ function renderMaterial(m) {
 
     // ページタイトル
     document.title = `${m.title || m.filename} | ソザイノ`;
+    const metaSummary = (m.description || m.usage_guide?.summary || `${m.title || m.filename}を無料でダウンロードできます。`).replace(/\s+/g, ' ').trim();
+    setMeta('description', metaSummary.slice(0, 150));
+    setMeta('og:title', `${m.title || m.filename} | ソザイノ`, 'property');
+    setMeta('og:description', metaSummary.slice(0, 150), 'property');
+    setMeta('og:image', new URL(imgPath, window.location.href).href, 'property');
+    setCanonical(new URL(`download.html?id=${m.id}`, window.location.href).href);
 
     // パンくず
     document.getElementById('breadTitle').textContent = m.title || m.filename;
@@ -1337,8 +1174,6 @@ function startDownload() {
                 if (mBtn)      { mBtn.disabled = false; mBtn.textContent = '⬇ ダウンロード'; }
                 if (mSub)      mSub.textContent = 'WebP形式 / 無料・商用OK';
                 dlRunning = false;
-                // アンケートポップアップを表示
-                showSurveyPopup();
             }, 800);
         }
     }
@@ -1359,6 +1194,27 @@ function getCatLabel(large, sub) {
     return sub ? `${l.label} › ${s}` : l.label;
 }
 function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function setMeta(key, content, attr) {
+    attr = attr || 'name';
+    let el = document.head.querySelector(`meta[${attr}="${key}"]`);
+    if (!el) {
+        el = document.createElement('meta');
+        el.setAttribute(attr, key);
+        document.head.appendChild(el);
+    }
+    el.setAttribute('content', content);
+}
+
+function setCanonical(url) {
+    let el = document.head.querySelector('link[rel="canonical"]');
+    if (!el) {
+        el = document.createElement('link');
+        el.rel = 'canonical';
+        document.head.appendChild(el);
+    }
+    el.href = url;
+}
 
 // ===== クレジットコピー =====
 function copyCredit() {
@@ -1391,141 +1247,6 @@ function trackDownload(materialId) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'download-count', id: materialId })
     }).catch(() => {});
-}
-
-// ===== アンケート共通：30分タイマー制御 =====
-const SURVEY_INTERVAL_MS = 30 * 60 * 1000; // 30分
-
-function surveyAnsweredRecently() {
-    const last = localStorage.getItem('survey_last_answered');
-    if (!last) return false;
-    return (Date.now() - parseInt(last, 10)) < SURVEY_INTERVAL_MS;
-}
-
-function recordSurveyAnswer() {
-    localStorage.setItem('survey_last_answered', String(Date.now()));
-}
-
-// ===== アンケートポップアップ（スマホのみ） =====
-function showSurveyPopup() {
-    if (localStorage.getItem('sozaino_admin')) return; // 管理者は除外
-    if (window.innerWidth > 768) return; // PCはポップアップ不要
-    if (surveyAnsweredRecently()) return; // 30分以内に回答済みはスキップ
-    document.getElementById('surveyOverlay').classList.add('active');
-}
-
-function closeSurvey() {
-    document.getElementById('surveyOverlay').classList.remove('active');
-}
-
-function selectSurvey(el) {
-    document.querySelectorAll('.survey-choice').forEach(b => b.classList.remove('selected'));
-    el.classList.add('selected');
-    document.getElementById('surveySubmit').disabled = false;
-}
-
-function submitSurvey() {
-    const selected = document.querySelector('.survey-choice.selected');
-    if (!selected) return;
-    const params = new URLSearchParams(location.search);
-    const materialId = params.get('id');
-    if (!materialId) return;
-
-    const choice = selected.dataset.value;
-    document.getElementById('surveySubmit').disabled = true;
-
-    fetch('https://amazon-sale-api.bulibuli-mushi.workers.dev', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'survey-vote', materialId, choice })
-    })
-    .then(r => r.json())
-    .then(data => {
-        if (data.ok) {
-            recordSurveyAnswer();
-            document.getElementById('surveyContent').style.display = 'none';
-            document.getElementById('surveyDone').style.display = 'block';
-            setTimeout(closeSurvey, 2000);
-        }
-    })
-    .catch(() => { closeSurvey(); });
-}
-
-// オーバーレイ背景クリックで閉じる
-document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('menuToggle').addEventListener('click', () => {
-        document.getElementById('navMenu').classList.toggle('open');
-    });
-    document.getElementById('surveyOverlay').addEventListener('click', e => {
-        if (e.target === document.getElementById('surveyOverlay')) closeSurvey();
-    });
-
-    // サイドバーアンケート：管理者または30分以内に回答済みならDLボタン即解放
-    if (localStorage.getItem('sozaino_admin') || surveyAnsweredRecently()) {
-        unlockDlBtn();
-        const box = document.getElementById('sidebarSurveyBox');
-        if (box) box.style.display = 'none';
-    }
-});
-
-// ===== サイドバーアンケート =====
-function selectSidebarSurvey(el) {
-    if (localStorage.getItem('sozaino_admin')) {
-        unlockDlBtn();
-        const box = document.getElementById('sidebarSurveyBox');
-        if (box) box.style.display = 'none';
-        return;
-    }
-    // 選択ビジュアル
-    document.querySelectorAll('.sidebar-survey-choice').forEach(b => b.classList.remove('selected'));
-    el.classList.add('selected');
-
-    // 選択肢をロック（連打防止）
-    document.getElementById('sidebarSurveyOptions').style.pointerEvents = 'none';
-
-    const params = new URLSearchParams(location.search);
-    const materialId = params.get('id');
-    const choice = el.dataset.value;
-
-    // バックグラウンドでKVに送信
-    if (materialId) {
-        fetch('https://amazon-sale-api.bulibuli-mushi.workers.dev', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ action: 'survey-vote', materialId, choice })
-        })
-        .then(r => r.json())
-        .then(data => { if (data.ok) recordSurveyAnswer(); })
-        .catch(() => {});
-    }
-
-    // DLボタンを解放
-    unlockDlBtn();
-
-    // アンケートをフェードアウトして非表示
-    const box = document.getElementById('sidebarSurveyBox');
-    if (box) {
-        box.style.transition = 'opacity .4s';
-        box.style.opacity = '0';
-        setTimeout(() => { box.style.display = 'none'; }, 400);
-    }
-}
-
-function unlockDlBtn() {
-    const btn = document.getElementById('dlBtn');
-    if (btn) {
-        btn.disabled = false;
-        btn.style.opacity = '1';
-        btn.style.cursor = 'pointer';
-    }
-}
-
-function lockSidebarSurvey(msg) {
-    // 後方互換用（ポップアップ側から呼ばれる場合）
-    const opts = document.getElementById('sidebarSurveyOptions');
-    const msgEl = document.getElementById('sidebarSurveyMsg');
-    if (opts)  { opts.style.pointerEvents = 'none'; opts.style.opacity = '.45'; }
-    if (msgEl) { msgEl.style.display = 'block'; msgEl.textContent = msg; }
 }
 
 // ===== SNS シェア機能 =====
@@ -1566,53 +1287,6 @@ function shareToLine() {
 }
 
 </script>
-
-<!-- ===== アンケートポップアップ ===== -->
-<div class="survey-overlay" id="surveyOverlay">
-    <div class="survey-modal">
-        <div id="surveyContent">
-            <p class="survey-title">どのシーンで使いますか？</p>
-            <p class="survey-sub">今後の素材制作の参考にさせてください</p>
-            <div class="survey-choices">
-                <button class="survey-choice" data-value="youtube" onclick="selectSurvey(this)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="2" y="5" width="20" height="14" rx="2"/>
-                        <polygon points="10,9 16,12 10,15" fill="currentColor" stroke="none"/>
-                    </svg>
-                    YouTube・動画
-                </button>
-                <button class="survey-choice" data-value="blog" onclick="selectSurvey(this)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"/>
-                    </svg>
-                    ブログ
-                </button>
-                <button class="survey-choice" data-value="sns" onclick="selectSurvey(this)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
-                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
-                    </svg>
-                    SNS
-                </button>
-                <button class="survey-choice" data-value="other" onclick="selectSurvey(this)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10"/>
-                        <line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
-                    </svg>
-                    その他
-                </button>
-            </div>
-            <button class="survey-submit" id="surveySubmit" disabled onclick="submitSurvey()">回答する</button>
-            <button class="survey-skip" onclick="closeSurvey()">スキップ</button>
-        </div>
-        <div id="surveyDone" class="survey-done" style="display:none;">
-            <div class="survey-done-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-            <div class="survey-done-text">ありがとうございました！</div>
-            <div class="survey-done-sub">回答を記録しました</div>
-            <button class="survey-skip" style="margin-top:1rem;" onclick="closeSurvey()">閉じる</button>
-        </div>
-    </div>
-</div>
 
 <!-- モバイル固定ダウンロードバー -->
 <div class="mobile-dl-bar" id="mobileDlBar">

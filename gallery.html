@@ -397,7 +397,6 @@
             .masonry { column-count: 2; }
         }
     </style>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2687113603921668" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -701,6 +700,7 @@ function applyFilters() {
         if (q) {
             const hit = (m.title||'').toLowerCase().includes(q)
                       || (m.description||'').toLowerCase().includes(q)
+                      || (m.usage_guide?.summary||'').toLowerCase().includes(q)
                       || (m.tags||[]).some(t => t.toLowerCase().includes(q));
             if (!hit) return false;
         }
@@ -770,8 +770,7 @@ function createCard(m, idx) {
     const catLabel = getCatLabel(m.largeCategory, m.category);
 
     // ワイドカード判定：WIDE_INTERVALの倍数かつWIDE_CATEGORIESのカテゴリ
-    const isWide = (idx > 0) && (idx % WIDE_INTERVAL === 0);
-                   WIDE_CATEGORIES.includes(m.largeCategory);
+    const isWide = (idx > 0) && (idx % WIDE_INTERVAL === 0) && WIDE_CATEGORIES.includes(m.largeCategory);
 
     const a = document.createElement('a');
     a.className = isWide ? 'masonry-item wide-card' : 'masonry-item';

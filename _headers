@@ -1,0 +1,11 @@
+/admin.html
+  X-Robots-Tag: noindex, nofollow, noarchive
+
+/*.py
+  X-Robots-Tag: noindex, nofollow, noarchive
+
+/*.bak_*
+  X-Robots-Tag: noindex, nofollow, noarchive
+
+/adsense-remediation-report.json
+  X-Robots-Tag: noindex, nofollow, noarchive
