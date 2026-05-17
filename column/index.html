@@ -29,8 +29,6 @@
             color: var(--text);
             background-color: var(--bg);
         }
-
-        /* ===== HEADER ===== */
         header {
             background: var(--header-bg);
             position: sticky; top:0; z-index:100;
@@ -42,62 +40,25 @@
             padding:.85rem 2rem;
             display:flex; justify-content:space-between; align-items:center;
         }
-        .logo {
-            font-size:1.3rem; font-weight:700;
-            color: var(--header-text); text-decoration:none;
-        }
+        .logo { font-size:1.3rem; font-weight:700; color: var(--header-text); text-decoration:none; }
         .logo span { color: var(--primary); }
         .nav-links { display:flex; gap:1.8rem; }
-        .nav-links a {
-            color: var(--header-text-muted); text-decoration:none;
-            font-size:.92rem; font-weight:500;
-            transition: color .2s;
-        }
+        .nav-links a { color: var(--header-text-muted); text-decoration:none; font-size:.92rem; font-weight:500; transition: color .2s; }
         .nav-links a:hover { color: var(--primary); }
         .menu-toggle { display:none; background:none; border:none; color: var(--header-text); font-size:1.4rem; cursor:pointer; }
-
-        /* ===== HERO ===== */
         .page-hero {
             background: linear-gradient(180deg, var(--primary-bg) 0%, #ffffff 100%);
             padding: 3.5rem 2rem 2.5rem;
             text-align: center;
         }
-        .breadcrumb {
-            max-width: 1000px; margin: 0 auto 1.2rem;
-            font-size: .85rem; color: var(--muted);
-            text-align: left;
-        }
+        .breadcrumb { max-width: 1000px; margin: 0 auto 1.2rem; font-size: .85rem; color: var(--muted); text-align: left; }
         .breadcrumb a { color: var(--muted); text-decoration: none; }
         .breadcrumb a:hover { color: var(--primary); }
         .breadcrumb .sep { margin: 0 .4rem; opacity: .5; }
-
-        .page-hero h1 {
-            font-size: clamp(1.8rem, 4vw, 2.4rem);
-            font-weight: 700;
-            margin-bottom: .8rem;
-            color: var(--text);
-        }
-        .page-hero p {
-            font-size: 1rem;
-            color: var(--muted);
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.8;
-        }
-
-        /* ===== ARTICLE LIST ===== */
-        main {
-            max-width: 1000px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-        }
-
-        .article-list {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-        }
-
+        .page-hero h1 { font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 700; margin-bottom: .8rem; color: var(--text); }
+        .page-hero p { font-size: 1rem; color: var(--muted); max-width: 600px; margin: 0 auto; line-height: 1.8; }
+        main { max-width: 1000px; margin: 2rem auto; padding: 0 2rem; }
+        .article-list { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
         .article-card {
             background: var(--surface);
             border-radius: 12px;
@@ -111,98 +72,35 @@
             gap: 1.5rem;
             align-items: center;
         }
-        .article-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(13,148,136,.10);
-        }
-
+        .article-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(13,148,136,.10); }
         .article-card-icon {
             width: 100px; height: 100px;
             border-radius: 16px;
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary2) 100%);
             display: flex; align-items: center; justify-content: center;
-            color: #fff;
-            flex-shrink: 0;
+            color: #fff; flex-shrink: 0;
         }
-        .article-card-icon svg {
-            width: 44px;
-            height: 44px;
-        }
-
+        .article-card-icon svg { width: 44px; height: 44px; }
         .article-card-body { min-width: 0; }
-        .article-card-meta {
-            display: flex; gap: .8rem; align-items: center;
-            font-size: .78rem; color: var(--muted);
-            margin-bottom: .6rem;
-            flex-wrap: wrap;
-        }
-        .article-card-tag {
-            display: inline-block;
-            background: var(--primary-bg);
-            color: var(--primary);
-            padding: .15rem .7rem;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: .72rem;
-        }
-        .article-card-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            line-height: 1.5;
-            margin-bottom: .5rem;
-            color: var(--text);
-        }
-        .article-card-desc {
-            font-size: .9rem;
-            color: var(--muted);
-            line-height: 1.7;
-        }
-
-        /* ===== FOOTER ===== */
-        footer {
-            background: #1e293b;
-            color: rgba(255,255,255,.7);
-            margin-top: 4rem;
-            padding: 3rem 2rem;
-        }
+        .article-card-meta { display: flex; gap: .8rem; align-items: center; font-size: .78rem; color: var(--muted); margin-bottom: .6rem; flex-wrap: wrap; }
+        .article-card-tag { display: inline-block; background: var(--primary-bg); color: var(--primary); padding: .15rem .7rem; border-radius: 12px; font-weight: 600; font-size: .72rem; }
+        .article-card-title { font-size: 1.2rem; font-weight: 700; line-height: 1.5; margin-bottom: .5rem; color: var(--text); }
+        .article-card-desc { font-size: .9rem; color: var(--muted); line-height: 1.7; }
+        footer { background: #1e293b; color: rgba(255,255,255,.7); margin-top: 4rem; padding: 3rem 2rem; }
         .footer-content { max-width: 1200px; margin: 0 auto; }
-        .footer-links {
-            display: flex; gap: 2rem; flex-wrap: wrap;
-            margin-bottom: 1.5rem; padding-bottom: 1.5rem;
-            border-bottom: 1px solid rgba(255,255,255,.1);
-        }
-        .footer-links a {
-            color: rgba(255,255,255,.65);
-            text-decoration: none;
-            font-size: .85rem;
-            transition: color .2s;
-        }
+        .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,.1); }
+        .footer-links a { color: rgba(255,255,255,.65); text-decoration: none; font-size: .85rem; transition: color .2s; }
         .footer-links a:hover { color: var(--primary2); }
         .footer-info { font-size: .8rem; color: rgba(255,255,255,.4); }
-
-        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
             .navbar { padding: .85rem 1rem; }
             .menu-toggle { display: block; }
-            .nav-links {
-                display: none; position: absolute;
-                top: 100%; left: 0; right: 0;
-                background: var(--header-bg);
-                flex-direction: column; gap: 0;
-                padding: .5rem 0;
-                box-shadow: 0 4px 12px rgba(15,23,42,.08);
-                border-top: 1px solid var(--border);
-            }
+            .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--header-bg); flex-direction: column; gap: 0; padding: .5rem 0; box-shadow: 0 4px 12px rgba(15,23,42,.08); border-top: 1px solid var(--border); }
             .nav-links.open { display: flex; }
             .nav-links a { padding: .8rem 1.5rem; border-bottom: 1px solid var(--border); }
             .nav-links a:last-child { border-bottom: none; }
             main { padding: 0 1rem; }
-            .article-card {
-                grid-template-columns: 1fr;
-                padding: 1.5rem;
-                gap: 1rem;
-            }
+            .article-card { grid-template-columns: 1fr; padding: 1.5rem; gap: 1rem; }
             .article-card-icon { width: 64px; height: 64px; }
             .article-card-icon svg { width: 32px; height: 32px; }
             .article-card-title { font-size: 1.05rem; }
@@ -229,17 +127,99 @@
 
 <div class="page-hero">
     <div class="breadcrumb">
-        <a href="/">ホーム</a>
-        <span class="sep">›</span>
-        <span>コラム</span>
+        <a href="/">ホーム</a><span class="sep">›</span><span>コラム</span>
     </div>
     <h1>コラム</h1>
     <p>画像フォーマット、AI生成画像と著作権、ブログでの素材活用など、Web画像にまつわるトピックをソザイノ編集部がお届けします。</p>
 </div>
 
 <main>
-
 <div class="article-list">
+
+    <a href="ai-material-howto.html" class="article-card">
+        <div class="article-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"></path>
+            </svg>
+        </div>
+        <div class="article-card-body">
+            <div class="article-card-meta">
+                <span class="article-card-tag">AI素材</span>
+                <span>2026年5月17日</span>
+            </div>
+            <div class="article-card-title">AI生成素材のブログ活用術。選び方・使い方・注意点をまとめて解説</div>
+            <div class="article-card-desc">AI生成画像をブログやSNSで活用するための実践的な使い方を解説。素材の選び方、アイキャッチへの組み込み方、利用時の注意点まで、ブログ運営者目線でまとめます。</div>
+        </div>
+    </a>
+
+    <a href="commercial-use-guide.html" class="article-card">
+        <div class="article-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="9" y1="13" x2="15" y2="13"></line>
+                <line x1="9" y1="17" x2="15" y2="17"></line>
+            </svg>
+        </div>
+        <div class="article-card-body">
+            <div class="article-card-meta">
+                <span class="article-card-tag">利用規約</span>
+                <span>2026年5月17日</span>
+            </div>
+            <div class="article-card-title">フリー素材の商用利用、実は注意が必要なケースとは？確認すべき3つのポイント</div>
+            <div class="article-card-desc">「商用利用OK」のフリー素材でも注意が必要なケースがあります。利用規約の読み方、NGになりやすいパターン、安全に使うための確認ポイントを解説します。</div>
+        </div>
+    </a>
+
+    <a href="sns-image-size-guide.html" class="article-card">
+        <div class="article-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+            </svg>
+        </div>
+        <div class="article-card-body">
+            <div class="article-card-meta">
+                <span class="article-card-tag">画像・デザイン</span>
+                <span>2026年5月17日</span>
+            </div>
+            <div class="article-card-title">SNS投稿の画像サイズ完全ガイド。X・Instagram・LINE・Facebook対応表</div>
+            <div class="article-card-desc">X・Instagram・LINE・Facebookそれぞれの推奨画像サイズを一覧で整理。SNS投稿で画像が切れたり粗くなったりしないための設定ポイントを解説します。</div>
+        </div>
+    </a>
+
+    <a href="webp-seo-effect.html" class="article-card">
+        <div class="article-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+            </svg>
+        </div>
+        <div class="article-card-body">
+            <div class="article-card-meta">
+                <span class="article-card-tag">SEO・画像最適化</span>
+                <span>2026年5月17日</span>
+            </div>
+            <div class="article-card-title">WebP素材がSEOに効く理由。ページ速度・Core Web Vitals・検索順位への影響を解説</div>
+            <div class="article-card-desc">WebP形式の画像がSEOに与える影響を解説。ページ読み込み速度の改善からCore Web Vitalsのスコアアップ、検索順位への効果まで、ブログ運営者が知っておきたい知識をまとめます。</div>
+        </div>
+    </a>
+
+    <a href="free-material-selection-guide.html" class="article-card">
+        <div class="article-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+        </div>
+        <div class="article-card-body">
+            <div class="article-card-meta">
+                <span class="article-card-tag">素材活用</span>
+                <span>2026年5月17日</span>
+            </div>
+            <div class="article-card-title">ブログ用フリー素材の選び方。失敗しないための5つの確認ポイント</div>
+            <div class="article-card-desc">ブログのアイキャッチや挿入画像に使うフリー素材を選ぶときの5つの確認ポイントを解説。商用利用・画質・ファイル形式・ライセンスの読み方まで、初心者でも迷わない選び方をまとめます。</div>
+        </div>
+    </a>
 
     <a href="eyecatch-size-guide.html" class="article-card">
         <div class="article-card-icon">
@@ -295,7 +275,6 @@
     </a>
 
 </div>
-
 </main>
 
 <footer>
@@ -314,9 +293,7 @@
                 <img src="https://b.blogmura.com/design/freesozai/88_31.gif" width="88" height="31" border="0" alt="にほんブログ村 デザインブログ フリー素材へ">
             </a>
         </div>
-        <div class="footer-info">
-            <p>&copy; 2026 ソザイノ (SOZAINO). All rights reserved.</p>
-        </div>
+        <div class="footer-info"><p>&copy; 2026 ソザイノ (SOZAINO). All rights reserved.</p></div>
     </div>
 </footer>
 
@@ -324,10 +301,7 @@
     const menuToggle = document.getElementById('menuToggle');
     const navMenu = document.getElementById('navMenu');
     menuToggle.addEventListener('click', () => navMenu.classList.toggle('open'));
-    navMenu.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => navMenu.classList.remove('open'));
-    });
+    navMenu.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => navMenu.classList.remove('open')); });
 </script>
-
 </body>
 </html>
