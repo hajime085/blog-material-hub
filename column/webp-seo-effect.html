@@ -1,182 +1,329 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebP素材がSEOに効く理由。ページ速度・Core Web Vitals・検索順位への影響を解説 | ソザイノ</title>
-    <meta name="description" content="WebP形式の画像がSEOに与える影響を解説。ページ読み込み速度の改善からCore Web Vitalsのスコアアップ、検索順位への効果まで、ブログ運営者が知っておきたい知識をまとめます。">
-    <link rel="canonical" href="https://sozaino.com/column/webp-seo-effect.html">
-    <meta property="og:type" content="article">
-    <meta property="og:title" content="WebP素材がSEOに効く理由。ページ速度・Core Web Vitals・検索順位への影響を解説">
-    <meta property="og:description" content="WebP形式の画像がSEOに与える影響を解説。ページ読み込み速度の改善からCore Web Vitalsのスコアアップ、検索順位への効果まで、ブログ運営者が知っておきたい知識をまとめます。">
-    <meta property="og:url" content="https://sozaino.com/column/webp-seo-effect.html">
-    <meta property="og:site_name" content="ソザイノ (SOZAINO)">
-    <style>
-        :root{--primary:#0d9488;--primary2:#14b8a6;--primary-bg:#f0fdfa;--text:#0f172a;--muted:#64748b;--border:#e2e8f0;--bg:#fafafa;--surface:#ffffff;--header-bg:#ffffff;--header-text:#0f172a;--header-text-muted:#64748b;}
-        *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
-        body{font-family:'Noto Sans JP',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.85;color:var(--text);background-color:var(--bg);}
-        header{background:var(--header-bg);position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border);box-shadow:0 1px 3px rgba(15,23,42,.04);}
-        .navbar{max-width:1200px;margin:0 auto;padding:.85rem 2rem;display:flex;justify-content:space-between;align-items:center;}
-        .logo{font-size:1.3rem;font-weight:700;color:var(--header-text);text-decoration:none;}.logo span{color:var(--primary);}
-        .nav-links{display:flex;gap:1.8rem;}.nav-links a{color:var(--header-text-muted);text-decoration:none;font-size:.92rem;font-weight:500;transition:color .2s;}.nav-links a:hover{color:var(--primary);}
-        .menu-toggle{display:none;background:none;border:none;color:var(--header-text);font-size:1.4rem;cursor:pointer;}
-        .article-hero{background:linear-gradient(180deg,var(--primary-bg) 0%,#ffffff 100%);padding:3rem 2rem 2rem;}
-        .breadcrumb{max-width:800px;margin:0 auto 1.2rem;font-size:.85rem;color:var(--muted);}.breadcrumb a{color:var(--muted);text-decoration:none;}.breadcrumb a:hover{color:var(--primary);}.breadcrumb .sep{margin:0 .4rem;opacity:.5;}
-        .article-meta-top{max-width:800px;margin:0 auto;display:flex;gap:1rem;align-items:center;font-size:.82rem;color:var(--muted);margin-bottom:1rem;}
-        .article-tag{display:inline-block;background:var(--primary-bg);color:var(--primary);padding:.2rem .8rem;border-radius:12px;font-weight:600;font-size:.78rem;}
-        h1.article-title{max-width:800px;margin:0 auto;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;line-height:1.4;letter-spacing:-.01em;color:var(--text);}
-        .article-author{max-width:800px;margin:1.5rem auto 0;display:flex;align-items:center;gap:.8rem;font-size:.85rem;color:var(--muted);}
-        .author-icon{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--primary2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.9rem;flex-shrink:0;}
-        article{max-width:800px;margin:2rem auto;padding:2.5rem 2rem;background:var(--surface);border-radius:12px;box-shadow:0 1px 3px rgba(15,23,42,.04);}
-        article p{margin-bottom:1.4rem;font-size:1rem;line-height:1.9;}
-        article h2{font-size:1.5rem;font-weight:700;margin:2.5rem 0 1.2rem;padding-bottom:.5rem;border-bottom:2px solid var(--primary);color:var(--text);line-height:1.4;}article h2:first-of-type{margin-top:0;}
-        article h3{font-size:1.15rem;font-weight:700;margin:2rem 0 .8rem;color:var(--text);padding-left:.8rem;border-left:4px solid var(--primary);line-height:1.5;}
-        article ul,article ol{margin:0 0 1.4rem 1.5rem;}article li{margin-bottom:.5rem;line-height:1.85;}
-        article a{color:var(--primary);text-decoration:underline;text-underline-offset:2px;}article a:hover{opacity:.75;}
-        article strong{font-weight:700;color:var(--text);}
-        article table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.92rem;}
-        article th,article td{padding:.8rem 1rem;text-align:left;border-bottom:1px solid var(--border);}
-        article th{background:var(--primary-bg);color:var(--text);font-weight:700;}article tbody tr:hover{background:#fafafa;}
-        .info-box{background:var(--primary-bg);border-left:4px solid var(--primary);padding:1.2rem 1.4rem;margin:1.5rem 0;border-radius:4px;}.info-box p:last-child{margin-bottom:0;}.info-box-title{font-weight:700;color:var(--primary);margin-bottom:.5rem;}
-        .material-feature{margin:1.8rem 0;background:#fafafa;border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:transform .2s,box-shadow .2s;}.material-feature:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(15,23,42,.08);}
-        .material-feature a{display:block;text-decoration:none;color:inherit;}
-        .material-feature-img{width:100%;aspect-ratio:16/9;background:#f0fdfa;object-fit:contain;padding:1rem;display:block;}
-        .material-feature-caption{padding:.9rem 1.2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;}
-        .material-feature-text{flex:1;min-width:0;}.material-feature-title{font-size:.92rem;font-weight:600;color:var(--text);margin-bottom:.15rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}.material-feature-sub{font-size:.78rem;color:var(--muted);}.material-feature-arrow{flex-shrink:0;color:var(--primary);font-size:.85rem;font-weight:600;white-space:nowrap;}
-        .article-footer{margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border);}.article-footer h3{font-size:1.1rem;margin-bottom:1rem;border:none;padding:0;}
-        .related-articles{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-bottom:2rem;}
-        .related-article-card{display:block;padding:1rem 1.2rem;border:1px solid var(--border);border-radius:8px;text-decoration:none;color:inherit;transition:all .2s;}.related-article-card:hover{border-color:var(--primary);transform:translateY(-2px);}
-        .related-article-card .label{font-size:.72rem;color:var(--primary);font-weight:700;margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.04em;}.related-article-card .title{font-size:.92rem;font-weight:600;color:var(--text);line-height:1.5;}
-        .gallery-cta{background:linear-gradient(135deg,var(--primary) 0%,var(--primary2) 100%);border-radius:12px;padding:1.8rem;text-align:center;margin-top:2rem;color:#fff;}
-        .gallery-cta h3{color:#fff!important;font-size:1.15rem;margin-bottom:.5rem;border:none!important;padding:0!important;}.gallery-cta p{color:rgba(255,255,255,.9);margin-bottom:1.2rem;font-size:.92rem;}
-        .gallery-cta-btn{display:inline-block;background:#fff;color:var(--primary);padding:.7rem 1.6rem;border-radius:8px;text-decoration:none;font-weight:700;font-size:.92rem;box-shadow:0 3px 12px rgba(0,0,0,.15);transition:transform .2s,box-shadow .2s;}.gallery-cta-btn:hover{transform:translateY(-1px);box-shadow:0 5px 16px rgba(0,0,0,.2);}
-        footer{background:#1e293b;color:rgba(255,255,255,.7);margin-top:4rem;padding:3rem 2rem;}.footer-content{max-width:1200px;margin:0 auto;}
-        .footer-links{display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(255,255,255,.1);}.footer-links a{color:rgba(255,255,255,.65);text-decoration:none;font-size:.85rem;transition:color .2s;}.footer-links a:hover{color:var(--primary2);}
-        .footer-info{font-size:.8rem;color:rgba(255,255,255,.4);}
-        @media(max-width:768px){.navbar{padding:.85rem 1rem;}.menu-toggle{display:block;}.nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:var(--header-bg);flex-direction:column;gap:0;padding:.5rem 0;box-shadow:0 4px 12px rgba(15,23,42,.08);border-top:1px solid var(--border);}.nav-links.open{display:flex;}.nav-links a{padding:.8rem 1.5rem;border-bottom:1px solid var(--border);}.nav-links a:last-child{border-bottom:none;}.article-hero{padding:2rem 1rem 1.5rem;}article{margin:1rem;padding:1.8rem 1.4rem;}article h2{font-size:1.3rem;}article h3{font-size:1.05rem;}}
-    </style>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"WebP素材がSEOに効く理由。ページ速度・Core Web Vitals・検索順位への影響を解説","description":"WebP形式の画像がSEOに与える影響を解説。ページ読み込み速度の改善からCore Web Vitalsのスコアアップ、検索順位への効果まで、ブログ運営者が知っておきたい知識をまとめます。","image":"https://sozaino.com/favicon-192.png","datePublished":"2026-05-17","dateModified":"2026-05-17","author":{"@type":"Organization","name":"ソザイノ編集部"},"publisher":{"@type":"Organization","name":"ソザイノ (SOZAINO)","logo":{"@type":"ImageObject","url":"https://sozaino.com/favicon-192.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://sozaino.com/column/webp-seo-effect.html"}}</script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2687113603921668" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebP素材がSEOに効く理由。ページ速度・Core Web Vitals・検索順位への影響を徹底解説 | ソザイノ</title>
+  <meta name="description" content="WebP形式の画像がSEOに与える影響を徹底解説。ページ読み込み速度の改善からCore Web Vitalsのスコアアップ、LCP・CLS・INPへの具体的な効果、WordPressでの導入方法まで、ブログ運営者が知っておきたい知識をまとめます。">
+  <link rel="canonical" href="https://sozaino.com/column/webp-seo-effect.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="WebP素材がSEOに効く理由。ページ速度・Core Web Vitals・検索順位への影響を徹底解説 | ソザイノ">
+  <meta property="og:description" content="WebP形式の画像がSEOに与える影響を徹底解説。Core Web VitalsのLCP・CLS・INPへの効果、WordPressでの導入方法まで解説します。">
+  <meta property="og:url" content="https://sozaino.com/column/webp-seo-effect.html">
+  <meta property="og:site_name" content="ソザイノ (SOZAINO)">
+  <style>
+    :root{--primary:#0d9488;--primary2:#14b8a6;--primary-bg:#f0fdfa;--text:#0f172a;--muted:#64748b;--border:#e2e8f0;--bg:#fafafa;--surface:#ffffff;}
+    *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+    body{font-family:'Noto Sans JP',-apple-system,sans-serif;line-height:1.85;color:var(--text);background:var(--bg);}
+    header{background:#fff;position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border);box-shadow:0 1px 3px rgba(15,23,42,.04);}
+    .navbar{max-width:1200px;margin:0 auto;padding:.85rem 2rem;display:flex;justify-content:space-between;align-items:center;}
+    .nav-logo{font-size:1.25rem;font-weight:700;color:var(--primary);text-decoration:none;letter-spacing:-.5px;}
+    .nav-logo span{color:var(--text);}
+    .nav-links{display:flex;gap:1.5rem;list-style:none;}
+    .nav-links a{color:var(--muted);text-decoration:none;font-size:.875rem;transition:color .2s;}
+    .nav-links a:hover{color:var(--primary);}
+    .hamburger{display:none;background:none;border:none;cursor:pointer;padding:.5rem;}
+    .hamburger span{display:block;width:22px;height:2px;background:var(--text);margin:5px 0;transition:.3s;}
+    @media(max-width:768px){.nav-links{display:none;}.hamburger{display:block;}}
+    main{max-width:800px;margin:0 auto;padding:2.5rem 1.5rem 4rem;}
+    .breadcrumb{font-size:.8rem;color:var(--muted);margin-bottom:1.5rem;}
+    .breadcrumb a{color:var(--muted);text-decoration:none;}
+    .breadcrumb a:hover{color:var(--primary);}
+    .article-meta{display:flex;gap:1rem;align-items:center;margin-bottom:1rem;flex-wrap:wrap;}
+    .tag{background:var(--primary-bg);color:var(--primary);font-size:.75rem;padding:.2rem .7rem;border-radius:99px;font-weight:600;}
+    .date{font-size:.8rem;color:var(--muted);}
+    h1{font-size:1.7rem;font-weight:800;line-height:1.4;margin-bottom:1.5rem;color:var(--text);}
+    .author-box{display:flex;align-items:center;gap:.75rem;padding:.85rem 1rem;background:var(--primary-bg);border-radius:.5rem;margin-bottom:2rem;font-size:.85rem;}
+    .author-icon{width:36px;height:36px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;flex-shrink:0;}
+    .author-name{font-weight:700;color:var(--text);}
+    .author-desc{color:var(--muted);font-size:.8rem;}
+    p{margin-bottom:1.25rem;font-size:1rem;}
+    h2{font-size:1.25rem;font-weight:700;margin:2.5rem 0 1rem;padding-left:.75rem;border-left:3px solid var(--primary);}
+    h3{font-size:1.05rem;font-weight:700;margin:1.75rem 0 .75rem;}
+    ul,ol{margin:0 0 1.25rem 1.5rem;}
+    li{margin-bottom:.4rem;}
+    table{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.9rem;}
+    th{background:var(--primary-bg);color:var(--primary);padding:.6rem .85rem;text-align:left;border:1px solid var(--border);}
+    td{padding:.6rem .85rem;border:1px solid var(--border);vertical-align:top;}
+    .notice{background:#fffbeb;border-left:3px solid #f59e0b;padding:1rem 1.25rem;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;font-size:.9rem;}
+    .notice strong{color:#b45309;}
+    .tip{background:var(--primary-bg);border-left:3px solid var(--primary);padding:1rem 1.25rem;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;font-size:.9rem;}
+    .material-card{border:1px solid var(--border);border-radius:.75rem;overflow:hidden;margin:1.75rem 0;display:flex;align-items:stretch;background:var(--surface);}
+    .material-card img{width:200px;height:133px;object-fit:cover;flex-shrink:0;}
+    .material-card-body{padding:.85rem 1rem;display:flex;flex-direction:column;justify-content:center;gap:.35rem;}
+    .material-card-label{font-size:.7rem;color:var(--muted);}
+    .material-card-title{font-size:.9rem;font-weight:700;}
+    .material-card-link{font-size:.8rem;color:var(--primary);text-decoration:none;}
+    .related-columns{margin:2.5rem 0 0;}
+    .related-columns h3{font-size:1rem;font-weight:700;margin-bottom:.85rem;}
+    .related-list{display:flex;flex-direction:column;gap:.6rem;}
+    .related-item{display:flex;gap:.5rem;align-items:flex-start;text-decoration:none;color:var(--text);font-size:.9rem;}
+    .related-item:hover{color:var(--primary);}
+    .related-tag{background:var(--primary-bg);color:var(--primary);font-size:.7rem;padding:.15rem .5rem;border-radius:99px;white-space:nowrap;margin-top:.15rem;}
+    .cta-box{background:var(--primary);color:#fff;border-radius:.75rem;padding:1.75rem;text-align:center;margin:2.5rem 0 0;}
+    .cta-box p{color:rgba(255,255,255,.85);margin-bottom:1rem;font-size:.95rem;}
+    .cta-box a{display:inline-block;background:#fff;color:var(--primary);font-weight:700;padding:.65rem 1.75rem;border-radius:99px;text-decoration:none;font-size:.95rem;}
+    footer{background:#0f172a;color:#94a3b8;padding:2rem 1.5rem;font-size:.82rem;}
+    .footer-inner{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:1rem;align-items:center;}
+    .footer-links{display:flex;flex-wrap:wrap;gap:.75rem 1.25rem;justify-content:center;}
+    .footer-links a{color:#94a3b8;text-decoration:none;}
+    .footer-links a:hover{color:#fff;}
+    .blogmura{margin-top:.5rem;}
+  </style>
 </head>
 <body>
 <header>
-    <div class="navbar">
-        <a href="/" class="logo">ソザイノ<span>.</span></a>
-        <button class="menu-toggle" id="menuToggle">☰</button>
-        <nav class="nav-links" id="navMenu">
-            <a href="/">ホーム</a><a href="../gallery.html">素材ギャラリー</a><a href="../about.html">ソザイノについて</a><a href="../process.html">素材ができるまで</a><a href="../column/">コラム</a><a href="../faq.html">よくあるご質問</a><a href="../contact.html">お問い合わせ</a>
-        </nav>
-    </div>
+  <nav class="navbar">
+    <a href="https://sozaino.com/" class="nav-logo">ソザイノ<span>.</span></a>
+    <button class="hamburger" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="https://sozaino.com/">ホーム</a></li>
+      <li><a href="https://sozaino.com/gallery.html">素材ギャラリー</a></li>
+      <li><a href="https://sozaino.com/about.html">ソザイノについて</a></li>
+      <li><a href="https://sozaino.com/process.html">素材ができるまで</a></li>
+      <li><a href="https://sozaino.com/column/">コラム</a></li>
+      <li><a href="https://sozaino.com/faq.html">よくあるご質問</a></li>
+      <li><a href="https://sozaino.com/contact.html">お問い合わせ</a></li>
+    </ul>
+  </nav>
 </header>
 
-<div class="article-hero">
-    <div class="breadcrumb"><a href="/">ホーム</a><span class="sep">›</span><a href="index.html">コラム</a><span class="sep">›</span><span>WebP素材のSEO効果</span></div>
-    <div class="article-meta-top"><span class="article-tag">SEO・画像最適化</span><span>公開日：2026年5月17日</span><span>最終更新：2026年5月17日</span></div>
-    <h1 class="article-title">WebP素材がSEOに効く理由。ページ速度・Core Web Vitals・検索順位への影響を解説</h1>
-    <div class="article-author">
-        <div class="author-icon">編</div>
-        <div><strong style="color:var(--text);">ソザイノ編集部</strong><br><span style="font-size:.78rem;">高品質WebP素材の配信を通じて、Web画像の最適化をサポートしています。</span></div>
+<main>
+  <div class="breadcrumb">
+    <a href="https://sozaino.com/">ホーム</a> ›
+    <a href="https://sozaino.com/column/index.html">コラム</a> ›
+    WebP素材のSEO効果
+  </div>
+
+  <div class="article-meta">
+    <span class="tag">SEO・画像最適化</span>
+    <span class="date">公開日：2026年5月16日</span>
+    <span class="date">最終更新：2026年5月16日</span>
+  </div>
+
+  <h1>WebP素材がSEOに効く理由。ページ速度・Core Web Vitals・検索順位への影響を徹底解説</h1>
+
+  <div class="author-box">
+    <div class="author-icon">編</div>
+    <div>
+      <div class="author-name">ソザイノ編集部</div>
+      <div class="author-desc">高品質WebP素材の配信を通じて、Web画像の最適化をサポートしています。</div>
     </div>
-</div>
+  </div>
 
-<article>
+  <p>「WebPにするとSEOに良い」という話を聞いたことがある方も多いと思います。しかし、具体的にどんな仕組みで検索順位に影響するのかを理解している方は少ないかもしれません。</p>
 
-<p>「WebPにするとSEOに良い」という話を聞いたことがある方も多いと思いますが、具体的にどんな仕組みで検索順位に影響するのかを理解している方は少ないかもしれません。本記事では、WebP形式がSEOに与える影響を、Googleの評価指標と合わせて解説します。</p>
+  <p>本記事では、WebP形式がSEOに与える影響を、Googleの評価指標であるCore Web Vitalsと合わせて解説します。「なんとなくWebPが良いらしい」という理解から、「なぜ・どのくらい・何に効くのか」まで具体的に把握できるよう整理しました。</p>
 
-<h2>画像の重さがページ速度に直結する</h2>
+  <h2>画像の重さがページ速度に直結する</h2>
 
-<p>Webページの読み込み時間のうち、画像が占める割合は非常に大きいです。テキストや HTMLファイル自体は数KB程度ですが、JPEGやPNGの画像は1枚で数百KBから数MBになることもあります。</p>
+  <p>Webページの読み込み時間のうち、画像が占める割合は非常に大きいです。テキストやHTMLファイル自体は数KB程度ですが、JPEGやPNGの画像は1枚で数百KBから数MBになることもあります。</p>
 
-<p>1記事に10枚の画像があり、平均500KBだとすると合計5MBの転送量が発生します。WebPで同じ画像を用意できれば、平均300KB程度に抑えられ、合計3MBまで削減できます。この差が体感速度として表れ、読者の離脱率にも影響します。</p>
+  <p>たとえば1記事に10枚の画像があり、平均500KBだとすると合計5MBの転送量が発生します。WebPで同じ画像を用意できれば、平均300KB程度に抑えられ、合計3MBまで削減できます。この約40%の差が体感速度として表れ、読者の離脱率にも影響します。</p>
 
-<!-- 素材1 -->
-<div class="material-feature">
-    <a href="../download.html?id=505">
-        <img class="material-feature-img" src="../assets/materials/home/home_026.webp" alt="ソザイノの素材サンプル" loading="lazy">
-        <div class="material-feature-caption"><div class="material-feature-text"><div class="material-feature-title">素材サンプル（home_026）</div><div class="material-feature-sub">ソザイノで無料ダウンロード可能</div></div><div class="material-feature-arrow">詳細を見る →</div></div>
-    </a>
-</div>
+  <p>Googleの調査では、ページの読み込みが3秒を超えると約53%のモバイルユーザーが離脱するというデータがあります。画像の軽量化は、読者を逃さないための地味だが確実に効く施策です。</p>
 
-<h2>Core Web VitalsとWebPの関係</h2>
+  <div class="material-card">
+    <img src="https://sozaino.com/assets/materials/home/home_026.webp" alt="ホーム素材サンプル home_026" width="200" height="133" loading="lazy">
+    <div class="material-card-body">
+      <div class="material-card-label">ソザイノの素材サンプル</div>
+      <div class="material-card-title">素材サンプル（home_026）</div>
+      <a href="https://sozaino.com/download.html?id=505" class="material-card-link">無料ダウンロード →</a>
+    </div>
+  </div>
 
-<p>GoogleはCore Web Vitals（コアウェブバイタル）という指標をもとにページの品質を評価しており、検索順位にも影響します。この中で特に画像と関係が深いのが<strong>LCP（Largest Contentful Paint）</strong>です。</p>
+  <h2>Core Web VitalsとWebPの関係</h2>
 
-<h3>LCP（最大コンテンツの描画）とは</h3>
+  <p>GoogleはCore Web Vitals（コアウェブバイタル）という指標をもとにページの品質を評価しており、検索順位にも影響します。3つの主要指標のうち、画像と特に関係が深いのが<strong>LCP</strong>と<strong>CLS</strong>です。</p>
 
-<p>LCPは、ページ内で最も大きな要素が表示されるまでの時間を測る指標です。多くのブログでは、アイキャッチ画像がページ内で最大の要素になるため、アイキャッチの読み込み速度がLCPに直結します。</p>
+  <table>
+    <tr>
+      <th>指標</th>
+      <th>意味</th>
+      <th>良好</th>
+      <th>要改善</th>
+      <th>不良</th>
+    </tr>
+    <tr>
+      <td><strong>LCP</strong></td>
+      <td>最大コンテンツの描画時間</td>
+      <td>2.5秒以内</td>
+      <td>2.5〜4.0秒</td>
+      <td>4.0秒以上</td>
+    </tr>
+    <tr>
+      <td><strong>INP</strong></td>
+      <td>操作への応答速度</td>
+      <td>200ms以内</td>
+      <td>200〜500ms</td>
+      <td>500ms以上</td>
+    </tr>
+    <tr>
+      <td><strong>CLS</strong></td>
+      <td>レイアウトのズレ量</td>
+      <td>0.1以下</td>
+      <td>0.1〜0.25</td>
+      <td>0.25以上</td>
+    </tr>
+  </table>
 
-<p>Googleの推奨値はLCPが2.5秒以内です。大きなJPEG画像を使っていると、低速回線のユーザーではこの基準を超えてしまうことがあります。WebPで画像を軽量化することはLCPの改善に直接つながります。</p>
+  <h3>LCP（最大コンテンツの描画）とWebP</h3>
 
-<table>
-    <thead><tr><th>指標</th><th>良好</th><th>要改善</th><th>不良</th></tr></thead>
-    <tbody>
-        <tr><td>LCP</td><td>2.5秒以内</td><td>2.5〜4.0秒</td><td>4.0秒以上</td></tr>
-        <tr><td>FID/INP</td><td>200ms以内</td><td>200〜500ms</td><td>500ms以上</td></tr>
-        <tr><td>CLS</td><td>0.1以下</td><td>0.1〜0.25</td><td>0.25以上</td></tr>
-    </tbody>
-</table>
+  <p>LCPは、ページ内で最も大きな要素が表示されるまでの時間を測る指標です。多くのブログでは、アイキャッチ画像がページ内で最大の要素になるため、<strong>アイキャッチの読み込み速度がLCPに直結</strong>します。</p>
 
-<h3>CLSにも注意が必要</h3>
+  <p>Googleの推奨値はLCPが2.5秒以内です。大きなJPEG画像を使っていると、低速回線のユーザーではこの基準を超えてしまうことがあります。WebPで画像を軽量化することはLCPの改善に直接つながります。同じ画質でJPEGより25〜35%軽くなるWebPは、LCP改善の最もコストパフォーマンスが高い施策のひとつです。</p>
 
-<p>CLS（Cumulative Layout Shift）は、ページ読み込み中にコンテンツが予期せずズレる現象を測る指標です。画像の縦横サイズをHTMLに明示していない場合、画像の読み込み前後でレイアウトがズレてCLSスコアが悪化します。WebP画像を使う際もwidth・height属性を設定しておくことが重要です。</p>
+  <h3>CLS（レイアウトシフト）と画像サイズ指定</h3>
 
-<!-- 素材2 -->
-<div class="material-feature">
-    <a href="../download.html?id=746">
-        <img class="material-feature-img" src="../assets/materials/character/character_016.webp" alt="ソザイノの素材サンプル" loading="lazy">
-        <div class="material-feature-caption"><div class="material-feature-text"><div class="material-feature-title">素材サンプル（character_016）</div><div class="material-feature-sub">ソザイノで無料ダウンロード可能</div></div><div class="material-feature-arrow">詳細を見る →</div></div>
-    </a>
-</div>
+  <p>CLSは、ページ読み込み中にコンテンツが予期せずズレる現象を測る指標です。画像の縦横サイズをHTMLに明示していない場合、画像の読み込み前後でレイアウトがズレてCLSスコアが悪化します。</p>
 
-<h2>WebPのSEO効果をブログで最大化する方法</h2>
+  <p>WebP画像を使う際も、必ず`width`と`height`属性を設定してください。ブラウザはこの情報をもとに読み込み前から画像の表示領域を確保するため、レイアウトのズレが発生しなくなります。</p>
 
-<h3>1. ファーストビューの画像を最優先で最適化する</h3>
-<p>LCPに最も影響するのはページ上部（ファーストビュー）の画像です。アイキャッチ画像をWebPで用意し、<code>loading="eager"</code>（遅延読み込みなし）に設定することでLCPを改善できます。スクロールしないと見えない画像は<code>loading="lazy"</code>で遅延読み込みにするとさらに効果的です。</p>
+  <div class="tip">
+    <strong>💡 width・height属性の書き方</strong><br>
+    <code>&lt;img src="image.webp" width="1200" height="630" alt="説明文"&gt;</code><br>
+    実際の表示サイズはCSSで制御しつつ、HTML属性には元画像の縦横比に合った数値を指定します。
+  </div>
 
-<h3>2. alt属性を適切に設定する</h3>
-<p>WebPかどうかに関わらず、画像のalt属性（代替テキスト）はSEO上重要です。Googleは画像の内容をalt属性から判断します。「image001.webp」のようなファイル名ではなく、「春の公園の桜並木」のように内容を説明するalt属性を設定してください。</p>
+  <div class="material-card">
+    <img src="https://sozaino.com/assets/materials/character/character_016.webp" alt="キャラクター素材サンプル character_016" width="200" height="133" loading="lazy">
+    <div class="material-card-body">
+      <div class="material-card-label">ソザイノの素材サンプル</div>
+      <div class="material-card-title">素材サンプル（character_016）</div>
+      <a href="https://sozaino.com/download.html?id=746" class="material-card-link">無料ダウンロード →</a>
+    </div>
+  </div>
 
-<h3>3. 画像ファイル名もキーワードを意識する</h3>
-<p>ファイル名もGoogleが画像の内容を理解する手がかりになります。「img001.webp」より「spring-cherry-blossom-park.webp」のように内容を反映したファイル名が望ましいです。</p>
+  <h2>WebPのSEO効果をブログで最大化する4つの方法</h2>
 
-<div class="info-box">
-    <div class="info-box-title">💡 WordPressでWebPを使う場合</div>
-    <p>WordPressにJPEGやPNGをアップロードし、プラグインで自動WebP変換する方法が手軽です。「EWWW Image Optimizer」や「Converter for Media」を使えば、既存画像も含めてWebPに変換・配信できます。</p>
-</div>
+  <h3>1. ファーストビューの画像を最優先で最適化する</h3>
 
-<!-- 素材3 -->
-<div class="material-feature">
-    <a href="../download.html?id=1054">
-        <img class="material-feature-img" src="../assets/materials/blog/blog_186.webp" alt="ソザイノの素材サンプル" loading="lazy">
-        <div class="material-feature-caption"><div class="material-feature-text"><div class="material-feature-title">素材サンプル（blog_186）</div><div class="material-feature-sub">ソザイノで無料ダウンロード可能</div></div><div class="material-feature-arrow">詳細を見る →</div></div>
-    </a>
-</div>
+  <p>LCPに最も影響するのはページ上部（ファーストビュー）の画像です。アイキャッチ画像をWebPで用意し、<code>loading="eager"</code>（遅延読み込みなし）に設定することでLCPを改善できます。スクロールしないと見えない画像は<code>loading="lazy"</code>で遅延読み込みにするとさらに効果的です。</p>
 
-<h2>まとめ：WebPはSEOの地盤を固める画像形式</h2>
+  <p>特にWordPressでは、テーマによってアイキャッチ画像の読み込み方法が異なります。ファーストビューのアイキャッチに`loading="lazy"`が設定されているとLCPが悪化するため、テーマの設定や使用しているプラグインを確認してください。</p>
 
-<p>WebP形式の採用はSEOの「地盤固め」として非常に有効な施策です。特にLCPの改善はCore Web Vitalsのスコアに直結し、Googleの検索評価にプラスの影響を与えます。ソザイノの素材はすべてWebP形式で配布しているので、ダウンロードしてそのまま使えばSEO面でも有利なスタートが切れます。</p>
+  <h3>2. alt属性を適切に設定する</h3>
 
-<div class="article-footer">
+  <p>WebPかどうかに関わらず、画像のalt属性（代替テキスト）はSEO上重要です。Googleは画像の内容をalt属性から判断します。「image001.webp」のようなファイル名由来の説明ではなく、「春の公園の桜並木」のように内容を説明するalt属性を設定してください。</p>
+
+  <p>alt属性はアクセシビリティの観点でも重要です。視覚障害のあるユーザーがスクリーンリーダーでページを読む際、alt属性の内容が読み上げられます。SEOと使いやすさの両面から、適切なalt属性の設定は必須です。</p>
+
+  <h3>3. 画像ファイル名もキーワードを意識する</h3>
+
+  <p>ファイル名もGoogleが画像の内容を理解する手がかりになります。「img001.webp」より「spring-cherry-blossom-park.webp」のように内容を反映したファイル名が望ましいです。ただし、日本語ファイル名はURLエンコードされると読みにくくなるため、半角英数字とハイフンで構成するのが一般的です。</p>
+
+  <h3>4. 画像サイズを用途に合わせて最適化する</h3>
+
+  <p>必要以上に大きな画像を使うと、WebPでも読み込みが遅くなります。アイキャッチなら1200×630px、記事内の挿入画像なら800〜1000px幅など、表示サイズに合わせた解像度に最適化してからアップロードするのが基本です。</p>
+
+  <p>ソザイノの素材はWebP形式で適切なサイズに最適化されているため、ダウンロードしてそのままブログに貼ればSEO面でも有利なスタートが切れます。</p>
+
+  <h2>WordPressでWebPを使う方法</h2>
+
+  <p>WordPressでWebPを導入する方法はいくつかあります。目的に合わせて選んでください。</p>
+
+  <table>
+    <tr>
+      <th>方法</th>
+      <th>特徴</th>
+      <th>おすすめ度</th>
+    </tr>
+    <tr>
+      <td>WebP素材をそのままアップロード</td>
+      <td>最もシンプル。WordPress 5.8以降は標準対応</td>
+      <td>◎ 最推奨</td>
+    </tr>
+    <tr>
+      <td>EWWW Image Optimizer</td>
+      <td>既存画像をWebPに自動変換・配信</td>
+      <td>○ 既存サイト向け</td>
+    </tr>
+    <tr>
+      <td>Converter for Media</td>
+      <td>WebP変換＋フォールバック自動対応</td>
+      <td>○ 初心者向け</td>
+    </tr>
+    <tr>
+      <td>Cloudflare Polish</td>
+      <td>CDN側で自動WebP変換（有料プラン）</td>
+      <td>△ 上級者向け</td>
+    </tr>
+  </table>
+
+  <p>新規にブログを始める場合は、最初からWebP素材を使うのが最もシンプルです。ソザイノのようなWebP専用素材サイトからダウンロードしてそのまま使えば、変換の手間も省けます。既存ブログでJPEG・PNGが大量にある場合は、EWWW Image Optimizerなどのプラグインで一括変換するのが効率的です。</p>
+
+  <div class="material-card">
+    <img src="https://sozaino.com/assets/materials/blog/blog_186.webp" alt="ブログ用素材サンプル blog_186" width="200" height="133" loading="lazy">
+    <div class="material-card-body">
+      <div class="material-card-label">ソザイノの素材サンプル</div>
+      <div class="material-card-title">素材サンプル（blog_186）</div>
+      <a href="https://sozaino.com/download.html?id=1054" class="material-card-link">無料ダウンロード →</a>
+    </div>
+  </div>
+
+  <h2>WebPだけでは解決しない点も知っておく</h2>
+
+  <p>WebPへの変換はSEO改善に有効ですが、万能ではありません。以下の点は別途対策が必要です。</p>
+
+  <ul>
+    <li><strong>画像の枚数が多すぎる</strong>：WebPにしても1ページに30枚以上の画像があれば読み込みは遅くなります。遅延読み込み（lazy loading）の設定が必須です。</li>
+    <li><strong>サーバーの応答速度</strong>：ホスティングサーバー自体が遅い場合、画像形式を変えても改善に限界があります。</li>
+    <li><strong>JavaScriptの実行時間</strong>：INP（操作応答速度）はJavaScriptの処理量に依存するため、画像最適化とは別の対策が必要です。</li>
+    <li><strong>フォントの読み込み</strong>：Webフォントの読み込みもLCPに影響することがあります。</li>
+  </ul>
+
+  <p>Core Web Vitalsのスコアを総合的に改善するには、画像最適化を入口として、サーバー・JavaScript・フォントと段階的に対策を進めていくのが現実的なアプローチです。</p>
+
+  <h2>まとめ：WebPはSEOの地盤を固める画像形式</h2>
+
+  <p>WebP形式の採用はSEOの「地盤固め」として非常に有効な施策です。特にLCPの改善はCore Web Vitalsのスコアに直結し、Googleの検索評価にプラスの影響を与えます。加えてwidth・height属性の設定でCLSも改善でき、alt属性・ファイル名の最適化で画像検索からの流入も期待できます。</p>
+
+  <p>ソザイノの素材はすべてWebP形式で配布しているので、ダウンロードしてそのまま使えばSEO面でも有利なスタートが切れます。まずはアイキャッチ画像のWebP化から始めて、LCPスコアの改善を体感してみてください。</p>
+
+  <div class="related-columns">
     <h3>関連コラム</h3>
-    <div class="related-articles">
-        <a href="webp-guide.html" class="related-article-card"><div class="label">画像フォーマット</div><div class="title">WebP形式とは？PNG・JPEGとの違いと、ブログで使う5つのメリット</div></a>
-        <a href="eyecatch-size-guide.html" class="related-article-card"><div class="label">画像・デザイン</div><div class="title">ブログのアイキャッチ画像サイズ、正解はこれ。用途別の推奨サイズと選び方</div></a>
+    <div class="related-list">
+      <a class="related-item" href="https://sozaino.com/column/webp-guide.html">
+        <span class="related-tag">画像フォーマット</span>
+        WebP形式とは？PNG・JPEGとの違いと、ブログで使う5つのメリット
+      </a>
+      <a class="related-item" href="https://sozaino.com/column/eyecatch-size-guide.html">
+        <span class="related-tag">画像・デザイン</span>
+        ブログのアイキャッチ画像サイズ、正解はこれ。用途別の推奨サイズと選び方
+      </a>
+      <a class="related-item" href="https://sozaino.com/column/sns-image-size-guide.html">
+        <span class="related-tag">画像・デザイン</span>
+        SNS投稿の画像サイズ完全ガイド。X・Instagram・LINE・Facebook・TikTok対応表
+      </a>
     </div>
-    <div class="gallery-cta">
-        <h3>SEOに強いWebP素材をギャラリーで探す</h3>
-        <p>1000点以上のWebP素材を無料配信中。商用利用OK、登録不要です。</p>
-        <a href="../gallery.html" class="gallery-cta-btn">素材ギャラリーへ →</a>
-    </div>
-</div>
-</article>
+  </div>
+
+  <div class="cta-box">
+    <p>SEOに強いWebP素材を1000点以上無料配信中。商用利用OK、登録不要です。</p>
+    <a href="https://sozaino.com/gallery.html">素材ギャラリーへ →</a>
+  </div>
+</main>
 
 <footer>
-    <div class="footer-content">
-        <div class="footer-links"><a href="../about.html">ソザイノについて</a><a href="../process.html">素材ができるまで</a><a href="index.html">コラム</a><a href="../privacy.html">プライバシーポリシー</a><a href="../terms.html">利用規約</a><a href="../disclaimer.html">免責事項</a><a href="../contact.html">お問い合わせ</a></div>
-        <div style="margin-top:1rem;"><a href="https://design.blogmura.com/freesozai/ranking/in?p_cid=11214708" target="_blank"><img src="https://b.blogmura.com/design/freesozai/88_31.gif" width="88" height="31" border="0" alt="にほんブログ村 デザインブログ フリー素材へ"></a></div>
-        <div class="footer-info"><p>&copy; 2026 ソザイノ (SOZAINO). All rights reserved.</p></div>
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="https://sozaino.com/about.html">ソザイノについて</a>
+      <a href="https://sozaino.com/process.html">素材ができるまで</a>
+      <a href="https://sozaino.com/column/index.html">コラム</a>
+      <a href="https://sozaino.com/privacy.html">プライバシーポリシー</a>
+      <a href="https://sozaino.com/terms.html">利用規約</a>
+      <a href="https://sozaino.com/disclaimer.html">免責事項</a>
+      <a href="https://sozaino.com/contact.html">お問い合わせ</a>
     </div>
+    <div class="blogmura">
+      <a href="https://design.blogmura.com/freesozai/ranking/in?p_cid=11214708">
+        <img src="https://b.blogmura.com/design/freesozai/88_31.gif" alt="にほんブログ村 デザインブログ フリー素材へ" loading="lazy">
+      </a>
+    </div>
+    <div>© 2026 ソザイノ (SOZAINO). All rights reserved.</div>
+  </div>
 </footer>
-<script>const menuToggle=document.getElementById('menuToggle');const navMenu=document.getElementById('navMenu');menuToggle.addEventListener('click',()=>navMenu.classList.toggle('open'));navMenu.querySelectorAll('a').forEach(link=>{link.addEventListener('click',()=>navMenu.classList.remove('open'));});</script>
 </body>
 </html>
