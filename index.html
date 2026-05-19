@@ -724,14 +724,26 @@
 </section>
 
 <!-- ===== ABOUT MINI ===== -->
+<style>
+.about-mini-card{display:flex;align-items:center;gap:1.2rem;padding:1.5rem 1.8rem;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;}
+.about-mini-icon{width:72px;height:72px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+.about-mini-body{min-width:0;flex:1;}
+.about-mini-label{font-size:.8rem;color:#94a3b8;margin-bottom:.2rem;}
+.about-mini-text{font-size:.9rem;color:#475569;line-height:1.7;}
+.about-mini-link{flex-shrink:0;font-size:.82rem;color:#0d9488;font-weight:600;text-decoration:none;white-space:nowrap;}
+@media(max-width:640px){
+  .about-mini-card{flex-direction:column;align-items:center;text-align:center;gap:.9rem;}
+  .about-mini-link{margin-top:.3rem;}
+}
+</style>
 <section style="max-width:720px;margin:0 auto 2rem;padding:0 1.5rem;">
-    <div style="display:flex;align-items:center;gap:1.2rem;padding:1.5rem 1.8rem;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;">
-        <img src="assets/materials/haji-icon.jpg" alt="編集者ひよこ" style="width:72px;height:72px;border-radius:50%;object-fit:cover;flex-shrink:0;">
-        <div style="min-width:0;flex:1;">
-            <div style="font-size:.8rem;color:#94a3b8;margin-bottom:.2rem;">このサイトについて</div>
-            <div style="font-size:.9rem;color:#475569;line-height:1.7;">sozaino.com はブログ・YouTube・SNS向けのAI生成WebP素材を無料配布しています。ブログ歴6年の運営者が「実際に使えるか」を基準に一枚ずつ選別しています。</div>
+    <div class="about-mini-card">
+        <img src="assets/materials/haji-icon.jpg" alt="編集者ひよこ" class="about-mini-icon">
+        <div class="about-mini-body">
+            <div class="about-mini-label">このサイトについて</div>
+            <div class="about-mini-text">sozaino.com はブログ・YouTube・SNS向けのAI生成WebP素材を無料配布しています。ブログ歴6年の運営者が「実際に使えるか」を基準に一枚ずつ選別しています。</div>
         </div>
-        <a href="about.html" style="flex-shrink:0;font-size:.82rem;color:#0d9488;font-weight:600;text-decoration:none;white-space:nowrap;">詳細 →</a>
+        <a href="about.html" class="about-mini-link">詳細 →</a>
     </div>
 </section>
 
