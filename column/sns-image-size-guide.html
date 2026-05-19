@@ -48,15 +48,12 @@
     .notice{background:#fffbeb;border-left:3px solid #f59e0b;padding:1rem 1.25rem;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;font-size:.9rem;}
     .notice strong{color:#b45309;}
     .tip{background:var(--primary-bg);border-left:3px solid var(--primary);padding:1rem 1.25rem;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;font-size:.9rem;}
-    .material-feature{margin:1.8rem 0;background:#fafafa;border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:transform .2s,box-shadow .2s;}
-    .material-feature:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(15,23,42,.08);}
-    .material-feature a{display:block;text-decoration:none;color:inherit;}
-    .material-feature-img{width:100%;aspect-ratio:16/9;background:#f0fdfa;object-fit:contain;padding:1rem;display:block;}
-    .material-feature-caption{padding:.9rem 1.2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;}
-    .material-feature-text{flex:1;min-width:0;}
-    .material-feature-title{font-size:.92rem;font-weight:600;color:var(--text);margin-bottom:.15rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-    .material-feature-sub{font-size:.78rem;color:var(--muted);}
-    .material-feature-arrow{flex-shrink:0;color:var(--primary);font-size:.85rem;font-weight:600;white-space:nowrap;}
+    .material-card{border:1px solid var(--border);border-radius:.75rem;overflow:hidden;margin:1.75rem 0;display:flex;align-items:stretch;background:var(--surface);}
+    .material-card img{width:200px;height:133px;object-fit:cover;flex-shrink:0;}
+    .material-card-body{padding:.85rem 1rem;display:flex;flex-direction:column;justify-content:center;gap:.35rem;}
+    .material-card-label{font-size:.7rem;color:var(--muted);}
+    .material-card-title{font-size:.9rem;font-weight:700;}
+    .material-card-link{font-size:.8rem;color:var(--primary);text-decoration:none;}
     .related-columns{margin:2.5rem 0 0;}
     .related-columns h3{font-size:1rem;font-weight:700;margin-bottom:.85rem;}
     .related-list{display:flex;flex-direction:column;gap:.6rem;}
@@ -187,17 +184,13 @@
     </tr>
   </table>
 
-    <div class="material-feature">
-    <a href="https://sozaino.com/download.html?id=1057">
-      <img class="material-feature-img" src="https://sozaino.com/assets/materials/blog/blog_189.webp" alt="ブログ用素材サンプル blog_189" loading="lazy">
-      <div class="material-feature-caption">
-        <div class="material-feature-text">
-          <div class="material-feature-title">素材サンプル（blog_189）</div>
-          <div class="material-feature-sub">ソザイノで無料ダウンロード可能</div>
-        </div>
-        <div class="material-feature-arrow">詳細を見る →</div>
-      </div>
-    </a>
+  <div class="material-card">
+    <img src="https://sozaino.com/assets/materials/blog/blog_189.webp" alt="ブログ用素材サンプル blog_189" width="200" height="133" loading="lazy">
+    <div class="material-card-body">
+      <div class="material-card-label">ソザイノの素材サンプル</div>
+      <div class="material-card-title">素材サンプル（blog_189）</div>
+      <a href="https://sozaino.com/download.html?id=1057" class="material-card-link">無料ダウンロード →</a>
+    </div>
   </div>
 
   <h2>X（旧Twitter）の画像サイズと注意点</h2>
@@ -230,17 +223,13 @@
   <h3>ストーリーズ・リール</h3>
   <p>ストーリーズとリールは縦型全画面（9:16、1080×1920px）が基本です。画面の上下15%程度はUIで隠れるため、重要な要素はその範囲を避けて配置するのがポイントです。</p>
 
-    <div class="material-feature">
-    <a href="https://sozaino.com/download.html?id=891">
-      <img class="material-feature-img" src="https://sozaino.com/assets/materials/character/character_264.webp" alt="キャラクター素材サンプル character_264" loading="lazy">
-      <div class="material-feature-caption">
-        <div class="material-feature-text">
-          <div class="material-feature-title">素材サンプル（character_264）</div>
-          <div class="material-feature-sub">ソザイノで無料ダウンロード可能</div>
-        </div>
-        <div class="material-feature-arrow">詳細を見る →</div>
-      </div>
-    </a>
+  <div class="material-card">
+    <img src="https://sozaino.com/assets/materials/character/character_264.webp" alt="キャラクター素材サンプル character_264" width="200" height="133" loading="lazy">
+    <div class="material-card-body">
+      <div class="material-card-label">ソザイノの素材サンプル</div>
+      <div class="material-card-title">素材サンプル（character_264）</div>
+      <a href="https://sozaino.com/download.html?id=891" class="material-card-link">無料ダウンロード →</a>
+    </div>
   </div>
 
   <h2>Facebook・LINEの画像サイズと注意点</h2>
@@ -273,17 +262,13 @@
   <h3>4. WebP形式で軽量化する</h3>
   <p>SNSへのアップロード前にWebP形式で画像を用意しておくと、アップロード速度が速く、ストレージの節約にもなります。ただしSNSのサーバー側で再圧縮されるため、最終的な表示画質はSNSの仕様に依存します。元画像は高解像度・高品質で用意しておくのが基本です。</p>
 
-    <div class="material-feature">
-    <a href="https://sozaino.com/download.html?id=944">
-      <img class="material-feature-img" src="https://sozaino.com/assets/materials/character/character_319.webp" alt="キャラクター素材サンプル character_319" loading="lazy">
-      <div class="material-feature-caption">
-        <div class="material-feature-text">
-          <div class="material-feature-title">素材サンプル（character_319）</div>
-          <div class="material-feature-sub">ソザイノで無料ダウンロード可能</div>
-        </div>
-        <div class="material-feature-arrow">詳細を見る →</div>
-      </div>
-    </a>
+  <div class="material-card">
+    <img src="https://sozaino.com/assets/materials/character/character_319.webp" alt="キャラクター素材サンプル character_319" width="200" height="133" loading="lazy">
+    <div class="material-card-body">
+      <div class="material-card-label">ソザイノの素材サンプル</div>
+      <div class="material-card-title">素材サンプル（character_319）</div>
+      <a href="https://sozaino.com/download.html?id=944" class="material-card-link">無料ダウンロード →</a>
+    </div>
   </div>
 
   <h2>SNS別：迷ったときの「とりあえずこれ」サイズ</h2>
