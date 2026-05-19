@@ -1,187 +1,376 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SNS投稿の画像サイズ完全ガイド。X・Instagram・LINE・Facebook対応表 | ソザイノ</title>
-    <meta name="description" content="X（旧Twitter）・Instagram・LINE・Facebookそれぞれの推奨画像サイズを一覧で整理。SNS投稿で画像が切れたり粗くなったりしないための設定ポイントを解説します。">
-    <link rel="canonical" href="https://sozaino.com/column/sns-image-size-guide.html">
-    <meta property="og:type" content="article">
-    <meta property="og:title" content="SNS投稿の画像サイズ完全ガイド。X・Instagram・LINE・Facebook対応表">
-    <meta property="og:description" content="X（旧Twitter）・Instagram・LINE・Facebookそれぞれの推奨画像サイズを一覧で整理。SNS投稿で画像が切れたり粗くなったりしないための設定ポイントを解説します。">
-    <meta property="og:url" content="https://sozaino.com/column/sns-image-size-guide.html">
-    <meta property="og:site_name" content="ソザイノ (SOZAINO)">
-    <style>
-        :root{--primary:#0d9488;--primary2:#14b8a6;--primary-bg:#f0fdfa;--text:#0f172a;--muted:#64748b;--border:#e2e8f0;--bg:#fafafa;--surface:#ffffff;--header-bg:#ffffff;--header-text:#0f172a;--header-text-muted:#64748b;}
-        *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
-        body{font-family:'Noto Sans JP',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.85;color:var(--text);background-color:var(--bg);}
-        header{background:var(--header-bg);position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border);box-shadow:0 1px 3px rgba(15,23,42,.04);}
-        .navbar{max-width:1200px;margin:0 auto;padding:.85rem 2rem;display:flex;justify-content:space-between;align-items:center;}
-        .logo{font-size:1.3rem;font-weight:700;color:var(--header-text);text-decoration:none;}.logo span{color:var(--primary);}
-        .nav-links{display:flex;gap:1.8rem;}.nav-links a{color:var(--header-text-muted);text-decoration:none;font-size:.92rem;font-weight:500;transition:color .2s;}.nav-links a:hover{color:var(--primary);}
-        .menu-toggle{display:none;background:none;border:none;color:var(--header-text);font-size:1.4rem;cursor:pointer;}
-        .article-hero{background:linear-gradient(180deg,var(--primary-bg) 0%,#ffffff 100%);padding:3rem 2rem 2rem;}
-        .breadcrumb{max-width:800px;margin:0 auto 1.2rem;font-size:.85rem;color:var(--muted);}.breadcrumb a{color:var(--muted);text-decoration:none;}.breadcrumb a:hover{color:var(--primary);}.breadcrumb .sep{margin:0 .4rem;opacity:.5;}
-        .article-meta-top{max-width:800px;margin:0 auto;display:flex;gap:1rem;align-items:center;font-size:.82rem;color:var(--muted);margin-bottom:1rem;}
-        .article-tag{display:inline-block;background:var(--primary-bg);color:var(--primary);padding:.2rem .8rem;border-radius:12px;font-weight:600;font-size:.78rem;}
-        h1.article-title{max-width:800px;margin:0 auto;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;line-height:1.4;letter-spacing:-.01em;color:var(--text);}
-        .article-author{max-width:800px;margin:1.5rem auto 0;display:flex;align-items:center;gap:.8rem;font-size:.85rem;color:var(--muted);}
-        .author-icon{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--primary2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.9rem;flex-shrink:0;}
-        article{max-width:800px;margin:2rem auto;padding:2.5rem 2rem;background:var(--surface);border-radius:12px;box-shadow:0 1px 3px rgba(15,23,42,.04);}
-        article p{margin-bottom:1.4rem;font-size:1rem;line-height:1.9;}
-        article h2{font-size:1.5rem;font-weight:700;margin:2.5rem 0 1.2rem;padding-bottom:.5rem;border-bottom:2px solid var(--primary);color:var(--text);line-height:1.4;}article h2:first-of-type{margin-top:0;}
-        article h3{font-size:1.15rem;font-weight:700;margin:2rem 0 .8rem;color:var(--text);padding-left:.8rem;border-left:4px solid var(--primary);line-height:1.5;}
-        article ul,article ol{margin:0 0 1.4rem 1.5rem;}article li{margin-bottom:.5rem;line-height:1.85;}
-        article a{color:var(--primary);text-decoration:underline;text-underline-offset:2px;}article a:hover{opacity:.75;}
-        article strong{font-weight:700;color:var(--text);}
-        article table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.92rem;}
-        article th,article td{padding:.8rem 1rem;text-align:left;border-bottom:1px solid var(--border);}
-        article th{background:var(--primary-bg);color:var(--text);font-weight:700;}article tbody tr:hover{background:#fafafa;}
-        .info-box{background:var(--primary-bg);border-left:4px solid var(--primary);padding:1.2rem 1.4rem;margin:1.5rem 0;border-radius:4px;}.info-box p:last-child{margin-bottom:0;}.info-box-title{font-weight:700;color:var(--primary);margin-bottom:.5rem;}
-        .material-feature{margin:1.8rem 0;background:#fafafa;border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:transform .2s,box-shadow .2s;}.material-feature:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(15,23,42,.08);}
-        .material-feature a{display:block;text-decoration:none;color:inherit;}
-        .material-feature-img{width:100%;aspect-ratio:16/9;background:#f0fdfa;object-fit:contain;padding:1rem;display:block;}
-        .material-feature-caption{padding:.9rem 1.2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;}
-        .material-feature-text{flex:1;min-width:0;}.material-feature-title{font-size:.92rem;font-weight:600;color:var(--text);margin-bottom:.15rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}.material-feature-sub{font-size:.78rem;color:var(--muted);}.material-feature-arrow{flex-shrink:0;color:var(--primary);font-size:.85rem;font-weight:600;white-space:nowrap;}
-        .article-footer{margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border);}.article-footer h3{font-size:1.1rem;margin-bottom:1rem;border:none;padding:0;}
-        .related-articles{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-bottom:2rem;}
-        .related-article-card{display:block;padding:1rem 1.2rem;border:1px solid var(--border);border-radius:8px;text-decoration:none;color:inherit;transition:all .2s;}.related-article-card:hover{border-color:var(--primary);transform:translateY(-2px);}
-        .related-article-card .label{font-size:.72rem;color:var(--primary);font-weight:700;margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.04em;}.related-article-card .title{font-size:.92rem;font-weight:600;color:var(--text);line-height:1.5;}
-        .gallery-cta{background:linear-gradient(135deg,var(--primary) 0%,var(--primary2) 100%);border-radius:12px;padding:1.8rem;text-align:center;margin-top:2rem;color:#fff;}
-        .gallery-cta h3{color:#fff!important;font-size:1.15rem;margin-bottom:.5rem;border:none!important;padding:0!important;}.gallery-cta p{color:rgba(255,255,255,.9);margin-bottom:1.2rem;font-size:.92rem;}
-        .gallery-cta-btn{display:inline-block;background:#fff;color:var(--primary);padding:.7rem 1.6rem;border-radius:8px;text-decoration:none;font-weight:700;font-size:.92rem;box-shadow:0 3px 12px rgba(0,0,0,.15);transition:transform .2s,box-shadow .2s;}.gallery-cta-btn:hover{transform:translateY(-1px);box-shadow:0 5px 16px rgba(0,0,0,.2);}
-        footer{background:#1e293b;color:rgba(255,255,255,.7);margin-top:4rem;padding:3rem 2rem;}.footer-content{max-width:1200px;margin:0 auto;}
-        .footer-links{display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(255,255,255,.1);}.footer-links a{color:rgba(255,255,255,.65);text-decoration:none;font-size:.85rem;transition:color .2s;}.footer-links a:hover{color:var(--primary2);}
-        .footer-info{font-size:.8rem;color:rgba(255,255,255,.4);}
-        @media(max-width:768px){.navbar{padding:.85rem 1rem;}.menu-toggle{display:block;}.nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:var(--header-bg);flex-direction:column;gap:0;padding:.5rem 0;box-shadow:0 4px 12px rgba(15,23,42,.08);border-top:1px solid var(--border);}.nav-links.open{display:flex;}.nav-links a{padding:.8rem 1.5rem;border-bottom:1px solid var(--border);}.nav-links a:last-child{border-bottom:none;}.article-hero{padding:2rem 1rem 1.5rem;}article{margin:1rem;padding:1.8rem 1.4rem;}article h2{font-size:1.3rem;}article h3{font-size:1.05rem;}article table{font-size:.82rem;}article th,article td{padding:.6rem .7rem;}}
-    </style>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"SNS投稿の画像サイズ完全ガイド。X・Instagram・LINE・Facebook対応表","description":"X（旧Twitter）・Instagram・LINE・Facebookそれぞれの推奨画像サイズを一覧で整理。SNS投稿で画像が切れたり粗くなったりしないための設定ポイントを解説します。","image":"https://sozaino.com/favicon-192.png","datePublished":"2026-05-17","dateModified":"2026-05-17","author":{"@type":"Organization","name":"ソザイノ編集部"},"publisher":{"@type":"Organization","name":"ソザイノ (SOZAINO)","logo":{"@type":"ImageObject","url":"https://sozaino.com/favicon-192.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://sozaino.com/column/sns-image-size-guide.html"}}</script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2687113603921668" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SNS投稿の画像サイズ完全ガイド2026年版。X・Instagram・LINE・Facebook・TikTok対応表 | ソザイノ</title>
+  <meta name="description" content="X（旧Twitter）・Instagram・LINE・Facebook・TikTokの推奨画像サイズを一覧で整理。SNS投稿で画像が切れたり粗くなったりしないための設定ポイントと、各SNSの特徴・注意点を詳しく解説します。">
+  <link rel="canonical" href="https://sozaino.com/column/sns-image-size-guide.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="SNS投稿の画像サイズ完全ガイド2026年版。X・Instagram・LINE・Facebook・TikTok対応表 | ソザイノ">
+  <meta property="og:description" content="X・Instagram・LINE・Facebook・TikTokの推奨画像サイズを一覧で整理。SNS投稿で画像が切れたり粗くなったりしないための設定ポイントを解説します。">
+  <meta property="og:url" content="https://sozaino.com/column/sns-image-size-guide.html">
+  <meta property="og:site_name" content="ソザイノ (SOZAINO)">
+  <style>
+    :root{--primary:#0d9488;--primary2:#14b8a6;--primary-bg:#f0fdfa;--text:#0f172a;--muted:#64748b;--border:#e2e8f0;--bg:#fafafa;--surface:#ffffff;}
+    *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+    body{font-family:'Noto Sans JP',-apple-system,sans-serif;line-height:1.85;color:var(--text);background:var(--bg);}
+    header{background:#fff;position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border);box-shadow:0 1px 3px rgba(15,23,42,.04);}
+    .navbar{max-width:1200px;margin:0 auto;padding:.85rem 2rem;display:flex;justify-content:space-between;align-items:center;}
+    .nav-logo{font-size:1.25rem;font-weight:700;color:var(--primary);text-decoration:none;letter-spacing:-.5px;}
+    .nav-logo span{color:var(--text);}
+    .nav-links{display:flex;gap:1.5rem;list-style:none;}
+    .nav-links a{color:var(--muted);text-decoration:none;font-size:.875rem;transition:color .2s;}
+    .nav-links a:hover{color:var(--primary);}
+    .hamburger{display:none;background:none;border:none;cursor:pointer;padding:.5rem;}
+    .hamburger span{display:block;width:22px;height:2px;background:var(--text);margin:5px 0;transition:.3s;}
+    @media(max-width:768px){.nav-links{display:none;}.hamburger{display:block;}}
+    main{max-width:800px;margin:0 auto;padding:2.5rem 1.5rem 4rem;}
+    .breadcrumb{font-size:.8rem;color:var(--muted);margin-bottom:1.5rem;}
+    .breadcrumb a{color:var(--muted);text-decoration:none;}
+    .breadcrumb a:hover{color:var(--primary);}
+    .article-meta{display:flex;gap:1rem;align-items:center;margin-bottom:1rem;flex-wrap:wrap;}
+    .tag{background:var(--primary-bg);color:var(--primary);font-size:.75rem;padding:.2rem .7rem;border-radius:99px;font-weight:600;}
+    .date{font-size:.8rem;color:var(--muted);}
+    h1{font-size:1.7rem;font-weight:800;line-height:1.4;margin-bottom:1.5rem;color:var(--text);}
+    .author-box{display:flex;align-items:center;gap:.75rem;padding:.85rem 1rem;background:var(--primary-bg);border-radius:.5rem;margin-bottom:2rem;font-size:.85rem;}
+    .author-icon{width:36px;height:36px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;flex-shrink:0;}
+    .author-name{font-weight:700;color:var(--text);}
+    .author-desc{color:var(--muted);font-size:.8rem;}
+    p{margin-bottom:1.25rem;font-size:1rem;}
+    h2{font-size:1.25rem;font-weight:700;margin:2.5rem 0 1rem;padding-left:.75rem;border-left:3px solid var(--primary);}
+    h3{font-size:1.05rem;font-weight:700;margin:1.75rem 0 .75rem;}
+    ul,ol{margin:0 0 1.25rem 1.5rem;}
+    li{margin-bottom:.4rem;}
+    table{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.9rem;}
+    th{background:var(--primary-bg);color:var(--primary);padding:.6rem .85rem;text-align:left;border:1px solid var(--border);}
+    td{padding:.6rem .85rem;border:1px solid var(--border);vertical-align:top;}
+    .notice{background:#fffbeb;border-left:3px solid #f59e0b;padding:1rem 1.25rem;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;font-size:.9rem;}
+    .notice strong{color:#b45309;}
+    .tip{background:var(--primary-bg);border-left:3px solid var(--primary);padding:1rem 1.25rem;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;font-size:.9rem;}
+    .material-feature{margin:1.8rem 0;background:#fafafa;border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:transform .2s,box-shadow .2s;}
+    .material-feature:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(15,23,42,.08);}
+    .material-feature a{display:block;text-decoration:none;color:inherit;}
+    .material-feature-img{width:100%;aspect-ratio:16/9;background:#f0fdfa;object-fit:contain;padding:1rem;display:block;}
+    .material-feature-caption{padding:.9rem 1.2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;}
+    .material-feature-text{flex:1;min-width:0;}
+    .material-feature-title{font-size:.92rem;font-weight:600;color:var(--text);margin-bottom:.15rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .material-feature-sub{font-size:.78rem;color:var(--muted);}
+    .material-feature-arrow{flex-shrink:0;color:var(--primary);font-size:.85rem;font-weight:600;white-space:nowrap;}
+    .related-columns{margin:2.5rem 0 0;}
+    .related-columns h3{font-size:1rem;font-weight:700;margin-bottom:.85rem;}
+    .related-list{display:flex;flex-direction:column;gap:.6rem;}
+    .related-item{display:flex;gap:.5rem;align-items:flex-start;text-decoration:none;color:var(--text);font-size:.9rem;}
+    .related-item:hover{color:var(--primary);}
+    .related-tag{background:var(--primary-bg);color:var(--primary);font-size:.7rem;padding:.15rem .5rem;border-radius:99px;white-space:nowrap;margin-top:.15rem;}
+    .cta-box{background:var(--primary);color:#fff;border-radius:.75rem;padding:1.75rem;text-align:center;margin:2.5rem 0 0;}
+    .cta-box p{color:rgba(255,255,255,.85);margin-bottom:1rem;font-size:.95rem;}
+    .cta-box a{display:inline-block;background:#fff;color:var(--primary);font-weight:700;padding:.65rem 1.75rem;border-radius:99px;text-decoration:none;font-size:.95rem;}
+    footer{background:#0f172a;color:#94a3b8;padding:2rem 1.5rem;font-size:.82rem;}
+    .footer-inner{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:1rem;align-items:center;}
+    .footer-links{display:flex;flex-wrap:wrap;gap:.75rem 1.25rem;justify-content:center;}
+    .footer-links a{color:#94a3b8;text-decoration:none;}
+    .footer-links a:hover{color:#fff;}
+    .blogmura{margin-top:.5rem;}
+  </style>
 </head>
 <body>
 <header>
-    <div class="navbar">
-        <a href="/" class="logo">ソザイノ<span>.</span></a>
-        <button class="menu-toggle" id="menuToggle">☰</button>
-        <nav class="nav-links" id="navMenu">
-            <a href="/">ホーム</a><a href="../gallery.html">素材ギャラリー</a><a href="../about.html">ソザイノについて</a><a href="../process.html">素材ができるまで</a><a href="../column/">コラム</a><a href="../faq.html">よくあるご質問</a><a href="../contact.html">お問い合わせ</a>
-        </nav>
-    </div>
+  <nav class="navbar">
+    <a href="https://sozaino.com/" class="nav-logo">ソザイノ<span>.</span></a>
+    <button class="hamburger" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="https://sozaino.com/">ホーム</a></li>
+      <li><a href="https://sozaino.com/gallery.html">素材ギャラリー</a></li>
+      <li><a href="https://sozaino.com/about.html">ソザイノについて</a></li>
+      <li><a href="https://sozaino.com/process.html">素材ができるまで</a></li>
+      <li><a href="https://sozaino.com/column/">コラム</a></li>
+      <li><a href="https://sozaino.com/faq.html">よくあるご質問</a></li>
+      <li><a href="https://sozaino.com/contact.html">お問い合わせ</a></li>
+    </ul>
+  </nav>
 </header>
 
-<div class="article-hero">
-    <div class="breadcrumb"><a href="/">ホーム</a><span class="sep">›</span><a href="index.html">コラム</a><span class="sep">›</span><span>SNS投稿の画像サイズ</span></div>
-    <div class="article-meta-top"><span class="article-tag">画像・デザイン</span><span>公開日：2026年5月17日</span><span>最終更新：2026年5月17日</span></div>
-    <h1 class="article-title">SNS投稿の画像サイズ完全ガイド。X・Instagram・LINE・Facebook対応表</h1>
-    <div class="article-author">
-        <div class="author-icon">編</div>
-        <div><strong style="color:var(--text);">ソザイノ編集部</strong><br><span style="font-size:.78rem;">高品質WebP素材の配信を通じて、Web画像の最適化をサポートしています。</span></div>
+<main>
+  <div class="breadcrumb">
+    <a href="https://sozaino.com/">ホーム</a> ›
+    <a href="https://sozaino.com/column/index.html">コラム</a> ›
+    SNS投稿の画像サイズ
+  </div>
+
+  <div class="article-meta">
+    <span class="tag">画像・デザイン</span>
+    <span class="date">公開日：2026年5月14日</span>
+    <span class="date">最終更新：2026年5月14日</span>
+  </div>
+
+  <h1>SNS投稿の画像サイズ完全ガイド2026年版。X・Instagram・LINE・Facebook・TikTok対応表</h1>
+
+  <div class="author-box">
+    <div class="author-icon">編</div>
+    <div>
+      <div class="author-name">ソザイノ編集部</div>
+      <div class="author-desc">高品質WebP素材の配信を通じて、Web画像の最適化をサポートしています。</div>
     </div>
-</div>
+  </div>
 
-<article>
+  <p>SNSに画像を投稿したとき、「意図しない場所で画像が切れてしまった」「思ったより画質が粗く表示された」という経験はありませんか。これはSNSごとに推奨される画像サイズが異なるため、最適なサイズで用意しないと起きる問題です。</p>
 
-<p>SNSに画像を投稿したとき、「意図しない場所で画像が切れてしまった」「思ったより画質が粗く表示された」という経験はありませんか。これはSNSごとに推奨される画像サイズが異なるため、最適なサイズで用意しないと起きる問題です。</p>
+  <p>本記事では、X（旧Twitter）・Instagram・LINE・Facebook・TikTokの推奨画像サイズを一覧で整理し、きれいに表示させるためのポイントを詳しく解説します。2026年時点の最新仕様に合わせて整理していますので、ブックマークしておくと便利です。</p>
 
-<p>本記事では、主要なSNSプラットフォームごとの推奨画像サイズを一覧で整理し、きれいに表示させるためのポイントを解説します。</p>
+  <h2>SNSごとの推奨画像サイズ一覧</h2>
 
-<h2>SNSごとの推奨画像サイズ一覧</h2>
+  <p>まず全SNSの推奨サイズをまとめて確認できる一覧表を掲載します。詳しい解説は後続のセクションで行います。</p>
 
-<table>
-    <thead><tr><th>SNS</th><th>用途</th><th>推奨サイズ</th><th>アスペクト比</th></tr></thead>
-    <tbody>
-        <tr><td>X（旧Twitter）</td><td>インライン画像（1枚）</td><td>1200×675 px</td><td>16:9</td></tr>
-        <tr><td>X（旧Twitter）</td><td>リンクカード（OGP）</td><td>1200×628 px</td><td>1.91:1</td></tr>
-        <tr><td>Instagram</td><td>正方形投稿</td><td>1080×1080 px</td><td>1:1</td></tr>
-        <tr><td>Instagram</td><td>横長投稿</td><td>1080×566 px</td><td>約1.91:1</td></tr>
-        <tr><td>Instagram</td><td>縦長投稿（リール等）</td><td>1080×1350 px</td><td>4:5</td></tr>
-        <tr><td>Facebook</td><td>リンクシェア</td><td>1200×630 px</td><td>1.91:1</td></tr>
-        <tr><td>Facebook</td><td>通常投稿画像</td><td>1200×900 px</td><td>4:3</td></tr>
-        <tr><td>LINE</td><td>リンクプレビュー</td><td>1200×630 px</td><td>1.91:1</td></tr>
-    </tbody>
-</table>
+  <table>
+    <tr>
+      <th>SNS</th>
+      <th>用途</th>
+      <th>推奨サイズ</th>
+      <th>アスペクト比</th>
+    </tr>
+    <tr>
+      <td>X（旧Twitter）</td>
+      <td>インライン画像（1枚）</td>
+      <td>1200×675 px</td>
+      <td>16:9</td>
+    </tr>
+    <tr>
+      <td>X（旧Twitter）</td>
+      <td>リンクカード（OGP）</td>
+      <td>1200×628 px</td>
+      <td>1.91:1</td>
+    </tr>
+    <tr>
+      <td>Instagram</td>
+      <td>正方形投稿</td>
+      <td>1080×1080 px</td>
+      <td>1:1</td>
+    </tr>
+    <tr>
+      <td>Instagram</td>
+      <td>横長投稿</td>
+      <td>1080×566 px</td>
+      <td>約1.91:1</td>
+    </tr>
+    <tr>
+      <td>Instagram</td>
+      <td>縦長投稿（リール等）</td>
+      <td>1080×1350 px</td>
+      <td>4:5</td>
+    </tr>
+    <tr>
+      <td>Facebook</td>
+      <td>リンクシェア</td>
+      <td>1200×630 px</td>
+      <td>1.91:1</td>
+    </tr>
+    <tr>
+      <td>Facebook</td>
+      <td>通常投稿画像</td>
+      <td>1200×900 px</td>
+      <td>4:3</td>
+    </tr>
+    <tr>
+      <td>LINE</td>
+      <td>リンクプレビュー</td>
+      <td>1200×630 px</td>
+      <td>1.91:1</td>
+    </tr>
+    <tr>
+      <td>TikTok</td>
+      <td>動画サムネイル</td>
+      <td>1080×1920 px</td>
+      <td>9:16</td>
+    </tr>
+  </table>
 
-<!-- 素材1 -->
-<div class="material-feature">
-    <a href="../download.html?id=1057">
-        <img class="material-feature-img" src="../assets/materials/blog/blog_189.webp" alt="ソザイノの素材サンプル" loading="lazy">
-        <div class="material-feature-caption"><div class="material-feature-text"><div class="material-feature-title">素材サンプル（blog_189）</div><div class="material-feature-sub">ソザイノで無料ダウンロード可能</div></div><div class="material-feature-arrow">詳細を見る →</div></div>
+    <div class="material-feature">
+    <a href="https://sozaino.com/download.html?id=1057">
+      <img class="material-feature-img" src="https://sozaino.com/assets/materials/blog/blog_189.webp" alt="ブログ用素材サンプル blog_189" loading="lazy">
+      <div class="material-feature-caption">
+        <div class="material-feature-text">
+          <div class="material-feature-title">素材サンプル（blog_189）</div>
+          <div class="material-feature-sub">ソザイノで無料ダウンロード可能</div>
+        </div>
+        <div class="material-feature-arrow">詳細を見る →</div>
+      </div>
     </a>
-</div>
+  </div>
 
-<h2>SNSごとの特徴と注意点</h2>
+  <h2>X（旧Twitter）の画像サイズと注意点</h2>
 
-<h3>X（旧Twitter）</h3>
+  <p>Xで画像を投稿する場合、1枚投稿と複数枚投稿ではトリミングのされ方が異なります。1枚投稿では<strong>16:9（1200×675px）</strong>がタイムライン上できれいに表示されます。</p>
 
-<p>Xでは、画像を1枚投稿する場合と複数枚投稿する場合でトリミングのされ方が変わります。1枚投稿では16:9（1200×675px）がきれいに表示されます。ブログ記事のリンクをシェアする場合はOGP画像（1200×628px）が表示されるため、アイキャッチ画像の設定が重要です。</p>
+  <h3>インライン画像（直接アップロード）</h3>
+  <p>タイムラインでは画像が自動的にトリミングされて表示されます。重要な要素（人物の顔・テキスト・ロゴ）は画像の中央寄りに配置しておくと、端が切れても見切れにくくなります。複数枚投稿の場合はさらにトリミングが厳しくなるため、特に注意が必要です。</p>
 
-<p>重要な要素（テキストやキャラクター）は画像の中央に配置しておくと、端がトリミングされても見切れにくくなります。</p>
+  <h3>リンクカード（OGP画像）</h3>
+  <p>ブログ記事のURLをポストすると、OGP設定に基づいてリンクカードが表示されます。推奨サイズは<strong>1200×628px（1.91:1）</strong>です。ブログのアイキャッチ画像をこのサイズで設定しておくと、Xでシェアされたときに自動的にきれいなカード表示になります。</p>
 
-<h3>Instagram</h3>
+  <div class="tip">
+    <strong>💡 Xでの表示確認方法</strong><br>
+    投稿前に「Card Validator」（cards-dev.twitter.com/validator）でOGP画像の表示を確認できます。リンクを貼り付けるだけでプレビューが表示されるため、公開前にチェックしておくと安心です。
+  </div>
 
-<p>Instagramは正方形（1:1）が基本と思われがちですが、実際には横長・縦長も投稿できます。フィード投稿では<strong>縦長（4:5）が最もスクリーン上の面積を広く使える</strong>ため、視認性の面で有利です。ただしプロフィールのサムネイルでは正方形にトリミングされるため、被写体が中央にある構図が無難です。</p>
+  <h2>Instagramの画像サイズと注意点</h2>
 
-<h3>Facebook・LINE</h3>
+  <p>Instagramは投稿の種類によって最適なアスペクト比が異なります。用途に合わせて使い分けることが重要です。</p>
 
-<p>FacebookのリンクシェアとLINEのリンクプレビューはどちらも1200×630px（1.91:1）が推奨で、ブログのアイキャッチサイズと共通です。ブログのOGP設定を正しく行っておけば、これらのSNSで記事をシェアしたときに自動的に適切な画像が表示されます。</p>
+  <h3>フィード投稿（正方形・横長・縦長）</h3>
+  <p>正方形（1:1）が基本と思われがちですが、縦長（4:5）はタイムライン上の表示面積が最も広くなるため、視認性の面で有利です。商品紹介やキャンペーン告知など、しっかり見てほしい投稿には縦長フォーマットが効果的です。</p>
 
-<!-- 素材2 -->
-<div class="material-feature">
-    <a href="../download.html?id=891">
-        <img class="material-feature-img" src="../assets/materials/character/character_264.webp" alt="ソザイノの素材サンプル" loading="lazy">
-        <div class="material-feature-caption"><div class="material-feature-text"><div class="material-feature-title">素材サンプル（character_264）</div><div class="material-feature-sub">ソザイノで無料ダウンロード可能</div></div><div class="material-feature-arrow">詳細を見る →</div></div>
+  <p>横長（1.91:1）は風景写真や横長バナーに向いていますが、モバイルのタイムラインでは表示が小さくなりがちです。テキストや細かいデザインを入れる場合は見切れに注意してください。</p>
+
+  <h3>プロフィールのサムネイル</h3>
+  <p>フィードに投稿した画像は、プロフィール画面では正方形にトリミングされて表示されます。縦長・横長で投稿した画像でも、プロフィールでは中央部分のみが切り取られます。プロフィールからも伝わるようにするには、被写体を中央に配置する構図が無難です。</p>
+
+  <h3>ストーリーズ・リール</h3>
+  <p>ストーリーズとリールは縦型全画面（9:16、1080×1920px）が基本です。画面の上下15%程度はUIで隠れるため、重要な要素はその範囲を避けて配置するのがポイントです。</p>
+
+    <div class="material-feature">
+    <a href="https://sozaino.com/download.html?id=891">
+      <img class="material-feature-img" src="https://sozaino.com/assets/materials/character/character_264.webp" alt="キャラクター素材サンプル character_264" loading="lazy">
+      <div class="material-feature-caption">
+        <div class="material-feature-text">
+          <div class="material-feature-title">素材サンプル（character_264）</div>
+          <div class="material-feature-sub">ソザイノで無料ダウンロード可能</div>
+        </div>
+        <div class="material-feature-arrow">詳細を見る →</div>
+      </div>
     </a>
-</div>
+  </div>
 
-<h2>SNS画像を選ぶときの3つのポイント</h2>
+  <h2>Facebook・LINEの画像サイズと注意点</h2>
 
-<h3>1. 重要な要素は中央に配置する</h3>
-<p>SNSでは自動トリミングが発生することがあります。伝えたいテキストや被写体は画像の中央寄りに配置しておくと、どのSNSでも安全に表示できます。</p>
+  <h3>Facebookのリンクシェア</h3>
+  <p>FacebookでブログのURLをシェアすると、OGP設定に基づいてリンクプレビューが表示されます。推奨サイズは<strong>1200×630px（1.91:1）</strong>で、XのOGP画像と同じサイズです。ブログのアイキャッチをこのサイズで作っておけば、XとFacebook両方に対応できます。</p>
 
-<h3>2. 高解像度の画像を用意する</h3>
-<p>推奨サイズより小さい画像を使うと、拡大表示された際に画質が粗くなります。推奨サイズ以上の解像度で用意するのが基本です。ソザイノの素材はWebP形式で軽量かつ高画質なため、SNS投稿にも適しています。</p>
+  <p>Facebookの通常投稿では横長（4:3）も使用できます。ただし、画像内のテキスト量が多いと広告としての配信時にリーチが下がる傾向があるため、テキストは最小限にしてキャプションで補足するのが効果的です。</p>
 
-<h3>3. テキストを画像に入れすぎない</h3>
-<p>Facebookでは画像内のテキスト量が多いとリーチが下がるという傾向があります。テキストは最小限にし、詳細はキャプションで伝えるのが効果的です。</p>
+  <h3>LINEのリンクプレビュー</h3>
+  <p>LINEでURLを送信すると、OGP設定に基づいてリンクプレビューが表示されます。推奨サイズはFacebookと同じ<strong>1200×630px（1.91:1）</strong>です。ブログのOGP設定を正しく行っておけば、LINEでシェアされたときに自動的に適切な画像が表示されます。</p>
 
-<div class="info-box">
-    <div class="info-box-title">💡 迷ったら1200×630pxで統一</div>
-    <p>複数のSNSで同じ画像を使いまわす場合、1200×630px（1.91:1）に統一するのが最もバランスが取れています。X・Facebook・LINEのリンクシェアすべてに対応でき、ブログのアイキャッチとも兼用できます。</p>
-</div>
+  <h2>TikTokの画像サイズと注意点</h2>
 
-<!-- 素材3 -->
-<div class="material-feature">
-    <a href="../download.html?id=944">
-        <img class="material-feature-img" src="../assets/materials/character/character_319.webp" alt="ソザイノの素材サンプル" loading="lazy">
-        <div class="material-feature-caption"><div class="material-feature-text"><div class="material-feature-title">素材サンプル（character_319）</div><div class="material-feature-sub">ソザイノで無料ダウンロード可能</div></div><div class="material-feature-arrow">詳細を見る →</div></div>
+  <p>TikTokは動画が中心のプラットフォームですが、サムネイル画像の設定も重要です。動画のサムネイルは<strong>1080×1920px（9:16）</strong>の縦型全画面が基本です。</p>
+
+  <p>サムネイルはフィード一覧で視聴者が最初に目にする要素です。文字を入れる場合は大きめのフォントで、画面の中央〜上部3分の2のエリアに収めると見やすくなります。下部はいいねボタンなどのUIと重なるため、重要な情報は避けるようにしてください。</p>
+
+  <h2>SNS画像を選ぶ・作るときの共通ポイント</h2>
+
+  <h3>1. 重要な要素は中央に配置する</h3>
+  <p>どのSNSでも自動トリミングが発生することがあります。伝えたいテキストや被写体は画像の中央寄りに配置しておくと、どのプラットフォームでも安全に表示できます。特に複数のSNSで同じ画像を使いまわす場合は、中央配置を基本にするのが無難です。</p>
+
+  <h3>2. 高解像度の画像を用意する</h3>
+  <p>推奨サイズより小さい画像を使うと、拡大表示された際に画質が粗くなります。最低でも推奨サイズ以上の解像度で用意するのが基本です。ソザイノの素材はWebP形式で軽量かつ高画質なため、SNS投稿にも適しています。</p>
+
+  <h3>3. テキストを画像に入れすぎない</h3>
+  <p>テキストが多い画像はSNSのアルゴリズムによって表示優先度が下がるケースがあります（特にFacebook広告）。伝えたいメッセージは最小限に絞り、詳細はキャプションで伝えるのが効果的です。</p>
+
+  <h3>4. WebP形式で軽量化する</h3>
+  <p>SNSへのアップロード前にWebP形式で画像を用意しておくと、アップロード速度が速く、ストレージの節約にもなります。ただしSNSのサーバー側で再圧縮されるため、最終的な表示画質はSNSの仕様に依存します。元画像は高解像度・高品質で用意しておくのが基本です。</p>
+
+    <div class="material-feature">
+    <a href="https://sozaino.com/download.html?id=944">
+      <img class="material-feature-img" src="https://sozaino.com/assets/materials/character/character_319.webp" alt="キャラクター素材サンプル character_319" loading="lazy">
+      <div class="material-feature-caption">
+        <div class="material-feature-text">
+          <div class="material-feature-title">素材サンプル（character_319）</div>
+          <div class="material-feature-sub">ソザイノで無料ダウンロード可能</div>
+        </div>
+        <div class="material-feature-arrow">詳細を見る →</div>
+      </div>
     </a>
-</div>
+  </div>
 
-<h2>まとめ：迷ったら1200×630pxを基準に</h2>
+  <h2>SNS別：迷ったときの「とりあえずこれ」サイズ</h2>
 
-<p>SNSごとに推奨サイズは異なりますが、1200×630pxを基準にしておけばほとんどのプラットフォームで問題なく表示できます。ソザイノの素材は横長構図のものが多く揃っているので、SNS投稿用の画像としてそのまま活用できます。</p>
+  <p>複数のSNSで同じ画像を使いまわす場合、どのサイズを基準にすればいいか迷うことがあります。用途別のおすすめをまとめます。</p>
 
-<div class="article-footer">
+  <table>
+    <tr>
+      <th>状況</th>
+      <th>おすすめサイズ</th>
+      <th>理由</th>
+    </tr>
+    <tr>
+      <td>複数SNSで使いまわす</td>
+      <td>1200×630px</td>
+      <td>X・Facebook・LINEのリンクシェア全対応</td>
+    </tr>
+    <tr>
+      <td>Instagramメイン</td>
+      <td>1080×1080px</td>
+      <td>正方形はどの表示形式でも無難</td>
+    </tr>
+    <tr>
+      <td>ブログ記事のアイキャッチ兼用</td>
+      <td>1200×630px</td>
+      <td>WordPressの推奨サイズと共通</td>
+    </tr>
+    <tr>
+      <td>縦型動画・ストーリーズ</td>
+      <td>1080×1920px</td>
+      <td>Instagram・TikTok・Xストーリーズ対応</td>
+    </tr>
+  </table>
+
+  <div class="tip">
+    <strong>💡 迷ったら1200×630pxを基準に</strong><br>
+    複数のSNSで同じ画像を使いまわす場合、1200×630px（1.91:1）に統一するのが最もバランスが取れています。X・Facebook・LINEのリンクシェアすべてに対応でき、ブログのアイキャッチとも兼用できます。ソザイノの素材は横長構図のものが多く揃っているので、このサイズでそのまま活用できます。
+  </div>
+
+  <h2>まとめ：SNSごとのサイズを把握して画像切れをなくそう</h2>
+
+  <p>SNSごとに推奨画像サイズは異なりますが、基本的な考え方は共通です。「重要な要素は中央に」「推奨サイズ以上の解像度で用意」「テキストは最小限に」の3点を意識するだけで、ほとんどの画像切れ・画質劣化問題は防げます。</p>
+
+  <p>複数のSNSで同じ素材を使いまわすなら1200×630pxを基準に、Instagramメインなら1080×1080pxを基準にするのがおすすめです。ソザイノの素材は横長・縦長ともに豊富に揃っていますので、用途に合わせてギャラリーから探してみてください。</p>
+
+  <div class="related-columns">
     <h3>関連コラム</h3>
-    <div class="related-articles">
-        <a href="eyecatch-size-guide.html" class="related-article-card"><div class="label">画像・デザイン</div><div class="title">ブログのアイキャッチ画像サイズ、正解はこれ。用途別の推奨サイズと選び方</div></a>
-        <a href="webp-guide.html" class="related-article-card"><div class="label">画像フォーマット</div><div class="title">WebP形式とは？PNG・JPEGとの違いと、ブログで使う5つのメリット</div></a>
+    <div class="related-list">
+      <a class="related-item" href="https://sozaino.com/column/eyecatch-size-guide.html">
+        <span class="related-tag">画像・デザイン</span>
+        ブログのアイキャッチ画像サイズ、正解はこれ。用途別の推奨サイズと選び方
+      </a>
+      <a class="related-item" href="https://sozaino.com/column/webp-guide.html">
+        <span class="related-tag">画像フォーマット</span>
+        WebP形式とは？PNG・JPEGとの違いと、ブログで使う5つのメリット
+      </a>
+      <a class="related-item" href="https://sozaino.com/column/free-material-selection-guide.html">
+        <span class="related-tag">素材活用</span>
+        ブログ用フリー素材の選び方。失敗しないための5つの確認ポイント
+      </a>
     </div>
-    <div class="gallery-cta">
-        <h3>SNS投稿に使える素材を探す</h3>
-        <p>1000点以上のWebP素材を無料配信中。商用利用OK、登録不要です。</p>
-        <a href="../gallery.html" class="gallery-cta-btn">素材ギャラリーへ →</a>
-    </div>
-</div>
-</article>
+  </div>
+
+  <div class="cta-box">
+    <p>SNS投稿に使えるWebP素材を1000点以上無料配信中。商用利用OK、登録不要です。</p>
+    <a href="https://sozaino.com/gallery.html">素材ギャラリーへ →</a>
+  </div>
+</main>
 
 <footer>
-    <div class="footer-content">
-        <div class="footer-links"><a href="../about.html">ソザイノについて</a><a href="../process.html">素材ができるまで</a><a href="index.html">コラム</a><a href="../privacy.html">プライバシーポリシー</a><a href="../terms.html">利用規約</a><a href="../disclaimer.html">免責事項</a><a href="../contact.html">お問い合わせ</a></div>
-        <div style="margin-top:1rem;"><a href="https://design.blogmura.com/freesozai/ranking/in?p_cid=11214708" target="_blank"><img src="https://b.blogmura.com/design/freesozai/88_31.gif" width="88" height="31" border="0" alt="にほんブログ村 デザインブログ フリー素材へ"></a></div>
-        <div class="footer-info"><p>&copy; 2026 ソザイノ (SOZAINO). All rights reserved.</p></div>
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="https://sozaino.com/about.html">ソザイノについて</a>
+      <a href="https://sozaino.com/process.html">素材ができるまで</a>
+      <a href="https://sozaino.com/column/index.html">コラム</a>
+      <a href="https://sozaino.com/privacy.html">プライバシーポリシー</a>
+      <a href="https://sozaino.com/terms.html">利用規約</a>
+      <a href="https://sozaino.com/disclaimer.html">免責事項</a>
+      <a href="https://sozaino.com/contact.html">お問い合わせ</a>
     </div>
+    <div class="blogmura">
+      <a href="https://design.blogmura.com/freesozai/ranking/in?p_cid=11214708">
+        <img src="https://b.blogmura.com/design/freesozai/88_31.gif" alt="にほんブログ村 デザインブログ フリー素材へ" loading="lazy">
+      </a>
+    </div>
+    <div>© 2026 ソザイノ (SOZAINO). All rights reserved.</div>
+  </div>
 </footer>
-<script>const menuToggle=document.getElementById('menuToggle');const navMenu=document.getElementById('navMenu');menuToggle.addEventListener('click',()=>navMenu.classList.toggle('open'));navMenu.querySelectorAll('a').forEach(link=>{link.addEventListener('click',()=>navMenu.classList.remove('open'));});</script>
 </body>
 </html>

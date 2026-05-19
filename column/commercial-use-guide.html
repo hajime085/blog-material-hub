@@ -1,200 +1,362 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>フリー素材の商用利用、実は注意が必要なケースとは？確認すべき3つのポイント | ソザイノ</title>
-    <meta name="description" content="「商用利用OK」のフリー素材でも注意が必要なケースがあります。利用規約の読み方、NGになりやすいパターン、安全に使うための確認ポイントを解説します。">
-    <link rel="canonical" href="https://sozaino.com/column/commercial-use-guide.html">
-    <meta property="og:type" content="article">
-    <meta property="og:title" content="フリー素材の商用利用、実は注意が必要なケースとは？確認すべき3つのポイント">
-    <meta property="og:description" content="「商用利用OK」のフリー素材でも注意が必要なケースがあります。利用規約の読み方、NGになりやすいパターン、安全に使うための確認ポイントを解説します。">
-    <meta property="og:url" content="https://sozaino.com/column/commercial-use-guide.html">
-    <meta property="og:site_name" content="ソザイノ (SOZAINO)">
-    <style>
-        :root{--primary:#0d9488;--primary2:#14b8a6;--primary-bg:#f0fdfa;--text:#0f172a;--muted:#64748b;--border:#e2e8f0;--bg:#fafafa;--surface:#ffffff;--header-bg:#ffffff;--header-text:#0f172a;--header-text-muted:#64748b;}
-        *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
-        body{font-family:'Noto Sans JP',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.85;color:var(--text);background-color:var(--bg);}
-        header{background:var(--header-bg);position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border);box-shadow:0 1px 3px rgba(15,23,42,.04);}
-        .navbar{max-width:1200px;margin:0 auto;padding:.85rem 2rem;display:flex;justify-content:space-between;align-items:center;}
-        .logo{font-size:1.3rem;font-weight:700;color:var(--header-text);text-decoration:none;}.logo span{color:var(--primary);}
-        .nav-links{display:flex;gap:1.8rem;}.nav-links a{color:var(--header-text-muted);text-decoration:none;font-size:.92rem;font-weight:500;transition:color .2s;}.nav-links a:hover{color:var(--primary);}
-        .menu-toggle{display:none;background:none;border:none;color:var(--header-text);font-size:1.4rem;cursor:pointer;}
-        .article-hero{background:linear-gradient(180deg,var(--primary-bg) 0%,#ffffff 100%);padding:3rem 2rem 2rem;}
-        .breadcrumb{max-width:800px;margin:0 auto 1.2rem;font-size:.85rem;color:var(--muted);}.breadcrumb a{color:var(--muted);text-decoration:none;}.breadcrumb a:hover{color:var(--primary);}.breadcrumb .sep{margin:0 .4rem;opacity:.5;}
-        .article-meta-top{max-width:800px;margin:0 auto;display:flex;gap:1rem;align-items:center;font-size:.82rem;color:var(--muted);margin-bottom:1rem;}
-        .article-tag{display:inline-block;background:var(--primary-bg);color:var(--primary);padding:.2rem .8rem;border-radius:12px;font-weight:600;font-size:.78rem;}
-        h1.article-title{max-width:800px;margin:0 auto;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;line-height:1.4;letter-spacing:-.01em;color:var(--text);}
-        .article-author{max-width:800px;margin:1.5rem auto 0;display:flex;align-items:center;gap:.8rem;font-size:.85rem;color:var(--muted);}
-        .author-icon{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--primary2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.9rem;flex-shrink:0;}
-        article{max-width:800px;margin:2rem auto;padding:2.5rem 2rem;background:var(--surface);border-radius:12px;box-shadow:0 1px 3px rgba(15,23,42,.04);}
-        article p{margin-bottom:1.4rem;font-size:1rem;line-height:1.9;}
-        article h2{font-size:1.5rem;font-weight:700;margin:2.5rem 0 1.2rem;padding-bottom:.5rem;border-bottom:2px solid var(--primary);color:var(--text);line-height:1.4;}article h2:first-of-type{margin-top:0;}
-        article h3{font-size:1.15rem;font-weight:700;margin:2rem 0 .8rem;color:var(--text);padding-left:.8rem;border-left:4px solid var(--primary);line-height:1.5;}
-        article ul,article ol{margin:0 0 1.4rem 1.5rem;}article li{margin-bottom:.5rem;line-height:1.85;}
-        article a{color:var(--primary);text-decoration:underline;text-underline-offset:2px;}article a:hover{opacity:.75;}
-        article strong{font-weight:700;color:var(--text);}
-        article table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.92rem;}
-        article th,article td{padding:.8rem 1rem;text-align:left;border-bottom:1px solid var(--border);}
-        article th{background:var(--primary-bg);color:var(--text);font-weight:700;}article tbody tr:hover{background:#fafafa;}
-        .info-box{background:var(--primary-bg);border-left:4px solid var(--primary);padding:1.2rem 1.4rem;margin:1.5rem 0;border-radius:4px;}.info-box p:last-child{margin-bottom:0;}.info-box-title{font-weight:700;color:var(--primary);margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem;}
-        .warn-box{background:#fffbeb;border-left:4px solid #f59e0b;padding:1.2rem 1.4rem;margin:1.5rem 0;border-radius:4px;}.warn-box p:last-child{margin-bottom:0;}.warn-box-title{font-weight:700;color:#b45309;margin-bottom:.5rem;}
-        .material-feature{margin:1.8rem 0;background:#fafafa;border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:transform .2s,box-shadow .2s;}.material-feature:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(15,23,42,.08);}
-        .material-feature a{display:block;text-decoration:none;color:inherit;}
-        .material-feature-img{width:100%;aspect-ratio:16/9;background:#f0fdfa;object-fit:contain;padding:1rem;display:block;}
-        .material-feature-caption{padding:.9rem 1.2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;}
-        .material-feature-text{flex:1;min-width:0;}.material-feature-title{font-size:.92rem;font-weight:600;color:var(--text);margin-bottom:.15rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}.material-feature-sub{font-size:.78rem;color:var(--muted);}.material-feature-arrow{flex-shrink:0;color:var(--primary);font-size:.85rem;font-weight:600;white-space:nowrap;}
-        .article-footer{margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border);}.article-footer h3{font-size:1.1rem;margin-bottom:1rem;border:none;padding:0;}
-        .related-articles{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-bottom:2rem;}
-        .related-article-card{display:block;padding:1rem 1.2rem;border:1px solid var(--border);border-radius:8px;text-decoration:none;color:inherit;transition:all .2s;}.related-article-card:hover{border-color:var(--primary);transform:translateY(-2px);}
-        .related-article-card .label{font-size:.72rem;color:var(--primary);font-weight:700;margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.04em;}.related-article-card .title{font-size:.92rem;font-weight:600;color:var(--text);line-height:1.5;}
-        .gallery-cta{background:linear-gradient(135deg,var(--primary) 0%,var(--primary2) 100%);border-radius:12px;padding:1.8rem;text-align:center;margin-top:2rem;color:#fff;}
-        .gallery-cta h3{color:#fff!important;font-size:1.15rem;margin-bottom:.5rem;border:none!important;padding:0!important;}.gallery-cta p{color:rgba(255,255,255,.9);margin-bottom:1.2rem;font-size:.92rem;}
-        .gallery-cta-btn{display:inline-block;background:#fff;color:var(--primary);padding:.7rem 1.6rem;border-radius:8px;text-decoration:none;font-weight:700;font-size:.92rem;box-shadow:0 3px 12px rgba(0,0,0,.15);transition:transform .2s,box-shadow .2s;}.gallery-cta-btn:hover{transform:translateY(-1px);box-shadow:0 5px 16px rgba(0,0,0,.2);}
-        footer{background:#1e293b;color:rgba(255,255,255,.7);margin-top:4rem;padding:3rem 2rem;}.footer-content{max-width:1200px;margin:0 auto;}
-        .footer-links{display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(255,255,255,.1);}.footer-links a{color:rgba(255,255,255,.65);text-decoration:none;font-size:.85rem;transition:color .2s;}.footer-links a:hover{color:var(--primary2);}
-        .footer-info{font-size:.8rem;color:rgba(255,255,255,.4);}
-        @media(max-width:768px){.navbar{padding:.85rem 1rem;}.menu-toggle{display:block;}.nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:var(--header-bg);flex-direction:column;gap:0;padding:.5rem 0;box-shadow:0 4px 12px rgba(15,23,42,.08);border-top:1px solid var(--border);}.nav-links.open{display:flex;}.nav-links a{padding:.8rem 1.5rem;border-bottom:1px solid var(--border);}.nav-links a:last-child{border-bottom:none;}.article-hero{padding:2rem 1rem 1.5rem;}article{margin:1rem;padding:1.8rem 1.4rem;}article h2{font-size:1.3rem;}article h3{font-size:1.05rem;}}
-    </style>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"フリー素材の商用利用、実は注意が必要なケースとは？確認すべき3つのポイント","description":"「商用利用OK」のフリー素材でも注意が必要なケースがあります。利用規約の読み方、NGになりやすいパターン、安全に使うための確認ポイントを解説します。","image":"https://sozaino.com/favicon-192.png","datePublished":"2026-05-17","dateModified":"2026-05-17","author":{"@type":"Organization","name":"ソザイノ編集部"},"publisher":{"@type":"Organization","name":"ソザイノ (SOZAINO)","logo":{"@type":"ImageObject","url":"https://sozaino.com/favicon-192.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://sozaino.com/column/commercial-use-guide.html"}}</script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2687113603921668" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>フリー素材の商用利用ガイド。「商用利用OK」でも注意が必要なケースと確認すべき5つのポイント | ソザイノ</title>
+  <meta name="description" content="「商用利用OK」のフリー素材でもトラブルになるケースがあります。利用規約の読み方、NGになりやすいパターン、ライセンス種別の違い、安全に使うための5つの確認ポイントをブログ運営者向けに詳しく解説します。">
+  <link rel="canonical" href="https://sozaino.com/column/commercial-use-guide.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="フリー素材の商用利用ガイド。「商用利用OK」でも注意が必要なケースと確認すべき5つのポイント | ソザイノ">
+  <meta property="og:description" content="「商用利用OK」のフリー素材でもトラブルになるケースがあります。利用規約の読み方、NGになりやすいパターン、安全に使うための5つの確認ポイントを解説。">
+  <meta property="og:url" content="https://sozaino.com/column/commercial-use-guide.html">
+  <meta property="og:site_name" content="ソザイノ (SOZAINO)">
+  <style>
+    :root{--primary:#0d9488;--primary2:#14b8a6;--primary-bg:#f0fdfa;--text:#0f172a;--muted:#64748b;--border:#e2e8f0;--bg:#fafafa;--surface:#ffffff;}
+    *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+    body{font-family:'Noto Sans JP',-apple-system,sans-serif;line-height:1.85;color:var(--text);background:var(--bg);}
+    header{background:#fff;position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border);box-shadow:0 1px 3px rgba(15,23,42,.04);}
+    .navbar{max-width:1200px;margin:0 auto;padding:.85rem 2rem;display:flex;justify-content:space-between;align-items:center;}
+    .nav-logo{font-size:1.25rem;font-weight:700;color:var(--primary);text-decoration:none;letter-spacing:-.5px;}
+    .nav-logo span{color:var(--text);}
+    .nav-links{display:flex;gap:1.5rem;list-style:none;}
+    .nav-links a{color:var(--muted);text-decoration:none;font-size:.875rem;transition:color .2s;}
+    .nav-links a:hover{color:var(--primary);}
+    .hamburger{display:none;background:none;border:none;cursor:pointer;padding:.5rem;}
+    .hamburger span{display:block;width:22px;height:2px;background:var(--text);margin:5px 0;transition:.3s;}
+    @media(max-width:768px){.nav-links{display:none;}.hamburger{display:block;}}
+    main{max-width:800px;margin:0 auto;padding:2.5rem 1.5rem 4rem;}
+    .breadcrumb{font-size:.8rem;color:var(--muted);margin-bottom:1.5rem;}
+    .breadcrumb a{color:var(--muted);text-decoration:none;}
+    .breadcrumb a:hover{color:var(--primary);}
+    .article-meta{display:flex;gap:1rem;align-items:center;margin-bottom:1rem;flex-wrap:wrap;}
+    .tag{background:var(--primary-bg);color:var(--primary);font-size:.75rem;padding:.2rem .7rem;border-radius:99px;font-weight:600;}
+    .date{font-size:.8rem;color:var(--muted);}
+    h1{font-size:1.7rem;font-weight:800;line-height:1.4;margin-bottom:1.5rem;color:var(--text);}
+    .author-box{display:flex;align-items:center;gap:.75rem;padding:.85rem 1rem;background:var(--primary-bg);border-radius:.5rem;margin-bottom:2rem;font-size:.85rem;}
+    .author-icon{width:36px;height:36px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;flex-shrink:0;}
+    .author-name{font-weight:700;color:var(--text);}
+    .author-desc{color:var(--muted);font-size:.8rem;}
+    p{margin-bottom:1.25rem;font-size:1rem;}
+    h2{font-size:1.25rem;font-weight:700;margin:2.5rem 0 1rem;padding-left:.75rem;border-left:3px solid var(--primary);}
+    h3{font-size:1.05rem;font-weight:700;margin:1.75rem 0 .75rem;}
+    ul,ol{margin:0 0 1.25rem 1.5rem;}
+    li{margin-bottom:.4rem;}
+    table{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.9rem;}
+    th{background:var(--primary-bg);color:var(--primary);padding:.6rem .85rem;text-align:left;border:1px solid var(--border);}
+    td{padding:.6rem .85rem;border:1px solid var(--border);vertical-align:top;}
+    .notice{background:#fffbeb;border-left:3px solid #f59e0b;padding:1rem 1.25rem;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;font-size:.9rem;}
+    .notice strong{color:#b45309;}
+    .tip{background:var(--primary-bg);border-left:3px solid var(--primary);padding:1rem 1.25rem;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;font-size:.9rem;}
+    .ok-box{background:#f0fdf4;border:1px solid #86efac;border-radius:.5rem;padding:1rem 1.25rem;margin:1.25rem 0;font-size:.9rem;}
+    .ok-box strong{color:#166534;}
+    .material-feature{margin:1.8rem 0;background:#fafafa;border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:transform .2s,box-shadow .2s;}
+    .material-feature:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(15,23,42,.08);}
+    .material-feature a{display:block;text-decoration:none;color:inherit;}
+    .material-feature-img{width:100%;aspect-ratio:16/9;background:#f0fdfa;object-fit:contain;padding:1rem;display:block;}
+    .material-feature-caption{padding:.9rem 1.2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;}
+    .material-feature-text{flex:1;min-width:0;}
+    .material-feature-title{font-size:.92rem;font-weight:600;color:var(--text);margin-bottom:.15rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .material-feature-sub{font-size:.78rem;color:var(--muted);}
+    .material-feature-arrow{flex-shrink:0;color:var(--primary);font-size:.85rem;font-weight:600;white-space:nowrap;}
+    .related-columns{margin:2.5rem 0 0;}
+    .related-columns h3{font-size:1rem;font-weight:700;margin-bottom:.85rem;}
+    .related-list{display:flex;flex-direction:column;gap:.6rem;}
+    .related-item{display:flex;gap:.5rem;align-items:flex-start;text-decoration:none;color:var(--text);font-size:.9rem;}
+    .related-item:hover{color:var(--primary);}
+    .related-tag{background:var(--primary-bg);color:var(--primary);font-size:.7rem;padding:.15rem .5rem;border-radius:99px;white-space:nowrap;margin-top:.15rem;}
+    .cta-box{background:var(--primary);color:#fff;border-radius:.75rem;padding:1.75rem;text-align:center;margin:2.5rem 0 0;}
+    .cta-box p{color:rgba(255,255,255,.85);margin-bottom:1rem;font-size:.95rem;}
+    .cta-box a{display:inline-block;background:#fff;color:var(--primary);font-weight:700;padding:.65rem 1.75rem;border-radius:99px;text-decoration:none;font-size:.95rem;}
+    footer{background:#0f172a;color:#94a3b8;padding:2rem 1.5rem;font-size:.82rem;}
+    .footer-inner{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:1rem;align-items:center;}
+    .footer-links{display:flex;flex-wrap:wrap;gap:.75rem 1.25rem;justify-content:center;}
+    .footer-links a{color:#94a3b8;text-decoration:none;}
+    .footer-links a:hover{color:#fff;}
+    .blogmura{margin-top:.5rem;}
+  </style>
 </head>
 <body>
 <header>
-    <div class="navbar">
-        <a href="/" class="logo">ソザイノ<span>.</span></a>
-        <button class="menu-toggle" id="menuToggle">☰</button>
-        <nav class="nav-links" id="navMenu">
-            <a href="/">ホーム</a><a href="../gallery.html">素材ギャラリー</a><a href="../about.html">ソザイノについて</a><a href="../process.html">素材ができるまで</a><a href="../column/">コラム</a><a href="../faq.html">よくあるご質問</a><a href="../contact.html">お問い合わせ</a>
-        </nav>
-    </div>
+  <nav class="navbar">
+    <a href="https://sozaino.com/" class="nav-logo">ソザイノ<span>.</span></a>
+    <button class="hamburger" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="https://sozaino.com/">ホーム</a></li>
+      <li><a href="https://sozaino.com/gallery.html">素材ギャラリー</a></li>
+      <li><a href="https://sozaino.com/about.html">ソザイノについて</a></li>
+      <li><a href="https://sozaino.com/process.html">素材ができるまで</a></li>
+      <li><a href="https://sozaino.com/column/">コラム</a></li>
+      <li><a href="https://sozaino.com/faq.html">よくあるご質問</a></li>
+      <li><a href="https://sozaino.com/contact.html">お問い合わせ</a></li>
+    </ul>
+  </nav>
 </header>
 
-<div class="article-hero">
-    <div class="breadcrumb"><a href="/">ホーム</a><span class="sep">›</span><a href="index.html">コラム</a><span class="sep">›</span><span>フリー素材の商用利用</span></div>
-    <div class="article-meta-top"><span class="article-tag">利用規約</span><span>公開日：2026年5月17日</span><span>最終更新：2026年5月17日</span></div>
-    <h1 class="article-title">フリー素材の商用利用、実は注意が必要なケースとは？確認すべき3つのポイント</h1>
-    <div class="article-author">
-        <div class="author-icon">編</div>
-        <div><strong style="color:var(--text);">ソザイノ編集部</strong><br><span style="font-size:.78rem;">高品質WebP素材の配信を通じて、Web画像の最適化をサポートしています。</span></div>
+<main>
+  <div class="breadcrumb">
+    <a href="https://sozaino.com/">ホーム</a> ›
+    <a href="https://sozaino.com/column/index.html">コラム</a> ›
+    フリー素材の商用利用
+  </div>
+
+  <div class="article-meta">
+    <span class="tag">利用規約</span>
+    <span class="date">公開日：2026年5月13日</span>
+    <span class="date">最終更新：2026年5月13日</span>
+  </div>
+
+  <h1>フリー素材の商用利用ガイド。「商用利用OK」でも注意が必要なケースと確認すべき5つのポイント</h1>
+
+  <div class="author-box">
+    <div class="author-icon">編</div>
+    <div>
+      <div class="author-name">ソザイノ編集部</div>
+      <div class="author-desc">高品質WebP素材の配信を通じて、Web画像の最適化をサポートしています。</div>
     </div>
-</div>
+  </div>
 
-<article>
+  <p>フリー素材サイトで「商用利用OK」と書かれていても、使い方によってはルール違反になるケースがあります。「無料で使えるなら何でもOK」と思って使っていると、後からトラブルになることも。本記事では、ブログやSNSで素材を活用する前に押さえておきたい知識を、実例を交えながら詳しく整理します。</p>
 
-<p>フリー素材サイトで「商用利用OK」と書かれていても、使い方によってはルール違反になるケースがあります。「無料で使えるなら何でもOK」と思って使っていると、後からトラブルになることも。ブログやSNSで素材を活用する前に、最低限押さえておきたいポイントをまとめました。</p>
+  <h2>「商用利用OK」の意味を正確に理解する</h2>
 
-<h2>「商用利用OK」の意味を正確に理解する</h2>
+  <p>「商用利用OK」とは、一般的に<strong>素材を使って収益を得る活動に使用してよい</strong>という意味です。アフィリエイトブログ、広告収入のあるWebサイト、販促用のSNS投稿、会社のホームページなどがこれに当たります。</p>
 
-<p>「商用利用OK」とは、一般的に<strong>素材を使って収益を得る活動に使用してよい</strong>という意味です。アフィリエイトブログ、広告収入のあるWebサイト、販促用のSNS投稿、会社のホームページなどがこれに当たります。</p>
+  <p>ただし「商用利用OK」は、「何でもOK」とイコールではありません。多くのサイトでは商用利用を認めながらも、別途いくつかの制限を設けています。たとえば「クレジット表記が必要」「人物画像は特定用途禁止」「素材の再販は不可」など、条件はサイトによって様々です。</p>
 
-<p>ただし「商用利用OK」は、「何でもOK」とイコールではありません。多くのサイトでは商用利用を認めながらも、いくつかの制限を設けています。</p>
+  <p>また「商用利用OK」と書いていないサイトでも、ライセンス条件によっては商用利用が認められている場合があります。逆に「フリー素材」と書いてあっても、個人の非商用利用にのみ許可されているケースもあります。重要なのは、ラベルだけを見るのではなく、<strong>利用規約やライセンスの本文を確認する習慣</strong>をつけることです。</p>
 
-<!-- 素材1 -->
-<div class="material-feature">
-    <a href="../download.html?id=1059">
-        <img class="material-feature-img" src="../assets/materials/blog/blog_191.webp" alt="ソザイノの素材サンプル" loading="lazy">
-        <div class="material-feature-caption"><div class="material-feature-text"><div class="material-feature-title">素材サンプル（blog_191）</div><div class="material-feature-sub">ソザイノで無料ダウンロード可能</div></div><div class="material-feature-arrow">詳細を見る →</div></div>
+    <div class="material-feature">
+    <a href="https://sozaino.com/download.html?id=1059">
+      <img class="material-feature-img" src="https://sozaino.com/assets/materials/blog/blog_191.webp" alt="ブログ用素材サンプル blog_191" loading="lazy">
+      <div class="material-feature-caption">
+        <div class="material-feature-text">
+          <div class="material-feature-title">素材サンプル（blog_191）</div>
+          <div class="material-feature-sub">ソザイノで無料ダウンロード可能</div>
+        </div>
+        <div class="material-feature-arrow">詳細を見る →</div>
+      </div>
     </a>
-</div>
+  </div>
 
-<h2>注意が必要な3つのケース</h2>
+  <h2>商用利用で注意が必要な4つのケース</h2>
 
-<h3>1. 素材の再配布・販売</h3>
+  <h3>1. 素材の再配布・販売</h3>
+  <p>ダウンロードした素材をそのまま別のサイトで配布したり、素材集として販売したりすることは、ほぼすべての素材サイトで禁止されています。「商用利用OK」はあくまで「素材を使った制作物を商用利用できる」という意味であり、素材そのものを商品として扱うことは別の話です。</p>
 
-<p>ダウンロードした素材をそのまま別のサイトで配布したり、素材集として販売したりすることは、ほぼすべての素材サイトで禁止されています。「商用利用OK」はあくまで「素材を使った制作物を商用利用できる」という意味であり、素材そのものを商品として扱うことは別の話です。</p>
+  <div class="notice">
+    <strong>⚠️ NGの例</strong><br>
+    ダウンロードした素材をまとめてUSBやDVDに入れて販売する、または別の素材サイトに転載して配布する行為はNGです。素材を使ったブログ記事やバナーを作って公開・販売することはOKです。
+  </div>
 
-<div class="warn-box">
-    <div class="warn-box-title">⚠️ NGの例</div>
-    <p>ダウンロードした素材をまとめてUSBやDVDに入れて販売する、または別の素材サイトに転載して配布する行為はNGです。素材を使ったブログ記事やバナーを作って公開・販売することはOKです。</p>
-</div>
+  <h3>2. クレジット表記が必要なサイトでの無断使用</h3>
+  <p>素材サイトによっては、商用利用を認める条件として「クレジット表記（出典の明記）」を求めているケースがあります。「〇〇より提供」「Photo by ○○」といった表記です。これを省略すると規約違反になります。</p>
+  <p>利用前に「クレジット表記が必要かどうか」を必ず確認しましょう。ソザイノの素材はクレジット表記不要で使用できますが、他のサイトでは異なる場合があります。英語サイトでは「Attribution required」という表記がこれに相当します。</p>
 
-<h3>2. クレジット表記が必要なサイトでの無断使用</h3>
-
-<p>素材サイトによっては、商用利用を認める条件として「クレジット表記（出典の明記）」を求めているケースがあります。「〇〇より提供」「Photo by ○○」といった表記です。これを省略すると規約違反になります。</p>
-
-<p>利用前に「クレジット表記が必要かどうか」を必ず確認しましょう。ソザイノの素材はクレジット表記不要で使用できますが、他のサイトでは異なる場合があります。</p>
-
-<h3>3. 人物が写った画像のセンシティブな用途への使用</h3>
-
-<p>人物が写ったフリー素材（モデル写真など）を使う場合、たとえ商用利用OKであっても、<strong>特定の用途は禁止されているケースが多い</strong>です。具体的には：</p>
-
-<ul>
+  <h3>3. 人物が写った画像のセンシティブな用途への使用</h3>
+  <p>人物が写ったフリー素材（モデル写真など）を使う場合、たとえ商用利用OKであっても、<strong>特定の用途は禁止されているケースが多い</strong>です。具体的には以下のような用途です。</p>
+  <ul>
     <li>特定の宗教・政治団体の宣伝への使用</li>
     <li>成人向けコンテンツへの使用</li>
     <li>差別的・侮辱的な文脈での使用</li>
     <li>モデルが実際には関与していない商品・サービスへの推薦のような使い方</li>
-</ul>
+  </ul>
+  <p>AI生成の人物画像でも同様の制限が設けられていることがあります。用途が特殊な場合は利用規約を必ず確認してください。</p>
 
-<p>AI生成の人物画像でも同様の制限が設けられていることがあります。用途が特殊な場合は利用規約を必ず確認してください。</p>
+  <h3>4. ライセンス条件が変更されたあとも旧条件で使い続けるケース</h3>
+  <p>フリー素材サイトの利用規約は、サイト運営の都合によって変更されることがあります。かつて「商用利用OK・クレジット不要」だったサイトが、途中からクレジット必須や有料プランのみ商用可に変更されるケースも実際にあります。</p>
+  <p>特定のサイトを長期的に使い続けている場合は、年に一度程度、利用規約の内容を確認する習慣をつけておくと安心です。変更があった場合はサイト内でアナウンスされることが多いですが、見逃してしまうこともあるため注意が必要です。</p>
 
-<!-- 素材2 -->
-<div class="material-feature">
-    <a href="../download.html?id=53">
-        <img class="material-feature-img" src="../assets/materials/person/person_014.webp" alt="ソザイノの素材サンプル" loading="lazy">
-        <div class="material-feature-caption"><div class="material-feature-text"><div class="material-feature-title">素材サンプル（person_014）</div><div class="material-feature-sub">ソザイノで無料ダウンロード可能</div></div><div class="material-feature-arrow">詳細を見る →</div></div>
+    <div class="material-feature">
+    <a href="https://sozaino.com/download.html?id=53">
+      <img class="material-feature-img" src="https://sozaino.com/assets/materials/person/person_014.webp" alt="人物素材サンプル person_014" loading="lazy">
+      <div class="material-feature-caption">
+        <div class="material-feature-text">
+          <div class="material-feature-title">素材サンプル（person_014）</div>
+          <div class="material-feature-sub">ソザイノで無料ダウンロード可能</div>
+        </div>
+        <div class="material-feature-arrow">詳細を見る →</div>
+      </div>
     </a>
-</div>
+  </div>
 
-<h2>利用規約を読むときの3つのチェックポイント</h2>
+  <h2>主なライセンス種別と商用利用の可否</h2>
 
-<table>
-    <thead><tr><th>確認項目</th><th>確認内容</th></tr></thead>
-    <tbody>
-        <tr><td>商用利用の可否</td><td>ブログ・広告・販促物への使用が認められているか</td></tr>
-        <tr><td>クレジット表記</td><td>出典・提供元の明記が必要かどうか</td></tr>
-        <tr><td>禁止用途</td><td>特定の業種・コンテンツへの使用制限があるか</td></tr>
-    </tbody>
-</table>
+  <p>フリー素材サイトが採用しているライセンスには、いくつかの代表的な種類があります。それぞれの特徴を理解しておくと、利用規約を読むときに迷いが減ります。</p>
 
-<p>この3点を確認するだけで、ほとんどのトラブルは防げます。利用規約が英語のサイトでは、「commercial use」「attribution」「prohibited uses」というキーワードを探すと該当箇所を見つけやすいです。</p>
+  <table>
+    <tr>
+      <th>ライセンス種別</th>
+      <th>商用利用</th>
+      <th>クレジット表記</th>
+      <th>改変</th>
+    </tr>
+    <tr>
+      <td>CC0（パブリックドメイン）</td>
+      <td>✅ OK</td>
+      <td>不要</td>
+      <td>✅ OK</td>
+    </tr>
+    <tr>
+      <td>CC BY（表示）</td>
+      <td>✅ OK</td>
+      <td>必要</td>
+      <td>✅ OK</td>
+    </tr>
+    <tr>
+      <td>CC BY-NC（表示・非営利）</td>
+      <td>❌ 不可</td>
+      <td>必要</td>
+      <td>✅ OK</td>
+    </tr>
+    <tr>
+      <td>CC BY-ND（表示・改変禁止）</td>
+      <td>✅ OK</td>
+      <td>必要</td>
+      <td>❌ 不可</td>
+    </tr>
+    <tr>
+      <td>独自規約（商用利用OK明記）</td>
+      <td>✅ OK（条件による）</td>
+      <td>サイトによる</td>
+      <td>サイトによる</td>
+    </tr>
+  </table>
 
-<h2>ソザイノの利用規約について</h2>
+  <p>最もシンプルで使いやすいのは<strong>CC0（パブリックドメイン）</strong>です。著作権を放棄した状態で提供されているため、商用利用・クレジット不要・改変OKと、制限がほぼありません。ソザイノの素材は独自規約で「商用利用OK・クレジット不要・改変OK」という条件を採用しており、実質的にCC0に近い使いやすさを目指しています。</p>
 
-<p>ソザイノの素材は以下の条件で利用できます：</p>
+  <h2>利用規約を読むときの5つのチェックポイント</h2>
 
-<div class="info-box">
-    <div class="info-box-title">✅ ソザイノの利用条件まとめ</div>
-    <p>・商用利用OK（ブログ、SNS、販促物、会社サイト等）<br>
+  <p>素材を使う前に確認しておくべき項目を5点にまとめました。この5点を確認する習慣をつけるだけで、ほとんどのトラブルは防げます。</p>
+
+  <table>
+    <tr>
+      <th>確認項目</th>
+      <th>確認内容</th>
+    </tr>
+    <tr>
+      <td>① 商用利用の可否</td>
+      <td>ブログ・広告・販促物への使用が認められているか</td>
+    </tr>
+    <tr>
+      <td>② クレジット表記</td>
+      <td>出典・提供元の明記が必要かどうか</td>
+    </tr>
+    <tr>
+      <td>③ 禁止用途</td>
+      <td>特定の業種・コンテンツへの使用制限があるか</td>
+    </tr>
+    <tr>
+      <td>④ 改変・加工の可否</td>
+      <td>トリミング・色変更・テキスト追加などが許可されているか</td>
+    </tr>
+    <tr>
+      <td>⑤ 再配布・転載の禁止</td>
+      <td>素材そのものを別サイトで配布・販売することが禁止されているか</td>
+    </tr>
+  </table>
+
+  <p>利用規約が英語のサイトでは、「commercial use」「attribution」「prohibited uses」「redistribution」というキーワードを探すと該当箇所を見つけやすいです。規約が長くて読みにくい場合は、ページ内検索（Ctrl+F）でこれらのキーワードを検索するのが効率的です。</p>
+
+  <div class="tip">
+    <strong>💡 迷ったときの判断基準</strong><br>
+    利用規約を読んでも判断がつかない場合は、「問い合わせて確認する」か「別の素材を使う」のどちらかが安全です。規約の解釈に自信がないまま使い続けることは、リスクの先送りになります。
+  </div>
+
+  <h2>ソザイノの利用規約について</h2>
+
+  <p>ソザイノの素材は、できるだけシンプルな条件で気軽に使っていただけるよう設計しています。</p>
+
+  <div class="ok-box">
+    <strong>✅ ソザイノの利用条件まとめ</strong><br><br>
+    ・商用利用OK（ブログ、SNS、販促物、会社サイト等）<br>
     ・クレジット表記不要（任意で表記いただける場合は「素材提供：ソザイノ」）<br>
     ・編集・改変OK（色調変更、トリミング、テキスト追加等）<br>
     ・素材の再配布・販売はNG<br>
-    ・素材を使った作品の配布・販売はOK</p>
-</div>
+    ・素材を使った作品の配布・販売はOK
+  </div>
 
-<!-- 素材3 -->
-<div class="material-feature">
-    <a href="../download.html?id=753">
-        <img class="material-feature-img" src="../assets/materials/character/character_007.webp" alt="ソザイノの素材サンプル" loading="lazy">
-        <div class="material-feature-caption"><div class="material-feature-text"><div class="material-feature-title">素材サンプル（character_007）</div><div class="material-feature-sub">ソザイノで無料ダウンロード可能</div></div><div class="material-feature-arrow">詳細を見る →</div></div>
+  <p>AI生成素材の著作権については、2026年現在も法的整備が進んでいる領域です。ソザイノでは外部素材を使用せず、プロンプト設計から人による選別まで自社で完結させることで、権利関係がクリアな素材の提供に努めています。詳しくは<a href="https://sozaino.com/column/ai-image-copyright.html">AI生成画像の著作権解説記事</a>をご覧ください。</p>
+
+    <div class="material-feature">
+    <a href="https://sozaino.com/download.html?id=753">
+      <img class="material-feature-img" src="https://sozaino.com/assets/materials/character/character_007.webp" alt="キャラクター素材サンプル character_007" loading="lazy">
+      <div class="material-feature-caption">
+        <div class="material-feature-text">
+          <div class="material-feature-title">素材サンプル（character_007）</div>
+          <div class="material-feature-sub">ソザイノで無料ダウンロード可能</div>
+        </div>
+        <div class="material-feature-arrow">詳細を見る →</div>
+      </div>
     </a>
-</div>
+  </div>
 
-<h2>まとめ：3点チェックを習慣にするだけで安心</h2>
+  <h2>よくある疑問：これはOK？NG？</h2>
 
-<p>フリー素材の商用利用で迷ったときは「再配布していないか」「クレジット表記は必要か」「禁止用途に該当しないか」の3点を確認する習慣をつけておくと、ほぼすべてのトラブルを防げます。ソザイノの素材はシンプルな規約で商用利用できますので、ぜひ安心してご活用ください。</p>
+  <p>商用利用に関してよく寄せられる疑問をQ&A形式でまとめます。</p>
 
-<div class="article-footer">
+  <h3>Q. アフィリエイトブログのアイキャッチに使ってもいい？</h3>
+  <p>ソザイノの素材は商用利用OKのため、アフィリエイトブログのアイキャッチ画像に使用していただけます。AdSense広告やアフィリエイトリンクを掲載したブログも商用利用に該当しますが、すべて問題ありません。</p>
+
+  <h3>Q. クライアントから依頼された仕事（受託制作）で使っていい？</h3>
+  <p>受託制作の成果物（ブログ記事・バナー・LP等）にソザイノの素材を使用することは問題ありません。ただし素材そのものをクライアントに「素材として」納品・販売することはNGです。制作物の一部として組み込んで納品するのはOKです。</p>
+
+  <h3>Q. YouTube動画のサムネイルに使っていい？</h3>
+  <p>YouTube動画のサムネイルへの使用はOKです。広告収益があるチャンネルでも問題ありません。動画内に素材をそのまま挿入して表示する用途も利用規約の範囲内です。</p>
+
+  <h3>Q. 印刷物（チラシ・名刺・ポスター）に使っていい？</h3>
+  <p>印刷物への使用も問題ありません。ただし、素材をほぼそのままの状態で印刷して販売する（ポストカード商品として売るなど）行為は再販に近いため、お控えください。デザインに組み込んだ印刷物の販売はOKです。</p>
+
+  <h2>まとめ：5点チェックを習慣にするだけで安心</h2>
+
+  <p>フリー素材の商用利用で迷ったときは、①商用利用の可否、②クレジット表記の要否、③禁止用途、④改変の可否、⑤再配布禁止の5点を確認する習慣をつけておくだけで、ほとんどのトラブルは防げます。</p>
+
+  <p>ソザイノの素材はこの5点をすべてシンプルな条件でクリアしており、ブログ・SNS・動画・印刷物など幅広い用途でお使いいただけます。「規約を読むのが面倒」と感じる方にこそ、シンプルな条件で使えるソザイノを活用していただければ嬉しいです。</p>
+
+  <div class="related-columns">
     <h3>関連コラム</h3>
-    <div class="related-articles">
-        <a href="ai-image-copyright.html" class="related-article-card"><div class="label">AI素材</div><div class="title">AI生成画像の著作権は大丈夫？ブログで使う前に知っておきたい現在地</div></a>
-        <a href="ai-material-howto.html" class="related-article-card"><div class="label">AI素材</div><div class="title">AI生成素材のブログ活用術。選び方・使い方・注意点をまとめて解説</div></a>
+    <div class="related-list">
+      <a class="related-item" href="https://sozaino.com/column/ai-image-copyright.html">
+        <span class="related-tag">AI素材</span>
+        AI生成画像の著作権は大丈夫？ブログで使う前に知っておきたい現在地
+      </a>
+      <a class="related-item" href="https://sozaino.com/column/ai-material-howto.html">
+        <span class="related-tag">AI素材</span>
+        AI生成素材のブログ活用術。選び方・使い方・注意点をまとめて解説
+      </a>
+      <a class="related-item" href="https://sozaino.com/column/free-material-selection-guide.html">
+        <span class="related-tag">素材活用</span>
+        ブログ用フリー素材の選び方。失敗しないための5つの確認ポイント
+      </a>
     </div>
-    <div class="gallery-cta">
-        <h3>商用利用OKの素材をギャラリーで探す</h3>
-        <p>1000点以上のWebP素材を無料配信中。クレジット表記不要です。</p>
-        <a href="../gallery.html" class="gallery-cta-btn">素材ギャラリーへ →</a>
-    </div>
-</div>
-</article>
+  </div>
+
+  <div class="cta-box">
+    <p>商用利用OK・クレジット不要・WebP形式。1000点以上を無料配信中。</p>
+    <a href="https://sozaino.com/gallery.html">素材ギャラリーへ →</a>
+  </div>
+</main>
 
 <footer>
-    <div class="footer-content">
-        <div class="footer-links"><a href="../about.html">ソザイノについて</a><a href="../process.html">素材ができるまで</a><a href="index.html">コラム</a><a href="../privacy.html">プライバシーポリシー</a><a href="../terms.html">利用規約</a><a href="../disclaimer.html">免責事項</a><a href="../contact.html">お問い合わせ</a></div>
-        <div style="margin-top:1rem;"><a href="https://design.blogmura.com/freesozai/ranking/in?p_cid=11214708" target="_blank"><img src="https://b.blogmura.com/design/freesozai/88_31.gif" width="88" height="31" border="0" alt="にほんブログ村 デザインブログ フリー素材へ"></a></div>
-        <div class="footer-info"><p>&copy; 2026 ソザイノ (SOZAINO). All rights reserved.</p></div>
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="https://sozaino.com/about.html">ソザイノについて</a>
+      <a href="https://sozaino.com/process.html">素材ができるまで</a>
+      <a href="https://sozaino.com/column/index.html">コラム</a>
+      <a href="https://sozaino.com/privacy.html">プライバシーポリシー</a>
+      <a href="https://sozaino.com/terms.html">利用規約</a>
+      <a href="https://sozaino.com/disclaimer.html">免責事項</a>
+      <a href="https://sozaino.com/contact.html">お問い合わせ</a>
     </div>
+    <div class="blogmura">
+      <a href="https://design.blogmura.com/freesozai/ranking/in?p_cid=11214708">
+        <img src="https://b.blogmura.com/design/freesozai/88_31.gif" alt="にほんブログ村 デザインブログ フリー素材へ" loading="lazy">
+      </a>
+    </div>
+    <div>© 2026 ソザイノ (SOZAINO). All rights reserved.</div>
+  </div>
 </footer>
-<script>const menuToggle=document.getElementById('menuToggle');const navMenu=document.getElementById('navMenu');menuToggle.addEventListener('click',()=>navMenu.classList.toggle('open'));navMenu.querySelectorAll('a').forEach(link=>{link.addEventListener('click',()=>navMenu.classList.remove('open'));});</script>
 </body>
 </html>
