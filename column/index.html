@@ -105,6 +105,34 @@
             .article-card-icon svg { width: 32px; height: 32px; }
             .article-card-title { font-size: 1.05rem; }
         }
+
+        /* ===== PAGINATION ===== */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: .5rem;
+            margin: 2.5rem 0 1rem;
+            flex-wrap: wrap;
+        }
+        .page-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--border);
+            background: #fff;
+            border-radius: 8px;
+            font-size: .88rem;
+            font-weight: 600;
+            color: var(--muted);
+            cursor: pointer;
+            transition: all .2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .page-btn:hover { border-color: var(--primary); color: var(--primary); }
+        .page-btn.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+        .page-btn.arrow { font-size: 1rem; }
     </style>
 </head>
 <body>
@@ -696,6 +724,68 @@
     const navMenu = document.getElementById('navMenu');
     menuToggle.addEventListener('click', () => navMenu.classList.toggle('open'));
     navMenu.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => navMenu.classList.remove('open')); });
+</script>
+
+<script>
+(function() {
+    const ITEMS_PER_PAGE = 10;
+    const grid = document.querySelector('.articles-grid');
+    if (!grid) return;
+
+    const cards = Array.from(grid.querySelectorAll('a.article-card'));
+    const total = cards.length;
+    const totalPages = Math.ceil(total / ITEMS_PER_PAGE);
+    let currentPage = 1;
+
+    function showPage(page) {
+        currentPage = page;
+        const start = (page - 1) * ITEMS_PER_PAGE;
+        const end = start + ITEMS_PER_PAGE;
+        cards.forEach((card, i) => {
+            card.style.display = (i >= start && i < end) ? '' : 'none';
+        });
+        renderPagination();
+        window.scrollTo({ top: grid.offsetTop - 100, behavior: 'smooth' });
+    }
+
+    function renderPagination() {
+        let el = document.getElementById('pagination');
+        if (!el) {
+            el = document.createElement('div');
+            el.id = 'pagination';
+            el.className = 'pagination';
+            grid.parentNode.insertBefore(el, grid.nextSibling);
+        }
+        el.innerHTML = '';
+
+        // 前へボタン
+        const prev = document.createElement('button');
+        prev.className = 'page-btn arrow';
+        prev.textContent = '←';
+        prev.disabled = currentPage === 1;
+        prev.onclick = () => showPage(currentPage - 1);
+        el.appendChild(prev);
+
+        // ページ番号
+        for (let i = 1; i <= totalPages; i++) {
+            const btn = document.createElement('button');
+            btn.className = 'page-btn' + (i === currentPage ? ' active' : '');
+            btn.textContent = i;
+            btn.onclick = () => showPage(i);
+            el.appendChild(btn);
+        }
+
+        // 次へボタン
+        const next = document.createElement('button');
+        next.className = 'page-btn arrow';
+        next.textContent = '→';
+        next.disabled = currentPage === totalPages;
+        next.onclick = () => showPage(currentPage + 1);
+        el.appendChild(next);
+    }
+
+    showPage(1);
+})();
 </script>
 </body>
 </html>
