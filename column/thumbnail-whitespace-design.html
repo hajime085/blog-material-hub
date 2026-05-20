@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTubeサムネイルの余白設計で再生数が変わる。3つのルールと実践手順 | ソザイノ</title>
+  <meta name="description" content="YouTubeサムネイルの余白設計がクリック率と再生数に与える影響を解説。端から10%ルール・被写体周囲の余白・テキストブロックの余白設計など、Canvaでの実践手順とともにまとめます。">
+  <link rel="canonical" href="https://sozaino.com/column/thumbnail-whitespace-design.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="YouTubeサムネイルの余白設計で再生数が変わる。3つのルールと実践手順 | ソザイノ">
+  <meta property="og:description" content="YouTubeサムネイルの余白設計がクリック率と再生数に与える影響を解説。端から10%ルール・被写体周囲の余白・テキストブロックの余白設計など、Canvaでの実践手順とともにまとめます。">
+  <meta property="og:url" content="https://sozaino.com/column/thumbnail-whitespace-design.html">
+  <meta property="og:site_name" content="ソザイノ (SOZAINO)">
+  <style>
+    :root{--primary:#0d9488;--primary2:#14b8a6;--primary-bg:#f0fdfa;--text:#0f172a;--muted:#64748b;--border:#e2e8f0;--bg:#fafafa;--surface:#ffffff;}
+    *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+    body{font-family:'Noto Sans JP',-apple-system,sans-serif;line-height:1.85;color:var(--text);background:var(--bg);}
+    header{background:#fff;position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border);box-shadow:0 1px 3px rgba(15,23,42,.04);}
+    .navbar{max-width:1200px;margin:0 auto;padding:.85rem 2rem;display:flex;justify-content:space-between;align-items:center;}
+    .nav-logo{font-size:1.25rem;font-weight:700;color:var(--primary);text-decoration:none;letter-spacing:-.5px;}
+    .nav-logo span{color:var(--text);}
+    .nav-links{display:flex;gap:1.5rem;list-style:none;}
+    .nav-links a{color:var(--muted);text-decoration:none;font-size:.875rem;transition:color .2s;}
+    .nav-links a:hover{color:var(--primary);}
+    .hamburger{display:none;background:none;border:none;cursor:pointer;padding:.5rem;}
+    .hamburger span{display:block;width:22px;height:2px;background:var(--text);margin:5px 0;transition:.3s;}
+    @media(max-width:768px){.nav-links{display:none;}.hamburger{display:block;}}
+    main{max-width:800px;margin:0 auto;padding:2.5rem 1.5rem 4rem;}
+    .breadcrumb{font-size:.8rem;color:var(--muted);margin-bottom:1.5rem;}
+    .breadcrumb a{color:var(--muted);text-decoration:none;}
+    .breadcrumb a:hover{color:var(--primary);}
+    .article-meta{display:flex;gap:1rem;align-items:center;margin-bottom:1rem;flex-wrap:wrap;}
+    .tag{background:var(--primary-bg);color:var(--primary);font-size:.75rem;padding:.2rem .7rem;border-radius:99px;font-weight:600;}
+    .date{font-size:.8rem;color:var(--muted);}
+    h1{font-size:1.7rem;font-weight:800;line-height:1.4;margin-bottom:1.5rem;color:var(--text);}
+    .author-box{display:flex;align-items:center;gap:.75rem;padding:.85rem 1rem;background:var(--primary-bg);border-radius:.5rem;margin-bottom:2rem;font-size:.85rem;}
+    .author-icon{width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+    .author-name{font-weight:700;color:var(--text);}
+    .author-desc{color:var(--muted);font-size:.8rem;}
+    p{margin-bottom:1.25rem;font-size:1rem;}
+    h2{font-size:1.25rem;font-weight:700;margin:2.5rem 0 1rem;padding-left:.75rem;border-left:3px solid var(--primary);}
+    h3{font-size:1.05rem;font-weight:700;margin:1.75rem 0 .75rem;}
+    ul,ol{margin:0 0 1.25rem 1.5rem;}
+    li{margin-bottom:.4rem;}
+    table{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.9rem;}
+    th{background:var(--primary-bg);color:var(--primary);padding:.6rem .85rem;text-align:left;border:1px solid var(--border);}
+    td{padding:.6rem .85rem;border:1px solid var(--border);vertical-align:top;}
+    .notice{background:#fffbeb;border-left:3px solid #f59e0b;padding:1rem 1.25rem;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;font-size:.9rem;}
+    .notice strong{color:#b45309;}
+    .tip{background:var(--primary-bg);border-left:3px solid var(--primary);padding:1rem 1.25rem;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;font-size:.9rem;}
+    .material-feature{margin:1.8rem 0;background:#fafafa;border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:transform .2s,box-shadow .2s;}
+    .material-feature:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(15,23,42,.08);}
+    .material-feature a{display:block;text-decoration:none;color:inherit;}
+    .material-feature-img{width:100%;aspect-ratio:16/9;background:#f0fdfa;object-fit:contain;padding:1rem;display:block;}
+    .material-feature-caption{padding:.9rem 1.2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;}
+    .material-feature-text{flex:1;min-width:0;}
+    .material-feature-title{font-size:.92rem;font-weight:600;color:var(--text);margin-bottom:.15rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .material-feature-sub{font-size:.78rem;color:var(--muted);}
+    .material-feature-arrow{flex-shrink:0;color:var(--primary);font-size:.85rem;font-weight:600;white-space:nowrap;}
+    .related-columns{margin:2.5rem 0 0;}
+    .related-columns h3{font-size:1rem;font-weight:700;margin-bottom:.85rem;}
+    .related-list{display:flex;flex-direction:column;gap:.6rem;}
+    .related-item{display:flex;gap:.5rem;align-items:flex-start;text-decoration:none;color:var(--text);font-size:.9rem;}
+    .related-item:hover{color:var(--primary);}
+    .related-tag{background:var(--primary-bg);color:var(--primary);font-size:.7rem;padding:.15rem .5rem;border-radius:99px;white-space:nowrap;margin-top:.15rem;}
+    .author-bottom{display:flex;align-items:center;gap:1rem;padding:1.2rem 1.5rem;background:#f8fafc;border:1px solid var(--border);border-radius:10px;margin:2.5rem 0 0;}
+    .author-bottom img{width:56px;height:56px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+    .author-bottom-body{min-width:0;flex:1;}
+    .author-bottom-label{font-size:.75rem;color:#94a3b8;margin-bottom:.15rem;}
+    .author-bottom-name{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.2rem;}
+    .author-bottom-desc{font-size:.83rem;color:var(--muted);line-height:1.6;}
+    .author-bottom-link{flex-shrink:0;font-size:.78rem;color:var(--primary);font-weight:600;text-decoration:none;white-space:nowrap;}
+    .cta-box{background:var(--primary);color:#fff;border-radius:.75rem;padding:1.75rem;text-align:center;margin:2.5rem 0 0;}
+    .cta-box p{color:rgba(255,255,255,.85);margin-bottom:1rem;font-size:.95rem;}
+    .cta-box a{display:inline-block;background:#fff;color:var(--primary);font-weight:700;padding:.65rem 1.75rem;border-radius:99px;text-decoration:none;font-size:.95rem;}
+    footer{background:#0f172a;color:#94a3b8;padding:2rem 1.5rem;font-size:.82rem;}
+    .footer-inner{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:1rem;align-items:center;}
+    .footer-links{display:flex;flex-wrap:wrap;gap:.75rem 1.25rem;justify-content:center;}
+    .footer-links a{color:#94a3b8;text-decoration:none;}
+    .footer-links a:hover{color:#fff;}
+    .blogmura{margin-top:.5rem;}
+  </style>
+</head>
+<body>
+<header>
+  <nav class="navbar">
+    <a href="https://sozaino.com/" class="nav-logo">ソザイノ<span>.</span></a>
+    <button class="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+    <ul class="nav-links">
+      <li><a href="https://sozaino.com/">ホーム</a></li>
+      <li><a href="https://sozaino.com/gallery.html">素材ギャラリー</a></li>
+      <li><a href="https://sozaino.com/about.html">ソザイノについて</a></li>
+      <li><a href="https://sozaino.com/process.html">素材ができるまで</a></li>
+      <li><a href="https://sozaino.com/column/">コラム</a></li>
+      <li><a href="https://sozaino.com/faq.html">よくあるご質問</a></li>
+      <li><a href="https://sozaino.com/contact.html">お問い合わせ</a></li>
+    </ul>
+  </nav>
+</header>
+<main>
+  <div class="breadcrumb">
+    <a href="https://sozaino.com/">ホーム</a> ›
+    <a href="https://sozaino.com/column/index.html">コラム</a> ›
+    サムネイルの余白設計
+  </div>
+  <div class="article-meta">
+    <span class="tag">YouTube・サムネイル</span>
+    <span class="date">公開日：2026年5月24日</span>
+  </div>
+  <h1>YouTubeサムネイルの余白設計で再生数が変わる。3つのルールと実践手順</h1>
+  <div class="author-box">
+    <img src="../assets/materials/haji-icon.jpg" alt="編集者ひよこ" class="author-icon">
+    <div>
+      <div class="author-name">編集者ひよこ</div>
+      <div class="author-desc">ブログ歴6年・YouTube制作歴2年。素材探しの非効率さを実感しソザイノを立ち上げました。</div>
+    </div>
+  </div>
+
+  <p>YouTubeサムネイルのデザインを考えるとき、文字・色・被写体に注目しがちですが、「余白」の使い方がクリック率と再生数に大きく影響します。余白が少なすぎると情報が詰め込まれて疲れるサムネイルに、多すぎると伝わらないサムネイルになります。</p>
+  <p>本記事では、サムネイルの余白設計の基本と、再生数が上がる余白の使い方を解説します。</p>
+
+  <h2>余白がサムネイルに与える3つの効果</h2>
+  <ul>
+    <li><strong>視線の誘導</strong>：余白があることで視線が主役（被写体・テキスト）に自然に引き寄せられる</li>
+    <li><strong>読みやすさの向上</strong>：テキスト周囲の余白が広いほど文字が読みやすくなる</li>
+    <li><strong>高級感・整理感の演出</strong>：余白が多いデザインは「洗練された印象」を与える</li>
+  </ul>
+
+  <div class="material-feature">
+    <a href="../download.html?id=173">
+      <img class="material-feature-img" src="../assets/materials/blog/blog_002.webp" alt="ブログ素材サンプル" loading="lazy">
+      <div class="material-feature-caption">
+        <div class="material-feature-text">
+          <div class="material-feature-title">素材サンプル（blog_002）</div>
+          <div class="material-feature-sub">ソザイノで無料ダウンロード可能</div>
+        </div>
+        <div class="material-feature-arrow">詳細を見る →</div>
+      </div>
+    </a>
+  </div>
+
+  <h2>サムネイルの余白設計：基本の3ルール</h2>
+
+  <h3>ルール1：端から10%以内に重要な要素を置かない</h3>
+  <p>YouTubeのサムネイルは、再生ボタン・チャンネルアイコン・動画時間などのUIが端に重なります。重要なテキストや被写体の顔が端ギリギリにあると、UIで隠れてしまいます。上下左右それぞれ全体の10%程度を「セーフゾーン外」として扱い、重要な要素はその内側に配置しましょう。</p>
+
+  <h3>ルール2：被写体の周囲に「呼吸できる空間」を作る</h3>
+  <p>被写体（人物・商品・イラスト）の周囲に余白がないと窮屈な印象になります。特に人物の頭部周辺に余白がないと「切り取られた感」が出て、見た目のクオリティが下がります。被写体を画面の60〜70%程度に収め、残りを余白にするのが目安です。</p>
+
+  <h3>ルール3：テキストブロックの周囲に余白を確保する</h3>
+  <p>テキストは背景と接触しないよう、テキストブロックの周囲に余白を設けてください。特に背景が複雑な場合、テキスト周囲に半透明の帯（テキストボックス）を敷くと読みやすくなります。</p>
+
+  <h2>余白の量と印象の関係</h2>
+  <table>
+    <tr>
+      <th>余白の量</th>
+      <th>印象</th>
+      <th>向いているジャンル</th>
+    </tr>
+    <tr>
+      <td>少ない（情報密度が高い）</td>
+      <td>エネルギッシュ・インパクト重視</td>
+      <td>エンタメ・ゲーム・スポーツ</td>
+    </tr>
+    <tr>
+      <td>中程度</td>
+      <td>バランスが良い・読みやすい</td>
+      <td>解説・ライフスタイル・料理</td>
+    </tr>
+    <tr>
+      <td>多い（余白が広い）</td>
+      <td>洗練・高級感・落ち着き</td>
+      <td>ビジネス・教育・美容</td>
+    </tr>
+  </table>
+
+  <div class="material-feature">
+    <a href="../download.html?id=763">
+      <img class="material-feature-img" src="../assets/materials/character/character_003.webp" alt="キャラクター素材サンプル" loading="lazy">
+      <div class="material-feature-caption">
+        <div class="material-feature-text">
+          <div class="material-feature-title">素材サンプル（character_003）</div>
+          <div class="material-feature-sub">ソザイノで無料ダウンロード可能</div>
+        </div>
+        <div class="material-feature-arrow">詳細を見る →</div>
+      </div>
+    </a>
+  </div>
+
+  <h2>余白設計の実践：Canvaでの作り方</h2>
+  <p>Canvaでサムネイルを作る場合、以下の手順で余白を意識した設計ができます。</p>
+  <ol>
+    <li>1280×720pxのカスタムサイズで新規作成</li>
+    <li>背景を設定する（単色・グラデーション・素材画像）</li>
+    <li>被写体（人物・イラスト）を配置し、画面の60〜70%に収める</li>
+    <li>テキストを追加し、被写体と重ならない位置に配置する</li>
+    <li>端から10%の範囲（128px・72px）に重要な要素がないか確認する</li>
+    <li>スマホで縮小したときに読めるかを確認する</li>
+  </ol>
+
+  <div class="tip">
+    <strong>💡 余白の確認方法</strong><br>
+    Canvaで作ったサムネイルをスマホに転送して、YouTubeのサムネイル一覧画面と同じサイズで見てみてください。実際の表示環境で確認するのが最も確実です。
+  </div>
+
+  <div class="material-feature">
+    <a href="../download.html?id=40">
+      <img class="material-feature-img" src="../assets/materials/person/person_046.webp" alt="人物素材サンプル" loading="lazy">
+      <div class="material-feature-caption">
+        <div class="material-feature-text">
+          <div class="material-feature-title">素材サンプル（person_046）</div>
+          <div class="material-feature-sub">ソザイノで無料ダウンロード可能</div>
+        </div>
+        <div class="material-feature-arrow">詳細を見る →</div>
+      </div>
+    </a>
+  </div>
+
+  <h2>まとめ：余白は「何もない空間」ではなく「デザインの一部」</h2>
+  <p>余白は単なる空白ではなく、視線を誘導し読みやすさを高めるデザインの要素です。端から10%を空ける・被写体周囲に呼吸できる空間を作る・テキストブロックに余白を設ける——この3つを意識するだけで、サムネイルのクオリティは大きく上がります。</p>
+
+  <div class="related-columns">
+    <h3>関連コラム</h3>
+    <div class="related-list">
+      <a class="related-item" href="https://sozaino.com/column/youtube-thumbnail-ctr.html">
+        <span class="related-tag">YouTube・サムネイル</span>
+        YouTubeサムネイルでCTRが上がる背景の選び方。色・明暗・構図の3つの法則
+      </a>
+      <a class="related-item" href="https://sozaino.com/column/thumbnail-ctr-decrease.html">
+        <span class="related-tag">YouTube・サムネイル</span>
+        クリック率が下がるサムネイルの特徴7選と改善チェックリスト
+      </a>
+      <a class="related-item" href="https://sozaino.com/column/canva-eyecatch-guide.html">
+        <span class="related-tag">Canva・デザイン</span>
+        Canvaでブログのアイキャッチを作る方法。無料でプロっぽく仕上げる手順と5つのコツ
+      </a>
+    </div>
+  </div>
+  <div class="cta-box">
+    <p>サムネイルに使えるWebP素材を1000点以上無料配信中。商用利用OK、登録不要です。</p>
+    <a href="https://sozaino.com/gallery.html">素材ギャラリーへ →</a>
+  </div>
+
+  <div class="author-bottom">
+    <img src="../assets/materials/haji-icon.jpg" alt="編集者ひよこ">
+    <div class="author-bottom-body">
+      <div class="author-bottom-label">この記事を書いた人</div>
+      <div class="author-bottom-name">編集者ひよこ</div>
+      <div class="author-bottom-desc">2020年よりブログ運営（雑記・まとめ系2サイト）、2024年よりYouTube Shorts制作。素材探しの非効率さを実感し、2026年4月にソザイノを立ち上げました。</div>
+    </div>
+    <a href="../about.html" class="author-bottom-link">プロフィール →</a>
+  </div>
+</main>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="https://sozaino.com/about.html">ソザイノについて</a>
+      <a href="https://sozaino.com/process.html">素材ができるまで</a>
+      <a href="https://sozaino.com/column/index.html">コラム</a>
+      <a href="https://sozaino.com/privacy.html">プライバシーポリシー</a>
+      <a href="https://sozaino.com/terms.html">利用規約</a>
+      <a href="https://sozaino.com/disclaimer.html">免責事項</a>
+      <a href="https://sozaino.com/contact.html">お問い合わせ</a>
+    </div>
+    <div class="blogmura">
+      <a href="https://design.blogmura.com/freesozai/ranking/in?p_cid=11214708">
+        <img src="https://b.blogmura.com/design/freesozai/88_31.gif" alt="にほんブログ村 デザインブログ フリー素材へ" loading="lazy">
+      </a>
+    </div>
+    <div>© 2026 ソザイノ (SOZAINO). All rights reserved.</div>
+  </div>
+</footer>
+</body>
+</html>
