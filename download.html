@@ -1147,57 +1147,65 @@ function initPreviewTabs(imgSrc, title) {
 }
 
 function renderAllPanes(src, title) {
-    // YouTube
-    document.getElementById('pane-youtube').innerHTML = `
-        <div class="yt-frame">
-            <div class="yt-header">
-                <span class="yt-logo">YouTube</span>
-                <div style="display:flex;align-items:center;gap:8px;">
-                    <span style="font-size:10px;color:#606060;background:#f2f2f2;padding:3px 8px;border-radius:99px;">すべて</span>
-                    <span style="font-size:10px;color:#606060;background:#f2f2f2;padding:3px 8px;border-radius:99px;">旅行</span>
-                    <span style="font-size:10px;color:#606060;background:#f2f2f2;padding:3px 8px;border-radius:99px;">日本</span>
+    // YouTube（ダークモード・3列グリッド）
+    const dummyColors = ['#1a1a2e','#16213e','#0f3460','#533483','#2b2d42'];
+    const dummyLabels = ['A','B','C','D','T'];
+    const dummyTitles = ['春の絶景スポット10選','京都観光完全ガイド','桜名所ランキング','日本の美しい庭園','旅行vlog 2026'];
+    const dummyViews = ['12万回視聴','8.3万回視聴','45万回視聴','2.1万回視聴'];
+    const dummyTimes = ['8:24','12:05','5:33','22:47'];
+
+    let ytHTML = `
+        <div style="background:#0f0f0f;border-radius:8px;overflow:hidden;font-family:'YouTube Noto',sans-serif;">
+            <div style="background:#0f0f0f;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #272727;">
+                <div style="display:flex;align-items:center;gap:6px;">
+                    <svg height="16" viewBox="0 0 90 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M27.9727 3.12324C27.6435 1.89323 26.6768 0.926623 25.4468 0.597366C23.2197 2.24288e-07 14.285 0 14.285 0C14.285 0 5.35042 2.24288e-07 3.12323 0.597366C1.89323 0.926623 0.926623 1.89323 0.597366 3.12324C2.24288e-07 5.35042 0 10 0 10C0 10 2.24288e-07 14.6496 0.597366 16.8768C0.926623 18.1068 1.89323 19.0734 3.12323 19.4026C5.35042 20 14.285 20 14.285 20C14.285 20 23.2197 20 25.4468 19.4026C26.6768 19.0734 27.6435 18.1068 27.9727 16.8768C28.5701 14.6496 28.5701 10 28.5701 10C28.5701 10 28.5677 5.35042 27.9727 3.12324Z" fill="#FF0000"/>
+                        <path d="M11.4253 14.2854L18.8477 10.0004L11.4253 5.71533V14.2854Z" fill="white"/>
+                    </svg>
+                    <span style="color:#fff;font-size:12px;font-weight:700;letter-spacing:-0.5px;">YouTube</span>
+                </div>
+                <div style="display:flex;gap:6px;">
+                    ${['すべて','旅行','日本','自然','観光'].map((t,i)=>`<span style="font-size:9px;color:${i===0?'#0f0f0f':'#f1f1f1'};background:${i===0?'#f1f1f1':'#272727'};padding:3px 8px;border-radius:99px;white-space:nowrap;">${t}</span>`).join('')}
                 </div>
             </div>
-            <div style="padding:8px;background:#f9f9f9;display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-                <div class="yt-card" style="grid-column:1/-1;">
-                    <div class="yt-thumb-wrap">
-                        <img src="${src}" alt="サムネイル" crossorigin="anonymous">
-                        <span class="yt-duration">5:42</span>
+            <div style="padding:10px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">`;
+
+    // メイン動画（素材使用）
+    ytHTML += `
+                <div style="grid-column:1/-1;cursor:pointer;">
+                    <div style="position:relative;aspect-ratio:16/9;border-radius:6px;overflow:hidden;background:#272727;">
+                        <img src="${src}" style="width:100%;height:100%;object-fit:cover;" crossorigin="anonymous" alt="">
+                        <span style="position:absolute;bottom:5px;right:6px;background:rgba(0,0,0,0.85);color:#fff;font-size:9px;font-weight:700;padding:1px 4px;border-radius:3px;">5:42</span>
                     </div>
-                    <div class="yt-info">
-                        <div class="yt-avatar">S</div>
-                        <div class="yt-meta">
-                            <div class="yt-title">${title}</div>
-                            <div class="yt-channel">ソザイノチャンネル · 23万回視聴 · 2日前</div>
+                    <div style="display:flex;gap:8px;padding:6px 0 2px;">
+                        <div style="width:28px;height:28px;border-radius:50%;background:#0d9488;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;">S</div>
+                        <div style="flex:1;min-width:0;">
+                            <div style="color:#f1f1f1;font-size:11px;font-weight:700;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${title}</div>
+                            <div style="color:#aaa;font-size:10px;margin-top:2px;">ソザイノチャンネル · 23万回視聴 · 2日前</div>
                         </div>
                     </div>
-                </div>
-                <div class="yt-card">
-                    <div class="yt-thumb-wrap" style="background:#e0e0e0;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="#bdbdbd"><path d="M8 5v14l11-7z"/></svg>
+                </div>`;
+
+    // ダミー動画6枚
+    for(let i=0;i<6;i++){
+        ytHTML += `
+                <div style="cursor:pointer;">
+                    <div style="position:relative;aspect-ratio:16/9;border-radius:4px;overflow:hidden;background:${dummyColors[i%5]};display:flex;align-items:center;justify-content:center;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="rgba(255,255,255,0.3)"><path d="M8 5v14l11-7z"/></svg>
+                        <span style="position:absolute;bottom:3px;right:4px;background:rgba(0,0,0,0.85);color:#fff;font-size:8px;font-weight:700;padding:1px 3px;border-radius:2px;">${dummyTimes[i%4]}</span>
                     </div>
-                    <div class="yt-info" style="padding:4px 0;">
-                        <div class="yt-avatar" style="background:#9e9e9e;width:22px;height:22px;font-size:9px;">A</div>
-                        <div class="yt-meta">
-                            <div style="background:#e0e0e0;height:8px;width:90%;border-radius:3px;margin-bottom:3px;"></div>
-                            <div style="background:#e0e0e0;height:7px;width:60%;border-radius:3px;"></div>
+                    <div style="display:flex;gap:5px;padding:4px 0 0;">
+                        <div style="width:22px;height:22px;border-radius:50%;background:${dummyColors[(i+2)%5]};flex-shrink:0;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.7);font-size:9px;font-weight:700;">${dummyLabels[i%5]}</div>
+                        <div>
+                            <div style="color:#f1f1f1;font-size:9px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${dummyTitles[i%5]}</div>
+                            <div style="color:#aaa;font-size:8px;margin-top:1px;">${dummyViews[i%4]} · ${i+1}日前</div>
                         </div>
                     </div>
-                </div>
-                <div class="yt-card">
-                    <div class="yt-thumb-wrap" style="background:#e0e0e0;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="#bdbdbd"><path d="M8 5v14l11-7z"/></svg>
-                    </div>
-                    <div class="yt-info" style="padding:4px 0;">
-                        <div class="yt-avatar" style="background:#9e9e9e;width:22px;height:22px;font-size:9px;">B</div>
-                        <div class="yt-meta">
-                            <div style="background:#e0e0e0;height:8px;width:85%;border-radius:3px;margin-bottom:3px;"></div>
-                            <div style="background:#e0e0e0;height:7px;width:55%;border-radius:3px;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>`;
+                </div>`;
+    }
+
+    ytHTML += `</div></div>`;
+    document.getElementById('pane-youtube').innerHTML = ytHTML;
 
     // Blog eyecatch
     document.getElementById('pane-eyecatch').innerHTML = `
