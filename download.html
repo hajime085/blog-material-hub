@@ -532,33 +532,179 @@
             vertical-align: -.15em;
             flex-shrink: 0;
         }
-    
+
+
+        /* ===== おすすめ用途バッジ ===== */
         .usage-badges-section { margin: 0 0 1.2rem; }
         .usage-badges-title { font-size: .8rem; font-weight: 700; color: var(--muted); margin-bottom: .5rem; text-transform: uppercase; letter-spacing: .05em; }
         .usage-badges { display: flex; flex-wrap: wrap; gap: .4rem; }
-        .usage-badge { display: inline-flex; align-items: center; gap: .3rem; background: var(--primary-bg); color: var(--primary); font-size: .78rem; font-weight: 600; padding: .3rem .75rem; border-radius: 99px; border: 1px solid rgba(13,148,136,.2); }
-        .usage-badge svg { width: 12px; height: 12px; min-width: 12px; flex-shrink: 0; display: inline-block; }
-        .summary-section { background: var(--primary-bg); border-left: 3px solid var(--primary); border-radius: 0 .5rem .5rem 0; padding: 1rem 1.2rem; margin-bottom: 1.2rem; font-size: .92rem; line-height: 1.85; color: var(--text); }
-        .summary-section-label { font-size: .72rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: .06em; margin-bottom: .4rem; }
-        .design-points-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; margin-top: .5rem; }
-        .design-point-item { display: flex; align-items: flex-start; gap: .4rem; background: var(--surface); border: 1px solid var(--border); border-radius: .4rem; padding: .5rem .7rem; font-size: .82rem; line-height: 1.5; }
-        .design-point-item::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--primary); flex-shrink: 0; margin-top: .4rem; }
-        @media(max-width:600px) { .design-points-grid { grid-template-columns: 1fr; } }
+        .usage-badge {
+            display: inline-flex; align-items: center; gap: .3rem;
+            background: var(--primary-bg); color: var(--primary);
+            font-size: .78rem; font-weight: 600;
+            padding: .3rem .75rem; border-radius: 99px;
+            border: 1px solid rgba(13,148,136,.2);
+        }
+        .usage-badge svg { width: 12px; height: 12px; flex-shrink: 0; }
 
+        /* ===== 素材説明強化 ===== */
+        .summary-section {
+            background: var(--primary-bg);
+            border-left: 3px solid var(--primary);
+            border-radius: 0 .5rem .5rem 0;
+            padding: 1rem 1.2rem;
+            margin-bottom: 1.2rem;
+            font-size: .92rem;
+            line-height: 1.85;
+            color: var(--text);
+        }
+        .summary-section-label {
+            font-size: .72rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            margin-bottom: .4rem;
+        }
 
-        .related-columns-section { margin: 2rem 0; }
-        .related-columns-title { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 1rem; display: flex; align-items: center; gap: .4rem; }
-        .related-col-list { display: flex; flex-direction: column; gap: .6rem; }
-        .related-col-item { display: flex; gap: .5rem; align-items: flex-start; text-decoration: none; color: var(--text); font-size: .88rem; padding: .6rem .85rem; background: var(--surface); border: 1px solid var(--border); border-radius: .5rem; transition: border-color .2s, color .2s; line-height: 1.5; }
+        /* ===== 活用アイデア強化 ===== */
+        .design-points-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: .5rem;
+            margin-top: .5rem;
+        }
+        .design-point-item {
+            display: flex;
+            align-items: flex-start;
+            gap: .4rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: .4rem;
+            padding: .5rem .7rem;
+            font-size: .82rem;
+            line-height: 1.5;
+        }
+        .design-point-item::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--primary);
+            flex-shrink: 0;
+            margin-top: .4rem;
+        }
+        @media(max-width:600px) {
+            .design-points-grid { grid-template-columns: 1fr; }
+        }
+        /* ===== 関連コラム ===== */
+        .related-columns-section {
+            margin: 2rem 0;
+        }
+        .related-columns-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+        }
+        .related-col-list {
+            display: flex;
+            flex-direction: column;
+            gap: .6rem;
+        }
+        .related-col-item {
+            display: flex;
+            gap: .5rem;
+            align-items: flex-start;
+            text-decoration: none;
+            color: var(--text);
+            font-size: .88rem;
+            padding: .6rem .85rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: .5rem;
+            transition: border-color .2s, color .2s;
+            line-height: 1.5;
+        }
         .related-col-item:hover { border-color: var(--primary); color: var(--primary); }
-        .related-col-tag { background: var(--primary-bg); color: var(--primary); font-size: .68rem; padding: .15rem .5rem; border-radius: 99px; white-space: nowrap; margin-top: .15rem; flex-shrink: 0; font-weight: 600; }
-        .author-mini-box { display: flex; align-items: center; gap: .85rem; padding: .9rem 1.1rem; background: #f8fafc; border: 1px solid var(--border); border-radius: .6rem; margin: 1.5rem 0; }
-        .author-mini-box img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+        .related-col-tag {
+            background: var(--primary-bg);
+            color: var(--primary);
+            font-size: .68rem;
+            padding: .15rem .5rem;
+            border-radius: 99px;
+            white-space: nowrap;
+            margin-top: .15rem;
+            flex-shrink: 0;
+            font-weight: 600;
+        }
+
+        /* ===== 著者ボックス ===== */
+        .author-mini-box {
+            display: flex;
+            align-items: center;
+            gap: .85rem;
+            padding: .9rem 1.1rem;
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: .6rem;
+            margin: 1.5rem 0;
+        }
+        .author-mini-box img {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
         .author-mini-body { min-width: 0; flex: 1; }
         .author-mini-label { font-size: .7rem; color: #94a3b8; margin-bottom: .1rem; }
         .author-mini-name { font-size: .88rem; font-weight: 700; color: var(--text); margin-bottom: .2rem; }
         .author-mini-desc { font-size: .78rem; color: var(--muted); line-height: 1.6; }
         .author-mini-link { flex-shrink: 0; font-size: .75rem; color: var(--primary); font-weight: 600; text-decoration: none; white-space: nowrap; }
+
+        /* ===== 使用例プレビュータブ ===== */
+        .usage-preview-section { margin: 1.5rem 0; }
+        .usage-preview-title { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: .85rem; display: flex; align-items: center; gap: .4rem; }
+        .preview-tabs { display: flex; gap: .35rem; flex-wrap: wrap; margin-bottom: .85rem; }
+        .preview-tab {
+            padding: .35rem .85rem;
+            font-size: .78rem;
+            font-weight: 600;
+            border: 1px solid var(--border);
+            border-radius: 99px;
+            background: var(--surface);
+            color: var(--muted);
+            cursor: pointer;
+            transition: all .2s;
+        }
+        .preview-tab:hover { border-color: var(--primary); color: var(--primary); }
+        .preview-tab.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+        .preview-canvas-wrap {
+            border: 1px solid var(--border);
+            border-radius: .75rem;
+            overflow: hidden;
+            background: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        .preview-canvas-wrap canvas {
+            max-width: 100%;
+            height: auto;
+            border-radius: .4rem;
+            box-shadow: 0 4px 16px rgba(15,23,42,.12);
+        }
+        .preview-canvas-label {
+            font-size: .75rem;
+            color: var(--muted);
+            text-align: center;
+            margin-top: .6rem;
+        }
     </style>
 </head>
 <body>
@@ -653,6 +799,24 @@
                         LINEで送る
                     </button>
                 </div>
+            </div>
+
+            <!-- 使用例プレビュー -->
+            <div class="usage-preview-section" id="usagePreviewSection" style="display:none;">
+                <div class="usage-preview-title">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                    使用例プレビュー
+                </div>
+                <div class="preview-tabs">
+                    <button class="preview-tab active" onclick="showPreviewTab('youtube', this)">YouTubeサムネ</button>
+                    <button class="preview-tab" onclick="showPreviewTab('eyecatch', this)">ブログアイキャッチ</button>
+                    <button class="preview-tab" onclick="showPreviewTab('sns', this)">SNS投稿</button>
+                    <button class="preview-tab" onclick="showPreviewTab('banner', this)">バナー</button>
+                </div>
+                <div class="preview-canvas-wrap">
+                    <canvas id="previewCanvas"></canvas>
+                </div>
+                <div class="preview-canvas-label" id="previewCanvasLabel"></div>
             </div>
 
             <!-- 説明文 -->
@@ -882,6 +1046,230 @@ function drawWatermarkedPreview(imgSrc, container, bgColor) {
     tempImg.src = imgSrc;
 }
 
+
+// ===== 使用例プレビュータブ =====
+let previewImgSrc = '';
+let previewTitle = '';
+let currentPreviewTab = 'youtube';
+
+const PREVIEW_CONFIGS = {
+    youtube: {
+        w: 1280, h: 720,
+        label: 'YouTubeサムネイル（1280×720px）',
+        render: (ctx, img, title, w, h) => {
+            // 背景画像
+            ctx.drawImage(img, 0, 0, w, h);
+            // 暗いオーバーレイ（下部）
+            const grad = ctx.createLinearGradient(0, h * 0.45, 0, h);
+            grad.addColorStop(0, 'rgba(0,0,0,0)');
+            grad.addColorStop(1, 'rgba(0,0,0,0.72)');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, w, h);
+            // タイトルテキスト
+            ctx.fillStyle = '#ffffff';
+            ctx.font = `bold ${Math.floor(h * 0.085)}px "Noto Sans JP", sans-serif`;
+            ctx.textAlign = 'left';
+            ctx.shadowColor = 'rgba(0,0,0,0.8)';
+            ctx.shadowBlur = 8;
+            const lines = wrapText(ctx, title, w * 0.06, w * 0.88, Math.floor(h * 0.095));
+            lines.forEach((line, i) => {
+                ctx.fillText(line, w * 0.06, h * 0.78 + i * Math.floor(h * 0.1));
+            });
+            ctx.shadowBlur = 0;
+            // チャンネルアイコン風
+            ctx.fillStyle = 'rgba(255,255,255,0.9)';
+            ctx.beginPath();
+            ctx.arc(w * 0.06 + 20, h * 0.93, 18, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = '#0d9488';
+            ctx.font = `bold ${Math.floor(h * 0.04)}px sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.fillText('S', w * 0.06 + 20, h * 0.935);
+            ctx.fillStyle = 'rgba(255,255,255,0.85)';
+            ctx.font = `${Math.floor(h * 0.035)}px "Noto Sans JP", sans-serif`;
+            ctx.textAlign = 'left';
+            ctx.fillText('ソザイノチャンネル', w * 0.06 + 46, h * 0.935);
+        }
+    },
+    eyecatch: {
+        w: 1200, h: 630,
+        label: 'ブログアイキャッチ（1200×630px）',
+        render: (ctx, img, title, w, h) => {
+            ctx.drawImage(img, 0, 0, w, h);
+            // 左側グラデーション
+            const grad = ctx.createLinearGradient(0, 0, w * 0.7, 0);
+            grad.addColorStop(0, 'rgba(0,0,0,0.68)');
+            grad.addColorStop(1, 'rgba(0,0,0,0)');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, w, h);
+            // タグバッジ
+            ctx.fillStyle = '#0d9488';
+            ctx.beginPath();
+            roundRect(ctx, w * 0.06, h * 0.32, 120, 32, 6);
+            ctx.fill();
+            ctx.fillStyle = '#fff';
+            ctx.font = `bold ${Math.floor(h * 0.045)}px "Noto Sans JP", sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.fillText('素材活用', w * 0.06 + 60, h * 0.32 + 22);
+            // タイトル
+            ctx.fillStyle = '#ffffff';
+            ctx.font = `bold ${Math.floor(h * 0.082)}px "Noto Sans JP", sans-serif`;
+            ctx.textAlign = 'left';
+            ctx.shadowColor = 'rgba(0,0,0,0.6)';
+            ctx.shadowBlur = 6;
+            const lines = wrapText(ctx, title, w * 0.06, w * 0.55, Math.floor(h * 0.09));
+            lines.forEach((line, i) => {
+                ctx.fillText(line, w * 0.06, h * 0.48 + i * Math.floor(h * 0.1));
+            });
+            ctx.shadowBlur = 0;
+            // サイト名
+            ctx.fillStyle = 'rgba(255,255,255,0.75)';
+            ctx.font = `${Math.floor(h * 0.04)}px "Noto Sans JP", sans-serif`;
+            ctx.fillText('sozaino.com', w * 0.06, h * 0.82);
+        }
+    },
+    sns: {
+        w: 1080, h: 1080,
+        label: 'SNS投稿・Instagram（1080×1080px）',
+        render: (ctx, img, title, w, h) => {
+            // 正方形にクロップ
+            const s = Math.min(img.width, img.height);
+            const sx = (img.width - s) / 2;
+            const sy = (img.height - s) / 2;
+            ctx.drawImage(img, sx, sy, s, s, 0, 0, w, h);
+            // 下部グラデーション
+            const grad = ctx.createLinearGradient(0, h * 0.5, 0, h);
+            grad.addColorStop(0, 'rgba(0,0,0,0)');
+            grad.addColorStop(1, 'rgba(0,0,0,0.75)');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, w, h);
+            // テキスト
+            ctx.fillStyle = '#ffffff';
+            ctx.font = `bold ${Math.floor(h * 0.072)}px "Noto Sans JP", sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.shadowColor = 'rgba(0,0,0,0.8)';
+            ctx.shadowBlur = 8;
+            const lines = wrapText(ctx, title, w / 2, w * 0.82, Math.floor(h * 0.08));
+            const startY = h * 0.78;
+            lines.forEach((line, i) => {
+                ctx.fillText(line, w / 2, startY + i * Math.floor(h * 0.085));
+            });
+            ctx.shadowBlur = 0;
+            // ソザイノロゴ風
+            ctx.fillStyle = 'rgba(255,255,255,0.8)';
+            ctx.font = `${Math.floor(h * 0.038)}px "DM Sans", sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.fillText('sozaino.com', w / 2, h * 0.95);
+        }
+    },
+    banner: {
+        w: 1200, h: 400,
+        label: 'バナー・広告用（1200×400px）',
+        render: (ctx, img, title, w, h) => {
+            ctx.drawImage(img, 0, 0, w, h);
+            // 全体オーバーレイ
+            const grad = ctx.createLinearGradient(0, 0, w, 0);
+            grad.addColorStop(0, 'rgba(13,148,136,0.85)');
+            grad.addColorStop(0.45, 'rgba(13,148,136,0.6)');
+            grad.addColorStop(1, 'rgba(0,0,0,0)');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, w, h);
+            // タイトル
+            ctx.fillStyle = '#ffffff';
+            ctx.font = `bold ${Math.floor(h * 0.155)}px "Noto Sans JP", sans-serif`;
+            ctx.textAlign = 'left';
+            ctx.shadowColor = 'rgba(0,0,0,0.4)';
+            ctx.shadowBlur = 4;
+            const lines = wrapText(ctx, title, w * 0.05, w * 0.42, Math.floor(h * 0.17));
+            lines.forEach((line, i) => {
+                ctx.fillText(line, w * 0.05, h * 0.38 + i * Math.floor(h * 0.18));
+            });
+            ctx.shadowBlur = 0;
+            // CTAボタン風
+            ctx.fillStyle = '#ffffff';
+            roundRect(ctx, w * 0.05, h * 0.68, 180, 44, 22);
+            ctx.fill();
+            ctx.fillStyle = '#0d9488';
+            ctx.font = `bold ${Math.floor(h * 0.1)}px "Noto Sans JP", sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.fillText('無料DL →', w * 0.05 + 90, h * 0.68 + 29);
+        }
+    }
+};
+
+function wrapText(ctx, text, x, maxWidth, lineHeight) {
+    const lines = [];
+    let line = '';
+    for (let i = 0; i < text.length; i++) {
+        const testLine = line + text[i];
+        if (ctx.measureText(testLine).width > maxWidth && line.length > 0) {
+            lines.push(line);
+            line = text[i];
+            if (lines.length >= 2) break;
+        } else {
+            line = testLine;
+        }
+    }
+    if (line) lines.push(line);
+    return lines;
+}
+
+function roundRect(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + w - r, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    ctx.lineTo(x + r, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+    ctx.lineTo(x, y + r);
+    ctx.quadraticCurveTo(x, y, x + r, y);
+    ctx.closePath();
+}
+
+function showPreviewTab(type, btn) {
+    currentPreviewTab = type;
+    document.querySelectorAll('.preview-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    renderPreviewCanvas(type);
+}
+
+function renderPreviewCanvas(type) {
+    const config = PREVIEW_CONFIGS[type];
+    if (!config || !previewImgSrc) return;
+
+    const canvas = document.getElementById('previewCanvas');
+    const label = document.getElementById('previewCanvasLabel');
+    if (!canvas) return;
+
+    const SCALE = 0.5;
+    canvas.width = config.w * SCALE;
+    canvas.height = config.h * SCALE;
+    const ctx = canvas.getContext('2d');
+    ctx.scale(SCALE, SCALE);
+
+    label.textContent = config.label;
+
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+        ctx.clearRect(0, 0, config.w, config.h);
+        config.render(ctx, img, previewTitle || 'タイトルテキスト例', config.w, config.h);
+    };
+    img.src = previewImgSrc;
+}
+
+function initUsagePreview(imgSrc, title) {
+    previewImgSrc = imgSrc;
+    previewTitle = title;
+    const section = document.getElementById('usagePreviewSection');
+    if (section) {
+        section.style.display = 'block';
+        renderPreviewCanvas(currentPreviewTab);
+    }
+}
+
 // ===== 背景色スウォッチ =====
 let currentBgColor = 'white';
 let currentImgPath = '';
@@ -996,6 +1384,9 @@ function renderMaterial(m) {
     currentBgColor = 'white';
     drawWatermarkedPreview(imgPath, wrap, 'white');
 
+    // 使用例プレビュー初期化
+    initUsagePreview(imgPath, m.title || m.filename);
+
     // 背景透過タグまたはキャラクターカテゴリの場合に背景色スウォッチを表示
     const bgSwitcher = document.getElementById('bgSwitcher');
     const hasTransparentBg = (Array.isArray(m.tags) && m.tags.includes('背景透過')) || m.largeCategory === 'character';
@@ -1041,6 +1432,7 @@ function renderMaterial(m) {
         </div>
     ` : '';
 
+    // おすすめ用途バッジをカテゴリ×タグから自動生成
     const badgeMap = {
         'blog':        ['ブログアイキャッチ', 'SNS投稿', 'Canva編集', '記事挿入画像'],
         'character':   ['イラスト素材', 'ブログアイキャッチ', 'Canva編集', 'SNS投稿'],
@@ -1057,7 +1449,7 @@ function renderMaterial(m) {
         <div class="usage-badges-section">
             <div class="usage-badges-title">おすすめ用途</div>
             <div class="usage-badges">
-                ${badges.map(b => `<span class="usage-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>${b}</span>`).join('')}
+                ${badges.map(b => `<span class="usage-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>${b}</span>`).join('')}
             </div>
         </div>
     `;
@@ -1149,50 +1541,51 @@ function renderMaterial(m) {
 
     // 関連コラム記事（カテゴリ別に出し分け）
     const colList = document.getElementById('relatedColList');
-    if (colList) {
-        const cat = m.largeCategory || '';
-        const colMap = {
-            'blog':        [
-                { tag:'Canva・デザイン', title:'Canvaでブログのアイキャッチを作る方法。無料でプロっぽく仕上げる手順と5つのコツ', href:'column/canva-eyecatch-guide.html' },
-                { tag:'ブログ・アイキャッチ', title:'アイキャッチ画像でクリック率が変わる理由。読まれるブログ画像の5つの特徴', href:'column/eyecatch-ctr-improvement.html' },
-                { tag:'画像・デザイン', title:'ブログのアイキャッチ画像サイズ、正解はこれ。用途別の推奨サイズと選び方', href:'column/eyecatch-size-guide.html' },
-            ],
-            'character':   [
-                { tag:'AI素材', title:'AI画像を安っぽく見せない5つの方法。フリー素材として使えるクオリティに仕上げるコツ', href:'column/ai-image-quality-tips.html' },
-                { tag:'AI素材', title:'ブログのアイキャッチにAI画像を使う5つのメリットと3つの注意点', href:'column/ai-eyecatch-merit.html' },
-                { tag:'Canva・デザイン', title:'Canvaでブログのアイキャッチを作る方法。無料でプロっぽく仕上げる手順と5つのコツ', href:'column/canva-eyecatch-guide.html' },
-            ],
-            'nature':      [
-                { tag:'YouTube・サムネイル', title:'YouTubeサムネイルでCTRが上がる背景の選び方。色・明暗・構図の3つの法則', href:'column/youtube-thumbnail-ctr.html' },
-                { tag:'YouTube・サムネイル', title:'YouTubeサムネイルの余白設計で再生数が変わる。3つのルールと実践手順', href:'column/thumbnail-whitespace-design.html' },
-                { tag:'デザイン', title:'ブログ画像の配色で読まれやすさが変わる理由。ジャンル別おすすめ配色パターン', href:'column/blog-image-color-guide.html' },
-            ],
-            'backgrounds': [
-                { tag:'YouTube・サムネイル', title:'YouTubeサムネイルでCTRが上がる背景の選び方。色・明暗・構図の3つの法則', href:'column/youtube-thumbnail-ctr.html' },
-                { tag:'デザイン', title:'バナー制作で避けるべき色と配色の基本。70・25・5の法則ですぐ使える5パターン', href:'column/banner-color-guide.html' },
-                { tag:'デザイン', title:'SNSで埋もれないデザインの作り方。タイムラインで目立つ5つの法則', href:'column/sns-design-tips.html' },
-            ],
-            'person':      [
-                { tag:'ブログ・アイキャッチ', title:'アイキャッチ画像でクリック率が変わる理由。読まれるブログ画像の5つの特徴', href:'column/eyecatch-ctr-improvement.html' },
-                { tag:'デザイン', title:'SNSで埋もれないデザインの作り方。タイムラインで目立つ5つの法則', href:'column/sns-design-tips.html' },
-                { tag:'画像・デザイン', title:'SNS投稿の画像サイズ完全ガイド。X・Instagram・LINE・Facebook・TikTok対応表', href:'column/sns-image-size-guide.html' },
-            ],
-        };
-        const defaultCols = [
-            { tag:'素材活用', title:'ブログ用フリー素材の選び方完全ガイド。失敗しないための5つの確認ポイント', href:'column/free-material-selection-guide.html' },
-            { tag:'利用規約', title:'フリー素材の商用利用ガイド。「商用利用OK」でも注意が必要なケース', href:'column/commercial-use-guide.html' },
-            { tag:'画像フォーマット', title:'WebP形式とは？PNG・JPEGとの違いと、ブログで使う5つのメリット', href:'column/webp-guide.html' },
-        ];
-        const cols = colMap[cat] || defaultCols;
-        colList.innerHTML = '';
-        cols.forEach(col => {
-            const a = document.createElement('a');
-            a.className = 'related-col-item';
-            a.href = col.href;
-            a.innerHTML = `<span class="related-col-tag">${col.tag}</span><span>${col.title}</span>`;
-            colList.appendChild(a);
-        });
-    }
+    const cat = m.largeCategory || '';
+
+    const colMap = {
+        'blog':        [
+            { tag:'Canva・デザイン', title:'Canvaでブログのアイキャッチを作る方法。無料でプロっぽく仕上げる手順と5つのコツ', href:'column/canva-eyecatch-guide.html' },
+            { tag:'ブログ・アイキャッチ', title:'アイキャッチ画像でクリック率が変わる理由。読まれるブログ画像の5つの特徴', href:'column/eyecatch-ctr-improvement.html' },
+            { tag:'画像・デザイン', title:'ブログのアイキャッチ画像サイズ、正解はこれ。用途別の推奨サイズと選び方', href:'column/eyecatch-size-guide.html' },
+        ],
+        'character':   [
+            { tag:'AI素材', title:'AI画像を安っぽく見せない5つの方法。フリー素材として使えるクオリティに仕上げるコツ', href:'column/ai-image-quality-tips.html' },
+            { tag:'AI素材', title:'ブログのアイキャッチにAI画像を使う5つのメリットと3つの注意点', href:'column/ai-eyecatch-merit.html' },
+            { tag:'Canva・デザイン', title:'Canvaでブログのアイキャッチを作る方法。無料でプロっぽく仕上げる手順と5つのコツ', href:'column/canva-eyecatch-guide.html' },
+        ],
+        'nature':      [
+            { tag:'YouTube・サムネイル', title:'YouTubeサムネイルでCTRが上がる背景の選び方。色・明暗・構図の3つの法則', href:'column/youtube-thumbnail-ctr.html' },
+            { tag:'YouTube・サムネイル', title:'YouTubeサムネイルの余白設計で再生数が変わる。3つのルールと実践手順', href:'column/thumbnail-whitespace-design.html' },
+            { tag:'デザイン', title:'ブログ画像の配色で読まれやすさが変わる理由。ジャンル別おすすめ配色パターン', href:'column/blog-image-color-guide.html' },
+        ],
+        'backgrounds': [
+            { tag:'YouTube・サムネイル', title:'YouTubeサムネイルでCTRが上がる背景の選び方。色・明暗・構図の3つの法則', href:'column/youtube-thumbnail-ctr.html' },
+            { tag:'デザイン', title:'バナー制作で避けるべき色と配色の基本。70・25・5の法則ですぐ使える5パターン', href:'column/banner-color-guide.html' },
+            { tag:'デザイン', title:'SNSで埋もれないデザインの作り方。タイムラインで目立つ5つの法則', href:'column/sns-design-tips.html' },
+        ],
+        'person':      [
+            { tag:'ブログ・アイキャッチ', title:'アイキャッチ画像でクリック率が変わる理由。読まれるブログ画像の5つの特徴', href:'column/eyecatch-ctr-improvement.html' },
+            { tag:'デザイン', title:'SNSで埋もれないデザインの作り方。タイムラインで目立つ5つの法則', href:'column/sns-design-tips.html' },
+            { tag:'画像・デザイン', title:'SNS投稿の画像サイズ完全ガイド。X・Instagram・LINE・Facebook・TikTok対応表', href:'column/sns-image-size-guide.html' },
+        ],
+    };
+
+    const defaultCols = [
+        { tag:'素材活用', title:'ブログ用フリー素材の選び方完全ガイド。失敗しないための5つの確認ポイント', href:'column/free-material-selection-guide.html' },
+        { tag:'利用規約', title:'フリー素材の商用利用ガイド。「商用利用OK」でも注意が必要なケースと確認すべき5つのポイント', href:'column/commercial-use-guide.html' },
+        { tag:'画像フォーマット', title:'WebP形式とは？PNG・JPEGとの違いと、ブログで使う5つのメリット', href:'column/webp-guide.html' },
+    ];
+
+    const cols = colMap[cat] || defaultCols;
+    colList.innerHTML = '';
+    cols.forEach(col => {
+        const a = document.createElement('a');
+        a.className = 'related-col-item';
+        a.href = col.href;
+        a.innerHTML = `<span class="related-col-tag">${col.tag}</span><span>${col.title}</span>`;
+        colList.appendChild(a);
+    });
 }
 
 function createRelCard(r) {
