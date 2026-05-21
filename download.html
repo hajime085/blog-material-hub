@@ -532,6 +532,19 @@
             vertical-align: -.15em;
             flex-shrink: 0;
         }
+    
+        .usage-badges-section { margin: 0 0 1.2rem; }
+        .usage-badges-title { font-size: .8rem; font-weight: 700; color: var(--muted); margin-bottom: .5rem; text-transform: uppercase; letter-spacing: .05em; }
+        .usage-badges { display: flex; flex-wrap: wrap; gap: .4rem; }
+        .usage-badge { display: inline-flex; align-items: center; gap: .3rem; background: var(--primary-bg); color: var(--primary); font-size: .78rem; font-weight: 600; padding: .3rem .75rem; border-radius: 99px; border: 1px solid rgba(13,148,136,.2); }
+        .usage-badge svg { width: 12px; height: 12px; min-width: 12px; flex-shrink: 0; display: inline-block; }
+        .summary-section { background: var(--primary-bg); border-left: 3px solid var(--primary); border-radius: 0 .5rem .5rem 0; padding: 1rem 1.2rem; margin-bottom: 1.2rem; font-size: .92rem; line-height: 1.85; color: var(--text); }
+        .summary-section-label { font-size: .72rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: .06em; margin-bottom: .4rem; }
+        .design-points-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; margin-top: .5rem; }
+        .design-point-item { display: flex; align-items: flex-start; gap: .4rem; background: var(--surface); border: 1px solid var(--border); border-radius: .4rem; padding: .5rem .7rem; font-size: .82rem; line-height: 1.5; }
+        .design-point-item::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--primary); flex-shrink: 0; margin-top: .4rem; }
+        @media(max-width:600px) { .design-points-grid { grid-template-columns: 1fr; } }
+
     </style>
 </head>
 <body>
