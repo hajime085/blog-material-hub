@@ -986,7 +986,36 @@ function renderMaterial(m) {
         <p>ダウンロードは無料で、個人・商用問わずご利用いただけます。</p>
     `;
 
-    descEl.innerHTML = introText + customBox + autoText2;
+    // summaryを上部に独立表示
+    const summaryHtml = (ug && ug.summary) ? `
+        <div class="summary-section">
+            <div class="summary-section-label">この素材について</div>
+            ${esc(ug.summary)}
+        </div>
+    ` : '';
+
+    const badgeMap = {
+        'blog':        ['ブログアイキャッチ', 'SNS投稿', 'Canva編集', '記事挿入画像'],
+        'character':   ['イラスト素材', 'ブログアイキャッチ', 'Canva編集', 'SNS投稿'],
+        'nature':      ['YouTubeサムネ', 'ブログアイキャッチ', 'SNS投稿', '背景素材'],
+        'backgrounds': ['YouTubeサムネ', '背景素材', 'Canva編集', 'バナー制作'],
+        'person':      ['ブログアイキャッチ', 'SNS投稿', 'Canva編集', 'バナー制作'],
+        'food':        ['ブログアイキャッチ', 'SNS投稿', 'Canva編集', 'レシピ記事'],
+        'home':        ['ブログアイキャッチ', 'SNS投稿', 'Canva編集', '記事挿入画像'],
+        'outdoor':     ['YouTubeサムネ', 'ブログアイキャッチ', 'SNS投稿', '背景素材'],
+        'beauty':      ['ブログアイキャッチ', 'SNS投稿', 'Canva編集', 'バナー制作'],
+    };
+    const badges = badgeMap[m.largeCategory] || ['ブログアイキャッチ', 'SNS投稿', 'Canva編集', '背景素材'];
+    const badgesHtml = `
+        <div class="usage-badges-section">
+            <div class="usage-badges-title">おすすめ用途</div>
+            <div class="usage-badges">
+                ${badges.map(b => `<span class="usage-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>${b}</span>`).join('')}
+            </div>
+        </div>
+    `;
+
+    descEl.innerHTML = summaryHtml + badgesHtml + customBox + autoText2;
 
     // 活用ガイド
     const guideCard = document.getElementById('usageGuideCard');
@@ -1002,7 +1031,13 @@ function renderMaterial(m) {
 
         if (ug.design_points && ug.design_points.length) {
             dpBlock.style.display = 'block';
-            ug.design_points.forEach(p => { const li=document.createElement('li'); li.textContent=p; dpEl.appendChild(li); });
+            dpEl.className = 'design-points-grid';
+            ug.design_points.forEach(p => {
+                const div = document.createElement('div');
+                div.className = 'design-point-item';
+                div.textContent = p;
+                dpEl.appendChild(div);
+            });
         } else {
             dpBlock.style.display = 'none';
         }
