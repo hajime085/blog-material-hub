@@ -705,6 +705,75 @@
             text-align: center;
             margin-top: .6rem;
         }
+
+        .preview-section { margin: 1.5rem 0; }
+        .preview-section-title { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: .85rem; display: flex; align-items: center; gap: .4rem; }
+        .preview-tabs { display: flex; gap: .35rem; flex-wrap: wrap; margin-bottom: .85rem; }
+        .preview-tab { padding: .35rem .85rem; font-size: .78rem; font-weight: 600; border: 1px solid var(--border); border-radius: 99px; background: var(--surface); color: var(--muted); cursor: pointer; transition: all .2s; }
+        .preview-tab:hover { border-color: var(--primary); color: var(--primary); }
+        .preview-tab.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+        .preview-mockup-wrap { border: 1px solid var(--border); border-radius: .75rem; overflow: hidden; background: #f1f5f9; padding: 1.25rem; }
+        .preview-mockup-label { font-size: .72rem; color: var(--muted); text-align: center; margin-top: .6rem; }
+        .preview-pane { display: none; }
+        .preview-pane.active { display: block; }
+
+        /* YouTube mockup */
+        .yt-frame { background: #fff; border-radius: 8px; overflow: hidden; font-family: sans-serif; }
+        .yt-header { background: #fff; padding: 8px 12px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #e5e5e5; }
+        .yt-logo { color: #ff0000; font-weight: 800; font-size: 14px; }
+        .yt-card { display: flex; flex-direction: column; }
+        .yt-thumb-wrap { position: relative; aspect-ratio: 16/9; overflow: hidden; }
+        .yt-thumb-wrap img { width: 100%; height: 100%; object-fit: cover; }
+        .yt-duration { position: absolute; bottom: 6px; right: 6px; background: rgba(0,0,0,0.8); color: #fff; font-size: 10px; padding: 1px 4px; border-radius: 3px; }
+        .yt-info { padding: 8px; display: flex; gap: 8px; }
+        .yt-avatar { width: 28px; height: 28px; border-radius: 50%; background: #0d9488; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 11px; font-weight: 700; }
+        .yt-meta { flex: 1; }
+        .yt-title { font-size: 11px; font-weight: 700; color: #0f0f0f; line-height: 1.4; margin-bottom: 2px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .yt-channel { font-size: 10px; color: #606060; }
+
+        /* X mockup */
+        .x-frame { background: #fff; border-radius: 8px; overflow: hidden; font-family: sans-serif; border: 1px solid #e7e7e7; }
+        .x-header { padding: 10px 12px; display: flex; gap: 8px; }
+        .x-avatar { width: 36px; height: 36px; border-radius: 50%; background: #0d9488; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 13px; font-weight: 700; }
+        .x-user { font-size: 12px; font-weight: 700; color: #0f1419; }
+        .x-handle { font-size: 11px; color: #536471; }
+        .x-body { padding: 0 12px 10px; font-size: 12px; color: #0f1419; line-height: 1.5; }
+        .x-card { margin: 8px 0; border: 1px solid #e7e7e7; border-radius: 10px; overflow: hidden; }
+        .x-card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
+        .x-card-label { padding: 6px 10px; font-size: 10px; color: #536471; background: #fff; }
+        .x-actions { padding: 4px 12px 10px; display: flex; gap: 20px; }
+        .x-action { font-size: 11px; color: #536471; display: flex; align-items: center; gap: 4px; }
+
+        /* Instagram mockup */
+        .ig-frame { background: #fff; border-radius: 8px; overflow: hidden; font-family: sans-serif; border: 1px solid #dbdbdb; max-width: 320px; margin: 0 auto; }
+        .ig-header { padding: 8px 10px; display: flex; align-items: center; justify-content: space-between; }
+        .ig-user-wrap { display: flex; align-items: center; gap: 8px; }
+        .ig-avatar { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); flex-shrink: 0; }
+        .ig-username { font-size: 11px; font-weight: 700; color: #262626; }
+        .ig-image { aspect-ratio: 1; overflow: hidden; }
+        .ig-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .ig-actions { padding: 8px 10px 4px; display: flex; gap: 12px; }
+        .ig-action { font-size: 18px; color: #262626; }
+        .ig-likes { padding: 0 10px 4px; font-size: 11px; font-weight: 700; color: #262626; }
+        .ig-caption { padding: 0 10px 8px; font-size: 11px; color: #262626; line-height: 1.4; }
+        .ig-caption span { font-weight: 700; }
+
+        /* Blog mockup */
+        .blog-frame { background: #fff; border-radius: 8px; overflow: hidden; font-family: sans-serif; border: 1px solid #e5e5e5; }
+        .blog-header { background: #0d9488; padding: 8px 12px; display: flex; align-items: center; justify-content: space-between; }
+        .blog-logo { color: #fff; font-size: 12px; font-weight: 700; }
+        .blog-nav { display: flex; gap: 10px; }
+        .blog-nav span { color: rgba(255,255,255,0.8); font-size: 10px; }
+        .blog-card-list { padding: 12px; display: flex; flex-direction: column; gap: 10px; }
+        .blog-card { display: flex; gap: 10px; border: 1px solid #e5e5e5; border-radius: 6px; overflow: hidden; }
+        .blog-card.featured { flex-direction: column; }
+        .blog-card.featured .blog-card-img { aspect-ratio: 16/9; width: 100%; }
+        .blog-card-img { width: 90px; flex-shrink: 0; overflow: hidden; }
+        .blog-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .blog-card-body { padding: 8px; flex: 1; }
+        .blog-card-cat { font-size: 9px; font-weight: 700; color: #0d9488; text-transform: uppercase; margin-bottom: 2px; }
+        .blog-card-title { font-size: 11px; font-weight: 700; color: #1a1a1a; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .blog-card-date { font-size: 9px; color: #888; margin-top: 3px; }
     </style>
 </head>
 <body>
@@ -800,23 +869,25 @@
                     </button>
                 </div>
             </div>
-
             <!-- 使用例プレビュー -->
-            <div class="usage-preview-section" id="usagePreviewSection" style="display:none;">
-                <div class="usage-preview-title">
+            <div class="preview-section" id="previewSection" style="display:none;">
+                <div class="preview-section-title">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                     使用例プレビュー
                 </div>
                 <div class="preview-tabs">
-                    <button class="preview-tab active" onclick="showPreviewTab('youtube', this)">YouTubeサムネ</button>
-                    <button class="preview-tab" onclick="showPreviewTab('eyecatch', this)">ブログアイキャッチ</button>
-                    <button class="preview-tab" onclick="showPreviewTab('sns', this)">SNS投稿</button>
-                    <button class="preview-tab" onclick="showPreviewTab('banner', this)">バナー</button>
+                    <button class="preview-tab active" data-tab="youtube">YouTubeサムネ</button>
+                    <button class="preview-tab" data-tab="eyecatch">ブログアイキャッチ</button>
+                    <button class="preview-tab" data-tab="instagram">Instagram</button>
+                    <button class="preview-tab" data-tab="x">X（旧Twitter）</button>
                 </div>
-                <div class="preview-canvas-wrap">
-                    <canvas id="previewCanvas"></canvas>
+                <div class="preview-mockup-wrap">
+                    <div class="preview-pane active" id="pane-youtube"></div>
+                    <div class="preview-pane" id="pane-eyecatch"></div>
+                    <div class="preview-pane" id="pane-instagram"></div>
+                    <div class="preview-pane" id="pane-x"></div>
                 </div>
-                <div class="preview-canvas-label" id="previewCanvasLabel"></div>
+                <div class="preview-mockup-label" id="previewLabel">※ イメージです。実際の表示とは異なる場合があります。</div>
             </div>
 
             <!-- 説明文 -->
@@ -1047,227 +1118,148 @@ function drawWatermarkedPreview(imgSrc, container, bgColor) {
 }
 
 
-// ===== 使用例プレビュータブ =====
-let previewImgSrc = '';
-let previewTitle = '';
-let currentPreviewTab = 'youtube';
 
-const PREVIEW_CONFIGS = {
-    youtube: {
-        w: 1280, h: 720,
-        label: 'YouTubeサムネイル（1280×720px）',
-        render: (ctx, img, title, w, h) => {
-            // 背景画像
-            ctx.drawImage(img, 0, 0, w, h);
-            // 暗いオーバーレイ（下部）
-            const grad = ctx.createLinearGradient(0, h * 0.45, 0, h);
-            grad.addColorStop(0, 'rgba(0,0,0,0)');
-            grad.addColorStop(1, 'rgba(0,0,0,0.72)');
-            ctx.fillStyle = grad;
-            ctx.fillRect(0, 0, w, h);
-            // タイトルテキスト
-            ctx.fillStyle = '#ffffff';
-            ctx.font = `bold ${Math.floor(h * 0.085)}px "Noto Sans JP", sans-serif`;
-            ctx.textAlign = 'left';
-            ctx.shadowColor = 'rgba(0,0,0,0.8)';
-            ctx.shadowBlur = 8;
-            const lines = wrapText(ctx, title, w * 0.06, w * 0.88, Math.floor(h * 0.095));
-            lines.forEach((line, i) => {
-                ctx.fillText(line, w * 0.06, h * 0.78 + i * Math.floor(h * 0.1));
-            });
-            ctx.shadowBlur = 0;
-            // チャンネルアイコン風
-            ctx.fillStyle = 'rgba(255,255,255,0.9)';
-            ctx.beginPath();
-            ctx.arc(w * 0.06 + 20, h * 0.93, 18, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.fillStyle = '#0d9488';
-            ctx.font = `bold ${Math.floor(h * 0.04)}px sans-serif`;
-            ctx.textAlign = 'center';
-            ctx.fillText('S', w * 0.06 + 20, h * 0.935);
-            ctx.fillStyle = 'rgba(255,255,255,0.85)';
-            ctx.font = `${Math.floor(h * 0.035)}px "Noto Sans JP", sans-serif`;
-            ctx.textAlign = 'left';
-            ctx.fillText('ソザイノチャンネル', w * 0.06 + 46, h * 0.935);
-        }
-    },
-    eyecatch: {
-        w: 1200, h: 630,
-        label: 'ブログアイキャッチ（1200×630px）',
-        render: (ctx, img, title, w, h) => {
-            ctx.drawImage(img, 0, 0, w, h);
-            // 左側グラデーション
-            const grad = ctx.createLinearGradient(0, 0, w * 0.7, 0);
-            grad.addColorStop(0, 'rgba(0,0,0,0.68)');
-            grad.addColorStop(1, 'rgba(0,0,0,0)');
-            ctx.fillStyle = grad;
-            ctx.fillRect(0, 0, w, h);
-            // タグバッジ
-            ctx.fillStyle = '#0d9488';
-            ctx.beginPath();
-            roundRect(ctx, w * 0.06, h * 0.32, 120, 32, 6);
-            ctx.fill();
-            ctx.fillStyle = '#fff';
-            ctx.font = `bold ${Math.floor(h * 0.045)}px "Noto Sans JP", sans-serif`;
-            ctx.textAlign = 'center';
-            ctx.fillText('素材活用', w * 0.06 + 60, h * 0.32 + 22);
-            // タイトル
-            ctx.fillStyle = '#ffffff';
-            ctx.font = `bold ${Math.floor(h * 0.082)}px "Noto Sans JP", sans-serif`;
-            ctx.textAlign = 'left';
-            ctx.shadowColor = 'rgba(0,0,0,0.6)';
-            ctx.shadowBlur = 6;
-            const lines = wrapText(ctx, title, w * 0.06, w * 0.55, Math.floor(h * 0.09));
-            lines.forEach((line, i) => {
-                ctx.fillText(line, w * 0.06, h * 0.48 + i * Math.floor(h * 0.1));
-            });
-            ctx.shadowBlur = 0;
-            // サイト名
-            ctx.fillStyle = 'rgba(255,255,255,0.75)';
-            ctx.font = `${Math.floor(h * 0.04)}px "Noto Sans JP", sans-serif`;
-            ctx.fillText('sozaino.com', w * 0.06, h * 0.82);
-        }
-    },
-    sns: {
-        w: 1080, h: 1080,
-        label: 'SNS投稿・Instagram（1080×1080px）',
-        render: (ctx, img, title, w, h) => {
-            // 正方形にクロップ
-            const s = Math.min(img.width, img.height);
-            const sx = (img.width - s) / 2;
-            const sy = (img.height - s) / 2;
-            ctx.drawImage(img, sx, sy, s, s, 0, 0, w, h);
-            // 下部グラデーション
-            const grad = ctx.createLinearGradient(0, h * 0.5, 0, h);
-            grad.addColorStop(0, 'rgba(0,0,0,0)');
-            grad.addColorStop(1, 'rgba(0,0,0,0.75)');
-            ctx.fillStyle = grad;
-            ctx.fillRect(0, 0, w, h);
-            // テキスト
-            ctx.fillStyle = '#ffffff';
-            ctx.font = `bold ${Math.floor(h * 0.072)}px "Noto Sans JP", sans-serif`;
-            ctx.textAlign = 'center';
-            ctx.shadowColor = 'rgba(0,0,0,0.8)';
-            ctx.shadowBlur = 8;
-            const lines = wrapText(ctx, title, w / 2, w * 0.82, Math.floor(h * 0.08));
-            const startY = h * 0.78;
-            lines.forEach((line, i) => {
-                ctx.fillText(line, w / 2, startY + i * Math.floor(h * 0.085));
-            });
-            ctx.shadowBlur = 0;
-            // ソザイノロゴ風
-            ctx.fillStyle = 'rgba(255,255,255,0.8)';
-            ctx.font = `${Math.floor(h * 0.038)}px "DM Sans", sans-serif`;
-            ctx.textAlign = 'center';
-            ctx.fillText('sozaino.com', w / 2, h * 0.95);
-        }
-    },
-    banner: {
-        w: 1200, h: 400,
-        label: 'バナー・広告用（1200×400px）',
-        render: (ctx, img, title, w, h) => {
-            ctx.drawImage(img, 0, 0, w, h);
-            // 全体オーバーレイ
-            const grad = ctx.createLinearGradient(0, 0, w, 0);
-            grad.addColorStop(0, 'rgba(13,148,136,0.85)');
-            grad.addColorStop(0.45, 'rgba(13,148,136,0.6)');
-            grad.addColorStop(1, 'rgba(0,0,0,0)');
-            ctx.fillStyle = grad;
-            ctx.fillRect(0, 0, w, h);
-            // タイトル
-            ctx.fillStyle = '#ffffff';
-            ctx.font = `bold ${Math.floor(h * 0.155)}px "Noto Sans JP", sans-serif`;
-            ctx.textAlign = 'left';
-            ctx.shadowColor = 'rgba(0,0,0,0.4)';
-            ctx.shadowBlur = 4;
-            const lines = wrapText(ctx, title, w * 0.05, w * 0.42, Math.floor(h * 0.17));
-            lines.forEach((line, i) => {
-                ctx.fillText(line, w * 0.05, h * 0.38 + i * Math.floor(h * 0.18));
-            });
-            ctx.shadowBlur = 0;
-            // CTAボタン風
-            ctx.fillStyle = '#ffffff';
-            roundRect(ctx, w * 0.05, h * 0.68, 180, 44, 22);
-            ctx.fill();
-            ctx.fillStyle = '#0d9488';
-            ctx.font = `bold ${Math.floor(h * 0.1)}px "Noto Sans JP", sans-serif`;
-            ctx.textAlign = 'center';
-            ctx.fillText('無料DL →', w * 0.05 + 90, h * 0.68 + 29);
-        }
-    }
-};
+// ===== 使用例プレビュー =====
+let _previewImgSrc = '';
+let _previewTitle = '';
 
-function wrapText(ctx, text, x, maxWidth, lineHeight) {
-    const lines = [];
-    let line = '';
-    for (let i = 0; i < text.length; i++) {
-        const testLine = line + text[i];
-        if (ctx.measureText(testLine).width > maxWidth && line.length > 0) {
-            lines.push(line);
-            line = text[i];
-            if (lines.length >= 2) break;
-        } else {
-            line = testLine;
-        }
-    }
-    if (line) lines.push(line);
-    return lines;
+function initPreviewTabs(imgSrc, title) {
+    _previewImgSrc = imgSrc;
+    _previewTitle = title;
+    const section = document.getElementById('previewSection');
+    if (!section) return;
+    section.style.display = 'block';
+
+    // タブクリック
+    section.querySelectorAll('.preview-tab').forEach(btn => {
+        btn.addEventListener('click', () => {
+            section.querySelectorAll('.preview-tab').forEach(b => b.classList.remove('active'));
+            section.querySelectorAll('.preview-pane').forEach(p => p.classList.remove('active'));
+            btn.classList.add('active');
+            const pane = document.getElementById('pane-' + btn.dataset.tab);
+            if (pane) pane.classList.add('active');
+        });
+    });
+
+    renderAllPanes(imgSrc, title);
 }
 
-function roundRect(ctx, x, y, w, h, r) {
-    ctx.beginPath();
-    ctx.moveTo(x + r, y);
-    ctx.lineTo(x + w - r, y);
-    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
-    ctx.lineTo(x + w, y + h - r);
-    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
-    ctx.lineTo(x + r, y + h);
-    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
-    ctx.lineTo(x, y + r);
-    ctx.quadraticCurveTo(x, y, x + r, y);
-    ctx.closePath();
-}
+function renderAllPanes(src, title) {
+    // YouTube
+    document.getElementById('pane-youtube').innerHTML = `
+        <div class="yt-frame">
+            <div class="yt-header">
+                <span class="yt-logo">YouTube</span>
+                <span style="font-size:11px;color:#606060;">検索</span>
+            </div>
+            <div style="padding:8px;background:#f9f9f9;">
+                <div class="yt-card">
+                    <div class="yt-thumb-wrap">
+                        <img src="${src}" alt="サムネイル">
+                        <span class="yt-duration">5:42</span>
+                    </div>
+                    <div class="yt-info">
+                        <div class="yt-avatar">S</div>
+                        <div class="yt-meta">
+                            <div class="yt-title">${title}</div>
+                            <div class="yt-channel">ソザイノチャンネル・23万回視聴・2日前</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="yt-card" style="opacity:.5;margin-top:8px;">
+                    <div class="yt-thumb-wrap" style="background:#e5e5e5;aspect-ratio:16/9;"></div>
+                    <div class="yt-info">
+                        <div class="yt-avatar" style="background:#888;">A</div>
+                        <div class="yt-meta">
+                            <div class="yt-title" style="background:#e5e5e5;height:10px;width:90%;border-radius:3px;margin-bottom:4px;"></div>
+                            <div class="yt-channel" style="background:#e5e5e5;height:8px;width:60%;border-radius:3px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>`;
 
-function showPreviewTab(type, btn) {
-    currentPreviewTab = type;
-    document.querySelectorAll('.preview-tab').forEach(t => t.classList.remove('active'));
-    btn.classList.add('active');
-    renderPreviewCanvas(type);
-}
+    // Blog eyecatch
+    document.getElementById('pane-eyecatch').innerHTML = `
+        <div class="blog-frame">
+            <div class="blog-header">
+                <span class="blog-logo">My Blog</span>
+                <div class="blog-nav"><span>ホーム</span><span>記事一覧</span><span>プロフィール</span></div>
+            </div>
+            <div class="blog-card-list">
+                <div class="blog-card featured">
+                    <div class="blog-card-img"><img src="${src}" alt="アイキャッチ"></div>
+                    <div class="blog-card-body" style="padding:10px;">
+                        <div class="blog-card-cat">おすすめ記事</div>
+                        <div class="blog-card-title" style="font-size:13px;">${title}</div>
+                        <div class="blog-card-date">2026年5月20日</div>
+                    </div>
+                </div>
+                <div class="blog-card" style="opacity:.5;">
+                    <div class="blog-card-img" style="background:#e5e5e5;min-height:60px;"></div>
+                    <div class="blog-card-body">
+                        <div style="background:#e5e5e5;height:8px;width:80%;border-radius:3px;margin-bottom:4px;"></div>
+                        <div style="background:#e5e5e5;height:8px;width:60%;border-radius:3px;"></div>
+                    </div>
+                </div>
+                <div class="blog-card" style="opacity:.3;">
+                    <div class="blog-card-img" style="background:#e5e5e5;min-height:60px;"></div>
+                    <div class="blog-card-body">
+                        <div style="background:#e5e5e5;height:8px;width:70%;border-radius:3px;margin-bottom:4px;"></div>
+                        <div style="background:#e5e5e5;height:8px;width:50%;border-radius:3px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>`;
 
-function renderPreviewCanvas(type) {
-    const config = PREVIEW_CONFIGS[type];
-    if (!config || !previewImgSrc) return;
+    // Instagram
+    document.getElementById('pane-instagram').innerHTML = `
+        <div class="ig-frame">
+            <div class="ig-header">
+                <div class="ig-user-wrap">
+                    <div class="ig-avatar"></div>
+                    <span class="ig-username">sozaino_official</span>
+                </div>
+                <span style="font-size:18px;color:#262626;">⋯</span>
+            </div>
+            <div class="ig-image">
+                <img src="${src}" alt="投稿画像">
+            </div>
+            <div class="ig-actions">
+                <span class="ig-action">♡</span>
+                <span class="ig-action">○</span>
+                <span class="ig-action">✈</span>
+            </div>
+            <div class="ig-likes">いいね！ 1,024件</div>
+            <div class="ig-caption"><span>sozaino_official</span> ${title} #フリー素材 #WebP #ブログ素材</div>
+        </div>`;
 
-    const canvas = document.getElementById('previewCanvas');
-    const label = document.getElementById('previewCanvasLabel');
-    if (!canvas) return;
-
-    const SCALE = 0.5;
-    canvas.width = config.w * SCALE;
-    canvas.height = config.h * SCALE;
-    const ctx = canvas.getContext('2d');
-    ctx.scale(SCALE, SCALE);
-
-    label.textContent = config.label;
-
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.onload = () => {
-        ctx.clearRect(0, 0, config.w, config.h);
-        config.render(ctx, img, previewTitle || 'タイトルテキスト例', config.w, config.h);
-    };
-    img.src = previewImgSrc;
-}
-
-function initUsagePreview(imgSrc, title) {
-    previewImgSrc = imgSrc;
-    previewTitle = title;
-    const section = document.getElementById('usagePreviewSection');
-    if (section) {
-        section.style.display = 'block';
-        renderPreviewCanvas(currentPreviewTab);
-    }
+    // X
+    document.getElementById('pane-x').innerHTML = `
+        <div class="x-frame">
+            <div class="x-header">
+                <div class="x-avatar">S</div>
+                <div style="flex:1;">
+                    <div class="x-user">ソザイノ公式</div>
+                    <div class="x-handle">@sozaino_official</div>
+                </div>
+                <span style="color:#1d9bf0;font-size:18px;font-weight:700;">𝕏</span>
+            </div>
+            <div class="x-body">
+                【新着素材】${title}<br>
+                商用利用OK・クレジット不要のWebP素材を無料配布中です。<br>
+                <span style="color:#1d9bf0;">sozaino.com</span>
+                <div class="x-card">
+                    <img src="${src}" alt="OGP画像">
+                    <div class="x-card-label">sozaino.com · 素材ギャラリー</div>
+                </div>
+            </div>
+            <div class="x-actions">
+                <span class="x-action">↩ 返信</span>
+                <span class="x-action">↻ 42</span>
+                <span class="x-action">♡ 156</span>
+            </div>
+        </div>`;
 }
 
 // ===== 背景色スウォッチ =====
@@ -1385,7 +1377,7 @@ function renderMaterial(m) {
     drawWatermarkedPreview(imgPath, wrap, 'white');
 
     // 使用例プレビュー初期化
-    initUsagePreview(imgPath, m.title || m.filename);
+    initPreviewTabs(imgPath, m.title || m.filename);
 
     // 背景透過タグまたはキャラクターカテゴリの場合に背景色スウォッチを表示
     const bgSwitcher = document.getElementById('bgSwitcher');
