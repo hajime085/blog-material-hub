@@ -1933,7 +1933,7 @@ function shareToLine() {
             lines.forEach((l,i) => ctx.fillText(l, w*0.05, h*0.38+i*h*0.19));
             ctx.shadowBlur=0;
             ctx.fillStyle='#fff';
-            ctx.beginPath(); ctx.roundRect(w*0.05, h*0.68, 160, 42, 21); ctx.fill();
+            ctx.beginPath(); ctx.arc(w*0.05+21, h*0.68+21, 21, Math.PI/2, -Math.PI/2, true); ctx.arc(w*0.05+139, h*0.68+21, 21, -Math.PI/2, Math.PI/2, true); ctx.closePath(); ctx.fill();
             ctx.fillStyle='#0d9488'; ctx.font=`bold ${h*0.1}px sans-serif`; ctx.textAlign='center';
             ctx.fillText('無料DL →', w*0.05+80, h*0.68+28);
         }},
@@ -1966,6 +1966,7 @@ function shareToLine() {
         wrap.appendChild(label);
         grid.appendChild(wrap);
         const img=new Image(); img.crossOrigin='anonymous';
-        img.onload=()=>{ ctx.clearRect(0,0,d.w,d.h); d.render(ctx,img,d.w,d.h); };
+        img.onload=()=>{ try{ ctx.clearRect(0,0,d.w,d.h); d.render(ctx,img,d.w,d.h); }catch(e){console.warn('canvas render error',e);} };
+        img.onerror=()=>{ ctx.fillStyle='#e0e0e0'; ctx.fillRect(0,0,d.w,d.h); ctx.fillStyle='#999'; ctx.font=`bold ${d.h*0.08}px sans-serif`; ctx.textAlign='center'; ctx.fillText('プレビュー準備中', d.w/2, d.h/2); };
         img.src=src;
     });
