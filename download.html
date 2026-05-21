@@ -1564,19 +1564,28 @@ function renderMaterial(m) {
 
         if (ug.design_points && ug.design_points.length) {
             dpBlock.style.display = 'block';
-            dpEl.className = 'design-points-grid';
+            dpEl.className = 'usage-chips';
             ug.design_points.forEach(p => {
-                const div = document.createElement('div');
-                div.className = 'design-point-item';
-                div.textContent = p;
-                dpEl.appendChild(div);
+                const chip = document.createElement('span');
+                chip.className = 'usage-chip';
+                chip.textContent = p;
+                dpEl.appendChild(chip);
             });
         } else {
             dpBlock.style.display = 'none';
         }
-
-        (ug.scenes    || []).forEach(s => { const li=document.createElement('li'); li.textContent=s; scenesEl.appendChild(li); });
-        (ug.headlines || []).forEach(h => { const li=document.createElement('li'); li.textContent=h; headlinesEl.appendChild(li); });
+        (ug.scenes || []).forEach(s => {
+            const tag = document.createElement('span');
+            tag.className = 'usage-scene-tag';
+            tag.textContent = s;
+            scenesEl.appendChild(tag);
+        });
+        (ug.headlines || []).forEach(h => {
+            const div = document.createElement('div');
+            div.className = 'usage-headline-item';
+            div.textContent = h;
+            headlinesEl.appendChild(div);
+        });
     } else {
         guideCard.style.display = 'none';
     }
