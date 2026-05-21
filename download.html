@@ -219,6 +219,19 @@
         .desc-box-body { font-size:.92rem; line-height:1.8; color:#5a4200; }
         .desc-box-body p + p { margin-top:.5rem; }
 
+        /* 活用ガイド リニューアル */
+        .usage-guide { display: flex; flex-direction: column; gap: 1.5rem; }
+        .usage-block-new { display: flex; flex-direction: column; gap: .6rem; }
+        .usage-block-label { font-size: .75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; display: flex; align-items: center; gap: .35rem; }
+        .usage-chips { display: flex; flex-wrap: wrap; gap: .4rem; }
+        .usage-chip { font-size: .78rem; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: .4rem; padding: .35rem .7rem; line-height: 1.4; }
+        .usage-scene-tags { display: flex; flex-wrap: wrap; gap: .35rem; }
+        .usage-scene-tag { font-size: .75rem; font-weight: 600; color: var(--primary); background: var(--primary-bg); border-radius: 99px; padding: .2rem .7rem; }
+        .usage-headline-list { display: flex; flex-direction: column; gap: .5rem; }
+        .usage-headline-item { font-size: .85rem; color: var(--text); background: var(--primary-bg); border-left: 3px solid var(--primary); border-radius: 0 .4rem .4rem 0; padding: .6rem .85rem; line-height: 1.6; }
+        .usage-headline-item::before { content: '「'; }
+        .usage-headline-item::after { content: '」'; }
+
         /* 活用ガイド */
         .usage-guide { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; margin-top:.6rem; }
         .usage-block {}
@@ -908,17 +921,26 @@
             <div class="desc-card" id="usageGuideCard" style="display:none;">
                 <div class="section-title"><svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg> この素材の活用ガイド</div>
                 <div class="usage-guide">
-                    <div class="usage-block" id="guideDesignPointsBlock" style="display:none;">
-                        <div class="usage-label"><svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><circle cx="13.5" cy="6.5" r="0.5" fill="currentColor"></circle><circle cx="17.5" cy="10.5" r="0.5" fill="currentColor"></circle><circle cx="8.5" cy="7.5" r="0.5" fill="currentColor"></circle><circle cx="6.5" cy="12.5" r="0.5" fill="currentColor"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"></path></svg> デザイン上のポイント</div>
-                        <ul class="usage-list" id="guideDesignPoints"></ul>
+                    <div class="usage-block-new" id="guideDesignPointsBlock" style="display:none;">
+                        <div class="usage-block-label">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                            デザインのポイント
+                        </div>
+                        <div class="usage-chips" id="guideDesignPoints"></div>
                     </div>
-                    <div class="usage-block">
-                        <div class="usage-label"><svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"></path></svg> おすすめ記事・動画ジャンル</div>
-                        <ul class="usage-list" id="guideScenes"></ul>
+                    <div class="usage-block-new">
+                        <div class="usage-block-label">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+                            おすすめ用途・ジャンル
+                        </div>
+                        <div class="usage-scene-tags" id="guideScenes"></div>
                     </div>
-                    <div class="usage-block">
-                        <div class="usage-label"><svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg> 見出し文の例</div>
-                        <ul class="usage-list usage-headlines" id="guideHeadlines"></ul>
+                    <div class="usage-block-new">
+                        <div class="usage-block-label">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                            見出し文の例
+                        </div>
+                        <div class="usage-headline-list" id="guideHeadlines"></div>
                     </div>
                 </div>
             </div>
