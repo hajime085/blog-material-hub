@@ -219,84 +219,78 @@
         .desc-box-body { font-size:.92rem; line-height:1.8; color:#5a4200; }
         .desc-box-body p + p { margin-top:.5rem; }
 
-        /* 活用ガイド 全面刷新 */
-        .guide-summary {
+        /* 活用ガイド メディアUI */
+        .guide-wrap { padding: 0; }
+        .guide-summary-text {
             font-size: .95rem;
-            color: var(--text);
-            line-height: 1.85;
-            padding: .85rem 1rem;
-            background: var(--primary-bg);
-            border-left: 3px solid var(--primary);
-            border-radius: 0 .5rem .5rem 0;
-            margin-bottom: 1.5rem;
+            color: #334155;
+            line-height: 1.9;
+            margin-bottom: 1.75rem;
+            padding-bottom: 1.25rem;
+            border-bottom: 1px solid var(--border);
         }
-        .guide-block { margin-bottom: 1.5rem; }
-        .guide-block-label {
-            font-size: .72rem;
+        .guide-section { margin-bottom: 1.5rem; }
+        .guide-section-label {
+            font-size: .7rem;
             font-weight: 700;
             color: var(--muted);
+            letter-spacing: .1em;
             text-transform: uppercase;
-            letter-spacing: .07em;
             margin-bottom: .6rem;
-            display: flex;
-            align-items: center;
-            gap: .3rem;
         }
-        .guide-tags { display: flex; flex-wrap: wrap; gap: .35rem; }
+        .guide-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
         .guide-tag {
             font-size: .78rem;
             font-weight: 600;
             color: var(--primary);
             background: var(--primary-bg);
-            border: 1px solid rgba(13,148,136,.2);
             border-radius: 99px;
-            padding: .25rem .75rem;
+            padding: .2rem .75rem;
         }
-        .guide-points { display: flex; flex-direction: column; gap: .5rem; }
+        .guide-points { display: flex; flex-direction: column; gap: .45rem; }
         .guide-point {
+            font-size: .88rem;
+            color: #334155;
+            line-height: 1.6;
             display: flex;
             align-items: flex-start;
-            gap: .6rem;
-            font-size: .88rem;
-            color: var(--text);
-            line-height: 1.6;
+            gap: .5rem;
         }
-        .guide-point-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--primary);
+        .guide-point-check {
+            color: var(--primary);
+            font-weight: 700;
             flex-shrink: 0;
-            margin-top: .5rem;
+            margin-top: .05rem;
         }
         .guide-headlines { display: flex; flex-direction: column; gap: .5rem; }
         .guide-headline {
-            font-size: .85rem;
-            color: var(--muted);
+            font-size: .87rem;
+            color: #334155;
             line-height: 1.6;
-            padding: .65rem 1rem;
-            border: 1px solid var(--border);
-            border-radius: .5rem;
-            background: var(--surface);
+            padding: .55rem .9rem;
+            background: #f8fafc;
+            border-radius: .4rem;
             position: relative;
+            padding-left: 1.6rem;
         }
         .guide-headline::before {
             content: '"';
-            font-size: 1.8rem;
-            color: var(--primary);
-            opacity: .3;
             position: absolute;
-            top: -.1rem;
-            left: .4rem;
-            line-height: 1;
+            left: .5rem;
+            top: .3rem;
+            font-size: 1.2rem;
+            color: var(--primary);
             font-family: Georgia, serif;
+            line-height: 1;
+            opacity: .5;
         }
-        .guide-headline-text {
-            padding-left: 1.2rem;
-            display: block;
+        @media(max-width:640px) {
+            .guide-summary-text { font-size: .9rem; }
+            .guide-point { font-size: .85rem; }
+            .guide-headline { font-size: .83rem; }
         }
 
-        /* 活用ガイド */
+        /* 活用ガイド */        /* 活用ガイド */
         .usage-guide { display: flex; flex-direction: column; gap: 1.5rem; }
         .usage-block-new { display: flex; flex-direction: column; gap: .6rem; }
         .usage-block-label { font-size: .75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; display: flex; align-items: center; gap: .35rem; }
@@ -1000,31 +994,23 @@
                     <svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
                     この素材の活用ガイド
                 </div>
+                <div class="guide-wrap">
+                    <p class="guide-summary-text" id="guideSummary"></p>
 
-                <div class="guide-summary" id="guideSummary"></div>
-
-                <div class="guide-block">
-                    <div class="guide-block-label">
-                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
-                        おすすめ用途
+                    <div class="guide-section">
+                        <div class="guide-section-label">おすすめ用途</div>
+                        <div class="guide-tags" id="guideScenes"></div>
                     </div>
-                    <div class="guide-tags" id="guideScenes"></div>
-                </div>
 
-                <div class="guide-block" id="guideDesignPointsBlock" style="display:none;">
-                    <div class="guide-block-label">
-                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                        活用ポイント
+                    <div class="guide-section" id="guideDesignPointsBlock" style="display:none;">
+                        <div class="guide-section-label">活用ポイント</div>
+                        <div class="guide-points" id="guideDesignPoints"></div>
                     </div>
-                    <div class="guide-points" id="guideDesignPoints"></div>
-                </div>
 
-                <div class="guide-block">
-                    <div class="guide-block-label">
-                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                        見出し文の例
+                    <div class="guide-section">
+                        <div class="guide-section-label">見出し例</div>
+                        <div class="guide-headlines" id="guideHeadlines"></div>
                     </div>
-                    <div class="guide-headlines" id="guideHeadlines"></div>
                 </div>
             </div>
 
