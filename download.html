@@ -1633,19 +1633,31 @@ function renderMaterial(m) {
 
         if (ug.design_points && ug.design_points.length) {
             dpBlock.style.display = 'block';
-            dpEl.className = 'design-points-grid';
+            dpEl.className = 'guide-points';
             ug.design_points.forEach(p => {
                 const div = document.createElement('div');
-                div.className = 'design-point-item';
-                div.textContent = p;
+                div.className = 'guide-point';
+                const short = p.length > 25 ? p.slice(0, 25) + '…' : p;
+                div.innerHTML = '<span class="guide-point-check">✓</span><span>' + short + '</span>';
                 dpEl.appendChild(div);
             });
         } else {
             dpBlock.style.display = 'none';
         }
-
-        (ug.scenes    || []).forEach(s => { const li=document.createElement('li'); li.textContent=s; scenesEl.appendChild(li); });
-        (ug.headlines || []).forEach(h => { const li=document.createElement('li'); li.textContent=h; headlinesEl.appendChild(li); });
+        (ug.scenes || []).slice(0, 6).forEach(s => {
+            const tag = document.createElement('span');
+            tag.className = 'guide-tag';
+            // scenesは長文なので先頭10文字のキーワードのみ
+            const keyword = s.replace(/。.*/, '').replace(/[のをにはがもで].*/, '').slice(0, 10);
+            tag.textContent = keyword;
+            scenesEl.appendChild(tag);
+        });
+        (ug.headlines || []).forEach(h => {
+            const div = document.createElement('div');
+            div.className = 'guide-headline';
+            div.innerHTML = '<span class="guide-headline-text">' + h + '</span>';
+            headlinesEl.appendChild(div);
+        });
     } else {
         guideCard.style.display = 'none';
     }
