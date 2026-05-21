@@ -219,24 +219,25 @@
         .desc-box-body { font-size:.92rem; line-height:1.8; color:#5a4200; }
         .desc-box-body p + p { margin-top:.5rem; }
 
-        /* 活用ガイド メディアUI */
-        .guide-wrap { padding: 0; }
+        /* 活用ガイド メディア感 */
+        .guide-wrap { max-width: 560px; }
         .guide-summary-text {
-            font-size: .95rem;
+            font-size: 1rem;
             color: #334155;
-            line-height: 1.9;
-            margin-bottom: 1.75rem;
-            padding-bottom: 1.25rem;
-            border-bottom: 1px solid var(--border);
+            line-height: 2;
+            margin-bottom: 2.25rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #f1f5f9;
+            font-weight: 400;
         }
-        .guide-section { margin-bottom: 1.5rem; }
+        .guide-section { margin-bottom: 2rem; }
         .guide-section-label {
-            font-size: .7rem;
+            font-size: .65rem;
             font-weight: 700;
-            color: var(--muted);
-            letter-spacing: .1em;
+            color: #94a3b8;
+            letter-spacing: .12em;
             text-transform: uppercase;
-            margin-bottom: .6rem;
+            margin-bottom: .85rem;
         }
         .guide-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
         .guide-tag {
@@ -245,52 +246,53 @@
             color: var(--primary);
             background: var(--primary-bg);
             border-radius: 99px;
-            padding: .2rem .75rem;
+            padding: .22rem .75rem;
         }
-        .guide-points { display: flex; flex-direction: column; gap: .45rem; }
+        .guide-points { display: flex; flex-direction: column; gap: .75rem; }
         .guide-point {
-            font-size: .88rem;
-            color: #334155;
-            line-height: 1.6;
+            font-size: .9rem;
+            color: #475569;
+            line-height: 1.75;
             display: flex;
-            align-items: flex-start;
+            align-items: baseline;
             gap: .5rem;
         }
         .guide-point-check {
             color: var(--primary);
             font-weight: 700;
             flex-shrink: 0;
-            margin-top: .05rem;
+            font-size: .8rem;
         }
-        .guide-headlines { display: flex; flex-direction: column; gap: .5rem; }
+        .guide-headlines { display: flex; flex-direction: column; gap: .85rem; }
         .guide-headline {
-            font-size: .87rem;
-            color: #334155;
-            line-height: 1.6;
-            padding: .55rem .9rem;
-            background: #f8fafc;
-            border-radius: .4rem;
+            font-size: .92rem;
+            color: #1e293b;
+            line-height: 1.75;
+            font-weight: 500;
+            padding: .1rem 0 .1rem 1.4rem;
             position: relative;
-            padding-left: 1.6rem;
+            border: none;
+            background: none;
         }
         .guide-headline::before {
             content: '"';
             position: absolute;
-            left: .5rem;
-            top: .3rem;
-            font-size: 1.2rem;
+            left: 0;
+            top: -.2rem;
+            font-size: 1.8rem;
             color: var(--primary);
+            opacity: .25;
             font-family: Georgia, serif;
             line-height: 1;
-            opacity: .5;
         }
         @media(max-width:640px) {
-            .guide-summary-text { font-size: .9rem; }
-            .guide-point { font-size: .85rem; }
-            .guide-headline { font-size: .83rem; }
+            .guide-wrap { max-width: 100%; }
+            .guide-summary-text { font-size: .93rem; line-height: 1.9; }
+            .guide-point { font-size: .87rem; }
+            .guide-headline { font-size: .88rem; }
         }
 
-        /* 活用ガイド */        /* 活用ガイド */
+        /* 活用ガイド */        /* 活用ガイド */        /* 活用ガイド */
         .usage-guide { display: flex; flex-direction: column; gap: 1.5rem; }
         .usage-block-new { display: flex; flex-direction: column; gap: .6rem; }
         .usage-block-label { font-size: .75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; display: flex; align-items: center; gap: .35rem; }
