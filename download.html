@@ -1853,25 +1853,8 @@ function shareToLine() {
     window.location.href = shareUrl;
 }
 
-</script>
 
-<!-- モバイル固定ダウンロードバー -->
-<div class="mobile-dl-bar" id="mobileDlBar">
-    <div class="mobile-dl-info">
-        <div class="mobile-dl-title" id="mobileDlTitle">素材をダウンロード</div>
-        <div class="mobile-dl-sub" id="mobileDlSub">WebP形式 / 無料・商用OK</div>
-        <!-- カウントダウンバー（処理中のみ表示） -->
-        <div class="mobile-dl-progress" id="mobileDlProgress" style="display:none;">
-            <div class="mobile-dl-progress-fill" id="mobileDlProgressFill"></div>
-        </div>
-    </div>
-    <button class="mobile-dl-btn" id="mobileDlBtn" onclick="startDownload()">⬇ ダウンロード</button>
-</div>
-
-</body>
-</html>
-
-    // デザイン活用例（Canvas）
+// デザイン活用例（Canvas）
     const designPane = document.getElementById('pane-design');
     designPane.innerHTML = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;" id="designCanvasGrid"></div>';
     const grid = document.getElementById('designCanvasGrid');
@@ -1970,3 +1953,20 @@ function shareToLine() {
         img.onerror=()=>{ ctx.fillStyle='#e0e0e0'; ctx.fillRect(0,0,d.w,d.h); ctx.fillStyle='#999'; ctx.font=`bold ${d.h*0.08}px sans-serif`; ctx.textAlign='center'; ctx.fillText('プレビュー準備中', d.w/2, d.h/2); };
         img.src=src;
     });
+</script>
+
+<!-- モバイル固定ダウンロードバー -->
+<div class="mobile-dl-bar" id="mobileDlBar">
+    <div class="mobile-dl-info">
+        <div class="mobile-dl-title" id="mobileDlTitle">素材をダウンロード</div>
+        <div class="mobile-dl-sub" id="mobileDlSub">WebP形式 / 無料・商用OK</div>
+        <!-- カウントダウンバー（処理中のみ表示） -->
+        <div class="mobile-dl-progress" id="mobileDlProgress" style="display:none;">
+            <div class="mobile-dl-progress-fill" id="mobileDlProgressFill"></div>
+        </div>
+    </div>
+    <button class="mobile-dl-btn" id="mobileDlBtn" onclick="startDownload()">⬇ ダウンロード</button>
+</div>
+
+</body>
+</html>
