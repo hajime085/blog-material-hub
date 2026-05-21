@@ -690,6 +690,26 @@
                 <div class="related-grid" id="relatedGrid"></div>
             </div>
 
+            <!-- 関連コラム記事 -->
+            <div class="related-columns-section" id="relatedColumnsSection">
+                <div class="related-columns-title">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                    この素材を活かすためのコラム
+                </div>
+                <div class="related-col-list" id="relatedColList"></div>
+            </div>
+
+            <!-- 著者ボックス -->
+            <div class="author-mini-box">
+                <img src="assets/materials/haji-icon.jpg" alt="編集者ひよこ">
+                <div class="author-mini-body">
+                    <div class="author-mini-label">この素材を選んだ人</div>
+                    <div class="author-mini-name">編集者ひよこ</div>
+                    <div class="author-mini-desc">ブログ歴6年・YouTube制作歴2年。「実際に使えるか」を基準にAI生成素材を一枚ずつ選別しています。</div>
+                </div>
+                <a href="about.html" class="author-mini-link">詳細 →</a>
+            </div>
+
             <!-- ギャラリー誘導バナー -->
             <a href="gallery.html" class="gallery-banner">
                 <div class="gallery-banner-inner">
@@ -1111,6 +1131,53 @@ function renderMaterial(m) {
         } else {
             relGrid.innerHTML = '<p style="color:var(--muted);font-size:.85rem;">関連素材はありません</p>';
         }
+    }
+
+    // 関連コラム記事（カテゴリ別に出し分け）
+    const colList = document.getElementById('relatedColList');
+    if (colList) {
+        const cat = m.largeCategory || '';
+        const colMap = {
+            'blog':        [
+                { tag:'Canva・デザイン', title:'Canvaでブログのアイキャッチを作る方法。無料でプロっぽく仕上げる手順と5つのコツ', href:'column/canva-eyecatch-guide.html' },
+                { tag:'ブログ・アイキャッチ', title:'アイキャッチ画像でクリック率が変わる理由。読まれるブログ画像の5つの特徴', href:'column/eyecatch-ctr-improvement.html' },
+                { tag:'画像・デザイン', title:'ブログのアイキャッチ画像サイズ、正解はこれ。用途別の推奨サイズと選び方', href:'column/eyecatch-size-guide.html' },
+            ],
+            'character':   [
+                { tag:'AI素材', title:'AI画像を安っぽく見せない5つの方法。フリー素材として使えるクオリティに仕上げるコツ', href:'column/ai-image-quality-tips.html' },
+                { tag:'AI素材', title:'ブログのアイキャッチにAI画像を使う5つのメリットと3つの注意点', href:'column/ai-eyecatch-merit.html' },
+                { tag:'Canva・デザイン', title:'Canvaでブログのアイキャッチを作る方法。無料でプロっぽく仕上げる手順と5つのコツ', href:'column/canva-eyecatch-guide.html' },
+            ],
+            'nature':      [
+                { tag:'YouTube・サムネイル', title:'YouTubeサムネイルでCTRが上がる背景の選び方。色・明暗・構図の3つの法則', href:'column/youtube-thumbnail-ctr.html' },
+                { tag:'YouTube・サムネイル', title:'YouTubeサムネイルの余白設計で再生数が変わる。3つのルールと実践手順', href:'column/thumbnail-whitespace-design.html' },
+                { tag:'デザイン', title:'ブログ画像の配色で読まれやすさが変わる理由。ジャンル別おすすめ配色パターン', href:'column/blog-image-color-guide.html' },
+            ],
+            'backgrounds': [
+                { tag:'YouTube・サムネイル', title:'YouTubeサムネイルでCTRが上がる背景の選び方。色・明暗・構図の3つの法則', href:'column/youtube-thumbnail-ctr.html' },
+                { tag:'デザイン', title:'バナー制作で避けるべき色と配色の基本。70・25・5の法則ですぐ使える5パターン', href:'column/banner-color-guide.html' },
+                { tag:'デザイン', title:'SNSで埋もれないデザインの作り方。タイムラインで目立つ5つの法則', href:'column/sns-design-tips.html' },
+            ],
+            'person':      [
+                { tag:'ブログ・アイキャッチ', title:'アイキャッチ画像でクリック率が変わる理由。読まれるブログ画像の5つの特徴', href:'column/eyecatch-ctr-improvement.html' },
+                { tag:'デザイン', title:'SNSで埋もれないデザインの作り方。タイムラインで目立つ5つの法則', href:'column/sns-design-tips.html' },
+                { tag:'画像・デザイン', title:'SNS投稿の画像サイズ完全ガイド。X・Instagram・LINE・Facebook・TikTok対応表', href:'column/sns-image-size-guide.html' },
+            ],
+        };
+        const defaultCols = [
+            { tag:'素材活用', title:'ブログ用フリー素材の選び方完全ガイド。失敗しないための5つの確認ポイント', href:'column/free-material-selection-guide.html' },
+            { tag:'利用規約', title:'フリー素材の商用利用ガイド。「商用利用OK」でも注意が必要なケース', href:'column/commercial-use-guide.html' },
+            { tag:'画像フォーマット', title:'WebP形式とは？PNG・JPEGとの違いと、ブログで使う5つのメリット', href:'column/webp-guide.html' },
+        ];
+        const cols = colMap[cat] || defaultCols;
+        colList.innerHTML = '';
+        cols.forEach(col => {
+            const a = document.createElement('a');
+            a.className = 'related-col-item';
+            a.href = col.href;
+            a.innerHTML = `<span class="related-col-tag">${col.tag}</span><span>${col.title}</span>`;
+            colList.appendChild(a);
+        });
     }
 }
 
