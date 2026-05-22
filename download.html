@@ -57,7 +57,7 @@
         }
 
         /* ===== LEFT COLUMN ===== */
-        .left-col {}
+        .left-col { min-width: 0; width: 100%; }
 
         h1.material-title {
             font-family:'DM Sans',sans-serif;
@@ -91,6 +91,7 @@
             position:relative;
             display:flex; justify-content:center; align-items:center;
             min-height:200px;
+            width:100%;
         }
         .preview-wrap img {
             display:block; width:100%; height:auto;
@@ -192,8 +193,8 @@
             .line-icon-wrap { width:22px; height:22px; border-radius:0; overflow:visible; }
             .line-icon-wrap svg { width:22px; height:22px; }
             .share-btn svg.share-icon { width:14px; height:14px; }
-            .share-buttons-container { gap:.45rem; flex-wrap:nowrap; }
-            .share-btn { flex:1; }
+            .share-buttons-container { gap:.45rem; flex-wrap:wrap; }
+            .share-btn { flex:1; min-width: calc(50% - .25rem); }
         }
 
         /* ===== 説明・詳細 ===== */
