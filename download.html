@@ -8,6 +8,7 @@
     <link rel="canonical" href="https://sozaino.com/download.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
     <style>
         :root {
             --primary:    #0d9488;  /* メインアクセント（ティール） */
@@ -250,18 +251,22 @@
         }
         .guide-points { display: flex; flex-direction: column; gap: .75rem; }
         .guide-point {
-            font-size: .85rem;
-            color: #475569;
-            line-height: 1.8;
+            font-size: .9rem;
+            color: #334155;
+            line-height: 1.9;
             display: flex;
-            align-items: baseline;
-            gap: .5rem;
+            align-items: flex-start;
+            gap: .55rem;
+            white-space: normal;
+            word-break: break-word;
+            overflow-wrap: break-word;
         }
         .guide-point-check {
             color: var(--primary);
             font-weight: 700;
             flex-shrink: 0;
-            font-size: .8rem;
+            font-size: .85rem;
+            margin-top: .15rem;
         }
         .guide-headlines { display: flex; flex-direction: column; gap: .85rem; }
         .guide-headline {
@@ -681,6 +686,160 @@
         }
 
 
+        /* ===== デザイン活用例 拡大モーダル ===== */
+        .design-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(0,0,0,.82);
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+        .design-modal-overlay.open {
+            display: flex;
+        }
+        .design-modal-inner {
+            position: relative;
+            max-width: 480px;
+            width: 100%;
+            animation: modalIn .2s ease;
+        }
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(.94); }
+            to   { opacity: 1; transform: scale(1); }
+        }
+        .design-modal-img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            display: block;
+            box-shadow: 0 8px 40px rgba(0,0,0,.5);
+        }
+        .design-modal-label {
+            text-align: center;
+            color: rgba(255,255,255,.75);
+            font-size: .82rem;
+            margin-top: .75rem;
+        }
+        .design-modal-close {
+            position: absolute;
+            top: -14px;
+            right: -14px;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: #fff;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,.3);
+            font-size: 1rem;
+            color: #374151;
+            transition: background .15s;
+        }
+        .design-modal-close:hover { background: #f3f4f6; }
+        /* フレームカードのホバー演出 */
+        .design-frame-card {
+            cursor: zoom-in;
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1414/2000;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 12px rgba(0,0,0,.15);
+            transition: box-shadow .2s, transform .2s;
+        }
+        .design-frame-card:hover {
+            box-shadow: 0 6px 24px rgba(0,0,0,.25);
+            transform: translateY(-2px);
+        }
+        .design-frame-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0);
+            transition: background .2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .design-frame-card:hover::after {
+            background: rgba(0,0,0,.18);
+        }
+        .design-zoom-hint {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0,0,0,.55);
+            color: #fff;
+            font-size: .68rem;
+            padding: .2rem .5rem;
+            border-radius: 4px;
+            opacity: 0;
+            transition: opacity .2s;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .design-frame-card:hover .design-zoom-hint { opacity: 1; }
+
+        /* ===== スマホ用サイドバー情報（折りたたみ） ===== */
+        .mobile-sidebar-info {
+            display: none; /* PCでは非表示 */
+        }
+        @media(max-width:768px) {
+            .mobile-sidebar-info {
+                display: block;
+                margin: 1.5rem 0;
+            }
+            .mobile-sidebar-toggle {
+                width: 100%;
+                background: #f8fafc;
+                border: 1px solid var(--border);
+                border-radius: .6rem;
+                padding: .75rem 1rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                cursor: pointer;
+                font-family: inherit;
+                font-size: .82rem;
+                font-weight: 700;
+                color: var(--text);
+                text-align: left;
+                transition: background .2s;
+            }
+            .mobile-sidebar-toggle:hover { background: #f1f5f9; }
+            .mobile-sidebar-toggle-arrow {
+                font-size: .9rem;
+                color: var(--muted);
+                transition: transform .25s;
+                flex-shrink: 0;
+            }
+            .mobile-sidebar-toggle.open .mobile-sidebar-toggle-arrow {
+                transform: rotate(180deg);
+            }
+            .mobile-sidebar-body {
+                display: none;
+                padding: .85rem 1rem 1rem;
+                background: #f8fafc;
+                border: 1px solid var(--border);
+                border-top: none;
+                border-radius: 0 0 .6rem .6rem;
+                font-size: .82rem;
+            }
+            .mobile-sidebar-body.open { display: block; }
+            .mobile-sidebar-meta-row { display: flex; gap: .5rem; align-items: baseline; padding: .3rem 0; border-bottom: 1px solid var(--border); }
+            .mobile-sidebar-meta-row:last-of-type { border-bottom: none; margin-bottom: .75rem; }
+            .mobile-sidebar-meta-key { color: var(--muted); font-size: .75rem; min-width: 52px; flex-shrink: 0; }
+            .mobile-sidebar-meta-val { color: var(--text); font-weight: 600; font-size: .8rem; }
+            .mobile-sidebar-tags { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .5rem; }
+            .mobile-sidebar-tags-label { font-size: .7rem; font-weight: 700; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; margin-bottom: .4rem; }
+        }
+
         /* ===== おすすめ用途バッジ ===== */
         .usage-badges-section { margin: 0 0 1.2rem; }
         .usage-badges-title { font-size: .8rem; font-weight: 700; color: var(--muted); margin-bottom: .5rem; text-transform: uppercase; letter-spacing: .05em; }
@@ -1077,13 +1236,7 @@
                 </div>
             </div>
 
-            <!-- ファイル情報 -->
-            <div class="desc-card" style="display:none;">
-                <div class="section-title"><svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg> ファイル情報</div>
-                <div class="file-info" id="matFileInfo"></div>
-            </div>
-
-            <!-- 関連素材（タグ一致順） -->
+            <!-- 関連素材（タグ一致順）※活用ガイドの直後に配置 -->
             <div class="related-section">
                 <div class="related-header">
                     <div>
@@ -1102,6 +1255,27 @@
                     この素材を活かすためのコラム
                 </div>
                 <div class="related-col-list" id="relatedColList"></div>
+            </div>
+
+            <!-- ファイル情報（非表示） -->
+            <div class="desc-card" style="display:none;">
+                <div class="section-title"><svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg> ファイル情報</div>
+                <div class="file-info" id="matFileInfo"></div>
+            </div>
+
+            <!-- スマホ用サイドバー情報（折りたたみ）-->
+            <div class="mobile-sidebar-info">
+                <button class="mobile-sidebar-toggle" id="mobileSidebarToggle" onclick="toggleMobileSidebar()" aria-expanded="false">
+                    <span>
+                        <svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.4em;"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>素材情報・タグ
+                    </span>
+                    <span class="mobile-sidebar-toggle-arrow">▼</span>
+                </button>
+                <div class="mobile-sidebar-body" id="mobileSidebarBody">
+                    <div id="mobileSidebarMetaRows"></div>
+                    <div class="mobile-sidebar-tags-label">タグ</div>
+                    <div class="mobile-sidebar-tags" id="mobileSidebarTags"></div>
+                </div>
             </div>
 
             <!-- 著者ボックス -->
@@ -1818,6 +1992,35 @@ function renderMaterial(m) {
         });
     }
 
+    // スマホ用サイドバー情報ブロックに同データを反映
+    const mobileMetaRows = document.getElementById('mobileSidebarMetaRows');
+    const mobileTags = document.getElementById('mobileSidebarTags');
+    if (mobileMetaRows) {
+        mobileMetaRows.innerHTML = '';
+        const metaRowsM = [
+            { key: '形式', val: 'WebP' },
+            { key: 'カテゴリ', val: (m.largeCategory || '') + (m.subCategory ? '・' + m.subCategory : '') },
+            { key: 'ライセンス', val: '無料・商用可' },
+        ];
+        if (m.filename) metaRowsM.splice(1, 0, { key: 'ファイル名', val: m.filename });
+        metaRowsM.forEach(row => {
+            const div = document.createElement('div');
+            div.className = 'mobile-sidebar-meta-row';
+            div.innerHTML = `<span class="mobile-sidebar-meta-key">${row.key}</span><span class="mobile-sidebar-meta-val">${row.val}</span>`;
+            mobileMetaRows.appendChild(div);
+        });
+    }
+    if (mobileTags) {
+        mobileTags.innerHTML = '';
+        (m.tags || []).forEach(tag => {
+            const a = document.createElement('a');
+            a.className = 'sidebar-meta-tag';
+            a.textContent = tag;
+            a.href = 'gallery.html?tag=' + encodeURIComponent(tag);
+            mobileTags.appendChild(a);
+        });
+    }
+
     // 関連コラム記事（カテゴリ別に出し分け）
     const colList = document.getElementById('relatedColList');
     const cat = m.largeCategory || '';
@@ -1982,6 +2185,17 @@ function startDownload() {
     requestAnimationFrame(tick);
 }
 
+// ===== スマホ用サイドバー折りたたみ =====
+function toggleMobileSidebar() {
+    const btn  = document.getElementById('mobileSidebarToggle');
+    const body = document.getElementById('mobileSidebarBody');
+    if (!btn || !body) return;
+    const isOpen = body.classList.contains('open');
+    body.classList.toggle('open', !isOpen);
+    btn.classList.toggle('open', !isOpen);
+    btn.setAttribute('aria-expanded', String(!isOpen));
+}
+
 // ===== エラー表示 =====
 function showError(msg) {
     document.getElementById('pageLoading').innerHTML =
@@ -2097,23 +2311,90 @@ function shareToLine() {
     designPane.innerHTML = `
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start;">
             <div style="display:flex;flex-direction:column;gap:6px;">
-                <div style="position:relative;width:100%;aspect-ratio:1414/2000;border-radius:8px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,0.15);">
-                    <img src="${imgSrc}" style="position:absolute;top:20.8%;left:0;width:100%;height:70.2%;object-fit:cover;display:block;">
-                    <img src="assets/materials/flame001.png" style="position:absolute;top:0;left:0;width:100%;height:100%;display:block;pointer-events:none;">
+                <div class="design-frame-card" id="designCard1"
+                     onclick="openDesignModal('designCard1','イベントポスター風')"
+                     role="button" tabindex="0" aria-label="イベントポスター風を拡大表示"
+                     onkeydown="if(event.key==='Enter')openDesignModal('designCard1','イベントポスター風')">
+                    <img src="${imgSrc}" style="position:absolute;top:20.8%;left:0;width:100%;height:70.2%;object-fit:cover;display:block;" draggable="false">
+                    <img src="assets/materials/flame001.png" style="position:absolute;top:0;left:0;width:100%;height:100%;display:block;pointer-events:none;" draggable="false">
+                    <span class="design-zoom-hint">タップで拡大</span>
                 </div>
                 <div style="font-size:.72rem;color:#64748b;text-align:center;">イベントポスター風</div>
             </div>
             <div style="display:flex;flex-direction:column;gap:6px;">
-                <div style="position:relative;width:100%;aspect-ratio:1414/2000;border-radius:8px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,0.15);">
-                    <img src="${imgSrc}" style="position:absolute;top:0;left:0;width:100%;height:55.2%;object-fit:cover;display:block;">
-                    <img src="assets/materials/flame002.png" style="position:absolute;top:0;left:0;width:100%;height:100%;display:block;pointer-events:none;">
+                <div class="design-frame-card" id="designCard2"
+                     onclick="openDesignModal('designCard2','展示会チラシ風')"
+                     role="button" tabindex="0" aria-label="展示会チラシ風を拡大表示"
+                     onkeydown="if(event.key==='Enter')openDesignModal('designCard2','展示会チラシ風')">
+                    <img src="${imgSrc}" style="position:absolute;top:0;left:0;width:100%;height:55.2%;object-fit:cover;display:block;" draggable="false">
+                    <img src="assets/materials/flame002.png" style="position:absolute;top:0;left:0;width:100%;height:100%;display:block;pointer-events:none;" draggable="false">
+                    <span class="design-zoom-hint">タップで拡大</span>
                 </div>
                 <div style="font-size:.72rem;color:#64748b;text-align:center;">展示会チラシ風</div>
             </div>
         </div>
         <div style="font-size:.75rem;color:#94a3b8;text-align:center;margin-top:.75rem;">※ フレームデザイン例です。実際の用途に合わせてCanvaで編集いただけます。</div>
     `;
+
+    // ===== デザイン活用例 モーダル =====
+    function openDesignModal(cardId, label) {
+        const card = document.getElementById(cardId);
+        if (!card) return;
+
+        // html2canvas で合成画像をキャプチャ
+        const overlay = document.getElementById('designModalOverlay');
+        const modalImg = document.getElementById('designModalImg');
+        const modalLabel = document.getElementById('designModalLabel');
+
+        // キャプチャ中はローディング表示
+        modalImg.style.opacity = '0';
+        modalLabel.textContent = label;
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+
+        html2canvas(card, {
+            scale: 2,
+            useCORS: true,
+            allowTaint: false,
+            backgroundColor: null,
+            logging: false,
+        }).then(canvas => {
+            modalImg.src = canvas.toDataURL('image/png');
+            modalImg.alt = label;
+            modalImg.onload = () => { modalImg.style.opacity = '1'; };
+        }).catch(() => {
+            // フォールバック：キャプチャ失敗時は最初の画像をそのまま表示
+            const firstImg = card.querySelector('img');
+            if (firstImg) { modalImg.src = firstImg.src; modalImg.style.opacity = '1'; }
+        });
+    }
+
+    function closeDesignModal(e) {
+        if (e && e.target !== document.getElementById('designModalOverlay') && !e.target.closest('.design-modal-close')) return;
+        document.getElementById('designModalOverlay').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    // グローバルに公開（onclick属性から呼び出せるように）
+    window.openDesignModal = openDesignModal;
+    window.closeDesignModal = closeDesignModal;
+
+    // ESCキーで閉じる
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeDesignModal({ target: document.getElementById('designModalOverlay') });
+    }, { once: false });
 </script>
+
+<!-- デザイン活用例 拡大モーダル -->
+<div class="design-modal-overlay" id="designModalOverlay" onclick="closeDesignModal(event)">
+    <div class="design-modal-inner">
+        <button class="design-modal-close" onclick="closeDesignModal()" aria-label="閉じる">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <img class="design-modal-img" id="designModalImg" src="" alt="">
+        <div class="design-modal-label" id="designModalLabel"></div>
+    </div>
+</div>
 
 <!-- モバイル固定ダウンロードバー -->
 <div class="mobile-dl-bar" id="mobileDlBar">
