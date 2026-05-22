@@ -220,7 +220,7 @@
         .desc-box-body p + p { margin-top:.5rem; }
 
         /* 活用ガイド メディア感 */
-        .guide-wrap { max-width: 560px; margin-top: -.5rem; }
+        .guide-wrap { max-width: 580px; margin-top: 0; }
         .guide-summary-text {
             font-size: 1rem;
             color: #334155;
@@ -265,25 +265,38 @@
         }
         .guide-headlines { display: flex; flex-direction: column; gap: .85rem; }
         .guide-headline {
-            font-size: .92rem;
-            color: #1e293b;
-            line-height: 1.75;
-            font-weight: 500;
-            padding: .1rem 0 .1rem 1.4rem;
+            font-size: .95rem;
+            color: #0f172a;
+            line-height: 1.8;
+            font-weight: 600;
+            padding: .75rem 1rem .75rem 2rem;
             position: relative;
             border: none;
             background: none;
+            border-bottom: 1px solid #f1f5f9;
         }
+        .guide-headline:last-child { border-bottom: none; }
         .guide-headline::before {
             content: '"';
             position: absolute;
-            left: 0;
-            top: -.2rem;
-            font-size: 1.8rem;
+            left: .3rem;
+            top: .4rem;
+            font-size: 2rem;
             color: var(--primary);
-            opacity: .25;
+            opacity: .2;
             font-family: Georgia, serif;
             line-height: 1;
+        }
+        .guide-section-label {
+            font-size: .65rem;
+            font-weight: 700;
+            color: #94a3b8;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            margin-bottom: .85rem;
+            padding-bottom: .4rem;
+            border-bottom: 2px solid var(--primary-bg);
+            display: inline-block;
         }
         @media(max-width:640px) {
             .guide-wrap { max-width: 100%; }
@@ -1645,12 +1658,17 @@ function renderMaterial(m) {
         } else {
             dpBlock.style.display = 'none';
         }
-        (ug.scenes || []).slice(0, 6).forEach(s => {
+        // scenesから短いキーワードを抽出してタグ化
+        const sceneKeywords = [];
+        (ug.scenes || []).forEach(s => {
+            // 読点・句点で分割してキーワードを取り出す
+            const parts = s.split(/[、。・\s]+/).filter(p => p.length >= 2 && p.length <= 10);
+            parts.forEach(p => { if (!sceneKeywords.includes(p)) sceneKeywords.push(p); });
+        });
+        sceneKeywords.slice(0, 8).forEach(kw => {
             const tag = document.createElement('span');
             tag.className = 'guide-tag';
-            // scenesは長文なので先頭10文字のキーワードのみ
-            const keyword = s.replace(/。.*/, '').replace(/[のをにはがもで].*/, '').slice(0, 10);
-            tag.textContent = keyword;
+            tag.textContent = kw;
             scenesEl.appendChild(tag);
         });
         (ug.headlines || []).forEach(h => {
