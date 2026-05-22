@@ -305,6 +305,50 @@
             .guide-headline { font-size: .88rem; }
         }
 
+        /* サイドバー素材情報 */
+        .sidebar-meta {
+            margin-top: 1.25rem;
+            padding: 1rem 1.1rem;
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: .6rem;
+            font-size: .82rem;
+        }
+        .sidebar-meta-title {
+            font-size: .65rem;
+            font-weight: 700;
+            color: var(--muted);
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            margin-bottom: .85rem;
+            padding-bottom: .5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .sidebar-meta-body { display: flex; flex-direction: column; gap: .45rem; margin-bottom: 1rem; }
+        .sidebar-meta-row { display: flex; align-items: baseline; gap: .5rem; }
+        .sidebar-meta-key { color: var(--muted); font-size: .75rem; flex-shrink: 0; min-width: 52px; }
+        .sidebar-meta-val { color: var(--text); font-weight: 600; font-size: .8rem; }
+        .sidebar-meta-tags-label {
+            font-size: .65rem;
+            font-weight: 700;
+            color: var(--muted);
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            margin-bottom: .5rem;
+        }
+        .sidebar-meta-tags { display: flex; flex-wrap: wrap; gap: .35rem; }
+        .sidebar-meta-tag {
+            font-size: .72rem;
+            color: var(--primary);
+            background: var(--primary-bg);
+            border-radius: 99px;
+            padding: .15rem .6rem;
+            font-weight: 600;
+        }
+        @media(max-width:768px) {
+            .sidebar-meta { margin-top: 1rem; }
+        }
+
         /* 活用ガイド */        /* 活用ガイド */        /* 活用ガイド */
         .usage-guide { display: flex; flex-direction: column; gap: 1.5rem; }
         .usage-block-new { display: flex; flex-direction: column; gap: .6rem; }
@@ -1123,6 +1167,14 @@
                 </div>
             </div>
 
+            <!-- サイドバー：素材情報 -->
+            <div class="sidebar-meta" id="sidebarMeta">
+                <div class="sidebar-meta-title">素材情報</div>
+                <div class="sidebar-meta-body" id="sidebarMetaBody"></div>
+                <div class="sidebar-meta-tags-label">タグ</div>
+                <div class="sidebar-meta-tags" id="sidebarTags"></div>
+            </div>
+
         </div>
 
     </div>
@@ -1731,6 +1783,34 @@ function renderMaterial(m) {
         } else {
             relGrid.innerHTML = '<p style="color:var(--muted);font-size:.85rem;">関連素材はありません</p>';
         }
+    }
+
+    // サイドバー素材情報を生成
+    const sidebarMetaBody = document.getElementById('sidebarMetaBody');
+    const sidebarTags = document.getElementById('sidebarTags');
+    if (sidebarMetaBody) {
+        sidebarMetaBody.innerHTML = '';
+        const metaRows = [
+            { key: '形式', val: 'WebP' },
+            { key: 'カテゴリ', val: (m.largeCategory || '') + (m.subCategory ? '・' + m.subCategory : '') },
+            { key: 'ライセンス', val: '無料・商用可' },
+        ];
+        if (m.filename) metaRows.splice(1, 0, { key: 'ファイル名', val: m.filename });
+        metaRows.forEach(row => {
+            const div = document.createElement('div');
+            div.className = 'sidebar-meta-row';
+            div.innerHTML = `<span class="sidebar-meta-key">${row.key}</span><span class="sidebar-meta-val">${row.val}</span>`;
+            sidebarMetaBody.appendChild(div);
+        });
+    }
+    if (sidebarTags) {
+        sidebarTags.innerHTML = '';
+        (m.tags || []).forEach(tag => {
+            const span = document.createElement('span');
+            span.className = 'sidebar-meta-tag';
+            span.textContent = tag;
+            sidebarTags.appendChild(span);
+        });
     }
 
     // 関連コラム記事（カテゴリ別に出し分け）
