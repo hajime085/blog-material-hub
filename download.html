@@ -1497,7 +1497,7 @@ function renderDesignExamples(imgSrc) {
     designPane.innerHTML = `
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start;">
             <div style="display:flex;flex-direction:column;gap:6px;">
-                <div class="design-frame-card" id="designCard1" data-label="イベントポスター風">
+                <div class="design-frame-card" id="designCard1" data-label="イベントポスター風" style="background:white;">
                     <img src="${imgSrc}" style="position:absolute;top:20.8%;left:0;width:100%;height:70.2%;object-fit:cover;display:block;" draggable="false">
                     <img src="assets/materials/flame001.png" style="position:absolute;top:0;left:0;width:100%;height:100%;display:block;pointer-events:none;" draggable="false">
                     <span class="design-zoom-hint">タップで拡大</span>
@@ -1505,7 +1505,7 @@ function renderDesignExamples(imgSrc) {
                 <div style="font-size:.72rem;color:#64748b;text-align:center;">イベントポスター風</div>
             </div>
             <div style="display:flex;flex-direction:column;gap:6px;">
-                <div class="design-frame-card" id="designCard2" data-label="展示会チラシ風">
+                <div class="design-frame-card" id="designCard2" data-label="展示会チラシ風" style="background:white;">
                     <img src="${imgSrc}" style="position:absolute;top:0;left:0;width:100%;height:55.2%;object-fit:cover;display:block;" draggable="false">
                     <img src="assets/materials/flame002.png" style="position:absolute;top:0;left:0;width:100%;height:100%;display:block;pointer-events:none;" draggable="false">
                     <span class="design-zoom-hint">タップで拡大</span>
@@ -1535,7 +1535,10 @@ function renderDesignExamples(imgSrc) {
             var clone = card.cloneNode(true);
             clone.className = 'design-modal-clone';
             clone.removeAttribute('id');
-            clone.style.cssText = 'position:relative;width:100%;aspect-ratio:1414/2000;border-radius:10px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.5);cursor:default;';
+            // 現在選択中の背景色を適用
+            var bg = (typeof currentBgColor !== 'undefined' && currentBgColor) ? currentBgColor : 'white';
+            if (bg === 'checker') bg = '#f0f0f0'; // チェッカーはモーダルでは薄グレーに
+            clone.style.cssText = 'position:relative;width:100%;aspect-ratio:1414/2000;border-radius:10px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.5);cursor:default;background:' + bg + ';';
             var hint = clone.querySelector('.design-zoom-hint');
             if (hint) hint.style.display = 'none';
 
@@ -1731,6 +1734,13 @@ function setPreviewBg(color, btn) {
         const wrap = document.getElementById('previewWrap');
         drawWatermarkedPreview(currentImgPath, wrap, color);
     }
+
+    // デザイン活用例カードの背景色も連動
+    var bg = (color === 'checker') ? '#f0f0f0' : color;
+    ['designCard1','designCard2'].forEach(function(id) {
+        var card = document.getElementById(id);
+        if (card) card.style.background = bg;
+    });
 }
 
 // ===== 画像保護 =====
