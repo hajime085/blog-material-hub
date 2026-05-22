@@ -8,7 +8,6 @@
     <link rel="canonical" href="https://sozaino.com/download.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
     <style>
         :root {
             --primary:    #0d9488;  /* メインアクセント（ティール） */
@@ -30,7 +29,8 @@
             --header-text-muted:#64748b;
         }
         *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family:'Noto Sans JP',sans-serif; background:var(--bg); color:var(--text); line-height:1.65; }
+        body { font-family:'Noto Sans JP',sans-serif; background:var(--bg); color:var(--text); line-height:1.65; overflow-x:hidden; }
+        html { overflow-x:hidden; }
 
         /* ===== HEADER ===== */
         header { background: var(--header-bg); position:relative; z-index:200; border-bottom: 1px solid var(--border); box-shadow: 0 1px 3px rgba(15,23,42,.04); }
@@ -2337,61 +2337,71 @@ function shareToLine() {
     `;
 
     // ===== デザイン活用例 モーダル =====
-    function openDesignModal(cardId, label) {
+    // html2canvas不要：モーダル内でCSSの重ね合わせをそのまま再現
+    window.openDesignModal = function(cardId, label) {
         const card = document.getElementById(cardId);
         if (!card) return;
 
-        // html2canvas で合成画像をキャプチャ
-        const overlay = document.getElementById('designModalOverlay');
+        const overlay  = document.getElementById('designModalOverlay');
         const modalImg = document.getElementById('designModalImg');
         const modalLabel = document.getElementById('designModalLabel');
+        const modalInner = document.querySelector('.design-modal-inner');
 
-        // キャプチャ中はローディング表示
-        modalImg.style.opacity = '0';
+        // カード内の画像情報を取得
+        const imgs = card.querySelectorAll('img');
+        if (!imgs.length) return;
+
+        // モーダル内にカードと同じ構造を複製して表示
+        modalImg.style.display = 'none'; // 静的imgは使わない
         modalLabel.textContent = label;
+
+        // 既存の複製があれば削除
+        const existing = modalInner.querySelector('.design-modal-clone');
+        if (existing) existing.remove();
+
+        // カードをクローン
+        const clone = card.cloneNode(true);
+        clone.className = 'design-modal-clone';
+        clone.style.cssText = `
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1414/2000;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 40px rgba(0,0,0,.5);
+            cursor: default;
+        `;
+        // クローン内のズームヒントは非表示に
+        const hint = clone.querySelector('.design-zoom-hint');
+        if (hint) hint.style.display = 'none';
+
+        modalInner.insertBefore(clone, modalInner.querySelector('.design-modal-label'));
         overlay.classList.add('open');
         document.body.style.overflow = 'hidden';
+    };
 
-        html2canvas(card, {
-            scale: 2,
-            useCORS: true,
-            allowTaint: false,
-            backgroundColor: null,
-            logging: false,
-        }).then(canvas => {
-            modalImg.src = canvas.toDataURL('image/png');
-            modalImg.alt = label;
-            modalImg.onload = () => { modalImg.style.opacity = '1'; };
-        }).catch(() => {
-            // フォールバック：キャプチャ失敗時は最初の画像をそのまま表示
-            const firstImg = card.querySelector('img');
-            if (firstImg) { modalImg.src = firstImg.src; modalImg.style.opacity = '1'; }
-        });
-    }
-
-    function closeDesignModal(e) {
-        if (e && e.target !== document.getElementById('designModalOverlay') && !e.target.closest('.design-modal-close')) return;
+    window.closeDesignModal = function(e) {
+        if (e && e.target !== document.getElementById('designModalOverlay') && !e.currentTarget?.classList.contains('design-modal-close')) return;
         document.getElementById('designModalOverlay').classList.remove('open');
         document.body.style.overflow = '';
-    }
-
-    // グローバルに公開（onclick属性から呼び出せるように）
-    window.openDesignModal = openDesignModal;
-    window.closeDesignModal = closeDesignModal;
+    };
 
     // ESCキーで閉じる
-    document.addEventListener('keydown', e => {
-        if (e.key === 'Escape') closeDesignModal({ target: document.getElementById('designModalOverlay') });
-    }, { once: false });
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            document.getElementById('designModalOverlay').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+    });
 </script>
 
 <!-- デザイン活用例 拡大モーダル -->
-<div class="design-modal-overlay" id="designModalOverlay" onclick="closeDesignModal(event)">
+<div class="design-modal-overlay" id="designModalOverlay" onclick="if(event.target===this){window.closeDesignModal(event)}">
     <div class="design-modal-inner">
-        <button class="design-modal-close" onclick="closeDesignModal()" aria-label="閉じる">
+        <button class="design-modal-close" onclick="document.getElementById('designModalOverlay').classList.remove('open');document.body.style.overflow=''" aria-label="閉じる">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
-        <img class="design-modal-img" id="designModalImg" src="" alt="">
+        <img class="design-modal-img" id="designModalImg" src="" alt="" style="display:none;">
         <div class="design-modal-label" id="designModalLabel"></div>
     </div>
 </div>
@@ -2408,6 +2418,7 @@ function shareToLine() {
     </div>
     <button class="mobile-dl-btn" id="mobileDlBtn" onclick="startDownload()">⬇ ダウンロード</button>
 </div>
+
 
 </body>
 </html>
