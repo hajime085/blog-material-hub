@@ -339,12 +339,16 @@
         .sidebar-meta-tags { display: flex; flex-wrap: wrap; gap: .35rem; }
         .sidebar-meta-tag {
             font-size: .72rem;
-            color: var(--primary);
-            background: var(--primary-bg);
+            color: #2563eb;
+            background: #eff6ff;
             border-radius: 99px;
             padding: .15rem .6rem;
             font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background .2s;
         }
+        .sidebar-meta-tag:hover { background: #dbeafe; }
         @media(max-width:768px) {
             .sidebar-meta { margin-top: 1rem; }
         }
@@ -1806,10 +1810,11 @@ function renderMaterial(m) {
     if (sidebarTags) {
         sidebarTags.innerHTML = '';
         (m.tags || []).forEach(tag => {
-            const span = document.createElement('span');
-            span.className = 'sidebar-meta-tag';
-            span.textContent = tag;
-            sidebarTags.appendChild(span);
+            const a = document.createElement('a');
+            a.className = 'sidebar-meta-tag';
+            a.textContent = tag;
+            a.href = 'gallery.html?tag=' + encodeURIComponent(tag);
+            sidebarTags.appendChild(a);
         });
     }
 
