@@ -63,6 +63,11 @@
             font-family:'DM Sans',sans-serif;
             font-size:1.65rem; font-weight:700;
             margin-bottom:.5rem; line-height:1.3;
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+        @media(max-width:768px) {
+            h1.material-title { font-size:1.25rem; }
         }
         .material-meta { font-size:.85rem; color:var(--muted); margin-bottom:1.2rem; }
         .material-meta a { color:var(--accent); text-decoration:none; }
@@ -1491,22 +1496,53 @@ function renderDesignExamples(imgSrc) {
     designPane.innerHTML = `
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start;">
             <div style="display:flex;flex-direction:column;gap:6px;">
-                <div style="position:relative;width:100%;aspect-ratio:1414/2000;border-radius:8px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,0.15);">
-                    <img src="${imgSrc}" style="position:absolute;top:20.8%;left:0;width:100%;height:70.2%;object-fit:cover;display:block;">
-                    <img src="assets/materials/flame001.png" style="position:absolute;top:0;left:0;width:100%;height:100%;display:block;pointer-events:none;">
+                <div class="design-frame-card" id="designCard1" data-label="イベントポスター風">
+                    <img src="${imgSrc}" style="position:absolute;top:20.8%;left:0;width:100%;height:70.2%;object-fit:cover;display:block;" draggable="false">
+                    <img src="assets/materials/flame001.png" style="position:absolute;top:0;left:0;width:100%;height:100%;display:block;pointer-events:none;" draggable="false">
+                    <span class="design-zoom-hint">タップで拡大</span>
                 </div>
                 <div style="font-size:.72rem;color:#64748b;text-align:center;">イベントポスター風</div>
             </div>
             <div style="display:flex;flex-direction:column;gap:6px;">
-                <div style="position:relative;width:100%;aspect-ratio:1414/2000;border-radius:8px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,0.15);">
-                    <img src="${imgSrc}" style="position:absolute;top:0;left:0;width:100%;height:55.2%;object-fit:cover;display:block;">
-                    <img src="assets/materials/flame002.png" style="position:absolute;top:0;left:0;width:100%;height:100%;display:block;pointer-events:none;">
+                <div class="design-frame-card" id="designCard2" data-label="展示会チラシ風">
+                    <img src="${imgSrc}" style="position:absolute;top:0;left:0;width:100%;height:55.2%;object-fit:cover;display:block;" draggable="false">
+                    <img src="assets/materials/flame002.png" style="position:absolute;top:0;left:0;width:100%;height:100%;display:block;pointer-events:none;" draggable="false">
+                    <span class="design-zoom-hint">タップで拡大</span>
                 </div>
                 <div style="font-size:.72rem;color:#64748b;text-align:center;">展示会チラシ風</div>
             </div>
         </div>
         <div style="font-size:.75rem;color:#94a3b8;text-align:center;margin-top:.75rem;">※ フレームデザイン例です。実際の用途に合わせてCanvaで編集いただけます。</div>
     `;
+
+    // カードにイベントリスナーを設定
+    ['designCard1','designCard2'].forEach(function(id) {
+        var card = document.getElementById(id);
+        if (!card) return;
+        card.addEventListener('click', function() {
+            var label = card.getAttribute('data-label');
+            var overlay   = document.getElementById('designModalOverlay');
+            var modalLabel = document.getElementById('designModalLabel');
+            var modalInner = document.querySelector('.design-modal-inner');
+            if (!overlay || !modalInner) return;
+
+            modalLabel.textContent = label;
+
+            var existing = modalInner.querySelector('.design-modal-clone');
+            if (existing) existing.remove();
+
+            var clone = card.cloneNode(true);
+            clone.className = 'design-modal-clone';
+            clone.removeAttribute('id');
+            clone.style.cssText = 'position:relative;width:100%;aspect-ratio:1414/2000;border-radius:10px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.5);cursor:default;';
+            var hint = clone.querySelector('.design-zoom-hint');
+            if (hint) hint.style.display = 'none';
+
+            modalInner.insertBefore(clone, document.getElementById('designModalLabel'));
+            overlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        });
+    });
 }
 
 function renderAllPanes(src, title) {
@@ -2302,103 +2338,34 @@ function shareToLine() {
 }
 
 
-    // デザイン活用例（フレーム画像合成）
-    const designPane = document.getElementById('pane-design');
-    const imgSrc = _previewImgSrc;
-
-    // flame001: 1414x2000px 透過 top=20.8% bottom=91.0%
-    // flame002: 1414x2000px 透過 top=0% bottom=55.2%
-    designPane.innerHTML = `
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start;">
-            <div style="display:flex;flex-direction:column;gap:6px;">
-                <div class="design-frame-card" id="designCard1"
-                     onclick="openDesignModal('designCard1','イベントポスター風')"
-                     role="button" tabindex="0" aria-label="イベントポスター風を拡大表示"
-                     onkeydown="if(event.key==='Enter')openDesignModal('designCard1','イベントポスター風')">
-                    <img src="${imgSrc}" style="position:absolute;top:20.8%;left:0;width:100%;height:70.2%;object-fit:cover;display:block;" draggable="false">
-                    <img src="assets/materials/flame001.png" style="position:absolute;top:0;left:0;width:100%;height:100%;display:block;pointer-events:none;" draggable="false">
-                    <span class="design-zoom-hint">タップで拡大</span>
-                </div>
-                <div style="font-size:.72rem;color:#64748b;text-align:center;">イベントポスター風</div>
-            </div>
-            <div style="display:flex;flex-direction:column;gap:6px;">
-                <div class="design-frame-card" id="designCard2"
-                     onclick="openDesignModal('designCard2','展示会チラシ風')"
-                     role="button" tabindex="0" aria-label="展示会チラシ風を拡大表示"
-                     onkeydown="if(event.key==='Enter')openDesignModal('designCard2','展示会チラシ風')">
-                    <img src="${imgSrc}" style="position:absolute;top:0;left:0;width:100%;height:55.2%;object-fit:cover;display:block;" draggable="false">
-                    <img src="assets/materials/flame002.png" style="position:absolute;top:0;left:0;width:100%;height:100%;display:block;pointer-events:none;" draggable="false">
-                    <span class="design-zoom-hint">タップで拡大</span>
-                </div>
-                <div style="font-size:.72rem;color:#64748b;text-align:center;">展示会チラシ風</div>
-            </div>
-        </div>
-        <div style="font-size:.75rem;color:#94a3b8;text-align:center;margin-top:.75rem;">※ フレームデザイン例です。実際の用途に合わせてCanvaで編集いただけます。</div>
-    `;
-
-    // ===== デザイン活用例 モーダル =====
-    // html2canvas不要：モーダル内でCSSの重ね合わせをそのまま再現
-    window.openDesignModal = function(cardId, label) {
-        const card = document.getElementById(cardId);
-        if (!card) return;
-
-        const overlay  = document.getElementById('designModalOverlay');
-        const modalImg = document.getElementById('designModalImg');
-        const modalLabel = document.getElementById('designModalLabel');
-        const modalInner = document.querySelector('.design-modal-inner');
-
-        // カード内の画像情報を取得
-        const imgs = card.querySelectorAll('img');
-        if (!imgs.length) return;
-
-        // モーダル内にカードと同じ構造を複製して表示
-        modalImg.style.display = 'none'; // 静的imgは使わない
-        modalLabel.textContent = label;
-
-        // 既存の複製があれば削除
-        const existing = modalInner.querySelector('.design-modal-clone');
-        if (existing) existing.remove();
-
-        // カードをクローン
-        const clone = card.cloneNode(true);
-        clone.className = 'design-modal-clone';
-        clone.style.cssText = `
-            position: relative;
-            width: 100%;
-            aspect-ratio: 1414/2000;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 8px 40px rgba(0,0,0,.5);
-            cursor: default;
-        `;
-        // クローン内のズームヒントは非表示に
-        const hint = clone.querySelector('.design-zoom-hint');
-        if (hint) hint.style.display = 'none';
-
-        modalInner.insertBefore(clone, modalInner.querySelector('.design-modal-label'));
-        overlay.classList.add('open');
-        document.body.style.overflow = 'hidden';
-    };
-
-    window.closeDesignModal = function(e) {
-        if (e && e.target !== document.getElementById('designModalOverlay') && !e.currentTarget?.classList.contains('design-modal-close')) return;
-        document.getElementById('designModalOverlay').classList.remove('open');
-        document.body.style.overflow = '';
-    };
-
-    // ESCキーで閉じる
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
+// ===== モーダルclose処理（DOM読み込み後に設定）=====
+document.addEventListener('DOMContentLoaded', function() {
+    var overlay = document.getElementById('designModalOverlay');
+    if (overlay) {
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) { overlay.classList.remove('open'); document.body.style.overflow = ''; }
+        });
+    }
+    var closeBtn = document.getElementById('designModalClose');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function() {
             document.getElementById('designModalOverlay').classList.remove('open');
             document.body.style.overflow = '';
+        });
+    }
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            var ov = document.getElementById('designModalOverlay');
+            if (ov) { ov.classList.remove('open'); document.body.style.overflow = ''; }
         }
     });
+});
 </script>
 
 <!-- デザイン活用例 拡大モーダル -->
-<div class="design-modal-overlay" id="designModalOverlay" onclick="if(event.target===this){window.closeDesignModal(event)}">
+<div class="design-modal-overlay" id="designModalOverlay">
     <div class="design-modal-inner">
-        <button class="design-modal-close" onclick="document.getElementById('designModalOverlay').classList.remove('open');document.body.style.overflow=''" aria-label="閉じる">
+        <button class="design-modal-close" id="designModalClose" aria-label="閉じる">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
         <img class="design-modal-img" id="designModalImg" src="" alt="" style="display:none;">
