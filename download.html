@@ -1108,12 +1108,12 @@
         <button class="menu-toggle" id="menuToggle">☰</button>
         <nav class="nav-links" id="navMenu">
             <a href="/">ホーム</a>
-            <a href="gallery.html">素材ギャラリー</a>
-            <a href="about.html">ソザイノについて</a>
-            <a href="process.html">素材ができるまで</a>
+            <a href="gallery">素材ギャラリー</a>
+            <a href="about">ソザイノについて</a>
+            <a href="process">素材ができるまで</a>
             <a href="column/">コラム</a>
-            <a href="faq.html">よくあるご質問</a>
-            <a href="contact.html">お問い合わせ</a>
+            <a href="faq">よくあるご質問</a>
+            <a href="contact">お問い合わせ</a>
         </nav>
     </div>
 </header>
@@ -1121,7 +1121,7 @@
 <div class="breadcrumb">
     <div class="breadcrumb-inner">
         <a href="/">ホーム</a><span>›</span>
-        <a href="gallery.html">素材ギャラリー</a><span>›</span>
+        <a href="gallery">素材ギャラリー</a><span>›</span>
         <span id="breadTitle">素材詳細</span>
     </div>
 </div>
@@ -1261,7 +1261,7 @@
                         <div class="section-title" style="margin-bottom:.25rem;"><svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg> この素材を見た方はこちらも</div>
                         <p class="related-sub">タグや雰囲気が近い素材をピックアップしました。ぜひ一緒にチェックしてみてください。</p>
                     </div>
-                    <a href="gallery.html" class="related-all-link">すべて見る →</a>
+                    <a href="gallery" class="related-all-link">すべて見る →</a>
                 </div>
                 <div class="related-grid" id="relatedGrid"></div>
             </div>
@@ -1304,11 +1304,11 @@
                     <div class="author-mini-name">編集者ひよこ</div>
                     <div class="author-mini-desc">ブログ歴6年・YouTube制作歴2年。「実際に使えるか」を基準にAI生成素材を一枚ずつ選別しています。</div>
                 </div>
-                <a href="about.html" class="author-mini-link">詳細 →</a>
+                <a href="about" class="author-mini-link">詳細 →</a>
             </div>
 
             <!-- ギャラリー誘導バナー -->
-            <a href="gallery.html" class="gallery-banner">
+            <a href="gallery" class="gallery-banner">
                 <div class="gallery-banner-inner">
                     <div class="gallery-banner-text">
                         <div class="gallery-banner-title">もっと素材を探す</div>
@@ -1348,7 +1348,7 @@
                     </div>
 
                     <div class="dl-note">
-                        ※ 本素材はブログ・SNS・動画制作など個人・商用問わずご利用いただけます。再配布・販売はご遠慮ください。<br>詳しくは<a href="terms.html" style="color:var(--accent);">利用規約</a>をご確認ください。
+                        ※ 本素材はブログ・SNS・動画制作など個人・商用問わずご利用いただけます。再配布・販売はご遠慮ください。<br>詳しくは<a href="terms" style="color:var(--accent);">利用規約</a>をご確認ください。
                     </div>
 
                     <!-- クレジット表記 -->
@@ -1379,13 +1379,13 @@
 <footer>
     <div class="footer-inner">
         <div class="footer-links">
-            <a href="about.html">ソザイノについて</a>
-            <a href="process.html">素材ができるまで</a>
+            <a href="about">ソザイノについて</a>
+            <a href="process">素材ができるまで</a>
             <a href="column/">コラム</a>
-            <a href="privacy.html">プライバシーポリシー</a>
-            <a href="terms.html">利用規約</a>
-            <a href="disclaimer.html">免責事項</a>
-            <a href="contact.html">お問い合わせ</a>
+            <a href="privacy">プライバシーポリシー</a>
+            <a href="terms">利用規約</a>
+            <a href="disclaimer">免責事項</a>
+            <a href="contact">お問い合わせ</a>
         </div>
         <div class="footer-copy">&copy; 2026 ソザイノ (SOZAINO). All rights reserved.</div>
     </div>
@@ -1836,7 +1836,7 @@ function renderMaterial(m) {
 
     // メタ
     document.getElementById('matMeta').innerHTML =
-        `カテゴリ: <a href="gallery.html">${esc(catLabel)}</a> &nbsp;|&nbsp; 登録日: ${m.createdDate || '—'}`;
+        `カテゴリ: <a href="gallery">${esc(catLabel)}</a> &nbsp;|&nbsp; 登録日: ${m.createdDate || '—'}`;
 
     // クレジットテキスト設定
     const pageUrl = window.location.origin + window.location.pathname.replace('download.html','') + `download.html?id=${m.id}`;
@@ -1887,7 +1887,7 @@ function renderMaterial(m) {
     ` : '';
 
     const autoText2 = `
-        <p>WebP形式は、PNG・JPEGに比べて高画質かつファイルサイズが軽量なため、ウェブページの表示速度を損なわずに使用できます。WebPの特徴やメリットについては、<a href="column/webp-guide.html" style="color:#0d9488;">「WebP形式とは？PNG・JPEGとの違いと、ブログで使う5つのメリット」</a>で詳しく解説しています。ブログのアイキャッチ画像、SNS投稿のビジュアル、YouTube動画のサムネイルなど、様々な用途にお役立てください。</p>
+        <p>WebP形式は、PNG・JPEGに比べて高画質かつファイルサイズが軽量なため、ウェブページの表示速度を損なわずに使用できます。WebPの特徴やメリットについては、<a href="column/webp-guide" style="color:#0d9488;">「WebP形式とは？PNG・JPEGとの違いと、ブログで使う5つのメリット」</a>で詳しく解説しています。ブログのアイキャッチ画像、SNS投稿のビジュアル、YouTube動画のサムネイルなど、様々な用途にお役立てください。</p>
         <p>ダウンロードは無料で、個人・商用問わずご利用いただけます。</p>
     `;
 
@@ -2258,7 +2258,7 @@ function toggleMobileSidebar() {
 // ===== エラー表示 =====
 function showError(msg) {
     document.getElementById('pageLoading').innerHTML =
-        `<div style="color:#e74c3c;font-size:1rem;">${msg}<br><br><a href="gallery.html" style="color:var(--accent);">← ギャラリーに戻る</a></div>`;
+        `<div style="color:#e74c3c;font-size:1rem;">${msg}<br><br><a href="gallery" style="color:var(--accent);">← ギャラリーに戻る</a></div>`;
 }
 
 // ===== ヘルパー =====
