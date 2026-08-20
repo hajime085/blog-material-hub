@@ -22,7 +22,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 JST = timezone(timedelta(hours=9))
 
 # 生成物。クリーンビルド時にこれらを消す。
-GENERATED_DIRS = ["p", "c", "categories", "about", "contact", "privacy", "disclaimer", "terms"]
+GENERATED_DIRS = ["p", "c", "categories", "page", "about", "contact", "privacy", "disclaimer", "terms"]
 GENERATED_FILES = ["index.html", "404.html", "sitemap.xml", "feed.xml", "robots.txt",
                    "assets/data/feed.json"]
 
@@ -115,9 +115,9 @@ def render_sticker(p):
 
 
 def render_sidebar(cfg, products, cats, active=None):
-    """PCではフィードの脇に、スマホではフィードの下に出る。
-    ランキングAPIが使えないので、売れ筋の根拠はレビュー件数。
-    順位に意味があるので、ここでは番号を振る。"""
+    """フィードの脇（PC）／下（スマホ）に出る棚。
+    ヘッダーと同じ黒帯をパネルの頭に載せて、本体と地続きに見せる。
+    順位マーカーは値札POPの縮小版。順位そのものに意味があるので番号を振る。"""
     ranked = sorted(products, key=lambda p: -(p.get("reviewCount") or 0))[:5]
     rows = ""
     for i, p in enumerate(ranked, 1):
@@ -127,8 +127,8 @@ def render_sidebar(cfg, products, cats, active=None):
             '<img class="rank-img" src="{img}" alt="" width="120" height="120" loading="lazy">'
             '<span class="rank-body">'
             '<span class="rank-title">{t}</span>'
-            '<span class="rank-meta">★{ra} <b>{rc}</b>件のレビュー</span>'
-            '<span class="rank-price">¥{pr}</span>'
+            '<span class="rank-meta">★{ra}<b>{rc}</b>件が購入後にレビュー</span>'
+            '<span class="rank-price"><i>¥</i>{pr}</span>'
             '</span></a>'
         ).format(id=e(p["id"]), i=i, img=e(p["image"]), t=e(p["title"]),
                  ra=p.get("reviewAverage") or "-", rc=yen(p.get("reviewCount") or 0),
@@ -138,7 +138,8 @@ def render_sidebar(cfg, products, cats, active=None):
     for p in products:
         counts[p["category"]] = counts.get(p["category"], 0) + 1
     cat_rows = "".join(
-        '<a class="side-cat%s" href="/c/%s/">%s<span>%s</span><b>%d</b></a>'
+        '<a class="side-cat%s" href="/c/%s/">%s<span class="sc-name">%s</span>'
+        '<span class="sc-count">%d</span></a>'
         % (" is-active" if active == c["slug"] else "", c["slug"],
            icons.use(c["icon"]), e(c["short"]), counts.get(c["slug"], 0))
         for c in cfg["categories"]
@@ -149,25 +150,30 @@ def render_sidebar(cfg, products, cats, active=None):
     if cp.get("url") and cp.get("label"):
         coupon = (
             '<section class="side-card side-coupon">'
-            '<h2 class="side-title">%sいま使えるクーポン</h2>'
+            '<h2 class="side-head">%s<span>いま使えるクーポン</span></h2>'
+            '<div class="side-body">'
             '<p class="coupon-label">%s</p>'
             '<p class="coupon-note">%s</p>'
             '<a class="btn btn-rakuten btn-block" href="%s" target="_blank" '
             'rel="nofollow sponsored noopener">クーポンを見る%s</a>'
-            '</section>'
+            '</div></section>'
         ) % (icons.use("tag"), e(cp["label"]), e(cp.get("note", "")), e(cp["url"]),
              icons.use("arrow-right", "ic-arrow"))
 
     return """<aside class="layout-side">
   <section class="side-card">
-    <h2 class="side-title">{ic}いま売れているもの</h2>
-    <div class="rank-list">{rows}</div>
-    <p class="side-note">楽天市場のレビュー件数が多い順です。</p>
+    <h2 class="side-head">{ic}<span>いま売れているもの</span></h2>
+    <div class="side-body">
+      <div class="rank-list">{rows}</div>
+      <p class="side-note">楽天市場のレビュー件数が多い順です。値下がり幅とは関係ありません。</p>
+    </div>
   </section>
   {coupon}
   <section class="side-card">
-    <h2 class="side-title">{ic2}売場から探す</h2>
-    <div class="side-cats">{cat_rows}</div>
+    <h2 class="side-head">{ic2}<span>売場から探す</span></h2>
+    <div class="side-body side-body-tight">
+      <div class="side-cats">{cat_rows}</div>
+    </div>
   </section>
 </aside>""".format(ic=icons.use("bolt"), ic2=icons.use("grid"),
                    rows=rows, cat_rows=cat_rows, coupon=coupon)
@@ -270,6 +276,29 @@ def render_operator(cfg):
                  role=e(op.get("role", "")), bio=e(op.get("bio", "")), link=link)
 
 
+def render_pager(page, total_pages, base):
+    """ページ送り。フィードが長くなるので10件ずつに切る。
+    JSに頼らず素のリンクで動かす（検索エンジンも人も同じものを辿れる）。"""
+    if total_pages <= 1:
+        return ""
+
+    def href(n):
+        return base if n == 1 else "%spage/%d/" % (base, n)
+
+    prev_btn = (
+        '<a class="pager-btn" href="%s" rel="prev">%s前のページ</a>' % (
+            e(href(page - 1)), icons.use("arrow-right", "ic-arrow ic-flip"))
+        if page > 1 else '<span class="pager-btn is-off">前のページ</span>')
+    next_btn = (
+        '<a class="pager-btn pager-next" href="%s" rel="next">次のページ%s</a>' % (
+            e(href(page + 1)), icons.use("arrow-right", "ic-arrow"))
+        if page < total_pages else '<span class="pager-btn is-off">次のページ</span>')
+
+    return ('<nav class="pager" aria-label="ページ送り">%s'
+            '<span class="pager-count"><b>%d</b><i>/</i>%d</span>%s</nav>'
+            % (prev_btn, page, total_pages, next_btn))
+
+
 def render_chipbar(cfg, active=None):
     chips = '<a class="chip" href="/"%s>%sすべて</a>' % (
         ' aria-current="true"' if active is None else "", icons.use("tag"))
@@ -297,7 +326,7 @@ def render_ticker(products, cats):
 
 
 # ---------------------------------------------------------------- page shell
-def page(cfg, base, *, title, desc, path, content, ogtype="website",
+def page_shell(cfg, base, *, title, desc, path, content, ogtype="website",
          chipbar="", jsonld="", bodyclass="", ogimage=None, robots="", scripts="",
          products=None, cats=None, ogtitle=None):
     site = cfg["site"]
@@ -368,33 +397,27 @@ def jsonld_block(obj):
 def build_index(cfg, base, products, cats):
     per = cfg["feed"]["perPage"]
     ordered = sorted(products, key=feed_order, reverse=True)
-    cards = "".join(render_card(p, cats) for p in ordered[:per])
-    more = ""
-    if len(ordered) > per:
-        more = ('<div class="load-more">'
-                '<button class="btn btn-ghost" id="loadMore">もっと見る</button></div>')
+    total_pages = max(1, -(-len(ordered) // per))
 
     counts = {}
     for p in products:
         counts[p["category"]] = counts.get(p["category"], 0) + 1
-    cat_cards = "".join(
-        '<a class="cat-card" href="/c/%s/">%s'
-        '<span class="l">%s</span><span class="c">%d件</span></a>'
-        % (c["slug"], icons.use(c["icon"], "ic-xl"), e(c["short"]), counts.get(c["slug"], 0))
-        for c in cfg["categories"]
-    )
 
     today = datetime.now(JST).strftime("%-m月%-d日")
     best = max((discount_rate(p) for p in products), default=0)
-    n_off = sum(1 for p in products if discount_rate(p) >= 5)
-    # 値下がりを1件も検知していない日に「最大0%OFF」と出しても意味がない。
-    # そのときは、いま何を見張っているのかを出す。
     if best:
         third = "{ic}最大{best}%OFF".format(ic=icons.use("bolt"), best=best)
     else:
         third = "{ic}値下がりを監視中".format(ic=icons.use("bolt"))
 
-    content = """
+    site_url = cfg["site"]["url"].rstrip("/")
+
+    for page in range(1, total_pages + 1):
+        chunk = ordered[(page - 1) * per: page * per]
+        cards = "".join(render_card(p, cats) for p in chunk)
+        path = "/" if page == 1 else "/page/%d/" % page
+
+        head = """
 <section class="hero wrap-narrow">
   <h1 class="hero-title">二度見する安さ、<br><span class="hl">ぜんぶここに。</span></h1>
   <p class="hero-lead">{lead}</p>
@@ -404,7 +427,18 @@ def build_index(cfg, base, products, cats):
     <span>{third}</span>
   </div>
 </section>
+""".format(lead=e(cfg["site"]["description"]), today=today, count=len(products),
+           third=third, ic_cal=icons.use("calendar"), ic_box=icons.use("box"))
+        if page > 1:
+            head = """
+<section class="page-head wrap-narrow">
+  <p class="page-eyebrow">{ic}FEED</p>
+  <h1 class="page-title">特価フィード</h1>
+  <p class="page-lead">{count}件を新しい順に。いまは{page}ページ目です。</p>
+</section>
+""".format(ic=icons.use("bolt"), count=len(products), page=page)
 
+        content = head + """
 <div class="layout wrap-wide">
 <div class="layout-main">
   <div class="toolbar">
@@ -416,32 +450,42 @@ def build_index(cfg, base, products, cats):
     </div>
   </div>
   <div class="feed" id="feed">{cards}</div>
-  {more}
+  {pager}
   <p class="affiliate-note">当サイトは楽天アフィリエイトプログラムに参加しています。価格・在庫・送料は取得時点のもので、変動します。購入前に楽天市場の商品ページで最新の条件をご確認ください。</p>
 </div>
 {sidebar}
 </div>
-""".format(lead=e(cfg["site"]["description"]), today=today, count=len(products),
-           best=best, cards=cards, more=more, cat_cards=cat_cards,
-           ic_cal=icons.use("calendar"), ic_box=icons.use("box"), third=third,
+""".format(count=len(products), cards=cards,
+           pager=render_pager(page, total_pages, "/"),
            sidebar=render_sidebar(cfg, products, cats))
 
-    jsonld = jsonld_block({
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": cfg["site"]["name"],
-        "url": cfg["site"]["url"],
-        "description": cfg["site"]["description"],
-        "inLanguage": "ja",
-    })
+        links = ""
+        if page > 1:
+            links += '<link rel="prev" href="%s">' % (
+                site_url + ("/" if page == 2 else "/page/%d/" % (page - 1)))
+        if page < total_pages:
+            links += '<link rel="next" href="%s/page/%d/">' % (site_url, page + 1)
 
-    write("index.html", page(
-        cfg, base,
-        title="%s｜%s" % (cfg["site"]["name"], cfg["site"]["tagline"]),
-        ogtitle="%s ── %s" % (cfg["site"]["name"], cfg["site"]["tagline"]),
-        desc=cfg["site"]["description"], path="/", content=content,
-        chipbar=render_chipbar(cfg), jsonld=jsonld, products=products, cats=cats,
-    ))
+        jsonld = jsonld_block({
+            "@context": "https://schema.org", "@type": "WebSite",
+            "name": cfg["site"]["name"], "url": cfg["site"]["url"],
+            "description": cfg["site"]["description"], "inLanguage": "ja",
+        }) + links
+
+        title = "%s｜%s" % (cfg["site"]["name"], cfg["site"]["tagline"])
+        desc = cfg["site"]["description"]
+        if page > 1:
+            title = "特価フィード %dページ目｜%s" % (page, cfg["site"]["name"])
+            desc = "%s（%dページ目）" % (cfg["site"]["description"], page)
+
+        html = page_shell(
+            cfg, base, title=title,
+            ogtitle="%s ── %s" % (cfg["site"]["name"], cfg["site"]["tagline"]),
+            desc=desc, path=path, content=content,
+            chipbar=render_chipbar(cfg), jsonld=jsonld, products=products, cats=cats,
+            robots=('<meta name="robots" content="noindex,follow">' if page > 1 else ""),
+        )
+        write("index.html" if page == 1 else "page/%d/index.html" % page, html)
 
 
 def build_categories(cfg, base, products, cats):
@@ -463,7 +507,7 @@ def build_categories(cfg, base, products, cats):
 </section>
 <section class="wrap"><div class="cat-grid">%s</div></section>
 """ % cat_cards
-    write("categories/index.html", page(
+    write("categories/index.html", page_shell(
         cfg, base, title="カテゴリ一覧｜%s" % cfg["site"]["name"],
         desc="ヤスミルの全カテゴリ。食品・家電・日用品など、売場ごとに特価をまとめています。",
         path="/categories/", content=content, chipbar=render_chipbar(cfg),
@@ -471,40 +515,68 @@ def build_categories(cfg, base, products, cats):
     ))
 
     # 各カテゴリ
+    per = cfg["feed"]["perPage"]
+    site_url = cfg["site"]["url"].rstrip("/")
     for c in cfg["categories"]:
         items = [p for p in products if p["category"] == c["slug"]]
         items.sort(key=feed_order, reverse=True)
-        if items:
-            cards = "".join(render_card(p, cats) for p in items)
-            body = '<div class="feed">%s</div>' % cards
-        else:
-            body = ('<div class="empty">' + icons.use("tag", "ic-xxl") +
-                    '<p class="empty-title">この売場はまだ空っぽです</p>'
-                    '<p>値下がりを見つけ次第ここに並べます。</p></div>')
         best = max((discount_rate(p) for p in items), default=0)
-        content = """
+        total_pages = max(1, -(-len(items) // per))
+        cbase = "/c/%s/" % c["slug"]
+
+        for page in range(1, total_pages + 1):
+            chunk = items[(page - 1) * per: page * per]
+            if chunk:
+                body = '<div class="feed">%s</div>' % "".join(
+                    render_card(p, cats) for p in chunk)
+            else:
+                body = ('<div class="empty">' + icons.use("tag", "ic-xxl") +
+                        '<p class="empty-title">この売場はまだ空っぽです</p>'
+                        '<p>値下がりを見つけ次第ここに並べます。</p></div>')
+
+            lead = "%d件掲載%s" % (len(items), "・最大%d%%OFF" % best if best else "・値下がりを監視中")
+            if page > 1:
+                lead += "（%d/%dページ）" % (page, total_pages)
+
+            content = """
 <section class="page-head wrap-narrow">
   <p class="page-eyebrow">{icon}CATEGORY</p>
   <h1 class="page-title">{label}の特価</h1>
-  <p class="page-lead">{count}件掲載{bestnote}</p>
+  <p class="page-lead">{lead}</p>
 </section>
 <div class="layout wrap-wide">
 <div class="layout-main">{body}
+  {pager}
   <p class="affiliate-note">当サイトは楽天アフィリエイトプログラムに参加しています。価格・在庫・送料は取得時点のものです。</p>
 </div>
 {sidebar}
 </div>
-""".format(icon=icons.use(c["icon"]), label=e(c["label"]), count=len(items),
-           bestnote="・最大%d%%OFF" % best if best else "・値下がりを監視中", body=body,
+""".format(icon=icons.use(c["icon"]), label=e(c["label"]), lead=lead, body=body,
+           pager=render_pager(page, total_pages, cbase),
            sidebar=render_sidebar(cfg, products, cats, active=c["slug"]))
-        write("c/%s/index.html" % c["slug"], page(
-            cfg, base,
-            title="%sの特価まとめ｜%s" % (c["label"], cfg["site"]["name"]),
-            desc="%sの値下がり商品だけをまとめています。%s" % (c["label"], cfg["site"]["description"]),
-            path="/c/%s/" % c["slug"], content=content,
-            chipbar=render_chipbar(cfg, active=c["slug"]),
-            products=products, cats=cats,
-        ))
+
+            links = ""
+            if page > 1:
+                links += '<link rel="prev" href="%s%s">' % (
+                    site_url, cbase if page == 2 else "%spage/%d/" % (cbase, page - 1))
+            if page < total_pages:
+                links += '<link rel="next" href="%s%spage/%d/">' % (site_url, cbase, page + 1)
+
+            title = "%sの特価まとめ｜%s" % (c["label"], cfg["site"]["name"])
+            if page > 1:
+                title = "%sの特価 %dページ目｜%s" % (c["label"], page, cfg["site"]["name"])
+
+            path = cbase if page == 1 else "%spage/%d/" % (cbase, page)
+            out = ("c/%s/index.html" % c["slug"] if page == 1
+                   else "c/%s/page/%d/index.html" % (c["slug"], page))
+            write(out, page_shell(
+                cfg, base, title=title,
+                desc="%sの値下がり商品だけをまとめています。%s" % (c["label"], cfg["site"]["description"]),
+                path=path, content=content, jsonld=links,
+                chipbar=render_chipbar(cfg, active=c["slug"]),
+                products=products, cats=cats,
+                robots=('<meta name="robots" content="noindex,follow">' if page > 1 else ""),
+            ))
 
 
 def build_products(cfg, base, products, cats):
@@ -558,6 +630,14 @@ def build_products(cfg, base, products, cats):
         if p.get("caption"):
             cap = '<p class="detail-cap">%s</p>' % e(p["caption"])
 
+        # レジの表示のように、価格の脇に根拠を小さく添える
+        cta_sub = ""
+        if p.get("unitNote"):
+            cta_sub = '<span class="cta-sub">%s</span>' % e(p["unitNote"])
+        elif d:
+            cta_sub = '<span class="cta-sub cta-was">%s ¥%s</span>' % (
+                price_basis_label(p), yen(p["listPrice"]))
+
         desc_block = ""
         if p.get("description"):
             paras = "".join("<p>%s</p>" % e(x) for x in p["description"].split("\n") if x.strip())
@@ -583,7 +663,11 @@ def build_products(cfg, base, products, cats):
 
   <div class="sticky-cta">
     <div class="sticky-cta-inner">
-      <div class="sticky-cta-price"><span class="y">¥</span><span class="n">{price}</span></div>
+      <div class="sticky-cta-price">
+        <span class="cta-label">いま</span>
+        <span class="cta-value"><span class="y">¥</span><span class="n">{price}</span></span>
+        {cta_sub}
+      </div>
       <a class="btn btn-rakuten btn-lg" href="{url}" target="_blank" rel="nofollow sponsored noopener">楽天市場で見る{arrow}</a>
     </div>
   </div>
@@ -603,7 +687,8 @@ def build_products(cfg, base, products, cats):
 """.format(cslug=e(p["category"]), clabel=e(c.get("label", "")),
            short=e(p["title"] if len(p["title"]) <= 18 else p["title"][:18] + "…"), img=e(p["image"]), alt=e(p["title"]),
            tag=render_pricetag(p), sticker=render_sticker(p), title=e(p["title"]),
-           cap=cap, price=yen(p["price"]), url=e(p.get("affiliateUrl") or "#"),
+           cap=cap, price=yen(p["price"]), cta_sub=cta_sub,
+           url=e(p.get("affiliateUrl") or "#"),
            posted=e(p.get("postedAt", "")), spec=spec, arrow=icons.use("arrow-right", "ic-arrow"),
            desc_block=desc_block, rel_block=rel_block,
            share_top=render_share(p, cfg, "top"),
@@ -645,7 +730,7 @@ def build_products(cfg, base, products, cats):
         if d:
             title = "【%d%%OFF】%s｜¥%s" % (d, p["title"], yen(p["price"]))
 
-        write("p/%s/index.html" % p["id"], page(
+        write("p/%s/index.html" % p["id"], page_shell(
             cfg, base,
             title="%s - %s" % (title, cfg["site"]["name"]),
             ogtitle=title,
@@ -687,7 +772,7 @@ def build_static_pages(cfg, base, products, cats):
 """ % (e(pg.get("eyebrow", "")), e(pg["title"]),
        pg["body"].replace("{{CONTACT_FORM}}", contact_block)
                  .replace("{{OPERATOR}}", render_operator(cfg)))
-        write("%s/index.html" % slug, page(
+        write("%s/index.html" % slug, page_shell(
             cfg, base,
             title="%s｜%s" % (pg["title"], site["name"]),
             desc=pg["description"], path="/%s/" % slug, content=content,
@@ -706,7 +791,7 @@ def build_static_pages(cfg, base, products, cats):
   </div>
 </div>
 """.format(ic=icons.use("tag", "ic-xxl"))
-    write("404.html", page(
+    write("404.html", page_shell(
         cfg, base, title="ページが見つかりません｜%s" % site["name"],
         desc="お探しのページは見つかりませんでした。", path="/404.html",
         content=content, chipbar=render_chipbar(cfg), products=products, cats=cats,
@@ -736,8 +821,15 @@ def build_sitemap(cfg, products):
     now = datetime.now(JST).strftime("%Y-%m-%d")
     urls = [(site_url + "/", now, "1.0", "daily"),
             (site_url + "/categories/", now, "0.6", "weekly")]
+    per = cfg["feed"]["perPage"]
+    total = max(1, -(-len(products) // per))
+    for n in range(2, total + 1):
+        urls.append((site_url + "/page/%d/" % n, now, "0.5", "daily"))
     for c in cfg["categories"]:
         urls.append((site_url + "/c/%s/" % c["slug"], now, "0.8", "daily"))
+        n_items = sum(1 for p in products if p["category"] == c["slug"])
+        for n in range(2, max(1, -(-n_items // per)) + 1):
+            urls.append((site_url + "/c/%s/page/%d/" % (c["slug"], n), now, "0.4", "daily"))
     for p in products:
         urls.append((site_url + "/p/%s/" % p["id"], p.get("postedAt", now), "0.7", "weekly"))
     for slug in ("about", "contact", "privacy", "disclaimer", "terms"):

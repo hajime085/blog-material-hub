@@ -44,7 +44,7 @@
     "_genreNote": "genres は実際にAPIを叩いて中身を確認したジャンルIDです。ジャンル検索APIが使えないため実測で同定しました。ジャンル指定があるカテゴリは、そのジャンル内だけを検索するのでカテゴリ違いの商品が混ざりません。"
   },
   "feed": {
-    "perPage": 24,
+    "perPage": 10,
     "relatedCount": 4
   },
   "categories": [

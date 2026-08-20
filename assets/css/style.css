@@ -280,7 +280,7 @@ a.ticker-item:hover::before { background: var(--pop); }
 .layout-main { max-width: var(--col); margin-inline: auto; }
 
 .layout-side { margin-top: 34px; }
-.layout-side > * + * { margin-top: 14px; }
+.layout-side > * + * { margin-top: 12px; }
 
 @media (min-width: 1000px) {
   .layout {
@@ -304,77 +304,159 @@ a.ticker-item:hover::before { background: var(--pop); }
 
 .side-card {
   background: var(--paper);
-  border: 1px solid var(--ink-08);
-  border-radius: var(--radius);
-  padding: 16px 15px;
+  border: 1px solid var(--ink-14);
+  border-radius: 14px;
+  overflow: hidden;
   box-shadow: var(--shadow-card);
 }
-.side-title {
-  display: flex; align-items: center; gap: 7px;
+
+/* パネルの頭はサイトヘッダーと同じ黒帯。
+   白いカードを浮かべるだけだと本体から浮くので、
+   ページで一番強い構造をここでも使う。 */
+.side-head {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--ink);
+  color: #fff;
+  padding: 11px 13px;
   font-family: var(--f-body); font-weight: 900;
-  font-size: .92rem;
-  margin-bottom: 12px;
+  font-size: .88rem; letter-spacing: .01em;
 }
-.side-title .ic { color: var(--sale); }
+.side-head .ic { color: var(--pop); width: 1.05em; height: 1.05em; }
+.side-body { padding: 8px 10px 12px; }
+.side-body-tight { padding: 8px; }
+
 .side-note {
-  margin-top: 11px; padding-top: 10px;
-  border-top: 1px solid var(--ink-08);
-  font-size: .68rem; color: var(--ink-52); line-height: 1.6;
+  margin: 9px 4px 0; padding-top: 9px;
+  border-top: 1px dashed var(--ink-14);
+  font-size: .66rem; color: var(--ink-52); line-height: 1.65;
 }
 
-/* 売れ筋。順位そのものに意味があるので番号を振る。 */
-.rank-list { display: flex; flex-direction: column; gap: 4px; }
+/* --- 売れ筋 --- */
+.rank-list { display: flex; flex-direction: column; }
 .rank {
   display: grid;
-  grid-template-columns: 22px 52px 1fr;
-  align-items: center; gap: 10px;
-  padding: 8px 4px;
-  border-radius: 10px;
+  grid-template-columns: 26px 58px 1fr;
+  align-items: center; gap: 9px;
+  padding: 9px 4px;
+  border-bottom: 1px solid var(--ink-08);
   text-decoration: none;
   transition: background .16s ease;
 }
+.rank:last-child { border-bottom: 0; }
 .rank:hover { background: var(--ground); }
+
+/* 順位マーカーは値札POPの縮小版。傾きも値札と揃える。 */
 .rank-no {
-  font-family: var(--f-price); font-size: 1.1rem; line-height: 1;
-  color: var(--ink-52); text-align: center;
+  display: grid; place-content: center;
+  width: 26px; height: 26px;
+  background: var(--pop);
+  color: var(--ink);
+  font-family: var(--f-price); font-weight: 400;
+  font-size: 1rem; line-height: 1;
+  transform: rotate(-3.2deg);
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 83% 100%, 66% 80%,
+                     50% 100%, 33% 80%, 16% 100%, 0 80%);
+  padding-bottom: 4px;
 }
-.rank:nth-child(1) .rank-no { color: var(--sale); font-size: 1.3rem; }
-.rank:nth-child(2) .rank-no,
-.rank:nth-child(3) .rank-no { color: var(--ink); }
-.rank-img { width: 52px; height: 52px; border-radius: 8px; object-fit: cover; background: var(--ground); }
+.rank:first-child .rank-no { background: var(--sale); color: #fff; }
+
+.rank-img {
+  width: 58px; height: 58px; border-radius: 7px;
+  object-fit: cover; background: var(--ground);
+  border: 1px solid var(--ink-08);
+}
 .rank-body { min-width: 0; }
 .rank-title {
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
-  font-size: .74rem; font-weight: 700; line-height: 1.45;
+  font-size: .76rem; font-weight: 700; line-height: 1.4;
+  color: var(--ink);
 }
-.rank-meta { display: block; font-size: .64rem; color: var(--ink-52); margin-top: 2px; }
-.rank-meta b { font-family: var(--f-price); font-weight: 400; font-size: .8rem; color: var(--ink); }
-.rank-price {
-  display: block; font-family: var(--f-price); font-size: 1rem;
-  color: var(--sale); line-height: 1.2; margin-top: 1px;
+.rank-meta {
+  display: block; font-size: .63rem; color: var(--ink-52);
+  margin-top: 3px; line-height: 1.3;
 }
-
-.side-cats { display: flex; flex-direction: column; }
-.side-cat {
-  display: flex; align-items: center; gap: 9px;
-  padding: 9px 6px;
-  border-bottom: 1px solid var(--ink-08);
-  text-decoration: none; font-size: .82rem; font-weight: 700;
-}
-.side-cat:last-child { border-bottom: 0; }
-.side-cat span { flex: 1; min-width: 0; }
-.side-cat b {
+.rank-meta b {
   font-family: var(--f-price); font-weight: 400;
-  font-size: .8rem; color: var(--ink-52);
+  font-size: .82rem; color: var(--ink); margin: 0 2px;
 }
-.side-cat:hover { color: var(--sale); }
+.rank-price {
+  display: block; font-family: var(--f-price); font-weight: 400;
+  font-size: 1.12rem; line-height: 1.15;
+  color: var(--sale); margin-top: 1px;
+}
+.rank-price i { font-style: normal; font-size: .68em; margin-right: 1px; }
+
+/* --- 売場 --- */
+.side-cats {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 5px;
+}
+.side-cat {
+  display: flex; align-items: center; gap: 6px;
+  padding: 9px 8px;
+  border: 1.5px solid var(--ink-14);
+  border-radius: 9px;
+  background: var(--paper);
+  text-decoration: none;
+  font-size: .74rem; font-weight: 700; line-height: 1.2;
+  transition: background .16s ease, border-color .16s ease, color .16s ease;
+}
+.side-cat .ic { width: 1.1em; height: 1.1em; color: var(--ink-52); }
+.sc-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sc-count {
+  font-family: var(--f-price); font-weight: 400;
+  font-size: .78rem; color: var(--ink-52);
+}
+.side-cat:hover { border-color: var(--ink); }
 .side-cat:hover .ic { color: var(--sale); }
-.side-cat.is-active { color: var(--sale); }
-.side-cat .ic { color: var(--ink-52); }
+.side-cat.is-active {
+  background: var(--ink); border-color: var(--ink); color: #fff;
+}
+.side-cat.is-active .ic,
+.side-cat.is-active .sc-count { color: var(--pop); }
 
 .side-coupon { border-color: var(--pop); border-width: 2px; }
+.side-coupon .side-head { background: var(--pop); color: var(--ink); }
+.side-coupon .side-head .ic { color: var(--sale); }
 .coupon-label { font-family: var(--f-hand); font-size: 1rem; line-height: 1.5; margin-bottom: 4px; }
 .coupon-note { font-size: .74rem; color: var(--ink-70); margin-bottom: 12px; }
+
+
+/* =========================================================
+   PAGER  ── 10件ごとに切る。素のリンクで動く。
+   ========================================================= */
+.pager {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px;
+  margin: 22px 0 8px;
+}
+.pager-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 11px 16px;
+  border: 1.5px solid var(--ink-14);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: .8rem; font-weight: 700;
+  text-decoration: none;
+  transition: border-color .16s ease, background .16s ease, transform .14s ease;
+}
+.pager-btn:hover { border-color: var(--ink); transform: translateY(-1px); }
+.pager-btn:active { transform: translateY(0); }
+.pager-btn.is-off { opacity: .32; pointer-events: none; }
+.pager-next { background: var(--ink); border-color: var(--ink); color: #fff; }
+.pager-next:hover { background: #000; }
+.pager-count {
+  font-family: var(--f-price); font-weight: 400;
+  font-size: .9rem; color: var(--ink-52);
+  display: inline-flex; align-items: baseline; gap: 3px;
+  flex: 0 0 auto;
+}
+.pager-count b { font-size: 1.35rem; color: var(--ink); font-weight: 400; }
+.pager-count i { font-style: normal; opacity: .5; }
+.ic-flip { transform: scaleX(-1); }
+@media (max-width: 400px) {
+  .pager-btn { padding: 10px 12px; font-size: .74rem; }
+}
 
 /* =========================================================
    HERO  ── トップだけの導入。低くて短い。
@@ -709,31 +791,91 @@ a.ticker-item:hover::before { background: var(--pop); }
 .prose h3 { font-size: 1rem; font-weight: 700; margin: 1.5em 0 .5em; }
 .prose ul, .prose ol { margin: 0 0 1.2em 1.3em; }
 .prose li { margin-bottom: .4em; }
-.prose a { color: #0B7A66; text-underline-offset: 3px; }
+/* ボタンは .btn 側の色を優先する。ここで一律に色を当てると
+   赤いボタンの上に緑の文字が乗ってしまう。 */
+.prose a:not(.btn) { color: #0B7A66; text-underline-offset: 3px; }
 .prose-card {
   background: var(--paper); border: 1px solid var(--ink-08);
   border-radius: var(--radius); padding: 22px 18px; box-shadow: var(--shadow-card);
 }
 
 /* 商品ページ下部の固定CTA（スマホ） */
+/* 商品ページ下部の固定バー。
+   このサイトは値札が主役なので、ここでもボタンより価格を大きく置く。
+   店のレジ表示と同じ並び（金額が左、行動が右）。 */
 .sticky-cta {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 95;
-  background: rgba(255,241,227,.92);
-  backdrop-filter: blur(10px);
-  border-top: 1px solid var(--ink-14);
-  padding: 10px var(--gutter) calc(10px + env(safe-area-inset-bottom));
+  background: rgba(255,241,227,.94);
+  backdrop-filter: blur(12px);
+  border-top: 2px solid var(--ink);
+  padding: 9px var(--gutter) calc(9px + env(safe-area-inset-bottom));
 }
 .sticky-cta-inner {
   max-width: var(--col); margin-inline: auto;
-  display: flex; align-items: center; gap: 12px;
+  display: flex; align-items: stretch; gap: 12px;
 }
-.sticky-cta-price { flex: 0 0 auto; line-height: 1.05; }
-.sticky-cta-price .n { font-family: var(--f-price); font-size: 1.5rem; color: var(--sale); }
-.sticky-cta-price .y { font-family: var(--f-price); font-size: .85rem; color: var(--sale); }
-.sticky-cta .btn-rakuten { flex: 1; }
-.has-sticky-cta { padding-bottom: 84px; }
+
+.sticky-cta-price {
+  flex: 0 0 auto;
+  display: flex; flex-direction: column; justify-content: center;
+  padding-right: 12px;
+  border-right: 1px solid var(--ink-14);
+  line-height: 1;
+}
+.cta-label {
+  font-family: var(--f-hand);
+  font-size: .64rem; line-height: 1;
+  color: var(--ink-52);
+  margin-bottom: 2px;
+}
+.cta-value {
+  display: flex; align-items: baseline; gap: 1px;
+  color: var(--sale);
+  font-family: var(--f-price); font-weight: 400;
+}
+.cta-value .y { font-size: 1.05rem; transform: translateY(-.1em); }
+.cta-value .n { font-size: 2.15rem; line-height: .9; letter-spacing: -.005em; }
+.cta-sub {
+  font-family: var(--f-body); font-weight: 700;
+  font-size: .62rem; line-height: 1.3;
+  color: var(--ink-70);
+  margin-top: 3px;
+  white-space: nowrap;
+}
+.cta-was {
+  text-decoration: line-through;
+  text-decoration-color: var(--sale);
+  text-decoration-thickness: 1.5px;
+}
+
+.sticky-cta .btn-rakuten {
+  flex: 1;
+  font-size: 1rem;
+  padding: 14px 18px;
+}
+.has-sticky-cta { padding-bottom: 96px; }
+
+@media (max-width: 359px) {
+  .cta-value .n { font-size: 1.8rem; }
+  .sticky-cta .btn-rakuten { font-size: .88rem; padding: 13px 12px; }
+}
+
 @media (min-width: 768px) {
-  .sticky-cta { position: static; background: transparent; backdrop-filter: none; border-top: 0; padding: 0; margin-top: 8px; }
+  /* PCでは固定をやめて本文の流れに置く。値札のように少しだけ傾ける。 */
+  .sticky-cta {
+    position: static;
+    background: var(--paper);
+    backdrop-filter: none;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-top: 10px;
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+  .sticky-cta-inner { gap: 18px; }
+  .cta-value .n { font-size: 2.6rem; }
+  .cta-label { font-size: .74rem; }
+  .cta-sub { font-size: .7rem; }
   .has-sticky-cta { padding-bottom: 0; }
 }
 
@@ -955,7 +1097,18 @@ a.ticker-item:hover::before { background: var(--pop); }
 }
 .footer-inner { max-width: var(--wide); margin-inline: auto; padding-inline: var(--gutter); }
 .footer-brand { font-family: var(--f-display); color: #fff; font-size: 1.1rem; margin-bottom: 4px; }
-.footer-tag { font-size: .76rem; margin-bottom: 22px; }
+.footer-tag {
+  font-family: var(--f-hand);
+  font-size: .95rem;
+  color: var(--pop);
+  margin-bottom: 10px;
+}
+.footer-desc {
+  font-size: .78rem; line-height: 1.9;
+  color: rgba(255,255,255,.62);
+  max-width: 46em;
+  margin-bottom: 18px;
+}
 .footer-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
 @media (min-width: 720px) { .footer-cols { grid-template-columns: 2fr 1fr 1fr; } }
 .footer-col h3 {

@@ -56,8 +56,7 @@
   var feed = document.getElementById('feed');
   if (!feed) return;
 
-  var state = { all: null, view: [], shown: 0, per: 24, sort: 'new', q: '' };
-  var loadMoreBtn = document.getElementById('loadMore');
+  var state = { all: null, view: [], page: 1, per: 10, sort: 'new', q: '' };
   var countEl = document.getElementById('resultCount');
   var sorter = document.querySelector('.sorter');
 
@@ -120,26 +119,50 @@
     return q.split(/\s+/).every(function (w) { return hay.indexOf(w) >= 0; });
   }
 
-  function render(reset) {
-    if (reset) { feed.innerHTML = ''; state.shown = 0; }
-    var next = state.view.slice(state.shown, state.shown + state.per);
-    if (!next.length && !state.shown) {
+  /* サーバーが出しているページ送りと同じ見た目を、JS側でも作る。
+     並べ替えや検索に切り替えても操作感が変わらないように。 */
+  function renderPager() {
+    var host = document.querySelector('.pager');
+    if (!host) return;
+    var total = Math.max(1, Math.ceil(state.view.length / state.per));
+    if (total <= 1) { host.hidden = true; return; }
+    host.hidden = false;
+    var prev = state.page > 1
+      ? '<button type="button" class="pager-btn" data-page="' + (state.page - 1) + '">' +
+        ic('arrow-right', 'ic-arrow ic-flip') + '前のページ</button>'
+      : '<span class="pager-btn is-off">前のページ</span>';
+    var next = state.page < total
+      ? '<button type="button" class="pager-btn pager-next" data-page="' + (state.page + 1) + '">' +
+        '次のページ' + ic('arrow-right', 'ic-arrow') + '</button>'
+      : '<span class="pager-btn is-off">次のページ</span>';
+    host.innerHTML = prev +
+      '<span class="pager-count"><b>' + state.page + '</b><i>/</i>' + total + '</span>' + next;
+  }
+
+  function render() {
+    var start = (state.page - 1) * state.per;
+    var slice = state.view.slice(start, start + state.per);
+    if (!slice.length) {
       feed.innerHTML = '<div class="empty">' + ic('search', 'ic-xxl') +
         '<p class="empty-title">見つかりませんでした</p>' +
         '<p>別のことばで探してみてください。</p></div>';
     } else {
-      feed.insertAdjacentHTML('beforeend', next.map(card).join(''));
+      feed.innerHTML = slice.map(card).join('');
     }
-    state.shown += next.length;
     if (countEl) countEl.textContent = state.view.length;
-    if (loadMoreBtn) loadMoreBtn.hidden = state.shown >= state.view.length;
+    renderPager();
   }
 
-  function refresh() {
-    var list = state.all;
+  function refresh(keepPage) {
+    var list = state.all || [];
     if (state.q) list = list.filter(function (p) { return matches(p, state.q); });
     state.view = applySort(list);
-    render(true);
+    if (!keepPage) state.page = 1;
+    render();
+    if (keepPage) {
+      var top = document.querySelector('.toolbar') || feed;
+      top.scrollIntoView({ block: 'start' });
+    }
   }
 
   var loading = null;
@@ -153,16 +176,13 @@
     return loading;
   }
 
-  if (loadMoreBtn) {
-    loadMoreBtn.addEventListener('click', function () {
-      loadMoreBtn.disabled = true;
-      ensureData().then(function () {
-        if (!state.view.length) { state.view = applySort(state.all); }
-        // サーバー側で描画済みのぶんを飛ばす
-        if (state.shown === 0) state.shown = feed.querySelectorAll('.card').length;
-        render(false);
-        loadMoreBtn.disabled = false;
-      });
+  var pagerHost = document.querySelector('.pager');
+  if (pagerHost) {
+    pagerHost.addEventListener('click', function (ev) {
+      var btn = ev.target.closest('button[data-page]');
+      if (!btn) return;
+      state.page = Number(btn.dataset.page);
+      refresh(true);
     });
   }
 
@@ -174,7 +194,7 @@
       Array.prototype.forEach.call(sorter.querySelectorAll('button'), function (b) {
         b.setAttribute('aria-pressed', String(b === btn));
       });
-      ensureData().then(refresh);
+      ensureData().then(function () { refresh(); });
     });
   }
 
