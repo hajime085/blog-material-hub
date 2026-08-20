@@ -596,12 +596,19 @@ def build_featured(cfg, app_id, access_key, aff_id, site_url):
         for it in items:
             buckets.setdefault(it.get("section", ""), []).append(it)
         picked, taken = [], {k: 0 for k in buckets}
-        while len(picked) < total_max and any(buckets[k] for k in buckets):
+        # 1周して1件も採れなかったら終わり。
+        # 「上限に達したジャンルに商品が残っている」状態で
+        # 残数だけを見て回し続けると、無限ループになる。
+        while len(picked) < total_max:
+            progressed = False
             for k in list(buckets):
                 if not buckets[k] or taken[k] >= per_section or len(picked) >= total_max:
                     continue
                 picked.append(buckets[k].pop(0))
                 taken[k] += 1
+                progressed = True
+            if not progressed:
+                break
         dropped_over = len(items) - len(picked)
         items = sorted(picked, key=lambda x: x["price"])
         if dropped_over:
