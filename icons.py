@@ -128,8 +128,22 @@ def sprite():
     return ('<svg xmlns="http://www.w3.org/2000/svg" style="display:none">%s</svg>' % symbols)
 
 
+_SPRITE_VER = None
+
+
+def sprite_version():
+    """スプライトの中身から求めたバージョン。アイコンを足したときに
+    古いスプライトがキャッシュされたままにならないようにする。"""
+    global _SPRITE_VER
+    if _SPRITE_VER is None:
+        import hashlib
+        _SPRITE_VER = hashlib.sha1(sprite().encode("utf-8")).hexdigest()[:8]
+    return _SPRITE_VER
+
+
 def use(name, cls=""):
     """HTMLに埋め込む <svg><use> 参照"""
     c = ("ic " + cls).strip()
     return ('<svg class="%s" aria-hidden="true" focusable="false">'
-            '<use href="/assets/img/icons.svg#ic-%s"></use></svg>' % (c, name))
+            '<use href="/assets/img/icons.svg?v=%s#ic-%s"></use></svg>'
+            % (c, sprite_version(), name))

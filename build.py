@@ -13,6 +13,7 @@ import json
 import os
 import re
 import shutil
+import hashlib
 import html
 import icons
 import urllib.parse
@@ -362,6 +363,8 @@ def page_shell(cfg, base, *, title, desc, path, content, ogtype="website",
         "IC_CLOSE": icons.use("close"),
         "IC_HOME": icons.use("home"),
         "IC_GRID": icons.use("grid"),
+        "CSS_HREF": asset_url("/assets/css/style.css"),
+        "JS_SRC": asset_url("/assets/js/app.js"),
         "FOOTER_OPERATOR": footer_operator(cfg),
         "THREADS_ITEM": threads_nav_item(cfg),
     })
@@ -386,6 +389,20 @@ def threads_nav_item(cfg):
         return ""
     return ('<li><a href="%s" target="_blank" rel="noopener me">%sThreads</a></li>'
             % (e(threads), icons.use("sns-threads")))
+
+
+def asset_url(relpath):
+    """中身のハッシュをURLに付ける。
+
+    CSSやJSは長期キャッシュさせたいが、そのままだと修正しても
+    再訪問者に古いものが出続ける（実際にCDNが7日間ヒットし続けた）。
+    中身が変われば別のURLになるので、長期キャッシュと即時反映を両立できる。"""
+    full = os.path.join(ROOT, relpath.lstrip("/"))
+    if not os.path.exists(full):
+        return relpath
+    with open(full, "rb") as f:
+        digest = hashlib.sha1(f.read()).hexdigest()[:8]
+    return "%s?v=%s" % (relpath, digest)
 
 
 def jsonld_block(obj):
