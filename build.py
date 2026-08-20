@@ -1136,6 +1136,48 @@ def ensure_placeholders(cfg, products):
 </svg>""")
 
 
+def check_padding_collisions():
+    """.wrap 系と併用しているクラスに padding の一括指定が無いか調べる。
+
+    .wrap { padding-inline: 16px } に対して .hero { padding: 26px 0 6px } のような
+    一括指定を後から当てると、左右の余白が 0 に潰れる。
+    見た目が崩れるだけでなく、回転している要素が画面外へ出て
+    横スクロールが発生する（実際に攻略ガイドで起きた）。
+    CSSの読み込み順に依存する事故なので、目視ではなく機械で見張る。
+    """
+    css_path = os.path.join(ROOT, "assets", "css", "style.css")
+    if not os.path.exists(css_path):
+        return
+    with open(css_path, encoding="utf-8") as f:
+        css = f.read()
+
+    # 生成物から .wrap 系と併用されているクラス名を集める
+    partners = set()
+    for root_dir, _dirs, files in os.walk(ROOT):
+        if ".git" in root_dir:
+            continue
+        for name in files:
+            if not name.endswith(".html"):
+                continue
+            with open(os.path.join(root_dir, name), encoding="utf-8", errors="ignore") as f:
+                for attr in re.findall(r'class="([^"]*\bwrap[\w-]*\b[^"]*)"', f.read()):
+                    for cls in attr.split():
+                        if not cls.startswith("wrap") and cls != "table-wrap":
+                            partners.add(cls)
+
+    bad = []
+    for cls in sorted(partners):
+        for m in re.finditer(r"^\." + re.escape(cls) + r"\s*\{([^}]*)\}", css, re.M):
+            if re.search(r"(^|[\s;])padding\s*:", m.group(1)):
+                decl = re.search(r"(^|[\s;])(padding\s*:[^;]*)", m.group(1)).group(2)
+                bad.append((cls, decl.strip()))
+    if bad:
+        print("\n⚠️  左右の余白が潰れます（padding の一括指定が padding-inline を上書き）:")
+        for cls, decl in bad:
+            print("     .%s { %s }  → padding-block を使ってください" % (cls, decl))
+    return bad
+
+
 def clean():
     for d in GENERATED_DIRS:
         full = os.path.join(ROOT, d)
@@ -1173,6 +1215,8 @@ def main():
     build_feed_json(cfg, products, cats)
     build_sitemap(cfg, products)
     build_rss(cfg, products)
+
+    check_padding_collisions()
 
     print("✅ ビルド完了")
     print("   商品 %d件 / カテゴリ %d件" % (len(products), len(cfg["categories"])))

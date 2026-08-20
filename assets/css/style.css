@@ -497,7 +497,7 @@ a.ticker-item:hover::before { background: var(--pop); }
    見出しは手書きの蛍光ペン、要点はPOP板、表は値札ボード、
    チェックリストは買い物メモ。
    ========================================================= */
-.guide-head { padding: 26px 0 6px; }
+.guide-head { padding-block: 26px 6px; }
 .guide-title {
   font-family: var(--f-body); font-weight: 900;
   font-size: clamp(1.42rem, 5.6vw, 2.1rem);
@@ -843,6 +843,10 @@ a.ticker-item:hover::before { background: var(--pop); }
 /* 手書きの吹き出し。値札の脇に添える一言。 */
 .pop-note {
   display: inline-flex; align-items: center;
+  /* 回転させる要素は、外接矩形が元の幅より広がる。
+     枠いっぱいだと1〜2px はみ出して横スクロールの原因になるので、
+     あらかじめ内側に収める。 */
+  max-width: calc(100% - 6px);
   font-family: var(--f-hand);
   font-size: .72rem; line-height: 1.3;
   color: var(--ink);
