@@ -66,7 +66,8 @@ REQUEST_INTERVAL = 1.1     # 楽天APIは秒間1リクエストが目安
 # ここに無いもの（caption / points / description / tags / hidden など）は
 # 手で書いた内容をそのまま残す。
 API_FIELDS = ("title", "rawTitle", "price", "image", "affiliateUrl", "shop",
-              "reviewAverage", "reviewCount", "itemCode", "genreId")
+              "reviewAverage", "reviewCount", "itemCode", "genreId",
+              "startTime", "endTime")
 
 
 # ------------------------------------------------------------------ helpers
@@ -287,6 +288,42 @@ def tags_from_title(raw):
     return found[:2]
 
 
+def sale_status(raw, tolerance_hours=24):
+    """いま買えるかどうか。
+
+    在庫あり(availability=1)でも、販売期間がまだ始まっていない商品がある。
+    「9月3日20時から」のようなものを今日載せても、読者は買えない。
+    特価サイトで一番やってはいけないことなので、ここで弾く。
+
+    ただし「今夜20時から数量限定」のような近い開始は、
+    予告として載せる価値があるので許容する（既定は24時間先まで）。
+
+    戻り値: (載せてよいか, 理由, 開始日時)
+    """
+    now = datetime.now(JST)
+
+    def parse(v):
+        for fmt in ("%Y-%m-%d %H:%M", "%Y-%m-%dT%H:%M:%S%z", "%Y-%m-%d"):
+            try:
+                d = datetime.strptime(v, fmt)
+                return d if d.tzinfo else d.replace(tzinfo=JST)
+            except ValueError:
+                continue
+        return None
+
+    start = parse(raw.get("startTime") or "") if raw.get("startTime") else None
+    end = parse(raw.get("endTime") or "") if raw.get("endTime") else None
+
+    if end and end < now:
+        return False, "販売期間が終了しています（%s まで）" % end.strftime("%-m月%-d日"), None
+    if start and start > now:
+        hours = (start - now).total_seconds() / 3600
+        if hours > tolerance_hours:
+            return False, "販売開始が%s（%.0f日先）" % (start.strftime("%-m月%-d日 %-H時"), hours / 24), start
+        return True, "", start
+    return True, "", None
+
+
 def product_id(item_code):
     return "r" + hashlib.sha1(item_code.encode("utf-8")).hexdigest()[:9]
 
@@ -378,6 +415,10 @@ def fetch_category(cat, app_id, access_key, aff_id, hits, site_url, ng_keyword="
                 "reviewAverage": item.get("reviewAverage") or None,
                 "reviewCount": item.get("reviewCount") or 0,
                 "genreId": str(item.get("genreId") or ""),
+                # 販売期間。availability=1（在庫あり）でも、
+                # 販売開始前なら買えない。買えないものは載せない。
+                "startTime": item.get("startTime") or "",
+                "endTime": item.get("endTime") or "",
                 # postageFlag: 0=送料込み, 1=送料別
                 "freeShipping": item.get("postageFlag") == 0,
             }
@@ -554,6 +595,13 @@ def build_featured(cfg, app_id, access_key, aff_id, site_url):
         rc = it.get("reviewCount") or 0
         ra = float(it.get("reviewAverage") or 0)
 
+        ok, sale_why, _ = sale_status(it, cfg["rakuten"].get("saleStartToleranceHours", 24))
+        if not ok:
+            rejected.append((clean_title(raw_name), sale_why, section))
+            print("  − %-38s %s" % (clean_title(raw_name)[:38], sale_why))
+            time.sleep(REQUEST_INTERVAL)
+            continue
+
         why = None
         if price > max_price:
             why = "¥%s（上限 ¥%s）" % ("{:,}".format(price), "{:,}".format(max_price))
@@ -703,6 +751,7 @@ def main():
     min_off = cfg["rakuten"].get("minDiscountRate", 15)
     ng_keyword = cfg["rakuten"].get("ngKeyword", "")
     sort_by = cfg["rakuten"].get("sort", "-reviewCount")
+    sale_tolerance = cfg["rakuten"].get("saleStartToleranceHours", 24)
     min_reviews = cfg["rakuten"].get("minReviewCount", 0)
     min_rating = cfg["rakuten"].get("minReviewAverage", 0)
     retention_days = cfg["rakuten"].get("retentionDays", 30)
@@ -710,6 +759,8 @@ def main():
     hits = cfg["rakuten"].get("hits", 30)
 
     kept, added, dropped = 0, 0, 0
+    not_on_sale = []
+    excluded = set()          # 買えないと判断して外したもの。保持ルールの対象外。
     result = {}
     candidates = {}
     seed_per_category = cfg["rakuten"].get("seedPerCategory", 12)
@@ -721,6 +772,21 @@ def main():
                                   ng_keyword, sort_by):
             if not raw["price"] or not raw["title"]:
                 continue
+
+            pid = product_id(raw["itemCode"])
+
+            # いま買えるか。既存の商品にも適用する。
+            # 在庫あり(availability=1)でも販売開始前の商品があり、
+            # それを載せても読者は買えない。
+            ok, why, start_at = sale_status(raw, sale_tolerance)
+            if not ok:
+                not_on_sale.append((clean_title(raw["rawTitle"]), why))
+                # 「順位から落ちた」のではなく「買えないから外した」商品。
+                # 30日の保持ルールで復活させてはいけない。
+                excluded.add(pid)
+                dropped += 1
+                continue
+
             # 実績のない商品は載せない。ランキングAPIが無い以上、
             # レビュー数と評価が「多くの人が実際に買った」ことの唯一の手がかりになる。
             if (raw.get("reviewCount") or 0) < min_reviews:
@@ -729,7 +795,6 @@ def main():
             if float(raw.get("reviewAverage") or 0) < min_rating:
                 dropped += 1
                 continue
-            pid = product_id(raw["itemCode"])
             records = update_history(history, pid, raw["price"], today)
 
             prev = existing.get(pid, {})
@@ -845,6 +910,9 @@ def main():
     for pid, p in existing.items():
         if pid in result:
             continue
+        if pid in excluded:
+            expired += 1
+            continue
         last = p.get("lastSeen") or p.get("postedAt") or today
         if last >= cutoff:
             result[pid] = p
@@ -880,6 +948,10 @@ def main():
     no_caption = sum(1 for p in products if not p.get("caption"))
     print("\n✅ products.json を更新しました")
     print("   新規 %d件 / 更新 %d件 / 見送り %d件 → 合計 %d件" % (added, kept, dropped, len(products)))
+    if not_on_sale:
+        print("   いま買えないため見送り: %d件" % len(not_on_sale))
+        for t, why in not_on_sale[:5]:
+            print("     − %-30s %s" % (t[:30], why))
     if kept_stale or expired:
         print("   掲載継続 %d件（今日はAPIの結果に無いが%d日以内）/ 掲載終了 %d件"
               % (kept_stale, retention_days, expired))
