@@ -48,7 +48,10 @@ def _table(rows):
             % (cells(rows[0], "th"), body))
 
 
-def render(md, heading_offset=1):
+CTA = re.compile(r"^\{\{cta:(\w+)\}\}$")
+
+
+def render(md, heading_offset=1, cta_renderer=None):
     """マークダウンをHTMLへ。見出しは heading_offset だけ深くする
     （ページのh1と重複させないため # → h2）。"""
     lines = md.split("\n")
@@ -64,6 +67,15 @@ def render(md, heading_offset=1):
     while i < len(lines):
         line = lines[i]
         stripped = line.strip()
+
+        # 記事に差し込むリンク。登録簿にURLが無ければ何も出さない。
+        m = CTA.match(stripped)
+        if m:
+            close(stack)
+            if cta_renderer:
+                out.append(cta_renderer(m.group(1)))
+            i += 1
+            continue
 
         # 表
         if stripped.startswith("|"):

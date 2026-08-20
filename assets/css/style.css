@@ -492,6 +492,50 @@ a.ticker-item:hover::before { background: var(--pop); }
 
 
 
+
+/* =========================================================
+   CTA SIGN  ── 記事の中に立てる案内看板
+   券(クーポン)ともバナー(サイドバー)とも別の物体にする。
+   売場でいえば「こちら→」の吊り看板。
+   本文の流れを一度止めるので、置くのは行動が必要な場所だけ。
+   ========================================================= */
+.cta-sign {
+  position: relative;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-left-width: 9px;
+  border-radius: 4px 12px 12px 4px;
+  box-shadow: 4px 4px 0 var(--pop);
+  padding: 17px 18px 18px;
+  margin: 2em 0 2.2em;
+}
+.cta-sign-label {
+  display: flex; align-items: center; gap: 7px;
+  font-family: var(--f-hand);
+  font-size: 1.12rem; line-height: 1.45;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.ic-sign {
+  width: 1.05em; height: 1.05em;
+  color: var(--sale);
+  flex: 0 0 auto;
+}
+.cta-sign-note {
+  font-size: .82rem; line-height: 1.8;
+  color: var(--ink-70);
+  margin-bottom: 14px;
+}
+.btn-sign {
+  width: 100%;
+  background: var(--sale); color: #fff;
+  font-size: .88rem; padding: 13px 16px;
+  border-radius: 10px;
+  box-shadow: 0 3px 0 var(--ink);
+}
+.btn-sign:hover { background: #E02733; transform: translateY(-2px); box-shadow: 0 5px 0 var(--ink); }
+.btn-sign:active { transform: translateY(3px); box-shadow: 0 0 0 var(--ink); }
+
 /* =========================================================
    GUIDE  ── 攻略ガイド
    長文だが読み物として静かにはせず、売場の言語で組む。
@@ -554,7 +598,7 @@ a.ticker-item:hover::before { background: var(--pop); }
 .prose-guide { font-size: .95rem; line-height: 2; }
 .prose-guide p { margin-bottom: 1.35em; }
 .prose-guide strong { font-weight: 900; }
-.prose-guide a { color: #0B7A66; text-underline-offset: 3px; }
+.prose-guide a:not(.btn) { color: #0B7A66; text-underline-offset: 3px; }
 .prose-guide ul, .prose-guide ol { margin: 0 0 1.5em 1.4em; }
 .prose-guide li { margin-bottom: .5em; }
 
@@ -1649,6 +1693,35 @@ a.ticker-item:hover::before { background: var(--pop); }
   font-weight: 400;
   font-feature-settings: normal;
 }
+
+
+/* =========================================================
+   ボタンの色を守る
+   .prose a のような「本文中のリンク全部」を狙った指定が
+   後から書かれると、赤いボタンの上に緑の文字が乗る事故が起きる。
+   実際に問い合わせページと攻略ガイドの2回起きた。
+   個別に :not(.btn) を足して回るのではなく、
+   クラスを重ねて詳細度を上げ、ボタン側が必ず勝つようにしておく。
+   ========================================================= */
+.btn.btn-rakuten,
+.btn.btn-rakuten:hover,
+.btn.btn-rakuten:visited { color: #fff; }
+
+.btn.btn-sign,
+.btn.btn-sign:hover,
+.btn.btn-sign:visited { color: #fff; }
+
+.btn.btn-ticket,
+.btn.btn-ticket:hover,
+.btn.btn-ticket:visited { color: #fff; }
+
+.btn.btn-threads,
+.btn.btn-threads:hover,
+.btn.btn-threads:visited { color: #fff; }
+
+.btn.btn-ghost,
+.btn.btn-ghost:hover,
+.btn.btn-ghost:visited { color: var(--ink); }
 
 /* =========================================================
    REDUCED MOTION

@@ -874,8 +874,26 @@ def load_guides():
 
 def build_guides(cfg, base, products, cats, guides):
     site_url = cfg["site"]["url"].rstrip("/")
+    links = load("links.json") if os.path.exists(os.path.join(ROOT, "links.json")) else {}
+
+    def cta(key):
+        """記事内のリンク。売場の案内看板として置く。
+        URLが未設定なら何も出さない。埋まっていない看板を立てないため。"""
+        item = links.get(key) or {}
+        if not item.get("url"):
+            return ""
+        return ("""<aside class="cta-sign">
+  <p class="cta-sign-label">{ic}{label}</p>
+  <p class="cta-sign-note">{note}</p>
+  <a class="btn btn-sign" href="{url}" target="_blank" rel="nofollow sponsored noopener">{button}{arrow}</a>
+</aside>""").format(
+            ic=icons.use("arrow-right", "ic-sign"),
+            label=e(item.get("label", "")), note=e(item.get("note", "")),
+            url=e(item["url"]), button=e(item.get("button", "開く")),
+            arrow=icons.use("arrow-right", "ic-arrow"))
+
     for g in guides:
-        body_html, toc = markdown.render(g["body"])
+        body_html, toc = markdown.render(g["body"], cta_renderer=cta)
 
         toc_html = "".join(
             '<li><a href="#%s">%s</a></li>' % (a, e(t)) for a, t in toc)
@@ -1144,6 +1162,43 @@ def ensure_placeholders(cfg, products):
 </svg>""")
 
 
+def containers_with_buttons():
+    """生成したHTMLを読み、内側に .btn を持つ要素のクラス名を集める。
+    CSSの警告を「実際に事故る組み合わせ」だけに絞るために使う。"""
+    from html.parser import HTMLParser
+
+    found = set()
+
+    class Scan(HTMLParser):
+        def __init__(self):
+            super().__init__(convert_charrefs=True)
+            self.stack = []
+
+        def handle_starttag(self, tag, attrs):
+            classes = dict(attrs).get("class", "").split()
+            if "btn" in classes:
+                for ancestor in self.stack:
+                    found.update(ancestor)
+            if tag not in ("br", "img", "input", "meta", "link", "hr", "use", "source"):
+                self.stack.append(classes)
+
+        def handle_endtag(self, tag):
+            if self.stack:
+                self.stack.pop()
+
+    for name in ("index.html", "guide/rakuten-super-sale/index.html",
+                 "contact/index.html", "about/index.html"):
+        path = os.path.join(ROOT, name)
+        if not os.path.exists(path):
+            continue
+        with open(path, encoding="utf-8", errors="ignore") as f:
+            try:
+                Scan().feed(f.read())
+            except Exception:                       # noqa: BLE001
+                pass
+    return found
+
+
 def check_padding_collisions():
     """.wrap 系と併用しているクラスに padding の一括指定が無いか調べる。
 
@@ -1183,6 +1238,21 @@ def check_padding_collisions():
         print("\n⚠️  左右の余白が潰れます（padding の一括指定が padding-inline を上書き）:")
         for cls, decl in bad:
             print("     .%s { %s }  → padding-block を使ってください" % (cls, decl))
+
+    # 本文中のリンクに一律で色を当てると、ボタンの文字色まで奪う。
+    # 赤いボタンに緑の文字が乗る事故が実際に2回起きた。
+    # ただし「ボタンを含まない入れ物」まで警告すると、うるさくて無視されるようになる。
+    # 生成したHTMLを実際に読んで、その入れ物の中に .btn があるものだけを挙げる。
+    holders = containers_with_buttons()
+    link_rules = re.findall(r"^\.([\w-]+)\s+a(?!:not)\s*\{([^}]*)\}", css, re.M)
+    risky = [("." + cls + " a", body.strip()[:34]) for cls, body in link_rules
+             if re.search(r"(^|[\s;])color\s*:", body) and cls in holders]
+    if risky:
+        print("\n⚠️  ボタンの文字色を奪います（その入れ物の中に実際にボタンがあります）:")
+        for sel, body in risky:
+            print("     %s { %s }  → a:not(.btn) にしてください" % (sel, body))
+        bad += risky
+
     return bad
 
 
