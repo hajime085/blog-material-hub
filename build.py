@@ -104,6 +104,21 @@ def render_pricetag(p, size="card"):
     ) % (yen(p["price"]), sub_html)
 
 
+def render_burst(p):
+    """レビュー件数のバースト。売場の「バカ売れ中！」に当たる位置だが、
+    書くのは主観ではなく実際の件数だけ。500件未満には出さない。"""
+    n = p.get("reviewCount") or 0
+    if n < 500:
+        return ""
+    if n >= 10000:
+        num, unit = "%.1f" % (n / 10000.0), "万件"
+    else:
+        num, unit = yen(n), "件"
+    return ('<div class="burst" aria-hidden="true">'
+            '<span class="burst-n">%s</span>'
+            '<span class="burst-l">%sのレビュー</span></div>') % (num, unit)
+
+
 def render_sticker(p):
     d = discount_rate(p)
     if d < 5:
@@ -128,10 +143,11 @@ def render_sidebar(cfg, products, cats, active=None):
             '<img class="rank-img" src="{img}" alt="" width="120" height="120" loading="lazy">'
             '<span class="rank-body">'
             '<span class="rank-title">{t}</span>'
-            '<span class="rank-meta">★{ra}<b>{rc}</b>件が購入後にレビュー</span>'
+            '<span class="rank-meta">{star}{ra}<b>{rc}</b>件が購入後にレビュー</span>'
             '<span class="rank-price"><i>¥</i>{pr}</span>'
             '</span></a>'
         ).format(id=e(p["id"]), i=i, img=e(p["image"]), t=e(p["title"]),
+                 star=icons.use("star", "ic-star"),
                  ra=p.get("reviewAverage") or "-", rc=yen(p.get("reviewCount") or 0),
                  pr=yen(p["price"]))
 
@@ -234,6 +250,7 @@ def render_card(p, cats):
     <img src="{img}" alt="{alt}" loading="lazy" width="640" height="640">
     {tag}
     {sticker}
+    {burst}
   </a>
   <div class="card-body">
     {cap}
@@ -246,7 +263,8 @@ def render_card(p, cats):
   </div>
 </article>""".format(
         id=e(p["id"]), aria=e(aria), img=e(p["image"]), alt=e(p["title"]),
-        tag=render_pricetag(p), sticker=render_sticker(p), cap=cap,
+        tag=render_pricetag(p), sticker=render_sticker(p),
+        burst=render_burst(p), cap=cap,
         title=e(p["title"]), cslug=e(p["category"]),
         cicon=icons.use(cat.get("icon", "tag")), clabel=e(cat.get("short", "")),
         tags=tags, shop=e(p.get("shop", "楽天市場")), url=e(p.get("affiliateUrl") or "#"),
@@ -449,7 +467,7 @@ def build_index(cfg, base, products, cats):
         if page > 1:
             head = """
 <section class="page-head wrap-narrow">
-  <p class="page-eyebrow">{ic}FEED</p>
+  <p class="page-eyebrow">{ic}特価フィード</p>
   <h1 class="page-title">特価フィード</h1>
   <p class="page-lead">{count}件を新しい順に。いまは{page}ページ目です。</p>
 </section>
@@ -518,7 +536,7 @@ def build_categories(cfg, base, products, cats):
     )
     content = """
 <section class="page-head wrap">
-  <p class="page-eyebrow">CATEGORIES</p>
+  <p class="page-eyebrow">売場の地図</p>
   <h1 class="page-title">カテゴリ一覧</h1>
   <p class="page-lead">気になる売場から、値下がりしたものだけを覗けます。</p>
 </section>
@@ -557,7 +575,7 @@ def build_categories(cfg, base, products, cats):
 
             content = """
 <section class="page-head wrap-narrow">
-  <p class="page-eyebrow">{icon}CATEGORY</p>
+  <p class="page-eyebrow">{icon}この売場</p>
   <h1 class="page-title">{label}の特価</h1>
   <p class="page-lead">{lead}</p>
 </section>
@@ -621,8 +639,9 @@ def build_products(cfg, base, products, cats):
             p["category"], icons.use(c.get("icon", "tag")), e(c.get("label", "")))))
         rows.append(("ショップ", "<td>%s</td>" % e(p.get("shop", "楽天市場"))))
         if p.get("reviewAverage"):
-            rows.append(("レビュー", "<td>★%s（%s件）</td>" % (
-                p["reviewAverage"], p.get("reviewCount", 0))))
+            rows.append(("レビュー", "<td>%s%s（%s件）</td>" % (
+                icons.use("star", "ic-star"), p["reviewAverage"],
+                yen(p.get("reviewCount", 0)))))
         rows.append(("掲載日", "<td>%s</td>" % e(p.get("postedAt", ""))))
         spec = "".join("<tr><th>%s</th>%s</tr>" % (k, v) for k, v in rows)
 
@@ -672,6 +691,7 @@ def build_products(cfg, base, products, cats):
     <img src="{img}" alt="{alt}" width="800" height="800">
     {tag}
     {sticker}
+    {burst}
   </div>
 
   <h1 class="detail-title">{title}</h1>
@@ -688,7 +708,7 @@ def build_products(cfg, base, products, cats):
       <a class="btn btn-rakuten btn-lg" href="{url}" target="_blank" rel="nofollow sponsored noopener">楽天市場で見る{arrow}</a>
     </div>
   </div>
-  <p class="price-note">※ 価格・在庫・送料は{posted}時点のものです。変動するため、購入前に楽天市場でご確認ください。</p>
+  <p class="pop-note">値段は毎日見にいってます。買う前に楽天でも確かめてね（{posted}時点）</p>
 
   <h2 class="section-title">商品情報</h2>
   <table class="spec"><tbody>{spec}</tbody></table>
@@ -703,7 +723,8 @@ def build_products(cfg, base, products, cats):
 </div>
 """.format(cslug=e(p["category"]), clabel=e(c.get("label", "")),
            short=e(p["title"] if len(p["title"]) <= 18 else p["title"][:18] + "…"), img=e(p["image"]), alt=e(p["title"]),
-           tag=render_pricetag(p), sticker=render_sticker(p), title=e(p["title"]),
+           tag=render_pricetag(p), sticker=render_sticker(p),
+           burst=render_burst(p), title=e(p["title"]),
            cap=cap, price=yen(p["price"]), cta_sub=cta_sub,
            url=e(p.get("affiliateUrl") or "#"),
            posted=e(p.get("postedAt", "")), spec=spec, arrow=icons.use("arrow-right", "ic-arrow"),
@@ -826,6 +847,7 @@ def build_feed_json(cfg, products, cats):
             "c": p["category"], "ci": c.get("icon", ""), "cl": c.get("short", ""),
             "pr": p["price"], "lp": p.get("listPrice") or 0, "d": discount_rate(p),
             "b": price_basis_label(p),
+            "rc": p.get("reviewCount") or 0,
             "u": p.get("unitNote", ""), "img": p["image"], "url": p.get("affiliateUrl") or "#",
             "shop": p.get("shop", "楽天市場"), "tags": (p.get("tags") or [])[:3],
             "at": p.get("postedAt", ""),

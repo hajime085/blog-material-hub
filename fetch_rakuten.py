@@ -344,6 +344,7 @@ def fetch_category(cat, app_id, access_key, aff_id, hits, site_url, ng_keyword="
                 continue
             raw_name = (item.get("itemName") or "").strip()
             found[code] = {
+                "srcGenre": genre_id or keyword,
                 "itemCode": code,
                 "title": clean_title(raw_name),
                 # 整形前の商品名。整形ルールを変えたとき、
@@ -512,7 +513,8 @@ def main():
                 if "ウォッチ中" not in item.get("tags", []):
                     item["tags"] = ["ウォッチ中"] + item.get("tags", [])
                 candidates.setdefault(cat["slug"], []).append(
-                    (raw.get("reviewCount") or 0, raw.get("shop", ""), pid, item))
+                    (raw.get("reviewCount") or 0, raw.get("shop", ""),
+                     raw.get("srcGenre", ""), pid, item))
                 continue
             elif not prev:
                 dropped += 1
@@ -529,21 +531,33 @@ def main():
         shop_total = {}
         max_total = max_per_shop * 2   # サイト全体では売場ごとの上限の2倍まで
         for slug, items in candidates.items():
-            items.sort(key=lambda x: -x[0])
+            # ジャンルごとに分けてから順番に1件ずつ拾う。
+            # まとめてレビュー数順に取ると、母数の大きいジャンルが
+            # 売場をまるごと占領してしまう（ベビーが全部おくるみになった）。
+            buckets = {}
+            for entry in items:
+                buckets.setdefault(entry[2], []).append(entry)
+            for b in buckets.values():
+                b.sort(key=lambda x: -x[0])
+
             per_shop, taken = {}, 0
-            for _, shop, pid, item in items:
-                if taken >= seed_per_category:
-                    break
-                # 同じ店の色違い・サイズ違いでフィードが埋まるのを防ぐ
-                if per_shop.get(shop, 0) >= max_per_shop:
-                    continue
-                if shop_total.get(shop, 0) >= max_total:
-                    continue
-                per_shop[shop] = per_shop.get(shop, 0) + 1
-                shop_total[shop] = shop_total.get(shop, 0) + 1
-                result[pid] = item
-                taken += 1
-                added += 1
+            order = list(buckets)
+            while taken < seed_per_category and any(buckets[g] for g in order):
+                for g in order:
+                    if taken >= seed_per_category:
+                        break
+                    while buckets[g]:
+                        _, shop, _, pid, item = buckets[g].pop(0)
+                        if per_shop.get(shop, 0) >= max_per_shop:
+                            continue
+                        if shop_total.get(shop, 0) >= max_total:
+                            continue
+                        per_shop[shop] = per_shop.get(shop, 0) + 1
+                        shop_total[shop] = shop_total.get(shop, 0) + 1
+                        result[pid] = item
+                        taken += 1
+                        added += 1
+                        break
             dropped += max(0, len(items) - taken)
 
     # 今回取得しなかったカテゴリの商品は、そのまま残す

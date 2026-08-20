@@ -71,6 +71,15 @@
       '<span class="pricetag-num">' + yen(p.pr) + '</span></span>' + sub + '</div>';
   }
 
+  function burst(p) {
+    var n = p.rc || 0;
+    if (n < 500) return '';
+    var num = n >= 10000 ? (n / 10000).toFixed(1) : yen(n);
+    var unit = n >= 10000 ? '万件' : '件';
+    return '<div class="burst" aria-hidden="true"><span class="burst-n">' + num +
+      '</span><span class="burst-l">' + unit + 'のレビュー</span></div>';
+  }
+
   function sticker(p) {
     if (p.d < 5) return '';
     return '<div class="sticker" aria-hidden="true"><span class="sticker-num">' + p.d +
@@ -95,7 +104,7 @@
     return '<article class="card">' +
       '<a class="card-media" href="/p/' + esc(p.id) + '/" aria-label="' + aria + '">' +
       '<img src="' + esc(p.img) + '" alt="' + esc(p.t) + '" loading="lazy" width="640" height="640">' +
-      pricetag(p) + sticker(p) + '</a>' +
+      pricetag(p) + sticker(p) + burst(p) + '</a>' +
       '<div class="card-body">' + cap +
       '<h2 class="card-title"><a href="/p/' + esc(p.id) + '/">' + esc(p.t) + '</a></h2>' +
       '<div class="card-tags"><a class="tag" href="/c/' + esc(p.c) + '/">' + ic(p.ci) + esc(p.cl) + '</a>' + tags + '</div>' +
