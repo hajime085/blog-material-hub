@@ -256,7 +256,11 @@ def render_share(p, cfg, place="top"):
 
     q = urllib.parse.quote
     targets = [
-        ("sns-x", "X", "https://x.com/intent/post?text=%s&url=%s" % (q(text), q(url))),
+        # Xアプリは /intent/tweet を投稿画面として直接開く。
+        # 新しい /intent/post はアプリ内ブラウザで開かれることがあり、
+        # アプリ内ブラウザはアプリ本体とログイン状態を共有しないため
+        # 毎回ログイン画面が出てしまう。実績のある方を使う。
+        ("sns-x", "X", "https://twitter.com/intent/tweet?text=%s&url=%s" % (q(text), q(url))),
         ("sns-threads", "Threads",
          "https://www.threads.net/intent/post?text=%s" % q(text + "\n" + url)),
         ("sns-line", "LINE",
@@ -943,7 +947,11 @@ def render_guide_share(g, cfg):
     text = g["title"]
     q = urllib.parse.quote
     targets = [
-        ("sns-x", "X", "https://x.com/intent/post?text=%s&url=%s" % (q(text), q(url))),
+        # Xアプリは /intent/tweet を投稿画面として直接開く。
+        # 新しい /intent/post はアプリ内ブラウザで開かれることがあり、
+        # アプリ内ブラウザはアプリ本体とログイン状態を共有しないため
+        # 毎回ログイン画面が出てしまう。実績のある方を使う。
+        ("sns-x", "X", "https://twitter.com/intent/tweet?text=%s&url=%s" % (q(text), q(url))),
         ("sns-threads", "Threads",
          "https://www.threads.net/intent/post?text=%s" % q(text + "\n" + url)),
         ("sns-line", "LINE",
