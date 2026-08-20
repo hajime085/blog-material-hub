@@ -71,6 +71,28 @@ def fill(template, mapping):
 
 
 # ---------------------------------------------------------------- components
+def last_fetch_date(products):
+    """最後に取得を回した日。個々の商品の鮮度はこの日と比べて判断する。"""
+    return max((p.get("lastSeen") or "" for p in products), default="")
+
+
+def is_stale(p, fetched):
+    """今日の取得ではAPIの結果に入らなかった商品。
+    掲載は続けるが、価格が最新である保証はないので、そう分かるように出す。"""
+    last = p.get("lastSeen") or p.get("postedAt") or ""
+    return bool(fetched) and bool(last) and last < fetched
+
+
+def stale_label(p):
+    """「8月20日の価格」のような表記"""
+    last = p.get("lastSeen") or p.get("postedAt") or ""
+    try:
+        d = datetime.strptime(last, "%Y-%m-%d")
+        return d.strftime("%-m月%-d日") + "の価格"
+    except ValueError:
+        return "取得時点の価格"
+
+
 def feed_order(p):
     """フィードの既定の並び。新しい順 → 割引率が高い順 → レビュー数が多い順。
 
@@ -139,7 +161,9 @@ def render_sidebar(cfg, products, cats, active=None, guides=None):
     """フィードの脇（PC）／下（スマホ）に出る棚。
     ヘッダーと同じ黒帯をパネルの頭に載せて、本体と地続きに見せる。
     順位マーカーは値札POPの縮小版。順位そのものに意味があるので番号を振る。"""
-    ranked = sorted(products, key=lambda p: -(p.get("reviewCount") or 0))[:5]
+    fetched = last_fetch_date(products)
+    fresh = [p for p in products if not is_stale(p, fetched)] or products
+    ranked = sorted(fresh, key=lambda p: -(p.get("reviewCount") or 0))[:5]
     rows = ""
     for i, p in enumerate(ranked, 1):
         rows += (
@@ -282,10 +306,12 @@ def render_share(p, cfg, place="top"):
             '<div class="share-row">%s</div></div>' % btns)
 
 
-def render_card(p, cats):
+def render_card(p, cats, fetched=""):
     cat = cats.get(p["category"], {})
     d = discount_rate(p)
     tags = ""
+    if is_stale(p, fetched):
+        tags += '<span class="tag tag-stale">%s</span>' % e(stale_label(p))
     for t in (p.get("tags") or [])[:3]:
         if t == "ウォッチ中":
             cls = "tag tag-watch"
@@ -346,6 +372,48 @@ def render_operator(cfg):
   {link}
 </div>""".format(avatar=e(op.get("avatar", "")), name=e(op["name"]),
                  role=e(op.get("role", "")), bio=e(op.get("bio", "")), link=link)
+
+
+def render_featured(cfg):
+    """注目商品。人が選んだものを横に並べる。
+
+    楽天の売上ランキングはAPIで取れず、アフィリエイトの注目商品ページも
+    ログインの中にある。そこで「選ぶのは人、集めるのは機械」に振り分けた。
+    通常のフィードとは出所が違うので、そう分かる見た目にしてある。"""
+    path = os.path.join(ROOT, "featured.json")
+    if not os.path.exists(path):
+        return ""
+    items = (load("featured.json") or {}).get("items") or []
+    if not items:
+        return ""
+
+    cards = ""
+    for p in items:
+        tags = ""
+        if p.get("freeShipping"):
+            tags = '<span class="fe-tag">送料無料</span>'
+        cards += (
+            '<a class="fe-card" href="{url}" target="_blank" rel="nofollow sponsored noopener">'
+            '<span class="fe-media"><img src="{img}" alt="" width="300" height="300" loading="lazy"></span>'
+            '<span class="fe-body">'
+            '<span class="fe-title">{t}</span>'
+            '<span class="fe-price"><i>¥</i>{pr}</span>'
+            '<span class="fe-meta">{star}{ra}<b>{rc}</b>件{tags}</span>'
+            '</span></a>'
+        ).format(url=e(p.get("affiliateUrl") or "#"), img=e(p.get("image", "")),
+                 t=e(p.get("title", "")), pr=yen(p.get("price", 0)),
+                 star=icons.use("star", "ic-star"), ra=p.get("reviewAverage") or "-",
+                 rc=yen(p.get("reviewCount") or 0), tags=tags)
+
+    return """
+<section class="featured wrap-wide">
+  <div class="featured-head">
+    <h2 class="featured-title">{ic}編集部が選んだもの</h2>
+    <p class="featured-note">売れ筋や特集から、これはと思ったものを手で選んでいます。</p>
+  </div>
+  <div class="featured-rail">{cards}</div>
+</section>
+""".format(ic=icons.use("bolt"), cards=cards)
 
 
 def render_pager(page, total_pages, base):
@@ -491,6 +559,7 @@ def jsonld_block(obj):
 # ---------------------------------------------------------------- builders
 def build_index(cfg, base, products, cats):
     per = cfg["feed"]["perPage"]
+    fetched = last_fetch_date(products)
     ordered = sorted(products, key=feed_order, reverse=True)
     total_pages = max(1, -(-len(ordered) // per))
 
@@ -512,7 +581,7 @@ def build_index(cfg, base, products, cats):
 
     for page in range(1, total_pages + 1):
         chunk = ordered[(page - 1) * per: page * per]
-        cards = "".join(render_card(p, cats) for p in chunk)
+        cards = "".join(render_card(p, cats, fetched) for p in chunk)
         path = "/" if page == 1 else "/page/%d/" % page
 
         head = """
@@ -537,6 +606,7 @@ def build_index(cfg, base, products, cats):
 """.format(ic=icons.use("bolt"), count=len(products), page=page)
 
         content = head + """
+{featured}
 <div class="layout wrap-wide">
 <div class="layout-main">
   <div class="toolbar">
@@ -561,6 +631,7 @@ def build_index(cfg, base, products, cats):
 {sidebar}
 </div>
 """.format(count=len(products), cards=cards,
+           featured=(render_featured(cfg) if page == 1 else ""),
            off_sort=('<button type="button" data-sort="off" aria-pressed="false">割引率</button>'
                      if n_off else ''),
            pager=render_pager(page, total_pages, "/"),
@@ -623,6 +694,7 @@ def build_categories(cfg, base, products, cats):
 
     # 各カテゴリ
     per = cfg["feed"]["perPage"]
+    fetched = last_fetch_date(products)
     site_url = cfg["site"]["url"].rstrip("/")
     for c in cfg["categories"]:
         items = [p for p in products if p["category"] == c["slug"]]
@@ -635,7 +707,7 @@ def build_categories(cfg, base, products, cats):
             chunk = items[(page - 1) * per: page * per]
             if chunk:
                 body = '<div class="feed">%s</div>' % "".join(
-                    render_card(p, cats) for p in chunk)
+                    render_card(p, cats, fetched) for p in chunk)
             else:
                 body = ('<div class="empty">' + icons.use("tag", "ic-xxl") +
                         '<p class="empty-title">この売場はまだ空っぽです</p>'
@@ -687,6 +759,7 @@ def build_categories(cfg, base, products, cats):
 
 
 def build_products(cfg, base, products, cats):
+    fetched = last_fetch_date(products)
     by_cat = {}
     for p in products:
         by_cat.setdefault(p["category"], []).append(p)
@@ -715,6 +788,10 @@ def build_products(cfg, base, products, cats):
                 icons.use("star", "ic-star"), p["reviewAverage"],
                 yen(p.get("reviewCount", 0)))))
         rows.append(("掲載日", "<td>%s</td>" % e(p.get("postedAt", ""))))
+        if p.get("lastSeen"):
+            rows.append(("価格の確認日", "<td>%s%s</td>" % (
+                e(p["lastSeen"]),
+                "" if not is_stale(p, fetched) else "<br><small>それ以降は変わっている可能性があります</small>")))
         spec = "".join("<tr><th>%s</th>%s</tr>" % (k, v) for k, v in rows)
 
         # 関連商品（同カテゴリの他商品）
@@ -780,7 +857,7 @@ def build_products(cfg, base, products, cats):
       <a class="btn btn-rakuten btn-lg" href="{url}" target="_blank" rel="nofollow sponsored noopener">楽天市場で見る{arrow}</a>
     </div>
   </div>
-  <p class="pop-note">値段は毎日見にいってます。買う前に楽天でも確かめてね（{posted}時点）</p>
+  <p class="pop-note{stale_cls}">{freshness}</p>
 
   <h2 class="section-title">商品情報</h2>
   <table class="spec"><tbody>{spec}</tbody></table>
@@ -798,8 +875,14 @@ def build_products(cfg, base, products, cats):
            tag=render_pricetag(p), sticker=render_sticker(p),
            burst=render_burst(p), title=e(p["title"]),
            cap=cap, price=yen(p["price"]), cta_sub=cta_sub,
+           stale_cls=(" pop-note-stale" if is_stale(p, fetched) else ""),
+           freshness=(
+               "この価格は%sに見たものです。そのあと変わっているかもしれないので、"
+               "楽天でいまの値段を確かめてください。" % stale_label(p).replace("の価格", "")
+               if is_stale(p, fetched)
+               else "値段は毎日見にいってます。買う前に楽天でも確かめてね（%s時点）" % e(p.get("lastSeen") or "")),
            url=e(p.get("affiliateUrl") or "#"),
-           posted=e(p.get("postedAt", "")), spec=spec, arrow=icons.use("arrow-right", "ic-arrow"),
+           spec=spec, arrow=icons.use("arrow-right", "ic-arrow"),
            desc_block=desc_block, rel_block=rel_block,
            share_top=render_share(p, cfg, "top"),
            share_bottom=render_share(p, cfg, "bottom"))

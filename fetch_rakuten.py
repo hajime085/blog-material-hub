@@ -6,6 +6,7 @@
   cp .env.example .env      # 初回だけ。.env に楽天のID・キーを書く
   python3 fetch_rakuten.py          # 値下がりした商品だけを取得（通常運転）
   python3 fetch_rakuten.py --seed   # 初回用。いま買える商品を「ウォッチ中」として掲載
+  python3 fetch_rakuten.py --featured  # featured.txt のURLから「注目商品」を作る
   python3 fetch_rakuten.py food     # 特定カテゴリだけ
 
   そのあと  python3 build.py  でサイトを再生成する。
@@ -136,9 +137,20 @@ def api_get(url, params, site_url):
         "Referer": origin + "/",
         "Accept": "application/json",
     })
+    for attempt in range(4):
+        try:
+            with urllib.request.urlopen(req, timeout=20) as res:
+                return json.loads(res.read().decode("utf-8"))
+        except urllib.error.HTTPError as ex:
+            # 流量制限。少し待てば通るので、間隔を空けて数回試す。
+            if ex.code == 429 and attempt < 3:
+                wait = 5 * (attempt + 1)
+                print("     （混み合っています。%d秒待ちます）" % wait)
+                time.sleep(wait)
+                continue
+            break
     try:
-        with urllib.request.urlopen(req, timeout=20) as res:
-            return json.loads(res.read().decode("utf-8"))
+        raise ex
     except urllib.error.HTTPError as ex:
         body = ""
         try:
@@ -196,50 +208,55 @@ TAGGABLE = {"送料無料": "送料無料", "あす楽": "あす楽", "まとめ
 
 
 def clean_title(raw):
-    """飾りを落として、商品名として読める形にする"""
-    t = raw
-    t = re.sub(r"[＼\\][^／/]{0,44}[／/]", " ", t)          # ＼送料無料／ のたぐい
-    t = re.sub(r"[★☆◆◇■□●○▼▲！!]+", " ", t)              # 装飾記号
-    # 先頭に連なる【】《》『』のうち、販促文言のものだけ落とす。
-    # 値段の話をしている括弧（「1枚600円」「1000円ポッキリ」など）も広告なので落とす。
-    PRICE_PITCH = re.compile(r"\d\s*[円¥￥].{0,10}(価格|セット|購入|以上|ポッキリ|OFF|オフ|引|off)"
-                             r"|(価格|ポッキリ|OFF|オフ|クーポン|セール).{0,8}\d\s*[円¥￥]"
-                             r"|\d+\s*%\s*(OFF|オフ|off)|ポッキリ|提供価格")
-    for _ in range(8):
-        m = re.match(r"\s*[【《『\[（(]([^】》』\]）)]{1,28})[】》』\]）)]", t)
-        if not m:
-            break
-        inner = m.group(1)
-        if any(w in inner for w in PROMO_WORDS) or PRICE_PITCH.search(inner) or UNIT_RE.search(inner):
-            t = t[m.end():]
-        else:
-            break
-    t = re.sub(r"\s+", " ", t).strip()
-    # 先頭に紛れ込んだ裸の数字（評価値など）を落とす
-    t = re.sub(r"^\d\.\d{1,2}\s+(?=[^\d])", "", t)
-    # 記号を外したあと、先頭に残る販促フレーズを落とす
-    LEAD = (r"(店内最安値|最安値挑戦?中?|最安値|期間限定|数量限定|タイムセール|超特価|激安|"
+    """飾りを落として、商品名として読める形にする。
+
+    先頭の飾りは何層にも重なっている:
+      77%OFF!【期間限定：990円～1,390円！】【年間ランキング3位】 UVパーカー
+    括弧を剥がすと裸の煽りが現れ、煽りを剥がすと括弧が現れる。
+    そのため、変化しなくなるまで剥がし続ける。
+    """
+    # 括弧にも記号にも囲まれていない、先頭の売り文句
+    LEAD2 = (r"(ゆうパケット[^ 　]{0,10}|[^ 　]{0,6}送料\d+円|\d+円以上で注文可能|"
+             r"\d+月限定\s*[（(]?要エントリー[）)]?|要エントリー|"
+             r"エントリーで[^ 　]{0,10}|最大\d+倍|全品\d+%?[オフOFF]+)")
+    LEAD = (r"(\d+\s*[%％]\s*(?:OFF|オフ|off)[!！]?|店内最安値|最安値挑戦?中?|最安値|"
+            r"期間限定|数量限定|タイムセール|超特価|激安|"
             r"[PpＰ]\s?\d+\s?(倍|限定)|ポイント\s?\d+倍|楽天ランキング\s?\d+位|"
             r"楽天\s?\d+位|ランキング\s?\d+位|\d+年間MVP|年間MVP|"
             r"まとめて購入がお得[♪！!]?|買うほどお得|お得♪|"
             r"[PpＰ]\s?\d+限定|\d+限定|1位|第\d+位|"
             r"本日限り|即日発送|翌日発送|新生活|大特価|お買い得|SALE|セール)")
-    # 括弧にも記号にも囲まれていない、先頭の売り文句
-    LEAD2 = (r"(ゆうパケット[^ 　]{0,10}|[^ 　]{0,6}送料\d+円|\d+円以上で注文可能|"
-             r"\d+月限定\s*[（(]?要エントリー[）)]?|要エントリー|"
-             r"エントリーで[^ 　]{0,10}|最大\d+倍|全品\d+%?[オフOFF]+)")
-    for _ in range(4):
-        m = re.match(r"\s*" + LEAD2 + r"\s*[ 　/／|｜、,・]*", t)
-        if not m or m.end() == 0:
-            break
-        t = t[m.end():]
+    PRICE_PITCH = re.compile(r"\d\s*[円¥￥].{0,10}(価格|セット|購入|以上|ポッキリ|OFF|オフ|引|off)"
+                             r"|(価格|ポッキリ|OFF|オフ|クーポン|セール).{0,8}\d\s*[円¥￥]"
+                             r"|\d+\s*%\s*(OFF|オフ|off)|ポッキリ|提供価格"
+                             r"|\d[\d,]*\s*円\s*[～〜→]")
 
-    for _ in range(6):
-        m = re.match(r"\s*" + LEAD + r"\s*[ 　/／|｜、,・]*", t)
-        if not m or m.end() == 0:
+    t = raw
+    for _ in range(10):
+        before = t
+        t = re.sub(r"[＼\\][^／/]{0,44}[／/]", " ", t)          # ＼送料無料／ のたぐい
+        t = re.sub(r"[★☆◆◇■□●○▼▲！!]+", " ", t)              # 装飾記号
+        t = re.sub(r"\s+", " ", t).strip()
+        t = re.sub(r"^\d\.\d{1,2}\s+(?=[^\d])", "", t)        # 先頭に紛れた評価値
+
+        # 先頭の括弧のうち、販促・値段の話・単価のものを剥がす
+        m = re.match(r"\s*[【《『\[（(]([^】》』\]）)]{1,28})[】》』\]）)]", t)
+        if m:
+            inner = m.group(1)
+            if (any(w in inner for w in PROMO_WORDS)
+                    or PRICE_PITCH.search(inner) or UNIT_RE.search(inner)):
+                t = t[m.end():]
+
+        # 裸の売り文句を剥がす
+        for pat in (LEAD2, LEAD):
+            m = re.match(r"\s*" + pat + r"\s*[ 　/／|｜、,・:：]*", t)
+            if m and m.end() > 0:
+                t = t[m.end():]
+
+        t = re.sub(r"\s+", " ", t).strip(" 　-–—/／|｜,、・:：")
+        if t == before:
             break
-        t = t[m.end():]
-    t = re.sub(r"\s+", " ", t).strip(" 　-–—/／|｜,、・")
+
     # 末尾によくある店舗の符牒（@zb など）を落とす
     t = re.sub(r"\s+[@＠][A-Za-z0-9_]{1,8}$", "", t)
     if len(t) > 52:
@@ -371,6 +388,243 @@ def fetch_category(cat, app_id, access_key, aff_id, hits, site_url, ng_keyword="
     return list(found.values())
 
 
+ITEM_URL_RE = re.compile(r"item\.rakuten\.co\.jp/([^/]+)/([^/?#]+)")
+
+
+def item_code_from_url(url, ctx=None, timeout=20):
+    """貼られたURLから商品コード（ショップ名:番号）を取り出す。
+
+    商品URLの末尾はショップが決めるもので、数字のこともあれば
+    英字のスラッグのこともある。APIの商品コードは常に数字なので、
+    スラッグの場合はショップの商品を走査して itemUrl で照合する。
+
+    一度解けたものは .featured_cache.json に覚えるので、次からは即座に解決する。
+    """
+    cache_path = os.path.join(ROOT, ".featured_cache.json")
+    cache = {}
+    if os.path.exists(cache_path):
+        try:
+            with open(cache_path, encoding="utf-8") as f:
+                cache = json.load(f)
+        except ValueError:
+            cache = {}
+    if url in cache:
+        return cache[url]
+
+    def remember(code):
+        if code:
+            cache[url] = code
+            with open(cache_path, "w", encoding="utf-8") as f:
+                json.dump(cache, f, ensure_ascii=False, indent=1)
+        return code
+
+    # 「ショップ名:番号」の形なら、そのまま商品コードとして使う。
+    # ランキングページから拾うときはこの形が確実で、余計な問い合わせもいらない。
+    if re.fullmatch(r"[A-Za-z0-9_-]+:[0-9]+", url.strip()):
+        return url.strip()
+
+    target = url
+    m = ITEM_URL_RE.search(target)
+    if not m:
+        # pc= に元のURLが入っている形
+        parsed = urllib.parse.urlparse(target)
+        for key in ("pc", "url", "m"):
+            vals = urllib.parse.parse_qs(parsed.query).get(key)
+            if vals:
+                m = ITEM_URL_RE.search(urllib.parse.unquote(vals[0]))
+                if m:
+                    break
+    if not m:
+        # 短縮URLはたどってみる
+        try:
+            req = urllib.request.Request(target, headers={"User-Agent": "yasumiru-builder/1.0"})
+            with urllib.request.urlopen(req, timeout=timeout) as res:
+                m = ITEM_URL_RE.search(res.geturl())
+        except Exception:                                 # noqa: BLE001
+            pass
+    if not m:
+        return None
+
+    shop, slug = m.group(1), m.group(2)
+
+    # 末尾が数字なら、それがそのまま商品コードであることが多い
+    if slug.isdigit():
+        return remember("%s:%s" % (shop, slug))
+
+    # そうでなければショップの商品を走査して itemUrl で照合する
+    if not ctx:
+        return None
+    app_id, access_key, aff_id, site_url = ctx
+    needle = "/%s/" % slug
+    for page in range(1, 4):
+        try:
+            data = api_get(ITEM_API, {
+                "applicationId": app_id, "accessKey": access_key, "affiliateId": aff_id,
+                "shopCode": shop, "page": page, "hits": 30,
+                "format": "json", "formatVersion": 2,
+            }, site_url)
+        except Exception:                                 # noqa: BLE001
+            return None
+        items = data.get("Items") or []
+        for it in items:
+            if needle in (it.get("itemUrl") or ""):
+                return remember(it.get("itemCode"))
+        if page >= (data.get("pageCount") or 1):
+            break
+        time.sleep(REQUEST_INTERVAL)
+    return None
+
+
+def build_featured(cfg, app_id, access_key, aff_id, site_url):
+    """featured.txt に貼られたURLから「編集部が選んだもの」を作る。
+
+    楽天アフィリエイトの売れ筋一覧は「実際に売れた商品」を
+    発生報酬額の順に並べたもの。売れているのは事実だが、
+    順位は売れた個数ではなく報酬額の順なので、高額・高料率の商品ほど上に来る。
+    このサイトは安さを紹介する場所なので、リストは使うが順位は使わない。
+
+    そのために、貼られた順番は捨てて安い順に並べ替え、
+    サイトの基準（価格帯・レビュー）に合わないものは弾いて理由を伝える。
+    料率は取り込まないし、どこにも表示しない。"""
+    path = os.path.join(ROOT, "featured.txt")
+    if not os.path.exists(path):
+        print("featured.txt がありません。")
+        return
+
+    # 「## ジャンル名」で区切ると、ジャンルごとに均等に採る。
+    urls, section = [], ""
+    for line in open(path, encoding="utf-8"):
+        line = line.strip()
+        if line.startswith("##"):
+            section = line.lstrip("#").strip()
+        elif line and not line.startswith("#"):
+            urls.append((line, section))
+    if not urls:
+        print("featured.txt にURLがありません。商品ページのURLを1行ずつ貼ってください。")
+        return
+
+    # サイトの基準は機械が一貫して適用する。
+    # 売れ筋一覧は発生報酬額の順なので、高額・高料率の商品ほど上に来る。
+    # そこに人の裁量が入ると基準がブレるため、ここで機械的に弾く。
+    max_price = cfg["rakuten"].get("featuredMaxPrice", 5000)
+    min_reviews = cfg["rakuten"].get("minReviewCount", 0)
+    min_rating = cfg["rakuten"].get("minReviewAverage", 0)
+    per_section = cfg["rakuten"].get("featuredPerSection", 4)
+    total_max = cfg["rakuten"].get("featuredMax", 12)
+
+    print("▼ 取り込みます（%d件）" % len(urls))
+    items, seen, rejected = [], set(), []
+    for url, section in urls:
+        code = item_code_from_url(url, ctx=(app_id, access_key, aff_id, site_url))
+        if not code:
+            print("  × 商品コードを読み取れません: %s" % url[:56])
+            print("      （ランキングページの「ショップ名:番号」を書くと確実です）")
+            continue
+        if code in seen:
+            print("  ・重複のため飛ばします: %s" % code)
+            continue
+        seen.add(code)
+        try:
+            data = api_get(ITEM_API, {
+                "applicationId": app_id, "accessKey": access_key, "affiliateId": aff_id,
+                "itemCode": code, "format": "json", "formatVersion": 2,
+            }, site_url)
+        except SystemExit as ex:
+            # URLの打ち間違いなど、その1件だけの問題なら飛ばして続ける。
+            # 1件のせいで取り込み全体が止まると、原因も分かりにくい。
+            if "itemCode is not valid" in str(ex) or "wrong_parameter" in str(ex):
+                print("  × 商品コードが正しくありません: %s" % code)
+                time.sleep(REQUEST_INTERVAL)
+                continue
+            raise
+        except Exception as ex:                          # noqa: BLE001
+            print("  × 取得に失敗: %s (%s)" % (code, ex))
+            time.sleep(REQUEST_INTERVAL)
+            continue
+
+        got = data.get("Items") or []
+        if not got:
+            print("  × 見つかりません（売り切れ・掲載終了の可能性）: %s" % code)
+            time.sleep(REQUEST_INTERVAL)
+            continue
+
+        it = got[0]
+        raw_name = (it.get("itemName") or "").strip()
+        price = int(it.get("itemPrice") or 0)
+        rc = it.get("reviewCount") or 0
+        ra = float(it.get("reviewAverage") or 0)
+
+        why = None
+        if price > max_price:
+            why = "¥%s（上限 ¥%s）" % ("{:,}".format(price), "{:,}".format(max_price))
+        elif rc < min_reviews:
+            why = "レビュー%d件（%d件以上）" % (rc, min_reviews)
+        elif ra < min_rating:
+            why = "評価★%.1f（★%.1f以上）" % (ra, min_rating)
+        if why:
+            rejected.append((clean_title(raw_name), why, section))
+            print("  − %-38s %s" % (clean_title(raw_name)[:38], why))
+            time.sleep(REQUEST_INTERVAL)
+            continue
+
+        items.append({
+            "section": section,
+            "id": "f" + product_id(code)[1:],
+            "itemCode": code,
+            "title": clean_title(raw_name),
+            "rawTitle": raw_name,
+            "price": price,
+            "image": big_image(it.get("mediumImageUrls") or it.get("smallImageUrls")),
+            "affiliateUrl": it.get("affiliateUrl") or it.get("itemUrl") or "",
+            "shop": (it.get("shopName") or "").strip(),
+            "reviewAverage": it.get("reviewAverage") or None,
+            "reviewCount": rc,
+            "unitNote": unit_note_from_title(raw_name),
+            "freeShipping": it.get("postageFlag") == 0,
+            "lastSeen": datetime.now(JST).strftime("%Y-%m-%d"),
+        })
+        print("  ・¥%-8s %s" % ("{:,}".format(items[-1]["price"]), items[-1]["title"][:38]))
+        time.sleep(REQUEST_INTERVAL)
+
+    # 貼られた順番は捨てる。安い順に並べ替えるのが、このサイトの基準。
+    items.sort(key=lambda x: x["price"])
+
+    # ジャンルごとの上限。1つのジャンルが棚を占領しないように、
+    # 安い順から順番に1件ずつ拾う。
+    if per_section:
+        buckets = {}
+        for it in items:
+            buckets.setdefault(it.get("section", ""), []).append(it)
+        picked, taken = [], {k: 0 for k in buckets}
+        while len(picked) < total_max and any(buckets[k] for k in buckets):
+            for k in list(buckets):
+                if not buckets[k] or taken[k] >= per_section or len(picked) >= total_max:
+                    continue
+                picked.append(buckets[k].pop(0))
+                taken[k] += 1
+        dropped_over = len(items) - len(picked)
+        items = sorted(picked, key=lambda x: x["price"])
+        if dropped_over:
+            print("\n  ・上限を超えたぶんは見送りました（%d件）" % dropped_over)
+
+    save_json("featured.json", {
+        "_readme": ("featured.txt から作った「編集部が選んだもの」。"
+                    "直接編集せず、featured.txt を編集してください。"
+                    "並びは貼った順ではなく安い順です（売れ筋の順位はサイトの基準ではないため）。"),
+        "updatedAt": datetime.now(JST).strftime("%Y-%m-%d"),
+        "items": items,
+    })
+    print("\n✅ featured.json を更新しました（%d件）" % len(items))
+    if items:
+        print("   並びは安い順です。貼った順（＝売れ筋の順位）は使っていません。")
+        print("   ¥%s 〜 ¥%s" % ("{:,}".format(items[0]["price"]), "{:,}".format(items[-1]["price"])))
+    if rejected:
+        print("\n   基準に合わず見送り: %d件" % len(rejected))
+        for title, why, sec in rejected:
+            print("     − %-34s %s" % (title[:34], why))
+    print("\n次: python3 build.py")
+
+
 def report_genres(cfg, app_id, access_key, aff_id, site_url):
     """ジャンル検索APIが使えないので、実際の検索結果から
     そのカテゴリに何のジャンルが混ざっているかを調べる。
@@ -420,6 +674,10 @@ def main():
     app_id, access_key, aff_id = credentials(cfg)
     site_url = cfg["site"]["url"]
 
+    if "--featured" in args:
+        build_featured(cfg, app_id, access_key, aff_id, site_url)
+        return
+
     if "--genres" in args:
         report_genres(cfg, app_id, access_key, aff_id, site_url)
         return
@@ -440,6 +698,8 @@ def main():
     sort_by = cfg["rakuten"].get("sort", "-reviewCount")
     min_reviews = cfg["rakuten"].get("minReviewCount", 0)
     min_rating = cfg["rakuten"].get("minReviewAverage", 0)
+    retention_days = cfg["rakuten"].get("retentionDays", 30)
+    max_new = cfg["rakuten"].get("maxNewPerRun", 20)
     hits = cfg["rakuten"].get("hits", 30)
 
     kept, added, dropped = 0, 0, 0
@@ -498,12 +758,19 @@ def main():
                 item["unitNote"] = raw["unitNote"]
             item.setdefault("unitNote", None)
             item.setdefault("postedAt", today)
+            # 今日もAPIの結果に入っていた、という記録。
+            # 掲載を続けるか消すかの判断と、価格の鮮度の表示に使う。
+            item["lastSeen"] = today
 
             off = 0
             if item.get("listPrice"):
                 off = round((item["listPrice"] - item["price"]) / item["listPrice"] * 100)
 
             if off >= min_off:
+                if not prev and added >= max_new:
+                    # 1回で載せる新規の上限。一気に増やさず、じわじわ増やす。
+                    dropped += 1
+                    continue
                 # 値下がりを検知した。新着として浮上させる。
                 item["postedAt"] = today
                 item["tags"] = [t for t in item.get("tags", []) if t != "ウォッチ中"]
@@ -562,11 +829,21 @@ def main():
                         break
             dropped += max(0, len(items) - taken)
 
-    # 今回取得しなかったカテゴリの商品は、そのまま残す
-    touched = {c["slug"] for c in cats}
+    # APIの結果から外れた商品の扱い。
+    # レビュー数順の上位しか取らないため、売り切れていなくても
+    # 順位が落ちただけで結果から外れる。すぐ消すと、Threadsに貼った
+    # リンクが次々404になる。最後に見かけた日から retention_days は残す。
+    cutoff = (datetime.now(JST) - timedelta(days=retention_days)).strftime("%Y-%m-%d")
+    kept_stale, expired = 0, 0
     for pid, p in existing.items():
-        if p.get("category") not in touched and pid not in result:
+        if pid in result:
+            continue
+        last = p.get("lastSeen") or p.get("postedAt") or today
+        if last >= cutoff:
             result[pid] = p
+            kept_stale += 1
+        else:
+            expired += 1
 
     products = sorted(result.values(),
                       key=lambda p: (p.get("postedAt", ""), -p.get("price", 0)), reverse=True)
@@ -596,6 +873,9 @@ def main():
     no_caption = sum(1 for p in products if not p.get("caption"))
     print("\n✅ products.json を更新しました")
     print("   新規 %d件 / 更新 %d件 / 見送り %d件 → 合計 %d件" % (added, kept, dropped, len(products)))
+    if kept_stale or expired:
+        print("   掲載継続 %d件（今日はAPIの結果に無いが%d日以内）/ 掲載終了 %d件"
+              % (kept_stale, retention_days, expired))
     if no_caption:
         print("   ※ ひとことキャプション未記入が %d件あります。" % no_caption)
         print("      caption を書くとカードの見え方がかなり変わります。")

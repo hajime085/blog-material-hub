@@ -42,7 +42,14 @@
     "_qualityNote": "レビュー数順で取得します。ランキングAPIが使えないため、「実際に買った人が多い」を売れ筋の代わりにしています。minReviewCount / minReviewAverage を下回るものは掲載しません。",
     "minReviewCount": 5,
     "minReviewAverage": 3.8,
-    "_genreNote": "genres は実際にAPIを叩いて中身を確認したジャンルIDです。ジャンル検索APIが使えないため実測で同定しました。ジャンル指定があるカテゴリは、そのジャンル内だけを検索するのでカテゴリ違いの商品が混ざりません。"
+    "_genreNote": "genres は実際にAPIを叩いて中身を確認したジャンルIDです。ジャンル検索APIが使えないため実測で同定しました。ジャンル指定があるカテゴリは、そのジャンル内だけを検索するのでカテゴリ違いの商品が混ざりません。",
+    "_retentionNote": "retentionDays: APIの結果から外れた商品を、何日間そのまま掲載し続けるか。レビュー数順の上位30件しか取らないため、売り切れていなくても順位が落ちただけで結果から外れる。すぐ消すとThreadsに貼ったリンクが次々404になるので猶予を持たせる。 maxNewPerRun: 1回の取得で新しく載せる上限。一気に増えすぎないように。",
+    "retentionDays": 30,
+    "maxNewPerRun": 20,
+    "featuredMaxPrice": 5000,
+    "featuredPerSection": 4,
+    "featuredMax": 12,
+    "_featuredNote": "featured.txt から取り込む「編集部が選んだもの」の基準。featuredMaxPrice を超えるもの、レビューが少ないものは機械的に弾く。楽天の売れ筋一覧は発生報酬額の順なので高額・高料率の商品が上に来るが、このサイトは安さを紹介する場所なので順位は使わず、安い順に並べ替える。featuredPerSection は「## ジャンル名」ごとの上限。1ジャンルが棚を占領しないように。"
   },
   "feed": {
     "perPage": 10,

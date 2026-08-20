@@ -493,6 +493,73 @@ a.ticker-item:hover::before { background: var(--pop); }
 
 
 
+
+/* =========================================================
+   FEATURED  ── 編集部が選んだもの
+   通常のフィードは機械が集めたもの、こちらは人が選んだもの。
+   出所が違うので、縦のカードではなく横に流れる棚として置く。
+   ========================================================= */
+.featured { padding-block: 22px 4px; }
+.featured-head { margin-bottom: 12px; }
+.featured-title {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--f-body); font-weight: 900;
+  font-size: 1.06rem;
+  margin-bottom: 4px;
+}
+.featured-title .ic { color: var(--sale); }
+.featured-note { font-size: .76rem; color: var(--ink-52); }
+
+.featured-rail {
+  display: flex; gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+}
+.fe-card {
+  flex: 0 0 auto;
+  width: 168px;
+  scroll-snap-align: start;
+  background: var(--paper);
+  border: 1px solid var(--ink-08);
+  border-radius: 14px;
+  overflow: hidden;
+  text-decoration: none;
+  box-shadow: var(--shadow-card);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.fe-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); }
+.fe-media { display: block; aspect-ratio: 1/1; background: var(--ground); }
+.fe-media img { width: 100%; height: 100%; object-fit: cover; }
+.fe-body { display: block; padding: 10px 11px 12px; }
+.fe-title {
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  font-size: .74rem; font-weight: 700; line-height: 1.5;
+  min-height: 2.2em;
+}
+.fe-price {
+  display: block;
+  font-family: var(--f-price); font-weight: 400;
+  font-size: 1.24rem; line-height: 1.2;
+  color: var(--sale);
+  margin-top: 5px;
+}
+.fe-price i { font-style: normal; font-size: .68em; margin-right: 1px; }
+.fe-meta {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 4px;
+  font-size: .62rem; color: var(--ink-52);
+  margin-top: 3px;
+}
+.fe-meta b { font-family: var(--f-price); font-weight: 400; font-size: .76rem; color: var(--ink); }
+.fe-tag {
+  font-family: var(--f-hand);
+  font-size: .62rem;
+  background: var(--fresh-bg); color: #007D69;
+  padding: 1px 6px 2px; border-radius: 4px;
+}
+
 /* =========================================================
    CTA SIGN  ── 記事の中に立てる案内看板
    券(クーポン)ともバナー(サイドバー)とも別の物体にする。
@@ -1150,6 +1217,20 @@ a.ticker-item:hover::before { background: var(--pop); }
 /* 値下がりを検知していない、価格を見張っているだけの商品。
    %OFFシールを付けないので、赤くせず控えめに置く。 */
 .tag-watch { background: var(--ink-08); color: var(--ink-52); }
+
+/* 今日の取得ではAPIの結果に入らなかった商品。掲載は続けるが、
+   価格が最新である保証はない。目立たせず、しかし確実に伝える。 */
+.tag-stale {
+  background: transparent;
+  color: var(--ink-52);
+  border: 1px dashed var(--ink-14);
+}
+
+/* 鮮度が落ちた商品ページの注意書き。通常より強く出す。 */
+.pop-note-stale {
+  border-color: var(--sale);
+  background: var(--sale-bg);
+}
 
 .card-foot { display: flex; align-items: center; gap: 10px; }
 .card-shop {
