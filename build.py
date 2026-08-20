@@ -919,14 +919,26 @@ def build_products(cfg, base, products, cats):
             ],
         }
 
+        # ページのタイトル（検索結果向け）は商品名を前に置く
         title = "%s｜¥%s" % (p["title"], yen(p["price"]))
         if d:
             title = "【%d%%OFF】%s｜¥%s" % (d, p["title"], yen(p["price"]))
 
+        # 共有カードのタイトルは価格を先頭に置く。
+        # ThreadsやXのカードはタイトルを途中で切るので、
+        # 末尾に価格を置くと一番大事な情報が消える。
+        name = p["title"]
+        if len(name) > 34:
+            name = name[:34].rstrip("　 ") + "…"
+        if d:
+            ogtitle = "¥%s（%d%%OFF）%s" % (yen(p["price"]), d, name)
+        else:
+            ogtitle = "¥%s %s" % (yen(p["price"]), name)
+
         write("p/%s/index.html" % p["id"], page_shell(
             cfg, base,
             title="%s - %s" % (title, cfg["site"]["name"]),
-            ogtitle=title,
+            ogtitle=ogtitle,
             desc=(p.get("caption") or p["title"])[:110],
             path="/p/%s/" % p["id"], content=content, ogtype="article",
             chipbar=render_chipbar(cfg, active=p["category"]),
