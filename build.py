@@ -109,8 +109,18 @@ def feed_order_desc(p):
 
 
 def price_basis_label(p):
-    """楽天APIは定価を返さないので、履歴から出した基準価格は「通常」ではなく「以前」と書く"""
-    return "以前" if p.get("priceBasis") == "history" else "通常"
+    """基準価格が何なのかを、そのまま言葉にする。
+
+    楽天APIは定価を返さない。当サイトが自分で観測した最高値は定価ではないので
+    「通常」とは書けず「以前」と書く。ショップがタイトルに書いた値は
+    セール前の価格の主張なので「セール前」と書く。
+    """
+    basis = p.get("priceBasis")
+    if basis == "history":
+        return "以前"
+    if basis == "title":
+        return "セール前"
+    return "通常"
 
 
 def render_pricetag(p, size="card"):

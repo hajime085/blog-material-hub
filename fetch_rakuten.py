@@ -240,8 +240,10 @@ def clean_title(raw):
         t = re.sub(r"\s+", " ", t).strip()
         t = re.sub(r"^\d\.\d{1,2}\s+(?=[^\d])", "", t)        # 先頭に紛れた評価値
 
-        # 先頭の括弧のうち、販促・値段の話・単価のものを剥がす
-        m = re.match(r"\s*[【《『\[（(]([^】》』\]）)]{1,28})[】》』\]）)]", t)
+        # 先頭の括弧のうち、販促・値段の話・単価のものを剥がす。
+        # 中身が販促だと分かっている場合だけ剥がすので、長さは緩めでよい。
+        # 「8/21 10時〜24H限定：1枚1,290円 2枚購入クーポンで」のように長い。
+        m = re.match(r"\s*[【《『\[（(]([^】》』\]）)]{1,40})[】》』\]）)]", t)
         if m:
             inner = m.group(1)
             if (any(w in inner for w in PROMO_WORDS)
@@ -271,6 +273,47 @@ def clean_title(raw):
 # 値札の下段（unitNote）へ移す。このサイトで一番効く情報なので。
 UNIT_RE = re.compile(r"(\d+\s*(?:枚|本|個|袋|食|包|回|杯|粒|着|足|セット|kg|g|ml|L)\s*"
                      r"あたり\s*[約]?\s*[¥￥]?\d[\d,]*\s*[円¥￥])")
+
+
+ARROW_RE = re.compile(
+    r"([\d,]{3,9})\s*円\s*(?:→|⇒|->|=>|▶)\s*([\d,]{3,9})\s*円")
+
+
+def list_price_from_title(raw_title, price):
+    """タイトルに書かれた「3,790円→1,999円」から、セール前の価格を読む。
+
+    楽天APIは定価を返さない。一方で値引きの大きい商品ほど、
+    ショップ自身がタイトルに「◯円→◯円」と書いている。
+    これを使えば、価格履歴が溜まるのを待たずに %OFF を出せる。
+
+    ただしタイトルはショップが自由に書ける宣伝文で、そのままでは信用できない。
+    そこで「矢印の右側が、いま実際に売られている価格と一致すること」を条件にする。
+    一致していれば、左側がセール前だという主張はその場で裏が取れる。
+
+    「77%OFF!【990円〜1,390円】」のように右側が価格帯の形式は、
+    どれがセール前か決められないので採用しない。
+    「50円OFFクーポン」のような割引額だけの表記も、値下げではないので読まない。
+    """
+    if not raw_title or not price:
+        return None
+    for m in ARROW_RE.finditer(raw_title):
+        try:
+            before = int(m.group(1).replace(",", ""))
+            after = int(m.group(2).replace(",", ""))
+        except ValueError:
+            continue
+        # 右側が実売価格と一致しなければ、別の商品や別容量の話。読まない。
+        if after != int(price):
+            continue
+        if before <= after:
+            continue
+        # 桁の打ち間違いや「1円→」のような釣りを弾く。
+        if before > after * 20:
+            continue
+        if (before - after) / before < 0.05:
+            continue
+        return before
+    return None
 
 
 def unit_note_from_title(raw):
@@ -516,6 +559,27 @@ def item_code_from_url(url, ctx=None, timeout=20):
     return None
 
 
+def category_for_section(cfg, section):
+    """featured.txt の「## 見出し」を、サイトのカテゴリに対応させる。
+
+    手で貼った商品も、フィードとカテゴリページに出したい。
+    そのためにはカテゴリが要るが、商品APIが返すジャンルIDは末端の細かいIDで、
+    config.json が持つ大分類のIDとは繋がらない（ジャンル検索APIは使えない）。
+    そこで、貼る側が見出しで示す形にする。
+    スラッグでも、カテゴリ名でも、その一部でも通る。
+    """
+    if not section:
+        return None
+    s = section.strip()
+    for c in cfg["categories"]:
+        if s in (c["slug"], c["label"], c.get("short")):
+            return c["slug"]
+    for c in cfg["categories"]:
+        if s and (s in c["label"] or s in (c.get("short") or "")):
+            return c["slug"]
+    return None
+
+
 def build_featured(cfg, app_id, access_key, aff_id, site_url):
     """featured.txt に貼られたURLから「編集部が選んだもの」を作る。
 
@@ -629,6 +693,11 @@ def build_featured(cfg, app_id, access_key, aff_id, site_url):
             "reviewCount": rc,
             "unitNote": unit_note_from_title(raw_name),
             "freeShipping": it.get("postageFlag") == 0,
+            "genreId": str(it.get("genreId") or ""),
+            "startTime": (it.get("startTime") or "").strip(),
+            "endTime": (it.get("endTime") or "").strip(),
+            "autoTags": tags_from_title(raw_name),
+            "listPrice": list_price_from_title(raw_name, price),
             "lastSeen": datetime.now(JST).strftime("%Y-%m-%d"),
         })
         print("  ・¥%-8s %s" % ("{:,}".format(items[-1]["price"]), items[-1]["title"][:38]))
@@ -636,6 +705,11 @@ def build_featured(cfg, app_id, access_key, aff_id, site_url):
 
     # 貼られた順番は捨てる。安い順に並べ替えるのが、このサイトの基準。
     items.sort(key=lambda x: x["price"])
+
+    # 基準を通ったものは全部フィードに載せる。
+    # このあとの上限は「トップの棚に何件並べるか」の話であって、
+    # 載せるかどうかの話ではない。
+    all_items = list(items)
 
     # ジャンルごとの上限。1つのジャンルが棚を占領しないように、
     # 安い順から順番に1件ずつ拾う。
@@ -660,7 +734,10 @@ def build_featured(cfg, app_id, access_key, aff_id, site_url):
         dropped_over = len(items) - len(picked)
         items = sorted(picked, key=lambda x: x["price"])
         if dropped_over:
-            print("\n  ・上限を超えたぶんは見送りました（%d件）" % dropped_over)
+            print("\n  ・トップの棚には入りきらないぶん（%d件）は、"
+                  "フィードとカテゴリにだけ載せます" % dropped_over)
+
+    merged, no_section = merge_featured_into_products(cfg, all_items)
 
     save_json("featured.json", {
         "_readme": ("featured.txt から作った「編集部が選んだもの」。"
@@ -673,11 +750,103 @@ def build_featured(cfg, app_id, access_key, aff_id, site_url):
     if items:
         print("   並びは安い順です。貼った順（＝売れ筋の順位）は使っていません。")
         print("   ¥%s 〜 ¥%s" % ("{:,}".format(items[0]["price"]), "{:,}".format(items[-1]["price"])))
+    if merged:
+        print("   フィードとカテゴリにも入れました（%d件）" % merged)
+    if no_section:
+        print("\n   ※ 見出しからカテゴリを判定できず、棚にだけ置いた商品が %d件 あります。"
+              % len(no_section))
+        for title, sec in no_section:
+            print("     − %-30s 見出し「%s」" % (title[:30], sec or "なし"))
+        print("     featured.txt の「##」を次のどれかにすると、フィードにも流れます:")
+        print("       " + " / ".join(c["slug"] for c in cfg["categories"]))
     if rejected:
         print("\n   基準に合わず見送り: %d件" % len(rejected))
         for title, why, sec in rejected:
             print("     − %-34s %s" % (title[:34], why))
     print("\n次: python3 build.py")
+
+
+def merge_featured_into_products(cfg, items):
+    """手で選んだ商品を、products.json にも入れる。
+
+    これまで featured.json は独立していて、棚に出るだけだった。
+    その結果、値引きの大きい商品を手で拾っても、フィードにも
+    カテゴリページにも現れないという状態になっていた。
+
+    貼ったものは「載せると決めたもの」なので、
+    APIの検索結果に出てくるかどうかとは無関係に載せ続ける（pinned）。
+    ただし売り切れや販売終了で消えたときは、次の --featured で落ちる。
+
+    手で書いた caption / tags / points / description は必ず残す。
+    """
+    doc = load_json("products.json", {}) or {}
+    existing = {p["id"]: p for p in doc.get("products", [])}
+    today = datetime.now(JST).strftime("%Y-%m-%d")
+    history = load_json("price_history.json", {}) or {}
+
+    merged, no_section = 0, []
+    keep_pinned = set()
+    for it in items:
+        slug = category_for_section(cfg, it.get("section"))
+        if not slug:
+            no_section.append((it["title"], it.get("section")))
+            continue
+        pid = product_id(it["itemCode"])
+        keep_pinned.add(pid)
+        prev = existing.get(pid, {})
+        p = dict(prev)
+        p["id"] = pid
+        p["category"] = slug
+        p["pinned"] = True
+        for f in API_FIELDS:
+            if f in it:
+                p[f] = it[f]
+
+        records = update_history(history, pid, it["price"], today)
+        if prev.get("priceBasis") == "manual" and prev.get("listPrice"):
+            pass
+        elif it.get("listPrice"):
+            p["listPrice"] = it["listPrice"]
+            p["priceBasis"] = "title"
+        else:
+            ref = reference_price(records, it["price"])
+            p["listPrice"] = ref
+            p["priceBasis"] = "history" if ref else None
+
+        p.setdefault("caption", "")
+        p.setdefault("points", [])
+        p.setdefault("description", "")
+        p.setdefault("tags", [])
+        for t in it.get("autoTags", []):
+            if t not in p["tags"]:
+                p["tags"].append(t)
+        if it.get("freeShipping") and "送料無料" not in p["tags"]:
+            p["tags"].insert(0, "送料無料")
+        elif not it.get("freeShipping") and "送料無料" in p["tags"]:
+            p["tags"].remove("送料無料")
+        if it.get("unitNote"):
+            p["unitNote"] = it["unitNote"]
+        p.setdefault("unitNote", None)
+        p.setdefault("postedAt", today)
+        p["lastSeen"] = today
+        existing[pid] = p
+        if not prev:
+            merged += 1
+
+    # featured.txt から外した商品は、留め置きも解く。
+    # 解いたあとは普通の商品として、30日の保持ルールに従う。
+    for pid, p in existing.items():
+        if p.get("pinned") and pid not in keep_pinned:
+            p.pop("pinned", None)
+
+    products = sorted(existing.values(),
+                      key=lambda p: (p.get("postedAt", ""), -p.get("price", 0)),
+                      reverse=True)
+    doc["products"] = products
+    doc["updatedAt"] = today
+    save_json("products.json", doc)
+    save_json("price_history.json", history)
+    return merged, no_section
 
 
 def report_genres(cfg, app_id, access_key, aff_id, site_url):
@@ -759,6 +928,7 @@ def main():
     hits = cfg["rakuten"].get("hits", 30)
 
     kept, added, dropped = 0, 0, 0
+    pinned_stale = []
     not_on_sale = []
     excluded = set()          # 買えないと判断して外したもの。保持ルールの対象外。
     result = {}
@@ -805,10 +975,17 @@ def main():
                 if f in raw:
                     item[f] = raw[f]
 
-            # 手で書いた値があればそちらを基準にする
+            # 基準価格の優先順位。手で書いたもの > タイトルの表記 > 価格履歴。
+            # タイトルを履歴より上に置くのは、ショップが「3,790円→1,999円」と
+            # 書いている以上、それがこの商品の売りだから。履歴は当サイトが
+            # 見はじめてからの最高値でしかなく、セール前を捉えられていない。
+            title_ref = list_price_from_title(raw.get("rawTitle"), raw["price"])
             if prev.get("priceBasis") == "manual" and prev.get("listPrice"):
                 item["listPrice"] = prev["listPrice"]
                 item["priceBasis"] = "manual"
+            elif title_ref:
+                item["listPrice"] = title_ref
+                item["priceBasis"] = "title"
             else:
                 ref = reference_price(records, raw["price"])
                 item["listPrice"] = ref
@@ -913,12 +1090,74 @@ def main():
         if pid in excluded:
             expired += 1
             continue
+        if p.get("pinned"):
+            # 手で選んで貼った商品。APIの検索結果に出るかどうかは関係なく載せる。
+            # ここでは日付で切らない代わりに、下で1件ずつ在庫を見に行く。
+            result[pid] = p
+            pinned_stale.append(pid)
+            continue
         last = p.get("lastSeen") or p.get("postedAt") or today
         if last >= cutoff:
             result[pid] = p
             kept_stale += 1
         else:
             expired += 1
+
+    # 留め置きの商品は、消えていないかを1件ずつ確かめる。
+    # 日付で切らないぶん、売り切れたまま残り続けるのを防ぐ。
+    gone = []
+    for pid in pinned_stale:
+        p = result[pid]
+        code = p.get("itemCode")
+        if not code:
+            continue
+        try:
+            data = api_get(ITEM_API, {
+                "applicationId": app_id, "accessKey": access_key, "affiliateId": aff_id,
+                "itemCode": code, "format": "json", "formatVersion": 2,
+            }, site_url)
+        except Exception:                                # noqa: BLE001
+            time.sleep(REQUEST_INTERVAL)
+            continue
+        got = data.get("Items") or []
+        if not got:
+            gone.append((p["title"], "見つかりません（売り切れの可能性）"))
+            del result[pid]
+            expired += 1
+            time.sleep(REQUEST_INTERVAL)
+            continue
+        it = got[0]
+        ok, why, _ = sale_status(it, sale_tolerance)
+        if not ok:
+            gone.append((p["title"], why))
+            del result[pid]
+            expired += 1
+            time.sleep(REQUEST_INTERVAL)
+            continue
+        price = int(it.get("itemPrice") or 0)
+        if price:
+            update_history(history, pid, price, today)
+            p["price"] = price
+        # タイトルも取り直す。「本日24時間限定」のような煽り文句は
+        # 翌日には嘘になるので、留め置きのあいだ固定しておくわけにいかない。
+        raw_name = (it.get("itemName") or "").strip()
+        if raw_name:
+            p["rawTitle"] = raw_name
+            p["title"] = clean_title(raw_name)
+            title_ref = list_price_from_title(raw_name, price)
+            if p.get("priceBasis") != "manual":
+                if title_ref:
+                    p["listPrice"] = title_ref
+                    p["priceBasis"] = "title"
+                elif p.get("priceBasis") == "title":
+                    # セール前の表記が消えた＝セールが終わった。%OFF を下ろす。
+                    ref = reference_price(history.get(pid, []), price)
+                    p["listPrice"] = ref
+                    p["priceBasis"] = "history" if ref else None
+        p["reviewCount"] = it.get("reviewCount") or p.get("reviewCount")
+        p["reviewAverage"] = it.get("reviewAverage") or p.get("reviewAverage")
+        p["lastSeen"] = today
+        time.sleep(REQUEST_INTERVAL)
 
     products = sorted(result.values(),
                       key=lambda p: (p.get("postedAt", ""), -p.get("price", 0)), reverse=True)
@@ -952,6 +1191,12 @@ def main():
         print("   いま買えないため見送り: %d件" % len(not_on_sale))
         for t, why in not_on_sale[:5]:
             print("     − %-30s %s" % (t[:30], why))
+    if gone:
+        print("   留め置きから外しました: %d件" % len(gone))
+        for title, why in gone:
+            print("     − %-34s %s" % (title[:34], why))
+    if pinned_stale:
+        print("   留め置き %d件（手で選んだので保持ルールの対象外）" % (len(pinned_stale) - len(gone)))
     if kept_stale or expired:
         print("   掲載継続 %d件（今日はAPIの結果に無いが%d日以内）/ 掲載終了 %d件"
               % (kept_stale, retention_days, expired))
