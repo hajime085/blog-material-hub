@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" role="img" aria-label="日用品">
+<defs><pattern id="h" width="24" height="24" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+<rect width="24" height="24" fill="#FFF1E3"/><rect width="9" height="24" fill="#00A88E" opacity=".16"/>
+</pattern></defs>
+<rect width="640" height="640" fill="url(#h)"/>
+<circle cx="320" cy="292" r="120" fill="#FFFFFF" opacity=".86"/>
+<g transform="translate(248 220) scale(6)" fill="none" stroke="#1A1410" stroke-width="1.5"
+   stroke-linecap="round" stroke-linejoin="round" opacity=".72"><path d="M9 8.8h6a1.7 1.7 0 0 1 1.7 1.7v9.3a1.7 1.7 0 0 1-1.7 1.7H9a1.7 1.7 0 0 1-1.7-1.7v-9.3A1.7 1.7 0 0 1 9 8.8Z"/><path d="M10.2 8.8V5.9h3.6v2.9"/><path d="M13.8 6.9h3.1l2.1-2.1"/><path d="M7.3 13.2h9.4"/></g>
+<text x="320" y="470" font-size="28" text-anchor="middle" font-family="sans-serif" font-weight="bold" fill="#1A1410" opacity=".52">日用品</text>
+</svg>

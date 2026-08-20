@@ -1,0 +1,224 @@
+{
+  "site": {
+    "name": "ヤスミル",
+    "nameEn": "YASUMIRU",
+    "tagline": "安いを、見る。",
+    "description": "二度見する安さだけを集めた特価フィード。家電も食品も日用品も、値下がりした瞬間だけを縦に流します。",
+    "url": "https://sozaino.com",
+    "locale": "ja_JP",
+    "author": "@hiyoko_web",
+    "twitter": "",
+    "threads": "https://www.threads.net/@hiyoko_web",
+    "contactFormUrl": "https://forms.gle/Htpo5D625T3HVCDj8",
+    "operator": {
+      "_comment": "運営者情報。name は表示名なので、本名でもハンドルでも好きなものに変えてください。",
+      "name": "@hiyoko_web",
+      "role": "ヤスミル 運営",
+      "bio": "毎日、楽天市場の値下がりを見ています。自分が二度見した安さだけを、このサイトと Threads に流しています。",
+      "avatar": "/assets/img/operator.png",
+      "avatarSmall": "/assets/img/operator-sm.png",
+      "threadsLabel": "@hiyoko_web"
+    },
+    "coupon": {
+      "_comment": "楽天にクーポンAPIが無いため自動取得はできません。楽天アフィリエイトで発行したクーポンページのリンクを手で入れてください。url を空にするとサイドバーのクーポン枠は出ません。",
+      "label": "",
+      "note": "",
+      "url": ""
+    }
+  },
+  "rakuten": {
+    "_comment": "認証情報はここに書かず、.env に入れてください (RAKUTEN_APP_ID / RAKUTEN_ACCESS_KEY / RAKUTEN_AFFILIATE_ID)。fetch_rakuten.py が読み込みます。",
+    "appId": "",
+    "affiliateId": "",
+    "hits": 30,
+    "minDiscountRate": 15,
+    "accessKey": "",
+    "ngKeyword": "ふるさと納税 福袋 予約 抽選 ジャンク品",
+    "_seedNote": "--seed 実行時、カテゴリごとに seedPerCategory 件まで採用します。同一ショップからは maxPerShop 件までに制限し、同じ商品の色違い・サイズ違いが並ぶのを防ぎます。",
+    "seedPerCategory": 14,
+    "maxPerShop": 2,
+    "sort": "-reviewCount",
+    "_qualityNote": "レビュー数順で取得します。ランキングAPIが使えないため、「実際に買った人が多い」を売れ筋の代わりにしています。minReviewCount / minReviewAverage を下回るものは掲載しません。",
+    "minReviewCount": 5,
+    "minReviewAverage": 3.8,
+    "_genreNote": "genres は実際にAPIを叩いて中身を確認したジャンルIDです。ジャンル検索APIが使えないため実測で同定しました。ジャンル指定があるカテゴリは、そのジャンル内だけを検索するのでカテゴリ違いの商品が混ざりません。"
+  },
+  "feed": {
+    "perPage": 24,
+    "relatedCount": 4
+  },
+  "categories": [
+    {
+      "slug": "food",
+      "label": "食品・飲料・お酒",
+      "short": "食品",
+      "icon": "food",
+      "keywords": [
+        "飲料 まとめ買い 送料無料",
+        "レトルト 詰め合わせ 大容量",
+        "お菓子 まとめ買い 訳あり"
+      ],
+      "minPrice": 300,
+      "maxPrice": 3500,
+      "genres": [
+        "100227",
+        "100316",
+        "510915"
+      ]
+    },
+    {
+      "slug": "kaden",
+      "label": "家電・カメラ・AV機器",
+      "short": "家電",
+      "icon": "kaden",
+      "keywords": [
+        "家電 アウトレット 訳あり",
+        "型落ち 家電 在庫処分"
+      ],
+      "minPrice": 700,
+      "maxPrice": 8000,
+      "genres": [
+        "562637"
+      ]
+    },
+    {
+      "slug": "kitchen",
+      "label": "キッチン・日用品・DIY",
+      "short": "日用品",
+      "icon": "kitchen",
+      "keywords": [
+        "洗剤 詰め替え 大容量",
+        "キッチン消耗品 まとめ買い",
+        "日用品 詰め替え まとめ買い"
+      ],
+      "minPrice": 300,
+      "maxPrice": 3000,
+      "genres": [
+        "215783"
+      ]
+    },
+    {
+      "slug": "beauty",
+      "label": "ドラッグストア・美容",
+      "short": "美容",
+      "icon": "beauty",
+      "keywords": [
+        "シャンプー 詰め替え 大容量",
+        "コスメ アウトレット 訳あり"
+      ],
+      "minPrice": 300,
+      "maxPrice": 3000,
+      "genres": [
+        "100939",
+        "100938"
+      ]
+    },
+    {
+      "slug": "fashion",
+      "label": "服・靴・バッグ・時計",
+      "short": "ファッション",
+      "icon": "fashion",
+      "keywords": [
+        "Tシャツ セット メンズ 送料無料",
+        "靴下 まとめ買い",
+        "レディース アウトレット セール"
+      ],
+      "minPrice": 500,
+      "maxPrice": 3500,
+      "genres": [
+        "100371",
+        "551177",
+        "558885"
+      ]
+    },
+    {
+      "slug": "pc",
+      "label": "パソコン・スマホ・事務",
+      "short": "PC",
+      "icon": "pc",
+      "keywords": [
+        "PC周辺機器 アウトレット",
+        "スマホアクセサリー まとめ買い"
+      ],
+      "minPrice": 400,
+      "maxPrice": 3500,
+      "genres": [
+        "211742"
+      ]
+    },
+    {
+      "slug": "sports",
+      "label": "スポーツ・アウトドア",
+      "short": "アウトドア",
+      "icon": "sports",
+      "keywords": [
+        "アウトドア用品 アウトレット 訳あり",
+        "スポーツ用品 型落ち セール"
+      ],
+      "minPrice": 500,
+      "maxPrice": 5000,
+      "genres": [
+        "101070"
+      ]
+    },
+    {
+      "slug": "baby-toy",
+      "label": "ベビー・おもちゃ・ホビー",
+      "short": "おもちゃ",
+      "icon": "baby-toy",
+      "keywords": [
+        "おむつ まとめ買い",
+        "おもちゃ アウトレット 訳あり"
+      ],
+      "minPrice": 500,
+      "maxPrice": 4000,
+      "genres": []
+    },
+    {
+      "slug": "books",
+      "label": "本・ゲーム・エンタメ",
+      "short": "エンタメ",
+      "icon": "books",
+      "keywords": [
+        "中古 ゲームソフト",
+        "文庫本 まとめ買い セット"
+      ],
+      "minPrice": 400,
+      "maxPrice": 3000,
+      "genres": [
+        "101205",
+        "101240"
+      ]
+    },
+    {
+      "slug": "pet",
+      "label": "ペット用品",
+      "short": "ペット",
+      "icon": "pet",
+      "keywords": [
+        "ペットフード まとめ買い",
+        "ペットシーツ 大容量"
+      ],
+      "minPrice": 500,
+      "maxPrice": 4000,
+      "genres": [
+        "101213"
+      ]
+    },
+    {
+      "slug": "car",
+      "label": "車・バイク・工具",
+      "short": "車・工具",
+      "icon": "car",
+      "keywords": [
+        "カー用品 洗車 まとめ買い",
+        "工具セット アウトレット"
+      ],
+      "minPrice": 500,
+      "maxPrice": 4000,
+      "genres": [
+        "503190"
+      ]
+    }
+  ]
+}

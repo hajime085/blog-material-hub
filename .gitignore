@@ -6,27 +6,20 @@ Thumbs.db
 .vscode/
 .idea/
 *.swp
-*.swo
 
 # Python
 __pycache__/
 *.py[cod]
-*$py.class
-*.egg-info/
-dist/
-build/
 
-# Node.js
-node_modules/
-npm-debug.log
-yarn-error.log
-
-# 一時ファイル
-*.tmp
-*.temp
+# 認証情報。楽天のIDは絶対にコミットしない。
 .env
 .env.local
+
+# ローカル確認用
+.claude/launch.json
+
+# バックアップ
 _backup_*/
-data.json.bak_*
-*.py
-*.zip
+*.bak
+products.json.bak_*
+products.json.sample_backup

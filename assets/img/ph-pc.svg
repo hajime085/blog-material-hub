@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" role="img" aria-label="PC">
+<defs><pattern id="h" width="24" height="24" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+<rect width="24" height="24" fill="#FFF1E3"/><rect width="9" height="24" fill="#5B8DEF" opacity=".16"/>
+</pattern></defs>
+<rect width="640" height="640" fill="url(#h)"/>
+<circle cx="320" cy="292" r="120" fill="#FFFFFF" opacity=".86"/>
+<g transform="translate(248 220) scale(6)" fill="none" stroke="#1A1410" stroke-width="1.5"
+   stroke-linecap="round" stroke-linejoin="round" opacity=".72"><rect x="3.5" y="4.5" width="17" height="11" rx="1.8"/><path d="M1.5 19.5h21"/></g>
+<text x="320" y="470" font-size="28" text-anchor="middle" font-family="sans-serif" font-weight="bold" fill="#1A1410" opacity=".52">PC</text>
+</svg>

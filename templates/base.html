@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}}</title>
+<meta name="description" content="{{DESC}}">
+<link rel="canonical" href="{{CANONICAL}}">
+{{ROBOTS}}
+<meta property="og:type" content="{{OGTYPE}}">
+<meta property="og:site_name" content="{{SITE_NAME}}">
+<meta property="og:title" content="{{OGTITLE}}">
+<meta property="og:description" content="{{DESC}}">
+<meta property="og:url" content="{{CANONICAL}}">
+<meta property="og:image" content="{{OGIMAGE}}">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1A1410">
+<link rel="icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Anton&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Yusei+Magic&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="preload" href="/assets/img/icons.svg" as="image" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="{{SITE_NAME}}" href="/feed.xml">
+{{JSONLD}}
+</head>
+<body class="{{BODYCLASS}}">
+<a class="skip-link" href="#main">本文へスキップ</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="/">
+      ヤスミル<span class="logo-en">YASUMIRU</span>
+    </a>
+    <div class="header-spacer"></div>
+    <nav class="nav-desktop" aria-label="メインメニュー">
+      <a href="/">特価フィード</a>
+      <a href="/categories/">カテゴリ</a>
+      <a href="/about/">ヤスミルとは</a>
+    </nav>
+    <button class="icon-btn" id="searchBtn" aria-label="商品を検索">{{IC_SEARCH}}</button>
+    <button class="icon-btn menu-btn" id="menuBtn" aria-label="メニューを開く" aria-expanded="false">{{IC_MENU}}</button>
+  </div>
+</header>
+
+<div class="ticker">
+  <span class="sr-only">注目の商品</span>
+  <div class="ticker-track">{{TICKER}}</div>
+</div>
+
+{{CHIPBAR}}
+
+<main id="main">
+{{CONTENT}}
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p class="footer-brand">ヤスミル</p>
+    <p class="footer-tag">安いを、見る。</p>
+    {{FOOTER_OPERATOR}}
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h3>カテゴリ</h3>
+        <ul>{{FOOTER_CATS}}</ul>
+      </div>
+      <div class="footer-col">
+        <h3>サイトについて</h3>
+        <ul>
+          <li><a href="/about/">ヤスミルとは</a></li>
+          <li><a href="/categories/">カテゴリ一覧</a></li>
+          <li><a href="/contact/">お問い合わせ</a></li>
+          {{THREADS_ITEM}}
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>規約</h3>
+        <ul>
+          <li><a href="/privacy/">プライバシーポリシー</a></li>
+          <li><a href="/disclaimer/">免責事項</a></li>
+          <li><a href="/terms/">利用規約</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="footer-legal">
+      当サイトは楽天アフィリエイトプログラムに参加しています。商品リンク経由で購入があった場合、当サイトが紹介料を受け取ることがあります。<br>
+      掲載している価格・在庫・送料は取得時点のものです。実際の販売条件は必ず楽天市場の商品ページでご確認ください。<br>
+      &copy; {{YEAR}} ヤスミル
+    </p>
+  </div>
+</footer>
+
+<!-- 検索シート -->
+<div class="search-sheet" id="searchSheet" data-open="false" role="dialog" aria-modal="true" aria-label="商品を検索">
+  <div class="search-panel">
+    <form class="search-row" id="searchForm" role="search">
+      <input class="search-input" id="searchInput" type="search" name="q" placeholder="商品名・キーワードで探す" autocomplete="off">
+      <button class="btn btn-rakuten" type="submit">探す</button>
+    </form>
+    <p class="search-hint">例：むぎ茶／サーキュレーター／詰め替え／2000円以下</p>
+  </div>
+</div>
+
+<!-- ドロワー -->
+<div class="drawer" id="drawer" data-open="false" role="dialog" aria-modal="true" aria-label="メニュー">
+  <div class="drawer-panel">
+    <div class="drawer-head">
+      <span class="drawer-title">メニュー</span>
+      <button class="icon-btn" id="drawerClose" aria-label="メニューを閉じる">{{IC_CLOSE}}</button>
+    </div>
+    <ul class="drawer-list">
+      <li><a href="/">{{IC_HOME}}特価フィード</a></li>
+      <li><a href="/categories/">{{IC_GRID}}カテゴリ一覧</a></li>
+      {{DRAWER_CATS}}
+    </ul>
+    <div class="drawer-sub">
+      <p class="drawer-sub-title">サイトについて</p>
+      <ul class="drawer-list">
+        <li><a href="/about/">ヤスミルとは</a></li>
+        {{THREADS_ITEM}}
+        <li><a href="/contact/">お問い合わせ</a></li>
+        <li><a href="/privacy/">プライバシーポリシー</a></li>
+        <li><a href="/disclaimer/">免責事項</a></li>
+        <li><a href="/terms/">利用規約</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script src="/assets/js/app.js" defer></script>
+{{SCRIPTS}}
+</body>
+</html>

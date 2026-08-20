@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+<rect width="1200" height="630" fill="#FFF1E3"/>
+<rect x="0" y="0" width="1200" height="14" fill="#1A1410"/>
+<g transform="rotate(-3.2 150 430)">
+<rect x="82" y="376" width="330" height="150" fill="#FFD31F"/>
+<text x="106" y="432" font-family="sans-serif" font-size="26" fill="#1A1410">いま</text>
+<text x="106" y="500" font-family="sans-serif" font-size="76" font-weight="900" fill="#1A1410">¥1,980</text>
+</g>
+<circle cx="1010" cy="180" r="86" fill="#F5333F" transform="rotate(9 1010 180)"/>
+<text x="1010" y="178" font-family="sans-serif" font-size="52" font-weight="900" fill="#fff" text-anchor="middle">67</text>
+<text x="1010" y="216" font-family="sans-serif" font-size="24" font-weight="900" fill="#fff" text-anchor="middle">%OFF</text>
+<text x="82" y="188" font-family="sans-serif" font-size="92" font-weight="900" fill="#1A1410">ヤスミル</text>
+<text x="82" y="256" font-family="sans-serif" font-size="38" fill="#1A1410" opacity=".7">安いを、見る。</text>
+<text x="82" y="320" font-family="sans-serif" font-size="26" fill="#1A1410" opacity=".5">二度見する安さだけを集めた特価フィード</text>
+</svg>

@@ -1,9 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /admin.html
-Disallow: /*.py$
-Disallow: /*.bak_*
-Disallow: /input/
-Disallow: /column/_imgbak_*
 
 Sitemap: https://sozaino.com/sitemap.xml

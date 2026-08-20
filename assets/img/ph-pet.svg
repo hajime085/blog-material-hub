@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" role="img" aria-label="ペット">
+<defs><pattern id="h" width="24" height="24" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+<rect width="24" height="24" fill="#FFF1E3"/><rect width="9" height="24" fill="#1A1410" opacity=".16"/>
+</pattern></defs>
+<rect width="640" height="640" fill="url(#h)"/>
+<circle cx="320" cy="292" r="120" fill="#FFFFFF" opacity=".86"/>
+<g transform="translate(248 220) scale(6)" fill="none" stroke="#1A1410" stroke-width="1.5"
+   stroke-linecap="round" stroke-linejoin="round" opacity=".72"><ellipse cx="6.6" cy="8.4" rx="2.1" ry="2.7" fill="currentColor" stroke="none"/><ellipse cx="11.4" cy="6.4" rx="2.2" ry="2.9" fill="currentColor" stroke="none"/><ellipse cx="16.6" cy="8.4" rx="2.1" ry="2.7" fill="currentColor" stroke="none"/><ellipse cx="20.4" cy="12.6" rx="1.8" ry="2.2" fill="currentColor" stroke="none"/><path d="M11.6 12.2c3.4 0 5.9 2.2 5.9 4.6 0 1.9-1.5 3.3-3.5 3.3-1 0-1.6-.4-2.4-.4s-1.4.4-2.4.4c-2 0-3.5-1.4-3.5-3.3 0-2.4 2.5-4.6 5.9-4.6Z" fill="currentColor" stroke="none"/></g>
+<text x="320" y="470" font-size="28" text-anchor="middle" font-family="sans-serif" font-weight="bold" fill="#1A1410" opacity=".52">ペット</text>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" role="img" aria-label="おもちゃ">
+<defs><pattern id="h" width="24" height="24" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+<rect width="24" height="24" fill="#FFF1E3"/><rect width="9" height="24" fill="#F5333F" opacity=".16"/>
+</pattern></defs>
+<rect width="640" height="640" fill="url(#h)"/>
+<circle cx="320" cy="292" r="120" fill="#FFFFFF" opacity=".86"/>
+<g transform="translate(248 220) scale(6)" fill="none" stroke="#1A1410" stroke-width="1.5"
+   stroke-linecap="round" stroke-linejoin="round" opacity=".72"><rect x="2.5" y="12.5" width="8" height="8" rx="1.6"/><rect x="13.5" y="12.5" width="8" height="8" rx="1.6"/><path d="m12 3 4.6 7.5H7.4L12 3Z"/></g>
+<text x="320" y="470" font-size="28" text-anchor="middle" font-family="sans-serif" font-weight="bold" fill="#1A1410" opacity=".52">おもちゃ</text>
+</svg>

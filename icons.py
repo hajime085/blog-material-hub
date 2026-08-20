@@ -1,0 +1,135 @@
+# -*- coding: utf-8 -*-
+"""
+ヤスミルのアイコン定義。
+
+絵文字は使わない。OSごとに見た目が変わり、線の太さも揃わないため。
+すべて 24x24 のグリッドで、線幅 1.8 の線画に統一している。
+
+build.py がこれを読んで assets/img/icons.svg（スプライト）を生成し、
+プレースホルダ画像にも同じパスを埋め込む。
+"""
+
+# name -> (svg inner markup, "line" | "solid")
+ICONS = {
+    # ---- カテゴリ ----
+    "food": ('<path d="M3.5 11h17a8.5 8.5 0 0 1-8.5 8.5A8.5 8.5 0 0 1 3.5 11Z"/>'
+             '<path d="M2 19.5h20"/>'
+             '<path d="M8 8c0-1.4 1-1.8 1-3M12 8c0-1.4 1-1.8 1-3M16 8c0-1.4 1-1.8 1-3"/>', "line"),
+
+    "kaden": ('<rect x="2.5" y="4.5" width="19" height="13" rx="2"/>'
+              '<path d="M9 21h6M12 17.5V21"/>', "line"),
+
+    "kitchen": ('<path d="M9 8.8h6a1.7 1.7 0 0 1 1.7 1.7v9.3a1.7 1.7 0 0 1-1.7 1.7H9'
+                'a1.7 1.7 0 0 1-1.7-1.7v-9.3A1.7 1.7 0 0 1 9 8.8Z"/>'
+                '<path d="M10.2 8.8V5.9h3.6v2.9"/>'
+                '<path d="M13.8 6.9h3.1l2.1-2.1"/>'
+                '<path d="M7.3 13.2h9.4"/>', "line"),
+
+    "beauty": ('<path d="M10 2.5h4v3l2.6 3.6a3 3 0 0 1 .4 1.6v8.3a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V10.7'
+               'a3 3 0 0 1 .4-1.6L10 5.5Z"/>'
+               '<path d="M7 13.5h10"/>', "line"),
+
+    "fashion": ('<path d="M8.5 2.5 4 5.2l1.9 4.4 2.1-.9V21h8V8.7l2.1.9L20 5.2 15.5 2.5'
+                'a3.6 3.6 0 0 1-7 0Z"/>', "line"),
+
+    "pc": ('<rect x="3.5" y="4.5" width="17" height="11" rx="1.8"/>'
+           '<path d="M1.5 19.5h21"/>', "line"),
+
+    "sports": ('<path d="M12 3 2.5 20.5h19L12 3Z"/>'
+               '<path d="M12 12.2 7.6 20.5h8.8L12 12.2Z"/>', "line"),
+
+    "baby-toy": ('<rect x="2.5" y="12.5" width="8" height="8" rx="1.6"/>'
+                 '<rect x="13.5" y="12.5" width="8" height="8" rx="1.6"/>'
+                 '<path d="m12 3 4.6 7.5H7.4L12 3Z"/>', "line"),
+
+    "books": ('<rect x="2" y="7.5" width="20" height="10" rx="4.5"/>'
+              '<path d="M7 10.5v4M5 12.5h4"/>'
+              '<path d="M15.6 11.5h.01M18.4 14h.01"/>', "line"),
+
+    "pet": ('<ellipse cx="6.6" cy="8.4" rx="2.1" ry="2.7" fill="currentColor" stroke="none"/>'
+            '<ellipse cx="11.4" cy="6.4" rx="2.2" ry="2.9" fill="currentColor" stroke="none"/>'
+            '<ellipse cx="16.6" cy="8.4" rx="2.1" ry="2.7" fill="currentColor" stroke="none"/>'
+            '<ellipse cx="20.4" cy="12.6" rx="1.8" ry="2.2" fill="currentColor" stroke="none"/>'
+            '<path d="M11.6 12.2c3.4 0 5.9 2.2 5.9 4.6 0 1.9-1.5 3.3-3.5 3.3-1 0-1.6-.4-2.4-.4'
+            's-1.4.4-2.4.4c-2 0-3.5-1.4-3.5-3.3 0-2.4 2.5-4.6 5.9-4.6Z" '
+            'fill="currentColor" stroke="none"/>', "solid"),
+
+    "car": ('<path d="M3 16.5v-4.2l2.2-5.3h13.6L21 12.3v4.2H3Z"/>'
+            '<path d="M3.5 16.5v2a1 1 0 0 0 1 1h1.6a1 1 0 0 0 1-1v-2'
+            'M16.9 16.5v2a1 1 0 0 0 1 1h1.6a1 1 0 0 0 1-1v-2"/>'
+            '<path d="M4.8 12.3h14.4"/>'
+            '<circle cx="7.6" cy="14.4" r=".9" fill="currentColor" stroke="none"/>'
+            '<circle cx="16.4" cy="14.4" r=".9" fill="currentColor" stroke="none"/>', "line"),
+
+    # ---- UI ----
+    "search": '<circle cx="10.8" cy="10.8" r="6.8"/><path d="m20 20-4.4-4.4"/>', 
+    "menu": '<path d="M3.5 7h17M3.5 12h17M3.5 17h17"/>',
+    "close": '<path d="m6.5 6.5 11 11M17.5 6.5l-11 11"/>',
+    "tag": ('<path d="M3.5 11.6V4.6a1 1 0 0 1 1-1h7l9 9-8 8-9-9Z"/>'
+            '<circle cx="8" cy="8" r="1.6"/>'),
+    "calendar": ('<rect x="3.5" y="5" width="17" height="15.5" rx="2"/>'
+                 '<path d="M3.5 10h17M8 3v4M16 3v4"/>'),
+    "box": ('<path d="m12 3 8.5 4.4v9.2L12 21l-8.5-4.4V7.4L12 3Z"/>'
+            '<path d="m3.5 7.4 8.5 4.4 8.5-4.4M12 11.8V21"/>'),
+    "bolt": '<path d="M13.4 2.5 4.5 13.8h6.4L10 21.5l9.2-11.6h-6.6l.8-7.4Z"/>',
+    "home": '<path d="m3.8 10 8.2-6.5 8.2 6.5v9.5a1 1 0 0 1-1 1H4.8a1 1 0 0 1-1-1V10Z"/>',
+    "grid": ('<rect x="3" y="3" width="7.4" height="7.4" rx="1.6"/>'
+             '<rect x="13.6" y="3" width="7.4" height="7.4" rx="1.6"/>'
+             '<rect x="3" y="13.6" width="7.4" height="7.4" rx="1.6"/>'
+             '<rect x="13.6" y="13.6" width="7.4" height="7.4" rx="1.6"/>'),
+    "arrow-right": '<path d="M4.5 12h14M13 6.5l5.5 5.5L13 17.5"/>',
+    "mail": ('<rect x="2.5" y="5" width="19" height="14" rx="2"/>'
+             '<path d="m3 6.5 9 6.5 9-6.5"/>'),
+    "shield": ('<path d="M12 3 4.5 6v6c0 4.4 3 8.2 7.5 9.5 4.5-1.3 7.5-5.1 7.5-9.5V6L12 3Z"/>'),
+    "doc": ('<path d="M6 3h7.5L19 8.5V21H6V3Z"/><path d="M13.5 3v5.5H19"/>'
+            '<path d="M9 13h7M9 16.5h5"/>'),
+    "info": '<circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.8h.01"/>',
+    "share": ('<circle cx="18" cy="5.5" r="2.8"/><circle cx="6" cy="12" r="2.8"/>'
+              '<circle cx="18" cy="18.5" r="2.8"/>'
+              '<path d="m8.5 10.7 7-3.4M8.5 13.3l7 3.4"/>'),
+
+    # ---- SNS ----
+    # 各社のマークを 24px グリッドで再現したもの。ボタンには文字ラベルも併記する。
+    "sns-x": ('<path d="M18.244 2.25h3.308l-7.227 8.26L23 21.75h-6.657l-5.214-6.817'
+              'L5.16 21.75H1.85l7.73-8.835L1 2.25h6.828l4.713 6.231L18.244 2.25Z'
+              'm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z" '
+              'fill="currentColor" stroke="none"/>', "solid"),
+
+    "sns-threads": ('<path d="M13 21.5C7.6 21.5 4 17.9 4 12S7.6 2.5 13 2.5c3.4 0 5.9 1.4 7.2 3.9"/>'
+                    '<path d="M17.5 10.4c-.5-2-2.2-3.2-4.5-3.2-2.4 0-4 1.1-4 2.7 0 1.5 1.3 2.3 '
+                    '3.9 2.5 3.9.3 6.1 1.9 6.1 4.6 0 2.6-2.2 4.4-5.3 4.4"/>'),
+
+    # 緑のボタンに載る前提。フキダシを白で塗り、文字は地の緑が抜けて見える。
+    "sns-line": ('<path d="M12 3.2c-4.9 0-8.8 3.2-8.8 7.1 0 3.5 3.1 6.5 7.3 7 .3.1.7.2.8.5.1.2 0 .6 0 .8'
+                 'l-.1.9c0 .3-.2 1 .9.6 1.1-.5 5.9-3.5 8-6 1.5-1.6 2.2-3.2 2.2-5 0-3.9-3.9-7.1-8.8-7.1Z" '
+                 'fill="#fff" stroke="none"/>'
+                 '<path d="M8.4 9.3v4.3M8.4 13.6h2.3M12.7 9.3v4.3M15.1 13.6V9.3l2.6 4.3V9.3" '
+                 'fill="none" stroke="#06C755" stroke-width="1.5" '
+                 'stroke-linecap="round" stroke-linejoin="round"/>', "solid"),
+}
+
+
+def inner(name):
+    v = ICONS[name]
+    return v[0] if isinstance(v, tuple) else v
+
+
+def kind(name):
+    v = ICONS[name]
+    return v[1] if isinstance(v, tuple) else "line"
+
+
+def sprite():
+    """<symbol> を並べたスプライトSVGを返す"""
+    symbols = "".join(
+        '<symbol id="ic-%s" viewBox="0 0 24 24">%s</symbol>' % (n, inner(n))
+        for n in ICONS
+    )
+    return ('<svg xmlns="http://www.w3.org/2000/svg" style="display:none">%s</svg>' % symbols)
+
+
+def use(name, cls=""):
+    """HTMLに埋め込む <svg><use> 参照"""
+    c = ("ic " + cls).strip()
+    return ('<svg class="%s" aria-hidden="true" focusable="false">'
+            '<use href="/assets/img/icons.svg#ic-%s"></use></svg>' % (c, name))

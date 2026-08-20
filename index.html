@@ -1,1009 +1,534 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-        <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ソザイノ (SOZAINO) - とっておきの1枚が見つかる無料WebP素材</title>
-    <meta name="description" content="とっておきの1枚が見つかる。ブログ・動画を彩る高品質WebP素材を無料で。商用利用OK。">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary:    #0d9488;  /* メインアクセント（ティール） */
-            --primary2:   #14b8a6;  /* 明るめティール */
-            --primary3:   #5eead4;  /* 淡ティール（バッジ用） */
-            --primary-bg: #f0fdfa;  /* 極淡ティール（ヒーロー背景） */
-            --accent:     #0d9488;  /* 旧変数互換 */
-            --acc2:       #14b8a6;  /* 旧変数互換 */
-            --navy:       #ffffff;  /* ヘッダー背景は白 */
-            --navy2:      #0f172a;  /* statsバーは濃ネイビー（メリハリ） */
-            --navy3:      #243352;
-            --text:       #0f172a;  /* 濃いネイビー文字 */
-            --muted:      #64748b;
-            --border:     #e2e8f0;
-            --bg:         #fafafa;
-            --surface:    #ffffff;
-            --header-bg:  #ffffff;
-            --header-text:#0f172a;
-            --header-text-muted:#64748b;
-        }
-        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-        html { scroll-behavior: smooth; }
-        body {
-            font-family:'Noto Sans JP', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.7;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ヤスミル｜安いを、見る。</title>
+<meta name="description" content="二度見する安さだけを集めた特価フィード。家電も食品も日用品も、値下がりした瞬間だけを縦に流します。">
+<link rel="canonical" href="https://sozaino.com/">
 
-        /* ===== HEADER ===== */
-        header {
-            background: var(--header-bg);
-            position: sticky; top:0; z-index:300;
-            border-bottom: 1px solid var(--border);
-            box-shadow: 0 1px 3px rgba(15,23,42,.04);
-        }
-        .navbar {
-            max-width:1400px; margin:0 auto;
-            padding:.85rem 2rem;
-            display:flex; justify-content:space-between; align-items:center; gap:1.5rem;
-        }
-        .logo {
-            font-family:'DM Sans',sans-serif;
-            font-size:1.2rem; font-weight:600;
-            color: var(--header-text); text-decoration:none;
-            display:flex; align-items:center; gap:.5rem;
-        }
-        .logo-dot { color:var(--primary); }
-        .nav-links { display:flex; gap:1.8rem; }
-        .nav-links a {
-            color: var(--header-text-muted); text-decoration:none;
-            font-size:.92rem; font-weight:500;
-            transition: color .2s;
-        }
-        .nav-links a:hover { color: var(--primary); }
-        .menu-toggle { display:none; background:none; border:none; color: var(--header-text); font-size:1.4rem; cursor:pointer; }
-
-        /* ===== HERO ===== */
-        .hero {
-            background: linear-gradient(180deg, var(--primary-bg) 0%, #ffffff 100%);
-            padding: 5rem 2rem 4rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        /* 背景の装飾グラデーション（柔らかな光） */
-        .hero::before {
-            content:'';
-            position:absolute; inset:0;
-            background:
-                radial-gradient(ellipse 70% 60% at 20% 30%, rgba(20,184,166,.10) 0%, transparent 70%),
-                radial-gradient(ellipse 50% 80% at 80% 60%, rgba(94,234,212,.12) 0%, transparent 60%);
-            pointer-events:none;
-        }
-        /* 微細なドットパターン */
-        .hero::after {
-            content:'';
-            position:absolute; inset:0;
-            background-image: radial-gradient(circle, rgba(13,148,136,.08) 1px, transparent 1px);
-            background-size: 24px 24px;
-            pointer-events:none;
-        }
-        .hero-inner { position:relative; z-index:1; max-width:700px; margin:0 auto; }
-        .hero-badge {
-            display:inline-flex; align-items:center; gap:.4rem;
-            background:rgba(13,148,136,.10); border:1px solid rgba(13,148,136,.25);
-            color: var(--primary); border-radius:20px;
-            padding:.3rem 1rem; font-size:.8rem; font-weight:700;
-            margin-bottom:1.5rem; letter-spacing:.04em;
-        }
-        .hero h1 {
-            font-family:'DM Sans',sans-serif;
-            font-size:clamp(2rem, 5vw, 3.2rem);
-            font-weight:700; color: var(--text); line-height:1.2;
-            margin-bottom:1.2rem;
-        }
-        .hero h1 em {
-            font-style:normal; color: var(--primary);
-        }
-        .hero p {
-            font-size:clamp(.95rem, 2vw, 1.1rem);
-            color: var(--muted);
-            margin-bottom:2.2rem;
-            line-height:1.8;
-        }
-        .hero-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
-
-        /* hero 検索窓 */
-        .hero-search {
-            display:flex; align-items:center;
-            background: #ffffff;
-            border:1.5px solid var(--border);
-            border-radius:50px;
-            padding:.45rem .45rem .45rem 1.2rem;
-            max-width:480px; margin:0 auto 1.4rem;
-            box-shadow: 0 2px 8px rgba(15,23,42,.04);
-            transition:border-color .2s, box-shadow .2s;
-        }
-        .hero-search:focus-within {
-            border-color: var(--primary);
-            box-shadow: 0 4px 16px rgba(13,148,136,.15);
-        }
-        .hero-search svg { flex-shrink:0; opacity:.5; color: var(--muted); }
-        .hero-search input {
-            flex:1; background:none; border:none; outline:none;
-            color: var(--text); font-size:.95rem; font-family:inherit;
-            padding:0 .7rem;
-        }
-        .hero-search input::placeholder { color: #94a3b8; }
-        .hero-search-btn {
-            background: var(--primary); color:#fff; border:none;
-            border-radius:40px; padding:.55rem 1.1rem;
-            font-size:.85rem; font-weight:700; font-family:inherit;
-            cursor:pointer; white-space:nowrap; flex-shrink:0;
-            transition:background .2s;
-        }
-        .hero-search-btn:hover { background: #0b827a; }
-        .btn-hero-primary {
-            padding:.85rem 2.2rem;
-            background:linear-gradient(135deg, var(--primary), var(--primary2));
-            color:#fff; border:none; border-radius:8px;
-            font-family:'DM Sans',sans-serif;
-            font-size:1rem; font-weight:700; cursor:pointer;
-            text-decoration:none;
-            box-shadow:0 4px 16px rgba(13,148,136,.30);
-            transition:all .25s;
-        }
-        .btn-hero-primary:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(13,148,136,.40); }
-        .btn-hero-secondary {
-            padding:.85rem 2.2rem;
-            background: #ffffff; border:1px solid var(--border);
-            color: var(--text); border-radius:8px;
-            font-family:'DM Sans',sans-serif;
-            font-size:1rem; font-weight:600; cursor:pointer;
-            text-decoration:none; transition:all .25s;
-        }
-        .btn-hero-secondary:hover { background: #f8fafc; border-color: var(--primary); color: var(--primary); }
-
-        /* ヒーロー下の数字バー */
-        .stats-bar {
-            background: #ffffff;
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-        }
-        .stats-inner {
-            max-width:1400px; margin:0 auto;
-            padding:1.1rem 2rem;
-            display:flex; justify-content:center; gap:3rem; flex-wrap:wrap;
-        }
-        .stat {
-            display:flex; align-items:center; gap:.7rem;
-        }
-        .stat-num {
-            font-family:'DM Sans',sans-serif;
-            font-size:1.4rem; font-weight:700; color: var(--primary);
-        }
-        .stat-label { font-size:.8rem; color: var(--muted); line-height:1.3; }
-        .stat-div { width:1px; height:28px; background: var(--border); }
-
-        /* ===== FEATURES ===== */
-        .features {
-            max-width:1400px; margin:0 auto;
-            padding:4rem 2rem;
-        }
-        .section-head {
-            text-align:center; margin-bottom:2.5rem;
-        }
-        .section-head h2 {
-            font-family:'DM Sans',sans-serif;
-            font-size:1.8rem; font-weight:700; color:var(--text);
-            margin-bottom:.5rem;
-        }
-        .section-head p { color:var(--muted); font-size:.95rem; }
-
-        .feature-grid {
-            display:grid;
-            grid-template-columns:repeat(auto-fit, minmax(240px,1fr));
-            gap:1.2rem;
-        }
-        .feature-card {
-            background:var(--surface);
-            border:1px solid var(--border);
-            border-radius:12px; padding:1.8rem 1.5rem;
-            transition:all .25s;
-        }
-        .feature-card:hover { box-shadow:0 8px 32px rgba(0,0,0,.08); transform:translateY(-3px); }
-        .feature-icon {
-            width:52px; height:52px; border-radius:14px;
-            background:linear-gradient(135deg, var(--primary), var(--primary2));
-            display:flex; align-items:center; justify-content:center;
-            margin-bottom:1.1rem; color:#fff;
-            box-shadow:0 4px 14px rgba(13,148,136,.25);
-        }
-        .feature-icon svg { width:24px; height:24px; }
-        .feature-card h3 {
-            font-family:'DM Sans',sans-serif;
-            font-size:1rem; font-weight:700; margin-bottom:.5rem;
-        }
-        .feature-card p { font-size:.88rem; color:var(--muted); line-height:1.7; }
-
-        /* ===== LATEST SECTION ===== */
-        .latest {
-            background: #f8fafc;
-            padding: 4rem 2rem;
-        }
-        .latest-inner { max-width:1400px; margin:0 auto; }
-        .latest-head {
-            display:flex; justify-content:space-between; align-items:center;
-            margin-bottom:1.8rem; flex-wrap:wrap; gap:1rem;
-        }
-        .latest-head h2 {
-            font-family:'DM Sans',sans-serif;
-            font-size:1.5rem; font-weight:700; color: var(--text);
-        }
-        .latest-head a {
-            color: var(--primary); text-decoration:none; font-size:.88rem; font-weight:600;
-            display:flex; align-items:center; gap:.3rem; transition:gap .2s;
-        }
-        .latest-head a:hover { gap:.6rem; }
-
-        /* ミニマソングリッド */
-        .latest-grid {
-            display:grid;
-            grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));
-            gap:6px;
-        }
-        .latest-card {
-            border-radius:8px; overflow:hidden;
-            aspect-ratio:4/3; position:relative;
-            background:#e2e8f0; display:block; text-decoration:none;
-        }
-        .latest-card img {
-            width:100%; height:100%; object-fit:cover; display:block;
-            transition:transform .35s cubic-bezier(.25,.46,.45,.94);
-        }
-        .latest-card:hover img { transform:scale(1.06); }
-        .latest-card .lc-overlay {
-            position:absolute; inset:0;
-            background:linear-gradient(to top, rgba(15,23,42,.78) 0%, transparent 55%);
-            opacity:0; transition:opacity .3s;
-            display:flex; align-items:flex-end; padding:.7rem;
-        }
-        .latest-card:hover .lc-overlay { opacity:1; }
-        .lc-title { color:#fff; font-size:.75rem; font-weight:600; }
-        .latest-loading { text-align:center; padding:2rem; color: var(--muted); font-size:.9rem; }
-
-        .latest-cta {
-            text-align:center; margin-top:2rem;
-        }
-        .btn-outline {
-            display:inline-block; padding:.75rem 2rem;
-            border:1.5px solid var(--primary); border-radius:8px;
-            color: var(--primary); text-decoration:none; font-size:.9rem; font-weight:600;
-            transition:all .25s; font-family:'DM Sans',sans-serif;
-            background: #fff;
-        }
-        .btn-outline:hover { background: var(--primary); color: #fff; }
-
-        /* ===== CATEGORIES ===== */
-        .categories {
-            max-width:1400px; margin:0 auto;
-            padding:4rem 2rem;
-        }
-        .cat-grid {
-            display:grid;
-            grid-template-columns:repeat(auto-fill, minmax(200px,1fr));
-            gap:.8rem; margin-top:1.5rem;
-        }
-        .cat-card {
-            position:relative; border-radius:12px; overflow:hidden;
-            aspect-ratio:4/3; display:block; text-decoration:none;
-            background:var(--navy2);
-            cursor:pointer;
-            box-shadow:0 2px 10px rgba(0,0,0,.12);
-            transition:transform .25s, box-shadow .25s;
-        }
-        .cat-card:hover { transform:translateY(-4px); box-shadow:0 10px 30px rgba(0,0,0,.2); }
-        .cat-card-bg {
-            position:absolute; inset:0;
-            background-size:cover; background-position:center;
-            transition:transform .4s cubic-bezier(.25,.46,.45,.94);
-        }
-        .cat-card:hover .cat-card-bg { transform:scale(1.06); }
-        /* 画像が無い場合のグラデーション fallback */
-        .cat-card-bg.no-img {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary2) 100%);
-        }
-        .cat-card-overlay {
-            position:absolute; inset:0;
-            background:linear-gradient(to top, rgba(5,10,20,.82) 0%, rgba(5,10,20,.25) 55%, transparent 100%);
-        }
-        .cat-card-body {
-            position:absolute; bottom:0; left:0; right:0;
-            padding:.9rem 1rem;
-        }
-        .cat-name { font-weight:700; font-size:1rem; color:#fff; line-height:1.3; }
-        .cat-icon-sm { font-size:.85rem; opacity:.75; color:rgba(255,255,255,.8); margin-bottom:.2rem; }
-
-        /* ===== CTA ===== */
-        .cta-section {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary2) 100%);
-            padding:4rem 2rem; text-align:center;
-            position:relative; overflow:hidden;
-        }
-        .cta-section::before {
-            content:'';
-            position:absolute; inset:0;
-            background-image: radial-gradient(circle, rgba(255,255,255,.10) 1px, transparent 1px);
-            background-size: 24px 24px;
-        }
-        .cta-inner { position:relative; z-index:1; max-width:560px; margin:0 auto; }
-        .cta-section h2 {
-            font-family:'DM Sans',sans-serif; font-size:1.8rem; font-weight:700;
-            color:#fff; margin-bottom:.8rem;
-        }
-        .cta-section p { color:rgba(255,255,255,.85); margin-bottom:1.8rem; }
-        /* CTAセクション内のボタンは白背景にして視認性を確保 */
-        .cta-section .btn-hero-primary {
-            background: #ffffff;
-            color: var(--primary);
-            box-shadow: 0 4px 16px rgba(0,0,0,.18);
-        }
-        .cta-section .btn-hero-primary:hover {
-            background: #ffffff;
-            color: var(--primary);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0,0,0,.25);
-        }
-
-        /* ===== FOOTER ===== */
-        footer { background: #1e293b; color:rgba(255,255,255,.7); padding:2.5rem 2rem; }
-        .footer-inner { max-width:1400px; margin:0 auto; }
-        .footer-links { display:flex; gap:2rem; flex-wrap:wrap; margin-bottom:1.5rem; padding-bottom:1.5rem; border-bottom:1px solid rgba(255,255,255,.1); }
-        .footer-links a { color:rgba(255,255,255,.65); text-decoration:none; font-size:.85rem; transition:color .2s; }
-        .footer-links a:hover { color: var(--primary2); }
-        .footer-copy { font-size:.8rem; color:rgba(255,255,255,.4); }
-
-        /* ===== RESPONSIVE ===== */
-        @media(max-width:768px) {
-            .navbar { padding:.85rem 1rem; }
-            .menu-toggle { display:block; }
-            .nav-links { display:none; position:absolute; top:100%; left:0; right:0; background: var(--header-bg); flex-direction:column; gap:0; padding:.5rem 0; box-shadow: 0 4px 12px rgba(15,23,42,.08); border-top: 1px solid var(--border); }
-            .nav-links.open { display:flex; }
-            .nav-links a { padding:.8rem 1.5rem; border-bottom: 1px solid var(--border); }
-            .nav-links a:last-child { border-bottom: none; }
-            .stats-inner { gap:1.5rem; }
-            .stat-div { display:none; }
-        }
-
-        /* ===== TICKER ===== */
-        .ticker-wrap {
-            width:100%; background: #f8fafc;
-            border-bottom:1px solid var(--border);
-            overflow:hidden; height:36px; display:flex; align-items:center;
-        }
-        .ticker-label {
-            flex-shrink:0; background: var(--primary); color:#fff;
-            font-size:.72rem; font-weight:700; padding:0 .9rem;
-            height:100%; display:flex; align-items:center; gap:.4rem;
-            letter-spacing:.06em; white-space:nowrap;
-        }
-        .ticker-label svg { width:14px; height:14px; flex-shrink:0; }
-        .ticker-track {
-            flex:1; overflow:hidden; position:relative; height:100%;
-        }
-        .ticker-inner {
-            display:flex; align-items:center; height:100%; white-space:nowrap;
-        }
-        .ticker-item {
-            display:inline-flex; align-items:center; gap:.5rem;
-            padding:0 2.5rem; font-size:.78rem; color: var(--muted);
-        }
-        .ticker-item .dot { display:none; }
-        .ticker-item a { color: var(--text); text-decoration:none; transition:color .2s; }
-        .ticker-item a:hover { color: var(--primary); }
-        .ticker-new {
-            color: var(--primary); font-size:.68rem; font-weight:700;
-            background:rgba(13,148,136,.10); border:1px solid rgba(13,148,136,.30);
-            border-radius:3px; padding:.1rem .35rem; letter-spacing:.04em;
-        }
-        @keyframes ticker-scroll {
-            0%   { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-    
-        /* ===== 絵文字置換アイコン共通スタイル ===== */
-        .emoji-icon {
-            display: inline-block;
-            vertical-align: -.15em;
-            flex-shrink: 0;
-        }
-    
-        /* ===== COLUMN SECTION ===== */
-        .column-section {
-            max-width:1400px; margin:0 auto;
-            padding:4rem 2rem;
-        }
-        .column-grid {
-            display:grid;
-            grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
-            gap:1.2rem;
-            margin-top:2rem;
-        }
-        .column-card {
-            display:flex; gap:1.2rem;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius:12px;
-            padding:1.5rem;
-            text-decoration:none;
-            color: inherit;
-            transition: all .25s;
-            align-items:center;
-        }
-        .column-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(13,148,136,.10);
-        }
-        .column-card { position: relative; }
-        .new-badge {
-            position: absolute;
-            top: .6rem;
-            left: .6rem;
-            background: #ef4444;
-            color: #fff;
-            font-size: .68rem;
-            font-weight: 700;
-            padding: .15rem .5rem;
-            border-radius: 4px;
-            letter-spacing: .03em;
-            z-index: 1;
-        }
-        .column-card-icon {
-            width:64px; height:64px; border-radius:14px;
-            background: linear-gradient(135deg, var(--primary), var(--primary2));
-            display:flex; align-items:center; justify-content:center;
-            color:#fff; flex-shrink:0;
-            box-shadow: 0 4px 14px rgba(13,148,136,.20);
-        }
-        .column-card-icon svg { width:28px; height:28px; }
-        .column-card-body { min-width:0; flex:1; }
-        .column-card-tag {
-            display:inline-block;
-            background: #f0fdfa;
-            color: var(--primary);
-            padding:.15rem .65rem;
-            border-radius:10px;
-            font-size:.7rem; font-weight:700;
-            margin-bottom:.4rem;
-        }
-        .column-card-title {
-            font-size:1rem; font-weight:700;
-            line-height:1.5; color: var(--text);
-            margin-bottom:.3rem;
-        }
-        .column-card-desc {
-            font-size:.82rem; color: var(--muted);
-            line-height:1.6;
-        }
-        .column-section-cta {
-            text-align:center; margin-top:1.8rem;
-        }
-        .column-section-cta a {
-            color: var(--primary); text-decoration:none;
-            font-size:.9rem; font-weight:600;
-            display:inline-flex; align-items:center; gap:.3rem;
-            transition:gap .2s;
-        }
-        .column-section-cta a:hover { gap:.6rem; }
-
-
-        @media(max-width:768px) {
-            .latest-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 4px;
-            }
-            .cat-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 8px;
-            }
-            .latest-card:nth-child(n+7) {
-                display: none;
-            }
-        }
-
-        @media(max-width:480px) {
-            .latest-grid {
-                grid-template-columns: repeat(3, 1fr) !important;
-                gap: 4px !important;
-            }
-            .cat-grid {
-                grid-template-columns: repeat(2, 1fr) !important;
-                gap: 8px !important;
-            }
-            .latest-card:nth-child(n+7) {
-                display: none !important;
-            }
-        }
-    </style>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2687113603921668" crossorigin="anonymous"></script>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ヤスミル">
+<meta property="og:title" content="ヤスミル ── 安いを、見る。">
+<meta property="og:description" content="二度見する安さだけを集めた特価フィード。家電も食品も日用品も、値下がりした瞬間だけを縦に流します。">
+<meta property="og:url" content="https://sozaino.com/">
+<meta property="og:image" content="https://sozaino.com/assets/img/ogp.png">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1A1410">
+<link rel="icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Anton&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Yusei+Magic&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="preload" href="/assets/img/icons.svg" as="image" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="ヤスミル" href="/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"ヤスミル","url":"https://sozaino.com","description":"二度見する安さだけを集めた特価フィード。家電も食品も日用品も、値下がりした瞬間だけを縦に流します。","inLanguage":"ja"}</script>
 </head>
-<body>
+<body class="">
+<a class="skip-link" href="#main">本文へスキップ</a>
 
-<header>
-    <div class="navbar">
-        <a href="" class="logo">ソザイノ<span class="logo-dot">.</span></a>
-        <button class="menu-toggle" id="menuToggle">☰</button>
-        <nav class="nav-links" id="navMenu">
-            <a href="/">ホーム</a>
-            <a href="gallery">素材ギャラリー</a>
-            <a href="about">ソザイノについて</a>
-            <a href="process">素材ができるまで</a>
-            <a href="column/">コラム</a>
-            <a href="faq">よくあるご質問</a>
-            <a href="contact">お問い合わせ</a>
-        </nav>
-    </div>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="/">
+      ヤスミル<span class="logo-en">YASUMIRU</span>
+    </a>
+    <div class="header-spacer"></div>
+    <nav class="nav-desktop" aria-label="メインメニュー">
+      <a href="/">特価フィード</a>
+      <a href="/categories/">カテゴリ</a>
+      <a href="/about/">ヤスミルとは</a>
+    </nav>
+    <button class="icon-btn" id="searchBtn" aria-label="商品を検索"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-search"></use></svg></button>
+    <button class="icon-btn menu-btn" id="menuBtn" aria-label="メニューを開く" aria-expanded="false"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-menu"></use></svg></button>
+  </div>
 </header>
 
-<!-- ===== TICKER ===== -->
-<div class="ticker-wrap">
-    <div class="ticker-label">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-        新着素材
-    </div>
-    <div class="ticker-track">
-        <div class="ticker-inner" id="tickerInner"></div>
-    </div>
+<div class="ticker">
+  <span class="sr-only">注目の商品</span>
+  <div class="ticker-track"><a class="ticker-item" href="/p/ra24bd7228/">注目 タイツ レギンス レディース 春 ハイウエスト  ¥900</a><a class="ticker-item" href="/p/r2b37d9ea2/">注目 日本製 ホテルスタイルタオル ビッグフェイスタオ ¥890</a><a class="ticker-item" href="/p/ra0e841d27/">注目 国産 雑穀米「三十雑穀」タマチャンショップの30 ¥1,000</a><a class="ticker-item" href="/p/r2a30b6cbf/">注目 【最短翌日お届け┃365日出荷】VOX 強炭酸水 ¥1,650</a><a class="ticker-item" href="/p/r76c6783d9/">注目 美粉屋 こなゆきコラーゲン 100000mg 一 ¥1,000</a><a class="ticker-item" href="/p/r476ecfd42/">注目 ブラ紐隠し タンクトップ レディース インナー  ¥2,690</a><a class="ticker-item" href="/p/r8ed120acd/">注目 【365日最短翌日お届け】BIYOUDO 水 シ ¥2,380</a><a class="ticker-item" href="/p/r2294569fe/">注目 【フレーバー・ラベルレス選べる】炭酸水 500m ¥1,429</a><a class="ticker-item" href="/p/r6f5d177d0/">注目 楽天ランキング1位 2024年間MVP ワイヤレ ¥2,780</a><a class="ticker-item" href="/p/re528f9c50/">注目 P 20限定 ポイント2倍 まとめて購入がお得♪ ¥1,299</a><a class="ticker-item" href="/p/ra24bd7228/">注目 タイツ レギンス レディース 春 ハイウエスト  ¥900</a><a class="ticker-item" href="/p/r2b37d9ea2/">注目 日本製 ホテルスタイルタオル ビッグフェイスタオ ¥890</a><a class="ticker-item" href="/p/ra0e841d27/">注目 国産 雑穀米「三十雑穀」タマチャンショップの30 ¥1,000</a><a class="ticker-item" href="/p/r2a30b6cbf/">注目 【最短翌日お届け┃365日出荷】VOX 強炭酸水 ¥1,650</a><a class="ticker-item" href="/p/r76c6783d9/">注目 美粉屋 こなゆきコラーゲン 100000mg 一 ¥1,000</a><a class="ticker-item" href="/p/r476ecfd42/">注目 ブラ紐隠し タンクトップ レディース インナー  ¥2,690</a><a class="ticker-item" href="/p/r8ed120acd/">注目 【365日最短翌日お届け】BIYOUDO 水 シ ¥2,380</a><a class="ticker-item" href="/p/r2294569fe/">注目 【フレーバー・ラベルレス選べる】炭酸水 500m ¥1,429</a><a class="ticker-item" href="/p/r6f5d177d0/">注目 楽天ランキング1位 2024年間MVP ワイヤレ ¥2,780</a><a class="ticker-item" href="/p/re528f9c50/">注目 P 20限定 ポイント2倍 まとめて購入がお得♪ ¥1,299</a></div>
 </div>
 
-<!-- ===== HERO ===== -->
-<section class="hero">
-    <div class="hero-inner">
-        <div class="hero-badge"><svg class="emoji-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-.15em;margin-right:.35em;flex-shrink:0;"><polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9 12 2"></polygon></svg> あなたのとっておきの1枚が見つかる</div>
-        <h1>ブログ・動画を彩る<br><em>高品質 WebP 素材</em>を無料で</h1>
-        <p>ソザイノ (SOZAINO) は、ブログや動画で<br>使える素材をWebP 形式で配信する<br>無料素材サービスです。アイキャッチ<br>サムネイル・SNS 投稿にどうぞ。</p>
-        <div class="hero-btns">
-            <!-- キーワード検索窓 -->
-            <form class="hero-search" onsubmit="heroSearch(event)" style="width:100%;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                </svg>
-                <input type="text" id="heroSearchInput" placeholder="キーワードで検索（例：夏、ビジネス）">
-                <button type="submit" class="hero-search-btn">検索</button>
-            </form>
-            <a href="gallery" class="btn-hero-primary">素材ギャラリーを見る →</a>
-            <a href="faq" class="btn-hero-secondary">使い方を見る</a>
-        </div>
-    </div>
+<nav class="chipbar" aria-label="カテゴリ"><div class="chipbar-scroll"><a class="chip" href="/" aria-current="true"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-tag"></use></svg>すべて</a><a class="chip" href="/c/food/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-food"></use></svg>食品</a><a class="chip" href="/c/kaden/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-kaden"></use></svg>家電</a><a class="chip" href="/c/kitchen/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-kitchen"></use></svg>日用品</a><a class="chip" href="/c/beauty/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-beauty"></use></svg>美容</a><a class="chip" href="/c/fashion/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-fashion"></use></svg>ファッション</a><a class="chip" href="/c/pc/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-pc"></use></svg>PC</a><a class="chip" href="/c/sports/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-sports"></use></svg>アウトドア</a><a class="chip" href="/c/baby-toy/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-baby-toy"></use></svg>おもちゃ</a><a class="chip" href="/c/books/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-books"></use></svg>エンタメ</a><a class="chip" href="/c/pet/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-pet"></use></svg>ペット</a><a class="chip" href="/c/car/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-car"></use></svg>車・工具</a></div></nav>
+
+<main id="main">
+
+<section class="hero wrap-narrow">
+  <h1 class="hero-title">二度見する安さ、<br><span class="hl">ぜんぶここに。</span></h1>
+  <p class="hero-lead">二度見する安さだけを集めた特価フィード。家電も食品も日用品も、値下がりした瞬間だけを縦に流します。</p>
+  <div class="hero-meta">
+    <span><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-calendar"></use></svg>8月20日更新</span>
+    <span><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-box"></use></svg>掲載154件</span>
+    <span><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-bolt"></use></svg>値下がりを監視中</span>
+  </div>
 </section>
 
-<!-- ===== STATS BAR ===== -->
-<div class="stats-bar">
-    <div class="stats-inner">
-        <div class="stat">
-            <div class="stat-num" id="statTotal">—</div>
-            <div class="stat-label">素材数<br>（随時追加中）</div>
-        </div>
-        <div class="stat-div"></div>
-        <div class="stat">
-            <div class="stat-num">WebP</div>
-            <div class="stat-label">次世代フォーマット<br>高画質 × 軽量</div>
-        </div>
-        <div class="stat-div"></div>
-        <div class="stat">
-            <div class="stat-num">無料</div>
-            <div class="stat-label">ダウンロード<br>商用利用 OK</div>
-        </div>
-        <div class="stat-div"></div>
-        <div class="stat">
-            <div class="stat-num" id="statCats">—</div>
-            <div class="stat-label">カテゴリ<br>（大分類）</div>
-        </div>
+<div class="layout wrap-wide">
+<div class="layout-main">
+  <div class="toolbar">
+    <p class="result-count"><b id="resultCount">154</b> 件の特価</p>
+    <div class="sorter" role="group" aria-label="並べ替え">
+      <button type="button" data-sort="new" aria-pressed="true">新着</button>
+      <button type="button" data-sort="off" aria-pressed="false">割引率</button>
+      <button type="button" data-sort="cheap" aria-pressed="false">安い順</button>
     </div>
+  </div>
+  <div class="feed" id="feed"><article class="card">
+  <a class="card-media" href="/p/rd9a2102c9/" aria-label="印鑑・はんこ・銀行印・認印 おしゃれなマーブルカラー印鑑 全12色 【12.0mm】 個人印鑑 ハンコ… ¥498">
+    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/hankoya-shop/cabinet/syouhin/60036.jpg?_ex=600x600" alt="印鑑・はんこ・銀行印・認印 おしゃれなマーブルカラー印鑑 全12色 【12.0mm】 個人印鑑 ハンコ…" loading="lazy" width="640" height="640">
+    <div class="pricetag"><span class="pricetag-label">いま</span><span class="pricetag-value"><span class="pricetag-yen">¥</span><span class="pricetag-num">498</span></span></div>
+    
+  </a>
+  <div class="card-body">
+    
+    <h2 class="card-title"><a href="/p/rd9a2102c9/">印鑑・はんこ・銀行印・認印 おしゃれなマーブルカラー印鑑 全12色 【12.0mm】 個人印鑑 ハンコ…</a></h2>
+    <div class="card-tags"><a class="tag" href="/c/kitchen/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-kitchen"></use></svg>日用品</a><span class="tag tag-watch">ウォッチ中</span><span class="tag">送料無料</span></div>
+    <div class="card-foot">
+      <span class="card-shop">ハンコヤストア</span>
+      <a class="btn btn-rakuten" href="https://hb.afl.rakuten.co.jp/hgc/g00qfdw7.jeifofb3.g00qfdw7.jeifp387/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fhankoya-shop%2Fcolor-580%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fhankoya-shop%2Fi%2F10001286%2F&amp;rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d" target="_blank" rel="nofollow sponsored noopener">楽天で見る<svg class="ic ic-arrow" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-arrow-right"></use></svg></a>
+    </div>
+  </div>
+</article><article class="card">
+  <a class="card-media" href="/p/r4b0f82943/" aria-label="日本製 ホテルスタイルタオル スタンダード フェイスタオル 【お試しSALE】 楽天1位受賞 /… ¥690">
+    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/toucher-home/cabinet/image02/hsldf_01s.jpg?_ex=600x600" alt="日本製 ホテルスタイルタオル スタンダード フェイスタオル 【お試しSALE】 楽天1位受賞 /…" loading="lazy" width="640" height="640">
+    <div class="pricetag"><span class="pricetag-label">いま</span><span class="pricetag-value"><span class="pricetag-yen">¥</span><span class="pricetag-num">690</span></span></div>
+    
+  </a>
+  <div class="card-body">
+    
+    <h2 class="card-title"><a href="/p/r4b0f82943/">日本製 ホテルスタイルタオル スタンダード フェイスタオル 【お試しSALE】 楽天1位受賞 /…</a></h2>
+    <div class="card-tags"><a class="tag" href="/c/kitchen/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-kitchen"></use></svg>日用品</a><span class="tag tag-watch">ウォッチ中</span><span class="tag">送料無料</span></div>
+    <div class="card-foot">
+      <span class="card-shop">タオル直販店 ヒオリエ/日織恵</span>
+      <a class="btn btn-rakuten" href="https://hb.afl.rakuten.co.jp/hgc/g00qcmk7.jeifoeeb.g00qcmk7.jeifp3b0/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftoucher-home%2F10000530%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Ftoucher-home%2Fi%2F10000530%2F&amp;rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d" target="_blank" rel="nofollow sponsored noopener">楽天で見る<svg class="ic ic-arrow" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-arrow-right"></use></svg></a>
+    </div>
+  </div>
+</article><article class="card">
+  <a class="card-media" href="/p/r8dd7dfb55/" aria-label="T10 3.0W 4連LED 白 / ホワイト 【T10 ウェッジ球】 High Power… ¥700">
+    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/mago1shop/cabinet/goods3/rakuten-lbh4-w-2020.jpg?_ex=600x600" alt="T10 3.0W 4連LED 白 / ホワイト 【T10 ウェッジ球】 High Power…" loading="lazy" width="640" height="640">
+    <div class="pricetag"><span class="pricetag-label">いま</span><span class="pricetag-value"><span class="pricetag-yen">¥</span><span class="pricetag-num">700</span></span></div>
+    
+  </a>
+  <div class="card-body">
+    
+    <h2 class="card-title"><a href="/p/r8dd7dfb55/">T10 3.0W 4連LED 白 / ホワイト 【T10 ウェッジ球】 High Power…</a></h2>
+    <div class="card-tags"><a class="tag" href="/c/car/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-car"></use></svg>車・工具</a><span class="tag tag-watch">ウォッチ中</span><span class="tag">送料無料</span></div>
+    <div class="card-foot">
+      <span class="card-shop">LEDのマゴイチヤ楽天市場支店</span>
+      <a class="btn btn-rakuten" href="https://hb.afl.rakuten.co.jp/hgc/g00rs947.jeifo3a3.g00rs947.jeifpa75/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmago1shop%2Flbh4-w%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fmago1shop%2Fi%2F10000543%2F&amp;rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d" target="_blank" rel="nofollow sponsored noopener">楽天で見る<svg class="ic ic-arrow" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-arrow-right"></use></svg></a>
+    </div>
+  </div>
+</article><article class="card">
+  <a class="card-media" href="/p/rd1d4a269e/" aria-label="タオル ヘアドライタオル 0359 マイクロファイバー バスタオル 小さめ まとめ買い コスパ… ¥880">
+    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/soutowelshop/cabinet/thumbnails/50/0359.jpg?_ex=600x600" alt="タオル ヘアドライタオル 0359 マイクロファイバー バスタオル 小さめ まとめ買い コスパ…" loading="lazy" width="640" height="640">
+    <div class="pricetag"><span class="pricetag-label">いま</span><span class="pricetag-value"><span class="pricetag-yen">¥</span><span class="pricetag-num">880</span></span></div>
+    
+  </a>
+  <div class="card-body">
+    
+    <h2 class="card-title"><a href="/p/rd1d4a269e/">タオル ヘアドライタオル 0359 マイクロファイバー バスタオル 小さめ まとめ買い コスパ…</a></h2>
+    <div class="card-tags"><a class="tag" href="/c/kitchen/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-kitchen"></use></svg>日用品</a><span class="tag tag-watch">ウォッチ中</span><span class="tag">送料無料</span><span class="tag">まとめ買い</span></div>
+    <div class="card-foot">
+      <span class="card-shop">SOU TOWEL SHOP</span>
+      <a class="btn btn-rakuten" href="https://hb.afl.rakuten.co.jp/hgc/g00u5in7.jeifoa45.g00u5in7.jeifp2ea/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsoutowelshop%2F0359%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fsoutowelshop%2Fi%2F10000180%2F&amp;rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d" target="_blank" rel="nofollow sponsored noopener">楽天で見る<svg class="ic ic-arrow" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-arrow-right"></use></svg></a>
+    </div>
+  </div>
+</article><article class="card">
+  <a class="card-media" href="/p/r2b37d9ea2/" aria-label="日本製 ホテルスタイルタオル ビッグフェイスタオル 【圧縮】 【お試しSALE】 楽天1位受賞 /… ¥890">
+    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/toucher-home/cabinet/image02/hslft_01sx.jpg?_ex=600x600" alt="日本製 ホテルスタイルタオル ビッグフェイスタオル 【圧縮】 【お試しSALE】 楽天1位受賞 /…" loading="lazy" width="640" height="640">
+    <div class="pricetag"><span class="pricetag-label">いま</span><span class="pricetag-value"><span class="pricetag-yen">¥</span><span class="pricetag-num">890</span></span></div>
+    
+  </a>
+  <div class="card-body">
+    
+    <h2 class="card-title"><a href="/p/r2b37d9ea2/">日本製 ホテルスタイルタオル ビッグフェイスタオル 【圧縮】 【お試しSALE】 楽天1位受賞 /…</a></h2>
+    <div class="card-tags"><a class="tag" href="/c/kitchen/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-kitchen"></use></svg>日用品</a><span class="tag tag-watch">ウォッチ中</span><span class="tag">送料無料</span></div>
+    <div class="card-foot">
+      <span class="card-shop">タオル直販店 ヒオリエ/日織恵</span>
+      <a class="btn btn-rakuten" href="https://hb.afl.rakuten.co.jp/hgc/g00qcmk7.jeifoeeb.g00qcmk7.jeifp3b0/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftoucher-home%2F10000264%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Ftoucher-home%2Fi%2F10000264%2F&amp;rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d" target="_blank" rel="nofollow sponsored noopener">楽天で見る<svg class="ic ic-arrow" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-arrow-right"></use></svg></a>
+    </div>
+  </div>
+</article><article class="card">
+  <a class="card-media" href="/p/r47c8ba6f2/" aria-label="圧縮ポーチ 衣類 圧縮袋 トラベルポーチ セット 軽量 撥水 服 おむつポーチ M L 圧縮バッグ… ¥899">
+    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/bubustores2023/cabinet/thumnailsale/hnbag50_1.jpg?_ex=600x600" alt="圧縮ポーチ 衣類 圧縮袋 トラベルポーチ セット 軽量 撥水 服 おむつポーチ M L 圧縮バッグ…" loading="lazy" width="640" height="640">
+    <div class="pricetag"><span class="pricetag-label">いま</span><span class="pricetag-value"><span class="pricetag-yen">¥</span><span class="pricetag-num">899</span></span></div>
+    
+  </a>
+  <div class="card-body">
+    
+    <h2 class="card-title"><a href="/p/r47c8ba6f2/">圧縮ポーチ 衣類 圧縮袋 トラベルポーチ セット 軽量 撥水 服 おむつポーチ M L 圧縮バッグ…</a></h2>
+    <div class="card-tags"><a class="tag" href="/c/baby-toy/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-baby-toy"></use></svg>おもちゃ</a><span class="tag tag-watch">ウォッチ中</span><span class="tag">送料無料</span><span class="tag">まとめ買い</span></div>
+    <div class="card-foot">
+      <span class="card-shop">Happy Nest</span>
+      <a class="btn btn-rakuten" href="https://hb.afl.rakuten.co.jp/hgc/g00uelh7.jeifoc4a.g00uelh7.jeifp475/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbubustores2023%2Fhnbag50%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fbubustores2023%2Fi%2F10000604%2F&amp;rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d" target="_blank" rel="nofollow sponsored noopener">楽天で見る<svg class="ic ic-arrow" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-arrow-right"></use></svg></a>
+    </div>
+  </div>
+</article><article class="card">
+  <a class="card-media" href="/p/ra24bd7228/" aria-label="タイツ レギンス レディース 春 ハイウエスト Yラインカバー 腹巻 美脚 ストレッチ 高伸縮… ¥900">
+    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/darkangel/cabinet/12863863/13534266/01216-main-260707-7.jpg?_ex=600x600" alt="タイツ レギンス レディース 春 ハイウエスト Yラインカバー 腹巻 美脚 ストレッチ 高伸縮…" loading="lazy" width="640" height="640">
+    <div class="pricetag"><span class="pricetag-label">いま</span><span class="pricetag-value"><span class="pricetag-yen">¥</span><span class="pricetag-num">900</span></span></div>
+    
+  </a>
+  <div class="card-body">
+    
+    <h2 class="card-title"><a href="/p/ra24bd7228/">タイツ レギンス レディース 春 ハイウエスト Yラインカバー 腹巻 美脚 ストレッチ 高伸縮…</a></h2>
+    <div class="card-tags"><a class="tag" href="/c/fashion/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-fashion"></use></svg>ファッション</a><span class="tag tag-watch">ウォッチ中</span></div>
+    <div class="card-foot">
+      <span class="card-shop">Dark Angel (ダークエンジェル)</span>
+      <a class="btn btn-rakuten" href="https://hb.afl.rakuten.co.jp/hgc/g00q8qj7.jeifo2ee.g00q8qj7.jeifpbbc/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdarkangel%2F312-535-01216%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fdarkangel%2Fi%2F10002101%2F&amp;rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d" target="_blank" rel="nofollow sponsored noopener">楽天で見る<svg class="ic ic-arrow" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-arrow-right"></use></svg></a>
+    </div>
+  </div>
+</article><article class="card">
+  <a class="card-media" href="/p/rb01f56dc5/" aria-label="薄手でしっかりUVカット 涼感素材 ラッシュガード レディース パーカー フードジップ… ¥980">
+    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/rinne/cabinet/thumnail/normal/11easis04.jpg?_ex=600x600" alt="薄手でしっかりUVカット 涼感素材 ラッシュガード レディース パーカー フードジップ…" loading="lazy" width="640" height="640">
+    <div class="pricetag"><span class="pricetag-label">いま</span><span class="pricetag-value"><span class="pricetag-yen">¥</span><span class="pricetag-num">980</span></span></div>
+    
+  </a>
+  <div class="card-body">
+    
+    <h2 class="card-title"><a href="/p/rb01f56dc5/">薄手でしっかりUVカット 涼感素材 ラッシュガード レディース パーカー フードジップ…</a></h2>
+    <div class="card-tags"><a class="tag" href="/c/sports/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-sports"></use></svg>アウトドア</a><span class="tag tag-watch">ウォッチ中</span><span class="tag">送料無料</span></div>
+    <div class="card-foot">
+      <span class="card-shop">リンネ スノー・アンド・サーフ</span>
+      <a class="btn btn-rakuten" href="https://hb.afl.rakuten.co.jp/hgc/g00qdnr7.jeifoc4a.g00qdnr7.jeifp26d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Frinne%2F11easis04%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Frinne%2Fi%2F10008871%2F&amp;rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d" target="_blank" rel="nofollow sponsored noopener">楽天で見る<svg class="ic ic-arrow" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-arrow-right"></use></svg></a>
+    </div>
+  </div>
+</article><article class="card">
+  <a class="card-media" href="/p/rdd3fc441a/" aria-label="涼感素材 ラッシュガード レディース トレンカ 【土日祝も出荷】≪365日品質保証≫… ¥980">
+    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/rinne/cabinet/thumnail/normal/11easis05.jpg?_ex=600x600" alt="涼感素材 ラッシュガード レディース トレンカ 【土日祝も出荷】≪365日品質保証≫…" loading="lazy" width="640" height="640">
+    <div class="pricetag"><span class="pricetag-label">いま</span><span class="pricetag-value"><span class="pricetag-yen">¥</span><span class="pricetag-num">980</span></span></div>
+    
+  </a>
+  <div class="card-body">
+    
+    <h2 class="card-title"><a href="/p/rdd3fc441a/">涼感素材 ラッシュガード レディース トレンカ 【土日祝も出荷】≪365日品質保証≫…</a></h2>
+    <div class="card-tags"><a class="tag" href="/c/sports/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-sports"></use></svg>アウトドア</a><span class="tag tag-watch">ウォッチ中</span><span class="tag">送料無料</span></div>
+    <div class="card-foot">
+      <span class="card-shop">リンネ スノー・アンド・サーフ</span>
+      <a class="btn btn-rakuten" href="https://hb.afl.rakuten.co.jp/hgc/g00qdnr7.jeifoc4a.g00qdnr7.jeifp26d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Frinne%2F11easis05%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Frinne%2Fi%2F10008892%2F&amp;rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d" target="_blank" rel="nofollow sponsored noopener">楽天で見る<svg class="ic ic-arrow" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-arrow-right"></use></svg></a>
+    </div>
+  </div>
+</article><article class="card">
+  <a class="card-media" href="/p/rf04123caa/" aria-label="switch2 ケース 収納ケース switch ケース 2枚組ガラスフィルム switch2 収納… ¥980">
+    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/smahoservice/cabinet/s/s300643/s300643-new.jpg?_ex=600x600" alt="switch2 ケース 収納ケース switch ケース 2枚組ガラスフィルム switch2 収納…" loading="lazy" width="640" height="640">
+    <div class="pricetag"><span class="pricetag-label">いま</span><span class="pricetag-value"><span class="pricetag-yen">¥</span><span class="pricetag-num">980</span></span></div>
+    
+  </a>
+  <div class="card-body">
+    
+    <h2 class="card-title"><a href="/p/rf04123caa/">switch2 ケース 収納ケース switch ケース 2枚組ガラスフィルム switch2 収納…</a></h2>
+    <div class="card-tags"><a class="tag" href="/c/books/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-books"></use></svg>エンタメ</a><span class="tag tag-watch">ウォッチ中</span></div>
+    <div class="card-foot">
+      <span class="card-shop">スマホサービス</span>
+      <a class="btn btn-rakuten" href="https://hb.afl.rakuten.co.jp/hgc/g00s3wv7.jeifo4a6.g00s3wv7.jeifp143/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsmahoservice%2Fs300643%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fsmahoservice%2Fi%2F10002186%2F&amp;rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d" target="_blank" rel="nofollow sponsored noopener">楽天で見る<svg class="ic ic-arrow" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-arrow-right"></use></svg></a>
+    </div>
+  </div>
+</article><article class="card">
+  <a class="card-media" href="/p/rfb9cbb123/" aria-label="印鑑 実印 はんこ 銀行印 認印 個人印鑑 黒水牛 印鑑ケース 付 10.5 ～ 18.0mm ハンコ… ¥999">
+    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/hankomaturi/cabinet/pointup_thumbnail/kurosui.jpg?_ex=600x600" alt="印鑑 実印 はんこ 銀行印 認印 個人印鑑 黒水牛 印鑑ケース 付 10.5 ～ 18.0mm ハンコ…" loading="lazy" width="640" height="640">
+    <div class="pricetag"><span class="pricetag-label">いま</span><span class="pricetag-value"><span class="pricetag-yen">¥</span><span class="pricetag-num">999</span></span></div>
+    
+  </a>
+  <div class="card-body">
+    
+    <h2 class="card-title"><a href="/p/rfb9cbb123/">印鑑 実印 はんこ 銀行印 認印 個人印鑑 黒水牛 印鑑ケース 付 10.5 ～ 18.0mm ハンコ…</a></h2>
+    <div class="card-tags"><a class="tag" href="/c/kitchen/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-kitchen"></use></svg>日用品</a><span class="tag tag-watch">ウォッチ中</span><span class="tag">送料無料</span></div>
+    <div class="card-foot">
+      <span class="card-shop">はんこ祭り</span>
+      <a class="btn btn-rakuten" href="https://hb.afl.rakuten.co.jp/hgc/g00qh5n7.jeifoa37.g00qh5n7.jeifp126/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fhankomaturi%2F1457238%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fhankomaturi%2Fi%2F10001696%2F&amp;rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d" target="_blank" rel="nofollow sponsored noopener">楽天で見る<svg class="ic ic-arrow" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-arrow-right"></use></svg></a>
+    </div>
+  </div>
+</article><article class="card">
+  <a class="card-media" href="/p/ra0e841d27/" aria-label="国産 雑穀米「三十雑穀」タマチャンショップの30雑穀米 1000円ポッキリ 送料無料… ¥1,000">
+    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/kyunan/cabinet/zakkokuspecial/sannjyukokumai/imgrc0098196195.jpg?_ex=600x600" alt="国産 雑穀米「三十雑穀」タマチャンショップの30雑穀米 1000円ポッキリ 送料無料…" loading="lazy" width="640" height="640">
+    <div class="pricetag"><span class="pricetag-label">いま</span><span class="pricetag-value"><span class="pricetag-yen">¥</span><span class="pricetag-num">1,000</span></span></div>
+    
+  </a>
+  <div class="card-body">
+    
+    <h2 class="card-title"><a href="/p/ra0e841d27/">国産 雑穀米「三十雑穀」タマチャンショップの30雑穀米 1000円ポッキリ 送料無料…</a></h2>
+    <div class="card-tags"><a class="tag" href="/c/food/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-food"></use></svg>食品</a><span class="tag tag-watch">ウォッチ中</span><span class="tag">送料無料</span></div>
+    <div class="card-foot">
+      <span class="card-shop">タマチャンショップ</span>
+      <a class="btn btn-rakuten" href="https://hb.afl.rakuten.co.jp/hgc/g00pwf87.jeifo8fa.g00pwf87.jeifp332/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkyunan%2F20grain%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fkyunan%2Fi%2F10000248%2F&amp;rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d" target="_blank" rel="nofollow sponsored noopener">楽天で見る<svg class="ic ic-arrow" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-arrow-right"></use></svg></a>
+    </div>
+  </div>
+</article><article class="card">
+  <a class="card-media" href="/p/r614069325/" aria-label="≪今だけ555円OFF まとめ買いクーポン≫うどん 讃岐うどん 1kg 10人前 選べる本場讃岐うどん… ¥1,000">
+    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/shizennoyakata/cabinet/item_img/saleitem/eraudon_sg_nabe_r.jpg?_ex=600x600" alt="≪今だけ555円OFF まとめ買いクーポン≫うどん 讃岐うどん 1kg 10人前 選べる本場讃岐うどん…" loading="lazy" width="640" height="640">
+    <div class="pricetag"><span class="pricetag-label">いま</span><span class="pricetag-value"><span class="pricetag-yen">¥</span><span class="pricetag-num">1,000</span></span></div>
+    
+  </a>
+  <div class="card-body">
+    
+    <h2 class="card-title"><a href="/p/r614069325/">≪今だけ555円OFF まとめ買いクーポン≫うどん 讃岐うどん 1kg 10人前 選べる本場讃岐うどん…</a></h2>
+    <div class="card-tags"><a class="tag" href="/c/food/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-food"></use></svg>食品</a><span class="tag tag-watch">ウォッチ中</span><span class="tag">送料無料</span><span class="tag">まとめ買い</span></div>
+    <div class="card-foot">
+      <span class="card-shop">美味しさは元気の源 【自然の館】</span>
+      <a class="btn btn-rakuten" href="https://hb.afl.rakuten.co.jp/hgc/g00pvla7.jeifobd5.g00pvla7.jeifp541/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fshizennoyakata%2Fotamesi%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fshizennoyakata%2Fi%2F10000720%2F&amp;rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d" target="_blank" rel="nofollow sponsored noopener">楽天で見る<svg class="ic ic-arrow" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-arrow-right"></use></svg></a>
+    </div>
+  </div>
+</article><article class="card">
+  <a class="card-media" href="/p/r575c64e61/" aria-label="ジェットストリーム 名入れ ボールペン 名入れ ジェットストリーム 4&amp;1 刻印 4色 0.38mm… ¥1,000">
+    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/bugyo/cabinet/pen_2021/pen_2019_123d.jpg?_ex=600x600" alt="ジェットストリーム 名入れ ボールペン 名入れ ジェットストリーム 4&amp;1 刻印 4色 0.38mm…" loading="lazy" width="640" height="640">
+    <div class="pricetag"><span class="pricetag-label">いま</span><span class="pricetag-value"><span class="pricetag-yen">¥</span><span class="pricetag-num">1,000</span></span></div>
+    
+  </a>
+  <div class="card-body">
+    
+    <h2 class="card-title"><a href="/p/r575c64e61/">ジェットストリーム 名入れ ボールペン 名入れ ジェットストリーム 4&amp;1 刻印 4色 0.38mm…</a></h2>
+    <div class="card-tags"><a class="tag" href="/c/kitchen/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-kitchen"></use></svg>日用品</a><span class="tag tag-watch">ウォッチ中</span></div>
+    <div class="card-foot">
+      <span class="card-shop">はんこ奉行</span>
+      <a class="btn btn-rakuten" href="https://hb.afl.rakuten.co.jp/hgc/g00qbsy7.jeifode2.g00qbsy7.jeifp27f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbugyo%2Fb06-21-277%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fbugyo%2Fi%2F10004467%2F&amp;rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d" target="_blank" rel="nofollow sponsored noopener">楽天で見る<svg class="ic ic-arrow" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-arrow-right"></use></svg></a>
+    </div>
+  </div>
+</article><article class="card">
+  <a class="card-media" href="/p/r76c6783d9/" aria-label="美粉屋 こなゆきコラーゲン 100000mg 一番搾りの高純度コラーゲン(低糖質・低脂質)コラーゲンパウ… ¥1,000">
+    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/kyunan/cabinet/bicosume/collagen/konayukicollagen-s.jpg?_ex=600x600" alt="美粉屋 こなゆきコラーゲン 100000mg 一番搾りの高純度コラーゲン(低糖質・低脂質)コラーゲンパウ…" loading="lazy" width="640" height="640">
+    <div class="pricetag"><span class="pricetag-label">いま</span><span class="pricetag-value"><span class="pricetag-yen">¥</span><span class="pricetag-num">1,000</span></span></div>
+    
+  </a>
+  <div class="card-body">
+    
+    <h2 class="card-title"><a href="/p/r76c6783d9/">美粉屋 こなゆきコラーゲン 100000mg 一番搾りの高純度コラーゲン(低糖質・低脂質)コラーゲンパウ…</a></h2>
+    <div class="card-tags"><a class="tag" href="/c/beauty/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-beauty"></use></svg>美容</a><span class="tag tag-watch">ウォッチ中</span><span class="tag">送料無料</span></div>
+    <div class="card-foot">
+      <span class="card-shop">タマチャンショップ</span>
+      <a class="btn btn-rakuten" href="https://hb.afl.rakuten.co.jp/hgc/g00pwf87.jeifo8fa.g00pwf87.jeifp332/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkyunan%2F1418025%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fkyunan%2Fi%2F10001288%2F&amp;rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d" target="_blank" rel="nofollow sponsored noopener">楽天で見る<svg class="ic ic-arrow" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-arrow-right"></use></svg></a>
+    </div>
+  </div>
+</article><article class="card">
+  <a class="card-media" href="/p/rff631307d/" aria-label="オメガ3 DHA EPA サプリ（約3ヶ月分） サプリメント アマニ油サプリ 亜麻仁油サプリ… ¥1,000">
+    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/oga/cabinet/item_img/250115_lk_4_03.jpg?_ex=600x600" alt="オメガ3 DHA EPA サプリ（約3ヶ月分） サプリメント アマニ油サプリ 亜麻仁油サプリ…" loading="lazy" width="640" height="640">
+    <div class="pricetag"><span class="pricetag-label">いま</span><span class="pricetag-value"><span class="pricetag-yen">¥</span><span class="pricetag-num">1,000</span></span></div>
+    
+  </a>
+  <div class="card-body">
+    
+    <h2 class="card-title"><a href="/p/rff631307d/">オメガ3 DHA EPA サプリ（約3ヶ月分） サプリメント アマニ油サプリ 亜麻仁油サプリ…</a></h2>
+    <div class="card-tags"><a class="tag" href="/c/beauty/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-beauty"></use></svg>美容</a><span class="tag tag-watch">ウォッチ中</span><span class="tag">送料無料</span></div>
+    <div class="card-foot">
+      <span class="card-shop">サプリ専門店 オーガランド</span>
+      <a class="btn btn-rakuten" href="https://hb.afl.rakuten.co.jp/hgc/g00pzam7.jeifo070.g00pzam7.jeifp958/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Foga%2F1014173%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Foga%2Fi%2F10126692%2F&amp;rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d" target="_blank" rel="nofollow sponsored noopener">楽天で見る<svg class="ic ic-arrow" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-arrow-right"></use></svg></a>
+    </div>
+  </div>
+</article><article class="card">
+  <a class="card-media" href="/p/rd514dd0f3/" aria-label="ワイヤレスイヤホン Bluetooth6.1 ワイヤレスヘッドセット bluetooth イヤホン… ¥1,000">
+    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/aidort/cabinet/09153537/1378-zhu-5.jpg?_ex=600x600" alt="ワイヤレスイヤホン Bluetooth6.1 ワイヤレスヘッドセット bluetooth イヤホン…" loading="lazy" width="640" height="640">
+    <div class="pricetag"><span class="pricetag-label">いま</span><span class="pricetag-value"><span class="pricetag-yen">¥</span><span class="pricetag-num">1,000</span></span></div>
+    
+  </a>
+  <div class="card-body">
+    
+    <h2 class="card-title"><a href="/p/rd514dd0f3/">ワイヤレスイヤホン Bluetooth6.1 ワイヤレスヘッドセット bluetooth イヤホン…</a></h2>
+    <div class="card-tags"><a class="tag" href="/c/pc/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-pc"></use></svg>PC</a><span class="tag tag-watch">ウォッチ中</span><span class="tag">送料無料</span></div>
+    <div class="card-foot">
+      <span class="card-shop">愛度楽天市場店</span>
+      <a class="btn btn-rakuten" href="https://hb.afl.rakuten.co.jp/hgc/g00skps7.jeifo982.g00skps7.jeifp82d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Faidort%2Fslub-1378%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Faidort%2Fi%2F10003438%2F&amp;rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d" target="_blank" rel="nofollow sponsored noopener">楽天で見る<svg class="ic ic-arrow" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-arrow-right"></use></svg></a>
+    </div>
+  </div>
+</article><article class="card">
+  <a class="card-media" href="/p/r24b91f85c/" aria-label="【OUTLET】ブロックプレート [Sサイズ] 基礎板 基礎版 互換 2枚セット ベースプレート 基本… ¥1,000">
+    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/base-coast/cabinet/images/duprlo-outlet_01.jpg?_ex=600x600" alt="【OUTLET】ブロックプレート [Sサイズ] 基礎板 基礎版 互換 2枚セット ベースプレート 基本…" loading="lazy" width="640" height="640">
+    <div class="pricetag"><span class="pricetag-label">いま</span><span class="pricetag-value"><span class="pricetag-yen">¥</span><span class="pricetag-num">1,000</span></span></div>
+    
+  </a>
+  <div class="card-body">
+    
+    <h2 class="card-title"><a href="/p/r24b91f85c/">【OUTLET】ブロックプレート [Sサイズ] 基礎板 基礎版 互換 2枚セット ベースプレート 基本…</a></h2>
+    <div class="card-tags"><a class="tag" href="/c/baby-toy/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-baby-toy"></use></svg>おもちゃ</a><span class="tag tag-watch">ウォッチ中</span><span class="tag">送料無料</span></div>
+    <div class="card-foot">
+      <span class="card-shop">BaseCoast ( ベースコースト)</span>
+      <a class="btn btn-rakuten" href="https://hb.afl.rakuten.co.jp/hgc/g00tirx7.jeifobe7.g00tirx7.jeifp5e0/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbase-coast%2Fsdupro-outlet%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fbase-coast%2Fi%2F10000099%2F&amp;rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d" target="_blank" rel="nofollow sponsored noopener">楽天で見る<svg class="ic ic-arrow" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-arrow-right"></use></svg></a>
+    </div>
+  </div>
+</article><article class="card">
+  <a class="card-media" href="/p/r7970e2350/" aria-label="Switch2 保護フィルム スイッチ2 保護フィルム switch2 フィルム Switch2… ¥1,000">
+    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/mywaysmart/cabinet/contents/05755520/imgrc0134588086.jpg?_ex=600x600" alt="Switch2 保護フィルム スイッチ2 保護フィルム switch2 フィルム Switch2…" loading="lazy" width="640" height="640">
+    <div class="pricetag"><span class="pricetag-label">いま</span><span class="pricetag-value"><span class="pricetag-yen">¥</span><span class="pricetag-num">1,000</span></span></div>
+    
+  </a>
+  <div class="card-body">
+    
+    <h2 class="card-title"><a href="/p/r7970e2350/">Switch2 保護フィルム スイッチ2 保護フィルム switch2 フィルム Switch2…</a></h2>
+    <div class="card-tags"><a class="tag" href="/c/books/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-books"></use></svg>エンタメ</a><span class="tag tag-watch">ウォッチ中</span><span class="tag">送料無料</span></div>
+    <div class="card-foot">
+      <span class="card-shop">MY WAY SMART 楽天市場店</span>
+      <a class="btn btn-rakuten" href="https://hb.afl.rakuten.co.jp/hgc/g00sca37.jeifo1ba.g00sca37.jeifp960/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmywaysmart%2Fntdsw-glfi-bl%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fmywaysmart%2Fi%2F10041873%2F&amp;rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d" target="_blank" rel="nofollow sponsored noopener">楽天で見る<svg class="ic ic-arrow" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-arrow-right"></use></svg></a>
+    </div>
+  </div>
+</article><article class="card">
+  <a class="card-media" href="/p/re26c1acdd/" aria-label="【本日10％OFF】【5と0の付く日】T10 2.5W パワーLED ウェッジ球 ホワイト… ¥1,000">
+    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/atv-yours/cabinet/thum/2ten5w_led_01.jpg?_ex=600x600" alt="【本日10％OFF】【5と0の付く日】T10 2.5W パワーLED ウェッジ球 ホワイト…" loading="lazy" width="640" height="640">
+    <div class="pricetag"><span class="pricetag-label">いま</span><span class="pricetag-value"><span class="pricetag-yen">¥</span><span class="pricetag-num">1,000</span></span></div>
+    
+  </a>
+  <div class="card-body">
+    
+    <h2 class="card-title"><a href="/p/re26c1acdd/">【本日10％OFF】【5と0の付く日】T10 2.5W パワーLED ウェッジ球 ホワイト…</a></h2>
+    <div class="card-tags"><a class="tag" href="/c/car/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-car"></use></svg>車・工具</a><span class="tag tag-watch">ウォッチ中</span><span class="tag">送料無料</span></div>
+    <div class="card-foot">
+      <span class="card-shop">Auto shop ユアーズ</span>
+      <a class="btn btn-rakuten" href="https://hb.afl.rakuten.co.jp/hgc/g00qda77.jeifo522.g00qda77.jeifpe86/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fatv-yours%2Ft10-25w-wh-led%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fatv-yours%2Fi%2F10001453%2F&amp;rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d" target="_blank" rel="nofollow sponsored noopener">楽天で見る<svg class="ic ic-arrow" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-arrow-right"></use></svg></a>
+    </div>
+  </div>
+</article><article class="card">
+  <a class="card-media" href="/p/r1ad45bf92/" aria-label="ガラスコーティング剤【ファインクリスタル 50ml】コーティング剤【洗車用品】ガラスコーティング 簡単… ¥1,000">
+    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/sensya/cabinet/1500_2025/996_1500.jpg?_ex=600x600" alt="ガラスコーティング剤【ファインクリスタル 50ml】コーティング剤【洗車用品】ガラスコーティング 簡単…" loading="lazy" width="640" height="640">
+    <div class="pricetag"><span class="pricetag-label">いま</span><span class="pricetag-value"><span class="pricetag-yen">¥</span><span class="pricetag-num">1,000</span></span></div>
+    
+  </a>
+  <div class="card-body">
+    
+    <h2 class="card-title"><a href="/p/r1ad45bf92/">ガラスコーティング剤【ファインクリスタル 50ml】コーティング剤【洗車用品】ガラスコーティング 簡単…</a></h2>
+    <div class="card-tags"><a class="tag" href="/c/car/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-car"></use></svg>車・工具</a><span class="tag tag-watch">ウォッチ中</span><span class="tag">送料無料</span></div>
+    <div class="card-foot">
+      <span class="card-shop">洗車の王国</span>
+      <a class="btn btn-rakuten" href="https://hb.afl.rakuten.co.jp/hgc/g00pxrg7.jeifoc84.g00pxrg7.jeifp099/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsensya%2F1325686%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fsensya%2Fi%2F10000828%2F&amp;rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d" target="_blank" rel="nofollow sponsored noopener">楽天で見る<svg class="ic ic-arrow" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-arrow-right"></use></svg></a>
+    </div>
+  </div>
+</article><article class="card">
+  <a class="card-media" href="/p/r1a42ed649/" aria-label="オーガニック・ルイボスティー なごみ ティーバッグ 100包 【送料無料】 植物由来ティーバッグ… ¥1,080">
+    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/nagomisabo/cabinet/img_rbs/100p_cart_nomal_r.jpg?_ex=600x600" alt="オーガニック・ルイボスティー なごみ ティーバッグ 100包 【送料無料】 植物由来ティーバッグ…" loading="lazy" width="640" height="640">
+    <div class="pricetag"><span class="pricetag-label">いま</span><span class="pricetag-value"><span class="pricetag-yen">¥</span><span class="pricetag-num">1,080</span></span></div>
+    
+  </a>
+  <div class="card-body">
+    
+    <h2 class="card-title"><a href="/p/r1a42ed649/">オーガニック・ルイボスティー なごみ ティーバッグ 100包 【送料無料】 植物由来ティーバッグ…</a></h2>
+    <div class="card-tags"><a class="tag" href="/c/food/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-food"></use></svg>食品</a><span class="tag tag-watch">ウォッチ中</span><span class="tag">送料無料</span></div>
+    <div class="card-foot">
+      <span class="card-shop">アロマ ルイボスnaturalshopなごみ</span>
+      <a class="btn btn-rakuten" href="https://hb.afl.rakuten.co.jp/hgc/g00qlom7.jeifo732.g00qlom7.jeifpc10/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnagomisabo%2F100p_new%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fnagomisabo%2Fi%2F10001670%2F&amp;rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d" target="_blank" rel="nofollow sponsored noopener">楽天で見る<svg class="ic ic-arrow" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-arrow-right"></use></svg></a>
+    </div>
+  </div>
+</article><article class="card">
+  <a class="card-media" href="/p/r984d91c11/" aria-label="夜道に映える 光る首輪 わずか50g 超軽量 長さ調整可 カットOK 圧倒的な視認性 綺麗 犬 散歩… ¥1,080">
+    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/next-online/cabinet/06938766/collar/imgrc0120363431.jpg?_ex=600x600" alt="夜道に映える 光る首輪 わずか50g 超軽量 長さ調整可 カットOK 圧倒的な視認性 綺麗 犬 散歩…" loading="lazy" width="640" height="640">
+    <div class="pricetag"><span class="pricetag-label">いま</span><span class="pricetag-value"><span class="pricetag-yen">¥</span><span class="pricetag-num">1,080</span></span></div>
+    
+  </a>
+  <div class="card-body">
+    
+    <h2 class="card-title"><a href="/p/r984d91c11/">夜道に映える 光る首輪 わずか50g 超軽量 長さ調整可 カットOK 圧倒的な視認性 綺麗 犬 散歩…</a></h2>
+    <div class="card-tags"><a class="tag" href="/c/pet/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-pet"></use></svg>ペット</a><span class="tag tag-watch">ウォッチ中</span><span class="tag">送料無料</span></div>
+    <div class="card-foot">
+      <span class="card-shop">Nextオンライン</span>
+      <a class="btn btn-rakuten" href="https://hb.afl.rakuten.co.jp/hgc/g00tfbh7.jeifo7dc.g00tfbh7.jeifpe5f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnext-online%2F10000228%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fnext-online%2Fi%2F10000237%2F&amp;rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d" target="_blank" rel="nofollow sponsored noopener">楽天で見る<svg class="ic ic-arrow" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-arrow-right"></use></svg></a>
+    </div>
+  </div>
+</article><article class="card">
+  <a class="card-media" href="/p/r778bcf75c/" aria-label="圧縮ポーチ 衣類 圧縮袋 トラベルポーチ セット 軽量 撥水 服 おむつポーチ M L 圧縮バッグ… ¥1,099">
+    <img src="https://thumbnail.image.rakuten.co.jp/@0_mall/bubustores2023/cabinet/zakka2/hnbag50-1-1.jpg?_ex=600x600" alt="圧縮ポーチ 衣類 圧縮袋 トラベルポーチ セット 軽量 撥水 服 おむつポーチ M L 圧縮バッグ…" loading="lazy" width="640" height="640">
+    <div class="pricetag"><span class="pricetag-label">いま</span><span class="pricetag-value"><span class="pricetag-yen">¥</span><span class="pricetag-num">1,099</span></span></div>
+    
+  </a>
+  <div class="card-body">
+    
+    <h2 class="card-title"><a href="/p/r778bcf75c/">圧縮ポーチ 衣類 圧縮袋 トラベルポーチ セット 軽量 撥水 服 おむつポーチ M L 圧縮バッグ…</a></h2>
+    <div class="card-tags"><a class="tag" href="/c/baby-toy/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-baby-toy"></use></svg>おもちゃ</a><span class="tag tag-watch">ウォッチ中</span><span class="tag">送料無料</span><span class="tag">まとめ買い</span></div>
+    <div class="card-foot">
+      <span class="card-shop">Happy Nest</span>
+      <a class="btn btn-rakuten" href="https://hb.afl.rakuten.co.jp/hgc/g00uelh7.jeifoc4a.g00uelh7.jeifp475/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbubustores2023%2Fhnbag50-s%2F&amp;m=http%3A%2F%2Fm.rakuten.co.jp%2Fbubustores2023%2Fi%2F10000626%2F&amp;rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d" target="_blank" rel="nofollow sponsored noopener">楽天で見る<svg class="ic ic-arrow" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-arrow-right"></use></svg></a>
+    </div>
+  </div>
+</article></div>
+  <div class="load-more"><button class="btn btn-ghost" id="loadMore">もっと見る</button></div>
+  <p class="affiliate-note">当サイトは楽天アフィリエイトプログラムに参加しています。価格・在庫・送料は取得時点のもので、変動します。購入前に楽天市場の商品ページで最新の条件をご確認ください。</p>
+</div>
+<aside class="layout-side">
+  <section class="side-card">
+    <h2 class="side-title"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-bolt"></use></svg>いま売れているもの</h2>
+    <div class="rank-list"><a class="rank" href="/p/ra24bd7228/"><span class="rank-no">1</span><img class="rank-img" src="https://thumbnail.image.rakuten.co.jp/@0_mall/darkangel/cabinet/12863863/13534266/01216-main-260707-7.jpg?_ex=600x600" alt="" width="120" height="120" loading="lazy"><span class="rank-body"><span class="rank-title">タイツ レギンス レディース 春 ハイウエスト Yラインカバー 腹巻 美脚 ストレッチ 高伸縮…</span><span class="rank-meta">★4.2 <b>132,013</b>件のレビュー</span><span class="rank-price">¥900</span></span></a><a class="rank" href="/p/r2b37d9ea2/"><span class="rank-no">2</span><img class="rank-img" src="https://thumbnail.image.rakuten.co.jp/@0_mall/toucher-home/cabinet/image02/hslft_01sx.jpg?_ex=600x600" alt="" width="120" height="120" loading="lazy"><span class="rank-body"><span class="rank-title">日本製 ホテルスタイルタオル ビッグフェイスタオル 【圧縮】 【お試しSALE】 楽天1位受賞 /…</span><span class="rank-meta">★4.49 <b>117,374</b>件のレビュー</span><span class="rank-price">¥890</span></span></a><a class="rank" href="/p/ra0e841d27/"><span class="rank-no">3</span><img class="rank-img" src="https://thumbnail.image.rakuten.co.jp/@0_mall/kyunan/cabinet/zakkokuspecial/sannjyukokumai/imgrc0098196195.jpg?_ex=600x600" alt="" width="120" height="120" loading="lazy"><span class="rank-body"><span class="rank-title">国産 雑穀米「三十雑穀」タマチャンショップの30雑穀米 1000円ポッキリ 送料無料…</span><span class="rank-meta">★4.5 <b>82,363</b>件のレビュー</span><span class="rank-price">¥1,000</span></span></a><a class="rank" href="/p/r2a30b6cbf/"><span class="rank-no">4</span><img class="rank-img" src="https://thumbnail.image.rakuten.co.jp/@0_mall/vox-official-store/cabinet/product-thumb/vox_ll_thumb1.jpg?_ex=600x600" alt="" width="120" height="120" loading="lazy"><span class="rank-body"><span class="rank-title">【最短翌日お届け┃365日出荷】VOX 強炭酸水 500ml 24本 ラベルレス シリカ 50mg/L…</span><span class="rank-meta">★4.8 <b>73,875</b>件のレビュー</span><span class="rank-price">¥1,650</span></span></a><a class="rank" href="/p/r76c6783d9/"><span class="rank-no">5</span><img class="rank-img" src="https://thumbnail.image.rakuten.co.jp/@0_mall/kyunan/cabinet/bicosume/collagen/konayukicollagen-s.jpg?_ex=600x600" alt="" width="120" height="120" loading="lazy"><span class="rank-body"><span class="rank-title">美粉屋 こなゆきコラーゲン 100000mg 一番搾りの高純度コラーゲン(低糖質・低脂質)コラーゲンパウ…</span><span class="rank-meta">★4.45 <b>72,781</b>件のレビュー</span><span class="rank-price">¥1,000</span></span></a></div>
+    <p class="side-note">楽天市場のレビュー件数が多い順です。</p>
+  </section>
+  
+  <section class="side-card">
+    <h2 class="side-title"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-grid"></use></svg>売場から探す</h2>
+    <div class="side-cats"><a class="side-cat" href="/c/food/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-food"></use></svg><span>食品</span><b>14</b></a><a class="side-cat" href="/c/kaden/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-kaden"></use></svg><span>家電</span><b>14</b></a><a class="side-cat" href="/c/kitchen/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-kitchen"></use></svg><span>日用品</span><b>14</b></a><a class="side-cat" href="/c/beauty/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-beauty"></use></svg><span>美容</span><b>14</b></a><a class="side-cat" href="/c/fashion/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-fashion"></use></svg><span>ファッション</span><b>14</b></a><a class="side-cat" href="/c/pc/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-pc"></use></svg><span>PC</span><b>14</b></a><a class="side-cat" href="/c/sports/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-sports"></use></svg><span>アウトドア</span><b>14</b></a><a class="side-cat" href="/c/baby-toy/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-baby-toy"></use></svg><span>おもちゃ</span><b>14</b></a><a class="side-cat" href="/c/books/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-books"></use></svg><span>エンタメ</span><b>14</b></a><a class="side-cat" href="/c/pet/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-pet"></use></svg><span>ペット</span><b>14</b></a><a class="side-cat" href="/c/car/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-car"></use></svg><span>車・工具</span><b>14</b></a></div>
+  </section>
+</aside>
 </div>
 
-<!-- ===== ABOUT BLOCK ===== -->
-<section style="max-width:900px;margin:2.5rem auto;padding:0 1.5rem;">
-    <div style="background:#f0fdfa;border-radius:1rem;padding:2rem 2.5rem;">
-        <div style="font-size:.75rem;font-weight:700;color:#0d9488;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.6rem;">ABOUT SOZAINO</div>
-        <h2 style="font-size:1.3rem;font-weight:800;color:#0f172a;margin-bottom:1rem;line-height:1.4;">ソザイノは「素材探しの時間」を減らすために生まれたサイトです</h2>
-        <p style="font-size:.95rem;color:#475569;line-height:1.85;margin-bottom:1.25rem;">ブログのアイキャッチやYouTubeサムネイルに使える画像を探すとき、「これだ」と思える1枚がなかなか見つからない——そんな経験から生まれたのがソザイノです。ブログ歴6年・YouTube制作歴2年の運営者が、AI生成素材を「実際に自分のコンテンツで使えるか」という基準で一枚ずつ選別しています。</p>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.75rem;margin-bottom:1.5rem;">
-            <div style="background:#fff;border-radius:.6rem;padding:.85rem 1rem;font-size:.85rem;color:#0f172a;">
-                <div style="margin-bottom:.4rem;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></div>
-                <div style="font-weight:700;margin-bottom:.2rem;">ブロガー向け</div>
-                <div style="color:#64748b;font-size:.8rem;">アイキャッチ・挿入画像をすばやく用意</div>
-            </div>
-            <div style="background:#fff;border-radius:.6rem;padding:.85rem 1rem;font-size:.85rem;color:#0f172a;">
-                <div style="margin-bottom:.4rem;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg></div>
-                <div style="font-weight:700;margin-bottom:.2rem;">動画クリエイター向け</div>
-                <div style="color:#64748b;font-size:.8rem;">サムネイル用のクリーンな素材を探せる</div>
-            </div>
-            <div style="background:#fff;border-radius:.6rem;padding:.85rem 1rem;font-size:.85rem;color:#0f172a;">
-                <div style="margin-bottom:.4rem;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg></div>
-                <div style="font-weight:700;margin-bottom:.2rem;">SNS運用向け</div>
-                <div style="color:#64748b;font-size:.8rem;">X・Instagram・LINE投稿に使える画像</div>
-            </div>
-            <div style="background:#fff;border-radius:.6rem;padding:.85rem 1rem;font-size:.85rem;color:#0f172a;">
-                <div style="margin-bottom:.4rem;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg></div>
-                <div style="font-weight:700;margin-bottom:.2rem;">Web制作者向け</div>
-                <div style="color:#64748b;font-size:.8rem;">商用利用OK・クレジット不要で使いやすい</div>
-            </div>
-        </div>
-        <a href="about" style="display:inline-flex;align-items:center;gap:.4rem;font-size:.88rem;font-weight:700;color:#0d9488;text-decoration:none;">ソザイノについてもっと詳しく →</a>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p class="footer-brand">ヤスミル</p>
+    <p class="footer-tag">安いを、見る。</p>
+    <a class="footer-operator" href="https://www.threads.net/@hiyoko_web" target="_blank" rel="noopener me"><img src="/assets/img/operator-sm.png" alt="" width="160" height="160" loading="lazy"><span class="fo-name">@hiyoko_web</span><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-sns-threads"></use></svg></a>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h3>カテゴリ</h3>
+        <ul><li><a href="/c/food/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-food"></use></svg>食品</a></li><li><a href="/c/kaden/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-kaden"></use></svg>家電</a></li><li><a href="/c/kitchen/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-kitchen"></use></svg>日用品</a></li><li><a href="/c/beauty/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-beauty"></use></svg>美容</a></li><li><a href="/c/fashion/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-fashion"></use></svg>ファッション</a></li><li><a href="/c/pc/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-pc"></use></svg>PC</a></li><li><a href="/c/sports/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-sports"></use></svg>アウトドア</a></li><li><a href="/c/baby-toy/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-baby-toy"></use></svg>おもちゃ</a></li><li><a href="/c/books/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-books"></use></svg>エンタメ</a></li><li><a href="/c/pet/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-pet"></use></svg>ペット</a></li><li><a href="/c/car/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-car"></use></svg>車・工具</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h3>サイトについて</h3>
+        <ul>
+          <li><a href="/about/">ヤスミルとは</a></li>
+          <li><a href="/categories/">カテゴリ一覧</a></li>
+          <li><a href="/contact/">お問い合わせ</a></li>
+          <li><a href="https://www.threads.net/@hiyoko_web" target="_blank" rel="noopener me"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-sns-threads"></use></svg>Threads</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>規約</h3>
+        <ul>
+          <li><a href="/privacy/">プライバシーポリシー</a></li>
+          <li><a href="/disclaimer/">免責事項</a></li>
+          <li><a href="/terms/">利用規約</a></li>
+        </ul>
+      </div>
     </div>
-</section>
-
-<!-- ===== COLUMN ===== -->
-<section class="column-section">
-    <div class="section-head">
-        <h2>コラム</h2>
-        <p>Web画像と素材活用にまつわる、知って得するトピックをお届けします。</p>
-    </div>
-    <div class="column-grid">
-
-        <a href="column/ai-eyecatch-merit" class="column-card">
-            <span class="new-badge">NEW</span>
-            <div class="column-card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                </svg>
-            </div>
-            <div class="column-card-body">
-                <span class="column-card-tag">AI素材</span>
-                <div class="column-card-title">ブログのアイキャッチにAI画像を使う5つのメリットと3つの注意点</div>
-                <div class="column-card-desc">差別化・素材探しの時間削減・WebPの軽量性など、実際のブログ運営経験からまとめます。</div>
-            </div>
-        </a>
-
-        <a href="column/canva-vs-free-material" class="column-card">
-            <span class="new-badge">NEW</span>
-            <div class="column-card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="12" y1="8" x2="12" y2="16"></line>
-                    <line x1="8" y1="12" x2="16" y2="12"></line>
-                </svg>
-            </div>
-            <div class="column-card-body">
-                <span class="column-card-tag">Canva・デザイン</span>
-                <div class="column-card-title">Canvaの無料素材と外部フリー素材の違いと使い分け。差別化に効く組み合わせ方</div>
-                <div class="column-card-desc">Canva内蔵素材と外部フリー素材の特徴の違いと効果的な使い分けを解説します。</div>
-            </div>
-        </a>
-
-        <a href="column/thumbnail-whitespace-design" class="column-card">
-            <div class="column-card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <polygon points="23 7 16 12 23 17 23 7"></polygon>
-                    <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
-                </svg>
-            </div>
-            <div class="column-card-body">
-                <span class="column-card-tag">YouTube・サムネイル</span>
-                <div class="column-card-title">YouTubeサムネイルの余白設計で再生数が変わる。3つのルールと実践手順</div>
-                <div class="column-card-desc">端から10%ルール・被写体周囲の余白・テキストブロックの余白設計をCanvaでの実践手順とともに解説。</div>
-            </div>
-        </a>
-
-        <a href="column/ai-material-commercial-use" class="column-card">
-            <div class="column-card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                    <polyline points="9 12 11 14 15 10"></polyline>
-                </svg>
-            </div>
-            <div class="column-card-body">
-                <span class="column-card-tag">AI素材</span>
-                <div class="column-card-title">AI素材を商用利用するときの注意点まとめ。確認すべき5つのポイント</div>
-                <div class="column-card-desc">商用利用で問題になりやすいケースと、事前に確認すべきポイントを実践的にまとめます。</div>
-            </div>
-        </a>
-
-        <a href="column/banner-color-guide" class="column-card">
-            <div class="column-card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="3" width="18" height="18" rx="2"></rect>
-                    <path d="M3 9h18"></path>
-                </svg>
-            </div>
-            <div class="column-card-body">
-                <span class="column-card-tag">デザイン</span>
-                <div class="column-card-title">バナー制作で避けるべき色と配色の基本。70・25・5の法則ですぐ使える5パターン</div>
-                <div class="column-card-desc">避けるべき色の組み合わせと使える配色パターンを解説。デザイン初心者でも実践できる基本をまとめます。</div>
-            </div>
-        </a>
-
-        <a href="column/blog-image-color-guide" class="column-card">
-            <div class="column-card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="12" y1="8" x2="12" y2="12"></line>
-                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                </svg>
-            </div>
-            <div class="column-card-body">
-                <span class="column-card-tag">デザイン</span>
-                <div class="column-card-title">ブログ画像の配色で読まれやすさが変わる理由。ジャンル別おすすめ配色パターン</div>
-                <div class="column-card-desc">配色がクリック率・読みやすさ・滞在時間に与える影響とジャンル別おすすめ配色パターンを解説。</div>
-            </div>
-        </a>
-
-    </div>
-    <div class="column-section-cta">
-        <a href="column/">すべてのコラムを見る →</a>
-    </div>
-</section>
-
-<!-- ===== LATEST MATERIALS ===== -->
-<section class="latest">
-    <div class="latest-inner">
-        <div class="latest-head">
-            <h2>最新の素材</h2>
-            <a href="gallery">すべて見る →</a>
-        </div>
-        <div class="latest-grid" id="latestGrid">
-            <a href="download.html?id=1075" class="latest-card">
-                <img src="assets/materials/blog/blog_208.webp" alt="OKサインをする手のジェスチャー" loading="lazy" width="300" height="169" onerror="this.parentElement.style.display='none'">
-                <div class="lc-overlay"><span class="lc-title">OKサインをする手のジェスチャー</span></div>
-            </a>
-            <a href="download.html?id=1074" class="latest-card">
-                <img src="assets/materials/blog/blog_207.webp" alt="緑の葉が茂る大きな木のイラスト" loading="lazy" width="300" height="169" onerror="this.parentElement.style.display='none'">
-                <div class="lc-overlay"><span class="lc-title">緑の葉が茂る大きな木のイラスト</span></div>
-            </a>
-            <a href="download.html?id=1073" class="latest-card">
-                <img src="assets/materials/blog/blog_206.webp" alt="緑色の樹木のシンプルなイラスト素材" loading="lazy" width="300" height="169" onerror="this.parentElement.style.display='none'">
-                <div class="lc-overlay"><span class="lc-title">緑色の樹木のシンプルなイラスト素材</span></div>
-            </a>
-            <a href="download.html?id=1072" class="latest-card">
-                <img src="assets/materials/blog/blog_205.webp" alt="青い水滴が降る雨のパターン素材" loading="lazy" width="300" height="169" onerror="this.parentElement.style.display='none'">
-                <div class="lc-overlay"><span class="lc-title">青い水滴が降る雨のパターン素材</span></div>
-            </a>
-            <a href="download.html?id=1071" class="latest-card">
-                <img src="assets/materials/blog/blog_204.webp" alt="降る雨のシンプルなイラストパターン" loading="lazy" width="300" height="169" onerror="this.parentElement.style.display='none'">
-                <div class="lc-overlay"><span class="lc-title">降る雨のシンプルなイラストパターン</span></div>
-            </a>
-            <a href="download.html?id=1070" class="latest-card">
-                <img src="assets/materials/blog/blog_203.webp" alt="赤い太陽のシンプルアイコン" loading="lazy" width="300" height="169" onerror="this.parentElement.style.display='none'">
-                <div class="lc-overlay"><span class="lc-title">赤い太陽のシンプルアイコン</span></div>
-            </a>
-            <a href="download.html?id=1069" class="latest-card">
-                <img src="assets/materials/blog/blog_202.webp" alt="太陽のアイコン｜赤いシンプルイラスト" loading="lazy" width="300" height="169" onerror="this.parentElement.style.display='none'">
-                <div class="lc-overlay"><span class="lc-title">太陽のアイコン｜赤いシンプルイラスト</span></div>
-            </a>
-            <a href="download.html?id=1068" class="latest-card">
-                <img src="assets/materials/blog/blog_200.webp" alt="白いカードを持つ手のクローズアップ" loading="lazy" width="300" height="169" onerror="this.parentElement.style.display='none'">
-                <div class="lc-overlay"><span class="lc-title">白いカードを持つ手のクローズアップ</span></div>
-            </a>
-            <a href="download.html?id=1067" class="latest-card">
-                <img src="assets/materials/blog/blog_199.webp" alt="力強く握られた拳のクローズアップ" loading="lazy" width="300" height="169" onerror="this.parentElement.style.display='none'">
-                <div class="lc-overlay"><span class="lc-title">力強く握られた拳のクローズアップ</span></div>
-            </a>
-            <a href="download.html?id=1066" class="latest-card">
-                <img src="assets/materials/blog/blog_198.webp" alt="電卓とペンで計算する手元の会計・財務イメージ" loading="lazy" width="300" height="169" onerror="this.parentElement.style.display='none'">
-                <div class="lc-overlay"><span class="lc-title">電卓とペンで計算する手元の会計・財務イメージ</span></div>
-            </a>
-            <a href="download.html?id=1065" class="latest-card">
-                <img src="assets/materials/blog/blog_197.webp" alt="ノートに手書きする仕事中のビジネスパーソン" loading="lazy" width="300" height="169" onerror="this.parentElement.style.display='none'">
-                <div class="lc-overlay"><span class="lc-title">ノートに手書きする仕事中のビジネスパーソン</span></div>
-            </a>
-            <a href="download.html?id=1064" class="latest-card">
-                <img src="assets/materials/blog/blog_196.webp" alt="ノートに書く手とコーヒーの作業風景" loading="lazy" width="300" height="169" onerror="this.parentElement.style.display='none'">
-                <div class="lc-overlay"><span class="lc-title">ノートに書く手とコーヒーの作業風景</span></div>
-            </a>
-        </div>
-        <div class="latest-cta">
-            <a href="gallery" class="btn-outline">ギャラリーで全素材を見る</a>
-        </div>
-    </div>
-</section>
-
-<!-- ===== CATEGORIES ===== -->
-<section class="categories">
-    <div class="section-head">
-        <h2>カテゴリから探す</h2>
-        <p>気になるジャンルをクリックしてギャラリーへ</p>
-    </div>
-    <div class="cat-grid" id="catGrid">
-        <!-- JS で生成 -->
-    </div>
-</section>
-
-<!-- ===== ABOUT MINI ===== -->
-<style>
-.about-mini-card{display:flex;align-items:center;gap:1.2rem;padding:1.5rem 1.8rem;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;}
-.about-mini-icon{width:72px;height:72px;border-radius:50%;object-fit:cover;flex-shrink:0;}
-.about-mini-body{min-width:0;flex:1;}
-.about-mini-label{font-size:.8rem;color:#94a3b8;margin-bottom:.2rem;}
-.about-mini-text{font-size:.9rem;color:#475569;line-height:1.7;}
-.about-mini-link{flex-shrink:0;font-size:.82rem;color:#0d9488;font-weight:600;text-decoration:none;white-space:nowrap;}
-@media(max-width:640px){
-  .about-mini-card{flex-direction:column;align-items:center;text-align:center;gap:.9rem;}
-  .about-mini-link{margin-top:.3rem;}
-}
-</style>
-<section style="max-width:720px;margin:0 auto 2rem;padding:0 1.5rem;">
-    <div class="about-mini-card">
-        <img src="assets/materials/haji-icon.jpg" alt="編集者ひよこ" class="about-mini-icon">
-        <div class="about-mini-body">
-            <div class="about-mini-label">このサイトについて</div>
-            <div class="about-mini-text">sozaino.com はブログ・YouTube・SNS向けのAI生成WebP素材を無料配布しています。ブログ歴6年の運営者が「実際に使えるか」を基準に一枚ずつ選別しています。</div>
-        </div>
-        <a href="about" class="about-mini-link">詳細 →</a>
-    </div>
-</section>
-
-<!-- ===== CTA ===== -->
-<section class="cta-section">
-    <div class="cta-inner">
-        <h2>さっそく素材を探してみよう</h2>
-        <p>ブログのアイキャッチ、SNS 投稿、YouTube サムネイルに。<br>すべて無料でダウンロードできます。</p>
-        <a href="gallery" class="btn-hero-primary">ギャラリーを開く →</a>
-    </div>
-</section>
-
-<footer>
-    <div class="footer-inner">
-        <div class="footer-links">
-            <a href="about">ソザイノについて</a>
-            <a href="process">素材ができるまで</a>
-            <a href="column/">コラム</a>
-            <a href="privacy">プライバシーポリシー</a>
-            <a href="terms">利用規約</a>
-            <a href="disclaimer">免責事項</a>
-            <a href="contact">お問い合わせ</a>
-        </div>
-        <div class="footer-copy">&copy; 2026 ソザイノ (SOZAINO). All rights reserved.</div>
-    </div>
+    <p class="footer-legal">
+      当サイトは楽天アフィリエイトプログラムに参加しています。商品リンク経由で購入があった場合、当サイトが紹介料を受け取ることがあります。<br>
+      掲載している価格・在庫・送料は取得時点のものです。実際の販売条件は必ず楽天市場の商品ページでご確認ください。<br>
+      &copy; 2026 ヤスミル
+    </p>
+  </div>
 </footer>
 
-<script>
-// NAV
-document.getElementById('menuToggle').addEventListener('click', () => {
-    document.getElementById('navMenu').classList.toggle('open');
-});
+<!-- 検索シート -->
+<div class="search-sheet" id="searchSheet" data-open="false" role="dialog" aria-modal="true" aria-label="商品を検索">
+  <div class="search-panel">
+    <form class="search-row" id="searchForm" role="search">
+      <input class="search-input" id="searchInput" type="search" name="q" placeholder="商品名・キーワードで探す" autocomplete="off">
+      <button class="btn btn-rakuten" type="submit">探す</button>
+    </form>
+    <p class="search-hint">例：むぎ茶／サーキュレーター／詰め替え／2000円以下</p>
+  </div>
+</div>
 
-// hero検索
-function heroSearch(e) {
-    e.preventDefault();
-    const q = document.getElementById('heroSearchInput').value.trim();
-    if (!q) { window.location.href = 'gallery.html'; return; }
-    window.location.href = `gallery.html?q=${encodeURIComponent(q)}`;
-}
+<!-- ドロワー -->
+<div class="drawer" id="drawer" data-open="false" role="dialog" aria-modal="true" aria-label="メニュー">
+  <div class="drawer-panel">
+    <div class="drawer-head">
+      <span class="drawer-title">メニュー</span>
+      <button class="icon-btn" id="drawerClose" aria-label="メニューを閉じる"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-close"></use></svg></button>
+    </div>
+    <ul class="drawer-list">
+      <li><a href="/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-home"></use></svg>特価フィード</a></li>
+      <li><a href="/categories/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-grid"></use></svg>カテゴリ一覧</a></li>
+      <li><a href="/c/food/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-food"></use></svg>食品・飲料・お酒</a></li><li><a href="/c/kaden/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-kaden"></use></svg>家電・カメラ・AV機器</a></li><li><a href="/c/kitchen/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-kitchen"></use></svg>キッチン・日用品・DIY</a></li><li><a href="/c/beauty/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-beauty"></use></svg>ドラッグストア・美容</a></li><li><a href="/c/fashion/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-fashion"></use></svg>服・靴・バッグ・時計</a></li><li><a href="/c/pc/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-pc"></use></svg>パソコン・スマホ・事務</a></li><li><a href="/c/sports/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-sports"></use></svg>スポーツ・アウトドア</a></li><li><a href="/c/baby-toy/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-baby-toy"></use></svg>ベビー・おもちゃ・ホビー</a></li><li><a href="/c/books/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-books"></use></svg>本・ゲーム・エンタメ</a></li><li><a href="/c/pet/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-pet"></use></svg>ペット用品</a></li><li><a href="/c/car/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-car"></use></svg>車・バイク・工具</a></li>
+    </ul>
+    <div class="drawer-sub">
+      <p class="drawer-sub-title">サイトについて</p>
+      <ul class="drawer-list">
+        <li><a href="/about/">ヤスミルとは</a></li>
+        <li><a href="https://www.threads.net/@hiyoko_web" target="_blank" rel="noopener me"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg#ic-sns-threads"></use></svg>Threads</a></li>
+        <li><a href="/contact/">お問い合わせ</a></li>
+        <li><a href="/privacy/">プライバシーポリシー</a></li>
+        <li><a href="/disclaimer/">免責事項</a></li>
+        <li><a href="/terms/">利用規約</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
 
-// data.json 読み込み
-async function loadData() {
-    let json = null;
-    try {
-        const res = await fetch('data.json');
-        if (res.ok) json = await res.json();
-    } catch(_) {}
-    if (!json) {
-        try {
-            const raw = localStorage.getItem('bmh_preview_json');
-            if (raw) json = JSON.parse(raw);
-        } catch(_) {}
-    }
-    if (!json) return;
+<script src="/assets/js/app.js" defer></script>
 
-    const materials = json.materials || [];
-    const catDefs   = json.metadata?.largeCategoryDefs || {};
-
-    // 統計
-    document.getElementById('statTotal').textContent = materials.length || '—';
-    document.getElementById('statCats').textContent  = Object.keys(catDefs).length || '—';
-
-    // 最新素材（最大12枚：登録日降順）
-    const latest = [...materials].reverse().slice(0, 12);
-    const grid = document.getElementById('latestGrid');
-    grid.innerHTML = '';
-    if (!latest.length) {
-        grid.innerHTML = '<div class="latest-loading">素材はまだ登録されていません</div>';
-    } else {
-        latest.forEach(m => {
-            const path = `assets/materials/${m.largeCategory}/${m.filename}`;
-            const a = document.createElement('a');
-            a.className = 'latest-card';
-            a.href = `download.html?id=${m.id}`;
-            a.innerHTML = `
-                <img src="${esc(path)}" alt="${esc(m.title||m.filename)}" loading="lazy" onerror="this.parentElement.style.display='none'">
-                <div class="lc-overlay"><span class="lc-title">${esc(m.title||m.filename)}</span></div>
-            `;
-            grid.appendChild(a);
-        });
-    }
-
-    // カテゴリカード（画像背景）
-    const catGrid = document.getElementById('catGrid');
-    catGrid.innerHTML = '';
-    Object.entries(catDefs).forEach(([key, def]) => {
-        // そのカテゴリの最初の素材を背景画像に使う
-        const sample = materials.find(m => m.largeCategory === key);
-        const bgPath = sample ? `assets/materials/${sample.largeCategory}/${sample.filename}` : '';
-
-        const a = document.createElement('a');
-        a.className = 'cat-card';
-
-        const bg = document.createElement('div');
-        bg.className = 'cat-card-bg' + (bgPath ? '' : ' no-img');
-        if (bgPath) {
-            // 画像をプリロードして表示
-            const testImg = new Image();
-            testImg.onload  = () => { bg.style.backgroundImage = `url(${bgPath})`; };
-            testImg.onerror = () => { bg.classList.add('no-img'); };
-            testImg.src = bgPath;
-        }
-
-        a.innerHTML = `
-            <div class="cat-card-overlay"></div>
-            <div class="cat-card-body">
-                <div class="cat-icon-sm">${def.icon||''}</div>
-                <div class="cat-name">${esc(def.label)}</div>
-            </div>
-        `;
-        a.insertBefore(bg, a.firstChild);
-
-        a.addEventListener('click', e => {
-            e.preventDefault();
-            sessionStorage.setItem('gallery_filter_large', key);
-            window.location.href = 'gallery.html';
-        });
-        catGrid.appendChild(a);
-    });
-
-    // ティッカー生成（直近7日以内からランダム10件）
-    const cutoff = new Date();
-    cutoff.setDate(cutoff.getDate() - 7);
-    const cutoffStr = cutoff.toISOString().split('T')[0];
-    let recent = materials.filter(m => (m.createdDate || '') >= cutoffStr);
-    if (!recent.length) {
-        recent = [...materials].sort((a, b) => b.id - a.id).slice(0, 10);
-    }
-    const shuffled = recent.sort(() => Math.random() - 0.5).slice(0, 10);
-    const tickerInner = document.getElementById('tickerInner');
-    if (tickerInner && shuffled.length) {
-        // 10件を1セットとして生成し、シームレスループのために2セット並べる
-        const buildSet = (items) => items.map((m, i) =>
-            `<div class="ticker-item">
-                ${i === 0 ? '<span class="ticker-new">NEW</span>' : ''}
-                <a href="download.html?id=${m.id}">${esc(m.title || m.filename)}</a>
-            </div>`
-        ).join('');
-        // 2セット並べてシームレスにループ
-        tickerInner.innerHTML = buildSet(shuffled) + buildSet(shuffled);
-
-        // DOMに反映してから幅を計測
-        setTimeout(() => {
-            const fullWidth = tickerInner.scrollWidth;
-            const halfWidth = fullWidth / 2;
-            // px/秒 = 200 でスピード調整
-            const duration = halfWidth / 200;
-            tickerInner.style.animation = 'none';
-            // JS で直接アニメーション（requestAnimationFrame）
-            let startTime = null;
-            let pos = 0;
-            function tick(ts) {
-                if (!startTime) startTime = ts;
-                const elapsed = (ts - startTime) / 1000;
-                pos = (elapsed * 40) % halfWidth;
-                tickerInner.style.transform = `translateX(-${pos}px)`;
-                requestAnimationFrame(tick);
-            }
-            requestAnimationFrame(tick);
-        }, 100);
-    }
-}
-
-function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-
-loadData();
-</script>
 </body>
 </html>

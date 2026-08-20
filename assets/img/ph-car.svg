@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" role="img" aria-label="車・工具">
+<defs><pattern id="h" width="24" height="24" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+<rect width="24" height="24" fill="#FFF1E3"/><rect width="9" height="24" fill="#FF8A3D" opacity=".16"/>
+</pattern></defs>
+<rect width="640" height="640" fill="url(#h)"/>
+<circle cx="320" cy="292" r="120" fill="#FFFFFF" opacity=".86"/>
+<g transform="translate(248 220) scale(6)" fill="none" stroke="#1A1410" stroke-width="1.5"
+   stroke-linecap="round" stroke-linejoin="round" opacity=".72"><path d="M3 16.5v-4.2l2.2-5.3h13.6L21 12.3v4.2H3Z"/><path d="M3.5 16.5v2a1 1 0 0 0 1 1h1.6a1 1 0 0 0 1-1v-2M16.9 16.5v2a1 1 0 0 0 1 1h1.6a1 1 0 0 0 1-1v-2"/><path d="M4.8 12.3h14.4"/><circle cx="7.6" cy="14.4" r=".9" fill="currentColor" stroke="none"/><circle cx="16.4" cy="14.4" r=".9" fill="currentColor" stroke="none"/></g>
+<text x="320" y="470" font-size="28" text-anchor="middle" font-family="sans-serif" font-weight="bold" fill="#1A1410" opacity=".52">車・工具</text>
+</svg>
