@@ -16,6 +16,7 @@ import shutil
 import hashlib
 import html
 import icons
+import markdown
 import urllib.parse
 from datetime import datetime, timezone, timedelta
 
@@ -23,7 +24,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 JST = timezone(timedelta(hours=9))
 
 # 生成物。クリーンビルド時にこれらを消す。
-GENERATED_DIRS = ["p", "c", "categories", "page", "about", "contact", "privacy", "disclaimer", "terms"]
+GENERATED_DIRS = ["p", "c", "categories", "page", "guide", "about", "contact", "privacy", "disclaimer", "terms"]
 GENERATED_FILES = ["index.html", "404.html", "sitemap.xml", "feed.xml", "robots.txt",
                    "assets/data/feed.json"]
 
@@ -71,9 +72,13 @@ def fill(template, mapping):
 
 # ---------------------------------------------------------------- components
 def feed_order(p):
-    """フィードの既定の並び。新しい順 → 割引率が高い順 → 安い順。
-    同じ日に載ったものが「高い順」に並ぶと、特価サイトとして逆になる。"""
-    return (p.get("postedAt", ""), discount_rate(p), -p.get("price", 0))
+    """フィードの既定の並び。新しい順 → 割引率が高い順 → レビュー数が多い順。
+
+    第3基準を価格にすると、値下がりがまだ無い日は全件が同着になり
+    「新着」と「安い順」がまったく同じ並びになってしまう。
+    レビュー数を使えば「新着」は実績のある順、「安い順」は価格順と、
+    それぞれ別の意味を持つ。"""
+    return (p.get("postedAt", ""), discount_rate(p), p.get("reviewCount") or 0)
 
 
 def feed_order_desc(p):
@@ -130,7 +135,7 @@ def render_sticker(p):
     ) % d
 
 
-def render_sidebar(cfg, products, cats, active=None):
+def render_sidebar(cfg, products, cats, active=None, guides=None):
     """フィードの脇（PC）／下（スマホ）に出る棚。
     ヘッダーと同じ黒帯をパネルの頭に載せて、本体と地続きに見せる。
     順位マーカーは値札POPの縮小版。順位そのものに意味があるので番号を振る。"""
@@ -143,9 +148,10 @@ def render_sidebar(cfg, products, cats, active=None):
             '<img class="rank-img" src="{img}" alt="" width="120" height="120" loading="lazy">'
             '<span class="rank-body">'
             '<span class="rank-title">{t}</span>'
-            '<span class="rank-meta">{star}{ra}<b>{rc}</b>件が購入後にレビュー</span>'
+            '<span class="rank-meta">{star}{ra}<b>{rc}</b>件のレビュー</span>'
+            '</span>'
             '<span class="rank-price"><i>¥</i>{pr}</span>'
-            '</span></a>'
+            '</a>'
         ).format(id=e(p["id"]), i=i, img=e(p["image"]), t=e(p["title"]),
                  star=icons.use("star", "ic-star"),
                  ra=p.get("reviewAverage") or "-", rc=yen(p.get("reviewCount") or 0),
@@ -164,18 +170,59 @@ def render_sidebar(cfg, products, cats, active=None):
 
     coupon = ""
     cp = cfg["site"].get("coupon") or {}
-    if cp.get("url") and cp.get("label"):
-        coupon = (
-            '<section class="side-card side-coupon">'
-            '<h2 class="side-head">%s<span>いま使えるクーポン</span></h2>'
-            '<div class="side-body">'
-            '<p class="coupon-label">%s</p>'
-            '<p class="coupon-note">%s</p>'
-            '<a class="btn btn-rakuten btn-block" href="%s" target="_blank" '
-            'rel="nofollow sponsored noopener">クーポンを見る%s</a>'
-            '</div></section>'
-        ) % (icons.use("tag"), e(cp["label"]), e(cp.get("note", "")), e(cp["url"]),
-             icons.use("arrow-right", "ic-arrow"))
+    # 期限切れのクーポンを出しっぱなしにしない。
+    # 特価サイトで一番やってはいけないのは、使えない情報を置いておくこと。
+    expired = False
+    if cp.get("until"):
+        try:
+            end = datetime.strptime(cp["until"], "%Y-%m-%d").date()
+            expired = datetime.now(JST).date() > end
+        except ValueError:
+            print("  [注意] coupon.until の日付が読めません: %r（YYYY-MM-DD 形式で）" % cp["until"])
+
+    if cp.get("url") and cp.get("label") and not expired:
+        note = cp.get("note", "")
+        stamp = ""
+        if cp.get("until"):
+            try:
+                end = datetime.strptime(cp["until"], "%Y-%m-%d")
+                left = (end.date() - datetime.now(JST).date()).days
+                stamp = end.strftime("%-m月%-d日") + "まで"
+                if left <= 3:
+                    stamp += "・のこり%d日" % left
+            except ValueError:
+                pass
+        # クーポンは値札ではなく「券」。切り取り線とミシン目のえぐれを持たせる。
+        coupon = """<section class="ticket">
+  <div class="ticket-top">
+    <p class="ticket-eyebrow">{ic}COUPON</p>
+    <p class="ticket-label">{label}</p>
+    <p class="ticket-note">{note}</p>
+    {stamp}
+  </div>
+  <div class="ticket-tear" aria-hidden="true">{scissors}</div>
+  <div class="ticket-bottom">
+    <a class="btn btn-ticket btn-block" href="{url}" target="_blank" rel="nofollow sponsored noopener">クーポンを見る{arrow}</a>
+  </div>
+</section>""".format(
+            ic=icons.use("tag"), label=e(cp["label"]), note=e(note),
+            stamp=('<p class="ticket-stamp">%s</p>' % e(stamp)) if stamp else "",
+            scissors=icons.use("scissors", "ic-scissors"),
+            url=e(cp["url"]), arrow=icons.use("arrow-right", "ic-arrow"))
+
+    guide_banner = ""
+    gs = guides if guides is not None else (cfg.get("_guides") or [])
+    if gs:
+        g = gs[0]
+        guide_banner = (
+            '<a class="guide-banner" href="/guide/%s/">'
+            '<span class="gb-eyebrow">%s読んでおく</span>'
+            '<span class="gb-label">%s</span>'
+            '<span class="gb-note">%s</span>'
+            '<span class="gb-go">攻略ガイドを読む%s</span>'
+            '</a>'
+        ) % (e(g["slug"]), icons.use("doc"), e(g.get("bannerLabel", "")),
+             e(g.get("bannerNote", "")), icons.use("arrow-right", "ic-arrow"))
 
     return """<aside class="layout-side">
   <section class="side-card">
@@ -185,6 +232,7 @@ def render_sidebar(cfg, products, cats, active=None):
       <p class="side-note">楽天市場のレビュー件数が多い順です。値下がり幅とは関係ありません。</p>
     </div>
   </section>
+  {guide_banner}
   {coupon}
   <section class="side-card">
     <h2 class="side-head">{ic2}<span>売場から探す</span></h2>
@@ -193,7 +241,8 @@ def render_sidebar(cfg, products, cats, active=None):
     </div>
   </section>
 </aside>""".format(ic=icons.use("bolt"), ic2=icons.use("grid"),
-                   rows=rows, cat_rows=cat_rows, coupon=coupon)
+                   rows=rows, cat_rows=cat_rows, coupon=coupon,
+                   guide_banner=guide_banner)
 
 
 def render_share(p, cfg, place="top"):
@@ -384,6 +433,13 @@ def page_shell(cfg, base, *, title, desc, path, content, ogtype="website",
         "CSS_HREF": asset_url("/assets/css/style.css"),
         "JS_SRC": asset_url("/assets/js/app.js"),
         "FOOTER_OPERATOR": footer_operator(cfg),
+        "GUIDE_LINKS": "".join(
+            '<li><a href="/guide/%s/">%s</a></li>' % (e(g["slug"]), e(g.get("shortTitle", g["title"])))
+            for g in (cfg.get("_guides") or [])),
+        "GUIDE_LINKS_DRAWER": "".join(
+            '<li><a href="/guide/%s/">%s%s</a></li>'
+            % (e(g["slug"]), icons.use("doc"), e(g.get("shortTitle", g["title"])))
+            for g in (cfg.get("_guides") or [])),
         "THREADS_ITEM": threads_nav_item(cfg),
     })
 
@@ -440,6 +496,9 @@ def build_index(cfg, base, products, cats):
 
     today = datetime.now(JST).strftime("%-m月%-d日")
     best = max((discount_rate(p) for p in products), default=0)
+    # 値下がりを検知した商品の数。0なら「割引率」で並べ替えても何も起きないので、
+    # そのボタン自体を出さない（押しても動かないボタンは壊れて見える）。
+    n_off = sum(1 for p in products if discount_rate(p) >= 5)
     if best:
         third = "{ic}最大{best}%OFF".format(ic=icons.use("bolt"), best=best)
     else:
@@ -480,9 +539,16 @@ def build_index(cfg, base, products, cats):
     <p class="result-count"><b id="resultCount">{count}</b> 件の特価</p>
     <div class="sorter" role="group" aria-label="並べ替え">
       <button type="button" data-sort="new" aria-pressed="true">新着</button>
-      <button type="button" data-sort="off" aria-pressed="false">割引率</button>
+      {off_sort}
       <button type="button" data-sort="cheap" aria-pressed="false">安い順</button>
     </div>
+  </div>
+  <div class="pricebar" role="group" aria-label="価格で絞り込む">
+    <button type="button" data-price="all" aria-pressed="true">すべて</button>
+    <button type="button" data-price="0-1000" aria-pressed="false">〜1,000円</button>
+    <button type="button" data-price="1000-2000" aria-pressed="false">1,000〜2,000円</button>
+    <button type="button" data-price="2000-3000" aria-pressed="false">2,000〜3,000円</button>
+    <button type="button" data-price="3000-" aria-pressed="false">3,000円〜</button>
   </div>
   <div class="feed" id="feed">{cards}</div>
   {pager}
@@ -491,6 +557,8 @@ def build_index(cfg, base, products, cats):
 {sidebar}
 </div>
 """.format(count=len(products), cards=cards,
+           off_sort=('<button type="button" data-sort="off" aria-pressed="false">割引率</button>'
+                     if n_off else ''),
            pager=render_pager(page, total_pages, "/"),
            sidebar=render_sidebar(cfg, products, cats))
 
@@ -782,6 +850,114 @@ def build_products(cfg, base, products, cats):
         ))
 
 
+def load_guides():
+    """content/guides/*.md を読み込む。新しい記事はここに .md を置くだけ。"""
+    d = os.path.join(ROOT, "content", "guides")
+    if not os.path.isdir(d):
+        return []
+    guides = []
+    for name in sorted(os.listdir(d)):
+        if not name.endswith(".md"):
+            continue
+        with open(os.path.join(d, name), encoding="utf-8") as f:
+            meta, body = markdown.parse_frontmatter(f.read())
+        if not meta.get("slug"):
+            continue
+        meta["body"] = body
+        guides.append(meta)
+    return guides
+
+
+def build_guides(cfg, base, products, cats, guides):
+    site_url = cfg["site"]["url"].rstrip("/")
+    for g in guides:
+        body_html, toc = markdown.render(g["body"])
+
+        toc_html = "".join(
+            '<li><a href="#%s">%s</a></li>' % (a, e(t)) for a, t in toc)
+
+        content = """
+<div class="wrap-narrow">
+  <nav class="breadcrumb" aria-label="パンくず">
+    <a href="/">ホーム</a><span class="sep">›</span>
+    <span>{short}</span>
+  </nav>
+</div>
+
+<article class="guide">
+  <header class="guide-head wrap-narrow">
+    <p class="page-eyebrow">{ic}攻略ガイド</p>
+    <h1 class="guide-title">{title}</h1>
+    <p class="guide-meta">{ic_cal}{updated} 更新</p>
+    <p class="pop-note guide-warn">セールの条件は毎回変わります。買う前に楽天市場の公式ページで、その回の期間・上限・条件をかならず確かめてください。</p>
+  </header>
+
+  <div class="layout wrap-wide">
+    <div class="layout-main">
+      <nav class="guide-toc" aria-label="この記事の目次">
+        <p class="guide-toc-head">{ic_grid}売場案内</p>
+        <ol>{toc}</ol>
+      </nav>
+
+      <div class="guide-body prose-guide">{body}</div>
+
+      <p class="affiliate-note">当サイトは楽天アフィリエイトプログラムに参加しています。記事内のリンクから購入があった場合、当サイトが紹介料を受け取ることがあります。</p>
+
+      {share}
+    </div>
+    {sidebar}
+  </div>
+</article>
+""".format(short=e(g.get("shortTitle", "攻略ガイド")), ic=icons.use("doc"),
+           title=e(g["title"]), ic_cal=icons.use("calendar"),
+           updated=e(g.get("updated", "")), ic_grid=icons.use("grid"),
+           toc=toc_html, body=body_html,
+           share=render_guide_share(g, cfg),
+           sidebar=render_sidebar(cfg, products, cats, guides=guides))
+
+        jsonld = jsonld_block({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": g["title"],
+            "description": g.get("description", ""),
+            "datePublished": g.get("updated", ""),
+            "dateModified": g.get("updated", ""),
+            "author": {"@type": "Organization", "name": cfg["site"]["name"]},
+            "publisher": {"@type": "Organization", "name": cfg["site"]["name"]},
+            "mainEntityOfPage": site_url + "/guide/%s/" % g["slug"],
+        })
+
+        write("guide/%s/index.html" % g["slug"], page_shell(
+            cfg, base,
+            title="%s｜%s" % (g["title"], cfg["site"]["name"]),
+            ogtitle=g["title"],
+            desc=g.get("description", ""),
+            path="/guide/%s/" % g["slug"],
+            content=content, ogtype="article", jsonld=jsonld,
+            chipbar=render_chipbar(cfg), products=products, cats=cats,
+        ))
+
+
+def render_guide_share(g, cfg):
+    url = cfg["site"]["url"].rstrip("/") + "/guide/%s/" % g["slug"]
+    text = g["title"]
+    q = urllib.parse.quote
+    targets = [
+        ("sns-x", "X", "https://x.com/intent/post?text=%s&url=%s" % (q(text), q(url))),
+        ("sns-threads", "Threads",
+         "https://www.threads.net/intent/post?text=%s" % q(text + "\n" + url)),
+        ("sns-line", "LINE",
+         "https://social-plugins.line.me/lineit/share?url=%s&text=%s" % (q(url), q(text))),
+    ]
+    btns = "".join(
+        '<a class="share-btn share-%s" href="%s" target="_blank" rel="noopener nofollow" '
+        'aria-label="%sでシェア">%s<span>%s</span></a>'
+        % (n.replace("sns-", ""), e(h), l, icons.use(n), l) for n, l, h in targets)
+    return ('<div class="share share-bottom">'
+            '<p class="share-heading">役に立ったら、誰かに教える</p>'
+            '<div class="share-row">%s</div></div>' % btns)
+
+
 def build_static_pages(cfg, base, products, cats):
     site = cfg["site"]
     pages = load("pages.json")
@@ -871,6 +1047,8 @@ def build_sitemap(cfg, products):
             urls.append((site_url + "/c/%s/page/%d/" % (c["slug"], n), now, "0.4", "daily"))
     for p in products:
         urls.append((site_url + "/p/%s/" % p["id"], p.get("postedAt", now), "0.7", "weekly"))
+    for g in (cfg.get("_guides") or []):
+        urls.append((site_url + "/guide/%s/" % g["slug"], g.get("updated", now), "0.9", "monthly"))
     for slug in ("about", "contact", "privacy", "disclaimer", "terms"):
         urls.append((site_url + "/%s/" % slug, now, "0.3", "monthly"))
 
@@ -985,7 +1163,10 @@ def main():
     clean()
     base = tpl("base.html")
 
+    guides = load_guides()
+    cfg["_guides"] = guides
     build_index(cfg, base, products, cats)
+    build_guides(cfg, base, products, cats, guides)
     build_categories(cfg, base, products, cats)
     build_products(cfg, base, products, cats)
     build_static_pages(cfg, base, products, cats)

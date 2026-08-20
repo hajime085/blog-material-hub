@@ -50,7 +50,10 @@ body {
   color: var(--ink);
   background: var(--ground);
   font-feature-settings: "palt" 1;
-  overflow-x: hidden;
+  /* overflow-x: hidden は書かない。
+     指定すると overflow-y が auto になって body がスクロールコンテナになり、
+     サイドバーの position: sticky が動かなくなる。
+     横方向のはみ出しは、はみ出す当人（マーキー等）の側で止める。 */
 }
 @media (min-width: 768px) { body { font-size: 16px; } }
 
@@ -167,6 +170,7 @@ a { color: inherit; }
 /* --- ドロワー --- */
 .drawer {
   position: fixed; inset: 0; z-index: 200;
+  overflow: hidden;
   background: rgba(26,20,16,.55);
   backdrop-filter: blur(3px);
   opacity: 0; visibility: hidden;
@@ -280,7 +284,7 @@ a.ticker-item:hover::before { background: var(--pop); }
 .layout-main { max-width: var(--col); margin-inline: auto; }
 
 .layout-side { margin-top: 34px; }
-.layout-side > * + * { margin-top: 12px; }
+.layout-side > * + * { margin-top: 18px; }
 
 @media (min-width: 1000px) {
   .layout {
@@ -291,13 +295,42 @@ a.ticker-item:hover::before { background: var(--pop); }
     justify-content: center;
   }
   .layout-main { margin-inline: 0; }
+
+  /* サイドバーは「ひとつのスクロール箱」にしない。
+     max-height と overflow-y を親に持たせると、3枚のパネルが
+     同じ箱に閉じ込められて内側にスクロールバーが出る。
+     代わりに各パネルを個別に追従させ、それぞれ独立して動かす。 */
   .layout-side {
     margin-top: 0;
+    align-self: start;
+    max-height: none;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  /* 3枚は一体で動かす。個別に貼り付けると重なって読めなくなる。
+     内側にスクロール箱は作らない（max-height / overflow を親に持たせない）。
+     そのかわりサイドバー自体を画面に収まる高さまで詰めてある。 */
+  .layout .layout-side > * { flex: 0 0 auto; position: static; }
+}
+
+/* サイドバーは3枚まとめて動かす。
+
+   サイドバーが画面より高いとき、top を正の値にすると
+   はみ出した下端（売場から探す）が永久に見えなくなる。
+   かといって bottom 指定の sticky は「下にある要素を引き上げる」動作なので、
+   通り過ぎた要素を留める働きはない。
+
+   正解は top に負の値を入れること。
+   「画面の高さ − サイドバーの高さ」を top にすると、
+   スクロールに合わせて普通に上がってきて、下端が画面の底に来たところで止まる。
+   高さは中身で変わるので、その値だけ app.js が測って入れる。
+   JSが動かない場合も、下のフォールバックで上端に貼り付く。 */
+@media (min-width: 1000px) {
+  .layout-side {
     position: sticky;
-    top: calc(var(--header-h) + 58px);
-    max-height: calc(100vh - var(--header-h) - 76px);
-    overflow-y: auto;
-    scrollbar-width: thin;
+    top: calc(var(--header-h) + 18px);
   }
   .hero-title { max-width: var(--col); }
 }
@@ -317,27 +350,27 @@ a.ticker-item:hover::before { background: var(--pop); }
   display: flex; align-items: center; gap: 8px;
   background: var(--ink);
   color: #fff;
-  padding: 11px 13px;
+  padding: 13px 15px;
   font-family: var(--f-body); font-weight: 900;
-  font-size: .88rem; letter-spacing: .01em;
+  font-size: .95rem; letter-spacing: .01em;
 }
 .side-head .ic { color: var(--pop); width: 1.05em; height: 1.05em; }
-.side-body { padding: 8px 10px 12px; }
-.side-body-tight { padding: 8px; }
+.side-body { padding: 10px 14px 16px; }
+.side-body-tight { padding: 12px; }
 
 .side-note {
-  margin: 9px 4px 0; padding-top: 9px;
+  margin: 12px 3px 0; padding-top: 12px;
   border-top: 1px dashed var(--ink-14);
-  font-size: .66rem; color: var(--ink-52); line-height: 1.65;
+  font-size: .68rem; color: var(--ink-52); line-height: 1.7;
 }
 
 /* --- 売れ筋 --- */
 .rank-list { display: flex; flex-direction: column; }
 .rank {
   display: grid;
-  grid-template-columns: 26px 58px 1fr;
-  align-items: center; gap: 9px;
-  padding: 9px 4px;
+  grid-template-columns: 26px 62px minmax(0, 1fr) auto;
+  align-items: center; gap: 5px 11px;
+  padding: 12px 4px;
   border-bottom: 1px solid var(--ink-08);
   text-decoration: none;
   transition: background .16s ease;
@@ -361,19 +394,20 @@ a.ticker-item:hover::before { background: var(--pop); }
 .rank:first-child .rank-no { background: var(--sale); color: #fff; }
 
 .rank-img {
-  width: 58px; height: 58px; border-radius: 7px;
+  width: 62px; height: 62px; border-radius: 8px;
   object-fit: cover; background: var(--ground);
   border: 1px solid var(--ink-08);
 }
 .rank-body { min-width: 0; }
 .rank-title {
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
-  font-size: .76rem; font-weight: 700; line-height: 1.4;
+  font-size: .78rem; font-weight: 700; line-height: 1.5;
   color: var(--ink);
 }
 .rank-meta {
-  display: block; font-size: .63rem; color: var(--ink-52);
-  margin-top: 3px; line-height: 1.3;
+  display: block; font-size: .64rem; color: var(--ink-52);
+  margin-top: 4px; line-height: 1.35;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .ic-star { width: .85em; height: .85em; color: #F5A623; vertical-align: -.08em; margin-right: 2px; }
 .rank-meta b {
@@ -381,24 +415,27 @@ a.ticker-item:hover::before { background: var(--pop); }
   font-size: .82rem; color: var(--ink); margin: 0 2px;
 }
 .rank-price {
-  display: block; font-family: var(--f-price); font-weight: 400;
-  font-size: 1.12rem; line-height: 1.15;
-  color: var(--sale); margin-top: 1px;
+  justify-self: end;
+  text-align: right;
+  white-space: nowrap;
+  font-family: var(--f-price); font-weight: 400;
+  font-size: 1.3rem; line-height: 1.1;
+  color: var(--sale);
 }
 .rank-price i { font-style: normal; font-size: .68em; margin-right: 1px; }
 
 /* --- 売場 --- */
 .side-cats {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 5px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 7px;
 }
 .side-cat {
-  display: flex; align-items: center; gap: 6px;
-  padding: 9px 8px;
+  display: flex; align-items: center; gap: 7px;
+  padding: 11px 10px;
   border: 1.5px solid var(--ink-14);
   border-radius: 9px;
   background: var(--paper);
   text-decoration: none;
-  font-size: .74rem; font-weight: 700; line-height: 1.2;
+  font-size: .78rem; font-weight: 700; line-height: 1.25;
   transition: background .16s ease, border-color .16s ease, color .16s ease;
 }
 .side-cat .ic { width: 1.1em; height: 1.1em; color: var(--ink-52); }
@@ -414,13 +451,6 @@ a.ticker-item:hover::before { background: var(--pop); }
 }
 .side-cat.is-active .ic,
 .side-cat.is-active .sc-count { color: var(--pop); }
-
-.side-coupon { border-color: var(--pop); border-width: 2px; }
-.side-coupon .side-head { background: var(--pop); color: var(--ink); }
-.side-coupon .side-head .ic { color: var(--sale); }
-.coupon-label { font-family: var(--f-hand); font-size: 1rem; line-height: 1.5; margin-bottom: 4px; }
-.coupon-note { font-size: .74rem; color: var(--ink-70); margin-bottom: 12px; }
-
 
 /* =========================================================
    PAGER  ── 10件ごとに切る。素のリンクで動く。
@@ -459,6 +489,335 @@ a.ticker-item:hover::before { background: var(--pop); }
   .pager-btn { padding: 10px 12px; font-size: .74rem; }
 }
 
+
+
+/* =========================================================
+   GUIDE  ── 攻略ガイド
+   長文だが読み物として静かにはせず、売場の言語で組む。
+   見出しは手書きの蛍光ペン、要点はPOP板、表は値札ボード、
+   チェックリストは買い物メモ。
+   ========================================================= */
+.guide-head { padding: 26px 0 6px; }
+.guide-title {
+  font-family: var(--f-body); font-weight: 900;
+  font-size: clamp(1.42rem, 5.6vw, 2.1rem);
+  line-height: 1.5;
+  letter-spacing: .005em;
+  margin-bottom: 10px;
+}
+.guide-meta {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: .74rem; color: var(--ink-52); font-weight: 700;
+}
+.guide-meta .ic { opacity: .6; }
+.guide-warn { margin-top: 16px; max-width: 44em; }
+
+/* 目次は売場案内図 */
+.guide-toc {
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  box-shadow: 4px 4px 0 var(--ink);
+  padding: 0 0 14px;
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+.guide-toc-head {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--ink); color: #fff;
+  font-family: var(--f-body); font-weight: 900;
+  font-size: .92rem;
+  padding: 12px 15px;
+  margin-bottom: 12px;
+}
+.guide-toc-head .ic { color: var(--pop); }
+.guide-toc ol { list-style: none; counter-reset: toc; margin: 0; padding: 0 15px; }
+.guide-toc li { counter-increment: toc; margin-bottom: 3px; }
+.guide-toc a {
+  display: flex; gap: 10px; align-items: baseline;
+  padding: 7px 4px;
+  font-size: .82rem; line-height: 1.55; font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px dashed var(--ink-08);
+}
+.guide-toc li:last-child a { border-bottom: 0; }
+.guide-toc a::before {
+  content: counter(toc, decimal-leading-zero);
+  font-family: var(--f-price); font-weight: 400;
+  font-size: .82rem; color: var(--sale);
+  flex: 0 0 auto;
+}
+.guide-toc a:hover { color: var(--sale); }
+
+/* 本文 */
+.prose-guide { font-size: .95rem; line-height: 2; }
+.prose-guide p { margin-bottom: 1.35em; }
+.prose-guide strong { font-weight: 900; }
+.prose-guide a { color: #0B7A66; text-underline-offset: 3px; }
+.prose-guide ul, .prose-guide ol { margin: 0 0 1.5em 1.4em; }
+.prose-guide li { margin-bottom: .5em; }
+
+/* 見出しは手書きの蛍光ペン */
+.guide-h2 {
+  font-family: var(--f-body); font-weight: 900;
+  font-size: clamp(1.14rem, 4.4vw, 1.42rem);
+  line-height: 1.55;
+  margin: 2.4em 0 .9em;
+  padding-bottom: 10px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 132 13'%3E%3Cpath d='M3 8.5c14-3.4 27 2.6 41-.4s25 3.2 39 .2 32-2.4 46-.6' stroke='%23FFD31F' stroke-width='6.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-position: left bottom;
+  background-size: auto 11px;
+  scroll-margin-top: calc(var(--header-h) + 70px);
+}
+.guide-h3 {
+  font-family: var(--f-body); font-weight: 900;
+  font-size: 1.04rem; line-height: 1.6;
+  margin: 2em 0 .7em;
+  padding-left: 12px;
+  border-left: 6px solid var(--pop);
+}
+.guide-h4, .guide-h5 {
+  font-family: var(--f-hand);
+  font-size: .98rem; line-height: 1.6;
+  margin: 1.6em 0 .5em;
+  color: var(--ink);
+}
+
+/* 要点は手書きのPOP板。売場で一番大きく貼ってあるやつ。 */
+.pop-quote {
+  position: relative;
+  background: var(--pop);
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+  box-shadow: 4px 4px 0 var(--ink);
+  font-family: var(--f-hand);
+  font-size: 1.06rem; line-height: 1.85;
+  padding: 20px 20px 22px;
+  margin: 1.9em 0 2.2em;
+  transform: rotate(-.7deg);
+}
+.pop-quote::before {
+  content: "";
+  position: absolute; top: -11px; left: 50%;
+  width: 74px; height: 20px;
+  transform: translateX(-50%) rotate(-1.6deg);
+  background: rgba(255,255,255,.62);
+  border: 1px solid rgba(26,20,16,.14);
+}
+
+/* 表は値札ボード */
+.table-wrap { overflow-x: auto; margin: 1.4em 0 1.9em; }
+.guide-table {
+  width: 100%; border-collapse: collapse;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 10px; overflow: hidden;
+  font-size: .86rem;
+}
+.guide-table th {
+  background: var(--ink); color: #fff;
+  font-weight: 700; font-size: .78rem;
+  padding: 10px 12px; text-align: left;
+  white-space: nowrap;
+}
+.guide-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--ink-08);
+}
+.guide-table tbody tr:nth-child(even) td { background: var(--ground); }
+.guide-table tbody tr:last-child td { border-bottom: 0; }
+.guide-table .ta-right { text-align: right; }
+.guide-table td.ta-right {
+  font-family: var(--f-price); font-weight: 400;
+  font-size: 1.02rem; color: var(--sale);
+  white-space: nowrap;
+}
+
+/* 区切りは棚の縁 */
+.guide-rule {
+  border: 0; height: 8px;
+  margin: 2.6em 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 8'%3E%3Cpath d='M0 7L6 1l6 6 6-6 6 6' stroke='%231A1410' stroke-opacity='.16' stroke-width='1.6' fill='none'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-size: auto 8px;
+}
+
+/* チェックリストは買い物メモ */
+.checklist {
+  list-style: none;
+  margin: 1.4em 0 .8em !important;
+  padding: 18px 16px;
+  background: var(--paper);
+  border: 2px dashed var(--ink-14);
+  border-radius: 12px;
+}
+.checklist li { margin-bottom: 0; }
+.check {
+  display: flex; align-items: flex-start; gap: 11px;
+  padding: 9px 4px;
+  border-bottom: 1px dashed var(--ink-08);
+  cursor: pointer;
+  font-family: var(--f-hand);
+  font-size: .92rem; line-height: 1.7;
+}
+.checklist li:last-child .check { border-bottom: 0; }
+.check input {
+  appearance: none; -webkit-appearance: none;
+  flex: 0 0 auto;
+  width: 21px; height: 21px;
+  margin-top: 4px;
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+  background: var(--paper);
+  cursor: pointer;
+  position: relative;
+  transition: background .14s ease;
+}
+.check input:checked { background: var(--pop); }
+.check input:checked::after {
+  content: "";
+  position: absolute; left: 5px; top: 1px;
+  width: 6px; height: 12px;
+  border: solid var(--ink);
+  border-width: 0 3px 3px 0;
+  transform: rotate(42deg);
+}
+.check input:checked + span { color: var(--ink-52); text-decoration: line-through; }
+.check-reset {
+  display: inline-flex; align-items: center;
+  background: transparent;
+  border: 1.5px solid var(--ink-14);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-family: var(--f-body); font-weight: 700;
+  font-size: .74rem; color: var(--ink-70);
+  cursor: pointer;
+  margin-bottom: 2em;
+}
+.check-reset:hover { border-color: var(--ink); color: var(--ink); }
+
+/* サイドバーの攻略ガイド banner */
+.guide-banner {
+  display: block;
+  background: var(--ink);
+  color: #fff;
+  border-radius: 14px;
+  padding: 17px 16px 18px;
+  text-decoration: none;
+  box-shadow: 4px 4px 0 rgba(26,20,16,.22);
+  transition: transform .16s ease, box-shadow .16s ease;
+}
+.guide-banner:hover { transform: translateY(-2px); box-shadow: 4px 7px 0 rgba(26,20,16,.26); }
+.gb-eyebrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--f-price); font-weight: 400;
+  font-size: .68rem; letter-spacing: .14em;
+  color: var(--pop);
+  margin-bottom: 8px;
+}
+.gb-label {
+  display: block;
+  font-family: var(--f-hand);
+  font-size: 1.28rem; line-height: 1.45;
+  color: var(--pop);
+  margin-bottom: 6px;
+}
+.gb-note {
+  display: block;
+  font-size: .76rem; line-height: 1.75;
+  color: rgba(255,255,255,.72);
+  margin-bottom: 13px;
+}
+.gb-go {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: .78rem; font-weight: 700;
+  border-bottom: 2px solid var(--pop);
+  padding-bottom: 2px;
+}
+
+/* =========================================================
+   TICKET  ── クーポン券
+   値札(POPカード)とは別の物体。切り取り線と、
+   ちぎるためのミシン目のえぐれを持たせる。
+   ========================================================= */
+.ticket {
+  position: relative;
+  background: var(--pop);
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  box-shadow: 4px 4px 0 var(--ink);
+  overflow: hidden;
+}
+.ticket-top { padding: 18px 17px 15px; }
+
+.ticket-eyebrow {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--f-price); font-weight: 400;
+  font-size: .68rem; letter-spacing: .18em;
+  color: var(--sale);
+  margin-bottom: 7px;
+}
+.ticket-eyebrow .ic { color: var(--ink); }
+
+.ticket-label {
+  font-family: var(--f-hand);
+  font-size: 1.3rem; line-height: 1.45;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.ticket-note {
+  font-size: .78rem; line-height: 1.85;
+  color: rgba(26,20,16,.78);
+}
+.ticket-stamp {
+  display: inline-block;
+  margin-top: 9px;
+  background: var(--ink); color: var(--pop);
+  font-family: var(--f-body); font-weight: 700;
+  font-size: .66rem;
+  padding: 3px 9px 4px;
+  border-radius: 3px;
+}
+
+/* 切り取り線。両端のえぐれは、地の色の円を半分だけ載せて作る。 */
+.ticket-tear {
+  position: relative;
+  height: 0;
+  border-top: 2px dashed rgba(26,20,16,.42);
+  margin: 0 14px;
+  display: flex; align-items: center; justify-content: flex-start;
+}
+.ticket-tear::before,
+.ticket-tear::after {
+  content: "";
+  position: absolute; top: 50%;
+  width: 18px; height: 18px;
+  background: var(--ground);
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+.ticket-tear::before { left: -25px; }
+.ticket-tear::after  { right: -25px; }
+.ic-scissors {
+  width: 15px; height: 15px;
+  color: rgba(26,20,16,.5);
+  background: var(--pop);
+  margin-left: 6px;
+  transform: translateY(-1px);
+}
+
+.ticket-bottom { padding: 15px 17px 18px; }
+
+.btn-ticket {
+  background: var(--sale); color: #fff;
+  font-size: .88rem; padding: 13px 16px;
+  border-radius: 10px;
+  box-shadow: 0 3px 0 var(--ink);
+}
+.btn-ticket:hover { background: #E02733; transform: translateY(-2px); box-shadow: 0 5px 0 var(--ink); }
+.btn-ticket:active { transform: translateY(3px); box-shadow: 0 0 0 var(--ink); }
 
 /* =========================================================
    POPキット ── 売場の手書き部品
@@ -572,6 +931,27 @@ a.ticker-item:hover::before { background: var(--pop); }
 }
 .result-count { font-size: .78rem; color: var(--ink-52); font-weight: 700; }
 .result-count b { color: var(--ink); font-family: var(--f-price); font-size: 1rem; }
+/* 価格の絞り込み。棚札と同じ言語で、フィードのすぐ上に置く。 */
+.pricebar {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  padding-bottom: 12px;
+}
+.pricebar button {
+  border: 1.5px solid var(--ink-14);
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-hand);
+  font-size: .74rem;
+  padding: 5px 11px 6px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background .16s ease, border-color .16s ease, color .16s ease;
+}
+.pricebar button:hover { border-color: var(--ink); }
+.pricebar button[aria-pressed="true"] {
+  background: var(--ink); border-color: var(--ink); color: #fff;
+}
+
 .sorter {
   display: inline-flex; background: var(--ink-08);
   border-radius: 999px; padding: 3px;

@@ -52,11 +52,68 @@
     });
   }
 
+  /* ------------------------------------------------ 買い物メモ
+     チェックリストは買う直前に使う道具なので、状態を端末に残す。
+     ページを閉じて楽天で買い物してから戻ってきても消えない。 */
+  (function checklist() {
+    var lists = document.querySelectorAll('[data-checklist]');
+    if (!lists.length) return;
+    var key = 'yasumiru:check:' + location.pathname;
+    var saved = {};
+    try { saved = JSON.parse(localStorage.getItem(key) || '{}'); } catch (e) { saved = {}; }
+
+    var boxes = document.querySelectorAll('[data-check]');
+    Array.prototype.forEach.call(boxes, function (b) {
+      if (saved[b.dataset.check]) b.checked = true;
+      b.addEventListener('change', function () {
+        saved[b.dataset.check] = b.checked;
+        try { localStorage.setItem(key, JSON.stringify(saved)); } catch (e) { /* 保存できなくても動く */ }
+      });
+    });
+
+    var reset = document.querySelector('[data-check-reset]');
+    if (reset) {
+      reset.addEventListener('click', function () {
+        Array.prototype.forEach.call(boxes, function (b) { b.checked = false; });
+        saved = {};
+        try { localStorage.removeItem(key); } catch (e) { /* noop */ }
+      });
+    }
+  })();
+
+  /* ------------------------------------------------ サイドバーの追従
+     サイドバーが画面より高いときは top に負の値を入れる。
+     こうするとスクロールに合わせて普通に上がってきて、
+     下端が画面の底に来たところで止まる（全部見えて、そのあと残る）。
+     収まるときは素直に上端へ貼り付ける。 */
+  (function stickyRail() {
+    var rail = document.querySelector('.layout-side');
+    if (!rail) return;
+    var GAP = 20;
+
+    function fit() {
+      if (window.innerWidth < 1000) { rail.style.top = ''; return; }
+      var headerH = parseInt(
+        getComputedStyle(document.documentElement).getPropertyValue('--header-h'), 10) || 80;
+      var topWhenFits = headerH + 18;
+      var h = rail.offsetHeight;
+      var avail = window.innerHeight - topWhenFits - GAP;
+      rail.style.top = (h > avail)
+        ? (window.innerHeight - h - GAP) + 'px'
+        : topWhenFits + 'px';
+    }
+
+    fit();
+    window.addEventListener('resize', fit);
+    window.addEventListener('load', fit);
+    if (window.ResizeObserver) new ResizeObserver(fit).observe(rail);
+  })();
+
   /* ------------------------------------------------ フィード */
   var feed = document.getElementById('feed');
   if (!feed) return;
 
-  var state = { all: null, view: [], page: 1, per: 10, sort: 'new', q: '' };
+  var state = { all: null, view: [], page: 1, per: 10, sort: 'new', q: '', pmin: 0, pmax: Infinity };
   var countEl = document.getElementById('resultCount');
   var sorter = document.querySelector('.sorter');
 
@@ -118,7 +175,7 @@
     if (state.sort === 'off') s.sort(function (a, b) { return b.d - a.d; });
     else if (state.sort === 'cheap') s.sort(function (a, b) { return a.pr - b.pr; });
     else s.sort(function (a, b) {
-      return (b.at || '').localeCompare(a.at || '') || (b.d - a.d) || (a.pr - b.pr);
+      return (b.at || '').localeCompare(a.at || '') || (b.d - a.d) || ((b.rc || 0) - (a.rc || 0));
     });
     return s;
   }
@@ -152,9 +209,11 @@
     var start = (state.page - 1) * state.per;
     var slice = state.view.slice(start, start + state.per);
     if (!slice.length) {
+      var why = (state.pmin > 0 || state.pmax < Infinity)
+        ? '<p>この価格帯にはまだ商品がありません。ほかの価格帯を見てください。</p>'
+        : '<p>別のことばで探してみてください。</p>';
       feed.innerHTML = '<div class="empty">' + ic('search', 'ic-xxl') +
-        '<p class="empty-title">見つかりませんでした</p>' +
-        '<p>別のことばで探してみてください。</p></div>';
+        '<p class="empty-title">見つかりませんでした</p>' + why + '</div>';
     } else {
       feed.innerHTML = slice.map(card).join('');
     }
@@ -165,6 +224,9 @@
   function refresh(keepPage) {
     var list = state.all || [];
     if (state.q) list = list.filter(function (p) { return matches(p, state.q); });
+    if (state.pmin > 0 || state.pmax < Infinity) {
+      list = list.filter(function (p) { return p.pr >= state.pmin && p.pr < state.pmax; });
+    }
     state.view = applySort(list);
     if (!keepPage) state.page = 1;
     render();
@@ -192,6 +254,21 @@
       if (!btn) return;
       state.page = Number(btn.dataset.page);
       refresh(true);
+    });
+  }
+
+  var pricebar = document.querySelector('.pricebar');
+  if (pricebar) {
+    pricebar.addEventListener('click', function (ev) {
+      var btn = ev.target.closest('button[data-price]');
+      if (!btn) return;
+      var parts = btn.dataset.price.split('-');
+      state.pmin = btn.dataset.price === 'all' ? 0 : Number(parts[0] || 0);
+      state.pmax = btn.dataset.price === 'all' || !parts[1] ? Infinity : Number(parts[1]);
+      Array.prototype.forEach.call(pricebar.querySelectorAll('button'), function (b) {
+        b.setAttribute('aria-pressed', String(b === btn));
+      });
+      ensureData().then(function () { refresh(); });
     });
   }
 

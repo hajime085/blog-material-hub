@@ -84,6 +84,8 @@ ICONS = {
     "doc": ('<path d="M6 3h7.5L19 8.5V21H6V3Z"/><path d="M13.5 3v5.5H19"/>'
             '<path d="M9 13h7M9 16.5h5"/>'),
     "info": '<circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.8h.01"/>',
+    "scissors": ('<circle cx="6" cy="6.2" r="2.6"/><circle cx="6" cy="17.8" r="2.6"/>'
+                 '<path d="M8.4 7.7 20 17.4M8.4 16.3 20 6.6"/>'),
     "star": ('<path d="M12 3.2l2.6 5.6 6 .8-4.4 4.3 1.1 6.1L12 17.1 6.7 20l1.1-6.1L3.4 9.6l6-.8L12 3.2Z" '
              'fill="currentColor" stroke="none"/>', "solid"),
     "share": ('<circle cx="18" cy="5.5" r="2.8"/><circle cx="6" cy="12" r="2.8"/>'
