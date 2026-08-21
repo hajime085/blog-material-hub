@@ -1860,6 +1860,11 @@ a.ticker-item:hover::before { background: var(--pop); }
 }
 .gacha-slot { min-height: 4px; margin-bottom: 14px; text-align: left; }
 .gacha-slot:empty { margin-bottom: 0; }
+/* 出た1件は、フィードのカードをそのまま使っている。
+   ただしガチャの枠はフィードより広いので、そのままだと
+   正方形の写真が画面いっぱいに伸びる（1000px近くになっていた）。
+   1件だけを見せる場所なので、幅を抑えて中央に置く。 */
+.gacha-slot .card { max-width: 400px; margin: 0 auto; }
 
 /* 抽選中。写真をぼかして小刻みに揺らす。 */
 .gacha-blur {
