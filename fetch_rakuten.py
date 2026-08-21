@@ -601,9 +601,14 @@ def build_featured(cfg, app_id, access_key, aff_id, site_url):
     for line in open(path, encoding="utf-8"):
         line = line.strip()
         if line.startswith("##"):
-            section = line.lstrip("#").strip()
+            # 「## fashion   # 服・靴・バッグ・時計」のように
+            # 見出しの後ろに説明を書けるようにする。
+            section = line.lstrip("#").split("#")[0].strip()
         elif line and not line.startswith("#"):
-            urls.append((line, section))
+            # 行の後ろに書いたメモも落とす。
+            line = line.split("#")[0].strip()
+            if line:
+                urls.append((line, section))
     if not urls:
         print("featured.txt にURLがありません。商品ページのURLを1行ずつ貼ってください。")
         return
