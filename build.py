@@ -167,7 +167,7 @@ def render_sticker(p):
     ) % d
 
 
-def render_sidebar(cfg, products, cats, active=None, guides=None):
+def render_sidebar(cfg, products, cats, active=None, guides=None, current_guide=None):
     """フィードの脇（PC）／下（スマホ）に出る棚。
     ヘッダーと同じ黒帯をパネルの頭に載せて、本体と地続きに見せる。
     順位マーカーは値札POPの縮小版。順位そのものに意味があるので番号を振る。"""
@@ -244,19 +244,26 @@ def render_sidebar(cfg, products, cats, active=None, guides=None):
             scissors=icons.use("scissors", "ic-scissors"),
             url=e(cp["url"]), arrow=icons.use("arrow-right", "ic-arrow"))
 
+    # 記事は増えていくので、1本だけ出す作りにしない。
+    # ただし黒帯を何枚も積むと主張が強すぎるので、1枚の中に並べる。
     guide_banner = ""
     gs = guides if guides is not None else (cfg.get("_guides") or [])
+    gs = [g for g in gs if g.get("slug") != current_guide]
     if gs:
-        g = gs[0]
-        guide_banner = (
-            '<a class="guide-banner" href="/guide/%s/">'
-            '<span class="gb-eyebrow">%s読んでおく</span>'
+        items = "".join(
+            '<a class="gb-item" href="/guide/%s/">'
             '<span class="gb-label">%s</span>'
             '<span class="gb-note">%s</span>'
-            '<span class="gb-go">攻略ガイドを読む%s</span>'
+            '<span class="gb-go">読む%s</span>'
             '</a>'
-        ) % (e(g["slug"]), icons.use("doc"), e(g.get("bannerLabel", "")),
-             e(g.get("bannerNote", "")), icons.use("arrow-right", "ic-arrow"))
+            % (e(g["slug"]), e(g.get("bannerLabel", "")), e(g.get("bannerNote", "")),
+               icons.use("arrow-right", "ic-arrow"))
+            for g in gs)
+        guide_banner = (
+            '<section class="guide-shelf">'
+            '<p class="gb-eyebrow">%s%s</p>%s'
+            '</section>'
+        ) % (icons.use("doc"), "あわせて読む" if current_guide else "読んでおく", items)
 
     return """<aside class="layout-side">
   <section class="side-card">
@@ -974,6 +981,9 @@ def load_guides():
             continue
         meta["body"] = body
         guides.append(meta)
+    # 新しい順。ファイル名順だと、記事が増えたとき
+    # たまたま名前が前に来たものが先頭を取ってしまう。
+    guides.sort(key=lambda g: (g.get("updated", ""), g.get("slug", "")), reverse=True)
     return guides
 
 
@@ -1040,7 +1050,8 @@ def build_guides(cfg, base, products, cats, guides):
            updated=e(g.get("updated", "")), ic_grid=icons.use("grid"),
            toc=toc_html, body=body_html,
            share=render_guide_share(g, cfg),
-           sidebar=render_sidebar(cfg, products, cats, guides=guides))
+           sidebar=render_sidebar(cfg, products, cats, guides=guides,
+                                  current_guide=g.get("slug")))
 
         jsonld = jsonld_block({
             "@context": "https://schema.org",
