@@ -167,49 +167,6 @@ def render_sticker(p):
     ) % d
 
 
-def render_sns(cfg):
-    """SNSの枠。まずフォローの案内を出しておく。
-
-    Xの公式タイムラインは、閲覧者がXにログインしていないと
-    中身が出ないことが多い（2025年以降は429で落ちることもある）。
-    そのため埋め込みは「出せたときだけ出す」。
-    出せなければ、この案内がそのまま残る。
-    空の箱を置いておくのが一番よくない。
-    """
-    site = cfg["site"]
-    x_url = site.get("x") or ""
-    th_url = site.get("threads") or ""
-    if not x_url and not th_url:
-        return ""
-
-    btns = ""
-    if x_url:
-        btns += ('<a class="sns-follow sns-follow-x" href="%s" target="_blank" '
-                 'rel="noopener me" data-short="X">%s<span>Xでフォロー</span></a>'
-                 % (e(x_url), icons.use("sns-x")))
-    if th_url:
-        btns += ('<a class="sns-follow sns-follow-threads" href="%s" target="_blank" '
-                 'rel="noopener me" data-short="Threads">%s<span>Threadsでフォロー</span></a>'
-                 % (e(th_url), icons.use("sns-threads")))
-
-    handle = site.get("twitter") or ""
-    embed = ""
-    if x_url:
-        embed = ('<div class="sns-timeline" id="snsTimeline" '
-                 'data-handle="%s" hidden></div>' % e(handle.lstrip("@")))
-
-    return """<section class="side-card sns-card">
-  <h2 class="side-head">{ic}<span>{name}の投稿</span></h2>
-  <div class="side-body">
-    {embed}
-    <div class="sns-intro" id="snsIntro">
-      <p class="sns-note">値下がりを見つけたら、その都度お知らせしています。</p>
-      <div class="sns-follows">{btns}</div>
-    </div>
-  </div>
-</section>""".format(ic=icons.use("share"), name=e(site["name"]), embed=embed, btns=btns)
-
-
 def render_sidebar(cfg, products, cats, active=None, guides=None, current_guide=None):
     """フィードの脇（PC）／下（スマホ）に出る棚。
     ヘッダーと同じ黒帯をパネルの頭に載せて、本体と地続きに見せる。
@@ -318,7 +275,6 @@ def render_sidebar(cfg, products, cats, active=None, guides=None, current_guide=
   </section>
   {guide_banner}
   {coupon}
-  {sns}
   <section class="side-card">
     <h2 class="side-head">{ic2}<span>売場から探す</span></h2>
     <div class="side-body side-body-tight">
@@ -327,7 +283,7 @@ def render_sidebar(cfg, products, cats, active=None, guides=None, current_guide=
   </section>
 </aside>""".format(ic=icons.use("bolt"), ic2=icons.use("grid"),
                    rows=rows, cat_rows=cat_rows, coupon=coupon,
-                   guide_banner=guide_banner, sns=render_sns(cfg))
+                   guide_banner=guide_banner)
 
 
 def render_share(p, cfg, place="top"):

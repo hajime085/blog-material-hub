@@ -7,7 +7,7 @@
     "url": "https://sozaino.com",
     "locale": "ja_JP",
     "author": "@hiyoko_web",
-    "twitter": "@YASUUMIRU",
+    "twitter": "",
     "threads": "https://www.threads.net/@hiyoko_web",
     "contactFormUrl": "https://forms.gle/Htpo5D625T3HVCDj8",
     "operator": {
@@ -25,9 +25,7 @@
       "note": "楽天で配布中のクーポンが並んでいます。日によって中身が入れ替わります。",
       "until": "",
       "url": "https://a.r10.to/h5DSdE"
-    },
-    "x": "https://x.com/YASUUMIRU",
-    "_xNote": "x を空にすると、サイドバーのSNS枠からXが消えます。タイムラインの埋め込みは、表示できたときだけ出す作りです（Xはログインしていない閲覧者に出さないことが多いため）。"
+    }
   },
   "rakuten": {
     "_comment": "認証情報はここに書かず、.env に入れてください (RAKUTEN_APP_ID / RAKUTEN_ACCESS_KEY / RAKUTEN_AFFILIATE_ID)。fetch_rakuten.py が読み込みます。",
