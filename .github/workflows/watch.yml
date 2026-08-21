@@ -1,0 +1,61 @@
+name: 特価の見張り
+
+# 3時間おきに価格を見に行き、変化があればサイトを作り直して反映する。
+# 手で動かしたいときは Actions タブの「Run workflow」から。
+on:
+  schedule:
+    # UTC で指定する。日本時間の 7,10,13,16,19,22 時にあたる。
+    # 深夜は楽天側の動きも鈍く、見に行っても得るものが少ないので外している。
+    - cron: "0 22,1,4,7,10,13 * * *"
+  workflow_dispatch:
+
+# 実行が重なると products.json の書き込みがぶつかる。前のものを待つ。
+concurrency:
+  group: watch
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 価格を見に行く
+        env:
+          RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
+          RAKUTEN_ACCESS_KEY: ${{ secrets.RAKUTEN_ACCESS_KEY }}
+          RAKUTEN_AFFILIATE_ID: ${{ secrets.RAKUTEN_AFFILIATE_ID }}
+        run: python3 fetch_rakuten.py --watch
+
+      - name: サイトを作り直す
+        run: python3 build.py
+
+      - name: 変化があれば反映する
+        run: |
+          git config user.name "yasumiru-bot"
+          git config user.email "bot@users.noreply.github.com"
+          if git diff --quiet && git diff --cached --quiet; then
+            echo "変化なし。何もしません。"
+            exit 0
+          fi
+          git add -A
+          git commit -F .run_summary.txt
+          # 手元からの push と重なったときのために、取り込んでから送る。
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push origin main && exit 0
+            echo "やり直します ($i)"
+            sleep 5
+          done
+          exit 1
+
+      - name: 実行結果を残す
+        if: always()
+        run: cat .run_summary.txt >> "$GITHUB_STEP_SUMMARY" || true
