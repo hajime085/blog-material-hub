@@ -52,8 +52,8 @@
     "_featuredNote": "featured.txt から取り込む「編集部が選んだもの」の基準。featuredMaxPrice を超えるもの、レビューが少ないものは機械的に弾く。楽天の売れ筋一覧は発生報酬額の順なので高額・高料率の商品が上に来るが、このサイトは安さを紹介する場所なので順位は使わず、安い順に並べ替える。featuredPerSection は「## ジャンル名」ごとの上限。1ジャンルが棚を占領しないように。",
     "saleStartToleranceHours": 36,
     "_saleNote": "在庫あり(availability=1)でも販売開始前の商品がある。買えない商品を載せないため startTime/endTime を見る。saleStartToleranceHours は「何時間先までの開始を許容するか」。当日夜の数量限定などは予告として載せる価値があるので既定24時間。",
-    "watchMaxNewPerRun": 3,
-    "_watchNote": "--watch（数時間おきの見張り）で1回に足す新規の上限。値段の追跡が主目的なので少なくしている。キャプションが空のカードが一気に増えないように。"
+    "watchMaxNewPerRun": 2,
+    "_watchNote": "--watch（数時間おきの見張り）で1回に足す新規の上限。1日5回動くので、最大で1日10件増える。値段の追跡が主目的なので少なくしている。キャプションが空のカードが一気に増えないように。"
   },
   "feed": {
     "perPage": 10,
