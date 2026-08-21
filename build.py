@@ -1304,6 +1304,58 @@ def containers_with_buttons():
     return found
 
 
+def check_guide_toc(guides):
+    """記事の目次が空になっていないかを見る。
+
+    目次に載るのは h2、つまり記事中の「#」だけ。
+    「##」から書き始めると h3 になり、目次が丸ごと空になる。
+    見た目は普通に出るので、言われないと気づけない。
+    """
+    for g in guides:
+        _body, toc = markdown.render(g["body"])
+        if not toc:
+            print("\n⚠ 記事「%s」の目次が空です。" % g.get("shortTitle") or g.get("slug"))
+            print("   大見出しは「##」ではなく「#」で書いてください（目次に載るのは # だけ）。")
+
+
+def check_internal_links():
+    """生成したページの中の、サイト内リンクが実在するかを確かめる。
+
+    記事は手で書くので、URLの打ち間違いが混ざる。
+    実際 /guides/ と /guide/ を取り違えた（ディレクトリは guide が正しい）。
+    リンク切れは読者をそこで止めてしまうし、
+    公開してからでないと気づけないのが一番まずい。
+    """
+    import re as _re
+
+    broken = {}
+    for base, _dirs, files in os.walk(ROOT):
+        # 生成物ではない場所は見ない
+        rel = os.path.relpath(base, ROOT)
+        if rel.split(os.sep)[0] in (".git", "content", "assets", "__pycache__", ".github"):
+            continue
+        for name in files:
+            if not name.endswith(".html"):
+                continue
+            path = os.path.join(base, name)
+            with open(path, encoding="utf-8") as f:
+                html_text = f.read()
+            for href in set(_re.findall(r'href="(/[^"#?]*)"', html_text)):
+                target = href.strip("/")
+                if not target:
+                    continue
+                if (os.path.exists(os.path.join(ROOT, target))
+                        or os.path.exists(os.path.join(ROOT, target, "index.html"))):
+                    continue
+                broken.setdefault(href, set()).add(os.path.relpath(path, ROOT))
+
+    if broken:
+        print("\n⚠ サイト内リンクの行き先がありません:")
+        for href, pages in sorted(broken.items()):
+            where = ", ".join(sorted(pages)[:3])
+            print("   %-34s ← %s" % (href, where))
+
+
 def check_padding_collisions():
     """.wrap 系と併用しているクラスに padding の一括指定が無いか調べる。
 
@@ -1400,6 +1452,8 @@ def main():
     build_rss(cfg, products)
 
     check_padding_collisions()
+    check_internal_links()
+    check_guide_toc(guides)
 
     print("✅ ビルド完了")
     print("   商品 %d件 / カテゴリ %d件" % (len(products), len(cfg["categories"])))
