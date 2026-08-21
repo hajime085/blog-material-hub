@@ -138,11 +138,14 @@ def api_get(url, params, site_url):
         "Referer": origin + "/",
         "Accept": "application/json",
     })
+    # except を抜けると例外変数は消えるので、外の変数に控えておく。
+    failure = None
     for attempt in range(4):
         try:
             with urllib.request.urlopen(req, timeout=20) as res:
                 return json.loads(res.read().decode("utf-8"))
         except urllib.error.HTTPError as ex:
+            failure = ex
             # 流量制限。少し待てば通るので、間隔を空けて数回試す。
             if ex.code == 429 and attempt < 3:
                 wait = 5 * (attempt + 1)
@@ -150,9 +153,9 @@ def api_get(url, params, site_url):
                 time.sleep(wait)
                 continue
             break
-    try:
-        raise ex
-    except urllib.error.HTTPError as ex:
+
+    if failure is not None:
+        ex = failure
         body = ""
         try:
             body = ex.read().decode("utf-8", "replace")[:400]
@@ -193,6 +196,8 @@ def api_get(url, params, site_url):
             )
         raise SystemExit("\nHTTP %s エラー: %s\n%s" % (ex.code, ex.reason, body))
 
+    raise SystemExit("\n楽天APIに接続できませんでした。ネットワークを確認してください。")
+
 
 # 楽天の商品名は、店舗が付けた販促の飾りで埋まっていることが多い。
 #   例: ＼送料無料／【あす楽】★店内最安値★ 商品名 まとめ買い
@@ -217,7 +222,8 @@ def clean_title(raw):
     そのため、変化しなくなるまで剥がし続ける。
     """
     # 括弧にも記号にも囲まれていない、先頭の売り文句
-    LEAD2 = (r"(ゆうパケット[^ 　]{0,10}|[^ 　]{0,6}送料\d+円|\d+円以上で注文可能|"
+    LEAD2 = (r"(クーポン[^ 　]{0,4}で?[^ 　]{0,16}円[～〜]?|"
+             r"ゆうパケット[^ 　]{0,10}|[^ 　]{0,6}送料\d+円|\d+円以上で注文可能|"
              r"\d+月限定\s*[（(]?要エントリー[）)]?|要エントリー|"
              r"エントリーで[^ 　]{0,10}|最大\d+倍|全品\d+%?[オフOFF]+)")
     LEAD = (r"(\d+\s*[%％]\s*(?:OFF|オフ|off)[!！]?|店内最安値|最安値挑戦?中?|最安値|"
@@ -316,9 +322,25 @@ def list_price_from_title(raw_title, price):
     return None
 
 
+# 「クーポン利用で5kgあたり2250円」のように、条件付きの単価。
+# 実際に払う額と違うので、そのまま単価として出すと嘘になる。
+CONDITIONAL_UNIT = re.compile(
+    r"(クーポン|エントリー|まとめ買い|\d+個以上|\d+点以上|セット購入|"
+    r"最大|実質|ポイント|同梱|複数購入)[^。]{0,12}$")
+
+
 def unit_note_from_title(raw):
+    """タイトルに書かれた単価を読む。ただし条件付きのものは読まない。
+
+    「5kgあたり2250円」と書いてあっても、その手前に「クーポン利用で」が
+    付いていれば、それはクーポンを使ったときの値段。
+    実売価格の横にそのまま並べると、読者に嘘をつくことになる。
+    """
     m = UNIT_RE.search(raw)
     if not m:
+        return None
+    # 単価の表記より前の部分に条件が書かれていないかを見る。
+    if CONDITIONAL_UNIT.search(raw[:m.start()]):
         return None
     return re.sub(r"\s+", "", m.group(1))
 
@@ -475,6 +497,28 @@ def fetch_category(cat, app_id, access_key, aff_id, hits, site_url, ng_keyword="
 ITEM_URL_RE = re.compile(r"item\.rakuten\.co\.jp/([^/]+)/([^/?#]+)")
 
 
+def item_code_from_page(item_url, shop, timeout=20):
+    """商品ページのHTMLから、数字の商品コードを読み取る。
+
+    楽天の商品URLの末尾はショップが自由に決めるもので、
+    「ex-x01028」のような英字のこともある。一方APIの商品コードは数字で、
+    英字のスラッグをそのまま渡しても itemCode is not valid になる。
+
+    商品ページには数字のほうが埋まっているので、1枚読んで取り出す。
+    ショップの商品を何百件も走査するより速く、確実。
+    """
+    url = item_url if item_url.startswith("http") else "https://" + item_url
+    try:
+        req = urllib.request.Request(url, headers={
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"})
+        with urllib.request.urlopen(req, timeout=timeout) as res:
+            body = res.read(400000).decode("utf-8", "replace")
+    except Exception:                                     # noqa: BLE001
+        return None
+    m = re.search(r'"itemId"\s*:\s*"?(\d+)', body)
+    return "%s:%s" % (shop, m.group(1)) if m else None
+
+
 def item_code_from_url(url, ctx=None, timeout=20):
     """貼られたURLから商品コード（ショップ名:番号）を取り出す。
 
@@ -535,12 +579,38 @@ def item_code_from_url(url, ctx=None, timeout=20):
     if slug.isdigit():
         return remember("%s:%s" % (shop, slug))
 
-    # そうでなければショップの商品を走査して itemUrl で照合する
     if not ctx:
         return None
     app_id, access_key, aff_id, site_url = ctx
     needle = "/%s/" % slug
-    for page in range(1, 4):
+
+    def same_item(it):
+        # itemUrl はアフィリエイトURLで返ることがあり、
+        # 元の商品URLは pc= の中にURLエンコードされて入っている。
+        # そのまま文字列で探すと一致しないので、必ず戻してから比べる。
+        return needle in urllib.parse.unquote(it.get("itemUrl") or "")
+
+    # 商品ページ自体に数字の商品コードが埋まっている。
+    # 「ex-x01028」のような英字のスラッグでも、ページを1枚読めば
+    # 「10000794」が分かるので、ショップ全体を走査せずに済む。
+    code = item_code_from_page(m.group(0), shop, timeout)
+    if code:
+        try:
+            data = api_get(ITEM_API, {
+                "applicationId": app_id, "accessKey": access_key, "affiliateId": aff_id,
+                "itemCode": code, "format": "json", "formatVersion": 2,
+            }, site_url)
+        except SystemExit:
+            data = {}
+        except Exception:                                 # noqa: BLE001
+            data = {}
+        got = data.get("Items") or []
+        # 貼られたURLと同じ商品かを確かめてから採用する。
+        if got and same_item(got[0]):
+            return remember(code)
+
+    # 読み取れなければ、ショップの商品を順に見て itemUrl で照合する。
+    for page in range(1, 11):
         try:
             data = api_get(ITEM_API, {
                 "applicationId": app_id, "accessKey": access_key, "affiliateId": aff_id,
@@ -551,7 +621,7 @@ def item_code_from_url(url, ctx=None, timeout=20):
             return None
         items = data.get("Items") or []
         for it in items:
-            if needle in (it.get("itemUrl") or ""):
+            if same_item(it):
                 return remember(it.get("itemCode"))
         if page >= (data.get("pageCount") or 1):
             break
