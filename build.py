@@ -1430,29 +1430,37 @@ def check_caption_prices(products):
 
     bad = []
     for p in products:
-        cap = p.get("caption") or ""
-        if not cap:
-            continue
+        # キャプションだけでなく、商品説明と箇条書きにも金額を書いている。
+        # 見張る範囲を分けておく理由がないので、まとめて見る。
+        blocks = [("キャプション", p.get("caption") or ""),
+                  ("説明", p.get("description") or "")]
+        blocks += [("箇条書き", x) for x in (p.get("points") or [])]
         ok = {p["price"], p.get("listPrice") or 0}
         note = p.get("unitNote") or ""
         for m in _re.findall(r"([\d,]{3,9})\s*円", note):
             ok.add(int(m.replace(",", "")))
-        for m in _re.findall(r"([\d,]{3,9})\s*円", cap):
-            v = int(m.replace(",", ""))
-            if v in ok:
+
+        for where, text in blocks:
+            if not text:
                 continue
-            # 単価の言及（1個あたり◯円）は本体価格と一致しなくて当然
-            if _re.search(r"1\s*[^\s]{0,4}あたり[^。]{0,6}%s" % _re.escape(m), cap):
-                continue
-            if _re.search(r"%s\s*円[^。]{0,6}(なら|で)" % _re.escape(m), cap):
-                continue
-            bad.append((p["id"], v, p["price"], cap))
+            for m in _re.findall(r"([\d,]{3,9})\s*円", text):
+                v = int(m.replace(",", ""))
+                if v in ok:
+                    continue
+                # 単価やセット単価の言及は、本体価格と一致しなくて当然
+                near = _re.search(r".{0,18}%s\s*円.{0,12}" % _re.escape(m), text)
+                around = near.group(0) if near else ""
+                if _re.search(r"(あたり|ぽっきり|1本|1袋|1包|1個|1枚|1食|1杯|1ヶ月|1kg|から|切ります|切る)",
+                              around):
+                    continue
+                bad.append((p["id"], v, p["price"], where, text))
 
     if bad:
-        print("\n⚠ キャプションの金額が、いまの価格と合いません:")
-        for pid, v, now, cap in bad[:12]:
-            print("   %s  文中 ¥%s / 実売 ¥%s" % (pid, "{:,}".format(v), "{:,}".format(now)))
-            print("      %s" % cap[:56])
+        print("\n⚠ 書いた金額が、いまの価格と合いません:")
+        for pid, v, now, where, text in bad[:12]:
+            print("   %s [%s]  文中 ¥%s / 実売 ¥%s"
+                  % (pid, where, "{:,}".format(v), "{:,}".format(now)))
+            print("      %s" % text.replace("\n", " ")[:60])
 
 
 def check_internal_links():
