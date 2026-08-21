@@ -2013,3 +2013,40 @@ a.ticker-item:hover::before { background: var(--pop); }
   .q-opt { font-size: 1.14rem; padding: 13px 6px; }
   .q-reveal-btns { grid-template-columns: 1fr; }
 }
+
+/* ---- SNS（サイドバー） ----
+   Xのタイムラインは出せたときだけ出す。出せなければフォローの案内が残る。 */
+.sns-note {
+  font-size: .8rem; line-height: 1.75;
+  color: var(--ink-70);
+  margin-bottom: 12px;
+}
+.sns-follows { display: grid; gap: 8px; }
+.sns-follow {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 12px 14px;
+  border-radius: 11px;
+  font-size: .84rem; font-weight: 700;
+  text-decoration: none;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.sns-follow:hover { transform: translateY(-2px); }
+.sns-follow-x, .sns-follow-threads {
+  background: var(--ink); color: #fff;
+  box-shadow: 2px 3px 0 rgba(26,20,16,.2);
+}
+.sns-follow:hover { box-shadow: 2px 5px 0 rgba(26,20,16,.24); }
+.sns-follow .ic { width: 17px; height: 17px; }
+
+.sns-timeline[hidden] { display: none; }
+.sns-timeline { margin-bottom: 12px; }
+/* タイムラインが出たときは、案内を控えめにして重複した主張を減らす */
+.sns-intro.is-compact { border-top: 1px dashed var(--ink-14); padding-top: 12px; }
+.sns-intro.is-compact .sns-note { display: none; }
+.sns-intro.is-compact .sns-follows { grid-template-columns: 1fr 1fr; }
+.sns-intro.is-compact .sns-follow { padding: 10px 8px; font-size: .76rem; }
+.sns-intro.is-compact .sns-follow span { display: none; }
+.sns-intro.is-compact .sns-follow::after {
+  content: attr(data-short);
+  font-size: .76rem;
+}

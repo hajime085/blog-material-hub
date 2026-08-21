@@ -326,6 +326,81 @@
     });
   }
 
+  // ------------------------------------------------------- Xのタイムライン
+  // Xは、閲覧者がXにログインしていないとタイムラインを返さないことが多い。
+  // 2025年以降は429で落ちることもある。つまり「たいてい失敗する」前提で扱う。
+  //
+  // そこで、失敗しても何も起きない作りにしてある。
+  //   ・既定ではフォローの案内だけを出しておく
+  //   ・サイドバーが画面に入って初めて、Xのスクリプトを読みに行く
+  //   ・中身が実際に描画されたときだけ、案内と入れ替える
+  //   ・8秒待って描画されなければ諦めて、案内をそのまま残す
+  // 「Tweets by —」だけの空の箱は、絶対に見せない。
+  var tl = document.getElementById('snsTimeline');
+  if (tl && tl.dataset.handle) {
+    var tried = false;
+
+    function loadWidgets() {
+      return new Promise(function (done, fail) {
+        if (window.twttr && window.twttr.widgets) return done();
+        var sc = document.createElement('script');
+        sc.src = 'https://platform.twitter.com/widgets.js';
+        sc.async = true;
+        sc.charset = 'utf-8';
+        sc.onload = function () { done(); };
+        sc.onerror = function () { fail(); };
+        document.head.appendChild(sc);
+      });
+    }
+
+    function tryTimeline() {
+      if (tried) return;
+      tried = true;
+
+      var giveUp = setTimeout(function () { tl.hidden = true; tl.innerHTML = ''; }, 8000);
+
+      loadWidgets().then(function () {
+        return window.twttr.widgets.createTimeline(
+          { sourceType: 'profile', screenName: tl.dataset.handle },
+          tl,
+          // dnt: Xに閲覧者の行動を追跡させない。
+          // chrome: Xのヘッダーとフッターを消して、サイトの見た目に寄せる。
+          { height: 420, dnt: true, chrome: 'noheader nofooter noborders transparent',
+            lang: 'ja', theme: 'light' }
+        );
+      }).then(function (el) {
+        clearTimeout(giveUp);
+        // createTimeline は失敗しても undefined を返すだけのことがある。
+        // さらに、枠だけ作られて中身が空、という状態もある。
+        // 実際に高さが出ているかどうかで判断する。
+        var ok = el && tl.offsetHeight > 180;
+        if (ok) {
+          tl.hidden = false;
+          var intro = document.getElementById('snsIntro');
+          if (intro) intro.classList.add('is-compact');
+        } else {
+          tl.hidden = true;
+          tl.innerHTML = '';
+        }
+      }).catch(function () {
+        clearTimeout(giveUp);
+        tl.hidden = true;
+        tl.innerHTML = '';
+      });
+    }
+
+    // サイドバーが見えるまでは、Xのスクリプトを読みに行かない。
+    // 読まれないまま帰る人に、第三者のスクリプトを踏ませる理由がない。
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) { io.disconnect(); tryTimeline(); }
+      }, { rootMargin: '300px' });
+      io.observe(tl.closest('.sns-card') || tl);
+    } else {
+      tryTimeline();
+    }
+  }
+
   // URLの ?q= を拾って絞り込み
   var q = new URLSearchParams(window.location.search).get('q');
   if (q) {
