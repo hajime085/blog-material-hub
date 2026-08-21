@@ -1416,6 +1416,45 @@ def check_guide_toc(guides):
             print("   大見出しは「##」ではなく「#」で書いてください（目次に載るのは # だけ）。")
 
 
+def check_caption_prices(products):
+    """キャプションに書いた金額が、いまの価格と食い違っていないか調べる。
+
+    キャプションは手で書くが、価格は毎日自動で動く。
+    「1,290円」と書いた商品が960円に下がると、その一文は嘘になる。
+    実際に2件やった。安さを売るサイトで、値段の記述が古いのは致命的。
+
+    単価（1包53円 など）は本体価格と一致しないので、
+    本体価格・セール前価格・単価の表記のどれとも合わない数字だけを挙げる。
+    """
+    import re as _re
+
+    bad = []
+    for p in products:
+        cap = p.get("caption") or ""
+        if not cap:
+            continue
+        ok = {p["price"], p.get("listPrice") or 0}
+        note = p.get("unitNote") or ""
+        for m in _re.findall(r"([\d,]{3,9})\s*円", note):
+            ok.add(int(m.replace(",", "")))
+        for m in _re.findall(r"([\d,]{3,9})\s*円", cap):
+            v = int(m.replace(",", ""))
+            if v in ok:
+                continue
+            # 単価の言及（1個あたり◯円）は本体価格と一致しなくて当然
+            if _re.search(r"1\s*[^\s]{0,4}あたり[^。]{0,6}%s" % _re.escape(m), cap):
+                continue
+            if _re.search(r"%s\s*円[^。]{0,6}(なら|で)" % _re.escape(m), cap):
+                continue
+            bad.append((p["id"], v, p["price"], cap))
+
+    if bad:
+        print("\n⚠ キャプションの金額が、いまの価格と合いません:")
+        for pid, v, now, cap in bad[:12]:
+            print("   %s  文中 ¥%s / 実売 ¥%s" % (pid, "{:,}".format(v), "{:,}".format(now)))
+            print("      %s" % cap[:56])
+
+
 def check_internal_links():
     """生成したページの中の、サイト内リンクが実在するかを確かめる。
 
@@ -1552,6 +1591,7 @@ def main():
 
     check_padding_collisions()
     check_internal_links()
+    check_caption_prices(products)
     check_guide_toc(guides)
 
     print("✅ ビルド完了")
