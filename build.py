@@ -323,6 +323,28 @@ def render_share(p, cfg, place="top"):
             '<div class="share-row">%s</div></div>' % btns)
 
 
+MARKER_COLORS = 5
+
+
+def marker_no(p):
+    """キャプションに引くマーカーの色番号（1〜5）。
+
+    商品IDから決めるので、ビルドし直しても同じ商品は同じ色になる。
+    並び順で決めると、商品が増えたときに既存の色が総入れ替えになってしまう。
+    """
+    h = hashlib.sha1(p["id"].encode("utf-8")).hexdigest()
+    return int(h[:8], 16) % MARKER_COLORS + 1
+
+
+def marked(text, p):
+    """マーカーを引くキャプション。線は span に対して引く。
+
+    p ではなく span に引くのは、行ごとに線を分けるため
+    （box-decoration-break: clone が効くのはインライン要素）。
+    """
+    return '<span class="mk mk-%d">%s</span>' % (marker_no(p), e(text))
+
+
 def render_card(p, cats, fetched=""):
     cat = cats.get(p["category"], {})
     d = discount_rate(p)
@@ -339,7 +361,7 @@ def render_card(p, cats, fetched=""):
         tags += '<span class="%s">%s</span>' % (cls, e(t))
     cap = ""
     if p.get("caption"):
-        cap = '<p class="card-cap">%s</p>' % e(p["caption"])
+        cap = '<p class="card-cap">%s</p>' % marked(p["caption"], p)
     aria = "%s %d%%OFF ¥%s" % (p["title"], d, yen(p["price"])) if d else "%s ¥%s" % (p["title"], yen(p["price"]))
     return """<article class="card">
   <a class="card-media" href="/p/{id}/" aria-label="{aria}">
@@ -852,7 +874,7 @@ def build_products(cfg, base, products, cats):
 
         cap = ""
         if p.get("caption"):
-            cap = '<p class="detail-cap">%s</p>' % e(p["caption"])
+            cap = '<p class="detail-cap">%s</p>' % marked(p["caption"], p)
 
         # レジの表示のように、価格の脇に根拠を小さく添える
         cta_sub = ""
@@ -1184,6 +1206,7 @@ def build_feed_json(cfg, products, cats):
         c = cats.get(p["category"], {})
         slim.append({
             "id": p["id"], "t": p["title"], "cap": p.get("caption", ""),
+            "mk": marker_no(p),
             "c": p["category"], "ci": c.get("icon", ""), "cl": c.get("short", ""),
             "pr": p["price"], "lp": p.get("listPrice") or 0, "d": discount_rate(p),
             "b": price_basis_label(p),

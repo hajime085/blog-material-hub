@@ -109,6 +109,29 @@
     if (window.ResizeObserver) new ResizeObserver(fit).observe(rail);
   })();
 
+  // ---------------------------------------------------------------- マーカー
+  // キャプションのマーカーは、画面に入ったところで引きはじめる。
+  // 最初から引かれていると、ただの装飾になって目に留まらない。
+  var drawer = ('IntersectionObserver' in window)
+    ? new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (!en.isIntersecting) return;
+          en.target.classList.add('is-drawn');
+          drawer.unobserve(en.target);      // 一度引いたら、もう見張らない
+        });
+      }, { rootMargin: '0px 0px -12% 0px', threshold: .35 })
+    : null;
+
+  function drawMarkers(root) {
+    var caps = (root || document).querySelectorAll('.card-cap, .detail-cap');
+    Array.prototype.forEach.call(caps, function (el) {
+      if (el.classList.contains('is-drawn')) return;
+      // 見張れない環境では、引いた状態で置いておく。線が出ないよりはいい。
+      if (drawer) drawer.observe(el); else el.classList.add('is-drawn');
+    });
+  }
+  drawMarkers();
+
   /* ------------------------------------------------ フィード */
   var feed = document.getElementById('feed');
   if (!feed) return;
@@ -156,7 +179,9 @@
       var cls = t === 'ウォッチ中' ? 'tag tag-watch' : (HOT.indexOf(t) >= 0 ? 'tag tag-hot' : 'tag');
       return '<span class="' + cls + '">' + esc(t) + '</span>';
     }).join('');
-    var cap = p.cap ? '<p class="card-cap">' + esc(p.cap) + '</p>' : '';
+    var cap = p.cap
+      ? '<p class="card-cap"><span class="mk mk-' + (p.mk || 1) + '">' + esc(p.cap) + '</span></p>'
+      : '';
     var aria = esc(p.t) + (p.d ? ' ' + p.d + '%OFF' : '') + ' ¥' + yen(p.pr);
     return '<article class="card">' +
       '<a class="card-media" href="/p/' + esc(p.id) + '/" aria-label="' + aria + '">' +
@@ -219,6 +244,7 @@
     }
     if (countEl) countEl.textContent = state.view.length;
     renderPager();
+    drawMarkers(feed);
   }
 
   function refresh(keepPage) {
@@ -316,6 +342,7 @@
             slot.classList.remove('is-rolling');
             slot.classList.add('is-out');
             slot.innerHTML = card(p);
+            drawMarkers(slot);
             rolling = false;
             gachaBtn.disabled = false;
             gachaBtn.innerHTML = ic('capsule', 'ic-capsule') + 'もう一回まわす';
