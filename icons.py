@@ -110,6 +110,28 @@ ICONS = {
                  '<path d="M8.4 9.3v4.3M8.4 13.6h2.3M12.7 9.3v4.3M15.1 13.6V9.3l2.6 4.3V9.3" '
                  'fill="none" stroke="#06C755" stroke-width="1.5" '
                  'stroke-linecap="round" stroke-linejoin="round"/>', "solid"),
+
+    # ---- 遊びの仕掛け ----
+    # ガチャ。カプセルを横から見た形。
+    "capsule": ('<path d="M4 12a8 8 0 0 1 16 0"/>'
+                '<path d="M4 12a8 8 0 0 0 16 0"/>'
+                '<path d="M3.2 12h17.6"/>'
+                '<path d="M9 7.6a4.6 4.6 0 0 1 3-1.4"/>', "line"),
+
+    # 値段あて。フキダシの中の疑問符。
+    "quiz": ('<path d="M3.5 5.5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-7l-4.5 4v-4h-1.5'
+             'a2 2 0 0 1-2-2Z"/>'
+             '<path d="M9.9 7.7A2.2 2.2 0 0 1 12 6.2c1.3 0 2.2.8 2.2 1.9 0 1.7-2.2 1.6-2.2 3.2"/>'
+             '<path d="M12 13.6h.01"/>', "line"),
+
+    # 結果。優勝カップ。
+    "trophy": ('<path d="M7.5 3.5h9v5a4.5 4.5 0 0 1-9 0Z"/>'
+               '<path d="M7.5 5h-3v1.4A3.6 3.6 0 0 0 8 10M16.5 5h3v1.4A3.6 3.6 0 0 1 16 10"/>'
+               '<path d="M12 13v3.5M8.5 20.5h7M9.8 16.5h4.4l1.3 4H8.5Z"/>', "line"),
+
+    # もう一度。回転の矢印。
+    "again": ('<path d="M20 12a8 8 0 1 1-2.6-5.9"/>'
+              '<path d="M20.5 3.5v4h-4"/>', "line"),
 }
 
 
@@ -143,6 +165,12 @@ def sprite_version():
         import hashlib
         _SPRITE_VER = hashlib.sha1(sprite().encode("utf-8")).hexdigest()[:8]
     return _SPRITE_VER
+
+
+def sprite_href():
+    """JS側から <use> を組み立てるときに使うスプライトのURL。
+    バージョンの付け方を use() と1か所に揃えておく。"""
+    return "/assets/img/icons.svg?v=%s" % sprite_version()
 
 
 def use(name, cls=""):

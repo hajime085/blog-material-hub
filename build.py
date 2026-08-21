@@ -519,6 +519,7 @@ def page_shell(cfg, base, *, title, desc, path, content, ogtype="website",
         "IC_CLOSE": icons.use("close"),
         "IC_HOME": icons.use("home"),
         "IC_GRID": icons.use("grid"),
+        "IC_QUIZ": icons.use("quiz"),
         "CSS_HREF": asset_url("/assets/css/style.css"),
         "JS_SRC": asset_url("/assets/js/app.js"),
         "FOOTER_OPERATOR": footer_operator(cfg),
@@ -574,6 +575,25 @@ def jsonld_block(obj):
 
 
 # ---------------------------------------------------------------- builders
+def render_gacha():
+    """トップのガチャ。中身はJSが /assets/data/feed.json から引く。
+
+    174件を上から順に眺めるのは骨が折れる。
+    レバーを引いて1件出すだけの遊びだが、売場を回る入口になる。
+    """
+    return """
+<div class="wrap-narrow"><section class="gacha">
+  <p class="gacha-eyebrow">{ic}TODAY'S PICK</p>
+  <h2 class="gacha-title">今日の一発、引いてみます？</h2>
+  <p class="gacha-note">掲載中の特価から、1件だけ出します。</p>
+  <div class="gacha-slot" id="gachaSlot"></div>
+  <button class="btn-gacha" type="button" id="gachaGo">{ic2}まわす</button>
+  <br><a class="gacha-more" href="/quiz/">値段あてクイズであそぶ{arrow}</a>
+</section></div>
+""".format(ic=icons.use("capsule"), ic2=icons.use("capsule", "ic-capsule"),
+           arrow=icons.use("arrow-right", "ic-arrow"))
+
+
 def build_index(cfg, base, products, cats):
     per = cfg["feed"]["perPage"]
     fetched = last_fetch_date(products)
@@ -624,6 +644,7 @@ def build_index(cfg, base, products, cats):
 
         content = head + """
 {featured}
+{gacha}
 <div class="layout wrap-wide">
 <div class="layout-main">
   <div class="toolbar">
@@ -649,6 +670,7 @@ def build_index(cfg, base, products, cats):
 </div>
 """.format(count=len(products), cards=cards,
            featured=(render_featured(cfg) if page == 1 else ""),
+           gacha=(render_gacha() if page == 1 else ""),
            off_sort=('<button type="button" data-sort="off" aria-pressed="false">割引率</button>'
                      if n_off else ''),
            pager=render_pager(page, total_pages, "/"),
@@ -1173,6 +1195,47 @@ def build_feed_json(cfg, products, cats):
     write("assets/data/feed.json", json.dumps(slim, ensure_ascii=False, separators=(",", ":")))
 
 
+def build_quiz(cfg, base, products, cats):
+    """値段あてクイズのページ。
+
+    このサイトのテーマは「安さを見抜く」なので、遊びも同じ筋にしてある。
+    出題データは商品一覧と同じ feed.json をJSが引く。
+    サーバー側の記録は持たない（自己最高だけ端末に残す）。
+    """
+    site_url = cfg["site"]["url"].rstrip("/")
+    content = """
+<section class="page-head wrap-narrow">
+  <p class="page-eyebrow">{ic}あそぶ</p>
+  <h1 class="page-title">これ、いくら？</h1>
+  <p class="page-lead">写真と商品名だけ見て、値段を当ててください。全5問です。
+  出題はすべて、いま実際に掲載している商品から選んでいます。</p>
+</section>
+
+<div class="layout wrap-wide">
+<div class="layout-main">
+  <div id="quiz" data-sprite="{sprite}" data-url="{site}">
+    <div class="q-card"><p class="q-ask">読み込んでいます…</p></div>
+  </div>
+  <p class="affiliate-note">当サイトは楽天アフィリエイトプログラムに参加しています。
+  出題に使っている価格は取得時点のもので、変動します。
+  購入前に楽天市場の商品ページで最新の条件をご確認ください。</p>
+</div>
+{sidebar}
+</div>
+""".format(ic=icons.use("quiz"), sprite=e(icons.sprite_href()), site=e(site_url),
+           sidebar=render_sidebar(cfg, products, cats))
+
+    write("quiz/index.html", page_shell(
+        cfg, base,
+        title="これ、いくら？｜値段あてクイズ",
+        desc="写真と商品名だけ見て、楽天の特価商品の値段を当てるクイズです。全5問。"
+             "出題はすべて、ヤスミルが実際に掲載している商品から選んでいます。",
+        path="/quiz/",
+        content=content,
+        products=products, cats=cats,
+        scripts='<script src="%s" defer></script>' % asset_url("/assets/js/quiz.js")))
+
+
 def build_sitemap(cfg, products):
     site_url = cfg["site"]["url"].rstrip("/")
     now = datetime.now(JST).strftime("%Y-%m-%d")
@@ -1191,6 +1254,7 @@ def build_sitemap(cfg, products):
         urls.append((site_url + "/p/%s/" % p["id"], p.get("postedAt", now), "0.7", "weekly"))
     for g in (cfg.get("_guides") or []):
         urls.append((site_url + "/guide/%s/" % g["slug"], g.get("updated", now), "0.9", "monthly"))
+    urls.append((site_url + "/quiz/", now, "0.6", "weekly"))
     for slug in ("about", "contact", "privacy", "disclaimer", "terms"):
         urls.append((site_url + "/%s/" % slug, now, "0.3", "monthly"))
 
@@ -1458,6 +1522,7 @@ def main():
     build_categories(cfg, base, products, cats)
     build_products(cfg, base, products, cats)
     build_static_pages(cfg, base, products, cats)
+    build_quiz(cfg, base, products, cats)
     build_feed_json(cfg, products, cats)
     build_sitemap(cfg, products)
     build_rss(cfg, products)

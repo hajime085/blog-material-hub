@@ -1827,3 +1827,189 @@ a.ticker-item:hover::before { background: var(--pop); }
   .ticker-track { animation: none; transform: none; }
   .card:hover { transform: none; }
 }
+
+/* =========================================================
+   PLAY  ── 遊びの仕掛け（ガチャ・値段あてクイズ）
+   売場のアミューズメント担当。色は既存の5色から出さない。
+   ========================================================= */
+
+/* ---- ガチャ（トップ） ---- */
+.gacha {
+  background: var(--ink);
+  border-radius: 18px;
+  padding: 20px 18px 22px;
+  box-shadow: 5px 5px 0 rgba(26,20,16,.22);
+  text-align: center;
+}
+.gacha-eyebrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--f-price); font-weight: 400;
+  font-size: .7rem; letter-spacing: .16em;
+  color: var(--pop);
+}
+.gacha-title {
+  font-family: var(--f-hand);
+  font-size: 1.5rem; line-height: 1.4;
+  color: #fff;
+  margin: 6px 0 4px;
+}
+.gacha-note {
+  font-size: .78rem; line-height: 1.7;
+  color: rgba(255,255,255,.68);
+  margin-bottom: 16px;
+}
+.gacha-slot { min-height: 4px; margin-bottom: 14px; text-align: left; }
+.gacha-slot:empty { margin-bottom: 0; }
+
+/* 抽選中。写真をぼかして小刻みに揺らす。 */
+.gacha-blur {
+  display: flex; justify-content: center;
+  padding: 14px 0;
+}
+.gacha-blur img {
+  width: 116px; height: 116px; object-fit: cover;
+  border-radius: 14px;
+  filter: blur(2.5px) saturate(.85);
+  animation: gachaShake .18s linear infinite;
+}
+@keyframes gachaShake {
+  0%   { transform: translateY(0)     rotate(-1.5deg); }
+  50%  { transform: translateY(-5px)  rotate(1.5deg); }
+  100% { transform: translateY(0)     rotate(-1.5deg); }
+}
+/* 当たりが出た瞬間だけ跳ねる */
+.gacha-slot.is-out > * { animation: gachaPop .5s cubic-bezier(.2,1.5,.4,1); }
+@keyframes gachaPop {
+  0%   { transform: scale(.82); opacity: 0; }
+  60%  { transform: scale(1.03); opacity: 1; }
+  100% { transform: scale(1); }
+}
+.btn-gacha {
+  background: var(--pop);
+  color: var(--ink);
+  font-family: var(--f-display); font-weight: 400;
+  font-size: 1rem;
+  border: 0; border-radius: 999px;
+  padding: 14px 26px;
+  box-shadow: 0 4px 0 #C9A200;
+  cursor: pointer;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.btn-gacha:hover { transform: translateY(1px); box-shadow: 0 3px 0 #C9A200; }
+.btn-gacha:active { transform: translateY(4px); box-shadow: 0 0 0 #C9A200; }
+.btn-gacha:disabled { opacity: .62; cursor: default; transform: translateY(4px); box-shadow: none; }
+.ic-capsule { width: 20px; height: 20px; }
+.gacha-more {
+  display: inline-block; margin-top: 13px;
+  font-size: .78rem; color: var(--pop);
+  border-bottom: 2px solid rgba(255,211,31,.5);
+  padding-bottom: 2px; text-decoration: none;
+}
+
+/* ---- 値段あてクイズ ---- */
+.q-card {
+  background: var(--paper);
+  border-radius: 18px;
+  padding: 18px 16px 20px;
+  box-shadow: 4px 4px 0 var(--ink-14);
+}
+.q-step { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.q-step-no {
+  font-family: var(--f-price); font-weight: 400;
+  font-size: .82rem; letter-spacing: .06em; color: var(--ink-52);
+  white-space: nowrap;
+}
+.q-step-bar { flex: 1; height: 6px; border-radius: 99px; background: var(--ink-08); overflow: hidden; }
+.q-step-bar i { display: block; height: 100%; background: var(--pop); transition: width .3s ease; }
+
+.q-photo { position: relative; text-align: center; margin-bottom: 12px; }
+.q-photo img {
+  width: 100%; max-width: 300px; aspect-ratio: 1/1;
+  object-fit: cover; border-radius: 14px;
+}
+/* 値札の代わりに疑問符の札を貼る */
+.q-mark {
+  position: absolute; right: 8px; top: 8px;
+  width: 46px; height: 46px; border-radius: 50%;
+  background: var(--sale); color: #fff;
+  display: grid; place-items: center;
+  transform: rotate(-8deg);
+  box-shadow: 2px 3px 0 rgba(26,20,16,.22);
+}
+.ic-qmark { width: 24px; height: 24px; }
+
+.q-shop { font-size: .72rem; color: var(--fresh); font-weight: 700; margin-bottom: 3px; }
+.q-title {
+  font-family: var(--f-body); font-weight: 900;
+  font-size: 1rem; line-height: 1.6;
+  margin-bottom: 12px;
+}
+.q-ask {
+  font-family: var(--f-hand);
+  font-size: 1.3rem; color: var(--ink);
+  text-align: center; margin-bottom: 12px;
+}
+.q-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+.q-opt {
+  font-family: var(--f-price); font-weight: 400;
+  font-size: 1.32rem; color: var(--ink);
+  background: var(--ground);
+  border: 2px solid var(--ink-14);
+  border-radius: 13px;
+  padding: 15px 8px;
+  cursor: pointer;
+  transition: transform .12s ease, border-color .12s ease, background .12s ease;
+}
+.q-opt i { font-style: normal; font-size: .74em; margin-right: 1px; }
+.q-opt:hover:not(:disabled) { border-color: var(--ink); transform: translateY(-2px); }
+.q-opt:disabled { cursor: default; opacity: .55; }
+.q-opt.is-right {
+  background: var(--pop); border-color: var(--ink); opacity: 1;
+  box-shadow: 2px 3px 0 var(--ink);
+}
+.q-opt.is-wrong {
+  background: var(--sale-bg); border-color: var(--sale); color: var(--sale); opacity: 1;
+}
+
+.q-reveal { margin-top: 18px; padding-top: 16px; border-top: 2px dashed var(--ink-14); }
+.q-verdict {
+  display: inline-block;
+  font-family: var(--f-display); font-weight: 400;
+  font-size: 1.1rem; padding: 4px 14px; border-radius: 99px;
+}
+.q-verdict.is-hit { background: var(--pop); color: var(--ink); }
+.q-verdict.is-miss { background: var(--ink); color: #fff; }
+.q-gap { display: block; font-size: .78rem; color: var(--ink-52); margin-top: 7px; }
+.q-gap b { font-family: var(--f-price); font-weight: 400; font-size: 1.06rem; color: var(--ink-70); }
+.q-real { font-size: 1rem; margin: 11px 0 6px; }
+.q-real b { font-family: var(--f-price); font-weight: 400; font-size: 1.9rem; color: var(--sale); }
+.q-real b i { font-style: normal; font-size: .6em; margin-right: 1px; }
+.q-cap { font-size: .84rem; line-height: 1.8; color: var(--ink-70); margin-bottom: 14px; }
+.q-reveal-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+
+/* ---- 結果 ---- */
+.q-result { text-align: center; }
+.q-result-eyebrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--f-price); font-weight: 400;
+  font-size: .72rem; letter-spacing: .16em; color: var(--ink-52);
+}
+.ic-trophy { width: 18px; height: 18px; }
+.q-score { margin: 6px 0 2px; }
+.q-score b {
+  font-family: var(--f-price); font-weight: 400;
+  font-size: 4.2rem; line-height: 1; color: var(--sale);
+}
+.q-score span { font-size: .92rem; color: var(--ink-70); margin-left: 6px; }
+.q-word { font-family: var(--f-hand); font-size: 1.25rem; line-height: 1.5; margin-bottom: 6px; }
+.q-best { font-size: .78rem; color: var(--ink-52); margin-bottom: 20px; }
+.q-share { border-top: 2px dashed var(--ink-14); padding-top: 16px; margin-bottom: 18px; }
+.q-share-head { font-family: var(--f-hand); font-size: 1rem; margin-bottom: 10px; }
+.q-again { display: grid; gap: 9px; }
+.ic-again { width: 19px; height: 19px; }
+
+@media (max-width: 360px) {
+  .q-opt { font-size: 1.14rem; padding: 13px 6px; }
+  .q-reveal-btns { grid-template-columns: 1fr; }
+}

@@ -284,6 +284,48 @@
     });
   }
 
+  // ---------------------------------------------------------------- ガチャ
+  // レバーを引くと174件から1つ出る。カードの描き方は一覧と同じものを使う。
+  var gachaBtn = document.getElementById('gachaGo');
+  if (gachaBtn) {
+    var slot = document.getElementById('gachaSlot');
+    var rolling = false;
+
+    gachaBtn.addEventListener('click', function () {
+      if (rolling) return;
+      rolling = true;
+      gachaBtn.disabled = true;
+      slot.classList.add('is-rolling');
+
+      ensureData().then(function () {
+        var pool = state.all.filter(function (p) { return p.img && p.pr; });
+        if (!pool.length) { rolling = false; gachaBtn.disabled = false; return; }
+
+        // 回っている感じを出すために、止まるまで数回入れ替える。
+        // 間隔を少しずつ広げると、抽選が減速して見える。
+        var spins = 9, i = 0, wait = 60;
+        (function tick() {
+          var p = pool[Math.floor(Math.random() * pool.length)];
+          if (i < spins) {
+            slot.innerHTML = '<div class="gacha-blur"><img src="' + p.img +
+                             '" alt="" width="200" height="200"></div>';
+            i++;
+            wait = wait * 1.22;
+            setTimeout(tick, wait);
+          } else {
+            slot.classList.remove('is-rolling');
+            slot.classList.add('is-out');
+            slot.innerHTML = card(p);
+            rolling = false;
+            gachaBtn.disabled = false;
+            gachaBtn.innerHTML = ic('capsule', 'ic-capsule') + 'もう一回まわす';
+            setTimeout(function () { slot.classList.remove('is-out'); }, 520);
+          }
+        })();
+      });
+    });
+  }
+
   // URLの ?q= を拾って絞り込み
   var q = new URLSearchParams(window.location.search).get('q');
   if (q) {
