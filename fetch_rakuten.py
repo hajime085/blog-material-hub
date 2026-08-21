@@ -245,6 +245,8 @@ def clean_title(raw):
         t = re.sub(r"[★☆◆◇■□●○▼▲！!]+", " ", t)              # 装飾記号
         t = re.sub(r"\s+", " ", t).strip()
         t = re.sub(r"^\d\.\d{1,2}\s+(?=[^\d])", "", t)        # 先頭に紛れた評価値
+        # 先頭の「3,990円→2990円」。値段は価格欄に出すので商品名には要らない。
+        t = re.sub(r"^\s*[\d,]{3,9}\s*円\s*[→⇒]\s*[\d,]{3,9}\s*円[！!]?\s*", "", t)
 
         # 先頭の括弧のうち、販促・値段の話・単価のものを剥がす。
         # 中身が販促だと分かっている場合だけ剥がすので、長さは緩めでよい。
@@ -405,9 +407,16 @@ def big_image(urls):
 
 # ------------------------------------------------------------------ history
 def update_history(history, pid, price, today):
+    """その日の観測値を記録する。1日1件。
+
+    同じ日に何度も見に行く場合は、高いほうを残す。
+    最新で上書きすると、昼にセールが始まった時点でその日の平常価格が消え、
+    「何と比べて安いのか」が分からなくなる。
+    比較の基準は過去の最高値なので、その日の最高値を残すのが正しい。
+    """
     rec = history.setdefault(pid, [])
     if rec and rec[-1][0] == today:
-        rec[-1] = [today, price]
+        rec[-1] = [today, max(rec[-1][1], price)]
     else:
         rec.append([today, price])
     cutoff = (datetime.now(JST) - timedelta(days=HISTORY_DAYS)).strftime("%Y-%m-%d")
@@ -982,7 +991,10 @@ def main():
         return
 
     seed = "--seed" in args
-    args = [a for a in args if a != "--seed"]
+    # 数時間おきの見張り。値段の追跡が主で、新規は控えめにしか足さない。
+    # キャプションの無いカードが一気に増えるのを避けるため。
+    watch = "--watch" in args
+    args = [a for a in args if a not in ("--seed", "--watch")]
     only = set(a for a in args if not a.startswith("-"))
     cats = [c for c in cfg["categories"] if not only or c["slug"] in only]
     if only and not cats:
@@ -999,10 +1011,12 @@ def main():
     min_reviews = cfg["rakuten"].get("minReviewCount", 0)
     min_rating = cfg["rakuten"].get("minReviewAverage", 0)
     retention_days = cfg["rakuten"].get("retentionDays", 30)
-    max_new = cfg["rakuten"].get("maxNewPerRun", 20)
+    max_new = (cfg["rakuten"].get("watchMaxNewPerRun", 3) if watch
+               else cfg["rakuten"].get("maxNewPerRun", 20))
     hits = cfg["rakuten"].get("hits", 30)
 
     kept, added, dropped = 0, 0, 0
+    price_drops, fresh = [], []
     pinned_stale = []
     not_on_sale = []
     excluded = set()          # 買えないと判断して外したもの。保持ルールの対象外。
@@ -1095,6 +1109,13 @@ def main():
                     # 1回で載せる新規の上限。一気に増やさず、じわじわ増やす。
                     dropped += 1
                     continue
+                # 記録は上限を通ったあとで。弾いたものまで数えると、
+                # 実際に載った件数と履歴の記述が食い違う。
+                was = prev.get("price")
+                if prev and was and was > item["price"]:
+                    price_drops.append((item["title"], was, item["price"], off))
+                elif not prev:
+                    fresh.append((item["title"], item["price"], off))
                 # 値下がりを検知した。新着として浮上させる。
                 item["postedAt"] = today
                 item["tags"] = [t for t in item.get("tags", []) if t != "ウォッチ中"]
@@ -1275,10 +1296,48 @@ def main():
     if kept_stale or expired:
         print("   掲載継続 %d件（今日はAPIの結果に無いが%d日以内）/ 掲載終了 %d件"
               % (kept_stale, retention_days, expired))
+    if price_drops:
+        print("\n   値下がりを見つけました: %d件" % len(price_drops))
+        for t, was, now, off in price_drops[:8]:
+            print("     ↓ %-28s ¥%s → ¥%s (%d%%OFF)"
+                  % (t[:28], "{:,}".format(was), "{:,}".format(now), off))
     if no_caption:
         print("   ※ ひとことキャプション未記入が %d件あります。" % no_caption)
         print("      caption を書くとカードの見え方がかなり変わります。")
+
+    write_run_summary(added, len(price_drops), len(products), no_caption,
+                      price_drops, fresh, gone)
     print("\n次: python3 build.py")
+
+
+def write_run_summary(added, drops, total, no_caption, price_drops, fresh, gone):
+    """自動実行のコミットメッセージに使う要約を書き出す。
+
+    クラウドで動かすと実行画面を誰も見ないので、
+    何が起きたのかは git の履歴に残す。あとから追えるように。
+    """
+    head = []
+    if drops:
+        head.append("値下がり%d件" % drops)
+    if added:
+        head.append("新規%d件" % added)
+    if gone:
+        head.append("掲載終了%d件" % len(gone))
+    title = "auto: " + ("・".join(head) if head else "変更なし")
+
+    body = []
+    for t, was, now, off in price_drops[:10]:
+        body.append("  ↓ %s  %s円 → %s円 (%d%%OFF)"
+                    % (t[:38], "{:,}".format(was), "{:,}".format(now), off))
+    for t, price, off in fresh[:10]:
+        body.append("  + %s  %s円 (%d%%OFF)" % (t[:38], "{:,}".format(price), off))
+    for t, why in gone[:10]:
+        body.append("  − %s  %s" % (t[:38], why))
+    body.append("")
+    body.append("掲載 %d件 / キャプション未記入 %d件" % (total, no_caption))
+
+    with open(os.path.join(ROOT, ".run_summary.txt"), "w", encoding="utf-8") as f:
+        f.write(title + "\n\n" + "\n".join(body) + "\n")
 
 
 if __name__ == "__main__":

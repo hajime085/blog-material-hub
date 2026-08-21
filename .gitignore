@@ -24,3 +24,6 @@ _backup_*/
 products.json.bak_*
 products.json.sample_backup
 .featured_cache.json
+
+# 自動実行の要約（コミットメッセージ用の一時ファイル）
+.run_summary.txt
