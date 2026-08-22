@@ -927,6 +927,7 @@ def merge_featured_into_products(cfg, items):
             p["unitNote"] = it["unitNote"]
         p.setdefault("unitNote", None)
         p.setdefault("postedAt", today)
+        p.setdefault("bumpedAt", datetime.now(JST).strftime("%Y-%m-%dT%H:%M:%S"))
         p["lastSeen"] = today
         existing[pid] = p
         if not prev:
@@ -1111,6 +1112,7 @@ def main():
                 item["unitNote"] = raw["unitNote"]
             item.setdefault("unitNote", None)
             item.setdefault("postedAt", today)
+            item.setdefault("bumpedAt", item["postedAt"] + "T00:00:00")
             # 今日もAPIの結果に入っていた、という記録。
             # 掲載を続けるか消すかの判断と、価格の鮮度の表示に使う。
             item["lastSeen"] = today
@@ -1131,8 +1133,23 @@ def main():
                     price_drops.append((item["title"], was, item["price"], off))
                 elif not prev:
                     fresh.append((item["title"], item["price"], off))
-                # 値下がりを検知した。新着として浮上させる。
-                item["postedAt"] = today
+
+                # 新着として浮上させるのは「新しく起きたこと」だけ。
+                #   ・初めて載せる商品
+                #   ・値下がりしていなかった商品が、値下がりした
+                #   ・すでに安かった商品が、さらに下がった
+                # 安いまま据え置きの商品まで毎回浮上させると、
+                # 同じ顔ぶれが上に居座り、本当の新着が押し下げられる。
+                had_off = 0
+                if prev.get("listPrice"):
+                    had_off = round((prev["listPrice"] - prev["price"])
+                                    / prev["listPrice"] * 100)
+                newsworthy = (not prev) or (had_off < min_off) or (was and was > item["price"])
+                if newsworthy:
+                    item["postedAt"] = today
+                    # 日付だけだと、同じ日に載ったものが全部同着になり、
+                    # 並びが割引率の順になってしまう。時刻まで持たせる。
+                    item["bumpedAt"] = datetime.now(JST).strftime("%Y-%m-%dT%H:%M:%S")
                 item["tags"] = [t for t in item.get("tags", []) if t != "ウォッチ中"]
             elif seed and not prev:
                 # 種まきモード。値下がりはまだ分からないので、

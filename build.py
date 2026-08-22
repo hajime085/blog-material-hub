@@ -100,7 +100,12 @@ def feed_order(p):
     「新着」と「安い順」がまったく同じ並びになってしまう。
     レビュー数を使えば「新着」は実績のある順、「安い順」は価格順と、
     それぞれ別の意味を持つ。"""
-    return (p.get("postedAt", ""), discount_rate(p), p.get("reviewCount") or 0)
+    # postedAt は日付だけなので、同じ日に載ったものが全部同着になる。
+    # それだと「新着」の中身が割引率の順になってしまうため、
+    # 時刻まで持つ bumpedAt を第1基準にする。
+    # 古いデータには bumpedAt が無いので、その日の0時として扱う。
+    at = p.get("bumpedAt") or ((p.get("postedAt") or "") + "T00:00:00")
+    return (at, discount_rate(p), p.get("reviewCount") or 0)
 
 
 def feed_order_desc(p):
@@ -1213,7 +1218,7 @@ def build_feed_json(cfg, products, cats):
             "rc": p.get("reviewCount") or 0,
             "u": p.get("unitNote", ""), "img": p["image"], "url": p.get("affiliateUrl") or "#",
             "shop": p.get("shop", "楽天市場"), "tags": (p.get("tags") or [])[:3],
-            "at": p.get("postedAt", ""),
+            "at": p.get("bumpedAt") or ((p.get("postedAt") or "") + "T00:00:00"),
         })
     write("assets/data/feed.json", json.dumps(slim, ensure_ascii=False, separators=(",", ":")))
 
