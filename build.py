@@ -350,6 +350,22 @@ def marked(text, p):
     return '<span class="mk mk-%d">%s</span>' % (marker_no(p), e(text))
 
 
+def render_watch_btn(p, place="card"):
+    """気になるリストのボタン。押した状態はJSが端末に保存する。
+
+    サーバーを持たないので、押した数を集計することはできない。
+    それらしい数字を出すのは簡単だが、それは嘘になる。
+    ここは「自分のための保存」として作り、数は出さない。
+    """
+    label = "気になる" if place == "card" else "あとで見る"
+    return ('<button class="watch-btn watch-{place}" type="button" data-watch="{id}" '
+            'aria-pressed="false" aria-label="{label}に追加">'
+            '{off}{on}<span class="watch-label">{label}</span></button>').format(
+        place=place, id=e(p["id"]), label=label,
+        off=icons.use("heart", "ic-heart-off"),
+        on=icons.use("heart-on", "ic-heart-on"))
+
+
 def render_card(p, cats, fetched=""):
     cat = cats.get(p["category"], {})
     d = discount_rate(p)
@@ -380,12 +396,13 @@ def render_card(p, cats, fetched=""):
     <h2 class="card-title"><a href="/p/{id}/">{title}</a></h2>
     <div class="card-tags"><a class="tag" href="/c/{cslug}/">{cicon}{clabel}</a>{tags}</div>
     <div class="card-foot">
-      <span class="card-shop">{shop}</span>
+      {watch}<span class="card-shop">{shop}</span>
       <a class="btn btn-rakuten" href="{url}" target="_blank" rel="nofollow sponsored noopener">楽天で見る{arrow}</a>
     </div>
   </div>
 </article>""".format(
         id=e(p["id"]), aria=e(aria), img=e(p["image"]), alt=e(p["title"]),
+        watch=render_watch_btn(p, "card"),
         tag=render_pricetag(p), sticker=render_sticker(p),
         burst=render_burst(p), cap=cap,
         title=e(p["title"]), cslug=e(p["category"]),
@@ -547,6 +564,7 @@ def page_shell(cfg, base, *, title, desc, path, content, ogtype="website",
         "IC_HOME": icons.use("home"),
         "IC_GRID": icons.use("grid"),
         "IC_QUIZ": icons.use("quiz"),
+        "IC_HEART": icons.use("heart"),
         "CSS_HREF": asset_url("/assets/css/style.css"),
         "JS_SRC": asset_url("/assets/js/app.js"),
         "FOOTER_OPERATOR": footer_operator(cfg),
@@ -911,6 +929,7 @@ def build_products(cfg, base, products, cats):
 
   <h1 class="detail-title">{title}</h1>
   {cap}
+  <div class="detail-actions">{watch}</div>
   {share_top}
 
   <div class="sticky-cta">
@@ -951,6 +970,7 @@ def build_products(cfg, base, products, cats):
            spec=spec, arrow=icons.use("arrow-right", "ic-arrow"),
            desc_block=desc_block, rel_block=rel_block,
            share_top=render_share(p, cfg, "top"),
+           watch=render_watch_btn(p, "detail"),
            share_bottom=render_share(p, cfg, "bottom"))
 
         offer = {
@@ -1262,6 +1282,54 @@ def build_quiz(cfg, base, products, cats):
         content=content,
         products=products, cats=cats,
         scripts='<script src="%s" defer></script>' % asset_url("/assets/js/quiz.js")))
+
+
+def build_watchlist(cfg, base, products, cats):
+    """ウォッチリストのページ。
+
+    会員登録は要らない。保存先はその端末のブラウザで、
+    サーバーには何も送らない。そのぶん、端末を変えると引き継げないし、
+    ブラウザのデータを消すと無くなる。これはページ上に明記する。
+    """
+    content = """
+<section class="page-head wrap-narrow">
+  <p class="page-eyebrow">{ic}あとで見る</p>
+  <h1 class="page-title">気になるリスト</h1>
+  <p class="page-lead">ハートを押した商品がここに並びます。登録も名前も要りません。</p>
+</section>
+
+<div class="layout wrap-wide">
+<div class="layout-main">
+  <div class="toolbar">
+    <p class="result-count"><b id="watchCount">0</b> 件を保存中</p>
+    <button class="btn btn-ghost btn-sm" type="button" id="watchClear" hidden>すべて外す</button>
+  </div>
+  <div class="feed" id="watchFeed"></div>
+  <div class="watch-note">
+    <p class="watch-note-head">{ic2}このリストについて</p>
+    <ul>
+      <li>保存先は<b>このブラウザの中だけ</b>です。サーバーには何も送っていません。</li>
+      <li>そのため、別の端末やブラウザでは開けません。</li>
+      <li>ブラウザの履歴やサイトデータを消すと、リストも消えます。</li>
+      <li>価格は保存した時点のものではなく、<b>いまの価格</b>を表示します。</li>
+      <li>掲載が終わった商品は、リストからも自動で消えます。</li>
+    </ul>
+  </div>
+</div>
+{sidebar}
+</div>
+""".format(ic=icons.use("heart"), ic2=icons.use("info"),
+           sidebar=render_sidebar(cfg, products, cats))
+
+    write("watch/index.html", page_shell(
+        cfg, base,
+        title="気になるリスト｜%s" % cfg["site"]["name"],
+        desc="ハートを押して保存した商品の一覧です。会員登録は要りません。"
+             "保存先はお使いのブラウザの中だけで、サーバーには送信されません。",
+        path="/watch/",
+        content=content,
+        products=products, cats=cats,
+        robots='<meta name="robots" content="noindex,follow">'))
 
 
 def build_sitemap(cfg, products):
@@ -1598,6 +1666,7 @@ def main():
     build_products(cfg, base, products, cats)
     build_static_pages(cfg, base, products, cats)
     build_quiz(cfg, base, products, cats)
+    build_watchlist(cfg, base, products, cats)
     build_feed_json(cfg, products, cats)
     build_sitemap(cfg, products)
     build_rss(cfg, products)

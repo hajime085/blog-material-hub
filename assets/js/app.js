@@ -109,6 +109,70 @@
     if (window.ResizeObserver) new ResizeObserver(fit).observe(rail);
   })();
 
+  // ------------------------------------------------------ 気になるリスト
+  // 会員登録を作らずに保存できるようにする。保存先はこの端末のブラウザだけで、
+  // サーバーには何も送らない。
+  //
+  // 押した数を集計して見せる「いいね」は作らない。
+  // サーバーが無い以上、数はでっち上げるしかなく、それは嘘になる。
+  // ハートは1つだけ置いて、押した結果は自分のリストに溜まる形にしてある。
+  var WATCH_KEY = 'yasumiru:watch';
+
+  function watchRead() {
+    try {
+      var v = JSON.parse(localStorage.getItem(WATCH_KEY) || '[]');
+      return Array.isArray(v) ? v : [];
+    } catch (e) { return []; }
+  }
+
+  function watchWrite(ids) {
+    try { localStorage.setItem(WATCH_KEY, JSON.stringify(ids)); } catch (e) {}
+    paintWatchCount();
+  }
+
+  function paintWatchCount() {
+    var n = watchRead().length;
+    Array.prototype.forEach.call(document.querySelectorAll('[data-watch-count]'), function (el) {
+      el.textContent = n;
+      el.hidden = n === 0;
+    });
+  }
+
+  /* ボタンの見た目を、保存されているかどうかに合わせる */
+  function paintWatchButtons(root) {
+    var ids = watchRead();
+    var btns = (root || document).querySelectorAll('[data-watch]');
+    Array.prototype.forEach.call(btns, function (b) {
+      var on = ids.indexOf(b.getAttribute('data-watch')) >= 0;
+      b.setAttribute('aria-pressed', String(on));
+      b.classList.toggle('is-on', on);
+      var lab = b.querySelector('.watch-label');
+      if (lab) lab.textContent = on ? '保存済み' : (b.classList.contains('watch-detail')
+        ? 'あとで見る' : '気になる');
+    });
+  }
+
+  // 押した本人にだけ効くので、クリックは1か所でまとめて拾う
+  document.addEventListener('click', function (ev) {
+    var btn = ev.target.closest && ev.target.closest('[data-watch]');
+    if (!btn) return;
+    ev.preventDefault();
+    var id = btn.getAttribute('data-watch');
+    var ids = watchRead();
+    var i = ids.indexOf(id);
+    if (i >= 0) ids.splice(i, 1); else ids.unshift(id);   // 新しく押したものが先頭
+    watchWrite(ids);
+    paintWatchButtons();
+    btn.classList.remove('is-pop');
+    void btn.offsetWidth;                                  // アニメを繰り返せるようにする
+    if (i < 0) btn.classList.add('is-pop');
+    if (watchFeed) renderWatch();
+  });
+
+  var watchFeed = document.getElementById('watchFeed');
+  paintWatchCount();
+  paintWatchButtons();
+
   // ---------------------------------------------------------------- マーカー
   // キャプションのマーカーは、画面に入ったところで引きはじめる。
   // 最初から引かれていると、ただの装飾になって目に留まらない。
@@ -134,7 +198,9 @@
 
   /* ------------------------------------------------ フィード */
   var feed = document.getElementById('feed');
-  if (!feed) return;
+  // 気になるリストのページには #feed が無いが、
+  // カードを描く関数はこの先で定義しているので、そこまでは通す。
+  if (!feed && !watchFeed) return;
 
   var state = { all: null, view: [], page: 1, per: 10, sort: 'new', q: '', pmin: 0, pmax: Infinity };
   var countEl = document.getElementById('resultCount');
@@ -174,6 +240,15 @@
       '<use href="/assets/img/icons.svg#ic-' + name + '"></use></svg>';
   }
 
+  /* カードのハート。サーバー側 render_watch_btn と同じ形にしておく。
+     並べ替え・絞り込み・ガチャで描き直したカードでも消えないように。 */
+  function watchBtn(id) {
+    return '<button class="watch-btn watch-card" type="button" data-watch="' + esc(id) + '" ' +
+      'aria-pressed="false" aria-label="気になるに追加">' +
+      ic('heart', 'ic-heart-off') + ic('heart-on', 'ic-heart-on') +
+      '<span class="watch-label">気になる</span></button>';
+  }
+
   function card(p) {
     var tags = (p.tags || []).slice(0, 3).map(function (t) {
       var cls = t === 'ウォッチ中' ? 'tag tag-watch' : (HOT.indexOf(t) >= 0 ? 'tag tag-hot' : 'tag');
@@ -190,9 +265,59 @@
       '<div class="card-body">' + cap +
       '<h2 class="card-title"><a href="/p/' + esc(p.id) + '/">' + esc(p.t) + '</a></h2>' +
       '<div class="card-tags"><a class="tag" href="/c/' + esc(p.c) + '/">' + ic(p.ci) + esc(p.cl) + '</a>' + tags + '</div>' +
-      '<div class="card-foot"><span class="card-shop">' + esc(p.shop) + '</span>' +
+      '<div class="card-foot">' + watchBtn(p.id) +
+      '<span class="card-shop">' + esc(p.shop) + '</span>' +
       '<a class="btn btn-rakuten" href="' + esc(p.url) + '" target="_blank" rel="nofollow sponsored noopener">楽天で見る' + ic('arrow-right', 'ic-arrow') + '</a>' +
       '</div></div></article>';
+  }
+
+  // 保存した商品を並べる。価格は保存時のものではなく、いまの値を出す。
+  // 掲載が終わった商品はデータに無いので、自然にリストからも消える。
+  function renderWatch() {
+    if (!watchFeed) return;
+    var countEl2 = document.getElementById('watchCount');
+    var clearBtn = document.getElementById('watchClear');
+
+    ensureData().then(function () {
+      var ids = watchRead();
+      var byId = {};
+      state.all.forEach(function (p) { byId[p.id] = p; });
+
+      var items = ids.map(function (id) { return byId[id]; }).filter(Boolean);
+
+      // 消えた商品のぶんは、保存側からも外しておく
+      if (items.length !== ids.length) {
+        watchWrite(items.map(function (p) { return p.id; }));
+      }
+
+      if (countEl2) countEl2.textContent = items.length;
+      if (clearBtn) clearBtn.hidden = items.length === 0;
+
+      if (!items.length) {
+        watchFeed.innerHTML =
+          '<div class="empty">' + ic('heart', 'ic-xxl') +
+          '<p class="empty-title">まだ何も保存していません</p>' +
+          '<p>商品のハートを押すと、ここに溜まります。' +
+          '登録も名前も要りません。</p>' +
+          '<p style="margin-top:14px"><a class="btn btn-rakuten" href="/">特価を見にいく</a></p>' +
+          '</div>';
+      } else {
+        watchFeed.innerHTML = items.map(card).join('');
+      }
+      paintWatchButtons(watchFeed);
+      drawMarkers(watchFeed);
+    });
+  }
+
+  if (watchFeed) {
+    renderWatch();
+    var clear = document.getElementById('watchClear');
+    if (clear) clear.addEventListener('click', function () {
+      if (!window.confirm('保存した商品をすべて外します。よろしいですか？')) return;
+      watchWrite([]);
+      paintWatchButtons();
+      renderWatch();
+    });
   }
 
   function applySort(list) {
@@ -245,6 +370,7 @@
     if (countEl) countEl.textContent = state.view.length;
     renderPager();
     drawMarkers(feed);
+    paintWatchButtons(feed);
   }
 
   function refresh(keepPage) {
@@ -343,6 +469,7 @@
             slot.classList.add('is-out');
             slot.innerHTML = card(p);
             drawMarkers(slot);
+            paintWatchButtons(slot);
             rolling = false;
             gachaBtn.disabled = false;
             gachaBtn.innerHTML = ic('capsule', 'ic-capsule') + 'もう一回まわす';
@@ -354,7 +481,7 @@
   }
 
   // URLの ?q= を拾って絞り込み
-  var q = new URLSearchParams(window.location.search).get('q');
+  var q = feed ? new URLSearchParams(window.location.search).get('q') : null;
   if (q) {
     state.q = q.trim().toLowerCase();
     var input = document.getElementById('searchInput');

@@ -2053,3 +2053,83 @@ a.ticker-item:hover::before { background: var(--pop); }
   .mk { transition: none; background-size: 100% .78em; }
 }
 
+
+/* =========================================================
+   WATCH  ── 気になるリスト
+   会員登録を作らずに保存できるようにしたもの。
+   保存先は端末のブラウザだけなので、押した数は集計できない。
+   だから数は出さない。出せば嘘になる。
+   ========================================================= */
+.watch-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: transparent;
+  border: 2px solid var(--ink-14);
+  border-radius: 999px;
+  padding: 8px 14px 8px 11px;
+  font-family: var(--f-body); font-size: .78rem; font-weight: 700;
+  color: var(--ink-70);
+  cursor: pointer;
+  transition: border-color .16s ease, color .16s ease, background .16s ease;
+}
+.watch-btn:hover { border-color: var(--sale); color: var(--sale); }
+.watch-btn .ic { width: 17px; height: 17px; }
+.watch-btn .ic-heart-on { display: none; }
+.watch-btn.is-on {
+  border-color: var(--sale);
+  background: var(--sale-bg);
+  color: var(--sale);
+}
+.watch-btn.is-on .ic-heart-off { display: none; }
+.watch-btn.is-on .ic-heart-on { display: inline-block; }
+
+/* 押した瞬間だけ跳ねる。SNSでハートを押したときの手ごたえ。 */
+.watch-btn.is-pop .ic-heart-on { animation: heartPop .42s cubic-bezier(.2,1.6,.4,1); }
+@keyframes heartPop {
+  0%   { transform: scale(.6); }
+  55%  { transform: scale(1.28); }
+  100% { transform: scale(1); }
+}
+
+/* カードの足元。ショップ名と楽天ボタンのあいだに置く */
+.card-foot .watch-btn { margin-right: auto; }
+.card-foot .card-shop { margin-right: 10px; }
+
+/* 商品ページ */
+.detail-actions { margin: 0 0 16px; }
+.detail-actions .watch-btn { padding: 11px 18px 11px 15px; font-size: .84rem; }
+
+/* ヘッダーのバッジ */
+.watch-nav { position: relative; display: inline-grid; place-items: center; }
+.watch-badge {
+  position: absolute; top: -3px; right: -3px;
+  min-width: 18px; height: 18px; padding: 0 5px;
+  border-radius: 999px;
+  background: var(--sale); color: #fff;
+  font-family: var(--f-price); font-weight: 400;
+  font-size: .68rem; line-height: 18px; text-align: center;
+}
+.watch-badge[hidden] { display: none; }
+
+/* リストのページに置く但し書き */
+.watch-note {
+  background: var(--paper);
+  border: 2px dashed var(--ink-14);
+  border-radius: 14px;
+  padding: 18px 18px 16px;
+  margin-top: 22px;
+}
+.watch-note-head {
+  display: flex; align-items: center; gap: 7px;
+  font-family: var(--f-hand); font-size: 1rem;
+  margin-bottom: 10px;
+}
+.watch-note ul { margin: 0; padding-left: 1.15em; }
+.watch-note li { font-size: .8rem; line-height: 1.85; color: var(--ink-70); }
+.btn-sm { padding: 8px 14px; font-size: .78rem; }
+
+/* スマホは指で押すので、タップ領域を確保する。
+   狭い画面ではショップ名を削って、ボタンのぶんを優先する。 */
+@media (max-width: 420px) {
+  .watch-btn { padding: 11px 14px 11px 11px; }
+  .card-foot .card-shop { font-size: .68rem; }
+}
