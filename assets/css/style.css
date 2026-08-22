@@ -259,23 +259,37 @@ a.ticker-item:hover::before { background: var(--pop); }
   -webkit-overflow-scrolling: touch;
 }
 .chipbar-scroll::-webkit-scrollbar { display: none; }
+/* 売場の案内板。押してほしさでは商品ボタンに劣るので、
+   同じ語彙（黒フチ・硬い影）を使いつつ、線も影も一段細くする。 */
 .chip {
   flex: 0 0 auto;
   display: inline-flex; align-items: center; gap: 6px;
-  padding: 7px 14px;
+  padding: 7px 15px;
   background: var(--paper);
-  border: 1.5px solid var(--ink-14);
+  border: 2px solid var(--ink);
   border-radius: 999px;
-  font-size: .8rem; font-weight: 700;
+  font-family: var(--f-hand); font-weight: 400;
+  font-size: .84rem;
   text-decoration: none; color: var(--ink);
   cursor: pointer;
   white-space: nowrap;
-  transition: background .16s ease, border-color .16s ease, color .16s ease;
+  box-shadow: 2px 2px 0 var(--ink);
+  transition: transform .14s ease, box-shadow .14s ease,
+              background .16s ease, color .16s ease;
 }
-.chip:hover { border-color: var(--ink); }
+.chip:hover { transform: translateY(-2px); box-shadow: 2px 4px 0 var(--ink); }
+.chip:active { transform: translateY(2px); box-shadow: 1px 1px 0 var(--ink); }
+/* いま見ている売場。黄色の札にして、少し傾ける。 */
 .chip[aria-current="true"], .chip.is-active {
-  background: var(--ink); border-color: var(--ink); color: #fff;
+  background: var(--pop); color: var(--ink);
+  transform: rotate(-2deg);
+  box-shadow: 2px 3px 0 var(--ink);
 }
+.chip[aria-current="true"]:hover, .chip.is-active:hover {
+  transform: rotate(-2deg) translateY(-2px); box-shadow: 2px 5px 0 var(--ink);
+}
+/* 傾けたぶん、隣とぶつからないように少しだけ間を空ける */
+.chipbar-scroll { padding-block: 13px; }
 
 
 /* =========================================================
@@ -1261,22 +1275,44 @@ a.ticker-item:hover::before { background: var(--pop); }
 }
 .btn:active { transform: translateY(1px); }
 
+/* このサイトで一番押してほしいボタン。
+   「気になる」と同じ黒フチと硬い影を持たせたうえで、
+   影を一段深くして、常にこちらが上に立つようにする。
+   傾けないのは、行き先を決めるボタンだから。ここだけは真っ直ぐ構える。 */
 .btn-rakuten {
   background: var(--sale); color: #fff;
-  font-size: .84rem;
-  padding: 11px 18px;
-  box-shadow: 0 3px 0 #C31F29;
+  font-family: var(--f-hand); font-weight: 400;
+  font-size: .94rem;
+  padding: 10px 18px;
+  border: 2.5px solid var(--ink);
+  border-radius: 11px;
+  box-shadow: 3px 4px 0 var(--ink);
   flex: 0 0 auto;
 }
-.btn-rakuten:hover { background: #E02733; }
-
-
-.btn-ghost {
-  background: transparent; color: var(--ink);
-  border: 1.5px solid var(--ink-14);
-  font-size: .82rem; padding: 11px 20px;
+.btn-rakuten:hover {
+  background: #FF4551;
+  transform: translateY(-2px);
+  box-shadow: 3px 6px 0 var(--ink);
 }
-.btn-ghost:hover { border-color: var(--ink); }
+.btn-rakuten:active {
+  transform: translateY(3px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+.btn-rakuten .ic-arrow { transition: transform .16s ease; }
+.btn-rakuten:hover .ic-arrow { transform: translateX(3px); }
+
+
+/* 主役ではないボタン。同じ語彙にしつつ、塗りは持たせない。 */
+.btn-ghost {
+  background: var(--paper); color: var(--ink);
+  border: 2.5px solid var(--ink);
+  border-radius: 11px;
+  font-family: var(--f-hand); font-weight: 400;
+  font-size: .88rem; padding: 10px 20px;
+  box-shadow: 2px 3px 0 var(--ink);
+}
+.btn-ghost:hover { transform: translateY(-2px); box-shadow: 2px 5px 0 var(--ink); }
+.btn-ghost:active { transform: translateY(3px); box-shadow: 1px 1px 0 var(--ink); }
 
 .btn-block { width: 100%; }
 .btn-lg { font-size: .98rem; padding: 16px 24px; border-radius: 14px; }
@@ -1538,19 +1574,20 @@ a.ticker-item:hover::before { background: var(--pop); }
   --btn: #1A1410;
   --btn-edge: rgba(255,255,255,.28);
   display: inline-flex; align-items: center; justify-content: center; gap: 7px;
-  padding: 9px 15px;
-  border: 0;
+  padding: 8px 15px;
   border-radius: 999px;
   background: var(--btn);
   color: #fff;
   font-size: .76rem; font-weight: 700;
   letter-spacing: .01em;
   text-decoration: none;
-  box-shadow: 0 3px 0 var(--btn-edge);
+  border: 2.5px solid var(--ink);
+  /* 影は地の色（暖色）の上に落ちるので、ボタン自体が黒でも読める */
+  box-shadow: 2px 3px 0 var(--ink);
   transition: transform .14s ease, box-shadow .14s ease, filter .16s ease;
 }
-.share-btn:hover  { transform: translateY(-2px); box-shadow: 0 5px 0 var(--btn-edge); filter: brightness(1.12); }
-.share-btn:active { transform: translateY(3px); box-shadow: 0 0 0 var(--btn-edge); }
+.share-btn:hover  { transform: translateY(-2px); box-shadow: 2px 5px 0 var(--ink); filter: brightness(1.16); }
+.share-btn:active { transform: translateY(3px); box-shadow: 1px 1px 0 var(--ink); }
 .share-btn .ic { width: 1.15em; height: 1.15em; }
 
 .share-x       { --btn: #000000; --btn-edge: #4A4A4A; }
