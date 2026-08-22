@@ -442,7 +442,12 @@ def fetch_category(cat, app_id, access_key, aff_id, hits, site_url, ng_keyword="
     if not queries:
         queries = [("", k) for k in (cat.get("keywords") or [cat["label"]])]
 
+    # APIは1回30件までしか返さない。hits がそれより多ければページを送る。
+    # 見る母数が増えるほど、値下がりに出くわす機会も増える。
+    pages = max(1, -(-hits // 30))
+
     for genre_id, keyword in queries:
+      for page in range(1, pages + 1):
         params = {
             "applicationId": app_id,
             "accessKey": access_key,
@@ -450,6 +455,7 @@ def fetch_category(cat, app_id, access_key, aff_id, hits, site_url, ng_keyword="
             "keyword": keyword or None,
             "genreId": genre_id or None,
             "hits": min(hits, 30),
+            "page": page if page > 1 else None,
             "minPrice": cat.get("minPrice") or None,
             "maxPrice": cat.get("maxPrice") or None,
             "NGKeyword": ng_keyword or None,
@@ -467,6 +473,12 @@ def fetch_category(cat, app_id, access_key, aff_id, hits, site_url, ng_keyword="
             print("  × %s%s の取得に失敗: %s" % (genre_id, keyword, ex), file=sys.stderr)
             time.sleep(REQUEST_INTERVAL)
             continue
+
+        # そのジャンルにこれ以上ページが無ければ、次のジャンルへ。
+        if page >= (data.get("pageCount") or 1):
+            last_page = True
+        else:
+            last_page = False
 
         for item in data.get("Items", []):
             code = item.get("itemCode") or ""
@@ -496,10 +508,13 @@ def fetch_category(cat, app_id, access_key, aff_id, hits, site_url, ng_keyword="
                 # postageFlag: 0=送料込み, 1=送料別
                 "freeShipping": item.get("postageFlag") == 0,
             }
-        print("  ・%-26s → %d件" % (
+        print("  ・%-26s → %d件%s" % (
             ("ジャンル " + genre_id) if genre_id else ("「%s」" % keyword),
-            len(data.get("Items", []))))
+            len(data.get("Items", [])),
+            "" if pages == 1 else "（%d/%dページ目）" % (page, pages)))
         time.sleep(REQUEST_INTERVAL)
+        if last_page:
+            break
     return list(found.values())
 
 
@@ -1305,12 +1320,16 @@ def main():
         print("   ※ ひとことキャプション未記入が %d件あります。" % no_caption)
         print("      caption を書くとカードの見え方がかなり変わります。")
 
+    # サイトに出している「価格の確認日」は毎日変わる。
+    # その日の1回目だけは、中身に動きがなくても残す必要がある。
+    first_today = (existing_doc.get("updatedAt") or "") != today
     write_run_summary(added, len(price_drops), len(products), no_caption,
-                      price_drops, fresh, gone)
+                      price_drops, fresh, gone, first_today)
     print("\n次: python3 build.py")
 
 
-def write_run_summary(added, drops, total, no_caption, price_drops, fresh, gone):
+def write_run_summary(added, drops, total, no_caption, price_drops, fresh, gone,
+                      first_today=True):
     """自動実行のコミットメッセージに使う要約を書き出す。
 
     クラウドで動かすと実行画面を誰も見ないので、
@@ -1338,6 +1357,13 @@ def write_run_summary(added, drops, total, no_caption, price_drops, fresh, gone)
 
     with open(os.path.join(ROOT, ".run_summary.txt"), "w", encoding="utf-8") as f:
         f.write(title + "\n\n" + "\n".join(body) + "\n")
+
+    # 反映する価値があるかを、自動実行の側から判断できるようにする。
+    # 中身に動きが無い回まで毎度コミットすると、
+    # 「価格の確認日が1日ずれただけ」で再デプロイが走る。
+    worth = bool(head) or first_today
+    with open(os.path.join(ROOT, ".run_changed"), "w", encoding="utf-8") as f:
+        f.write("yes" if worth else "no")
 
 
 if __name__ == "__main__":

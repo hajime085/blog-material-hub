@@ -44,6 +44,12 @@ jobs:
         run: |
           git config user.name "yasumiru-bot"
           git config user.email "bot@users.noreply.github.com"
+          if [ "$(cat .run_changed 2>/dev/null)" = "no" ]; then
+            echo "見に行ったが、伝える変化はなかった。反映しない。"
+            echo "（価格の確認日が変わるその日の1回目は、動きが無くても反映する）"
+            git checkout -- . || true
+            exit 0
+          fi
           if git diff --quiet && git diff --cached --quiet; then
             echo "変化なし。何もしません。"
             exit 0

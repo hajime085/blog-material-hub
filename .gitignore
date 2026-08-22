@@ -27,3 +27,4 @@ products.json.sample_backup
 
 # 自動実行の要約（コミットメッセージ用の一時ファイル）
 .run_summary.txt
+.run_changed

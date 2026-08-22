@@ -31,7 +31,7 @@
     "_comment": "認証情報はここに書かず、.env に入れてください (RAKUTEN_APP_ID / RAKUTEN_ACCESS_KEY / RAKUTEN_AFFILIATE_ID)。fetch_rakuten.py が読み込みます。",
     "appId": "",
     "affiliateId": "",
-    "hits": 30,
+    "hits": 60,
     "minDiscountRate": 15,
     "accessKey": "",
     "ngKeyword": "ふるさと納税 福袋 予約 抽選 ジャンク品",
@@ -53,7 +53,8 @@
     "saleStartToleranceHours": 36,
     "_saleNote": "在庫あり(availability=1)でも販売開始前の商品がある。買えない商品を載せないため startTime/endTime を見る。saleStartToleranceHours は「何時間先までの開始を許容するか」。当日夜の数量限定などは予告として載せる価値があるので既定24時間。",
     "watchMaxNewPerRun": 2,
-    "_watchNote": "--watch（数時間おきの見張り）で1回に足す新規の上限。1日5回動くので、最大で1日10件増える。値段の追跡が主目的なので少なくしている。キャプションが空のカードが一気に増えないように。"
+    "_watchNote": "--watch（数時間おきの見張り）で1回に足す新規の上限。1日5回動くので、最大で1日10件増える。値段の追跡が主目的なので少なくしている。キャプションが空のカードが一気に増えないように。",
+    "_hitsNote": "1カテゴリあたり何件まで見るか。APIは1回30件が上限なので、30を超えるぶんはページを送って取る。母数が増えるほど値下がりに出くわす機会も増えるが、そのぶん実行時間も延びる（秒間1リクエストが目安）。"
   },
   "feed": {
     "perPage": 10,
