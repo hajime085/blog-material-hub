@@ -147,7 +147,7 @@
       b.setAttribute('aria-pressed', String(on));
       b.classList.toggle('is-on', on);
       var lab = b.querySelector('.watch-label');
-      if (lab) lab.textContent = on ? '保存済み' : (b.classList.contains('watch-detail')
+      if (lab) lab.textContent = on ? 'キープ中！' : (b.classList.contains('watch-detail')
         ? 'あとで見る' : '気になる');
     });
   }
