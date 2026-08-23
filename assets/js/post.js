@@ -155,6 +155,10 @@
     .then(function (r) { return r.json(); })
     .then(function (list) { all = list; render(all); })
     .catch(function () {
-      host.innerHTML = '<div class="empty"><p class="empty-title">読み込みに失敗しました</p></div>';
+      host.innerHTML = '<div class="empty">' +
+        '<p class="empty-title">商品データを読み込めませんでした</p>' +
+        '<p>通信を確かめて、ページを再読み込みしてください。</p></div>';
+      var c = document.getElementById('postCount');
+      if (c) c.textContent = '?';
     });
 })();

@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Anton&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Yusei+Magic&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/style.css?v=2daf3f40">
+<link rel="stylesheet" href="/assets/css/style.css?v=09bfc143">
 
 <link rel="alternate" type="application/rss+xml" title="ヤスミル" href="/feed.xml">
 
@@ -59,11 +59,15 @@
 <section class="page-head wrap-narrow">
   <p class="page-eyebrow"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg?v=9e65213c#ic-share"></use></svg>運営用</p>
   <h1 class="page-title">投稿台</h1>
-  <p class="page-lead">直近3日ぶんの商品です。未投稿は <b id="postCount">0</b> 件。
+  <p class="page-lead">直近3日ぶんの商品です。未投稿は <b id="postCount">-</b> 件。
   「Xで開く」を押すと、本文が入った状態でXの投稿画面が開きます。あとは投稿を押すだけです。</p>
 </section>
 
 <div class="wrap-narrow">
+  <div id="postboard" data-url="https://sozaino.com">
+    <p class="pb-loading">読み込んでいます…</p>
+  </div>
+
   <div class="pb-note">
     <p class="pb-note-head"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg?v=9e65213c#ic-info"></use></svg>この作りにした理由</p>
     <ul>
@@ -74,7 +78,6 @@
       <li>商品ページのOGPが効くので、<b>写真つきの大きなカード</b>で表示されます。</li>
     </ul>
   </div>
-  <div id="postboard" data-url="https://sozaino.com"></div>
 </div>
 
 </main>
@@ -163,6 +166,6 @@
 </div>
 
 <script src="/assets/js/app.js?v=f6ec88b4" defer></script>
-<script src="/assets/js/post.js?v=b932f3c3" defer></script>
+<script src="/assets/js/post.js?v=13039eb4" defer></script>
 </body>
 </html>

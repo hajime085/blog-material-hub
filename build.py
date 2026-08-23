@@ -1348,11 +1348,15 @@ def build_postboard(cfg, base, products, cats):
 <section class="page-head wrap-narrow">
   <p class="page-eyebrow">{ic}運営用</p>
   <h1 class="page-title">投稿台</h1>
-  <p class="page-lead">直近3日ぶんの商品です。未投稿は <b id="postCount">0</b> 件。
+  <p class="page-lead">直近3日ぶんの商品です。未投稿は <b id="postCount">-</b> 件。
   「Xで開く」を押すと、本文が入った状態でXの投稿画面が開きます。あとは投稿を押すだけです。</p>
 </section>
 
 <div class="wrap-narrow">
+  <div id="postboard" data-url="{site}">
+    <p class="pb-loading">読み込んでいます…</p>
+  </div>
+
   <div class="pb-note">
     <p class="pb-note-head">{ic2}この作りにした理由</p>
     <ul>
@@ -1363,7 +1367,6 @@ def build_postboard(cfg, base, products, cats):
       <li>商品ページのOGPが効くので、<b>写真つきの大きなカード</b>で表示されます。</li>
     </ul>
   </div>
-  <div id="postboard" data-url="{site}"></div>
 </div>
 """.format(ic=icons.use("share"), ic2=icons.use("info"), site=e(site_url))
 

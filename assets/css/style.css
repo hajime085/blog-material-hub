@@ -2252,3 +2252,7 @@ a.ticker-item:hover::before { background: var(--pop); }
   .pb-item { flex-direction: column; }
   .pb-media img { width: 100%; height: 150px; }
 }
+.pb-loading {
+  text-align: center; padding: 40px 0;
+  font-family: var(--f-hand); font-size: 1rem; color: var(--ink-52);
+}
