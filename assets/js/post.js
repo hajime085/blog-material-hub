@@ -21,6 +21,10 @@
 
   var DONE_KEY = 'yasumiru:posted';
   var SITE = host.getAttribute('data-url');
+  /* 広告表記。楽天のガイドラインは「ファーストビューの上部」と定めており、
+     下部への記載や大量ハッシュタグに埋もれた表記をNG例として挙げている。
+     だから末尾のタグではなく、文頭のプレーンな文字として置く。 */
+  var PR = host.getAttribute('data-pr') || '';
   var DAYS = 3;
 
   function doneRead() {
@@ -69,7 +73,7 @@
       : '¥' + yen(p.pr);
     var cap = trim(p.cap || '', 96);
 
-    var body = head + title + '\n' + price;
+    var body = PR + head + title + '\n' + price;
     if (cap) body += '\n\n' + cap;
     return body;
   }

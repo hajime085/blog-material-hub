@@ -1353,7 +1353,7 @@ def build_postboard(cfg, base, products, cats):
 </section>
 
 <div class="wrap-narrow">
-  <div id="postboard" data-url="{site}">
+  <div id="postboard" data-url="{site}" data-pr="{pr}">
     <p class="pb-loading">読み込んでいます…</p>
   </div>
 
@@ -1365,10 +1365,15 @@ def build_postboard(cfg, base, products, cats):
       <li>貼るのは楽天のリンクではなく<b>このサイトの商品ページ</b>です。
       アフィリエイトURLの連投は目を付けられますし、サイトに来てもらったほうが他も見てもらえます。</li>
       <li>商品ページのOGPが効くので、<b>写真つきの大きなカード</b>で表示されます。</li>
+      <li>先頭の<b>【PR】</b>は、楽天のガイドラインに沿って<b>文頭</b>に置いています。
+      商品提供を受けていない今の使い方では義務ではありませんが、
+      下部やハッシュタグに混ぜる書き方はNG例とされているため、付けるなら先頭が正解です。
+      外したいときは config.json の site.prLabel を空にしてください。</li>
     </ul>
   </div>
 </div>
-""".format(ic=icons.use("share"), ic2=icons.use("info"), site=e(site_url))
+""".format(ic=icons.use("share"), ic2=icons.use("info"), site=e(site_url),
+           pr=e(cfg["site"].get("prLabel") or ""))
 
     write("post/index.html", page_shell(
         cfg, base,
