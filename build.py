@@ -1332,6 +1332,52 @@ def build_watchlist(cfg, base, products, cats):
         robots='<meta name="robots" content="noindex,follow">'))
 
 
+def build_postboard(cfg, base, products, cats):
+    """Xへ流すための投稿台。運営者だけが使うページ。
+
+    XのAPIは2026年2月から従量課金のみになり、URLを含む投稿は1件$0.20。
+    1日5件で月30ドルかかるので使わない。ブラウザを自動操作して投稿するのは
+    規約違反なので、それもしない。
+
+    代わりに、文面を組み立てて「Xの投稿画面を開くリンク」を並べる。
+    費用はゼロ、規約の中、手間は1件2秒。
+    サイトの導線には出さない（noindex・リンクなし）。
+    """
+    site_url = cfg["site"]["url"].rstrip("/")
+    content = """
+<section class="page-head wrap-narrow">
+  <p class="page-eyebrow">{ic}運営用</p>
+  <h1 class="page-title">投稿台</h1>
+  <p class="page-lead">直近3日ぶんの商品です。未投稿は <b id="postCount">0</b> 件。
+  「Xで開く」を押すと、本文が入った状態でXの投稿画面が開きます。あとは投稿を押すだけです。</p>
+</section>
+
+<div class="wrap-narrow">
+  <div class="pb-note">
+    <p class="pb-note-head">{ic2}この作りにした理由</p>
+    <ul>
+      <li>XのAPIは従量課金のみで、<b>URLを含む投稿は1件$0.20</b>。1日5件で月30ドルになります。</li>
+      <li>ブラウザを自動で操作して投稿するのは<b>Xの規約違反</b>で、凍結の的になります。</li>
+      <li>貼るのは楽天のリンクではなく<b>このサイトの商品ページ</b>です。
+      アフィリエイトURLの連投は目を付けられますし、サイトに来てもらったほうが他も見てもらえます。</li>
+      <li>商品ページのOGPが効くので、<b>写真つきの大きなカード</b>で表示されます。</li>
+    </ul>
+  </div>
+  <div id="postboard" data-url="{site}"></div>
+</div>
+""".format(ic=icons.use("share"), ic2=icons.use("info"), site=e(site_url))
+
+    write("post/index.html", page_shell(
+        cfg, base,
+        title="投稿台｜%s" % cfg["site"]["name"],
+        desc="運営用のページです。",
+        path="/post/",
+        content=content,
+        products=products, cats=cats,
+        robots='<meta name="robots" content="noindex,nofollow">',
+        scripts='<script src="%s" defer></script>' % asset_url("/assets/js/post.js")))
+
+
 def build_sitemap(cfg, products):
     site_url = cfg["site"]["url"].rstrip("/")
     now = datetime.now(JST).strftime("%Y-%m-%d")
@@ -1667,6 +1713,7 @@ def main():
     build_static_pages(cfg, base, products, cats)
     build_quiz(cfg, base, products, cats)
     build_watchlist(cfg, base, products, cats)
+    build_postboard(cfg, base, products, cats)
     build_feed_json(cfg, products, cats)
     build_sitemap(cfg, products)
     build_rss(cfg, products)

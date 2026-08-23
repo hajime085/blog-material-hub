@@ -2199,3 +2199,56 @@ a.ticker-item:hover::before { background: var(--pop); }
      読めない文字列を置くくらいなら消す。商品ページには出している。 */
   .card-foot .card-shop { display: none; }
 }
+
+/* =========================================================
+   POSTBOARD  ── Xへ流すための投稿台（運営用）
+   ========================================================= */
+.pb-note {
+  background: var(--paper);
+  border: 2px dashed var(--ink-14);
+  border-radius: 14px;
+  padding: 16px 18px 14px;
+  margin-bottom: 20px;
+}
+.pb-note-head {
+  display: flex; align-items: center; gap: 7px;
+  font-family: var(--f-hand); font-size: 1rem; margin-bottom: 9px;
+}
+.pb-note ul { margin: 0; padding-left: 1.15em; }
+.pb-note li { font-size: .8rem; line-height: 1.85; color: var(--ink-70); }
+
+.pb-item {
+  display: flex; gap: 14px;
+  background: var(--paper);
+  border: 2.5px solid var(--ink);
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 14px;
+  box-shadow: 3px 4px 0 var(--ink);
+}
+.pb-item.is-done { opacity: .5; box-shadow: 2px 2px 0 var(--ink-14); border-color: var(--ink-14); }
+.pb-media { flex: 0 0 auto; }
+.pb-media img {
+  width: 92px; height: 92px; object-fit: cover;
+  border-radius: 10px; border: 2px solid var(--ink);
+}
+.pb-body { flex: 1 1 auto; min-width: 0; }
+/* 投稿されるのと同じ見た目で置く。改行もそのまま。 */
+.pb-text {
+  font-family: var(--f-body);
+  font-size: .82rem; line-height: 1.75;
+  white-space: pre-wrap; word-break: break-word;
+  background: var(--ground);
+  border-radius: 9px;
+  padding: 11px 12px;
+  margin: 0 0 8px;
+}
+.pb-meta { font-size: .72rem; color: var(--ink-52); margin-bottom: 11px; }
+.pb-over { color: var(--sale); }
+.pb-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+.pb-btns .btn { font-size: .8rem; padding: 8px 14px; }
+
+@media (max-width: 560px) {
+  .pb-item { flex-direction: column; }
+  .pb-media img { width: 100%; height: 150px; }
+}
