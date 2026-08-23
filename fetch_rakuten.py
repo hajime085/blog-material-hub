@@ -432,22 +432,38 @@ def reference_price(records, current):
 
 # ------------------------------------------------------------------ fetching
 def fetch_category(cat, app_id, access_key, aff_id, hits, site_url, ng_keyword="",
-                   sort_by="-reviewCount"):
-    """1カテゴリぶんの商品を取得して dict のリストで返す"""
+                   sort_by="-reviewCount", sale_keywords=()):
+    """1カテゴリぶんの商品を取得して dict のリストで返す
+
+    レビュー数の多い順に見るだけでは、値下がりした商品はほとんど拾えない。
+    実測では4日間で値段が動いた商品は追跡3,089件のうち39件（1.3%）しかなく、
+    上位に並ぶのは値段の動かない定番商品ばかりだった。
+
+    そこで「OFF」「半額」のように、値引きを謳っている商品を
+    直接探しにいく検索も足す。同じ300件を見ても、
+    レビュー数順では0件、「半額」で探すと10件見つかる。
+    """
     found = {}
     # ジャンルIDが分かっているカテゴリは、そのジャンルの中だけを見る。
     # キーワード検索はジャンルをまたいで散らばるため
     # （ベビーに大人用おむつ、ペットにゴミ箱が混ざるのはこれが原因）。
-    queries = [(g, "") for g in (cat.get("genres") or [])]
+    genres = cat.get("genres") or []
+    queries = [(g, "") for g in genres]
     if not queries:
         queries = [("", k) for k in (cat.get("keywords") or [cat["label"]])]
+    # 値引きを謳っている商品を探す検索。ジャンルは絞ったまま。
+    for g in genres:
+        for kw in sale_keywords:
+            queries.append((g, kw))
 
     # APIは1回30件までしか返さない。hits がそれより多ければページを送る。
     # 見る母数が増えるほど、値下がりに出くわす機会も増える。
     pages = max(1, -(-hits // 30))
 
     for genre_id, keyword in queries:
-      for page in range(1, pages + 1):
+      # 値引き検索はページを送らない。母数より、上位の鮮度のほうが効く。
+      n_pages = 1 if (genre_id and keyword) else pages
+      for page in range(1, n_pages + 1):
         params = {
             "applicationId": app_id,
             "accessKey": access_key,
@@ -1030,6 +1046,7 @@ def main():
     max_new = (cfg["rakuten"].get("watchMaxNewPerRun", 3) if watch
                else cfg["rakuten"].get("maxNewPerRun", 20))
     hits = cfg["rakuten"].get("hits", 30)
+    sale_keywords = cfg["rakuten"].get("saleKeywords") or []
 
     kept, added, dropped = 0, 0, 0
     price_drops, fresh = [], []
@@ -1044,7 +1061,7 @@ def main():
     for cat in cats:
         print("▼ %s" % cat["label"])
         for raw in fetch_category(cat, app_id, access_key, aff_id, hits, site_url,
-                                  ng_keyword, sort_by):
+                                  ng_keyword, sort_by, sale_keywords):
             if not raw["price"] or not raw["title"]:
                 continue
 
