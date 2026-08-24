@@ -1312,6 +1312,8 @@ def build_feed_json(cfg, products, cats):
             # 終了時刻。ビルドの間隔（最大6時間）のあいだに終わるセールを
             # 読む人の時刻で判定できるように、そのまま渡す。
             "et": (p.get("endTime") or "").strip(),
+            # 投稿の「用途」の型で使う。箇条書きは事実だけを書いてある。
+            "pt": (p.get("points") or [])[:3],
         })
     write("assets/data/feed.json", json.dumps(slim, ensure_ascii=False, separators=(",", ":")))
 
@@ -1405,6 +1407,43 @@ def build_watchlist(cfg, base, products, cats):
         robots='<meta name="robots" content="noindex,follow">'))
 
 
+# セール会場やクーポンのページを紹介する投稿。商品を選ばなくていい。
+POST_LINK_TEXT = {
+    "sale":   ("楽天スーパーSALEの会場です。",
+               "値引き幅の大きいものから見ていくと早いです。"),
+    "coupon": ("楽天のクーポンページです。",
+               "買う前に取っておくだけで値段が変わります。取り忘れが一番もったいない。"),
+    "entry":  ("エントリーはお済みですか。",
+               "してもしなくても値段は同じに見えますが、"
+               "していないとポイントが付きません。"),
+    "spu":    ("いまの自分のポイント倍率を確認できます。",
+               "何倍かを知らずに買うと、いくら戻るのか分かりません。"),
+    "deal":   ("楽天スーパーDEALの対象商品です。",
+               "ポイントの還元率が高く設定されているものが並びます。"),
+}
+
+
+def render_post_links(cfg):
+    """商品以外の投稿の下書き。links.json に入っているURLを使う。"""
+    links = load("links.json") if os.path.exists(os.path.join(ROOT, "links.json")) else {}
+    pr = cfg["site"].get("prLabel") or ""
+    rows = ""
+    for key, (head, body) in POST_LINK_TEXT.items():
+        item = links.get(key) or {}
+        url = item.get("url")
+        if not url:
+            continue
+        text = pr + head + "\n" + body
+        intent = ("https://twitter.com/intent/tweet?text=%s&url=%s"
+                  % (urllib.parse.quote(text), urllib.parse.quote(url)))
+        rows += (
+            '<div class="pb-link">'
+            '<pre class="pb-text">%s\n%s</pre>'
+            '<a class="btn btn-rakuten" href="%s" target="_blank" rel="noopener">Xで開く</a>'
+            '</div>' % (e(text), e(url), e(intent)))
+    return rows or '<p class="pb-links-note">links.json にURLが入っていません。</p>'
+
+
 def build_postboard(cfg, base, products, cats):
     """Xへ流すための投稿台。運営者だけが使うページ。
 
@@ -1426,6 +1465,13 @@ def build_postboard(cfg, base, products, cats):
 </section>
 
 <div class="wrap-narrow">
+  <div class="pb-links">
+    <p class="pb-links-head">{ic3}商品以外の投稿</p>
+    <p class="pb-links-note">セール会場やクーポンのページも紹介できます。
+    商品を選ぶ手間がいらないので、投稿のたびに商品を探さなくて済みます。</p>
+    {linkrows}
+  </div>
+
   <div id="postboard" data-url="{site}" data-pr="{pr}">
     <p class="pb-loading">読み込んでいます…</p>
   </div>
@@ -1445,8 +1491,9 @@ def build_postboard(cfg, base, products, cats):
     </ul>
   </div>
 </div>
-""".format(ic=icons.use("share"), ic2=icons.use("info"), site=e(site_url),
-           pr=e(cfg["site"].get("prLabel") or ""))
+""".format(ic=icons.use("share"), ic2=icons.use("info"), ic3=icons.use("tag"),
+           site=e(site_url), pr=e(cfg["site"].get("prLabel") or ""),
+           linkrows=render_post_links(cfg))
 
     write("post/index.html", page_shell(
         cfg, base,

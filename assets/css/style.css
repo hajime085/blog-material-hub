@@ -2282,3 +2282,40 @@ a.ticker-item:hover::before { background: var(--pop); }
   padding: 8px 14px; border-radius: 10px 10px 0 0;
   margin-bottom: -2px;
 }
+
+/* 投稿台の型えらび */
+.pb-tabs { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-bottom: 8px; }
+.pb-tabs-label { font-size: .7rem; color: var(--ink-52); margin-right: 2px; }
+.pb-tab, .pb-tail {
+  background: var(--paper);
+  border: 2px solid var(--ink-14);
+  border-radius: 999px;
+  padding: 4px 11px;
+  font-family: var(--f-body); font-size: .74rem; font-weight: 700;
+  color: var(--ink-70); cursor: pointer;
+  transition: border-color .14s ease, background .14s ease, color .14s ease;
+}
+.pb-tab:hover, .pb-tail:hover { border-color: var(--ink); color: var(--ink); }
+.pb-tab.is-on, .pb-tail.is-on {
+  background: var(--ink); border-color: var(--ink); color: #fff;
+}
+.pb-tabs + .pb-text { margin-top: 0; }
+
+/* 投稿台：商品以外の投稿 */
+.pb-links {
+  background: var(--paper);
+  border: 2.5px solid var(--ink);
+  border-radius: 14px;
+  padding: 16px 16px 14px;
+  margin-bottom: 20px;
+  box-shadow: 3px 4px 0 var(--ink);
+}
+.pb-links-head {
+  display: flex; align-items: center; gap: 7px;
+  font-family: var(--f-hand); font-size: 1.05rem; margin-bottom: 6px;
+}
+.pb-links-note { font-size: .78rem; line-height: 1.8; color: var(--ink-70); margin-bottom: 12px; }
+.pb-link { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 10px; }
+.pb-link .pb-text { flex: 1 1 auto; min-width: 0; margin: 0; }
+.pb-link .btn { flex: 0 0 auto; font-size: .78rem; padding: 8px 14px; }
+@media (max-width: 560px) { .pb-link { flex-direction: column; } .pb-link .btn { width: 100%; } }
