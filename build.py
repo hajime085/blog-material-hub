@@ -325,13 +325,19 @@ def render_sidebar(cfg, products, cats, active=None, guides=None, current_guide=
   </section>
   {guide_banner}
   {coupon}
+  <section class="side-card cal-card">
+    <h2 class="side-head">{ic3}<span>楽天のイベント</span></h2>
+    <div class="side-body">
+      <div id="calendar"><p class="cal-loading">読み込んでいます…</p></div>
+    </div>
+  </section>
   <section class="side-card">
     <h2 class="side-head">{ic2}<span>売場から探す</span></h2>
     <div class="side-body side-body-tight">
       <div class="side-cats">{cat_rows}</div>
     </div>
   </section>
-</aside>""".format(ic=icons.use("bolt"), ic2=icons.use("grid"),
+</aside>""".format(ic=icons.use("bolt"), ic2=icons.use("grid"), ic3=icons.use("calendar"),
                    rows=rows, cat_rows=cat_rows, coupon=coupon,
                    guide_banner=guide_banner)
 
@@ -615,6 +621,7 @@ def page_shell(cfg, base, *, title, desc, path, content, ogtype="website",
         "IC_HEART": icons.use("heart"),
         "CSS_HREF": asset_url("/assets/css/style.css"),
         "JS_SRC": asset_url("/assets/js/app.js"),
+        "CAL_SRC": asset_url("/assets/js/calendar.js"),
         "FOOTER_OPERATOR": footer_operator(cfg),
         "GUIDE_LINKS": "".join(
             '<li><a href="/guide/%s/">%s</a></li>' % (e(g["slug"]), e(g.get("shortTitle", g["title"])))
@@ -1316,6 +1323,15 @@ def build_feed_json(cfg, products, cats):
             "pt": (p.get("points") or [])[:3],
         })
     write("assets/data/feed.json", json.dumps(slim, ensure_ascii=False, separators=(",", ":")))
+
+    # サイドバーのカレンダー用。手で書いた events.json をそのまま配る。
+    ev_path = os.path.join(ROOT, "events.json")
+    if os.path.exists(ev_path):
+        with open(ev_path, encoding="utf-8") as f:
+            ev = json.load(f)
+        write("assets/data/events.json", json.dumps(
+            {"events": ev.get("events") or [], "recurring": ev.get("recurring") or []},
+            ensure_ascii=False, separators=(",", ":")))
 
 
 def build_quiz(cfg, base, products, cats):
