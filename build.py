@@ -1484,6 +1484,29 @@ def build_feed_json(cfg, products, cats):
         })
     write("assets/data/feed.json", json.dumps(slim, ensure_ascii=False, separators=(",", ":")))
 
+    # 開始前の商品は通常のフィードから外してある（まだ買えないので）。
+    # ただし投稿台では使う。セールが始まる前に告知を流したいので、
+    # ここだけ別のファイルに書き出す。読者向けの画面では読み込まない。
+    soon = []
+    for p in sorted(products, key=lambda x: (x.get("startTime") or "")):
+        if sale_over(p) or not sale_soon(p):
+            continue
+        c = cats.get(p["category"], {})
+        soon.append({
+            "id": p["id"], "t": p["title"], "cap": p.get("caption", ""),
+            "c": p["category"], "ci": c.get("icon", ""), "cl": c.get("short", ""),
+            "pr": p["price"], "lp": p.get("listPrice") or 0, "d": discount_rate(p),
+            "b": price_basis_label(p),
+            "rc": p.get("reviewCount") or 0,
+            "u": p.get("unitNote", ""), "img": p["image"],
+            "shop": p.get("shop", "楽天市場"), "tags": (p.get("tags") or [])[:3],
+            "st": (p.get("startTime") or "").strip(),
+            "et": (p.get("endTime") or "").strip(),
+            "sl": sale_starts_label(p),
+            "pt": (p.get("points") or [])[:3],
+        })
+    write("assets/data/soon.json", json.dumps(soon, ensure_ascii=False, separators=(",", ":")))
+
     # サイドバーのカレンダー用。手で書いた events.json をそのまま配る。
     ev_path = os.path.join(ROOT, "events.json")
     if os.path.exists(ev_path):
@@ -1663,7 +1686,8 @@ def build_postboard(cfg, base, products, cats):
 <section class="page-head wrap-narrow">
   <p class="page-eyebrow">{ic}運営用</p>
   <h1 class="page-title">投稿台</h1>
-  <p class="page-lead">直近3日ぶんの商品です。未投稿は <b id="postCount">-</b> 件。
+  <p class="page-lead">未投稿は <b id="postCount">-</b> 件。
+  左が直近3日の通常商品、右がセール開始前の商品です。
   「Xで開く」を押すと、本文が入った状態でXの投稿画面が開きます。あとは投稿を押すだけです。</p>
 </section>
 

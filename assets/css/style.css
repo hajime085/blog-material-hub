@@ -1522,6 +1522,74 @@ a.ticker-item:hover::before { background: var(--pop); }
 /* 仕様表の送料。かかるほうだけ目立たせる。 */
 .spec-ship { color: var(--sale); }
 
+/* 投稿台の2カラム。
+   通常の商品と、まだ始まっていないセール商品は書ける内容が違う。
+   「いま◯円」と「◯時から◯円」を同じ列に混ぜると、取り違える。 */
+.pb-cols {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+/* 狭い画面ではタブで切り替える。縦に積むと、60件を通り過ぎないと
+   もう片方に届かない。広い画面では両方見えているのでタブは出さない。 */
+.pb-switch {
+  display: flex; gap: 8px;
+  margin-bottom: 14px;
+}
+.pb-switch-btn {
+  flex: 1;
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  padding: 9px 12px;
+  font-family: inherit; font-size: .92rem; font-weight: 700;
+  color: var(--ink); cursor: pointer;
+  box-shadow: 0 2px 0 var(--ink);
+}
+.pb-switch-btn b {
+  font-family: var(--f-price); font-weight: 400; font-size: .9em;
+  background: rgba(0,0,0,.1);
+  border-radius: 999px; padding: 0 8px;
+}
+.pb-switch-btn.is-on { background: var(--ink); color: var(--paper); }
+.pb-switch-btn.is-on b { background: rgba(255,255,255,.24); }
+.pb-cols[data-show="normal"] .pb-col-sale,
+.pb-cols[data-show="sale"] .pb-col-normal { display: none; }
+
+@media (min-width: 900px) {
+  .pb-cols { grid-template-columns: 1fr 1fr; align-items: start; }
+  .pb-switch { display: none; }
+  /* 広い画面では両方出す。タブの選択は効かせない。 */
+  .pb-cols[data-show="normal"] .pb-col-sale,
+  .pb-cols[data-show="sale"] .pb-col-normal { display: block; }
+}
+.pb-col { min-width: 0; }
+.pb-col-head {
+  border-radius: 14px;
+  padding: 11px 14px;
+  margin-bottom: 12px;
+}
+.pb-col-normal .pb-col-head { background: var(--paper-2, #f2ece2); }
+.pb-col-sale .pb-col-head { background: var(--sale); color: #fff; }
+.pb-col-title {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--f-display); font-weight: 400;
+  font-size: 1.06rem; line-height: 1.3;
+  margin: 0 0 3px;
+}
+.pb-col-title b {
+  font-family: var(--f-price); font-weight: 400;
+  font-size: .92em;
+  border-radius: 999px;
+  padding: 1px 9px;
+  background: rgba(0,0,0,.12);
+}
+.pb-col-sale .pb-col-title b { background: rgba(255,255,255,.26); }
+.pb-col-note { font-size: .82rem; margin: 0; opacity: .84; }
+.pb-col-sale .pb-col-note { opacity: .92; }
+
 .sticky-cta .btn-rakuten {
   flex: 1;
   font-size: 1rem;

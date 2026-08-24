@@ -138,6 +138,59 @@
     return out.map(function (v) { return { name: v.name, body: PR + v.body }; });
   }
 
+  /* セール前の商品の型。
+   *
+   * 通常の型は「いま◯円です」と書くが、開始前の商品にそれを使うと嘘になる。
+   * まだ買えないので、書けるのは「いつから、いくらになるか」だけ。
+   * 在庫数や「売り切れ必至」は手元のデータに無いので書かない。
+   */
+  function soonVariants(p) {
+    var title = trim(p.t, 54);
+    var cap = trim(p.cap || '', 88);
+    var when = p.sl || '';                       // 「今夜 20:00 から」
+    var out = [];
+
+    // ① 予告。いつ・いくらになるかだけを言う。
+    out.push({
+      name: '予告',
+      body: '【' + when + '】\n' + title + '\n' +
+            (p.d ? '¥' + yen(p.lp) + ' → ¥' + yen(p.pr) : '¥' + yen(p.pr)) +
+            (cap ? '\n\n' + cap : '')
+    });
+
+    // ② カウントダウン。開始時刻を主役にする。
+    out.push({
+      name: '開始時刻',
+      body: when + '、この値段になります。\n\n' +
+            title + '\n' +
+            '¥' + yen(p.pr) + (p.d ? '（' + p.d + '%OFF）' : '') + '\n\n' +
+            'それまではまだ買えません。'
+    });
+
+    // ③ 買いまわり向け。1ショップ1,000円のカウントに使える価格帯のときだけ。
+    //   1,000円に届かないものを「買いまわりに使える」と書くと嘘になる。
+    if (p.pr >= 1000) {
+      out.push({
+        name: '買いまわり',
+        body: '買いまわりの1件に。\n' +
+              title + '\n' +
+              '¥' + yen(p.pr) + '（' + when + '）' +
+              (cap ? '\n\n' + cap : '')
+      });
+    }
+
+    // ④ 実績。レビュー数は他人が残した事実。
+    if ((p.rc || 0) >= 1000) {
+      out.push({
+        name: 'レビュー',
+        body: 'レビュー' + yen(p.rc) + '件の商品が、' + when + '¥' + yen(p.pr) +
+              (p.d ? '（' + p.d + '%OFF）' : '') + '。\n\n' + title
+      });
+    }
+
+    return out.map(function (v) { return { name: v.name, body: PR + v.body }; });
+  }
+
   /* 締めの一言。付けるかどうかは投稿する人が選ぶ。 */
   var TAILS = [
     { name: 'なし', text: '' },
@@ -145,8 +198,14 @@
     { name: 'コメント', text: '\n\n使ったことある人いますか？' }
   ];
 
+  /* どの型を使うか。開始前の商品かどうかで変わる。
+     選び方は1か所にまとめておく。2か所で分岐すると片方を直し忘れる。 */
+  function variantsFor(p) {
+    return p.sl ? soonVariants(p) : variants(p);
+  }
+
   function compose(p, vi, ti) {
-    var vs = variants(p);
+    var vs = variantsFor(p);
     var v = vs[Math.min(vi || 0, vs.length - 1)];
     return v.body + (TAILS[ti || 0] || TAILS[0]).text;
   }
@@ -167,29 +226,65 @@
     return new Date(t).toISOString().slice(0, 10);
   }
 
-  function render(list) {
+  function render() {
     var done = doneRead();
     var since = jstDate(-DAYS);
 
-    var items = list
+    var normal = all
       .filter(function (p) { return (p.at || '').slice(0, 10) >= since; })
       .sort(function (a, b) { return (b.at || '').localeCompare(a.at || ''); });
 
-    var todo = items.filter(function (p) { return done.indexOf(p.id) < 0; });
+    // セール前の商品は開始時刻の早い順。今夜始まるものから流したい。
+    var sale = soon.slice().sort(function (a, b) {
+      return (a.st || '').localeCompare(b.st || '');
+    });
 
+    var todo = normal.concat(sale)
+      .filter(function (p) { return done.indexOf(p.id) < 0; });
     document.getElementById('postCount').textContent = todo.length;
 
-    if (!items.length) {
-      host.innerHTML = '<div class="empty"><p class="empty-title">' +
-        DAYS + '日以内に載った商品がありません</p>' +
-        '<p>自動取得が新しい商品を見つけると、ここに並びます。</p></div>';
-      return;
+    function column(items, key, head, note, empty) {
+      var n = items.filter(function (p) { return done.indexOf(p.id) < 0; }).length;
+      var body = items.length
+        ? items.map(item).join('')
+        : '<div class="empty"><p class="empty-title">' + empty + '</p></div>';
+      return '<section class="pb-col pb-col-' + key + '">' +
+        '<div class="pb-col-head">' +
+          '<h2 class="pb-col-title">' + esc(head) + '<b>' + n + '</b></h2>' +
+          '<p class="pb-col-note">' + esc(note) + '</p>' +
+        '</div>' + body + '</section>';
     }
 
-    host.innerHTML = items.map(function (p) {
+    // 画面が狭いときは2列に並べられない。縦に積むと60件を通り過ぎないと
+    // もう片方に届かないので、狭いときだけタブで切り替える。
+    // 広い画面では両方見えているので、タブは出さない。
+    function tab(key, label, n) {
+      return '<button class="pb-switch-btn' + (show === key ? ' is-on' : '') +
+        '" type="button" data-show="' + key + '">' + esc(label) +
+        '<b>' + n + '</b></button>';
+    }
+    var nUndone = function (items) {
+      return items.filter(function (p) { return done.indexOf(p.id) < 0; }).length;
+    };
+
+    host.innerHTML =
+      '<div class="pb-switch">' +
+        tab('normal', '通常', nUndone(normal)) +
+        tab('sale', 'セール・マラソン', nUndone(sale)) +
+      '</div>' +
+      '<div class="pb-cols" data-show="' + esc(show) + '">' +
+      column(normal, 'normal', '通常の投稿',
+             '直近' + DAYS + '日に載った、いま買える商品です。',
+             DAYS + '日以内に載った商品がありません') +
+      column(sale, 'sale', 'セール・マラソン用',
+             'まだ始まっていない商品です。開始前に告知として流せます。',
+             'いま開始待ちの商品はありません') +
+      '</div>';
+
+    function item(p) {
       var isDone = done.indexOf(p.id) >= 0;
       var sel = pick[p.id] || { v: 0, t: 0 };
-      var vs = variants(p);
+      var vs = variantsFor(p);
       var text = compose(p, sel.v, sel.t);
       var w = weight(text) + 1 + 23;          // 本文 + 改行 + URL
 
@@ -218,18 +313,27 @@
           '</div>' +
         '</div>' +
       '</article>';
-    }).join('');
+    }
   }
 
   var all = [];
+  var soon = [];
+  var show = 'normal';   // 狭い画面でどちらの列を出しているか
 
   host.addEventListener('click', function (ev) {
+    var sw = ev.target.closest('[data-show]');
+    if (sw && sw.classList.contains('pb-switch-btn')) {
+      show = sw.getAttribute('data-show');
+      render();
+      host.scrollIntoView({ block: 'start' });
+      return;
+    }
     var tv = ev.target.closest('[data-v]');
     if (tv) {
       var a = tv.getAttribute('data-v').split(':');
       pick[a[0]] = pick[a[0]] || { v: 0, t: 0 };
       pick[a[0]].v = +a[1];
-      render(all);
+      render();
       return;
     }
     var tt = ev.target.closest('[data-t]');
@@ -237,7 +341,7 @@
       var b2 = tt.getAttribute('data-t').split(':');
       pick[b2[0]] = pick[b2[0]] || { v: 0, t: 0 };
       pick[b2[0]].t = +b2[1];
-      render(all);
+      render();
       return;
     }
     var b = ev.target.closest('[data-done]');
@@ -247,7 +351,7 @@
       var i = done.indexOf(id);
       if (i >= 0) done.splice(i, 1); else done.push(id);
       doneWrite(done);
-      render(all);
+      render();
       return;
     }
     // Xを開いたら、投稿したものとして印を付ける。
@@ -257,13 +361,17 @@
       var oid = o.getAttribute('data-open');
       var d2 = doneRead();
       if (d2.indexOf(oid) < 0) { d2.push(oid); doneWrite(d2); }
-      setTimeout(function () { render(all); }, 400);
+      setTimeout(function () { render(); }, 400);
     }
   });
 
-  fetch('/assets/data/feed.json')
-    .then(function (r) { return r.json(); })
-    .then(function (list) { all = list; render(all); })
+  Promise.all([
+    fetch('/assets/data/feed.json').then(function (r) { return r.json(); }),
+    // 開始前の商品。読者向けの画面では読み込まない。
+    fetch('/assets/data/soon.json').then(function (r) { return r.json(); })
+                                   .catch(function () { return []; })
+  ])
+    .then(function (d) { all = d[0]; soon = d[1] || []; render(); })
     .catch(function () {
       host.innerHTML = '<div class="empty">' +
         '<p class="empty-title">商品データを読み込めませんでした</p>' +
