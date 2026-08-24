@@ -70,7 +70,7 @@
       "links": [
         {
           "label": "エントリーする",
-          "to": "entry"
+          "to": "fivezero"
         },
         {
           "label": "いまの倍率",
@@ -87,7 +87,7 @@
       "links": [
         {
           "label": "エントリーする",
-          "to": "entry"
+          "to": "wonderful"
         }
       ]
     },
@@ -100,7 +100,7 @@
       "links": [
         {
           "label": "エントリーする",
-          "to": "entry"
+          "to": "ichiba"
         }
       ]
     }

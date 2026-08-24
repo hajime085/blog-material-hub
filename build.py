@@ -1434,7 +1434,8 @@ def build_guides(cfg, base, products, cats, guides):
         """記事内のリンク。売場の案内看板として置く。
         URLが未設定なら何も出さない。埋まっていない看板を立てないため。"""
         item = links.get(key) or {}
-        if not item.get("url"):
+        url = link_url(links, key)
+        if not url:
             return ""
         return ("""<aside class="cta-sign">
   <p class="cta-sign-label">{ic}{label}</p>
@@ -1443,7 +1444,7 @@ def build_guides(cfg, base, products, cats, guides):
 </aside>""").format(
             ic=icons.use("arrow-right", "ic-sign"),
             label=e(item.get("label", "")), note=e(item.get("note", "")),
-            url=e(item["url"]), button=e(item.get("button", "開く")),
+            url=e(url), button=e(item.get("button", "開く")),
             arrow=icons.use("arrow-right", "ic-arrow"))
 
     for g in guides:
@@ -1666,7 +1667,7 @@ def build_feed_json(cfg, products, cats):
                     if to.startswith("/"):
                         got.append({"label": l.get("label", ""), "url": to, "ext": False})
                         continue
-                    url = (links.get(to) or {}).get("url")
+                    url = link_url(links, to)
                     if url:
                         got.append({"label": l.get("label", ""), "url": url, "ext": True})
                 e3 = dict(e2)
@@ -1891,22 +1892,44 @@ def build_watchlist(cfg, base, products, cats):
 
 
 # セール会場やクーポンのページを紹介する投稿。商品を選ばなくていい。
+# 会場とエントリーは同じ場所に着くので、投稿の型はひとつにする。
+# 同じURLを別の文面で二度出しても、押す人にとっては同じページ。
 POST_LINK_TEXT = {
     "sale":   ("楽天スーパーSALEの会場です。",
-               "値引き幅の大きいものから見ていくと早いです。"),
+               "エントリーもここからできます。値引き幅の大きいものから見ていくと早いです。"),
     "coupon": ("楽天のクーポンページです。",
                "買う前に取っておくだけで値段が変わります。取り忘れが一番もったいない。"),
     "marathon": ("お買い物マラソンのエントリーはお済みですか。",
                "してもしなくても値段は同じに見えますが、"
                "していないと買いまわりのポイントが付きません。"),
-    "entry":  ("楽天スーパーSALEのエントリーはお済みですか。",
-               "してもしなくても値段は同じに見えますが、"
-               "していないとポイントが付きません。"),
+    "fivezero": ("今日は5と0のつく日です。",
+               "エントリーと楽天カードでの支払いが条件です。"
+               "同じ買い物でも、しているかどうかで戻る量が変わります。"),
+    "wonderful": ("今日はワンダフルデーです。",
+               "毎月1日だけの日です。エントリーが条件で、押すだけ無料です。"),
+    "ichiba": ("今日はいちばの日です。",
+               "毎月18日だけの日です。エントリーが条件で、押すだけ無料です。"),
     "spu":    ("いまの自分のポイント倍率を確認できます。",
                "何倍かを知らずに買うと、いくら戻るのか分かりません。"),
     "deal":   ("楽天スーパーDEALの対象商品です。",
                "ポイントの還元率が高く設定されているものが並びます。"),
 }
+
+
+def link_url(links, key, _seen=None):
+    """links.json のURLを引く。alias があれば、そちらを辿る。
+
+    同じ場所に着くのに別々の短縮URLを持つと、片方だけ古くなる。
+    URLは1本にして、呼び名だけを分ける。
+    """
+    _seen = _seen or set()
+    if key in _seen:
+        return ""
+    _seen.add(key)
+    item = links.get(key) or {}
+    if item.get("alias"):
+        return link_url(links, item["alias"], _seen)
+    return item.get("url") or ""
 
 
 def render_post_links(cfg):
@@ -1921,12 +1944,20 @@ def render_post_links(cfg):
     # 全部並べたうえで、いま開催しているかどうかを添える。
     # 開催していないものを勧めても押した人のポイントは増えないが、
     # それを判断するのに必要なのは、消すことではなく書くこと。
-    RUNNING = {"marathon": "marathon", "entry": "sale", "sale": "sale"}
+    RUNNING = {"marathon": "marathon", "sale": "sale"}
+
+    # 定例は日付で決まるので、こちらで数えられる。
+    # 「今日は5と0のつく日です」と書いた投稿を、違う日に流さないため。
+    today = datetime.now(JST)
+    DAILY = {
+        "fivezero": (today.day % 5 == 0, "5と0のつく日"),
+        "wonderful": (today.day == 1, "ワンダフルデー"),
+        "ichiba": (today.day == 18, "いちばの日"),
+    }
 
     rows = ""
     for key, (head, body) in POST_LINK_TEXT.items():
-        item = links.get(key) or {}
-        url = item.get("url")
+        url = link_url(links, key)
         if not url:
             continue
         text = pr + head + "\n" + body
@@ -1936,7 +1967,14 @@ def render_post_links(cfg):
         # このリンクが結びついているイベントが、いま開催しているか。
         need = RUNNING.get(key)
         state = ""
-        if need:
+        if key in DAILY:
+            live, name = DAILY[key]
+            state = (('<span class="pb-state is-live">%s今日は%s</span>'
+                      % (icons.use("check", "pb-state-ic"), e(name)))
+                     if live else
+                     ('<span class="pb-state is-off">%s今日ではありません</span>'
+                      % icons.use("info", "pb-state-ic")))
+        elif need:
             if kind == need:
                 state = ('<span class="pb-state is-live">%s%s 開催中</span>'
                          % (icons.use("check", "pb-state-ic"), e(ev["name"])))
