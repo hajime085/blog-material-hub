@@ -56,7 +56,51 @@ def yen(n):
     return "{:,}".format(int(n))
 
 
+def sale_over(p):
+    """セールがもう終わっているか。
+
+    楽天は商品によって販売期間（endTime）を持っている。
+    「24時間限定 半額」のような商品は、その時刻を過ぎると元の値段に戻る。
+
+    取得のときにも見ているが、それだけでは足りない。
+    朝7時の取得では「まだ先」だったものが、10時には終わっている。
+    次の取得は15時なので、その間ずっと終わったセールを載せ続けることになる。
+    だから表示するたびに、いまの時刻で確かめる。
+    """
+    end = (p.get("endTime") or "").strip()
+    if not end:
+        return False
+    for fmt in ("%Y-%m-%d %H:%M", "%Y-%m-%dT%H:%M:%S", "%Y-%m-%d %H:%M:%S"):
+        try:
+            return datetime.strptime(end, fmt) < datetime.now(JST).replace(tzinfo=None)
+        except ValueError:
+            continue
+    return False
+
+
+def sale_ends_label(p):
+    """「8月24日 9:59まで」。期限があることを、読む人に伝える。"""
+    end = (p.get("endTime") or "").strip()
+    if not end:
+        return ""
+    for fmt in ("%Y-%m-%d %H:%M", "%Y-%m-%dT%H:%M:%S", "%Y-%m-%d %H:%M:%S"):
+        try:
+            d = datetime.strptime(end, fmt)
+            return d.strftime("%-m月%-d日 %H:%Mまで")
+        except ValueError:
+            continue
+    return ""
+
+
 def discount_rate(p):
+    """割引率。セールが終わっていたら0を返す。
+
+    ここで一括して落とすことで、%OFFシール・「セール前◯円」の表記・
+    ページタイトル・OGP・RSSまで、割引の主張が全部止まる。
+    終了の告知だけ出して値札は「50%OFF」のまま、という食い違いを防ぐ。
+    """
+    if sale_over(p):
+        return 0
     lp, pr = p.get("listPrice"), p.get("price")
     if not lp or not pr or lp <= pr:
         return 0
@@ -177,7 +221,8 @@ def render_sidebar(cfg, products, cats, active=None, guides=None, current_guide=
     ヘッダーと同じ黒帯をパネルの頭に載せて、本体と地続きに見せる。
     順位マーカーは値札POPの縮小版。順位そのものに意味があるので番号を振る。"""
     fetched = last_fetch_date(products)
-    fresh = [p for p in products if not is_stale(p, fetched)] or products
+    fresh = [p for p in products
+             if not is_stale(p, fetched) and not sale_over(p)] or products
     ranked = sorted(fresh, key=lambda p: -(p.get("reviewCount") or 0))[:5]
     rows = ""
     for i, p in enumerate(ranked, 1):
@@ -513,7 +558,10 @@ def render_chipbar(cfg, active=None):
 def render_ticker(products, cats):
     """電光掲示板。流れている商品はそのまま商品ページへ飛べる。
     同じ内容を2周ぶん並べて途切れなく流す。"""
-    ranked = sorted(products, key=lambda x: (-discount_rate(x), -(x.get("reviewCount") or 0)))[:10]
+    # 終わったセールは流さない。ここは割引率の高い順なので、
+    # 何もしないと「終了した半額」ほど先頭に出てしまう。
+    live = [x for x in products if not sale_over(x)]
+    ranked = sorted(live, key=lambda x: (-discount_rate(x), -(x.get("reviewCount") or 0)))[:10]
     items = []
     for p in ranked:
         d = discount_rate(p)
@@ -642,7 +690,10 @@ def render_gacha():
 def build_index(cfg, base, products, cats):
     per = cfg["feed"]["perPage"]
     fetched = last_fetch_date(products)
-    ordered = sorted(products, key=feed_order, reverse=True)
+    # 終わったセールは特価フィードに並べない。
+    # 商品ページは残す（Xに貼ったリンクが死なないように）。
+    live = [p for p in products if not sale_over(p)]
+    ordered = sorted(live, key=feed_order, reverse=True)
     total_pages = max(1, -(-len(ordered) // per))
 
     counts = {}
@@ -781,7 +832,8 @@ def build_categories(cfg, base, products, cats):
     fetched = last_fetch_date(products)
     site_url = cfg["site"]["url"].rstrip("/")
     for c in cfg["categories"]:
-        items = [p for p in products if p["category"] == c["slug"]]
+        items = [p for p in products
+                 if p["category"] == c["slug"] and not sale_over(p)]
         items.sort(key=feed_order, reverse=True)
         best = max((discount_rate(p) for p in items), default=0)
         total_pages = max(1, -(-len(items) // per))
@@ -899,6 +951,19 @@ def build_products(cfg, base, products, cats):
         if p.get("caption"):
             cap = '<p class="detail-cap">%s</p>' % marked(p["caption"], p)
 
+        # セールが終わっていたら、その事実を最初に伝える。
+        # 値段が戻っているのに「いま¥1,490」と出し続けるのは、
+        # このサイトが一番やってはいけないこと。
+        over_notice = ""
+        if sale_over(p):
+            over_notice = (
+                '<div class="sale-over">'
+                '<p class="sale-over-head">%sこのセールは終了しました</p>'
+                '<p class="sale-over-body">%s の期間限定でした。'
+                'いまは値段が戻っている可能性が高いので、'
+                '楽天市場で最新の価格をご確認ください。</p>'
+                '</div>' % (icons.use("info"), e(sale_ends_label(p))))
+
         # レジの表示のように、価格の脇に根拠を小さく添える
         cta_sub = ""
         if p.get("unitNote"):
@@ -928,6 +993,7 @@ def build_products(cfg, base, products, cats):
   </div>
 
   <h1 class="detail-title">{title}</h1>
+  {over_notice}
   {cap}
   <div class="detail-actions">{watch}</div>
   {share_top}
@@ -971,6 +1037,7 @@ def build_products(cfg, base, products, cats):
            desc_block=desc_block, rel_block=rel_block,
            share_top=render_share(p, cfg, "top"),
            watch=render_watch_btn(p, "detail"),
+           over_notice=over_notice,
            share_bottom=render_share(p, cfg, "bottom"))
 
         offer = {
@@ -1228,6 +1295,9 @@ def build_feed_json(cfg, products, cats):
     """クライアント側の絞り込み・並べ替え・検索用の軽いデータ"""
     slim = []
     for p in sorted(products, key=feed_order, reverse=True):
+        # 終わったセールは、絞り込みでもガチャでもクイズでも出さない
+        if sale_over(p):
+            continue
         c = cats.get(p["category"], {})
         slim.append({
             "id": p["id"], "t": p["title"], "cap": p.get("caption", ""),
@@ -1239,6 +1309,9 @@ def build_feed_json(cfg, products, cats):
             "u": p.get("unitNote", ""), "img": p["image"], "url": p.get("affiliateUrl") or "#",
             "shop": p.get("shop", "楽天市場"), "tags": (p.get("tags") or [])[:3],
             "at": p.get("bumpedAt") or ((p.get("postedAt") or "") + "T00:00:00"),
+            # 終了時刻。ビルドの間隔（最大6時間）のあいだに終わるセールを
+            # 読む人の時刻で判定できるように、そのまま渡す。
+            "et": (p.get("endTime") or "").strip(),
         })
     write("assets/data/feed.json", json.dumps(slim, ensure_ascii=False, separators=(",", ":")))
 
@@ -1422,7 +1495,8 @@ def build_sitemap(cfg, products):
 def build_rss(cfg, products):
     site = cfg["site"]
     site_url = site["url"].rstrip("/")
-    ordered = sorted(products, key=lambda p: p.get("postedAt", ""), reverse=True)[:30]
+    live = [p for p in products if not sale_over(p)]
+    ordered = sorted(live, key=lambda p: p.get("postedAt", ""), reverse=True)[:30]
     items = ""
     for p in ordered:
         d = discount_rate(p)
@@ -1541,6 +1615,40 @@ def check_guide_toc(guides):
         if not toc:
             print("\n⚠ 記事「%s」の目次が空です。" % g.get("shortTitle") or g.get("slug"))
             print("   大見出しは「##」ではなく「#」で書いてください（目次に載るのは # だけ）。")
+
+
+def check_expired_sales(products):
+    """終わったセールが、一覧やデータに残っていないか確かめる。
+
+    「24時間限定 半額」の商品は、時刻を過ぎると値段が戻る。
+    それを載せ続けるのは、このサイトが批判している「安く見えて安くない」
+    そのものになる。商品ページは残すが、一覧・ティッカー・RSS・
+    ブラウザ用データからは消えていなければならない。
+    """
+    over = [p["id"] for p in products if sale_over(p)]
+    if not over:
+        return
+
+    targets = ["index.html", "feed.xml", "assets/data/feed.json", "categories/index.html"]
+    targets += ["c/%s/index.html" % c for c in
+                sorted({p["category"] for p in products})]
+
+    leaked = []
+    for rel in targets:
+        path = os.path.join(ROOT, rel)
+        if not os.path.exists(path):
+            continue
+        with open(path, encoding="utf-8") as f:
+            text = f.read()
+        for pid in over:
+            if pid in text:
+                leaked.append((rel, pid))
+
+    print("   終了したセール %d件 を一覧から外しました" % len(over))
+    if leaked:
+        print("\n⚠ 終了したセールが残っています:")
+        for rel, pid in leaked[:10]:
+            print("   %-28s %s" % (rel, pid))
 
 
 def check_caption_prices(products):
@@ -1729,6 +1837,7 @@ def main():
     check_padding_collisions()
     check_internal_links()
     check_caption_prices(products)
+    check_expired_sales(products)
     check_guide_toc(guides)
 
     print("✅ ビルド完了")

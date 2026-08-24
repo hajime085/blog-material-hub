@@ -2256,3 +2256,29 @@ a.ticker-item:hover::before { background: var(--pop); }
   text-align: center; padding: 40px 0;
   font-family: var(--f-hand); font-size: 1rem; color: var(--ink-52);
 }
+
+/* 終わったセールの商品ページに出す告知。
+   値段が戻っているのに「いま◯円」と出し続けないための断り書き。 */
+.sale-over {
+  background: var(--sale-bg);
+  border: 2.5px solid var(--sale);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+}
+.sale-over-head {
+  display: flex; align-items: center; gap: 7px;
+  font-family: var(--f-hand); font-size: 1rem;
+  color: var(--sale);
+  margin-bottom: 6px;
+}
+.sale-over-body { font-size: .82rem; line-height: 1.8; color: var(--ink-70); }
+/* 気になるリストで、保存後にセールが終わったもの */
+.watch-over { position: relative; }
+.watch-over .card { opacity: .55; }
+.watch-over-note {
+  background: var(--sale); color: #fff;
+  font-size: .78rem; font-weight: 700;
+  padding: 8px 14px; border-radius: 10px 10px 0 0;
+  margin-bottom: -2px;
+}

@@ -173,6 +173,21 @@
   paintWatchCount();
   paintWatchButtons();
 
+  // ------------------------------------------------------ 終わったセール
+  // ビルド時にも外しているが、それだけでは足りない。
+  // 取得は1日5回なので、朝の取得のあとに終わるセールは
+  // 次のビルドまで最大6時間、終わったまま並び続ける。
+  // 読む人の時計で判定して、その場で消す。
+  function saleOver(p) {
+    var end = (p && p.et) || '';
+    if (!end) return false;
+    // 「2026-08-24 09:59」を日本時間として読む
+    var m = end.match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})/);
+    if (!m) return false;
+    var t = Date.UTC(+m[1], +m[2] - 1, +m[3], +m[4], +m[5]) - 9 * 3600000;
+    return Date.now() > t;
+  }
+
   // ---------------------------------------------------------------- マーカー
   // キャプションのマーカーは、画面に入ったところで引きはじめる。
   // 最初から引かれていると、ただの装飾になって目に留まらない。
@@ -302,7 +317,15 @@
           '<p style="margin-top:14px"><a class="btn btn-rakuten" href="/">特価を見にいく</a></p>' +
           '</div>';
       } else {
-        watchFeed.innerHTML = items.map(card).join('');
+        watchFeed.innerHTML = items.map(function (p) {
+          // 保存したあとにセールが終わることがある。
+          // 消してしまうと「保存したのに無い」になるので、印を付けて残す。
+          return saleOver(p)
+            ? '<div class="watch-over"><p class="watch-over-note">' +
+              'このセールは終了しました。いまの価格は楽天でご確認ください。</p>' +
+              card(p) + '</div>'
+            : card(p);
+        }).join('');
       }
       paintWatchButtons(watchFeed);
       drawMarkers(watchFeed);
@@ -374,7 +397,7 @@
   }
 
   function refresh(keepPage) {
-    var list = state.all || [];
+    var list = (state.all || []).filter(function (p) { return !saleOver(p); });
     if (state.q) list = list.filter(function (p) { return matches(p, state.q); });
     if (state.pmin > 0 || state.pmax < Infinity) {
       list = list.filter(function (p) { return p.pr >= state.pmin && p.pr < state.pmax; });
@@ -398,6 +421,21 @@
     }
     return loading;
   }
+
+  // サーバーが出したカードのうち、読み込み時点で終わっているものを消す。
+  // データを持たないので、feed.json が来てから照合する。
+  function hideExpiredServerCards() {
+    if (!feed || !state.all) return;
+    var over = {};
+    state.all.forEach(function (p) { if (saleOver(p)) over[p.id] = 1; });
+    Array.prototype.forEach.call(feed.querySelectorAll('.card'), function (c) {
+      var a = c.querySelector('a[href^="/p/"]');
+      if (!a) return;
+      var id = a.getAttribute('href').split('/')[2];
+      if (over[id]) c.remove();
+    });
+  }
+  if (feed) ensureData().then(hideExpiredServerCards);
 
   var pagerHost = document.querySelector('.pager');
   if (pagerHost) {
@@ -450,7 +488,9 @@
       slot.classList.add('is-rolling');
 
       ensureData().then(function () {
-        var pool = state.all.filter(function (p) { return p.img && p.pr; });
+        var pool = state.all.filter(function (p) {
+          return p.img && p.pr && !saleOver(p);
+        });
         if (!pool.length) { rolling = false; gachaBtn.disabled = false; return; }
 
         // 回っている感じを出すために、止まるまで数回入れ替える。
