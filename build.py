@@ -827,25 +827,54 @@ def jsonld_block(obj):
 
 # ---------------------------------------------------------------- builders
 def render_soon(products, cats):
-    """まもなく始まる特価。ヒーローのすぐ下に置く。
+    """セールの特価をまとめる枠。ヒーローのすぐ下に置く。
 
-    「20時から」の商品は、その時刻まで買えない。
-    だから通常のフィードには並べず、ここにだけ集めて、
-    いつ始まるのかを最初に言う。
-    始まればこの枠から消えて、フィードへ流れる。
+    開始前のものは、その時刻まで買えないので通常のフィードには並べず、
+    ここにだけ集めて、いつ買えるのかを最初に言う。
+
+    始まったものも、イベントの最中はここに残す。
+    以前は開始と同時にこの枠から消していたが、それは逆だった。
+    いちばん見せたいのは「いま実際に買える特価」であって、
+    始まった瞬間に221件のフィードへ紛れ込ませては、探せなくなる。
+    セールが終わるか、イベントの期間が終われば、自然に消える。
 
     該当が無い日は、枠ごと出さない。空の箱を置いておかない。
     """
-    soon = [p for p in products if sale_soon(p) and not sale_over(p)]
+    ev = active_kaimawari_event()
+
+    def in_event(p):
+        """このイベントで始まった（始まる）特価かどうか。
+
+        イベントの開始12時間前から終了までに売り出しが始まるものを、
+        そのイベントの特価とみなす。売り出しの予告は前日から出るため。
+        """
+        if not ev:
+            return False
+        st = (p.get("startTime") or "").strip()
+        if not st:
+            return False
+        try:
+            t = datetime.strptime(st[:16], "%Y-%m-%d %H:%M")
+            a = datetime.strptime(ev["start"][:16], "%Y-%m-%d %H:%M")
+            b = datetime.strptime((ev.get("end") or ev["start"])[:16], "%Y-%m-%d %H:%M")
+        except (ValueError, KeyError):
+            return False
+        return a - timedelta(hours=12) <= t <= b
+
+    soon = [p for p in products if not sale_over(p)
+            and (sale_soon(p) or in_event(p))]
     if not soon:
         return ""
 
     def key(p):
-        return ((p.get("startTime") or ""), -discount_rate(p))
+        # 買えるものを先に。次に開始の早い順。
+        return (1 if sale_soon(p) else 0, (p.get("startTime") or ""),
+                -discount_rate(p))
     soon.sort(key=key)
 
-    # いちばん早い開始時刻を見出しに使う
-    head = sale_starts_label(soon[0])
+    n_live = sum(1 for p in soon if not sale_soon(p))
+    head = (("%s 開催中" % ev["name"]) if (ev and n_live)
+            else sale_starts_label(soon[0]))
 
     def card(p):
         d = discount_rate(p)
@@ -873,7 +902,8 @@ def render_soon(products, cats):
     # 各カードに時刻を書くより、時刻で束ねたほうが読み手の頭に入る。
     groups, order = {}, []
     for p in soon:
-        k = sale_starts_label(p)
+        # 買えるものはひとまとめ。開始時刻で分けても意味がない。
+        k = ("いま買えます" if not sale_soon(p) else sale_starts_label(p))
         if k not in groups:
             groups[k] = []
             order.append(k)
@@ -893,14 +923,19 @@ def render_soon(products, cats):
 <section class="soon wrap-narrow">
   <div class="soon-head">
     <p class="soon-eyebrow">{ic}{head}</p>
-    <h2 class="soon-title-main">まもなく始まる特価 {n}件</h2>
-    <p class="soon-note">開始まではまだ買えません。時間になったら楽天のページで
-    値段が変わります。数量限定のものは、早いもの勝ちになります。
-    始まったものはこの枠から消えて、下の一覧に並びます。</p>
+    <h2 class="soon-title-main">{title} {n}件</h2>
+    <p class="soon-note">{note}</p>
   </div>
   {rows}
 </section>
-""".format(ic=icons.use("bolt"), head=e(head), n=len(soon), rows=rows)
+""".format(ic=icons.use("bolt"), head=e(head), n=len(soon), rows=rows,
+           title=("このセールの特価" if n_live else "まもなく始まる特価"),
+           note=("「いま買えます」のものは、押せばその値段で買えます。"
+                 "数量限定のものは早いもの勝ちです。"
+                 "開始前のものは、その時刻まで買えません。"
+                 if n_live else
+                 "開始まではまだ買えません。時間になったら楽天のページで"
+                 "値段が変わります。数量限定のものは、早いもの勝ちになります。"))
 
 
 def render_gacha():
