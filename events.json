@@ -33,7 +33,7 @@
           "to": "entry"
         },
         {
-          "label": "買いまわりの手順を読む",
+          "label": "買いまわりの手順",
           "to": "/guide/rakuten-super-sale/"
         }
       ]
@@ -47,7 +47,7 @@
       "note": "半額以下の商品が出ます。過去の傾向からの見込みです。",
       "links": [
         {
-          "label": "攻略ガイドを読む",
+          "label": "攻略ガイド",
           "to": "/guide/rakuten-super-sale/"
         },
         {
@@ -69,7 +69,7 @@
           "to": "entry"
         },
         {
-          "label": "いまの倍率を見る",
+          "label": "いまの倍率",
           "to": "spu"
         }
       ]
