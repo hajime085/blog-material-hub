@@ -1186,6 +1186,23 @@ a.ticker-item:hover::before { background: var(--pop); }
   text-decoration-color: var(--sale);
   text-decoration-thickness: 1.5px;
 }
+/* 送料別の印。値札の中に置く。
+   347円の商品に590円の送料が乗ることがあるので、
+   ここを黙っていると値札が嘘になる。
+   額は楽天のデータに無いので書かない。 */
+.pricetag-ship {
+  display: block;
+  color: var(--ink);
+  font-weight: 700;
+  opacity: .82;
+}
+/* まだ始まっていない商品の値札。「いま」ではなく開始時刻が入るので、
+   ラベルが長くなる。折り返さないように少しだけ小さくする。 */
+.pricetag.is-soon .pricetag-label {
+  font-size: .82em;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
 
 /* --- SIGNATURE: 剥がれかけの割引シール --- */
 .sticker {
@@ -1501,6 +1518,9 @@ a.ticker-item:hover::before { background: var(--pop); }
   text-decoration-color: var(--sale);
   text-decoration-thickness: 1.5px;
 }
+.cta-ship { font-weight: 700; opacity: .8; }
+/* 仕様表の送料。かかるほうだけ目立たせる。 */
+.spec-ship { color: var(--sale); }
 
 .sticky-cta .btn-rakuten {
   flex: 1;
@@ -2580,6 +2600,11 @@ a.ticker-item:hover::before { background: var(--pop); }
   margin-bottom: 9px;
 }
 .soon-when b { font-weight: 400; opacity: .72; font-size: .84em; }
+.soon-price em {
+  font-style: normal; font-weight: 700;
+  font-size: .74rem; opacity: .8;
+  margin-left: 5px;
+}
 .soon-when .ic-when { width: 15px; height: 15px; }
 .ic-when { width: 13px; height: 13px; }
 .soon-title {

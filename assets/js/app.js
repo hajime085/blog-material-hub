@@ -225,6 +225,9 @@
     var sub = '';
     if (p.u) sub += '<span class="pricetag-unit">' + esc(p.u) + '</span>';
     if (p.d) sub += '<span class="pricetag-was">' + esc(p.b || '通常') + ' ¥' + yen(p.lp) + '</span>';
+    // 送料別なら値札に書く。無料のときだけ印を出して、かかるときに
+    // 黙っているのでは、安く見せているのと同じになる。
+    if ((p.tags || []).indexOf('送料無料') < 0) sub += '<span class="pricetag-ship">＋送料</span>';
     if (sub) sub = '<span class="pricetag-sub">' + sub + '</span>';
     return '<div class="pricetag">' +
       '<span class="pricetag-label">いま</span>' +

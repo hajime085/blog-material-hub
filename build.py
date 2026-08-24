@@ -207,6 +207,22 @@ def price_basis_label(p):
     return "通常"
 
 
+def free_shipping(p):
+    return "送料無料" in (p.get("tags") or [])
+
+
+def price_label(p):
+    """値札の頭に付ける言葉。
+
+    まだ始まっていない商品に「いま」と書くと、その値段で
+    いま買えるように読める。実際には開始時刻まで買えないので、
+    そういうものには開始時刻を書く。
+    """
+    if sale_soon(p):
+        return sale_starts_label(p).replace(" から", "")
+    return "いま"
+
+
 def render_pricetag(p, size="card"):
     d = discount_rate(p)
     sub = []
@@ -215,14 +231,20 @@ def render_pricetag(p, size="card"):
     if d:
         sub.append('<span class="pricetag-was">%s ¥%s</span>' % (
             price_basis_label(p), yen(p["listPrice"])))
+    # 送料別なら値札に書く。無料のときだけ印を出して、
+    # かかるときは黙っているのでは、安く見せているのと同じになる。
+    # 金額は楽天のデータに無いので、額は書かない。
+    if not free_shipping(p):
+        sub.append('<span class="pricetag-ship">＋送料</span>')
     sub_html = '<span class="pricetag-sub">%s</span>' % "".join(sub) if sub else ""
     return (
-        '<div class="pricetag">'
-        '<span class="pricetag-label">いま</span>'
+        '<div class="pricetag%s">'
+        '<span class="pricetag-label">%s</span>'
         '<span class="pricetag-value"><span class="pricetag-yen">¥</span>'
         '<span class="pricetag-num">%s</span></span>'
         '%s</div>'
-    ) % (yen(p["price"]), sub_html)
+    ) % (" is-soon" if sale_soon(p) else "", e(price_label(p)),
+         yen(p["price"]), sub_html)
 
 
 def render_burst(p):
@@ -750,7 +772,8 @@ def render_soon(products, cats):
             badge=('<span class="soon-off">%d%%<b>OFF</b></span>' % d) if d else "",
             t=e(p["title"]),
             pr=yen(p["price"]),
-            was=('<s>¥%s</s>' % yen(p["listPrice"])) if d else "",
+            was=(('<s>¥%s</s>' % yen(p["listPrice"])) if d else "")
+                + ("" if free_shipping(p) else '<em>＋送料</em>'),
             cic=icons.use(cat.get("icon", "tag")), cl=e(cat.get("short", "")))
 
     # 開始時刻ごとにまとめる。「いつ買えるのか」が一番大事な情報なので、
@@ -1033,13 +1056,32 @@ def build_products(cfg, base, products, cats):
 
         rows = [("価格", '<td class="price-cell">¥%s</td>' % yen(p["price"]))]
         if d:
-            basis = "通常価格" if price_basis_label(p) == "通常" else "以前の価格"
-            note = "" if basis == "通常価格" else "<br><small>当サイトが過去60日で観測した最高値です</small>"
+            # 値引きの根拠は3つある。どれなのかを混ぜない。
+            # 自分で観測した値と、店が名乗った値は、別のものとして書く。
+            lab = price_basis_label(p)
+            if lab == "以前":
+                basis = "以前の価格"
+                note = "<br><small>当サイトが過去60日で観測した最高値です</small>"
+            elif lab == "セール前":
+                basis = "セール前の価格"
+                note = ("<br><small>ショップが商品名に書いていた値で、"
+                        "実売価格と一致することを確かめています。"
+                        "当サイトが以前に観測した値ではありません</small>")
+            else:
+                basis = "通常価格"
+                note = ""
             rows.append((basis, "<td>¥%s（%d%%OFF）%s</td>" % (yen(p["listPrice"]), d, note)))
         if p.get("unitNote"):
             rows.append(("単価の目安", "<td>%s</td>" % e(p["unitNote"])))
         rows.append(("カテゴリ", '<td><a class="inline-cat" href="/c/%s/">%s%s</a></td>' % (
             p["category"], icons.use(c.get("icon", "tag")), e(c.get("label", "")))))
+        # 送料は必ず1行取る。無料のときだけ書いて、かかるときに黙るのは
+        # 安く見せているのと同じ。金額は楽天のデータに無いので額は書かない。
+        rows.append(("送料", "<td>%s</td>" % (
+            "無料（楽天のデータより）" if free_shipping(p)
+            else '<b class="spec-ship">別途かかります</b>'
+                 ' — 商品代とは別に送料が乗ります。'
+                 '金額は届け先で変わるので、楽天のページでご確認ください。')))
         rows.append(("ショップ", "<td>%s</td>" % e(p.get("shop", "楽天市場"))))
         if p.get("reviewAverage"):
             rows.append(("レビュー", "<td>%s%s（%s件）</td>" % (
@@ -1093,6 +1135,8 @@ def build_products(cfg, base, products, cats):
         elif d:
             cta_sub = '<span class="cta-sub cta-was">%s ¥%s</span>' % (
                 price_basis_label(p), yen(p["listPrice"]))
+        if not free_shipping(p):
+            cta_sub += '<span class="cta-sub cta-ship">＋送料</span>'
 
         desc_block = ""
         if p.get("description"):
@@ -1123,7 +1167,7 @@ def build_products(cfg, base, products, cats):
   <div class="sticky-cta">
     <div class="sticky-cta-inner">
       <div class="sticky-cta-price">
-        <span class="cta-label">いま</span>
+        <span class="cta-label">{price_label}</span>
         <span class="cta-value"><span class="y">¥</span><span class="n">{price}</span></span>
         {cta_sub}
       </div>
@@ -1148,6 +1192,7 @@ def build_products(cfg, base, products, cats):
            tag=render_pricetag(p), sticker=render_sticker(p),
            burst=render_burst(p), title=e(p["title"]),
            cap=cap, price=yen(p["price"]), cta_sub=cta_sub,
+           price_label=e(price_label(p)),
            stale_cls=(" pop-note-stale" if is_stale(p, fetched) else ""),
            freshness=(
                "この価格は%sに見たものです。そのあと変わっているかもしれないので、"
