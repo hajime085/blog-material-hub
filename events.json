@@ -35,6 +35,10 @@
         {
           "label": "買いまわりの手順",
           "to": "/guide/rakuten-marathon/"
+        },
+        {
+          "label": "買いまわり用の商品",
+          "to": "/kaimawari/"
         }
       ]
     },

@@ -925,10 +925,14 @@ def render_soon(products, cats):
     <p class="soon-eyebrow">{ic}{head}</p>
     <h2 class="soon-title-main">{title} {n}件</h2>
     <p class="soon-note">{note}</p>
+    {kwlink}
   </div>
   {rows}
 </section>
 """.format(ic=icons.use("bolt"), head=e(head), n=len(soon), rows=rows,
+           kwlink=('<a class="soon-kw" href="/kaimawari/">%s買いまわりに使えるものを見る%s</a>'
+                   % (icons.use("check", "ic-km"),
+                      icons.use("arrow-right", "ic-arrow"))) if ev else "",
            title=("このセールの特価" if n_live else "まもなく始まる特価"),
            note=("「いま買えます」のものは、押せばその値段で買えます。"
                  "数量限定のものは早いもの勝ちです。"
@@ -1717,6 +1721,127 @@ def build_quiz(cfg, base, products, cats):
         scripts='<script src="%s" defer></script>' % asset_url("/assets/js/quiz.js")))
 
 
+def build_kaimawari(cfg, base, products, cats):
+    """買いまわりに使えるものだけを集めたページ。
+
+    買いまわりは1ショップ税込1,000円以上で1カウント。
+    そして必要なのは「別々の店」で、同じ店を何度使っても1のまま。
+    だから本当に欲しいのは「安い商品の一覧」ではなく、
+    「別々の店から1つずつ、なるべく安く」という組み方になる。
+
+    送料は1,000円の判定に入らないので、送料別は入れない。
+    1,000円＋送料590円は、支払い1,590円でカウントは1。
+    それなら1,200円の送料無料のほうが安くて同じ1カウントになる。
+
+    並べるのは、すでにこのサイトに載っている商品だけ。
+    買いまわりのために別口で商品を集めることはしない。
+    「安ければ何でも」を始めると、値下がりを載せるサイトではなくなる。
+    """
+    ev = active_kaimawari_event()
+
+    ok = [p for p in products
+          if not sale_over(p) and not sale_soon(p)
+          and p["price"] >= KAIMAWARI_MIN and free_shipping(p)]
+    ok.sort(key=lambda p: (p["price"], -(p.get("reviewCount") or 0)))
+
+    # 店ごとに一番安いものを1つ。買いまわりは別々の店でないと数が増えない。
+    picked, seen = [], set()
+    for p in ok:
+        sh = p.get("shop") or ""
+        if sh in seen:
+            continue
+        seen.add(sh)
+        picked.append(p)
+
+    rows, total = "", 0
+    for i, p in enumerate(picked[:10], 1):
+        total += p["price"]
+        cat = cats.get(p["category"], {})
+        rows += (
+            '<li class="kw-row">'
+            '<span class="kw-no">{i}</span>'
+            '<a class="kw-media" href="/p/{id}/">'
+            '<img src="{img}" alt="" loading="lazy" width="120" height="120"></a>'
+            '<span class="kw-body">'
+            '<span class="kw-shop">{ic}{shop}</span>'
+            '<a class="kw-title" href="/p/{id}/">{t}</a>'
+            '<span class="kw-price"><i>¥</i>{pr}'
+            '<b>ここまで¥{tot}</b></span>'
+            '</span></li>'
+        ).format(i=i, id=e(p["id"]), img=e(p["image"]), t=e(p["title"]),
+                 ic=icons.use(cat.get("icon", "tag"), "kw-ic"),
+                 shop=e(p.get("shop", "楽天市場")),
+                 pr=yen(p["price"]), tot=yen(total))
+
+    basket = ""
+    if len(picked) >= 2:
+        basket = """
+  <div class="kw-basket">
+    <p class="kw-basket-head">{ic}別々の店から、安い順に{n}件</p>
+    <p class="kw-basket-note">この{n}件を買うと{n}カウントになります。
+    合計は<b>¥{tot}</b>です。ただし、これは<b>いま必要でないものを
+    買う話ではありません</b>。要らないものを足して増えるポイントは、
+    足した金額より小さいのがふつうです。</p>
+    <ol class="kw-list">{rows}</ol>
+  </div>""".format(ic=icons.use("check", "ic-km"), n=len(picked[:10]),
+                   tot=yen(total), rows=rows)
+
+    cards = "".join(render_card(p, cats, "", shop_totals(products) if ev else None)
+                    for p in ok[:60])
+
+    lead = ("いま開催中の%sで使えます。" % ev["name"]) if ev else \
+           "次のセールに備えて見ておけます。"
+
+    content = """
+<section class="page-head wrap-narrow">
+  <p class="page-eyebrow">{ic}買いまわり</p>
+  <h1 class="page-title">買いまわりに使えるもの</h1>
+  <p class="page-lead">{lead}
+  1ショップ税込1,000円以上で1カウントになります。
+  ここに出しているのは<b>1,000円以上で送料無料</b>のものだけです。
+  送料は1,000円の判定に入らないので、送料別のものは入れていません。</p>
+</section>
+
+<div class="wrap-narrow">{basket}</div>
+
+<div class="layout wrap-wide">
+<div class="layout-main">
+  <div class="toolbar">
+    <p class="result-count"><b>{n}</b> 件が条件を満たしています</p>
+  </div>
+  <div class="feed">{cards}</div>
+  <div class="watch-note">
+    <p class="watch-note-head">{ic2}この一覧の作り方</p>
+    <ul>
+      <li>1ショップ税込<b>1,000円以上</b>で1カウント。判定は商品ごとではなく<b>その店での合計</b>です。</li>
+      <li><b>送料は判定に入りません。</b>1,000円＋送料590円は支払い1,590円でカウントは1。
+      それなら1,200円の送料無料のほうが安くて同じ1カウントです。だから送料別は載せていません。</li>
+      <li>必要なのは<b>別々の店</b>です。同じ店で何度買っても1のままなので、
+      同じ店にまとめるなら送料を1回で済ませたほうが得です。</li>
+      <li>ここに並ぶのは<b>もともとこのサイトに載っている商品だけ</b>です。
+      買いまわりのために別口で商品を集めてはいません。</li>
+      <li>買う順番はカウントに関係ありません。詳しくは
+      <a href="/guide/rakuten-marathon/">お買い物マラソンの攻略法</a>にまとめています。</li>
+    </ul>
+  </div>
+</div>
+{sidebar}
+</div>
+""".format(ic=icons.use("check"), ic2=icons.use("info"), lead=lead,
+           basket=basket, cards=cards, n=len(ok),
+           sidebar=render_sidebar(cfg, products, cats))
+
+    write("kaimawari/index.html", page_shell(
+        cfg, base,
+        title="買いまわりに使えるもの｜1,000円以上・送料無料｜%s" % cfg["site"]["name"],
+        desc="楽天の買いまわりは1ショップ税込1,000円以上で1カウント。"
+             "送料は判定に入らないので、1,000円以上かつ送料無料のものだけを集めました。"
+             "別々の店から1つずつ選ぶ組み方も出しています。",
+        path="/kaimawari/",
+        content=content,
+        products=products, cats=cats))
+
+
 def build_watchlist(cfg, base, products, cats):
     """ウォッチリストのページ。
 
@@ -2235,6 +2360,7 @@ def main():
     build_static_pages(cfg, base, products, cats)
     build_quiz(cfg, base, products, cats)
     build_watchlist(cfg, base, products, cats)
+    build_kaimawari(cfg, base, products, cats)
     build_postboard(cfg, base, products, cats)
     build_feed_json(cfg, products, cats)
     build_sitemap(cfg, products)
