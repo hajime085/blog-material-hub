@@ -30,6 +30,17 @@ jobs:
         with:
           python-version: "3.12"
 
+      # セールの最中だけ、これから始まる商品も拾いにいく。
+      # 期間外なら何もせず終わる（events.json の「確定」の予定を見る）。
+      # マラソン中は新しいタイムセールが次々に始まるので、
+      # 一度きりでは取りこぼす。
+      - name: セール中なら開始前の商品も探す
+        env:
+          RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
+          RAKUTEN_ACCESS_KEY: ${{ secrets.RAKUTEN_ACCESS_KEY }}
+          RAKUTEN_AFFILIATE_ID: ${{ secrets.RAKUTEN_AFFILIATE_ID }}
+        run: python3 fetch_rakuten.py --event --scheduled
+
       - name: 価格を見に行く
         env:
           RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}

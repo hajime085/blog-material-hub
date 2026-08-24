@@ -331,6 +331,31 @@ CONDITIONAL_UNIT = re.compile(
     r"最大|実質|ポイント|同梱|複数購入)[^。]{0,12}$")
 
 
+CONDITIONAL_RE = re.compile(
+    r"(クーポン[^0-9]{0,8}|エントリー[^0-9]{0,8}|実質[^0-9]{0,4}|"
+    r"まとめ買い[^0-9]{0,8}|\d\s*点以上[^0-9]{0,8})"
+    # 「最大1,000円OFF」は買える値段ではなく割引額なので、除く。
+    r"([0-9,]{2,9})\s*円(?!\s*(?:OFF|off|オフ|引き|値引|以上))")
+
+
+def conditional_price(raw_title, price):
+    """「クーポンで1,000円」のような条件つきの値段を見つける。
+
+    嘘ではないが、クーポンを取っていない人はその値段では買えない。
+    実売と一致しないなら、安く見えるだけの表記なので載せない。
+    一致しているなら、条件を満たさなくてもその値段なので問題ない。
+    """
+    for m in CONDITIONAL_RE.finditer(raw_title or ""):
+        try:
+            stated = int(m.group(2).replace(",", ""))
+        except ValueError:
+            continue
+        if stated < 100 or stated == price:
+            continue
+        return stated
+    return None
+
+
 def unit_note_from_title(raw):
     """タイトルに書かれた単価を読む。ただし条件付きのものは読まない。
 
@@ -1008,6 +1033,228 @@ def show_genres(app_id, access_key, site_url, genre_id="0"):
 
 
 # ------------------------------------------------------------------ main
+def event_window(hours_before=12):
+    """いまイベントの最中か、その直前かを返す。
+
+    events.json はカレンダー用に手で書いているものだが、
+    「いつセールなのか」はそこにしか無いので、こちらでも使う。
+    日程を二か所に書くと、必ず片方が古くなる。
+    """
+    doc = load_json("events.json", {}) or {}
+    now = datetime.now(JST).replace(tzinfo=None)
+    for ev in doc.get("events", []):
+        # 予想の日程では回さない。まだ発表されていない日に
+        # 商品を探しにいっても意味がないし、空振りするだけ。
+        if ev.get("status") != "確定":
+            continue
+        try:
+            a = datetime.strptime(ev["start"][:16], "%Y-%m-%d %H:%M")
+            b = datetime.strptime((ev.get("end") or ev["start"])[:16], "%Y-%m-%d %H:%M")
+        except (ValueError, KeyError):
+            continue
+        if a - timedelta(hours=hours_before) <= now <= b:
+            return ev
+    return None
+
+
+def fetch_event(cfg, app_id, access_key, aff_id, site_url,
+                dry_run=False, scheduled=False, force=False):
+    """セール前夜の洗い出し。
+
+    スーパーSALEやお買い物マラソンは、始まる数時間前から
+    「◯月◯日20時開始」の商品が楽天のデータに現れる。
+    普段の巡回は「いま買えるもの」を探すので、これを拾いにいかない。
+    そこで、イベントの前だけこちらを回す。
+
+    見つけたものは products.json に足すだけでよい。
+    トップの「まもなく始まる特価」は開始時刻を見て勝手に並べ、
+    始まれば枠から消えて通常のフィードへ流れる。
+    枠を出したり消したりする作業は要らない。
+    """
+    r = cfg["rakuten"]
+
+    # イベントの外では回さない。普段の巡回が「いま買えるもの」を拾うので、
+    # 開始前の商品を足しても、ただ買えないものが増えるだけになる。
+    if not force:
+        ev = event_window(r.get("eventLeadHours", 12))
+        if not ev:
+            print("いまはイベントの期間外なので、開始前の商品は探しません。")
+            print("（events.json の「確定」の予定を見ています。"
+                  "どうしても回すときは --force）")
+            return
+        print("▼ %s に合わせて回します（%s 〜 %s）"
+              % (ev.get("name", "イベント"), ev.get("start"), ev.get("end")))
+
+    kws = r.get("eventKeywords") or ["20時", "タイムセール", "半額", "数量限定"]
+    hours = r.get("eventAheadHours", 36)
+    max_shop = r.get("eventMaxPerShop", 2)
+    max_cat = r.get("eventMaxPerCategory", 5)
+    # 自動実行では控えめに足す。キャプションは人が書くので、
+    # 一度に増えすぎると空欄のカードが並んでしまう。
+    target = (r.get("eventMaxNewPerRun", 6) if scheduled
+              else r.get("eventMaxNew", 22))
+    max_total = r.get("eventMaxTotal", 40)
+    min_reviews = r.get("minReviewCount", 0)
+    min_rating = r.get("minReviewAverage", 0)
+
+    doc = load_json("products.json", {}) or {}
+    products = doc.get("products", [])
+    listed = {p["id"] for p in products}
+    now = datetime.now(JST).replace(tzinfo=None)
+    limit = now + timedelta(hours=hours)
+
+    # すでに開始前の商品が十分あるなら、これ以上は足さない。
+    # 何度回しても青天井に増えないようにしておく。
+    waiting = 0
+    for p in products:
+        st = (p.get("startTime") or "").strip()
+        if not st:
+            continue
+        try:
+            if datetime.strptime(st[:16], "%Y-%m-%d %H:%M") > now:
+                waiting += 1
+        except ValueError:
+            continue
+    if waiting >= max_total:
+        print("開始前の商品がすでに%d件あるので、今回は足しません（上限%d件）。"
+              % (waiting, max_total))
+        return
+    target = min(target, max_total - waiting)
+
+    print("▼ 開始前の商品を探します（%s以内・検索語 %s）"
+          % (("%d時間" % hours), "／".join(kws)))
+
+    found, scanned = {}, 0
+    for cat in cfg["categories"]:
+        for genre_id in (cat.get("genres") or []):
+            for kw in kws:
+                params = {
+                    "applicationId": app_id, "accessKey": access_key,
+                    "affiliateId": aff_id, "keyword": kw, "genreId": genre_id,
+                    "hits": 30,
+                    "minPrice": cat.get("minPrice") or None,
+                    "maxPrice": cat.get("maxPrice") or None,
+                    "sort": r.get("sort", "-reviewCount"),
+                    "imageFlag": 1, "availability": 1,
+                    "format": "json", "formatVersion": 2,
+                }
+                try:
+                    data = api_get(ITEM_API, params, site_url)
+                except SystemExit:
+                    raise
+                except Exception as ex:                       # noqa: BLE001
+                    print("  × %s「%s」の取得に失敗: %s" % (genre_id, kw, ex),
+                          file=sys.stderr)
+                    time.sleep(REQUEST_INTERVAL)
+                    continue
+
+                for it in data.get("Items", []):
+                    scanned += 1
+                    start = (it.get("startTime") or "").strip()
+                    if not start:
+                        continue
+                    try:
+                        t = datetime.strptime(start, "%Y-%m-%d %H:%M")
+                    except ValueError:
+                        continue
+                    # これから始まるもの。遠すぎる予告は載せない。
+                    if not (now < t < limit):
+                        continue
+                    pid = product_id(it.get("itemCode") or "")
+                    if pid in listed or pid in found:
+                        continue
+                    if (it.get("reviewCount") or 0) < min_reviews:
+                        continue
+                    if float(it.get("reviewAverage") or 0) < min_rating:
+                        continue
+                    raw_name = (it.get("itemName") or "").strip()
+                    price = int(it.get("itemPrice") or 0)
+                    if not price or not raw_name:
+                        continue
+                    # 条件つきの値段を掲げているものは載せない
+                    if conditional_price(raw_name, price):
+                        continue
+                    found[pid] = {
+                        "start": start, "price": price, "rawTitle": raw_name,
+                        "listPrice": list_price_from_title(raw_name, price),
+                        "itemCode": it.get("itemCode"), "category": cat["slug"],
+                        "reviewCount": it.get("reviewCount") or 0,
+                        "reviewAverage": it.get("reviewAverage") or None,
+                        "endTime": (it.get("endTime") or "").strip(),
+                        "image": big_image(it.get("mediumImageUrls")
+                                           or it.get("smallImageUrls")),
+                        "affiliateUrl": it.get("affiliateUrl") or it.get("itemUrl") or "",
+                        "shop": (it.get("shopName") or "").strip(),
+                        "genreId": str(it.get("genreId") or ""),
+                    }
+                time.sleep(REQUEST_INTERVAL)
+        print("  ・%-22s → ここまで %d件" % (cat["label"], len(found)))
+
+    print("\n  %d件を見て、開始前の未掲載品が %d件" % (scanned, len(found)))
+    if not found:
+        print("  いまは開始前の商品がありません。イベントの数時間前に回してください。")
+        return
+
+    # 値引きの裏が取れたもの、レビューの多いものを上に。
+    # そのうえで同じ店・同じ売場に寄らないようにする。
+    # 1店舗の商品ばかり並ぶと、特価まとめではなく宣伝になる。
+    rows = sorted(found.items(),
+                  key=lambda kv: (0 if kv[1]["listPrice"] else 1,
+                                  -(kv[1]["reviewCount"] or 0)))
+    by_shop, by_cat, picked = {}, {}, []
+    for pid, v in rows:
+        if by_shop.get(v["shop"], 0) >= max_shop:
+            continue
+        if by_cat.get(v["category"], 0) >= max_cat:
+            continue
+        by_shop[v["shop"]] = by_shop.get(v["shop"], 0) + 1
+        by_cat[v["category"]] = by_cat.get(v["category"], 0) + 1
+        picked.append((pid, v))
+        if len(picked) >= target:
+            break
+
+    print("  同じ店は%d件まで、同じ売場は%d件までに絞って %d件\n"
+          % (max_shop, max_cat, len(picked)))
+
+    today = datetime.now(JST).strftime("%Y-%m-%d")
+    stamp = datetime.now(JST).strftime("%Y-%m-%dT%H:%M:%S")
+    for pid, v in sorted(picked, key=lambda kv: (kv[1]["start"], kv[1]["category"])):
+        off = (round((v["listPrice"] - v["price"]) / v["listPrice"] * 100)
+               if v["listPrice"] else 0)
+        print("  %s %-8s %s開始 %7s円%s  %s"
+              % (pid, v["category"], v["start"][5:], "{:,}".format(v["price"]),
+                 (" %d%%OFF" % off) if off else "       ",
+                 clean_title(v["rawTitle"])[:38]))
+        if dry_run:
+            continue
+        products.append({
+            "id": pid, "category": v["category"],
+            "title": clean_title(v["rawTitle"]), "rawTitle": v["rawTitle"],
+            "price": v["price"], "image": v["image"],
+            "affiliateUrl": v["affiliateUrl"], "shop": v["shop"],
+            "reviewAverage": v["reviewAverage"], "reviewCount": v["reviewCount"],
+            "itemCode": v["itemCode"], "genreId": v["genreId"],
+            "startTime": v["start"], "endTime": v["endTime"],
+            "listPrice": v["listPrice"],
+            "priceBasis": "title" if v["listPrice"] else None,
+            # キャプションは空で置く。ここは人が書く。
+            "caption": "", "points": [], "description": "",
+            "tags": tags_from_title(v["rawTitle"]),
+            "unitNote": unit_note_from_title(v["rawTitle"]),
+            "postedAt": today, "bumpedAt": stamp, "lastSeen": today,
+        })
+
+    if dry_run:
+        print("\n  --dry-run なので products.json は書き換えていません。")
+        return
+
+    doc["products"] = products
+    save_json("products.json", doc)
+    print("\n  products.json に %d件足しました（合計 %d件）"
+          % (len(picked), len(products)))
+    print("  キャプションが空のままなので、書いてから python3 build.py してください。")
+
+
 def main():
     args = [a for a in sys.argv[1:]]
     cfg = load_json("config.json")
@@ -1016,6 +1263,13 @@ def main():
 
     if "--featured" in args:
         build_featured(cfg, app_id, access_key, aff_id, site_url)
+        return
+
+    if "--event" in args:
+        fetch_event(cfg, app_id, access_key, aff_id, site_url,
+                    dry_run="--dry-run" in args,
+                    scheduled="--scheduled" in args,
+                    force="--force" in args)
         return
 
     if "--genres" in args:
@@ -1066,6 +1320,16 @@ def main():
                 continue
 
             pid = product_id(raw["itemCode"])
+
+            # 「クーポンで◯円」のように、条件を満たさないと届かない値段を
+            # 商品名に掲げているものは載せない。嘘ではないが、
+            # クーポンを取っていない人はその値段では買えない。
+            cond = conditional_price(raw["rawTitle"], raw["price"])
+            if cond:
+                not_on_sale.append((clean_title(raw["rawTitle"]),
+                                    "条件つきの値段（%s円）を掲げている" % "{:,}".format(cond)))
+                excluded.add(pid)
+                continue
 
             # いま買えるか。既存の商品にも適用する。
             # 在庫あり(availability=1)でも販売開始前の商品があり、
