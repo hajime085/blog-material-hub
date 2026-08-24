@@ -732,17 +732,15 @@ def render_soon(products, cats):
     # いちばん早い開始時刻を見出しに使う
     head = sale_starts_label(soon[0])
 
-    cards = ""
-    for p in soon[:8]:
+    def card(p):
         d = discount_rate(p)
         cat = cats.get(p["category"], {})
-        cards += (
+        return (
             '<a class="soon-card" href="/p/{id}/">'
             '<span class="soon-media">'
             '<img src="{img}" alt="{alt}" loading="lazy" width="300" height="300">'
             '{badge}</span>'
             '<span class="soon-body">'
-            '<span class="soon-when">{ic}{when}</span>'
             '<span class="soon-title">{t}</span>'
             '<span class="soon-price"><i>¥</i>{pr}{was}</span>'
             '<span class="soon-cat">{cic}{cl}</span>'
@@ -750,24 +748,43 @@ def render_soon(products, cats):
         ).format(
             id=e(p["id"]), img=e(p["image"]), alt=e(p["title"]),
             badge=('<span class="soon-off">%d%%<b>OFF</b></span>' % d) if d else "",
-            ic=icons.use("calendar", "ic-when"),
-            when=e(sale_starts_label(p)),
             t=e(p["title"]),
             pr=yen(p["price"]),
             was=('<s>¥%s</s>' % yen(p["listPrice"])) if d else "",
             cic=icons.use(cat.get("icon", "tag")), cl=e(cat.get("short", "")))
 
+    # 開始時刻ごとにまとめる。「いつ買えるのか」が一番大事な情報なので、
+    # 各カードに時刻を書くより、時刻で束ねたほうが読み手の頭に入る。
+    groups, order = {}, []
+    for p in soon:
+        k = sale_starts_label(p)
+        if k not in groups:
+            groups[k] = []
+            order.append(k)
+        groups[k].append(p)
+
+    rows = ""
+    for k in order:
+        rows += (
+            '<div class="soon-group">'
+            '<p class="soon-when">{ic}{k}<b>{n}件</b></p>'
+            '<div class="soon-rail">{cards}</div>'
+            '</div>'
+        ).format(ic=icons.use("calendar", "ic-when"), k=e(k),
+                 n=len(groups[k]), cards="".join(card(p) for p in groups[k]))
+
     return """
 <section class="soon wrap-narrow">
   <div class="soon-head">
     <p class="soon-eyebrow">{ic}{head}</p>
-    <h2 class="soon-title-main">まもなく始まる特価</h2>
+    <h2 class="soon-title-main">まもなく始まる特価 {n}件</h2>
     <p class="soon-note">開始まではまだ買えません。時間になったら楽天のページで
-    値段が変わります。数量限定のものは、早いもの勝ちになります。</p>
+    値段が変わります。数量限定のものは、早いもの勝ちになります。
+    始まったものはこの枠から消えて、下の一覧に並びます。</p>
   </div>
-  <div class="soon-rail">{cards}</div>
+  {rows}
 </section>
-""".format(ic=icons.use("bolt"), head=e(head), cards=cards)
+""".format(ic=icons.use("bolt"), head=e(head), n=len(soon), rows=rows)
 
 
 def render_gacha():
@@ -803,7 +820,7 @@ def build_index(cfg, base, products, cats):
         counts[p["category"]] = counts.get(p["category"], 0) + 1
 
     today = datetime.now(JST).strftime("%-m月%-d日")
-    best = max((discount_rate(p) for p in products), default=0)
+    best = max((discount_rate(p) for p in live), default=0)
     # 値下がりを検知した商品の数。0なら「割引率」で並べ替えても何も起きないので、
     # そのボタン自体を出さない（押しても動かないボタンは壊れて見える）。
     n_off = sum(1 for p in products if discount_rate(p) >= 5)
@@ -829,7 +846,7 @@ def build_index(cfg, base, products, cats):
     <span>{third}</span>
   </div>
 </section>
-""".format(lead=e(cfg["site"]["description"]), today=today, count=len(products),
+""".format(lead=e(cfg["site"]["description"]), today=today, count=len(ordered),
            third=third, ic_cal=icons.use("calendar"), ic_box=icons.use("box"))
         if page > 1:
             head = """
@@ -838,7 +855,7 @@ def build_index(cfg, base, products, cats):
   <h1 class="page-title">特価フィード</h1>
   <p class="page-lead">{count}件を新しい順に。いまは{page}ページ目です。</p>
 </section>
-""".format(ic=icons.use("bolt"), count=len(products), page=page)
+""".format(ic=icons.use("bolt"), count=len(ordered), page=page)
 
         content = head + """
 {soon}

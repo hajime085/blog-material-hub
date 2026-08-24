@@ -2489,25 +2489,44 @@ a.ticker-item:hover::before { background: var(--pop); }
 .soon {
   background: var(--ink);
   border-radius: 18px;
-  padding: 18px 16px 16px;
+  padding-block: 18px 16px;
   margin-bottom: 26px;
   box-shadow: 5px 5px 0 rgba(26,20,16,.22);
 }
 .soon-head { margin-bottom: 14px; }
+/* 開始時刻の告知。値札POPと同じ手で切ったギザギザにして、
+   赤地に白文字で置く。ここが一番目に入ってほしい。 */
 .soon-eyebrow {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: var(--pop); color: var(--ink);
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--sale); color: #fff;
   font-family: var(--f-price); font-weight: 400;
-  font-size: .92rem; letter-spacing: .04em;
-  border-radius: 999px; padding: 5px 13px;
-  margin-bottom: 9px;
+  font-size: 1.34rem; letter-spacing: .04em; line-height: 1;
+  padding: 11px 20px 21px;
+  margin-bottom: 10px;
+  transform: rotate(-2deg);
+  clip-path: polygon(
+    0% 0%, 100% 0%, 100% 84%,
+    93% 100%, 86% 84%, 79% 100%, 72% 84%, 65% 100%, 58% 84%,
+    51% 100%, 44% 84%, 37% 100%, 30% 84%, 23% 100%, 16% 84%,
+    9% 100%, 2% 84%, 0% 92%
+  );
+  filter: drop-shadow(0 3px 7px rgba(245,51,63,.4));
+  animation: soonPulse 2.6s ease-in-out infinite;
 }
-.soon-eyebrow .ic { width: 16px; height: 16px; }
+.soon-eyebrow .ic { width: 21px; height: 21px; }
+/* ゆっくり息をする。動きすぎると読みにくくなるので、振れ幅は小さく。 */
+@keyframes soonPulse {
+  0%, 100% { transform: rotate(-2deg) scale(1); }
+  50%      { transform: rotate(-2deg) scale(1.035); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .soon-eyebrow { animation: none; }
+}
 .soon-title-main {
-  font-family: var(--f-hand);
-  font-size: 1.42rem; line-height: 1.4;
+  font-family: var(--f-display); font-weight: 400;
+  font-size: 1.34rem; line-height: 1.45;
   color: var(--pop);
-  margin-bottom: 6px;
+  margin-bottom: 7px;
 }
 .soon-note {
   font-size: .84rem; line-height: 1.8;
@@ -2549,13 +2568,19 @@ a.ticker-item:hover::before { background: var(--pop); }
 .soon-off b { font-size: .56em; font-weight: 400; margin-left: 1px; }
 
 .soon-body { display: block; padding: 10px 11px 12px; }
+/* 開始時刻ごとの見出し。カード1枚ずつに時刻を書くより、
+   時刻で束ねたほうが「いつ買えるのか」が頭に入る。 */
+.soon-group { margin-top: 14px; }
 .soon-when {
-  display: inline-flex; align-items: center; gap: 4px;
-  background: var(--sale-bg); color: var(--sale);
-  font-size: .76rem; font-weight: 700;
-  border-radius: 999px; padding: 3px 9px;
-  margin-bottom: 7px;
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--sale); color: #fff;
+  font-family: var(--f-price); font-weight: 400;
+  font-size: 1.02rem; letter-spacing: .03em;
+  border-radius: 999px; padding: 5px 14px;
+  margin-bottom: 9px;
 }
+.soon-when b { font-weight: 400; opacity: .72; font-size: .84em; }
+.soon-when .ic-when { width: 15px; height: 15px; }
 .ic-when { width: 13px; height: 13px; }
 .soon-title {
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
