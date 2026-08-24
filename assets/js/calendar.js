@@ -129,6 +129,7 @@
                    : days2 > 0 ? '<span class="cal-in">あと' + days2 + '日</span>' : '')) +
         '</p>' +
         (ev.note ? '<p class="cal-ev-note">' + esc(ev.note) + '</p>' : '') +
+        btns(ev) +
       '</li>';
     }).join('');
 
@@ -148,10 +149,37 @@
         '<span class="cal-key ev-marathon"></span>マラソン' +
         '<span class="cal-key is-five"></span>5と0のつく日' +
       '</p>' +
+      todayNote(events, today) +
       (list ? '<ul class="cal-list">' + list + '</ul>'
             : '<p class="cal-none">予定が入っていません。</p>') +
       '<p class="cal-note">日程は楽天の発表によります。' +
       '「予想」は過去の傾向からの見込みで、変わることがあります。</p>';
+  }
+
+  /* 予定に押せるボタンを付ける。
+     外部（アフィリエイトのリンク）は別タブで開き、
+     rel に nofollow sponsored を付ける。サイト内はそのまま遷移させる。 */
+  /* 今日が定例の日（5と0のつく日など）なら、そこだけ短く出す。
+     毎月あるので一覧には並べないが、今日なら知らせる価値がある。 */
+  function todayNote(events, today) {
+    var t = events.filter(function (e) {
+      return e.recurring && (e.start || '').slice(0, 10) === today;
+    });
+    if (!t.length) return '';
+    return '<div class="cal-today-note">' +
+      '<p class="cal-today-name">今日は' + esc(t[0].name) + '</p>' +
+      (t[0].note ? '<p class="cal-today-body">' + esc(t[0].note) + '</p>' : '') +
+      btns(t[0]) + '</div>';
+  }
+
+  function btns(ev) {
+    var ls = ev.links || [];
+    if (!ls.length) return '';
+    return '<div class="cal-ev-btns">' + ls.map(function (l) {
+      return '<a class="cal-btn' + (l.ext ? ' is-ext' : '') + '" href="' + esc(l.url) + '"' +
+        (l.ext ? ' target="_blank" rel="nofollow sponsored noopener"' : '') +
+        '>' + esc(l.label) + '</a>';
+    }).join('') + '</div>';
   }
 
   function esc(s) {

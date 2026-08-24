@@ -323,14 +323,14 @@ def render_sidebar(cfg, products, cats, active=None, guides=None, current_guide=
       <p class="side-note">楽天市場のレビュー件数が多い順です。値下がり幅とは関係ありません。</p>
     </div>
   </section>
-  {guide_banner}
-  {coupon}
   <section class="side-card cal-card">
     <h2 class="side-head">{ic3}<span>楽天のイベント</span></h2>
     <div class="side-body">
       <div id="calendar"><p class="cal-loading">読み込んでいます…</p></div>
     </div>
   </section>
+  {guide_banner}
+  {coupon}
   <section class="side-card">
     <h2 class="side-head">{ic2}<span>売場から探す</span></h2>
     <div class="side-body side-body-tight">
@@ -1329,8 +1329,35 @@ def build_feed_json(cfg, products, cats):
     if os.path.exists(ev_path):
         with open(ev_path, encoding="utf-8") as f:
             ev = json.load(f)
+        links = load("links.json") if os.path.exists(
+            os.path.join(ROOT, "links.json")) else {}
+
+        def resolve(entries):
+            """links の to を、実際のURLに置き換える。
+
+            links.json のキー（entry / sale など）はアフィリエイトのリンクなので、
+            外部リンクとして印を付けて渡す。ブラウザ側で
+            rel="nofollow sponsored noopener" と target を付けるため。
+            サイト内のパスはそのまま。"""
+            out = []
+            for e2 in entries or []:
+                got = []
+                for l in (e2.get("links") or []):
+                    to = l.get("to") or ""
+                    if to.startswith("/"):
+                        got.append({"label": l.get("label", ""), "url": to, "ext": False})
+                        continue
+                    url = (links.get(to) or {}).get("url")
+                    if url:
+                        got.append({"label": l.get("label", ""), "url": url, "ext": True})
+                e3 = dict(e2)
+                e3["links"] = got
+                out.append(e3)
+            return out
+
         write("assets/data/events.json", json.dumps(
-            {"events": ev.get("events") or [], "recurring": ev.get("recurring") or []},
+            {"events": resolve(ev.get("events")),
+             "recurring": resolve(ev.get("recurring"))},
             ensure_ascii=False, separators=(",", ":")))
 
 

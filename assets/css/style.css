@@ -2322,24 +2322,36 @@ a.ticker-item:hover::before { background: var(--pop); }
 
 /* =========================================================
    CALENDAR  ── サイドバーの楽天イベント
-   日程は楽天の発表による。確定と予想は必ず見分けられるようにする。
+   ボタン類の黒フチは「押すもの」の語彙なので、ここでは使わない。
+   カレンダーは読むものなので、売場に貼ってある紙の月暦くらいの軽さにする。
    ========================================================= */
 .cal-loading { text-align: center; padding: 22px 0; font-size: .82rem; color: var(--ink-52); }
 
-.cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
-.cal-title { font-family: var(--f-price); font-weight: 400; font-size: 1rem; letter-spacing: .04em; }
-.cal-nav {
-  width: 28px; height: 28px; line-height: 1;
-  background: var(--paper); border: 2px solid var(--ink); border-radius: 8px;
-  font-size: 1.1rem; cursor: pointer; color: var(--ink);
-  box-shadow: 1px 2px 0 var(--ink);
+/* 月の見出しは黄色の帯。値札と同じ色なので、サイトの中で浮かない。 */
+.cal-head {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--pop);
+  border-radius: 11px;
+  padding: 7px 8px;
+  margin-bottom: 11px;
 }
-.cal-nav:active { transform: translateY(2px); box-shadow: 0 0 0 var(--ink); }
+.cal-title {
+  font-family: var(--f-price); font-weight: 400;
+  font-size: 1.02rem; letter-spacing: .04em; color: var(--ink);
+}
+.cal-nav {
+  width: 26px; height: 26px; line-height: 1;
+  background: rgba(255,255,255,.66); border: 0; border-radius: 8px;
+  font-size: 1.05rem; cursor: pointer; color: var(--ink);
+  transition: background .14s ease, transform .12s ease;
+}
+.cal-nav:hover { background: #fff; }
+.cal-nav:active { transform: scale(.9); }
 
 .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
 .cal-wd {
-  text-align: center; font-size: .66rem; font-weight: 700;
-  color: var(--ink-52); padding-bottom: 3px;
+  text-align: center; font-size: .64rem; font-weight: 700;
+  color: var(--ink-52); padding-bottom: 4px;
 }
 .cal-wd.is-sun { color: var(--sale); }
 .cal-wd.is-sat { color: #3D7BD6; }
@@ -2349,61 +2361,108 @@ a.ticker-item:hover::before { background: var(--pop); }
   display: grid; place-items: center;
   aspect-ratio: 1 / 1;
   font-family: var(--f-price); font-weight: 400;
-  font-size: .82rem;
-  border-radius: 7px;
+  font-size: .84rem;
+  border-radius: 50%;
   color: var(--ink);
 }
 .cal-cell.is-blank { visibility: hidden; }
-.cal-cell.is-past { color: var(--ink-14); }
+.cal-cell.is-past { color: rgba(26,20,16,.22); }
 
-/* 5と0のつく日。地味な下線で、セールと見分けられるように */
+/* 5と0のつく日。丸で囲わず、下に点を置くだけ。 */
 .cal-cell.is-five::after {
-  content: ""; position: absolute; left: 22%; right: 22%; bottom: 3px;
-  height: 2px; border-radius: 2px; background: var(--fresh);
+  content: ""; position: absolute; left: 50%; bottom: 2px;
+  width: 4px; height: 4px; margin-left: -2px;
+  border-radius: 50%; background: var(--fresh);
 }
-/* イベント日は塗る */
-.cal-cell.has-ev { color: #fff; font-weight: 400; }
-.cal-cell.has-ev.ev-sale     { background: var(--sale); }
-.cal-cell.has-ev.ev-marathon { background: #7B5BD6; }
-.cal-cell.has-ev.ev-point    { background: transparent; color: var(--ink); }
-/* 予想は塗りつぶさず、点線の枠にする。確定と見分けがつくように。 */
+.cal-cell.is-past.is-five::after { opacity: .3; }
+
+/* イベント日は丸く塗る。塗りは薄めにして、数字が読めるようにする。 */
+.cal-cell.has-ev { font-weight: 400; }
+.cal-cell.has-ev.ev-sale     { background: var(--sale); color: #fff; }
+.cal-cell.has-ev.ev-marathon { background: #8E6BEA; color: #fff; }
+.cal-cell.has-ev.ev-point    { background: transparent; }
+.cal-cell.has-ev.is-past     { opacity: .35; }
+
+/* 予想は塗らず、点線の輪にする。確定とひと目で見分けられるように。 */
 .cal-cell.has-ev.is-guess {
   background: transparent; color: var(--ink);
-  outline: 2px dashed var(--sale); outline-offset: -2px;
+  border: 2px dashed var(--sale);
 }
-.cal-cell.has-ev.is-guess.ev-marathon { outline-color: #7B5BD6; }
-.cal-cell.is-today { outline: 2.5px solid var(--ink); outline-offset: -2px; font-weight: 700; }
+.cal-cell.has-ev.is-guess.ev-marathon { border-color: #8E6BEA; }
+
+/* 今日。黄色の丸で、いちばん目に入る。 */
+.cal-cell.is-today {
+  background: var(--pop); color: var(--ink); font-weight: 700;
+  box-shadow: 0 0 0 3px rgba(255,211,31,.34);
+}
+.cal-cell.is-today.has-ev.ev-sale,
+.cal-cell.is-today.has-ev.ev-marathon { color: #fff; }
+.cal-cell.is-today.has-ev.ev-sale     { background: var(--sale); box-shadow: 0 0 0 3px rgba(245,51,63,.28); }
+.cal-cell.is-today.has-ev.ev-marathon { background: #8E6BEA; box-shadow: 0 0 0 3px rgba(142,107,234,.3); }
 
 .cal-legend {
   display: flex; flex-wrap: wrap; align-items: center; gap: 5px;
   font-size: .66rem; color: var(--ink-52);
-  margin: 10px 0 12px;
+  margin: 12px 0 4px;
 }
-.cal-key { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
+.cal-key { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
 .cal-key.ev-sale { background: var(--sale); }
-.cal-key.ev-marathon { background: #7B5BD6; }
-.cal-key.is-five { background: var(--fresh); height: 3px; border-radius: 2px; }
-.cal-legend .cal-key:not(:first-child) { margin-left: 6px; }
+.cal-key.ev-marathon { background: #8E6BEA; }
+.cal-key.is-five { width: 5px; height: 5px; background: var(--fresh); }
+.cal-legend .cal-key:not(:first-child) { margin-left: 7px; }
 
-.cal-list { list-style: none; margin: 0; padding: 0; border-top: 1px dashed var(--ink-14); }
-.cal-ev { padding: 11px 0; border-bottom: 1px dashed var(--ink-14); }
-.cal-ev:last-child { border-bottom: 0; }
-.cal-ev-name { font-size: .86rem; font-weight: 900; margin-bottom: 3px; }
+/* 今日が5と0のつく日などのとき、そこだけ短く出す */
+.cal-today-note {
+  background: var(--ground);
+  border-radius: 11px;
+  padding: 11px 12px;
+  margin: 10px 0 2px;
+}
+.cal-today-name { font-family: var(--f-hand); font-size: .94rem; margin-bottom: 3px; }
+.cal-today-body { font-size: .74rem; line-height: 1.7; color: var(--ink-70); }
+
+.cal-list { list-style: none; margin: 12px 0 0; padding: 0; }
+.cal-ev {
+  background: var(--ground);
+  border-radius: 12px;
+  padding: 12px 13px;
+  margin-bottom: 9px;
+}
+.cal-ev.is-live { background: var(--sale-bg); }
+.cal-ev-name { font-size: .9rem; font-weight: 900; margin-bottom: 3px; }
 .cal-ev.ev-sale .cal-ev-name { color: var(--sale); }
 .cal-ev.ev-marathon .cal-ev-name { color: #6A4BC4; }
 .cal-guess {
   display: inline-block; margin-left: 6px;
   font-size: .62rem; font-weight: 700;
-  border: 1.5px dashed var(--ink-52); color: var(--ink-52);
-  border-radius: 999px; padding: 1px 7px; vertical-align: 2px;
+  background: rgba(26,20,16,.08); color: var(--ink-52);
+  border-radius: 999px; padding: 2px 8px; vertical-align: 2px;
 }
 .cal-ev-when { font-size: .74rem; color: var(--ink-70); }
 .cal-live {
   display: inline-block; margin-left: 6px;
   background: var(--sale); color: #fff;
-  font-size: .66rem; border-radius: 999px; padding: 1px 8px;
+  font-size: .66rem; border-radius: 999px; padding: 1px 9px;
 }
 .cal-in { margin-left: 6px; color: var(--ink-52); }
-.cal-ev-note { font-size: .74rem; line-height: 1.7; color: var(--ink-70); margin-top: 4px; }
+.cal-ev-note { font-size: .74rem; line-height: 1.7; color: var(--ink-70); margin-top: 5px; }
+
+/* 押せるところ。丸いタブ型にして、カレンダーの軽さに合わせる。 */
+.cal-ev-btns { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.cal-btn {
+  display: inline-flex; align-items: center;
+  background: var(--paper); color: var(--ink);
+  font-size: .74rem; font-weight: 700;
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 7px 13px;
+  transition: transform .12s ease, background .14s ease, color .14s ease;
+}
+.cal-btn:hover { transform: translateY(-1px); }
+/* 楽天へ出ていくものは赤。サイト内は白のまま。行き先が色で分かる。 */
+.cal-btn.is-ext { background: var(--sale); color: #fff; }
+.cal-btn.is-ext:hover { background: #FF4551; }
+.cal-btn:not(.is-ext):hover { background: var(--ink); color: #fff; }
+
 .cal-none { font-size: .8rem; color: var(--ink-52); padding: 10px 0; }
 .cal-note { font-size: .68rem; line-height: 1.7; color: var(--ink-52); margin-top: 10px; }
