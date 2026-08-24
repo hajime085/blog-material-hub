@@ -2520,7 +2520,23 @@ a.ticker-item:hover::before { background: var(--pop); }
 }
 .pb-links-note { font-size: 0.85rem; line-height: 1.8; color: var(--ink-70); margin-bottom: 12px; }
 .pb-link { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 10px; }
-.pb-link .pb-text { flex: 1 1 auto; min-width: 0; margin: 0; }
+.pb-link-body { flex: 1 1 auto; min-width: 0; }
+.pb-link .pb-text { margin: 0; }
+/* 開催状況。開催していないものも並べたうえで、そう書く。
+   消してしまうと「なぜ無いのか」が分からない。 */
+.pb-state {
+  display: inline-flex; align-items: center; gap: 5px;
+  border-radius: 999px;
+  padding: 3px 10px;
+  margin-bottom: 6px;
+  font-size: .76rem; font-weight: 700;
+}
+.pb-state .pb-state-ic { width: 13px; height: 13px; }
+.pb-state.is-live { background: #eafaef; color: #16663a; }
+.pb-state.is-off  { background: var(--paper-2, #f2ece2); color: var(--ink-70); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .pb-state.is-live { background: #12331f; color: #9fe7bb; }
+}
 .pb-link .btn { flex: 0 0 auto; font-size: 0.85rem; padding: 8px 14px; }
 /* 「Xで開く」と「コピー」を縦に積む。
    Xを開かずに、Threadsや他の場所へ貼りたいことがある。 */

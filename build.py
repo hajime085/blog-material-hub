@@ -1916,20 +1916,15 @@ def render_post_links(cfg):
     ev = active_kaimawari_event()
     kind = (ev or {}).get("kind")
 
-    # エントリー先はイベントごとに違う。開催していないイベントの
-    # エントリーを勧めても、押した人のポイントは増えない。
-    skip = set()
-    if kind == "marathon":
-        skip |= {"entry", "sale"}      # スーパーSALEはいま開催していない
-    elif kind == "sale":
-        skip |= {"marathon"}
-    else:
-        skip |= {"marathon"}           # 平常時は通年のページだけ出す
+    # エントリー先はイベントごとに違う。使い回すと違うイベントへ送ってしまう。
+    # ただし隠しはしない。何を投稿するかを選ぶのは運営者なので、
+    # 全部並べたうえで、いま開催しているかどうかを添える。
+    # 開催していないものを勧めても押した人のポイントは増えないが、
+    # それを判断するのに必要なのは、消すことではなく書くこと。
+    RUNNING = {"marathon": "marathon", "entry": "sale", "sale": "sale"}
 
     rows = ""
     for key, (head, body) in POST_LINK_TEXT.items():
-        if key in skip:
-            continue
         item = links.get(key) or {}
         url = item.get("url")
         if not url:
@@ -1938,14 +1933,25 @@ def render_post_links(cfg):
         full = text + "\n" + url
         intent = ("https://twitter.com/intent/tweet?text=%s&url=%s"
                   % (urllib.parse.quote(text), urllib.parse.quote(url)))
+        # このリンクが結びついているイベントが、いま開催しているか。
+        need = RUNNING.get(key)
+        state = ""
+        if need:
+            if kind == need:
+                state = ('<span class="pb-state is-live">%s%s 開催中</span>'
+                         % (icons.use("check", "pb-state-ic"), e(ev["name"])))
+            else:
+                state = ('<span class="pb-state is-off">%sいまは開催していません</span>'
+                         % icons.use("info", "pb-state-ic"))
+
         rows += (
             '<div class="pb-link">'
-            '<pre class="pb-text">%s</pre>'
+            '<div class="pb-link-body">%s<pre class="pb-text">%s</pre></div>'
             '<div class="pb-link-btns">'
             '<a class="btn btn-rakuten" href="%s" target="_blank" rel="noopener">Xで開く</a>'
             '<button class="btn btn-ghost" type="button" data-copy>コピー</button>'
             '</div>'
-            '</div>' % (e(full), e(intent)))
+            '</div>' % (state, e(full), e(intent)))
     return rows or '<p class="pb-links-note">links.json にURLが入っていません。</p>'
 
 
