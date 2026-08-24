@@ -37,20 +37,6 @@ jobs:
           RAKUTEN_AFFILIATE_ID: ${{ secrets.RAKUTEN_AFFILIATE_ID }}
         run: python3 fetch_rakuten.py --watch
 
-      - name: キャプションを書く
-        # 文章が無くても価格データは正しいので、ここで失敗しても止めない。
-        # 書けなかったぶんはキャプションが空のまま残り、あとから手で書ける。
-        continue-on-error: true
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: |
-          if [ -z "$ANTHROPIC_API_KEY" ]; then
-            echo "ANTHROPIC_API_KEY が未設定のため、キャプションは書きません。"
-            exit 0
-          fi
-          pip install --quiet anthropic
-          python3 write_captions.py
-
       - name: サイトを作り直す
         run: python3 build.py
 
