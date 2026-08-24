@@ -56,6 +56,41 @@ def yen(n):
     return "{:,}".format(int(n))
 
 
+def sale_soon(p):
+    """まだ販売が始まっていない商品か。
+
+    「20時から タイムセール」のように、開始が先の商品がある。
+    在庫あり扱いで返ってくるので、そのままだと通常のフィードに並ぶが、
+    その時刻までは買えない。買えないものを特価として並べないのが
+    このサイトの決まりなので、フィードからは外して専用の枠に集める。
+    始まれば自然にフィードへ流れる。
+    """
+    start = (p.get("startTime") or "").strip()
+    if not start:
+        return False
+    for fmt in ("%Y-%m-%d %H:%M", "%Y-%m-%dT%H:%M:%S", "%Y-%m-%d %H:%M:%S"):
+        try:
+            return datetime.strptime(start, fmt) > datetime.now(JST).replace(tzinfo=None)
+        except ValueError:
+            continue
+    return False
+
+
+def sale_starts_label(p):
+    """「今夜20:00から」「8月25日 10:00から」"""
+    start = (p.get("startTime") or "").strip()
+    for fmt in ("%Y-%m-%d %H:%M", "%Y-%m-%dT%H:%M:%S", "%Y-%m-%d %H:%M:%S"):
+        try:
+            d = datetime.strptime(start, fmt)
+        except ValueError:
+            continue
+        today = datetime.now(JST).replace(tzinfo=None).date()
+        if d.date() == today:
+            return ("今夜" if d.hour >= 17 else "今日") + d.strftime(" %H:%M から")
+        return d.strftime("%-m月%-d日 %H:%M から")
+    return ""
+
+
 def sale_over(p):
     """セールがもう終わっているか。
 
@@ -222,7 +257,8 @@ def render_sidebar(cfg, products, cats, active=None, guides=None, current_guide=
     順位マーカーは値札POPの縮小版。順位そのものに意味があるので番号を振る。"""
     fetched = last_fetch_date(products)
     fresh = [p for p in products
-             if not is_stale(p, fetched) and not sale_over(p)] or products
+             if not is_stale(p, fetched) and not sale_over(p)
+             and not sale_soon(p)] or products
     ranked = sorted(fresh, key=lambda p: -(p.get("reviewCount") or 0))[:5]
     rows = ""
     for i, p in enumerate(ranked, 1):
@@ -566,7 +602,7 @@ def render_ticker(products, cats):
     同じ内容を2周ぶん並べて途切れなく流す。"""
     # 終わったセールは流さない。ここは割引率の高い順なので、
     # 何もしないと「終了した半額」ほど先頭に出てしまう。
-    live = [x for x in products if not sale_over(x)]
+    live = [x for x in products if not sale_over(x) and not sale_soon(x)]
     ranked = sorted(live, key=lambda x: (-discount_rate(x), -(x.get("reviewCount") or 0)))[:10]
     items = []
     for p in ranked:
@@ -675,6 +711,65 @@ def jsonld_block(obj):
 
 
 # ---------------------------------------------------------------- builders
+def render_soon(products, cats):
+    """まもなく始まる特価。ヒーローのすぐ下に置く。
+
+    「20時から」の商品は、その時刻まで買えない。
+    だから通常のフィードには並べず、ここにだけ集めて、
+    いつ始まるのかを最初に言う。
+    始まればこの枠から消えて、フィードへ流れる。
+
+    該当が無い日は、枠ごと出さない。空の箱を置いておかない。
+    """
+    soon = [p for p in products if sale_soon(p) and not sale_over(p)]
+    if not soon:
+        return ""
+
+    def key(p):
+        return ((p.get("startTime") or ""), -discount_rate(p))
+    soon.sort(key=key)
+
+    # いちばん早い開始時刻を見出しに使う
+    head = sale_starts_label(soon[0])
+
+    cards = ""
+    for p in soon[:8]:
+        d = discount_rate(p)
+        cat = cats.get(p["category"], {})
+        cards += (
+            '<a class="soon-card" href="/p/{id}/">'
+            '<span class="soon-media">'
+            '<img src="{img}" alt="{alt}" loading="lazy" width="300" height="300">'
+            '{badge}</span>'
+            '<span class="soon-body">'
+            '<span class="soon-when">{ic}{when}</span>'
+            '<span class="soon-title">{t}</span>'
+            '<span class="soon-price"><i>¥</i>{pr}{was}</span>'
+            '<span class="soon-cat">{cic}{cl}</span>'
+            '</span></a>'
+        ).format(
+            id=e(p["id"]), img=e(p["image"]), alt=e(p["title"]),
+            badge=('<span class="soon-off">%d%%<b>OFF</b></span>' % d) if d else "",
+            ic=icons.use("calendar", "ic-when"),
+            when=e(sale_starts_label(p)),
+            t=e(p["title"]),
+            pr=yen(p["price"]),
+            was=('<s>¥%s</s>' % yen(p["listPrice"])) if d else "",
+            cic=icons.use(cat.get("icon", "tag")), cl=e(cat.get("short", "")))
+
+    return """
+<section class="soon wrap-narrow">
+  <div class="soon-head">
+    <p class="soon-eyebrow">{ic}{head}</p>
+    <h2 class="soon-title-main">まもなく始まる特価</h2>
+    <p class="soon-note">開始まではまだ買えません。時間になったら楽天のページで
+    値段が変わります。数量限定のものは、早いもの勝ちになります。</p>
+  </div>
+  <div class="soon-rail">{cards}</div>
+</section>
+""".format(ic=icons.use("bolt"), head=e(head), cards=cards)
+
+
 def render_gacha():
     """トップのガチャ。中身はJSが /assets/data/feed.json から引く。
 
@@ -699,7 +794,7 @@ def build_index(cfg, base, products, cats):
     fetched = last_fetch_date(products)
     # 終わったセールは特価フィードに並べない。
     # 商品ページは残す（Xに貼ったリンクが死なないように）。
-    live = [p for p in products if not sale_over(p)]
+    live = [p for p in products if not sale_over(p) and not sale_soon(p)]
     ordered = sorted(live, key=feed_order, reverse=True)
     total_pages = max(1, -(-len(ordered) // per))
 
@@ -746,6 +841,7 @@ def build_index(cfg, base, products, cats):
 """.format(ic=icons.use("bolt"), count=len(products), page=page)
 
         content = head + """
+{soon}
 {featured}
 {gacha}
 <div class="layout wrap-wide">
@@ -772,6 +868,7 @@ def build_index(cfg, base, products, cats):
 {sidebar}
 </div>
 """.format(count=len(products), cards=cards,
+           soon=(render_soon(products, cats) if page == 1 else ""),
            featured=(render_featured(cfg) if page == 1 else ""),
            gacha=(render_gacha() if page == 1 else ""),
            off_sort=('<button type="button" data-sort="off" aria-pressed="false">割引率</button>'
@@ -840,7 +937,8 @@ def build_categories(cfg, base, products, cats):
     site_url = cfg["site"]["url"].rstrip("/")
     for c in cfg["categories"]:
         items = [p for p in products
-                 if p["category"] == c["slug"] and not sale_over(p)]
+                 if p["category"] == c["slug"]
+                 and not sale_over(p) and not sale_soon(p)]
         items.sort(key=feed_order, reverse=True)
         best = max((discount_rate(p) for p in items), default=0)
         total_pages = max(1, -(-len(items) // per))
@@ -1303,7 +1401,7 @@ def build_feed_json(cfg, products, cats):
     slim = []
     for p in sorted(products, key=feed_order, reverse=True):
         # 終わったセールは、絞り込みでもガチャでもクイズでも出さない
-        if sale_over(p):
+        if sale_over(p) or sale_soon(p):
             continue
         c = cats.get(p["category"], {})
         slim.append({
@@ -1585,7 +1683,7 @@ def build_sitemap(cfg, products):
 def build_rss(cfg, products):
     site = cfg["site"]
     site_url = site["url"].rstrip("/")
-    live = [p for p in products if not sale_over(p)]
+    live = [p for p in products if not sale_over(p) and not sale_soon(p)]
     ordered = sorted(live, key=lambda p: p.get("postedAt", ""), reverse=True)[:30]
     items = ""
     for p in ordered:

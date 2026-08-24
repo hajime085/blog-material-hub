@@ -2479,3 +2479,106 @@ a.ticker-item:hover::before { background: var(--pop); }
 
 .cal-none { font-size: 0.865rem; color: var(--ink-52); padding: 10px 0; }
 .cal-note { font-size: 0.769rem; line-height: 1.7; color: var(--ink-52); margin-top: 10px; }
+
+/* =========================================================
+   SOON  ── まもなく始まる特価
+   「20時から」の商品はその時刻まで買えない。
+   買える商品と同じ顔で並べると誤解を招くので、
+   売場の予告ポスターとして、はっきり別物に見せる。
+   ========================================================= */
+.soon {
+  background: var(--ink);
+  border-radius: 18px;
+  padding: 18px 16px 16px;
+  margin-bottom: 26px;
+  box-shadow: 5px 5px 0 rgba(26,20,16,.22);
+}
+.soon-head { margin-bottom: 14px; }
+.soon-eyebrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--pop); color: var(--ink);
+  font-family: var(--f-price); font-weight: 400;
+  font-size: .92rem; letter-spacing: .04em;
+  border-radius: 999px; padding: 5px 13px;
+  margin-bottom: 9px;
+}
+.soon-eyebrow .ic { width: 16px; height: 16px; }
+.soon-title-main {
+  font-family: var(--f-hand);
+  font-size: 1.42rem; line-height: 1.4;
+  color: var(--pop);
+  margin-bottom: 6px;
+}
+.soon-note {
+  font-size: .84rem; line-height: 1.8;
+  color: rgba(255,255,255,.72);
+}
+
+/* 横に流す。数が少ない日でも寂しく見えないように。 */
+.soon-rail {
+  display: flex; gap: 11px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  scrollbar-width: none;
+}
+.soon-rail::-webkit-scrollbar { display: none; }
+
+.soon-card {
+  flex: 0 0 auto;
+  width: 168px;
+  background: var(--paper);
+  border-radius: 13px;
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--ink);
+  transition: transform .14s ease;
+}
+.soon-card:hover { transform: translateY(-3px); }
+.soon-media { position: relative; display: block; aspect-ratio: 1/1; background: var(--ground); }
+.soon-media img { width: 100%; height: 100%; object-fit: cover; }
+/* 割引は出すが、買えるカードの値札POPとは別の形にする */
+.soon-off {
+  position: absolute; left: 7px; top: 7px;
+  background: var(--sale); color: #fff;
+  font-family: var(--f-price); font-weight: 400;
+  font-size: 1.1rem; line-height: 1;
+  border-radius: 9px; padding: 5px 8px 6px;
+  transform: rotate(-4deg);
+  box-shadow: 2px 2px 0 rgba(26,20,16,.3);
+}
+.soon-off b { font-size: .56em; font-weight: 400; margin-left: 1px; }
+
+.soon-body { display: block; padding: 10px 11px 12px; }
+.soon-when {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: var(--sale-bg); color: var(--sale);
+  font-size: .76rem; font-weight: 700;
+  border-radius: 999px; padding: 3px 9px;
+  margin-bottom: 7px;
+}
+.ic-when { width: 13px; height: 13px; }
+.soon-title {
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: .84rem; line-height: 1.55; font-weight: 700;
+  margin-bottom: 7px;
+}
+.soon-price {
+  display: block;
+  font-family: var(--f-price); font-weight: 400;
+  font-size: 1.5rem; color: var(--sale); line-height: 1;
+}
+.soon-price i { font-style: normal; font-size: .6em; margin-right: 1px; }
+.soon-price s {
+  font-family: var(--f-body); font-size: .5em; font-weight: 700;
+  color: var(--ink-52); margin-left: 6px;
+}
+.soon-cat {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: .74rem; color: var(--fresh); margin-top: 7px;
+}
+.soon-cat .ic { width: 13px; height: 13px; }
+
+@media (min-width: 700px) {
+  .soon-card { width: 186px; }
+}
