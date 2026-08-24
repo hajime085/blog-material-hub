@@ -207,6 +207,99 @@ def price_basis_label(p):
     return "通常"
 
 
+# 買いまわりの最低額。1商品ではなく、1ショップの合計（税込）で判定される。
+KAIMAWARI_MIN = 1000
+
+
+def active_kaimawari_event():
+    """いま買いまわりのあるイベントの最中かを返す。
+
+    日程は events.json にしか無いので、そこを読む。
+    「予想」の日程では出さない。まだ発表されていない日を前提に
+    「買いまわりに使えます」と書くのは、根拠のない案内になる。
+    """
+    if not os.path.exists(os.path.join(ROOT, "events.json")):
+        return None
+    doc = load("events.json")
+    now = datetime.now(JST).replace(tzinfo=None)
+    for ev in doc.get("events", []):
+        if ev.get("status") != "確定":
+            continue
+        if ev.get("kind") not in ("marathon", "sale"):
+            continue
+        try:
+            a = datetime.strptime(ev["start"][:16], "%Y-%m-%d %H:%M")
+            b = datetime.strptime((ev.get("end") or ev["start"])[:16], "%Y-%m-%d %H:%M")
+        except (ValueError, KeyError):
+            continue
+        if a <= now <= b:
+            return ev
+    return None
+
+
+def shop_totals(products):
+    """店ごとの、1,000円に届かない商品の合計額。
+
+    買いまわりは1商品ではなく1ショップの合計で数える。
+    だから328円の商品でも、同じ店で合わせれば1カウントになる。
+    「1,000円未満だから無駄」と切り捨てると、そこを見落とす。
+    """
+    tot, cnt = {}, {}
+    for p in products:
+        if sale_over(p) or p["price"] >= KAIMAWARI_MIN:
+            continue
+        sh = p.get("shop") or ""
+        tot[sh] = tot.get(sh, 0) + p["price"]
+        cnt[sh] = cnt.get(sh, 0) + 1
+    return tot, cnt
+
+
+def render_kaimawari(p, totals):
+    """買いまわりに使えるかどうかの印。イベントの最中だけ出す。
+
+    買いまわりは1ショップの合計（税込）が1,000円以上で1カウント。
+    だから最小の出費でカウントを稼ぐ最適解は「ちょうど1,000円前後」で、
+    「1,000円ポッキリ」を狙う買い方は理にかなっている。
+
+    ただし送料は1,000円の判定に入らない。
+    1,000円＋送料590円は、支払い1,590円でカウントは1。
+    1,200円の送料無料のほうが、安くて同じ1カウントになる。
+    ここを見ないと「ポッキリ」を選んだつもりで損をする。
+
+    条件は値段と送料で決まるので、機械的に判定できる。人の裁量は入れない。
+    """
+    if not totals:
+        return ""
+    tot, cnt = totals
+    price, free = p["price"], free_shipping(p)
+
+    if price < KAIMAWARI_MIN:
+        sh = p.get("shop") or ""
+        others = cnt.get(sh, 0) - 1
+        short = KAIMAWARI_MIN - price
+        if others > 0 and tot.get(sh, 0) >= KAIMAWARI_MIN:
+            return ('<span class="km is-mix">%s単体では%d円たりない'
+                    '<b>同じ店の他%d件と合わせれば1カウント</b></span>'
+                    % (icons.use("info", "km-ic"), short, others))
+        return ('<span class="km is-no">%s単体では買いまわりに数えません'
+                '<b>あと%d円</b></span>'
+                % (icons.use("info", "km-ic"), short))
+
+    if not free:
+        # 送料は1,000円の判定に入らない。額は楽天のデータに無いので書かない。
+        return ('<span class="km is-warn">%s買いまわり対象'
+                '<b>ただし送料別。合計は上がります</b></span>'
+                % icons.use("info", "km-ic"))
+
+    if price < KAIMAWARI_MIN * 2:
+        return ('<span class="km is-best">%s買いまわり向き'
+                '<b>送料無料で1カウント</b></span>'
+                % icons.use("check", "km-ic"))
+
+    return ('<span class="km is-ok">%s買いまわり対象<b>送料無料</b></span>'
+            % icons.use("check", "km-ic"))
+
+
 def free_shipping(p):
     return "送料無料" in (p.get("tags") or [])
 
@@ -475,7 +568,7 @@ def render_watch_btn(p, place="card"):
         on=icons.use("heart-on", "ic-heart-on"))
 
 
-def render_card(p, cats, fetched=""):
+def render_card(p, cats, fetched="", km=None):
     cat = cats.get(p["category"], {})
     d = discount_rate(p)
     tags = ""
@@ -501,7 +594,7 @@ def render_card(p, cats, fetched=""):
     {burst}
   </a>
   <div class="card-body">
-    {cap}
+    {km}{cap}
     <h2 class="card-title"><a href="/p/{id}/">{title}</a></h2>
     <div class="card-tags"><a class="tag" href="/c/{cslug}/">{cicon}{clabel}</a>{tags}</div>
     <div class="card-foot">
@@ -513,7 +606,7 @@ def render_card(p, cats, fetched=""):
         id=e(p["id"]), aria=e(aria), img=e(p["image"]), alt=e(p["title"]),
         watch=render_watch_btn(p, "card"),
         tag=render_pricetag(p), sticker=render_sticker(p),
-        burst=render_burst(p), cap=cap,
+        burst=render_burst(p), cap=cap, km=render_kaimawari(p, km),
         title=e(p["title"]), cslug=e(p["category"]),
         cicon=icons.use(cat.get("icon", "tag")), clabel=e(cat.get("short", "")),
         tags=tags, shop=e(p.get("shop", "楽天市場")), url=e(p.get("affiliateUrl") or "#"),
@@ -837,6 +930,9 @@ def build_index(cfg, base, products, cats):
     live = [p for p in products if not sale_over(p) and not sale_soon(p)]
     ordered = sorted(live, key=feed_order, reverse=True)
     total_pages = max(1, -(-len(ordered) // per))
+    # 買いまわりの印はイベントの最中だけ出す。
+    # 何も無い日に「買いまわり対象」と書いても意味がない。
+    km = shop_totals(products) if active_kaimawari_event() else None
 
     counts = {}
     for p in products:
@@ -856,7 +952,7 @@ def build_index(cfg, base, products, cats):
 
     for page in range(1, total_pages + 1):
         chunk = ordered[(page - 1) * per: page * per]
-        cards = "".join(render_card(p, cats, fetched) for p in chunk)
+        cards = "".join(render_card(p, cats, fetched, km) for p in chunk)
         path = "/" if page == 1 else "/page/%d/" % page
 
         head = """
@@ -975,6 +1071,7 @@ def build_categories(cfg, base, products, cats):
     per = cfg["feed"]["perPage"]
     fetched = last_fetch_date(products)
     site_url = cfg["site"]["url"].rstrip("/")
+    km = shop_totals(products) if active_kaimawari_event() else None
     for c in cfg["categories"]:
         items = [p for p in products
                  if p["category"] == c["slug"]
@@ -988,7 +1085,7 @@ def build_categories(cfg, base, products, cats):
             chunk = items[(page - 1) * per: page * per]
             if chunk:
                 body = '<div class="feed">%s</div>' % "".join(
-                    render_card(p, cats, fetched) for p in chunk)
+                    render_card(p, cats, fetched, km) for p in chunk)
             else:
                 body = ('<div class="empty">' + icons.use("tag", "ic-xxl") +
                         '<p class="empty-title">この売場はまだ空っぽです</p>'

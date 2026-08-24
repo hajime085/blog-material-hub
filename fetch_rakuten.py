@@ -1198,9 +1198,16 @@ def fetch_event(cfg, app_id, access_key, aff_id, site_url,
     # 値引きの裏が取れたもの、レビューの多いものを上に。
     # そのうえで同じ店・同じ売場に寄らないようにする。
     # 1店舗の商品ばかり並ぶと、特価まとめではなく宣伝になる。
-    rows = sorted(found.items(),
-                  key=lambda kv: (0 if kv[1]["listPrice"] else 1,
-                                  -(kv[1]["reviewCount"] or 0)))
+    # 買いまわりに使えるものを先に取る。
+    # 1ショップ税込1,000円以上で1カウントなので、
+    # 1,000円に届かない商品は単体ではカウントされない。
+    # そのうえで、値引きの裏が取れたもの、レビューの多いものを上に。
+    def rank(kv):
+        v = kv[1]
+        usable = 0 if v["price"] >= 1000 else 1
+        return (usable, 0 if v["listPrice"] else 1, -(v["reviewCount"] or 0))
+
+    rows = sorted(found.items(), key=rank)
     by_shop, by_cat, picked = {}, {}, []
     for pid, v in rows:
         if by_shop.get(v["shop"], 0) >= max_shop:

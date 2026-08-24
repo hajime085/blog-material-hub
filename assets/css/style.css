@@ -1588,6 +1588,32 @@ a.ticker-item:hover::before { background: var(--pop); }
 }
 .pb-col-sale .pb-col-title b { background: rgba(255,255,255,.26); }
 .pb-col-note { font-size: .82rem; margin: 0; opacity: .84; }
+
+/* 買いまわりの印。イベントの最中だけ出る。
+   1ショップ税込1,000円以上で1カウントなので、
+   最小の出費で数を稼ぐなら「送料無料でちょうど1,000円台」が本命。
+   送料は判定に入らないので、そこは分けて出す。 */
+.km {
+  display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap;
+  border-radius: 10px;
+  padding: 6px 10px;
+  margin-bottom: 8px;
+  font-size: .78rem; font-weight: 700;
+  line-height: 1.4;
+}
+.km b { font-weight: 400; opacity: .86; font-size: .95em; }
+.km .km-ic { width: 14px; height: 14px; flex: none; align-self: center; }
+.km.is-best { background: #eafaef; color: #16663a; }
+.km.is-ok   { background: var(--paper-2, #f2ece2); color: var(--ink); }
+.km.is-warn { background: #fff4e2; color: #8a5210; }
+.km.is-mix  { background: #eef4ff; color: #274b8f; }
+.km.is-no   { background: var(--paper-2, #f2ece2); color: var(--ink-70); }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .km.is-best { background: #12331f; color: #9fe7bb; }
+  :root:not([data-theme="light"]) .km.is-warn { background: #3a2a10; color: #f2c887; }
+  :root:not([data-theme="light"]) .km.is-mix  { background: #16233d; color: #a9c4f5; }
+}
 .pb-col-sale .pb-col-note { opacity: .92; }
 
 .sticky-cta .btn-rakuten {
