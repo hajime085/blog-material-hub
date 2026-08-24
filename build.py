@@ -1896,7 +1896,10 @@ POST_LINK_TEXT = {
                "値引き幅の大きいものから見ていくと早いです。"),
     "coupon": ("楽天のクーポンページです。",
                "買う前に取っておくだけで値段が変わります。取り忘れが一番もったいない。"),
-    "entry":  ("エントリーはお済みですか。",
+    "marathon": ("お買い物マラソンのエントリーはお済みですか。",
+               "してもしなくても値段は同じに見えますが、"
+               "していないと買いまわりのポイントが付きません。"),
+    "entry":  ("楽天スーパーSALEのエントリーはお済みですか。",
                "してもしなくても値段は同じに見えますが、"
                "していないとポイントが付きません。"),
     "spu":    ("いまの自分のポイント倍率を確認できます。",
@@ -1910,20 +1913,39 @@ def render_post_links(cfg):
     """商品以外の投稿の下書き。links.json に入っているURLを使う。"""
     links = load("links.json") if os.path.exists(os.path.join(ROOT, "links.json")) else {}
     pr = cfg["site"].get("prLabel") or ""
+    ev = active_kaimawari_event()
+    kind = (ev or {}).get("kind")
+
+    # エントリー先はイベントごとに違う。開催していないイベントの
+    # エントリーを勧めても、押した人のポイントは増えない。
+    skip = set()
+    if kind == "marathon":
+        skip |= {"entry", "sale"}      # スーパーSALEはいま開催していない
+    elif kind == "sale":
+        skip |= {"marathon"}
+    else:
+        skip |= {"marathon"}           # 平常時は通年のページだけ出す
+
     rows = ""
     for key, (head, body) in POST_LINK_TEXT.items():
+        if key in skip:
+            continue
         item = links.get(key) or {}
         url = item.get("url")
         if not url:
             continue
         text = pr + head + "\n" + body
+        full = text + "\n" + url
         intent = ("https://twitter.com/intent/tweet?text=%s&url=%s"
                   % (urllib.parse.quote(text), urllib.parse.quote(url)))
         rows += (
             '<div class="pb-link">'
-            '<pre class="pb-text">%s\n%s</pre>'
+            '<pre class="pb-text">%s</pre>'
+            '<div class="pb-link-btns">'
             '<a class="btn btn-rakuten" href="%s" target="_blank" rel="noopener">Xで開く</a>'
-            '</div>' % (e(text), e(url), e(intent)))
+            '<button class="btn btn-ghost" type="button" data-copy>コピー</button>'
+            '</div>'
+            '</div>' % (e(full), e(intent)))
     return rows or '<p class="pb-links-note">links.json にURLが入っていません。</p>'
 
 

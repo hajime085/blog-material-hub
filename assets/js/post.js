@@ -307,6 +307,7 @@
             (w > 280 ? '<b class="pb-over">　長すぎます</b>' : '') + '</p>' +
           '<div class="pb-btns">' +
             '<a class="btn btn-rakuten" href="' + intent(p, sel.v, sel.t) + '" target="_blank" rel="noopener" data-open="' + esc(p.id) + '">Xで開く</a>' +
+            '<button class="btn btn-ghost" type="button" data-copy>コピー</button>' +
             '<button class="btn btn-ghost" type="button" data-done="' + esc(p.id) + '">' +
               (isDone ? '投稿済みを取り消す' : '投稿した') + '</button>' +
             '<a class="btn btn-ghost" href="/p/' + esc(p.id) + '/" target="_blank" rel="noopener">商品ページ</a>' +
@@ -363,6 +364,62 @@
       if (d2.indexOf(oid) < 0) { d2.push(oid); doneWrite(d2); }
       setTimeout(function () { render(); }, 400);
     }
+  });
+
+  /* 投稿文をその場でコピーできるようにする。
+     Xを開かずに、Threadsや他の場所へ貼りたいことがある。
+
+     押されたボタンの近くにある <pre> の中身をそのまま渡す。
+     画面に見えているものと、コピーされるものを必ず一致させたいので、
+     文面を組み直さずにDOMから取る。
+
+     clipboard は安全な文脈（https か localhost）でしか使えないので、
+     使えないときは選択状態にして、手でコピーしてもらう。 */
+  function copyFrom(btn) {
+    var box = btn.closest('.pb-item, .pb-link');
+    var pre = box && box.querySelector('.pb-text');
+    if (!pre) return;
+    var text = pre.textContent;
+    var done = function () {
+      var was = btn.textContent;
+      btn.textContent = 'コピーしました';
+      btn.classList.add('is-copied');
+      setTimeout(function () {
+        btn.textContent = was;
+        btn.classList.remove('is-copied');
+      }, 1600);
+    };
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(done, function () { select(pre, btn, done); });
+    } else {
+      select(pre, btn, done);
+    }
+  }
+
+  /* clipboard が使えないときの代わり。
+     文面を選んだうえで、古い execCommand でのコピーを試す。
+     これも駄目なら、選ばれた状態は残るので手でコピーできる。
+     「押したのに何も起きない」が一番困る。 */
+  function select(pre, btn, done) {
+    var r = document.createRange();
+    r.selectNodeContents(pre);
+    var sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(r);
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    if (ok) {
+      sel.removeAllRanges();
+      done();
+      return;
+    }
+    btn.textContent = '選択しました。コピーしてください';
+    setTimeout(function () { btn.textContent = 'コピー'; }, 2600);
+  }
+
+  document.addEventListener('click', function (ev) {
+    var b = ev.target.closest('[data-copy]');
+    if (b) copyFrom(b);
   });
 
   Promise.all([

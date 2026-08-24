@@ -2522,7 +2522,23 @@ a.ticker-item:hover::before { background: var(--pop); }
 .pb-link { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 10px; }
 .pb-link .pb-text { flex: 1 1 auto; min-width: 0; margin: 0; }
 .pb-link .btn { flex: 0 0 auto; font-size: 0.85rem; padding: 8px 14px; }
-@media (max-width: 560px) { .pb-link { flex-direction: column; } .pb-link .btn { width: 100%; } }
+/* 「Xで開く」と「コピー」を縦に積む。
+   Xを開かずに、Threadsや他の場所へ貼りたいことがある。 */
+.pb-link-btns { flex: 0 0 auto; display: flex; flex-direction: column; gap: 7px; }
+.pb-link-btns .btn { width: 100%; }
+@media (max-width: 560px) {
+  .pb-link { flex-direction: column; }
+  .pb-link .btn { width: 100%; }
+  /* 横に並べるときは幅を等分する。
+     どちらも100%にすると、合わせて2倍になってはみ出す。 */
+  .pb-link-btns { width: 100%; flex-direction: row; }
+  .pb-link-btns .btn { width: auto; flex: 1 1 0; min-width: 0; }
+}
+/* コピーできた合図。押したところで色が変わるだけにする。 */
+.btn.is-copied {
+  background: var(--pop);
+  color: var(--ink);
+}
 
 /* =========================================================
    CALENDAR  ── サイドバーの楽天イベント
