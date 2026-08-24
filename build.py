@@ -13,6 +13,8 @@ import json
 import os
 import re
 import shutil
+import contextlib
+import io
 import hashlib
 import html
 import icons
@@ -2432,15 +2434,30 @@ def main():
     build_sitemap(cfg, products)
     build_rss(cfg, products)
 
-    check_padding_collisions()
-    check_internal_links()
-    check_caption_prices(products)
-    check_expired_sales(products)
-    check_guide_toc(guides)
+    # 検査の出力を捕まえておく。
+    # そのまま流すと、あとから出る「ビルド完了」に押し流されて、
+    # tail で末尾だけ見たときに警告が画面から消える。実際に見落として、
+    # 900円と書いたまま1,690円の商品を公開してしまった。
+    # 出力はそのまま見せたうえで、件数を最後にもう一度出す。
+    buf = io.StringIO()
+    with contextlib.redirect_stdout(buf):
+        check_padding_collisions()
+        check_internal_links()
+        check_caption_prices(products)
+        check_expired_sales(products)
+        check_guide_toc(guides)
+    checks = buf.getvalue()
+    print(checks, end="")
+    warned = checks.count("⚠")
 
     print("✅ ビルド完了")
     print("   商品 %d件 / カテゴリ %d件" % (len(products), len(cfg["categories"])))
     print("   生成: index.html, c/, p/, categories/, 固定ページ, sitemap.xml, feed.xml")
+    if warned:
+        # 末尾3行だけ見ても必ず目に入る位置に出す。
+        print("")
+        print("⚠️  直していない警告が %d件あります。上に内容が出ています。" % warned)
+        print("   反映する前に直してください。")
 
 
 if __name__ == "__main__":
