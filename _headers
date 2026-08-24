@@ -9,11 +9,16 @@
 # 新しいURLへアクセスが入ると、CDNが古い中身をそのURLで
 # キャッシュしてしまう事故が実際に起きた。
 # 1年だと1年間直せないため、1日に留めて自然に治るようにする。
+# 1年ではなく1時間に留める。
+# ハッシュ付きURLは本来なら永久にキャッシュして安全なはずだが、
+# デプロイ完了前にそのURLへアクセスが入ると、CDNが古い中身を
+# 新しいURLで覚えてしまう。実際に2回起きた。
+# 短くしておけば、気づかなくても1時間で自然に治る。
 /assets/css/*
-  Cache-Control: public, max-age=86400
+  Cache-Control: public, max-age=3600
 
 /assets/js/*
-  Cache-Control: public, max-age=86400
+  Cache-Control: public, max-age=3600
 
 /assets/img/*
   Cache-Control: public, max-age=604800
