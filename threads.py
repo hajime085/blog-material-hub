@@ -120,7 +120,7 @@ def publishing_limit(uid, token):
 
 # ---------------------------------------------------------------- 文面
 
-def compose_product(p, site, pr):
+def compose_product(p, site, pr, reply_link=False):
     """商品の投稿文。
 
     Threadsは500文字まで使えるので、Xより中身を入れられる。
@@ -156,9 +156,13 @@ def compose_product(p, site, pr):
         lines.append("")
         lines += ["・" + x for x in pts[:3]]
 
+    url = "%s/p/%s/" % (site, p["id"])
+    if reply_link:
+        # リンクは本文に入れず、あとから自分の投稿への返信として貼る。
+        return "\n".join(lines), url
     lines.append("")
-    lines.append("%s/p/%s/" % (site, p["id"]))
-    return "\n".join(lines)
+    lines.append(url)
+    return "\n".join(lines), None
 
 
 def compose_guide(g, site, pr):
@@ -183,7 +187,7 @@ def compose_guide(g, site, pr):
         g["lead"],
         "",
         "%s%s" % (site, g["path"]),
-    ])
+    ]), None
 
 
 def compose_page(page, site, pr):
@@ -194,7 +198,7 @@ def compose_page(page, site, pr):
         page["lead"],
         "",
         "%s%s" % (site, page["path"]),
-    ])
+    ]), None
 
 
 # ---------------------------------------------------------------- 何を出すか
@@ -273,6 +277,11 @@ def pick(cfg, posted, want):
     # PRを付けるのは商品の投稿だけ。記事とセールの案内には付けない。
     # どちらもこの投稿にアフィリエイトリンクを含まないが、
     # 商品は値段を出して買いに誘導するので、実質的に広告になる。
+    # リンクを本文に入れるか、自分の投稿への返信として貼るか。
+    # Metaは「リンクは正しくランキングされている」と言っているので本文を既定にする。
+    # ただし日本語のノウハウでは返信に貼るほうが伸びるとされており、
+    # どちらが正しいかは実際に測るまで分からない。切り替えられるようにしておく。
+    reply_link = cfg.get("threads", {}).get("linkPlacement") == "reply"
     on = cfg.get("threads", {}).get("prOn") or ["product"]
     pr = (cfg["site"].get("prLabel") or "") if "product" in on else ""
     feed = load("assets/data/feed.json", []) or []
@@ -297,22 +306,33 @@ def pick(cfg, posted, want):
     out = []
     if pool_event:
         e = pool_event[0]
-        out.append((e["key"], compose_page(e, site, pr)))
+        body, link = compose_page(e, site, pr)
+        out.append((e["key"], body, link))
     if len(out) < want and pool_guide:
         g = pool_guide[0]
-        out.append((g["key"], compose_guide(g, site, pr)))
+        body, link = compose_guide(g, site, pr)
+        out.append((g["key"], body, link))
     for p in items:
         if len(out) >= want:
             break
-        out.append(("product:" + p["id"], compose_product(p, site, pr)))
+        body, link = compose_product(p, site, pr, reply_link)
+        out.append(("product:" + p["id"], body, link))
     return out
 
 
 # ---------------------------------------------------------------- 出す
 
-def publish(uid, token, text):
-    """2段階。まず入れ物を作り、それから公開する。"""
-    c = api("POST", "%s/threads" % uid, {"media_type": "TEXT", "text": text}, token)
+def publish(uid, token, text, reply_to=None):
+    """2段階。まず入れ物を作り、それから公開する。
+
+    reply_to を渡すと、その投稿への返信として出す。
+    自分の投稿への返信なので、楽天が禁じている
+    「他人の投稿への返信やコメント欄への掲載」には当たらない。
+    """
+    params = {"media_type": "TEXT", "text": text}
+    if reply_to:
+        params["reply_to_id"] = reply_to
+    c = api("POST", "%s/threads" % uid, params, token)
     cid = c.get("id")
     if not cid:
         raise RuntimeError("入れ物を作れませんでした: %s" % c)
@@ -473,9 +493,11 @@ def main():
         return
 
     print("▼ %d件を出します%s\n" % (len(picks), "（--dry-run なので出しません）" if dry else ""))
-    for key, text in picks:
+    for key, text, link in picks:
         print("── %s（%d文字）" % (key, len(text)))
         print(text)
+        if link:
+            print("   ↳ 返信として貼るリンク: %s" % link)
         print()
 
     if dry:
@@ -488,9 +510,14 @@ def main():
 
     now = datetime.now(JST).strftime("%Y-%m-%d %H:%M")
     ok = 0
-    for key, text in picks:
+    for key, text, link in picks:
         try:
             pid = publish(uid, token, text)
+            if link:
+                # 本文に入れず、自分の投稿への返信としてリンクを貼る。
+                # 続けて叩くと弾かれることがあるので少し待つ。
+                time.sleep(5)
+                publish(uid, token, link, reply_to=pid)
         except Exception as ex:                           # noqa: BLE001
             print("  × %s の投稿に失敗: %s" % (key, ex), file=sys.stderr)
             if "OAuth" in str(ex) or "190" in str(ex) or "401" in str(ex):

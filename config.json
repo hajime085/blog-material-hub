@@ -274,6 +274,8 @@
     "prOn": [
       "product"
     ],
-    "_prOn": "【PR】を付ける投稿の種類。product / guide / page から選ぶ。"
+    "_prOn": "【PR】を付ける投稿の種類。product / guide / page から選ぶ。",
+    "linkPlacement": "body",
+    "_linkPlacement": "商品リンクを body（本文の末尾）と reply（自分の投稿への返信）のどちらに置くか。"
   }
 }
