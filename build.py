@@ -1966,6 +1966,9 @@ def render_post_links(cfg):
         full = text + "\n" + url
         intent = ("https://twitter.com/intent/tweet?text=%s&url=%s"
                   % (urllib.parse.quote(text), urllib.parse.quote(url)))
+        # Threadsは本文とURLを分けて渡せないので、末尾に付けて1本にする。
+        th = ("https://www.threads.net/intent/post?text=%s"
+              % urllib.parse.quote(full))
         # このリンクが結びついているイベントが、いま開催しているか。
         need = RUNNING.get(key)
         state = ""
@@ -1989,9 +1992,10 @@ def render_post_links(cfg):
             '<div class="pb-link-body">%s<pre class="pb-text">%s</pre></div>'
             '<div class="pb-link-btns">'
             '<a class="btn btn-rakuten" href="%s" target="_blank" rel="noopener">Xで開く</a>'
+            '<a class="btn btn-threads" href="%s" target="_blank" rel="noopener">Threadsで開く</a>'
             '<button class="btn btn-ghost" type="button" data-copy>コピー</button>'
             '</div>'
-            '</div>' % (state, e(full), e(intent)))
+            '</div>' % (state, e(full), e(intent), e(th)))
     return rows or '<p class="pb-links-note">links.json にURLが入っていません。</p>'
 
 

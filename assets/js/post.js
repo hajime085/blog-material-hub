@@ -216,6 +216,19 @@
       encodeURIComponent(compose(p, vi, ti)) + '&url=' + encodeURIComponent(url);
   }
 
+  /* Threadsの投稿画面を文面つきで開く。
+     Xと違い本文とURLを分けて渡せないので、末尾に付けて1本の text にする。
+
+     楽天はThreadsを認定SNSに入れているので、貼ること自体に問題はない。
+     ただし貼るのは楽天のアフィリエイトURLではなく、このサイトの商品ページ。
+     アフィリエイトリンクは登録済みの自サイト側にあり、
+     投稿そのものにはアフィリエイトリンクが含まれない形にしておく。 */
+  function threadsIntent(p, vi, ti) {
+    var url = SITE + '/p/' + p.id + '/';
+    return 'https://www.threads.net/intent/post?text=' +
+      encodeURIComponent(compose(p, vi, ti) + '\n' + url);
+  }
+
   // どの型・どの締めを選んでいるかを商品ごとに覚えておく
   var pick = {};
 
@@ -286,7 +299,9 @@
       var sel = pick[p.id] || { v: 0, t: 0 };
       var vs = variantsFor(p);
       var text = compose(p, sel.v, sel.t);
-      var w = weight(text) + 1 + 23;          // 本文 + 改行 + URL
+      var w = weight(text) + 1 + 23;          // Xは本文 + 改行 + URL(23固定)
+      // Threadsは500字まで。URLも実際の長さで数えられ、全角も1字。
+      var tw = (text + '\n' + SITE + '/p/' + p.id + '/').length;
 
       var tabs = vs.map(function (v, i) {
         return '<button class="pb-tab' + (i === sel.v ? ' is-on' : '') +
@@ -303,10 +318,13 @@
           '<div class="pb-tabs"><span class="pb-tabs-label">型</span>' + tabs + '</div>' +
           '<pre class="pb-text">' + esc(text) + '\n' + esc(SITE + '/p/' + p.id + '/') + '</pre>' +
           '<div class="pb-tabs"><span class="pb-tabs-label">締め</span>' + tails + '</div>' +
-          '<p class="pb-meta">' + w + ' / 280 文字' +
-            (w > 280 ? '<b class="pb-over">　長すぎます</b>' : '') + '</p>' +
+          '<p class="pb-meta">' +
+            'X ' + w + '/280' + (w > 280 ? '<b class="pb-over">超過</b>' : '') +
+            '　Threads ' + tw + '/500' + (tw > 500 ? '<b class="pb-over">超過</b>' : '') +
+          '</p>' +
           '<div class="pb-btns">' +
             '<a class="btn btn-rakuten" href="' + intent(p, sel.v, sel.t) + '" target="_blank" rel="noopener" data-open="' + esc(p.id) + '">Xで開く</a>' +
+            '<a class="btn btn-threads" href="' + threadsIntent(p, sel.v, sel.t) + '" target="_blank" rel="noopener" data-open="' + esc(p.id) + '">Threadsで開く</a>' +
             '<button class="btn btn-ghost" type="button" data-copy>コピー</button>' +
             '<button class="btn btn-ghost" type="button" data-done="' + esc(p.id) + '">' +
               (isDone ? '投稿済みを取り消す' : '投稿した') + '</button>' +
