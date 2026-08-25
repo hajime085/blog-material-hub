@@ -420,11 +420,28 @@ def pick(cfg, posted, want):
     for t in fresh:
         plain.append((t["key"], compose_plain(t)))
 
-    # ---- 交互に取る ----
-    # 直前がリンクありだったら、今回はリンクなしから始める。
+    # ---- どちらを先に取るか ----
+    #
+    # 夜は商品を出す。通販は夜のほうが買われるので、
+    # 買う気のある時間帯に、買えるものを置く。
+    # 楽天のセールが20時開始なのも同じ理由。
+    #
+    # 昼は知識や予定を出す。買う時間ではないので、
+    # そこに商品を並べても流されるだけになる。
+    # 読んで役に立つものを置いて、覚えてもらうほうに使う。
+    #
+    # 直前と同じ側が続いたときは入れ替える。
+    # 夜だからと商品ばかり続けると、宣伝の列になる。
+    hour = datetime.now(JST).hour
+    night = hour >= 19 or hour < 2
+    want_plain = not night
+
     last = (posted.get("log") or [])
-    want_plain = bool(last) and not str(last[-1].get("key", "")).startswith(
-        ("tip:", "schedule:"))
+    if last:
+        prev_plain = str(last[-1].get("key", "")).startswith(("tip:", "schedule:"))
+        if prev_plain == want_plain:
+            want_plain = not want_plain
+
     out = []
     while len(out) < want and (linked or plain):
         pool = plain if want_plain else linked
@@ -656,7 +673,11 @@ def report():
             return "昼"
         if h < 19:
             return "夕方"
-        return "夜"
+        if h < 22:
+            return "夜"
+        if h < 24:
+            return "夜遅く"
+        return "深夜"
 
     summarize("型べつ", lambda x: x.get("kind", "?"))
     summarize("リンクの置き方べつ", lambda x: x.get("link", "?"))
