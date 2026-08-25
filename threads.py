@@ -26,6 +26,7 @@ XのAPIは2026年2月から従量課金だけになり、URLを含む投稿は1�
 import json
 import os
 import random
+import re
 import sys
 import time
 import urllib.parse
@@ -120,31 +121,50 @@ def publishing_limit(uid, token):
 
 # ---------------------------------------------------------------- 文面
 
-def compose_product(p, site, pr, reply_link=False):
+def ends_label(et):
+    """「8月27日 9:59まで」。終了時刻が分かるときだけ出す。"""
+    m = re.match(r"(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})", (et or "").strip())
+    if not m:
+        return ""
+    return "%d月%d日 %s:%s まで" % (int(m.group(2)), int(m.group(3)),
+                                 m.group(4).lstrip("0") or "0", m.group(5))
+
+
+def compose_product(p, site, pr, reply_link=False, ev=None):
     """商品の投稿文。
 
-    Threadsは500文字まで使えるので、Xより中身を入れられる。
-    ただし書けるのは手元のデータから事実として言えることだけ。
-    使っていない商品の体験談は書かない。作り話になる。
+    キャプションがあればそれを先頭に置く。人が書いた文なので、いちばん読ませる。
 
-    先頭はキャプション。商品名は楽天の検索語がそのまま入っていて
-    読ませる文になっていないので、頭に置かない。
-    値段も繰り返さない。同じ数字が3回出ると、読む気が失せる。
+    無ければ、手元のデータだけで組み立てる。
+    キャプションを書くのは人の作業なので、そこを待っていると
+    今朝見つけた53%OFFを流せるのが明日になる。
+    セールの訴求は鮮度がすべてなので、待たないほうを選ぶ。
+
+    データだけで書く場合も、書くのは事実だけ。
+    値引き、送料、レビュー件数、終了時刻、買いまわりに使えるか。
+    どれも楽天のデータか、そこから機械的に決まることしか使わない。
+    感想は書かない。使っていない商品の感想は作り話になる。
     """
     cap = (p.get("cap") or "").strip()
-    lines = [pr + cap]
-
-    # 商品名は補足として置く。長いものは切る。
     title = p["t"]
     if len(title) > 46:
         title = title[:46].rstrip("…") + "…"
-    lines.append(title)
 
-    # 値段の行は、キャプションが値引きに触れていないときだけ足す。
-    if p.get("d") and p.get("lp") and (yen(p["lp"]) not in cap):
-        lines.append("%s円 → %s円（%d%%OFF）" % (yen(p["lp"]), yen(p["pr"]), p["d"]))
+    lines = []
+    if cap:
+        lines.append(pr + cap)
+        lines.append(title)
+        if p.get("d") and p.get("lp") and (yen(p["lp"]) not in cap):
+            lines.append("%s円 → %s円（%d%%OFF）" % (yen(p["lp"]), yen(p["pr"]), p["d"]))
+    else:
+        # 値段を先頭に出す。ここが一番の情報になる。
+        if p.get("d") and p.get("lp"):
+            lines.append("%s%s円 → %s円（%d%%OFF）"
+                         % (pr, yen(p["lp"]), yen(p["pr"]), p["d"]))
+        else:
+            lines.append("%s%s円" % (pr, yen(p["pr"])))
+        lines.append(title)
 
-    # 箇条書きから、値段を言い直しているだけのものを落とす。
     pts = []
     for x in (p.get("pt") or []):
         if yen(p["pr"]) in x and (yen(p["lp"]) in x if p.get("lp") else True):
@@ -152,13 +172,28 @@ def compose_product(p, site, pr, reply_link=False):
         if x.strip() == "%s円" % yen(p["pr"]):
             continue
         pts.append(x)
+
+    if not cap:
+        # 人の書いた箇条書きが無いので、データから作る。
+        free = "送料無料" in (p.get("tags") or [])
+        pts = ["送料無料" if free else "送料は別にかかります"]
+        rc = p.get("rc") or 0
+        if rc >= 100:
+            pts.append("レビュー%s件・★%s" % (yen(rc), p.get("ra", "")))
+        # 買いまわりに使えるかは、値段と送料で機械的に決まる。
+        # セールの最中だけ出す。何も無い日に言っても意味がない。
+        if ev and p["pr"] >= 1000 and free:
+            pts.append("買いまわりに使えます（税込1,000円以上・送料無料）")
+        ends = ends_label(p.get("et"))
+        if ends:
+            pts.append("この値段は%s" % ends)
+
     if pts:
         lines.append("")
-        lines += ["・" + x for x in pts[:3]]
+        lines += ["・" + x for x in pts[:4]]
 
     url = "%s/p/%s/" % (site, p["id"])
     if reply_link:
-        # リンクは本文に入れず、あとから自分の投稿への返信として貼る。
         return "\n".join(lines), url
     lines.append("")
     lines.append(url)
@@ -380,7 +415,12 @@ def pick(cfg, posted, want):
 
     items = []
     for p in feed:
-        if not p.get("cap") or ("product:" + p["id"]) in done:
+        if ("product:" + p["id"]) in done:
+            continue
+        # キャプションが無くても、言えることがあるなら出す。
+        # 値引きが取れているか、期限が分かっていること。
+        # どちらも無い商品は、値段を並べるだけになるので出さない。
+        if not p.get("cap") and not (p.get("d") or p.get("et")):
             continue
         if (p.get("at") or "")[:10] < limit:
             continue
@@ -395,7 +435,7 @@ def pick(cfg, posted, want):
     reply_link = placement == "reply"
     for p in items:
         linked.append(("product:" + p["id"],
-                       compose_product(p, site, pr, reply_link)))
+                       compose_product(p, site, pr, reply_link, ev)))
 
     # ---- リンクのない投稿 ----
     plain = []
@@ -741,6 +781,10 @@ def main():
         sys.exit("24時間の上限に近いので止めます（%s/%s）" % (used, total))
 
     now = datetime.now(JST).strftime("%Y-%m-%d %H:%M")
+    # どの商品に人の書いた文があったかを控えておく
+    feed_now = {("product:" + x["id"]): bool(x.get("cap"))
+                for x in (load("assets/data/feed.json", []) or [])}
+    caps = feed_now
     ok = 0
     for key, text, link in picks:
         try:
@@ -765,6 +809,9 @@ def main():
                 "guide" if key.startswith("guide:") else "page")
         posted["log"].append({
             "key": key, "id": pid, "at": now, "kind": kind,
+            # 人が書いた文があったかどうか。
+            # データだけの投稿と読み比べたときに、差が出るのかを見るため。
+            "cap": caps.get(key, None),
             # あとで比べるために、どの出し方で出したかを残す。
             # 記録が無いと、伸びた理由が本文か返信かを言えなくなる。
             "link": ("none" if kind in ("tip", "schedule")
