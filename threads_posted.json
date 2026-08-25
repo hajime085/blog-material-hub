@@ -1,7 +1,8 @@
 {
   "keys": [
     "page:kaimawari:2026-08-24",
-    "guide:price-trick"
+    "guide:price-trick",
+    "schedule:2026-08-25"
   ],
   "log": [
     {
@@ -17,6 +18,14 @@
       "at": "2026-08-25 17:16",
       "kind": "guide",
       "link": "body"
+    },
+    {
+      "key": "schedule:2026-08-25",
+      "id": "18069858914719061",
+      "at": "2026-08-25 20:31",
+      "kind": "schedule",
+      "cap": null,
+      "link": "none"
     }
   ]
 }
