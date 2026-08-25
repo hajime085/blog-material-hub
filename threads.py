@@ -261,62 +261,178 @@ def active_event():
     return None
 
 
+
+# ---------------------------------------------------------------- リンクなしの投稿
+
+# 買いまわりと値段の見分け方の短い知識。
+# 中身はすべて自分の記事に書いたことで、確かめた事実だけを置く。
+# リンクを貼らないので、読んで終わりでいい投稿になる。
+# 全部の投稿に商品リンクが入っていると、宣伝の列にしかならない。
+TIPS = [
+    ("買いまわりは1商品ではなく、1ショップの合計で数えます。",
+     "税込1,000円以上で1カウント。\n"
+     "500円のものを2つ同じ店で買えば、それで1カウントになります。"),
+    ("送料は買いまわりの1,000円判定に入りません。",
+     "商品900円＋送料300円で1,200円払っても、カウントされません。\n"
+     "商品代だけで税込1,000円を超える必要があります。"),
+    ("1,000円＋送料590円より、1,200円の送料無料のほうが安いです。",
+     "どちらも1カウント。払う額は1,590円と1,200円。\n"
+     "「1,000円ポッキリ」を狙うときほど、送料欄を見てください。"),
+    ("同じ店で3回買っても、カウントは1のままです。",
+     "だから同じ店のものはまとめて買ったほうが得です。送料が1回で済みます。"),
+    ("買いまわりは、買う順番に関係ありません。",
+     "先に買った分にも、最終的に達成した店舗数の倍率がかかります。\n"
+     "「高いものを最後に」という必要はありません。"),
+    ("「実質1,800円」はレジで払う額ではありません。",
+     "ポイント還元を引いた計算上の値段です。\n"
+     "今日払うのは値引き前の金額で、ポイントは後から付きます。"),
+    ("「クーポンで1,000円」は、クーポンを取っていない人には関係ない値段です。",
+     "嘘ではありませんが、そのままでは買えません。\n"
+     "単価の手前に「クーポンで」「エントリーで」が付いていないか見てください。"),
+    ("「3,880円→890円」の右側が、実際の価格と違うことがあります。",
+     "色やサイズで値段が変わる商品だと、一番安い組み合わせの値段が書かれがちです。\n"
+     "矢印の右と、表示価格が一致しているかを見てください。"),
+    ("送料無料には種類があります。",
+     "完全に無料、一部地域除外、条件つき、価格に込み。\n"
+     "北海道・沖縄・離島にお住まいなら、送料欄を必ず開いてください。"),
+    ("ポイントには獲得上限があります。",
+     "上限に達したら、店舗を増やしてもポイントは増えません。\n"
+     "上限はその回のキャンペーンページに書いてあります。"),
+    ("買いまわりで付くのは期間限定ポイントです。",
+     "有効期限が短く、使い道も楽天の中に限られます。\n"
+     "現金と同じものとして計算に入れると、あとで困ります。"),
+    ("「10店舗達成」を目標にしないほうがいいです。",
+     "あと1店舗で増えるポイントは、買う予定の合計金額の1%ほど。\n"
+     "合計3万円なら約300ポイントです。1,000円の要らないものを足すと損になります。"),
+    ("割引率が書いてあるのに、いくらなのか書いていない商品があります。",
+     "「77%OFF【990円〜1,390円】」のような書き方です。\n"
+     "値段が幅で書かれているとき、その割引率はどれか1つのものです。"),
+    ("販売開始前の商品は、ページが見えていても買えません。",
+     "確実なのは、カートに入れてみることです。入らなければまだ売っていません。"),
+    ("5と0のつく日は、エントリーと楽天カードでの支払いが条件です。",
+     "どちらも忘れると、同じ買い物でも戻る量が変わります。"),
+]
+
+
+def tip_posts():
+    return [{"key": "tip:%02d" % i, "title": t, "lead": b}
+            for i, (t, b) in enumerate(TIPS)]
+
+
+def schedule_post():
+    """次に来るイベントの予定。リンクは貼らない。
+
+    「予想」の日程は予想と明記する。
+    発表前の日程を確定のように書くのは、
+    このサイトが批判している「安く見えて安くない」と同じことになる。
+    """
+    doc = load("events.json", {}) or {}
+    now = datetime.now(JST).replace(tzinfo=None)
+    rows = []
+    for ev in doc.get("events", []):
+        try:
+            a = datetime.strptime(ev["start"][:16], "%Y-%m-%d %H:%M")
+            b = datetime.strptime((ev.get("end") or ev["start"])[:16], "%Y-%m-%d %H:%M")
+        except (ValueError, KeyError):
+            continue
+        if b < now:
+            continue
+        rows.append((a, b, ev))
+    if not rows:
+        return []
+    rows.sort()
+
+    def fmt(d):
+        return "%d月%d日 %02d:%02d" % (d.month, d.day, d.hour, d.minute)
+
+    lines = []
+    for a, b, ev in rows[:3]:
+        mark = "" if ev.get("status") == "確定" else "（予想）"
+        state = "開催中" if a <= now <= b else "あと%d日" % max(0, (a.date() - now.date()).days)
+        lines.append("・%s%s\n  %s 〜 %s（%s）" % (ev["name"], mark, fmt(a), fmt(b), state))
+
+    key = "schedule:%s" % now.strftime("%Y-%m-%d")
+    return [{"key": key,
+             "title": "楽天のイベント予定",
+             "lead": "\n".join(lines) +
+                     "\n\n予想と書いたものは、まだ楽天が発表していない日程です。"
+                     "過去の傾向からの見込みなので、変わることがあります。"}]
+
+
+def compose_plain(x):
+    """リンクなしの投稿。読んで終わりでいい。"""
+    return x["title"] + "\n\n" + x["lead"], None
+
+
 # ---------------------------------------------------------------- 選ぶ
 
 def pick(cfg, posted, want):
     """今回出すものを選ぶ。
 
-    同じ種類ばかり続けない。商品だけを毎回流すと、
-    ただの値段の羅列になって読む理由が無くなる。
-    記事とセールの案内を混ぜて、間を空ける。
+    リンクのある投稿とない投稿を交互に出す。
+    全部にリンクが入っていると、読む側から見れば宣伝の列にしかならない。
+    間に知識や予定を挟むことで、読んで終わりでいい投稿が混ざる。
 
     一度出したものは二度と出さない。
-    同じ商品を何度も流すのは、読む側から見れば繰り返しでしかない。
+    ただし知識（tip）だけは、出し切ったら古いものから回す。
+    種類が有限で、時間が経てば読む人も変わるため。
     """
     site = cfg["site"]["url"].rstrip("/")
-    # PRを付けるのは商品の投稿だけ。記事とセールの案内には付けない。
-    # どちらもこの投稿にアフィリエイトリンクを含まないが、
-    # 商品は値段を出して買いに誘導するので、実質的に広告になる。
+    th = cfg.get("threads", {})
     # リンクを本文に入れるか、自分の投稿への返信として貼るか。
-    # Metaは「リンクは正しくランキングされている」と言っているので本文を既定にする。
-    # ただし日本語のノウハウでは返信に貼るほうが伸びるとされており、
-    # どちらが正しいかは実際に測るまで分からない。切り替えられるようにしておく。
-    reply_link = cfg.get("threads", {}).get("linkPlacement") == "reply"
-    on = cfg.get("threads", {}).get("prOn") or ["product"]
+    # どちらが伸びるかは測るまで分からないので、切り替えられるようにしてある。
+    placement = th.get("linkPlacement", "body")
+    on = th.get("prOn") or ["product"]
     pr = (cfg["site"].get("prLabel") or "") if "product" in on else ""
+
     feed = load("assets/data/feed.json", []) or []
     done = set(posted.get("keys") or [])
-
     ev = active_event()
     n_km = sum(1 for p in feed
                if p["pr"] >= 1000 and "送料無料" in (p.get("tags") or []))
 
-    # 1) セールの案内。開催中だけ、期間に1回。
-    pool_event = [x for x in event_posts(site, ev, n_km) if x["key"] not in done]
-    # 2) 攻略ガイド。出し切ったら、いちばん前に出したものから再び回す。
-    guides = guide_posts(site)
-    pool_guide = [g for g in guides if g["key"] not in done]
-
-    # 3) 商品。新しく載ったものから。キャプションの無いものは出さない。
-    #    文章が無いと、値段だけの投稿になってしまう。
+    # ---- リンクのある投稿 ----
+    linked = []
+    for e in event_posts(site, ev, n_km):
+        if e["key"] not in done:
+            linked.append((e["key"], compose_page(e, site, pr)))
+    for g in guide_posts(site):
+        if g["key"] not in done:
+            linked.append((g["key"], compose_guide(g, site, pr)))
     items = [p for p in feed
              if p.get("cap") and ("product:" + p["id"]) not in done]
     items.sort(key=lambda p: p.get("at") or "", reverse=True)
-
-    out = []
-    if pool_event:
-        e = pool_event[0]
-        body, link = compose_page(e, site, pr)
-        out.append((e["key"], body, link))
-    if len(out) < want and pool_guide:
-        g = pool_guide[0]
-        body, link = compose_guide(g, site, pr)
-        out.append((g["key"], body, link))
+    reply_link = placement == "reply"
     for p in items:
-        if len(out) >= want:
-            break
-        body, link = compose_product(p, site, pr, reply_link)
-        out.append(("product:" + p["id"], body, link))
+        linked.append(("product:" + p["id"],
+                       compose_product(p, site, pr, reply_link)))
+
+    # ---- リンクのない投稿 ----
+    plain = []
+    for x in schedule_post():
+        if x["key"] not in done:
+            plain.append((x["key"], compose_plain(x)))
+    fresh = [t for t in tip_posts() if t["key"] not in done]
+    if not fresh:
+        # 出し切ったので、いちばん前に出したものから回す
+        order = {k: i for i, k in enumerate(posted.get("keys") or [])}
+        fresh = sorted(tip_posts(), key=lambda t: order.get(t["key"], 0))
+    for t in fresh:
+        plain.append((t["key"], compose_plain(t)))
+
+    # ---- 交互に取る ----
+    # 直前がリンクありだったら、今回はリンクなしから始める。
+    last = (posted.get("log") or [])
+    want_plain = bool(last) and not str(last[-1].get("key", "")).startswith(
+        ("tip:", "schedule:"))
+    out = []
+    while len(out) < want and (linked or plain):
+        pool = plain if want_plain else linked
+        if not pool:
+            pool = linked if want_plain else plain
+        key, (body, link) = pool.pop(0)
+        out.append((key, body, link))
+        want_plain = not want_plain
     return out
 
 
@@ -460,8 +576,85 @@ def setup():
     print("   値は画面に出していないので、.env を開いてコピーしてください。")
 
 
+
+def report():
+    """出した投稿の成績を集める。
+
+    どの型が効いたか、リンクを本文と返信のどちらに置いたほうが良いかを、
+    推測ではなく数字で見るためのもの。
+
+    threads_manage_insights の権限が要る。
+    無いときは、その旨だけ言って終わる。黙って空の表を出さない。
+    """
+    uid, token = credentials()
+    posted = load(STATE, {}) or {}
+    log = [x for x in (posted.get("log") or []) if x.get("id")]
+    if not log:
+        print("まだ出した記録がありません。")
+        return
+
+    rows, missing = [], 0
+    for x in log:
+        try:
+            d = api("GET", "%s/insights" % x["id"],
+                    {"metric": "views,likes,replies,reposts,quotes,shares"}, token)
+        except Exception as ex:                           # noqa: BLE001
+            if "insights" in str(ex).lower() or "permission" in str(ex).lower():
+                print("成績を取れませんでした。")
+                print("Metaのアプリに threads_manage_insights を足して、")
+                print("トークンを取り直してから、もう一度実行してください。")
+                print("  1. ユースケース → Threads APIにアクセス → アクセス許可と機能")
+                print("  2. threads_manage_insights を「＋追加」")
+                print("  3. アクセストークンを生成し直す")
+                print("  4. python3 threads.py --setup")
+                return
+            missing += 1
+            continue
+        got = {}
+        for m in d.get("data", []):
+            got[m.get("name")] = (m.get("values") or [{}])[0].get("value", 0)
+        rows.append((x, got))
+
+    if not rows:
+        print("成績を取れた投稿がありませんでした。")
+        return
+
+    print("=== 1件ずつ ===")
+    print("  %-22s %-8s %-6s %6s %6s %6s" % ("投稿", "型", "リンク", "表示", "いいね", "返信"))
+    for x, g in rows:
+        print("  %-22s %-8s %-6s %6s %6s %6s" % (
+            x["key"][:22], x.get("kind", "?"), x.get("link", "?"),
+            g.get("views", 0), g.get("likes", 0), g.get("replies", 0)))
+
+    def summarize(title, keyfn):
+        buckets = {}
+        for x, g in rows:
+            k = keyfn(x)
+            b = buckets.setdefault(k, {"n": 0, "views": 0, "likes": 0, "replies": 0})
+            b["n"] += 1
+            for m in ("views", "likes", "replies"):
+                b[m] += g.get(m, 0) or 0
+        print("\n=== %s ===" % title)
+        print("  %-10s %4s %10s %10s %10s" % ("", "件数", "表示/件", "いいね/件", "返信/件"))
+        for k, b in sorted(buckets.items(), key=lambda kv: -kv[1]["views"]):
+            n = max(1, b["n"])
+            print("  %-10s %4d %10.1f %10.1f %10.1f"
+                  % (k, b["n"], b["views"] / n, b["likes"] / n, b["replies"] / n))
+
+    summarize("型べつ", lambda x: x.get("kind", "?"))
+    summarize("リンクの置き方べつ", lambda x: x.get("link", "?"))
+
+    if missing:
+        print("\n（%d件は取れませんでした）" % missing)
+    print("\n表示回数は時間とともに増えます。出した直後の投稿は不利に見えるので、")
+    print("比べるときは、どちらの型も同じくらい時間が経ってから見てください。")
+
+
 def main():
     args = sys.argv[1:]
+    if "--report" in args:
+        report()
+        return
     if "--setup" in args:
         setup()
         return
@@ -527,7 +720,17 @@ def main():
                 break
             continue
         posted["keys"].append(key)
-        posted["log"].append({"key": key, "id": pid, "at": now})
+        kind = ("tip" if key.startswith("tip:") else
+                "schedule" if key.startswith("schedule:") else
+                "product" if key.startswith("product:") else
+                "guide" if key.startswith("guide:") else "page")
+        posted["log"].append({
+            "key": key, "id": pid, "at": now, "kind": kind,
+            # あとで比べるために、どの出し方で出したかを残す。
+            # 記録が無いと、伸びた理由が本文か返信かを言えなくなる。
+            "link": ("none" if kind in ("tip", "schedule")
+                     else ("reply" if link else "body")),
+        })
         ok += 1
         print("  ✅ %s → %s" % (key, pid))
         # 続けて出すときは間を空ける。まとめて出すとスパムに見える。
