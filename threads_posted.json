@@ -4,7 +4,8 @@
     "guide:price-trick",
     "schedule:2026-08-25",
     "guide:marathon",
-    "schedule:2026-08-26"
+    "schedule:2026-08-26",
+    "guide:super-sale"
   ],
   "log": [
     {
@@ -44,6 +45,14 @@
       "kind": "schedule",
       "cap": null,
       "link": "none"
+    },
+    {
+      "key": "guide:super-sale",
+      "id": "18038536442837587",
+      "at": "2026-08-26 08:27",
+      "kind": "guide",
+      "cap": null,
+      "link": "body"
     }
   ]
 }
