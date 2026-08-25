@@ -1,0 +1,62 @@
+name: Threadsへ投稿
+
+# 1日3回、間を空けて出す。
+# 続けざまに出すとスパムに見えるので、朝・昼・夜に散らす。
+# ThreadsのAPIは無料で1日250件まで出せるが、上限まで使う理由はない。
+on:
+  schedule:
+    # UTC で指定する。日本時間の 8時・12時・20時にあたる。
+    - cron: "0 23,3,11 * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "出さずに文面だけ見る"
+        type: boolean
+        default: false
+
+# 実行が重なると threads_posted.json の書き込みがぶつかる。前のものを待つ。
+concurrency:
+  group: threads
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Threadsへ出す
+        env:
+          THREADS_USER_ID: ${{ secrets.THREADS_USER_ID }}
+          THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
+        run: |
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            python3 threads.py --dry-run
+          else
+            python3 threads.py
+          fi
+
+      - name: 出したものを記録する
+        run: |
+          git config user.name "yasumiru-bot"
+          git config user.email "bot@users.noreply.github.com"
+          if git diff --quiet -- threads_posted.json; then
+            echo "出したものはありません。"
+            exit 0
+          fi
+          git add threads_posted.json
+          git commit -m "auto: Threadsへ投稿"
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push origin main && exit 0
+            echo "やり直します ($i)"
+            sleep 5
+          done
+          exit 1
