@@ -366,8 +366,65 @@ def io_open_lines(path):
         return f.readlines()
 
 
+def setup():
+    """トークンを受け取って .env に書く。
+
+    ユーザーIDはトークンから引けるので、人が調べる必要はない。
+    トークンは getpass で受け取る。画面にも履歴にも残さない。
+    """
+    import getpass
+
+    print("Metaの「ユーザートークン生成ツール」で出したトークンを貼り付けてください。")
+    print("入力中は画面に表示されません。貼り付けてEnterを押してください。\n")
+    token = getpass.getpass("トークン: ").strip()
+    if not token:
+        sys.exit("何も入力されませんでした。")
+
+    # トークンが誰のものかを確かめる。取り違えるとよそのアカウントに出てしまう。
+    url = ("https://graph.threads.net/v1.0/me?fields=id,username&access_token=%s"
+           % urllib.parse.quote(token))
+    try:
+        with urllib.request.urlopen(urllib.request.Request(url), timeout=30) as r:
+            me = json.loads(r.read().decode("utf-8"))
+    except urllib.error.HTTPError as ex:
+        body = ex.read().decode("utf-8", "replace")
+        sys.exit("トークンが使えませんでした。\n%s" % body[:400])
+    except Exception as ex:                               # noqa: BLE001
+        sys.exit("確認できませんでした: %s" % ex)
+
+    uid, name = me.get("id"), me.get("username")
+    if not uid:
+        sys.exit("ユーザーIDを取れませんでした: %s" % me)
+    print("\n  アカウント: @%s" % name)
+    print("  ユーザーID: %s" % uid)
+
+    ans = input("\nこのアカウントで投稿します。よろしいですか？ [y/N] ").strip().lower()
+    if ans != "y":
+        print("やめました。.env は変えていません。")
+        return
+
+    path = os.path.join(ROOT, ".env")
+    lines = io_open_lines(path) if os.path.exists(path) else []
+    keep = [l for l in lines
+            if not l.strip().startswith(("THREADS_USER_ID=", "THREADS_ACCESS_TOKEN="))]
+    if keep and not keep[-1].endswith("\n"):
+        keep[-1] += "\n"
+    keep.append("THREADS_USER_ID=%s\n" % uid)
+    keep.append("THREADS_ACCESS_TOKEN=%s\n" % token)
+    with open(path, "w", encoding="utf-8") as f:
+        f.writelines(keep)
+
+    print("\n✅ .env に書きました。")
+    print("   次にこれで確かめてください:  python3 threads.py --check")
+    print("   自動実行にも使うなら、GitHubのSecretsにも同じ2つを入れてください。")
+    print("   値は画面に出していないので、.env を開いてコピーしてください。")
+
+
 def main():
     args = sys.argv[1:]
+    if "--setup" in args:
+        setup()
+        return
     if "--refresh" in args:
         refresh_token()
         return
