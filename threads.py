@@ -366,9 +366,32 @@ def pick(cfg, posted, want):
     for g in guide_posts(site):
         if g["key"] not in done:
             linked.append((g["key"], compose_guide(g, site, pr)))
-    items = [p for p in feed
-             if p.get("cap") and ("product:" + p["id"]) not in done]
+    # 商品は新しいものだけを出す。
+    #
+    # 掲載中の商品は日が経つほど溜まっていく。古い順に消化していくと、
+    # 何日も前に見つけた値段を、いま見つけたかのように流すことになる。
+    # 値段は毎日動くので、それは古い情報を配っているのと同じ。
+    #
+    # 出せる新しい商品が無い日は、商品を出さない。
+    # 数を埋めるために古いものを引っぱり出すくらいなら、知識を出したほうがいい。
+    fresh_days = th.get("freshDays", 3)
+    limit = (datetime.now(JST) - timedelta(days=fresh_days)).strftime("%Y-%m-%d")
+    now_s = datetime.now(JST).strftime("%Y-%m-%d %H:%M")
+
+    items = []
+    for p in feed:
+        if not p.get("cap") or ("product:" + p["id"]) in done:
+            continue
+        if (p.get("at") or "")[:10] < limit:
+            continue
+        # 終わったセールは出さない。
+        # サイトの作り直しから投稿までに終わることがあるので、ここでも見る。
+        et = (p.get("et") or "").strip()
+        if et and et[:16].replace("T", " ") < now_s:
+            continue
+        items.append(p)
     items.sort(key=lambda p: p.get("at") or "", reverse=True)
+
     reply_link = placement == "reply"
     for p in items:
         linked.append(("product:" + p["id"],
