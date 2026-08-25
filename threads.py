@@ -641,8 +641,26 @@ def report():
             print("  %-10s %4d %10.1f %10.1f %10.1f"
                   % (k, b["n"], b["views"] / n, b["likes"] / n, b["replies"] / n))
 
+    def slot_of(x):
+        """出した時刻を、午前・昼・夕方・夜に振り分ける。
+
+        記録の時刻から出すので、あとから足した項目でも過去の分を数えられる。
+        """
+        try:
+            h = int(str(x.get("at", ""))[11:13])
+        except ValueError:
+            return "?"
+        if h < 11:
+            return "午前"
+        if h < 15:
+            return "昼"
+        if h < 19:
+            return "夕方"
+        return "夜"
+
     summarize("型べつ", lambda x: x.get("kind", "?"))
     summarize("リンクの置き方べつ", lambda x: x.get("link", "?"))
+    summarize("時間帯べつ", slot_of)
 
     if missing:
         print("\n（%d件は取れませんでした）" % missing)
