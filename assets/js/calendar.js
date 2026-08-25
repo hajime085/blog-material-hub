@@ -100,17 +100,34 @@
       if (ds === today) cls += ' is-today';
       if (ds < today) cls += ' is-past';
       if (evs.length) cls += ' has-ev ev-' + (evs[0].kind || 'other');
+      // 終わったイベントの日も塗りは残す。いつ何があったかを辿れるように。
+      // ただし薄くして、これから来るものと見分けがつくようにする。
+      if (evs.length && ds < today) cls += ' is-done';
       if (evs.some(function (e) { return e.status === '予想'; })) cls += ' is-guess';
       if (five) cls += ' is-five';
       cells += '<span class="' + cls + '">' + d + '</span>';
     }
 
-    // これから来るもの・開催中のものだけ並べる。終わったものは出さない。
     // 一覧に出すのはセールとマラソンだけ。
     // 定例は毎月あるので、並べても「次はいつか」の情報にならない。
+    //
+    // 今月を見ているときは、これから来るものと開催中のものを出す。
+    // 過去の月をめくったときは、その月に終わったものを出す。
+    // いつどのイベントがあったかを、あとから辿れるようにしておく。
+    // events.json からは終わったイベントも消さない。消すと履歴が失われる。
+    var thisMonth = (new Date(now.getTime())).toISOString().slice(0, 7);
+    var shownMonth = y + '-' + String(mo + 1).padStart(2, '0');
+    var past = shownMonth < thisMonth;
+
     var upcoming = events.filter(function (ev) {
-      return !ev.recurring &&
-        parseJst(ev.end || ev.start) + 12 * 3600000 >= Date.now();
+      if (ev.recurring) return false;
+      var end = parseJst(ev.end || ev.start);
+      if (past) {
+        // その月に かかっていたイベントを出す
+        return (ev.start || '').slice(0, 7) <= shownMonth &&
+               (ev.end || ev.start || '').slice(0, 7) >= shownMonth;
+      }
+      return end + 12 * 3600000 >= Date.now();
     }).sort(function (a, b) { return parseJst(a.start) - parseJst(b.start); });
 
     var list = upcoming.slice(0, 3).map(function (ev) {
@@ -126,7 +143,8 @@
         '</p>' +
         '<p class="cal-ev-when">' + fmt(ev.start, true) + ' 〜 ' + fmt(ev.end, true) +
           (live ? '<b class="cal-live">開催中</b>'
-                : (days2 === 0 ? '<span class="cal-in">今日から</span>'
+                : (Date.now() > b ? '<span class="cal-done">終了</span>'
+                   : days2 === 0 ? '<span class="cal-in">今日から</span>'
                    : days2 === 1 ? '<span class="cal-in">明日から</span>'
                    : days2 > 0 ? '<span class="cal-in">あと' + days2 + '日</span>' : '')) +
         '</p>' +
@@ -153,7 +171,7 @@
       '</p>' +
       todayNote(events, today) +
       (list ? '<ul class="cal-list">' + list + '</ul>'
-            : '<p class="cal-none">予定が入っていません。</p>') +
+            : '<p class="cal-none">' + (past ? 'この月のイベントはありません。' : '予定が入っていません。') + '</p>') +
       '<p class="cal-note">日程は楽天の発表によります。' +
       '「予想」は過去の傾向からの見込みで、変わることがあります。</p>';
   }

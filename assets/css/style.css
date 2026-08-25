@@ -2636,6 +2636,16 @@ a.ticker-item:hover::before { background: var(--pop); }
 .cal-cell.is-today.has-ev.ev-sale     { background: var(--sale); box-shadow: 0 0 0 3px rgba(245,51,63,.28); }
 .cal-cell.is-today.has-ev.ev-marathon { background: #8E6BEA; box-shadow: 0 0 0 3px rgba(142,107,234,.3); }
 
+/* 終わったイベント。日の塗りは残して、薄くして見分ける。
+   いつ何があったかを、あとから辿れるようにしておく。 */
+.cal-cell.has-ev.is-done { opacity: .42; }
+.cal-done {
+  display: inline-block;
+  background: var(--paper-2, #f2ece2); color: var(--ink-70);
+  border-radius: 999px; padding: 1px 8px; margin-left: 6px;
+  font-size: .74rem; font-weight: 700;
+}
+
 .cal-legend {
   display: flex; flex-wrap: wrap; align-items: center; gap: 5px;
   font-size: 0.752rem; color: var(--ink-52);

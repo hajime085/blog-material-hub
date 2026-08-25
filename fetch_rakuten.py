@@ -449,6 +449,23 @@ def update_history(history, pid, price, today):
     return history[pid]
 
 
+def price_returned(records, current, tolerance=0.02):
+    """セールが終わって、値段が元に戻ったか。
+
+    このサイトは値下がりした瞬間だけを載せる。
+    値段が戻った商品は、もう載せる理由がない。
+    直してまで、あとから買う人はいない。
+
+    ゆらぎで消さないように、少しの上がりは見逃す。
+    2,992円が2,998円になったのは「戻った」ではない。
+    """
+    vals = [p for _, p in records if p]
+    if not vals:
+        return False
+    low = min(vals)
+    return current > low * (1 + tolerance) and current > low + 50
+
+
 def reference_price(records, current):
     """過去に観測した最高値。現在価格より高いときだけ比較基準になる。"""
     highs = [p for _, p in records if p > current]
@@ -1313,6 +1330,7 @@ def main():
     price_drops, fresh = [], []
     pinned_stale = []
     not_on_sale = []
+    price_back = []
     excluded = set()          # 買えないと判断して外したもの。保持ルールの対象外。
     result = {}
     candidates = {}
@@ -1359,6 +1377,17 @@ def main():
                 dropped += 1
                 continue
             records = update_history(history, pid, raw["price"], today)
+
+            # セールが終わって値段が戻った商品は落とす。
+            # このサイトは値下がりした瞬間だけを載せるので、
+            # 戻ったものを置いておく理由がない。
+            # 直してまで、あとから買う人はいない。
+            if price_returned(records, raw["price"]):
+                price_back.append((clean_title(raw["rawTitle"]),
+                                   min(v for _, v in records), raw["price"]))
+                excluded.add(pid)
+                dropped += 1
+                continue
 
             prev = existing.get(pid, {})
             item = dict(prev)
@@ -1611,6 +1640,10 @@ def main():
         print("   留め置きから外しました: %d件" % len(gone))
         for title, why in gone:
             print("     − %-34s %s" % (title[:34], why))
+    if price_back:
+        print("   値段が戻った %d件 を外しました:" % len(price_back))
+        for t, lo, now_p in price_back[:5]:
+            print("     %s円 → %s円  %s" % ("{:,}".format(lo), "{:,}".format(now_p), t[:34]))
     if pinned_stale:
         print("   留め置き %d件（手で選んだので保持ルールの対象外）" % (len(pinned_stale) - len(gone)))
     if kept_stale or expired:
