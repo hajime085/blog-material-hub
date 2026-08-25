@@ -162,8 +162,23 @@ def compose_product(p, site, pr):
 
 
 def compose_guide(g, site, pr):
+    """攻略ガイドの案内。
+
+    ここに【PR】は付けない。
+    この投稿にアフィリエイトリンクは含まれておらず、
+    リンク先は自分のサイトの記事で、特定の商品を勧めてもいない。
+    仕組みの解説に広告の印を付けると、実態より広告寄りに見せることになる。
+    それはそれで正確でない。
+
+    ステマ規制の名宛人は「商品・サービスを供給する事業者」であって、
+    紹介する側ではない。楽天のガイドラインが求めているのも
+    「アフィリエイトリンクを掲載する投稿」へのPR表示。
+
+    商品の投稿には付ける。あちらは値段を出して買いに誘導するので、
+    実質的に広告そのものになる。
+    """
     return "\n".join([
-        pr + g["title"],
+        g["title"],
         "",
         g["lead"],
         "",
@@ -172,8 +187,9 @@ def compose_guide(g, site, pr):
 
 
 def compose_page(page, site, pr):
+    """セールの案内。理由は compose_guide と同じで、PRは付けない。"""
     return "\n".join([
-        pr + page["title"],
+        page["title"],
         "",
         page["lead"],
         "",
@@ -254,7 +270,11 @@ def pick(cfg, posted, want):
     同じ商品を何度も流すのは、読む側から見れば繰り返しでしかない。
     """
     site = cfg["site"]["url"].rstrip("/")
-    pr = cfg["site"].get("prLabel") or ""
+    # PRを付けるのは商品の投稿だけ。記事とセールの案内には付けない。
+    # どちらもこの投稿にアフィリエイトリンクを含まないが、
+    # 商品は値段を出して買いに誘導するので、実質的に広告になる。
+    on = cfg.get("threads", {}).get("prOn") or ["product"]
+    pr = (cfg["site"].get("prLabel") or "") if "product" in on else ""
     feed = load("assets/data/feed.json", []) or []
     done = set(posted.get("keys") or [])
 

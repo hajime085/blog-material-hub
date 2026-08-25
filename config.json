@@ -270,6 +270,10 @@
     }
   ],
   "threads": {
-    "postsPerRun": 2
+    "postsPerRun": 2,
+    "prOn": [
+      "product"
+    ],
+    "_prOn": "【PR】を付ける投稿の種類。product / guide / page から選ぶ。"
   }
 }
