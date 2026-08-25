@@ -29,6 +29,7 @@ import random
 import sys
 import time
 import urllib.parse
+import urllib.error
 import urllib.request
 from datetime import datetime, timedelta, timezone
 
@@ -301,8 +302,83 @@ def publish(uid, token, text):
     return r.get("id")
 
 
+def token_expiry(token):
+    """トークンがいつ切れるかを見る。中身は表示しない。"""
+    try:
+        url = ("https://graph.threads.net/v1.0/me?fields=id&access_token=%s"
+               % urllib.parse.quote(token))
+        req = urllib.request.Request(url, method="GET")
+        with urllib.request.urlopen(req, timeout=20) as r:
+            json.loads(r.read().decode("utf-8"))
+        return True, ""
+    except urllib.error.HTTPError as ex:                  # noqa: BLE001
+        try:
+            body = json.loads(ex.read().decode("utf-8"))
+            msg = (body.get("error") or {}).get("message", str(ex))
+        except Exception:                                 # noqa: BLE001
+            msg = str(ex)
+        return False, msg
+    except Exception as ex:                               # noqa: BLE001
+        return False, str(ex)
+
+
+def refresh_token():
+    """長期トークンを取り直して .env に書き戻す。
+
+    長期トークンは60日で切れる。切れると投稿が止まる。
+    取り直したトークンは画面に出さず、.env に直接書く。
+    トークンを画面やログに出すと、そこから漏れる。
+    """
+    uid, token = credentials()
+    url = ("https://graph.threads.net/refresh_access_token"
+           "?grant_type=th_refresh_token&access_token=%s" % urllib.parse.quote(token))
+    req = urllib.request.Request(url, method="GET")
+    with urllib.request.urlopen(req, timeout=30) as r:
+        d = json.loads(r.read().decode("utf-8"))
+    new = d.get("access_token")
+    if not new:
+        sys.exit("取り直せませんでした: %s" % d)
+    days = int(d.get("expires_in", 0)) // 86400
+
+    path = os.path.join(ROOT, ".env")
+    if not os.path.exists(path):
+        sys.exit(".env がありません。")
+    lines = io_open_lines(path)
+    out, done = [], False
+    for line in lines:
+        if line.strip().startswith("THREADS_ACCESS_TOKEN="):
+            out.append("THREADS_ACCESS_TOKEN=%s\n" % new)
+            done = True
+        else:
+            out.append(line)
+    if not done:
+        out.append("THREADS_ACCESS_TOKEN=%s\n" % new)
+    with open(path, "w", encoding="utf-8") as f:
+        f.writelines(out)
+
+    print("✅ .env のトークンを取り直しました。あと%d日もちます。" % days)
+    print("   自動実行にも使うなら、GitHubのSecretsにも入れ直してください。")
+    print("   値は画面に出していません。.env を開いてコピーしてください。")
+
+
+def io_open_lines(path):
+    with open(path, encoding="utf-8") as f:
+        return f.readlines()
+
+
 def main():
     args = sys.argv[1:]
+    if "--refresh" in args:
+        refresh_token()
+        return
+    if "--check" in args:
+        uid, token = credentials()
+        ok, msg = token_expiry(token)
+        print("トークン: %s" % ("使えます" if ok else "使えません — %s" % msg))
+        if ok:
+            used, total = publishing_limit(uid, token)
+            print("24時間の投稿数: %s / %s" % (used, total))
+        return
     dry = "--dry-run" in args
     cfg = load("config.json")
     want = int(cfg.get("threads", {}).get("postsPerRun", 2))
@@ -340,6 +416,11 @@ def main():
             pid = publish(uid, token, text)
         except Exception as ex:                           # noqa: BLE001
             print("  × %s の投稿に失敗: %s" % (key, ex), file=sys.stderr)
+            if "OAuth" in str(ex) or "190" in str(ex) or "401" in str(ex):
+                print("     トークンが切れている可能性があります。"
+                      "手元で python3 threads.py --refresh を実行してください。",
+                      file=sys.stderr)
+                break
             continue
         posted["keys"].append(key)
         posted["log"].append({"key": key, "id": pid, "at": now})
