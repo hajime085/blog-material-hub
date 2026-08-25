@@ -2,7 +2,8 @@
   "keys": [
     "page:kaimawari:2026-08-24",
     "guide:price-trick",
-    "schedule:2026-08-25"
+    "schedule:2026-08-25",
+    "guide:marathon"
   ],
   "log": [
     {
@@ -26,6 +27,14 @@
       "kind": "schedule",
       "cap": null,
       "link": "none"
+    },
+    {
+      "key": "guide:marathon",
+      "id": "18102469454264221",
+      "at": "2026-08-25 22:53",
+      "kind": "guide",
+      "cap": null,
+      "link": "body"
     }
   ]
 }
