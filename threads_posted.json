@@ -5,7 +5,8 @@
     "schedule:2026-08-25",
     "guide:marathon",
     "schedule:2026-08-26",
-    "guide:super-sale"
+    "guide:super-sale",
+    "tip:00"
   ],
   "log": [
     {
@@ -53,6 +54,14 @@
       "kind": "guide",
       "cap": null,
       "link": "body"
+    },
+    {
+      "key": "tip:00",
+      "id": "18112902394799703",
+      "at": "2026-08-26 12:47",
+      "kind": "tip",
+      "cap": null,
+      "link": "none"
     }
   ]
 }
