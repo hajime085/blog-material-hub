@@ -8,7 +8,8 @@
     "guide:super-sale",
     "tip:00",
     "product:rb91539b1f",
-    "product:re53b58ebb"
+    "product:re53b58ebb",
+    "tip:12"
   ],
   "log": [
     {
@@ -80,6 +81,14 @@
       "kind": "product",
       "cap": false,
       "link": "reply"
+    },
+    {
+      "key": "tip:12",
+      "id": "17980483395064227",
+      "at": "2026-08-26 23:03",
+      "kind": "tip",
+      "cap": null,
+      "link": "none"
     }
   ]
 }
