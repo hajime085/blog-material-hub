@@ -707,6 +707,10 @@ def report():
             h = int(str(x.get("at", ""))[11:13])
         except ValueError:
             return "?"
+        # 0時台を先に見る。h < 11 から先に判定すると、
+        # 深夜0時の投稿が「午前」に入ってしまう。実際に入っていた。
+        if h < 5:
+            return "深夜"
         if h < 11:
             return "午前"
         if h < 15:
@@ -715,9 +719,7 @@ def report():
             return "夕方"
         if h < 22:
             return "夜"
-        if h < 24:
-            return "夜遅く"
-        return "深夜"
+        return "夜遅く"
 
     summarize("型べつ", lambda x: x.get("kind", "?"))
     summarize("リンクの置き方べつ", lambda x: x.get("link", "?"))
