@@ -1825,7 +1825,6 @@ def build_kaimawari(cfg, base, products, cats):
       買いまわりのために別口で商品を集めてはいません。</li>
       <li>買う順番はカウントに関係ありません。詳しくは
       <a href="/guide/rakuten-marathon/">お買い物マラソンの攻略法</a>にまとめています。</li>
-      <li>「あと1店舗」を足すか迷ったら、<a href="/keisan/">計算ツール</a>で損か得かを出せます。</li>
     </ul>
   </div>
 </div>
@@ -1844,52 +1843,6 @@ def build_kaimawari(cfg, base, products, cats):
         path="/kaimawari/",
         content=content,
         products=products, cats=cats))
-
-
-def build_keisan(cfg, base, products, cats):
-    """買いまわり計算ツールのページ。
-
-    世に出ている計算ツールは「いくらポイントがもらえるか」を答える。
-    こちらが答えるのは「あと1店舗、足すべきか」。
-    うちの記事の主張は「10店舗を目指さない」なので、そこに合わせる。
-    同じものを作っても、先に出ているものには勝てない。
-    """
-    content = """
-<section class="page-head wrap-narrow">
-  <p class="page-eyebrow">{ic}買いまわり</p>
-  <h1 class="page-title">あと1店舗、足すべき？</h1>
-  <p class="page-lead">買いまわりの「あと1店舗」が得になるかを計算します。
-  もらえるポイントの総額ではなく、<b>足したら損か得か</b>だけを出します。
-  項目の横の <b>?</b> を押すと説明が出ます。</p>
-</section>
-
-<div class="wrap-narrow">
-  <div id="keisan" data-url="{site}"></div>
-
-  <div class="ks-about">
-    <p class="ks-about-head">{ic2}なぜ「もらえるポイント」ではないのか</p>
-    <p>もらえる総額を出すツールは、すでにいくつもあります。
-    ただ、その数字を見て嬉しくなって、要らないものを足してしまうと本末転倒です。</p>
-    <p>買いまわりで増えるポイントは、たいてい足した金額より小さくなります。
-    合計30,000円のところに1,000円を足しても、増えるのは400ポイントほど。
-    差し引き600円の損です。</p>
-    <p>だからこのツールは、<b>足すか足さないか</b>だけを答えます。
-    考え方は<a href="/guide/rakuten-marathon/">お買い物マラソンの攻略法</a>に書いています。</p>
-  </div>
-</div>
-""".format(ic=icons.use("check"), ic2=icons.use("info"),
-           site=e(cfg["site"]["url"].rstrip("/")))
-
-    write("keisan/index.html", page_shell(
-        cfg, base,
-        title="あと1店舗、足すべき？｜楽天お買い物マラソンの買いまわり計算｜%s" % cfg["site"]["name"],
-        desc="楽天の買いまわりで「あと1店舗」を足すべきかを計算します。"
-             "もらえるポイントの総額ではなく、足したら損か得かだけを出します。"
-             "送料や期間限定ポイントなど、計算に入れていないものも明記しています。",
-        path="/keisan/",
-        content=content,
-        products=products, cats=cats,
-        scripts='<script src="%s" defer></script>' % asset_url("/assets/js/keisan.js")))
 
 
 def build_watchlist(cfg, base, products, cats):
@@ -2128,9 +2081,6 @@ def build_sitemap(cfg, products):
     for g in (cfg.get("_guides") or []):
         urls.append((site_url + "/guide/%s/" % g["slug"], g.get("updated", now), "0.9", "monthly"))
     urls.append((site_url + "/quiz/", now, "0.6", "weekly"))
-    # 道具のページ。中身が毎日変わるものではないので monthly。
-    # 記事と同じく、検索から入ってくることを狙っている。
-    urls.append((site_url + "/keisan/", now, "0.9", "monthly"))
     urls.append((site_url + "/kaimawari/", now, "0.7", "daily"))
     for slug in ("about", "contact", "privacy", "disclaimer", "terms"):
         urls.append((site_url + "/%s/" % slug, now, "0.3", "monthly"))
@@ -2484,7 +2434,6 @@ def main():
     build_quiz(cfg, base, products, cats)
     build_watchlist(cfg, base, products, cats)
     build_kaimawari(cfg, base, products, cats)
-    build_keisan(cfg, base, products, cats)
     build_postboard(cfg, base, products, cats)
     build_feed_json(cfg, products, cats)
     build_sitemap(cfg, products)
