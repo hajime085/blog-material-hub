@@ -391,13 +391,17 @@ def pick(cfg, posted, want):
 
     # ---- リンクのある投稿 ----
     reply_link = placement == "reply"
+    # 商品。ここが主役。
     linked = []
+    # 記事とセールの案内。リンクは付くが、中身は読み物なので
+    # 「商品以外」として数える。
+    other = []
     for e in event_posts(site, ev, n_km):
         if e["key"] not in done:
-            linked.append((e["key"], compose_page(e, site, pr, reply_link)))
+            other.append((e["key"], compose_page(e, site, pr, reply_link)))
     for g in guide_posts(site):
         if g["key"] not in done:
-            linked.append((g["key"], compose_guide(g, site, pr, reply_link)))
+            other.append((g["key"], compose_guide(g, site, pr, reply_link)))
     # 商品は新しいものだけを出す。
     #
     # 掲載中の商品は日が経つほど溜まっていく。古い順に消化していくと、
@@ -433,8 +437,10 @@ def pick(cfg, posted, want):
         linked.append(("product:" + p["id"],
                        compose_product(p, site, pr, reply_link, ev)))
 
-    # ---- リンクのない投稿 ----
-    plain = []
+    # ---- 商品以外 ----
+    # 記事・セールの案内・知識・予定をまとめて扱う。
+    # 読む人から見れば、どれも「いま買うもの」ではない。
+    plain = list(other)
     for x in schedule_post():
         if x["key"] not in done:
             plain.append((x["key"], compose_plain(x)))
@@ -458,25 +464,35 @@ def pick(cfg, posted, want):
 
     # ---- どちらを先に取るか ----
     #
-    # 夜は商品を出す。通販は夜のほうが買われるので、
-    # 買う気のある時間帯に、買えるものを置く。
-    # 楽天のセールが20時開始なのも同じ理由。
+    # このサイトは特価を出すサイトなので、商品が主でなければならない。
+    # 知識や予定ばかり流していると、ノウハウのアカウントなのか
+    # 特価のアカウントなのか分からなくなる。
     #
-    # 昼は知識や予定を出す。買う時間ではないので、
-    # そこに商品を並べても流されるだけになる。
-    # 読んで役に立つものを置いて、覚えてもらうほうに使う。
+    # だから商品7、それ以外3の割合を保つ。
+    # 直近10件を見て、商品が足りていなければ商品を取る。
     #
-    # 直前と同じ側が続いたときは入れ替える。
-    # 夜だからと商品ばかり続けると、宣伝の列になる。
+    # そのうえで、足りているときの選び方は時間帯で決める。
+    # 夜は買う時間なので商品を、昼は読む時間なので知識を優先する。
+    share = th.get("productShare", 0.7)
+    recent = [x.get("kind") for x in (posted.get("log") or [])][-10:]
+    have = sum(1 for k in recent if k == "product")
+    short_of_product = (not recent) or (have < len(recent) * share)
+
     hour = datetime.now(JST).hour
     night = hour >= 19 or hour < 2
-    want_plain = not night
 
-    last = (posted.get("log") or [])
-    if last:
-        prev_plain = str(last[-1].get("key", "")).startswith(("tip:", "schedule:"))
-        if prev_plain == want_plain:
-            want_plain = not want_plain
+    # 商品が3つ続いたら、いったん挟む。
+    # 割合を守るだけだと、足りない日に商品を6つ並べて、
+    # 次の日は知識だけ、という揺れ方をする。それでは宣伝の列になる。
+    last2 = [k for k in recent[-2:]]
+    run = len(last2) == 2 and all(k == "product" for k in last2)
+
+    if run:
+        want_plain = True
+    elif short_of_product:
+        want_plain = False
+    else:
+        want_plain = not night
 
     out = []
     while len(out) < want and (linked or plain):
