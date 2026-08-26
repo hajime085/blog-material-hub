@@ -200,7 +200,7 @@ def compose_product(p, site, pr, reply_link=False, ev=None):
     return "\n".join(lines), None
 
 
-def compose_guide(g, site, pr):
+def compose_guide(g, site, pr, reply_link=False):
     """攻略ガイドの案内。
 
     ここに【PR】は付けない。
@@ -216,24 +216,20 @@ def compose_guide(g, site, pr):
     商品の投稿には付ける。あちらは値段を出して買いに誘導するので、
     実質的に広告そのものになる。
     """
-    return "\n".join([
-        g["title"],
-        "",
-        g["lead"],
-        "",
-        "%s%s" % (site, g["path"]),
-    ]), None
+    url = "%s%s" % (site, g["path"])
+    body = "\n".join([g["title"], "", g["lead"]])
+    if reply_link:
+        return body, url
+    return body + "\n\n" + url, None
 
 
-def compose_page(page, site, pr):
+def compose_page(page, site, pr, reply_link=False):
     """セールの案内。理由は compose_guide と同じで、PRは付けない。"""
-    return "\n".join([
-        page["title"],
-        "",
-        page["lead"],
-        "",
-        "%s%s" % (site, page["path"]),
-    ]), None
+    url = "%s%s" % (site, page["path"])
+    body = "\n".join([page["title"], "", page["lead"]])
+    if reply_link:
+        return body, url
+    return body + "\n\n" + url, None
 
 
 # ---------------------------------------------------------------- 何を出すか
@@ -394,13 +390,14 @@ def pick(cfg, posted, want):
                if p["pr"] >= 1000 and "送料無料" in (p.get("tags") or []))
 
     # ---- リンクのある投稿 ----
+    reply_link = placement == "reply"
     linked = []
     for e in event_posts(site, ev, n_km):
         if e["key"] not in done:
-            linked.append((e["key"], compose_page(e, site, pr)))
+            linked.append((e["key"], compose_page(e, site, pr, reply_link)))
     for g in guide_posts(site):
         if g["key"] not in done:
-            linked.append((g["key"], compose_guide(g, site, pr)))
+            linked.append((g["key"], compose_guide(g, site, pr, reply_link)))
     # 商品は新しいものだけを出す。
     #
     # 掲載中の商品は日が経つほど溜まっていく。古い順に消化していくと、
@@ -432,7 +429,6 @@ def pick(cfg, posted, want):
         items.append(p)
     items.sort(key=lambda p: p.get("at") or "", reverse=True)
 
-    reply_link = placement == "reply"
     for p in items:
         linked.append(("product:" + p["id"],
                        compose_product(p, site, pr, reply_link, ev)))
