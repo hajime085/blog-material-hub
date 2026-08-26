@@ -7,7 +7,8 @@
     "schedule:2026-08-26",
     "guide:super-sale",
     "tip:00",
-    "product:rb91539b1f"
+    "product:rb91539b1f",
+    "product:re53b58ebb"
   ],
   "log": [
     {
@@ -68,6 +69,14 @@
       "key": "product:rb91539b1f",
       "id": "18186842002404467",
       "at": "2026-08-26 18:01",
+      "kind": "product",
+      "cap": false,
+      "link": "reply"
+    },
+    {
+      "key": "product:re53b58ebb",
+      "id": "18097000568148838",
+      "at": "2026-08-26 20:43",
       "kind": "product",
       "cap": false,
       "link": "reply"
