@@ -9,7 +9,8 @@
     "tip:00",
     "product:rb91539b1f",
     "product:re53b58ebb",
-    "tip:12"
+    "tip:12",
+    "product:rb2dfeec36"
   ],
   "log": [
     {
@@ -89,6 +90,14 @@
       "kind": "tip",
       "cap": null,
       "link": "none"
+    },
+    {
+      "key": "product:rb2dfeec36",
+      "id": "18104527604589326",
+      "at": "2026-08-27 01:34",
+      "kind": "product",
+      "cap": false,
+      "link": "reply"
     }
   ]
 }
