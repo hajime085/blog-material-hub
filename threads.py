@@ -307,7 +307,8 @@ def tip_posts():
     doc = load("tips.json", {}) or {}
     rows = doc.get("tips") or []
     return [{"key": "tip:%02d" % i, "title": t.get("title", ""),
-             "lead": t.get("body", ""), "cat": t.get("cat", "")}
+             "lead": t.get("body", ""), "cat": t.get("cat", ""),
+             "to": t.get("to", "")}
             for i, t in enumerate(rows) if t.get("title")]
 
 
@@ -357,9 +358,48 @@ def schedule_post():
                      "過去の傾向からの見込みなので、変わることがあります。"}]
 
 
-def compose_plain(x):
-    """リンクなしの投稿。読んで終わりでいい。"""
-    return x["title"] + "\n\n" + x["lead"], None
+# 返信で案内するときの一言。行き先ごとに変える。
+# どこへ送るのかと噛み合っていないと、押した人が肩透かしを食う。
+# 同じ文が毎回続くと機械が貼っているのが見えるので、数を用意しておく。
+FOLLOW = {
+    "/guide/rakuten-marathon/": [
+        "この話、もう少し詳しく書いています。",
+        "買いまわりの数え方、まとめてあります。",
+        "「あと1店舗」の損得も計算しています。",
+    ],
+    "/guide/price-trick/": [
+        "同じような見せ方を、5つに分けてまとめました。",
+        "ほかの落とし穴もまとめてあります。",
+        "見分け方の一覧はこちらです。",
+    ],
+    "/guide/rakuten-super-sale/": [
+        "セールの買い方はこちらにまとめています。",
+        "買いまわりの手順も書いています。",
+    ],
+    "/kaimawari/": [
+        "条件に合う商品を集めてあります。",
+        "1,000円以上・送料無料のものだけ並べています。",
+    ],
+}
+FOLLOW_DEFAULT = ["くわしくはこちらです。"]
+
+
+def compose_plain(x, site="", i=0):
+    """知識や予定の投稿。本文にはリンクを入れない。
+
+    リンクは投稿したあとに、自分への返信として貼る。
+    本文が読みやすいままリーチを保てるし、
+    読んだ人が「もっと知りたい」と思ったときに続きがある。
+
+    行き先が無いものは、本文だけで終える。
+    案内する先が無いのに一言だけ足しても、押すところがない。
+    """
+    body = x["title"] + "\n\n" + x["lead"]
+    to = x.get("to")
+    if not to or not site:
+        return body, None
+    lines = FOLLOW.get(to) or FOLLOW_DEFAULT
+    return body, lines[i % len(lines)] + "\n" + site + to
 
 
 # ---------------------------------------------------------------- 選ぶ
@@ -443,7 +483,7 @@ def pick(cfg, posted, want):
     plain = list(other)
     for x in schedule_post():
         if x["key"] not in done:
-            plain.append((x["key"], compose_plain(x)))
+            plain.append((x["key"], compose_plain(x, site)))
     tips = tip_posts()
     fresh = [t for t in tips if t["key"] not in done]
     if not fresh:
@@ -459,8 +499,10 @@ def pick(cfg, posted, want):
         other = [t for t in fresh if t.get("cat") not in seen]
         if other:
             fresh = other + [t for t in fresh if t not in other]
-    for t in fresh:
-        plain.append((t["key"], compose_plain(t)))
+    for n, t in enumerate(fresh):
+        # 一言は順番に入れ替える。同じ文が毎回続くと機械が貼っているのが見える。
+        seq = len([k for k in (posted.get("keys") or []) if k.startswith("tip:")]) + n
+        plain.append((t["key"], compose_plain(t, site, seq)))
 
     # ---- どちらを先に取るか ----
     #
