@@ -971,24 +971,41 @@ def report():
             x["key"][:22], x.get("kind", "?"), x.get("link", "?"),
             g.get("views", 0), g.get("likes", 0), g.get("replies", 0), age_h(x)))
 
-    def summarize(title, keyfn):
+    def median(xs):
+        """中央値。表示回数はたまに大きく跳ねるので、平均だけだと1件に引きずられる。"""
+        if not xs:
+            return 0.0
+        xs = sorted(xs)
+        n = len(xs)
+        return float(xs[n // 2]) if n % 2 else (xs[n // 2 - 1] + xs[n // 2]) / 2.0
+
+    def summarize(title, keyfn, only_product=False):
         buckets = {}
         for x, g in rows:
+            if only_product and x.get("kind") != "product":
+                continue
             k = keyfn(x)
-            b = buckets.setdefault(k, {"n": 0, "views": 0, "likes": 0,
-                                       "replies": 0, "age": 0.0})
-            b["n"] += 1
+            if k is None:
+                continue
+            b = buckets.setdefault(k, {"views": [], "likes": [], "replies": [],
+                                       "age": 0.0})
+            b["views"].append(g.get("views", 0) or 0)
+            b["likes"].append(g.get("likes", 0) or 0)
+            b["replies"].append(g.get("replies", 0) or 0)
             b["age"] += age_h(x)
-            for m in ("views", "likes", "replies"):
-                b[m] += g.get(m, 0) or 0
+        if not buckets:
+            return
         print("\n=== %s ===" % title)
-        print("  %-10s %4s %10s %10s %10s %9s"
-              % ("", "件数", "表示/件", "いいね/件", "返信/件", "平均経過"))
-        for k, b in sorted(buckets.items(), key=lambda kv: -kv[1]["views"]):
-            n = max(1, b["n"])
-            print("  %-10s %4d %10.1f %10.1f %10.1f %8.1fh"
-                  % (k, b["n"], b["views"] / n, b["likes"] / n,
-                     b["replies"] / n, b["age"] / n))
+        print("  %-14s %4s %9s %9s %8s %8s %8s"
+              % ("", "件数", "表示 平均", "表示 中央", "いいね", "返信", "平均経過"))
+        for k, b in sorted(buckets.items(),
+                           key=lambda kv: -median(kv[1]["views"])):
+            n = len(b["views"])
+            print("  %-14s %4d %9.1f %9.1f %8.1f %8.1f %7.1fh"
+                  % (str(k), n,
+                     sum(b["views"]) / n, median(b["views"]),
+                     sum(b["likes"]) / n, sum(b["replies"]) / n,
+                     b["age"] / n))
 
     def slot_of(x):
         """出した時刻を、午前・昼・夕方・夜に振り分ける。
@@ -1016,10 +1033,16 @@ def report():
     summarize("型べつ", lambda x: x.get("kind", "?"))
     summarize("リンクの置き方べつ", lambda x: x.get("link", "?"))
     summarize("時間帯べつ", slot_of)
-    if any(x.get("hook_type") for x, _ in rows):
-        summarize("入口の型べつ", lambda x: x.get("hook_type") or "（型なし）")
-    if any(x.get("cta") for x, _ in rows):
-        summarize("締めべつ", lambda x: x.get("cta") or "（回しているもの）")
+
+    # ここから下は商品の投稿だけ。知識や予定と混ぜると比べられない。
+    summarize("組み立てべつ（旧 vs 新）",
+              lambda x: x.get("logic_version"), only_product=True)
+    summarize("入口の型べつ",
+              lambda x: x.get("hook_type") or "（型なし）", only_product=True)
+    summarize("締めべつ",
+              lambda x: x.get("cta_type") or "（回しているもの）", only_product=True)
+    summarize("売場べつ",
+              lambda x: x.get("category"), only_product=True)
 
     if missing:
         print("\n（%d件は取れませんでした）" % missing)
@@ -1086,6 +1109,11 @@ def main():
              for x in _feed}
     ctas = {("product:" + x["id"]): (x.get("mk2") or {}).get("cta")
             for x in _feed}
+    cats = {("product:" + x["id"]): x.get("c") for x in _feed}
+    # どちらの組み立てで出したか。あとで旧と新を比べるため。
+    # 商品理解を持っているものだけが新しいほうを通る。
+    vers = {("product:" + x["id"]):
+            ("marketing_v2" if x.get("mk2") else "legacy_v1") for x in _feed}
     ok = 0
     for key, text, link in picks:
         try:
@@ -1116,7 +1144,12 @@ def main():
             # どの入口の型で出したか。あとでどれが伸びたかを見るため。
             "hook_type": hooks.get(key),
             # どの締めで出したか。反応の差を見るため。
-            "cta": ctas.get(key),
+            "cta_type": ctas.get(key),
+            # 売場。売場によって伸び方が違うかもしれない。
+            "category": cats.get(key),
+            # 旧い組み立てか、新しい組み立てか。
+            "logic_version": vers.get(key,
+                                      "legacy_v1" if kind == "product" else None),
             # あとで比べるために、どの出し方で出したかを残す。
             # 記録が無いと、伸びた理由が本文か返信かを言えなくなる。
             "link": ("none" if kind in ("tip", "schedule")

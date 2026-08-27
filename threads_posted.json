@@ -72,7 +72,9 @@
       "at": "2026-08-26 18:01",
       "kind": "product",
       "cap": false,
-      "link": "reply"
+      "link": "reply",
+      "logic_version": "legacy_v1",
+      "category": "beauty"
     },
     {
       "key": "product:re53b58ebb",
@@ -80,7 +82,9 @@
       "at": "2026-08-26 20:43",
       "kind": "product",
       "cap": false,
-      "link": "reply"
+      "link": "reply",
+      "logic_version": "legacy_v1",
+      "category": "beauty"
     },
     {
       "key": "tip:12",
@@ -96,7 +100,9 @@
       "at": "2026-08-27 01:34",
       "kind": "product",
       "cap": false,
-      "link": "reply"
+      "link": "reply",
+      "logic_version": "legacy_v1",
+      "category": "beauty"
     },
     {
       "key": "product:rf05138318",
@@ -104,7 +110,9 @@
       "at": "2026-08-27 13:30",
       "kind": "product",
       "cap": true,
-      "link": "reply"
+      "link": "reply",
+      "logic_version": "marketing_v2",
+      "category": "fashion"
     }
   ]
 }
