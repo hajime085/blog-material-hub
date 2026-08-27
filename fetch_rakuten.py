@@ -1266,6 +1266,8 @@ def fetch_event(cfg, app_id, access_key, aff_id, site_url,
             "tags": tags_from_title(v["rawTitle"]),
             "unitNote": unit_note_from_title(v["rawTitle"]),
             "postedAt": today, "bumpedAt": stamp, "lastSeen": today,
+            # 親投稿のもとはまだ無い。pitch.py で作る。
+            "pitch_status": "pending",
         })
 
     if dry_run:
@@ -1462,6 +1464,9 @@ def main():
                     had_off = round((prev["listPrice"] - prev["price"])
                                     / prev["listPrice"] * 100)
                 newsworthy = (not prev) or (had_off < min_off) or (was and was > item["price"])
+                # 初めて載る商品は、親投稿のもとがまだ無い。pitch.py で作る。
+                if not prev:
+                    item.setdefault("pitch_status", "pending")
                 if newsworthy:
                     item["postedAt"] = today
                     # 日付だけだと、同じ日に載ったものが全部同着になり、
@@ -1640,6 +1645,10 @@ def main():
         print("   留め置きから外しました: %d件" % len(gone))
         for title, why in gone:
             print("     − %-34s %s" % (title[:34], why))
+    pending = sum(1 for p in result.values()
+                  if (p.get("pitch_status") or "pending") == "pending")
+    if pending:
+        print("   親投稿のもとが未作成: %d件（python3 pitch.py --pending）" % pending)
     if price_back:
         print("   値段が戻った %d件 を外しました:" % len(price_back))
         for t, lo, now_p in price_back[:5]:

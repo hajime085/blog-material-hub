@@ -138,6 +138,15 @@ def short_title(t, n=34):
 
 # 締めの一言。付けるかどうかは投稿ごとに回す。
 # 「使ったことある人いますか」は、こちらが使ったとは言っていないので嘘にならない。
+# 締めの型。pitch.py の CTA_TYPES と対応している。
+CTA_TEXT = {
+    "experience": "使ったことある人いますか？",
+    "compare":    "これ、他にいいのがあれば教えてください。",
+    "empathy":    "同じこと思ってる人、いませんか。",
+    "save":       "気になる人は保存しておくと、あとで見返せます。",
+    "none":       "",
+}
+
 TAILS = [
     "",
     "\n\n使ったことある人いますか？",
@@ -289,7 +298,18 @@ def compose_product(p, site, pr, reply_link=False, ev=None, seq=0):
             tail += "\nこの値段は%s。" % ends
         lines += ["", tail]
 
-        body = "\n".join(lines) + TAILS[seq % len(TAILS)]
+        # 締めは商品に合わせて選んだものを使う。
+        # 決めていなければ、これまでどおり順に回す。
+        cta = mk.get("cta")
+        if cta == "question":
+            tailtext = "\n\n" + (mk.get("cta_text") or "").strip()
+        elif cta in CTA_TEXT:
+            t2 = CTA_TEXT[cta]
+            tailtext = ("\n\n" + t2) if t2 else ""
+        else:
+            tailtext = TAILS[seq % len(TAILS)]
+
+        body = "\n".join(lines) + tailtext
         url = "%s/p/%s/" % (site, p["id"])
         if reply_link:
             return body, url
@@ -998,6 +1018,8 @@ def report():
     summarize("時間帯べつ", slot_of)
     if any(x.get("hook_type") for x, _ in rows):
         summarize("入口の型べつ", lambda x: x.get("hook_type") or "（型なし）")
+    if any(x.get("cta") for x, _ in rows):
+        summarize("締めべつ", lambda x: x.get("cta") or "（回しているもの）")
 
     if missing:
         print("\n（%d件は取れませんでした）" % missing)
@@ -1062,6 +1084,8 @@ def main():
     caps = {("product:" + x["id"]): bool(x.get("cap")) for x in _feed}
     hooks = {("product:" + x["id"]): (x.get("mk2") or {}).get("hook_type")
              for x in _feed}
+    ctas = {("product:" + x["id"]): (x.get("mk2") or {}).get("cta")
+            for x in _feed}
     ok = 0
     for key, text, link in picks:
         try:
@@ -1091,6 +1115,8 @@ def main():
             "cap": caps.get(key, None),
             # どの入口の型で出したか。あとでどれが伸びたかを見るため。
             "hook_type": hooks.get(key),
+            # どの締めで出したか。反応の差を見るため。
+            "cta": ctas.get(key),
             # あとで比べるために、どの出し方で出したかを残す。
             # 記録が無いと、伸びた理由が本文か返信かを言えなくなる。
             "link": ("none" if kind in ("tip", "schedule")

@@ -42,6 +42,40 @@ HOOK_TYPES = {
 
 REQUIRED = ("hook_type", "target", "problem", "hook", "body")
 
+# 締めの一言。商品に合うものを選ぶ。同じ問いを毎回続けない。
+# none も立派な選択肢。問いかけが不自然な商品に無理に付けない。
+CTA_TYPES = {
+    "experience": "使ったことある人いますか？",
+    "compare":    "これ、他にいいのがあれば教えてください。",
+    "empathy":    "同じこと思ってる人、いませんか。",
+    "save":       "気になる人は保存しておくと、あとで見返せます。",
+    "question":   None,   # 商品ごとの問い。cta_text に書く
+    "none":       "",
+}
+
+# 判定は3階層で見る。「〜そう」が付いているかどうかでは決めない。
+#
+#   レベル1 直接事実          … 商品データに書いてあること。そのまま使える
+#   レベル2 直接導ける説明     … 物理的な比較、算術、仕様の言い換え。使える
+#   レベル3 性能・効果・未来   … 禁止
+#
+# レベル2とレベル3の境目は「第三者が同じ結論に達するか」。
+#   30枚1,360円 → 1枚45円            算術なので誰が計算しても同じ。レベル2
+#   バスタオルより小さい → 場所を取らない  大きさの比較。レベル2
+#   ワイヤー入り → 形が崩れにくい        持ちの話。人と条件による。レベル3
+#
+# レベル3の目印になる述語を並べておく。ここに当たったら見直しに回す。
+LEVEL3_WORDS = [
+    # 性能が続くこと
+    "崩れにく", "へたりにく", "落ちにく", "壊れにく", "長持ち", "劣化しにく",
+    "型崩れ", "色落ちしにく", "毛玉になりにく",
+    # 体や体調
+    "疲れが", "眠", "効き", "整う", "痩せ", "肌が", "髪が", "体調",
+    # 未来のふるまい
+    "時間が減", "手間が減", "楽になる", "続けやす", "起きにく", "迷わなくな",
+    "快適になる", "便利になる", "習慣にな", "面倒がなくな", "失敗しにく",
+]
+
 # 効果効能に触れる語。サプリと化粧品では書けない。
 EFFECT_WORDS = [
     "効く", "効果", "改善", "治", "痩せ", "痩身", "美白", "シミが", "シワが",
@@ -85,8 +119,16 @@ def validate(m, p):
     for k in REQUIRED:
         if not (m.get(k) or "").strip():
             issues.append("%s が空" % k)
+    # 何を根拠にしたかが残っていないと、あとから確かめられない。
+    if not (m.get("features") or []):
+        issues.append("features が空（何を根拠にしたか残らない）")
     if m.get("hook_type") not in HOOK_TYPES:
         issues.append("入口の型が不明: %s" % m.get("hook_type"))
+    cta = m.get("cta")
+    if cta is not None and cta not in CTA_TYPES:
+        issues.append("締めの型が不明: %s" % cta)
+    if cta == "question" and not (m.get("cta_text") or "").strip():
+        issues.append("cta が question なのに cta_text が空")
 
     t = text_of(m)
     cat = p.get("category", "")
@@ -116,11 +158,14 @@ def validate(m, p):
         if re.search(r"[\d,]{3,}\s*円", t):
             issues.append("本文に値段が入っている（価格は組み立て側で付ける）")
 
-    # 「〜そう」の直前が性能や効果を指していないか、目印になる語で拾う。
-    for mt in re.finditer(r"(.{0,14})(そう|しやすそう)[。、]", t):
-        near = mt.group(1)
-        if any(w in near for w in ["崩れにく", "落ちにく", "効き", "整", "変わ", "減ら", "増え"]):
-            issues.append("性能や効果を推測している疑い: 「%s%s」" % (near, mt.group(2)))
+    # レベル3に当たる述語が入っていないか。
+    # 「〜そう」が付いているかどうかでは判定しない。
+    # 「選びやすそう」は仕様の言い換え（レベル2）なので通す。
+    for w in LEVEL3_WORDS:
+        if w in t:
+            mt = re.search(r".{0,16}%s.{0,10}" % re.escape(w), t)
+            issues.append("レベル3（性能・効果・未来の推測）: 「%s」"
+                          % (mt.group(0).strip() if mt else w))
             break
 
     if len(t) > 200:
