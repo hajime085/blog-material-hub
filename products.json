@@ -1,230 +1,23 @@
 {
   "_readme": "商品データ。手で書いた caption / tags / points / description / hidden は fetch_rakuten.py を再実行しても保持されます。",
-  "updatedAt": "2026-08-27",
+  "updatedAt": "2026-08-28",
   "products": [
     {
-      "id": "reec95b18d",
-      "category": "beauty",
-      "title": "国産はとむぎエキス《約1ヶ月分》 ネコポス送料無料 はとむぎ/ハトムギ/ヨクイニン/サプリ…",
-      "rawTitle": "【8/27終了★タイムセールで328円】国産はとむぎエキス《約1ヶ月分》 ネコポス送料無料 はとむぎ/ハトムギ/ヨクイニン/サプリ サプリメント はとむぎ 美容 ビタミン カルシム 鉄分 植物繊維 アミノ酸 マグネシウム 葉酸",
-      "price": 328,
-      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/seedcoms/cabinet/images/thum/sale/hato_1m_328.jpg?_ex=600x600",
-      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00r8h17.jeifob48.g00r8h17.jeifp49a/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fseedcoms%2F10004739-1-298%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fseedcoms%2Fi%2F10004998%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
-      "shop": "サプリ専門SHOP シードコムス",
-      "reviewAverage": 4.48,
-      "reviewCount": 1048,
-      "itemCode": "seedcoms:10004998",
-      "genreId": "201476",
-      "startTime": "2026-08-24 20:00",
-      "endTime": "2026-08-27 23:59",
-      "listPrice": 600,
-      "priceBasis": "history",
-      "caption": "600円の国産はとむぎエキスのサプリが328円。約1ヶ月分。",
-      "tags": [
-        "送料無料"
-      ],
-      "points": [
-        "600円から328円へ",
-        "約1ヶ月分・送料無料",
-        "レビュー1,048件・★4.48"
-      ],
-      "description": "国産のはとむぎを使ったサプリメントです。約1ヶ月分が入っています。\nヨクイニンのほか、ビタミンやカルシウム、鉄分、マグネシウムも入っています。ネコポスで届きます。",
-      "unitNote": null,
-      "postedAt": "2026-08-27",
-      "bumpedAt": "2026-08-27T17:08:43",
-      "lastSeen": "2026-08-27",
-      "pitch_status": "ready",
-      "marketing": {
-        "hook_type": "compare",
-        "target": "はとむぎを試してみたい人",
-        "problem": "3ヶ月分は最初から多い",
-        "use_case": "はじめて試すとき",
-        "features": [
-          "国産はとむぎエキス",
-          "ヨクイニン",
-          "ビタミン・カルシウム・鉄分・マグネシウム",
-          "約1ヶ月分",
-          "ネコポス"
-        ],
-        "benefits": [
-          "1ヶ月分から試せる"
-        ],
-        "hook": "はとむぎ、まず1ヶ月分から。",
-        "body": "国産のはとむぎエキスを使ったサプリメントです。\nヨクイニンのほか、ビタミンやカルシウム、鉄分も入っています。ネコポスで届きます。",
-        "cta": "none"
-      }
-    },
-    {
-      "id": "r528c4512a",
-      "category": "beauty",
-      "title": "濃いルテイン≪約3ヶ月分≫送料無料 ルテイン サプリ サプリメント 亜麻仁油 エゴマ油 ビタミンA…",
-      "rawTitle": "【8/27終了★タイムセールで548円】濃いルテイン≪約3ヶ月分≫送料無料 ルテイン サプリ サプリメント 亜麻仁油 エゴマ油 ビタミンA ビタミンE ブルーライト デジタルケア マリーゴールド抽出物 PC スマホ",
-      "price": 548,
-      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/seedcoms/cabinet/images/thum/sale/krute_3m_548.jpg?_ex=600x600",
-      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00r8h17.jeifob48.g00r8h17.jeifp49a/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fseedcoms%2F10007117%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fseedcoms%2Fi%2F10007117%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
-      "shop": "サプリ専門SHOP シードコムス",
-      "reviewAverage": 4.45,
-      "reviewCount": 1995,
-      "itemCode": "seedcoms:10007117",
-      "genreId": "402667",
-      "startTime": "2026-08-24 20:00",
-      "endTime": "2026-08-27 23:59",
-      "listPrice": 1879,
-      "priceBasis": "history",
-      "caption": "1,879円のルテインのサプリが548円。約3ヶ月分で送料込み。",
-      "tags": [
-        "送料無料"
-      ],
-      "points": [
-        "1,879円から548円へ",
-        "約3ヶ月分・送料無料",
-        "レビュー1,995件・★4.45"
-      ],
-      "description": "マリーゴールド抽出物を使ったルテインのサプリメントです。約3ヶ月分が入っています。\n亜麻仁油とエゴマ油、ビタミンAとEも一緒に入っています。",
-      "unitNote": null,
-      "postedAt": "2026-08-27",
-      "bumpedAt": "2026-08-27T12:33:36",
-      "lastSeen": "2026-08-27",
-      "marketing": {
-        "hook_type": "problem_price",
-        "target": "ルテインを続けたい人",
-        "problem": "3ヶ月分をまとめて買うと高い",
-        "use_case": "毎日の習慣",
-        "features": [
-          "約3ヶ月分",
-          "亜麻仁油・エゴマ油",
-          "ビタミンA・E",
-          "送料無料"
-        ],
-        "benefits": [
-          "3ヶ月分がまとまっている"
-        ],
-        "hook": "ルテインのサプリ、3ヶ月分で548円。",
-        "body": "亜麻仁油とエゴマ油、ビタミンAとEも一緒に入っています。\n送料込みです。",
-        "cta": "none"
-      },
-      "pitch_status": "ready"
-    },
-    {
-      "id": "rd3a9d4a91",
-      "category": "beauty",
-      "title": "野草酵素《約3ヶ月分》ダイエット サプリ エンザイム 酵素サプリ 酵素 カプセル 野菜 野草 果物…",
-      "rawTitle": "【8/27終了★タイムセールで798円】野草酵素《約3ヶ月分》ダイエット サプリ エンザイム 酵素サプリ 酵素 カプセル 野菜 野草 果物 発酵 熟成 送料無料 サプリメント 酵素 野草酵素 野草 酵素ドリンク 健康食品",
-      "price": 798,
-      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/seedcoms/cabinet/images/thum/sale/yaso_3m_798.jpg?_ex=600x600",
-      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00r8h17.jeifob48.g00r8h17.jeifp49a/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fseedcoms%2F10000183-100000%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fseedcoms%2Fi%2F10006706%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
-      "shop": "サプリ専門SHOP シードコムス",
-      "reviewAverage": 4.35,
-      "reviewCount": 1946,
-      "itemCode": "seedcoms:10006706",
-      "genreId": "402594",
-      "startTime": "2026-08-24 20:00",
-      "endTime": "2026-08-27 23:59",
-      "listPrice": 1600,
-      "priceBasis": "history",
-      "caption": "1,600円の野草酵素のサプリが798円。約3ヶ月分で送料込み。",
-      "tags": [
-        "送料無料"
-      ],
-      "points": [
-        "1,600円から798円へ",
-        "約3ヶ月分・送料無料",
-        "レビュー1,946件・★4.35"
-      ],
-      "description": "野菜と野草、果物を発酵熟成させた酵素のサプリメントです。約3ヶ月分が入っています。\nカプセルタイプです。",
-      "unitNote": null,
-      "postedAt": "2026-08-27",
-      "bumpedAt": "2026-08-27T12:33:36",
-      "lastSeen": "2026-08-27",
-      "marketing": {
-        "hook_type": "problem_price",
-        "target": "酵素サプリを続けたい人",
-        "problem": "3ヶ月分をまとめて買うと高くつく",
-        "use_case": "毎日の習慣",
-        "features": [
-          "野草酵素",
-          "カプセル",
-          "約3ヶ月分",
-          "野菜・野草・果物を発酵熟成",
-          "送料無料"
-        ],
-        "benefits": [
-          "3ヶ月分がまとまっている"
-        ],
-        "hook": "酵素のサプリ、3ヶ月分で798円。",
-        "body": "野菜と野草、果物を発酵熟成させたものです。\nカプセルで、送料込みです。",
-        "cta": "none"
-      },
-      "pitch_status": "ready"
-    },
-    {
-      "id": "rc18459c03",
-      "category": "beauty",
-      "title": "サラシア 約3ヶ月分 送料無料 サプリ サプリメント ダイエットサプリ 美容 菊芋 バナバ…",
-      "rawTitle": "【8/27終了★タイムセールで798円】サラシア 約3ヶ月分 送料無料 サプリ サプリメント ダイエットサプリ 美容 菊芋 バナバ サラシノール コタラノール マニジフェリン エピカテキンガレート ダイエット さらしあ",
-      "price": 798,
-      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/seedcoms/cabinet/images/thum/sale/sara_1m_798.jpg?_ex=600x600",
-      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00r8h17.jeifob48.g00r8h17.jeifp49a/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fseedcoms%2F100000333-3%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fseedcoms%2Fi%2F10006840%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
-      "shop": "サプリ専門SHOP シードコムス",
-      "reviewAverage": 4.28,
-      "reviewCount": 1238,
-      "itemCode": "seedcoms:10006840",
-      "genreId": "567634",
-      "startTime": "2026-08-24 20:00",
-      "endTime": "2026-08-27 23:59",
-      "listPrice": 2340,
-      "priceBasis": "history",
-      "caption": "2,340円のサラシアのサプリが798円。約3ヶ月分で送料込み。",
-      "tags": [
-        "送料無料"
-      ],
-      "points": [
-        "2,340円から798円へ",
-        "約3ヶ月分・送料無料",
-        "レビュー1,238件・★4.28"
-      ],
-      "description": "サラシアを使ったサプリメントです。約3ヶ月分が入っています。\n菊芋とバナバも一緒に入っています。",
-      "unitNote": null,
-      "postedAt": "2026-08-27",
-      "bumpedAt": "2026-08-27T17:08:43",
-      "lastSeen": "2026-08-27",
-      "pitch_status": "ready",
-      "marketing": {
-        "hook_type": "discovery",
-        "target": "サラシアを摂りたい人",
-        "problem": "菊芋やバナバを別々に買うとかさばる",
-        "use_case": "毎日の習慣",
-        "features": [
-          "サラシア",
-          "菊芋",
-          "バナバ",
-          "約3ヶ月分",
-          "送料無料"
-        ],
-        "benefits": [
-          "3種類が1つにまとまっている"
-        ],
-        "hook": "サラシアに菊芋とバナバを合わせたものがあります。",
-        "body": "約3ヶ月分が入っていて、送料込みです。",
-        "cta": "none"
-      }
-    },
-    {
-      "id": "rc7fec7f81",
-      "category": "beauty",
-      "title": "乳酸菌ソフトカプセル《約3ヶ月分》サプリ/乳酸菌サプリ 酵素配合 サプリメント 有胞子性乳酸菌…",
-      "rawTitle": "【8/27終了★タイムセールで798円】乳酸菌ソフトカプセル《約3ヶ月分》サプリ/乳酸菌サプリ 酵素配合 サプリメント 有胞子性乳酸菌 ラクリス菌 美容 健康 食生活サプリ",
-      "price": 798,
-      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/seedcoms/cabinet/images/thum/sale/nyu_3m_798.jpg?_ex=600x600",
-      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00r8h17.jeifob48.g00r8h17.jeifp49a/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fseedcoms%2F10000716-ts%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fseedcoms%2Fi%2F10003996%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
-      "shop": "サプリ専門SHOP シードコムス",
-      "reviewAverage": 4.41,
-      "reviewCount": 933,
-      "itemCode": "seedcoms:10003996",
-      "genreId": "402594",
-      "startTime": "2026-08-24 20:00",
-      "endTime": "2026-08-27 23:59",
-      "listPrice": 1600,
+      "id": "r472b024c2",
+      "category": "fashion",
+      "title": "29 10:00～／【特別送料無料 】Tシャツ 汗染み防止 UVカット 綿100％ M/L/LL/3L…",
+      "rawTitle": "＼24時間タイムセール☆8/29 10:00～／【特別送料無料！】Tシャツ 汗染み防止 UVカット 綿100％ M/L/LL/3L レディース トップス カットソー 半袖 コットン 薄手 大きいサイズ ゆったり 夏 【メール便可11】◆zootie（ズーティー）：汗しみない Tシャツ［スタンダード］",
+      "price": 1299,
+      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/e-zakkamania/cabinet/17a12/32136-1701203e.jpg?_ex=600x600",
+      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00pqec7.jeifo156.g00pqec7.jeifp286/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fe-zakkamania%2F32136-1701203%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fe-zakkamania%2Fi%2F10073588%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+      "shop": "イーザッカマニアストアーズ",
+      "reviewAverage": 4.19,
+      "reviewCount": 5038,
+      "itemCode": "e-zakkamania:10073588",
+      "genreId": "303656",
+      "startTime": "2026-08-29 10:00",
+      "endTime": "2026-08-30 09:59",
+      "listPrice": 1590,
       "priceBasis": "history",
       "caption": "",
       "tags": [
@@ -233,114 +26,118 @@
       "points": [],
       "description": "",
       "unitNote": null,
-      "postedAt": "2026-08-27",
-      "bumpedAt": "2026-08-27T21:58:49",
-      "lastSeen": "2026-08-27",
+      "postedAt": "2026-08-28",
+      "bumpedAt": "2026-08-28T04:58:53",
+      "lastSeen": "2026-08-28",
       "pitch_status": "pending"
     },
     {
-      "id": "r045c3ee62",
-      "category": "beauty",
-      "title": "水素カプセル 約3ヶ月分 サプリ サプリメント 美容 ダイエット 水素 カルシウム 送料無料",
-      "rawTitle": "【8/27終了★タイムセールで999円】水素カプセル 約3ヶ月分 サプリ サプリメント 美容 ダイエット 水素 カルシウム 　送料無料",
-      "price": 999,
-      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/seedcoms/cabinet/images/thum/sale/sui_3m_999.jpg?_ex=600x600",
-      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00r8h17.jeifob48.g00r8h17.jeifp49a/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fseedcoms%2F10004885-1000%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fseedcoms%2Fi%2F10004890%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
-      "shop": "サプリ専門SHOP シードコムス",
-      "reviewAverage": 4.37,
-      "reviewCount": 1317,
-      "itemCode": "seedcoms:10004890",
-      "genreId": "402553",
-      "startTime": "2026-08-24 20:00",
-      "endTime": "2026-08-27 23:59",
-      "listPrice": 2200,
-      "priceBasis": "history",
-      "caption": "2,200円の水素カプセルが999円。約3ヶ月分で送料込み。",
-      "tags": [
-        "送料無料"
-      ],
-      "points": [
-        "2,200円から999円へ",
-        "約3ヶ月分・送料無料",
-        "レビュー1,317件・★4.37"
-      ],
-      "description": "水素とカルシウムを使ったサプリメントです。約3ヶ月分が入っています。\nカプセルタイプです。",
+      "id": "r72e12aba9",
+      "category": "fashion",
+      "title": "裏起毛 ワイドパンツ カシミア風 レディース 秋冬 ストレッチ あったか ズボン 美脚 スリット…",
+      "rawTitle": "【4日まで、タイムセール★5160円⇒2,280円】裏起毛 ワイドパンツ カシミア風 レディース 秋冬 ストレッチ あったか ズボン 美脚 スリット ゆったり 通勤 きれいめ 防寒 厚手 体型カバー 選べる丈 高身長 低身長 暖パン 黒 秋冬用 　ポケット付き ロング 茶色",
+      "price": 2280,
+      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/mixsim/cabinet/biiino/item/main-image-4/20251117160416_1.jpg?_ex=600x600",
+      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00trk47.jeifo820.g00trk47.jeifp240/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmixsim%2Fpants-z791%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fmixsim%2Fi%2F10000801%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+      "shop": "MINAX(ミナックス)",
+      "reviewAverage": 4.15,
+      "reviewCount": 13,
+      "itemCode": "mixsim:10000801",
+      "genreId": "206440",
+      "startTime": "2026-08-27 11:45",
+      "endTime": "2026-09-04 10:20",
+      "listPrice": 5160,
+      "priceBasis": "title",
+      "caption": "",
+      "tags": [],
+      "points": [],
+      "description": "",
       "unitNote": null,
-      "postedAt": "2026-08-27",
-      "bumpedAt": "2026-08-27T17:08:43",
-      "lastSeen": "2026-08-27",
-      "pitch_status": "ready",
-      "marketing": {
-        "hook_type": "problem_price",
-        "target": "水素のサプリを続けたい人",
-        "problem": "3ヶ月分をまとめて買うと高い",
-        "use_case": "毎日の習慣",
-        "features": [
-          "水素",
-          "カルシウム",
-          "カプセル",
-          "約3ヶ月分",
-          "送料無料"
-        ],
-        "benefits": [
-          "3ヶ月分がまとまっている"
-        ],
-        "hook": "水素カプセル、3ヶ月分で999円。",
-        "body": "水素とカルシウムを使ったサプリメントです。\nカプセルタイプで、送料込みです。",
-        "cta": "none"
-      }
+      "postedAt": "2026-08-28",
+      "bumpedAt": "2026-08-28T04:58:53",
+      "lastSeen": "2026-08-28",
+      "pitch_status": "pending"
     },
     {
-      "id": "r51cd61d3b",
-      "category": "beauty",
-      "title": "ぷるぷるすっぽんコラーゲン 約3ヶ月分 送料無料 エラスチン入り サプリメント ゼリー ドリンク 粉末…",
-      "rawTitle": "【8/27終了★タイムセールで999円】ぷるぷるすっぽんコラーゲン 約3ヶ月分 送料無料 エラスチン入り サプリメント ゼリー ドリンク 粉末 健康 美容 フィッシュコラーゲン ヒアルロン酸 エラスチン アミノ酸 美容ケアサプリ",
-      "price": 999,
-      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/seedcoms/cabinet/images/thum/sale/skora_3m_999.jpg?_ex=600x600",
-      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00r8h17.jeifob48.g00r8h17.jeifp49a/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fseedcoms%2F10003536-a%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fseedcoms%2Fi%2F10003775%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
-      "shop": "サプリ専門SHOP シードコムス",
-      "reviewAverage": 4.34,
-      "reviewCount": 1110,
-      "itemCode": "seedcoms:10003775",
-      "genreId": "402726",
-      "startTime": "2026-08-24 20:00",
-      "endTime": "2026-08-27 23:59",
-      "listPrice": 2548,
-      "priceBasis": "history",
-      "caption": "2,548円のすっぽんコラーゲンが999円。約3ヶ月分で送料込み。",
-      "tags": [
-        "送料無料"
-      ],
-      "points": [
-        "2,548円から999円へ",
-        "約3ヶ月分・送料無料",
-        "レビュー1,110件・★4.34"
-      ],
-      "description": "すっぽんコラーゲンにエラスチンを合わせたサプリメントです。約3ヶ月分が入っています。\nフィッシュコラーゲンとヒアルロン酸、アミノ酸も入っています。",
+      "id": "r27423d12b",
+      "category": "fashion",
+      "title": "ローファー ヒールローファー 快適パンプス パンプス フラットパンプス フラットシューズ…",
+      "rawTitle": "【4日まで、タイムセール★5,960円⇒2,380円】ローファー ヒールローファー 快適パンプス パンプス フラットパンプス フラットシューズ バレエシューズ 柔らかい クッション ふわふわ 低反発 走れる 痛くない レディース 歩きやすい 安定感 入園式 入学式 卒業式 通年",
+      "price": 2380,
+      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/mixsim/cabinet/biiino/item/main-image-5/20260803141540_1.jpg?_ex=600x600",
+      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00trk47.jeifo820.g00trk47.jeifp240/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmixsim%2Fshoes-cfg9891%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fmixsim%2Fi%2F10000439%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+      "shop": "MINAX(ミナックス)",
+      "reviewAverage": 4.12,
+      "reviewCount": 17,
+      "itemCode": "mixsim:10000439",
+      "genreId": "216160",
+      "startTime": "2026-08-27 10:55",
+      "endTime": "2026-09-04 10:20",
+      "listPrice": 5960,
+      "priceBasis": "title",
+      "caption": "",
+      "tags": [],
+      "points": [],
+      "description": "",
       "unitNote": null,
-      "postedAt": "2026-08-27",
-      "bumpedAt": "2026-08-27T17:08:43",
-      "lastSeen": "2026-08-27",
-      "pitch_status": "ready",
-      "marketing": {
-        "hook_type": "compare",
-        "target": "コラーゲンを長く続けたい人",
-        "problem": "1ヶ月分だとすぐ切れる",
-        "use_case": "毎日の習慣",
-        "features": [
-          "すっぽんコラーゲン",
-          "エラスチン",
-          "フィッシュコラーゲン",
-          "ヒアルロン酸",
-          "約3ヶ月分"
-        ],
-        "benefits": [
-          "3ヶ月分がまとまっている"
-        ],
-        "hook": "1ヶ月分だとすぐ切れる、というときの3ヶ月分。",
-        "body": "すっぽんコラーゲンにエラスチンを合わせたサプリメントです。\nフィッシュコラーゲンとヒアルロン酸、アミノ酸も入っています。",
-        "cta": "none"
-      }
+      "postedAt": "2026-08-28",
+      "bumpedAt": "2026-08-28T04:58:53",
+      "lastSeen": "2026-08-28",
+      "pitch_status": "pending"
+    },
+    {
+      "id": "r7aa4e3dfa",
+      "category": "fashion",
+      "title": "レースTシャツ / 公式 CUBE SUGAR 裾レース 変形 プルオーバー Tシャツ(4色):…",
+      "rawTitle": "【8/30までタイムセール★50%OFF】レースTシャツ / 公式 CUBE SUGAR 裾レース 変形 プルオーバー Tシャツ(4色): アメカジ レディース トップス Tシャツ カットソー 半袖 レイヤード ナチュラル 無地 カジュアル キューブシュガー",
+      "price": 2475,
+      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/and-cubesugar/cabinet/7603top/76034785_02_2.jpg?_ex=600x600",
+      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00qj0t7.jeifoddc.g00qj0t7.jeifpd36/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fand-cubesugar%2F76034785%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fand-cubesugar%2Fi%2F10041022%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+      "shop": "and CUBE SUGAR",
+      "reviewAverage": 4.8,
+      "reviewCount": 5,
+      "itemCode": "and-cubesugar:10041022",
+      "genreId": "303656",
+      "startTime": "2026-08-27 20:00",
+      "endTime": "2026-08-30 23:59",
+      "listPrice": 2970,
+      "priceBasis": "history",
+      "caption": "",
+      "tags": [],
+      "points": [],
+      "description": "",
+      "unitNote": null,
+      "postedAt": "2026-08-28",
+      "bumpedAt": "2026-08-28T04:58:53",
+      "lastSeen": "2026-08-28",
+      "pitch_status": "pending"
+    },
+    {
+      "id": "r334c4318f",
+      "category": "fashion",
+      "title": "スリッポン スニーカー レディース 超軽量 立ったまま履ける靴 通気 高齢者 スポーツシューズ…",
+      "rawTitle": "【4日まで、タイムセール5,960円⇒2,780円】スリッポン スニーカー レディース 超軽量 立ったまま履ける靴 通気 高齢者 スポーツシューズ ウォーキングシューズ カジュアルシューズ 通勤 通学 インスタフィット クツベラフリー 22.5cm-25.5cm",
+      "price": 2780,
+      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/mixsim/cabinet/biiino/item/main-image-4/20251106163017_1.jpg?_ex=600x600",
+      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00trk47.jeifo820.g00trk47.jeifp240/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmixsim%2Fshoes-qj231%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fmixsim%2Fi%2F10000708%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+      "shop": "MINAX(ミナックス)",
+      "reviewAverage": 4.82,
+      "reviewCount": 22,
+      "itemCode": "mixsim:10000708",
+      "genreId": "564562",
+      "startTime": "2026-08-27 10:45",
+      "endTime": "2026-09-04 10:20",
+      "listPrice": 5960,
+      "priceBasis": "title",
+      "caption": "",
+      "tags": [],
+      "points": [],
+      "description": "",
+      "unitNote": null,
+      "postedAt": "2026-08-28",
+      "bumpedAt": "2026-08-28T04:58:53",
+      "lastSeen": "2026-08-28",
+      "pitch_status": "pending"
     },
     {
       "id": "r04836f890",
@@ -368,7 +165,7 @@
       "unitNote": null,
       "postedAt": "2026-08-27",
       "bumpedAt": "2026-08-27T21:59:36",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "pitch_status": "pending"
     },
     {
@@ -397,7 +194,7 @@
       "unitNote": null,
       "postedAt": "2026-08-27",
       "bumpedAt": "2026-08-27T21:59:36",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "pitch_status": "pending"
     },
     {
@@ -426,7 +223,7 @@
       "unitNote": null,
       "postedAt": "2026-08-27",
       "bumpedAt": "2026-08-27T21:59:36",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "pitch_status": "pending"
     },
     {
@@ -455,7 +252,7 @@
       "unitNote": null,
       "postedAt": "2026-08-27",
       "bumpedAt": "2026-08-27T21:59:36",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "pitch_status": "pending"
     },
     {
@@ -488,7 +285,7 @@
       "unitNote": null,
       "postedAt": "2026-08-27",
       "bumpedAt": "2026-08-27T17:08:12",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
@@ -508,320 +305,6 @@
         "body": "カークランドシグネチャーの浄水ポット用フィルターです。\nマクストラ＋を使うポットに使えて、8個入っています。",
         "cta": "experience"
       }
-    },
-    {
-      "id": "r7299ae396",
-      "category": "beauty",
-      "title": "20倍濃縮マカ+100倍濃縮トンカットアリ配合 キングパワー 約1ヶ月分 亜鉛 すっぽん アルギニン…",
-      "rawTitle": "【8/27終了★タイムセールで328円】20倍濃縮マカ+100倍濃縮トンカットアリ配合 キングパワー 約1ヶ月分 亜鉛 すっぽん アルギニン シトルリン サプリ サプリメント 男性",
-      "price": 328,
-      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/seedcoms/cabinet/images/thum/sale/king_1m_328.jpg?_ex=600x600",
-      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00r8h17.jeifob48.g00r8h17.jeifp49a/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fseedcoms%2F100058159-1%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fseedcoms%2Fi%2F10007421%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
-      "shop": "サプリ専門SHOP シードコムス",
-      "reviewAverage": 4.39,
-      "reviewCount": 2609,
-      "itemCode": "seedcoms:10007421",
-      "genreId": "402663",
-      "startTime": "2026-08-24 20:00",
-      "endTime": "2026-08-27 23:59",
-      "listPrice": 1298,
-      "priceBasis": "history",
-      "caption": "1,298円のマカとトンカットアリのサプリが328円。約1ヶ月分。",
-      "tags": [
-        "送料無料"
-      ],
-      "points": [
-        "1,298円から328円へ",
-        "約1ヶ月分・送料無料",
-        "レビュー2,609件・★4.39"
-      ],
-      "description": "20倍濃縮のマカと100倍濃縮のトンカットアリを使ったサプリメントです。約1ヶ月分が入っています。\n亜鉛、すっぽん、アルギニン、シトルリンも入っています。",
-      "unitNote": null,
-      "postedAt": "2026-08-26",
-      "bumpedAt": "2026-08-26T20:12:10",
-      "lastSeen": "2026-08-27",
-      "marketing": {
-        "hook_type": "discovery",
-        "target": "マカや亜鉛を摂りたい人",
-        "problem": "何種類も買うとかさばる",
-        "use_case": "毎日の習慣",
-        "features": [
-          "20倍濃縮マカ",
-          "100倍濃縮トンカットアリ",
-          "亜鉛",
-          "すっぽん",
-          "アルギニン",
-          "シトルリン",
-          "約1ヶ月分"
-        ],
-        "benefits": [
-          "複数の成分が1つにまとまっている"
-        ],
-        "hook": "マカ、亜鉛、アルギニン。別々に買うとかさばります。",
-        "body": "これは1つにまとまっています。\n20倍濃縮マカと100倍濃縮トンカットアリ、すっぽんとシトルリンも。約1ヶ月分。",
-        "cta": "none"
-      },
-      "pitch_status": "ready"
-    },
-    {
-      "id": "re53b58ebb",
-      "category": "beauty",
-      "title": "GABA サプリ 約1ヶ月分 ジョーンズワート クワンソウ 亜麻仁油 発酵紅参 イワシ抽出ペプチド…",
-      "rawTitle": "【8/27終了★タイムセールで328円】GABA サプリ 約1ヶ月分 ジョーンズワート クワンソウ 亜麻仁油 発酵紅参 イワシ抽出ペプチド 健康 サプリ サプリメント 休息 ストレス イライラ ギャバ",
-      "price": 328,
-      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/seedcoms/cabinet/images/thum/sale/gaba_1m_328.jpg?_ex=600x600",
-      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00r8h17.jeifob48.g00r8h17.jeifp49a/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fseedcoms%2F10002174012-2-1%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fseedcoms%2Fi%2F10007338%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
-      "shop": "サプリ専門SHOP シードコムス",
-      "reviewAverage": 4.45,
-      "reviewCount": 2602,
-      "itemCode": "seedcoms:10007338",
-      "genreId": "407974",
-      "startTime": "2026-08-24 20:00",
-      "endTime": "2026-08-27 23:59",
-      "listPrice": 1580,
-      "priceBasis": "history",
-      "caption": "1,580円のGABAのサプリが328円。約1ヶ月分で送料込み。",
-      "tags": [
-        "送料無料"
-      ],
-      "points": [
-        "1,580円から328円へ",
-        "約1ヶ月分・送料無料",
-        "レビュー2,602件・★4.45"
-      ],
-      "description": "GABAを使ったサプリメントです。約1ヶ月分が入っています。\nジョーンズワート、クワンソウ、亜麻仁油、発酵紅参、イワシ抽出ペプチドも入っています。",
-      "unitNote": null,
-      "postedAt": "2026-08-26",
-      "bumpedAt": "2026-08-26T20:12:10",
-      "lastSeen": "2026-08-27",
-      "marketing": {
-        "hook_type": "scene",
-        "target": "夜の時間を大切にしたい人",
-        "problem": "何を選べばいいか分からない",
-        "use_case": "夜の習慣",
-        "features": [
-          "GABA",
-          "ジョーンズワート",
-          "クワンソウ",
-          "亜麻仁油",
-          "発酵紅参",
-          "イワシ抽出ペプチド",
-          "約1ヶ月分"
-        ],
-        "benefits": [
-          "6種類がまとまっている"
-        ],
-        "hook": "GABA、クワンソウ、ジョーンズワート。名前だけは聞きます。",
-        "body": "この6種類が1つにまとまったサプリメントです。\n亜麻仁油と発酵紅参、イワシ抽出ペプチドも入っています。約1ヶ月分。",
-        "cta": "none"
-      },
-      "pitch_status": "ready"
-    },
-    {
-      "id": "r48c6c030a",
-      "category": "beauty",
-      "title": "肝臓エキス入りオルニチンカプセル《約1ヶ月分》 送料無料 サプリ サプリメント シジミ しじみ…",
-      "rawTitle": "【8/27終了★タイムセールで328円】肝臓エキス入りオルニチンカプセル《約1ヶ月分》 送料無料 サプリ サプリメント シジミ しじみ 肝臓エキス オルニチン アミノ酸 ミネラル",
-      "price": 328,
-      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/seedcoms/cabinet/images/thum/sale/kanzo_1m_328.jpg?_ex=600x600",
-      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00r8h17.jeifob48.g00r8h17.jeifp49a/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fseedcoms%2F10003540-319-1%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fseedcoms%2Fi%2F10004807%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
-      "shop": "サプリ専門SHOP シードコムス",
-      "reviewAverage": 4.53,
-      "reviewCount": 2468,
-      "itemCode": "seedcoms:10004807",
-      "genreId": "402720",
-      "startTime": "2026-08-24 20:00",
-      "endTime": "2026-08-27 23:59",
-      "listPrice": 600,
-      "priceBasis": "history",
-      "caption": "600円の肝臓エキス入りオルニチンが328円。約1ヶ月分。",
-      "tags": [
-        "送料無料"
-      ],
-      "points": [
-        "600円から328円へ",
-        "約1ヶ月分・送料無料",
-        "レビュー2,468件・★4.53"
-      ],
-      "description": "しじみの肝臓エキスとオルニチンを使ったサプリメントです。約1ヶ月分が入っています。\nアミノ酸とミネラルも入っています。",
-      "unitNote": null,
-      "postedAt": "2026-08-26",
-      "bumpedAt": "2026-08-26T23:29:03",
-      "lastSeen": "2026-08-27",
-      "marketing": {
-        "hook_type": "discovery",
-        "target": "しじみの成分を摂りたい人",
-        "problem": "しじみを日常的に食べるのは難しい",
-        "use_case": "外食や飲み会が続く時期",
-        "features": [
-          "肝臓エキス",
-          "オルニチン",
-          "カプセル",
-          "約1ヶ月分"
-        ],
-        "benefits": [
-          "カプセルでまとまっている"
-        ],
-        "hook": "しじみ、そんなに食べる機会はありません。",
-        "body": "肝臓エキス入りのオルニチンカプセルです。\n約1ヶ月分が入っています。",
-        "cta": "none"
-      },
-      "pitch_status": "ready"
-    },
-    {
-      "id": "rb91539b1f",
-      "category": "beauty",
-      "title": "ぷるぷるすっぽんコラーゲン《約1ヶ月分》エラスチン入り 美容 サプリ コラーゲン すっぽん エラスチン…",
-      "rawTitle": "【8/27終了★タイムセールで398円】ぷるぷるすっぽんコラーゲン《約1ヶ月分》エラスチン入り 美容 サプリ コラーゲン すっぽん エラスチン ヒアルロン酸 サプリメント ダイエット 中の方にも 美容ケアサプリ",
-      "price": 398,
-      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/seedcoms/cabinet/images/thum/sale/skora_1m_398.jpg?_ex=600x600",
-      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00r8h17.jeifob48.g00r8h17.jeifp49a/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fseedcoms%2F10003536-298-1cp%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fseedcoms%2Fi%2F10007320%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
-      "shop": "サプリ専門SHOP シードコムス",
-      "reviewAverage": 4.5,
-      "reviewCount": 3323,
-      "itemCode": "seedcoms:10007320",
-      "genreId": "567605",
-      "startTime": "2026-08-24 20:00",
-      "endTime": "2026-08-27 23:59",
-      "listPrice": 949,
-      "priceBasis": "history",
-      "caption": "949円のすっぽんコラーゲンが398円。約1ヶ月分で送料込み。",
-      "tags": [
-        "送料無料"
-      ],
-      "points": [
-        "949円から398円へ",
-        "約1ヶ月分・送料無料",
-        "レビュー3,323件・★4.5"
-      ],
-      "description": "すっぽんコラーゲンにエラスチンを合わせたサプリメントです。約1ヶ月分が入っています。\nヒアルロン酸も入っています。",
-      "unitNote": null,
-      "postedAt": "2026-08-26",
-      "bumpedAt": "2026-08-26T16:36:21",
-      "lastSeen": "2026-08-27",
-      "marketing": {
-        "hook_type": "discovery",
-        "target": "コラーゲンを摂りたい人",
-        "problem": "粉末は飲み物を選ぶ",
-        "use_case": "毎日の習慣",
-        "features": [
-          "すっぽんコラーゲン",
-          "エラスチン入り",
-          "ヒアルロン酸",
-          "約1ヶ月分"
-        ],
-        "benefits": [
-          "1ヶ月分がまとまっている"
-        ],
-        "hook": "コラーゲンには、粒で摂れるタイプもあります。",
-        "body": "すっぽんコラーゲンにエラスチンとヒアルロン酸を合わせたサプリメントです。\n約1ヶ月分が入っています。",
-        "cta": "none"
-      },
-      "pitch_status": "ready"
-    },
-    {
-      "id": "rb68677931",
-      "category": "beauty",
-      "title": "国産すっぽん黒酢 約3ヶ月分 送料無料 ダイエット サプリ サプリメント すっぽん 黒酢 アミノ酸…",
-      "rawTitle": "【8/27終了★タイムセールで798円】国産すっぽん黒酢　約3ヶ月分 送料無料 ダイエット サプリ サプリメント すっぽん 黒酢 アミノ酸 黒酢サプリ ミネラル 大豆ペプチド コラーゲン 有機酸 カルシウム 鉄分",
-      "price": 798,
-      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/seedcoms/cabinet/images/thum/sale/skuro_3m_798.jpg?_ex=600x600",
-      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00r8h17.jeifob48.g00r8h17.jeifp49a/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fseedcoms%2F10004355-1000%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fseedcoms%2Fi%2F10006708%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
-      "shop": "サプリ専門SHOP シードコムス",
-      "reviewAverage": 4.44,
-      "reviewCount": 3031,
-      "itemCode": "seedcoms:10006708",
-      "genreId": "567623",
-      "startTime": "2026-08-24 20:00",
-      "endTime": "2026-08-27 23:59",
-      "listPrice": 1600,
-      "priceBasis": "history",
-      "caption": "1,600円の国産すっぽん黒酢が798円。約3ヶ月分で送料込み。",
-      "tags": [
-        "送料無料"
-      ],
-      "points": [
-        "1,600円から798円へ",
-        "約3ヶ月分・送料無料",
-        "レビュー3,031件・★4.44"
-      ],
-      "description": "国産のすっぽんと黒酢を使ったサプリメントです。約3ヶ月分が入っています。\nアミノ酸、ミネラル、大豆ペプチド、コラーゲンも入っています。",
-      "unitNote": null,
-      "postedAt": "2026-08-26",
-      "bumpedAt": "2026-08-26T16:36:21",
-      "lastSeen": "2026-08-27",
-      "marketing": {
-        "hook_type": "problem_price",
-        "target": "黒酢を続けたい人",
-        "problem": "毎日飲むには量が要る",
-        "use_case": "毎日の習慣",
-        "features": [
-          "国産すっぽん",
-          "黒酢",
-          "アミノ酸",
-          "ミネラル",
-          "約3ヶ月分",
-          "送料無料"
-        ],
-        "benefits": [
-          "3ヶ月分がまとまっている"
-        ],
-        "hook": "すっぽん黒酢、3ヶ月分で798円。",
-        "body": "国産のすっぽんと黒酢を使ったサプリメントです。\nアミノ酸とミネラルも入っています。送料込み。",
-        "cta": "none"
-      },
-      "pitch_status": "ready"
-    },
-    {
-      "id": "rb2dfeec36",
-      "category": "beauty",
-      "title": "国産はとむぎエキス 約3ヶ月分 サプリ サプリメント 美容 スキンケア 国産 はとむぎ ハトムギ…",
-      "rawTitle": "【8/27終了★タイムセールで798円】国産はとむぎエキス 約3ヶ月分 サプリ サプリメント 美容 スキンケア 国産 はとむぎ ハトムギ ヨクイニン ビタミン ナイアシン アミノ酸 食物繊維 葉酸 鉄分　送料無料",
-      "price": 798,
-      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/seedcoms/cabinet/images/thum/sale/hato_3m_798.jpg?_ex=600x600",
-      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00r8h17.jeifob48.g00r8h17.jeifp49a/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fseedcoms%2F10004739%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fseedcoms%2Fi%2F10004739%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
-      "shop": "サプリ専門SHOP シードコムス",
-      "reviewAverage": 4.41,
-      "reviewCount": 2142,
-      "itemCode": "seedcoms:10004739",
-      "genreId": "201476",
-      "startTime": "2026-08-24 20:00",
-      "endTime": "2026-08-27 23:59",
-      "listPrice": 1600,
-      "priceBasis": "history",
-      "caption": "1,600円の国産はとむぎエキスが798円。約3ヶ月分で送料込み。",
-      "tags": [
-        "送料無料"
-      ],
-      "points": [
-        "1,600円から798円へ",
-        "約3ヶ月分・送料無料",
-        "レビュー2,142件・★4.41"
-      ],
-      "description": "国産のはとむぎを使ったサプリメントです。約3ヶ月分が入っています。\nヨクイニン、ビタミン、ナイアシン、アミノ酸、食物繊維も入っています。",
-      "unitNote": null,
-      "postedAt": "2026-08-26",
-      "bumpedAt": "2026-08-26T23:29:03",
-      "lastSeen": "2026-08-27",
-      "marketing": {
-        "hook_type": "scene",
-        "target": "はとむぎを取り入れたい人",
-        "problem": "はとむぎ茶以外の摂り方が分からない",
-        "use_case": "毎日の習慣",
-        "features": [
-          "国産はとむぎエキス",
-          "ヨクイニン",
-          "ビタミン",
-          "約3ヶ月分"
-        ],
-        "benefits": [
-          "3ヶ月分がまとまっている"
-        ],
-        "hook": "はとむぎ、お茶以外の形もあります。",
-        "body": "国産はとむぎエキスのサプリメントです。\nヨクイニンとビタミンも入っていて、約3ヶ月分。",
-        "cta": "none"
-      },
-      "pitch_status": "ready"
     },
     {
       "id": "r6cfbfd715",
@@ -875,7 +358,7 @@
       "unitNote": null,
       "postedAt": "2026-08-26",
       "bumpedAt": "2026-08-26T23:27:48",
-      "lastSeen": "2026-08-27"
+      "lastSeen": "2026-08-28"
     },
     {
       "id": "rf05138318",
@@ -888,7 +371,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00q8qj7.jeifo2ee.g00q8qj7.jeifpbbc/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdarkangel%2Fto2023-0245%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fdarkangel%2Fi%2F10035933%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "Dark Angel (ダークエンジェル)",
       "reviewAverage": 4.32,
-      "reviewCount": 6216,
+      "reviewCount": 6222,
       "itemCode": "darkangel:10035933",
       "genreId": "303656",
       "startTime": "2026-08-26 10:00",
@@ -907,7 +390,7 @@
       ],
       "unitNote": null,
       "postedAt": "2026-08-26",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "bumpedAt": "2026-08-26T12:19:44",
       "pitch_status": "ready",
       "marketing": {
@@ -959,7 +442,7 @@
       "unitNote": null,
       "postedAt": "2026-08-26",
       "bumpedAt": "2026-08-26T07:39:36",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "marketing": {
         "hook_type": "problem",
         "target": "外でも室内でも扇風機を使いたい人",
@@ -1212,366 +695,6 @@
       "pitch_status": "ready"
     },
     {
-      "id": "r3a59b4de4",
-      "category": "beauty",
-      "title": "サラシア ダイエットサプリ 約1ヶ月分 ショップオブザイヤー受賞店舗 総合賞8位 送料無料 健康…",
-      "rawTitle": "【8/27終了★タイムセールで328円】サラシア ダイエットサプリ　約1ヶ月分 ショップオブザイヤー受賞店舗 総合賞8位 　送料無料 健康 サプリメン サプリ ダイエット サラシア 糖分 炭水化物",
-      "price": 328,
-      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/seedcoms/cabinet/images/thum/sale/sara_1m_328.jpg?_ex=600x600",
-      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00r8h17.jeifob48.g00r8h17.jeifp49a/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fseedcoms%2F100000333-1%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fseedcoms%2Fi%2F10006846%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
-      "shop": "サプリ専門SHOP シードコムス",
-      "reviewAverage": 4.42,
-      "reviewCount": 12172,
-      "itemCode": "seedcoms:10006846",
-      "genreId": "567634",
-      "startTime": "2026-08-24 20:00",
-      "endTime": "2026-08-27 23:59",
-      "listPrice": 960,
-      "priceBasis": "history",
-      "caption": "960円のサラシアのサプリが328円。約1ヶ月分で送料込み。",
-      "tags": [
-        "送料無料"
-      ],
-      "points": [
-        "960円から328円へ",
-        "約1ヶ月分・送料無料",
-        "レビュー12,172件・★4.42"
-      ],
-      "description": "サラシアを使ったサプリメントです。約1ヶ月分が入っています。\nショップ・オブ・ザ・イヤーの総合8位を受賞した店の商品で、レビューは1万2千件を超えています。",
-      "unitNote": null,
-      "postedAt": "2026-08-24",
-      "bumpedAt": "2026-08-24T16:12:40",
-      "lastSeen": "2026-08-27",
-      "marketing": {
-        "hook_type": "problem_price",
-        "target": "サラシアを試したい人",
-        "problem": "何から始めるか決めきれない",
-        "use_case": "はじめて試すとき",
-        "features": [
-          "サラシア",
-          "約1ヶ月分",
-          "送料無料"
-        ],
-        "benefits": [
-          "1ヶ月分から試せる"
-        ],
-        "hook": "サラシアのサプリ、1ヶ月分で328円。",
-        "body": "約1ヶ月分が入っていて、送料込みです。\nレビューは1万2千件を超えています。",
-        "cta": "none"
-      },
-      "pitch_status": "ready"
-    },
-    {
-      "id": "rc8cd634a2",
-      "category": "beauty",
-      "title": "エゴマ油・亜麻仁油配合DHA+EPA【約1ヶ月分】 サプリ オメガ3 リノレン酸 えごま油 亜麻仁油…",
-      "rawTitle": "【8/27終了★タイムセールで328円】エゴマ油・亜麻仁油配合DHA+EPA【約1ヶ月分】 サプリ オメガ3 リノレン酸 えごま油 亜麻仁油 アマニ油 ドコサヘキサエン酸 エイコサペンタエンサン 送料無料 サプリメント DHA EPA 青魚 美容 健康 サプリ エゴマ油",
-      "price": 328,
-      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/seedcoms/cabinet/images/thum/sale/edha_1m_328.jpg?_ex=600x600",
-      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00r8h17.jeifob48.g00r8h17.jeifp49a/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fseedcoms%2F1000003312-111111%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fseedcoms%2Fi%2F10007155%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
-      "shop": "サプリ専門SHOP シードコムス",
-      "reviewAverage": 4.59,
-      "reviewCount": 9323,
-      "itemCode": "seedcoms:10007155",
-      "genreId": "402546",
-      "startTime": "2026-08-24 20:00",
-      "endTime": "2026-08-27 23:59",
-      "listPrice": 600,
-      "priceBasis": "history",
-      "caption": "DHAとEPAのサプリが328円。約1ヶ月分で送料込み。",
-      "tags": [
-        "送料無料"
-      ],
-      "points": [
-        "約1ヶ月分で328円",
-        "送料無料",
-        "レビュー9,321件・★4.59"
-      ],
-      "description": "青魚に含まれるDHAとEPAに、えごま油と亜麻仁油を合わせたサプリメントです。約1ヶ月分が入っています。\nレビューは9,000件を超えています。",
-      "unitNote": null,
-      "postedAt": "2026-08-24",
-      "bumpedAt": "2026-08-24T19:47:08",
-      "lastSeen": "2026-08-27",
-      "marketing": {
-        "hook_type": "scene",
-        "target": "魚を食べる機会が少ない人",
-        "problem": "青魚を毎日は食べられない",
-        "use_case": "毎日の食事の補い",
-        "features": [
-          "DHAとEPA",
-          "えごま油・亜麻仁油配合",
-          "約1ヶ月分",
-          "送料無料"
-        ],
-        "benefits": [
-          "1ヶ月分がまとまっている"
-        ],
-        "hook": "青魚、毎日は食べられない。",
-        "body": "DHAとEPAに、えごま油と亜麻仁油を合わせたサプリメントです。\n約1ヶ月分が入っています。",
-        "cta": "none"
-      },
-      "pitch_status": "ready"
-    },
-    {
-      "id": "re6f180928",
-      "category": "beauty",
-      "title": "国産すっぽん黒酢《約1ヶ月分》送料無料 すっぽん/スッポン/黒酢/アミノ酸/ダイエット/国産",
-      "rawTitle": "【8/27終了★タイムセールで328円】国産すっぽん黒酢《約1ヶ月分》送料無料 すっぽん/スッポン/黒酢/アミノ酸/ダイエット/国産",
-      "price": 328,
-      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/seedcoms/cabinet/images/thum/sale/skuro_1m_328.jpg?_ex=600x600",
-      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00r8h17.jeifob48.g00r8h17.jeifp49a/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fseedcoms%2F10004355-198%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fseedcoms%2Fi%2F10006088%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
-      "shop": "サプリ専門SHOP シードコムス",
-      "reviewAverage": 4.57,
-      "reviewCount": 7184,
-      "itemCode": "seedcoms:10006088",
-      "genreId": "567623",
-      "startTime": "2026-08-24 20:00",
-      "endTime": "2026-08-27 23:59",
-      "listPrice": 600,
-      "priceBasis": "history",
-      "caption": "国産すっぽんの黒酢サプリが328円。約1ヶ月分で送料込み。",
-      "tags": [
-        "送料無料"
-      ],
-      "points": [
-        "約1ヶ月分で328円",
-        "送料無料",
-        "レビュー7,181件・★4.57"
-      ],
-      "description": "国産のすっぽんと黒酢を使ったサプリメントです。約1ヶ月分が入っています。\nアミノ酸を摂りたい人向けの商品で、レビューは7,000件を超えています。",
-      "unitNote": null,
-      "postedAt": "2026-08-24",
-      "bumpedAt": "2026-08-24T19:47:08",
-      "lastSeen": "2026-08-27",
-      "marketing": {
-        "hook_type": "compare",
-        "target": "黒酢を試したい人",
-        "problem": "3ヶ月分は最初から多い",
-        "use_case": "はじめて試すとき",
-        "features": [
-          "国産すっぽん",
-          "黒酢",
-          "アミノ酸",
-          "約1ヶ月分",
-          "送料無料"
-        ],
-        "benefits": [
-          "1ヶ月分から試せる"
-        ],
-        "hook": "いきなり3ヶ月分は多い、というときの1ヶ月分。",
-        "body": "国産のすっぽんと黒酢を使ったサプリメントです。\nアミノ酸が入っていて、送料込みです。",
-        "cta": "none"
-      },
-      "pitch_status": "ready"
-    },
-    {
-      "id": "rc03822892",
-      "category": "beauty",
-      "title": "ブルーベリー 約1ヶ月分 サプリ サプリメント ブルーベリー ビルベリー メグスリノキ アイブライト…",
-      "rawTitle": "【8/27終了★タイムセールで328円】ブルーベリー 約1ヶ月分　サプリ サプリメント ブルーベリー ビルベリー メグスリノキ アイブライト ビタミン ポリフェノール アントシニアン タンニン",
-      "price": 328,
-      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/seedcoms/cabinet/images/thum/sale/blue_1m_328.jpg?_ex=600x600",
-      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00r8h17.jeifob48.g00r8h17.jeifp49a/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fseedcoms%2F10002174012-2-2%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fseedcoms%2Fi%2F10007340%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
-      "shop": "サプリ専門SHOP シードコムス",
-      "reviewAverage": 4.5,
-      "reviewCount": 6529,
-      "itemCode": "seedcoms:10007340",
-      "genreId": "101023",
-      "startTime": "2026-08-24 20:00",
-      "endTime": "2026-08-27 23:59",
-      "listPrice": 890,
-      "priceBasis": "history",
-      "caption": "ブルーベリーのサプリが328円。約1ヶ月分。",
-      "points": [
-        "約1ヶ月分で328円",
-        "ビルベリー・メグスリノキ配合",
-        "レビュー6,528件・★4.5"
-      ],
-      "description": "ブルーベリーを使ったサプリメントです。約1ヶ月分が入っています。\nビルベリーやメグスリノキ、アイブライトも一緒に入っています。レビューは6,500件を超えています。",
-      "tags": [
-        "送料無料"
-      ],
-      "unitNote": null,
-      "postedAt": "2026-08-24",
-      "bumpedAt": "2026-08-24T19:47:08",
-      "lastSeen": "2026-08-27",
-      "marketing": {
-        "hook_type": "scene",
-        "target": "画面を見る時間が長い人",
-        "problem": "目のための成分が何か分からない",
-        "use_case": "デスクワーク・スマホ",
-        "features": [
-          "ブルーベリー",
-          "ビルベリー",
-          "メグスリノキ",
-          "アイブライト",
-          "約1ヶ月分"
-        ],
-        "benefits": [
-          "4種類がまとまっている"
-        ],
-        "hook": "画面を見る時間、思っているより長くありませんか。",
-        "body": "ブルーベリーのサプリメントです。\nビルベリー、メグスリノキ、アイブライトも一緒に入っています。約1ヶ月分。",
-        "cta": "empathy"
-      },
-      "pitch_status": "ready"
-    },
-    {
-      "id": "r1383f77b8",
-      "category": "beauty",
-      "title": "乳酸菌サプリ 約1ヶ月分ネコポス送料無料有胞子性乳酸菌ソフトカプセル/ 乳酸菌 高配合 サプリ…",
-      "rawTitle": "【8/27終了★タイムセールで328円】乳酸菌サプリ 約1ヶ月分ネコポス送料無料有胞子性乳酸菌ソフトカプセル/ 乳酸菌 高配合 サプリ 桜の花エキス 食生活サプリ",
-      "price": 328,
-      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/seedcoms/cabinet/images/thum/sale/nyu_1m_328.jpg?_ex=600x600",
-      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00r8h17.jeifob48.g00r8h17.jeifp49a/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fseedcoms%2F10000716-298%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fseedcoms%2Fi%2F10004832%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
-      "shop": "サプリ専門SHOP シードコムス",
-      "reviewAverage": 4.47,
-      "reviewCount": 4983,
-      "itemCode": "seedcoms:10004832",
-      "genreId": "208151",
-      "startTime": "2026-08-24 20:00",
-      "endTime": "2026-08-27 23:59",
-      "listPrice": 600,
-      "priceBasis": "history",
-      "caption": "乳酸菌のサプリが328円。約1ヶ月分で送料込み。",
-      "points": [
-        "約1ヶ月分で328円",
-        "送料無料",
-        "レビュー4,981件・★4.47"
-      ],
-      "description": "有胞子性の乳酸菌を使ったソフトカプセルです。約1ヶ月分が入っています。\n桜の花エキスも入っています。ネコポスで届きます。",
-      "tags": [
-        "送料無料"
-      ],
-      "unitNote": null,
-      "postedAt": "2026-08-24",
-      "bumpedAt": "2026-08-24T19:47:08",
-      "lastSeen": "2026-08-27",
-      "marketing": {
-        "hook_type": "discovery",
-        "target": "乳酸菌を続けたい人",
-        "problem": "錠剤が飲みにくい",
-        "use_case": "毎日の習慣",
-        "features": [
-          "有胞子性の乳酸菌",
-          "ソフトカプセル",
-          "桜の花エキス配合",
-          "約1ヶ月分",
-          "ネコポスで届く"
-        ],
-        "benefits": [
-          "カプセルなので味を感じにくい"
-        ],
-        "hook": "乳酸菌、ヨーグルト以外でも摂れます。",
-        "body": "有胞子性の乳酸菌を使ったソフトカプセルです。\n桜の花エキスも入っています。約1ヶ月分で、ネコポスで届きます。",
-        "cta": "none"
-      },
-      "pitch_status": "ready"
-    },
-    {
-      "id": "r78a4b405c",
-      "category": "beauty",
-      "title": "サラシアブラック 約1ヶ月分 新発売 炭 チャコール配合 サプリ サプリメント ダイエット…",
-      "rawTitle": "【8/27終了★タイムセールで328円】サラシアブラック 約1ヶ月分 新発売　炭 チャコール配合 サプリ サプリメント ダイエット チャコールクレンズ 食生活サプリ",
-      "price": 328,
-      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/seedcoms/cabinet/images/thum/sale/sarabk_1m_328.jpg?_ex=600x600",
-      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00r8h17.jeifob48.g00r8h17.jeifp49a/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fseedcoms%2F100000222250-1%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fseedcoms%2Fi%2F10007439%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
-      "shop": "サプリ専門SHOP シードコムス",
-      "reviewAverage": 4.42,
-      "reviewCount": 4020,
-      "itemCode": "seedcoms:10007439",
-      "genreId": "567634",
-      "startTime": "2026-08-24 20:00",
-      "endTime": "2026-08-27 23:59",
-      "listPrice": 1148,
-      "priceBasis": "history",
-      "caption": "1,148円のサラシアと炭のサプリが328円。約1ヶ月分で送料込み。",
-      "points": [
-        "1,148円から328円へ",
-        "約1ヶ月分・送料無料",
-        "レビュー4,020件・★4.42"
-      ],
-      "description": "サラシアに炭（チャコール）を合わせたサプリメントです。約1ヶ月分が入っています。\nレビューは4,000件を超えています。",
-      "tags": [
-        "送料無料"
-      ],
-      "unitNote": null,
-      "postedAt": "2026-08-24",
-      "bumpedAt": "2026-08-24T19:47:08",
-      "lastSeen": "2026-08-27",
-      "marketing": {
-        "hook_type": "discovery",
-        "target": "サラシアを試したい人",
-        "problem": "炭とサラシアを別々に買うとかさばる",
-        "use_case": "毎日の習慣",
-        "features": [
-          "サラシア",
-          "炭（チャコール）配合",
-          "約1ヶ月分"
-        ],
-        "benefits": [
-          "2つがまとまっている"
-        ],
-        "hook": "サラシアに炭を合わせたものがあります。",
-        "body": "チャコール配合のサプリメントです。\n約1ヶ月分が入っています。",
-        "cta": "none"
-      },
-      "pitch_status": "ready"
-    },
-    {
-      "id": "r01f3a5dc1",
-      "category": "beauty",
-      "title": "すっぽん黒酢無臭にんにく卵黄約1ヶ月分 ネコポス送料無料 ダイエット サプリ オメガ3 大豆ペプチド…",
-      "rawTitle": "【8/27終了★タイムセールで328円】すっぽん黒酢無臭にんにく卵黄約1ヶ月分 ネコポス送料無料 ダイエット サプリ オメガ3 大豆ペプチド / 美容 健康 亜麻仁油 アミノ酸 すっぽん 黒酢 にんにく卵黄",
-      "price": 328,
-      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/seedcoms/cabinet/images/thum/sale/snin_1m_328.jpg?_ex=600x600",
-      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00r8h17.jeifob48.g00r8h17.jeifp49a/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fseedcoms%2F10000716-960-1%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fseedcoms%2Fi%2F10007285%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
-      "shop": "サプリ専門SHOP シードコムス",
-      "reviewAverage": 4.56,
-      "reviewCount": 3986,
-      "itemCode": "seedcoms:10007285",
-      "genreId": "550091",
-      "startTime": "2026-08-24 20:00",
-      "endTime": "2026-08-27 23:59",
-      "listPrice": 1298,
-      "priceBasis": "history",
-      "caption": "1,298円のすっぽん黒酢とにんにく卵黄のサプリが328円。約1ヶ月分。",
-      "points": [
-        "1,298円から328円へ",
-        "約1ヶ月分・送料無料",
-        "レビュー3,986件・★4.56"
-      ],
-      "description": "すっぽん黒酢に無臭のにんにく卵黄を合わせたサプリメントです。約1ヶ月分が入っています。\n亜麻仁油や大豆ペプチドも入っています。ネコポスで届きます。",
-      "tags": [
-        "送料無料"
-      ],
-      "unitNote": null,
-      "postedAt": "2026-08-24",
-      "bumpedAt": "2026-08-24T19:47:08",
-      "lastSeen": "2026-08-27",
-      "marketing": {
-        "hook_type": "discovery",
-        "target": "にんにく卵黄を試したい人",
-        "problem": "にんにくのにおいが気になる",
-        "use_case": "毎日の習慣",
-        "features": [
-          "すっぽん黒酢",
-          "無臭のにんにく卵黄",
-          "亜麻仁油",
-          "大豆ペプチド",
-          "約1ヶ月分",
-          "ネコポス"
-        ],
-        "benefits": [
-          "無臭タイプ"
-        ],
-        "hook": "にんにく卵黄、無臭のものがあります。",
-        "body": "すっぽん黒酢に無臭のにんにく卵黄を合わせたサプリメントです。\n亜麻仁油と大豆ペプチドも入っていて、約1ヶ月分。ネコポスで届きます。",
-        "cta": "none"
-      },
-      "pitch_status": "ready"
-    },
-    {
       "id": "r815ad9360",
       "category": "fashion",
       "title": "半額 693円→347円【メンズ】ヒンヤリ 接触冷感 裾上げ済 カラーパンツ…",
@@ -1600,59 +723,6 @@
       "postedAt": "2026-08-24",
       "bumpedAt": "2026-08-24T17:23:49",
       "lastSeen": "2026-08-24"
-    },
-    {
-      "id": "rf4416810f",
-      "category": "beauty",
-      "title": "輝きの青汁プラセンタ 入り 3g×30包入り 送料無料 ダイエット 大麦若葉 抹茶 乳酸菌 食物繊維…",
-      "rawTitle": "【8/27終了★タイムセールで699円】輝きの青汁プラセンタ 入り 3g×30包入り 送料無料 ダイエット 大麦若葉 抹茶 乳酸菌 食物繊維 ビタミンC カルシウム だけでなく 青汁プラセンタ",
-      "price": 699,
-      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/seedcoms/cabinet/images/thum/sale/ao_30p_699.jpg?_ex=600x600",
-      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00r8h17.jeifob48.g00r8h17.jeifp49a/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fseedcoms%2F10004174%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fseedcoms%2Fi%2F10004174%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
-      "shop": "サプリ専門SHOP シードコムス",
-      "reviewAverage": 4.62,
-      "reviewCount": 15402,
-      "itemCode": "seedcoms:10004174",
-      "genreId": "214781",
-      "listPrice": 1600,
-      "priceBasis": "history",
-      "caption": "30包で1,600円。1包あたり53円で、水に溶かすだけ。",
-      "tags": [
-        "送料無料"
-      ],
-      "points": [
-        "30包で1,600円・1包あたり53円",
-        "3gの個包装。水に溶かすだけ",
-        "レビュー15,380件・★4.62"
-      ],
-      "description": "大麦若葉と抹茶を使った粉末の青汁です。3gの個包装が30包入っています。\n1包53円ほど。水に溶かすだけなので、道具も要りません。乳酸菌と食物繊維も入っています。",
-      "unitNote": null,
-      "postedAt": "2026-08-24",
-      "lastSeen": "2026-08-27",
-      "startTime": "2026-08-24 20:00",
-      "endTime": "2026-08-27 23:59",
-      "bumpedAt": "2026-08-24T12:11:54",
-      "marketing": {
-        "hook_type": "scene",
-        "target": "青汁を毎日続けたい人",
-        "problem": "道具を出すのが面倒だと続かない",
-        "use_case": "朝の一杯",
-        "features": [
-          "粉末",
-          "3gの個包装が30包",
-          "水に溶かすだけ",
-          "大麦若葉と抹茶",
-          "乳酸菌・食物繊維"
-        ],
-        "benefits": [
-          "1包53円ほど",
-          "道具が要らない"
-        ],
-        "hook": "青汁、水に溶かすだけなら道具が要りません。",
-        "body": "3gの個包装が30包。1包53円ほどです。\n大麦若葉と抹茶を使っていて、乳酸菌と食物繊維も入っています。",
-        "cta": "none"
-      },
-      "pitch_status": "ready"
     },
     {
       "id": "rc2d104ddc",
@@ -1684,7 +754,7 @@
       "unitNote": null,
       "postedAt": "2026-08-24",
       "bumpedAt": "2026-08-24T07:29:55",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "marketing": {
         "hook_type": "scene",
         "target": "夏に麺類をよく食べる人",
@@ -2313,7 +1383,7 @@
       "unitNote": null,
       "postedAt": "2026-08-24",
       "bumpedAt": "2026-08-24T17:23:49",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "marketing": {
         "hook_type": "discovery",
         "target": "ハンバーグを家で焼く人",
@@ -2593,7 +1663,7 @@
       "unitNote": null,
       "postedAt": "2026-08-24",
       "bumpedAt": "2026-08-24T17:23:49",
-      "lastSeen": "2026-08-27"
+      "lastSeen": "2026-08-28"
     },
     {
       "id": "r3c11bc6b4",
@@ -2787,7 +1857,7 @@
       "unitNote": null,
       "postedAt": "2026-08-23",
       "bumpedAt": "2026-08-23T23:44:11",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "marketing": {
         "hook_type": "discovery",
         "target": "パスタをよく作る人",
@@ -2837,7 +1907,7 @@
       "unitNote": null,
       "postedAt": "2026-08-23",
       "bumpedAt": "2026-08-23T23:44:11",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "marketing": {
         "hook_type": "scene",
         "target": "雑穀米を試したい人",
@@ -2868,7 +1938,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00skps7.jeifo982.g00skps7.jeifp82d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Faidort%2Fslub-1378%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Faidort%2Fi%2F10003438%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "愛度楽天市場店",
       "reviewAverage": 4.36,
-      "reviewCount": 17059,
+      "reviewCount": 17063,
       "itemCode": "aidort:10003438",
       "genreId": "502835",
       "listPrice": 1380,
@@ -2885,7 +1955,7 @@
       "description": "インナーイヤー型のワイヤレスイヤホンです。Bluetooth 6.1で自動ペアリングします。\nENCマイク付きなので通話にも使えます。この値段なら、なくしたときの諦めがつきます。",
       "unitNote": null,
       "postedAt": "2026-08-22",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-22T00:00:00",
@@ -2920,7 +1990,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00tstg7.jeifo50d.g00tstg7.jeifpe87/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmeisei%2F1378%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fmeisei%2Fi%2F10002326%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "明誠ショップ",
       "reviewAverage": 4.4,
-      "reviewCount": 3192,
+      "reviewCount": 3193,
       "itemCode": "meisei:10002326",
       "genreId": "502835",
       "startTime": "",
@@ -2939,7 +2009,7 @@
       "description": "上と同じ形のワイヤレスイヤホンを、別のショップが同じ値段で扱っています。\nインナーイヤー型で、耳を密閉しません。周りの音が聞こえるので、外を歩くときにも使えます。",
       "unitNote": null,
       "postedAt": "2026-08-22",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "bumpedAt": "2026-08-22T00:00:00"
     },
     {
@@ -2971,7 +2041,7 @@
       "description": "ケーブルの要らないモバイルバッテリーです。本体のコネクターをスマホに直接挿して充電します。\n5000mAhで、1日ぶんの継ぎ足しに向く容量。iPhone用とType-Cのコネクターが両方付いています。",
       "unitNote": null,
       "postedAt": "2026-08-22",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "bumpedAt": "2026-08-22T23:55:42",
       "marketing": {
         "hook_type": "discovery",
@@ -3003,7 +2073,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00skps7.jeifo982.g00skps7.jeifp82d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Faidort%2Fslub-1286%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Faidort%2Fi%2F10003547%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "愛度楽天市場店",
       "reviewAverage": 4.14,
-      "reviewCount": 8507,
+      "reviewCount": 8509,
       "itemCode": "aidort:10003547",
       "genreId": "502835",
       "startTime": "",
@@ -3022,7 +2092,7 @@
       "description": "耳を挟んで装着するイヤーカフ構造の骨伝導イヤホンです。耳の穴をふさぎません。\n周りの音が聞こえたままなので、外を歩くときや、家で呼ばれるのに気づきたいときに向きます。",
       "unitNote": null,
       "postedAt": "2026-08-22",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "bumpedAt": "2026-08-22T00:00:00"
     },
     {
@@ -3055,7 +2125,7 @@
       "description": "卵の形をしたパーツを開いて、色と形を合わせるパズルです。6色ぶんの組み合わせがあります。\n開ける、はめる、合わせるという動きが一つのおもちゃに入っているので、手を動かす遊びとして長く持ちます。",
       "unitNote": null,
       "postedAt": "2026-08-22",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "bumpedAt": "2026-08-22T00:00:00",
       "marketing": {
         "hook_type": "discovery",
@@ -3088,7 +2158,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00q8qj7.jeifo2ee.g00q8qj7.jeifpbbc/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdarkangel%2Fpa2301-3635%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fdarkangel%2Fi%2F10035877%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "Dark Angel (ダークエンジェル)",
       "reviewAverage": 4.28,
-      "reviewCount": 4980,
+      "reviewCount": 4984,
       "itemCode": "darkangel:10035877",
       "genreId": "206440",
       "startTime": "2026-08-24 09:00",
@@ -3107,7 +2177,7 @@
       ],
       "unitNote": null,
       "postedAt": "2026-08-22",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "bumpedAt": "2026-08-22T00:00:00",
       "marketing": {
         "hook_type": "scene",
@@ -3128,55 +2198,6 @@
         "hook": "洗濯機で洗えるかどうかで、着る回数が変わります。",
         "body": "裾に丸みのあるコクーンシルエットのパンツです。\n速乾でUVカットの生地。低身長と高身長、どちらの丈もあります。",
         "cta": "none"
-      },
-      "pitch_status": "ready"
-    },
-    {
-      "id": "rc26554137",
-      "category": "sports",
-      "title": "スポーツブラ ルーパ ナチュラルフィットブラ Loopa ヨガウェア スポブラ スポーツブラ 揺れない…",
-      "rawTitle": "【限定27%OFF】 スポーツブラ ルーパ ナチュラルフィットブラ Loopa ヨガウェア スポブラ スポーツブラ 揺れない ヨガ ブラ 大きいサイズ 高校生 小学生 大人 夏 中学生 ヨガ ピラティス ホットヨガ ランニング ダンス ズンバ スポーツ 「OS」【◎】 RVPB",
-      "price": 2400,
-      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/puravida/cabinet/202407/106100001-itm01.jpg?_ex=600x600",
-      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00q08t7.jeifo22f.g00q08t7.jeifpd5f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fpuravida%2F106100001%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fpuravida%2Fi%2F10000938%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
-      "shop": "Puravida-プラヴィダ",
-      "reviewAverage": 4.21,
-      "reviewCount": 5266,
-      "itemCode": "puravida:10000938",
-      "genreId": "206725",
-      "startTime": "",
-      "endTime": "",
-      "listPrice": 2980,
-      "priceBasis": "history",
-      "caption": "揺れにくいスポーツブラが2,400円。ヨガでもピラティスでも使える。",
-      "tags": [],
-      "points": [
-        "2,400円",
-        "Loopa（ヨガブランド）",
-        "小学生〜大人・大きいサイズあり"
-      ],
-      "description": "ヨガブランドLoopaのナチュラルフィットブラです。締めつけずに支える作り。\nヨガ、ピラティス、ホットヨガと、動きの大きい種目でも使えます。小学生から大人まで、大きいサイズも揃います。",
-      "unitNote": null,
-      "postedAt": "2026-08-22",
-      "lastSeen": "2026-08-27",
-      "bumpedAt": "2026-08-22T00:00:00",
-      "marketing": {
-        "hook_type": "compare",
-        "target": "ヨガやピラティスをする人",
-        "problem": "締めつけの強いブラだと動きにくい",
-        "use_case": "ヨガ・ピラティス・ホットヨガ",
-        "features": [
-          "ナチュラルフィット",
-          "締めつけずに支える",
-          "小学生から大人まで",
-          "大きいサイズあり"
-        ],
-        "benefits": [
-          "サイズの幅が広い"
-        ],
-        "hook": "スポーツブラ、締めつけの強さで選んでいませんか。",
-        "body": "これは締めつけずに支える作りのものです。\nヨガブランドLoopaのもので、小学生から大人まで、大きいサイズも揃います。",
-        "cta": "experience"
       },
       "pitch_status": "ready"
     },
@@ -3207,7 +2228,7 @@
       "description": "男女兼用のスニーカーです。3Eの幅広で、外反母趾でも履けることをうたっています。\n軽量の厚底で、通学から体育館シューズ、ウォーキングまで使えます。白と黒があります。",
       "unitNote": null,
       "postedAt": "2026-08-22",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "bumpedAt": "2026-08-22T23:55:42",
       "marketing": {
         "hook_type": "problem",
@@ -3258,7 +2279,7 @@
       "description": "ハイウエストのストレッチスキニーです。腰の位置が上がるぶん、脚が長く見えます。\n白と黒の無地なので、合わせるものを選びません。",
       "unitNote": null,
       "postedAt": "2026-08-22",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "bumpedAt": "2026-08-22T00:00:00"
     },
     {
@@ -3323,7 +2344,7 @@
       ],
       "unitNote": null,
       "postedAt": "2026-08-21",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "bumpedAt": "2026-08-21T00:00:00"
     },
     {
@@ -3331,13 +2352,13 @@
       "category": "kitchen",
       "pinned": true,
       "title": "ハンガー 滑らないハンガー 回転フック 大人サイズ キッズサイズ 子供用 バー付 バー無…",
-      "rawTitle": "【15％OFFクーポン 8/27 9:59迄】 ＼パンツハンガー新登場／ ハンガー 滑らないハンガー 回転フック 大人サイズ キッズサイズ 子供用 バー付 バー無 すべらないハンガー 回転式フック すべらない 肩 跡つかない セット ステンレス 洗濯 ズボン 大人 子ども ズボン",
+      "rawTitle": "＼パンツハンガー新登場／ ハンガー 滑らないハンガー 回転フック 大人サイズ キッズサイズ 子供用 バー付 バー無 すべらないハンガー 回転式フック すべらない 肩 跡つかない セット ステンレス 洗濯 ズボン 大人 子ども ズボン",
       "price": 1180,
       "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/auc-risecreation/cabinet/product/top-2/c0225_01a.jpg?_ex=600x600",
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00s0p37.jeifoc3f.g00s0p37.jeifp4e4/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fauc-risecreation%2Fc0225%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fauc-risecreation%2Fi%2F10005057%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "atRise(アットライズ)",
       "reviewAverage": 4.57,
-      "reviewCount": 1600,
+      "reviewCount": 1602,
       "itemCode": "auc-risecreation:10005057",
       "genreId": "100687",
       "startTime": "",
@@ -3354,7 +2375,7 @@
       "tags": [],
       "unitNote": null,
       "postedAt": "2026-08-21",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "bumpedAt": "2026-08-21T00:00:00"
     },
     {
@@ -3368,7 +2389,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00ugxh7.jeifo8d9.g00ugxh7.jeifp626/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fangelingg%2Fag-r-00154%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fangelingg%2Fi%2F10001004%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "Angeling(エンジェリング)",
       "reviewAverage": 4.13,
-      "reviewCount": 1601,
+      "reviewCount": 1602,
       "itemCode": "angelingg:10001004",
       "genreId": "567822",
       "startTime": "",
@@ -3387,7 +2408,7 @@
       ],
       "unitNote": null,
       "postedAt": "2026-08-21",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "bumpedAt": "2026-08-21T00:00:00"
     },
     {
@@ -3401,7 +2422,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00ufk67.jeifo1eb.g00ufk67.jeifpf2c/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkiroran%2Fdl-xmt%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fkiroran%2Fi%2F10000205%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "FULNG 楽天市場店",
       "reviewAverage": 4.64,
-      "reviewCount": 4503,
+      "reviewCount": 4504,
       "itemCode": "kiroran:10000205",
       "genreId": "565605",
       "startTime": "",
@@ -3420,7 +2441,7 @@
       ],
       "unitNote": null,
       "postedAt": "2026-08-21",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "bumpedAt": "2026-08-21T00:00:00"
     },
     {
@@ -3434,7 +2455,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00s7h37.jeifoabf.g00s7h37.jeifpd22/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsinkatec%2Fhu_shair_catcher%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fsinkatec%2Fi%2F10000425%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "SINKATEC 公式ショップ 楽天市場店",
       "reviewAverage": 4.68,
-      "reviewCount": 10436,
+      "reviewCount": 10443,
       "itemCode": "sinkatec:10000425",
       "genreId": "101838",
       "startTime": "",
@@ -3453,21 +2474,21 @@
       ],
       "unitNote": null,
       "postedAt": "2026-08-21",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "bumpedAt": "2026-08-21T00:00:00"
     },
     {
       "id": "r83d99a75f",
       "category": "fashion",
       "pinned": true,
-      "title": "まとめ買いクーポン有 ブラトップ キャミソール タンクトップ カップ付きインナー…",
-      "rawTitle": "★まとめ買いクーポン有★＼楽天1位★新色追加／ブラトップ キャミソール タンクトップ カップ付きインナー オールインワンブラトップ リブフィットタンク リブフィットキャミソール ナイトブラ 脇高 脇肉 スッキリ 垂れ胸 産後 寄せ 谷間 ラディアンヌ",
+      "title": "ブラトップ キャミソール タンクトップ カップ付きインナー オールインワンブラトップ…",
+      "rawTitle": "＼楽天1位★新色追加／ブラトップ キャミソール タンクトップ カップ付きインナー オールインワンブラトップ リブフィットタンク リブフィットキャミソール ナイトブラ 脇高 脇肉 スッキリ 垂れ胸 産後 寄せ 谷間 ラディアンヌ",
       "price": 1990,
       "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/radianne/cabinet/mg2/cm00026.jpg?_ex=600x600",
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00rzxt7.jeifob5f.g00rzxt7.jeifp48b/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fradianne%2Fcm00026%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fradianne%2Fi%2F10000736%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "ラディアンヌ 楽天市場店",
       "reviewAverage": 4.16,
-      "reviewCount": 8898,
+      "reviewCount": 8900,
       "itemCode": "radianne:10000736",
       "genreId": "566018",
       "startTime": "",
@@ -3487,7 +2508,7 @@
       ],
       "unitNote": null,
       "postedAt": "2026-08-21",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "bumpedAt": "2026-08-21T00:00:00"
     },
     {
@@ -3501,7 +2522,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00q8qj7.jeifo2ee.g00q8qj7.jeifpbbc/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdarkangel%2Fpa2311-3843%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fdarkangel%2Fi%2F10036320%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "Dark Angel (ダークエンジェル)",
       "reviewAverage": 4.15,
-      "reviewCount": 3676,
+      "reviewCount": 3677,
       "itemCode": "darkangel:10036320",
       "genreId": "206440",
       "startTime": "2026-08-24 09:00",
@@ -3520,7 +2541,7 @@
       ],
       "unitNote": null,
       "postedAt": "2026-08-21",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "bumpedAt": "2026-08-21T00:00:00"
     },
     {
@@ -3534,7 +2555,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00sv257.jeifodd7.g00sv257.jeifp331/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Feunicedress%2Feuni-205%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Feunicedress%2Fi%2F10001955%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "京童工房(きょうわらべこうぼう)",
       "reviewAverage": 4.18,
-      "reviewCount": 1316,
+      "reviewCount": 1317,
       "itemCode": "eunicedress:10001955",
       "genreId": "401646",
       "startTime": "2026-04-24 20:00",
@@ -3553,7 +2574,7 @@
       ],
       "unitNote": null,
       "postedAt": "2026-08-21",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "bumpedAt": "2026-08-21T00:00:00"
     },
     {
@@ -3567,7 +2588,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00uaej7.jeifo180.g00uaej7.jeifp8aa/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fexception5251%2Fex-x01028%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fexception5251%2Fi%2F10000794%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "EXCEPTION本店",
       "reviewAverage": 4.65,
-      "reviewCount": 273,
+      "reviewCount": 274,
       "itemCode": "exception5251:10000794",
       "genreId": "201184",
       "startTime": "",
@@ -3584,7 +2605,7 @@
       "tags": [],
       "unitNote": null,
       "postedAt": "2026-08-21",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "bumpedAt": "2026-08-21T00:00:00"
     },
     {
@@ -3615,7 +2636,7 @@
       "description": "マーブル模様の個人印鑑です。12.0mmで、認印としても銀行印としても使えます。\n色は12色。認印は切らしてから慌てるものなので、予備を1本持っておくと困りません。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -3648,7 +2669,7 @@
       "description": "押すとぷちぷち音が鳴る、繰り返し遊べるおもちゃです。電池も消耗品も使いません。\n静かな場所での手持ち無沙汰や、車の中での時間つぶしに向いています。洗えるので、汚れても扱いに困りません。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -3681,7 +2702,7 @@
       "description": "日本製のフェイスタオルです。約34×86cmで、ホテルスタイルの厚手。\nタオルは消耗品なので、1枚単位で買い足せるかどうかが効いてきます。楽天1位を取っている定番です。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00",
@@ -3732,7 +2753,7 @@
       "description": "色を覚えるための知育絵本です。バーゲン本なので、この値段で新品が手に入ります。\nバーゲン本は出版社が価格を下げて放出したもので、中身は通常品と同じです。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -3746,8 +2767,8 @@
       "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/mago1shop/cabinet/goods3/rakuten-lbh4-w-2020.jpg?_ex=600x600",
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00rs947.jeifo3a3.g00rs947.jeifpa75/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmago1shop%2Flbh4-w%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fmago1shop%2Fi%2F10000543%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "LEDのマゴイチヤ楽天市場支店",
-      "reviewAverage": 4.47,
-      "reviewCount": 3602,
+      "reviewAverage": 4.46,
+      "reviewCount": 3603,
       "itemCode": "mago1shop:10000543",
       "genreId": "563709",
       "listPrice": null,
@@ -3765,7 +2786,7 @@
       "description": "T10のウェッジ球をLEDにする交換用バルブです。ポジション灯、ナンバー灯、ルームランプに使えます。\n交換は工具なしで抜き差しするだけの箇所が多く、店に頼めばかかる工賃がまるごと浮きます。無極性なので、向きを気にせず挿せます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -3799,7 +2820,7 @@
       "description": "髪を拭くためのマイクロファイバータオルです。バスタオルより小さめのスリム型。\n吸水と速乾に振っているので、洗ってもすぐ乾きます。髪を拭く時間そのものが短くなります。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -3832,7 +2853,7 @@
       "description": "日本製のビッグフェイスタオル、約40×100cmです。圧縮された状態で届きます。\nバスタオルより小さく、フェイスタオルより大きい。この大きさなら洗濯機の場所も取りません。レビューは11万件を超えています。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00",
@@ -3883,7 +2904,7 @@
       "description": "薄手のUVカットラッシュガードパーカーです。全色でUVカット率98.9％以上。\nフードとジップが付いているので、羽織って前を開けたままでも使えます。涼感素材なので夏でも着ていられます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00",
@@ -3916,7 +2937,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00qdnr7.jeifoc4a.g00qdnr7.jeifp26d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Frinne%2F11easis05%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Frinne%2Fi%2F10008892%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "リンネ スノー・アンド・サーフ",
       "reviewAverage": 4.5,
-      "reviewCount": 8489,
+      "reviewCount": 8490,
       "itemCode": "rinne:10008892",
       "genreId": "501761",
       "listPrice": null,
@@ -3934,7 +2955,7 @@
       "description": "上のパーカーと同じシリーズのトレンカです。UVカット率99.5％以上。\n上下そろえても2,000円を切ります。水着の上から履けるので、体型カバーとしても使えます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -3967,7 +2988,7 @@
       "description": "黒水牛の実印です。印鑑ケースが付いてきます。サイズは10.5mmから18.0mmまで選べます。\n実印は作る機会が急に来るものです。ケース込みで揃うので、そのまま持ち歩けます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -4000,7 +3021,7 @@
       "description": "30種類の雑穀をまぜた国産の雑穀米です。白米に混ぜて一緒に炊くだけで使えます。\n炊き方を変える必要がないので、いつもの手順のまま続けられます。レビューは8万件を超えています。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00",
@@ -4052,7 +3073,7 @@
       "description": "本場讃岐の極太麺うどんが1kg、10人前入っています。1食あたり100円ほど。\nゆで時間8分の麺です。乾麺なので保管もきき、常備しておけます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -4067,7 +3088,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00qbsy7.jeifode2.g00qbsy7.jeifp27f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbugyo%2Fb06-21-277%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fbugyo%2Fi%2F10004467%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "はんこ奉行",
       "reviewAverage": 4.78,
-      "reviewCount": 13588,
+      "reviewCount": 13589,
       "itemCode": "bugyo:10004467",
       "genreId": "205824",
       "listPrice": null,
@@ -4084,7 +3105,7 @@
       "description": "三菱鉛筆のジェットストリーム4&1に、名前を刻印できるものです。\n4色のボールペンとシャープペンが1本にまとまっています。名入れができるので、贈り物としても使えます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -4117,7 +3138,7 @@
       "description": "40種類の精油から6本を選べるセットです。AEAJ（日本アロマ環境協会）の認定精油です。\n香りは実際に嗅いでみないと合うかどうか分かりません。返品保証が付いているのは、その前提での売り方です。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -4132,7 +3153,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00pwf87.jeifo8fa.g00pwf87.jeifp332/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkyunan%2F1418025%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fkyunan%2Fi%2F10001288%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "タマチャンショップ",
       "reviewAverage": 4.45,
-      "reviewCount": 72799,
+      "reviewCount": 72801,
       "itemCode": "kyunan:10001288",
       "genreId": "567605",
       "listPrice": null,
@@ -4150,7 +3171,7 @@
       "description": "粉末のコラーゲンです。味がほとんど付いていないので、コーヒーでも味噌汁でも混ぜられます。\n続けるものなので、飲み物を変えずに足せるかどうかが実際には効いてきます。レビューは7万件を超えています。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00",
@@ -4200,7 +3221,7 @@
       "description": "DHAとEPAを含むオメガ3のサプリです。約3ヶ月分がこの値段に収まっています。\n1日あたりにすると11円ほどで、続けることを前提にした価格です。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -4233,7 +3254,7 @@
       "description": "iPhone用のライトニングケーブルです。MFi認証を取ったApple認証品。\n認証品はiOSの更新で使えなくなる心配がありません。2.4Aの急速充電に対応します。ケーブルは切れると即困るので、予備を1本置いておくものです。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -4248,7 +3269,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00u4ix7.jeifo023.g00u4ix7.jeifpfbe/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftyb-family%2Fs1%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Ftyb-family%2Fi%2F10000012%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "TYB ダイレクト楽天市場店",
       "reviewAverage": 4.61,
-      "reviewCount": 25377,
+      "reviewCount": 25380,
       "itemCode": "tyb-family:10000012",
       "genreId": "564278",
       "listPrice": null,
@@ -4266,7 +3287,7 @@
       "description": "シリコン被覆のライトニングケーブルです。硬くなりにくく、絡まりにくい。\nMFi認証品なので、iOSの更新で弾かれることがありません。カバンに入れて持ち歩く用に向いています。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -4274,8 +3295,8 @@
     {
       "id": "re26c1acdd",
       "category": "car",
-      "title": "T10 2.5W パワーLED ウェッジ球 ホワイト 2個1セット…",
-      "rawTitle": "T10 2.5W パワーLED ウェッジ球 ホワイト 2個1セット 【ポジション・ライセンス・ルームランプのLED化に最適】【車検対応】 【視認性抜群 】[1]",
+      "title": "【事前告知 30日は10％OFF 】T10 2.5W パワーLED ウェッジ球 ホワイト 2個1セット…",
+      "rawTitle": "【事前告知! 30日は10％OFF!】T10 2.5W パワーLED ウェッジ球 ホワイト 2個1セット 【ポジション・ライセンス・ルームランプのLED化に最適】【車検対応】 【視認性抜群 】[1]",
       "price": 1000,
       "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/atv-yours/cabinet/thum/2ten5w_led_01.jpg?_ex=600x600",
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00qda77.jeifo522.g00qda77.jeifpe86/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fatv-yours%2Ft10-25w-wh-led%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fatv-yours%2Fi%2F10001453%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
@@ -4299,7 +3320,7 @@
       "description": "T10のLEDバルブ2個セットです。車検対応をうたっています。\nポジション灯は左右2つで1組なので、2個セットが最小の買い方になります。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -4332,7 +3353,7 @@
       "description": "ガラス系のコーティング剤50mlです。業務用のものを小容量にしたお試しサイズ。\n洗車のあとに塗って拭き上げるだけなので、専用の道具は要りません。まず自分の車で効き目を見たいときに。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -4347,7 +3368,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00tfbh7.jeifo7dc.g00tfbh7.jeifpe5f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnext-online%2F10000228%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fnext-online%2Fi%2F10000237%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "Nextオンライン",
       "reviewAverage": 4.68,
-      "reviewCount": 4804,
+      "reviewCount": 4810,
       "itemCode": "next-online:10000237",
       "genreId": "210762",
       "listPrice": null,
@@ -4365,7 +3386,7 @@
       "description": "夜の散歩用に光る犬の首輪です。重さは約50g。\n常時点灯と点滅が選べます。長さを調整でき、余った部分はカットできるので、犬の首回りに合わせられます。USB充電式なので電池は要りません。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -4398,7 +3419,7 @@
       "description": "精油を2本だけ選べるお試しセットです。まず香りを確かめたい人向けの最小構成です。\n1本5mlなので、毎日使っても使い切るまでにしばらくかかります。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -4413,7 +3434,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00q0207.jeifod2d.g00q0207.jeifp6a9/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fogawahan%2F10002465%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fogawahan%2Fi%2F10002465%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "印鑑はんこ製造直売店@小川祥雲堂",
       "reviewAverage": 4.73,
-      "reviewCount": 28530,
+      "reviewCount": 28531,
       "itemCode": "ogawahan:10002465",
       "genreId": "216081",
       "listPrice": null,
@@ -4431,7 +3452,7 @@
       "description": "シヤチハタのキャップレス9です。フタがないので、片手でそのまま押せます。\nキャップは失くすものですし、探す時間もかかります。その両方がなくなります。全26色。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -4464,7 +3485,7 @@
       "description": "シヤチハタのキャップレス9で、印面が入った状態で届きます。開けたその日から押せます。\n別注品なので名前が入ります。浸透印なのでスタンプ台は要りません。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -4497,7 +3518,7 @@
       "description": "AEAJ認定の精油を6本選べるセットです。ラベンダー、グレープフルーツ、ユーカリなどから組み合わせられます。\n天然100％で、アロマディフューザーにもアロマストーンにも使えます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -4529,7 +3550,7 @@
       "description": "車のヘッドレストに吊り下げて使うティッシュケースです。抗菌加工がされています。\n吊り下げのほか、壁掛けや縦置きでも使えるので、車をやめたあとも洗面所などに回せます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -4562,7 +3583,7 @@
       "description": "キヤノンのプリンタ用の互換インクです。型番と色を選んで8本まとめられます。\n純正だと1本ずつ買うことになりますが、まとめて必要な色だけ揃えられます。よく切れる色を多めに、という買い方ができます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -4594,7 +3615,7 @@
       "description": "黒水牛の印鑑に、もみ革のケースが付いたセットです。サイズは10.5mmから15.0mmまで。\n実印・銀行印・認印のどれとしても作れます。カラーの認印も付きます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00",
@@ -4647,7 +3668,7 @@
       "description": "有明産の焼き海苔です。訳あり扱いですが、理由は形やサイズが揃わないこと。\n巻いてしまえば見た目は変わりません。全型・半切から枚数を選べます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00",
@@ -4697,7 +3718,7 @@
       "description": "エプソンのIC6CL50に対応する互換インク6色セットです。\n残量表示のICチップが付いているので、あとどれくらい残っているかが本体で分かります。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -4729,7 +3750,7 @@
       "description": "水につけるとビーズ同士がくっついて、立体的な形が作れます。のりも接着剤も使いません。\n約3,000粒入りなので、しばらく遊べる量が最初から揃っています。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -4761,7 +3782,7 @@
       "description": "シヤチハタのキャップレス9に、伸びるリールのキーホルダーが付いたものです。\nカバンに着けたまま押せるので、取り出す手間も、置き忘れる心配もありません。別注品なので名前が入ります。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -4794,7 +3815,7 @@
       "description": "30枚入りのシートマスクです。1枚あたり45円なので、毎日使っても負担になりにくい値段です。\n日本製で、プラセンタエキスなどを50％配合しています。オールインワンなので、これ1枚で済ませられます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00",
@@ -4827,7 +3848,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00syeo7.jeifof9c.g00syeo7.jeifp8ae/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmarine-blue%2Fbabys262%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fmarine-blue%2Fi%2F10000915%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "MarineBlue",
       "reviewAverage": 4.71,
-      "reviewCount": 6490,
+      "reviewCount": 6493,
       "itemCode": "marine-blue:10000915",
       "genreId": "508430",
       "listPrice": null,
@@ -4845,7 +3866,7 @@
       "description": "6重のガーゼで織られたおくるみです。ガーゼは洗うほど柔らかくなり、乾きも早い生地です。\n春夏はケットとして、肌寒い時期は重ねて使えます。退院時から保育園のお昼寝まで、長く使える1枚です。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -4878,7 +3899,7 @@
       "description": "脱げにくいことを狙った犬用ハーネスです。ロック付きで、超小型犬から大型犬まで対応します。\nハンドルが付いているので、いざというときに掴んで止められます。介護の補助としても使えます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -4893,7 +3914,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00tkn47.jeifo92c.g00tkn47.jeifpa2d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flifedrinkcompany%2Fzaosoda-500%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Flifedrinkcompany%2Fi%2F10000004%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "LIFEDRINKオンラインストア",
       "reviewAverage": 4.68,
-      "reviewCount": 51997,
+      "reviewCount": 52000,
       "itemCode": "lifedrinkcompany:10000004",
       "genreId": "506536",
       "listPrice": null,
@@ -4911,7 +3932,7 @@
       "description": "500mlの炭酸水が24本入ったケースです。1本あたり60円ほど。\nプレーン、レモン、ピンクグレープフルーツ、ライムから選べます。ラベルレスも選べるので、捨てるときに剥がす手間がありません。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00",
@@ -4963,7 +3984,7 @@
       "description": "よく伸びるストレッチ素材のスキニーパンツです。累計60万本を売っている定番。\n神戸レタスの商品で、30代から50代向けに作られています。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -4996,7 +4017,7 @@
       "description": "筋膜リリースに使うフォームローラーです。凹凸のあるグリッドタイプ。\n体重をかけて転がすだけなので、道具の使い方を覚える必要がありません。デザインを選べます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -5030,7 +4051,7 @@
       "description": "アンチバースト仕様のバランスボールです。45cm・55cm・65cmから選べます。\nアンチバーストは、穴が開いても一気に破裂せず、ゆっくり空気が抜ける作りです。ポンプと説明書、エクササイズガイドが付きます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -5062,7 +4083,7 @@
       "description": "日本製の革のブックカバーです。文庫、新書、四六判、B6、A5、コミックまでサイズを選べます。\nサイズオーダーにも対応しているので、手持ちの本に合わせられます。イニシャルの名入れが付きます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -5095,7 +4116,7 @@
       "description": "犬にも猫にも使える顆粒タイプの乳酸菌サプリです。日本産。\nナノ型乳酸菌、ビフィズス菌、オリゴ糖が入っています。顆粒なので、いつものごはんに振りかけるだけで足せます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -5128,7 +4149,7 @@
       "description": "BOTANISTのシャンプーとトリートメントの2本セットです。ノンシリコンのボタニカルシリーズ。\n2本まとめてこの値段なので、単品で買い足すより計算が合います。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00",
@@ -5161,7 +4182,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00rgnw7.jeifob35.g00rgnw7.jeifpf99/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fcase-by-case%2F3017%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fcase-by-case%2Fi%2F10002035%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "ケースbyケース",
       "reviewAverage": 4.43,
-      "reviewCount": 29610,
+      "reviewCount": 29613,
       "itemCode": "case-by-case:10002035",
       "genreId": "564277",
       "listPrice": null,
@@ -5179,7 +4200,7 @@
       "description": "ケーブルが本体に内蔵されたモバイルバッテリーです。PSE認証品。\nケーブルを別に持たなくていいので、カバンに入れるものが1つ減ります。マット加工で指紋が残りにくい仕上げ。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -5212,7 +4233,7 @@
       "description": "博多久松の辛子高菜、2袋セットです。3種類から選べます。\nそのままご飯に乗せても、油で炒めても使えます。メール便のポスト投函なので、受け取りの手間がありません。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -5245,7 +4266,7 @@
       "description": "使う場面から選べる精油5本のセットです。ラベンダー、レモングラス、オレンジなどが揃います。\n香りごとに使いどころが違うので、1本ずつ買い足すより、まとめて試すほうが自分に合うものを見つけやすい。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -5324,7 +4345,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00q0207.jeifod2d.g00q0207.jeifp6a9/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fogawahan%2F10002596%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fogawahan%2Fi%2F10002596%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "印鑑はんこ製造直売店@小川祥雲堂",
       "reviewAverage": 4.81,
-      "reviewCount": 16979,
+      "reviewCount": 16981,
       "itemCode": "ogawahan:10002596",
       "genreId": "216081",
       "listPrice": null,
@@ -5342,7 +4363,7 @@
       "description": "シヤチハタのネーム9、直径9.5mmの別注品です。書体と色を選んで注文します。\n浸透印なのでスタンプ台が要りません。就職や引っ越しの祝いとしても選ばれています。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -5375,7 +4396,7 @@
       "description": "ジョイコンのスティックが勝手に動く、いわゆるドリフトを自分で直すためのセットです。交換用パーツと工具が23点入っています。\n修理に出すと日数も費用もかかりますが、これなら手元で終わります。分解の作業が必要なので、細かい作業が苦にならない人向けです。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -5407,7 +4428,7 @@
       "description": "九州の日田で採った水を使った完全国産の強炭酸水です。500mlが24本。\nプレーンなので、そのまま飲んでも割り材としても使えます。ラベルレス。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00",
@@ -5441,7 +4462,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00skps7.jeifo982.g00skps7.jeifp82d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Faidort%2Fslub-725a2%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Faidort%2Fi%2F10001503%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "愛度楽天市場店",
       "reviewAverage": 4.18,
-      "reviewCount": 16122,
+      "reviewCount": 16124,
       "itemCode": "aidort:10001503",
       "genreId": "502835",
       "listPrice": null,
@@ -5459,7 +4480,7 @@
       "description": "Bluetooth 5.4のワイヤレスヘッドセットです。充電ケースが付きます。\nケースと本体の両方にバッテリー残量が出ます。防水防滴なので、汗をかく場面でも使えます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -5492,7 +4513,7 @@
       "description": "BTSの『Proof』コンパクト盤です。韓国音楽チャートに反映される取扱いになっています。\n当店特典が付きます。通常盤より小さい構成なので、値段が抑えられています。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -5525,7 +4546,7 @@
       "description": "BTSの『Proof』コンパクト盤です。上と同じ内容を、別のショップが同じ値段で扱っています。\n特典の内容はショップごとに違うので、比べてから選べます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -5558,7 +4579,7 @@
       "description": "九州産の黄金生姜と熟成黒生姜を、丸ごと乾燥させた粉末です。無着色・無添加。\n粉末なので、味噌汁でも紅茶でも後から足せます。生の生姜のようにすりおろす手間がありません。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -5590,7 +4611,7 @@
       "description": "木質ペレットの猫砂です。20kg（約33リットル）入っています。\n1kgあたり97円ほど。木の素材なので、燃えるごみとして出せる自治体が多いものです。まとめ買い向けの量です。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -5605,7 +4626,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00t3287.jeifoe70.g00t3287.jeifpf2a/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkanekichionline%2Fol_90000999%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fkanekichionline%2Fi%2F10000049%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "カネ吉オンライン 楽天市場店",
       "reviewAverage": 4.68,
-      "reviewCount": 42187,
+      "reviewCount": 42189,
       "itemCode": "kanekichionline:10000049",
       "genreId": "566615",
       "listPrice": null,
@@ -5623,7 +4644,7 @@
       "description": "カネ吉の惣菜が12袋入ったおまかせセットです。中身は届いてからのお楽しみ。\n1袋165円ほどで、温めるだけで一品になります。あと1品足りない日のために、冷凍庫に置いておくものです。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -5638,7 +4659,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00tfbh7.jeifo7dc.g00tfbh7.jeifpe5f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnext-online%2F10000180%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fnext-online%2Fi%2F10000180%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "Nextオンライン",
       "reviewAverage": 4.6,
-      "reviewCount": 41322,
+      "reviewCount": 41325,
       "itemCode": "next-online:10000180",
       "genreId": "211876",
       "listPrice": null,
@@ -5656,7 +4677,7 @@
       "description": "洗濯機の下に噛ませて底上げする台、4個セットです。防振と防音を兼ねます。\n持ち上がったぶん下に手が入るので、たまる埃を掃除できるようになります。ドラム式にも縦型にも使えます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00",
@@ -5688,7 +4709,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00tgx37.jeifo343.g00tgx37.jeifp088/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnityukan0715%2Fqqdou7009a%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fnityukan0715%2Fi%2F10002163%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "スマートストア",
       "reviewAverage": 4.34,
-      "reviewCount": 22549,
+      "reviewCount": 22561,
       "itemCode": "nityukan0715:10002163",
       "genreId": "502556",
       "listPrice": null,
@@ -5706,7 +4727,7 @@
       "description": "接触冷感の生地を使ったUVカットパーカーです。メッシュで通気を取っています。\n羽織るだけなので、日焼け止めを塗り直さずに済みます。レディースとメンズの両方があります。年間ランキング2位。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -5721,7 +4742,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00rehx7.jeifo923.g00rehx7.jeifpf0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdabada%2Fyoga-mat-10%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fdabada%2Fi%2F10000522%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "DABADAストア 楽天市場店",
       "reviewAverage": 4.32,
-      "reviewCount": 12621,
+      "reviewCount": 12622,
       "itemCode": "dabada:10000522",
       "genreId": "204688",
       "listPrice": null,
@@ -5738,7 +4759,7 @@
       "description": "厚手のヨガマットです。10mmと15mmから選べます。\n収納ケースとバンドが両方付くので、丸めてそのまま片付けられます。男女兼用で、宅トレ用としても使えます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -5753,7 +4774,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00to087.jeifo055.g00to087.jeifpcd2/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flively777%2Fformroller%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Flively777%2Fi%2F10000143%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "ライブリー",
       "reviewAverage": 4.57,
-      "reviewCount": 8099,
+      "reviewCount": 8102,
       "itemCode": "lively777:10000143",
       "genreId": "568340",
       "listPrice": null,
@@ -5771,7 +4792,7 @@
       "description": "凹凸の異なる2種類を1本にしたフォームローラーです。強さを使い分けられます。\nミニローラーも付くので、肩まわりなど狭いところにも当てられます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -5786,7 +4807,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00rqrk7.jeifo5bf.g00rqrk7.jeifp04a/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsuzukachan%2F540%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fsuzukachan%2Fi%2F10000000%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "UVカットマスク通販 MARUFUKU",
       "reviewAverage": 4.66,
-      "reviewCount": 7540,
+      "reviewCount": 7542,
       "itemCode": "suzukachan:10000000",
       "genreId": "568384",
       "listPrice": null,
@@ -5803,7 +4824,7 @@
       "description": "ヤケーヌのフェイスカバー、スタンダードのマジック式です。公式ショップからの発送。\n顔から首までを覆いますが、息苦しくならない作りになっています。洗えるので繰り返し使えます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -5835,7 +4856,7 @@
       "description": "洗えるぬいぐるみです。赤ちゃんが口に入れたり、床に落としたりする前提で選べます。\nあひる・犬・羊などから選べて、はじめてのおもちゃとしても、贈り物としても使えます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -5868,7 +4889,7 @@
       "description": "洗えるタイプの動物のぬいぐるみです。くま・犬・うさぎ・ぞう・ユニコーンから選べます。\n赤ちゃんが持つものは汚れるのが前提なので、洗えるかどうかは実用上いちばん大きい違いになります。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -5883,7 +4904,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00qnb07.jeifo5de.g00qnb07.jeifp3fc/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fichikawa929%2Fdeer_horn%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fichikawa929%2Fi%2F10000637%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "北海道ラブなイチカワクリーニング",
       "reviewAverage": 4.7,
-      "reviewCount": 2814,
+      "reviewCount": 2815,
       "itemCode": "ichikawa929:10000637",
       "genreId": "215335",
       "listPrice": null,
@@ -5901,7 +4922,7 @@
       "description": "北海道産のエゾシカの角です。極太サイズで、犬のおもちゃとして使います。\n角は硬く、噛んでも減りにくいので長持ちします。甘噛みやいたずらの向け先として、デンタルケアと口臭対策も兼ねられます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -5916,7 +4937,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00uird7.jeifo36b.g00uird7.jeifp0c5/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fcreaswing%2Fcar-311-0005%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fcreaswing%2Fi%2F10000036%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "CREAS WING 公式ショップ",
       "reviewAverage": 4.46,
-      "reviewCount": 13747,
+      "reviewCount": 13756,
       "itemCode": "creaswing:10000036",
       "genreId": "510302",
       "listPrice": null,
@@ -5934,7 +4955,7 @@
       "description": "傘のように開いて広げるフロントサンシェードです。折りたたみ式より畳むのが速い形。\nXSから2XLまで7サイズあるので、軽自動車からハイエースまで合わせられます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -5967,7 +4988,7 @@
       "description": "日本ブランドTOKAIZの傘型サンシェードです。UVカット99.9%、UPF50+をうたっています。\n中棒が曲がるので、フロントガラスの角度に沿わせられます。骨が10本あり、たわみにくい作りです。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -6000,7 +5021,7 @@
       "description": "HMBのサプリで、1袋432粒入りです。原料も生産も国内で行っています。\n粒数が多いぶん、1粒あたりの単価は下がります。続けて飲む前提の商品です。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -6033,7 +5054,7 @@
       "description": "カシミアタッチの生地を使ったタートルネックのニットです。家で洗えます。\nニットは洗濯に出すと1着ぶんの費用がかさみます。自宅で洗えるかどうかは、着る回数に直結します。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -6065,7 +5086,7 @@
       "description": "木質ペレット20kgです。猫砂としても、ペレットストーブの燃料としても使えます。\n崩れるタイプなので、システムトイレの下段に落とす使い方ができます。用途が2つあるぶん、余っても行き先があります。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -6080,7 +5101,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00s6537.jeifo96d.g00s6537.jeifp071/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fenelabojapan%2F10000000%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fenelabojapan%2Fi%2F10000000%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "エネラボ・ジャパン",
       "reviewAverage": 4.62,
-      "reviewCount": 5074,
+      "reviewCount": 5075,
       "itemCode": "enelabojapan:10000000",
       "genreId": "204174",
       "listPrice": 2050,
@@ -6098,7 +5119,7 @@
       "description": "猫砂用の木質ペレットです。33リットルから容量を選べます。\n木の素材なので、燃えるごみとして出せる自治体が多いものです。まとめ買いで単価が下がります。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -6113,7 +5134,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00tna67.jeifodd2.g00tna67.jeifp8a1/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fattenir%2F166011%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fattenir%2Fi%2F10000250%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "アテニア公式ショップ 楽天市場店",
       "reviewAverage": 4.75,
-      "reviewCount": 39876,
+      "reviewCount": 39877,
       "itemCode": "attenir:10000250",
       "genreId": "405061",
       "listPrice": null,
@@ -6131,7 +5152,7 @@
       "description": "アテニアのクレンジングオイル175mLです。公式ショップからの発送になります。\nW洗顔が不要なので、これ1本でメイク落としが終わります。手間と洗顔料の両方が減る作りです。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00",
@@ -6181,7 +5202,7 @@
       "description": "潤滑剤のLSベルハンマーゴールド、スプレー420mlです。1人1本かぎりのお試し企画になっています。\n2回目以降の注文は自動でキャンセルされる決まりなので、まとめ買いはできません。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -6213,7 +5234,7 @@
       "description": "ノースリーブのマキシ丈ワンピースです。丈が2種類から選べます。\n吸水速乾でUVカット。マタニティでも着られる形なので、体型が変わる時期でも使えます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -6246,7 +5267,7 @@
       "description": "パッド入りのノンワイヤースポーツブラです。累計22万枚売れています。\nヨガ、筋トレ、ナイトブラと使い分けられます。ジュニアや中学生のサイズもあります。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -6279,7 +5300,7 @@
       "description": "ふわふわの手ざわりを売りにしたぬいぐるみです。うさぎ・くま・いぬから選べます。\nランキングで連続して1位を取っている商品で、出産祝いの定番として選ばれています。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -6312,7 +5333,7 @@
       "description": "PUPPIAのベスト型ソフトハーネスです。世界で累計170万個売れています。\nメッシュのベスト型なので、面で支えます。首だけに力がかからないぶん、引っぱる犬でも負担が散ります。XSからLまで。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -6344,7 +5365,7 @@
       "description": "Nintendo Switch用の『ふたりで!にゃんこ大戦争』です。追加コンテンツのDLCが同梱されています。\n2人で一緒に遊べるので、家に1本あると来客時にも使えます。即日出荷の扱いです。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -6377,7 +5398,7 @@
       "description": "ボタンを押すと童謡が鳴る絵本です。幼稚園の先生が選んだ曲が入っています。\n0歳から5歳ごろまで幅があり、手遊びやカラオケとしても使えます。ギフト包装が無料なので、贈り物にそのまま回せます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -6392,7 +5413,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00rgnw7.jeifob35.g00rgnw7.jeifpf99/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fcase-by-case%2F3010%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fcase-by-case%2Fi%2F10002027%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "ケースbyケース",
       "reviewAverage": 4.5,
-      "reviewCount": 5294,
+      "reviewCount": 5295,
       "itemCode": "case-by-case:10002027",
       "genreId": "565955",
       "listPrice": null,
@@ -6410,7 +5431,7 @@
       "description": "Switch 2 にも対応したワイヤレスコントローラーです。純正のプロコンより安く揃えられます。\n2台目、3台目として買い足すときに効いてくる値段です。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -6443,7 +5464,7 @@
       "description": "ブラ紐を隠しつつ、脇汗も受けるタンクトップです。1枚で2つの役目をこなします。\n接触冷感の生地なので、夏でもインナーを1枚増やす負担が小さい。3枚セットでの購入になります。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "2026-08-27 16:00",
       "endTime": "2026-09-01 17:59",
       "bumpedAt": "2026-08-20T00:00:00",
@@ -6495,7 +5516,7 @@
       "description": "『ポケットモンスター ソード・シールド』の追加コンテンツ、エキスパンションパスのダウンロード版です。\n本編がないと遊べません。すでに持っている人向けの追加要素です。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "2020-01-10 00:00",
       "endTime": "2050-12-31 23:59",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -6528,7 +5549,7 @@
       "description": "屋外に置いたタイヤを覆うカバーです。防水と紫外線対策の両方をうたっています。\nタイヤはゴムなので、日に当て続けるとひび割れます。保管場所が屋外なら、掛けておくかどうかで寿命が変わります。位置シートが付いていて、どのタイヤをどこに履かせていたか記録できます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -6560,7 +5581,7 @@
       "description": "クリスタルガイザーの500mlが48本入ったケースです。1本あたり58円ほど。\nカリフォルニアの採水地から届く定番の水です。箱で置いておけば、買い足す頻度が減ります。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -6575,7 +5596,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00tyy97.jeifo4dc.g00tyy97.jeifp137/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fazusa%2F0302%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fazusa%2Fi%2F10000130%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "春夏秋冬",
       "reviewAverage": 4.4,
-      "reviewCount": 17488,
+      "reviewCount": 17493,
       "itemCode": "azusa:10000130",
       "genreId": "208375",
       "listPrice": null,
@@ -6593,7 +5614,7 @@
       "description": "冷却プレートが付いたハンディファンです。風だけでなく、首や額に直接当てて冷やせます。\n風量は120段階。バッテリーは5000mAhと3200mAhから選べます。卓上でも使えます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -6608,7 +5629,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00u9317.jeifo295.g00u9317.jeifp6c9/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fgracevally%2Fgrace-x1%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fgracevally%2Fi%2F10000003%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "GraceVally 楽天市場店",
       "reviewAverage": 4.51,
-      "reviewCount": 49147,
+      "reviewCount": 49154,
       "itemCode": "gracevally:10000003",
       "genreId": "502835",
       "listPrice": null,
@@ -6626,7 +5647,7 @@
       "description": "Bluetooth 5.4のワイヤレスイヤホンです。ケースに残量が表示されます。\nENCのノイズキャンセリング付きで、連続36時間使えます。2024年の年間MVPを取った製品です。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00",
@@ -6677,7 +5698,7 @@
       "description": "ストレッチの効いたスキニーデニムです。丈が2種類から選べます。\n小さいサイズから大きいサイズまで揃っているので、既製品で合う丈がなかった人でも探せます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -6710,7 +5731,7 @@
       "description": "次亜塩素酸水のサライウォーター2Lです。薄めずにそのまま使えます。\n除菌と消臭の両方に使えるので、キッチン、トイレ、ペットのにおい、靴と1本で回せます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -6743,7 +5764,7 @@
       "description": "ロジクールのワイヤレスキーボードとマウスのセット、MK235です。国内正規品。\n耐水設計で、2年間の無償保証が付きます。有線をやめたいときの、いちばん確実な選択肢です。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -6776,7 +5797,7 @@
       "description": "BTSの『LOVE YOURSELF 結 Answer』です。バージョンはランダムで届きます。\n生写真とトレカのおまけが付きます。どのバージョンが来るかは選べません。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -6809,7 +5830,7 @@
       "description": "自動連射の機能が付いた無線コントローラーです。Switch 2、Switch、Lite、有機ELモデルに対応します。\nPCのSteamでも使えるので、1つで複数の環境に回せます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -6842,7 +5863,7 @@
       "description": "BTSの『MAP OF THE SOUL : 7』です。バージョンはランダムで届きます。\n生写真とトレカが付きます。中身は同じで、ジャケットの版が変わります。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -6875,7 +5896,7 @@
       "description": "薄型のワイヤレスキーボードとマウスのセットです。充電式で、電池を買い足す必要がありません。\n2.4GHzとBluetoothの両方に対応するので、パソコンとタブレットで使い分けられます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -6908,7 +5929,7 @@
       "description": "セパレートのフィットネス水着に、ゴーグル・タオル・バッグ・スイムキャップが付いたセットです。\n泳ぎに行くのに要るものが一度に揃います。半袖でめくれ防止、UVカット付き。大きいサイズもあります。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -6941,7 +5962,7 @@
       "description": "吸盤で取り付ける車載スマホホルダーです。年間ランキングで4年連続1位を取っています。\n吸盤タイプは貼る場所を選べるぶん、外して付け替えるのも簡単です。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -6975,7 +5996,7 @@
       "description": "12Vバイク用の全自動バッテリー充電器です。トリクル充電に対応しています。\n冬のあいだ乗らないバイクは、放っておくとバッテリーが上がります。繋ぎっぱなしにできるので、春に乗り出すときの手間が減ります。車両ケーブルが付属。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -6990,7 +6011,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00pqec7.jeifo156.g00pqec7.jeifp286/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fe-zakkamania%2F33566-1401336%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fe-zakkamania%2Fi%2F10044278%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "イーザッカマニアストアーズ",
       "reviewAverage": 4.19,
-      "reviewCount": 27170,
+      "reviewCount": 27171,
       "itemCode": "e-zakkamania:10044278",
       "genreId": "206440",
       "listPrice": null,
@@ -7008,7 +6029,7 @@
       "description": "ウエストがゴムのストレッチスキニーです。SからXXXLまでサイズが揃っています。\nデニム見えしますが履き心地はレギンスに近く、長時間座る日でも楽です。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00",
@@ -7043,7 +6064,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00qzts7.jeifo29d.g00qzts7.jeifp8fc/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftu-hacci%2F90368r%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Ftu-hacci%2Fi%2F10004413%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "tu-hacci(ツーハッチ)",
       "reviewAverage": 4.41,
-      "reviewCount": 25937,
+      "reviewCount": 25939,
       "itemCode": "tu-hacci:10004413",
       "genreId": "303662",
       "listPrice": null,
@@ -7060,7 +6081,7 @@
       "description": "ワイヤーが入ったタイプのブラトップです。カップ付きなので、下着を重ねずに済みます。\nワイヤー入りは形が崩れにくいぶん、ノンワイヤーより支える力があります。デザインは3種類から。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00",
@@ -7094,7 +6115,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00qzts7.jeifo29d.g00qzts7.jeifp8fc/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftu-hacci%2F90389r%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Ftu-hacci%2Fi%2F10005040%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "tu-hacci(ツーハッチ)",
       "reviewAverage": 4.37,
-      "reviewCount": 18440,
+      "reviewCount": 18442,
       "itemCode": "tu-hacci:10005040",
       "genreId": "303662",
       "listPrice": null,
@@ -7111,7 +6132,7 @@
       "description": "綿を使ったノンワイヤーのブラトップです。締めつけないことを狙った作り。\n3wayで着られるので、部屋着としても外出時のインナーとしても回せます。デザインは4種類から。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -7144,7 +6165,7 @@
       "description": "ロング丈のフレアワイドパンツです。色が11色あり、形も2タイプから選べます。\nストレッチが効いているので、ヨガやリラックス用としても使えます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -7159,7 +6180,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00scnq7.jeifo536.g00scnq7.jeifp16c/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftorreya-shop%2F100000013%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Ftorreya-shop%2Fi%2F10000022%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "Torreya 楽天市場店",
       "reviewAverage": 4.66,
-      "reviewCount": 14947,
+      "reviewCount": 14954,
       "itemCode": "torreya-shop:10000022",
       "genreId": "563788",
       "listPrice": null,
@@ -7177,7 +6198,7 @@
       "description": "LEDとUVの両方に対応した48Wのジェルネイルライトです。セルフネイル用。\n低ヒート機能があるので、硬化するときの熱さを抑えられます。レジンクラフトにも使えます。1年保証付き。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -7210,7 +6231,7 @@
       "description": "Switch用の『やわらかあたま塾 いっしょにあたまのストレッチ』です。\n短い問題を繰り返す形なので、まとまった時間が取れなくても進められます。家族で交代しながら遊べます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -7243,7 +6264,7 @@
       "description": "野草と野菜、果物を発酵・熟成させた酵素のカプセルです。約6ヶ月分が入っています。\n1日あたり17円ほど。半年ぶんまとめて買うことで、この単価になっています。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -7276,7 +6297,7 @@
       "description": "Nintendo Switch Online の12ヶ月券、ダウンロード版です。\n1ヶ月あたり250円。1ヶ月券を毎月買うより、まとめたほうが安くなります。オンライン対戦とセーブデータの預かりが使えます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "2018-09-19 00:00",
       "endTime": "2050-12-31 23:59",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -7308,7 +6329,7 @@
       "description": "クロックスのクロックバンドです。定番のモデルで、色はブラック・ホワイト・ネイビー・パープルなど。\n室内でも屋外でも履けます。丸洗いできるので、汚れても水で流すだけで戻せます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -7341,7 +6362,7 @@
       "description": "冷蔵庫の下に敷く透明のポリカーボネート製マットです。床のへこみとキズを防ぎます。\n賃貸では、退去時に床の跡が問題になることがあります。敷いておけば、そこを気にせずに済みます。床暖房にも対応。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -7374,7 +6395,7 @@
       "description": "グリニーズプラスのデンタルガム、超小型犬用60本です。体重2〜7kgが対象。\n1本あたり53円で、約2ヶ月分にあたります。総合栄養食なので、おやつでありながら栄養の基準も満たしています。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -7407,7 +6428,7 @@
       "description": "重ねる、並べる、崩すという遊びができるカップのセットです。積み木より軽く、当たっても痛くありません。\n6か月ごろから3歳ごろまで、遊び方を変えながら使えます。北欧のブランド mushie の製品です。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -7440,7 +6461,7 @@
       "description": "ベビーサークルの拡張用パネル2枚組です。単体では囲いになりません。\nすでに同じシリーズを持っていて、もう少し広げたい、形を変えたいというときのための追加パーツです。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -7488,7 +6509,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00teot7.jeifo1c5.g00teot7.jeifpc26/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftreesoyc%2Frm02%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Ftreesoyc%2Fi%2F10000002%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "trees楽天市場店",
       "reviewAverage": 4.71,
-      "reviewCount": 11575,
+      "reviewCount": 11578,
       "itemCode": "treesoyc:10000002",
       "genreId": "101766",
       "listPrice": 3390,
@@ -7506,7 +6527,7 @@
       "description": "透明度90%の冷蔵庫マットです。耐荷重500kgで、防カビ加工と薬剤検査を通しています。\n収納と不動産の専門家が監修した製品で、雑誌LDKにも取り上げられています。特典を選べます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -7521,7 +6542,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00t8ou7.jeifo852.g00t8ou7.jeifpba2/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fioroi%2Fxxkjcwysj%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fioroi%2Fi%2F10000555%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "五百蔵商店",
       "reviewAverage": 4.48,
-      "reviewCount": 3071,
+      "reviewCount": 3072,
       "itemCode": "ioroi:10000555",
       "genreId": "404114",
       "listPrice": null,
@@ -7539,7 +6560,7 @@
       "description": "循環式の自動給水器です。1.8Lの蛇口式で、浄水しながら回します。\n静音をうたっていて、寝室に置いても気になりにくい作り。3年保証が付きます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -7572,7 +6593,7 @@
       "description": "ロジクールのMK270B/MK270Gです。定番の無線キーボードとマウスのセット。\n防滴設計で、2年間の無償保証が付きます。WindowsとChromeに対応。Unifyingには非対応です。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -7605,7 +6626,7 @@
       "description": "日本製の木の積み木です。無垢の木を使った手作りで、玩具安全基準のPSCに対応しています。\n木の積み木は握った感触と音が違うので、最初の1セットとして選ばれることが多いものです。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -7639,7 +6660,7 @@
       "description": "アイリスオーヤマの紙の猫砂、7Lが6袋です。トイレに流せます。\n1袋613円ほど。紙製で軽いので、運ぶのも捨てるのも楽です。燃えるごみとしても出せます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00",
@@ -7690,7 +6711,7 @@
       "description": "DABADAのトレッキングポール2本セットです。アルミ製で1本220gと軽量。\nSGマークを取得しています。最少56.5cmまで縮むので、ザックに挿して持ち運べます。熊よけ鈴と収納袋、キャップが付きます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -7705,7 +6726,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00tbsu7.jeifoafa.g00tbsu7.jeifp998/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbrita%2Fmaxtraplus-3-w%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fbrita%2Fi%2F10000052%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "浄水器のブリタ公式 楽天市場店",
       "reviewAverage": 4.75,
-      "reviewCount": 13260,
+      "reviewCount": 13261,
       "itemCode": "brita:10000052",
       "genreId": "212491",
       "listPrice": null,
@@ -7724,7 +6745,7 @@
       "description": "ブリタの浄水ポット用カートリッジ、マクストラプロの3個セットです。日本仕様。\n訳あり扱いですが、公式が売っている正規品です。カートリッジは消耗品なので、まとめて持っておくと切らしません。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -7732,14 +6753,14 @@
     {
       "id": "rb457504c0",
       "category": "kaden",
-      "title": "≪15%OFFクーポン≫ 《公式店》【SALONIA ストレート ヘアアイロン 15mm 24mm…",
-      "rawTitle": "≪15%OFFクーポン≫ 《公式店》【SALONIA ストレート ヘアアイロン 15mm 24mm 35mm】楽天1位送料無料 1年保証 耐熱ポーチ付き サロニア 人気 おすすめ プレゼント コテ アイロン hk クリスマスプレゼント 女性 slall",
+      "title": "《公式店》【SALONIA ストレート ヘアアイロン 15mm 24mm 35mm】楽天1位送料無料…",
+      "rawTitle": "《公式店》【SALONIA ストレート ヘアアイロン 15mm 24mm 35mm】楽天1位送料無料 1年保証 耐熱ポーチ付き サロニア 人気 おすすめ プレゼント コテ アイロン hk クリスマスプレゼント 女性 slall",
       "price": 3828,
-      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/kobe-beauty-labo/cabinet/thum/main-salo6_15off.jpg?_ex=600x600",
+      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/kobe-beauty-labo/cabinet/1st_thum/main-salo6.jpg?_ex=600x600",
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00r23n7.jeifoddc.g00r23n7.jeifp65c/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkobe-beauty-labo%2Fmain-salo6%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fkobe-beauty-labo%2Fi%2F10000074%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "アンド ハビット",
       "reviewAverage": 4.56,
-      "reviewCount": 38868,
+      "reviewCount": 38872,
       "itemCode": "kobe-beauty-labo:10000074",
       "genreId": "509412",
       "listPrice": null,
@@ -7757,7 +6778,7 @@
       "description": "サロニアのストレートヘアアイロンです。プレート幅を15mm・24mm・35mmから選べます。\n幅が広いほど一度に挟める量が増え、狭いほど前髪など細かい場所に届きます。1年保証と耐熱ポーチ付き。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00",
@@ -7809,7 +6830,7 @@
       "description": "ドア付きのベビーサークルです。大人がまたがずに出入りできるので、抱っこしたままでも通れます。\n高さ65cmのハイタイプで、使わないときは折りたためます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -7824,7 +6845,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00tsqq7.jeifoe96.g00tsqq7.jeifpcdb/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fcholylife%2Fqm3%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fcholylife%2Fi%2F10000085%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "Choly Life",
       "reviewAverage": 4.43,
-      "reviewCount": 15813,
+      "reviewCount": 15814,
       "itemCode": "cholylife:10000085",
       "genreId": "208532",
       "listPrice": null,
@@ -7841,7 +6862,7 @@
       "description": "回転式の電気シェーバーです。充電式で、丸洗いできます。\n防水なので風呂場でも使えます。回転刃は替刃が国内で手に入るので、本体を長く使えます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -7874,7 +6895,7 @@
       "description": "ファブリックカバーが付いたバランスボールです。45cm・55cm・65cmから選べます。\nカバーがあると床で滑りにくく、そのまま椅子代わりにも使えます。アンチバースト仕様で、ポンプとエクササイズガイドが付きます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -7908,7 +6929,7 @@
       "description": "おからと静岡県産の茶葉を使った猫砂です。7Lが6袋。\n1袋663円ほど。トイレに流せて、燃えるごみとしても出せます。お茶の香りで消臭と抗菌を兼ねます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -7941,7 +6962,7 @@
       "description": "タワー型の超音波加湿器です。次亜塩素酸水にも対応しています。\n水がなくなると自動で止まります。卓上に置ける大きさなので、部屋全体ではなく手元を加湿する使い方に向いています。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -7974,7 +6995,7 @@
       "description": "リビングに置くことを想定したベビーサークルです。ドア付きで、大人もまたがずに出入りできます。\n生活空間に置きっぱなしになるものなので、色はベージュ・グレー・ホワイトから選べます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -8007,7 +7028,7 @@
       "description": "ストレートとカールの両方に使える2WAYアイロンです。全4色。\nチタニウムのプレートで、海外の電圧にも対応します。1本で済むので、旅行に持っていくものを減らせます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -8015,8 +7036,8 @@
     {
       "id": "r463511ccd",
       "category": "kaden",
-      "title": "≪15%OFFクーポン≫ 《SALONIA公式店》【SALONIA サロニア 2WAY ストレート &…",
-      "rawTitle": "≪15%OFFクーポン≫ 《SALONIA公式店》【SALONIA サロニア 2WAY ストレート & カール アイロン 32mm 】送料無料 1年保証 海外対応 カール hk プレゼント ギフト コテ 32mm ヘアードライヤー 海外旅行 トラベル ヘアアイロン 2way slall",
+      "title": "《SALONIA公式店》【SALONIA サロニア 2WAY ストレート & カール アイロン…",
+      "rawTitle": "《SALONIA公式店》【SALONIA サロニア 2WAY ストレート & カール アイロン 32mm 】送料無料 1年保証 海外対応 カール hk プレゼント ギフト コテ 32mm ヘアードライヤー 海外旅行 トラベル ヘアアイロン 2way slall",
       "price": 4708,
       "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/kobe-beauty-labo/cabinet/1st_thum/main-salo3.jpg?_ex=600x600",
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00r23n7.jeifoddc.g00r23n7.jeifp65c/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkobe-beauty-labo%2Fmain-salo3%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fkobe-beauty-labo%2Fi%2F10000050%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
@@ -8040,7 +7061,7 @@
       "description": "サロニアの2WAYアイロン、32mmです。ストレートにもカールにも使えます。\n32mmは太めなので、ゆるめのカールを作る幅です。1年保証と海外対応付き。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -8073,7 +7094,7 @@
       "description": "アレティの2WAYヘアアイロン、20mmです。セラミックコーティングで滑りをよくしています。\n温度が35段階（最高230℃）で選べるので、髪質に合わせて 低めから使えます。前髪にも届く幅です。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -8106,7 +7127,7 @@
       "description": "人感センサー付きのセラミックファンヒーターです。人がいなくなると止まります。\nすぐ温まるので、足元だけを短時間あたためる使い方に向いています。薄型でコンパクト。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -8139,7 +7160,7 @@
       "description": "recolteのフードプロセッサーです。刻む、混ぜる、砕く、泡立てるなど7つの役目をこなします。\n容量は500ml。大根おろしから離乳食、氷を砕くところまで1台で回せます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -8154,7 +7175,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00tbsu7.jeifoafa.g00tbsu7.jeifp998/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbrita%2Fmaxtraplus-8%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fbrita%2Fi%2F10000161%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "浄水器のブリタ公式 楽天市場店",
       "reviewAverage": 4.78,
-      "reviewCount": 25651,
+      "reviewCount": 25656,
       "itemCode": "brita:10000161",
       "genreId": "212491",
       "listPrice": null,
@@ -8173,7 +7194,7 @@
       "description": "ブリタの浄水カートリッジ、マクストラプロの8個セットです。日本仕様の公式正規品。\n1個あたり999円。カートリッジは定期的に替えるものなので、まとめたほうが1個あたりが下がります。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-08-27",
+      "lastSeen": "2026-08-28",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
