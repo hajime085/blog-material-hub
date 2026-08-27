@@ -130,25 +130,79 @@ def ends_label(et):
                                  m.group(4).lstrip("0") or "0", m.group(5))
 
 
-def compose_product(p, site, pr, reply_link=False, ev=None):
+def short_title(t, n=34):
+    """商品名を短く。楽天の商品名は検索語の羅列なので、長く出しても読めない。"""
+    t = (t or "").strip()
+    return t if len(t) <= n else t[:n].rstrip("…、 ") + "…"
+
+
+# 締めの一言。付けるかどうかは投稿ごとに回す。
+# 「使ったことある人いますか」は、こちらが使ったとは言っていないので嘘にならない。
+# 反応がつくとアルゴリズムに拾われやすくなる、というのは方々で言われている。
+TAILS = [
+    "",
+    "\n\n使ったことある人いますか？",
+    "\n\n気になる人は保存しておくと、あとで見返せます。",
+    "",
+    "\n\nこれ、他にいいのがあれば教えてください。",
+]
+
+
+def hook(p, pr):
+    """1行目。ここで止まってもらえないと、あとが全部無駄になる。
+
+    値引き率から入るのはやめる。「◯%OFFです」は売り込みの形で、
+    流れてくる人の指は止まらない。
+    先に出すのは、値段そのものか、期限か、他の人が買った数。
+    どれも手元のデータから言えることで、感想は入れない。
+
+    使った体験は書かない。買っていない商品の体験談は作り話になる。
+    【PR】を掲げているアカウントがそれをやるのは筋が通らない。
+    """
+    price = yen(p["pr"])
+    ends = ends_label(p.get("et"))
+    rc = p.get("rc") or 0
+    unit = (p.get("u") or "").strip()
+
+    cands = []
+
+    # ① 値段そのもの。単価が分かるものは、それを添える。
+    if unit:
+        cands.append("%s%s円。%s。" % (pr, price, unit))
+    cands.append("%sこれ、%s円です。" % (pr, price))
+
+    # ② 期限。本物の終了時刻があるときだけ。煽りではなく事実。
+    if ends:
+        cands.append("%sこの値段は%s。" % (pr, ends))
+
+    # ③ 他の人が買った数。感想ではなく記録。
+    if rc >= 1000:
+        cands.append("%sレビュー%s件で、星%s。" % (pr, yen(rc), p.get("ra", "")))
+
+    # ④ 値引きの幅が大きいときは、金額の差で見せる。率より額のほうが伝わる。
+    if p.get("d") and p.get("lp") and (p["lp"] - p["pr"]) >= 500:
+        cands.append("%s%s円だったものが%s円になっています。"
+                     % (pr, yen(p["lp"]), price))
+
+    return cands
+
+
+def compose_product(p, site, pr, reply_link=False, ev=None, seq=0):
     """商品の投稿文。
 
     キャプションがあればそれを先頭に置く。人が書いた文なので、いちばん読ませる。
 
     無ければ、手元のデータだけで組み立てる。
     キャプションを書くのは人の作業なので、そこを待っていると
-    今朝見つけた53%OFFを流せるのが明日になる。
+    今朝見つけた79%OFFを流せるのが明日になる。
     セールの訴求は鮮度がすべてなので、待たないほうを選ぶ。
 
     データだけで書く場合も、書くのは事実だけ。
     値引き、送料、レビュー件数、終了時刻、買いまわりに使えるか。
     どれも楽天のデータか、そこから機械的に決まることしか使わない。
-    感想は書かない。使っていない商品の感想は作り話になる。
     """
     cap = (p.get("cap") or "").strip()
-    title = p["t"]
-    if len(title) > 46:
-        title = title[:46].rstrip("…") + "…"
+    title = short_title(p["t"])
 
     lines = []
     if cap:
@@ -157,13 +211,16 @@ def compose_product(p, site, pr, reply_link=False, ev=None):
         if p.get("d") and p.get("lp") and (yen(p["lp"]) not in cap):
             lines.append("%s円 → %s円（%d%%OFF）" % (yen(p["lp"]), yen(p["pr"]), p["d"]))
     else:
-        # 値段を先頭に出す。ここが一番の情報になる。
-        if p.get("d") and p.get("lp"):
-            lines.append("%s%s円 → %s円（%d%%OFF）"
-                         % (pr, yen(p["lp"]), yen(p["pr"]), p["d"]))
-        else:
-            lines.append("%s%s円" % (pr, yen(p["pr"])))
+        cands = hook(p, pr)
+        head = cands[seq % len(cands)]
+        lines.append(head)
         lines.append(title)
+        # 1行目で値段の変化を言っているなら、直後に同じことを書かない。
+        # 同じ数字が2行続くと、読む気が失せる。
+        if p.get("d") and p.get("lp") and yen(p["lp"]) not in head:
+            lines.append("%s円 → %s円（%d%%OFF）" % (yen(p["lp"]), yen(p["pr"]), p["d"]))
+        elif p.get("d") and p.get("lp"):
+            lines.append("%d%%OFF です。" % p["d"])
 
     pts = []
     for x in (p.get("pt") or []):
@@ -174,30 +231,29 @@ def compose_product(p, site, pr, reply_link=False, ev=None):
         pts.append(x)
 
     if not cap:
-        # 人の書いた箇条書きが無いので、データから作る。
         free = "送料無料" in (p.get("tags") or [])
         pts = ["送料無料" if free else "送料は別にかかります"]
         rc = p.get("rc") or 0
-        if rc >= 100:
+        # 1行目でレビュー数を言っているなら、繰り返さない
+        if rc >= 100 and yen(rc) not in lines[0]:
             pts.append("レビュー%s件・★%s" % (yen(rc), p.get("ra", "")))
-        # 買いまわりに使えるかは、値段と送料で機械的に決まる。
-        # セールの最中だけ出す。何も無い日に言っても意味がない。
         if ev and p["pr"] >= 1000 and free:
             pts.append("買いまわりに使えます（税込1,000円以上・送料無料）")
         ends = ends_label(p.get("et"))
-        if ends:
+        # 1行目で期限を言っているなら、繰り返さない
+        if ends and ends not in lines[0]:
             pts.append("この値段は%s" % ends)
 
     if pts:
         lines.append("")
         lines += ["・" + x for x in pts[:4]]
 
+    body = "\n".join(lines) + TAILS[seq % len(TAILS)]
+
     url = "%s/p/%s/" % (site, p["id"])
     if reply_link:
-        return "\n".join(lines), url
-    lines.append("")
-    lines.append(url)
-    return "\n".join(lines), None
+        return body, url
+    return body + "\n\n" + url, None
 
 
 def compose_guide(g, site, pr, reply_link=False):
@@ -498,9 +554,10 @@ def pick(cfg, posted, want):
         items.append(p)
     items.sort(key=lambda p: p.get("at") or "", reverse=True)
 
-    for p in items:
+    n_done = len([k for k in (posted.get("keys") or []) if k.startswith("product:")])
+    for n, p in enumerate(items):
         linked.append(("product:" + p["id"],
-                       compose_product(p, site, pr, reply_link, ev)))
+                       compose_product(p, site, pr, reply_link, ev, n_done + n)))
 
     # ---- 商品以外 ----
     # 記事・セールの案内・知識・予定をまとめて扱う。
