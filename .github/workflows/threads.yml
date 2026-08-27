@@ -60,6 +60,12 @@ jobs:
             python3 threads.py
           fi
 
+      - name: いつ動いたかを残す
+        if: always()
+        run: |
+          echo "起動: $(TZ=Asia/Tokyo date '+%m/%d %H:%M') JST" >> "$GITHUB_STEP_SUMMARY"
+          echo "予定: ${{ github.event_name }}" >> "$GITHUB_STEP_SUMMARY"
+
       - name: 出したものを記録する
         run: |
           git config user.name "yasumiru-bot"

@@ -9,7 +9,8 @@
     "product:rb91539b1f",
     "product:re53b58ebb",
     "product:rb2dfeec36",
-    "product:rf05138318"
+    "product:rf05138318",
+    "product:r079bc53f2"
   ],
   "log": [
     {
@@ -113,6 +114,18 @@
       "link": "reply",
       "logic_version": "marketing_v2",
       "category": "fashion"
+    },
+    {
+      "key": "product:r079bc53f2",
+      "id": "17995978208816733",
+      "at": "2026-08-27 21:47",
+      "kind": "product",
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "experience",
+      "category": "kaden",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
