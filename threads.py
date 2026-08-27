@@ -743,36 +743,28 @@ def pick(cfg, posted, want):
 
     # ---- どちらを先に取るか ----
     #
-    # このサイトは特価を出すサイトなので、商品が主でなければならない。
-    # 知識や予定ばかり流していると、ノウハウのアカウントなのか
-    # 特価のアカウントなのか分からなくなる。
+    # 時刻ごとに、商品を出す枠か、それ以外を出す枠かを決めてある。
+    # 動的に決めていたころは、足りない日に商品が偏って比率が揺れた。
+    # 枠で固定すれば、1日の内訳が毎日同じになる。
+    # 検証のあいだは、この安定のほうが要る。
     #
-    # だから商品7、それ以外3の割合を保つ。
-    # 直近10件を見て、商品が足りていなければ商品を取る。
-    #
-    # そのうえで、足りているときの選び方は時間帯で決める。
-    # 夜は買う時間なので商品を、昼は読む時間なので知識を優先する。
-    share = th.get("productShare", 0.7)
-    recent = [x.get("kind") for x in (posted.get("log") or [])][-10:]
-    have = sum(1 for k in recent if k == "product")
-    short_of_product = (not recent) or (have < len(recent) * share)
-
+    # 夜8時以降を厚くしているのは、通販がその時間に動くから。
+    # 楽天のセールが20時開始なのも同じ理由。
     hour = datetime.now(JST).hour
-    night = hour >= 19 or hour < 2
+    slots = th.get("slots") or {}
+    kind = slots.get(str(hour))
+    if kind is None:
+        # 枠から外れた時刻に走ったとき（手で実行した場合など）は、
+        # いちばん近い枠の指定に従う。
+        if slots:
+            near = min(slots, key=lambda k: min(abs(int(k) - hour),
+                                                24 - abs(int(k) - hour)))
+            kind = slots[near]
+        else:
+            kind = "product"
+    want_plain = (kind == "plain")
 
-    # 商品が3つ続いたら、いったん挟む。
-    # 割合を守るだけだと、足りない日に商品を6つ並べて、
-    # 次の日は知識だけ、という揺れ方をする。それでは宣伝の列になる。
-    last2 = [k for k in recent[-2:]]
-    run = len(last2) == 2 and all(k == "product" for k in last2)
-
-    if run:
-        want_plain = True
-    elif short_of_product:
-        want_plain = False
-    else:
-        want_plain = not night
-
+    # 出すものが無い枠は、もう片方で埋める。投稿を落とさない。
     out = []
     while len(out) < want and (linked or plain):
         pool = plain if want_plain else linked
