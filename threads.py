@@ -489,6 +489,20 @@ def _unused_tip_posts():
             for i, (t, b) in enumerate(TIPS)]
 
 
+def schedule_recent(posted, days=3):
+    """最近この型を出したか。予定の投稿が続けざまに並ぶのを避ける。"""
+    now = datetime.now(JST).replace(tzinfo=None)
+    for x in reversed(posted.get("log") or []):
+        if not str(x.get("key", "")).startswith("schedule:"):
+            continue
+        try:
+            t = datetime.strptime(x["at"], "%Y-%m-%d %H:%M")
+        except (ValueError, KeyError):
+            continue
+        return (now - t).total_seconds() < days * 86400
+    return False
+
+
 def schedule_post():
     """次に来るイベントの予定。リンクは貼らない。
 
@@ -521,7 +535,9 @@ def schedule_post():
         state = "開催中" if a <= now <= b else "あと%d日" % max(0, (a.date() - now.date()).days)
         lines.append("・%s%s\n  %s 〜 %s（%s）" % (ev["name"], mark, fmt(a), fmt(b), state))
 
-    key = "schedule:%s" % now.strftime("%Y-%m-%d")
+    # 日付ごとに鍵を作ると、日をまたいだ直後にほぼ同じ内容がもう一度出る。
+    # 予定はそう頻繁に変わらないので、間隔を空ける。
+    key = "schedule:%s" % now.strftime("%Y-W%W-%w")
     return [{"key": key,
              "title": "楽天のイベント予定",
              "lead": "\n".join(lines) +
@@ -702,7 +718,7 @@ def pick(cfg, posted, want):
     # 記事・セールの案内・知識・予定をまとめて扱う。
     # 読む人から見れば、どれも「いま買うもの」ではない。
     plain = list(other)
-    for x in schedule_post():
+    for x in (schedule_post() if not schedule_recent(posted) else []):
         if x["key"] not in done:
             plain.append((x["key"], compose_plain(x, site)))
     tips = tip_posts()

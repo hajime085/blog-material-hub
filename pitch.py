@@ -203,16 +203,36 @@ def main():
         for a in args:
             if a.isdigit():
                 n = int(a)
-        # 新しいものから。出すのは、いま投稿に使える商品だけ。
-        feed_ids = {x["id"] for x in (load("assets/data/feed.json", []) or [])}
-        todo = [p for p in products
-                if p["id"] in feed_ids
-                and (p.get("pitch_status") or "pending") == "pending"]
+        # 出すのは、投稿の窓に入っている商品だけ。
+        #
+        # threads.py は「載せてから3日以内」のものしか出さない。
+        # それより古い商品に商品理解を作っても、出番が来ないまま終わる。
+        # 実際、25件ぶん無駄に作った。
+        # ここで窓を見ておけば、作った分がそのまま使われる。
+        from datetime import datetime, timedelta, timezone
+        JST = timezone(timedelta(hours=9))
+        cfg = load("config.json") or {}
+        days = cfg.get("threads", {}).get("freshDays", 3)
+        limit = (datetime.now(JST) - timedelta(days=days)).strftime("%Y-%m-%d")
+
+        feed = {x["id"]: x for x in (load("assets/data/feed.json", []) or [])}
+        todo = []
+        for p in products:
+            f = feed.get(p["id"])
+            if not f:
+                continue
+            if (p.get("pitch_status") or "pending") != "pending":
+                continue
+            if (f.get("at") or "")[:10] < limit:
+                continue
+            todo.append(p)
         todo.sort(key=lambda p: p.get("bumpedAt") or "", reverse=True)
         out = [material(p) for p in todo[:n]]
         print(json.dumps(out, ensure_ascii=False, indent=2))
-        print("\n// 残り %d件（うち %d件を出しました）" % (len(todo), len(out)),
-              file=sys.stderr)
+        print("\n// 窓の中で未作成 %d件（うち %d件を出しました）"
+              % (len(todo), len(out)), file=sys.stderr)
+        print("// 窓は「載せてから%d日以内」。これより古いものは出番が来ないので出しません。"
+              % days, file=sys.stderr)
         return
 
     if "--apply" in args:
