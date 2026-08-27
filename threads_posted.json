@@ -11,7 +11,8 @@
     "product:rb2dfeec36",
     "product:rf05138318",
     "product:r079bc53f2",
-    "product:r4dcf8a139"
+    "product:r4dcf8a139",
+    "tip:00"
   ],
   "log": [
     {
@@ -139,6 +140,18 @@
       "category": "food",
       "logic_version": "marketing_v2",
       "link": "reply"
+    },
+    {
+      "key": "tip:00",
+      "id": "18176631106427381",
+      "at": "2026-08-28 04:07",
+      "kind": "tip",
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
     }
   ]
 }
