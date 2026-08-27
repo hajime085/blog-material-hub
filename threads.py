@@ -138,117 +138,179 @@ def short_title(t, n=34):
 
 # 締めの一言。付けるかどうかは投稿ごとに回す。
 # 「使ったことある人いますか」は、こちらが使ったとは言っていないので嘘にならない。
-# 反応がつくとアルゴリズムに拾われやすくなる、というのは方々で言われている。
 TAILS = [
     "",
     "\n\n使ったことある人いますか？",
     "\n\n気になる人は保存しておくと、あとで見返せます。",
     "",
     "\n\nこれ、他にいいのがあれば教えてください。",
+    "",
 ]
 
 
-def hook(p, pr):
-    """1行目。ここで止まってもらえないと、あとが全部無駄になる。
+def shapes(p, pr, ev):
+    """投稿の形。1行目だけ変えても、組み立てが同じだと同じ投稿に見える。
 
-    値引き率から入るのはやめる。「◯%OFFです」は売り込みの形で、
-    流れてくる人の指は止まらない。
-    先に出すのは、値段そのものか、期限か、他の人が買った数。
-    どれも手元のデータから言えることで、感想は入れない。
+    行の数、順番、何を先に出すか。そこから変える。
+    使えるのは手元のデータだけなので、材料が揃った形だけを候補に出す。
 
-    使った体験は書かない。買っていない商品の体験談は作り話になる。
-    【PR】を掲げているアカウントがそれをやるのは筋が通らない。
+    体験は書かない。買っていない商品の感想は作り話になる。
     """
     price = yen(p["pr"])
-    ends = ends_label(p.get("et"))
+    lp = p.get("lp") or 0
+    off = p.get("d") or 0
+    title = short_title(p["t"])
+    free = "送料無料" in (p.get("tags") or [])
     rc = p.get("rc") or 0
+    ra = p.get("ra") or ""
+    ends = ends_label(p.get("et"))
     unit = (p.get("u") or "").strip()
+    gap = (lp - p["pr"]) if lp else 0
+    km = ev and p["pr"] >= 1000 and free
 
-    cands = []
+    out = []
 
-    # ① 値段そのもの。単価が分かるものは、それを添える。
-    if unit:
-        cands.append("%s%s円。%s。" % (pr, price, unit))
-    cands.append("%sこれ、%s円です。" % (pr, price))
-
-    # ② 期限。本物の終了時刻があるときだけ。煽りではなく事実。
+    # ① 値札型。値段を先に見せて、根拠を下に積む。
+    v = ["%sこれ、%s円です。" % (pr, price), title]
+    if off:
+        v.append("%s円 → %s円（%d%%OFF）" % (yen(lp), price, off))
+    b = ["送料無料" if free else "送料は別にかかります"]
+    if rc >= 100:
+        b.append("レビュー%s件・★%s" % (yen(rc), ra))
+    if km:
+        b.append("買いまわりに使えます（税込1,000円以上・送料無料）")
     if ends:
-        cands.append("%sこの値段は%s。" % (pr, ends))
+        b.append("この値段は%s" % ends)
+    out.append("\n".join(v) + "\n\n" + "\n".join("・" + x for x in b[:4]))
 
-    # ③ 他の人が買った数。感想ではなく記録。
-    if rc >= 1000:
-        cands.append("%sレビュー%s件で、星%s。" % (pr, yen(rc), p.get("ra", "")))
+    # ② 問いかけ型。値段を最後まで出さない。
+    if off and lp:
+        out.append("\n".join([
+            "%sこれ、いくらだと思いますか。" % pr,
+            title,
+            "",
+            "もとは%s円。いまは%s円です。" % (yen(lp), price),
+            ("送料込みで、レビュー%s件・★%s。" % (yen(rc), ra)) if rc >= 100
+            else ("送料込みです。" if free else "送料は別にかかります。"),
+        ]))
 
-    # ④ 値引きの幅が大きいときは、金額の差で見せる。率より額のほうが伝わる。
-    if p.get("d") and p.get("lp") and (p["lp"] - p["pr"]) >= 500:
-        cands.append("%s%s円だったものが%s円になっています。"
-                     % (pr, yen(p["lp"]), price))
+    # ③ 期限型。終わる時刻が分かっているときだけ。煽りではなく事実。
+    if ends:
+        line = "%s円" % price
+        if off:
+            line = "%s円 → %s円（%d%%OFF）" % (yen(lp), price, off)
+        out.append("\n".join([
+            "%sこの値段、%sで戻ります。" % (pr, ends.replace(" まで", "")),
+            "",
+            line,
+            title,
+            "",
+            "送料無料。" if free else "送料は別にかかります。",
+        ]))
 
-    return cands
+    # ④ 差額型。率より額のほうが伝わる。
+    if gap >= 300:
+        out.append("\n".join([
+            "%s%s円ぶん安くなっています。" % (pr, yen(gap)),
+            "",
+            "%s円だったものが%s円。" % (yen(lp), price),
+            title,
+            "",
+            ("送料込み・レビュー%s件" % yen(rc)) if (free and rc >= 100)
+            else ("送料込み" if free else "送料は別にかかります"),
+        ]))
+
+    # ⑤ 送料型。うちが毎日データで見ている、いちばん強いところ。
+    if free and p["pr"] <= 2000:
+        out.append("\n".join([
+            "%s%s円で、送料無料です。" % (pr, price),
+            "",
+            "この値段帯は送料が乗ると倍近くになります。",
+            "込みかどうかで、払う額がまるで変わる。",
+            "",
+            title,
+        ] + ([ "%s円 → %s円（%d%%OFF）" % (yen(lp), price, off) ] if off else [])))
+
+    # ⑥ 短く3行。長い投稿ばかりだと、それ自体が読み飛ばされる。
+    tail3 = ends.replace(" まで", "まで。") if ends else ("送料無料。" if free else "")
+    out.append("\n".join([
+        "%s%s円%s" % (pr, price, ("（%d%%OFF）" % off) if off else "。"),
+        title,
+        tail3,
+    ]).rstrip())
+
+    # ⑦ 単価型。1袋いくら、1包いくらが分かるものだけ。
+    if unit:
+        out.append("\n".join([
+            "%s%s。" % (pr, unit),
+            "",
+            "%s円です。%s" % (price, "送料込み。" if free else "送料は別。"),
+            title,
+        ]))
+
+    return out
 
 
 def compose_product(p, site, pr, reply_link=False, ev=None, seq=0):
     """商品の投稿文。
 
     キャプションがあればそれを先頭に置く。人が書いた文なので、いちばん読ませる。
-
     無ければ、手元のデータだけで組み立てる。
-    キャプションを書くのは人の作業なので、そこを待っていると
-    今朝見つけた79%OFFを流せるのが明日になる。
+    キャプションを待っていると、今朝見つけた79%OFFを流せるのが明日になる。
     セールの訴求は鮮度がすべてなので、待たないほうを選ぶ。
 
-    データだけで書く場合も、書くのは事実だけ。
-    値引き、送料、レビュー件数、終了時刻、買いまわりに使えるか。
-    どれも楽天のデータか、そこから機械的に決まることしか使わない。
+    形は投稿ごとに変える。1行目だけ入れ替えても、
+    組み立てが同じなら同じ投稿に見える。
     """
     cap = (p.get("cap") or "").strip()
     title = short_title(p["t"])
 
-    lines = []
     if cap:
-        lines.append(pr + cap)
-        lines.append(title)
-        if p.get("d") and p.get("lp") and (yen(p["lp"]) not in cap):
-            lines.append("%s円 → %s円（%d%%OFF）" % (yen(p["lp"]), yen(p["pr"]), p["d"]))
-    else:
-        cands = hook(p, pr)
-        head = cands[seq % len(cands)]
-        lines.append(head)
-        lines.append(title)
-        # 1行目で値段の変化を言っているなら、直後に同じことを書かない。
-        # 同じ数字が2行続くと、読む気が失せる。
-        if p.get("d") and p.get("lp") and yen(p["lp"]) not in head:
-            lines.append("%s円 → %s円（%d%%OFF）" % (yen(p["lp"]), yen(p["pr"]), p["d"]))
-        elif p.get("d") and p.get("lp"):
-            lines.append("%d%%OFF です。" % p["d"])
-
-    pts = []
-    for x in (p.get("pt") or []):
-        if yen(p["pr"]) in x and (yen(p["lp"]) in x if p.get("lp") else True):
-            continue
-        if x.strip() == "%s円" % yen(p["pr"]):
-            continue
-        pts.append(x)
-
-    if not cap:
-        free = "送料無料" in (p.get("tags") or [])
-        pts = ["送料無料" if free else "送料は別にかかります"]
-        rc = p.get("rc") or 0
-        # 1行目でレビュー数を言っているなら、繰り返さない
-        if rc >= 100 and yen(rc) not in lines[0]:
-            pts.append("レビュー%s件・★%s" % (yen(rc), p.get("ra", "")))
-        if ev and p["pr"] >= 1000 and free:
-            pts.append("買いまわりに使えます（税込1,000円以上・送料無料）")
+        pts = []
+        for x in (p.get("pt") or []):
+            if yen(p["pr"]) in x and (yen(p["lp"]) in x if p.get("lp") else True):
+                continue
+            if x.strip() == "%s円" % yen(p["pr"]):
+                continue
+            pts.append(x)
         ends = ends_label(p.get("et"))
-        # 1行目で期限を言っているなら、繰り返さない
-        if ends and ends not in lines[0]:
-            pts.append("この値段は%s" % ends)
+        chg = ("%s円 → %s円（%d%%OFF）" % (yen(p["lp"]), yen(p["pr"]), p["d"])
+               if (p.get("d") and p.get("lp") and yen(p["lp"]) not in cap) else "")
 
-    if pts:
-        lines.append("")
-        lines += ["・" + x for x in pts[:4]]
+        # キャプションがあるときも、形は入れ替える。
+        # 人が書いた文を先頭に置くのは変わらないが、
+        # 毎回そのあとに商品名と箇条書きが続くと、やはり同じ投稿に見える。
+        forms = []
 
-    body = "\n".join(lines) + TAILS[seq % len(TAILS)]
+        # 形a｜これまでどおり。文 → 商品名 → 値段 → 箇条書き
+        a = [pr + cap, title] + ([chg] if chg else [])
+        if pts:
+            a += [""] + ["・" + x for x in pts[:3]]
+        forms.append("\n".join(a))
+
+        # 形b｜文だけを立たせて、細かい情報は下にまとめる
+        b = [pr + cap, ""]
+        if chg:
+            b.append(chg)
+        b.append(title)
+        if pts:
+            b.append("（" + "／".join(pts[:2]) + "）")
+        forms.append("\n".join(b))
+
+        # 形c｜短く。文と値段だけで終える
+        c = [pr + cap, title]
+        if ends:
+            c.append("%sの値段です。" % ends.replace(" まで", "まで"))
+        elif chg:
+            c.append(chg)
+        forms.append("\n".join(c))
+
+        body = forms[seq % len(forms)]
+    else:
+        cands = shapes(p, pr, ev)
+        body = cands[seq % len(cands)]
+
+    body += TAILS[seq % len(TAILS)]
 
     url = "%s/p/%s/" % (site, p["id"])
     if reply_link:
