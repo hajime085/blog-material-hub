@@ -8,7 +8,8 @@
     "guide:super-sale",
     "product:rb91539b1f",
     "product:re53b58ebb",
-    "product:rb2dfeec36"
+    "product:rb2dfeec36",
+    "product:rf05138318"
   ],
   "log": [
     {
@@ -95,6 +96,14 @@
       "at": "2026-08-27 01:34",
       "kind": "product",
       "cap": false,
+      "link": "reply"
+    },
+    {
+      "key": "product:rf05138318",
+      "id": "18136143658610622",
+      "at": "2026-08-27 13:30",
+      "kind": "product",
+      "cap": true,
       "link": "reply"
     }
   ]
