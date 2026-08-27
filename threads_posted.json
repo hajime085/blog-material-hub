@@ -10,7 +10,8 @@
     "product:re53b58ebb",
     "product:rb2dfeec36",
     "product:rf05138318",
-    "product:r079bc53f2"
+    "product:r079bc53f2",
+    "product:r4dcf8a139"
   ],
   "log": [
     {
@@ -124,6 +125,18 @@
       "hook_type": "discovery",
       "cta_type": "experience",
       "category": "kaden",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r4dcf8a139",
+      "id": "18618163636065053",
+      "at": "2026-08-27 21:56",
+      "kind": "product",
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "none",
+      "category": "food",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
