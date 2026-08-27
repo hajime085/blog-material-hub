@@ -682,33 +682,50 @@ def report():
         got = {}
         for m in d.get("data", []):
             got[m.get("name")] = (m.get("values") or [{}])[0].get("value", 0)
+        # 返信方式で出したときは、リンクを貼るために自分で返信している。
+        # それを「反応があった」と数えると、数字が水増しになる。
+        if x.get("link") == "reply" and got.get("replies"):
+            got["replies"] = max(0, got["replies"] - 1)
         rows.append((x, got))
 
     if not rows:
         print("成績を取れた投稿がありませんでした。")
         return
 
+    now_dt = datetime.now(JST).replace(tzinfo=None)
+
+    def age_h(x):
+        try:
+            return (now_dt - datetime.strptime(x["at"], "%Y-%m-%d %H:%M")).total_seconds() / 3600
+        except (ValueError, KeyError):
+            return 0.0
+
     print("=== 1件ずつ ===")
-    print("  %-22s %-8s %-6s %6s %6s %6s" % ("投稿", "型", "リンク", "表示", "いいね", "返信"))
+    print("  %-22s %-8s %-6s %6s %6s %6s %7s"
+          % ("投稿", "型", "リンク", "表示", "いいね", "返信", "経過"))
     for x, g in rows:
-        print("  %-22s %-8s %-6s %6s %6s %6s" % (
+        print("  %-22s %-8s %-6s %6s %6s %6s %6.1fh" % (
             x["key"][:22], x.get("kind", "?"), x.get("link", "?"),
-            g.get("views", 0), g.get("likes", 0), g.get("replies", 0)))
+            g.get("views", 0), g.get("likes", 0), g.get("replies", 0), age_h(x)))
 
     def summarize(title, keyfn):
         buckets = {}
         for x, g in rows:
             k = keyfn(x)
-            b = buckets.setdefault(k, {"n": 0, "views": 0, "likes": 0, "replies": 0})
+            b = buckets.setdefault(k, {"n": 0, "views": 0, "likes": 0,
+                                       "replies": 0, "age": 0.0})
             b["n"] += 1
+            b["age"] += age_h(x)
             for m in ("views", "likes", "replies"):
                 b[m] += g.get(m, 0) or 0
         print("\n=== %s ===" % title)
-        print("  %-10s %4s %10s %10s %10s" % ("", "件数", "表示/件", "いいね/件", "返信/件"))
+        print("  %-10s %4s %10s %10s %10s %9s"
+              % ("", "件数", "表示/件", "いいね/件", "返信/件", "平均経過"))
         for k, b in sorted(buckets.items(), key=lambda kv: -kv[1]["views"]):
             n = max(1, b["n"])
-            print("  %-10s %4d %10.1f %10.1f %10.1f"
-                  % (k, b["n"], b["views"] / n, b["likes"] / n, b["replies"] / n))
+            print("  %-10s %4d %10.1f %10.1f %10.1f %8.1fh"
+                  % (k, b["n"], b["views"] / n, b["likes"] / n,
+                     b["replies"] / n, b["age"] / n))
 
     def slot_of(x):
         """出した時刻を、午前・昼・夕方・夜に振り分ける。
