@@ -828,6 +828,13 @@ def jsonld_block(obj):
 
 
 # ---------------------------------------------------------------- builders
+def short_name(t, n=30):
+    """行に収める長さに切る。楽天の商品名は検索語の羅列なので、
+    長く出しても読めない。"""
+    t = (t or "").strip()
+    return t if len(t) <= n else t[:n].rstrip("…、 ") + "…"
+
+
 def render_soon(products, cats):
     """セールの特価をまとめる枠。ヒーローのすぐ下に置く。
 
@@ -878,60 +885,57 @@ def render_soon(products, cats):
     head = (("%s 開催中" % ev["name"]) if (ev and n_live)
             else sale_starts_label(soon[0]))
 
-    def card(p):
+    def row(p):
+        """1件ぶんの行。カードだと縦を使いすぎる。
+
+        件数が少ない日でも枠だけが大きく残っていた。
+        写真・時刻・名前・値段を1行に収めて、必要な高さだけ使う。
+        """
         d = discount_rate(p)
         cat = cats.get(p["category"], {})
+        when = sale_starts_label(p) if sale_soon(p) else "いま買えます"
         return (
-            '<a class="soon-card" href="/p/{id}/">'
-            '<span class="soon-media">'
-            '<img src="{img}" alt="{alt}" loading="lazy" width="300" height="300">'
-            '{badge}</span>'
-            '<span class="soon-body">'
-            '<span class="soon-title">{t}</span>'
-            '<span class="soon-price"><i>¥</i>{pr}{was}</span>'
-            '<span class="soon-cat">{cic}{cl}</span>'
+            '<a class="soon-row" href="/p/{id}/">'
+            '<img class="soon-thumb" src="{img}" alt="" loading="lazy" '
+            'width="56" height="56">'
+            '<span class="soon-main">'
+            '<span class="soon-when-in">{ic}{when}</span>'
+            '<span class="soon-name">{t}</span>'
+            '</span>'
+            '<span class="soon-fig">'
+            '<span class="soon-yen"><i>¥</i>{pr}</span>'
+            '{off}{ship}'
             '</span></a>'
         ).format(
-            id=e(p["id"]), img=e(p["image"]), alt=e(p["title"]),
-            badge=('<span class="soon-off">%d%%<b>OFF</b></span>' % d) if d else "",
-            t=e(p["title"]),
+            id=e(p["id"]), img=e(p["image"]), t=e(short_name(p["title"])),
+            ic=icons.use("calendar", "ic-when"), when=e(when),
             pr=yen(p["price"]),
-            was=(('<s>¥%s</s>' % yen(p["listPrice"])) if d else "")
-                + ("" if free_shipping(p) else '<em>＋送料</em>'),
-            cic=icons.use(cat.get("icon", "tag")), cl=e(cat.get("short", "")))
+            off=('<span class="soon-off-s">%d%%OFF</span>' % d) if d else "",
+            ship="" if free_shipping(p) else '<span class="soon-ship-s">＋送料</span>',
+            cic=icons.use(cat.get("icon", "tag")))
 
-    # 開始時刻ごとにまとめる。「いつ買えるのか」が一番大事な情報なので、
-    # 各カードに時刻を書くより、時刻で束ねたほうが読み手の頭に入る。
-    groups, order = {}, []
-    for p in soon:
-        # 買えるものはひとまとめ。開始時刻で分けても意味がない。
-        k = ("いま買えます" if not sale_soon(p) else sale_starts_label(p))
-        if k not in groups:
-            groups[k] = []
-            order.append(k)
-        groups[k].append(p)
-
-    rows = ""
-    for k in order:
-        rows += (
-            '<div class="soon-group">'
-            '<p class="soon-when">{ic}{k}<b>{n}件</b></p>'
-            '<div class="soon-rail">{cards}</div>'
-            '</div>'
-        ).format(ic=icons.use("calendar", "ic-when"), k=e(k),
-                 n=len(groups[k]), cards="".join(card(p) for p in groups[k]))
+    # 開始時刻ごとにまとめず、1本の一覧にする。
+    # 各行に時刻を書けば、見出しで分ける必要がない。
+    # 見出しを挟むぶんだけ縦が伸びていた。
+    soon.sort(key=lambda p: (1 if sale_soon(p) else 0, p.get("startTime") or ""))
+    rows = "".join(row(p) for p in soon)
+    n_soon = sum(1 for p in soon if sale_soon(p))
 
     return """
-<section class="soon wrap-narrow">
-  <div class="soon-head">
-    <p class="soon-eyebrow">{ic}{head}</p>
-    <h2 class="soon-title-main">{title} {n}件</h2>
-    <p class="soon-note">{note}</p>
-    {kwlink}
-  </div>
-  {rows}
-</section>
+<details class="soon wrap-narrow"{open}>
+  <summary class="soon-sum">
+    <span class="soon-sum-main">
+      <span class="soon-eyebrow">{ic}{head}</span>
+      <span class="soon-title-main">{title}<b class="soon-count">{n}件</b></span>
+    </span>
+    <span class="soon-toggle" aria-hidden="true"></span>
+  </summary>
+  <p class="soon-note">{note}</p>
+  <div class="soon-list">{rows}</div>
+  {kwlink}
+</details>
 """.format(ic=icons.use("bolt"), head=e(head), n=len(soon), rows=rows,
+           open=(" open" if len(soon) <= 4 else ""),
            kwlink=('<a class="soon-kw" href="/kaimawari/">%s買いまわりに使えるものを見る%s</a>'
                    % (icons.use("check", "ic-km"),
                       icons.use("arrow-right", "ic-arrow"))) if ev else "",

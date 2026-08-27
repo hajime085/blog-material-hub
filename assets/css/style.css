@@ -2801,23 +2801,82 @@ a.ticker-item:hover::before { background: var(--pop); }
 .soon-off b { font-size: .56em; font-weight: 400; margin-left: 1px; }
 
 .soon-body { display: block; padding: 10px 11px 12px; }
-/* 開始時刻ごとの見出し。カード1枚ずつに時刻を書くより、
-   時刻で束ねたほうが「いつ買えるのか」が頭に入る。 */
-.soon-group { margin-top: 14px; }
-.soon-when {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: var(--sale); color: #fff;
+/* 折りたたみの見出し。押せる場所だと分かる形にする。 */
+.soon-sum {
+  display: flex; align-items: flex-start; gap: 12px;
+  cursor: pointer;
+  list-style: none;
+  padding: 0 0 10px;
+}
+.soon-sum::-webkit-details-marker { display: none; }
+.soon-sum-main { flex: 1 1 auto; min-width: 0; }
+.soon-count {
+  display: inline-block; margin-left: 9px; font-weight: 400;
   font-family: var(--f-price); font-weight: 400;
-  font-size: 1.02rem; letter-spacing: .03em;
-  border-radius: 999px; padding: 5px 14px;
-  margin-bottom: 9px;
+  font-size: .9em; opacity: .8;
 }
-.soon-when b { font-weight: 400; opacity: .72; font-size: .84em; }
-.soon-price em {
-  font-style: normal; font-weight: 700;
-  font-size: .74rem; opacity: .8;
-  margin-left: 5px;
+/* 開いているか閉じているかを、三角で示す。 */
+.soon-toggle {
+  flex: none; width: 26px; height: 26px;
+  border: 2px solid var(--pop); border-radius: 999px;
+  position: relative;
 }
+.soon-toggle::after {
+  content: ""; position: absolute; inset: 0; margin: auto;
+  width: 7px; height: 7px;
+  border-right: 2px solid var(--pop); border-bottom: 2px solid var(--pop);
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform .18s;
+}
+.soon[open] .soon-toggle::after { transform: translateY(1px) rotate(225deg); }
+
+/* 1件ぶんの行。カードだと件数が少ない日でも縦を使いすぎた。 */
+.soon-list { display: grid; gap: 8px; }
+.soon-row {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  gap: 11px; align-items: center;
+  background: rgba(255,255,255,.07);
+  border-radius: 12px;
+  padding: 8px 11px;
+  color: var(--paper); text-decoration: none;
+}
+.soon-row:hover { background: rgba(255,255,255,.13); }
+.soon-thumb {
+  width: 56px; height: 56px; object-fit: cover;
+  border-radius: 9px; display: block; background: #fff;
+}
+.soon-main { min-width: 0; }
+.soon-when-in {
+  display: flex; align-items: center; gap: 4px;
+  font-family: var(--f-price); font-weight: 400;
+  font-size: .8rem; color: var(--pop);
+  margin-bottom: 2px;
+}
+.soon-when-in .ic-when { width: 12px; height: 12px; flex: none; }
+.soon-name {
+  display: block; font-size: .84rem; line-height: 1.4;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.soon-fig { text-align: right; flex: none; }
+.soon-yen {
+  display: block;
+  font-family: var(--f-price); font-weight: 400;
+  font-size: 1.18rem; color: var(--pop); line-height: 1.1;
+}
+.soon-yen i { font-style: normal; font-size: .62em; }
+.soon-off-s, .soon-ship-s {
+  display: inline-block; font-size: .68rem; font-weight: 700;
+  margin-top: 2px;
+}
+.soon-off-s { color: #fff; background: var(--sale); border-radius: 999px; padding: 1px 7px; }
+.soon-ship-s { color: var(--paper); opacity: .72; margin-left: 5px; }
+
+@media (max-width: 380px) {
+  .soon-row { grid-template-columns: 46px 1fr auto; gap: 9px; }
+  .soon-thumb { width: 46px; height: 46px; }
+}
+
 .soon-when .ic-when { width: 15px; height: 15px; }
 .ic-when { width: 13px; height: 13px; }
 .soon-title {
@@ -2845,3 +2904,19 @@ a.ticker-item:hover::before { background: var(--pop); }
 @media (min-width: 700px) {
   .soon-card { width: 186px; }
 }
+
+
+/* 折りたたみの見出し。件数が少ない日でも枠だけ大きく残らないよう、
+   帯と字を小さくして1行に収める。 */
+.soon-sum .soon-eyebrow {
+  font-size: 1.02rem;
+  padding: 7px 14px 15px;
+  margin-bottom: 7px;
+}
+.soon-sum .soon-eyebrow .ic { width: 16px; height: 16px; }
+.soon-sum .soon-title-main {
+  font-size: 1.16rem;
+  margin-bottom: 0;
+  display: block;
+}
+.soon-toggle { margin-top: 6px; }
