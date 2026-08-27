@@ -554,6 +554,30 @@ def pick(cfg, posted, want):
         items.append(p)
     items.sort(key=lambda p: p.get("at") or "", reverse=True)
 
+    # 売場を回す。
+    #
+    # 新しい順に取るだけだと、そのとき多く見つかった売場に偏る。
+    # いま出せる56件のうち30件がサプリなので、放っておくと
+    # オルニチン、マカ、すっぽん黒酢…と続く。
+    # 流れてくる人の大半はサプリを探していないので、
+    # どれだけ安くても、どれだけ文章を練っても押されない。
+    #
+    # 直近3件と違う売場のものを先に出す。
+    # 同じものが続くと、読む人にとっては同じ投稿が並んでいるのと変わらない。
+    recent_cats = []
+    for k in reversed(posted.get("keys") or []):
+        if not k.startswith("product:"):
+            continue
+        hit = next((q for q in feed if q["id"] == k[8:]), None)
+        if hit:
+            recent_cats.append(hit.get("c"))
+        if len(recent_cats) >= 3:
+            break
+    if recent_cats:
+        fresh_cat = [q for q in items if q.get("c") not in recent_cats]
+        if fresh_cat:
+            items = fresh_cat + [q for q in items if q not in fresh_cat]
+
     n_done = len([k for k in (posted.get("keys") or []) if k.startswith("product:")])
     for n, p in enumerate(items):
         linked.append(("product:" + p["id"],
