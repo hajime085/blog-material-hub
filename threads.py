@@ -262,6 +262,39 @@ def compose_product(p, site, pr, reply_link=False, ev=None, seq=0):
     形は投稿ごとに変える。1行目だけ入れ替えても、
     組み立てが同じなら同じ投稿に見える。
     """
+    mk = p.get("mk2") or None
+    if mk and mk.get("hook"):
+        # 事前に作って、決まりに照らして通した商品理解を使う。
+        # 何を先に出すか、誰に向けて書くかは、ここで決めてある。
+        # 投稿するときに考えると毎回ぶれるし、確かめる機会もない。
+        lines = [pr + mk["hook"]]
+        if mk.get("body"):
+            lines += ["", mk["body"]]
+
+        # 判断材料は最後に置く。値段から入ると売り込みの形になる。
+        facts = []
+        if p.get("d") and p.get("lp"):
+            facts.append("%s円 → %s円（%d%%OFF）" % (yen(p["lp"]), yen(p["pr"]), p["d"]))
+        else:
+            facts.append("%s円" % yen(p["pr"]))
+        facts.append("送料込み" if "送料無料" in (p.get("tags") or [])
+                     else "送料は別にかかります")
+        tail = "、".join(facts) + "。"
+        rc = p.get("rc") or 0
+        if rc >= 100:
+            # 件数のまま書く。買った人数に言い換えない。
+            tail += "\nレビュー%s件、星%s。" % (yen(rc), p.get("ra", ""))
+        ends = ends_label(p.get("et"))
+        if ends:
+            tail += "\nこの値段は%s。" % ends
+        lines += ["", tail]
+
+        body = "\n".join(lines) + TAILS[seq % len(TAILS)]
+        url = "%s/p/%s/" % (site, p["id"])
+        if reply_link:
+            return body, url
+        return body + "\n\n" + url, None
+
     cap = (p.get("cap") or "").strip()
     title = short_title(p["t"])
 
@@ -963,6 +996,8 @@ def report():
     summarize("型べつ", lambda x: x.get("kind", "?"))
     summarize("リンクの置き方べつ", lambda x: x.get("link", "?"))
     summarize("時間帯べつ", slot_of)
+    if any(x.get("hook_type") for x, _ in rows):
+        summarize("入口の型べつ", lambda x: x.get("hook_type") or "（型なし）")
 
     if missing:
         print("\n（%d件は取れませんでした）" % missing)
@@ -1023,9 +1058,10 @@ def main():
 
     now = datetime.now(JST).strftime("%Y-%m-%d %H:%M")
     # どの商品に人の書いた文があったかを控えておく
-    feed_now = {("product:" + x["id"]): bool(x.get("cap"))
-                for x in (load("assets/data/feed.json", []) or [])}
-    caps = feed_now
+    _feed = load("assets/data/feed.json", []) or []
+    caps = {("product:" + x["id"]): bool(x.get("cap")) for x in _feed}
+    hooks = {("product:" + x["id"]): (x.get("mk2") or {}).get("hook_type")
+             for x in _feed}
     ok = 0
     for key, text, link in picks:
         try:
@@ -1053,6 +1089,8 @@ def main():
             # 人が書いた文があったかどうか。
             # データだけの投稿と読み比べたときに、差が出るのかを見るため。
             "cap": caps.get(key, None),
+            # どの入口の型で出したか。あとでどれが伸びたかを見るため。
+            "hook_type": hooks.get(key),
             # あとで比べるために、どの出し方で出したかを残す。
             # 記録が無いと、伸びた理由が本文か返信かを言えなくなる。
             "link": ("none" if kind in ("tip", "schedule")

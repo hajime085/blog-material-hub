@@ -1620,6 +1620,9 @@ def build_feed_json(cfg, products, cats):
             "et": (p.get("endTime") or "").strip(),
             # 投稿の「用途」の型で使う。箇条書きは事実だけを書いてある。
             "pt": (p.get("points") or [])[:3],
+            # 親投稿のもと。pitch.py が作って、決まりに照らして通ったものだけ。
+            # 読者向けの画面では使わないが、投稿を組み立てるのに要る。
+            "mk2": ((p.get("marketing") or {}) if p.get("pitch_status") == "ready" else None),
         })
     write("assets/data/feed.json", json.dumps(slim, ensure_ascii=False, separators=(",", ":")))
 
