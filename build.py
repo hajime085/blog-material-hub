@@ -1003,24 +1003,39 @@ def render_soon(products, cats):
     # 各行に時刻を書けば、見出しで分ける必要がない。
     # 見出しを挟むぶんだけ縦が伸びていた。
     soon.sort(key=lambda p: (1 if sale_soon(p) else 0, p.get("startTime") or ""))
-    rows = "".join(row(p) for p in soon)
     n_soon = sum(1 for p in soon if sale_soon(p))
 
+    # 最初の何件かは、たたまずに必ず見せる。
+    #
+    # 全部をたたむと、件数が増えても見出し1行しか見えない。
+    # 件数が少ないときは寂しく、多いときは中身が伝わらない。
+    # 上を開いたまま、あふれたぶんだけ「ほかに◯件」に入れる。
+    SHOWN = 5
+    head_rows = "".join(row(p) for p in soon[:SHOWN])
+    rest = soon[SHOWN:]
+    more = ""
+    if rest:
+        more = ("""
+  <details class="soon-more">
+    <summary class="soon-more-sum">ほかに%d件<span class="soon-toggle" aria-hidden="true"></span></summary>
+    <div class="soon-list">%s</div>
+  </details>""" % (len(rest), "".join(row(p) for p in rest)))
+
     return """
-<details class="soon wrap-narrow"{open}>
-  <summary class="soon-sum">
+<section class="soon wrap-narrow">
+  <div class="soon-sum">
     <span class="soon-sum-main">
       <span class="soon-eyebrow">{ic}{head}</span>
       <span class="soon-title-main">{title}<b class="soon-count">{n}件</b></span>
     </span>
-    <span class="soon-toggle" aria-hidden="true"></span>
-  </summary>
+  </div>
   <p class="soon-note">{note}</p>
   <div class="soon-list">{rows}</div>
+  {more}
   {kwlink}
-</details>
-""".format(ic=icons.use("bolt"), head=e(head), n=len(soon), rows=rows,
-           open=(" open" if len(soon) <= 4 else ""),
+</section>
+""".format(ic=icons.use("bolt"), head=e(head), n=len(soon), rows=head_rows,
+           more=more,
            kwlink=('<a class="soon-kw" href="/kaimawari/">%s買いまわりに使えるものを見る%s</a>'
                    % (icons.use("check", "ic-km"),
                       icons.use("arrow-right", "ic-arrow"))) if ev else "",

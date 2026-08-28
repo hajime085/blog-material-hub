@@ -2989,3 +2989,23 @@ a.ticker-item:hover::before { background: var(--pop); }
   .evbar { padding-block: 17px 16px; }
   .evb-title { font-size: 1.12rem; }
 }
+
+/* あふれたぶんだけたたむ。上の数件は必ず見えている状態にする。 */
+.soon-more { margin-top: 4px; }
+.soon-more-sum {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px;
+  padding: 10px 2px;
+  cursor: pointer; list-style: none;
+  font-size: .82rem; font-weight: 700;
+  color: rgba(255,255,255,.66);
+}
+.soon-more-sum::-webkit-details-marker { display: none; }
+.soon-more-sum:hover { color: var(--pop); }
+.soon-more .soon-toggle {
+  width: 13px; height: 13px; flex: 0 0 auto;
+  border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translate(-2px, -2px);
+  transition: transform .16s ease;
+}
+.soon-more[open] .soon-toggle { transform: rotate(-135deg) translate(-2px, -2px); }
