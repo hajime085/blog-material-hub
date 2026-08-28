@@ -12,7 +12,8 @@
     "product:rf05138318",
     "product:r079bc53f2",
     "product:r4dcf8a139",
-    "tip:00"
+    "tip:00",
+    "tip:12"
   ],
   "log": [
     {
@@ -146,6 +147,20 @@
       "id": "18176631106427381",
       "at": "2026-08-28 04:07",
       "kind": "tip",
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
+    },
+    {
+      "key": "tip:12",
+      "id": "18047531990807884",
+      "at": "2026-08-28 16:15",
+      "kind": "tip",
+      "slot": 14,
+      "catchup": true,
       "cap": null,
       "hook_type": null,
       "cta_type": null,
