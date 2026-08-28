@@ -29,3 +29,4 @@ products.json.sample_backup
 .run_summary.txt
 .run_changed
 backup/
+.threads.lock

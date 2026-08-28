@@ -105,6 +105,35 @@ def yen(n):
     return "{:,}".format(int(n))
 
 
+def minutes_since_last_post(uid, token):
+    """アカウントに最後の投稿が載ってから何分たったか。
+
+    手元の記録ではなく、アカウントそのものを見る。
+    錠はファイルなので、同じ機械の中でしか効かない。
+    手元の見張りと GitHub の予定実行は別の機械なので、
+    ファイルでは重なりを止められない。
+    どちらから見ても同じものを見るには、アカウントを見るしかない。
+
+    分からないときは None。分からないことを「大丈夫」と読み替えない。
+    """
+    try:
+        d = api("GET", "%s/threads" % uid,
+                {"fields": "id,timestamp", "limit": 1}, token)
+    except Exception:                                         # noqa: BLE001
+        return None
+    rows = d.get("data") or []
+    if not rows:
+        return 9999
+    ts = rows[0].get("timestamp") or ""
+    try:
+        t = datetime.strptime(ts[:19], "%Y-%m-%dT%H:%M:%S")
+    except ValueError:
+        return None
+    # timestamp は UTC。JST に直してから、いまとの差を見る。
+    t = t + timedelta(hours=9)
+    return (datetime.now(JST).replace(tzinfo=None) - t).total_seconds() / 60
+
+
 def publishing_limit(uid, token):
     """いま何件出せるか。上限は1日250件だが、無駄に近づかない。"""
     try:
@@ -1106,12 +1135,17 @@ def report():
 
 
 def run_once(cfg, posted, slot_hour=None, dry=False, late=False):
-    """1件出す。slot_hour を渡すと、その枠の決まりで中身を選ぶ。"""
+    """1件出す。slot_hour を渡すと、その枠の決まりで中身を選ぶ。
+
+    (出した数, 理由) を返す。理由は ok / empty / blocked。
+    「出すものが無い」と「出せなかった」を区別しないと、
+    上限に当たっただけの枠まで消化済みにしてしまう。
+    """
     want = int(cfg.get("threads", {}).get("postsPerRun", 2))
     picks = pick(cfg, posted, want, slot_hour)
     if not picks:
         print("出せるものがありません。")
-        return 0
+        return 0, "empty"
 
     print("▼ %d件を出します%s\n" % (len(picks), "（--dry-run なので出しません）" if dry else ""))
     for key, text, link in picks:
@@ -1122,14 +1156,25 @@ def run_once(cfg, posted, slot_hour=None, dry=False, late=False):
         print()
 
     if dry:
-        return 0
+        return 0, "dry"
 
     uid, token = credentials()
+
+    # 直前に誰かが出していないか。別の機械から重なって走っていた場合、
+    # ここでしか気づけない。
+    gap = int((cfg.get("threads") or {}).get("minGapMin", 10))
+    since = minutes_since_last_post(uid, token)
+    if since is not None and since < gap:
+        print("%.0f分前に投稿があります（%d分は空けます）。今回は出しません。"
+              % (since, gap), file=sys.stderr)
+        print("別の場所からも動いている可能性があります。", file=sys.stderr)
+        return 0, "blocked"
+
     used, total = publishing_limit(uid, token)
     if used is not None and used + len(picks) > total:
         print("24時間の上限に近いので止めます（%s/%s）" % (used, total),
               file=sys.stderr)
-        return 0
+        return 0, "blocked"
 
     now = datetime.now(JST).strftime("%Y-%m-%d %H:%M")
     # どの商品に人の書いた文があったかを控えておく
@@ -1200,7 +1245,7 @@ def run_once(cfg, posted, slot_hour=None, dry=False, late=False):
     posted["log"] = posted["log"][-400:]
     save(STATE, posted)
     print("\n%d件を出しました。" % ok)
-    return ok
+    return ok, ("ok" if ok else "blocked")
 
 
 # ------------------------------------------------- 落ちた枠を埋めながら走る
@@ -1323,7 +1368,13 @@ def serve(cfg, until_s=None, window_h=4.0, gap_min=25, max_late_h=3,
         late = (t - t.replace(hour=h, minute=0)).total_seconds() > 3600
         print("\n── %d時の枠を出します（いま %s%s）"
               % (h, t.strftime("%H:%M"), "、遅れて埋めます" if late else ""))
-        n = run_once(cfg, posted, slot_hour=h, dry=dry, late=late)
+        try:
+            n, why = run_once(cfg, posted, slot_hour=h, dry=dry, late=late)
+        except Exception as ex:                               # noqa: BLE001
+            # ここで落ちると、その日の残りの枠が全部消える。
+            # 1枠ぶんの失敗で1日を落とさない。
+            print("  × %d時の枠で例外: %s" % (h, ex), file=sys.stderr)
+            n, why = 0, "blocked"
         if dry:
             print("（--dry-run なので記録は残しません）")
             return
@@ -1332,6 +1383,11 @@ def serve(cfg, until_s=None, window_h=4.0, gap_min=25, max_late_h=3,
             last = t
             if push:
                 push_state()
+        elif why == "blocked":
+            # 上限やトークンで出せなかっただけ。枠は使っていない。
+            # ここを消化済みにすると、直ったあとも二度と出せなくなる。
+            print("  出せなかったので、この枠は残したまま少し待ちます。")
+            last = t
         else:
             # 出すものが無い枠で止まると、そこから先に進めなくなる。
             # 出せなかったことを記録して次の枠へ送る。
@@ -1341,6 +1397,58 @@ def serve(cfg, until_s=None, window_h=4.0, gap_min=25, max_late_h=3,
                 "slot": h, "catchup": False, "link": "none",
             })
             save(STATE, posted)
+
+
+LOCK = ".threads.lock"
+
+
+def take_lock(what):
+    """二重に走らせない。
+
+    これまで、手元の見張り・GitHubの予定実行・手で叩いた素の実行が
+    同時に走れる状態だった。どれも threads_posted.json を
+    「読む→足す→書く」ので、重なると片方の記録が消える。
+    記録が消えると、次の起動が同じものをもう一度出す。
+
+    実際、8/28 17:02 に出た1件は素の実行から出たもので、
+    記録は残ったが push されず、19時のコミットに紛れて入った。
+    どこから出たのかを、あとから説明できない状態になっていた。
+    """
+    path = os.path.join(ROOT, LOCK)
+    if os.path.exists(path):
+        try:
+            with open(path, encoding="utf-8") as f:
+                old = json.load(f)
+        except Exception:                                     # noqa: BLE001
+            old = {}
+        pid = old.get("pid")
+        alive = False
+        if pid:
+            try:
+                os.kill(int(pid), 0)
+                alive = True
+            except (OSError, ValueError):
+                alive = False
+        if alive:
+            print("すでに走っています（%s / PID %s、%s に開始）。"
+                  % (old.get("what", "?"), pid, old.get("at", "?")),
+                  file=sys.stderr)
+            print("重なると記録が壊れるので、こちらは何もせずに終わります。",
+                  file=sys.stderr)
+            return False
+        print("前回の錠が残っていました（PID %s はもういません）。外して進みます。"
+              % pid, file=sys.stderr)
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump({"pid": os.getpid(), "what": what,
+                   "at": datetime.now(JST).strftime("%Y-%m-%d %H:%M")}, f)
+    return True
+
+
+def drop_lock():
+    try:
+        os.remove(os.path.join(ROOT, LOCK))
+    except OSError:
+        pass
 
 
 def push_state():
@@ -1359,16 +1467,25 @@ def push_state():
     ]
     try:
         if subprocess.run(["git", "diff", "--quiet", "--", STATE]).returncode == 0:
-            return
+            return True
         for c in cmds:
             subprocess.run(c, check=True)
         for _ in range(3):
-            subprocess.run(["git", "pull", "--rebase", "origin", "main"])
+            # --autostash が要る。手元で走らせると index.html などが
+            # 生成し直されて汚れていることがあり、素の --rebase は
+            # 「unstaged changes」で止まる。止まると記録が送られないまま
+            # 残り、次の起動が同じものをもう一度出す。
+            subprocess.run(["git", "pull", "--rebase", "--autostash",
+                            "origin", "main"])
             if subprocess.run(["git", "push", "origin", "main"]).returncode == 0:
-                return
+                return True
             time.sleep(5)
+        print("  記録を送れませんでした。次の起動が同じものを出す恐れがあります。",
+              file=sys.stderr)
+        return False
     except Exception as ex:                                   # noqa: BLE001
         print("  記録の送信に失敗: %s" % ex, file=sys.stderr)
+        return False
 
 
 # ------------------------------------------------- 予定実行が届いているか
@@ -1466,6 +1583,8 @@ def main():
     dry = "--dry-run" in args
 
     if "--serve" in args:
+        if not dry and not take_lock("serve"):
+            sys.exit(1)
         until = None
         if "--until" in args:
             until = args[args.index("--until") + 1]
@@ -1473,14 +1592,32 @@ def main():
         if "--hours" in args:
             window = float(args[args.index("--hours") + 1])
         th = cfg.get("threads") or {}
-        serve(cfg, until, window_h=window,
-              gap_min=int(th.get("catchupGapMin", 25)),
-              max_late_h=float(th.get("maxLateHours", 3)),
-              dry=dry, push=("--push" in args))
+        try:
+            serve(cfg, until, window_h=window,
+                  gap_min=int(th.get("catchupGapMin", 25)),
+                  max_late_h=float(th.get("maxLateHours", 3)),
+                  dry=dry, push=("--push" in args))
+        finally:
+            if not dry:
+                drop_lock()
         return
 
+    # 素で叩いたときも枠は記録する。空のまま残すと、
+    # 見張り側が「投稿した時刻」を枠とみなしてしまい、
+    # 実際には出していない枠まで消化済みになる。
+    if not dry and not take_lock("single"):
+        sys.exit(1)
     posted = load(STATE, {"keys": [], "log": []}) or {"keys": [], "log": []}
-    run_once(cfg, posted, dry=dry)
+    now_h = datetime.now(JST).hour
+    try:
+        n, _why = run_once(cfg, posted, slot_hour=now_h, dry=dry)
+    finally:
+        if not dry:
+            drop_lock()
+    if n and not dry:
+        print("\n※ この実行は記録を送っていません（--push なし）。")
+        print("   git add %s して push しないと、次の起動が同じものを出す恐れがあります。"
+              % STATE)
 
 
 if __name__ == "__main__":

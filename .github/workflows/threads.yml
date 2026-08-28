@@ -108,7 +108,7 @@ jobs:
           git add threads_posted.json
           git commit -m "auto: Threadsへ投稿"
           for i in 1 2 3; do
-            git pull --rebase origin main && git push origin main && exit 0
+            git pull --rebase --autostash origin main && git push origin main && exit 0
             echo "やり直します ($i)"
             sleep 5
           done
