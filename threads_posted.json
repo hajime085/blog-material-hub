@@ -13,7 +13,8 @@
     "product:r079bc53f2",
     "product:r4dcf8a139",
     "tip:00",
-    "tip:12"
+    "tip:12",
+    "product:r27423d12b"
   ],
   "log": [
     {
@@ -167,6 +168,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:r27423d12b",
+      "id": "18378395221231702",
+      "at": "2026-08-28 17:00",
+      "kind": "product",
+      "slot": 17,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "save",
+      "category": "fashion",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
