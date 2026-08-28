@@ -1,26 +1,49 @@
 name: Threadsへ投稿
 
-# 1日10回、1件ずつ出す。商品7件、それ以外3件。
+# 1日10件（商品7・それ以外3）を、時刻ごとの枠に沿って出す。
 #
-# 通販は夜のほうが買われるので、夜8時以降に商品を4件寄せている。
-# 楽天のセールが20時開始なのも同じ理由。
-# 残りの商品3件は朝と昼に散らす。
+# ■ なぜ「1日4回の起動」で10件出すのか
 #
-# 何を出すかは時刻ごとに config の threads.slots で決めてある。
-# 1回に複数出すと、同じ時間帯の投稿が互いに食い合って、
-# どちらの数字もその時間帯の実力を表さなくなる。1回1件にする。
+# GitHub の予定実行は、指定した時刻には動かない。
+# 8/21〜8/28 の実行記録40回を数えた結果:
 #
-# 毎時0分は世界中の予定実行が集中して大きく遅れるので、17分に置く。
+#     定刻に動いた回     0回
+#     遅れ              平均48分・最大77分・最小27分
+#
+# さらに、1日の予定回数を増やすほど、実行そのものが届かなくなる。
+#
+#     5〜7回/日 … 配信率 100%（6日間つづけて）
+#     11回/日  … 91%
+#     14回/日  … 21%
+#     17回/日  … 0%
+#
+# 10件出すために10回起動する、という作りが原因だった。
+# なので「1回の起動が長く生きて、複数の枠を見届ける」形に変える。
+# 起動は1日4回。1回が約4時間生き、その間の枠を順に出す。
+#
+# ■ 落ちてもその日のうちに取り返す
+#
+# 起動が落ちても、次の起動が「まだ出していない枠」を見つけて埋める。
+# 4回のうち1回でも動けば、その日の投稿は続く。
+# ただし3時間より前の枠は捨てる。夜にまとめて出しても、
+# 時間帯ごとの反応を比べる材料にならないため。
 on:
   schedule:
-    # UTC で指定する。日本時間の 7,9,12,14,17,19,20,21,23,0時の17分。
-    - cron: "17 22,0,3,5,8,10,11,12,14,15 * * *"
+    # UTC。日本時間の 6:30 / 10:50 / 15:50 / 20:30 にあたる。
+    # 毎時0分は世界中の予定実行が集中するので、半端な分に置く。
+    - cron: "30 21 * * *"
+    - cron: "50 1 * * *"
+    - cron: "50 6 * * *"
+    - cron: "30 11 * * *"
   workflow_dispatch:
     inputs:
       dry_run:
         description: "出さずに文面だけ見る"
         type: boolean
         default: false
+      hours:
+        description: "何時間ぶん見届けるか"
+        default: "4"
 
 # 実行が重なると threads_posted.json の書き込みがぶつかる。前のものを待つ。
 concurrency:
@@ -33,7 +56,9 @@ permissions:
 jobs:
   post:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    # 窓は4時間。詰まったときのために少しだけ余裕を持たせる。
+    # GitHub のジョブは6時間で強制終了されるので、それより短くする。
+    timeout-minutes: 280
     steps:
       - uses: actions/checkout@v5
 
@@ -49,29 +74,35 @@ jobs:
           THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
         run: python3 threads.py --check
 
-      - name: Threadsへ出す
+      - name: いつ動いたかを残す
+        run: |
+          echo "起動: $(TZ=Asia/Tokyo date '+%m/%d %H:%M') JST" >> "$GITHUB_STEP_SUMMARY"
+          echo "きっかけ: ${{ github.event_name }}" >> "$GITHUB_STEP_SUMMARY"
+
+      # 出したそばから記録を送る（--push）。
+      # 数時間動き続けるので、最後にまとめて送ると、
+      # 途中で切れたときに「出したのに記録が無い」状態になり、
+      # 次の起動が同じものをもう一度出してしまう。
+      - name: 枠を見届けながら出す
         env:
           THREADS_USER_ID: ${{ secrets.THREADS_USER_ID }}
           THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
         run: |
+          H="${{ inputs.hours }}"
+          H="${H:-4}"
           if [ "${{ inputs.dry_run }}" = "true" ]; then
-            python3 threads.py --dry-run
+            python3 threads.py --serve --hours "$H" --dry-run
           else
-            python3 threads.py
+            python3 threads.py --serve --hours "$H" --push
           fi
 
-      - name: いつ動いたかを残す
+      - name: 送り残しがあれば送る
         if: always()
-        run: |
-          echo "起動: $(TZ=Asia/Tokyo date '+%m/%d %H:%M') JST" >> "$GITHUB_STEP_SUMMARY"
-          echo "予定: ${{ github.event_name }}" >> "$GITHUB_STEP_SUMMARY"
-
-      - name: 出したものを記録する
         run: |
           git config user.name "yasumiru-bot"
           git config user.email "bot@users.noreply.github.com"
           if git diff --quiet -- threads_posted.json; then
-            echo "出したものはありません。"
+            echo "送り残しはありません。"
             exit 0
           fi
           git add threads_posted.json

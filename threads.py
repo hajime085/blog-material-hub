@@ -616,7 +616,7 @@ def compose_plain(x, site="", i=0):
 
 # ---------------------------------------------------------------- 選ぶ
 
-def pick(cfg, posted, want):
+def pick(cfg, posted, want, slot_hour=None):
     """今回出すものを選ぶ。
 
     リンクのある投稿とない投稿を交互に出す。
@@ -750,7 +750,10 @@ def pick(cfg, posted, want):
     #
     # 夜8時以降を厚くしているのは、通販がその時間に動くから。
     # 楽天のセールが20時開始なのも同じ理由。
-    hour = datetime.now(JST).hour
+    # 落ちた枠をあとから埋めるときは、いまの時刻ではなく
+    # 「本来その投稿が出るはずだった時刻」の枠に従う。
+    # そうしないと、朝の枠を昼に埋めた瞬間に中身が昼のものに変わる。
+    hour = datetime.now(JST).hour if slot_hour is None else int(slot_hour)
     slots = th.get("slots") or {}
     kind = slots.get(str(hour))
     if kind is None:
@@ -975,9 +978,15 @@ def report():
     print("  %-22s %-8s %-6s %6s %6s %6s %7s"
           % ("投稿", "型", "リンク", "表示", "いいね", "返信", "経過"))
     for x, g in rows:
-        print("  %-22s %-8s %-6s %6s %6s %6s %6.1fh" % (
+        # 落ちた枠をあとから埋めたものは印を付ける。
+        # 予定と違う時刻に出ているので、時間帯の比較には使えない。
+        mark = "*" if x.get("catchup") else ""
+        print("  %-22s %-8s %-6s %6s %6s %6s %6.1fh %s" % (
             x["key"][:22], x.get("kind", "?"), x.get("link", "?"),
-            g.get("views", 0), g.get("likes", 0), g.get("replies", 0), age_h(x)))
+            g.get("views", 0), g.get("likes", 0), g.get("replies", 0),
+            age_h(x), mark))
+    if any(x.get("catchup") for x, _ in rows):
+        print("  * 落ちた枠を遅れて埋めたもの。時間帯べつの比較からは外しています。")
 
     def median(xs):
         """中央値。表示回数はたまに大きく跳ねるので、平均だけだと1件に引きずられる。"""
@@ -1040,7 +1049,11 @@ def report():
 
     summarize("型べつ", lambda x: x.get("kind", "?"))
     summarize("リンクの置き方べつ", lambda x: x.get("link", "?"))
+    # 遅れて埋めたものは、予定と違う時刻に出ている。時間帯の比較から外す。
+    _all = rows
+    rows = [(x, g) for x, g in rows if not x.get("catchup")]
     summarize("時間帯べつ", slot_of)
+    rows = _all
 
     # ここから下は商品の投稿だけ。知識や予定と混ぜると比べられない。
     summarize("組み立てべつ（旧 vs 新）",
@@ -1058,40 +1071,14 @@ def report():
     print("比べるときは、どちらの型も同じくらい時間が経ってから見てください。")
 
 
-def main():
-    args = sys.argv[1:]
-    if "--report" in args:
-        report()
-        return
-    if "--setup" in args:
-        setup()
-        return
-    if "--refresh" in args:
-        refresh_token()
-        return
-    if "--check" in args:
-        uid, token = credentials()
-        ok, msg = token_expiry(token)
-        print("トークン: %s" % ("使えます" if ok else "使えません — %s" % msg))
-        if ok:
-            used, total = publishing_limit(uid, token)
-            print("24時間の投稿数: %s / %s" % (used, total))
-        return
-    dry = "--dry-run" in args
-    cfg = load("config.json")
+
+def run_once(cfg, posted, slot_hour=None, dry=False, late=False):
+    """1件出す。slot_hour を渡すと、その枠の決まりで中身を選ぶ。"""
     want = int(cfg.get("threads", {}).get("postsPerRun", 2))
-
-    if "--limit" in args:
-        uid, token = credentials()
-        used, total = publishing_limit(uid, token)
-        print("24時間の投稿数: %s / %s" % (used, total))
-        return
-
-    posted = load(STATE, {"keys": [], "log": []}) or {"keys": [], "log": []}
-    picks = pick(cfg, posted, want)
+    picks = pick(cfg, posted, want, slot_hour)
     if not picks:
         print("出せるものがありません。")
-        return
+        return 0
 
     print("▼ %d件を出します%s\n" % (len(picks), "（--dry-run なので出しません）" if dry else ""))
     for key, text, link in picks:
@@ -1102,12 +1089,14 @@ def main():
         print()
 
     if dry:
-        return
+        return 0
 
     uid, token = credentials()
     used, total = publishing_limit(uid, token)
     if used is not None and used + len(picks) > total:
-        sys.exit("24時間の上限に近いので止めます（%s/%s）" % (used, total))
+        print("24時間の上限に近いので止めます（%s/%s）" % (used, total),
+              file=sys.stderr)
+        return 0
 
     now = datetime.now(JST).strftime("%Y-%m-%d %H:%M")
     # どの商品に人の書いた文があったかを控えておく
@@ -1146,6 +1135,11 @@ def main():
                 "guide" if key.startswith("guide:") else "page")
         posted["log"].append({
             "key": key, "id": pid, "at": now, "kind": kind,
+            # どの枠のぶんか。落ちた枠をあとから埋めたときも、
+            # 本来の枠が分かるようにしておく。
+            "slot": slot_hour,
+            # 予定より1時間以上あとに出したものは、時間帯の比較から外せるようにする。
+            "catchup": late,
             # 人が書いた文があったかどうか。
             # データだけの投稿と読み比べたときに、差が出るのかを見るため。
             "cap": caps.get(key, None),
@@ -1173,6 +1167,287 @@ def main():
     posted["log"] = posted["log"][-400:]
     save(STATE, posted)
     print("\n%d件を出しました。" % ok)
+    return ok
+
+
+# ------------------------------------------------- 落ちた枠を埋めながら走る
+#
+# GitHub の予定実行は、時刻どおりには動かない。
+# 8/21〜8/28 の実行記録40回を数えたところ、
+# 定刻に動いた回は 0回、遅れは平均48分・最大77分だった。
+# さらに 1日の予定回数を増やすと、実行そのものが配信されなくなる。
+#
+#     5〜7回/日 … 配信率 100%（6日間）
+#     11回/日  … 91%
+#     14回/日  … 21%
+#     17回/日  … 0%
+#
+# だから「予定した回数だけ起動する」ことに頼らない作りにする。
+# 起動回数を1日4回まで減らし、そのかわり1回の起動が長く生き、
+# その日の落ちた枠を見つけて埋める。
+# 4回のうち1回でも動けば、その日の投稿は最後まで出る。
+
+
+def slot_hours(cfg):
+    return sorted(int(h) for h in ((cfg.get("threads") or {}).get("slots") or {}))
+
+
+def done_slots(posted, day):
+    """その日、すでに出した枠。"""
+    ds = day.strftime("%Y-%m-%d")
+    out = set()
+    for x in posted.get("log") or []:
+        at = x.get("at") or ""
+        if at[:10] != ds:
+            continue
+        s = x.get("slot")
+        if s is None:
+            # 枠を記録する前の古い記録。出した時刻をその枠とみなす。
+            try:
+                s = int(at[11:13])
+            except ValueError:
+                continue
+        out.add(int(s))
+    return out
+
+
+def next_action(hours, done, t, until, last, gap_min, max_late_h=3):
+    """いま何をすべきか決める。時計に触らないので、机上で確かめられる。
+
+    ("stop",) / ("post", 枠) / ("wait", 秒) のどれかを返す。
+    """
+    if t >= until:
+        return ("stop",)
+    # 遅れすぎた枠は捨てる。何時間も前の枠を夜にまとめて出すと、
+    # 時間帯ごとの反応を比べる材料にならないうえ、まとめ出しに見える。
+    due = []
+    for h in hours:
+        s = t.replace(hour=h, minute=0, second=0, microsecond=0)
+        if s <= t and h not in done:
+            if (t - s).total_seconds() <= max_late_h * 3600:
+                due.append(h)
+    if due:
+        if last is None or (t - last).total_seconds() >= gap_min * 60:
+            return ("post", due[0])
+        nxt = min(until, last + timedelta(minutes=gap_min))
+    else:
+        nxt = until
+        for h in hours:
+            s = t.replace(hour=h, minute=0, second=0, microsecond=0)
+            if s > t and h not in done:
+                nxt = min(nxt, s)
+                break
+    return ("wait", max(60, min((nxt - t).total_seconds(), 300)))
+
+
+def serve(cfg, until_s=None, window_h=4.0, gap_min=25, max_late_h=3,
+          dry=False, push=False):
+    """終わりの時刻まで生き続け、来た枠を出し、落ちた枠を埋める。"""
+    hours = slot_hours(cfg)
+    if not hours:
+        print("枠が決まっていません。")
+        return
+
+    def now():
+        return datetime.now(JST).replace(tzinfo=None)
+
+    if until_s:
+        hh, mm = (int(x) for x in until_s.split(":"))
+        until = now().replace(hour=hh, minute=mm, second=0, microsecond=0)
+        if until <= now():
+            until += timedelta(days=1)
+    else:
+        # 起動そのものが平均48分遅れるので、終わりは時刻で決めず、
+        # 「動き出してから何時間」で決める。そうすれば遅れて始まっても
+        # 受け持ちの枠を最後まで見届けられる。
+        until = now() + timedelta(hours=window_h)
+
+    print("いまは %s、%s まで見張ります。枠: %s"
+          % (now().strftime("%H:%M"), until.strftime("%m/%d %H:%M"),
+             "、".join("%d時" % h for h in hours)))
+
+    last = None
+    made = 0
+    while True:
+        t = now()
+        posted = load(STATE, {"keys": [], "log": []}) or {"keys": [], "log": []}
+        done = done_slots(posted, t.date())
+        act = next_action(hours, done, t, until, last, gap_min,
+                           max_late_h)
+
+        if act[0] == "stop":
+            print("%s になりました。終わります（%d件）。"
+                  % (t.strftime("%H:%M"), made))
+            return
+        if act[0] == "wait":
+            if dry:
+                print("待ちに入るところなので、--dry-run はここで終わります。")
+                return
+            time.sleep(act[1])
+            continue
+
+        h = act[1]
+        late = (t - t.replace(hour=h, minute=0)).total_seconds() > 3600
+        print("\n── %d時の枠を出します（いま %s%s）"
+              % (h, t.strftime("%H:%M"), "、遅れて埋めます" if late else ""))
+        n = run_once(cfg, posted, slot_hour=h, dry=dry, late=late)
+        if dry:
+            print("（--dry-run なので記録は残しません）")
+            return
+        if n:
+            made += n
+            last = t
+            if push:
+                push_state()
+        else:
+            # 出すものが無い枠で止まると、そこから先に進めなくなる。
+            # 出せなかったことを記録して次の枠へ送る。
+            posted.setdefault("log", []).append({
+                "key": "skip:%d" % h, "id": None,
+                "at": t.strftime("%Y-%m-%d %H:%M"), "kind": "skip",
+                "slot": h, "catchup": False, "link": "none",
+            })
+            save(STATE, posted)
+
+
+def push_state():
+    """出したそばから記録を送る。
+
+    1回の起動が数時間続くので、最後にまとめて送ると、
+    途中で止まったときに「出したのに記録が無い」状態になり、
+    次の起動が同じものをもう一度出してしまう。
+    """
+    import subprocess
+    cmds = [
+        ["git", "add", STATE],
+        ["git", "-c", "user.name=yasumiru-bot",
+         "-c", "user.email=bot@users.noreply.github.com",
+         "commit", "-m", "auto: Threadsへ投稿"],
+    ]
+    try:
+        if subprocess.run(["git", "diff", "--quiet", "--", STATE]).returncode == 0:
+            return
+        for c in cmds:
+            subprocess.run(c, check=True)
+        for _ in range(3):
+            subprocess.run(["git", "pull", "--rebase", "origin", "main"])
+            if subprocess.run(["git", "push", "origin", "main"]).returncode == 0:
+                return
+            time.sleep(5)
+    except Exception as ex:                                   # noqa: BLE001
+        print("  記録の送信に失敗: %s" % ex, file=sys.stderr)
+
+
+# ------------------------------------------------- 予定実行が届いているか
+
+def doctor(days=7):
+    """GitHub が予定実行をちゃんと配信しているかを数える。
+
+    落ちていることに気づかないまま何日も投稿が止まる、というのが
+    いちばん困る。だから配信率そのものを見られるようにしておく。
+    """
+    import urllib.request
+    import subprocess
+    try:
+        url = subprocess.run(["git", "remote", "get-url", "origin"],
+                             capture_output=True, text=True).stdout.strip()
+        repo = re.sub(r"\.git$", "", re.split(r"github\.com[:/]", url)[-1])
+    except Exception:                                         # noqa: BLE001
+        print("リポジトリが分かりません。")
+        return
+    runs = []
+    for p in (1, 2, 3):
+        u = ("https://api.github.com/repos/%s/actions/runs?per_page=100&page=%d"
+             % (repo, p))
+        try:
+            with urllib.request.urlopen(u, timeout=30) as r:
+                runs += json.load(r).get("workflow_runs", [])
+        except Exception as ex:                               # noqa: BLE001
+            print("実行記録が取れません: %s" % ex)
+            return
+    since = datetime.now(JST).replace(tzinfo=None) - timedelta(days=days)
+    rows = []
+    for r in runs:
+        if r["event"] != "schedule":
+            continue
+        t = (datetime.strptime(r["created_at"], "%Y-%m-%dT%H:%M:%SZ")
+             + timedelta(hours=9))
+        if t < since:
+            continue
+        rows.append((t, r["name"], r["conclusion"]))
+    rows.sort()
+    if not rows:
+        print("この%d日、予定実行は一度も動いていません。" % days)
+        return
+    import collections
+    per = collections.Counter()
+    for t, name, _ in rows:
+        per[(t.strftime("%m/%d"), name)] += 1
+    names = sorted(set(n for _, n, _ in rows))
+    print("予定実行が動いた回数（JST・%d日ぶん）" % days)
+    print("  %-8s %s" % ("日", "  ".join("%-14s" % n[:14] for n in names)))
+    for d in sorted(set(k[0] for k in per)):
+        print("  %-8s %s"
+              % (d, "  ".join("%-14s" % ("%d回" % per[(d, n)]) for n in names)))
+    print("\n最後に動いたのは %s。" % rows[-1][0].strftime("%m/%d %H:%M"))
+    gap = (datetime.now(JST).replace(tzinfo=None) - rows[-1][0]).total_seconds() / 3600
+    if gap > 8:
+        print("⚠️  それから %.1f時間 空いています。予定実行が届いていません。" % gap)
+        print("   Actions タブから手で動かすか、"
+              "python3 threads.py --serve --until HH:MM を手元で走らせてください。")
+    else:
+        print("直近 %.1f時間以内に動いています。" % gap)
+
+
+def main():
+    args = sys.argv[1:]
+    if "--report" in args:
+        report()
+        return
+    if "--doctor" in args:
+        doctor()
+        return
+    if "--setup" in args:
+        setup()
+        return
+    if "--refresh" in args:
+        refresh_token()
+        return
+    if "--check" in args:
+        uid, token = credentials()
+        ok, msg = token_expiry(token)
+        print("トークン: %s" % ("使えます" if ok else "使えません — %s" % msg))
+        if ok:
+            used, total = publishing_limit(uid, token)
+            print("24時間の投稿数: %s / %s" % (used, total))
+        return
+
+    cfg = load("config.json")
+
+    if "--limit" in args:
+        uid, token = credentials()
+        used, total = publishing_limit(uid, token)
+        print("24時間の投稿数: %s / %s" % (used, total))
+        return
+
+    dry = "--dry-run" in args
+
+    if "--serve" in args:
+        until = None
+        if "--until" in args:
+            until = args[args.index("--until") + 1]
+        window = 4.0
+        if "--hours" in args:
+            window = float(args[args.index("--hours") + 1])
+        th = cfg.get("threads") or {}
+        serve(cfg, until, window_h=window,
+              gap_min=int(th.get("catchupGapMin", 25)),
+              max_late_h=float(th.get("maxLateHours", 3)),
+              dry=dry, push=("--push" in args))
+        return
+
+    posted = load(STATE, {"keys": [], "log": []}) or {"keys": [], "log": []}
+    run_once(cfg, posted, dry=dry)
 
 
 if __name__ == "__main__":
