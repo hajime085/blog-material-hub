@@ -533,19 +533,49 @@ def schedule_post():
         return "%d月%d日 %02d:%02d" % (d.month, d.day, d.hour, d.minute)
 
     lines = []
+    guess = False
     for a, b, ev in rows[:3]:
-        mark = "" if ev.get("status") == "確定" else "（予想）"
-        state = "開催中" if a <= now <= b else "あと%d日" % max(0, (a.date() - now.date()).days)
+        mark = ""
+        if ev.get("status") != "確定":
+            mark = "（予想）"
+            guess = True
+        state = ("開催中" if a <= now <= b
+                 else "あと%d日" % max(0, (a.date() - now.date()).days))
         lines.append("・%s%s\n  %s 〜 %s（%s）" % (ev["name"], mark, fmt(a), fmt(b), state))
+
+    # エントリーが先に始まるイベントは、始まるのを待つ必要がない。
+    # ここを言わないと「まだ先の話」に見えて、当日まで何もしないことになる。
+    entry = None
+    for a, b, ev in rows[:3]:
+        try:
+            es = datetime.strptime(ev["entryStart"][:16], "%Y-%m-%d %H:%M")
+        except (ValueError, KeyError, TypeError):
+            continue
+        if es <= now < a:
+            entry = ev
+            break
+
+    tail = []
+    if entry:
+        tail.append("%sのエントリーは、もう始まっています。" % entry["name"])
+        cap = entry.get("pointCap")
+        if cap:
+            tail.append("押すだけ、無料、10秒。")
+            tail.append("ちなみに買いまわりの上限は%s。" % ("%s,%03dポイント" % (cap // 1000, cap % 1000)
+                                                if cap >= 1000 else "%dポイント" % cap))
+        tail.append("")
+        tail.append("開始してから慌てる人、多いんですよね。")
+    if guess:
+        tail.append("予想と書いたものは、まだ楽天が発表していない日程です。"
+                    "過去の傾向からの見込みなので、変わることがあります。")
 
     # 日付ごとに鍵を作ると、日をまたいだ直後にほぼ同じ内容がもう一度出る。
     # 予定はそう頻繁に変わらないので、間隔を空ける。
     key = "schedule:%s" % now.strftime("%Y-W%W-%w")
-    return [{"key": key,
-             "title": "楽天のイベント予定",
-             "lead": "\n".join(lines) +
-                     "\n\n予想と書いたものは、まだ楽天が発表していない日程です。"
-                     "過去の傾向からの見込みなので、変わることがあります。"}]
+    body = "\n".join(lines)
+    if tail:
+        body += "\n\n" + "\n".join(tail)
+    return [{"key": key, "title": "楽天のイベント予定", "lead": body}]
 
 
 # 返信で案内するときの一言。行き先ごとに変える。

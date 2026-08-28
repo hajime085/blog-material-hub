@@ -835,6 +835,91 @@ def short_name(t, n=30):
     return t if len(t) <= n else t[:n].rstrip("…、 ") + "…"
 
 
+def upcoming_event():
+    """これから来るイベント。エントリーが始まっていれば、その間も返す。
+
+    セールは始まってから動くものではない。エントリーは先に開いていて、
+    エントリー前の買い物は対象外になる。
+    だから「開催中かどうか」ではなく「エントリーが開いているか」で出す。
+    """
+    if not os.path.exists(os.path.join(ROOT, "events.json")):
+        return None
+    now = datetime.now(JST).replace(tzinfo=None)
+    best = None
+    for ev in (load("events.json") or {}).get("events", []):
+        if ev.get("status") != "確定" or ev.get("kind") not in ("marathon", "sale"):
+            continue
+        try:
+            a = datetime.strptime(ev["start"][:16], "%Y-%m-%d %H:%M")
+            b = datetime.strptime((ev.get("end") or ev["start"])[:16], "%Y-%m-%d %H:%M")
+        except (ValueError, KeyError):
+            continue
+        es = a
+        if ev.get("entryStart"):
+            try:
+                es = datetime.strptime(ev["entryStart"][:16], "%Y-%m-%d %H:%M")
+            except ValueError:
+                es = a
+        if es <= now <= b and (best is None or a < best[0]):
+            best = (a, b, es, ev)
+    return best
+
+
+def render_event_banner():
+    """セールの助走と開催を知らせる。
+
+    件数の多い日ほど下が長くなるので、ここは高さを取らない。
+    出すのは、その日に効く事実だけにする。
+    """
+    got = upcoming_event()
+    if not got:
+        return ""
+    a, b, _es, ev = got
+    now = datetime.now(JST).replace(tzinfo=None)
+    links = load("links.json") or {}
+    running = a <= now <= b
+
+    def when(d):
+        return "%d月%d日 %d:%02d" % (d.month, d.day, d.hour, d.minute)
+
+    if running:
+        head = "開催中"
+        title = "%sは %s まで" % (ev["name"], when(b))
+    else:
+        days = (a.date() - now.date()).days
+        head = ("今日 %d:%02d から" % (a.hour, a.minute) if days == 0
+                else "あと%d日" % days)
+        title = "%sは %s から" % (ev["name"], when(a))
+
+    # 事実だけを並べる。書いていないことは出さない。
+    facts = []
+    if not running and ev.get("entryStart"):
+        facts.append("エントリーはもう始まっています。押すだけ、無料")
+    facts.append("買いまわりは1ショップ税込1,000円以上で1カウント")
+    if ev.get("pointCap"):
+        facts.append("もらえる上限は%sポイント（期間限定）" % "{:,}".format(ev["pointCap"]))
+
+    btns = []
+    for lk in (ev.get("links") or [])[:2]:
+        to = lk.get("to") or ""
+        url = to if to.startswith("/") else (link_url(links, to) or "")
+        if not url:
+            continue
+        ext = ' target="_blank" rel="nofollow sponsored noopener"' if url.startswith("http") else ""
+        btns.append('<a class="evb-btn" href="%s"%s>%s</a>' % (url, ext, lk.get("label", "見る")))
+
+    return """
+<section class="evbar wrap-narrow">
+  <p class="evb-eyebrow">{ic}{head}</p>
+  <h2 class="evb-title">{title}</h2>
+  <ul class="evb-facts">{facts}</ul>
+  <div class="evb-btns">{btns}</div>
+</section>
+""".format(ic=icons.use("bolt"), head=e(head), title=e(title),
+           facts="".join("<li>%s</li>" % e(f) for f in facts),
+           btns="".join(btns))
+
+
 def render_soon(products, cats):
     """セールの特価をまとめる枠。ヒーローのすぐ下に置く。
 
@@ -1022,6 +1107,7 @@ def build_index(cfg, base, products, cats):
 """.format(ic=icons.use("bolt"), count=len(ordered), page=page)
 
         content = head + """
+{evbar}
 {soon}
 {featured}
 {gacha}
@@ -1049,6 +1135,7 @@ def build_index(cfg, base, products, cats):
 {sidebar}
 </div>
 """.format(count=len(products), cards=cards,
+           evbar=(render_event_banner() if page == 1 else ""),
            soon=(render_soon(products, cats) if page == 1 else ""),
            featured=(render_featured(cfg) if page == 1 else ""),
            gacha=(render_gacha() if page == 1 else ""),

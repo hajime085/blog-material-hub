@@ -79,8 +79,9 @@
     "eventMaxNew": 22,
     "eventMaxNewPerRun": 6,
     "eventMaxTotal": 40,
-    "eventLeadHours": 12,
-    "_watchMaxNewPerRun": "1回の巡回で新しく載せる上限。1日7件投稿するので、余裕を持たせている。"
+    "eventLeadHours": 36,
+    "_watchMaxNewPerRun": "1回の巡回で新しく載せる上限。1日7件投稿するので、余裕を持たせている。",
+    "_eventLeadHours": "イベント開始の何時間前から、開始前の商品を探しにいくか。2026年9月のスーパーSALEは先行セールがあり、楽天モバイル利用者は前日20時からポイントアップ期間に入る。12時間では前日ぶんを取りこぼすので36時間にした。"
   },
   "feed": {
     "perPage": 10,

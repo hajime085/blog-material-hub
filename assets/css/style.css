@@ -2920,3 +2920,72 @@ a.ticker-item:hover::before { background: var(--pop); }
   display: block;
 }
 .soon-toggle { margin-top: 6px; }
+
+/* ── セールの助走と開催の告知 ────────────────────────────
+   開催中かどうかではなく、エントリーが開いた時点から出す。
+   セールは始まってから動くものではないため。
+   件数の多い日ほど下が長くなるので、ここは高さを取らない。 */
+.evbar {
+  position: relative;
+  background: var(--ink);
+  border-radius: 15px;
+  padding-block: 20px 18px;
+  margin-bottom: 18px;
+}
+.evbar .evb-eyebrow {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--sale); color: #fff;
+  font-family: var(--f-price); font-weight: 400;
+  font-size: 1.16rem; letter-spacing: .04em; line-height: 1;
+  padding: 10px 18px 19px;
+  margin-bottom: 9px;
+  transform: rotate(-2deg);
+  /* 値札POPと同じ、手で切ったギザギザ */
+  clip-path: polygon(
+    0% 0%, 100% 0%, 100% 84%,
+    93% 100%, 86% 84%, 79% 100%, 72% 84%, 65% 100%, 58% 84%,
+    51% 100%, 44% 84%, 37% 100%, 30% 84%, 23% 100%, 16% 84%,
+    9% 100%, 2% 84%, 0% 92%
+  );
+  filter: drop-shadow(0 3px 7px rgba(245,51,63,.4));
+}
+.evbar .evb-eyebrow .ic { width: 18px; height: 18px; }
+.evb-title {
+  font-family: var(--f-display); font-weight: 400;
+  font-size: 1.3rem; line-height: 1.4;
+  color: var(--pop);
+  margin: 0 0 10px;
+}
+.evb-facts {
+  list-style: none; margin: 0 0 14px; padding: 0;
+  display: grid; gap: 5px;
+}
+.evb-facts li {
+  position: relative; padding-left: 15px;
+  font-size: .84rem; line-height: 1.7;
+  color: rgba(255,255,255,.78);
+}
+/* 絵文字は使わない。印は四角で描く。 */
+.evb-facts li::before {
+  content: ""; position: absolute; left: 0; top: .62em;
+  width: 6px; height: 6px; background: var(--pop);
+}
+.evb-btns { display: flex; flex-wrap: wrap; gap: 9px; }
+.evb-btn {
+  display: inline-flex; align-items: center;
+  padding: 9px 17px;
+  border-radius: 999px;
+  background: var(--pop); color: var(--ink);
+  font-weight: 700; font-size: .86rem;
+  text-decoration: none;
+  transition: transform .14s ease;
+}
+.evb-btn:hover { transform: translateY(-2px); }
+.evb-btn + .evb-btn {
+  background: transparent; color: var(--pop);
+  box-shadow: inset 0 0 0 2px rgba(255,214,0,.5);
+}
+@media (max-width: 560px) {
+  .evbar { padding-block: 17px 16px; }
+  .evb-title { font-size: 1.12rem; }
+}
