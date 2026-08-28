@@ -14,7 +14,9 @@
     "product:r4dcf8a139",
     "tip:00",
     "tip:12",
-    "product:r27423d12b"
+    "product:r27423d12b",
+    "product:rd0188c0f0",
+    "tip:21"
   ],
   "log": [
     {
@@ -182,6 +184,34 @@
       "category": "fashion",
       "logic_version": "marketing_v2",
       "link": "reply"
+    },
+    {
+      "key": "product:rd0188c0f0",
+      "id": "18123776575756380",
+      "at": "2026-08-28 17:02",
+      "kind": "product",
+      "slot": null,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "problem",
+      "cta_type": "question",
+      "category": "kitchen",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "tip:21",
+      "id": "17931738297382813",
+      "at": "2026-08-28 19:00",
+      "kind": "tip",
+      "slot": 19,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
     }
   ]
 }
