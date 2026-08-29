@@ -105,6 +105,33 @@ def yen(n):
     return "{:,}".format(int(n))
 
 
+def recent_posts(uid, token, n=8):
+    """アカウントに実際に載っている、直近の投稿。
+
+    手元の記録ではなくアカウントを見る。記録は押せないことがある。
+    8/29 は 14:00 に出した記録が push できず、次の回が
+    「まだ出していない」と読んで同じ知識投稿をもう一度出した。
+    記録が欠けても、アカウントを見ていれば気づける。
+    """
+    try:
+        d = api("GET", "%s/threads" % uid,
+                {"fields": "id,timestamp,text", "limit": n}, token)
+    except Exception:                                         # noqa: BLE001
+        return None
+    return d.get("data") or []
+
+
+def head_of(text):
+    """見比べ用に、投稿の先頭だけを取り出す。
+
+    返信のリンクや末尾の一言は回すので、末尾で比べると別物に見える。
+    同じ知識・同じ商品なら1行目は必ず同じになる。
+    """
+    t = (text or "").strip()
+    t = t.replace("【PR】", "")
+    return t.split("\n")[0].strip()[:40]
+
+
 def minutes_since_last_post(uid, token):
     """アカウントに最後の投稿が載ってから何分たったか。
 
@@ -1163,12 +1190,32 @@ def run_once(cfg, posted, slot_hour=None, dry=False, late=False):
     # 直前に誰かが出していないか。別の機械から重なって走っていた場合、
     # ここでしか気づけない。
     gap = int((cfg.get("threads") or {}).get("minGapMin", 10))
-    since = minutes_since_last_post(uid, token)
-    if since is not None and since < gap:
-        print("%.0f分前に投稿があります（%d分は空けます）。今回は出しません。"
-              % (since, gap), file=sys.stderr)
-        print("別の場所からも動いている可能性があります。", file=sys.stderr)
-        return 0, "blocked"
+    live = recent_posts(uid, token)
+    if live:
+        t0 = live[0].get("timestamp") or ""
+        try:
+            last = (datetime.strptime(t0[:19], "%Y-%m-%dT%H:%M:%S")
+                    + timedelta(hours=9))
+            since = (datetime.now(JST).replace(tzinfo=None)
+                     - last).total_seconds() / 60
+        except ValueError:
+            since = None
+        if since is not None and since < gap:
+            print("%.0f分前に投稿があります（%d分は空けます）。今回は出しません。"
+                  % (since, gap), file=sys.stderr)
+            print("別の場所からも動いている可能性があります。", file=sys.stderr)
+            return 0, "blocked"
+
+        # 時間が空いていても、同じ中身なら出さない。
+        # 間隔だけ見ていた版は、21分空いた重複を通してしまった。
+        heads = {head_of(x.get("text")) for x in live}
+        for key, text, _link in picks:
+            h = head_of(text)
+            if h and h in heads:
+                print("同じ内容がすでに載っています。今回は出しません。",
+                      file=sys.stderr)
+                print("  %s" % h, file=sys.stderr)
+                return 0, "blocked"
 
     used, total = publishing_limit(uid, token)
     if used is not None and used + len(picks) > total:
@@ -1381,8 +1428,13 @@ def serve(cfg, until_s=None, window_h=4.0, gap_min=25, max_late_h=3,
         if n:
             made += n
             last = t
-            if push:
-                push_state()
+            if push and not push_state():
+                # 記録を送れないまま出し続けると、次の回が同じものを出す。
+                # 8/29 の重複はこれで起きた。押せなかったら、そこで止める。
+                print("記録を送れませんでした。ここで止めます。"
+                      "出したぶんは載っていますが、記録はこの回に残りません。",
+                      file=sys.stderr)
+                return
         elif why == "blocked":
             # 上限やトークンで出せなかっただけ。枠は使っていない。
             # ここを消化済みにすると、直ったあとも二度と出せなくなる。

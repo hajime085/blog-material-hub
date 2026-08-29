@@ -25,22 +25,35 @@
 
 const REPO = "hajime085/blog-material-hub";
 
-// UTC の時 → 叩くワークフロー
-// 日本時間は +9時間。
+// UTC の時 → その時刻に叩くワークフロー（複数可）
+// 日本時間は +9時間。Cron は毎時 :20 に起きる。
+//
+// 枠ごとに1回ずつ起こす。
+// 以前は1回の起動が4時間生きて複数の枠を見ていたが、
+// 回が重なって順番待ちになり、押せなかった記録をもう片方が
+// 読み落として同じ投稿を二度出した（8/29 14:00 と 14:21）。
+// workflow_dispatch は取りこぼさないので、長く生かす必要はない。
+const T = "threads.yml";
+const W = "watch.yml";
+
 const PLAN = {
-  21: { file: "threads.yml", inputs: { hours: "4" } },   // JST  6:20 投稿
-  22: { file: "watch.yml" },                             // JST  7:20 見張り
-  1:  { file: "threads.yml", inputs: { hours: "4" } },   // JST 10:20 投稿
-  2:  { file: "watch.yml" },                             // JST 11:20 見張り
-  6:  { file: "threads.yml", inputs: { hours: "4" } },   // JST 15:20 投稿
-  7:  { file: "watch.yml" },                             // JST 16:20 見張り
-  11: { file: "threads.yml", inputs: { hours: "4" } },   // JST 20:20 投稿
-  12: { file: "watch.yml" },                             // JST 21:20 見張り
+  22: [T, W],   // JST  7:20  投稿(7時の枠) + 見張り
+  0:  [T],      // JST  9:20  投稿(9時の枠)
+  2:  [W],      // JST 11:20  見張り
+  3:  [T],      // JST 12:20  投稿(12時の枠)
+  5:  [T],      // JST 14:20  投稿(14時の枠)
+  7:  [W],      // JST 16:20  見張り
+  8:  [T],      // JST 17:20  投稿(17時の枠)
+  10: [T],      // JST 19:20  投稿(19時の枠)
+  11: [T],      // JST 20:20  投稿(20時の枠)
+  12: [T, W],   // JST 21:20  投稿(21時の枠) + 見張り
+  14: [T],      // JST 23:20  投稿(23時の枠)
+  15: [T],      // JST  0:20  投稿(0時の枠)
 };
 
-async function dispatch(job, token) {
+async function dispatch(file, token) {
   const url =
-    `https://api.github.com/repos/${REPO}/actions/workflows/${job.file}/dispatches`;
+    `https://api.github.com/repos/${REPO}/actions/workflows/${file}/dispatches`;
   const res = await fetch(url, {
     method: "POST",
     headers: {
@@ -51,27 +64,29 @@ async function dispatch(job, token) {
       "User-Agent": "yasumiru-cron",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ ref: "main", inputs: job.inputs || {} }),
+    body: JSON.stringify({ ref: "main", inputs: {} }),
   });
   // 成功は 204 No Content
   if (res.status !== 204) {
-    console.log(`${job.file} を起こせませんでした: ${res.status} ${await res.text()}`);
+    console.log(`${file} を起こせませんでした: ${res.status} ${await res.text()}`);
     return false;
   }
-  console.log(`${job.file} を起こしました`);
+  console.log(`${file} を起こしました`);
   return true;
 }
 
 export default {
   async scheduled(event, env, ctx) {
     const hour = new Date(event.scheduledTime).getUTCHours();
-    const job = PLAN[hour];
-    if (!job) return;                    // この時刻は用が無い
+    const jobs = PLAN[hour];
+    if (!jobs) return;                   // この時刻は用が無い
     if (!env.GH_TOKEN) {
       console.log("GH_TOKEN が入っていません");
       return;
     }
-    ctx.waitUntil(dispatch(job, env.GH_TOKEN));
+    ctx.waitUntil(
+      Promise.all(jobs.map((f) => dispatch(f, env.GH_TOKEN))),
+    );
   },
 
   // ブラウザで開くと、いまの状態と次の予定を返す。
@@ -80,7 +95,8 @@ export default {
     const now = new Date();
     const h = now.getUTCHours();
     const rows = Object.entries(PLAN)
-      .map(([k, v]) => `JST ${String((Number(k) + 9) % 24).padStart(2, "0")}:20  ${v.file}`)
+      .map(([k, v]) =>
+        `JST ${String((Number(k) + 9) % 24).padStart(2, "0")}:20  ${v.join(" + ")}`)
       .sort();
     return new Response(
       [

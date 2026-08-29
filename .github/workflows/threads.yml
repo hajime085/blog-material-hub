@@ -27,14 +27,15 @@ name: Threadsへ投稿
 # 4回のうち1回でも動けば、その日の投稿は続く。
 # ただし3時間より前の枠は捨てる。夜にまとめて出しても、
 # 時間帯ごとの反応を比べる材料にならないため。
+# 起こす役は Cloudflare Workers（ops/cron-worker.js）に置いてある。
+# ここに schedule を書かないこと。
+#
+# 8/29 に schedule が復活し、Cloudflare と二重に起動した。
+# 4時間生きる回が重なって順番待ちになり、片方が押せなかった記録を
+# もう片方が「まだ出していない」と読んで、同じ知識投稿を
+# 14:00 と 14:21 に二度出した。
+# 起こす役は必ず1つにする。
 on:
-  schedule:
-    # UTC。日本時間の 6:30 / 10:50 / 15:50 / 20:30 にあたる。
-    # 毎時0分は世界中の予定実行が集中するので、半端な分に置く。
-    - cron: "30 21 * * *"
-    - cron: "50 1 * * *"
-    - cron: "50 6 * * *"
-    - cron: "30 11 * * *"
   workflow_dispatch:
     inputs:
       dry_run:
@@ -43,7 +44,7 @@ on:
         default: false
       hours:
         description: "何時間ぶん見届けるか"
-        default: "4"
+        default: "0.75"
 
 # 実行が重なると threads_posted.json の書き込みがぶつかる。前のものを待つ。
 concurrency:
@@ -58,7 +59,7 @@ jobs:
     runs-on: ubuntu-latest
     # 窓は4時間。詰まったときのために少しだけ余裕を持たせる。
     # GitHub のジョブは6時間で強制終了されるので、それより短くする。
-    timeout-minutes: 280
+    timeout-minutes: 70
     steps:
       - uses: actions/checkout@v5
 
@@ -89,7 +90,10 @@ jobs:
           THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
         run: |
           H="${{ inputs.hours }}"
-          H="${H:-4}"
+          # 既定は45分。以前は4時間だったが、回が重なって順番待ちになり、
+          # 押せなかった記録をもう片方が読み落として重複投稿になった。
+          # Cloudflare が枠ごとに起こすので、1回が長く生きる必要はない。
+          H="${H:-0.75}"
           if [ "${{ inputs.dry_run }}" = "true" ]; then
             python3 threads.py --serve --hours "$H" --dry-run
           else
