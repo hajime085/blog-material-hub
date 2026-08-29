@@ -89,11 +89,39 @@ export default {
     );
   },
 
+// トークンの期限を GitHub に聞く。
+// 認証つきで叩くと、応答のヘッダに期限が入って返ってくる。
+// 切れたら全部止まるので、人が覚えていなくても見えるようにしておく。
+async function tokenExpiry(token) {
+  try {
+    const res = await fetch("https://api.github.com/rate_limit", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "User-Agent": "yasumiru-cron",
+        Accept: "application/vnd.github+json",
+      },
+    });
+    if (res.status === 401) return "使えません（切れたか、無効です）";
+    const exp = res.headers.get("github-authentication-token-expiration");
+    if (!exp) return "期限なし";
+    const d = new Date(exp.replace(" UTC", "Z").replace(" ", "T"));
+    if (isNaN(d)) return exp;
+    const days = Math.floor((d - new Date()) / 86400000);
+    const ymd = d.toISOString().slice(0, 10);
+    if (days < 0) return `${ymd} に切れています`;
+    if (days <= 14) return `${ymd} まで（あと${days}日 ← 作り直してください）`;
+    return `${ymd} まで（あと${days}日）`;
+  } catch (e) {
+    return `確かめられませんでした: ${e}`;
+  }
+}
+
   // ブラウザで開くと、いまの状態と次の予定を返す。
   // 動いているかどうかを人が確かめられるようにしておく。
   async fetch(req, env) {
     const now = new Date();
     const h = now.getUTCHours();
+    const exp = env.GH_TOKEN ? await tokenExpiry(env.GH_TOKEN) : "—";
     const rows = Object.entries(PLAN)
       .map(([k, v]) =>
         `JST ${String((Number(k) + 9) % 24).padStart(2, "0")}:20  ${v.join(" + ")}`)
@@ -102,6 +130,7 @@ export default {
       [
         "ヤスミルの予定実行",
         `いま UTC ${h}時。トークン: ${env.GH_TOKEN ? "あり" : "なし"}`,
+        `トークンの期限: ${exp}`,
         "",
         ...rows,
       ].join("\n"),
