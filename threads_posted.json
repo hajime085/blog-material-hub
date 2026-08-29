@@ -21,7 +21,8 @@
     "product:r88d870d5e",
     "product:rf04123caa",
     "product:r1961b4c2e",
-    "product:r710d74505"
+    "product:r710d74505",
+    "product:r770ff1652"
   ],
   "log": [
     {
@@ -285,6 +286,20 @@
       "hook_type": "relatable",
       "cta_type": "experience",
       "category": "baby-toy",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r770ff1652",
+      "id": "18152727574466516",
+      "at": "2026-08-30 00:01",
+      "kind": "product",
+      "slot": 0,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "save",
+      "category": "pc",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
