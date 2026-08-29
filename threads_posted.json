@@ -18,7 +18,8 @@
     "product:rd0188c0f0",
     "tip:21",
     "schedule:2026-W34-6",
-    "product:r88d870d5e"
+    "product:r88d870d5e",
+    "product:rf04123caa"
   ],
   "log": [
     {
@@ -240,6 +241,20 @@
       "hook_type": null,
       "cta_type": null,
       "category": "car",
+      "logic_version": "legacy_v1",
+      "link": "reply"
+    },
+    {
+      "key": "product:rf04123caa",
+      "id": "17900801757355614",
+      "at": "2026-08-29 12:00",
+      "kind": "product",
+      "slot": 12,
+      "catchup": false,
+      "cap": false,
+      "hook_type": null,
+      "cta_type": null,
+      "category": "books",
       "logic_version": "legacy_v1",
       "link": "reply"
     }
