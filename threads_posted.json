@@ -20,7 +20,8 @@
     "schedule:2026-W34-6",
     "product:r88d870d5e",
     "product:rf04123caa",
-    "product:r1961b4c2e"
+    "product:r1961b4c2e",
+    "product:r710d74505"
   ],
   "log": [
     {
@@ -271,6 +272,20 @@
       "cta_type": null,
       "category": "sports",
       "logic_version": "legacy_v1",
+      "link": "reply"
+    },
+    {
+      "key": "product:r710d74505",
+      "id": "17870640222593415",
+      "at": "2026-08-29 23:20",
+      "kind": "product",
+      "slot": 23,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "relatable",
+      "cta_type": "experience",
+      "category": "baby-toy",
+      "logic_version": "marketing_v2",
       "link": "reply"
     }
   ]
