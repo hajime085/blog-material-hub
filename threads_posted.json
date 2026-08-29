@@ -19,7 +19,8 @@
     "tip:21",
     "schedule:2026-W34-6",
     "product:r88d870d5e",
-    "product:rf04123caa"
+    "product:rf04123caa",
+    "product:r1961b4c2e"
   ],
   "log": [
     {
@@ -255,6 +256,20 @@
       "hook_type": null,
       "cta_type": null,
       "category": "books",
+      "logic_version": "legacy_v1",
+      "link": "reply"
+    },
+    {
+      "key": "product:r1961b4c2e",
+      "id": "18113503337072862",
+      "at": "2026-08-29 22:27",
+      "kind": "product",
+      "slot": 21,
+      "catchup": false,
+      "cap": false,
+      "hook_type": null,
+      "cta_type": null,
+      "category": "sports",
       "logic_version": "legacy_v1",
       "link": "reply"
     }

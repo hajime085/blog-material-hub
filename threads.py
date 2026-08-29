@@ -708,7 +708,7 @@ def compose_plain(x, site="", i=0):
 
 # ---------------------------------------------------------------- 選ぶ
 
-def pick(cfg, posted, want, slot_hour=None):
+def pick(cfg, posted, want, slot_hour=None, live_heads=None):
     """今回出すものを選ぶ。
 
     リンクのある投稿とない投稿を交互に出す。
@@ -858,6 +858,22 @@ def pick(cfg, posted, want, slot_hour=None):
         else:
             kind = "product"
     want_plain = (kind == "plain")
+
+    # すでにアカウントに載っているものは、候補の段階で外す。
+    #
+    # 記録は押せないことがある。押せなければ「まだ出していない」と読んで
+    # 同じものをまた選ぶ。出す直前に止めるだけだと、その枠は空振りになる。
+    # 候補から外しておけば、次の候補が出る。枠を落とさない。
+    if live_heads:
+        def fresh(pair):
+            _k, (body, _l) = pair
+            return head_of(body) not in live_heads
+        before = len(linked) + len(plain)
+        linked = [x for x in linked if fresh(x)]
+        plain = [x for x in plain if fresh(x)]
+        gone = before - len(linked) - len(plain)
+        if gone:
+            print("すでに載っているものを%d件、候補から外しました。" % gone)
 
     # 出すものが無い枠は、もう片方で埋める。投稿を落とさない。
     out = []
@@ -1172,7 +1188,20 @@ def run_once(cfg, posted, slot_hour=None, dry=False, late=False):
     上限に当たっただけの枠まで消化済みにしてしまう。
     """
     want = int(cfg.get("threads", {}).get("postsPerRun", 2))
-    picks = pick(cfg, posted, want, slot_hour)
+
+    # 候補を作る前にアカウントを見る。記録が欠けていても、
+    # 実際に載っているものは候補から外せる。
+    live = None
+    heads = None
+    if not dry:
+        try:
+            uid0, tok0 = credentials()
+            live = recent_posts(uid0, tok0)
+            if live:
+                heads = {head_of(x.get("text")) for x in live}
+        except SystemExit:
+            pass
+    picks = pick(cfg, posted, want, slot_hour, heads)
     if not picks:
         print("出せるものがありません。")
         return 0, "empty"
@@ -1193,7 +1222,8 @@ def run_once(cfg, posted, slot_hour=None, dry=False, late=False):
     # 直前に誰かが出していないか。別の機械から重なって走っていた場合、
     # ここでしか気づけない。
     gap = int((cfg.get("threads") or {}).get("minGapMin", 10))
-    live = recent_posts(uid, token)
+    if live is None:
+        live = recent_posts(uid, token)
     if live:
         t0 = live[0].get("timestamp") or ""
         try:
