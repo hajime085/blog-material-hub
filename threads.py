@@ -122,14 +122,17 @@ def recent_posts(uid, token, n=8):
 
 
 def head_of(text):
-    """見比べ用に、投稿の先頭だけを取り出す。
+    """見比べ用に、投稿の頭のほうをならして取り出す。
 
-    返信のリンクや末尾の一言は回すので、末尾で比べると別物に見える。
-    同じ知識・同じ商品なら1行目は必ず同じになる。
+    1行目だけで比べると、毎回同じ見出しを使う投稿を
+    「重複」と誤って弾く。「楽天のイベント予定」がそれで、
+    中身は毎回違うのに1行目は必ず同じになる。
+    改行をつめた先頭100字で比べる。ここまで一致していれば、
+    同じ知識・同じ商品と見てよい。
     """
-    t = (text or "").strip()
-    t = t.replace("【PR】", "")
-    return t.split("\n")[0].strip()[:40]
+    t = (text or "").replace("【PR】", "")
+    t = " ".join(t.split())          # 改行と連続する空白をつめる
+    return t[:100]
 
 
 def minutes_since_last_post(uid, token):
@@ -1542,6 +1545,42 @@ def push_state():
 
 # ------------------------------------------------- 予定実行が届いているか
 
+def check_duplicates():
+    """アカウントに同じ投稿が並んでいないか。
+
+    重複は表示を絞られる要因になるし、機械が回しているのも見える。
+    出す前に止める仕掛けは入れたが、それが効かなかったときに
+    気づけないのがいちばん困る。だから後からも数えられるようにしておく。
+    """
+    try:
+        uid, token = credentials()
+    except SystemExit:
+        return
+    live = recent_posts(uid, token, n=25)
+    if not live:
+        print("アカウントの投稿を取れませんでした。")
+        return
+    seen = {}
+    dup = []
+    for x in live:
+        h = head_of(x.get("text"))
+        if not h:
+            continue
+        if h in seen:
+            dup.append((h, seen[h], x.get("timestamp", "")))
+        else:
+            seen[h] = x.get("timestamp", "")
+    if dup:
+        print("")
+        print("⚠️  同じ内容が並んでいます（直近%d件のうち %d組）:" % (len(live), len(dup)))
+        for h, a, b in dup:
+            print("     %s" % h)
+            print("       %s と %s" % (b[:16], a[:16]))
+        print("   Threadsのアプリから片方を消してください。")
+    else:
+        print("直近%d件に重複はありません。" % len(live))
+
+
 def doctor(days=7):
     """GitHub が予定実行をちゃんと配信しているかを数える。
 
@@ -1599,6 +1638,7 @@ def doctor(days=7):
               "python3 threads.py --serve --until HH:MM を手元で走らせてください。")
     else:
         print("直近 %.1f時間以内に動いています。" % gap)
+    check_duplicates()
 
 
 def main():
