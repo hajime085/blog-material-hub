@@ -19,7 +19,7 @@
       "endTime": "",
       "listPrice": 1255,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,255円のSwitch用収納ケースが1,004円。ゲームカードも入ります。",
       "tags": [
         "送料無料"
       ],
@@ -29,7 +29,24 @@
       "postedAt": "2026-08-30",
       "bumpedAt": "2026-08-30T07:32:56",
       "lastSeen": "2026-08-30",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "Switchを持ち出す人",
+        "problem": "本体は入っても、ソフトが別のところへ行く",
+        "use_case": "持ち運び",
+        "features": [
+          "収納ケース",
+          "ゲームカードも入る",
+          "キャリングケース"
+        ],
+        "benefits": [
+          "本体とソフトをまとめて持てる"
+        ],
+        "hook": "持ち歩くとき、ソフトだけどこかへ行く。",
+        "body": "本体と一緒にゲームカードもしまえるケースです。\n持ち運び用のキャリングタイプ。",
+        "cta": "save"
+      }
     },
     {
       "id": "r4cfa93d04",
@@ -48,7 +65,7 @@
       "endTime": "",
       "listPrice": 1600,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,600円のSwitch用保護カバーが1,280円。有機ELモデルにも対応。",
       "tags": [],
       "points": [],
       "description": "",
@@ -56,7 +73,26 @@
       "postedAt": "2026-08-30",
       "bumpedAt": "2026-08-30T07:32:56",
       "lastSeen": "2026-08-30",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "compare",
+        "target": "Switchに傷をつけたくない人",
+        "problem": "ケースにしまうと、遊ぶたびに出し入れが要る",
+        "use_case": "日常の保護",
+        "features": [
+          "本体に装着する保護カバー",
+          "有機ELモデル対応",
+          "コントローラー用もある",
+          "ガラスフィルム付き"
+        ],
+        "benefits": [
+          "つけたまま遊べる",
+          "持っている型に合わせて選べる"
+        ],
+        "hook": "しまうケースではなく、つけっぱなしのほう。",
+        "body": "本体に装着する保護カバーです。有機ELモデルにも対応。\nコントローラー用もあって、ガラスフィルムが付きます。",
+        "cta": "none"
+      }
     },
     {
       "id": "ref3ad4e1a",
@@ -75,7 +111,7 @@
       "endTime": "",
       "listPrice": 1650,
       "priceBasis": "history",
-      "caption": "1,650円のB'zの初回限定盤が1,361円。CDとDVDの2枚組。",
+      "caption": "1,650円のB'zの初回限定盤が1,293円。CDとDVDの2枚組。",
       "tags": [
         "送料無料"
       ],
@@ -168,7 +204,26 @@
       "postedAt": "2026-08-29",
       "bumpedAt": "2026-08-29T21:25:33",
       "lastSeen": "2026-08-29",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "problem",
+        "target": "野菜を使い切れない人",
+        "problem": "買っても切る前に萎びる",
+        "use_case": "味噌汁・スープ・炒め物",
+        "features": [
+          "乾燥カット野菜",
+          "すべて国産",
+          "キャベツ・白菜・根菜の3種類から選べる"
+        ],
+        "benefits": [
+          "切らずにそのまま使える",
+          "常温で置いておける"
+        ],
+        "hook": "野菜、切るところで面倒になる。",
+        "body": "すべて国産の乾燥カット野菜です。切ってあるので、そのまま入れられます。\nキャベツ・白菜・根菜の3種類から選べます。",
+        "cta": "question",
+        "cta_text": "乾燥野菜、何に使ってます？"
+      }
     },
     {
       "id": "r710d74505",
@@ -241,7 +296,26 @@
       "postedAt": "2026-08-29",
       "bumpedAt": "2026-08-29T21:29:05",
       "lastSeen": "2026-08-30",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "運動用のボトムスを探している人",
+        "problem": "ヨガ用と水辺用で、別々に買うことになる",
+        "use_case": "ヨガ・トレーニング・水辺",
+        "features": [
+          "水陸両用",
+          "厚手",
+          "無地と柄から選べる",
+          "レディース"
+        ],
+        "benefits": [
+          "水に入る場面でも使える",
+          "1本で用途をまたげる"
+        ],
+        "hook": "ヨガ用なのに、水に入っても平気なレギンス。",
+        "body": "水陸両用のレギンスです。厚手のタイプ。\n無地と柄から選べます。",
+        "cta": "experience"
+      }
     },
     {
       "id": "re70adb7d5",
@@ -792,7 +866,26 @@
       "postedAt": "2026-08-28",
       "bumpedAt": "2026-08-28T04:58:53",
       "lastSeen": "2026-08-30",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "problem",
+        "target": "夏に色物のTシャツを避けている人",
+        "problem": "汗染みが出るので、着られる色が限られる",
+        "use_case": "夏の普段着",
+        "features": [
+          "汗染み防止",
+          "UVカット",
+          "綿100%",
+          "M〜3L"
+        ],
+        "benefits": [
+          "色を選ぶときの制約が減る",
+          "サイズの幅が広い"
+        ],
+        "hook": "夏、着られるTシャツの色が限られてくる。",
+        "body": "汗染み防止のTシャツです。綿100%でUVカット。\nMから3Lまであります。",
+        "cta": "empathy"
+      }
     },
     {
       "id": "re783e2082",
@@ -1048,7 +1141,26 @@
       "unitNote": null,
       "postedAt": "2026-08-28",
       "lastSeen": "2026-08-30",
-      "bumpedAt": "2026-08-28T21:33:08"
+      "bumpedAt": "2026-08-28T21:33:08",
+      "marketing": {
+        "hook_type": "relatable",
+        "target": "レギンスを外でも履きたい人",
+        "problem": "レギンス1枚だと、そのまま出かけるには心もとない",
+        "use_case": "普段着",
+        "features": [
+          "裾がフレア",
+          "ストレッチ",
+          "レギンスパンツ"
+        ],
+        "benefits": [
+          "裾に広がりがある",
+          "伸びるので動きやすい"
+        ],
+        "hook": "レギンス1枚だと、さすがに出かけづらい。",
+        "body": "裾がフレアになったレギンスパンツです。\nストレッチが効いています。",
+        "cta": "empathy"
+      },
+      "pitch_status": "ready"
     },
     {
       "id": "r770ff1652",
@@ -1649,7 +1761,26 @@
       "postedAt": "2026-08-28",
       "bumpedAt": "2026-08-28T21:14:38",
       "lastSeen": "2026-08-30",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "compare",
+        "target": "乳酸菌のサプリを選んでいる人",
+        "problem": "どれも似て見えて、選ぶ基準が分からない",
+        "use_case": "毎日のサプリ",
+        "features": [
+          "乳酸菌・ビフィズス菌・酪酸菌の3種類",
+          "オリゴ糖とイヌリン",
+          "ナットウキナーゼ",
+          "国内製造"
+        ],
+        "benefits": [
+          "入っている菌の種類で比べられる"
+        ],
+        "hook": "乳酸菌のサプリ、菌の種類まで見て選んでますか。",
+        "body": "乳酸菌・ビフィズス菌・酪酸菌の3種類が入っています。\nオリゴ糖とイヌリンも配合。国内製造です。",
+        "cta": "question",
+        "cta_text": "サプリ、成分表まで見て選んでます？"
+      }
     },
     {
       "id": "rdb7e75acf",
@@ -1678,7 +1809,23 @@
       "postedAt": "2026-08-28",
       "bumpedAt": "2026-08-28T21:31:24",
       "lastSeen": "2026-08-30",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "成分名で選びたい人",
+        "problem": "サプリの棚を見ても、名前だけでは何の成分か分からない",
+        "use_case": "毎日のサプリ",
+        "features": [
+          "エラグ酸を配合",
+          "高濃度をうたっている"
+        ],
+        "benefits": [
+          "成分名がはっきりしている"
+        ],
+        "hook": "エラグ酸、名前だけだと何の成分か分かりません。",
+        "body": "エラグ酸を配合したサプリです。高濃度をうたっています。",
+        "cta": "none"
+      }
     },
     {
       "id": "re33845cbc",
