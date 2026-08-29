@@ -17,7 +17,8 @@
     "product:r27423d12b",
     "product:rd0188c0f0",
     "tip:21",
-    "schedule:2026-W34-6"
+    "schedule:2026-W34-6",
+    "product:r88d870d5e"
   ],
   "log": [
     {
@@ -227,6 +228,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:r88d870d5e",
+      "id": "18151268305515562",
+      "at": "2026-08-29 10:20",
+      "kind": "product",
+      "slot": 9,
+      "catchup": true,
+      "cap": false,
+      "hook_type": null,
+      "cta_type": null,
+      "category": "car",
+      "logic_version": "legacy_v1",
+      "link": "reply"
     }
   ]
 }
