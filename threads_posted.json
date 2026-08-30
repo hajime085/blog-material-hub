@@ -28,7 +28,8 @@
     "product:re63e00606",
     "tip:01",
     "product:rb505b66ae",
-    "tip:13"
+    "tip:13",
+    "product:r2e3c35a08"
   ],
   "log": [
     {
@@ -392,6 +393,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:r2e3c35a08",
+      "id": "18149072209547044",
+      "at": "2026-08-30 20:00",
+      "kind": "product",
+      "slot": 20,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "relatable",
+      "cta_type": "question",
+      "category": "pc",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
