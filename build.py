@@ -1018,7 +1018,12 @@ def render_soon(products, cats):
             ic=icons.use("calendar", "ic-when"), when=e(when),
             pr=yen(p["price"]),
             off=('<span class="soon-off-s">%d%%OFF</span>' % d) if d else "",
-            ship="" if free_shipping(p) else '<span class="soon-ship-s">＋送料</span>',
+            # 送料込みは、黙っていないで言う。
+            # 「¥1,000 ＋送料」は、それだけで買えない値段に見える。
+            # 実際は14件中ほとんどが送料込みだった。
+            # 言わなければ伝わらないし、言えば強みになる。
+            ship=('<span class="soon-ship-in">送料込み</span>' if free_shipping(p)
+                  else '<span class="soon-ship-s">＋送料</span>'),
             cic=icons.use(cat.get("icon", "tag")))
 
     # 開始時刻ごとにまとめず、1本の一覧にする。

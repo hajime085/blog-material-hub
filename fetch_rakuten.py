@@ -442,6 +442,22 @@ def sale_status(raw, tolerance_hours=24):
     return True, "", None
 
 
+def merge_shipping_tag(tags, free):
+    """楽天が返した送料の事実を、タグに反映する。
+
+    free が None のときは分からないということなので、何もしない。
+    分からないものを「送料別」として出すと、事実でないことを言うことになる。
+    """
+    tags = list(tags or [])
+    if free is True and "送料無料" not in tags:
+        tags.append("送料無料")
+    elif free is False and "送料無料" in tags:
+        # 名前に「送料無料」と書いてあっても、条件つきのことがある。
+        # 楽天のデータのほうを信じる。
+        tags.remove("送料無料")
+    return tags
+
+
 def product_id(item_code):
     return "r" + hashlib.sha1(item_code.encode("utf-8")).hexdigest()[:9]
 
@@ -1263,6 +1279,11 @@ def fetch_event(cfg, app_id, access_key, aff_id, site_url,
                         "affiliateUrl": it.get("affiliateUrl") or it.get("itemUrl") or "",
                         "shop": (it.get("shopName") or "").strip(),
                         "genreId": str(it.get("genreId") or ""),
+                        # 送料。postageFlag は 0 が送料込み。
+                        # ここを保存していなかったので、開始前の商品は
+                        # ぜんぶ「＋送料」と表示されていた。
+                        # 実際には送料無料のものばかりで、事実と逆だった。
+                        "freeShipping": it.get("postageFlag") == 0,
                     }
                 time.sleep(REQUEST_INTERVAL)
         print("  ・%-22s → ここまで %d件" % (cat["label"], len(found)))
@@ -1323,7 +1344,12 @@ def fetch_event(cfg, app_id, access_key, aff_id, site_url,
             "priceBasis": "title" if v["listPrice"] else None,
             # キャプションは空で置く。ここは人が書く。
             "caption": "", "points": [], "description": "",
-            "tags": tags_from_title(v["rawTitle"]),
+            # 商品名からのタグに、楽天が返した送料の事実を足す。
+            # 名前に「送料無料」と書いていない送料込みの商品は多い。
+            # 名前だけを見ていたので、送料込みなのに「＋送料」と
+            # 出ていた（16件中14件がそうだった）。
+            "tags": merge_shipping_tag(tags_from_title(v["rawTitle"]),
+                                       v.get("freeShipping")),
             "unitNote": unit_note_from_title(v["rawTitle"]),
             "postedAt": today, "bumpedAt": stamp, "lastSeen": today,
             # 親投稿のもとはまだ無い。pitch.py で作る。

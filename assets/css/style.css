@@ -3009,3 +3009,16 @@ a.ticker-item:hover::before { background: var(--pop); }
   transition: transform .16s ease;
 }
 .soon-more[open] .soon-toggle { transform: rotate(-135deg) translate(-2px, -2px); }
+
+/* 送料込みは黙っていないで言う。「＋送料」だけを出していたころは、
+   送料込みの商品まで買えない値段に見えていた。 */
+.soon-ship-in {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: rgba(255,214,0,.16);
+  color: var(--pop);
+  font-size: .68rem; font-weight: 700; letter-spacing: .02em;
+  white-space: nowrap;
+}
