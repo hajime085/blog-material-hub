@@ -25,7 +25,8 @@
     "product:r770ff1652",
     "tip:25",
     "product:r9599f9e79",
-    "product:re63e00606"
+    "product:re63e00606",
+    "tip:01"
   ],
   "log": [
     {
@@ -347,6 +348,20 @@
       "category": "food",
       "logic_version": "marketing_v2",
       "link": "reply"
+    },
+    {
+      "key": "tip:01",
+      "id": "18091701647127647",
+      "at": "2026-08-30 14:20",
+      "kind": "tip",
+      "slot": 14,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
     }
   ]
 }
