@@ -23,7 +23,8 @@
     "product:r1961b4c2e",
     "product:r710d74505",
     "product:r770ff1652",
-    "tip:25"
+    "tip:25",
+    "product:r9599f9e79"
   ],
   "log": [
     {
@@ -317,6 +318,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:r9599f9e79",
+      "id": "18119956168931767",
+      "at": "2026-08-30 09:20",
+      "kind": "product",
+      "slot": 9,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "save",
+      "category": "books",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
