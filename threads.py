@@ -1639,28 +1639,36 @@ def doctor(days=7):
     since = datetime.now(JST).replace(tzinfo=None) - timedelta(days=days)
     rows = []
     for r in runs:
-        if r["event"] != "schedule":
+        # Cloudflare から起こすようになったので workflow_dispatch が本筋。
+        # schedule だけを数えていたころの名残で、動いているのに
+        # 「届いていません」と誤報していた。
+        if r["event"] not in ("schedule", "workflow_dispatch"):
             continue
         t = (datetime.strptime(r["created_at"], "%Y-%m-%dT%H:%M:%SZ")
              + timedelta(hours=9))
         if t < since:
             continue
-        rows.append((t, r["name"], r["conclusion"]))
+        rows.append((t, r["name"], r["conclusion"], r["event"]))
     rows.sort()
     if not rows:
         print("この%d日、予定実行は一度も動いていません。" % days)
         return
     import collections
     per = collections.Counter()
-    for t, name, _ in rows:
+    for t, name, _c, _e in rows:
         per[(t.strftime("%m/%d"), name)] += 1
-    names = sorted(set(n for _, n, _ in rows))
+    names = sorted(set(n for _, n, _c, _e in rows))
     print("予定実行が動いた回数（JST・%d日ぶん）" % days)
     print("  %-8s %s" % ("日", "  ".join("%-14s" % n[:14] for n in names)))
     for d in sorted(set(k[0] for k in per)):
         print("  %-8s %s"
               % (d, "  ".join("%-14s" % ("%d回" % per[(d, n)]) for n in names)))
-    print("\n最後に動いたのは %s。" % rows[-1][0].strftime("%m/%d %H:%M"))
+    print("\n最後に動いたのは %s（%s）。"
+          % (rows[-1][0].strftime("%m/%d %H:%M"),
+             "Cloudflare" if rows[-1][3] == "workflow_dispatch" else "GitHubのschedule"))
+    stale = [r for r in rows if r[3] == "schedule"]
+    if stale and (rows[-1][0] - stale[-1][0]).total_seconds() < 0:
+        print("⚠️  GitHubのscheduleが動いています。二重に起こすと記録が壊れます。")
     gap = (datetime.now(JST).replace(tzinfo=None) - rows[-1][0]).total_seconds() / 3600
     if gap > 8:
         print("⚠️  それから %.1f時間 空いています。予定実行が届いていません。" % gap)

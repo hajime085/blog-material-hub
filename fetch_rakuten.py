@@ -203,6 +203,12 @@ def api_get(url, params, site_url):
 #   例: ＼送料無料／【あす楽】★店内最安値★ 商品名 まとめ買い
 # そのまま並べるとカードが読めなくなるので、飾りは外して
 # 意味のあるものはタグへ移す。
+# 載せない売場。CD・DVD・音楽まわり。
+# 101240（CD・DVD・楽器）は config の genres からも外してあるが、
+# 子ジャンルは別の検索にも現れるので、IDでも弾く。
+NG_GENRES = set()
+
+
 PROMO_WORDS = ["送料無料", "あす楽", "ポイント", "最安", "在庫処分", "セール", "SALE",
                "訳あり", "アウトレット", "まとめ買い", "限定", "クーポン", "実質", "P5倍",
                "翌日配送", "即納", "新品", "正規品", "父の日", "母の日", "お中元", "お歳暮",
@@ -561,6 +567,11 @@ def fetch_category(cat, app_id, access_key, aff_id, hits, site_url, ng_keyword="
         for item in data.get("Items", []):
             code = item.get("itemCode") or ""
             if not code:
+                continue
+            # 載せない売場。CD・DVD・音楽は扱わないと決めた。
+            # 親ジャンルを外しても、子ジャンルの商品が別の検索で
+            # 拾われることがあるので、ここでも見る。
+            if str(item.get("genreId") or "") in NG_GENRES:
                 continue
             raw_name = (item.get("itemName") or "").strip()
             found[code] = {
@@ -1197,6 +1208,9 @@ def fetch_event(cfg, app_id, access_key, aff_id, site_url,
 
                 for it in data.get("Items", []):
                     scanned += 1
+                    # 載せない売場は、開始前の探索でも弾く
+                    if str(it.get("genreId") or "") in NG_GENRES:
+                        continue
                     start = (it.get("startTime") or "").strip()
                     if not start:
                         continue
@@ -1311,9 +1325,16 @@ def fetch_event(cfg, app_id, access_key, aff_id, site_url,
     print("  キャプションが空のままなので、書いてから python3 build.py してください。")
 
 
+def load_ng_genres(cfg):
+    NG_GENRES.clear()
+    NG_GENRES.update(str(g) for g in (cfg.get("rakuten", {}).get("ngGenres") or []))
+
+
 def main():
     args = [a for a in sys.argv[1:]]
     cfg = load_json("config.json")
+    # 載せない売場は、どの経路（巡回・見張り・開始前の探索）でも効かせる。
+    load_ng_genres(cfg)
     app_id, access_key, aff_id = credentials(cfg)
     site_url = cfg["site"]["url"]
 
