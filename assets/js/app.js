@@ -178,6 +178,15 @@
   // 取得は1日5回なので、朝の取得のあとに終わるセールは
   // 次のビルドまで最大6時間、終わったまま並び続ける。
   // 読む人の時計で判定して、その場で消す。
+  // いつ載せたか。値段は毎日動くので、「いつの話か」が要る。
+  function postedLabel(p) {
+    var at = (p && p.at) || '';
+    var m = at.match(/^(\d{4})-(\d{2})-(\d{2})/);
+    if (!m) return '';
+    return '<span class="card-posted"><time datetime="' + at.slice(0, 10) + '">'
+      + (+m[2]) + '/' + (+m[3]) + ' 掲載</time></span>';
+  }
+
   function saleOver(p) {
     var end = (p && p.et) || '';
     if (!end) return false;
@@ -284,7 +293,7 @@
       '<h2 class="card-title"><a href="/p/' + esc(p.id) + '/">' + esc(p.t) + '</a></h2>' +
       '<div class="card-tags"><a class="tag" href="/c/' + esc(p.c) + '/">' + ic(p.ci) + esc(p.cl) + '</a>' + tags + '</div>' +
       '<div class="card-foot">' + watchBtn(p.id) +
-      '<span class="card-shop">' + esc(p.shop) + '</span>' +
+      '<span class="card-shop">' + esc(p.shop) + '</span>' + postedLabel(p) +
       '<a class="btn btn-rakuten" href="' + esc(p.url) + '" target="_blank" rel="nofollow sponsored noopener">楽天で見る' + ic('arrow-right', 'ic-arrow') + '</a>' +
       '</div></div></article>';
   }

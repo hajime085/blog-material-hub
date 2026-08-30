@@ -3022,3 +3022,13 @@ a.ticker-item:hover::before { background: var(--pop); }
   font-size: .68rem; font-weight: 700; letter-spacing: .02em;
   white-space: nowrap;
 }
+
+/* 掲載日。値段は毎日動くので「いつの話か」が要る。
+   ただしカードの主役は値段と割引率なので、目立たせない。 */
+.card-posted {
+  margin-left: auto;
+  font-size: .68rem;
+  color: rgba(26,20,16,.42);
+  white-space: nowrap;
+}
+.card-foot .btn-rakuten { margin-left: 8px; }

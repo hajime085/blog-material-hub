@@ -318,6 +318,23 @@ def price_label(p):
     return "いま"
 
 
+def posted_label(p):
+    """いつ載せたか。店名の隣に小さく置く。
+
+    値段は毎日動くので、「いつの話か」が分からないと 読む人 は判断できない。
+    カードの主役は値段と割引率なので、ここは控えめにする。
+    """
+    at = (p.get("postedAt") or "").strip()
+    if len(at) < 10:
+        return ""
+    try:
+        d = datetime.strptime(at[:10], "%Y-%m-%d")
+    except ValueError:
+        return ""
+    return '<span class="card-posted"><time datetime="%s">%d/%d 掲載</time></span>' % (
+        at[:10], d.month, d.day)
+
+
 def render_pricetag(p, size="card"):
     d = discount_rate(p)
     sub = []
@@ -600,13 +617,14 @@ def render_card(p, cats, fetched="", km=None):
     <h2 class="card-title"><a href="/p/{id}/">{title}</a></h2>
     <div class="card-tags"><a class="tag" href="/c/{cslug}/">{cicon}{clabel}</a>{tags}</div>
     <div class="card-foot">
-      {watch}<span class="card-shop">{shop}</span>
+      {watch}<span class="card-shop">{shop}</span>{posted}
       <a class="btn btn-rakuten" href="{url}" target="_blank" rel="nofollow sponsored noopener">楽天で見る{arrow}</a>
     </div>
   </div>
 </article>""".format(
         id=e(p["id"]), aria=e(aria), img=e(p["image"]), alt=e(p["title"]),
         watch=render_watch_btn(p, "card"),
+        posted=posted_label(p),
         tag=render_pricetag(p), sticker=render_sticker(p),
         burst=render_burst(p), cap=cap, km=render_kaimawari(p, km),
         title=e(p["title"]), cslug=e(p["category"]),
