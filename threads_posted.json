@@ -31,7 +31,8 @@
     "tip:13",
     "product:r2e3c35a08",
     "product:r4cfa93d04",
-    "product:r319e3b4a4"
+    "product:r319e3b4a4",
+    "product:re70adb7d5"
   ],
   "log": [
     {
@@ -435,6 +436,20 @@
       "hook_type": "scene",
       "cta_type": "empathy",
       "category": "fashion",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:re70adb7d5",
+      "id": "17927111169166097",
+      "at": "2026-08-31 00:01",
+      "kind": "product",
+      "slot": 0,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "problem",
+      "cta_type": "save",
+      "category": "sports",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
