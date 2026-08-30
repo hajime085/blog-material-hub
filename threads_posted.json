@@ -24,7 +24,8 @@
     "product:r710d74505",
     "product:r770ff1652",
     "tip:25",
-    "product:r9599f9e79"
+    "product:r9599f9e79",
+    "product:re63e00606"
   ],
   "log": [
     {
@@ -330,6 +331,20 @@
       "hook_type": "scene",
       "cta_type": "save",
       "category": "books",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:re63e00606",
+      "id": "18075112157444048",
+      "at": "2026-08-30 12:20",
+      "kind": "product",
+      "slot": 12,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "problem",
+      "cta_type": "question",
+      "category": "food",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
