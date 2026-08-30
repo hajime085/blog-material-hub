@@ -30,7 +30,8 @@
     "product:rb505b66ae",
     "tip:13",
     "product:r2e3c35a08",
-    "product:r4cfa93d04"
+    "product:r4cfa93d04",
+    "product:r319e3b4a4"
   ],
   "log": [
     {
@@ -420,6 +421,20 @@
       "hook_type": "compare",
       "cta_type": "none",
       "category": "books",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r319e3b4a4",
+      "id": "17953537110237486",
+      "at": "2026-08-30 23:20",
+      "kind": "product",
+      "slot": 23,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "empathy",
+      "category": "fashion",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
