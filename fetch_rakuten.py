@@ -1154,6 +1154,11 @@ def fetch_event(cfg, app_id, access_key, aff_id, site_url,
         max_total = r.get("everydayMaxTotal", 14)
     min_reviews = r.get("minReviewCount", 0)
     min_rating = r.get("minReviewAverage", 0)
+    # セールの目玉として並べる以上、「いつもより少し安い」では意味がない。
+    # このサイトの看板は「二度見する安さ」なので、値引きの裏が取れていて、
+    # かつ大きく下がっているものだけを入れる。
+    # 元値が取れない商品は、安いかどうか自分でも言えないので入れない。
+    min_off = r.get("eventMinDiscountRate", 40)
 
     doc = load_json("products.json", {}) or {}
     products = doc.get("products", [])
@@ -1235,9 +1240,20 @@ def fetch_event(cfg, app_id, access_key, aff_id, site_url,
                     # 条件つきの値段を掲げているものは載せない
                     if conditional_price(raw_name, price):
                         continue
+                    # 値引きの裏が取れて、かつ大きく下がっているものだけ。
+                    #
+                    # 以前は割引を見ずに入れていたので、23件のうち10件は
+                    # 元値が取れず（安いと言えない）、5件は1〜19%OFFだった。
+                    # 「二度見する安さ」を掲げている枠に、いつもより少し安い
+                    # ものを混ぜると、枠そのものが信用されなくなる。
+                    lp = list_price_from_title(raw_name, price)
+                    if not lp:
+                        continue
+                    if round((lp - price) / lp * 100) < min_off:
+                        continue
                     found[pid] = {
                         "start": start, "price": price, "rawTitle": raw_name,
-                        "listPrice": list_price_from_title(raw_name, price),
+                        "listPrice": lp,
                         "itemCode": it.get("itemCode"), "category": cat["slug"],
                         "reviewCount": it.get("reviewCount") or 0,
                         "reviewAverage": it.get("reviewAverage") or None,

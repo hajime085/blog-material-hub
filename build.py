@@ -935,6 +935,10 @@ def render_soon(products, cats):
     該当が無い日は、枠ごと出さない。空の箱を置いておかない。
     """
     ev = active_kaimawari_event()
+    # 開催中でなくても、これから来るイベントの商品なら、その名前で出す。
+    # 中身がスーパーSALEの目玉なのに「まもなく始まる特価」と名乗るのは、
+    # 実態と合わないし、いちばん強い言葉を捨てている。
+    coming = upcoming_event()
 
     def in_event(p):
         """このイベントで始まった（始まる）特価かどうか。
@@ -969,6 +973,24 @@ def render_soon(products, cats):
     n_live = sum(1 for p in soon if not sale_soon(p))
     head = (("%s 開催中" % ev["name"]) if (ev and n_live)
             else sale_starts_label(soon[0]))
+
+    # この一覧が、来るイベントの品ぞろえかどうか。
+    # 開始48時間前から終わりまでに売り出すものを、そのイベントの品とみなす。
+    ev_name = None
+    if coming:
+        a, b, _es, cev = coming
+        n_in = 0
+        for p in soon:
+            st = (p.get("startTime") or "").strip()
+            try:
+                t = datetime.strptime(st[:16], "%Y-%m-%d %H:%M")
+            except ValueError:
+                continue
+            if a - timedelta(hours=48) <= t <= b:
+                n_in += 1
+        # 半分以上がそのイベントのものなら、イベント名で出す
+        if soon and n_in * 2 >= len(soon):
+            ev_name = cev["name"]
 
     def row(p):
         """1件ぶんの行。カードだと縦を使いすぎる。
@@ -1039,7 +1061,8 @@ def render_soon(products, cats):
            kwlink=('<a class="soon-kw" href="/kaimawari/">%s買いまわりに使えるものを見る%s</a>'
                    % (icons.use("check", "ic-km"),
                       icons.use("arrow-right", "ic-arrow"))) if ev else "",
-           title=("このセールの特価" if n_live else "まもなく始まる特価"),
+           title=(("%sで始まる特価" % ev_name) if (ev_name and not n_live)
+                  else ("このセールの特価" if n_live else "まもなく始まる特価")),
            note=("「いま買えます」のものは、押せばその値段で買えます。"
                  "数量限定のものは早いもの勝ちです。"
                  "開始前のものは、その時刻まで買えません。"
