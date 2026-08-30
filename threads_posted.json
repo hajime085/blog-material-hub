@@ -27,7 +27,8 @@
     "product:r9599f9e79",
     "product:re63e00606",
     "tip:01",
-    "product:rb505b66ae"
+    "product:rb505b66ae",
+    "tip:13"
   ],
   "log": [
     {
@@ -377,6 +378,20 @@
       "category": "sports",
       "logic_version": "marketing_v2",
       "link": "reply"
+    },
+    {
+      "key": "tip:13",
+      "id": "18466073164114040",
+      "at": "2026-08-30 19:20",
+      "kind": "tip",
+      "slot": 19,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
     }
   ]
 }
