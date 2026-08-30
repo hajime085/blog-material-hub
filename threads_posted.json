@@ -29,7 +29,8 @@
     "tip:01",
     "product:rb505b66ae",
     "tip:13",
-    "product:r2e3c35a08"
+    "product:r2e3c35a08",
+    "product:r4cfa93d04"
   ],
   "log": [
     {
@@ -405,6 +406,20 @@
       "hook_type": "relatable",
       "cta_type": "question",
       "category": "pc",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r4cfa93d04",
+      "id": "17916094665244234",
+      "at": "2026-08-30 21:00",
+      "kind": "product",
+      "slot": 21,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "compare",
+      "cta_type": "none",
+      "category": "books",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
