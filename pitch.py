@@ -16,7 +16,8 @@ threads.py は貯めたものを組み立てるだけにする。
     needs_review … 根拠が足りない、または決まりに触れている疑いがある
 
 使い方:
-    python3 pitch.py --pending           作るべき商品を、材料つきで出す
+    python3 pitch.py --pending           投稿の窓に入っている商品を出す（Threads用）
+    python3 pitch.py --site              掲載中で未作成のものを出す（サイトの「どんな商品？」用）
     python3 pitch.py --apply out.json    作ったものを取り込む（チェック付き）
     python3 pitch.py --check             貯めたもの全部を検査し直す
     python3 pitch.py --stats             状態と入口の型の内訳
@@ -198,41 +199,67 @@ def main():
     products = doc.get("products", [])
     by_id = {p["id"]: p for p in products}
 
-    if "--pending" in args:
+    if "--pending" in args or "--site" in args:
         n = 40
         for a in args:
             if a.isdigit():
                 n = int(a)
-        # 出すのは、投稿の窓に入っている商品だけ。
+        # 出す対象は2通りある。
         #
-        # threads.py は「載せてから3日以内」のものしか出さない。
-        # それより古い商品に商品理解を作っても、出番が来ないまま終わる。
-        # 実際、25件ぶん無駄に作った。
-        # ここで窓を見ておけば、作った分がそのまま使われる。
+        #   既定（--pending）      投稿の窓に入っている商品。Threads用。
+        #                          窓の外に作っても出番が来ないまま終わる。
+        #                          実際、25件ぶん無駄に作ったことがある。
+        #   --site                 掲載中で商品理解が無いものすべて。サイト用。
+        #                          「どんな商品？」はサイトに載っている全部に要る。
+        #                          窓で絞ると、そこが埋まらないまま残る。
+        #
+        # 商品理解はどちらにも使える。分けているのは「どれから作るか」だけ。
         from datetime import datetime, timedelta, timezone
         JST = timezone(timedelta(hours=9))
         cfg = load("config.json") or {}
         days = cfg.get("threads", {}).get("freshDays", 3)
         limit = (datetime.now(JST) - timedelta(days=days)).strftime("%Y-%m-%d")
+        site_mode = "--site" in args
 
         feed = {x["id"]: x for x in (load("assets/data/feed.json", []) or [])}
         todo = []
         for p in products:
-            f = feed.get(p["id"])
-            if not f:
-                continue
             if (p.get("pitch_status") or "pending") != "pending":
                 continue
-            if (f.get("at") or "")[:10] < limit:
-                continue
+            if site_mode:
+                # 掲載していないものは、ページも無いので後回し。
+                if p.get("id") not in feed and not p.get("startTime"):
+                    continue
+            else:
+                f = feed.get(p["id"])
+                if not f:
+                    continue
+                if (f.get("at") or "")[:10] < limit:
+                    continue
             todo.append(p)
-        todo.sort(key=lambda p: p.get("bumpedAt") or "", reverse=True)
+
+        def off(p):
+            lp = p.get("listPrice") or 0
+            return round((lp - p["price"]) / lp * 100) if lp > p.get("price", 0) else 0
+
+        if site_mode:
+            # 割引の大きいものから。目立つ商品のページから埋まる。
+            todo.sort(key=off, reverse=True)
+        else:
+            todo.sort(key=lambda p: p.get("bumpedAt") or "", reverse=True)
+
         out = [material(p) for p in todo[:n]]
         print(json.dumps(out, ensure_ascii=False, indent=2))
-        print("\n// 窓の中で未作成 %d件（うち %d件を出しました）"
-              % (len(todo), len(out)), file=sys.stderr)
-        print("// 窓は「載せてから%d日以内」。これより古いものは出番が来ないので出しません。"
-              % days, file=sys.stderr)
+        if site_mode:
+            print("\n// 掲載中で未作成 %d件（うち %d件を出しました）"
+                  % (len(todo), len(out)), file=sys.stderr)
+            print("// 割引の大きい順。「どんな商品？」はサイトの全商品に要ります。",
+                  file=sys.stderr)
+        else:
+            print("\n// 窓の中で未作成 %d件（うち %d件を出しました）"
+                  % (len(todo), len(out)), file=sys.stderr)
+            print("// 窓は「載せてから%d日以内」。これより古いものは出番が来ないので出しません。"
+                  % days, file=sys.stderr)
         return
 
     if "--apply" in args:
