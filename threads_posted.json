@@ -34,7 +34,8 @@
     "product:r319e3b4a4",
     "product:re70adb7d5",
     "tip:22",
-    "product:r7476dcde3"
+    "product:r7476dcde3",
+    "product:rbb2761911"
   ],
   "log": [
     {
@@ -481,6 +482,20 @@
       "cta_type": "question",
       "category": "beauty",
       "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:rbb2761911",
+      "id": "17903630499332669",
+      "at": "2026-08-31 12:20",
+      "kind": "product",
+      "slot": 12,
+      "catchup": false,
+      "cap": true,
+      "hook_type": null,
+      "cta_type": null,
+      "category": "pet",
+      "logic_version": "legacy_v1",
       "link": "reply"
     }
   ]
