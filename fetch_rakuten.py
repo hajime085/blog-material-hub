@@ -508,6 +508,40 @@ def price_returned(records, current, tolerance=0.02):
     return current > low * (1 + tolerance) and current > low + 50
 
 
+def pre_start_candidate(raw, start_at, min_off, ahead_hours, min_reviews,
+                        min_rating, records=()):
+    """まだ始まっていない商品を、開始前の枠に入れてよいか。
+
+    入れる条件は「まもなく始まる特価」の枠と同じにする。
+    値引きの裏が取れていて、大きく下がっているものだけ。
+    枠が違っても看板は同じなので、基準を分ける理由がない。
+    """
+    now = datetime.now(JST).replace(tzinfo=None)
+    t = start_at.replace(tzinfo=None) if start_at.tzinfo else start_at
+    if not (now < t <= now + timedelta(hours=ahead_hours)):
+        return None
+    if (raw.get("reviewCount") or 0) < min_reviews:
+        return None
+    if float(raw.get("reviewAverage") or 0) < min_rating:
+        return None
+    if conditional_price(raw["rawTitle"], raw["price"]):
+        return None
+    # 値引きの裏は2つの経路で取る。
+    #   1. 題名の「◯円→◯円」（右側がいまの値段と一致することを確かめている）
+    #   2. 自前の価格履歴（セール前に見ていた値段）
+    # 題名だけを見ていたので、「半額」とだけ書いてある商品を
+    # 全部落としていた。履歴を持っているなら、そちらのほうが確かな根拠になる。
+    lp = raw.get("listPrice") or reference_price(records, raw["price"])
+    if not lp or lp <= raw["price"]:
+        return None
+    if round((lp - raw["price"]) / lp * 100) < min_off:
+        return None
+    out = dict(raw)
+    out["listPrice"] = lp
+    out["_basis"] = "title" if raw.get("listPrice") else "history"
+    return out
+
+
 def reference_price(records, current):
     """過去に観測した最高値。現在価格より高いときだけ比較基準になる。"""
     highs = [p for _, p in records if p > current]
@@ -1429,6 +1463,15 @@ def main():
     excluded = set()          # 買えないと判断して外したもの。保持ルールの対象外。
     result = {}
     candidates = {}
+    # 巡回の途中で見つかる「まだ始まっていない特価」。
+    # これまでは捨てていた。開始前の枠へ回すために貯めておく。
+    pre_start = {}
+    listed_ids = set(existing)
+    pre_min_off = cfg["rakuten"].get("eventMinDiscountRate", 40)
+    pre_hours = cfg["rakuten"].get("eventAheadHours", 120)
+    pre_max_total = cfg["rakuten"].get("eventMaxTotal", 40)
+    pre_max_shop = cfg["rakuten"].get("eventMaxPerShop", 2)
+    pre_max_cat = cfg["rakuten"].get("eventMaxPerCategory", 5)
     seed_per_category = cfg["rakuten"].get("seedPerCategory", 12)
     max_per_shop = cfg["rakuten"].get("maxPerShop", 2)
 
@@ -1480,6 +1523,21 @@ def main():
             # それを載せても読者は買えない。
             ok, why, start_at = sale_status(raw, sale_tolerance)
             if not ok:
+                # まだ始まっていないだけの商品は、捨てずに開始前の枠へ回す。
+                #
+                # これまでは「いま買えない」の一言で全部捨てていた。
+                # 8/31 の巡回では1,426件を捨てており、その大半が
+                # 9月3日20時開始、つまりスーパーSALEの目玉だった。
+                # 同じ巡回で見つけているのに、別処理だからという理由で
+                # 握りつぶしていた。拾えば追加のAPI呼び出しは要らない。
+                if start_at and pid not in listed_ids:
+                    keep_pre = pre_start_candidate(
+                        raw, start_at, pre_min_off, pre_hours,
+                        min_reviews, min_rating, history.get(pid, []))
+                    if keep_pre:
+                        keep_pre = dict(keep_pre)
+                        keep_pre["_cat"] = cat["slug"]
+                        pre_start[pid] = keep_pre
                 not_on_sale.append((clean_title(raw["rawTitle"]), why))
                 # 「順位から落ちた」のではなく「買えないから外した」商品。
                 # 30日の保持ルールで復活させてはいけない。
@@ -1726,6 +1784,63 @@ def main():
         p["lastSeen"] = today
         time.sleep(REQUEST_INTERVAL)
 
+    # 巡回の途中で見つけた「まだ始まっていない特価」を載せる。
+    #
+    # 別処理で探し直すのではなく、いま見た結果から拾う。
+    # 追加のAPI呼び出しは要らない。
+    pre_added = []
+    if pre_start:
+        waiting = 0
+        for p in result.values():
+            st = (p.get("startTime") or "").strip()
+            if not st:
+                continue
+            try:
+                if datetime.strptime(st[:16].replace("T", " "),
+                                     "%Y-%m-%d %H:%M") > datetime.now(JST).replace(tzinfo=None):
+                    waiting += 1
+            except ValueError:
+                continue
+        room = max(0, pre_max_total - waiting)
+        by_shop, by_cat = {}, {}
+        # 深く下がっている順に採る
+        for pid, raw in sorted(
+                pre_start.items(),
+                key=lambda kv: -round((kv[1]["listPrice"] - kv[1]["price"])
+                                      / kv[1]["listPrice"] * 100)):
+            if len(pre_added) >= room:
+                break
+            shop = raw.get("shop", "")
+            cat = raw.get("_cat") or "kaden"
+            if by_shop.get(shop, 0) >= pre_max_shop:
+                continue
+            if by_cat.get(cat, 0) >= pre_max_cat:
+                continue
+            by_shop[shop] = by_shop.get(shop, 0) + 1
+            by_cat[cat] = by_cat.get(cat, 0) + 1
+            off = round((raw["listPrice"] - raw["price"]) / raw["listPrice"] * 100)
+            result[pid] = {
+                "id": pid, "category": cat,
+                "title": clean_title(raw["rawTitle"]), "rawTitle": raw["rawTitle"],
+                "price": raw["price"], "image": raw["image"],
+                "affiliateUrl": raw["affiliateUrl"], "shop": shop,
+                "reviewAverage": raw.get("reviewAverage"),
+                "reviewCount": raw.get("reviewCount") or 0,
+                "itemCode": raw["itemCode"], "genreId": raw.get("genreId", ""),
+                "startTime": raw.get("startTime", ""),
+                "endTime": raw.get("endTime", ""),
+                "listPrice": raw["listPrice"],
+                "priceBasis": raw.get("_basis") or "title",
+                "caption": "", "points": [], "description": "",
+                "tags": merge_shipping_tag(list(raw.get("autoTags") or []),
+                                           raw.get("freeShipping")),
+                "unitNote": raw.get("unitNote"),
+                "postedAt": today, "bumpedAt": today + "T00:00:00",
+                "lastSeen": today, "pitch_status": "pending",
+            }
+            pre_added.append((clean_title(raw["rawTitle"]), raw["price"], off,
+                              raw.get("startTime", "")))
+
     products = sorted(result.values(),
                       key=lambda p: (p.get("postedAt", ""), -p.get("price", 0)), reverse=True)
 
@@ -1754,6 +1869,12 @@ def main():
     no_caption = sum(1 for p in products if not p.get("caption"))
     print("\n✅ products.json を更新しました")
     print("   新規 %d件 / 更新 %d件 / 見送り %d件 → 合計 %d件" % (added, kept, dropped, len(products)))
+    if pre_added:
+        print("\n   開始前の特価を %d件 拾いました（巡回の途中で見つけたもの）:"
+              % len(pre_added))
+        for t, pr, off, st in pre_added[:8]:
+            print("     ◦ %-28s ¥%-7s %d%%OFF  %s開始"
+                  % (t[:28], "{:,}".format(pr), off, st[5:16]))
     if not_on_sale:
         print("   いま買えないため見送り: %d件" % len(not_on_sale))
         for t, why in not_on_sale[:5]:
