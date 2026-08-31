@@ -36,7 +36,8 @@
     "tip:22",
     "product:r7476dcde3",
     "product:rbb2761911",
-    "tip:24"
+    "tip:24",
+    "product:rbff977e72"
   ],
   "log": [
     {
@@ -512,6 +513,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:rbff977e72",
+      "id": "18112615334516903",
+      "at": "2026-08-31 17:20",
+      "kind": "product",
+      "slot": 17,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "problem",
+      "cta_type": "empathy",
+      "category": "fashion",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
