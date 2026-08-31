@@ -135,35 +135,6 @@ def head_of(text):
     return t[:100]
 
 
-def minutes_since_last_post(uid, token):
-    """アカウントに最後の投稿が載ってから何分たったか。
-
-    手元の記録ではなく、アカウントそのものを見る。
-    錠はファイルなので、同じ機械の中でしか効かない。
-    手元の見張りと GitHub の予定実行は別の機械なので、
-    ファイルでは重なりを止められない。
-    どちらから見ても同じものを見るには、アカウントを見るしかない。
-
-    分からないときは None。分からないことを「大丈夫」と読み替えない。
-    """
-    try:
-        d = api("GET", "%s/threads" % uid,
-                {"fields": "id,timestamp", "limit": 1}, token)
-    except Exception:                                         # noqa: BLE001
-        return None
-    rows = d.get("data") or []
-    if not rows:
-        return 9999
-    ts = rows[0].get("timestamp") or ""
-    try:
-        t = datetime.strptime(ts[:19], "%Y-%m-%dT%H:%M:%S")
-    except ValueError:
-        return None
-    # timestamp は UTC。JST に直してから、いまとの差を見る。
-    t = t + timedelta(hours=9)
-    return (datetime.now(JST).replace(tzinfo=None) - t).total_seconds() / 60
-
-
 def publishing_limit(uid, token):
     """いま何件出せるか。上限は1日250件だが、無駄に近づかない。"""
     try:
@@ -189,24 +160,6 @@ def ends_label(et):
                                  m.group(4).lstrip("0") or "0", m.group(5))
 
 
-def short_title(t, n=34):
-    """商品名を短く。楽天の商品名は検索語の羅列なので、長く出しても読めない。
-
-    切る位置は区切りに合わせる。文字数で機械的に切ると
-    「活性オメガ3オイル 100ml ふりかけ…」のように語の途中で終わり、
-    文章が途切れたように見える。実際にそう見える投稿が出た。
-    """
-    t = " ".join((t or "").split())
-    if len(t) <= n:
-        return t
-    cut = t[:n]
-    # 半角/全角の空白、読点、スラッシュのところまで戻す
-    best = max(cut.rfind(c) for c in (" ", "　", "、", "/", "・", "／"))
-    if best >= n // 2:          # 短くなりすぎるなら、そのまま切る
-        cut = cut[:best]
-    return cut.rstrip("…、・/／ 　") + "…"
-
-
 # 締めの一言。付けるかどうかは投稿ごとに回す。
 # 「使ったことある人いますか」は、こちらが使ったとは言っていないので嘘にならない。
 # 締めの型。pitch.py の CTA_TYPES と対応している。
@@ -226,109 +179,6 @@ TAILS = [
     "\n\nもっといいのあったら教えてください。",
     "",
 ]
-
-
-def shapes(p, pr, ev):
-    """投稿の形。1行目だけ変えても、組み立てが同じだと同じ投稿に見える。
-
-    行の数、順番、何を先に出すか。そこから変える。
-    使えるのは手元のデータだけなので、材料が揃った形だけを候補に出す。
-
-    体験は書かない。買っていない商品の感想は作り話になる。
-    """
-    price = yen(p["pr"])
-    lp = p.get("lp") or 0
-    off = p.get("d") or 0
-    title = short_title(p["t"])
-    free = "送料無料" in (p.get("tags") or [])
-    rc = p.get("rc") or 0
-    ra = p.get("ra") or ""
-    ends = ends_label(p.get("et"))
-    unit = (p.get("u") or "").strip()
-    gap = (lp - p["pr"]) if lp else 0
-    km = ev and p["pr"] >= 1000 and free
-
-    out = []
-
-    # ① 値札型。値段を先に見せて、根拠を下に積む。
-    v = ["%sこれ、%s円です。" % (pr, price), title]
-    if off:
-        v.append("%s円 → %s円（%d%%OFF）" % (yen(lp), price, off))
-    b = ["送料無料" if free else "送料は別"]
-    if rc >= 100:
-        b.append("レビュー%s件・★%s" % (yen(rc), ra))
-    if km:
-        b.append("買いまわりに使えます（税込1,000円以上・送料無料）")
-    if ends:
-        b.append("この値段は%s" % ends)
-    out.append("\n".join(v) + "\n\n" + "\n".join("・" + x for x in b[:4]))
-
-    # ② 問いかけ型。値段を最後まで出さない。
-    if off and lp:
-        out.append("\n".join([
-            "%sこれ、いくらだと思いますか。" % pr,
-            title,
-            "",
-            "もとは%s円。いまは%s円です。" % (yen(lp), price),
-            ("送料込みで、レビュー%s件・★%s。" % (yen(rc), ra)) if rc >= 100
-            else ("送料込みです。" if free else "送料は別です。"),
-        ]))
-
-    # ③ 期限型。終わる時刻が分かっているときだけ。煽りではなく事実。
-    if ends:
-        line = "%s円" % price
-        if off:
-            line = "%s円 → %s円（%d%%OFF）" % (yen(lp), price, off)
-        out.append("\n".join([
-            "%sこの値段、%sで戻ります。" % (pr, ends.replace(" まで", "")),
-            "",
-            line,
-            title,
-            "",
-            "送料無料。" if free else "送料は別です。",
-        ]))
-
-    # ④ 差額型。率より額のほうが伝わる。
-    if gap >= 300:
-        out.append("\n".join([
-            "%s%s円ぶん安くなっています。" % (pr, yen(gap)),
-            "",
-            "%s円だったものが%s円。" % (yen(lp), price),
-            title,
-            "",
-            ("送料込み・レビュー%s件" % yen(rc)) if (free and rc >= 100)
-            else ("送料込み" if free else "送料は別"),
-        ]))
-
-    # ⑤ 送料型。うちが毎日データで見ている、いちばん強いところ。
-    if free and p["pr"] <= 2000:
-        out.append("\n".join([
-            "%s%s円で、送料無料です。" % (pr, price),
-            "",
-            "この値段帯は送料が乗ると倍近くになります。",
-            "込みかどうかで、払う額がまるで変わる。",
-            "",
-            title,
-        ] + ([ "%s円 → %s円（%d%%OFF）" % (yen(lp), price, off) ] if off else [])))
-
-    # ⑥ 短く3行。長い投稿ばかりだと、それ自体が読み飛ばされる。
-    tail3 = ends.replace(" まで", "まで。") if ends else ("送料無料。" if free else "")
-    out.append("\n".join([
-        "%s%s円%s" % (pr, price, ("（%d%%OFF）" % off) if off else "。"),
-        title,
-        tail3,
-    ]).rstrip())
-
-    # ⑦ 単価型。1袋いくら、1包いくらが分かるものだけ。
-    if unit:
-        out.append("\n".join([
-            "%s%s。" % (pr, unit),
-            "",
-            "%s円です。%s" % (price, "送料込み。" if free else "送料は別。"),
-            title,
-        ]))
-
-    return out
 
 
 def compose_product(p, site, pr, reply_link=False, ev=None, seq=0):
@@ -386,65 +236,16 @@ def compose_product(p, site, pr, reply_link=False, ev=None, seq=0):
             return body, url
         return body + "\n\n" + url, None
 
-    cap = (p.get("cap") or "").strip()
-    title = short_title(p["t"])
-
-    if cap:
-        pts = []
-        for x in (p.get("pt") or []):
-            if yen(p["pr"]) in x and (yen(p["lp"]) in x if p.get("lp") else True):
-                continue
-            if x.strip() == "%s円" % yen(p["pr"]):
-                continue
-            pts.append(x)
-        ends = ends_label(p.get("et"))
-        chg = ("%s円 → %s円（%d%%OFF）" % (yen(p["lp"]), yen(p["pr"]), p["d"])
-               if (p.get("d") and p.get("lp") and yen(p["lp"]) not in cap) else "")
-
-        # ここから下は、商品理解がまだ無い商品のための古い型。
-        # pick() が商品理解のあるものしか選ばないので、通常は通らない。
-        name = title
-
-        # キャプションがあるときも、形は入れ替える。
-        # 人が書いた文を先頭に置くのは変わらないが、
-        # 毎回そのあとに商品名と箇条書きが続くと、やはり同じ投稿に見える。
-        forms = []
-
-        # 形a｜これまでどおり。文 → 商品名 → 値段 → 箇条書き
-        a = [pr + cap] + ([name] if name else []) + ([chg] if chg else [])
-        if pts:
-            a += [""] + ["・" + x for x in pts[:3]]
-        forms.append("\n".join(a))
-
-        # 形b｜文だけを立たせて、細かい情報は下にまとめる
-        b = [pr + cap, ""]
-        if chg:
-            b.append(chg)
-        if name:
-            b.append(name)
-        if pts:
-            b.append("（" + "／".join(pts[:2]) + "）")
-        forms.append("\n".join(b))
-
-        # 形c｜短く。文と値段だけで終える
-        c = [pr + cap] + ([name] if name else [])
-        if ends:
-            c.append("%sの値段です。" % ends.replace(" まで", "まで"))
-        elif chg:
-            c.append(chg)
-        forms.append("\n".join(c))
-
-        body = forms[seq % len(forms)]
-    else:
-        cands = shapes(p, pr, ev)
-        body = cands[seq % len(cands)]
-
-    body += TAILS[seq % len(TAILS)]
-
-    url = "%s/p/%s/" % (site, p["id"])
-    if reply_link:
-        return body, url
-    return body + "\n\n" + url, None
+    # 商品理解の無い商品は、pick() が候補から外している。
+    # ここへは来ない。来たら、それは決まりが壊れている合図なので、
+    # 黙って古い形で出さずに、出さないことを選ぶ。
+    #
+    # 以前はここに「キャプション＋商品名」と「値札型など7種」という
+    # 古い道が残っていた。使わないのに残していたので、
+    # pick() の条件が外れた拍子にそこへ落ち、
+    # 楽天の商品名をそのまま貼った投稿が出た（2026-08-31）。
+    # 使わなくなった道は残さない。残せば、いつか落ちる。
+    return None, None
 
 
 def compose_guide(g, site, pr, reply_link=False):
@@ -560,12 +361,6 @@ def tip_posts():
              "lead": t.get("body", ""), "cat": t.get("cat", ""),
              "to": t.get("to", "")}
             for i, t in enumerate(rows) if t.get("title")]
-
-
-def _unused_tip_posts():
-
-    return [{"key": "tip:%02d" % i, "title": t, "lead": b}
-            for i, (t, b) in enumerate(TIPS)]
 
 
 def schedule_recent(posted, days=3):

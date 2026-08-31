@@ -354,6 +354,46 @@ def rule_featured_fresh(ctx):
     return []
 
 
+def rule_no_dead_fallback(ctx):
+    """使わなくなった道は残さない。
+
+    残しておくと、条件がひとつ外れた拍子にそこへ落ちる。
+    実際、投稿の組み立てには新旧3本の道があり、
+    使っていないはずの古い道に落ちて、楽天の商品名を
+    そのまま貼った投稿が出た（2026-08-31）。
+
+    新しいやり方に切り替えたら、古いほうは消す。
+    「いつか使うかもしれない」で残さない。
+    """
+    src = ctx["threads_py"]
+    out = []
+    if "def shapes(" in src:
+        out.append("threads.py に古い投稿の型 shapes() が残っています")
+    if "forms.append" in src:
+        out.append("threads.py に古い「キャプション＋商品名」の型が残っています")
+
+    # 呼ばれていない関数も残骸。消し忘れると、いつか誰かが使う。
+    import ast as _ast
+    import collections as _c
+    for name, code in (("threads.py", src), ("build.py", ctx["build_py"])):
+        try:
+            tree = _ast.parse(code)
+        except SyntaxError:
+            continue
+        defs = [n.name for n in tree.body if isinstance(n, _ast.FunctionDef)]
+        used = _c.Counter()
+        for n in _ast.walk(tree):
+            if isinstance(n, _ast.Name):
+                used[n.id] += 1
+            elif isinstance(n, _ast.Attribute):
+                used[n.attr] += 1
+        dead = [d for d in defs if used[d] == 0 and d != "main"]
+        if dead:
+            out.append("%s に呼ばれていない関数があります: %s"
+                       % (name, "、".join(dead[:4])))
+    return out
+
+
 RULES = [
     ("投稿は商品理解のあるものだけ", rule_post_needs_pitch),
     ("「どんな商品？」が出る", rule_what_is_it),
@@ -375,6 +415,7 @@ RULES = [
     ("キャプションの空きを残さない", rule_captions_filled),
     ("自分の広告を自分で踏まない", rule_no_self_click),
     ("編集部の棚を放置しない", rule_featured_fresh),
+    ("使わなくなった道を残さない", rule_no_dead_fallback),
 ]
 
 
