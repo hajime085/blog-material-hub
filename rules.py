@@ -289,6 +289,47 @@ def rule_captions_filled(ctx):
     return []
 
 
+def rule_no_self_click(ctx):
+    """自分のアフィリエイトリンクを、こちらから辿らない。
+
+    a.r10.to や hb.afl.rakuten.co.jp は成果計測を通る転送で、
+    叩けば自分の広告を自分で踏むことになる。楽天が禁じている不正クリック。
+    2026-08-31: featured.txt に短縮URLが貼られており、
+    取り込み処理がそれを辿る作りになっていた。
+    """
+    out = []
+    if "不正クリックになります" not in ctx["fetch_py"]:
+        out.append("fetch_rakuten.py が、アフィリエイトの短縮URLを辿らない作りになっていません")
+    src = load("featured.txt", "")
+    live = [l for l in src.splitlines()
+            if l.strip() and not l.strip().startswith("#")]
+    bad = [l for l in live if "a.r10.to" in l or "hb.afl.rakuten.co.jp" in l]
+    if bad:
+        out.append("featured.txt にアフィリエイトのリンクが %d行あります" % len(bad))
+    return out
+
+
+def rule_featured_fresh(ctx):
+    """編集部の棚を放置しない。
+
+    手で選ぶ枠なので、放っておくと季節も値段も合わなくなる。
+    価格と在庫は自動で追えるが、顔ぶれは人が入れ替えるしかない。
+    """
+    from datetime import datetime
+    d = load("featured.json", {}) or {}
+    at = (d.get("updatedAt") or "")[:10]
+    if not at:
+        return ["featured.json に更新日がありません"]
+    try:
+        days = (datetime.now() - datetime.strptime(at, "%Y-%m-%d")).days
+    except ValueError:
+        return ["featured.json の更新日が読めません: %s" % at]
+    if days > 7:
+        return ["編集部の棚が %d日 更新されていません（%s）。"
+                "顔ぶれを見直してください" % (days, at)]
+    return []
+
+
 RULES = [
     ("投稿は商品理解のあるものだけ", rule_post_needs_pitch),
     ("「どんな商品？」が出る", rule_what_is_it),
@@ -308,6 +349,8 @@ RULES = [
     ("終わったセールを隠す", rule_hide_ended_sales),
     ("セールの商品はイベント名で出す", rule_event_heading),
     ("キャプションの空きを残さない", rule_captions_filled),
+    ("自分の広告を自分で踏まない", rule_no_self_click),
+    ("編集部の棚を放置しない", rule_featured_fresh),
 ]
 
 

@@ -726,7 +726,18 @@ def item_code_from_url(url, ctx=None, timeout=20):
                 if m:
                     break
     if not m:
-        # 短縮URLはたどってみる
+        # 短縮URLをたどる。ただし自分のアフィリエイトリンクは踏まない。
+        #
+        # a.r10.to や hb.afl.rakuten.co.jp は成果計測を通る転送で、
+        # こちらから叩くと自分の広告を自分で踏むことになる。
+        # 楽天が禁じている不正クリックそのものなので、辿らない。
+        host = (urllib.parse.urlparse(target).netloc or "").lower()
+        if any(h in host for h in ("a.r10.to", "hb.afl.rakuten.co.jp",
+                                   "af.moshimo.com")):
+            print("  × アフィリエイトの短縮URLは辿りません（不正クリックになります）")
+            print("    楽天市場の商品ページURL（item.rakuten.co.jp/…）を貼ってください")
+            print("    %s" % target)
+            return None
         try:
             req = urllib.request.Request(target, headers={"User-Agent": "yasumiru-builder/1.0"})
             with urllib.request.urlopen(req, timeout=timeout) as res:
@@ -849,7 +860,10 @@ def build_featured(cfg, app_id, access_key, aff_id, site_url):
     # サイトの基準は機械が一貫して適用する。
     # 売れ筋一覧は発生報酬額の順なので、高額・高料率の商品ほど上に来る。
     # そこに人の裁量が入ると基準がブレるため、ここで機械的に弾く。
-    max_price = cfg["rakuten"].get("featuredMaxPrice", 5000)
+    # 編集部の棚は人が選ぶ枠なので、値段の上限を掛けない。
+    # 自動で拾う枠には基準が要るが、ここは「編集者が選んだ」ことが理由になる。
+    # 0 を入れると上限なし。
+    max_price = cfg["rakuten"].get("featuredMaxPrice", 5000) or 10 ** 9
     min_reviews = cfg["rakuten"].get("minReviewCount", 0)
     min_rating = cfg["rakuten"].get("minReviewAverage", 0)
     per_section = cfg["rakuten"].get("featuredPerSection", 4)

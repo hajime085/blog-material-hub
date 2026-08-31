@@ -4,59 +4,24 @@
 # 楽天の検索結果に出てこなくなっても、貼ってあるかぎり載り続けます。
 # 売り切れ・販売終了になったときだけ、自動で落ちます。
 #
-# 書き方は「## カテゴリ」で区切って、その下に1行ずつ。
-#
-#   ショップ名:番号                 ← 楽天アフィリエイトのランキングページから拾えます
-#   https://item.rakuten.co.jp/...  ← 商品ページのURLでも可（自動で変換します）
-#
-# 使えるカテゴリ（見出しに書くもの）
-#   food       食品・飲料・お酒
-#   kaden      家電・カメラ・AV機器
-#   kitchen    キッチン・日用品・DIY
-#   beauty     ドラッグストア・美容
-#   fashion    服・靴・バッグ・時計
-#   pc         パソコン・スマホ・事務
-#   sports     スポーツ・アウトドア
-#   baby-toy   ベビー・おもちゃ・ホビー
-#   books      本・ゲーム・エンタメ
-#   pet        ペット用品
-#   car        車・バイク・工具
-#
-# 反映: python3 fetch_rakuten.py --featured && python3 build.py
-#
-# 自動で適用される基準
-#   ・¥5,000 を超えるものは載せません
-#   ・レビューが少ないもの、評価が低いものは載せません
-#   ・まだ販売が始まっていないものは載せません
-#   ・トップの棚は「安い順」。貼った順（＝売れ筋の順位）は使いません
-#     楽天の順位は発生報酬額の順で、高額・高料率の商品ほど上に来るため
-#   ・トップの棚は1カテゴリあたり4件まで（1カテゴリが棚を占領しないように）
-#     ※ 棚に入らなかったぶんも、フィードとカテゴリには載ります
-#
-# 値引きの表示について
-#   タイトルに「3,790円→1,999円」と書いてあり、右側がいまの価格と
-#   一致していれば、そのまま「セール前 ¥3,790」として %OFF を出します。
-#   一致しないものは読みません（別の色・別サイズの値段のことがあるため）。
-
-## kitchen
-sinkatec:10000425
-kiroran:10000196
-kiroran:10000205
-ideazakkaten:10000170
-handmade-amane:10001224
-angelingg:10001004
-auc-risecreation:10005057
-eunicedress:10001955
-
-## fashion
-darkangel:10031059
-darkangel:10037257
-radianne:10000736
-darkangel:10035877
-sljapan1:10004735
-darkangel:10036035
-darkangel:10036320
-darkangel:10035933
+# 書き方は「
 
 ## food
-https://a.r10.to/h5UW9p
+https://item.rakuten.co.jp/f406091-aka/3x2/
+https://item.rakuten.co.jp/exception5251/ex-x01028/
+# https://item.rakuten.co.jp/matsuya/us30/  ← 予約販売限定で、楽天のAPIが商品を返さない。掲載除外
+
+## kitchen
+# https://item.rakuten.co.jp/abemashopping/r-haburashi-3set-sale/  ← APIの索引に無い。掲載除外
+https://item.rakuten.co.jp/at-rescue/10000171/
+https://item.rakuten.co.jp/h2brothers/portabletoilet01/
+
+## fashion
+https://item.rakuten.co.jp/darkangel/pa2301-3635/
+https://item.rakuten.co.jp/gossipstar/bm1638/
+
+## baby-toy
+https://item.rakuten.co.jp/chakasho-dina/535dahuoji/
+
+## beauty
+https://item.rakuten.co.jp/teinei-tsuhan/komachi/
