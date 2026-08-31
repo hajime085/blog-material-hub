@@ -35,7 +35,8 @@
     "product:re70adb7d5",
     "tip:22",
     "product:r7476dcde3",
-    "product:rbb2761911"
+    "product:rbb2761911",
+    "tip:24"
   ],
   "log": [
     {
@@ -497,6 +498,20 @@
       "category": "pet",
       "logic_version": "legacy_v1",
       "link": "reply"
+    },
+    {
+      "key": "tip:24",
+      "id": "17978505063109136",
+      "at": "2026-08-31 14:20",
+      "kind": "tip",
+      "slot": 14,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
     }
   ]
 }
