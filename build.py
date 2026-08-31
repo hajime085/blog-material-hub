@@ -2632,6 +2632,12 @@ def main():
         check_caption_prices(products)
         check_expired_sales(products)
         check_guide_toc(guides)
+        # 決めたことを機械で守らせる。書き置きでは戻ってしまう。
+        try:
+            import rules as _rules
+            _rules.run(quiet=True)
+        except Exception as _ex:                              # noqa: BLE001
+            print("⚠ 決まりの検査が動きませんでした: %s" % _ex)
     checks = buf.getvalue()
     print(checks, end="")
     warned = checks.count("⚠")
