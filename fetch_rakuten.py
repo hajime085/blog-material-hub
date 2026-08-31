@@ -1432,10 +1432,34 @@ def main():
     seed_per_category = cfg["rakuten"].get("seedPerCategory", 12)
     max_per_shop = cfg["rakuten"].get("maxPerShop", 2)
 
+    def est_off(raw):
+        """いまつかんでいる材料で、値引き率を見積もる。
+
+        題名の「◯円→◯円」と、自前の価格履歴の両方を見る。
+        どちらも無ければ0。
+        """
+        code = raw.get("itemCode") or ""
+        if not code:
+            return 0
+        lp = raw.get("listPrice")
+        if not lp:
+            lp = reference_price(history.get(product_id(code), []), raw["price"])
+        if not lp or lp <= raw["price"]:
+            return 0
+        return round((lp - raw["price"]) / lp * 100)
+
     for cat in cats:
         print("▼ %s" % cat["label"])
-        for raw in fetch_category(cat, app_id, access_key, aff_id, hits, site_url,
-                                  ng_keyword, sort_by, sale_keywords):
+        # 深く下がっているものから採る。
+        #
+        # 1回に載せる新規には上限がある。以前は見つけた順に採っていたので、
+        # 79%OFFの商品が16%OFFの商品に押し出されて捨てられていた。
+        # 実際、自前の追跡で見つけた40%以上の値下がり25件のうち、
+        # 20件がサイトに載っていなかった。
+        raws = sorted(fetch_category(cat, app_id, access_key, aff_id, hits,
+                                     site_url, ng_keyword, sort_by, sale_keywords),
+                      key=est_off, reverse=True)
+        for raw in raws:
             if not raw["price"] or not raw["title"]:
                 continue
 
