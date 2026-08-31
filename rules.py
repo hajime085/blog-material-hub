@@ -78,14 +78,39 @@ def rule_what_is_it(ctx):
                    "（%s）。pitch.py --site で作ってください"
                    % (len(bad), bad[0]))
 
-    # 直近に足したものも、そのまま溜めない。
+    # 出ているものと、まだ出ていないものを分けて見る。
+    #
+    # 2026-08-31: 「この2日に足したもの」で数えていたので、
+    # 9/3開始のスーパーSALE待ちで意図的に伏せてある12件を
+    # 決まり違反として鳴らした。狼が来ないのに鳴く検査は、
+    # そのうち誰も見なくなる。それが抜けを見逃す本当の原因になる。
+    # 出ている商品に欠けがあるときだけ「違反」とする。
     from datetime import datetime, timedelta
-    recent = (datetime.now() - timedelta(days=2)).strftime("%Y-%m-%d")
-    fresh_bad = [p["id"] for p in ps
-                 if (p.get("postedAt") or "") >= recent and missing(p)]
-    if len(fresh_bad) > 5:
-        out.append("この2日に足した商品で「どんな商品？」が無いものが %d件あります"
-                   % len(fresh_bad))
+    now = datetime.now().strftime("%Y-%m-%d %H:%M")
+
+    def not_yet(p):
+        return (p.get("startTime") or "") > now
+
+    def finished(p):
+        e = (p.get("endTime") or "").strip()
+        return bool(e) and e < now
+
+    live_bad = [p["id"] for p in ps
+                if missing(p) and not not_yet(p) and not finished(p)]
+    if live_bad:
+        out.append("サイトに出ているのに「どんな商品？」が無い商品が %d件あります"
+                   "（%s）。pitch.py --site で作ってください"
+                   % (len(live_bad), live_bad[0]))
+
+    # 開始前のものは違反ではない。ただし始まる前に書き終える必要がある。
+    # 期限が近いものだけ、名前を出して知らせる。
+    soon_limit = (datetime.now() + timedelta(hours=48)).strftime("%Y-%m-%d %H:%M")
+    waiting = [p for p in ps
+               if missing(p) and not_yet(p) and (p.get("startTime") or "") <= soon_limit]
+    if waiting:
+        out.append("48時間以内に始まる商品で「どんな商品？」が無いものが %d件あります"
+                   "（%s 開始）。始まるまでに pitch.py --site で作ってください"
+                   % (len(waiting), min(x.get("startTime") or "" for x in waiting)))
     return out
 
 
