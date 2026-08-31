@@ -19,7 +19,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 1000,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,000円のプラセンタのサプリが500円。約1ヶ月分で、送料込み。",
       "points": [],
       "description": "",
       "tags": [
@@ -29,7 +29,26 @@
       "postedAt": "2026-08-31",
       "bumpedAt": "2026-08-31T00:00:00",
       "lastSeen": "2026-08-31",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "compare",
+        "target": "手軽に続けたい人",
+        "problem": "原液や美容液は手間がかかる",
+        "use_case": "毎日のサプリ",
+        "features": [
+          "プラセンタ",
+          "50倍濃縮",
+          "アルガンオイル",
+          "大豆レシチン",
+          "約1ヶ月分"
+        ],
+        "benefits": [
+          "粒で摂れる"
+        ],
+        "hook": "原液や美容液ではなく、粒で摂るタイプ。",
+        "body": "プラセンタのサプリです。アルガンオイルと大豆レシチンも配合。\n約1ヶ月ぶん。",
+        "cta": "none"
+      }
     },
     {
       "id": "rdacf13a21",
@@ -48,7 +67,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 1080,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,080円のiPhone用充電ケーブルが540円。MFi認証で、長さは3種類から。",
       "points": [],
       "description": "",
       "tags": [
@@ -58,7 +77,26 @@
       "postedAt": "2026-08-31",
       "bumpedAt": "2026-08-31T00:00:00",
       "lastSeen": "2026-08-31",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "problem",
+        "target": "ケーブルを買い替えている人",
+        "problem": "どれを買えば純正と同じに使えるか分からない",
+        "use_case": "iPhoneの充電",
+        "features": [
+          "MFi認証品",
+          "シリコン素材",
+          "急速充電対応",
+          "0.3m/1m/1.5m/2m"
+        ],
+        "benefits": [
+          "認証品なので対応がはっきりしている",
+          "長さを場所に合わせて選べる"
+        ],
+        "hook": "充電ケーブル、結局どれを買えばいいのか。",
+        "body": "MFi認証のライトニングケーブルです。シリコン素材で急速充電に対応。\n長さは4種類から選べます。",
+        "cta": "compare"
+      }
     },
     {
       "id": "rb4a28eb5d",
@@ -77,7 +115,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 1280,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,280円の充電ケーブル3本セットが544円。2mで、C to CとUSB-A to C。",
       "points": [],
       "description": "",
       "tags": [
@@ -87,7 +125,25 @@
       "postedAt": "2026-08-31",
       "bumpedAt": "2026-08-31T00:00:00",
       "lastSeen": "2026-08-31",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "relatable",
+        "target": "家じゅうで充電したい人",
+        "problem": "ケーブルが常にどこか足りない",
+        "use_case": "自宅・職場",
+        "features": [
+          "2mが3本",
+          "C to C",
+          "USB-A to C"
+        ],
+        "benefits": [
+          "置き場所を分けられる",
+          "端子の組み合わせを選べる"
+        ],
+        "hook": "充電ケーブル、なぜか家じゅうで足りなくなる。",
+        "body": "2mが3本のセットです。\nC to CとUSB-A to Cから選べます。",
+        "cta": "save"
+      }
     },
     {
       "id": "r69a7992a4",
@@ -106,7 +162,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 1100,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,100円のメンズのクロップドパンツが550円。綿100%の7分丈。",
       "points": [],
       "description": "",
       "tags": [
@@ -116,7 +172,25 @@
       "postedAt": "2026-08-31",
       "bumpedAt": "2026-08-31T00:00:00",
       "lastSeen": "2026-08-31",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "季節の変わり目の服に困る人",
+        "problem": "長ズボンはまだ暑く、短パンでは出かけにくい",
+        "use_case": "夏の終わりの普段着",
+        "features": [
+          "綿100%",
+          "7分丈",
+          "チノパン",
+          "難燃加工"
+        ],
+        "benefits": [
+          "丈が中間で使いやすい"
+        ],
+        "hook": "夏の終わり、長ズボンはまだ暑い。",
+        "body": "綿100%の7分丈チノパンです。\n難燃の加工がされています。",
+        "cta": "none"
+      }
     },
     {
       "id": "rf74a6f898",
@@ -135,7 +209,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 1290,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,290円のSwitch用保護フィルムが645円。有機ELとLiteに対応。",
       "points": [],
       "description": "",
       "tags": [
@@ -145,7 +219,24 @@
       "postedAt": "2026-08-31",
       "bumpedAt": "2026-08-31T00:00:00",
       "lastSeen": "2026-08-31",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "problem",
+        "target": "Switchを複数持っている人",
+        "problem": "機種が違ってフィルムを買い直した",
+        "use_case": "Switchの保護",
+        "features": [
+          "有機ELとLiteに対応",
+          "ブルーライトカット",
+          "ガラスフィルム"
+        ],
+        "benefits": [
+          "持っている型に合わせて選べる"
+        ],
+        "hook": "フィルム、機種が違って買い直したことがある。",
+        "body": "Switch用の保護フィルムです。有機ELとLiteに対応。\nブルーライトカットのガラスタイプ。",
+        "cta": "save"
+      }
     },
     {
       "id": "rcc5a62526",
@@ -164,7 +255,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 1800,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,800円のイヌリン配合サプリが800円。約1ヶ月分で、送料込み。",
       "points": [],
       "description": "",
       "tags": [
@@ -174,7 +265,26 @@
       "postedAt": "2026-08-31",
       "bumpedAt": "2026-08-31T00:00:00",
       "lastSeen": "2026-08-31",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "compare",
+        "target": "成分で選びたい人",
+        "problem": "サプリは名前だけ見ても中身が分からない",
+        "use_case": "毎日のサプリ",
+        "features": [
+          "フォルスコリ",
+          "イヌリン配合",
+          "デキストリン",
+          "約1ヶ月分",
+          "植物性"
+        ],
+        "benefits": [
+          "入っている成分がはっきりしている"
+        ],
+        "hook": "フォルスコリとイヌリンが、ひとつに入っています。",
+        "body": "植物性のサプリです。デキストリンも配合。\n約1ヶ月ぶん。",
+        "cta": "none"
+      }
     },
     {
       "id": "r27281ecec",
@@ -193,7 +303,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 1740,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,740円のAirPods Pro用ケースが870円。カラビナ付き。",
       "points": [],
       "description": "",
       "tags": [],
@@ -201,7 +311,24 @@
       "postedAt": "2026-08-31",
       "bumpedAt": "2026-08-31T00:00:00",
       "lastSeen": "2026-08-31",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "イヤホンを持ち歩く人",
+        "problem": "カバンの中で見失う",
+        "use_case": "通勤・外出",
+        "features": [
+          "AirPods Pro用",
+          "カラビナ付き",
+          "第3世代にも対応"
+        ],
+        "benefits": [
+          "カバンの外に留められる"
+        ],
+        "hook": "イヤホン、カバンの中で行方不明になる。",
+        "body": "AirPods Pro用のケースです。カラビナが付いています。\n第3世代にも対応。",
+        "cta": "empathy"
+      }
     },
     {
       "id": "rf994cdd4f",
@@ -263,7 +390,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2000,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,000円のエラグ酸のサプリが1,000円。90日分で、送料込み。",
       "points": [],
       "description": "",
       "tags": [
@@ -273,7 +400,23 @@
       "postedAt": "2026-08-31",
       "bumpedAt": "2026-08-31T00:00:00",
       "lastSeen": "2026-08-31",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "compare",
+        "target": "サプリを切らしたくない人",
+        "problem": "1ヶ月分だと買い直しが早く来る",
+        "use_case": "毎日のサプリ",
+        "features": [
+          "エラグ酸 3mg",
+          "90日ぶんのセット"
+        ],
+        "benefits": [
+          "買い直しの間隔が長い"
+        ],
+        "hook": "サプリ、1ヶ月ぶんだと切れるのが早い。",
+        "body": "エラグ酸のサプリです。90日ぶんのセット。",
+        "cta": "none"
+      }
     },
     {
       "id": "r3f46403d6",
@@ -292,7 +435,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2000,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,000円の置き換えスムージーが1,000円。108種類の生酵素入り。",
       "points": [],
       "description": "",
       "tags": [
@@ -302,7 +445,27 @@
       "postedAt": "2026-08-31",
       "bumpedAt": "2026-08-31T00:00:00",
       "lastSeen": "2026-08-31",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "置き換えを試したい人",
+        "problem": "味が合わないと手が伸びない",
+        "use_case": "食事の置き換え",
+        "features": [
+          "108種類の生酵素",
+          "食物繊維",
+          "乳酸菌",
+          "100g",
+          "マンゴー／アサイー／ベリー＆ヨーグルト"
+        ],
+        "benefits": [
+          "味を3種類から選べる"
+        ],
+        "hook": "置き換えのスムージー、味が3種類から選べます。",
+        "body": "108種類の生酵素と食物繊維、乳酸菌を配合。100g入り。\nマンゴー、アサイー、ベリー＆ヨーグルトから。",
+        "cta": "question",
+        "cta_text": "どの味が気になりますか？"
+      }
     },
     {
       "id": "rd8159e85e",
@@ -321,7 +484,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2000,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,000円のメンズのロングカーディガンが1,000円。ストールとフード付き。",
       "points": [],
       "description": "",
       "tags": [],
@@ -329,7 +492,25 @@
       "postedAt": "2026-08-31",
       "bumpedAt": "2026-08-31T00:00:00",
       "lastSeen": "2026-08-31",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "surprise",
+        "target": "羽織りを探しているメンズ",
+        "problem": "カーディガンは形が似たものばかり",
+        "use_case": "秋の普段着",
+        "features": [
+          "ストール付き",
+          "フード付き",
+          "ロング丈",
+          "大きいサイズあり"
+        ],
+        "benefits": [
+          "1枚で形に変化がつく"
+        ],
+        "hook": "カーディガンに、ストールとフードが付いています。",
+        "body": "ロング丈のメンズカーディガンです。\n大きいサイズもあります。",
+        "cta": "none"
+      }
     },
     {
       "id": "rc73f70ca2",
@@ -348,7 +529,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2178,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,178円の2重ガーゼのおくるみが1,080円。約100×100cmの日本製。",
       "points": [],
       "description": "",
       "tags": [
@@ -358,7 +539,25 @@
       "postedAt": "2026-08-31",
       "bumpedAt": "2026-08-31T00:00:00",
       "lastSeen": "2026-08-31",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "出産祝いを選んでいる人",
+        "problem": "人とかぶらないものを選びたい",
+        "use_case": "出産祝い・普段使い",
+        "features": [
+          "日本製",
+          "2重ガーゼ",
+          "約100×100cm",
+          "ケットとしても使える"
+        ],
+        "benefits": [
+          "贈り物にも普段使いにもできる"
+        ],
+        "hook": "出産祝い、かぶらないものを選びたい。",
+        "body": "日本製の2重ガーゼのおくるみです。約100×100cm。\nケットとしても使えます。",
+        "cta": "save"
+      }
     },
     {
       "id": "r532257289",
@@ -377,7 +576,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2300,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,300円の自家焙煎コーヒー豆が1,150円。5種類から選べて200g。",
       "points": [],
       "description": "",
       "tags": [
@@ -387,7 +586,26 @@
       "postedAt": "2026-08-31",
       "bumpedAt": "2026-08-31T00:00:00",
       "lastSeen": "2026-08-31",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "compare",
+        "target": "コーヒーを飲み比べたい人",
+        "problem": "1kgは多いが、少量だと選べない",
+        "use_case": "毎日のコーヒー",
+        "features": [
+          "自家焙煎",
+          "5種類から選べる",
+          "200gと1kg",
+          "豆と粉を指定できる"
+        ],
+        "benefits": [
+          "少量から種類を選べる"
+        ],
+        "hook": "豆を選ぶところから始められる200g。",
+        "body": "自家焙煎のブレンドコーヒーです。5種類から選べます。\n豆と粉を指定できます。",
+        "cta": "question",
+        "cta_text": "深煎り派ですか、浅煎り派ですか？"
+      }
     },
     {
       "id": "r253fbb57e",
@@ -406,7 +624,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2480,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,480円のSwitch用ケースが1,240円。ジョイコンのカバー付き。",
       "points": [],
       "description": "",
       "tags": [
@@ -416,7 +634,24 @@
       "postedAt": "2026-08-31",
       "bumpedAt": "2026-08-31T00:00:00",
       "lastSeen": "2026-08-31",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "relatable",
+        "target": "Switchを持ち歩く人",
+        "problem": "本体は守っていてもジョイコンは裸のまま",
+        "use_case": "持ち運び",
+        "features": [
+          "Switch用ケース",
+          "ジョイコンのカバー付き",
+          "有機ELモデル対応"
+        ],
+        "benefits": [
+          "本体とジョイコンを一緒に守れる"
+        ],
+        "hook": "Switch、本体は守っていてもジョイコンは裸。",
+        "body": "Switch用のケースです。ジョイコンのカバーも付いています。\n有機ELモデルに対応。",
+        "cta": "none"
+      }
     },
     {
       "id": "r3925e51dd",
@@ -435,7 +670,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2490,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,490円のSwitch用ケースが1,240円。名入れができます。",
       "points": [],
       "description": "",
       "tags": [],
@@ -462,7 +697,7 @@
       "endTime": "",
       "listPrice": 2596,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,596円の犬猫用オメガ3オイルが1,298円。100mlのふりかけタイプ。",
       "tags": [],
       "points": [],
       "description": "",
@@ -489,7 +724,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2600,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,600円のフレーバーティーが1,300円。2袋を選べます。",
       "points": [],
       "description": "",
       "tags": [
@@ -518,7 +753,7 @@
       "endTime": "2026-09-05 23:59",
       "listPrice": 2860,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,860円の長袖ポロシャツが1,430円。吸汗速乾で、形態安定。",
       "points": [],
       "description": "",
       "tags": [],
@@ -545,7 +780,7 @@
       "endTime": "2026-09-05 23:59",
       "listPrice": 2980,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,980円のプリーツパンツが1,490円。接触冷感で、裾上げ不要。",
       "points": [],
       "description": "",
       "tags": [],
@@ -572,7 +807,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2980,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,980円のゲーミングキーボードとマウスのセットが1,490円。日本語配列の有線。",
       "points": [],
       "description": "",
       "tags": [
@@ -601,7 +836,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2980,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,980円のガーゼのおくるみが1,490円。日本製で、出産祝いにも。",
       "points": [],
       "description": "",
       "tags": [],
@@ -628,7 +863,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2980,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,980円の傘型サンシェードが1,490円。UVカットで、折りたためます。",
       "points": [],
       "description": "",
       "tags": [
@@ -657,7 +892,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2980,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,980円の傘式カーサンシェードが1,490円。フロントガラス用。",
       "points": [],
       "description": "",
       "tags": [
@@ -686,7 +921,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 3000,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "3,000円のメンズのサルエルパンツが1,500円。サスペンダー付きの2WAY。",
       "points": [],
       "description": "",
       "tags": [],
@@ -725,7 +960,25 @@
       "postedAt": "2026-08-31",
       "bumpedAt": "2026-08-31T10:17:54",
       "lastSeen": "2026-08-31",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "surprise",
+        "target": "タオルをまとめて替えたい人",
+        "problem": "訳あり品は品質が心配になる",
+        "use_case": "日常のタオル",
+        "features": [
+          "ホテル仕様",
+          "スーピマコットンの綿100%",
+          "在庫処分",
+          "セット"
+        ],
+        "benefits": [
+          "訳ありの理由が品質ではない"
+        ],
+        "hook": "訳ありの理由が、品質ではなく在庫でした。",
+        "body": "ホテル仕様のタオルセットです。スーピマコットンの綿100%。\n在庫処分として出ています。",
+        "cta": "save"
+      }
     },
     {
       "id": "r82d75cbfc",
@@ -756,7 +1009,26 @@
       "postedAt": "2026-08-31",
       "bumpedAt": "2026-08-31T10:17:54",
       "lastSeen": "2026-08-31",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "compare",
+        "target": "タオルを一式そろえたい人",
+        "problem": "バスタオルとフェイスタオルを別々に買うと手間",
+        "use_case": "日常のタオル",
+        "features": [
+          "バスタオルとフェイスタオル",
+          "ホテル仕様",
+          "スーピマコットンの綿100%",
+          "組み合わせを選べる"
+        ],
+        "benefits": [
+          "一度でそろう",
+          "組み合わせを選べる"
+        ],
+        "hook": "バスタオルとフェイスタオル、まとめて替えるとき。",
+        "body": "ホテル仕様のタオルセットです。スーピマコットンの綿100%。\n組み合わせを選べます。",
+        "cta": "none"
+      }
     },
     {
       "id": "r86dc3b5d3",
@@ -786,7 +1058,26 @@
       "postedAt": "2026-08-31",
       "bumpedAt": "2026-08-31T10:17:35",
       "lastSeen": "2026-08-31",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "compare",
+        "target": "扇風機の置き場所に困る人",
+        "problem": "手で持つと片手がふさがる",
+        "use_case": "外出・デスク・キッチン",
+        "features": [
+          "クリップ式",
+          "首かけ",
+          "卓上",
+          "充電式",
+          "静音"
+        ],
+        "benefits": [
+          "挟む・かける・置くの3通りで使える"
+        ],
+        "hook": "持つ、挟む、かける。ひとつで3通り。",
+        "body": "クリップ式のハンディファンです。首にかけても、卓上に置いても使えます。\n充電式の静音タイプ。",
+        "cta": "experience"
+      }
     },
     {
       "id": "r37783ebd3",
@@ -815,7 +1106,26 @@
       "postedAt": "2026-08-31",
       "bumpedAt": "2026-08-31T10:17:54",
       "lastSeen": "2026-08-31",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "賃貸で水圧に不満がある人",
+        "problem": "シャワーの水圧は住まいで決まると諦めている",
+        "use_case": "毎日の入浴",
+        "features": [
+          "増圧タイプ",
+          "水流の切り替え",
+          "塩素除去のカートリッジ",
+          "シャワーフック付き"
+        ],
+        "benefits": [
+          "水流を場面で変えられる",
+          "付け替えるだけで使える"
+        ],
+        "hook": "シャワーの水圧、賃貸だと諦めている人が多い。",
+        "body": "増圧タイプのシャワーヘッドです。水流は切り替えられます。\n塩素除去のカートリッジとフックが付いています。",
+        "cta": "experience"
+      }
     },
     {
       "id": "r7bcc60553",
@@ -834,7 +1144,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 3960,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "3,960円の卓上加湿器が1,980円。超音波式で、7色のライト付き。",
       "points": [],
       "description": "",
       "tags": [
@@ -874,7 +1184,26 @@
       "postedAt": "2026-08-31",
       "bumpedAt": "2026-08-31T10:19:28",
       "lastSeen": "2026-08-31",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "problem",
+        "target": "雪や凍結のある土地に住む人",
+        "problem": "冬の朝は足元が滑る",
+        "use_case": "冬の通勤・アウトドア",
+        "features": [
+          "防水",
+          "防滑",
+          "超軽量",
+          "大きいサイズあり"
+        ],
+        "benefits": [
+          "濡れた路面でも履ける",
+          "サイズの幅が広い"
+        ],
+        "hook": "冬の朝、靴が滑ると一日こわい。",
+        "body": "防水と防滑のスノーブーツです。超軽量。\n大きいサイズもあります。",
+        "cta": "save"
+      }
     },
     {
       "id": "rc87b2ba45",
@@ -904,7 +1233,25 @@
       "postedAt": "2026-08-31",
       "bumpedAt": "2026-08-31T10:19:28",
       "lastSeen": "2026-08-31",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "雪の予報を見てから慌てる人",
+        "problem": "降ると分かってから探すと間に合わない",
+        "use_case": "冬の通勤",
+        "features": [
+          "防水",
+          "防滑",
+          "翌日配達",
+          "大きいサイズあり"
+        ],
+        "benefits": [
+          "注文から届くまでが短い"
+        ],
+        "hook": "雪が降ると分かってから探すと、もう間に合わない。",
+        "body": "防水と防滑のスノーブーツです。翌日配達に対応しています。\n大きいサイズもあります。",
+        "cta": "none"
+      }
     },
     {
       "id": "rbff977e72",
@@ -931,7 +1278,27 @@
       "postedAt": "2026-08-31",
       "bumpedAt": "2026-08-31T10:19:28",
       "lastSeen": "2026-08-31",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "problem",
+        "target": "通勤で長時間歩く人",
+        "problem": "幅が合わない靴は一日もたない",
+        "use_case": "通勤・ウォーキング",
+        "features": [
+          "幅広",
+          "スリッポン",
+          "厚底",
+          "軽量",
+          "黒と白"
+        ],
+        "benefits": [
+          "脱ぎ履きに手間がかからない",
+          "幅で選べる"
+        ],
+        "hook": "通勤の靴、幅が合わないと一日もたない。",
+        "body": "幅広のスリッポンです。厚底で軽量。\n黒と白から選べます。",
+        "cta": "empathy"
+      }
     },
     {
       "id": "rfee3d8340",
@@ -950,7 +1317,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 6980,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "6,980円のドライヤーが3,490円。1300Wの大風量で、折りたたみ式。",
       "points": [],
       "description": "",
       "tags": [],
