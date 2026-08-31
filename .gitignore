@@ -30,3 +30,4 @@ products.json.sample_backup
 .run_changed
 backup/
 .threads.lock
+.build_log.txt

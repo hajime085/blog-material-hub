@@ -52,7 +52,29 @@ jobs:
         run: python3 fetch_rakuten.py --watch
 
       - name: サイトを作り直す
-        run: python3 build.py
+        run: python3 build.py | tee .build_log.txt
+
+      # 決まりを破っていたら、実行の要約に大きく出す。
+      # 以前は警告を出すだけで終了コードは 0 だったので、
+      # 自動実行のログに埋もれて誰も気づかなかった。
+      # 「今日の分やって」で私が走らせたときにしか見つからない状態だった。
+      - name: 決まりを破っていないか
+        if: always()
+        run: |
+          if grep -q "決まりを破っています" .build_log.txt; then
+            {
+              echo "## ⚠ 決まりを破っています"
+              echo ""
+              echo '```'
+              grep -A2 "決まりを破っています" .build_log.txt
+              echo '```'
+              echo ""
+              echo "直し方は rules.py の各検査のコメントにあります。"
+            } >> "$GITHUB_STEP_SUMMARY"
+            echo "::warning::決まりを破っています。実行の要約を見てください"
+          else
+            echo "決まり、すべて守れています。" >> "$GITHUB_STEP_SUMMARY"
+          fi
 
       - name: 変化があれば反映する
         run: |
