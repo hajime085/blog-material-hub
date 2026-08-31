@@ -2449,6 +2449,12 @@ def check_caption_prices(products):
         blocks = [("キャプション", p.get("caption") or ""),
                   ("説明", p.get("description") or "")]
         blocks += [("箇条書き", x) for x in (p.get("points") or [])]
+        # 商品理解も見る。Threadsの投稿はここから組み立てるので、
+        # ここが古いと、間違った値段がそのまま外へ出る。
+        # 実際、実売998円の商品の一文に999円と書いてあった。
+        mk = p.get("marketing") or {}
+        blocks += [("商品理解の入口", mk.get("hook") or ""),
+                   ("商品理解の本文", mk.get("body") or "")]
         ok = {p["price"], p.get("listPrice") or 0}
         note = p.get("unitNote") or ""
         for m in _re.findall(r"([\d,]{3,9})\s*円", note):

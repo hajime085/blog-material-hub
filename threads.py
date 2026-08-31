@@ -190,9 +190,21 @@ def ends_label(et):
 
 
 def short_title(t, n=34):
-    """商品名を短く。楽天の商品名は検索語の羅列なので、長く出しても読めない。"""
-    t = (t or "").strip()
-    return t if len(t) <= n else t[:n].rstrip("…、 ") + "…"
+    """商品名を短く。楽天の商品名は検索語の羅列なので、長く出しても読めない。
+
+    切る位置は区切りに合わせる。文字数で機械的に切ると
+    「活性オメガ3オイル 100ml ふりかけ…」のように語の途中で終わり、
+    文章が途切れたように見える。実際にそう見える投稿が出た。
+    """
+    t = " ".join((t or "").split())
+    if len(t) <= n:
+        return t
+    cut = t[:n]
+    # 半角/全角の空白、読点、スラッシュのところまで戻す
+    best = max(cut.rfind(c) for c in (" ", "　", "、", "/", "・", "／"))
+    if best >= n // 2:          # 短くなりすぎるなら、そのまま切る
+        cut = cut[:best]
+    return cut.rstrip("…、・/／ 　") + "…"
 
 
 # 締めの一言。付けるかどうかは投稿ごとに回す。
@@ -389,13 +401,17 @@ def compose_product(p, site, pr, reply_link=False, ev=None, seq=0):
         chg = ("%s円 → %s円（%d%%OFF）" % (yen(p["lp"]), yen(p["pr"]), p["d"])
                if (p.get("d") and p.get("lp") and yen(p["lp"]) not in cap) else "")
 
+        # ここから下は、商品理解がまだ無い商品のための古い型。
+        # pick() が商品理解のあるものしか選ばないので、通常は通らない。
+        name = title
+
         # キャプションがあるときも、形は入れ替える。
         # 人が書いた文を先頭に置くのは変わらないが、
         # 毎回そのあとに商品名と箇条書きが続くと、やはり同じ投稿に見える。
         forms = []
 
         # 形a｜これまでどおり。文 → 商品名 → 値段 → 箇条書き
-        a = [pr + cap, title] + ([chg] if chg else [])
+        a = [pr + cap] + ([name] if name else []) + ([chg] if chg else [])
         if pts:
             a += [""] + ["・" + x for x in pts[:3]]
         forms.append("\n".join(a))
@@ -404,13 +420,14 @@ def compose_product(p, site, pr, reply_link=False, ev=None, seq=0):
         b = [pr + cap, ""]
         if chg:
             b.append(chg)
-        b.append(title)
+        if name:
+            b.append(name)
         if pts:
             b.append("（" + "／".join(pts[:2]) + "）")
         forms.append("\n".join(b))
 
         # 形c｜短く。文と値段だけで終える
-        c = [pr + cap, title]
+        c = [pr + cap] + ([name] if name else [])
         if ends:
             c.append("%sの値段です。" % ends.replace(" まで", "まで"))
         elif chg:
@@ -761,6 +778,16 @@ def pick(cfg, posted, want, slot_hour=None, live_heads=None):
     items = []
     for p in feed:
         if ("product:" + p["id"]) in done:
+            continue
+        # 商品理解のあるものだけを出す。
+        #
+        # 以前は、商品理解が無ければキャプションと商品名を並べる
+        # 古い型に落としていた。だが楽天の商品名は検索語の羅列なので、
+        # 貼るとそこで文章が途切れたようにしか見えない。
+        # 「誰に・どんな悩みに・どの特徴が効くか」を先に考える、という
+        # 作り直しの趣旨そのものからも外れている。
+        # 出せるものが無い枠は、知識や記事で埋める。そちらのほうがましだ。
+        if not p.get("mk2"):
             continue
         # キャプションが無くても、言えることがあるなら出す。
         # 値引きが取れているか、期限が分かっていること。
