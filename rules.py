@@ -51,18 +51,42 @@ def rule_what_is_it(ctx):
 
     2026-08-30: 自動で足した商品は description が空なので、
     この項目がまるごと消えていた。二度指摘を受けた。
+    2026-08-31: ルールを作ったのに三度目が起きた。
+    「全体の3割を超えたら警告」にしていたので、
+    新しく足した25件が全部欠けていても10%で素通りした。
+    割合ではなく「目立つところが埋まっているか」で見る。
     """
     src = ctx["build_py"]
     if 'p.get("marketing") or {}' not in src or "どんな商品？" not in src:
         return ["build.py が、商品理解を「どんな商品？」の代わりに使っていません"]
+
     ps = ctx["products"]
-    bad = [p["id"] for p in ps
-           if not (p.get("description") or "").strip()
-           and not p.get("marketing")]
-    if len(bad) > len(ps) * 0.3:
-        return ["「どんな商品？」が出ない商品が %d件（全%d件）あります。"
-                "pitch.py --site で埋めてください" % (len(bad), len(ps))]
-    return []
+    def missing(p):
+        return (not (p.get("description") or "").strip()
+                and not p.get("marketing"))
+
+    out = []
+    # 編集部の棚は、トップでいちばん目立つ。1件でも欠けたら言う。
+    # 棚と商品はIDの付き方が違う（棚は f…、商品は r…）。
+    # 商品コードで突き合わせる。IDで引くと全件が「無い」判定になった。
+    feat = load("featured.json", {}) or {}
+    by_code = {p.get("itemCode"): p for p in ps if p.get("itemCode")}
+    bad = [x.get("itemCode") for x in (feat.get("items") or [])
+           if missing(by_code.get(x.get("itemCode"), {}))]
+    if bad:
+        out.append("編集部の棚に「どんな商品？」が無い商品が %d件あります"
+                   "（%s）。pitch.py --site で作ってください"
+                   % (len(bad), bad[0]))
+
+    # 直近に足したものも、そのまま溜めない。
+    from datetime import datetime, timedelta
+    recent = (datetime.now() - timedelta(days=2)).strftime("%Y-%m-%d")
+    fresh_bad = [p["id"] for p in ps
+                 if (p.get("postedAt") or "") >= recent and missing(p)]
+    if len(fresh_bad) > 5:
+        out.append("この2日に足した商品で「どんな商品？」が無いものが %d件あります"
+                   % len(fresh_bad))
+    return out
 
 
 def rule_price_checked_everywhere(ctx):
