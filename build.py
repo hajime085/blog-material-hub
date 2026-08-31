@@ -189,11 +189,6 @@ def feed_order(p):
     return (at, discount_rate(p), p.get("reviewCount") or 0)
 
 
-def feed_order_desc(p):
-    o = feed_order(p)
-    return (o[0], o[1], o[2])
-
-
 def price_basis_label(p):
     """基準価格が何なのかを、そのまま言葉にする。
 
