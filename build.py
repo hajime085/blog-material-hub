@@ -1428,10 +1428,30 @@ def build_products(cfg, base, products, cats):
         if not free_shipping(p):
             cta_sub += '<span class="cta-sub cta-ship">＋送料</span>'
 
+        # 「どんな商品？」の中身。
+        #
+        # 手で書いた description があればそれを使う。
+        # 無ければ、pitch.py で作って決まりに照らして通した商品理解を使う。
+        # 以前は description しか見ていなかったので、
+        # 自動で足した商品では、この項目がまるごと消えていた。
+        desc_src = (p.get("description") or "").strip()
+        pts = list(p.get("points") or [])
+        if not desc_src:
+            mk = p.get("marketing") or {}
+            if (p.get("pitch_status") == "ready") and mk.get("body"):
+                desc_src = mk["body"]
+                if not pts:
+                    pts = [x for x in (mk.get("features") or []) if x]
         desc_block = ""
-        if p.get("description"):
-            paras = "".join("<p>%s</p>" % e(x) for x in p["description"].split("\n") if x.strip())
-            desc_block = '<h2 class="section-title">どんな商品？</h2><div class="prose prose-card">%s%s</div>' % (paras, points)
+        if desc_src:
+            paras = "".join("<p>%s</p>" % e(x)
+                            for x in desc_src.split("\n") if x.strip())
+            plist = ""
+            if pts:
+                plist = "<ul class=\"prose-points\">%s</ul>" % "".join(
+                    "<li>%s</li>" % e(x) for x in pts)
+            desc_block = ('<h2 class="section-title">どんな商品？</h2>'
+                          '<div class="prose prose-card">%s%s</div>' % (paras, plist))
 
         content = """
 <div class="wrap">
