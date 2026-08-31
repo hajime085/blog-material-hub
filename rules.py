@@ -171,6 +171,124 @@ def rule_no_cd_dvd(ctx):
     return []
 
 
+def rule_posted_date_shown(ctx):
+    """カードに掲載日を出す。値段は毎日動くので、いつの話かが要る。
+
+    2026-08-31: 一覧を見ても、いつ載った商品なのか分からなかった。
+    静的なカードとJSで描き直すカードの両方に要る。片方だけだと
+    一覧を触った瞬間に消える。
+    """
+    out = []
+    if "card-posted" not in ctx["build_py"]:
+        out.append("build.py のカードに掲載日がありません")
+    js = load("assets/js/app.js", "")
+    # 関数があるだけでは足りない。カードの中で呼ばれているかを見る。
+    # 呼び出しを外しても気づかず、一覧から掲載日が消えたことがある。
+    if not re.search(r"card-foot[^;]{0,400}postedLabel\(", js, re.S):
+        out.append("assets/js/app.js のカードで掲載日を呼んでいません"
+                   "（一覧はJSで描き直すので、ここが無いと消えます）")
+    return out
+
+
+def rule_no_duplicate_post(ctx):
+    """同じ内容を二度出さない。手元の記録ではなくアカウントを見る。
+
+    2026-08-29: 同じ知識投稿を 14:00 / 14:21 / 19:00 の三度出した。
+    記録が push できず、次の回が「まだ出していない」と読んだため。
+    記録は壊れることがあるので、アカウントそのものを見るしかない。
+    """
+    src = ctx["threads_py"]
+    out = []
+    if "recent_posts" not in src or "head_of" not in src:
+        out.append("threads.py に、アカウントの直近と見比べる仕組みがありません")
+    if "live_heads" not in src:
+        out.append("候補を作る段階で、すでに載っているものを外していません"
+                   "（出す直前に止めるだけだと、その枠が空振りになります）")
+    return out
+
+
+def rule_stop_when_unpushed(ctx):
+    """記録を押せなかったら、その回はそこで止める。
+
+    2026-08-29: push に失敗したまま出し続け、次の回が同じものを出した。
+    出したのに記録が無い状態が、重複の引き金になる。
+    """
+    if "記録を送れませんでした。ここで止めます" not in ctx["threads_py"]:
+        return ["push に失敗しても投稿を続ける作りになっています"]
+    return []
+
+
+def rule_single_run_records_slot(ctx):
+    """素で叩いた実行でも、枠を記録する。
+
+    2026-08-29 17:02 の投稿がどこから出たか説明できなかった。
+    枠が空だと、見張り側が投稿時刻を枠とみなし、
+    実際には出していない枠まで消化済みになる。
+    """
+    src = ctx["threads_py"]
+    if "slot_hour=now_h" not in src:
+        return ["素の実行が枠を記録していません"]
+    if "take_lock" not in src:
+        return ["二重起動を止める錠がありません"]
+    return []
+
+
+def rule_short_serve_window(ctx):
+    """1回の起動は短くする。長く居座ると回が重なる。
+
+    2026-08-29: 1回が4時間生きる作りだったため、Cloudflare と
+    GitHub の起動が重なって順番待ちになり、記録が壊れた。
+    枠ごとに起こすので、長く生きる必要はない。
+    """
+    src = load(".github/workflows/threads.yml", "")
+    m = re.search(r'H="\$\{H:-([\d.]+)\}"', src)
+    if not m:
+        return ["threads.yml に窓の既定値が見当たりません"]
+    if float(m.group(1)) > 1.5:
+        return ["1回の窓が %s時間。長すぎます（回が重なります）" % m.group(1)]
+    return []
+
+
+def rule_hide_ended_sales(ctx):
+    """終わったセールは、作り直しを待たずに客側でも隠す。
+
+    サイトの作り直しは1日4回。その間に終わったセールが残ると、
+    買えないものを載せていることになる。
+    """
+    js = load("assets/js/app.js", "")
+    # 関数の有無ではなく、一覧を絞るところで使われているかを見る。
+    if not re.search(r"filter\(.{0,90}?saleOver\(", js, re.S):
+        return ["assets/js/app.js が、終了したセールを一覧から外していません"]
+    return []
+
+
+def rule_event_heading(ctx):
+    """セールの商品はイベント名で出す。
+
+    2026-08-30: 中身がスーパーSALEの目玉なのに
+    「まもなく始まる特価」と名乗っていた。実態と合わず、
+    いちばん強い言葉を捨てていた。
+    """
+    if "で始まる特価" not in ctx["build_py"]:
+        return ["build.py が、イベント名を見出しに使っていません"]
+    return []
+
+
+def rule_captions_filled(ctx):
+    """キャプションの空きを残さない。
+
+    値札だけのカードは、何が安いのか読む人に伝わらない。
+    自動で足した商品は空で入るので、日次で埋める
+    （「今日の分やって」の手順）。
+    """
+    ps = ctx["products"]
+    empty = [p for p in ps if not (p.get("caption") or "").strip()]
+    if len(empty) > max(10, len(ps) * 0.05):
+        return ["キャプションが空の商品が %d件（全%d件）あります。"
+                "日次で埋めてください" % (len(empty), len(ps))]
+    return []
+
+
 RULES = [
     ("投稿は商品理解のあるものだけ", rule_post_needs_pitch),
     ("「どんな商品？」が出る", rule_what_is_it),
@@ -182,6 +300,14 @@ RULES = [
     ("料率を見せない", rule_no_rate_shown),
     ("商品リンクは楽天の公式転送", rule_affiliate_links),
     ("CD・DVDは扱わない", rule_no_cd_dvd),
+    ("カードに掲載日を出す", rule_posted_date_shown),
+    ("同じ内容を二度出さない", rule_no_duplicate_post),
+    ("記録を押せなければ止める", rule_stop_when_unpushed),
+    ("素の実行でも枠を記録する", rule_single_run_records_slot),
+    ("1回の起動は短く", rule_short_serve_window),
+    ("終わったセールを隠す", rule_hide_ended_sales),
+    ("セールの商品はイベント名で出す", rule_event_heading),
+    ("キャプションの空きを残さない", rule_captions_filled),
 ]
 
 
