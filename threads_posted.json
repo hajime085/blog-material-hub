@@ -50,7 +50,8 @@
     "product:r86dc3b5d3",
     "tip:23",
     "product:r56c8bea98",
-    "product:r3661d4a90"
+    "product:r3661d4a90",
+    "product:rc789b8f62"
   ],
   "log": [
     {
@@ -720,6 +721,20 @@
       "hook_type": "compare",
       "cta_type": "experience",
       "category": "baby-toy",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:rc789b8f62",
+      "id": "18114432358977900",
+      "at": "2026-09-01 23:20",
+      "kind": "product",
+      "slot": 23,
+      "catchup": false,
+      "cap": false,
+      "hook_type": "relatable",
+      "cta_type": "experience",
+      "category": "food",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
