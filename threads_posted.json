@@ -44,7 +44,8 @@
     "product:rd627df8f4",
     "product:r123e4e6c5",
     "schedule:2026-W35-2",
-    "product:ra26063fcc"
+    "product:ra26063fcc",
+    "product:r1b2bb1d56"
   ],
   "log": [
     {
@@ -630,6 +631,20 @@
       "hook_type": "discovery",
       "cta_type": "save",
       "category": "kitchen",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r1b2bb1d56",
+      "id": "18066989735772170",
+      "at": "2026-09-01 12:20",
+      "kind": "product",
+      "slot": 12,
+      "catchup": false,
+      "cap": false,
+      "hook_type": "scene",
+      "cta_type": "save",
+      "category": "food",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
