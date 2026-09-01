@@ -43,7 +43,8 @@
     "product:rce7af8604",
     "product:rd627df8f4",
     "product:r123e4e6c5",
-    "schedule:2026-W35-2"
+    "schedule:2026-W35-2",
+    "product:ra26063fcc"
   ],
   "log": [
     {
@@ -617,6 +618,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:ra26063fcc",
+      "id": "18009108875970885",
+      "at": "2026-09-01 09:20",
+      "kind": "product",
+      "slot": 9,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "kitchen",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
