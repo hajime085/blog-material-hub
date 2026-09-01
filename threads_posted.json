@@ -46,7 +46,8 @@
     "schedule:2026-W35-2",
     "product:ra26063fcc",
     "product:r1b2bb1d56",
-    "tip:14"
+    "tip:14",
+    "product:r86dc3b5d3"
   ],
   "log": [
     {
@@ -662,6 +663,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:r86dc3b5d3",
+      "id": "18164287231475728",
+      "at": "2026-09-01 17:20",
+      "kind": "product",
+      "slot": 17,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "compare",
+      "cta_type": "experience",
+      "category": "kaden",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
