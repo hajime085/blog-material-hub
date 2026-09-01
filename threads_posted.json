@@ -51,7 +51,8 @@
     "tip:23",
     "product:r56c8bea98",
     "product:r3661d4a90",
-    "product:rc789b8f62"
+    "product:rc789b8f62",
+    "product:rbcd9e1bc8"
   ],
   "log": [
     {
@@ -735,6 +736,20 @@
       "hook_type": "relatable",
       "cta_type": "experience",
       "category": "food",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:rbcd9e1bc8",
+      "id": "18118158910902416",
+      "at": "2026-09-02 00:01",
+      "kind": "product",
+      "slot": 0,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "problem",
+      "cta_type": "empathy",
+      "category": "kitchen",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
