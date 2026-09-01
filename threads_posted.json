@@ -52,7 +52,8 @@
     "product:r56c8bea98",
     "product:r3661d4a90",
     "product:rc789b8f62",
-    "product:rbcd9e1bc8"
+    "product:rbcd9e1bc8",
+    "tip:26"
   ],
   "log": [
     {
@@ -752,6 +753,20 @@
       "category": "kitchen",
       "logic_version": "marketing_v2",
       "link": "reply"
+    },
+    {
+      "key": "tip:26",
+      "id": "18020920790872738",
+      "at": "2026-09-02 07:20",
+      "kind": "tip",
+      "slot": 7,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
     }
   ]
 }
