@@ -47,7 +47,8 @@
     "product:ra26063fcc",
     "product:r1b2bb1d56",
     "tip:14",
-    "product:r86dc3b5d3"
+    "product:r86dc3b5d3",
+    "tip:23"
   ],
   "log": [
     {
@@ -677,6 +678,20 @@
       "category": "kaden",
       "logic_version": "marketing_v2",
       "link": "reply"
+    },
+    {
+      "key": "tip:23",
+      "id": "17905610319541652",
+      "at": "2026-09-01 19:20",
+      "kind": "tip",
+      "slot": 19,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
     }
   ]
 }
