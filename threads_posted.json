@@ -48,7 +48,8 @@
     "product:r1b2bb1d56",
     "tip:14",
     "product:r86dc3b5d3",
-    "tip:23"
+    "tip:23",
+    "product:r56c8bea98"
   ],
   "log": [
     {
@@ -692,6 +693,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:r56c8bea98",
+      "id": "18120316261899457",
+      "at": "2026-09-01 20:00",
+      "kind": "product",
+      "slot": 20,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "none",
+      "category": "fashion",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
