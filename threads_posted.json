@@ -49,7 +49,8 @@
     "tip:14",
     "product:r86dc3b5d3",
     "tip:23",
-    "product:r56c8bea98"
+    "product:r56c8bea98",
+    "product:r3661d4a90"
   ],
   "log": [
     {
@@ -705,6 +706,20 @@
       "hook_type": "discovery",
       "cta_type": "none",
       "category": "fashion",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r3661d4a90",
+      "id": "18128918512781701",
+      "at": "2026-09-01 21:00",
+      "kind": "product",
+      "slot": 21,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "compare",
+      "cta_type": "experience",
+      "category": "baby-toy",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
