@@ -56,7 +56,8 @@
     "tip:26",
     "product:rf994cdd4f",
     "product:rbde6613d0",
-    "tip:03"
+    "tip:03",
+    "product:r68630cc41"
   ],
   "log": [
     {
@@ -812,6 +813,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:r68630cc41",
+      "id": "17897262447600070",
+      "at": "2026-09-02 17:20",
+      "kind": "product",
+      "slot": 17,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "problem",
+      "cta_type": "save",
+      "category": "fashion",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
