@@ -61,7 +61,8 @@
     "tip:15",
     "product:r37783ebd3",
     "product:rc87b2ba45",
-    "product:rc2ad25e52"
+    "product:rc2ad25e52",
+    "product:r82d75cbfc"
   ],
   "log": [
     {
@@ -884,6 +885,20 @@
       "cap": true,
       "hook_type": "surprise",
       "cta_type": "save",
+      "category": "kitchen",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r82d75cbfc",
+      "id": "17899951740590273",
+      "at": "2026-09-03 00:01",
+      "kind": "product",
+      "slot": 0,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "compare",
+      "cta_type": "none",
       "category": "kitchen",
       "logic_version": "marketing_v2",
       "link": "reply"
