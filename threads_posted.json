@@ -53,7 +53,8 @@
     "product:r3661d4a90",
     "product:rc789b8f62",
     "product:rbcd9e1bc8",
-    "tip:26"
+    "tip:26",
+    "product:rf994cdd4f"
   ],
   "log": [
     {
@@ -767,6 +768,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:rf994cdd4f",
+      "id": "17959591074194418",
+      "at": "2026-09-02 09:20",
+      "kind": "product",
+      "slot": 9,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "problem_price",
+      "cta_type": "save",
+      "category": "fashion",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
