@@ -54,7 +54,8 @@
     "product:rc789b8f62",
     "product:rbcd9e1bc8",
     "tip:26",
-    "product:rf994cdd4f"
+    "product:rf994cdd4f",
+    "product:rbde6613d0"
   ],
   "log": [
     {
@@ -779,6 +780,20 @@
       "cap": true,
       "hook_type": "problem_price",
       "cta_type": "save",
+      "category": "fashion",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:rbde6613d0",
+      "id": "18124079548795344",
+      "at": "2026-09-02 12:20",
+      "kind": "product",
+      "slot": 12,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "none",
       "category": "fashion",
       "logic_version": "marketing_v2",
       "link": "reply"
