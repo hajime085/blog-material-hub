@@ -60,7 +60,8 @@
     "product:r68630cc41",
     "tip:15",
     "product:r37783ebd3",
-    "product:rc87b2ba45"
+    "product:rc87b2ba45",
+    "product:rc2ad25e52"
   ],
   "log": [
     {
@@ -870,6 +871,20 @@
       "hook_type": "scene",
       "cta_type": "none",
       "category": "fashion",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:rc2ad25e52",
+      "id": "18008769749967274",
+      "at": "2026-09-02 23:20",
+      "kind": "product",
+      "slot": 23,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "surprise",
+      "cta_type": "save",
+      "category": "kitchen",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
