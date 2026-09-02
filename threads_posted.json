@@ -58,7 +58,8 @@
     "product:rbde6613d0",
     "tip:03",
     "product:r68630cc41",
-    "tip:15"
+    "tip:15",
+    "product:r37783ebd3"
   ],
   "log": [
     {
@@ -842,6 +843,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:r37783ebd3",
+      "id": "18094617689545719",
+      "at": "2026-09-02 20:00",
+      "kind": "product",
+      "slot": 20,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "experience",
+      "category": "kitchen",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
