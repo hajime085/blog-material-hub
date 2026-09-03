@@ -69,7 +69,8 @@
     "tip:16",
     "tip:30",
     "tip:28",
-    "product:rc9a36d83a"
+    "product:rc9a36d83a",
+    "product:r28f079dd9"
   ],
   "log": [
     {
@@ -1005,6 +1006,20 @@
       "hook_type": "problem",
       "cta_type": "experience",
       "category": "pet",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r28f079dd9",
+      "id": "18625237399053905",
+      "at": "2026-09-03 21:20",
+      "kind": "product",
+      "slot": 21,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "problem",
+      "cta_type": "empathy",
+      "category": "fashion",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
