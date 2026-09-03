@@ -71,7 +71,8 @@
     "tip:28",
     "product:rc9a36d83a",
     "product:r28f079dd9",
-    "product:rdd864712f"
+    "product:rdd864712f",
+    "product:rdac42fc8f"
   ],
   "log": [
     {
@@ -1035,6 +1036,20 @@
       "hook_type": "problem",
       "cta_type": "save",
       "category": "food",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:rdac42fc8f",
+      "id": "18077575214354916",
+      "at": "2026-09-04 00:01",
+      "kind": "product",
+      "slot": 0,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "problem",
+      "cta_type": "experience",
+      "category": "kitchen",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
