@@ -106,7 +106,7 @@
       "endTime": "",
       "listPrice": 1500,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "1,500円の国産25雑穀米が699円。無添加、送料込み。",
       "tags": [
         "送料無料"
       ],
@@ -116,7 +116,27 @@
       "postedAt": "2026-09-03",
       "bumpedAt": "2026-09-03T11:22:06",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "白米に混ぜる雑穀を探している人",
+        "problem": "雑穀米は袋が小さくて途中で終わる",
+        "use_case": "毎日の白米に混ぜて炊く",
+        "features": [
+          "25種類の雑穀",
+          "国産",
+          "無添加",
+          "熊本県産もち麦入り",
+          "送料込み"
+        ],
+        "benefits": [
+          "混ぜて炊くだけ",
+          "産地が分かる"
+        ],
+        "hook": "雑穀米、いつも袋が小さくて途中で終わる。",
+        "body": "国産25種類の雑穀です。無添加で、熊本県産のもち麦が入っています。\n白米に混ぜて炊くだけ。送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "r4097dc932",
@@ -278,7 +298,7 @@
       "endTime": "",
       "listPrice": 2560,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "2,560円のくまもとラーメン6食分が1,280円。生麺のとんこつ、送料込み。",
       "tags": [
         "送料無料"
       ],
@@ -288,7 +308,25 @@
       "postedAt": "2026-09-03",
       "bumpedAt": "2026-09-03T11:22:06",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "家でラーメンを食べたい人",
+        "problem": "夜、急にとんこつが食べたくなる",
+        "use_case": "週末の昼、夜食",
+        "features": [
+          "生麺 6食セット",
+          "とんこつ",
+          "熊本",
+          "送料込み"
+        ],
+        "benefits": [
+          "まとめて置いておける"
+        ],
+        "hook": "夜中に急にとんこつが食べたくなる日、ある。",
+        "body": "熊本のとんこつラーメン、生麺で6食分です。\n一度に届くので、食べたい日にすぐ作れます。送料込み。",
+        "cta": "empathy"
+      }
     },
     {
       "id": "r03b46f609",
@@ -307,7 +345,7 @@
       "endTime": "",
       "listPrice": 2760,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "2,760円のあご入りだしパックが1,380円。国産、送料込み。",
       "tags": [
         "送料無料"
       ],
@@ -317,7 +355,26 @@
       "postedAt": "2026-09-03",
       "bumpedAt": "2026-09-03T11:22:06",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "problem",
+        "target": "出汁をとるのが面倒な人",
+        "problem": "出汁は取りたいが毎回はできない",
+        "use_case": "味噌汁・煮物・つゆ",
+        "features": [
+          "あご入りだしパック",
+          "国産",
+          "かつお節・昆布",
+          "減塩",
+          "送料込み"
+        ],
+        "benefits": [
+          "袋ごと煮出すだけ"
+        ],
+        "hook": "出汁を取ったほうがいいのは分かっている。毎回はできない。",
+        "body": "国産のあご入りだしパックです。袋ごと煮出すだけ。\nかつお節と昆布が入った減塩タイプ。送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "r8eaf9d31e",
@@ -711,7 +768,7 @@
       "endTime": "",
       "listPrice": 1900,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,900円のザセムのコンシーラーが1,000円。5種類から選べる。",
       "tags": [
         "送料無料",
         "訳あり",
@@ -723,7 +780,24 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T11:23:54",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "コンシーラーを試したい人",
+        "problem": "色が合わなくて使わないまま残る",
+        "use_case": "朝のベースメイク",
+        "features": [
+          "THE SAEM",
+          "5種類から選べる",
+          "正規品"
+        ],
+        "benefits": [
+          "色を選んで買える"
+        ],
+        "hook": "コンシーラー、色が合わないまま放置しているのが1本ある。",
+        "body": "ザセムのコンシーラーです。5種類から選べます。正規品。",
+        "cta": "experience"
+      }
     },
     {
       "id": "rd8159e85e",
@@ -1826,7 +1900,7 @@
       "endTime": "2026-09-11 23:59",
       "listPrice": 2580,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "2,580円のレギンスパンツが770円。SからXXXLまで6サイズ。",
       "tags": [
         "送料無料"
       ],
@@ -1836,7 +1910,25 @@
       "postedAt": "2026-09-01",
       "bumpedAt": "2026-09-01T16:34:13",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "家でも外でも履けるボトムスがほしい人",
+        "problem": "部屋着のまま出ると気まずい",
+        "use_case": "買い物・送り迎え",
+        "features": [
+          "レギンスパンツ",
+          "ストレッチ",
+          "S〜3XLの6サイズ"
+        ],
+        "benefits": [
+          "そのまま出られる",
+          "サイズの幅が広い"
+        ],
+        "hook": "部屋着のままコンビニに出て、知り合いに会う。",
+        "body": "ストレッチのきいたレギンスパンツです。SからXXXLまで6サイズ。",
+        "cta": "empathy"
+      }
     },
     {
       "id": "ra8d91264c",
@@ -1855,7 +1947,7 @@
       "endTime": "2026-09-11 23:59",
       "listPrice": 2580,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "2,580円のカラーレギンスが770円。ストレッチ、SからXXXLまで。",
       "tags": [
         "送料無料"
       ],
@@ -1865,7 +1957,24 @@
       "postedAt": "2026-09-01",
       "bumpedAt": "2026-09-01T16:34:13",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "compare",
+        "target": "色違いで揃えたい人",
+        "problem": "同じ形を色だけ変えて履きたい",
+        "use_case": "秋の普段着",
+        "features": [
+          "カラーパンツ",
+          "ストレッチ",
+          "S〜3XL"
+        ],
+        "benefits": [
+          "色で印象を変えられる"
+        ],
+        "hook": "気に入った形は、色だけ変えてもう1本ほしくなる。",
+        "body": "ストレッチのきいたカラーレギンスです。SからXXXLまで。",
+        "cta": "compare"
+      }
     },
     {
       "id": "r97eb34d64",
@@ -1884,7 +1993,7 @@
       "endTime": "2026-09-11 23:59",
       "listPrice": 3980,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "3,980円のドット柄ブラウスが796円。Vネックにフリル袖。",
       "tags": [
         "送料無料"
       ],
@@ -1894,7 +2003,26 @@
       "postedAt": "2026-09-01",
       "bumpedAt": "2026-09-01T16:34:13",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "きれいめの一枚がほしい人",
+        "problem": "手持ちが無地ばかりになる",
+        "use_case": "食事・ちょっとした外出",
+        "features": [
+          "ドット柄",
+          "Vネック",
+          "フリル袖",
+          "デシン素材",
+          "重ね着できる"
+        ],
+        "benefits": [
+          "柄が一枚あると組みやすい"
+        ],
+        "hook": "気づくと、クローゼットが無地だけになっている。",
+        "body": "デシン素材のドット柄ブラウスです。Vネックにフリル袖。\n重ね着にも使えます。",
+        "cta": "save"
+      }
     },
     {
       "id": "rb19876492",
@@ -1940,7 +2068,7 @@
       "endTime": "2026-09-11 09:59",
       "listPrice": 2380,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,380円のSwitch2用ジョイコン充電スタンドが990円。ケーブル不要。",
       "tags": [
         "送料無料"
       ],
@@ -1950,7 +2078,25 @@
       "postedAt": "2026-09-01",
       "bumpedAt": "2026-09-01T11:30:58",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "problem",
+        "target": "Switch2を使っている人",
+        "problem": "ジョイコンの充電に本体へ挿し直すのが面倒",
+        "use_case": "遊び終わったあと置くだけ",
+        "features": [
+          "Switch2対応",
+          "ジョイコン充電スタンド",
+          "ケーブル不要",
+          "ドック対応"
+        ],
+        "benefits": [
+          "置くだけで充電できる"
+        ],
+        "hook": "ジョイコンを充電するのに、いちいち本体へ挿し直している。",
+        "body": "Switch2のジョイコン用充電スタンドです。ケーブルは要りません。\n置くだけで充電できます。",
+        "cta": "experience"
+      }
     },
     {
       "id": "r644cfb152",
@@ -1969,7 +2115,7 @@
       "endTime": "2026-09-11 23:59",
       "listPrice": 6980,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "6,980円の半袖セットアップが1,396円。冷感素材の上下2点。",
       "tags": [
         "送料無料"
       ],
@@ -1979,7 +2125,25 @@
       "postedAt": "2026-09-01",
       "bumpedAt": "2026-09-01T16:34:13",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "上下を考えるのが面倒な人",
+        "problem": "朝、組み合わせを考える時間がない",
+        "use_case": "買い物・近所の外出",
+        "features": [
+          "半袖Tシャツとワイドパンツ",
+          "冷感素材",
+          "サマーニット",
+          "スリット入り"
+        ],
+        "benefits": [
+          "上下そろって届く"
+        ],
+        "hook": "朝、上下の組み合わせを考える時間がない。",
+        "body": "半袖のサマーニットとワイドパンツのセットです。冷感素材。\nパンツはスリット入り。",
+        "cta": "save"
+      }
     },
     {
       "id": "r36091d231",
@@ -1998,7 +2162,7 @@
       "endTime": "2026-09-11 23:59",
       "listPrice": 6980,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "6,980円のTシャツとガウチョパンツのセットが1,396円。冷感素材。",
       "tags": [
         "送料無料"
       ],
@@ -2008,7 +2172,25 @@
       "postedAt": "2026-09-01",
       "bumpedAt": "2026-09-01T16:34:13",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "relatable",
+        "target": "一枚で決まる服がほしい人",
+        "problem": "服はあるのに着るものがない",
+        "use_case": "夏から秋の普段着",
+        "features": [
+          "Tシャツとガウチョパンツ",
+          "冷感素材",
+          "セットアップ",
+          "スリット入り"
+        ],
+        "benefits": [
+          "上下そろって届く"
+        ],
+        "hook": "服は持っているのに、毎朝これといって着るものがない。",
+        "body": "冷感素材のTシャツとガウチョパンツのセットです。\nスリットが入っています。",
+        "cta": "empathy"
+      }
     },
     {
       "id": "rdf14a502e",
@@ -2027,7 +2209,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2980,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "2,980円のリポソームビタミンCが1,490円。30日分、日本製。",
       "tags": [
         "送料無料"
       ],
@@ -2037,7 +2219,27 @@
       "postedAt": "2026-09-01",
       "bumpedAt": "2026-09-01T16:32:44",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "compare",
+        "target": "ビタミンCを毎日とりたい人",
+        "problem": "サプリは途中でやめてしまう",
+        "use_case": "毎日1回",
+        "features": [
+          "ビタミンC 1000mg",
+          "リポソーム",
+          "30日分",
+          "ビタミンD・E配合",
+          "日本製",
+          "栄養機能食品"
+        ],
+        "benefits": [
+          "1袋で30日分"
+        ],
+        "hook": "サプリは、途中でやめてしまうと意味がないと毎回思う。",
+        "body": "ビタミンC 1000mgのリポソームタイプです。30日分。\nビタミンDとEも入っています。日本製の栄養機能食品。",
+        "cta": "save"
+      }
     },
     {
       "id": "rc23c39486",
@@ -2056,7 +2258,7 @@
       "endTime": "",
       "listPrice": 3480,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "3,480円の水着3点セットが1,980円。ホルダーネックでワイヤー入り。",
       "tags": [
         "送料無料"
       ],
@@ -2066,7 +2268,26 @@
       "postedAt": "2026-09-01",
       "bumpedAt": "2026-09-01T11:25:17",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "水着を買い替えたい人",
+        "problem": "上下だけだと、そのへんを歩くのに困る",
+        "use_case": "海・プール",
+        "features": [
+          "ビキニ・ワンピース・ショートパンツの3点",
+          "ホルダーネック",
+          "ワイヤー入り",
+          "花柄",
+          "S〜LL"
+        ],
+        "benefits": [
+          "3点そろっている"
+        ],
+        "hook": "水着は上下だけだと、そのへんを歩くのに困る。",
+        "body": "ビキニとワンピース、ショートパンツの3点セットです。\nホルダーネックでワイヤー入り。SからLLまで。",
+        "cta": "save"
+      }
     },
     {
       "id": "rbde6613d0",
@@ -2086,9 +2307,9 @@
       "endTime": "2026-09-04 09:59",
       "listPrice": 3790,
       "priceBasis": "title",
-      "caption": "3,790円のコクーンパンツが1,999円。速乾でUVカット、洗濯機で洗える。",
+      "caption": "3,790円のコクーンパンツが1,990円。速乾でUVカット、洗濯機で洗える。",
       "points": [
-        "3,790円から1,999円へ",
+        "3,790円から1,990円へ",
         "速乾・UVカット・洗濯機可",
         "レビュー4,903件・★4.28"
       ],
@@ -2188,7 +2409,7 @@
       "endTime": "2026-09-30 23:59",
       "listPrice": 1500,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,500円の讃岐生うどん9食分が598円。冷やしでも温かくでも、送料込み。",
       "tags": [
         "送料無料",
         "在庫処分"
@@ -4101,7 +4322,7 @@
       "endTime": "2026-09-04 17:59",
       "listPrice": 3580,
       "priceBasis": "title",
-      "caption": "3,580円の2WAYニットパンツが1,990円。ジョガーとワイドの2通り、3丈展開。",
+      "caption": "3,580円の2WAYニットパンツが1,999円。ジョガーとワイドの2通り、3丈展開。",
       "tags": [
         "送料無料"
       ],
@@ -5615,12 +5836,12 @@
       "endTime": "2026-09-03 23:59",
       "listPrice": null,
       "priceBasis": null,
-      "caption": "牛肉100%の無添加ハンバーグ6食分が3,380円。送料込み。",
+      "caption": "牛肉100%の無添加ハンバーグ6食分が3,200円。送料込み。",
       "tags": [
         "送料無料"
       ],
       "points": [
-        "150g×6食で3,380円",
+        "150g×6食で3,200円",
         "牛肉100%・無添加",
         "レビュー5,705件・★4.62"
       ],
