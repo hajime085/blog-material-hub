@@ -72,7 +72,8 @@
     "product:rc9a36d83a",
     "product:r28f079dd9",
     "product:rdd864712f",
-    "product:rdac42fc8f"
+    "product:rdac42fc8f",
+    "schedule:2026-W35-5"
   ],
   "log": [
     {
@@ -1052,6 +1053,20 @@
       "category": "kitchen",
       "logic_version": "marketing_v2",
       "link": "reply"
+    },
+    {
+      "key": "schedule:2026-W35-5",
+      "id": "18460939027185613",
+      "at": "2026-09-04 07:20",
+      "kind": "schedule",
+      "slot": 7,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
     }
   ]
 }
