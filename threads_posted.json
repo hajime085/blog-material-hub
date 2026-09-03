@@ -70,7 +70,8 @@
     "tip:30",
     "tip:28",
     "product:rc9a36d83a",
-    "product:r28f079dd9"
+    "product:r28f079dd9",
+    "product:rdd864712f"
   ],
   "log": [
     {
@@ -1020,6 +1021,20 @@
       "hook_type": "problem",
       "cta_type": "empathy",
       "category": "fashion",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:rdd864712f",
+      "id": "18129735208665590",
+      "at": "2026-09-03 23:20",
+      "kind": "product",
+      "slot": 23,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "problem",
+      "cta_type": "save",
+      "category": "food",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
