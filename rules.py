@@ -71,8 +71,12 @@ def rule_what_is_it(ctx):
     # 商品コードで突き合わせる。IDで引くと全件が「無い」判定になった。
     feat = load("featured.json", {}) or {}
     by_code = {p.get("itemCode"): p for p in ps if p.get("itemCode")}
+    # 棚のカードは楽天へ直接飛ぶので、それ自体に「どんな商品？」は無い。
+    # 見るべきは「棚に出していて、かつサイトにも商品ページがあるもの」。
+    # 2026-09-03: 棚にあるがproducts.jsonから落ちた1件を
+    #             「欠けている」と鳴らした。ページが無いものは対象外。
     bad = [x.get("itemCode") for x in (feat.get("items") or [])
-           if missing(by_code.get(x.get("itemCode"), {}))]
+           if x.get("itemCode") in by_code and missing(by_code[x["itemCode"]])]
     if bad:
         out.append("編集部の棚に「どんな商品？」が無い商品が %d件あります"
                    "（%s）。pitch.py --site で作ってください"

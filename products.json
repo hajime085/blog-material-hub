@@ -19,7 +19,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 1080,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,080円のMFI認証ライトニングケーブルが540円。長さ4種から。",
       "tags": [
         "送料無料"
       ],
@@ -29,7 +29,25 @@
       "postedAt": "2026-09-03",
       "bumpedAt": "2026-09-03T11:27:21",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "compare",
+        "target": "ケーブルの長さを選びたい人",
+        "problem": "長さが合わないと使いどころに困る",
+        "use_case": "寝室・車内・デスク",
+        "features": [
+          "MFI認証品",
+          "シリコン素材",
+          "急速充電対応",
+          "0.3m/1m/1.5m/2mから選べる"
+        ],
+        "benefits": [
+          "置く場所に合わせて選べる"
+        ],
+        "hook": "ケーブルは長さが合わないと、あるのに使わないものになる。",
+        "body": "MFI認証のライトニングケーブルです。シリコン素材で急速充電に対応。\n0.3mから2mまで選べます。",
+        "cta": "save"
+      }
     },
     {
       "id": "rb4a28eb5d",
@@ -48,7 +66,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 1280,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,280円の2m充電ケーブル3本セットが544円。Type-CとUSB-A。",
       "tags": [
         "送料無料"
       ],
@@ -58,7 +76,25 @@
       "postedAt": "2026-09-03",
       "bumpedAt": "2026-09-03T11:27:21",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "problem",
+        "target": "充電ケーブルが足りない人",
+        "problem": "部屋ごとに置きたいのに1本しかない",
+        "use_case": "自宅・職場・カバンの中",
+        "features": [
+          "2m×3本セット",
+          "Type-C to C / USB-A to C",
+          "iPhone対応",
+          "送料込み"
+        ],
+        "benefits": [
+          "置き場所を分けられる"
+        ],
+        "hook": "充電ケーブル、いつも自分がいない部屋にある。",
+        "body": "2mのケーブルが3本のセットです。Type-CとUSB-Aの両方。\niPhoneにも使えます。送料込み。",
+        "cta": "empathy"
+      }
     },
     {
       "id": "rf74a6f898",
@@ -77,7 +113,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 1290,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,290円のSwitch用ガラスフィルムが645円。有機ELとlite対応。",
       "tags": [
         "送料無料"
       ],
@@ -87,7 +123,25 @@
       "postedAt": "2026-09-03",
       "bumpedAt": "2026-09-03T11:30:59",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "problem",
+        "target": "Switchの画面を守りたい人",
+        "problem": "画面に傷が入ってから後悔する",
+        "use_case": "持ち運び・据え置き",
+        "features": [
+          "Switch 有機EL・lite対応",
+          "ガラスフィルム",
+          "ブルーライトカット",
+          "送料込み"
+        ],
+        "benefits": [
+          "買った直後に貼れる"
+        ],
+        "hook": "画面の傷は、入ってから貼っても遅い。",
+        "body": "Nintendo Switch用のガラスフィルムです。有機ELとliteに対応。\nブルーライトカットつき。送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "rc1b583414",
@@ -155,7 +209,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2160,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,160円の乾燥カットわかめ徳用が1,000円。無添加無着色、送料込み。",
       "tags": [
         "送料無料"
       ],
@@ -165,7 +219,27 @@
       "postedAt": "2026-09-03",
       "bumpedAt": "2026-09-03T11:22:06",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "汁物にもう一品足したい人",
+        "problem": "味噌汁の具がいつも同じになる",
+        "use_case": "味噌汁・サラダ・スープ",
+        "features": [
+          "九州唐津産",
+          "乾燥カットわかめ",
+          "徳用大袋",
+          "無添加",
+          "無着色",
+          "送料込み"
+        ],
+        "benefits": [
+          "袋から出してすぐ使える"
+        ],
+        "hook": "味噌汁の具、気づくとずっと同じ組み合わせでまわしている。",
+        "body": "九州唐津産の乾燥カットわかめです。無添加・無着色の徳用大袋。\n味噌汁にもサラダにも使えます。送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "rdac42fc8f",
@@ -184,7 +258,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 1780,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,780円のシリコン製シャンプーブラシが1,000円。",
       "tags": [
         "送料無料"
       ],
@@ -194,7 +268,26 @@
       "postedAt": "2026-09-03",
       "bumpedAt": "2026-09-03T07:23:14",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "problem",
+        "target": "シャンプーのやり方を見直したい人",
+        "problem": "指だとちゃんと洗えているか分からない",
+        "use_case": "毎日のシャンプー",
+        "features": [
+          "シリコン製",
+          "シャンプーブラシ",
+          "ケンザン型",
+          "頭皮用",
+          "1個"
+        ],
+        "benefits": [
+          "力の入れ具合が一定になる"
+        ],
+        "hook": "指で洗っていると、ちゃんと届いているのかよく分からない。",
+        "body": "シリコン製のシャンプーブラシです。ケンザンのような形をしています。",
+        "cta": "experience"
+      }
     },
     {
       "id": "ra3310b37a",
@@ -213,7 +306,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 1936,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,936円のシートマスク60枚が1,000円。日本製のオールインワン。",
       "tags": [
         "送料無料"
       ],
@@ -223,7 +316,26 @@
       "postedAt": "2026-09-03",
       "bumpedAt": "2026-09-03T11:23:54",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "毎日使いたい人",
+        "problem": "1枚あたりが高いと特別な日にしか使わない",
+        "use_case": "毎日のお手入れ",
+        "features": [
+          "60枚組（30枚×2）",
+          "日本製",
+          "ビタミンC誘導体",
+          "ナイアシンアミド",
+          "オールインワン"
+        ],
+        "benefits": [
+          "枚数があるので気兼ねなく使える"
+        ],
+        "hook": "シートマスク、高いと結局いい日にしか開けない。",
+        "body": "日本製のシートマスク60枚組です。30枚入りが2箱。\nビタミンC誘導体とナイアシンアミド配合のオールインワン。",
+        "cta": "save"
+      }
     },
     {
       "id": "r3925e51dd",
@@ -242,7 +354,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2490,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,490円のSwitchケースが1,240円。名前やイニシャルを入れられる。",
       "tags": [],
       "points": [],
       "description": "",
@@ -250,7 +362,25 @@
       "postedAt": "2026-09-03",
       "bumpedAt": "2026-09-03T11:30:59",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "人と同じものを避けたい人",
+        "problem": "ケースは似たものばかりになる",
+        "use_case": "持ち運び",
+        "features": [
+          "Nintendo Switch用ケース",
+          "名入れ・イニシャル対応",
+          "ジョイコンカバー",
+          "傷防止"
+        ],
+        "benefits": [
+          "名前を入れて選べる"
+        ],
+        "hook": "ケースを買うと、たいてい誰かと同じものになる。",
+        "body": "Nintendo Switch用のケースです。名前やイニシャルを入れられます。\nジョイコン部分もカバーします。",
+        "cta": "save"
+      }
     },
     {
       "id": "re6dca7069",
@@ -269,7 +399,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2500,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,500円の粉末抹茶100g×2袋が1,250円。鹿児島県産、無糖無添加。",
       "tags": [
         "送料無料"
       ],
@@ -279,7 +409,25 @@
       "postedAt": "2026-09-03",
       "bumpedAt": "2026-09-03T11:22:06",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "家でお菓子や飲みものを作る人",
+        "problem": "抹茶は少量だとすぐなくなる",
+        "use_case": "抹茶ラテ・お菓子作り",
+        "features": [
+          "粉末抹茶 100g×2袋",
+          "鹿児島県産",
+          "無糖",
+          "無添加"
+        ],
+        "benefits": [
+          "まとめて使える量がある"
+        ],
+        "hook": "抹茶を使い始めると、少量の缶ではまるで足りない。",
+        "body": "鹿児島県産の粉末抹茶です。無糖・無添加で100gが2袋。\nラテにもお菓子作りにも使えます。",
+        "cta": "save"
+      }
     },
     {
       "id": "r8550b30d9",
@@ -393,7 +541,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2980,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,980円の日本製ガーゼおくるみが1,490円。コットンのスワドル型。",
       "tags": [],
       "points": [],
       "description": "",
@@ -401,7 +549,26 @@
       "postedAt": "2026-09-03",
       "bumpedAt": "2026-09-03T11:29:48",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "出産祝いを探している人",
+        "problem": "何を贈ればいいのか毎回悩む",
+        "use_case": "出産祝い・ギフト",
+        "features": [
+          "日本製",
+          "ガーゼのおくるみ",
+          "スワドル",
+          "コットン",
+          "男の子・女の子"
+        ],
+        "benefits": [
+          "贈り物として渡せる形"
+        ],
+        "hook": "出産祝い、何を選べばいいのか毎回ふりだしに戻る。",
+        "body": "日本製のガーゼのおくるみです。コットン素材のスワドル型。\nギフトにも使えます。",
+        "cta": "save"
+      }
     },
     {
       "id": "racddf60d5",
@@ -420,7 +587,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 3650,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "3,650円の青汁30日分が1,825円。北海道産、乳酸菌100億個。",
       "tags": [
         "送料無料"
       ],
@@ -430,7 +597,27 @@
       "postedAt": "2026-09-03",
       "bumpedAt": "2026-09-03T11:23:54",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "野菜が足りない自覚がある人",
+        "problem": "青汁は続くかどうかが問題",
+        "use_case": "朝の1杯",
+        "features": [
+          "大麦若葉750mg",
+          "クマザサ300mg",
+          "乳酸菌100億個",
+          "抹茶入り",
+          "北海道産",
+          "30日分"
+        ],
+        "benefits": [
+          "抹茶が入っていて飲みやすい"
+        ],
+        "hook": "野菜が足りていないのは分かっている。問題はそこじゃない。",
+        "body": "北海道産の大麦若葉とクマザサの青汁です。乳酸菌100億個入り。\n抹茶が入っていて1箱30日分。",
+        "cta": "empathy"
+      }
     },
     {
       "id": "r08de2ee6c",
@@ -449,7 +636,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 5400,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "5,400円の機能性表示食品が2,700円。30日分、配合量が明記。",
       "tags": [
         "送料無料"
       ],
@@ -459,7 +646,28 @@
       "postedAt": "2026-09-03",
       "bumpedAt": "2026-09-03T11:23:54",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "compare",
+        "target": "成分の量を確かめて選びたい人",
+        "problem": "配合量が書いていない商品が多い",
+        "use_case": "毎日",
+        "features": [
+          "機能性表示食品",
+          "プロテオグリカン16mg",
+          "非変性II型コラーゲン16mg",
+          "乳酸菌",
+          "カルシウム",
+          "ビタミンD",
+          "30日分"
+        ],
+        "benefits": [
+          "区分と量が明記されている"
+        ],
+        "hook": "成分名は大きく書いてあるのに、量はどこにも書いていないことが多い。",
+        "body": "機能性表示食品です。プロテオグリカンと非変性II型コラーゲンを各16mg。\n乳酸菌とカルシウム、ビタミンDも入って30日分。",
+        "cta": "compare"
+      }
     },
     {
       "id": "r1890b4bc0",
@@ -478,7 +686,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 1000,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,000円のプラセンタサプリが500円。50倍濃縮、約1ヶ月分。",
       "tags": [
         "送料無料"
       ],
@@ -488,7 +696,27 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T11:23:54",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "まず試してみたい人",
+        "problem": "高いものから始めると続かない",
+        "use_case": "毎日",
+        "features": [
+          "プラセンタ 50倍濃縮",
+          "約1ヶ月分",
+          "アルガンオイル",
+          "大豆レシチン",
+          "フィッシュコラーゲン",
+          "送料込み"
+        ],
+        "benefits": [
+          "1ヶ月分ずつ買える"
+        ],
+        "hook": "高いものから始めると、たいてい1袋で終わる。",
+        "body": "50倍濃縮のプラセンタサプリメントです。約1ヶ月分。\nアルガンオイルとフィッシュコラーゲン入り。送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "r0b880f618",
@@ -507,7 +735,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 1780,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "1,780円のカップ付きキャミソールが534円。ノンワイヤー。",
       "tags": [
         "送料無料"
       ],
@@ -517,7 +745,26 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T16:25:03",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "problem",
+        "target": "インナーを減らしたい人",
+        "problem": "ブラとキャミを重ねると枚数が増える",
+        "use_case": "部屋着・重ね着",
+        "features": [
+          "カップ付き",
+          "ノンワイヤー",
+          "アンダーゴム",
+          "Uネック",
+          "サテン風生地"
+        ],
+        "benefits": [
+          "1枚で済む"
+        ],
+        "hook": "ブラとキャミ、2枚着るとそのぶん暑い。",
+        "body": "カップが付いたキャミソールです。ノンワイヤーでアンダーはゴム。\nUネックのサテン風生地。",
+        "cta": "save"
+      }
     },
     {
       "id": "r69a7992a4",
@@ -536,7 +783,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 1100,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,100円の綿100%クロップドパンツが550円。7分丈、送料込み。",
       "tags": [
         "送料無料"
       ],
@@ -546,7 +793,26 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T11:25:16",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "夏から秋に履けるパンツを探している人",
+        "problem": "長いと暑い、短いと落ち着かない",
+        "use_case": "普段着・作業",
+        "features": [
+          "7分丈",
+          "綿100%",
+          "難燃",
+          "クロップドパンツ",
+          "送料込み"
+        ],
+        "benefits": [
+          "丈が中間で使いやすい"
+        ],
+        "hook": "長いと暑いし、短いと落ち着かない。",
+        "body": "綿100%の7分丈クロップドパンツです。難燃の生地。\n送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "rcc5a62526",
@@ -565,7 +831,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 1800,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,800円のイヌリン配合サプリが800円。約1ヶ月分、送料込み。",
       "tags": [
         "送料無料"
       ],
@@ -575,7 +841,26 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T11:23:54",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "食物繊維をとりたい人",
+        "problem": "食事だけだと足りない気がする",
+        "use_case": "毎日",
+        "features": [
+          "イヌリン配合",
+          "コレウスフォルスコリ",
+          "約1ヶ月分",
+          "植物性",
+          "送料込み"
+        ],
+        "benefits": [
+          "1ヶ月ぶんずつ買える"
+        ],
+        "hook": "食物繊維、意識して食べているつもりでも足りている気がしない。",
+        "body": "イヌリンを配合した植物性のサプリメントです。約1ヶ月分。\nコレウスフォルスコリ入り。送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "r38aefbf21",
@@ -594,7 +879,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2780,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "2,780円のラッシュガード上下が834円。UVカット率99%以上。",
       "tags": [
         "送料無料"
       ],
@@ -604,7 +889,26 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T16:27:29",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "problem",
+        "target": "日差しの下で長くいる人",
+        "problem": "水着だけだと日差しがつらい",
+        "use_case": "海・川・プールの付き添い",
+        "features": [
+          "UVカット率99%以上",
+          "上下2点セット",
+          "水陸両用",
+          "薄手",
+          "クロップド丈"
+        ],
+        "benefits": [
+          "着たまま水に入れる"
+        ],
+        "hook": "日差しの下に何時間もいるのに、水着だけで過ごすことになる。",
+        "body": "UVカット率99%以上のラッシュガード上下セットです。\n水陸両用の薄手で、着たまま水に入れます。",
+        "cta": "save"
+      }
     },
     {
       "id": "rf3cd56567",
@@ -623,7 +927,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 1485,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,485円のジェイソンマークのクリーニングキットが891円。旧製品。",
       "points": [],
       "description": "",
       "tags": [
@@ -633,7 +937,25 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T00:00:00",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "problem",
+        "target": "スニーカーを長く履きたい人",
+        "problem": "汚れたら諦めてそのまま履いている",
+        "use_case": "スニーカーの手入れ",
+        "features": [
+          "ジェイソンマーク",
+          "クリーナーとブラシのキット",
+          "旧製品",
+          "いろいろな素材に使える"
+        ],
+        "benefits": [
+          "道具がひと通りそろう"
+        ],
+        "hook": "スニーカーが汚れたら、諦めてそのまま履き続けている。",
+        "body": "ジェイソンマークのクリーニングキットです。クリーナーとブラシが入っています。\nいろいろな素材に使えます。旧製品。",
+        "cta": "experience"
+      }
     },
     {
       "id": "r4ce6a0e47",
@@ -652,7 +974,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 3180,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "3,180円のオフショルビキニ2点セットが954円。ショーツは2タイプ。",
       "tags": [
         "送料無料"
       ],
@@ -662,7 +984,26 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T16:25:03",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "ビキニを買い替えたい人",
+        "problem": "二の腕まわりが落ち着かない",
+        "use_case": "海・プール",
+        "features": [
+          "オフショルダー",
+          "2点セット",
+          "フリル",
+          "ショーツ2タイプ",
+          "ワイヤー入り"
+        ],
+        "benefits": [
+          "ショーツの形を選べる"
+        ],
+        "hook": "ビキニ、肩まわりが落ち着かなくてずっと直している。",
+        "body": "オフショルダーのビキニ2点セットです。ワイヤー入りで、フリルつき。\nショーツは2タイプから選べます。",
+        "cta": "save"
+      }
     },
     {
       "id": "r328f7d9b9",
@@ -681,7 +1022,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 4610,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "4,610円のブリタ マクストラ プロが979円。新旧型対応、3個から。",
       "tags": [
         "送料無料"
       ],
@@ -691,7 +1032,25 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T11:22:35",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "problem",
+        "target": "ブリタを使っている人",
+        "problem": "カートリッジの替えを買い忘れる",
+        "use_case": "ブリタの浄水ポットに",
+        "features": [
+          "マクストラ プロ",
+          "新旧型対応",
+          "3個・6個・9個セット",
+          "PFAS除去"
+        ],
+        "benefits": [
+          "まとめて買っておける"
+        ],
+        "hook": "ブリタのカートリッジ、切らしてから思い出す。",
+        "body": "マクストラ プロの交換カートリッジです。新旧型に対応。\n3個から9個まで選べます。",
+        "cta": "save"
+      }
     },
     {
       "id": "ra68cdd492",
@@ -710,7 +1069,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2000,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,000円のエラグ酸サプリ90日分が1,000円。送料込み。",
       "tags": [
         "送料無料"
       ],
@@ -720,7 +1079,25 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T11:23:54",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "まとめ買いしたい人",
+        "problem": "1ヶ月分だとすぐ買い足しになる",
+        "use_case": "毎日",
+        "features": [
+          "エラグ酸3mg",
+          "3ヶ月セット 90日分",
+          "カルニチン配合",
+          "送料込み"
+        ],
+        "benefits": [
+          "買い足しの回数が少ない"
+        ],
+        "hook": "サプリは1ヶ月分で買うと、気づけばまた注文している。",
+        "body": "エラグ酸3mgを配合したサプリメントです。90日分の3ヶ月セット。\nカルニチンも入っています。送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "r3f46403d6",
@@ -739,7 +1116,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2000,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,000円の粉末スムージー100gが1,000円。108種類の生酵素入り、3味。",
       "tags": [
         "送料無料"
       ],
@@ -749,7 +1126,26 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T11:23:54",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "朝に時間をかけたくない人",
+        "problem": "朝食を作る時間がない",
+        "use_case": "朝の1杯",
+        "features": [
+          "粉末スムージー 100g",
+          "108種類の生酵素",
+          "食物繊維",
+          "乳酸菌",
+          "マンゴー・アサイー・ベリー＆ヨーグルト"
+        ],
+        "benefits": [
+          "溶かすだけで用意できる"
+        ],
+        "hook": "朝、作る時間はないのに何か口には入れたい。",
+        "body": "溶かして飲む粉末スムージーです。108種類の生酵素と食物繊維、乳酸菌入り。\n3つの味から選べます。",
+        "cta": "save"
+      }
     },
     {
       "id": "r5750ebe74",
@@ -816,7 +1212,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2000,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,000円のロングカーディガンが1,000円。ストールとフード付き。",
       "tags": [],
       "points": [],
       "description": "",
@@ -824,7 +1220,26 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T16:25:03",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "羽織りものを探している人",
+        "problem": "上着だと大げさ、シャツだと寒い",
+        "use_case": "秋の外出",
+        "features": [
+          "ロングカーディガン",
+          "ストール&フード付き",
+          "黒・茶",
+          "長袖",
+          "大きいサイズあり"
+        ],
+        "benefits": [
+          "首まわりだけ足せる"
+        ],
+        "hook": "上着を着るほどじゃないけど、シャツ一枚だと寒い時期がある。",
+        "body": "ストールとフードが付いたロングカーディガンです。\n黒と茶があり、大きいサイズもあります。",
+        "cta": "save"
+      }
     },
     {
       "id": "raf2707125",
@@ -843,7 +1258,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 4950,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "4,950円の水陸両用ヨガレギンスが1,000円。速乾の花柄。",
       "tags": [
         "送料無料"
       ],
@@ -853,7 +1268,25 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T16:27:29",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "ヨガや水辺で使えるボトムスがほしい人",
+        "problem": "ヨガ用と水着用で別に買うことになる",
+        "use_case": "ホットヨガ・プール・フィットネス",
+        "features": [
+          "水陸両用",
+          "花柄",
+          "速乾",
+          "ヨガレギンス"
+        ],
+        "benefits": [
+          "1本で両方に使える"
+        ],
+        "hook": "ヨガ用と水辺用で、同じような1本を2回買っている。",
+        "body": "水陸両用のヨガレギンスです。速乾で、花柄。\nホットヨガにもプールにも使えます。",
+        "cta": "save"
+      }
     },
     {
       "id": "rc73f70ca2",
@@ -872,7 +1305,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2178,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "2,178円の日本製2重ガーゼおくるみが1,080円。約100×100cm。",
       "tags": [
         "送料無料"
       ],
@@ -882,7 +1315,25 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T16:29:26",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "compare",
+        "target": "大きめのおくるみがほしい人",
+        "problem": "小さいとすぐ使わなくなる",
+        "use_case": "おくるみ・ケット",
+        "features": [
+          "日本製",
+          "2重ガーゼ",
+          "約100×100cm",
+          "コットン"
+        ],
+        "benefits": [
+          "大きいぶん長く使える"
+        ],
+        "hook": "おくるみ、小さいとあっという間に出番がなくなる。",
+        "body": "日本製の2重ガーゼのおくるみです。約100×100cm。\nコットンでできています。",
+        "cta": "save"
+      }
     },
     {
       "id": "rbdaf5694e",
@@ -901,7 +1352,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 1995,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,995円のジップアップパーカーが1,097円。無地と迷彩、男女兼用。",
       "points": [],
       "description": "",
       "tags": [],
@@ -909,7 +1360,26 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T00:00:00",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "1枚羽織るものがほしい人",
+        "problem": "朝晩だけ寒い時期に着るものがない",
+        "use_case": "通年の普段着",
+        "features": [
+          "ジップアップパーカー",
+          "無地・迷彩・サイドライン",
+          "長袖",
+          "男女兼用",
+          "大きいサイズあり"
+        ],
+        "benefits": [
+          "前を開けて温度を調整できる"
+        ],
+        "hook": "朝晩だけ寒い時期、着るものがいちばん決まらない。",
+        "body": "ジップアップのパーカーです。無地と迷彩、サイドライン入りがあります。\n男女兼用。",
+        "cta": "save"
+      }
     },
     {
       "id": "raf00dd26d",
@@ -928,7 +1398,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 3780,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "3,780円の水着3点セットが1,134円。ラッシュガードと水泳帽子つき。",
       "tags": [
         "送料無料"
       ],
@@ -938,7 +1408,25 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T16:27:29",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "必要なものを一度でそろえたい人",
+        "problem": "水着を買っても帽子やラッシュガードが足りない",
+        "use_case": "プール・スイミング",
+        "features": [
+          "3点上下セット",
+          "半袖ラッシュガード",
+          "水泳帽子つき",
+          "LL・3Lあり"
+        ],
+        "benefits": [
+          "これだけで行ける"
+        ],
+        "hook": "水着を買ったのに、帽子とラッシュガードが足りないと気づく。",
+        "body": "ラッシュガードと水泳帽子までついた3点セットです。\nLLや3Lもあります。",
+        "cta": "save"
+      }
     },
     {
       "id": "r532257289",
@@ -957,7 +1445,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2300,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,300円のブレンドコーヒーが1,150円。5種から選べる自家焙煎。",
       "tags": [
         "送料無料"
       ],
@@ -967,7 +1455,26 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T11:22:08",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "毎日コーヒーを飲む人",
+        "problem": "少量ずつ買うと単価が上がる",
+        "use_case": "毎朝の1杯",
+        "features": [
+          "ブレンドコーヒー豆",
+          "200g / 1kg",
+          "5種類から選べる",
+          "自家焙煎",
+          "豆・粉が選べる"
+        ],
+        "benefits": [
+          "飲む量に合わせて選べる"
+        ],
+        "hook": "毎日飲むものは、少量ずつ買うと結局高くつく。",
+        "body": "自家焙煎のブレンドコーヒーです。5種類から選べます。\n200gと1kg、豆と粉が選べます。",
+        "cta": "save"
+      }
     },
     {
       "id": "rf58e6a8c3",
@@ -986,7 +1493,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2380,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "2,380円のローズサプリ360粒が1,190円。イヌリン配合。",
       "tags": [
         "送料無料"
       ],
@@ -996,7 +1503,25 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T16:23:45",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "大容量で試したい人",
+        "problem": "少量だと続く前になくなる",
+        "use_case": "毎日",
+        "features": [
+          "360粒",
+          "イヌリン",
+          "水溶性食物繊維",
+          "ローズ"
+        ],
+        "benefits": [
+          "量がある"
+        ],
+        "hook": "サプリは、なくなるのが早いと結局そこで終わる。",
+        "body": "360粒入りのローズのサプリメントです。\n水溶性食物繊維のイヌリンが入っています。",
+        "cta": "save"
+      }
     },
     {
       "id": "rb0f238890",
@@ -1015,7 +1540,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 3980,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "3,980円の無地ワンピース水着が1,194円。大きいサイズあり。",
       "tags": [
         "送料無料"
       ],
@@ -1025,7 +1550,25 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T16:25:03",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "compare",
+        "target": "柄物より無地を選びたい人",
+        "problem": "水着は柄が派手なものばかり",
+        "use_case": "海・プール",
+        "features": [
+          "ワンピース型",
+          "無地",
+          "バックシャン",
+          "大きいサイズあり"
+        ],
+        "benefits": [
+          "柄で悩まなくていい"
+        ],
+        "hook": "水着売り場、なぜか柄物ばかりで無地が見つからない。",
+        "body": "無地のワンピース水着です。背中側に切り替えがあります。\n大きいサイズもあります。",
+        "cta": "compare"
+      }
     },
     {
       "id": "r989f74d15",
@@ -1044,7 +1587,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 3980,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "3,980円のフィットネス水着が1,194円。半袖セパレート。",
       "tags": [
         "送料無料"
       ],
@@ -1054,7 +1597,25 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T16:27:29",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "泳ぐために水着を買う人",
+        "problem": "見た目重視の水着だと動きにくい",
+        "use_case": "フィットネス・トレーニング",
+        "features": [
+          "セパレート",
+          "半袖",
+          "ボタニカル柄",
+          "大きいサイズあり"
+        ],
+        "benefits": [
+          "動く前提の形"
+        ],
+        "hook": "泳ぐために買いたいのに、出てくるのは見せるための水着ばかり。",
+        "body": "セパレートのフィットネス水着です。半袖のボタニカル柄。\n大きいサイズもあります。",
+        "cta": "save"
+      }
     },
     {
       "id": "r253fbb57e",
@@ -1073,7 +1634,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2480,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,480円のSwitchケースが1,240円。水彩柄、有機ELモデル対応。",
       "tags": [
         "送料無料"
       ],
@@ -1083,7 +1644,25 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T16:30:35",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "Switchを持ち歩く人",
+        "problem": "裸で持ち歩くと傷が気になる",
+        "use_case": "持ち運び",
+        "features": [
+          "Switch用ケース",
+          "水彩グラデーション",
+          "有機ELモデル対応",
+          "ジョイコン部分もカバー"
+        ],
+        "benefits": [
+          "本体ごと包める"
+        ],
+        "hook": "Switch、そのままカバンに入れて毎回ひやっとしている。",
+        "body": "Switch用のケースです。水彩のグラデーション柄。\n無印と有機ELモデルに対応しています。",
+        "cta": "save"
+      }
     },
     {
       "id": "r230be61b3",
@@ -1102,7 +1681,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2480,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "2,480円のマカ20倍濃縮サプリが1,240円。30日分60粒、日本製。",
       "tags": [
         "送料無料"
       ],
@@ -1112,7 +1691,27 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T11:23:54",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "compare",
+        "target": "配合量で比べたい人",
+        "problem": "何がどれだけ入っているのか読み取りにくい",
+        "use_case": "毎日2粒",
+        "features": [
+          "マカ126000mg 20倍濃縮",
+          "亜鉛",
+          "シトルリン",
+          "アルギニン",
+          "30日分60粒",
+          "日本製 GMP認定工場"
+        ],
+        "benefits": [
+          "中身が数字で書いてある"
+        ],
+        "hook": "サプリの箱、成分名は並んでいても量が読み取れないことが多い。",
+        "body": "マカを20倍に濃縮したサプリメントです。亜鉛とシトルリン、アルギニン入り。\n30日分60粒、日本製。",
+        "cta": "compare"
+      }
     },
     {
       "id": "r58b64002e",
@@ -1131,7 +1730,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2600,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,600円のフレーバーティーが1,300円。国産無添加、2袋選べる。",
       "tags": [
         "送料無料"
       ],
@@ -1141,7 +1740,26 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T11:22:08",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "お茶の種類を変えてみたい人",
+        "problem": "いつも同じ茶葉ばかり買う",
+        "use_case": "食後・休憩",
+        "features": [
+          "フレーバーティー 選べる2袋",
+          "ティーバッグ",
+          "国産",
+          "無添加",
+          "ほうじ茶・ミント・レモングラス・ゆず"
+        ],
+        "benefits": [
+          "2種類を選んで頼める"
+        ],
+        "hook": "お茶、気づくと10年同じものを買っている。",
+        "body": "日本茶をベースにしたフレーバーティーです。国産で無添加のティーバッグ。\nほうじ茶やミント、ゆずなどから2袋選べます。",
+        "cta": "save"
+      }
     },
     {
       "id": "r080276d93",
@@ -1160,7 +1778,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 4380,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "4,380円のオールインワン水着が1,314円。ワイヤー入りの花柄。",
       "tags": [
         "送料無料"
       ],
@@ -1170,7 +1788,26 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T16:25:03",
       "lastSeen": "2026-09-02",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "problem",
+        "target": "1枚で着られる水着を探している人",
+        "problem": "上下に分かれていると気を使う",
+        "use_case": "海・プール・付き添い",
+        "features": [
+          "ワンピース型",
+          "オールインワン",
+          "花柄",
+          "ワイヤー入り",
+          "裾ペプラム"
+        ],
+        "benefits": [
+          "1枚で完結する"
+        ],
+        "hook": "水着、上下に分かれているとずっと気を使うことになる。",
+        "body": "オールインワンのワンピース水着です。ワイヤー入りで、裾はペプラム。\n花柄と黒があります。",
+        "cta": "save"
+      }
     },
     {
       "id": "rd43a1f2c9",
@@ -1189,7 +1826,7 @@
       "endTime": "2026-09-05 23:59",
       "listPrice": 2860,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,860円の長袖ポロシャツが1,430円。鹿の子素材、Sから4Lまで。",
       "tags": [],
       "points": [],
       "description": "",
@@ -1197,7 +1834,27 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T11:25:16",
       "lastSeen": "2026-09-02",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "仕事着を探している人",
+        "problem": "制服にも普段着にも使える形が少ない",
+        "use_case": "仕事・普段着",
+        "features": [
+          "長袖ポロシャツ",
+          "鹿の子",
+          "吸汗速乾",
+          "UVカット",
+          "形態安定",
+          "S〜4L"
+        ],
+        "benefits": [
+          "場面を選ばず着られる"
+        ],
+        "hook": "仕事にも普段にも着られる一枚、探すと意外とない。",
+        "body": "鹿の子素材の長袖ポロシャツです。吸汗速乾でUVカット。\nSから4Lまであります。",
+        "cta": "save"
+      }
     },
     {
       "id": "r32c05e926",
@@ -1216,7 +1873,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2894,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "2,894円のワイルドビルベリーサプリが1,447円。約3ヶ月分。",
       "tags": [
         "送料無料"
       ],
@@ -1226,7 +1883,25 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T16:23:45",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "長く続けたい人",
+        "problem": "1ヶ月分だとすぐ買い足しになる",
+        "use_case": "毎日1粒",
+        "features": [
+          "ワイルドビルベリー",
+          "ルテイン",
+          "約3ヶ月分",
+          "クランベリー・メグスリノキエキス"
+        ],
+        "benefits": [
+          "買い足しの回数が少ない"
+        ],
+        "hook": "サプリを1ヶ月分で買うと、気づけばまた注文している。",
+        "body": "ワイルドビルベリーとルテインのサプリメントです。約3ヶ月分。\nクランベリーやメグスリノキのエキスも入っています。",
+        "cta": "save"
+      }
     },
     {
       "id": "r02346b614",
@@ -1245,7 +1920,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2970,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "2,970円のNMN4800mgが1,485円。30日分、成分量分析済の国内製造。",
       "tags": [
         "送料無料"
       ],
@@ -1255,7 +1930,26 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T11:23:54",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "compare",
+        "target": "NMNを試してみたい人",
+        "problem": "配合量も純度も表記がまちまち",
+        "use_case": "毎日1回",
+        "features": [
+          "NMN 4800mg",
+          "1袋30日分",
+          "高純度100%",
+          "成分量分析済",
+          "国内製造"
+        ],
+        "benefits": [
+          "分析済みの数字が出ている"
+        ],
+        "hook": "NMN、値段の幅が広すぎて何を基準にすればいいのか分からない。",
+        "body": "1袋30日分でNMN4800mgです。高純度100%で成分量は分析済み。\n国内製造。",
+        "cta": "compare"
+      }
     },
     {
       "id": "rd305591d7",
@@ -1274,7 +1968,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2980,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "2,980円の医薬部外品クリームが1,490円。20g、ヒト型セラミド配合。",
       "tags": [
         "送料無料"
       ],
@@ -1284,7 +1978,25 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T11:23:54",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "クリームを選び直したい人",
+        "problem": "種類が多くて何が違うのか分からない",
+        "use_case": "朝と夜のお手入れ",
+        "features": [
+          "医薬部外品",
+          "20g",
+          "ヒト型セラミド配合",
+          "無添加"
+        ],
+        "benefits": [
+          "区分がはっきりしている"
+        ],
+        "hook": "クリーム、棚に並びすぎていて違いが分からない。",
+        "body": "医薬部外品の薬用クリームです。20g入りで、ヒト型セラミド配合。",
+        "cta": "save"
+      }
     },
     {
       "id": "r98464856b",
@@ -1303,7 +2015,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2980,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "2,980円のルテイン105mgサプリが1,490円。30日分の栄養機能食品。",
       "tags": [
         "送料無料"
       ],
@@ -1313,7 +2025,27 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T11:23:54",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "compare",
+        "target": "ルテインを選んでいる人",
+        "problem": "配合量の表記がばらばらで比べにくい",
+        "use_case": "毎日1粒",
+        "features": [
+          "ルテイン105mg",
+          "ゼアキサンチン",
+          "ビルベリー",
+          "30日分",
+          "栄養機能食品",
+          "製薬会社共同開発"
+        ],
+        "benefits": [
+          "数字で比べられる"
+        ],
+        "hook": "ルテインのサプリ、配合量の書き方がばらばらで比べにくい。",
+        "body": "ルテイン105mgにゼアキサンチンとビルベリーを合わせた30日分です。\n栄養機能食品。",
+        "cta": "compare"
+      }
     },
     {
       "id": "r460f4734a",
@@ -1332,7 +2064,7 @@
       "endTime": "2026-09-05 23:59",
       "listPrice": 2980,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,980円のプリーツパンツが1,490円。自分で切れる裾上げ不要タイプ。",
       "tags": [],
       "points": [],
       "description": "",
@@ -1340,7 +2072,26 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T11:25:16",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "problem",
+        "target": "裾上げが面倒な人",
+        "problem": "買ったあと直しに出すのが手間",
+        "use_case": "通年の普段着",
+        "features": [
+          "プリーツパンツ",
+          "セルフカットで裾上げ不要",
+          "接触冷感",
+          "ウエストゴム",
+          "フリーサイズ M-L"
+        ],
+        "benefits": [
+          "自分で切って長さを決められる"
+        ],
+        "hook": "パンツを買っても、裾上げに出すまでが遠い。",
+        "body": "裾を自分で切って長さを決められるプリーツパンツです。\n接触冷感でウエストはゴム。",
+        "cta": "save"
+      }
     },
     {
       "id": "r563ad3c1c",
@@ -1359,7 +2110,7 @@
       "endTime": "2026-09-05 23:59",
       "listPrice": 2980,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,980円の長袖ポロシャツが1,490円。吸汗速乾、Mから4Lまで。",
       "points": [],
       "description": "",
       "tags": [],
@@ -1367,7 +2118,27 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T00:00:00",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "仕事でも私服でも着られる一枚がほしい人",
+        "problem": "シャツだとかたい、Tシャツだとラフすぎる",
+        "use_case": "仕事・ゴルフ・普段着",
+        "features": [
+          "長袖ポロシャツ",
+          "吸汗速乾",
+          "UVカット",
+          "形態安定",
+          "胸ポケット",
+          "M〜4L"
+        ],
+        "benefits": [
+          "場面をまたいで着られる"
+        ],
+        "hook": "シャツだとかたいし、Tシャツだとラフすぎる日がある。",
+        "body": "長袖のポロシャツです。吸汗速乾でUVカット、形態安定。\nMから4Lまであります。",
+        "cta": "save"
+      }
     },
     {
       "id": "rd33447219",
@@ -1386,7 +2157,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2980,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,980円のキーボードとマウスのセットが1,490円。有線の日本語配列。",
       "tags": [
         "送料無料"
       ],
@@ -1396,7 +2167,27 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T16:27:03",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "パソコンまわりを一度に揃えたい人",
+        "problem": "キーボードとマウスを別々に選ぶのが面倒",
+        "use_case": "在宅・ゲーム",
+        "features": [
+          "キーボードとマウスのセット",
+          "有線",
+          "日本語JIS配列",
+          "テンキー付き",
+          "LEDバックライト",
+          "リストレスト付"
+        ],
+        "benefits": [
+          "つないですぐ使える"
+        ],
+        "hook": "キーボードとマウス、別々に選び始めると日が暮れる。",
+        "body": "有線のキーボードとマウスのセットです。日本語配列でテンキー付き。\nリストレストとLEDライトが付いています。",
+        "cta": "save"
+      }
     },
     {
       "id": "r0effb07e3",
@@ -1415,7 +2206,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2980,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,980円の傘型サンシェードが1,490円。10本骨、収納ポーチ付き。",
       "tags": [
         "送料無料"
       ],
@@ -1425,7 +2216,27 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T16:31:27",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "problem",
+        "target": "夏に車を停める人",
+        "problem": "戻るとハンドルが熱くて触れない",
+        "use_case": "駐車中のフロントガラス",
+        "features": [
+          "傘型サンシェード",
+          "10本骨",
+          "UVカット",
+          "遮熱",
+          "収納ポーチ付き",
+          "軽自動車〜ミニバン"
+        ],
+        "benefits": [
+          "畳んで袋に入る"
+        ],
+        "hook": "車に戻ると、ハンドルが熱くて握れない。",
+        "body": "傘のように開くサンシェードです。10本骨で、収納ポーチ付き。\n軽自動車からミニバンまで。",
+        "cta": "empathy"
+      }
     },
     {
       "id": "r81238d1b9",
@@ -1444,7 +2255,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2980,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,980円の傘式サンシェードが1,490円。傘と同じように畳める。",
       "tags": [
         "送料無料"
       ],
@@ -1454,7 +2265,26 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T21:31:30",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "折りたたむ手間を減らしたい人",
+        "problem": "蛇腹のシェードは畳むのが面倒",
+        "use_case": "駐車中のフロントガラス",
+        "features": [
+          "傘式サンシェード",
+          "パラソル型",
+          "UVカット",
+          "遮光",
+          "断熱"
+        ],
+        "benefits": [
+          "傘と同じ動きで畳める"
+        ],
+        "hook": "サンシェード、広げるのはいいけど畳むのが毎回めんどう。",
+        "body": "傘と同じように開いて閉じるサンシェードです。\nUVカットと断熱のはたらきがあります。",
+        "cta": "save"
+      }
     },
     {
       "id": "r15ad388df",
@@ -1473,7 +2303,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2980,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,980円の傘型サンシェードが1,490円。中棒が曲がる強化十本骨。",
       "points": [],
       "description": "",
       "tags": [
@@ -1483,7 +2313,28 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T00:00:00",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "取り回しで選びたい人",
+        "problem": "狭い運転席では広げにくい",
+        "use_case": "駐車中のフロントガラス",
+        "features": [
+          "中棒が曲がる",
+          "強化十本骨",
+          "UVカット",
+          "遮光",
+          "断熱",
+          "収納ポーチ付き",
+          "6ヶ月保証"
+        ],
+        "benefits": [
+          "席に座ったまま扱える"
+        ],
+        "hook": "運転席の中でサンシェードを広げようとすると、どこかに当たる。",
+        "body": "中棒が曲がる傘型のサンシェードです。骨は十本で強化タイプ。\n収納ポーチ付き、6ヶ月保証。",
+        "cta": "save"
+      }
     },
     {
       "id": "r6ff5a7369",
@@ -1502,7 +2353,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 3000,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "3,000円のスキニーサルエルが1,500円。黒、サスペンダー2way。",
       "tags": [],
       "points": [],
       "description": "",
@@ -1510,7 +2361,26 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T11:25:16",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "細身のシルエットが好きな人",
+        "problem": "サルエルは太く見えるものが多い",
+        "use_case": "普段着",
+        "features": [
+          "サルエルパンツ",
+          "スキニー",
+          "黒",
+          "サスペンダー取り外し可の2way",
+          "Wウエスト"
+        ],
+        "benefits": [
+          "上に何を合わせても収まる"
+        ],
+        "hook": "サルエルは好きだけど、だぼっとしすぎるのは選びにくい。",
+        "body": "スキニー寄りのサルエルパンツです。黒で、サスペンダーは取り外せます。\nシャツやジャケットにも合わせられます。",
+        "cta": "save"
+      }
     },
     {
       "id": "r3401797db",
@@ -1529,7 +2399,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 3000,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "3,000円のサルエルパンツが1,500円。茶チェック、サスペンダー2way。",
       "points": [],
       "description": "",
       "tags": [],
@@ -1537,7 +2407,25 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T00:00:00",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "柄のパンツを試したい人",
+        "problem": "無地ばかりで組み合わせが固定される",
+        "use_case": "普段着",
+        "features": [
+          "サルエルパンツ",
+          "茶のチェック",
+          "サスペンダー取り外し可の2way",
+          "Wウエスト"
+        ],
+        "benefits": [
+          "1本で組み合わせが変わる"
+        ],
+        "hook": "手持ちが無地ばかりだと、組み合わせがいつも同じになる。",
+        "body": "茶のチェックのサルエルパンツです。サスペンダーは自由に外せる2way。\nウエストは二重になっています。",
+        "cta": "save"
+      }
     },
     {
       "id": "rd0b184716",
@@ -1556,7 +2444,7 @@
       "endTime": "2026-09-05 23:59",
       "listPrice": 3260,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "3,260円の竹レーヨンハイネックTシャツが1,630円。長袖の無地。",
       "tags": [
         "送料無料"
       ],
@@ -1566,7 +2454,26 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T16:25:03",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "problem",
+        "target": "チクチクする服が苦手な人",
+        "problem": "長袖インナーは素材で当たり外れがある",
+        "use_case": "秋冬の重ね着",
+        "features": [
+          "竹レーヨン",
+          "ハイネック",
+          "長袖",
+          "無地",
+          "敏感肌向け"
+        ],
+        "benefits": [
+          "表に出しても下に着てもいい"
+        ],
+        "hook": "長袖のインナー、素材が合わないと一日中それが気になる。",
+        "body": "竹レーヨンのハイネックTシャツです。長袖の無地。\n重ね着にも1枚でも使えます。",
+        "cta": "experience"
+      }
     },
     {
       "id": "reb9d0ff8a",
@@ -1585,7 +2492,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 3400,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "3,400円のサルエルパンツが1,700円。白黒チェック、サスペンダー2way。",
       "points": [],
       "description": "",
       "tags": [],
@@ -1593,7 +2500,25 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T00:00:00",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "普通のパンツに飽きた人",
+        "problem": "手持ちがどれも同じ形になる",
+        "use_case": "普段着",
+        "features": [
+          "サルエルパンツ",
+          "白黒チェック",
+          "サスペンダー取り外し可の2way",
+          "Wウエスト"
+        ],
+        "benefits": [
+          "サスペンダーの有無で印象が変わる"
+        ],
+        "hook": "クローゼットを開けると、似た形のパンツばかり並んでいる。",
+        "body": "白黒チェックのサルエルパンツです。サスペンダーは取り外せる2way。\nウエストは二重になっています。",
+        "cta": "save"
+      }
     },
     {
       "id": "rfb02220a0",
@@ -1612,7 +2537,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 4048,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "4,048円の日本製4重ガーゼおくるみが1,800円。クマ柄、約80×80cm。",
       "tags": [
         "送料無料"
       ],
@@ -1622,7 +2547,26 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T16:29:26",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "おくるみを探している人",
+        "problem": "厚みの選び方が分からない",
+        "use_case": "おくるみ・ケット",
+        "features": [
+          "日本製",
+          "4重ガーゼ",
+          "約80×80cm",
+          "クマ柄",
+          "耳付き"
+        ],
+        "benefits": [
+          "厚みが数字で分かる"
+        ],
+        "hook": "ガーゼの厚みって、何重がちょうどいいのか分からない。",
+        "body": "日本製の4重ガーゼのおくるみです。約80×80cmのクマ柄。\n耳が付いています。",
+        "cta": "save"
+      }
     },
     {
       "id": "r7bcc60553",
@@ -1641,7 +2585,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 3960,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "3,960円の卓上加湿器が1,980円。250ml、USBで空焚き防止つき。",
       "tags": [
         "送料無料"
       ],
@@ -1651,7 +2595,27 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T11:22:35",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "デスクまわりの乾燥が気になる人",
+        "problem": "部屋用の加湿器は机には大きすぎる",
+        "use_case": "オフィス・寝室・車内",
+        "features": [
+          "250ml",
+          "超音波式",
+          "USB",
+          "7色LED",
+          "空焚き防止",
+          "アロマ対応"
+        ],
+        "benefits": [
+          "机の上に置ける大きさ"
+        ],
+        "hook": "加湿器がほしいのは部屋じゃなくて、机の上だったりする。",
+        "body": "250mlの卓上加湿器です。USBで動いて、空焚き防止つき。\nアロマも使えます。",
+        "cta": "save"
+      }
     },
     {
       "id": "r7690820f1",
@@ -1670,7 +2634,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 3972,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "3,972円のやわらかくんさき202gが1,986円。函館製造の燻製。",
       "tags": [
         "送料無料"
       ],
@@ -1680,7 +2644,26 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T11:22:08",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "つまみを常備しておきたい人",
+        "problem": "家で飲むとき、つまみだけない",
+        "use_case": "晩酌・手土産",
+        "features": [
+          "やわらかいさきいか",
+          "燻製",
+          "202g",
+          "北海道函館製造",
+          "1袋〜6袋"
+        ],
+        "benefits": [
+          "日持ちする形で置いておける"
+        ],
+        "hook": "家で飲もうとすると、酒はあるのにつまみだけない。",
+        "body": "函館で作られた燻製のさきいかです。1袋202g。\nやわらかいタイプで、1袋から6袋まで選べます。",
+        "cta": "empathy"
+      }
     },
     {
       "id": "r8d09ebfbb",
@@ -1699,7 +2682,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 4300,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "4,300円のコーヒー飲み比べ7種が2,150円。50gずつ、豆と粉が選べる。",
       "tags": [
         "送料無料"
       ],
@@ -1709,7 +2692,24 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T11:22:08",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "コーヒーの好みを探している人",
+        "problem": "1kgで買って合わないと詰む",
+        "use_case": "毎朝の1杯",
+        "features": [
+          "50g×7種",
+          "豆・粉が選べる",
+          "モカ・キリマン・マンデリンなど"
+        ],
+        "benefits": [
+          "少量ずつ試せる"
+        ],
+        "hook": "コーヒー豆、大袋で買って口に合わないと逃げ場がない。",
+        "body": "7種類が50gずつ入った飲み比べセットです。豆と粉が選べます。\nモカやキリマン、マンデリンなど。",
+        "cta": "save"
+      }
     },
     {
       "id": "re604c9b9f",
@@ -1728,7 +2728,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 4510,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "4,510円の日本製5重ガーゼおくるみが2,250円。約84×84cm。",
       "tags": [
         "送料無料"
       ],
@@ -1738,7 +2738,26 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T16:29:26",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "出産祝いを選んでいる人",
+        "problem": "ベビー用品は素材が気になる",
+        "use_case": "おくるみ・ベビーケット",
+        "features": [
+          "日本製",
+          "5重ガーゼ",
+          "約84×84cm",
+          "耳付き",
+          "コットン"
+        ],
+        "benefits": [
+          "産地と枚数が分かる"
+        ],
+        "hook": "赤ちゃんに使うものは、どこで作ったのかが気になる。",
+        "body": "日本製の5重ガーゼのおくるみです。約84×84cm、耳付き。\nコットンでできています。",
+        "cta": "save"
+      }
     },
     {
       "id": "r6cb042838",
@@ -1757,7 +2776,7 @@
       "endTime": "2026-09-05 23:59",
       "listPrice": 4800,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "4,800円の竹レーヨンパジャマ上下が2,400円。冷感で抗菌・消臭。",
       "tags": [
         "送料無料"
       ],
@@ -1767,7 +2786,26 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T16:25:03",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "problem",
+        "target": "寝るときの蒸れが気になる人",
+        "problem": "夜中に暑くて目が覚める",
+        "use_case": "就寝時",
+        "features": [
+          "竹レーヨン",
+          "冷感",
+          "抗菌",
+          "消臭",
+          "上下セット"
+        ],
+        "benefits": [
+          "さらっとしている"
+        ],
+        "hook": "夜中に暑くて起きる。エアコンの設定ではなく、着ているものかもしれない。",
+        "body": "竹レーヨンのパジャマ上下です。冷感で、抗菌と消臭の加工つき。",
+        "cta": "empathy"
+      }
     },
     {
       "id": "rdc64e8492",
@@ -1786,7 +2824,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 6400,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "6,400円のマヌカハニー250gが2,800円。MGS認証MG200以上、非加熱。",
       "tags": [
         "送料無料"
       ],
@@ -1796,7 +2834,26 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T11:22:08",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "はちみつを選び直したい人",
+        "problem": "マヌカハニーは等級の見方が分からない",
+        "use_case": "朝のトーストやヨーグルトに",
+        "features": [
+          "MGS認証 MG200以上",
+          "250g",
+          "非加熱",
+          "無添加",
+          "認定書・分析書付き"
+        ],
+        "benefits": [
+          "等級の根拠が紙で付いてくる"
+        ],
+        "hook": "マヌカハニー、数字が並んでいて何を見ればいいのか分からない。",
+        "body": "MGS認証でMG200以上のマヌカハニーです。250g、非加熱の無添加。\n認定書と分析書が付いています。",
+        "cta": "save"
+      }
     },
     {
       "id": "rfee3d8340",
@@ -1815,7 +2872,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 6980,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "6,980円の折り畳みドライヤーが3,490円。1300W、1年保証。",
       "points": [],
       "description": "",
       "tags": [],
@@ -1823,7 +2880,27 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T00:00:00",
       "lastSeen": "2026-09-02",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "旅行や帰省に持っていく人",
+        "problem": "備え付けのドライヤーが弱い",
+        "use_case": "旅行・帰省・出張",
+        "features": [
+          "1300W",
+          "折り畳み式",
+          "マイナスイオン",
+          "3段階調整",
+          "57℃恒温機能",
+          "1年保証"
+        ],
+        "benefits": [
+          "畳んで持ち運べる"
+        ],
+        "hook": "泊まりに行った先のドライヤーが弱い、というのを毎回やっている。",
+        "body": "折り畳めるドライヤーです。1300Wで風量は3段階。\n57℃の恒温機能つき、1年保証。",
+        "cta": "empathy"
+      }
     },
     {
       "id": "r4ec2cd68a",
@@ -1842,7 +2919,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 8500,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "8,500円の1200Wドライヤーが3,582円。大風量でマイナスイオンつき。",
       "tags": [
         "送料無料"
       ],
@@ -1852,7 +2929,26 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T21:22:30",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "problem",
+        "target": "ドライヤーを買い替えたい人",
+        "problem": "乾かす時間が毎晩じわじわ効いてくる",
+        "use_case": "毎晩のドライ",
+        "features": [
+          "1200W",
+          "大風量",
+          "マイナスイオン",
+          "軽量",
+          "ノズル付き"
+        ],
+        "benefits": [
+          "風量で押し切れる"
+        ],
+        "hook": "ドライヤーの前で立っている時間、毎晩積み上がっている。",
+        "body": "1200Wの大風量ドライヤーです。マイナスイオンつきで軽量。\nノズルが付いています。",
+        "cta": "experience"
+      }
     },
     {
       "id": "rfcd2ebeff",
@@ -1871,7 +2967,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 13200,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "13,200円の厚手ジャージパンツが3,960円。ジョガー型、大きいサイズあり。",
       "tags": [
         "送料無料"
       ],
@@ -1881,7 +2977,25 @@
       "postedAt": "2026-09-02",
       "bumpedAt": "2026-09-02T16:27:29",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "冬の部屋着とスポーツ用を兼ねたい人",
+        "problem": "冬は下に履くものが薄いか厚いかの二択になる",
+        "use_case": "ヨガ・散歩・部屋着",
+        "features": [
+          "厚手のジャージパンツ",
+          "ジョガー型",
+          "レディース",
+          "大きいサイズあり"
+        ],
+        "benefits": [
+          "そのまま外に出られる"
+        ],
+        "hook": "冬の下半身、薄いか着ぶくれかの二択になりがち。",
+        "body": "厚手のジャージパンツです。ジョガー型で裾がしぼってあります。\n大きいサイズもあります。",
+        "cta": "save"
+      }
     },
     {
       "id": "r3979f8f60",
@@ -2041,7 +3155,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 1584,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,584円の無地長袖Tシャツが880円。男女兼用、キッズもあり。",
       "points": [],
       "description": "",
       "tags": [],
@@ -2049,7 +3163,26 @@
       "postedAt": "2026-09-01",
       "bumpedAt": "2026-09-01T00:00:00",
       "lastSeen": "2026-09-01",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "重ね着用の一枚がほしい人",
+        "problem": "インナーに使える無地が意外とない",
+        "use_case": "重ね着・普段着",
+        "features": [
+          "長袖Tシャツ",
+          "無地",
+          "男女兼用",
+          "キッズサイズあり",
+          "春秋冬"
+        ],
+        "benefits": [
+          "家族で同じものを選べる"
+        ],
+        "hook": "重ね着に使う無地の長袖、いざ探すと見つからない。",
+        "body": "無地の長袖Tシャツです。男女兼用で、キッズサイズもあります。\n春と秋冬に使えます。",
+        "cta": "save"
+      }
     },
     {
       "id": "rbd400d609",
@@ -2459,7 +3592,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 1580,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,580円のL-カルニチンサプリが790円。30日分、送料込み。",
       "points": [],
       "description": "",
       "tags": [
@@ -2469,7 +3602,27 @@
       "postedAt": "2026-08-31",
       "bumpedAt": "2026-08-31T00:00:00",
       "lastSeen": "2026-09-03",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "compare",
+        "target": "成分をまとめてとりたい人",
+        "problem": "何種類も別々に買うと管理が増える",
+        "use_case": "毎日",
+        "features": [
+          "L-カルニチン",
+          "α-リポ酸",
+          "BCAA",
+          "カプサイシン",
+          "30日分",
+          "送料込み"
+        ],
+        "benefits": [
+          "1袋にまとまっている"
+        ],
+        "hook": "別々に買うと、袋が増えて何を飲んだか分からなくなる。",
+        "body": "L-カルニチンにα-リポ酸とBCAA、カプサイシンを合わせた30日分です。\n送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "r123e4e6c5",
@@ -2538,7 +3691,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2000,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,000円のルテイン100mgサプリが1,000円。30日分、国内製造。",
       "points": [],
       "description": "",
       "tags": [
@@ -2548,7 +3701,27 @@
       "postedAt": "2026-08-31",
       "bumpedAt": "2026-08-31T00:00:00",
       "lastSeen": "2026-08-31",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "compare",
+        "target": "配合量で選びたい人",
+        "problem": "同じ名前でも中身の量が違う",
+        "use_case": "毎日1粒",
+        "features": [
+          "ルテイン100mg",
+          "ゼアキサンチン5mg",
+          "フリー体",
+          "ビルベリー",
+          "30日分",
+          "GMP認定工場"
+        ],
+        "benefits": [
+          "フリー体かどうかまで書いてある"
+        ],
+        "hook": "同じ名前のサプリでも、中身の量は全然ちがう。",
+        "body": "ルテイン100mgとゼアキサンチン5mgのサプリメントです。フリー体の高濃度タイプ。\n30日分、国内製造。",
+        "cta": "compare"
+      }
     },
     {
       "id": "rc789b8f62",
@@ -2567,7 +3740,7 @@
       "endTime": "2026-09-01 23:59",
       "listPrice": 2680,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,680円の21穀米900gが1,340円。無添加、混ぜて炊くだけ。送料込み。",
       "tags": [
         "送料無料"
       ],
