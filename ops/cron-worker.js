@@ -102,19 +102,6 @@ async function dispatch(file, token) {
   return true;
 }
 
-export default {
-  async scheduled(event, env, ctx) {
-    const jobs = planFor(event.scheduledTime);
-    if (!jobs.length) return;            // この時刻は用が無い
-    if (!env.GH_TOKEN) {
-      console.log("GH_TOKEN が入っていません");
-      return;
-    }
-    ctx.waitUntil(
-      Promise.all(jobs.map((f) => dispatch(f, env.GH_TOKEN))),
-    );
-  },
-
 // トークンの期限を GitHub に聞く。
 // 認証つきで叩くと、応答のヘッダに期限が入って返ってくる。
 // 切れたら全部止まるので、人が覚えていなくても見えるようにしておく。
@@ -141,6 +128,19 @@ async function tokenExpiry(token) {
     return `確かめられませんでした: ${e}`;
   }
 }
+
+export default {
+  async scheduled(event, env, ctx) {
+    const jobs = planFor(event.scheduledTime);
+    if (!jobs.length) return;            // この時刻は用が無い
+    if (!env.GH_TOKEN) {
+      console.log("GH_TOKEN が入っていません");
+      return;
+    }
+    ctx.waitUntil(
+      Promise.all(jobs.map((f) => dispatch(f, env.GH_TOKEN))),
+    );
+  },
 
   // ブラウザで開くと、いまの状態と次の予定を返す。
   // 動いているかどうかを人が確かめられるようにしておく。
