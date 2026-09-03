@@ -68,7 +68,8 @@
     "tip:04",
     "tip:16",
     "tip:30",
-    "tip:28"
+    "tip:28",
+    "product:rc9a36d83a"
   ],
   "log": [
     {
@@ -992,6 +993,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:rc9a36d83a",
+      "id": "17998369007808908",
+      "at": "2026-09-03 20:00",
+      "kind": "product",
+      "slot": 20,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "problem",
+      "cta_type": "experience",
+      "category": "pet",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
