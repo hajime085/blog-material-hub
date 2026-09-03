@@ -51,6 +51,33 @@ const PLAN = {
   15: [T],      // JST  0:20  投稿(0時の枠)
 };
 
+// セールの間だけ、見張りを増やす。
+//
+// セール中は値段が日に何度も動き、終わる特価も出る。
+// 4回では、終わったものを載せたまま何時間も置くことになる。
+// 増やすのは「見に行く回数」だけで、1回に新しく載せる数は
+// そのぶん減らしてある（config.json）。
+// 拾う量が増えても、文章を書くのが追いつかなければ、
+// 載らない商品が積み上がるだけで、読む人には何も変わらないため。
+//
+// 期間が過ぎたら自動でもとに戻る。
+// 手で戻す作りにすると、戻し忘れてそのままになる。
+const SALE_UNTIL = Date.parse("2026-09-10T16:59:59Z");  // JST 9/11 01:59
+const SALE_EXTRA = {
+  5:  [W],      // JST 14:20  昼の見張り
+  11: [W],      // JST 20:20  セール開始・日替わりの直後
+  15: [W],      // JST  0:20  日付が変わった直後
+  18: [W],      // JST  3:20  夜のあいだに1回
+};
+
+function planFor(when) {
+  const hour = new Date(when).getUTCHours();
+  const base = PLAN[hour] || [];
+  if (when > SALE_UNTIL) return base;
+  const extra = (SALE_EXTRA[hour] || []).filter((f) => !base.includes(f));
+  return base.concat(extra);
+}
+
 async function dispatch(file, token) {
   const url =
     `https://api.github.com/repos/${REPO}/actions/workflows/${file}/dispatches`;
@@ -77,9 +104,8 @@ async function dispatch(file, token) {
 
 export default {
   async scheduled(event, env, ctx) {
-    const hour = new Date(event.scheduledTime).getUTCHours();
-    const jobs = PLAN[hour];
-    if (!jobs) return;                   // この時刻は用が無い
+    const jobs = planFor(event.scheduledTime);
+    if (!jobs.length) return;            // この時刻は用が無い
     if (!env.GH_TOKEN) {
       console.log("GH_TOKEN が入っていません");
       return;
@@ -122,15 +148,27 @@ async function tokenExpiry(token) {
     const now = new Date();
     const h = now.getUTCHours();
     const exp = env.GH_TOKEN ? await tokenExpiry(env.GH_TOKEN) : "—";
-    const rows = Object.entries(PLAN)
-      .map(([k, v]) =>
-        `JST ${String((Number(k) + 9) % 24).padStart(2, "0")}:20  ${v.join(" + ")}`)
+    // いまの日付で見たときの、実際に動く予定を出す。
+    // PLAN だけを出すと、セール中の増えたぶんが見えない。
+    const hours = new Set(
+      [...Object.keys(PLAN), ...Object.keys(SALE_EXTRA)].map(Number));
+    const sale = now.getTime() <= SALE_UNTIL;
+    const rows = [...hours]
+      .map((k) => {
+        const at = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(),
+                            now.getUTCDate(), k, 20);
+        return `JST ${String((k + 9) % 24).padStart(2, "0")}:20  ` +
+               planFor(at).join(" + ");
+      })
+      .filter((r) => !r.endsWith("  "))
       .sort();
     return new Response(
       [
         "ヤスミルの予定実行",
         `いま UTC ${h}時。トークン: ${env.GH_TOKEN ? "あり" : "なし"}`,
         `トークンの期限: ${exp}`,
+        sale ? "セール中：見張りを1日8回に増やしています（9/11 01:59まで）"
+             : "通常運転：見張りは1日4回",
         "",
         ...rows,
       ].join("\n"),
