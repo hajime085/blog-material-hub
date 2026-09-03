@@ -1,0 +1,331 @@
+{
+  "_readme": "投稿から学んだことの台帳。learn.py が書き、rules.py が止まっていないか見張る。",
+  "findings": [
+    {
+      "date": "2026-09-03",
+      "dim": "投稿の種類",
+      "claim": "投稿の種類 では「tip」が「product」より 2.4倍 見られている",
+      "evidence": "中央値 26.5(n=20) 対 11(n=41)",
+      "action": "exp-001 で試している"
+    },
+    {
+      "date": "2026-09-03",
+      "dim": "リンクの位置",
+      "claim": "リンクの位置 では「none」が「reply」より 3.5倍 見られている",
+      "evidence": "中央値 39.0(n=24) 対 11(n=41)",
+      "action": "exp-001 で試している"
+    }
+  ],
+  "experiments": [
+    {
+      "id": "exp-001",
+      "started": "2026-09-03",
+      "until": "2026-09-10",
+      "status": "running",
+      "hypothesis": "リンクの付く商品投稿は表示が抑えられる。商品の比率を下げれば1日の表示合計は増える。",
+      "change": "時刻ごとの枠を 商品7:それ以外3 から 商品4:それ以外6 に変えた（config.json の threads.slots）。商品は夜20時以降に寄せた。",
+      "metric": "1日あたりの表示合計（中央値）",
+      "baseline": 233,
+      "target": 400,
+      "note": "1回にひとつしか変えない。本数を減らす案は exp-002 に回す。"
+    }
+  ],
+  "lastRun": "2026-09-03",
+  "snapshot": {
+    "date": "2026-09-03",
+    "posts": 69,
+    "views": 2856,
+    "replies": 0,
+    "followers": 1,
+    "cuts": {
+      "投稿の種類": {
+        "page": {
+          "n": 1,
+          "median": 0,
+          "mean": 0.0,
+          "max": 0
+        },
+        "guide": {
+          "n": 3,
+          "median": 3,
+          "mean": 5.3,
+          "max": 11
+        },
+        "schedule": {
+          "n": 4,
+          "median": 187.5,
+          "mean": 277.0,
+          "max": 659
+        },
+        "tip": {
+          "n": 20,
+          "median": 26.5,
+          "mean": 40.2,
+          "max": 163
+        },
+        "product": {
+          "n": 41,
+          "median": 11,
+          "mean": 22.6,
+          "max": 230
+        }
+      },
+      "リンクの位置": {
+        "body": {
+          "n": 4,
+          "median": 2.5,
+          "mean": 4.0,
+          "max": 11
+        },
+        "none": {
+          "n": 24,
+          "median": 39.0,
+          "mean": 79.7,
+          "max": 659
+        },
+        "reply": {
+          "n": 41,
+          "median": 11,
+          "mean": 22.6,
+          "max": 230
+        }
+      },
+      "締めの型": {
+        "（なし）": {
+          "n": 8,
+          "median": 10.5,
+          "mean": 39.6,
+          "max": 230
+        },
+        "experience": {
+          "n": 6,
+          "median": 4.5,
+          "mean": 7.0,
+          "max": 17
+        },
+        "none": {
+          "n": 7,
+          "median": 14,
+          "mean": 14.9,
+          "max": 30
+        },
+        "save": {
+          "n": 11,
+          "median": 8,
+          "mean": 10.4,
+          "max": 34
+        },
+        "question": {
+          "n": 5,
+          "median": 9,
+          "mean": 48.8,
+          "max": 211
+        },
+        "empathy": {
+          "n": 4,
+          "median": 12.5,
+          "mean": 26.8,
+          "max": 71
+        }
+      },
+      "入口の型": {
+        "（なし）": {
+          "n": 8,
+          "median": 10.5,
+          "mean": 39.6,
+          "max": 230
+        },
+        "discovery": {
+          "n": 4,
+          "median": 13.0,
+          "mean": 13.8,
+          "max": 23
+        },
+        "scene": {
+          "n": 10,
+          "median": 7.5,
+          "mean": 14.7,
+          "max": 71
+        },
+        "problem": {
+          "n": 7,
+          "median": 11,
+          "mean": 38.3,
+          "max": 211
+        },
+        "relatable": {
+          "n": 3,
+          "median": 13,
+          "mean": 10.7,
+          "max": 17
+        },
+        "surprise": {
+          "n": 3,
+          "median": 16,
+          "mean": 17.3,
+          "max": 34
+        },
+        "compare": {
+          "n": 5,
+          "median": 7,
+          "mean": 9.0,
+          "max": 20
+        },
+        "problem_price": {
+          "n": 1,
+          "median": 12,
+          "mean": 12.0,
+          "max": 12
+        }
+      },
+      "売場": {
+        "beauty": {
+          "n": 5,
+          "median": 9,
+          "mean": 13.4,
+          "max": 31
+        },
+        "fashion": {
+          "n": 10,
+          "median": 11.5,
+          "mean": 15.4,
+          "max": 71
+        },
+        "kaden": {
+          "n": 2,
+          "median": 4.5,
+          "mean": 4.5,
+          "max": 6
+        },
+        "food": {
+          "n": 5,
+          "median": 13,
+          "mean": 19.0,
+          "max": 34
+        },
+        "kitchen": {
+          "n": 7,
+          "median": 11,
+          "mean": 38.7,
+          "max": 211
+        },
+        "car": {
+          "n": 1,
+          "median": 4,
+          "mean": 4.0,
+          "max": 4
+        },
+        "books": {
+          "n": 3,
+          "median": 7,
+          "mean": 6.3,
+          "max": 9
+        },
+        "sports": {
+          "n": 3,
+          "median": 18,
+          "mean": 17.3,
+          "max": 18
+        },
+        "baby-toy": {
+          "n": 2,
+          "median": 9.0,
+          "mean": 9.0,
+          "max": 17
+        },
+        "pc": {
+          "n": 2,
+          "median": 4.5,
+          "mean": 4.5,
+          "max": 7
+        },
+        "pet": {
+          "n": 1,
+          "median": 230,
+          "mean": 230.0,
+          "max": 230
+        }
+      },
+      "時刻": {
+        "None": {
+          "n": 16,
+          "median": 11.5,
+          "mean": 90.9,
+          "max": 659
+        },
+        "14": {
+          "n": 6,
+          "median": 54.5,
+          "mean": 58.3,
+          "max": 133
+        },
+        "17": {
+          "n": 5,
+          "median": 3,
+          "mean": 6.8,
+          "max": 16
+        },
+        "19": {
+          "n": 5,
+          "median": 2,
+          "mean": 14.2,
+          "max": 44
+        },
+        "7": {
+          "n": 6,
+          "median": 63.5,
+          "mean": 54.2,
+          "max": 109
+        },
+        "9": {
+          "n": 6,
+          "median": 6.5,
+          "mean": 7.8,
+          "max": 17
+        },
+        "12": {
+          "n": 6,
+          "median": 10.5,
+          "mean": 48.8,
+          "max": 230
+        },
+        "21": {
+          "n": 5,
+          "median": 7,
+          "mean": 12.4,
+          "max": 34
+        },
+        "23": {
+          "n": 5,
+          "median": 13,
+          "mean": 11.4,
+          "max": 17
+        },
+        "0": {
+          "n": 5,
+          "median": 18,
+          "mean": 25.4,
+          "max": 71
+        },
+        "20": {
+          "n": 4,
+          "median": 5.0,
+          "mean": 8.8,
+          "max": 23
+        }
+      }
+    }
+  },
+  "constraints": [
+    {
+      "date": "2026-09-03",
+      "fact": "フォロワーが1人。表示はすべて「おすすめ」経由で、フォロワー経由の分はゼロ。",
+      "meaning": "文面の良し悪しを比べる前に、そもそも届いていない。まず届く量を増やす。"
+    },
+    {
+      "date": "2026-09-03",
+      "fact": "1日4〜6本のころの表示中央値261、10本にしても233。本数を倍にしても届く量は増えていない。",
+      "meaning": "枠を埋めることが目的になっていた。本数ではなく中身で変える。"
+    }
+  ]
+}

@@ -423,6 +423,48 @@ def rule_no_dead_fallback(ctx):
     return out
 
 
+
+def rule_keep_learning(ctx):
+    """出した投稿から学ぶ手を止めない。
+
+    2026-09-03: 69本出して、いいね0・返信0・フォロワー1人だった。
+    数字は毎日取れていたのに、取るだけで何も変えていなかった。
+    「今日の分やって」で枠を埋めることが目的になっていた。
+
+    運用を無駄にしないために、台帳（learnings.json）を見張る。
+    ・測っているか（4日以上ほったらかしにしない）
+    ・試しが走っているか（分かったことを寝かせない）
+    ・期限の来た試しに決着がついているか（やりっぱなしにしない）
+    """
+    from datetime import datetime, timedelta
+    led = load("learnings.json", None)
+    if not led:
+        return ["learnings.json がありません。python3 learn.py を実行してください"]
+
+    out = []
+    today = datetime.now().strftime("%Y-%m-%d")
+    limit = (datetime.now() - timedelta(days=4)).strftime("%Y-%m-%d")
+    if (led.get("lastRun") or "") < limit:
+        out.append("成績を %s から測っていません。python3 learn.py を実行してください"
+                   % (led.get("lastRun") or "一度も"))
+
+    exps = led.get("experiments") or []
+    running = [e for e in exps if e.get("status") == "running"]
+    stale = [e for e in running if (e.get("until") or "9999") < today]
+    if stale:
+        out.append("試し %s は %s に期限が来ています。決着をつけてください"
+                   % (stale[0]["id"], stale[0]["until"]))
+    if not running:
+        todo = [f for f in (led.get("findings") or [])
+                if (f.get("action") or "") == "未着手"]
+        if todo:
+            out.append("走っている試しがありません。手つかずの気づきが %d件あります（%s）"
+                       % (len(todo), todo[0]["claim"]))
+        elif not exps:
+            out.append("試しが一度も走っていません。learn.py の出力から一手を決めてください")
+    return out
+
+
 RULES = [
     ("投稿は商品理解のあるものだけ", rule_post_needs_pitch),
     ("「どんな商品？」が出る", rule_what_is_it),
@@ -445,6 +487,7 @@ RULES = [
     ("自分の広告を自分で踏まない", rule_no_self_click),
     ("編集部の棚を放置しない", rule_featured_fresh),
     ("使わなくなった道を残さない", rule_no_dead_fallback),
+    ("学びを止めない", rule_keep_learning),
 ]
 
 
