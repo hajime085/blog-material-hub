@@ -64,7 +64,8 @@
     "product:rc2ad25e52",
     "product:r82d75cbfc",
     "tip:29",
-    "tip:27"
+    "tip:27",
+    "tip:04"
   ],
   "log": [
     {
@@ -925,6 +926,20 @@
       "at": "2026-09-03 09:20",
       "kind": "tip",
       "slot": 9,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
+    },
+    {
+      "key": "tip:04",
+      "id": "18095381309175501",
+      "at": "2026-09-03 12:20",
+      "kind": "tip",
+      "slot": 12,
       "catchup": false,
       "cap": null,
       "hook_type": null,
