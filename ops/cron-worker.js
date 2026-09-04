@@ -17,11 +17,12 @@
 //        権限: Actions = Read and write（これだけでよい）
 //   2. Cloudflare の Workers で新しい Worker を作り、このファイルを貼る
 //   3. Settings → Variables → Secret に GH_TOKEN として 1. のトークンを入れる
-//   4. Settings → Trigger Events → Cron Triggers に「20 * * * *」を1本だけ足す
+//   4. Settings → Trigger Events → Cron Triggers に次の2本を足す
+//        20 * * * *                    ← いつもの毎時
+//        0,10,30,40,50 11,12 * * *     ← セールの山場（JST 20・21時台）だけ10分おき
 //
-//   Cron は1本だけでよい。毎時 :20（UTC）に起きて、
-//   その時刻に用があるものだけを叩く。
-//   1本で足りるので、Worker あたりの Cron 本数の上限にも当たらない。
+//   毎時 :20（UTC）に起きて、その時刻に用があるものだけを叩く。
+//   2本目はセールの山場だけに効く。期間が過ぎれば、鳴っても何もしない。
 
 const REPO = "hajime085/blog-material-hub";
 
@@ -76,6 +77,25 @@ const SALE_EXTRA = {
   16: [T],      // JST  1:20  深夜の商品
   18: [W],      // JST  3:20  夜のあいだに1回
 };
+
+// セールの山場（JST 20時台・21時台）だけ、10分おきに投稿する。
+//
+// 2026-09-04: セールは20時に始まり、日替わりの目玉もそこで入れ替わる。
+// 1時間に1本では、いちばん人が見ている2時間を取りこぼす。
+//
+// Cron を2本にする。
+//   "20 * * * *"          いつもの毎時 :20
+//   "0,10,30,40,50 11,12 * * *"  UTC 11・12時台（JST 20・21時台）
+// :20 を burst 側から外してあるのは、毎時の cron と二重に鳴らないため。
+// 合わせて :00 :10 :20 :30 :40 :50 の6本 × 2時間 = 12本になる。
+const BURST_HOURS = [11, 12];   // UTC。JST 20時台・21時台
+
+
+function isBurst(when) {
+  const d = new Date(when);
+  return when <= SALE_UNTIL && BURST_HOURS.includes(d.getUTCHours())
+         && d.getUTCMinutes() !== 20;
+}
 
 function planFor(when) {
   const hour = new Date(when).getUTCHours();
@@ -138,7 +158,10 @@ async function tokenExpiry(token) {
 
 export default {
   async scheduled(event, env, ctx) {
-    const jobs = planFor(event.scheduledTime);
+    // 山場の10分おきは、投稿だけを出す。
+    const jobs = isBurst(event.scheduledTime)
+      ? [T]
+      : planFor(event.scheduledTime);
     if (!jobs.length) return;            // この時刻は用が無い
     if (!env.GH_TOKEN) {
       console.log("GH_TOKEN が入っていません");

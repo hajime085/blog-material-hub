@@ -19,7 +19,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 949,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "949円のすっぽんコラーゲン1ヶ月分が398円。エラスチン入り、送料込み。",
       "tags": [
         "送料無料"
       ],
@@ -29,7 +29,26 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T16:31:01",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "まず1ヶ月試したい人",
+        "problem": "合うか分からないうちは大容量を買いにくい",
+        "use_case": "毎日",
+        "features": [
+          "すっぽんコラーゲン",
+          "エラスチン入り",
+          "ヒアルロン酸",
+          "約1ヶ月分",
+          "送料込み"
+        ],
+        "benefits": [
+          "1ヶ月で区切れる"
+        ],
+        "hook": "合うかどうか分からないうちに、大きい袋を買う気にはならない。",
+        "body": "すっぽん由来のコラーゲンにエラスチンとヒアルロン酸を合わせたサプリメントです。\n約1ヶ月分、送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "rff5507558",
@@ -48,7 +67,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 1000,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,000円の大豆イソフラボン1ヶ月分が399円。アグリコン型26mg。",
       "tags": [
         "送料無料"
       ],
@@ -58,7 +77,26 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T14:31:48",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "compare",
+        "target": "配合の型まで見て選びたい人",
+        "problem": "同じ名前でも吸収の型が書いていないことが多い",
+        "use_case": "毎日",
+        "features": [
+          "アグリコン型の大豆イソフラボン26mg",
+          "ビタミンD",
+          "葉酸",
+          "約1ヶ月分",
+          "送料込み"
+        ],
+        "benefits": [
+          "型と量が書いてある"
+        ],
+        "hook": "大豆イソフラボン、どれも同じに見えて実は書き方が違う。",
+        "body": "アグリコン型の大豆イソフラボンを26mg配合しています。ビタミンDと葉酸入り。\n約1ヶ月分、送料込み。",
+        "cta": "compare"
+      }
     },
     {
       "id": "rc13b17364",
@@ -77,7 +115,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 980,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "980円のAirPodsクリアケースが490円。第2・第3世代対応。",
       "tags": [
         "送料無料"
       ],
@@ -87,7 +125,24 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T16:34:09",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "problem",
+        "target": "AirPodsを裸で持ち歩いている人",
+        "problem": "落として傷が入ってから後悔する",
+        "use_case": "カバンの中・ポケット",
+        "features": [
+          "クリアのハードケース",
+          "AirPods 第2・第3世代対応",
+          "透明"
+        ],
+        "benefits": [
+          "中身が見えたまま守れる"
+        ],
+        "hook": "AirPodsのケース、傷が入ってから探し始める。",
+        "body": "透明のハードケースです。第2世代と第3世代に対応。\n本体の色をそのまま見せられます。",
+        "cta": "save"
+      }
     },
     {
       "id": "rb9808baba",
@@ -106,7 +161,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 1330,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,330円のイチョウ葉エキス1ヶ月分が499円。DHA・EPA配合。",
       "tags": [
         "送料無料"
       ],
@@ -116,7 +171,25 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T14:31:48",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "compare",
+        "target": "成分をまとめてとりたい人",
+        "problem": "別々に買うと管理が増える",
+        "use_case": "毎日",
+        "features": [
+          "イチョウ葉エキス",
+          "DHA・EPA配合",
+          "約1ヶ月分",
+          "ネコポス送料込み"
+        ],
+        "benefits": [
+          "1袋にまとまっている"
+        ],
+        "hook": "サプリは種類が増えるほど、何を飲んだか分からなくなる。",
+        "body": "イチョウ葉エキスにDHAとEPAを合わせたサプリメントです。\n約1ヶ月分、送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "r1d0e2ea9d",
@@ -135,7 +208,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 1480,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,480円の50倍濃縮プラセンタ1ヶ月分が500円。NMN・アスタキサンチン入り。",
       "tags": [
         "送料無料"
       ],
@@ -145,7 +218,27 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T16:31:01",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "compare",
+        "target": "中身の濃さで選びたい人",
+        "problem": "濃縮の倍率が書いていない商品が多い",
+        "use_case": "毎日",
+        "features": [
+          "50倍濃縮プラセンタ",
+          "NMN",
+          "アスタキサンチン",
+          "シルクペプチド",
+          "亜麻仁油",
+          "約1ヶ月分"
+        ],
+        "benefits": [
+          "倍率が数字で書いてある"
+        ],
+        "hook": "プラセンタ、濃縮の倍率が書いていない商品のほうが多い。",
+        "body": "50倍濃縮のプラセンタに、NMNとアスタキサンチンを合わせています。\n約1ヶ月分、送料込み。",
+        "cta": "compare"
+      }
     },
     {
       "id": "r330c9bc42",
@@ -164,7 +257,7 @@
       "endTime": "2026-09-11 23:59",
       "listPrice": 1470,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,470円のルテインサプリ1ヶ月分が500円。機能性表示食品。",
       "tags": [
         "送料無料"
       ],
@@ -174,7 +267,25 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T14:31:48",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "compare",
+        "target": "表示区分で選びたい人",
+        "problem": "似た商品が多くて基準が持てない",
+        "use_case": "毎日",
+        "features": [
+          "機能性表示食品",
+          "ルテイン配合",
+          "約1ヶ月分",
+          "送料込み"
+        ],
+        "benefits": [
+          "区分が明記されている"
+        ],
+        "hook": "棚に似たものが並ぶと、何を基準に選べばいいのか分からない。",
+        "body": "ルテインを配合した機能性表示食品です。約1ヶ月分、送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "rb7e74186a",
@@ -193,7 +304,7 @@
       "endTime": "",
       "listPrice": 1340,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,340円の花柄シフォンガウンが500円。全7パターン。",
       "tags": [],
       "points": [],
       "description": "",
@@ -201,7 +312,25 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T14:33:08",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "一枚羽織るものがほしい人",
+        "problem": "冷房の効いた場所で肩が寒い",
+        "use_case": "外出・オフィス",
+        "features": [
+          "シフォンのロングガウン",
+          "花柄 全7パターン",
+          "ノーボタン"
+        ],
+        "benefits": [
+          "畳んで持ち歩ける",
+          "柄を選べる"
+        ],
+        "hook": "冷房の効いた店に入るたび、羽織るものを持ってくればよかったと思う。",
+        "body": "シフォン素材のロングガウンです。ボタンは無く、そのまま羽織る形。\n花柄が7パターンあります。",
+        "cta": "save"
+      }
     },
     {
       "id": "rd7371e81c",
@@ -220,7 +349,7 @@
       "endTime": "",
       "listPrice": 1239,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,239円のバックプリーツTシャツが500円。全5色。",
       "tags": [],
       "points": [],
       "description": "",
@@ -228,7 +357,24 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T14:33:08",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "無地のTシャツに飽きた人",
+        "problem": "前から見ると全部同じに見える",
+        "use_case": "普段着",
+        "features": [
+          "バックプリーツのコットンTシャツ",
+          "全5色",
+          "2サイズ"
+        ],
+        "benefits": [
+          "後ろ姿で印象が変わる"
+        ],
+        "hook": "Tシャツは前から見るとどれも同じ、というところで止まっていた。",
+        "body": "背中にプリーツが入ったコットンのTシャツです。5色から選べます。",
+        "cta": "save"
+      }
     },
     {
       "id": "r6f992d128",
@@ -439,7 +585,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 1680,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,680円のカリウムサプリ180粒が598円。栄養機能食品、送料込み。",
       "tags": [
         "送料無料"
       ],
@@ -449,7 +595,26 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T14:31:48",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "外食や中食が多い人",
+        "problem": "食事の内容が自分で選べない日がある",
+        "use_case": "毎日",
+        "features": [
+          "カリウム 塩化カリウム40,950mg配合",
+          "1袋180粒",
+          "約1ヶ月分",
+          "栄養機能食品",
+          "ヒハツ・ハトムギ入り"
+        ],
+        "benefits": [
+          "配合量が数字で出ている"
+        ],
+        "hook": "外で食べる日が続くと、中身は自分で選べない。",
+        "body": "カリウムの栄養機能食品です。1袋180粒で約1ヶ月分。\nヒハツやハトムギも入っています。送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "rf4416810f",
@@ -518,7 +683,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2570,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,570円のブルーベリーサプリ3ヶ月分が848円。ビルベリー・カシス入り。",
       "tags": [
         "送料無料"
       ],
@@ -528,7 +693,26 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T16:31:01",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "画面を見る時間が長い人",
+        "problem": "仕事もスマホも画面ばかり",
+        "use_case": "仕事中・移動中",
+        "features": [
+          "ブルーベリー・ビルベリー",
+          "カシス・クコシ・アイブライト",
+          "メグスリノキ",
+          "約3ヶ月分",
+          "送料込み"
+        ],
+        "benefits": [
+          "3ヶ月分がまとめて届く"
+        ],
+        "hook": "仕事で画面を見て、休憩でもスマホを見ている。",
+        "body": "ブルーベリーとビルベリーに、カシスやメグスリノキを合わせたサプリメントです。\n約3ヶ月分、送料込み。",
+        "cta": "empathy"
+      }
     },
     {
       "id": "r1bdf176c4",
@@ -547,7 +731,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 1700,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,700円のDHA&EPA＋DPA 3ヶ月分が848円。送料込み。",
       "tags": [
         "送料無料"
       ],
@@ -557,7 +741,25 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T16:31:01",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "compare",
+        "target": "オメガ3をとりたい人",
+        "problem": "魚を毎日は食べられない",
+        "use_case": "毎日",
+        "features": [
+          "DHA・EPA・DPAの3種",
+          "不飽和脂肪酸",
+          "約3ヶ月分",
+          "送料込み"
+        ],
+        "benefits": [
+          "3種類がまとまっている"
+        ],
+        "hook": "魚を毎日食べたほうがいいのは分かっている。毎日は無理だ。",
+        "body": "DHAとEPAにDPAを加えた3種類のオメガ3サプリメントです。\n約3ヶ月分、送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "rb68677931",
@@ -576,7 +778,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 1600,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,600円の国産すっぽん黒酢3ヶ月分が848円。送料込み。",
       "tags": [
         "送料無料"
       ],
@@ -586,7 +788,27 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T16:31:01",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "黒酢を続けたい人",
+        "problem": "液体の黒酢は味で止まる",
+        "use_case": "毎日",
+        "features": [
+          "国産すっぽん黒酢",
+          "アミノ酸",
+          "大豆ペプチド",
+          "コラーゲン",
+          "約3ヶ月分",
+          "送料込み"
+        ],
+        "benefits": [
+          "粒なので味を気にしない"
+        ],
+        "hook": "黒酢は体によさそうだけど、あの味を毎日は続かない。",
+        "body": "国産のすっぽん黒酢を粒にしたサプリメントです。アミノ酸と大豆ペプチド入り。\n約3ヶ月分、送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "rb2dfeec36",
@@ -653,7 +875,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 1600,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,600円の乳酸菌カプセル3ヶ月分が848円。有胞子性乳酸菌。",
       "tags": [
         "送料無料"
       ],
@@ -663,7 +885,26 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T14:31:48",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "compare",
+        "target": "乳酸菌の種類まで見たい人",
+        "problem": "どの菌かが書いていない商品が多い",
+        "use_case": "毎日",
+        "features": [
+          "有胞子性乳酸菌（ラクリス菌）",
+          "酵素配合",
+          "ソフトカプセル",
+          "約3ヶ月分",
+          "送料込み"
+        ],
+        "benefits": [
+          "菌の名前が書いてある"
+        ],
+        "hook": "乳酸菌と書いてあっても、どの菌かまで書いてある商品は少ない。",
+        "body": "有胞子性乳酸菌（ラクリス菌）を使ったソフトカプセルです。酵素も配合。\n約3ヶ月分、送料込み。",
+        "cta": "compare"
+      }
     },
     {
       "id": "r8800019bb",
@@ -682,7 +923,7 @@
       "endTime": "",
       "listPrice": 1991,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,991円のテーラードジャケットが990円。全7色、2タイプ。",
       "tags": [],
       "points": [],
       "description": "",
@@ -690,7 +931,24 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T14:33:08",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "きちんと見せたい日がある人",
+        "problem": "羽織るとかたい、脱ぐとラフすぎる",
+        "use_case": "仕事・食事・行事",
+        "features": [
+          "ポンチ素材のテーラードジャケット",
+          "全7色",
+          "ロング丈とショート丈"
+        ],
+        "benefits": [
+          "伸びる素材で肩が楽"
+        ],
+        "hook": "きちんとして見せたい日と、動きやすさが両立しない。",
+        "body": "ポンチ素材のテーラードジャケットです。伸びるジャージー系の生地。\n全7色、ロング丈とショート丈があります。",
+        "cta": "save"
+      }
     },
     {
       "id": "r4110cd3c0",
@@ -804,7 +1062,7 @@
       "endTime": "2026-09-10 23:59",
       "listPrice": 2400,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,400円の鹿児島茶100包が1,200円。深蒸し茶、送料込み。",
       "tags": [
         "送料無料"
       ],
@@ -814,7 +1072,27 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T16:29:23",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "お茶をよく飲む人",
+        "problem": "買い足しの回数が多い",
+        "use_case": "家・職場",
+        "features": [
+          "鹿児島茶のティーバッグ",
+          "2.5g×100包",
+          "深蒸し茶",
+          "水出しもできる",
+          "送料込み"
+        ],
+        "benefits": [
+          "100包あるので減りを気にしない",
+          "冷茶にもできる"
+        ],
+        "hook": "お茶は減りが早いのに、いつも少ない箱を買っている。",
+        "body": "鹿児島産の深蒸し茶のティーバッグです。2.5gが100包。\n水出しでも作れます。送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "r19936e0b3",
@@ -833,7 +1111,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2980,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,980円のカバのTシャツが1,490円。綿100%、S〜XL。",
       "tags": [],
       "points": [],
       "description": "",
@@ -841,7 +1119,26 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T16:32:15",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "無地ばかりで飽きた人",
+        "problem": "柄物は派手すぎて着られない",
+        "use_case": "普段着",
+        "features": [
+          "カバのプリントTシャツ",
+          "白黒のシンプルなデザイン",
+          "綿100%",
+          "S〜XL",
+          "ユニセックス"
+        ],
+        "benefits": [
+          "柄物だが色数が少ない"
+        ],
+        "hook": "柄物を着たいけれど、派手なのは着る場所がない。",
+        "body": "カバをあしらった白黒のTシャツです。綿100%でSからXLまで。\n男女どちらでも着られます。",
+        "cta": "save"
+      }
     },
     {
       "id": "ree7a8eb0f",
@@ -860,7 +1157,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2980,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,980円の動物デザインTシャツが1,490円。綿100%、送料込み。",
       "tags": [
         "送料無料"
       ],
@@ -870,7 +1167,24 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T16:32:15",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "人と違うものを着たい人",
+        "problem": "店で買うと誰かとかぶる",
+        "use_case": "普段着・休日",
+        "features": [
+          "動物のデザインTシャツ",
+          "綿100%",
+          "S〜XL"
+        ],
+        "benefits": [
+          "かぶりにくい"
+        ],
+        "hook": "店で選ぶと、たいてい誰かとかぶる。",
+        "body": "動物をあしらったプリントTシャツです。綿100%でSからXLまで。",
+        "cta": "save"
+      }
     },
     {
       "id": "rddd92e946",
@@ -933,7 +1247,7 @@
       "endTime": "2026-09-07 17:59",
       "listPrice": 3580,
       "priceBasis": "title",
-      "caption": "3,580円の2WAYニットパンツが1,999円。ジョガーとワイドの2通り、3丈展開。",
+      "caption": "3,580円の2WAYニットパンツが1,790円。ジョガーとワイドの2通り、3丈展開。",
       "tags": [
         "送料無料"
       ],
@@ -982,9 +1296,9 @@
       "endTime": "2026-09-06 09:59",
       "listPrice": 3790,
       "priceBasis": "title",
-      "caption": "3,790円のコクーンパンツが1,990円。速乾でUVカット、洗濯機で洗える。",
+      "caption": "3,790円のコクーンパンツが1,970円。速乾でUVカット、洗濯機で洗える。",
       "points": [
-        "3,790円から1,990円へ",
+        "3,790円から1,970円へ",
         "速乾・UVカット・洗濯機可",
         "レビュー4,903件・★4.28"
       ],
@@ -1035,7 +1349,7 @@
       "endTime": "",
       "listPrice": 3380,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "3,380円の厚手パーカーが1,980円。綿100%のビッグシルエット。",
       "tags": [],
       "points": [],
       "description": "",
@@ -1043,7 +1357,26 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T14:33:08",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "秋冬の羽織りを探している人",
+        "problem": "薄手だと寒い、上着だと大げさ",
+        "use_case": "外出・運動・部屋着",
+        "features": [
+          "厚手のプルオーバーパーカー",
+          "綿100%",
+          "ビッグシルエット",
+          "大きいサイズあり",
+          "男女兼用"
+        ],
+        "benefits": [
+          "中に着込める"
+        ],
+        "hook": "薄手だと寒いし、上着を出すには早い時期がある。",
+        "body": "綿100%の厚手プルオーバーパーカーです。ビッグシルエットで、中に着込めます。\n大きいサイズもあります。",
+        "cta": "save"
+      }
     },
     {
       "id": "raa7d94a42",
@@ -1114,7 +1447,7 @@
       "endTime": "2026-09-11 10:50",
       "listPrice": 5360,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "5,360円のマウンテンパーカーが2,680円。撥水・防風、送料込み。",
       "tags": [
         "送料無料"
       ],
@@ -1124,7 +1457,26 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T16:32:15",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "急な雨と風に備えたい人",
+        "problem": "上着を持つか迷って結局持たない",
+        "use_case": "通勤・アウトドア・秋冬",
+        "features": [
+          "マウンテンパーカー",
+          "撥水",
+          "防風",
+          "男女兼用",
+          "秋冬向け"
+        ],
+        "benefits": [
+          "1枚で雨と風に対応できる"
+        ],
+        "hook": "上着を持つか迷って、結局持たずに出て後悔する。",
+        "body": "撥水と防風のマウンテンパーカーです。秋冬向けで男女兼用。",
+        "cta": "save"
+      }
     },
     {
       "id": "rcb1617c6a",
@@ -1143,7 +1495,7 @@
       "endTime": "",
       "listPrice": 5500,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "5,500円の裏起毛パーカーが2,750円。厚手のビッグシルエット。",
       "tags": [],
       "points": [],
       "description": "",
@@ -1151,7 +1503,26 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T14:33:08",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "problem",
+        "target": "冬の部屋着を替えたい人",
+        "problem": "家の中でも寒い日がある",
+        "use_case": "部屋着・外出",
+        "features": [
+          "裏起毛のプルオーバーパーカー",
+          "厚手",
+          "ビッグシルエット",
+          "大きいサイズあり",
+          "男女兼用"
+        ],
+        "benefits": [
+          "裏が起毛している"
+        ],
+        "hook": "暖房を入れる前の時期が、いちばん着るものに困る。",
+        "body": "裏起毛の厚手パーカーです。ビッグシルエットで大きいサイズもあります。",
+        "cta": "save"
+      }
     },
     {
       "id": "rdacf13a21",
