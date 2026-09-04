@@ -75,7 +75,8 @@
     "product:rdac42fc8f",
     "schedule:2026-W35-5",
     "tip:05",
-    "tip:17"
+    "tip:17",
+    "tip:31"
   ],
   "log": [
     {
@@ -1090,6 +1091,20 @@
       "at": "2026-09-04 12:20",
       "kind": "tip",
       "slot": 12,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
+    },
+    {
+      "key": "tip:31",
+      "id": "18110500099845511",
+      "at": "2026-09-04 14:20",
+      "kind": "tip",
+      "slot": 14,
       "catchup": false,
       "cap": null,
       "hook_type": null,
