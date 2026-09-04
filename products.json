@@ -19,7 +19,7 @@
       "endTime": "2026-09-07 23:59",
       "listPrice": 2960,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,960円のとろろ昆布100gが1,450円。北海道産昆布、送料込み。",
       "points": [],
       "description": "",
       "tags": [
@@ -29,7 +29,26 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T00:00:00",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "ご飯のお供を切らしたくない人",
+        "problem": "あと一品、というときに何もない",
+        "use_case": "ご飯・おにぎり・お弁当",
+        "features": [
+          "とろろ昆布 100gの大袋",
+          "北海道産昆布",
+          "醸造酢不使用",
+          "送料込み"
+        ],
+        "benefits": [
+          "酢の酸味が無い",
+          "袋が大きい"
+        ],
+        "hook": "あと一品ほしい、というときに限って冷蔵庫に何もない。",
+        "body": "北海道産の昆布を使ったとろろ昆布です。100gの大袋。\n醸造酢を使っていないので、酸っぱくありません。送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "rdacf13a21",
@@ -238,7 +257,7 @@
       "endTime": "",
       "listPrice": 1780,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,780円のGABAサプリが790円。機能性表示食品、30日分。",
       "tags": [
         "送料無料"
       ],
@@ -248,7 +267,25 @@
       "postedAt": "2026-09-03",
       "bumpedAt": "2026-09-03T20:31:10",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "compare",
+        "target": "表示区分を見て選びたい人",
+        "problem": "似た商品が多くて何を基準にするか分からない",
+        "use_case": "毎日",
+        "features": [
+          "機能性表示食品",
+          "GABA配合",
+          "30日分",
+          "送料込み"
+        ],
+        "benefits": [
+          "区分が明記されている"
+        ],
+        "hook": "棚に似たものが並んでいると、何を基準に選べばいいのか分からなくなる。",
+        "body": "GABAを配合した機能性表示食品です。30日分。送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "rf994cdd4f",
@@ -315,7 +352,7 @@
       "endTime": "",
       "listPrice": 1980,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,980円の夜用サプリが990円。GABA・グリシン・テアニン配合、30日分。",
       "tags": [
         "送料無料"
       ],
@@ -325,7 +362,27 @@
       "postedAt": "2026-09-03",
       "bumpedAt": "2026-09-03T20:31:10",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "compare",
+        "target": "配合を見て選びたい人",
+        "problem": "成分名は並んでいても量や種類が読み取りにくい",
+        "use_case": "夜",
+        "features": [
+          "GABA",
+          "グリシン",
+          "テアニン",
+          "トリプトファン",
+          "30日分",
+          "送料込み"
+        ],
+        "benefits": [
+          "4種類がまとまっている"
+        ],
+        "hook": "サプリの箱、成分名は並んでいても中身の組み合わせが読み取りにくい。",
+        "body": "GABAとグリシン、テアニン、トリプトファンを合わせた夜用のサプリメントです。\n30日分、送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "re31eee71d",
@@ -490,7 +547,7 @@
       "endTime": "",
       "listPrice": 2000,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,000円のエラグ酸サプリ90日分が1,000円。機能性表示食品、送料込み。",
       "tags": [
         "送料無料"
       ],
@@ -500,7 +557,26 @@
       "postedAt": "2026-09-03",
       "bumpedAt": "2026-09-03T20:31:10",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "まとめ買いしたい人",
+        "problem": "1ヶ月分だとすぐ買い足しになる",
+        "use_case": "毎日",
+        "features": [
+          "機能性表示食品",
+          "エラグ酸3mg",
+          "90日分",
+          "カルニチン・BCAA配合",
+          "送料込み"
+        ],
+        "benefits": [
+          "3ヶ月分が一度に届く"
+        ],
+        "hook": "1ヶ月分で買うと、気づけばまた注文している。",
+        "body": "エラグ酸3mgを配合した機能性表示食品です。90日分。\nカルニチンとBCAAも入っています。送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "ra3310b37a",
@@ -802,7 +878,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 3190,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "3,190円の足つきおくるみが1,450円。フリースのフード付き、耳つき。",
       "tags": [],
       "points": [],
       "description": "",
@@ -810,7 +886,26 @@
       "postedAt": "2026-09-03",
       "bumpedAt": "2026-09-03T21:38:44",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "出産祝いや冬支度を考えている人",
+        "problem": "寒い時期の赤ちゃんの上着に迷う",
+        "use_case": "防寒・お祝い・写真",
+        "features": [
+          "足つきアフガン",
+          "フリース",
+          "フード付き",
+          "耳つき（クマ・ウサギ）"
+        ],
+        "benefits": [
+          "足まで包める",
+          "そのまま写真に使える"
+        ],
+        "hook": "寒い時期の赤ちゃんの上着、何を着せるのが正解なのか分からない。",
+        "body": "足まで入るフリースのおくるみです。フード付きで、クマとウサギの耳つき。",
+        "cta": "save"
+      }
     },
     {
       "id": "r8eaf9d31e",
@@ -875,7 +970,7 @@
       "endTime": "",
       "listPrice": 2880,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,880円の防水Bluetoothスピーカーが1,500円。18時間連続再生。",
       "tags": [
         "送料無料"
       ],
@@ -885,7 +980,27 @@
       "postedAt": "2026-09-03",
       "bumpedAt": "2026-09-03T20:34:24",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "家の中で音を持ち歩きたい人",
+        "problem": "部屋を移るたびに音が途切れる",
+        "use_case": "風呂・キッチン・屋外",
+        "features": [
+          "Bluetooth 5.1",
+          "防水",
+          "18時間連続再生",
+          "ステレオ機能",
+          "AUXケーブル付属"
+        ],
+        "benefits": [
+          "水まわりでも置ける",
+          "1日つけっぱなしでも持つ"
+        ],
+        "hook": "部屋を移るたびに音が途切れて、結局スマホを持ち歩いている。",
+        "body": "防水のBluetoothスピーカーです。18時間の連続再生に対応。\nAUXケーブルも付いています。",
+        "cta": "save"
+      }
     },
     {
       "id": "racddf60d5",
@@ -1003,7 +1118,7 @@
       "endTime": "",
       "listPrice": 3980,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "3,980円の首掛け扇風機が2,280円。冷却プレートつき、手持ちにもなる。",
       "tags": [
         "送料無料"
       ],
@@ -1013,7 +1128,26 @@
       "postedAt": "2026-09-03",
       "bumpedAt": "2026-09-03T20:29:53",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "手がふさがるのが嫌な人",
+        "problem": "手持ちの扇風機は片手が使えなくなる",
+        "use_case": "通勤・屋外・作業中",
+        "features": [
+          "首掛け式",
+          "冷却プレート",
+          "手持ちにもできる",
+          "携帯サイズ"
+        ],
+        "benefits": [
+          "両手が空く",
+          "首元に当てられる"
+        ],
+        "hook": "手持ちの扇風機、涼しいけれど片手がずっとふさがる。",
+        "body": "首にかけて使う扇風機です。冷却プレートつきで、手持ちにもできます。",
+        "cta": "experience"
+      }
     },
     {
       "id": "r0a3882660",
@@ -1178,7 +1312,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 6380,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "6,380円のはちみつ梅干し1kgが3,190円。国産南高梅の訳あり、送料込み。",
       "tags": [
         "送料無料",
         "訳あり"
@@ -1189,7 +1323,29 @@
       "postedAt": "2026-09-03",
       "bumpedAt": "2026-09-03T21:30:33",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "梅干しをよく食べる人",
+        "problem": "少量パックだとすぐなくなる",
+        "use_case": "お弁当・おにぎり・保存食",
+        "features": [
+          "1kg",
+          "国産の完熟南高梅",
+          "はちみつ梅",
+          "天日塩",
+          "訳あり（破れ・無選別）",
+          "塩分8%",
+          "送料込み"
+        ],
+        "benefits": [
+          "量がある",
+          "家で食べるぶんには見た目は関係ない"
+        ],
+        "hook": "梅干しは少量パックで買うと、あっという間になくなる。",
+        "body": "国産の完熟南高梅を使ったはちみつ梅干しです。1kgで塩分8%。\n破れや大きさ不揃いのため訳あり品です。送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "r1890b4bc0",
@@ -3346,7 +3502,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": null,
       "priceBasis": null,
-      "caption": "6,400円のマヌカハニー250gが2,800円。MGS認証MG200以上、非加熱。",
+      "caption": "マヌカハニー250gが2,800円。MGS認証MG200以上、非加熱。送料込み。",
       "tags": [
         "送料無料"
       ],
