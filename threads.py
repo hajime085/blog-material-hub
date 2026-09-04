@@ -105,7 +105,7 @@ def yen(n):
     return "{:,}".format(int(n))
 
 
-def recent_posts(uid, token, n=8):
+def recent_posts(uid, token, n=25):
     """アカウントに実際に載っている、直近の投稿。
 
     手元の記録ではなくアカウントを見る。記録は押せないことがある。
