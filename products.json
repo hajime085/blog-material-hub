@@ -19,7 +19,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2570,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,570円の亜鉛＆鉄サプリ3ヶ月分が568円。1カプセルで亜鉛10mgと鉄10mg。",
       "tags": [
         "送料無料"
       ],
@@ -29,7 +29,26 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T11:32:49",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "compare",
+        "target": "複数の成分をまとめてとりたい人",
+        "problem": "別々に買うと袋が増える",
+        "use_case": "毎日1カプセル",
+        "features": [
+          "1カプセルで亜鉛10mgと鉄10mg",
+          "約3ヶ月分",
+          "栄養機能食品",
+          "送料込み"
+        ],
+        "benefits": [
+          "1粒で2種類ぶん",
+          "袋が増えない"
+        ],
+        "hook": "サプリを別々に買うと、棚に袋が並んで何を飲んだか分からなくなる。",
+        "body": "1カプセルに亜鉛10mgと鉄10mgが入っています。約3ヶ月分。\n栄養機能食品、送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "r68a1741d7",
@@ -48,7 +67,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2570,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,570円のマルチビタミン＆ミネラル3ヶ月分が568円。送料込み。",
       "tags": [
         "送料無料"
       ],
@@ -58,7 +77,26 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T11:32:49",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "食事が偏りがちな人",
+        "problem": "自炊が続かない週がある",
+        "use_case": "毎日",
+        "features": [
+          "マルチビタミン＆マルチミネラル",
+          "約3ヶ月分",
+          "ビタミンA〜E・葉酸",
+          "鉄・亜鉛・カルシウム・マグネシウム",
+          "送料込み"
+        ],
+        "benefits": [
+          "まとめて1粒"
+        ],
+        "hook": "自炊が続かない週は、食事の中身がだいたい同じものになる。",
+        "body": "ビタミンとミネラルをまとめたサプリメントです。約3ヶ月分。\n葉酸や鉄、カルシウムなども入っています。送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "r528c4512a",
@@ -77,7 +115,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 1879,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,879円のルテインサプリ3ヶ月分が568円。亜麻仁油・エゴマ油入り。",
       "tags": [
         "送料無料"
       ],
@@ -87,7 +125,27 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T11:32:49",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "画面を見る時間が長い人",
+        "problem": "一日中パソコンとスマホを見ている",
+        "use_case": "仕事中・移動中",
+        "features": [
+          "ルテイン",
+          "マリーゴールド抽出物",
+          "亜麻仁油・エゴマ油",
+          "ビタミンA・E",
+          "約3ヶ月分",
+          "送料込み"
+        ],
+        "benefits": [
+          "3ヶ月分がまとめて届く"
+        ],
+        "hook": "起きてから寝るまで、だいたい何かの画面を見ている。",
+        "body": "マリーゴールド由来のルテインに、亜麻仁油とエゴマ油を合わせたサプリメントです。\n約3ヶ月分、送料込み。",
+        "cta": "empathy"
+      }
     },
     {
       "id": "r3e44dcf5c",
@@ -106,7 +164,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 1600,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,600円の亜鉛サプリ3ヶ月分が568円。1粒15mg、栄養機能食品。",
       "tags": [
         "送料無料"
       ],
@@ -116,7 +174,25 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T11:32:49",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "compare",
+        "target": "まず試してみたい人",
+        "problem": "いきなり大容量を買うのは迷う",
+        "use_case": "毎日1粒",
+        "features": [
+          "1粒に亜鉛15mg",
+          "約3ヶ月分",
+          "栄養機能食品",
+          "送料込み"
+        ],
+        "benefits": [
+          "3ヶ月で区切って買える"
+        ],
+        "hook": "合うかどうか分からないうちから、大容量を買うのは気が引ける。",
+        "body": "1粒に亜鉛15mgが入った栄養機能食品です。約3ヶ月分。\n送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "rf4416810f",
@@ -135,7 +211,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 1600,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,600円の青汁30包が699円。大麦若葉に抹茶入り、送料込み。",
       "tags": [
         "送料無料"
       ],
@@ -145,7 +221,28 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T11:32:49",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "problem",
+        "target": "野菜が足りていない自覚がある人",
+        "problem": "青汁は続くかどうかが問題",
+        "use_case": "朝の1杯",
+        "features": [
+          "3g×30包",
+          "大麦若葉",
+          "抹茶入り",
+          "乳酸菌・食物繊維",
+          "プラセンタ入り",
+          "送料込み"
+        ],
+        "benefits": [
+          "個包装で持ち運べる",
+          "抹茶が入っている"
+        ],
+        "hook": "野菜が足りていないのは分かっている。問題はそこじゃない。",
+        "body": "大麦若葉に抹茶を合わせた青汁です。3g×30包の個包装。\n乳酸菌と食物繊維も入っています。送料込み。",
+        "cta": "empathy"
+      }
     },
     {
       "id": "rb2dfeec36",
@@ -164,7 +261,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 1600,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,600円の国産はとむぎエキス3ヶ月分が848円。送料込み。",
       "tags": [
         "送料無料"
       ],
@@ -174,7 +271,26 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T11:32:49",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "はとむぎを試してみたい人",
+        "problem": "はとむぎ茶以外の形を知らない",
+        "use_case": "毎日",
+        "features": [
+          "国産はとむぎエキス",
+          "約3ヶ月分",
+          "ヨクイニン",
+          "ビタミン・アミノ酸・食物繊維",
+          "送料込み"
+        ],
+        "benefits": [
+          "粒で続けられる"
+        ],
+        "hook": "はとむぎといえばお茶しか思い浮かばなかった。",
+        "body": "国産のはとむぎエキスのサプリメントです。約3ヶ月分。\nビタミンやアミノ酸も入っています。送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "r4110cd3c0",
@@ -193,7 +309,7 @@
       "endTime": "2026-09-11 09:59",
       "listPrice": 2380,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,380円の形態安定ワイシャツが1,071円。ボタンダウンとレギュラー。",
       "tags": [
         "送料無料"
       ],
@@ -203,7 +319,27 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T11:34:22",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "仕事用のシャツを買い足したい人",
+        "problem": "アイロンをかける時間がない",
+        "use_case": "仕事・冠婚葬祭",
+        "features": [
+          "長袖ワイシャツ",
+          "形態安定",
+          "ボタンダウンとレギュラー",
+          "白",
+          "大きいサイズあり",
+          "送料込み"
+        ],
+        "benefits": [
+          "洗って干すだけで着られる"
+        ],
+        "hook": "朝、シャツにアイロンをかける時間はどう考えてもない。",
+        "body": "形態安定の長袖ワイシャツです。ボタンダウンとレギュラーから選べます。\n大きいサイズもあります。送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "r57bb79dd9",
@@ -222,7 +358,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 3000,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "3,000円の亜鉛サプリ6ヶ月分が1,098円。1粒15mg、送料込み。",
       "tags": [
         "送料無料"
       ],
@@ -232,7 +368,24 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T11:32:49",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "買い足しの回数を減らしたい人",
+        "problem": "3ヶ月分でも意外とすぐなくなる",
+        "use_case": "毎日1粒",
+        "features": [
+          "1粒に亜鉛15mg",
+          "約6ヶ月分",
+          "送料込み"
+        ],
+        "benefits": [
+          "半年分がまとめて届く"
+        ],
+        "hook": "3ヶ月分のつもりが、気づけばもう次を注文している。",
+        "body": "1粒に亜鉛15mgが入ったサプリメントです。約6ヶ月分。\n送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "rddd92e946",
@@ -251,7 +404,7 @@
       "endTime": "",
       "listPrice": 2998,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,998円の天然生うに100gが1,499円。ミョウバン不使用の完全無添加。",
       "tags": [],
       "points": [],
       "description": "",
@@ -259,7 +412,24 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T11:30:50",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "うにを家で食べたい人",
+        "problem": "うには添加物の有無が分かりにくい",
+        "use_case": "海鮮丼・寿司",
+        "features": [
+          "天然の生うに 100g",
+          "ミョウバン不使用",
+          "完全無添加"
+        ],
+        "benefits": [
+          "何が入っていないかが書いてある"
+        ],
+        "hook": "うには、パックの見た目だけでは中身の違いが分からない。",
+        "body": "ミョウバンを使っていない天然の生うにです。100g、完全無添加。\n海鮮丼や寿司に。",
+        "cta": "save"
+      }
     },
     {
       "id": "raa7d94a42",
@@ -278,7 +448,7 @@
       "endTime": "",
       "listPrice": 3490,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "3,490円のモバイルバッテリーが1,980円。USB-C内蔵、PD20Wで2台同時。",
       "tags": [
         "送料無料"
       ],
@@ -288,7 +458,30 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T11:36:45",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "problem",
+        "target": "モバイルバッテリーを持ち歩く人",
+        "problem": "ケーブルを忘れると意味がない",
+        "use_case": "外出・旅行・出張",
+        "features": [
+          "USB-Cコネクタ内蔵",
+          "5,000mAh",
+          "PD20W対応",
+          "2台同時充電",
+          "機内持ち込み可",
+          "PSE適合",
+          "2年保証",
+          "名入れ可"
+        ],
+        "benefits": [
+          "ケーブルを持たなくていい",
+          "2台まとめて充電できる"
+        ],
+        "hook": "モバイルバッテリーは持ってきたのに、ケーブルを忘れる。",
+        "body": "本体にUSB-Cコネクタが付いたモバイルバッテリーです。5,000mAhでPD20W対応。\n2台同時に充電できて、2年保証。",
+        "cta": "empathy"
+      }
     },
     {
       "id": "rdacf13a21",
