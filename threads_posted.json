@@ -85,7 +85,8 @@
     "product:r4ec2cd68a",
     "product:raf00dd26d",
     "product:r36091d231",
-    "product:r528c4512a"
+    "product:r528c4512a",
+    "page:kaimawari:2026-09-04"
   ],
   "log": [
     {
@@ -1246,6 +1247,20 @@
       "cta_type": "empathy",
       "category": "beauty",
       "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "page:kaimawari:2026-09-04",
+      "id": "18107731628594593",
+      "at": "2026-09-05 07:20",
+      "kind": "page",
+      "slot": 7,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
       "link": "reply"
     }
   ]
