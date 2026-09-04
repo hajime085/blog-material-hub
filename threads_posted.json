@@ -79,7 +79,8 @@
     "tip:31",
     "tip:34",
     "tip:06",
-    "product:raf2707125"
+    "product:raf2707125",
+    "product:r644cfb152"
   ],
   "log": [
     {
@@ -1155,6 +1156,20 @@
       "hook_type": "scene",
       "cta_type": "save",
       "category": "sports",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r644cfb152",
+      "id": "18131936536561325",
+      "at": "2026-09-04 21:20",
+      "kind": "product",
+      "slot": 20,
+      "catchup": true,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "save",
+      "category": "fashion",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
