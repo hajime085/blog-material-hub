@@ -181,6 +181,29 @@ TAILS = [
 ]
 
 
+# セールの間だけ、商品リンクを楽天へ直接つなぐ。
+#
+# 2026-09-04: サイトの実訪問は1日9アクセスしかなかった。
+# 「投稿 → 返信のリンク → サイトの商品ページ → 楽天ボタン」の4段で、
+# 楽天まで届いたのは1日1件。サイトを1枚はさむ意味が薄い。
+# セール中は鮮度がすべてなので、間を抜いて直接つなぐ。
+#
+# 期間が過ぎたら自動でサイト経由に戻る。
+# 手で戻す作りにすると、戻し忘れてそのままになる。
+DIRECT_UNTIL = "2026-09-11 01:59"
+
+
+def link_for(p, site):
+    """返信に貼るリンク。セール中は楽天へ直接、それ以外はサイトの商品ページへ。"""
+    url = (p.get("url") or "").strip()
+    now = datetime.now(JST).strftime("%Y-%m-%d %H:%M")
+    if now <= DIRECT_UNTIL and url.startswith("https://hb.afl.rakuten.co.jp/"):
+        # 広告であることは親の投稿の【PR】でも示しているが、
+        # リンクだけを見た人にも分かるように、返信にも書く。
+        return "※PR\n" + url
+    return "%s/p/%s/" % (site, p["id"])
+
+
 def compose_product(p, site, pr, reply_link=False, ev=None, seq=0):
     """商品の投稿文。
 
@@ -231,7 +254,7 @@ def compose_product(p, site, pr, reply_link=False, ev=None, seq=0):
             tailtext = TAILS[seq % len(TAILS)]
 
         body = "\n".join(lines) + tailtext
-        url = "%s/p/%s/" % (site, p["id"])
+        url = link_for(p, site)
         if reply_link:
             return body, url
         return body + "\n\n" + url, None
