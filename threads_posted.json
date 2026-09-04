@@ -73,7 +73,8 @@
     "product:r28f079dd9",
     "product:rdd864712f",
     "product:rdac42fc8f",
-    "schedule:2026-W35-5"
+    "schedule:2026-W35-5",
+    "tip:05"
   ],
   "log": [
     {
@@ -1060,6 +1061,20 @@
       "at": "2026-09-04 07:20",
       "kind": "schedule",
       "slot": 7,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
+    },
+    {
+      "key": "tip:05",
+      "id": "18092683523556057",
+      "at": "2026-09-04 09:20",
+      "kind": "tip",
+      "slot": 9,
       "catchup": false,
       "cap": null,
       "hook_type": null,
