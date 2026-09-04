@@ -190,14 +190,14 @@ TAILS = [
 #
 # 期間が過ぎたら自動でサイト経由に戻る。
 # 手で戻す作りにすると、戻し忘れてそのままになる。
-DIRECT_UNTIL = "2026-09-11 01:59"
+SALE_UNTIL = "2026-09-11 01:59"
 
 
 def link_for(p, site):
     """返信に貼るリンク。セール中は楽天へ直接、それ以外はサイトの商品ページへ。"""
     url = (p.get("url") or "").strip()
     now = datetime.now(JST).strftime("%Y-%m-%d %H:%M")
-    if now <= DIRECT_UNTIL and url.startswith("https://hb.afl.rakuten.co.jp/"):
+    if now <= SALE_UNTIL and url.startswith("https://hb.afl.rakuten.co.jp/"):
         # 広告であることは親の投稿の【PR】でも示しているが、
         # リンクだけを見た人にも分かるように、返信にも書く。
         return "※PR\n" + url
@@ -620,7 +620,19 @@ def pick(cfg, posted, want, slot_hour=None, live_heads=None):
         if et and et[:16].replace("T", " ") < now_s:
             continue
         items.append(p)
-    items.sort(key=lambda p: p.get("at") or "", reverse=True)
+    # 並べ方。
+    #
+    # ふだんは新しい順。値段は日々動くので、古い値引きを
+    # 今見つけたかのように流さないため。
+    #
+    # セールの間はそうしない。セール中は「安い順に見たい」人が来る。
+    # 新しい順に出すと、たまたま今朝拾った20%OFFが先に出て、
+    # 昨日拾った70%OFFが後ろに回る。目玉が埋もれる。
+    # 2026-09-04: 利用者から「通常の投稿じゃない。とっておきを出せ」と指摘。
+    if datetime.now(JST).strftime("%Y-%m-%d %H:%M") <= SALE_UNTIL:
+        items.sort(key=lambda p: (p.get("d") or 0, p.get("at") or ""), reverse=True)
+    else:
+        items.sort(key=lambda p: p.get("at") or "", reverse=True)
 
     # 売場を回す。
     #
