@@ -82,7 +82,8 @@
     "product:raf2707125",
     "product:r644cfb152",
     "product:r6f992d128",
-    "product:r4ec2cd68a"
+    "product:r4ec2cd68a",
+    "product:raf00dd26d"
   ],
   "log": [
     {
@@ -1200,6 +1201,20 @@
       "hook_type": "problem",
       "cta_type": "experience",
       "category": "kaden",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:raf00dd26d",
+      "id": "18006149234972845",
+      "at": "2026-09-04 23:20",
+      "kind": "product",
+      "slot": 23,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "sports",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
