@@ -102,13 +102,26 @@ def cuts(rows):
         "売場": (lambda x: x.get("category") or "（なし）", "product"),
         "時刻": (lambda x: str(x.get("slot")), None),
     }
+    # 表示は時間とともに増える。出したばかりの投稿は必ず低く出るので、
+    # 混ぜて数えると「古い型のほうが良い」という嘘の差が立つ。
+    #
+    # 2026-09-04: 締めの型で「（なし）」が experience の2.2倍と出た。
+    # だが「（なし）」は古い投稿だけに付いている印で、
+    # 中身ではなく経過時間を測っていた。
+    # 48時間たった投稿だけで比べる。
+    from datetime import datetime, timedelta
+    ripe = (datetime.now() - timedelta(hours=48)).strftime("%Y-%m-%d %H:%M")
+
     out = {}
     for name, (f, only) in dims.items():
         b = collections.defaultdict(list)
         for x, g in rows:
             if only and x.get("kind") != only:
                 continue
+            if (x.get("at") or "") > ripe:
+                continue
             b[f(x)].append(g.get("views", 0) or 0)
+        b = {k: v for k, v in b.items() if v}
         out[name] = {k: {"n": len(v), "median": st.median(v),
                          "mean": round(sum(v) / len(v), 1), "max": max(v)}
                      for k, v in b.items()}
