@@ -78,7 +78,8 @@
     "tip:17",
     "tip:31",
     "tip:34",
-    "tip:06"
+    "tip:06",
+    "product:raf2707125"
   ],
   "log": [
     {
@@ -1142,6 +1143,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:raf2707125",
+      "id": "18087309098471836",
+      "at": "2026-09-04 20:20",
+      "kind": "product",
+      "slot": 18,
+      "catchup": true,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "save",
+      "category": "sports",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
