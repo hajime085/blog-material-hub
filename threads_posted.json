@@ -84,7 +84,8 @@
     "product:r6f992d128",
     "product:r4ec2cd68a",
     "product:raf00dd26d",
-    "product:r36091d231"
+    "product:r36091d231",
+    "product:r528c4512a"
   ],
   "log": [
     {
@@ -1230,6 +1231,20 @@
       "hook_type": "relatable",
       "cta_type": "empathy",
       "category": "fashion",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r528c4512a",
+      "id": "18064217318777063",
+      "at": "2026-09-05 01:20",
+      "kind": "product",
+      "slot": 1,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "empathy",
+      "category": "beauty",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
