@@ -81,7 +81,8 @@
     "tip:06",
     "product:raf2707125",
     "product:r644cfb152",
-    "product:r6f992d128"
+    "product:r6f992d128",
+    "product:r4ec2cd68a"
   ],
   "log": [
     {
@@ -1185,6 +1186,20 @@
       "hook_type": "compare",
       "cta_type": "save",
       "category": "beauty",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r4ec2cd68a",
+      "id": "18120996926477477",
+      "at": "2026-09-04 22:45",
+      "kind": "product",
+      "slot": 22,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "problem",
+      "cta_type": "experience",
+      "category": "kaden",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
