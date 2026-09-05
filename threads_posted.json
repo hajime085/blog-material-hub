@@ -90,7 +90,8 @@
     "tip:18",
     "tip:32",
     "product:rbd400d609",
-    "tip:36"
+    "tip:36",
+    "tip:07"
   ],
   "log": [
     {
@@ -1315,6 +1316,20 @@
       "at": "2026-09-05 14:20",
       "kind": "tip",
       "slot": 14,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
+    },
+    {
+      "key": "tip:07",
+      "id": "18115147498785996",
+      "at": "2026-09-05 17:20",
+      "kind": "tip",
+      "slot": 17,
       "catchup": false,
       "cap": null,
       "hook_type": null,
