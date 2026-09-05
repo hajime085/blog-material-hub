@@ -99,8 +99,10 @@ def rule_what_is_it(ctx):
         e = (p.get("endTime") or "").strip()
         return bool(e) and e < now
 
+    # 伏せた商品はサイトに出ていないので、対象から外す。
     live_bad = [p["id"] for p in ps
-                if missing(p) and not not_yet(p) and not finished(p)]
+                if missing(p) and not p.get("hidden")
+                and not not_yet(p) and not finished(p)]
     if live_bad:
         out.append("サイトに出ているのに「どんな商品？」が無い商品が %d件あります"
                    "（%s）。pitch.py --site で作ってください"
@@ -110,7 +112,8 @@ def rule_what_is_it(ctx):
     # 期限が近いものだけ、名前を出して知らせる。
     soon_limit = (datetime.now() + timedelta(hours=48)).strftime("%Y-%m-%d %H:%M")
     waiting = [p for p in ps
-               if missing(p) and not_yet(p) and (p.get("startTime") or "") <= soon_limit]
+               if missing(p) and not p.get("hidden") and not_yet(p)
+               and (p.get("startTime") or "") <= soon_limit]
     if waiting:
         out.append("48時間以内に始まる商品で「どんな商品？」が無いものが %d件あります"
                    "（%s 開始）。始まるまでに pitch.py --site で作ってください"
@@ -341,7 +344,8 @@ def rule_captions_filled(ctx):
     自動で足した商品は空で入るので、日次で埋める
     （「今日の分やって」の手順）。
     """
-    ps = ctx["products"]
+    # 伏せた商品はサイトに出ていないので数えない。
+    ps = [p for p in ctx["products"] if not p.get("hidden")]
     empty = [p for p in ps if not (p.get("caption") or "").strip()]
     if len(empty) > max(10, len(ps) * 0.05):
         return ["キャプションが空の商品が %d件（全%d件）あります。"
@@ -472,6 +476,27 @@ def rule_keep_learning(ctx):
     return out
 
 
+
+def rule_no_lookalike_pileup(ctx):
+    """同じ店の似た商品を並べない。
+
+    2026-09-05: 同じ店の同じ値段のSwitchケースが13件も載っていた。
+    柄違いを13件並べても、読む人の選択肢は増えない。
+    棚が埋まって見えるだけで、二度見する商品が埋もれる。
+    サプリも同じ店・同じ値段で11件あった。
+    店と値段が同じものは2件までにする。
+    """
+    import collections as _c
+    ps = [p for p in ctx["products"] if not p.get("hidden")]
+    g = _c.Counter((p.get("shop"), p.get("price")) for p in ps)
+    over = [(k, v) for k, v in g.items() if v > 2]
+    if over:
+        (shop, price), n = max(over, key=lambda kv: kv[1])
+        return ["同じ店・同じ値段の商品が並んでいます（%s %s円 が%d件、ほか%d組）"
+                % (shop, price, n, len(over) - 1)]
+    return []
+
+
 RULES = [
     ("投稿は商品理解のあるものだけ", rule_post_needs_pitch),
     ("「どんな商品？」が出る", rule_what_is_it),
@@ -494,6 +519,7 @@ RULES = [
     ("自分の広告を自分で踏まない", rule_no_self_click),
     ("編集部の棚を放置しない", rule_featured_fresh),
     ("使わなくなった道を残さない", rule_no_dead_fallback),
+    ("同じ店の似た商品を並べない", rule_no_lookalike_pileup),
     ("学びを止めない", rule_keep_learning),
 ]
 

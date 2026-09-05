@@ -19,7 +19,7 @@
       "endTime": "",
       "listPrice": 660,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "660円のマグネットネイルが330円。超微粒5ミクロン、全5色。",
       "tags": [
         "アウトレット"
       ],
@@ -29,7 +29,26 @@
       "postedAt": "2026-09-05",
       "bumpedAt": "2026-09-05T00:32:08",
       "lastSeen": "2026-09-05",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "ネイルを自分でする人",
+        "problem": "マグネットネイルは粒が粗いと仕上がりが読めない",
+        "use_case": "セルフネイル",
+        "features": [
+          "超微粒（5ミクロン）",
+          "ポリッシュタイプ",
+          "全5色",
+          "約5ml",
+          "アウトレット品"
+        ],
+        "benefits": [
+          "筆が付いていて塗りやすい"
+        ],
+        "hook": "マグネットネイル、粒の細かさで仕上がりが変わる。",
+        "body": "5ミクロンの超微粒タイプです。ポリッシュ型で全5色、約5ml。\nアウトレット品です。",
+        "cta": "save"
+      }
     },
     {
       "id": "r6d214984e",
@@ -48,7 +67,7 @@
       "endTime": "",
       "listPrice": 759,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "759円のニュアンスネイル用インクが380円。全4色、約5ml。",
       "tags": [
         "アウトレット"
       ],
@@ -58,7 +77,25 @@
       "postedAt": "2026-09-05",
       "bumpedAt": "2026-09-05T00:32:08",
       "lastSeen": "2026-09-05",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "ニュアンスネイルを試したい人",
+        "problem": "materialを買い足すと高くつく",
+        "use_case": "セルフネイル",
+        "features": [
+          "ブルーミングリキッド",
+          "全4色",
+          "約5ml",
+          "アウトレット・生産終了品"
+        ],
+        "benefits": [
+          "色を足して遊べる"
+        ],
+        "hook": "ネイルの材料は、買い足していくとあっという間に高くなる。",
+        "body": "ニュアンスネイル用のインクです。全4色で約5ml。\nアウトレットの生産終了品です。",
+        "cta": "save"
+      }
     },
     {
       "id": "rba4a99622",
@@ -77,7 +114,7 @@
       "endTime": "",
       "listPrice": 1222,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,222円のカラージェルセットが611円。好きな色を選べる、UV/LED対応。",
       "tags": [
         "まとめ買い"
       ],
@@ -87,7 +124,25 @@
       "postedAt": "2026-09-05",
       "bumpedAt": "2026-09-05T00:32:08",
       "lastSeen": "2026-09-05",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "色を揃えたい人",
+        "problem": "1色ずつ買うと単価が高い",
+        "use_case": "セルフネイル",
+        "features": [
+          "カラージェルの選べるセット",
+          "全21色以上から選択",
+          "UV/LED対応",
+          "定番色とトレンド色"
+        ],
+        "benefits": [
+          "好きな色だけ選べる"
+        ],
+        "hook": "ネイルの色は、1本ずつ買うとすぐ財布に響く。",
+        "body": "好きな色を選べるカラージェルのセットです。UVとLEDの両方に対応。\n定番色からトレンド色まであります。",
+        "cta": "save"
+      }
     },
     {
       "id": "r1d6a5cd3d",
@@ -106,7 +161,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 1500,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,500円のSwitch2用クリアハードケースが750円。送料込み。",
       "tags": [
         "送料無料"
       ],
@@ -116,7 +171,25 @@
       "postedAt": "2026-09-05",
       "bumpedAt": "2026-09-05T00:39:27",
       "lastSeen": "2026-09-05",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "problem",
+        "target": "Switch2を買った人",
+        "problem": "新しい本体ほど傷が気になる",
+        "use_case": "持ち運び・保管",
+        "features": [
+          "Switch2とSwitchに対応",
+          "クリアのハードケース",
+          "透明カバー",
+          "送料込み"
+        ],
+        "benefits": [
+          "本体の見た目を隠さない"
+        ],
+        "hook": "買ったばかりの本体ほど、最初の傷が痛い。",
+        "body": "Switch2とSwitchに対応した透明のハードケースです。\n本体の見た目をそのまま見せられます。送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "rfdafdc622",
@@ -135,7 +208,7 @@
       "endTime": "2026-09-07 09:59",
       "listPrice": 4490,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "4,490円のUVパーカーが880円。UPF50+の薄手長袖、送料込み。",
       "points": [],
       "description": "",
       "tags": [
@@ -145,7 +218,26 @@
       "postedAt": "2026-09-05",
       "bumpedAt": "2026-09-05T00:28:58",
       "lastSeen": "2026-09-05",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "日差しの下にいる時間が長い人",
+        "problem": "上着を着ると暑い",
+        "use_case": "自転車・スポーツ・外出",
+        "features": [
+          "UPF50+",
+          "UVカット",
+          "薄手の長袖",
+          "ラッシュガードにもなる",
+          "送料込み"
+        ],
+        "benefits": [
+          "薄手なので着たままいられる"
+        ],
+        "hook": "日差しは避けたいけれど、上着を着るほどの気温じゃない。",
+        "body": "UPF50+の薄手UVパーカーです。長袖で、自転車やスポーツにも。\n水辺でも使えます。送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "re719455ba",
@@ -164,7 +256,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 3980,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "3,980円のブラ紐隠しタンクトップが1,180円。接触冷感、脇高。",
       "tags": [
         "送料無料"
       ],
@@ -174,7 +266,26 @@
       "postedAt": "2026-09-05",
       "bumpedAt": "2026-09-05T00:33:34",
       "lastSeen": "2026-09-05",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "problem",
+        "target": "インナーの見え方が気になる人",
+        "problem": "ブラの紐が見えるのが落ち着かない",
+        "use_case": "夏の重ね着",
+        "features": [
+          "ブラ紐隠しの2wayタンクトップ",
+          "アメスリ",
+          "接触冷感",
+          "ストレッチ",
+          "脇高設計"
+        ],
+        "benefits": [
+          "紐を気にせず着られる"
+        ],
+        "hook": "肩の紐が見えていないか、一日中気になっている。",
+        "body": "ブラの紐を隠せる2wayのタンクトップです。接触冷感でストレッチ入り。\n脇が高めに作られています。",
+        "cta": "empathy"
+      }
     },
     {
       "id": "recd8d6de8",
@@ -203,7 +314,9 @@
       "postedAt": "2026-09-05",
       "bumpedAt": "2026-09-05T00:39:27",
       "lastSeen": "2026-09-05",
-      "pitch_status": "pending"
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "2026-09-05: 同じ店（woodgreen スマホケースの町）の同じ値段の商品が13件あった。柄違いを並べても読む人の選択肢は増えないので、レビューの多い2件だけ残す。"
     },
     {
       "id": "r423631bbb",
@@ -232,7 +345,9 @@
       "postedAt": "2026-09-05",
       "bumpedAt": "2026-09-05T00:39:27",
       "lastSeen": "2026-09-05",
-      "pitch_status": "pending"
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "2026-09-05: 同じ店（woodgreen スマホケースの町）の同じ値段の商品が13件あった。柄違いを並べても読む人の選択肢は増えないので、レビューの多い2件だけ残す。"
     },
     {
       "id": "rba219da78",
@@ -261,7 +376,9 @@
       "postedAt": "2026-09-05",
       "bumpedAt": "2026-09-05T00:39:27",
       "lastSeen": "2026-09-05",
-      "pitch_status": "pending"
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "2026-09-05: 同じ店（woodgreen スマホケースの町）の同じ値段の商品が13件あった。柄違いを並べても読む人の選択肢は増えないので、レビューの多い2件だけ残す。"
     },
     {
       "id": "re47007508",
@@ -290,7 +407,9 @@
       "postedAt": "2026-09-05",
       "bumpedAt": "2026-09-05T00:39:27",
       "lastSeen": "2026-09-05",
-      "pitch_status": "pending"
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "2026-09-05: 同じ店（woodgreen スマホケースの町）の同じ値段の商品が13件あった。柄違いを並べても読む人の選択肢は増えないので、レビューの多い2件だけ残す。"
     },
     {
       "id": "re07f791fe",
@@ -319,7 +438,9 @@
       "postedAt": "2026-09-05",
       "bumpedAt": "2026-09-05T07:38:06",
       "lastSeen": "2026-09-05",
-      "pitch_status": "pending"
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "2026-09-05: 同じ店（woodgreen スマホケースの町）の同じ値段の商品が13件あった。柄違いを並べても読む人の選択肢は増えないので、レビューの多い2件だけ残す。"
     },
     {
       "id": "rdcec256e4",
@@ -348,7 +469,9 @@
       "postedAt": "2026-09-05",
       "bumpedAt": "2026-09-05T07:38:06",
       "lastSeen": "2026-09-05",
-      "pitch_status": "pending"
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "2026-09-05: 同じ店（woodgreen スマホケースの町）の同じ値段の商品が13件あった。柄違いを並べても読む人の選択肢は増えないので、レビューの多い2件だけ残す。"
     },
     {
       "id": "r77cfaf544",
@@ -377,7 +500,9 @@
       "postedAt": "2026-09-05",
       "bumpedAt": "2026-09-05T07:38:06",
       "lastSeen": "2026-09-05",
-      "pitch_status": "pending"
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "2026-09-05: 同じ店（woodgreen スマホケースの町）の同じ値段の商品が13件あった。柄違いを並べても読む人の選択肢は増えないので、レビューの多い2件だけ残す。"
     },
     {
       "id": "r670e1970b",
@@ -406,7 +531,9 @@
       "postedAt": "2026-09-05",
       "bumpedAt": "2026-09-05T07:38:06",
       "lastSeen": "2026-09-05",
-      "pitch_status": "pending"
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "2026-09-05: 同じ店（woodgreen スマホケースの町）の同じ値段の商品が13件あった。柄違いを並べても読む人の選択肢は増えないので、レビューの多い2件だけ残す。"
     },
     {
       "id": "r954e87b1b",
@@ -425,7 +552,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 4360,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "4,360円のシリコントイレマットが1,960円。滑りにくく洗える。",
       "tags": [],
       "points": [],
       "description": "",
@@ -433,7 +560,26 @@
       "postedAt": "2026-09-05",
       "bumpedAt": "2026-09-05T07:38:32",
       "lastSeen": "2026-09-05",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "problem",
+        "target": "ペットのトイレまわりを整えたい人",
+        "problem": "シーツがずれて外に漏れる",
+        "use_case": "犬・猫のトイレ",
+        "features": [
+          "シリコンのトイレマット",
+          "滑りにくい",
+          "トイレトレー付き",
+          "洗える"
+        ],
+        "benefits": [
+          "ずれにくい",
+          "洗って繰り返し使える"
+        ],
+        "hook": "トイレシーツ、気づくとずれていて意味をなしていない。",
+        "body": "シリコン製のトイレマットです。滑りにくく、洗って繰り返し使えます。",
+        "cta": "experience"
+      }
     },
     {
       "id": "r53836647c",
@@ -452,7 +598,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 7980,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "7,980円のプリーツロングワンピが2,380円。長袖と半袖から選べる。",
       "tags": [
         "送料無料"
       ],
@@ -462,7 +608,26 @@
       "postedAt": "2026-09-05",
       "bumpedAt": "2026-09-05T00:33:34",
       "lastSeen": "2026-09-05",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "長く着られる一枚がほしい人",
+        "problem": "季節が変わると着られなくなる",
+        "use_case": "通年",
+        "features": [
+          "プリーツのロングワンピース",
+          "長袖と半袖から選べる",
+          "マキシ丈",
+          "春夏秋冬に対応"
+        ],
+        "benefits": [
+          "袖丈を選べる",
+          "季節をまたいで着られる"
+        ],
+        "hook": "季節が変わるたび、着られない服が増えていく。",
+        "body": "プリーツのロングワンピースです。長袖と半袖から選べます。\nマキシ丈で、季節をまたいで着られます。",
+        "cta": "save"
+      }
     },
     {
       "id": "rb91539b1f",
@@ -670,7 +835,7 @@
       "endTime": "2026-09-30 23:59",
       "listPrice": 1500,
       "priceBasis": "history",
-      "caption": "1,500円の讃岐生うどん9食分が598円。冷やしでも温かくでも、送料込み。",
+      "caption": "1,500円の讃岐生うどん9食分が500円。冷やしでも温かくでも、送料込み。",
       "tags": [
         "送料無料",
         "在庫処分"
@@ -767,7 +932,7 @@
       "endTime": "2026-09-11 15:59",
       "listPrice": 1995,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,995円のジョガーパンツが500円。テーパードの細身、サイドライン入り。",
       "tags": [],
       "points": [],
       "description": "",
@@ -775,7 +940,26 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T20:33:31",
       "lastSeen": "2026-09-05",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "部屋着と外着を兼ねたい人",
+        "problem": "スウェットは家用に見える",
+        "use_case": "普段着・近所",
+        "features": [
+          "ジョガーパンツ",
+          "テーパード",
+          "サイドライン",
+          "細身",
+          "メンズ"
+        ],
+        "benefits": [
+          "裾がしぼってあるので外でも着られる"
+        ],
+        "hook": "スウェットは楽だけど、そのまま外に出ると部屋着に見える。",
+        "body": "裾をしぼったジョガーパンツです。テーパードの細身で、サイドライン入り。",
+        "cta": "save"
+      }
     },
     {
       "id": "r7ff263388",
@@ -794,7 +978,7 @@
       "endTime": "",
       "listPrice": 1470,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,470円の靴用バイオ消臭剤が500円。除菌・殺菌つき。",
       "tags": [],
       "points": [],
       "description": "",
@@ -802,7 +986,25 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T21:33:31",
       "lastSeen": "2026-09-05",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "problem",
+        "target": "靴のにおいが気になる人",
+        "problem": "消臭スプレーはその場しのぎになる",
+        "use_case": "靴・ブーツ・タイツ",
+        "features": [
+          "バイオの消臭剤",
+          "除菌・殺菌",
+          "靴・ブーツ・パンプスに使える",
+          "4本以上で送料無料"
+        ],
+        "benefits": [
+          "靴のほうに使える"
+        ],
+        "hook": "におい対策、足のほうばかり気にして靴を忘れている。",
+        "body": "靴やブーツに使うバイオの消臭剤です。除菌・殺菌のはたらきつき。\n4本以上で送料無料になります。",
+        "cta": "save"
+      }
     },
     {
       "id": "rb7e74186a",
@@ -988,7 +1190,9 @@
         "hook": "サプリを別々に買うと、棚に袋が並んで何を飲んだか分からなくなる。",
         "body": "1カプセルに亜鉛10mgと鉄10mgが入っています。約3ヶ月分。\n栄養機能食品、送料込み。",
         "cta": "save"
-      }
+      },
+      "hidden": true,
+      "hiddenReason": "2026-09-05: 同じ店（サプリ専門SHOP シードコムス）の同じ値段の商品が4件あった。柄違いを並べても読む人の選択肢は増えないので、レビューの多い2件だけ残す。"
     },
     {
       "id": "r68a1741d7",
@@ -1036,7 +1240,9 @@
         "hook": "自炊が続かない週は、食事の中身がだいたい同じものになる。",
         "body": "ビタミンとミネラルをまとめたサプリメントです。約3ヶ月分。\n葉酸や鉄、カルシウムなども入っています。送料込み。",
         "cta": "save"
-      }
+      },
+      "hidden": true,
+      "hiddenReason": "2026-09-05: 同じ店（サプリ専門SHOP シードコムス）の同じ値段の商品が4件あった。柄違いを並べても読む人の選択肢は増えないので、レビューの多い2件だけ残す。"
     },
     {
       "id": "r528c4512a",
@@ -1259,7 +1465,9 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T20:32:06",
       "lastSeen": "2026-09-05",
-      "pitch_status": "pending"
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "2026-09-05: 同じ店（サプリ専門SHOP シードコムス）の同じ値段の商品が11件あった。柄違いを並べても読む人の選択肢は増えないので、レビューの多い2件だけ残す。"
     },
     {
       "id": "rf0639a415",
@@ -1307,7 +1515,9 @@
         "hook": "仕事で画面を見て、休憩でもスマホを見ている。",
         "body": "ブルーベリーとビルベリーに、カシスやメグスリノキを合わせたサプリメントです。\n約3ヶ月分、送料込み。",
         "cta": "empathy"
-      }
+      },
+      "hidden": true,
+      "hiddenReason": "2026-09-05: 同じ店（サプリ専門SHOP シードコムス）の同じ値段の商品が11件あった。柄違いを並べても読む人の選択肢は増えないので、レビューの多い2件だけ残す。"
     },
     {
       "id": "rc18459c03",
@@ -1336,7 +1546,9 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T20:32:06",
       "lastSeen": "2026-09-05",
-      "pitch_status": "pending"
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "2026-09-05: 同じ店（サプリ専門SHOP シードコムス）の同じ値段の商品が11件あった。柄違いを並べても読む人の選択肢は増えないので、レビューの多い2件だけ残す。"
     },
     {
       "id": "r67425784a",
@@ -1365,7 +1577,9 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T21:32:06",
       "lastSeen": "2026-09-05",
-      "pitch_status": "pending"
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "2026-09-05: 同じ店（サプリ専門SHOP シードコムス）の同じ値段の商品が11件あった。柄違いを並べても読む人の選択肢は増えないので、レビューの多い2件だけ残す。"
     },
     {
       "id": "r1bdf176c4",
@@ -1412,7 +1626,9 @@
         "hook": "魚を毎日食べたほうがいいのは分かっている。毎日は無理だ。",
         "body": "DHAとEPAにDPAを加えた3種類のオメガ3サプリメントです。\n約3ヶ月分、送料込み。",
         "cta": "save"
-      }
+      },
+      "hidden": true,
+      "hiddenReason": "2026-09-05: 同じ店（サプリ専門SHOP シードコムス）の同じ値段の商品が11件あった。柄違いを並べても読む人の選択肢は増えないので、レビューの多い2件だけ残す。"
     },
     {
       "id": "rb68677931",
@@ -1538,7 +1754,9 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T20:32:06",
       "lastSeen": "2026-09-05",
-      "pitch_status": "pending"
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "2026-09-05: 同じ店（サプリ専門SHOP シードコムス）の同じ値段の商品が11件あった。柄違いを並べても読む人の選択肢は増えないので、レビューの多い2件だけ残す。"
     },
     {
       "id": "rd3a9d4a91",
@@ -1567,7 +1785,9 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T20:32:06",
       "lastSeen": "2026-09-05",
-      "pitch_status": "pending"
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "2026-09-05: 同じ店（サプリ専門SHOP シードコムス）の同じ値段の商品が11件あった。柄違いを並べても読む人の選択肢は増えないので、レビューの多い2件だけ残す。"
     },
     {
       "id": "rc7fec7f81",
@@ -1615,7 +1835,9 @@
         "hook": "乳酸菌と書いてあっても、どの菌かまで書いてある商品は少ない。",
         "body": "有胞子性乳酸菌（ラクリス菌）を使ったソフトカプセルです。酵素も配合。\n約3ヶ月分、送料込み。",
         "cta": "compare"
-      }
+      },
+      "hidden": true,
+      "hiddenReason": "2026-09-05: 同じ店（サプリ専門SHOP シードコムス）の同じ値段の商品が11件あった。柄違いを並べても読む人の選択肢は増えないので、レビューの多い2件だけ残す。"
     },
     {
       "id": "r2261e8b37",
@@ -1644,7 +1866,9 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T20:32:06",
       "lastSeen": "2026-09-05",
-      "pitch_status": "pending"
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "2026-09-05: 同じ店（サプリ専門SHOP シードコムス）の同じ値段の商品が11件あった。柄違いを並べても読む人の選択肢は増えないので、レビューの多い2件だけ残す。"
     },
     {
       "id": "r5ac1f69f1",
@@ -1663,7 +1887,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 3180,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "3,180円のヨガウェア上下セットが954円。吸汗速乾、送料込み。",
       "tags": [
         "送料無料"
       ],
@@ -1673,7 +1897,27 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T21:36:07",
       "lastSeen": "2026-09-05",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "ヨガやピラティスを始めたい人",
+        "problem": "上下を別々に選ぶのが面倒",
+        "use_case": "ヨガ・ピラティス",
+        "features": [
+          "ヨガウェア上下セット",
+          "ブラトップとヨガパンツ",
+          "長袖",
+          "吸汗速乾",
+          "クロップド丈",
+          "フリル袖"
+        ],
+        "benefits": [
+          "上下そろって届く"
+        ],
+        "hook": "始めようと思ったのに、ウェアを選ぶところで止まっている。",
+        "body": "ヨガウェアの上下セットです。長袖のトップスとヨガパンツ。\n吸汗速乾の生地です。",
+        "cta": "save"
+      }
     },
     {
       "id": "r8800019bb",
@@ -1736,7 +1980,7 @@
       "endTime": "",
       "listPrice": 1980,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,980円の太ヒールパンプスが990円。5センチ、スクエアトゥの黒。",
       "tags": [],
       "points": [],
       "description": "",
@@ -1744,7 +1988,26 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T21:33:31",
       "lastSeen": "2026-09-04",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "problem",
+        "target": "歩く日にも履ける靴を探している人",
+        "problem": "ヒールは細いと歩きにくい",
+        "use_case": "仕事・外出",
+        "features": [
+          "チャンキーヒール（太ヒール）",
+          "5センチ",
+          "スクエアトゥ",
+          "黒",
+          "ローヒール"
+        ],
+        "benefits": [
+          "接地面が広い"
+        ],
+        "hook": "ヒールは細いほど、歩ける距離が短くなる。",
+        "body": "5センチの太ヒールのパンプスです。スクエアトゥの黒。",
+        "cta": "save"
+      }
     },
     {
       "id": "r5fba09e43",
@@ -1763,7 +2026,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2224,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,224円のアスタキサンチン3ヶ月分が1,068円。ビタミン各種入り。",
       "tags": [
         "送料無料"
       ],
@@ -1773,7 +2036,27 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T20:32:06",
       "lastSeen": "2026-09-05",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "compare",
+        "target": "まとめてとりたい人",
+        "problem": "ビタミンを別々に買うと管理が増える",
+        "use_case": "毎日",
+        "features": [
+          "アスタキサンチン",
+          "ビタミンA・B群・C・E",
+          "ナイアシン",
+          "パントテン酸",
+          "約3ヶ月分",
+          "送料込み"
+        ],
+        "benefits": [
+          "1粒にまとまっている"
+        ],
+        "hook": "ビタミンを種類ごとに買うと、棚が袋だらけになる。",
+        "body": "アスタキサンチンにビタミンA・B群・C・Eを合わせたサプリメントです。\n約3ヶ月分、送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "r4110cd3c0",
@@ -1936,7 +2219,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2480,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "2,480円のねぎとろ1.7kgが1,240円。100g×17パックの小分け。",
       "tags": [
         "送料無料"
       ],
@@ -1946,7 +2229,25 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T20:30:15",
       "lastSeen": "2026-09-05",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "家で丼ものを食べたい人",
+        "problem": "魚は下ごしらえが要る",
+        "use_case": "丼・手巻き",
+        "features": [
+          "ねぎとろ 100g×17パック",
+          "総量1.7kg",
+          "小分け",
+          "送料込み"
+        ],
+        "benefits": [
+          "小分けなので使う分だけ出せる"
+        ],
+        "hook": "魚を食べたい日ほど、さばく気力がない。",
+        "body": "小分けのねぎとろです。100gが17パックで総量1.7kg。\n使う分だけ解凍できます。送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "r89fbae1af",
@@ -1965,7 +2266,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2480,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,480円のSwitchケースが1,240円。水彩のボタニカル柄、送料込み。",
       "tags": [
         "送料無料"
       ],
@@ -1975,7 +2276,25 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T21:39:24",
       "lastSeen": "2026-09-05",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "Switchを持ち歩く人",
+        "problem": "裸で入れるとカバンの中で当たる",
+        "use_case": "持ち運び",
+        "features": [
+          "Switch用ケース",
+          "花柄・ボタニカルの水彩",
+          "ジョイコン部分もカバー",
+          "送料込み"
+        ],
+        "benefits": [
+          "柄を選べる"
+        ],
+        "hook": "Switchをそのままカバンに入れて、毎回ひやっとしている。",
+        "body": "Switch用のケースです。水彩のボタニカル柄。\nジョイコン部分もカバーします。送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "r958d1a9b7",
@@ -2004,7 +2323,9 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T21:39:24",
       "lastSeen": "2026-09-05",
-      "pitch_status": "pending"
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "2026-09-05: 同じ店（woodgreen スマホケースの町）の同じ値段の商品が13件あった。柄違いを並べても読む人の選択肢は増えないので、レビューの多い2件だけ残す。"
     },
     {
       "id": "r7c05622de",
@@ -2033,7 +2354,9 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T21:39:24",
       "lastSeen": "2026-09-05",
-      "pitch_status": "pending"
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "2026-09-05: 同じ店（woodgreen スマホケースの町）の同じ値段の商品が13件あった。柄違いを並べても読む人の選択肢は増えないので、レビューの多い2件だけ残す。"
     },
     {
       "id": "r69f200578",
@@ -2062,7 +2385,9 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T21:39:24",
       "lastSeen": "2026-09-05",
-      "pitch_status": "pending"
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "2026-09-05: 同じ店（woodgreen スマホケースの町）の同じ値段の商品が13件あった。柄違いを並べても読む人の選択肢は増えないので、レビューの多い2件だけ残す。"
     },
     {
       "id": "rb6924c483",
@@ -2081,7 +2406,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 3160,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "3,160円の綿100%ガーゼが1,420円。2重と6重から選べる。",
       "tags": [
         "送料無料"
       ],
@@ -2091,7 +2416,26 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T21:38:12",
       "lastSeen": "2026-09-05",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "compare",
+        "target": "厚みで選びたい人",
+        "problem": "ガーゼは何重がいいのか分からない",
+        "use_case": "おくるみ・スリーパー",
+        "features": [
+          "2重と6重のガーゼ",
+          "綿100%",
+          "スワドル・スリーパー・ケットに使える",
+          "夏用"
+        ],
+        "benefits": [
+          "厚みを選べる",
+          "使い方を変えられる"
+        ],
+        "hook": "ガーゼの厚み、何重がちょうどいいのか毎回迷う。",
+        "body": "綿100%のガーゼです。2重と6重から選べます。\nおくるみにもスリーパーにも使えます。",
+        "cta": "save"
+      }
     },
     {
       "id": "rddeb3b6e5",
@@ -2110,7 +2454,7 @@
       "endTime": "",
       "listPrice": 2490,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,490円のNMNサプリ30日分が1,490円。国産・日本製。",
       "tags": [],
       "points": [],
       "description": "",
@@ -2118,7 +2462,24 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T20:32:06",
       "lastSeen": "2026-09-05",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "compare",
+        "target": "産地で選びたい人",
+        "problem": "どこで作られたかが書いていない商品が多い",
+        "use_case": "毎日",
+        "features": [
+          "NMN",
+          "国産・日本製",
+          "30日分"
+        ],
+        "benefits": [
+          "製造国が書いてある"
+        ],
+        "hook": "NMNは値段の幅が広いわりに、どこで作ったのかが書いていない。",
+        "body": "国産・日本製のNMNサプリメントです。30日分。",
+        "cta": "compare"
+      }
     },
     {
       "id": "r19936e0b3",
@@ -2473,7 +2834,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 6600,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "6,600円のロング丈ヨガトップスが2,673円。2wayのメッシュ素材。",
       "tags": [
         "送料無料"
       ],
@@ -2483,7 +2844,27 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T21:36:07",
       "lastSeen": "2026-09-05",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "ヨガ用のトップスを探している人",
+        "problem": "短いと動くたびに気になる",
+        "use_case": "ヨガ・リラックス",
+        "features": [
+          "2wayのヨガトップス",
+          "ロング丈",
+          "長袖",
+          "メッシュ",
+          "レディース"
+        ],
+        "benefits": [
+          "丈が長い",
+          "着方を変えられる"
+        ],
+        "hook": "動くたびに裾を直しているうちに、集中が切れる。",
+        "body": "ロング丈のヨガトップスです。長袖で、メッシュ素材。\n2通りの着方ができます。",
+        "cta": "save"
+      }
     },
     {
       "id": "r3c3bd5dc4",
@@ -2596,7 +2977,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 5998,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "5,998円の冷凍オムライス8袋が2,999円。レンジで温めるだけ、送料込み。",
       "tags": [
         "送料無料"
       ],
@@ -2606,7 +2987,26 @@
       "postedAt": "2026-09-04",
       "bumpedAt": "2026-09-04T20:30:15",
       "lastSeen": "2026-09-05",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "作る時間がない日がある人",
+        "problem": "疲れた日ほど台所に立てない",
+        "use_case": "昼・夜・仕送り",
+        "features": [
+          "オムライス 210g×8袋",
+          "冷凍",
+          "電子レンジで温めるだけ",
+          "送料込み"
+        ],
+        "benefits": [
+          "レンジだけで済む",
+          "8食まとめて置ける"
+        ],
+        "hook": "疲れた日ほど、台所に立つのが遠い。",
+        "body": "冷凍のオムライスです。210gが8袋。電子レンジで温めるだけ。\n送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "rdacf13a21",
@@ -4381,7 +4781,9 @@
         "hook": "朝、作る時間はないのに何か口には入れたい。",
         "body": "溶かして飲む粉末スムージーです。108種類の生酵素と食物繊維、乳酸菌入り。\n3つの味から選べます。",
         "cta": "save"
-      }
+      },
+      "hidden": true,
+      "hiddenReason": "2026-09-05: 同じ店（DUEN SHOP）の同じ値段の商品が4件あった。柄違いを並べても読む人の選択肢は増えないので、レビューの多い2件だけ残す。"
     },
     {
       "id": "raf2707125",
@@ -5281,7 +5683,9 @@
         "hook": "ルテインのサプリ、配合量の書き方がばらばらで比べにくい。",
         "body": "ルテイン105mgにゼアキサンチンとビルベリーを合わせた30日分です。\n栄養機能食品。",
         "cta": "compare"
-      }
+      },
+      "hidden": true,
+      "hiddenReason": "2026-09-05: 同じ店（美と健康のレバンテ楽天市場店）の同じ値段の商品が3件あった。柄違いを並べても読む人の選択肢は増えないので、レビューの多い2件だけ残す。"
     },
     {
       "id": "r460f4734a",
@@ -6853,7 +7257,9 @@
         "hook": "同じ名前のサプリでも、中身の量は全然ちがう。",
         "body": "ルテイン100mgとゼアキサンチン5mgのサプリメントです。フリー体の高濃度タイプ。\n30日分、国内製造。",
         "cta": "compare"
-      }
+      },
+      "hidden": true,
+      "hiddenReason": "2026-09-05: 同じ店（DUEN SHOP）の同じ値段の商品が4件あった。柄違いを並べても読む人の選択肢は増えないので、レビューの多い2件だけ残す。"
     },
     {
       "id": "rc789b8f62",
@@ -8116,7 +8522,9 @@
           "日本製"
         ],
         "cta": "none"
-      }
+      },
+      "hidden": true,
+      "hiddenReason": "2026-09-05: 同じ店（着物なごみや）の同じ値段の商品が4件あった。柄違いを並べても読む人の選択肢は増えないので、レビューの多い2件だけ残す。"
     },
     {
       "id": "r8944c3d05",
@@ -8160,7 +8568,9 @@
           "日本製"
         ],
         "cta": "save"
-      }
+      },
+      "hidden": true,
+      "hiddenReason": "2026-09-05: 同じ店（着物なごみや）の同じ値段の商品が4件あった。柄違いを並べても読む人の選択肢は増えないので、レビューの多い2件だけ残す。"
     },
     {
       "id": "re783e2082",
@@ -9417,7 +9827,9 @@
         "cta": "question",
         "cta_text": "どのたれが気になりますか。"
       },
-      "pitch_status": "ready"
+      "pitch_status": "ready",
+      "hidden": true,
+      "hiddenReason": "2026-09-05: 同じ店（北海道産直グルメ ぼーの）の同じ値段の商品が3件あった。柄違いを並べても読む人の選択肢は増えないので、レビューの多い2件だけ残す。"
     },
     {
       "id": "r99d57c679",
