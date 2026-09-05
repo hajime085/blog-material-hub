@@ -97,7 +97,8 @@
     "product:r97eb34d64",
     "product:r1d0e2ea9d",
     "product:rb4a28eb5d",
-    "product:r989f74d15"
+    "product:r989f74d15",
+    "product:re719455ba"
   ],
   "log": [
     {
@@ -1425,6 +1426,20 @@
       "hook_type": "scene",
       "cta_type": "save",
       "category": "sports",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:re719455ba",
+      "id": "17922157902424480",
+      "at": "2026-09-05 23:21",
+      "kind": "product",
+      "slot": 23,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "problem",
+      "cta_type": "empathy",
+      "category": "fashion",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
