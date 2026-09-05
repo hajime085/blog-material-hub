@@ -89,7 +89,8 @@
     "page:kaimawari:2026-09-04",
     "tip:18",
     "tip:32",
-    "product:rbd400d609"
+    "product:rbd400d609",
+    "tip:36"
   ],
   "log": [
     {
@@ -1307,6 +1308,20 @@
       "category": "books",
       "logic_version": "marketing_v2",
       "link": "reply"
+    },
+    {
+      "key": "tip:36",
+      "id": "17894840745393671",
+      "at": "2026-09-05 14:20",
+      "kind": "tip",
+      "slot": 14,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
     }
   ]
 }
