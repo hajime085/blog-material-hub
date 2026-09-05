@@ -70,6 +70,44 @@ API_FIELDS = ("title", "rawTitle", "price", "image", "affiliateUrl", "shop",
               "startTime", "endTime")
 
 
+# 手で書いた内容の物置。
+#
+# 2026-09-05: 9/4に商品理解を書いた「とろろ昆布」が、
+# セールがいったん終わって外され、翌日また拾われたときに
+# 新規として入り直し、書いた内容が消えていた。
+# API_FIELDS の仕組みは「更新」のときしか効かない。
+# 消して入れ直す経路では守れていなかった。
+#
+# 消すときに預けておき、同じ商品がまた来たら戻す。
+HAND_FIELDS = ("caption", "points", "description", "tags", "listPrice",
+               "marketing", "pitch_status", "unitNote", "hidden",
+               "hiddenReason")
+
+
+def stash_hand(attic, p):
+    """消す商品の手書きぶんを物置に預ける。"""
+    code = p.get("itemCode")
+    if not code:
+        return
+    body = {k: p[k] for k in HAND_FIELDS if p.get(k)}
+    if body:
+        body["_stashedAt"] = datetime.now(JST).strftime("%Y-%m-%d")
+        attic[code] = body
+
+
+def restore_hand(attic, p):
+    """また拾った商品に、預けてあった手書きぶんを戻す。"""
+    body = attic.get(p.get("itemCode"))
+    if not body:
+        return False
+    for k, v in body.items():
+        if k.startswith("_"):
+            continue
+        if not p.get(k):
+            p[k] = v
+    return True
+
+
 # ------------------------------------------------------------------ helpers
 def load_json(name, default=None):
     path = os.path.join(ROOT, name)
@@ -1455,6 +1493,8 @@ def main():
 
     existing_doc = load_json("products.json", {}) or {}
     existing = {p["id"]: p for p in existing_doc.get("products", [])}
+    # 手で書いた内容の物置。消した商品のぶんを預けてある。
+    attic = load_json("hand_attic.json", {}) or {}
     history = load_json("price_history.json", {}) or {}
     today = datetime.now(JST).strftime("%Y-%m-%d")
     min_off = cfg["rakuten"].get("minDiscountRate", 15)
@@ -1677,6 +1717,10 @@ def main():
                 dropped += 1
                 continue          # 通常モードでは、値下がりしていない新規は載せない
 
+            # 前に載せていて外した商品が、また拾えることがある。
+            # そのとき手で書いた内容が消えていた（2026-09-05）。物置から戻す。
+            if not prev and restore_hand(attic, item):
+                print("  ↩ 手で書いた内容を戻しました: %s" % item["title"][:30])
             result[pid] = item
             if prev:
                 kept += 1
@@ -1761,6 +1805,7 @@ def main():
         got = data.get("Items") or []
         if not got:
             gone.append((p["title"], "見つかりません（売り切れの可能性）"))
+            stash_hand(attic, p)
             del result[pid]
             expired += 1
             time.sleep(REQUEST_INTERVAL)
@@ -1769,6 +1814,7 @@ def main():
         ok, why, _ = sale_status(it, sale_tolerance)
         if not ok:
             gone.append((p["title"], why))
+            stash_hand(attic, p)
             del result[pid]
             expired += 1
             time.sleep(REQUEST_INTERVAL)
@@ -1872,9 +1918,12 @@ def main():
             % (len(existing), len(history))
         )
 
+    # 消した商品の手書きぶんは物置に残す。また拾えたときに戻すため。
+    save_json("hand_attic.json", attic)
     save_json("products.json", {
-        "_readme": "商品データ。手で書いた caption / tags / points / description / hidden は "
-                   "fetch_rakuten.py を再実行しても保持されます。",
+        "_readme": "商品データ。手で書いた caption / points / description / tags / "
+                   "marketing / hidden は、更新でも、いったん外して拾い直したときでも "
+                   "残ります（外すときは hand_attic.json に預けています）。",
         "updatedAt": today,
         "products": products,
     })
