@@ -100,7 +100,8 @@
     "product:r989f74d15",
     "product:re719455ba",
     "product:r330c9bc42",
-    "product:rfb02220a0"
+    "product:rfb02220a0",
+    "tip:33"
   ],
   "log": [
     {
@@ -1472,6 +1473,20 @@
       "category": "baby-toy",
       "logic_version": "marketing_v2",
       "link": "reply"
+    },
+    {
+      "key": "tip:33",
+      "id": "18095849147181293",
+      "at": "2026-09-06 07:21",
+      "kind": "tip",
+      "slot": 7,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
     }
   ]
 }
