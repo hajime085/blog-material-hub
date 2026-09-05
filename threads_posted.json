@@ -88,7 +88,8 @@
     "product:r528c4512a",
     "page:kaimawari:2026-09-04",
     "tip:18",
-    "tip:32"
+    "tip:32",
+    "product:rbd400d609"
   ],
   "log": [
     {
@@ -1292,6 +1293,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:rbd400d609",
+      "id": "17957366700219003",
+      "at": "2026-09-05 13:00",
+      "kind": "product",
+      "slot": 13,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "problem",
+      "cta_type": "experience",
+      "category": "books",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
