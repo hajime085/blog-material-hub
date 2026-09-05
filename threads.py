@@ -1255,6 +1255,22 @@ def next_action(hours, done, t, until, last, gap_min, max_late_h=3):
     return ("wait", max(60, min((nxt - t).total_seconds(), 300)))
 
 
+def burst_now(t):
+    """セールの山場（JST 20時台・21時台）かどうか。
+
+    2026-09-04: 10分おきに起こしたのに、1時間に1本しか出なかった。
+    枠を「時」で管理しているので、その時の枠が埋まると
+    次の時が来るまで next_action が「待て」を返す。
+    起こす回数だけ増やしても、この作りのままでは本数は増えない。
+
+    山場だけは枠を見ない。間隔（minGapMin）は run_once が
+    アカウントの最後の投稿と突き合わせて守るので、そちらに任せる。
+    """
+    if datetime.now(JST).strftime("%Y-%m-%d %H:%M") > SALE_UNTIL:
+        return False
+    return t.hour in (20, 21)
+
+
 def serve(cfg, until_s=None, window_h=4.0, gap_min=25, max_late_h=3,
           dry=False, push=False):
     """終わりの時刻まで生き続け、来た枠を出し、落ちた枠を埋める。"""
@@ -1287,6 +1303,16 @@ def serve(cfg, until_s=None, window_h=4.0, gap_min=25, max_late_h=3,
         t = now()
         posted = load(STATE, {"keys": [], "log": []}) or {"keys": [], "log": []}
         done = done_slots(posted, t.date())
+        if burst_now(t):
+            # 枠を見ずに1本出して終わる。間隔は run_once が守る。
+            print("\n── 山場の1本を出します（いま %s）" % t.strftime("%H:%M"))
+            n, why = run_once(cfg, posted, slot_hour=t.hour, dry=dry, late=False)
+            if dry:
+                print("（--dry-run なので記録は残しません）")
+                return
+            if n and push and not push_state():
+                print("記録を送れませんでした。ここで止めます。", file=sys.stderr)
+            return
         act = next_action(hours, done, t, until, last, gap_min,
                            max_late_h)
 
