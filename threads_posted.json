@@ -86,7 +86,8 @@
     "product:raf00dd26d",
     "product:r36091d231",
     "product:r528c4512a",
-    "page:kaimawari:2026-09-04"
+    "page:kaimawari:2026-09-04",
+    "tip:18"
   ],
   "log": [
     {
@@ -1262,6 +1263,20 @@
       "category": null,
       "logic_version": null,
       "link": "reply"
+    },
+    {
+      "key": "tip:18",
+      "id": "18091723169138731",
+      "at": "2026-09-05 09:20",
+      "kind": "tip",
+      "slot": 9,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
     }
   ]
 }
