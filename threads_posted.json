@@ -96,7 +96,8 @@
     "tip:19",
     "product:r97eb34d64",
     "product:r1d0e2ea9d",
-    "product:rb4a28eb5d"
+    "product:rb4a28eb5d",
+    "product:r989f74d15"
   ],
   "log": [
     {
@@ -1410,6 +1411,20 @@
       "hook_type": "problem",
       "cta_type": "empathy",
       "category": "pc",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r989f74d15",
+      "id": "18135884902542462",
+      "at": "2026-09-05 22:20",
+      "kind": "product",
+      "slot": 22,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "save",
+      "category": "sports",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
