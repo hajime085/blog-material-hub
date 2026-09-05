@@ -99,7 +99,8 @@
     "product:rb4a28eb5d",
     "product:r989f74d15",
     "product:re719455ba",
-    "product:r330c9bc42"
+    "product:r330c9bc42",
+    "product:rfb02220a0"
   ],
   "log": [
     {
@@ -1455,6 +1456,20 @@
       "hook_type": "compare",
       "cta_type": "save",
       "category": "beauty",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:rfb02220a0",
+      "id": "18115436146976244",
+      "at": "2026-09-06 01:21",
+      "kind": "product",
+      "slot": 1,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "baby-toy",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
