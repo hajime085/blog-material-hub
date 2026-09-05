@@ -91,7 +91,8 @@
     "tip:32",
     "product:rbd400d609",
     "tip:36",
-    "tip:07"
+    "tip:07",
+    "product:r5ac1f69f1"
   ],
   "log": [
     {
@@ -1337,6 +1338,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:r5ac1f69f1",
+      "id": "18077092166421113",
+      "at": "2026-09-05 18:00",
+      "kind": "product",
+      "slot": 18,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "save",
+      "category": "sports",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
