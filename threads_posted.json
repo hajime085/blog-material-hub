@@ -117,7 +117,8 @@
     "product:r3e44dcf5c",
     "product:rb6924c483",
     "product:rb0f238890",
-    "product:r73bd1c0f8"
+    "product:r73bd1c0f8",
+    "product:r57bb79dd9"
   ],
   "log": [
     {
@@ -1725,6 +1726,20 @@
       "hook_type": "scene",
       "cta_type": "save",
       "category": "sports",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r57bb79dd9",
+      "id": "17879669379528599",
+      "at": "2026-09-06 21:31",
+      "kind": "product",
+      "slot": 21,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "beauty",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
