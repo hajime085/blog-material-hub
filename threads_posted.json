@@ -123,7 +123,8 @@
     "product:r0b880f618",
     "product:r4097dc932",
     "product:rb9808baba",
-    "product:refcdc1c00"
+    "product:refcdc1c00",
+    "product:r7ff263388"
   ],
   "log": [
     {
@@ -1815,6 +1816,20 @@
       "hook_type": "discovery",
       "cta_type": "save",
       "category": "pet",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r7ff263388",
+      "id": "18175312654432694",
+      "at": "2026-09-07 01:21",
+      "kind": "product",
+      "slot": 1,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "problem",
+      "cta_type": "save",
+      "category": "fashion",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
