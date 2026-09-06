@@ -102,7 +102,8 @@
     "product:r330c9bc42",
     "product:rfb02220a0",
     "tip:33",
-    "tip:37"
+    "tip:37",
+    "tip:08"
   ],
   "log": [
     {
@@ -1495,6 +1496,20 @@
       "at": "2026-09-06 09:21",
       "kind": "tip",
       "slot": 9,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
+    },
+    {
+      "key": "tip:08",
+      "id": "18181745989418211",
+      "at": "2026-09-06 12:21",
+      "kind": "tip",
+      "slot": 12,
       "catchup": false,
       "cap": null,
       "hook_type": null,
