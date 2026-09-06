@@ -120,7 +120,8 @@
     "product:r73bd1c0f8",
     "product:r57bb79dd9",
     "product:r0e73010c4",
-    "product:r0b880f618"
+    "product:r0b880f618",
+    "product:r4097dc932"
   ],
   "log": [
     {
@@ -1770,6 +1771,20 @@
       "hook_type": "problem",
       "cta_type": "save",
       "category": "fashion",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r4097dc932",
+      "id": "18091276730146679",
+      "at": "2026-09-06 22:21",
+      "kind": "product",
+      "slot": 22,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "save",
+      "category": "food",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
