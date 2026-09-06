@@ -44,12 +44,31 @@ jobs:
           RAKUTEN_AFFILIATE_ID: ${{ secrets.RAKUTEN_AFFILIATE_ID }}
         run: python3 fetch_rakuten.py --event --scheduled
 
+      # 落ちた理由を実行の要約に残す。
+      #
+      # 2026-09-06: 10回に2回ここで落ちていた。
+      # ログは管理者権限が無いと読めず、原因が分からないまま数日過ぎた。
+      # 出力を控えて、落ちたら末尾を要約に貼る。
       - name: 価格を見に行く
+        id: watch
         env:
           RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
           RAKUTEN_ACCESS_KEY: ${{ secrets.RAKUTEN_ACCESS_KEY }}
           RAKUTEN_AFFILIATE_ID: ${{ secrets.RAKUTEN_AFFILIATE_ID }}
-        run: python3 fetch_rakuten.py --watch
+        run: |
+          set -o pipefail
+          python3 fetch_rakuten.py --watch 2>&1 | tee .watch_log.txt
+
+      - name: 落ちた理由を残す
+        if: failure() && steps.watch.outcome == 'failure'
+        run: |
+          {
+            echo "## 価格の見張りが落ちました"
+            echo ""
+            echo '```'
+            tail -40 .watch_log.txt || echo "（ログが残っていません）"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: サイトを作り直す
         run: python3 build.py | tee .build_log.txt

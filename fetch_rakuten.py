@@ -1545,6 +1545,7 @@ def main():
             return 0
         return round((lp - raw["price"]) / lp * 100)
 
+    failed_cats = []
     for cat in cats:
         print("▼ %s" % cat["label"])
         # 深く下がっているものから採る。
@@ -1553,9 +1554,21 @@ def main():
         # 79%OFFの商品が16%OFFの商品に押し出されて捨てられていた。
         # 実際、自前の追跡で見つけた40%以上の値下がり25件のうち、
         # 20件がサイトに載っていなかった。
-        raws = sorted(fetch_category(cat, app_id, access_key, aff_id, hits,
-                                     site_url, ng_keyword, sort_by, sale_keywords),
-                      key=est_off, reverse=True)
+        # 1つの売場で楽天が応えなくても、その回をまるごと落とさない。
+        #
+        # 2026-09-06: 10回に2回、ここで例外が出て見張りが失敗していた。
+        # 11売場のうち1つが応えないだけで、価格の更新も掲載終了の反映も
+        # 全部止まっていた。落ちた売場は次の回に回せばよい。
+        try:
+            raws = sorted(fetch_category(cat, app_id, access_key, aff_id, hits,
+                                         site_url, ng_keyword, sort_by,
+                                         sale_keywords),
+                          key=est_off, reverse=True)
+        except Exception as ex:                              # noqa: BLE001
+            print("  × %s は取れませんでした: %s" % (cat["label"], ex),
+                  file=sys.stderr)
+            failed_cats.append(cat["label"])
+            continue
         for raw in raws:
             if not raw["price"] or not raw["title"]:
                 continue
@@ -1928,6 +1941,11 @@ def main():
         "products": products,
     })
     save_json("price_history.json", history)
+
+    if failed_cats:
+        print("\n⚠️  取れなかった売場が %d件あります: %s"
+              % (len(failed_cats), "、".join(failed_cats)))
+        print("   次の回で拾い直します。")
 
     no_caption = sum(1 for p in products if not p.get("caption"))
     print("\n✅ products.json を更新しました")

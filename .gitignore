@@ -31,3 +31,4 @@ products.json.sample_backup
 backup/
 .threads.lock
 .build_log.txt
+.watch_log.txt
