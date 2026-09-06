@@ -116,7 +116,8 @@
     "product:rfcd2ebeff",
     "product:r3e44dcf5c",
     "product:rb6924c483",
-    "product:rb0f238890"
+    "product:rb0f238890",
+    "product:r73bd1c0f8"
   ],
   "log": [
     {
@@ -1710,6 +1711,20 @@
       "hook_type": "compare",
       "cta_type": "compare",
       "category": "fashion",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r73bd1c0f8",
+      "id": "18077148122414419",
+      "at": "2026-09-06 21:21",
+      "kind": "product",
+      "slot": 21,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "save",
+      "category": "sports",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
