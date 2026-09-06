@@ -108,7 +108,8 @@
     "tip:20",
     "tip:38",
     "product:rfdafdc622",
-    "tip:09"
+    "tip:09",
+    "product:r38aefbf21"
   ],
   "log": [
     {
@@ -1592,6 +1593,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:r38aefbf21",
+      "id": "18137117605614183",
+      "at": "2026-09-06 20:00",
+      "kind": "product",
+      "slot": 20,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "problem",
+      "cta_type": "save",
+      "category": "sports",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
