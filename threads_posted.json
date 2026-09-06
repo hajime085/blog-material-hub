@@ -121,7 +121,8 @@
     "product:r57bb79dd9",
     "product:r0e73010c4",
     "product:r0b880f618",
-    "product:r4097dc932"
+    "product:r4097dc932",
+    "product:rb9808baba"
   ],
   "log": [
     {
@@ -1785,6 +1786,20 @@
       "hook_type": "scene",
       "cta_type": "save",
       "category": "food",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:rb9808baba",
+      "id": "17989457726852902",
+      "at": "2026-09-06 23:00",
+      "kind": "product",
+      "slot": 23,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "compare",
+      "cta_type": "save",
+      "category": "beauty",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
