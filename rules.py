@@ -497,6 +497,34 @@ def rule_no_lookalike_pileup(ctx):
     return []
 
 
+
+def rule_daily_routine_is_one_piece(ctx):
+    """日次の手順を途中で切らない。「今日の分やって」は挨拶まで含む。
+
+    2026-09-06: 手順9（外への挨拶）をやらずに終えた。
+    3回まわす話をしたときに「朝の一式（1〜8）」と書き足したせいで、
+    自分の書いた覚え書きを読み違えた。
+    番号で切ると、その境目で必ず落ちる。
+
+    覚え書きに「1〜9すべて」と書いてあるかを機械で見る。
+    """
+    import os
+    p = os.path.expanduser(
+        "~/.claude/projects/-Users-furusawahatsu-Desktop-blog-material-hub"
+        "/memory/daily-routine.md")
+    if not os.path.exists(p):
+        return []          # 手元に覚え書きが無い環境では見ない
+    with open(p, encoding="utf-8") as f:
+        src = f.read()
+    if "1〜9すべて" not in src:
+        return ["日次の手順に「1〜9すべて」の一文がありません。"
+                "途中で切れる書き方に戻っています"]
+    if "朝の一式（1〜8）は" in src:
+        return ["日次の手順に「朝の一式（1〜8）」が残っています。"
+                "この書き方で挨拶を落としました（2026-09-06）"]
+    return []
+
+
 RULES = [
     ("投稿は商品理解のあるものだけ", rule_post_needs_pitch),
     ("「どんな商品？」が出る", rule_what_is_it),
@@ -520,6 +548,7 @@ RULES = [
     ("編集部の棚を放置しない", rule_featured_fresh),
     ("使わなくなった道を残さない", rule_no_dead_fallback),
     ("同じ店の似た商品を並べない", rule_no_lookalike_pileup),
+    ("日次の手順を途中で切らない", rule_daily_routine_is_one_piece),
     ("学びを止めない", rule_keep_learning),
 ]
 
