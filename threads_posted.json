@@ -115,7 +115,8 @@
     "product:re31eee71d",
     "product:rfcd2ebeff",
     "product:r3e44dcf5c",
-    "product:rb6924c483"
+    "product:rb6924c483",
+    "product:rb0f238890"
   ],
   "log": [
     {
@@ -1695,6 +1696,20 @@
       "hook_type": "compare",
       "cta_type": "save",
       "category": "baby-toy",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:rb0f238890",
+      "id": "18111669113098031",
+      "at": "2026-09-06 21:11",
+      "kind": "product",
+      "slot": 21,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "compare",
+      "cta_type": "compare",
+      "category": "fashion",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
