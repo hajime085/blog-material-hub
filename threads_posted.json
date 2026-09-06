@@ -103,7 +103,8 @@
     "product:rfb02220a0",
     "tip:33",
     "tip:37",
-    "tip:08"
+    "tip:08",
+    "product:r328f7d9b9"
   ],
   "log": [
     {
@@ -1517,6 +1518,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:r328f7d9b9",
+      "id": "18125795065832229",
+      "at": "2026-09-06 13:00",
+      "kind": "product",
+      "slot": 13,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "problem",
+      "cta_type": "save",
+      "category": "kaden",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
