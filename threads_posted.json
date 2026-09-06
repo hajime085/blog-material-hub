@@ -106,7 +106,8 @@
     "tip:08",
     "product:r328f7d9b9",
     "tip:20",
-    "tip:38"
+    "tip:38",
+    "product:rfdafdc622"
   ],
   "log": [
     {
@@ -1562,6 +1563,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:rfdafdc622",
+      "id": "18283886224289822",
+      "at": "2026-09-06 18:00",
+      "kind": "product",
+      "slot": 18,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "save",
+      "category": "fashion",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
