@@ -110,7 +110,8 @@
     "product:rfdafdc622",
     "tip:09",
     "product:r38aefbf21",
-    "product:r95f9c9687"
+    "product:r95f9c9687",
+    "product:r954e87b1b"
   ],
   "log": [
     {
@@ -1620,6 +1621,20 @@
       "hook_type": "scene",
       "cta_type": "save",
       "category": "beauty",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r954e87b1b",
+      "id": "18011699990951565",
+      "at": "2026-09-06 20:21",
+      "kind": "product",
+      "slot": 20,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "problem",
+      "cta_type": "experience",
+      "category": "pet",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
