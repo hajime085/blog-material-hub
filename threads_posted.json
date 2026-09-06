@@ -122,7 +122,8 @@
     "product:r0e73010c4",
     "product:r0b880f618",
     "product:r4097dc932",
-    "product:rb9808baba"
+    "product:rb9808baba",
+    "product:refcdc1c00"
   ],
   "log": [
     {
@@ -1800,6 +1801,20 @@
       "hook_type": "compare",
       "cta_type": "save",
       "category": "beauty",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:refcdc1c00",
+      "id": "17980528593113846",
+      "at": "2026-09-07 00:01",
+      "kind": "product",
+      "slot": 0,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "pet",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
