@@ -109,7 +109,8 @@
     "tip:38",
     "product:rfdafdc622",
     "tip:09",
-    "product:r38aefbf21"
+    "product:r38aefbf21",
+    "product:r95f9c9687"
   ],
   "log": [
     {
@@ -1605,6 +1606,20 @@
       "hook_type": "problem",
       "cta_type": "save",
       "category": "sports",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r95f9c9687",
+      "id": "18282614977288205",
+      "at": "2026-09-06 20:11",
+      "kind": "product",
+      "slot": 20,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "save",
+      "category": "beauty",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
