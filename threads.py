@@ -113,12 +113,22 @@ def recent_posts(uid, token, n=25):
     「まだ出していない」と読んで同じ知識投稿をもう一度出した。
     記録が欠けても、アカウントを見ていれば気づける。
     """
-    try:
-        d = api("GET", "%s/threads" % uid,
-                {"fields": "id,timestamp,text", "limit": n}, token)
-    except Exception:                                         # noqa: BLE001
-        return None
-    return d.get("data") or []
+    # 一度の失敗で None を返すと、呼び出し側の重複よけが丸ごと止まる。
+    # 「見えなかった」と「重複が無かった」が同じ扱いになり、
+    # 通信が1回つまずいただけで同じ投稿がもう一度出る。
+    # 2026-09-04 の重複は、これが引き金だった可能性が高い。
+    # 数回やり直してから、それでも駄目なときだけ None を返す。
+    for attempt in range(3):
+        try:
+            d = api("GET", "%s/threads" % uid,
+                    {"fields": "id,timestamp,text", "limit": n}, token)
+            return d.get("data") or []
+        except Exception as ex:                               # noqa: BLE001
+            if attempt == 2:
+                print("  自分の投稿を見に行けませんでした: %s" % ex,
+                      file=sys.stderr)
+                return None
+            time.sleep(3 * (attempt + 1))
 
 
 def head_of(text):
@@ -400,6 +410,8 @@ def schedule_recent(posted, days=SCHEDULE_GAP_DAYS):
     """最近この型を出したか。予定の投稿が続けざまに並ぶのを避ける。"""
     now = datetime.now(JST).replace(tzinfo=None)
     for x in reversed(posted.get("log") or []):
+        if x.get("failed"):
+            continue          # 出せなかったものは「出した」に数えない
         if not str(x.get("key", "")).startswith("schedule:"):
             continue
         try:
@@ -1091,6 +1103,13 @@ def run_once(cfg, posted, slot_hour=None, dry=False, late=False):
     gap = int((cfg.get("threads") or {}).get("minGapMin", 10))
     if live is None:
         live = recent_posts(uid, token)
+    # アカウントを見られないまま出すと、重複よけが働かない。
+    # 枠を1つ落とすより、同じ投稿を二度出すほうが痛い。
+    # 見えないときは出さない。
+    if live is None:
+        print("  自分の投稿を確認できないので、この枠は出しません。",
+              file=sys.stderr)
+        return 0, "blind"
     if live:
         t0 = live[0].get("timestamp") or ""
         try:
@@ -1147,6 +1166,18 @@ def run_once(cfg, posted, slot_hour=None, dry=False, late=False):
                 publish(uid, token, link, reply_to=pid)
         except Exception as ex:                           # noqa: BLE001
             print("  × %s の投稿に失敗: %s" % (key, ex), file=sys.stderr)
+            # 失敗したことを記録に残す。
+            #
+            # 2026-09-07: 20:41 の1本が出なかった。起動はしていたのに、
+            # なぜ出なかったのかを調べる材料が何も残っていなかった。
+            # 失敗は stderr に出るだけで、手順は緑のまま終わる。
+            # 価格ずれと同じで、誰も読まないところに置いても直らない。
+            posted.setdefault("log", []).append({
+                "key": key,
+                "at": datetime.now(JST).strftime("%Y-%m-%d %H:%M"),
+                "failed": True,
+                "error": str(ex)[:200],
+            })
             if "OAuth" in str(ex) or "190" in str(ex) or "401" in str(ex):
                 print("     トークンが切れている可能性があります。"
                       "手元で python3 threads.py --refresh を実行してください。",
@@ -1222,6 +1253,8 @@ def done_slots(posted, day):
     ds = day.strftime("%Y-%m-%d")
     out = set()
     for x in posted.get("log") or []:
+        if x.get("failed"):
+            continue          # 失敗した枠は埋まっていない。次の起動に拾わせる
         at = x.get("at") or ""
         if at[:10] != ds:
             continue
@@ -1570,6 +1603,29 @@ def doctor(days=7):
     else:
         print("直近 %.1f時間以内に動いています。" % gap)
     check_duplicates()
+    report_failures()
+
+
+def report_failures(days=7):
+    """出そうとして出せなかった投稿を数える。
+
+    2026-09-07: 20:41 の1本が出なかった。起動はしていたのに、
+    なぜ出なかったのかを調べる材料が何も残っていなかった。
+    失敗は stderr に流れるだけで、手順は緑のまま終わる。
+    数が残らないと、たまたまなのか続いているのかも分からない。
+    """
+    posted = load("threads_posted.json", {}) or {}
+    since = (datetime.now(JST).replace(tzinfo=None)
+             - timedelta(days=days)).strftime("%Y-%m-%d %H:%M")
+    bad = [x for x in (posted.get("log") or [])
+           if x.get("failed") and (x.get("at") or "") >= since]
+    if not bad:
+        print("この%d日、投稿に失敗した記録はありません。" % days)
+        return
+    print("\n⚠️  この%d日で %d件、投稿に失敗しています:" % (days, len(bad)))
+    for x in bad[-10:]:
+        print("   %s %s — %s" % (x.get("at"), x.get("key"),
+                                 (x.get("error") or "")[:80]))
 
 
 def main():

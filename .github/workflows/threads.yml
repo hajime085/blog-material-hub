@@ -106,6 +106,18 @@ jobs:
             python3 threads.py --serve --hours "$H" --push
           fi
 
+      # 投稿に失敗しても、これまでは stderr に流れるだけで
+      # 手順は緑のまま終わっていた。何本落ちたのかも残らない。
+      # 2026-09-07 に20:41の1本が消えたとき、調べる材料が何も無かった。
+      - name: 出せなかったものを残す
+        if: always()
+        run: |
+          if python3 ops/failed_posts.py >> "$GITHUB_STEP_SUMMARY"; then
+            :
+          else
+            echo "::warning::出せなかった投稿があります。実行の要約を見てください"
+          fi
+
       - name: 送り残しがあれば送る
         if: always()
         run: |

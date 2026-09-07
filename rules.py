@@ -581,28 +581,95 @@ def rule_unknown_flags_stop(ctx):
     return bad
 
 
-def rule_price_gap_is_surfaced(ctx):
-    """価格ずれを、自動実行でも人の目に入るところに出す。
+def rule_warnings_reach_a_human(ctx):
+    """検査の警告が、自動実行でも人の目に入るところに出る。
 
-    2026-09-07: 朝に価格ずれを1件直したのに、夜には6件たまっていた。
-    build.py は警告を出すが終了コードは 0 で、実行の要約にも出ないので、
-    自動実行では誰の目にも入らなかった。
-    うち2件は参考価格が消えたまま古い値引き額を出しており、
-    1件は値段が戻っているのにセール価格を書いたままだった。
+    2026-09-07: 価格ずれが半日で6件たまった。うち1件は値段が戻っているのに
+    「1,740円のケースが870円」と書いたままだった。
     このサイトが批判している「安く見えて安くない」を自分でやっていた。
 
-    見張りの手順に、価格ずれを要約へ出す段があるかを見る。
+    build.py は警告を出すが終了コードは 0 で、実行の要約にも出ない。
+    直る道が「私が手で回したとき」しか無かった。
+    半日で6件たまるのは見落としではなく、仕組みの穴。
+
+    最初は「合いません」を拾う段を足したが、それでは検査を足すたびに
+    同じ穴が開く。件名で拾わず「直していない警告」で拾う。
+
+    2つを見る:
+      1. 見張りの手順が、警告を要約へ出しているか
+      2. build.py が、直せた金額を書き出す前に直しているか
+         （知らせるだけでは、読む人がいないところで嘘が公開される）
     """
     import os
-    p = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                     ".github", "workflows", "watch.yml")
-    if not os.path.exists(p):
-        return []
-    with open(p, encoding="utf-8") as f:
-        src = f.read()
-    if "合いません" not in src:
-        return ["見張りの手順に、価格ずれを実行の要約へ出す段がありません。"
-                "自動実行では気づけません（2026-09-07）"]
+    here = os.path.dirname(os.path.abspath(__file__))
+    out = []
+
+    p = os.path.join(here, ".github", "workflows", "watch.yml")
+    if os.path.exists(p):
+        with open(p, encoding="utf-8") as f:
+            wf = f.read()
+        if "直していない警告" not in wf:
+            out.append("見張りの手順が、検査の警告を実行の要約へ出していません。"
+                       "自動実行では気づけません（2026-09-07）")
+
+    src = ctx.get("build_py") or ""
+    if "def reconcile_prices" not in src:
+        out.append("build.py が、書き出す前に金額を直していません。"
+                   "知らせるだけでは、読む人のいないところで嘘が公開されます"
+                   "（2026-09-07）")
+    # 「reconcile_prices(all_products)」で探すと def の行に当たってしまい、
+    # 呼び出しを消しても鳴らない。2026-09-07、壊して確かめて気づいた。
+    # 検査そのものが素通りするのが、いちばん質が悪い。呼び出しの形で探す。
+    elif "= reconcile_prices(" not in src:
+        out.append("reconcile_prices が定義されているのに呼ばれていません")
+    return out
+
+
+def rule_failed_posts_leave_a_trace(ctx):
+    """出せなかった投稿が、記録に残って人の目に入る。
+
+    2026-09-07: 10分おきの12本のうち20:41の1本が出なかった。
+    起動はしていたのに、なぜ出なかったのかを調べる材料が何も無かった。
+    失敗は stderr に流れるだけで、手順は緑のまま終わり、
+    記録にも残らないので、たまたまか続いているのかも分からない。
+
+    価格ずれとまったく同じ形の穴。誰も読まないところに置いても直らない。
+    """
+    import os
+    here = os.path.dirname(os.path.abspath(__file__))
+    out = []
+    src = ctx["threads_py"]
+    if '"failed": True' not in src:
+        out.append("threads.py が、出せなかった投稿を記録に残していません"
+                   "（2026-09-07）")
+    if 'x.get("failed")' not in src:
+        out.append("失敗した記録を「出した」と数えてしまいます。"
+                   "枠が埋まったことにされ、次の起動が拾いません")
+    p = os.path.join(here, ".github", "workflows", "threads.yml")
+    if os.path.exists(p):
+        with open(p, encoding="utf-8") as f:
+            if "failed_posts.py" not in f.read():
+                out.append("投稿の手順が、出せなかったものを実行の要約へ"
+                           "出していません")
+    if not os.path.exists(os.path.join(here, "ops", "failed_posts.py")):
+        out.append("ops/failed_posts.py がありません")
+    return out
+
+
+def rule_blind_means_stop(ctx):
+    """自分の投稿を確認できないときは、出さない。
+
+    2026-09-07: recent_posts は通信が1回つまずくと None を返し、
+    呼び出し側は「重複が無かった」と同じ扱いで先へ進んでいた。
+    重複よけが、見えないところで丸ごと止まっていた。
+    9/4 の重複投稿は、これが引き金だった可能性が高い。
+
+    枠を1つ落とすより、同じ投稿を二度出すほうが痛い。
+    """
+    src = ctx["threads_py"]
+    if 'return 0, "blind"' not in src:
+        return ["自分の投稿を確認できないまま投稿しています。"
+                "重複よけが働きません（2026-09-07）"]
     return []
 
 
@@ -632,7 +699,9 @@ RULES = [
     ("日次の手順を途中で切らない", rule_daily_routine_is_one_piece),
     ("つながらなかったらやり直す", rule_network_failures_retried),
     ("知らない指定で止まる", rule_unknown_flags_stop),
-    ("価格ずれを表に出す", rule_price_gap_is_surfaced),
+    ("警告が人に届く", rule_warnings_reach_a_human),
+    ("出せなかった投稿を記録に残す", rule_failed_posts_leave_a_trace),
+    ("見えないときは出さない", rule_blind_means_stop),
     ("学びを止めない", rule_keep_learning),
 ]
 

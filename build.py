@@ -2584,11 +2584,121 @@ def clean():
             os.remove(full)
 
 
+def stale_prices(p):
+    """その商品の文章に混じっている、いまの値段と合わない金額を挙げる。
+
+    check_caption_prices と同じ見方をする。あちらは知らせるだけ、
+    こちらは直すために使う。
+    """
+    import re as _re
+    ok = {p.get("price"), p.get("listPrice") or 0}
+    for m in _re.findall(r"([\d,]{3,9})\s*円", p.get("unitNote") or ""):
+        ok.add(int(m.replace(",", "")))
+    fields = [("caption", p.get("caption") or ""),
+              ("description", p.get("description") or "")]
+    fields += [("points[%d]" % i, x) for i, x in enumerate(p.get("points") or [])]
+    mk = p.get("marketing") or {}
+    fields += [("marketing.hook", mk.get("hook") or ""),
+               ("marketing.body", mk.get("body") or "")]
+    out = []
+    for where, text in fields:
+        for m in _re.findall(r"([\d,]{3,9})\s*円", text):
+            v = int(m.replace(",", ""))
+            if v in ok:
+                continue
+            near = _re.search(r".{0,18}%s\s*円.{0,12}" % _re.escape(m), text)
+            around = near.group(0) if near else ""
+            if _re.search(r"(あたり|ぽっきり|1本|1袋|1包|1個|1枚|1食|1杯|1ヶ月|1kg|から|切ります|切る)",
+                          around):
+                continue
+            out.append((where, m, v))
+    return out
+
+
+def reconcile_prices(all_products):
+    """書き出す前に、文章の金額をいまの値段に合わせる。合わせられなければ消す。
+
+    2026-09-07: 半日で6件たまった。うち1件は値段が戻っているのに
+    「1,740円のケースが870円」と書いたままだった。
+    このサイトが批判している「安く見えて安くない」を自分でやっていた。
+
+    それまでは check_caption_prices が知らせるだけだった。
+    知らせる先は build.py の出力で、終了コードは 0。
+    自動実行では誰も読まないので、直る道が「私が手で回す」しか無かった。
+    半日で6件たまるのは、見落としではなく仕組みの穴。
+
+    だから、知らせる前に直す。
+      1. 「A円の○○がB円」の形なら、A=参考価格・B=実売に書き直す
+      2. 参考価格が消えているなら、参考価格の部分ごと落とす
+      3. どちらでもなければ、その文を出さない（間違った値段を載せるより良い）
+    直せないものを載せないので、ページには必ず正しい値段だけが出る。
+
+    ビルドは止めない。止めると古いページが残り、間違った値段が
+    そのまま公開され続ける。前へ倒して直すほうが安全。
+    """
+    import re as _re
+
+    def yen(n):
+        return "{:,}".format(n)
+
+    fixed, dropped = [], []
+    for p in all_products:
+        stale = stale_prices(p)
+        if not stale:
+            continue
+        price = p.get("price")
+        lp = p.get("listPrice") or 0
+        cap = p.get("caption") or ""
+
+        # 1・2. 「A円の○○がB円」型は、数字を入れ替えれば正しくなる。
+        m = _re.match(r"^([\d,]{3,9})\s*円の(.+?)が([\d,]{3,9})\s*円", cap)
+        if m:
+            if lp and lp > price:
+                new = "%s円の%sが%s円" % (yen(lp), m.group(2), yen(price))
+            else:
+                # 参考価格が消えた。値引き幅を語れないので、そこを落とす。
+                new = "%sが%s円" % (m.group(2), yen(price))
+            p["caption"] = new + cap[m.end():]
+            # 箇条書きの「A円からB円へ」も同じ理由で古くなる。作り直せない
+            # ものは落とす。ここは飾りなので、無くてもページは成り立つ。
+            p["points"] = [x for x in (p.get("points") or [])
+                           if not _re.search(r"[\d,]{3,9}\s*円", x)]
+            if not stale_prices(p):
+                fixed.append((p["id"], cap, p["caption"]))
+                continue
+
+        # 3. 直せない文は出さない。
+        for where, _txt, _v in stale_prices(p):
+            if where.startswith("points["):
+                p["points"] = [x for x in (p.get("points") or [])
+                               if not _re.search(r"[\d,]{3,9}\s*円", x)]
+            elif where.startswith("marketing."):
+                p.setdefault("marketing", {})[where.split(".", 1)[1]] = ""
+            else:
+                p[where] = ""
+        dropped.append(p["id"])
+
+    if fixed or dropped:
+        print("\n金額をいまの値段に合わせました:")
+        for pid, before, after in fixed:
+            print("   %s" % pid)
+            print("      前: %s" % before[:60])
+            print("      後: %s" % after[:60])
+        for pid in dropped:
+            print("   %s 直せないので、その文を出しません" % pid)
+    return len(fixed), len(dropped)
+
+
 def main():
     cfg = load("config.json")
     data = load("products.json")
-    products = data["products"] if isinstance(data, dict) else data
-    products = [p for p in products if not p.get("hidden")]
+    all_products = data["products"] if isinstance(data, dict) else data
+    # 書き出す前に直す。検査は「出したあとに知らせる」ので間に合わない。
+    n_fixed, n_dropped = reconcile_prices(all_products)
+    if n_fixed or n_dropped:
+        with open(os.path.join(ROOT, "products.json"), "w", encoding="utf-8") as _f:
+            json.dump(data, _f, ensure_ascii=False, indent=2)
+    products = [p for p in all_products if not p.get("hidden")]
     cats = {c["slug"]: c for c in cfg["categories"]}
 
     unknown = {p["category"] for p in products} - set(cats)
