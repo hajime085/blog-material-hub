@@ -581,6 +581,31 @@ def rule_unknown_flags_stop(ctx):
     return bad
 
 
+def rule_price_gap_is_surfaced(ctx):
+    """価格ずれを、自動実行でも人の目に入るところに出す。
+
+    2026-09-07: 朝に価格ずれを1件直したのに、夜には6件たまっていた。
+    build.py は警告を出すが終了コードは 0 で、実行の要約にも出ないので、
+    自動実行では誰の目にも入らなかった。
+    うち2件は参考価格が消えたまま古い値引き額を出しており、
+    1件は値段が戻っているのにセール価格を書いたままだった。
+    このサイトが批判している「安く見えて安くない」を自分でやっていた。
+
+    見張りの手順に、価格ずれを要約へ出す段があるかを見る。
+    """
+    import os
+    p = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                     ".github", "workflows", "watch.yml")
+    if not os.path.exists(p):
+        return []
+    with open(p, encoding="utf-8") as f:
+        src = f.read()
+    if "合いません" not in src:
+        return ["見張りの手順に、価格ずれを実行の要約へ出す段がありません。"
+                "自動実行では気づけません（2026-09-07）"]
+    return []
+
+
 RULES = [
     ("投稿は商品理解のあるものだけ", rule_post_needs_pitch),
     ("「どんな商品？」が出る", rule_what_is_it),
@@ -607,6 +632,7 @@ RULES = [
     ("日次の手順を途中で切らない", rule_daily_routine_is_one_piece),
     ("つながらなかったらやり直す", rule_network_failures_retried),
     ("知らない指定で止まる", rule_unknown_flags_stop),
+    ("価格ずれを表に出す", rule_price_gap_is_surfaced),
     ("学びを止めない", rule_keep_learning),
 ]
 

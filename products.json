@@ -30,7 +30,9 @@
       "postedAt": "2026-09-07",
       "bumpedAt": "2026-09-07T20:36:06",
       "lastSeen": "2026-09-07",
-      "pitch_status": "pending"
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "同じ店・同じ値段の互換インクが3件。2件までにする"
     },
     {
       "id": "rf0e26deba",
@@ -59,7 +61,25 @@
       "postedAt": "2026-09-07",
       "bumpedAt": "2026-09-07T20:39:51",
       "lastSeen": "2026-09-07",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "Switch2を持ち歩く人",
+        "problem": "カバーを付けるとドックに入らなくなることがある",
+        "use_case": "持ち運び・据え置き",
+        "features": [
+          "ドック対応の分体式",
+          "PC素材",
+          "本体とジョイコンを分けて装着",
+          "2025年モデル対応"
+        ],
+        "benefits": [
+          "付けたままドックに挿せる"
+        ],
+        "hook": "カバーを付けたまま、ドックに挿せるタイプです。",
+        "body": "本体とジョイコンを分けて付ける分体式のカバーです。\nPC素材。2025年モデル向け。",
+        "cta": "save"
+      }
     },
     {
       "id": "r99038cde1",
@@ -88,7 +108,24 @@
       "postedAt": "2026-09-07",
       "bumpedAt": "2026-09-07T20:39:51",
       "lastSeen": "2026-09-07",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "3DSをまだ使っている人",
+        "problem": "古い機種のケースは、そもそも売り場に残っていない",
+        "use_case": "持ち運び",
+        "features": [
+          "3DS用の保護カバー",
+          "水彩グラデーション柄",
+          "レビュー6件・星4.17"
+        ],
+        "benefits": [
+          "現行機ではない機種のカバーが選べる"
+        ],
+        "hook": "3DS用のケース、まだ売っています。",
+        "body": "水彩のグラデーション柄をした3DS用の保護カバーです。\nレビューは6件で、星4.17。",
+        "cta": "save"
+      }
     },
     {
       "id": "r60c611df5",
@@ -117,7 +154,26 @@
       "postedAt": "2026-09-07",
       "bumpedAt": "2026-09-07T16:31:41",
       "lastSeen": "2026-09-07",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "乳酸菌のサプリを続けたい人",
+        "problem": "種類が多くて、何が入っているか分かりにくい",
+        "use_case": "毎日",
+        "features": [
+          "22種類の乳酸菌",
+          "ラクトフェリン・ビフィズス菌・オリゴ糖・食物繊維を配合",
+          "30日分",
+          "一日2粒目安",
+          "レビュー1,318件・星4.5"
+        ],
+        "benefits": [
+          "配合されているものが表示されている"
+        ],
+        "hook": "22種類の乳酸菌が入っている、と書かれています。",
+        "body": "一日2粒目安で30日分のサプリメントです。\nラクトフェリン、ビフィズス菌、オリゴ糖、食物繊維も配合。",
+        "cta": "save"
+      }
     },
     {
       "id": "rbe83ed306",
@@ -146,7 +202,9 @@
       "postedAt": "2026-09-07",
       "bumpedAt": "2026-09-07T16:31:41",
       "lastSeen": "2026-09-07",
-      "pitch_status": "pending"
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "同じ店・同じ値段のサプリが3件。2件までにする"
     },
     {
       "id": "r0f909586a",
@@ -175,7 +233,25 @@
       "postedAt": "2026-09-07",
       "bumpedAt": "2026-09-07T16:31:41",
       "lastSeen": "2026-09-07",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "飲むタイプの美容サプリを探している人",
+        "problem": "配合量が書いていない商品が多い",
+        "use_case": "毎日",
+        "features": [
+          "ヒアルロン酸を1日あたり10,000mg",
+          "50倍濃縮",
+          "セラミド・コラーゲン・エラスチンを配合",
+          "GMP認定工場・国内製造"
+        ],
+        "benefits": [
+          "1日あたりの配合量が数字で出ている"
+        ],
+        "hook": "1日あたりの配合量が、数字で書いてあります。",
+        "body": "ヒアルロン酸を1日あたり10,000mg配合したサプリメントです。\nセラミド、コラーゲン、エラスチンも入っています。国内製造。",
+        "cta": "save"
+      }
     },
     {
       "id": "r429d5ab72",
@@ -204,7 +280,26 @@
       "postedAt": "2026-09-07",
       "bumpedAt": "2026-09-07T16:31:41",
       "lastSeen": "2026-09-07",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "夜向けのサプリを探している人",
+        "problem": "成分名だけ並んでいて、中身が分かりにくい",
+        "use_case": "夜",
+        "features": [
+          "植物由来9種のブレンド",
+          "テアニン・GABA・グリシン・ビタミンBを配合",
+          "レモングラス風味",
+          "90粒・一日3粒目安",
+          "日本製"
+        ],
+        "benefits": [
+          "味が付いていて飲みやすい形になっている"
+        ],
+        "hook": "レモングラス風味が付いています。",
+        "body": "植物由来9種をブレンドしたサプリメントです。\nテアニン、GABA、グリシン、ビタミンB。90粒で一日3粒目安。日本製。",
+        "cta": "save"
+      }
     },
     {
       "id": "r99b5a6b0f",
@@ -233,7 +328,27 @@
       "postedAt": "2026-09-07",
       "bumpedAt": "2026-09-07T16:31:41",
       "lastSeen": "2026-09-07",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "黒い素材のサプリを探している人",
+        "problem": "何が入っているか、名前だけでは分からない",
+        "use_case": "毎日",
+        "features": [
+          "ビオチン配合",
+          "黒ごま・黒ウコン・椿油",
+          "セサミン",
+          "国産",
+          "一日2粒目安",
+          "レビュー1,635件・星4.25"
+        ],
+        "benefits": [
+          "原材料が並べて書かれている"
+        ],
+        "hook": "黒ごま、黒ウコン、椿油。名前のとおり黒いものが入っています。",
+        "body": "ビオチンとセサミンに、黒ごま・黒ウコン・椿油を合わせた国産のサプリメントです。\n一日2粒目安。",
+        "cta": "save"
+      }
     },
     {
       "id": "r93bd11101",
@@ -262,7 +377,9 @@
       "postedAt": "2026-09-07",
       "bumpedAt": "2026-09-07T16:38:30",
       "lastSeen": "2026-09-07",
-      "pitch_status": "pending"
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "同じ店・同じ値段のSwitchケースが5件。柄違いは2件までにする"
     },
     {
       "id": "r89aaccb59",
@@ -291,7 +408,9 @@
       "postedAt": "2026-09-07",
       "bumpedAt": "2026-09-07T20:39:51",
       "lastSeen": "2026-09-07",
-      "pitch_status": "pending"
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "同じ店・同じ値段のSwitchケースが5件。柄違いは2件までにする"
     },
     {
       "id": "rba2388b7c",
@@ -320,7 +439,9 @@
       "postedAt": "2026-09-07",
       "bumpedAt": "2026-09-07T20:39:51",
       "lastSeen": "2026-09-07",
-      "pitch_status": "pending"
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "同じ店・同じ値段のSwitchケースが5件。柄違いは2件までにする"
     },
     {
       "id": "r3ec61b9a2",
@@ -349,7 +470,27 @@
       "postedAt": "2026-09-07",
       "bumpedAt": "2026-09-07T16:29:59",
       "lastSeen": "2026-09-07",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "青汁が苦手だった人",
+        "problem": "青汁は原料の産地が書かれていないことが多い",
+        "use_case": "毎日",
+        "features": [
+          "有機JAS",
+          "鹿児島県大隅半島産100%",
+          "桑の葉の粉末120g",
+          "完全無添加",
+          "低温粉砕製法",
+          "レビュー2,484件・星4.68"
+        ],
+        "benefits": [
+          "産地と製法が明記されている"
+        ],
+        "hook": "原料は鹿児島県大隅半島産、100%の桑の葉です。",
+        "body": "有機JASの桑の葉を粉末にしたものが120g入っています。\n完全無添加、低温粉砕製法。",
+        "cta": "save"
+      }
     },
     {
       "id": "r460f4734a",
@@ -376,7 +517,28 @@
       "postedAt": "2026-09-07",
       "bumpedAt": "2026-09-07T16:33:00",
       "lastSeen": "2026-09-07",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "裾直しが面倒な人",
+        "problem": "パンツは丈が合わず、直しに出す手間がかかる",
+        "use_case": "普段着",
+        "features": [
+          "セルフカットできる裾",
+          "裾上げ不要",
+          "ウエストゴム",
+          "接触冷感",
+          "吸水速乾",
+          "UVカット",
+          "フリーサイズ M-L"
+        ],
+        "benefits": [
+          "自分で切って丈を合わせられる"
+        ],
+        "hook": "裾を自分で切って合わせるタイプです。",
+        "body": "裾上げに出さず、そのまま切って丈を合わせるワイドパンツです。\nウエストはゴム。接触冷感、吸水速乾、UVカット。",
+        "cta": "save"
+      }
     },
     {
       "id": "r563ad3c1c",
@@ -403,7 +565,28 @@
       "postedAt": "2026-09-07",
       "bumpedAt": "2026-09-07T16:33:00",
       "lastSeen": "2026-09-07",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "仕事でポロシャツを着る人",
+        "problem": "長袖のポロシャツは、サイズ展開が少ない",
+        "use_case": "仕事・作業・ゴルフ",
+        "features": [
+          "長袖ポロシャツ",
+          "M・L・LL・3L・4L",
+          "綿混",
+          "吸汗速乾",
+          "UVカット",
+          "形態安定",
+          "胸ポケット付き"
+        ],
+        "benefits": [
+          "4Lまでサイズが選べる"
+        ],
+        "hook": "Mから4Lまで、5サイズあります。",
+        "body": "綿混の長袖ポロシャツです。胸ポケット付き。\n吸汗速乾、UVカット、形態安定。",
+        "cta": "save"
+      }
     },
     {
       "id": "rd0fc22355",
@@ -432,7 +615,27 @@
       "postedAt": "2026-09-07",
       "bumpedAt": "2026-09-07T16:33:00",
       "lastSeen": "2026-09-07",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "夏から秋にかけて着られる1枚がほしい人",
+        "problem": "半袖のワンピースは、季節の変わり目に着るものがない",
+        "use_case": "通勤・普段着",
+        "features": [
+          "プリーツのロングワンピース",
+          "半袖",
+          "シャーリング",
+          "接触冷感",
+          "春夏秋向け",
+          "レビュー813件・星4.11"
+        ],
+        "benefits": [
+          "1枚で3シーズン着られる"
+        ],
+        "hook": "春夏秋、と書いてあるワンピースです。",
+        "body": "プリーツのロング丈で、半袖。シャーリング入り。\n接触冷感の生地を使っています。",
+        "cta": "save"
+      }
     },
     {
       "id": "r04836f890",
@@ -451,7 +654,7 @@
       "endTime": "2026-09-09 09:59",
       "listPrice": 3580,
       "priceBasis": "title",
-      "caption": "3,580円の2WAYニットパンツが1,790円。ジョガーとワイドの2通り、3丈展開。",
+      "caption": "3,580円の2WAYニットパンツが1,780円。ジョガーとワイドの2通り、3丈展開。",
       "tags": [
         "送料無料"
       ],
@@ -908,7 +1111,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 1680,
       "priceBasis": "history",
-      "caption": "3,480円のかかと用やすりが1,500円。皮膚科医監修。",
+      "caption": "1,680円のかかと用やすりが1,500円。皮膚科医監修。",
       "tags": [],
       "points": [],
       "description": "",
@@ -1051,7 +1254,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 1980,
       "priceBasis": "history",
-      "caption": "3,980円の豚毛ロールブラシが1,780円。木製、送料込み。",
+      "caption": "1,980円の豚毛ロールブラシが1,780円。木製、送料込み。",
       "tags": [
         "送料無料"
       ],
@@ -1099,7 +1302,7 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": null,
       "priceBasis": null,
-      "caption": "5,980円の夏用腰サポーターが2,950円。整体師推薦。",
+      "caption": "夏用の腰サポーターが2,950円。整体師推薦。",
       "tags": [],
       "points": [],
       "description": "",
@@ -4216,9 +4419,9 @@
       "endTime": "2026-09-11 09:59",
       "listPrice": 3790,
       "priceBasis": "title",
-      "caption": "3,790円のコクーンパンツが1,990円。速乾でUVカット、洗濯機で洗える。",
+      "caption": "3,790円のコクーンパンツが1,999円。速乾でUVカット、洗濯機で洗える。",
       "points": [
-        "3,790円から1,990円へ",
+        "3,790円から1,999円へ",
         "速乾・UVカット・洗濯機可",
         "レビュー4,903件・★4.28"
       ],
@@ -5511,10 +5714,10 @@
       "endTime": "",
       "listPrice": 7500,
       "priceBasis": "title",
-      "caption": "7,500円のスニーカーが2,980円から。幅広3Eで軽い。",
+      "caption": "7,500円のスニーカーが2,680円から。幅広3Eで軽い。",
       "tags": [],
       "points": [
-        "7,500円から2,980円へ",
+        "7,500円から2,680円へ",
         "3E幅広・軽量厚底",
         "男女兼用・白／黒"
       ],
@@ -8574,7 +8777,7 @@
       "endTime": "",
       "listPrice": null,
       "priceBasis": null,
-      "caption": "1,740円のAirPods Pro用ケースが870円。カラビナ付き。",
+      "caption": "AirPods Pro用ケースが1,740円。カラビナ付き。",
       "points": [],
       "description": "",
       "tags": [],
@@ -10601,7 +10804,7 @@
       "endTime": "2026-09-04 17:59",
       "listPrice": 3790,
       "priceBasis": "title",
-      "caption": "3,790円のインナートップスが2,990円。タートルとラウンドから選べます。",
+      "caption": "3,790円のインナートップスが2,799円。タートルとラウンドから選べます。",
       "tags": [
         "送料無料"
       ],

@@ -95,6 +95,27 @@ jobs:
             echo "決まり、すべて守れています。" >> "$GITHUB_STEP_SUMMARY"
           fi
 
+      # 価格ずれは build.py が警告を出すが、終了コードは 0 のまま。
+      # 実行の要約にも出ていなかったので、自動実行では誰の目にも入らなかった。
+      #
+      # 2026-09-07: 朝に直したのに、夜には6件たまっていた。
+      # うち2件は参考価格が消えたまま古い値引き額を出しており、
+      # 1件は値段が戻っているのにセール価格を書いたままだった。
+      # このサイトが批判している「安く見えて安くない」を自分でやっていた。
+      - name: 価格ずれを残す
+        if: always()
+        run: |
+          if grep -q "合いません" .build_log.txt; then
+            {
+              echo "## ⚠ 書いた金額が、いまの価格と合いません"
+              echo ""
+              echo '```'
+              grep -A3 "合いません" .build_log.txt
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
+            echo "::warning::価格ずれがあります。実行の要約を見てください"
+          fi
+
       - name: 変化があれば反映する
         run: |
           git config user.name "yasumiru-bot"
