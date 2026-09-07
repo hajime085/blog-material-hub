@@ -138,7 +138,8 @@
     "product:r027de4428",
     "product:rf4416810f",
     "product:r1d6a5cd3d",
-    "product:rb7e74186a"
+    "product:rb7e74186a",
+    "product:rabf4c18bc"
   ],
   "log": [
     {
@@ -2040,6 +2041,20 @@
       "hook_type": "scene",
       "cta_type": "save",
       "category": "fashion",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:rabf4c18bc",
+      "id": "18027880730847841",
+      "at": "2026-09-07 21:11",
+      "kind": "product",
+      "slot": 21,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "pc",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
