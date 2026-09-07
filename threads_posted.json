@@ -135,7 +135,8 @@
     "product:rff5507558",
     "product:rc1b583414",
     "product:r0a3882660",
-    "product:r027de4428"
+    "product:r027de4428",
+    "product:rf4416810f"
   ],
   "log": [
     {
@@ -1995,6 +1996,20 @@
       "hook_type": "discovery",
       "cta_type": "save",
       "category": "pc",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:rf4416810f",
+      "id": "18635074984033235",
+      "at": "2026-09-07 20:31",
+      "kind": "product",
+      "slot": 20,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "problem",
+      "cta_type": "empathy",
+      "category": "beauty",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
