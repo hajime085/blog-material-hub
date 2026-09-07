@@ -59,6 +59,13 @@ jobs:
           set -o pipefail
           python3 fetch_rakuten.py --watch 2>&1 | tee .watch_log.txt
 
+      # 落ちた理由を、あとから読める場所に残す。
+      #
+      # 2026-09-07: 実行の要約へ出すようにした。
+      # 2026-09-08: それでも分からなかった。要約は管理者権限がないと読めず、
+      # APIから取れる注釈は「Process completed with exit code 1」だけ。
+      # 報告を、読めない場所に置いていた。価格ずれのときと同じ間違い。
+      # リポジトリの中に置いて、git pull で読めるようにする。
       - name: 落ちた理由を残す
         if: failure() && steps.watch.outcome == 'failure'
         run: |
@@ -69,6 +76,15 @@ jobs:
             tail -40 .watch_log.txt || echo "（ログが残っていません）"
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
+          python3 ops/record_failure.py .watch_log.txt 見張り
+          git config user.name "yasumiru-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add ops/failures.md
+          git commit -m "auto: 見張りが落ちた記録" || exit 0
+          for i in 1 2 3; do
+            git pull --rebase --autostash origin main && git push origin main && exit 0
+            sleep 5
+          done
 
       # 決まりが本当に鳴るかを、材料を壊して機械で確かめる。
       #

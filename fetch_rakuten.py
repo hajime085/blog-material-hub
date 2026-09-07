@@ -191,6 +191,20 @@ def api_get(url, params, site_url):
                 print("     （混み合っています。%d秒待ちます）" % wait)
                 time.sleep(wait)
                 continue
+            # 向こう側の一時的な不調。こちらの設定は間違っていないので、
+            # 待てば通る。
+            #
+            # 2026-09-07: 見張りが10回に2回落ちていた。通信の切断を
+            # 再試行するようにしたが、翌日も 00:20 に落ちた。
+            # 原因はこちら。429 以外の HTTP エラーはすべて SystemExit で、
+            # SystemExit は Exception ではないので、売場ごとの受け止めも
+            # 素通りする。楽天が一度 500 を返すだけで実行全体が死んでいた。
+            if ex.code in (500, 502, 503, 504) and attempt < 3:
+                wait = 5 * (attempt + 1)
+                print("     （楽天側が %d を返しました。%d秒待ちます）"
+                      % (ex.code, wait))
+                time.sleep(wait)
+                continue
             break
         # 2026-09-07: 見張りが10回に2回落ちていた。落ちる場所は毎回ちがい、
         # 13分〜21分と時間もばらばらだった。ここで拾っていたのは HTTPError だけで、

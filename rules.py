@@ -683,6 +683,51 @@ def rule_selftest_is_wired(ctx):
     return out
 
 
+def rule_reports_land_where_readable(ctx):
+    """落ちた理由を、あとから読める場所に残す。
+
+    2026-09-07: 見張りが落ちる理由が分からず、実行の要約へ出すようにした。
+    2026-09-08: それでも分からなかった。要約は管理者権限がないと読めず、
+    APIから取れる注釈は「Process completed with exit code 1」だけだった。
+    報告を、読めない場所に置いていた。価格ずれのときと同じ形の間違い。
+
+    出したつもりで、届いていない。それは出していないのと同じ。
+    リポジトリの中に置けば git pull で読める。
+    """
+    out = []
+    wf = ctx.get("watch_yml") or ""
+    if wf and "record_failure.py" not in wf:
+        out.append("見張りの手順が、落ちた理由をリポジトリに残していません。"
+                   "実行の要約は管理者権限がないと読めません（2026-09-08）")
+    if not (ctx.get("record_failure_py") or ""):
+        out.append("ops/record_failure.py がありません")
+    return out
+
+
+def rule_server_errors_are_retried(ctx):
+    """向こう側の一時的な不調で、実行全体を落とさない。
+
+    2026-09-08: 見張りが落ち続けていた。前日に通信の切断を再試行するよう
+    直したのに、翌 00:20 にまた落ちた。原因は別のところにあった。
+    api_get は 429 以外の HTTP エラーをすべて SystemExit で投げる。
+    SystemExit は Exception ではないので、売場ごとの受け止めも、
+    再試行の網も素通りする。楽天が一度 500 を返すだけで実行全体が死ぬ。
+
+    設定の間違い（403・400）は止まってよい。向こうの不調は待てば通る。
+    """
+    src = ctx.get("fetch_py") or ""
+    if not src:
+        return []
+    head = src[src.find("def api_get("):]
+    cut = head.find("\ndef ", 1)
+    if cut > 0:
+        head = head[:cut]
+    if "500, 502, 503, 504" not in head:
+        return ["api_get が、楽天側の一時的な不調（500系）を再試行していません。"
+                "一度返ってくるだけで見張りが丸ごと落ちます（2026-09-08）"]
+    return []
+
+
 RULES = [
     ("投稿は商品理解のあるものだけ", rule_post_needs_pitch),
     ("「どんな商品？」が出る", rule_what_is_it),
@@ -713,6 +758,8 @@ RULES = [
     ("出せなかった投稿を記録に残す", rule_failed_posts_leave_a_trace),
     ("見えないときは出さない", rule_blind_means_stop),
     ("決まりが鳴るかを確かめる", rule_selftest_is_wired),
+    ("落ちた理由を読める場所に残す", rule_reports_land_where_readable),
+    ("向こうの不調で全部を落とさない", rule_server_errors_are_retried),
     ("学びを止めない", rule_keep_learning),
 ]
 
@@ -770,6 +817,11 @@ PROBES = {
         [("products", "同じ店・同じ値段を3件作る", "mutate")],
     "決まりが鳴るかを確かめる": [("watch_yml", "--selftest", "remove"),
                                  ("rules_py", "def selftest(", "remove")],
+    "落ちた理由を読める場所に残す":
+        [("watch_yml", "record_failure.py", "remove"),
+         ("record_failure_py", "", "empty")],
+    "向こうの不調で全部を落とさない":
+        [("fetch_py", "500, 502, 503, 504", "remove")],
     "学びを止めない": [],
 }
 
@@ -791,6 +843,18 @@ def selftest():
             ng.append("%s ── そんな決まりはありません（名前が変わった？）" % name)
             continue
         for key, marker, how in probes:
+            if how == "empty":
+                broken = dict(ctx)
+                broken[key] = ""
+                checked += 1
+                try:
+                    issues = fn(broken)
+                except Exception as ex:                        # noqa: BLE001
+                    issues = ["検査そのものが失敗: %s" % ex]
+                if not issues:
+                    ng.append("%s ── %s を空にしても鳴りませんでした"
+                              % (name, key))
+                continue
             if how == "mutate":
                 fn2 = MUTATIONS.get(marker)
                 if fn2 is None:
@@ -859,6 +923,7 @@ def context():
         "index_html": load("index.html", ""),
         "app_js": load("assets/js/app.js", ""),
         "rules_py": load("rules.py", ""),
+        "record_failure_py": load("ops/record_failure.py", ""),
         "featured_txt": load("featured.txt", ""),
     }
 
