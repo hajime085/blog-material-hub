@@ -127,7 +127,8 @@
     "product:r7ff263388",
     "schedule:2026-W36-1",
     "tip:35",
-    "tip:10"
+    "tip:10",
+    "product:r07c06d72e"
   ],
   "log": [
     {
@@ -1877,6 +1878,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:r07c06d72e",
+      "id": "18183639823422019",
+      "at": "2026-09-07 13:00",
+      "kind": "product",
+      "slot": 13,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "pc",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
