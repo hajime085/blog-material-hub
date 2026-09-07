@@ -146,7 +146,8 @@
     "product:r89c3f72dc",
     "product:r5fba09e43",
     "product:r99038cde1",
-    "product:r53836647c"
+    "product:r53836647c",
+    "product:r3ec61b9a2"
   ],
   "log": [
     {
@@ -2160,6 +2161,20 @@
       "hook_type": "discovery",
       "cta_type": "save",
       "category": "fashion",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r3ec61b9a2",
+      "id": "17967059946142146",
+      "at": "2026-09-08 01:00",
+      "kind": "product",
+      "slot": 1,
+      "catchup": false,
+      "cap": false,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "food",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
