@@ -141,7 +141,8 @@
     "product:rb7e74186a",
     "product:rabf4c18bc",
     "product:r0efe95d2a",
-    "product:r89fbae1af"
+    "product:r89fbae1af",
+    "product:rd7371e81c"
   ],
   "log": [
     {
@@ -2085,6 +2086,20 @@
       "hook_type": "scene",
       "cta_type": "save",
       "category": "books",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:rd7371e81c",
+      "id": "18167986429460273",
+      "at": "2026-09-07 21:41",
+      "kind": "product",
+      "slot": 21,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "fashion",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
