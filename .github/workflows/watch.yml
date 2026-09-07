@@ -70,6 +70,28 @@ jobs:
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
 
+      # 決まりが本当に鳴るかを、材料を壊して機械で確かめる。
+      #
+      # 2026-09-07: 手で壊して確かめる限り、確かめ忘れた決まりは静かに死ぬ。
+      # 実際に3件、鳴らなくなっていた決まりが見つかった。
+      # 「決まり29件、すべて守れています」は、
+      # 検査が動いていて初めて意味を持つ。
+      - name: 決まりが鳴るかを確かめる
+        if: always()
+        run: |
+          if python3 rules.py --selftest | tee .selftest.txt; then
+            :
+          else
+            {
+              echo "## ⚠ 鳴らない決まりがあります"
+              echo ""
+              echo '```'
+              cat .selftest.txt
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
+            echo "::warning::鳴らない決まりがあります。実行の要約を見てください"
+          fi
+
       - name: サイトを作り直す
         run: python3 build.py | tee .build_log.txt
 

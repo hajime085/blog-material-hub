@@ -31,6 +31,17 @@ def load(name, default=None):
         return f.read()
 
 
+def _routine():
+    """日次の手順の覚え書き。手元に無い環境では空。"""
+    p = os.path.expanduser(
+        "~/.claude/projects/-Users-furusawahatsu-Desktop-blog-material-hub"
+        "/memory/daily-routine.md")
+    if not os.path.exists(p):
+        return ""
+    with open(p, encoding="utf-8") as f:
+        return f.read()
+
+
 # ---------------------------------------------------------------- 決まりごと
 
 def rule_post_needs_pitch(ctx):
@@ -188,8 +199,8 @@ def rule_no_emoji(ctx):
     """デザインに絵文字を使わない。アイコンはSVGで用意する。"""
     emoji = re.compile("[\U0001F300-\U0001FAFF☀-➿]")
     out = []
-    for f in ("index.html",):
-        src = load(f, "")
+    for f, key in (("index.html", "index_html"),):
+        src = ctx.get(key) or ""
         hits = set(emoji.findall(src))
         if hits:
             out.append("%s に絵文字があります: %s" % (f, " ".join(sorted(hits))[:40]))
@@ -199,8 +210,8 @@ def rule_no_emoji(ctx):
 def rule_no_rate_shown(ctx):
     """料率は読者に見せない。"""
     out = []
-    for f in ("index.html",):
-        src = load(f, "")
+    for f, key in (("index.html", "index_html"),):
+        src = ctx.get(key) or ""
         if re.search(r"料率|affiliateRate", src):
             out.append("%s に料率らしき記述があります" % f)
     return out
@@ -237,7 +248,7 @@ def rule_posted_date_shown(ctx):
     out = []
     if "card-posted" not in ctx["build_py"]:
         out.append("build.py のカードに掲載日がありません")
-    js = load("assets/js/app.js", "")
+    js = ctx.get("app_js") or ""
     # 関数があるだけでは足りない。カードの中で呼ばれているかを見る。
     # 呼び出しを外しても気づかず、一覧から掲載日が消えたことがある。
     if not re.search(r"card-foot[^;]{0,400}postedLabel\(", js, re.S):
@@ -318,7 +329,7 @@ def rule_hide_ended_sales(ctx):
     サイトの作り直しは1日4回。その間に終わったセールが残ると、
     買えないものを載せていることになる。
     """
-    js = load("assets/js/app.js", "")
+    js = ctx.get("app_js") or ""
     # 関数の有無ではなく、一覧を絞るところで使われているかを見る。
     if not re.search(r"filter\(.{0,90}?saleOver\(", js, re.S):
         return ["assets/js/app.js が、終了したセールを一覧から外していません"]
@@ -364,7 +375,7 @@ def rule_no_self_click(ctx):
     out = []
     if "不正クリックになります" not in ctx["fetch_py"]:
         out.append("fetch_rakuten.py が、アフィリエイトの短縮URLを辿らない作りになっていません")
-    src = load("featured.txt", "")
+    src = ctx.get("featured_txt") or ""
     live = [l for l in src.splitlines()
             if l.strip() and not l.strip().startswith("#")]
     bad = [l for l in live if "a.r10.to" in l or "hb.afl.rakuten.co.jp" in l]
@@ -508,14 +519,9 @@ def rule_daily_routine_is_one_piece(ctx):
 
     覚え書きに「1〜9すべて」と書いてあるかを機械で見る。
     """
-    import os
-    p = os.path.expanduser(
-        "~/.claude/projects/-Users-furusawahatsu-Desktop-blog-material-hub"
-        "/memory/daily-routine.md")
-    if not os.path.exists(p):
+    src = ctx.get("daily_routine") or ""
+    if not src:
         return []          # 手元に覚え書きが無い環境では見ない
-    with open(p, encoding="utf-8") as f:
-        src = f.read()
     if "1〜9すべて" not in src:
         return ["日次の手順に「1〜9すべて」の一文がありません。"
                 "途中で切れる書き方に戻っています"]
@@ -537,13 +543,9 @@ def rule_network_failures_retried(ctx):
 
     再試行の網が外れていないかを見る。
     """
-    import os
-    p = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                     "fetch_rakuten.py")
-    if not os.path.exists(p):
+    src = ctx.get("fetch_py") or ""
+    if not src:
         return []
-    with open(p, encoding="utf-8") as f:
-        src = f.read()
     head = src[src.find("def api_get("):]
     head = head[:head.find("\ndef ", 1)] if "\ndef " in head[1:] else head
     missing = [n for n in ("urllib.error.URLError", "TimeoutError", "OSError",
@@ -567,16 +569,11 @@ def rule_unknown_flags_stop(ctx):
 
     外に出る・ファイルを書き換える2本に、網が掛かっているかを見る。
     """
-    import os
-    here = os.path.dirname(os.path.abspath(__file__))
     bad = []
-    for name in ("threads.py", "fetch_rakuten.py"):
-        p = os.path.join(here, name)
-        if not os.path.exists(p):
-            continue
-        with open(p, encoding="utf-8") as f:
-            src = f.read()
-        if "知らない指定です" not in src:
+    for name, key in (("threads.py", "threads_py"),
+                      ("fetch_rakuten.py", "fetch_py")):
+        src = ctx.get(key) or ""
+        if src and "知らない指定です" not in src:
             bad.append("%s に知らない指定を止める仕組みがありません" % name)
     return bad
 
@@ -600,17 +597,11 @@ def rule_warnings_reach_a_human(ctx):
       2. build.py が、直せた金額を書き出す前に直しているか
          （知らせるだけでは、読む人がいないところで嘘が公開される）
     """
-    import os
-    here = os.path.dirname(os.path.abspath(__file__))
     out = []
-
-    p = os.path.join(here, ".github", "workflows", "watch.yml")
-    if os.path.exists(p):
-        with open(p, encoding="utf-8") as f:
-            wf = f.read()
-        if "直していない警告" not in wf:
-            out.append("見張りの手順が、検査の警告を実行の要約へ出していません。"
-                       "自動実行では気づけません（2026-09-07）")
+    wf = ctx.get("watch_yml") or ""
+    if wf and "直していない警告" not in wf:
+        out.append("見張りの手順が、検査の警告を実行の要約へ出していません。"
+                   "自動実行では気づけません（2026-09-07）")
 
     src = ctx.get("build_py") or ""
     if "def reconcile_prices" not in src:
@@ -635,8 +626,6 @@ def rule_failed_posts_leave_a_trace(ctx):
 
     価格ずれとまったく同じ形の穴。誰も読まないところに置いても直らない。
     """
-    import os
-    here = os.path.dirname(os.path.abspath(__file__))
     out = []
     src = ctx["threads_py"]
     if '"failed": True' not in src:
@@ -645,13 +634,10 @@ def rule_failed_posts_leave_a_trace(ctx):
     if 'x.get("failed")' not in src:
         out.append("失敗した記録を「出した」と数えてしまいます。"
                    "枠が埋まったことにされ、次の起動が拾いません")
-    p = os.path.join(here, ".github", "workflows", "threads.yml")
-    if os.path.exists(p):
-        with open(p, encoding="utf-8") as f:
-            if "failed_posts.py" not in f.read():
-                out.append("投稿の手順が、出せなかったものを実行の要約へ"
-                           "出していません")
-    if not os.path.exists(os.path.join(here, "ops", "failed_posts.py")):
+    ty = ctx.get("threads_yml") or ""
+    if ty and "failed_posts.py" not in ty:
+        out.append("投稿の手順が、出せなかったものを実行の要約へ出していません")
+    if not (ctx.get("failed_posts_py") or ""):
         out.append("ops/failed_posts.py がありません")
     return out
 
@@ -671,6 +657,30 @@ def rule_blind_means_stop(ctx):
         return ["自分の投稿を確認できないまま投稿しています。"
                 "重複よけが働きません（2026-09-07）"]
     return []
+
+
+def rule_selftest_is_wired(ctx):
+    """決まりが鳴るかを確かめる仕組みが、動く場所に置いてある。
+
+    2026-09-07: 手で壊して確かめる限り、確かめ忘れた決まりは静かに死ぬ。
+    実際にこの日、鳴らなくなっていた決まりが3件見つかった。
+      ・警告が人に届く（探す文字列が定義行にも当たっていた）
+      ・つながらなかったらやり直す（材料を ctx から取っていなかった）
+      ・終わったセールを隠す（同上）
+    どれも「守れています」と出ていた。
+
+    決まりを足したら PROBES に壊し方も書く。
+    書かないと、自己診断が「壊し方を書いていない決まり」として挙げる。
+    """
+    out = []
+    wf = ctx.get("watch_yml") or ""
+    if wf and "--selftest" not in wf:
+        out.append("見張りの手順が、決まりの自己診断を回していません"
+                   "（2026-09-07）")
+    src = ctx.get("rules_py") or ""
+    if src and "def selftest(" not in src:
+        out.append("rules.py に自己診断がありません")
+    return out
 
 
 RULES = [
@@ -702,18 +712,159 @@ RULES = [
     ("警告が人に届く", rule_warnings_reach_a_human),
     ("出せなかった投稿を記録に残す", rule_failed_posts_leave_a_trace),
     ("見えないときは出さない", rule_blind_means_stop),
+    ("決まりが鳴るかを確かめる", rule_selftest_is_wired),
     ("学びを止めない", rule_keep_learning),
 ]
 
 
-def run(quiet=False):
-    ctx = {
+
+# ---------------------------------------------------------------- 自己診断
+#
+# 決まりを足すたびに、私は手で壊して「鳴るか」を確かめてきた。
+# だが手で確かめる限り、確かめ忘れた決まりは静かに死ぬ。
+#
+# 2026-09-07: 実際に死んでいた。reconcile_prices の呼び出しを消しても
+# 鳴らない決まりがあった。探していた文字列が、その関数の定義行にも
+# 当たっていたため。壊れないことを確かめない検査は、検査ではない。
+#
+# ここでは、決まりが見ている材料をその場で書き換えて、
+# ちゃんと鳴るかを機械で確かめる。ファイルには触らない。
+#
+# PROBES の各行は「この決まりは、この材料からこの文字列が消えたら
+# （または現れたら）鳴るはずだ」という宣言。
+# 商品データの壊し方。文字列の抜き差しでは作れないものはここに書く。
+MUTATIONS = {
+    "リンクを楽天以外にする":
+        lambda ps: [dict(p, affiliateUrl="https://example.com/") for p in ps],
+    "キャプションを全部空にする":
+        lambda ps: [dict(p, caption="") for p in ps],
+    "同じ店・同じ値段を3件作る":
+        lambda ps: ps + [dict(ps[0], id="probe%d" % i, shop="probe店",
+                              price=12345, hidden=False) for i in range(3)],
+}
+
+
+PROBES = {
+    "「どんな商品？」が出る": [("build_py", "どんな商品？", "remove")],
+    "送料は楽天のデータを正とする": [("fetch_py", "merge_shipping_tag", "remove")],
+    "同じ内容を二度出さない": [("threads_py", "recent_posts", "remove")],
+    "素の実行でも枠を記録する": [("threads_py", "take_lock", "remove")],
+    "使わなくなった道を残さない": [("threads_py", "def shapes(", "add")],
+    "日次の手順を途中で切らない": [("daily_routine", "1〜9すべて", "remove")],
+    "知らない指定で止まる": [("threads_py", "知らない指定です", "remove"),
+                             ("fetch_py", "知らない指定です", "remove")],
+    "つながらなかったらやり直す": [("fetch_py", "urllib.error.URLError", "remove")],
+    "警告が人に届く": [("watch_yml", "直していない警告", "remove"),
+                       ("build_py", "= reconcile_prices(", "remove")],
+    "出せなかった投稿を記録に残す": [("threads_py", '"failed": True', "remove"),
+                                     ("threads_yml", "failed_posts.py", "remove")],
+    "見えないときは出さない": [("threads_py", 'return 0, "blind"', "remove")],
+    "料率を見せない": [("index_html", "料率", "add")],
+    "絵文字を使わない": [("index_html", "\U0001F600", "add")],
+    "終わったセールを隠す": [("app_js", "saleOver(", "remove")],
+    "自分の広告を自分で踏まない": [("fetch_py", "不正クリックになります", "remove")],
+    "商品リンクは楽天の公式転送": [("products", "リンクを楽天以外にする", "mutate")],
+    "キャプションの空きを残さない":
+        [("products", "キャプションを全部空にする", "mutate")],
+    "同じ店の似た商品を並べない":
+        [("products", "同じ店・同じ値段を3件作る", "mutate")],
+    "決まりが鳴るかを確かめる": [("watch_yml", "--selftest", "remove"),
+                                 ("rules_py", "def selftest(", "remove")],
+    "学びを止めない": [],
+}
+
+
+def selftest():
+    """決まりが本当に鳴るかを、材料を壊して確かめる。
+
+    鳴らない決まりは、守っているのではなく、見ていないだけ。
+    """
+    ctx = context()
+    by_name = dict(RULES)
+    ng = []
+    checked = 0
+    for name, probes in PROBES.items():
+        if not probes:
+            continue
+        fn = by_name.get(name)
+        if fn is None:
+            ng.append("%s ── そんな決まりはありません（名前が変わった？）" % name)
+            continue
+        for key, marker, how in probes:
+            if how == "mutate":
+                fn2 = MUTATIONS.get(marker)
+                if fn2 is None:
+                    ng.append("%s ── 壊し方 %r がありません" % (name, marker))
+                    continue
+                broken = dict(ctx)
+                broken[key] = fn2(ctx.get(key) or [])
+                checked += 1
+                try:
+                    issues = fn(broken)
+                except Exception as ex:                        # noqa: BLE001
+                    issues = ["検査そのものが失敗: %s" % ex]
+                if not issues:
+                    ng.append("%s ── %s を「%s」でも鳴りませんでした"
+                              % (name, key, marker))
+                continue
+            base = ctx.get(key)
+            if not isinstance(base, str) or (how == "remove" and marker not in base):
+                ng.append("%s ── %s に %r が見当たりません。"
+                          "決まりが何も見ていない可能性があります"
+                          % (name, key, marker))
+                continue
+            broken = dict(ctx)
+            broken[key] = (base.replace(marker, "") if how == "remove"
+                           else base + "\n" + marker + "\n")
+            checked += 1
+            try:
+                issues = fn(broken)
+            except Exception as ex:                            # noqa: BLE001
+                issues = ["検査そのものが失敗: %s" % ex]
+            if not issues:
+                ng.append("%s ── %s から %r を%sても鳴りませんでした"
+                          % (name, key, marker,
+                             "消し" if how == "remove" else "足し"))
+
+    missing = [n for n, _ in RULES if n not in PROBES]
+    print("自己診断: %d通りの壊し方を試しました。" % checked)
+    if ng:
+        print("\n⚠️  鳴らない決まりがあります:")
+        for x in ng:
+            print("   %s" % x)
+    if missing:
+        print("\n（壊し方を書いていない決まり %d件: %s）"
+              % (len(missing), "、".join(missing[:6])))
+    if ng:
+        return 1
+    print("試したものは、すべて鳴りました。")
+    return 0
+
+def context():
+    """決まりが見る材料を、まとめて読む。"""
+    return {
         "products": (load("products.json", {}) or {}).get("products", []),
         "config": load("config.json", {}) or {},
         "build_py": load("build.py", ""),
         "threads_py": load("threads.py", ""),
         "fetch_py": load("fetch_rakuten.py", ""),
+        # 手順や覚え書きも ctx から読む。
+        # 直接ファイルを開くと、決まりを壊して確かめるのに
+        # 本物のファイルを書き換えるしかなくなり、自己診断が作れない。
+        "watch_yml": load(".github/workflows/watch.yml", ""),
+        "threads_yml": load(".github/workflows/threads.yml", ""),
+        "learn_py": load("learn.py", ""),
+        "failed_posts_py": load("ops/failed_posts.py", ""),
+        "daily_routine": _routine(),
+        "index_html": load("index.html", ""),
+        "app_js": load("assets/js/app.js", ""),
+        "rules_py": load("rules.py", ""),
+        "featured_txt": load("featured.txt", ""),
     }
+
+
+def run(quiet=False):
+    ctx = context()
     broken = 0
     for name, fn in RULES:
         try:
@@ -731,6 +882,8 @@ def run(quiet=False):
 
 
 if __name__ == "__main__":
+    if "--selftest" in sys.argv[1:]:
+        sys.exit(selftest())
     n = run()
     print("")
     print("決まり %d件中 %d件を破っています。" % (len(RULES), n) if n
