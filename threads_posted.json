@@ -126,7 +126,8 @@
     "product:refcdc1c00",
     "product:r7ff263388",
     "schedule:2026-W36-1",
-    "tip:35"
+    "tip:35",
+    "tip:10"
   ],
   "log": [
     {
@@ -1855,6 +1856,20 @@
       "at": "2026-09-07 09:21",
       "kind": "tip",
       "slot": 9,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
+    },
+    {
+      "key": "tip:10",
+      "id": "18131048935639066",
+      "at": "2026-09-07 12:15",
+      "kind": "tip",
+      "slot": 12,
       "catchup": false,
       "cap": null,
       "hook_type": null,
