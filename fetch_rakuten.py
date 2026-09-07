@@ -828,9 +828,14 @@ def item_code_from_url(url, ctx=None, timeout=20):
                 "applicationId": app_id, "accessKey": access_key, "affiliateId": aff_id,
                 "itemCode": code, "format": "json", "formatVersion": 2,
             }, site_url)
-        except SystemExit:
+        except SystemExit as ex:
+            # api_get は認証の取り違えを SystemExit で知らせる。
+            # 黙って {} にすると、設定ミスが「商品が無い」に化ける。
+            print("  商品コードを引けませんでした: %s"
+                  % str(ex).splitlines()[0], file=sys.stderr)
             data = {}
-        except Exception:                                 # noqa: BLE001
+        except Exception as ex:                           # noqa: BLE001
+            print("  商品コードを引けませんでした: %s" % ex, file=sys.stderr)
             data = {}
         got = data.get("Items") or []
         # 貼られたURLと同じ商品かを確かめてから採用する。
@@ -1839,7 +1844,11 @@ def main():
                 "applicationId": app_id, "accessKey": access_key, "affiliateId": aff_id,
                 "itemCode": code, "format": "json", "formatVersion": 2,
             }, site_url)
-        except Exception:                                # noqa: BLE001
+        except Exception as ex:                          # noqa: BLE001
+            # 黙って飛ばすと、売り切れの確認が抜けたまま載り続ける。
+            # 「確かめて残した」と「確かめられなかった」は違う。
+            print("  留め置きの確認ができませんでした（%s）: %s"
+                  % (p.get("title", "")[:24], ex), file=sys.stderr)
             time.sleep(REQUEST_INTERVAL)
             continue
         got = data.get("Items") or []

@@ -55,11 +55,17 @@ def fetch():
     log = [x for x in (load("threads_posted.json", {}) or {}).get("log", [])
            if x.get("id")]
     rows = []
+    lost = []
     for x in log:
         try:
             d = T.api("GET", "%s/insights" % x["id"],
                       {"metric": "views,likes,replies"}, token)
-        except Exception:                                  # noqa: BLE001
+        except Exception as ex:                            # noqa: BLE001
+            # 黙って飛ばすと、測れた投稿だけで中央値を出すことになる。
+            # 落ちたのが特定の型や時間帯に偏っていれば、
+            # そのぶん見立てが歪む。何件落ちたかを必ず言う。
+            # 2026-09-07: 「警告を出して先へ進む」作りを見直したときに気づいた。
+            lost.append((x.get("at"), x.get("key"), str(ex)[:60]))
             continue
         g = {m.get("name"): (m.get("values") or [{}])[0].get("value", 0)
              for m in d.get("data", [])}
@@ -68,6 +74,14 @@ def fetch():
         if (x.get("link") == "reply" or x.get("kind") == "tip") and g.get("replies"):
             g["replies"] = max(0, g["replies"] - 1)
         rows.append((x, g))
+    if lost:
+        print("⚠️  成績を取れなかった投稿が %d件あります（%d件中）。"
+              % (len(lost), len(log)))
+        for at, key, err in lost[:5]:
+            print("     %s %s — %s" % (at, key, err))
+        if len(lost) > len(log) * 0.2:
+            print("     取りこぼしが2割を超えています。"
+                  "この数字で型を比べるのは危険です。")
     return rows
 
 

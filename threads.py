@@ -1078,8 +1078,10 @@ def run_once(cfg, posted, slot_hour=None, dry=False, late=False):
             live = recent_posts(uid0, tok0)
             if live:
                 heads = {head_of(x.get("text")) for x in live}
-        except SystemExit:
-            pass
+        except SystemExit as ex:
+            # 黙って進むと、重複よけの材料が無いまま選ぶことになる。
+            print("  自分の投稿を見に行けませんでした: %s" % ex,
+                  file=sys.stderr)
     picks = pick(cfg, posted, want, slot_hour, heads)
     if not picks:
         print("出せるものがありません。")
