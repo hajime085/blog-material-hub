@@ -525,6 +525,37 @@ def rule_daily_routine_is_one_piece(ctx):
     return []
 
 
+def rule_network_failures_retried(ctx):
+    """一過性の通信失敗を、そのまま落とさない。
+
+    2026-09-07: 特価の見張りが10回に2回落ちていた。
+    落ちる場所も時間（13〜21分）も毎回ちがい、手元では再現しなかった。
+    api_get が拾っていたのは HTTPError だけで、接続が切れた・応答が
+    途中で終わった・返事が JSON でなかった、という失敗は再試行されずに
+    そのまま例外になっていた。1回の見張りで数百回叩くので、
+    どこか1回でも起きれば全部が止まる。
+
+    再試行の網が外れていないかを見る。
+    """
+    import os
+    p = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                     "fetch_rakuten.py")
+    if not os.path.exists(p):
+        return []
+    with open(p, encoding="utf-8") as f:
+        src = f.read()
+    head = src[src.find("def api_get("):]
+    head = head[:head.find("\ndef ", 1)] if "\ndef " in head[1:] else head
+    missing = [n for n in ("urllib.error.URLError", "TimeoutError", "OSError",
+                           "json.JSONDecodeError")
+               if n not in head]
+    if missing:
+        return ["api_get が %s を拾っていません。"
+                "一過性の通信失敗で見張りが丸ごと落ちます（2026-09-07）"
+                % "・".join(missing)]
+    return []
+
+
 RULES = [
     ("投稿は商品理解のあるものだけ", rule_post_needs_pitch),
     ("「どんな商品？」が出る", rule_what_is_it),
@@ -549,6 +580,7 @@ RULES = [
     ("使わなくなった道を残さない", rule_no_dead_fallback),
     ("同じ店の似た商品を並べない", rule_no_lookalike_pileup),
     ("日次の手順を途中で切らない", rule_daily_routine_is_one_piece),
+    ("つながらなかったらやり直す", rule_network_failures_retried),
     ("学びを止めない", rule_keep_learning),
 ]
 

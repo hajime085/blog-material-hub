@@ -30,6 +30,7 @@ products.json の listPrice を手で書いた場合はそちらが優先され�
 """
 
 import hashlib
+import http.client
 import json
 import os
 import re
@@ -191,6 +192,21 @@ def api_get(url, params, site_url):
                 time.sleep(wait)
                 continue
             break
+        # 2026-09-07: 見張りが10回に2回落ちていた。落ちる場所は毎回ちがい、
+        # 13分〜21分と時間もばらばらだった。ここで拾っていたのは HTTPError だけで、
+        # 接続が切れた・応答が途中で終わった・返事が JSON でなかった、という
+        # 一過性の失敗は再試行されずそのまま落ちていた。
+        # 1回の見張りで数百回叩くので、1回でも起きれば全部が止まる。
+        except (urllib.error.URLError, TimeoutError, OSError,
+                json.JSONDecodeError, http.client.HTTPException) as ex:
+            failure = None
+            if attempt < 3:
+                wait = 3 * (attempt + 1)
+                print("     （つながりませんでした: %s。%d秒待ってやり直します）"
+                      % (type(ex).__name__, wait))
+                time.sleep(wait)
+                continue
+            raise
 
     if failure is not None:
         ex = failure
