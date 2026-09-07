@@ -136,7 +136,8 @@
     "product:rc1b583414",
     "product:r0a3882660",
     "product:r027de4428",
-    "product:rf4416810f"
+    "product:rf4416810f",
+    "product:r1d6a5cd3d"
   ],
   "log": [
     {
@@ -2010,6 +2011,20 @@
       "hook_type": "problem",
       "cta_type": "empathy",
       "category": "beauty",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r1d6a5cd3d",
+      "id": "18223010155328083",
+      "at": "2026-09-07 20:51",
+      "kind": "product",
+      "slot": 20,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "problem",
+      "cta_type": "save",
+      "category": "books",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
