@@ -144,7 +144,8 @@
     "product:r89fbae1af",
     "product:rd7371e81c",
     "product:r89c3f72dc",
-    "product:r5fba09e43"
+    "product:r5fba09e43",
+    "product:r99038cde1"
   ],
   "log": [
     {
@@ -2130,6 +2131,20 @@
       "hook_type": "compare",
       "cta_type": "save",
       "category": "beauty",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r99038cde1",
+      "id": "18017947190875310",
+      "at": "2026-09-07 23:21",
+      "kind": "product",
+      "slot": 23,
+      "catchup": false,
+      "cap": false,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "books",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
