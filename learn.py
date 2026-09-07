@@ -100,7 +100,12 @@ def cuts(rows):
         "締めの型": (lambda x: x.get("cta_type") or "（なし）", "product"),
         "入口の型": (lambda x: x.get("hook_type") or "（なし）", "product"),
         "売場": (lambda x: x.get("category") or "（なし）", "product"),
-        "時刻": (lambda x: str(x.get("slot")), None),
+        # 時刻をそのまま切ると、種類との交絡になる。
+        # 2026-09-07: 「7時が9時の8.3倍」と出たが、7時は商品以外だけ、
+        # 9時は半分が商品。時刻ではなく種類の差を測っていた。
+        # 同じ種類どうしで比べる。
+        "時刻（豆知識）": (lambda x: str(x.get("slot")), "tip"),
+        "時刻（商品）": (lambda x: str(x.get("slot")), "product"),
     }
     # 表示は時間とともに増える。出したばかりの投稿は必ず低く出るので、
     # 混ぜて数えると「古い型のほうが良い」という嘘の差が立つ。
