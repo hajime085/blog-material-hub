@@ -125,7 +125,8 @@
     "product:rb9808baba",
     "product:refcdc1c00",
     "product:r7ff263388",
-    "schedule:2026-W36-1"
+    "schedule:2026-W36-1",
+    "tip:35"
   ],
   "log": [
     {
@@ -1840,6 +1841,20 @@
       "at": "2026-09-07 07:21",
       "kind": "schedule",
       "slot": 7,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
+    },
+    {
+      "key": "tip:35",
+      "id": "17924634114420242",
+      "at": "2026-09-07 09:21",
+      "kind": "tip",
+      "slot": 9,
       "catchup": false,
       "cap": null,
       "hook_type": null,
