@@ -166,6 +166,19 @@ def credentials(cfg):
     return app_id, access_key, aff_id
 
 
+class UpstreamError(Exception):
+    """楽天側の一時的な不調。こちらの設定は間違っていない。
+
+    2026-09-08: 見張りが5日で7回落ちていた。api_get は 429 以外の
+    HTTP エラーをすべて SystemExit で投げており、SystemExit は
+    Exception ではないので、売場ごとの受け止めを素通りしていた。
+    楽天が一度 500 系を返すだけで、11売場ぶんの実行が丸ごと死ぬ。
+
+    設定の間違い（403・400）は SystemExit のまま止める。直すのは人。
+    向こうの不調はこの型で投げる。1売場を諦めて、残りを続ける。
+    """
+
+
 def api_get(url, params, site_url):
     """新APIは Origin / Referer でアクセス元を見ている。
     アプリ設定の「許可されたWebサイト」と一致する値を必ず送る。"""
@@ -220,7 +233,7 @@ def api_get(url, params, site_url):
                       % (type(ex).__name__, wait))
                 time.sleep(wait)
                 continue
-            raise
+            raise UpstreamError("つながりませんでした: %s" % ex)
 
     if failure is not None:
         ex = failure
@@ -262,6 +275,9 @@ def api_get(url, params, site_url):
                 ".env の RAKUTEN_ACCESS_KEY を確認してください。\n\n"
                 "サーバーの返答: %s" % body
             )
+        if ex.code == 429 or ex.code >= 500:
+            raise UpstreamError("HTTP %s %s（楽天側の不調）: %s"
+                                % (ex.code, ex.reason, body[:120]))
         raise SystemExit("\nHTTP %s エラー: %s\n%s" % (ex.code, ex.reason, body))
 
     raise SystemExit("\n楽天APIに接続できませんでした。ネットワークを確認してください。")

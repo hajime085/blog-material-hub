@@ -173,11 +173,18 @@ jobs:
           git add -A
           git commit -F .run_summary.txt
           # 手元からの push と重なったときのために、取り込んでから送る。
-          for i in 1 2 3; do
+          #
+          # 2026-09-08: 9/7 11:20 の失敗はここだった（0.3分で終了）。
+          # 私が手元から続けて push していた時間帯と重なっている。
+          # 5秒おきに3回では、押し合いが続くと抜けられない。
+          # 待ち時間を延ばして回数も増やす。集めた値段を捨てるほうが惜しい。
+          for i in 1 2 3 4 5 6; do
             git pull --rebase --autostash origin main && git push origin main && exit 0
             echo "やり直します ($i)"
-            sleep 5
+            sleep $((i * 10))
           done
+          echo "::warning::記録を送れませんでした。次の回が取り込みます"
+          python3 ops/record_failure.py .run_summary.txt "記録の送信"
           exit 1
 
       - name: 実行結果を残す

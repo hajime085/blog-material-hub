@@ -722,10 +722,16 @@ def rule_server_errors_are_retried(ctx):
     cut = head.find("\ndef ", 1)
     if cut > 0:
         head = head[:cut]
+    out = []
     if "500, 502, 503, 504" not in head:
-        return ["api_get が、楽天側の一時的な不調（500系）を再試行していません。"
-                "一度返ってくるだけで見張りが丸ごと落ちます（2026-09-08）"]
-    return []
+        out.append("api_get が、楽天側の一時的な不調（500系）を再試行していません。"
+                   "一度返ってくるだけで見張りが丸ごと落ちます（2026-09-08）")
+    # 諦めるときも、設定の間違いと同じ SystemExit で投げてはいけない。
+    # SystemExit は Exception ではないので、売場ごとの受け止めを素通りする。
+    if "class UpstreamError" not in src:
+        out.append("楽天側の不調と、設定の間違いを分けていません。"
+                   "1売場の不調で11売場ぶんが死にます（2026-09-08）")
+    return out
 
 
 RULES = [
@@ -821,7 +827,8 @@ PROBES = {
         [("watch_yml", "record_failure.py", "remove"),
          ("record_failure_py", "", "empty")],
     "向こうの不調で全部を落とさない":
-        [("fetch_py", "500, 502, 503, 504", "remove")],
+        [("fetch_py", "500, 502, 503, 504", "remove"),
+         ("fetch_py", "class UpstreamError", "remove")],
     "学びを止めない": [],
 }
 
