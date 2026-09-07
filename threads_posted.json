@@ -139,7 +139,8 @@
     "product:rf4416810f",
     "product:r1d6a5cd3d",
     "product:rb7e74186a",
-    "product:rabf4c18bc"
+    "product:rabf4c18bc",
+    "product:r0efe95d2a"
   ],
   "log": [
     {
@@ -2055,6 +2056,20 @@
       "hook_type": "discovery",
       "cta_type": "save",
       "category": "pc",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r0efe95d2a",
+      "id": "18077467142346192",
+      "at": "2026-09-07 21:21",
+      "kind": "product",
+      "slot": 21,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "compare",
+      "cta_type": "save",
+      "category": "beauty",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
