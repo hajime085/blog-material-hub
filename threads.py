@@ -386,7 +386,17 @@ def tip_posts():
             for i, t in enumerate(rows) if t.get("title")]
 
 
-def schedule_recent(posted, days=3):
+# 予定の投稿を、次に出すまで何日あけるか。
+#
+# 2026-09-07: 予定の投稿は中央値110、ほかの型は11だった。
+# ただし n=5 で、自分たちで決めた「8件に満たない差は分からない」に届かない。
+# 同じ7時に出している豆知識と比べると3.1倍で、10倍ではない。
+# 判断するには件数が要る。件数を増やす唯一の方法が、頻度を上げること。
+# 3日 → 2日（exp-006、9/21に決着）。
+SCHEDULE_GAP_DAYS = 2
+
+
+def schedule_recent(posted, days=SCHEDULE_GAP_DAYS):
     """最近この型を出したか。予定の投稿が続けざまに並ぶのを避ける。"""
     now = datetime.now(JST).replace(tzinfo=None)
     for x in reversed(posted.get("log") or []):
@@ -1564,6 +1574,21 @@ def doctor(days=7):
 
 def main():
     args = sys.argv[1:]
+
+    # 知らない指定は、黙って無視せず止まる。
+    #
+    # 2026-09-07: 中身を見るつもりで --dry と打った。正しくは --dry-run。
+    # 知らない指定は素通りし、下見のつもりが本当に投稿された。
+    # 「効かなかった」より「打ち間違いに気づかない」ほうが高くつく。
+    known = {"--report", "--doctor", "--setup", "--refresh", "--check",
+             "--limit", "--dry-run", "--serve", "--until", "--hours",
+             "--push", "--late", "--slot", "--now"}
+    unknown = [a for i, a in enumerate(args)
+               if a.startswith("--") and a not in known]
+    if unknown:
+        sys.exit("知らない指定です: %s\n使えるのは: %s"
+                 % (" ".join(unknown), " ".join(sorted(known))))
+
     if "--report" in args:
         report()
         return

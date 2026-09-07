@@ -1482,6 +1482,17 @@ def main():
     app_id, access_key, aff_id = credentials(cfg)
     site_url = cfg["site"]["url"]
 
+    # 知らない指定は、黙って無視せず止まる。
+    # 2026-09-07: threads.py で --dry と打ち間違え、下見のつもりが本当に投稿された。
+    # ここも同じ形をしている。--wach と打てば見張りのつもりで巡回が走り、
+    # products.json を書き換える。
+    known = {"--featured", "--event", "--genres", "--seed", "--watch",
+             "--dry-run", "--scheduled", "--force"}
+    unknown = [a for a in args if a.startswith("-") and a not in known]
+    if unknown:
+        sys.exit("知らない指定です: %s\n使えるのは: %s"
+                 % (" ".join(unknown), " ".join(sorted(known))))
+
     if "--featured" in args:
         build_featured(cfg, app_id, access_key, aff_id, site_url)
         return

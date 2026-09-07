@@ -556,6 +556,31 @@ def rule_network_failures_retried(ctx):
     return []
 
 
+def rule_unknown_flags_stop(ctx):
+    """知らない指定で止まる。黙って無視しない。
+
+    2026-09-07: 中身を見るつもりで `threads.py --dry` と打った。
+    正しくは --dry-run。知らない指定は素通りし、
+    下見のつもりが本当にThreadsへ投稿された。
+    fetch_rakuten.py も同じ形をしていて、--wach と打てば
+    見張りのつもりで巡回が走り products.json を書き換える。
+
+    外に出る・ファイルを書き換える2本に、網が掛かっているかを見る。
+    """
+    import os
+    here = os.path.dirname(os.path.abspath(__file__))
+    bad = []
+    for name in ("threads.py", "fetch_rakuten.py"):
+        p = os.path.join(here, name)
+        if not os.path.exists(p):
+            continue
+        with open(p, encoding="utf-8") as f:
+            src = f.read()
+        if "知らない指定です" not in src:
+            bad.append("%s に知らない指定を止める仕組みがありません" % name)
+    return bad
+
+
 RULES = [
     ("投稿は商品理解のあるものだけ", rule_post_needs_pitch),
     ("「どんな商品？」が出る", rule_what_is_it),
@@ -581,6 +606,7 @@ RULES = [
     ("同じ店の似た商品を並べない", rule_no_lookalike_pileup),
     ("日次の手順を途中で切らない", rule_daily_routine_is_one_piece),
     ("つながらなかったらやり直す", rule_network_failures_retried),
+    ("知らない指定で止まる", rule_unknown_flags_stop),
     ("学びを止めない", rule_keep_learning),
 ]
 

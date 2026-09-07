@@ -87,14 +87,12 @@ def followers():
     return None
 
 
-def cuts(rows):
-    """切り口ごとに、表示の中央値を出す。"""
-    # 締め・入口・売場は商品の投稿にしか付かない。
-    # 全部を混ぜて数えると、値の無い tip や schedule が
-    # 「（なし）」という一群になり、どの切り口でも同じ差が出る。
-    # それは「商品の投稿が弱い」を4回言い換えているだけで、
-    # 台帳が同じ話で埋まる。商品どうしで比べる。
-    dims = {
+# 締め・入口・売場は商品の投稿にしか付かない。
+# 全部を混ぜて数えると、値の無い tip や schedule が
+# 「（なし）」という一群になり、どの切り口でも同じ差が出る。
+# それは「商品の投稿が弱い」を4回言い換えているだけで、
+# 台帳が同じ話で埋まる。商品どうしで比べる。
+DIMS = {
         "投稿の種類": (lambda x: x.get("kind") or "?", None),
         "リンクの位置": (lambda x: x.get("link") or "?", None),
         "締めの型": (lambda x: x.get("cta_type") or "（なし）", "product"),
@@ -106,7 +104,49 @@ def cuts(rows):
         # 同じ種類どうしで比べる。
         "時刻（豆知識）": (lambda x: str(x.get("slot")), "tip"),
         "時刻（商品）": (lambda x: str(x.get("slot")), "product"),
-    }
+}
+
+
+def ripe_at():
+    """出したばかりの投稿を外す境目。表示は時間とともに増えるので、
+    若い投稿を混ぜると「古い型のほうが良い」という嘘の差が立つ。"""
+    from datetime import datetime, timedelta
+    return (datetime.now() - timedelta(hours=48)).strftime("%Y-%m-%d %H:%M")
+
+
+def restatements(rows):
+    """「投稿の種類」の言い換えでしかない切り口を挙げる。
+
+    2026-09-07: 台帳に「tipがproductの2.4倍」と「noneがreplyの3.5倍」が
+    別々の学びとして載っていた。だが商品の投稿は必ず reply、
+    豆知識は必ず none で、リンクの位置は種類の別名でしかなかった。
+    同じ話を二度数えると、台帳が厚くなるだけで手は増えない。
+
+    種類が分かれば値もほぼ決まる切り口は、学びとして書かない。
+    """
+    ripe = ripe_at()
+    out = set()
+    for name, (f, only) in DIMS.items():
+        if name == "投稿の種類":
+            continue
+        by_kind = collections.defaultdict(collections.Counter)
+        for x, _ in rows:
+            if only and x.get("kind") != only:
+                continue
+            if (x.get("at") or "") > ripe:
+                continue
+            by_kind[x.get("kind")][f(x)] += 1
+        seen = [c for c in by_kind.values() if sum(c.values()) >= 3]
+        if not seen:
+            continue
+        if all(max(c.values()) / sum(c.values()) >= 0.95 for c in seen):
+            out.add(name)
+    return out
+
+
+def cuts(rows):
+    """切り口ごとに、表示の中央値を出す。"""
+    dims = DIMS
     # 表示は時間とともに増える。出したばかりの投稿は必ず低く出るので、
     # 混ぜて数えると「古い型のほうが良い」という嘘の差が立つ。
     #
@@ -114,8 +154,7 @@ def cuts(rows):
     # だが「（なし）」は古い投稿だけに付いている印で、
     # 中身ではなく経過時間を測っていた。
     # 48時間たった投稿だけで比べる。
-    from datetime import datetime, timedelta
-    ripe = (datetime.now() - timedelta(hours=48)).strftime("%Y-%m-%d %H:%M")
+    ripe = ripe_at()
 
     out = {}
     for name, (f, only) in dims.items():
@@ -188,8 +227,12 @@ def main():
 
     # ---- 分かったことを拾う ----
     known = {f["dim"] for f in led["findings"]}
+    same = restatements(rows)
     for name in cut:
         if name in known:
+            continue
+        if name in same:
+            print("  （%s は「投稿の種類」の言い換えなので、学びにしません）" % name)
             continue
         j = judged(cut, name)
         if not j:
