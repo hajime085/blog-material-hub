@@ -156,7 +156,8 @@
     "tip:25",
     "tip:01",
     "product:rc13b17364",
-    "product:r4110cd3c0"
+    "product:r4110cd3c0",
+    "product:r6503194ae"
   ],
   "log": [
     {
@@ -2310,6 +2311,20 @@
       "hook_type": "scene",
       "cta_type": "save",
       "category": "fashion",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r6503194ae",
+      "id": "18017518190932297",
+      "at": "2026-09-08 20:11",
+      "kind": "product",
+      "slot": 20,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "save",
+      "category": "food",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
