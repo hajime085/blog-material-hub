@@ -159,7 +159,8 @@
     "product:r4110cd3c0",
     "product:r6503194ae",
     "product:r60c611df5",
-    "product:raa7d94a42"
+    "product:raa7d94a42",
+    "product:rb78fbf6bb"
   ],
   "log": [
     {
@@ -2355,6 +2356,20 @@
       "hook_type": "problem",
       "cta_type": "empathy",
       "category": "pc",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:rb78fbf6bb",
+      "id": "17905925700542078",
+      "at": "2026-09-08 20:51",
+      "kind": "product",
+      "slot": 20,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "problem",
+      "cta_type": "save",
+      "category": "fashion",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
