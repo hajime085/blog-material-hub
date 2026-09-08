@@ -163,7 +163,8 @@
     "product:rb78fbf6bb",
     "product:ra2f9ea19e",
     "product:r429d5ab72",
-    "product:rf0e26deba"
+    "product:rf0e26deba",
+    "product:r19936e0b3"
   ],
   "log": [
     {
@@ -2415,6 +2416,20 @@
       "hook_type": "discovery",
       "cta_type": "save",
       "category": "books",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r19936e0b3",
+      "id": "17909662158532601",
+      "at": "2026-09-08 21:31",
+      "kind": "product",
+      "slot": 21,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "fashion",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
