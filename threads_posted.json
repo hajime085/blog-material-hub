@@ -148,7 +148,8 @@
     "product:r99038cde1",
     "product:r53836647c",
     "product:r3ec61b9a2",
-    "tip:41"
+    "tip:41",
+    "tip:42"
   ],
   "log": [
     {
@@ -2185,6 +2186,20 @@
       "at": "2026-09-08 07:21",
       "kind": "tip",
       "slot": 7,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
+    },
+    {
+      "key": "tip:42",
+      "id": "18094179743531116",
+      "at": "2026-09-08 09:21",
+      "kind": "tip",
+      "slot": 9,
       "catchup": false,
       "cap": null,
       "hook_type": null,
