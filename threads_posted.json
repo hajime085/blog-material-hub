@@ -170,7 +170,8 @@
     "product:r6cbef6122",
     "product:rd0fc22355",
     "product:rc8139d923",
-    "product:r460f4734a"
+    "product:r460f4734a",
+    "schedule:2026-W36-3"
   ],
   "log": [
     {
@@ -2522,6 +2523,20 @@
       "category": "fashion",
       "logic_version": "marketing_v2",
       "link": "reply"
+    },
+    {
+      "key": "schedule:2026-W36-3",
+      "id": "17879256357533850",
+      "at": "2026-09-09 07:21",
+      "kind": "schedule",
+      "slot": 7,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
     }
   ]
 }
