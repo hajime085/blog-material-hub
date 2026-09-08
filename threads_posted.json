@@ -166,7 +166,8 @@
     "product:rf0e26deba",
     "product:r19936e0b3",
     "product:r36aae00f2",
-    "product:r0f909586a"
+    "product:r0f909586a",
+    "product:r6cbef6122"
   ],
   "log": [
     {
@@ -2459,6 +2460,20 @@
       "cap": true,
       "hook_type": "discovery",
       "cta_type": "save",
+      "category": "beauty",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r6cbef6122",
+      "id": "18196575100381055",
+      "at": "2026-09-08 22:21",
+      "kind": "product",
+      "slot": 22,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "compare",
+      "cta_type": "compare",
       "category": "beauty",
       "logic_version": "marketing_v2",
       "link": "reply"
