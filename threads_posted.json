@@ -154,7 +154,8 @@
     "product:r99b5a6b0f",
     "tip:12",
     "tip:25",
-    "tip:01"
+    "tip:01",
+    "product:rc13b17364"
   ],
   "log": [
     {
@@ -2282,6 +2283,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:rc13b17364",
+      "id": "18100526282198474",
+      "at": "2026-09-08 18:21",
+      "kind": "product",
+      "slot": 18,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "problem",
+      "cta_type": "save",
+      "category": "pc",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
