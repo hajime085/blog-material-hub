@@ -155,7 +155,8 @@
     "tip:12",
     "tip:25",
     "tip:01",
-    "product:rc13b17364"
+    "product:rc13b17364",
+    "product:r4110cd3c0"
   ],
   "log": [
     {
@@ -2295,6 +2296,20 @@
       "hook_type": "problem",
       "cta_type": "save",
       "category": "pc",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r4110cd3c0",
+      "id": "18407280490092230",
+      "at": "2026-09-08 20:00",
+      "kind": "product",
+      "slot": 20,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "save",
+      "category": "fashion",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
