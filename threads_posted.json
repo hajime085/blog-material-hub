@@ -150,7 +150,8 @@
     "product:r3ec61b9a2",
     "tip:41",
     "tip:42",
-    "tip:43"
+    "tip:43",
+    "product:r99b5a6b0f"
   ],
   "log": [
     {
@@ -2222,6 +2223,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:r99b5a6b0f",
+      "id": "18192050407391679",
+      "at": "2026-09-08 13:00",
+      "kind": "product",
+      "slot": 13,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "beauty",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
