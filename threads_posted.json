@@ -158,7 +158,8 @@
     "product:rc13b17364",
     "product:r4110cd3c0",
     "product:r6503194ae",
-    "product:r60c611df5"
+    "product:r60c611df5",
+    "product:raa7d94a42"
   ],
   "log": [
     {
@@ -2340,6 +2341,20 @@
       "hook_type": "discovery",
       "cta_type": "save",
       "category": "beauty",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:raa7d94a42",
+      "id": "18205177417372102",
+      "at": "2026-09-08 20:31",
+      "kind": "product",
+      "slot": 20,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "problem",
+      "cta_type": "empathy",
+      "category": "pc",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
