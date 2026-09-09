@@ -189,7 +189,8 @@
     "product:ra5603046f",
     "product:r992796b74",
     "tip:02",
-    "tip:14"
+    "tip:14",
+    "product:r28099416e"
   ],
   "log": [
     {
@@ -2807,6 +2808,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:r28099416e",
+      "id": "17933615922390371",
+      "at": "2026-09-09 21:51",
+      "kind": "product",
+      "slot": 21,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "fashion",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
