@@ -19,8 +19,12 @@
       "endTime": "2026-09-14 09:59",
       "listPrice": 890,
       "priceBasis": "history",
-      "caption": "",
-      "points": [],
+      "caption": "890円の香るアロマサプリが445円。5種類から選べます。",
+      "points": [
+        "890円から445円へ",
+        "ローズ・ピーチ・さくら・バニラ・グレープフルーツ",
+        "各約1ヶ月分・レビュー8,004件"
+      ],
       "description": "",
       "tags": [
         "送料無料"
@@ -29,7 +33,24 @@
       "postedAt": "2026-09-09",
       "bumpedAt": "2026-09-09T00:00:00",
       "lastSeen": "2026-09-09",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "香りのサプリを試したい人",
+        "problem": "香りものは好みが分かれる",
+        "use_case": "毎日",
+        "features": [
+          "5種類から選べる（ローズ・ピーチ・さくら・バニラ・グレープフルーツ）",
+          "各約1ヶ月分",
+          "レビュー8,004件・星4.30"
+        ],
+        "benefits": [
+          "香りを選べる"
+        ],
+        "hook": "5種類の香りから選べます。",
+        "body": "ローズ、ピーチ、さくら、バニラ、グレープフルーツ。\n各約1ヶ月分のお試しサイズです。",
+        "cta": "save"
+      }
     },
     {
       "id": "r51aa10d15",
@@ -48,17 +69,41 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 4680,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "4,680円のUVパーカーが980円。UPF50+、接触冷感。",
       "tags": [
         "送料無料"
       ],
-      "points": [],
+      "points": [
+        "4,680円から980円へ",
+        "遮蔽率99.9%と表示・フードと指穴つき",
+        "3タイプから選べる"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-08",
       "bumpedAt": "2026-09-08T14:32:56",
       "lastSeen": "2026-09-09",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "秋も日差しが気になる人",
+        "problem": "夏用の羽織は、秋には出番がなくなる",
+        "use_case": "外出・屋外",
+        "features": [
+          "UPF50+",
+          "遮蔽率99.9%と表示",
+          "接触冷感",
+          "吸湿速乾",
+          "指穴つきフード付き",
+          "3タイプから選べる"
+        ],
+        "benefits": [
+          "夏と秋の両方で着られる"
+        ],
+        "hook": "UPF50+、遮蔽率99.9%と書かれています。",
+        "body": "接触冷感の生地を使ったラッシュパーカーです。フード・指穴つき。\n3タイプから選べます。",
+        "cta": "save"
+      }
     },
     {
       "id": "racb4401f5",
@@ -77,17 +122,40 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 5960,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "5,960円のシャツワンピースが980円。袖丈2タイプ。",
       "tags": [
         "送料無料"
       ],
-      "points": [],
+      "points": [
+        "5,960円から980円へ",
+        "長袖とノースリーブから選ぶ",
+        "ロング丈・まくり袖"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-08",
       "bumpedAt": "2026-09-08T14:32:56",
       "lastSeen": "2026-09-09",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "一枚で着られる秋物を探している人",
+        "problem": "ワンピースは袖丈が合わないと一年着られない",
+        "use_case": "普段着",
+        "features": [
+          "袖丈2タイプから選べる",
+          "長袖・ノースリーブ",
+          "シャツワンピース",
+          "ロング丈",
+          "まくり袖"
+        ],
+        "benefits": [
+          "袖丈を選べる"
+        ],
+        "hook": "袖丈を2タイプから選べます。",
+        "body": "ロング丈のシャツワンピースです。まくり袖。\n長袖とノースリーブから選びます。",
+        "cta": "save"
+      }
     },
     {
       "id": "rc1a34b77f",
@@ -106,17 +174,40 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 1980,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,980円のSwitchケースが990円。ソフトのポケット付き。",
       "tags": [
         "送料無料"
       ],
-      "points": [],
+      "points": [
+        "1,980円から990円へ",
+        "Switch2・Switch・Switch Lite対応",
+        "ストラップ付き・耐衝撃"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-08",
       "bumpedAt": "2026-09-08T14:38:24",
       "lastSeen": "2026-09-08",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "Switchを持ち歩く人",
+        "problem": "ソフトを別に持つと、結局かさばる",
+        "use_case": "持ち運び",
+        "features": [
+          "Switch2・Switch・Switch Lite対応",
+          "ゲームカードのポケット付き",
+          "ストラップ付き",
+          "耐衝撃",
+          "軽量"
+        ],
+        "benefits": [
+          "本体とソフトをまとめて入れられる"
+        ],
+        "hook": "ソフトのポケットが付いたケースです。",
+        "body": "Switch2・Switch・Switch Liteに対応したキャリングケースです。\nゲームカードのポケットとストラップ付き。",
+        "cta": "save"
+      }
     },
     {
       "id": "r9b344a98a",
@@ -135,17 +226,39 @@
       "endTime": "2026-09-08 23:59",
       "listPrice": 2480,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,480円の美容サプリが1,240円。プラセンタ・コラーゲン・CICA。",
       "tags": [
         "送料無料"
       ],
-      "points": [],
+      "points": [
+        "2,480円から1,240円へ",
+        "超低分子コラーゲン配合",
+        "国内製造"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-08",
       "bumpedAt": "2026-09-08T14:31:39",
       "lastSeen": "2026-09-08",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "美容サプリをまとめたい人",
+        "problem": "成分ごとに買うと本数が増える",
+        "use_case": "毎日",
+        "features": [
+          "プラセンタ・コラーゲン・CICAを配合",
+          "超低分子コラーゲン",
+          "ヒアルロン酸・セラミド・エラスチン・アスタキサンチン",
+          "国内製造"
+        ],
+        "benefits": [
+          "複数の成分が1つにまとまっている"
+        ],
+        "hook": "3つの成分を1つにまとめたサプリメントです。",
+        "body": "プラセンタ、コラーゲン、CICAを配合しています。\nヒアルロン酸、セラミド、エラスチンも。国内製造。",
+        "cta": "save"
+      }
     },
     {
       "id": "r8797a6820",
@@ -164,17 +277,41 @@
       "endTime": "",
       "listPrice": 3000,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "3,000円のスムージー2袋セットが1,500円。3種類から選べます。",
       "tags": [
         "送料無料"
       ],
-      "points": [],
+      "points": [
+        "3,000円から1,500円へ",
+        "マンゴー・アサイー・ベリー＆ヨーグルト",
+        "1袋100g・送料込み"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-08",
       "bumpedAt": "2026-09-08T14:31:39",
       "lastSeen": "2026-09-08",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "スムージーを試したい人",
+        "problem": "味が合わないと、一袋を飲みきれない",
+        "use_case": "毎日",
+        "features": [
+          "2袋セット",
+          "マンゴー・アサイー・ベリー＆ヨーグルトから選ぶ",
+          "108種類の生酵素と表示",
+          "食物繊維・乳酸菌を配合",
+          "100g",
+          "送料込み"
+        ],
+        "benefits": [
+          "2袋で味を選べる"
+        ],
+        "hook": "3種類の味から、2袋を選ぶ形です。",
+        "body": "1袋100gのスムージーが2袋のセットです。\nマンゴー、アサイー、ベリー＆ヨーグルト。送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "rbde6613d0",
@@ -301,8 +438,12 @@
       "endTime": "2026-09-09 23:59",
       "listPrice": 4960,
       "priceBasis": "title",
-      "caption": "",
-      "points": [],
+      "caption": "4,960円のシャンプー＆トリートメントが2,480円。3種類から。",
+      "points": [
+        "4,960円から2,480円へ",
+        "シャンプー400ml＋トリートメント400g",
+        "美容室専売品と表示"
+      ],
       "description": "",
       "tags": [
         "送料無料"
@@ -311,7 +452,25 @@
       "postedAt": "2026-09-08",
       "bumpedAt": "2026-09-08T14:28:46",
       "lastSeen": "2026-09-08",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "シャンプーをまとめて買い替える人",
+        "problem": "シャンプーだけ買って、トリートメントが足りなくなる",
+        "use_case": "毎日",
+        "features": [
+          "シャンプー400mlとトリートメント400gのセット",
+          "3種類から選べる",
+          "美容室専売品と表示",
+          "レビュー605件・星4.49"
+        ],
+        "benefits": [
+          "2本そろって届く"
+        ],
+        "hook": "シャンプーとトリートメントのセットです。",
+        "body": "400mlのシャンプーと400gのトリートメント。3種類から選べます。\n美容室専売品として売られているものです。",
+        "cta": "save"
+      }
     },
     {
       "id": "rf0e26deba",
