@@ -193,7 +193,8 @@
     "product:r28099416e",
     "tip:23",
     "tip:26",
-    "tip:03"
+    "tip:03",
+    "product:r1941d2a91"
   ],
   "log": [
     {
@@ -2867,6 +2868,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:r1941d2a91",
+      "id": "18078666515705432",
+      "at": "2026-09-10 01:21",
+      "kind": "product",
+      "slot": 1,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "compare",
+      "cta_type": "save",
+      "category": "beauty",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
