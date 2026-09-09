@@ -180,7 +180,8 @@
     "tip:24",
     "product:racb4401f5",
     "product:r8797a6820",
-    "product:r51aa10d15"
+    "product:r51aa10d15",
+    "product:r563ad3c1c"
   ],
   "log": [
     {
@@ -2663,6 +2664,20 @@
       "key": "product:r51aa10d15",
       "id": "18133135780649113",
       "at": "2026-09-09 20:11",
+      "kind": "product",
+      "slot": 20,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "fashion",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r563ad3c1c",
+      "id": "18123301729847400",
+      "at": "2026-09-09 20:21",
       "kind": "product",
       "slot": 20,
       "catchup": false,
