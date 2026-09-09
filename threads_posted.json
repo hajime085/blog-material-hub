@@ -173,7 +173,8 @@
     "product:r460f4734a",
     "schedule:2026-W36-3",
     "tip:13",
-    "tip:22"
+    "tip:22",
+    "product:rc1a34b77f"
   ],
   "log": [
     {
@@ -2567,6 +2568,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:rc1a34b77f",
+      "id": "18364787665244406",
+      "at": "2026-09-09 13:00",
+      "kind": "product",
+      "slot": 13,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "books",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
