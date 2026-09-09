@@ -186,7 +186,8 @@
     "product:r6d214984e",
     "product:r5b97cfdf8",
     "product:r566ab8fbb",
-    "product:ra5603046f"
+    "product:ra5603046f",
+    "product:r992796b74"
   ],
   "log": [
     {
@@ -2758,6 +2759,20 @@
       "catchup": false,
       "cap": true,
       "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "beauty",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r992796b74",
+      "id": "18115092532959639",
+      "at": "2026-09-09 21:21",
+      "kind": "product",
+      "slot": 21,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
       "cta_type": "save",
       "category": "beauty",
       "logic_version": "marketing_v2",
