@@ -177,7 +177,8 @@
     "product:rc1a34b77f",
     "tip:00",
     "tip:21",
-    "tip:24"
+    "tip:24",
+    "product:racb4401f5"
   ],
   "log": [
     {
@@ -2627,6 +2628,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:racb4401f5",
+      "id": "18127756450751112",
+      "at": "2026-09-09 18:00",
+      "kind": "product",
+      "slot": 18,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "fashion",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
