@@ -187,7 +187,8 @@
     "product:r5b97cfdf8",
     "product:r566ab8fbb",
     "product:ra5603046f",
-    "product:r992796b74"
+    "product:r992796b74",
+    "tip:02"
   ],
   "log": [
     {
@@ -2777,6 +2778,20 @@
       "category": "beauty",
       "logic_version": "marketing_v2",
       "link": "reply"
+    },
+    {
+      "key": "tip:02",
+      "id": "18304924909303424",
+      "at": "2026-09-09 21:31",
+      "kind": "tip",
+      "slot": 21,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
     }
   ]
 }
