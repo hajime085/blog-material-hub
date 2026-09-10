@@ -734,6 +734,46 @@ def rule_server_errors_are_retried(ctx):
     return out
 
 
+def rule_hand_writing_is_never_overwritten(ctx):
+    """自動実行が、人の書いたものを上書きしない。
+
+    2026-09-10: 9/13開始の商品に書いたキャプションと商品理解が、
+    同じ日の巡回で消えていた。開始前の商品を作るところが、
+    既存を見ずに辞書をまるごと作り直していた。
+    開始前の商品は始まるまで何度も拾い直されるので、
+    書いても書いても次の巡回で空に戻る。
+
+    9/5に hand_attic.json を入れたが、あれは「消してから足し直す」経路
+    にしか効かない。ここは消さずに上書きしていたので素通りしていた。
+    同じ「書いたものが消える」でも、道が2本あった。
+
+    2つを見る:
+      1. 上書きを防ぐ with_prev があり、実際に使われているか
+      2. 守る範囲が広すぎないか（listPrice まで守ると
+         参考価格が古いまま固定され、「安く見えて安くない」に戻る）
+    """
+    src = ctx.get("fetch_py") or ""
+    if not src:
+        return []
+    out = []
+    if "def with_prev(" not in src:
+        out.append("fetch_rakuten.py に with_prev がありません。"
+                   "開始前の商品を作り直すたびに、書いたものが消えます"
+                   "（2026-09-10）")
+    elif "with_prev(existing.get(pid)" not in src:
+        out.append("with_prev が定義されているのに、使われていません")
+    if "WRITTEN_BY_HAND" in src:
+        i = src.find("WRITTEN_BY_HAND = (")
+        head = src[i:src.find(")", i)]
+        for f in ("listPrice", "tags", "unitNote"):
+            if f in head:
+                out.append("WRITTEN_BY_HAND に %s が入っています。"
+                           "毎回calculate し直す項目を守ると、"
+                           "参考価格が古いまま固定されます" % f)
+                break
+    return out
+
+
 RULES = [
     ("投稿は商品理解のあるものだけ", rule_post_needs_pitch),
     ("「どんな商品？」が出る", rule_what_is_it),
@@ -766,6 +806,7 @@ RULES = [
     ("決まりが鳴るかを確かめる", rule_selftest_is_wired),
     ("落ちた理由を読める場所に残す", rule_reports_land_where_readable),
     ("向こうの不調で全部を落とさない", rule_server_errors_are_retried),
+    ("書いたものを自動で消さない", rule_hand_writing_is_never_overwritten),
     ("学びを止めない", rule_keep_learning),
 ]
 
@@ -829,6 +870,9 @@ PROBES = {
     "向こうの不調で全部を落とさない":
         [("fetch_py", "500, 502, 503, 504", "remove"),
          ("fetch_py", "class UpstreamError", "remove")],
+    "書いたものを自動で消さない":
+        [("fetch_py", "def with_prev(", "remove"),
+         ("fetch_py", "with_prev(existing.get(pid)", "remove")],
     "学びを止めない": [],
 }
 

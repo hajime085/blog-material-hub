@@ -85,6 +85,42 @@ HAND_FIELDS = ("caption", "points", "description", "tags", "listPrice",
                "hiddenReason")
 
 
+# 人が書いたもの。自動実行が上書きしてはいけない。
+# listPrice・tags・unitNote は毎回計算し直すので、ここには入れない。
+WRITTEN_BY_HAND = ("caption", "points", "description", "marketing",
+                   "hidden", "hiddenReason")
+
+
+def with_prev(prev, fields):
+    """すでにある商品の上に、APIから取れた項目だけを重ねる。
+
+    2026-09-10: 9/13開始の商品に書いたキャプションと商品理解が、
+    同じ日の巡回で消えていた。開始前の商品を作るところが2箇所あり、
+    どちらも既存を見ずに辞書をまるごと作り直していた。
+    開始前の商品は始まるまで何度も拾い直されるので、
+    書いても書いても、次の巡回で空に戻る。
+
+    9/5に hand_attic.json を入れたが、あれは「消してから足し直す」経路
+    にしか効かない。ここは消さずに上書きしていたので素通りしていた。
+
+    手で書いた項目は、prev にあればそのまま残す。
+    無いときだけ空の初期値を置く。
+    """
+    out = dict(prev or {})
+    for k, v in fields.items():
+        # 人が書いた項目だけを守る。
+        #
+        # HAND_FIELDS をそのまま使ってはいけない。あちらには listPrice や
+        # tags のように「APIやタイトルから毎回計算し直すもの」が入っている。
+        # それを守ると、参考価格が古いまま固定されてしまう。
+        # 2026-09-07 に直したばかりの「安く見えて安くない」を、
+        # 自分で作り直すことになる。
+        if k in WRITTEN_BY_HAND and out.get(k):
+            continue
+        out[k] = v
+    return out
+
+
 def stash_hand(attic, p):
     """消す商品の手書きぶんを物置に預ける。"""
     code = p.get("itemCode")
@@ -1958,7 +1994,7 @@ def main():
             by_shop[shop] = by_shop.get(shop, 0) + 1
             by_cat[cat] = by_cat.get(cat, 0) + 1
             off = round((raw["listPrice"] - raw["price"]) / raw["listPrice"] * 100)
-            result[pid] = {
+            result[pid] = with_prev(existing.get(pid), {
                 "id": pid, "category": cat,
                 "title": clean_title(raw["rawTitle"]), "rawTitle": raw["rawTitle"],
                 "price": raw["price"], "image": raw["image"],
@@ -1976,7 +2012,7 @@ def main():
                 "unitNote": raw.get("unitNote"),
                 "postedAt": today, "bumpedAt": today + "T00:00:00",
                 "lastSeen": today, "pitch_status": "pending",
-            }
+            })
             pre_added.append((clean_title(raw["rawTitle"]), raw["price"], off,
                               raw.get("startTime", "")))
 

@@ -19,8 +19,12 @@
       "endTime": "2026-09-14 09:59",
       "listPrice": 890,
       "priceBasis": "history",
-      "caption": "",
-      "points": [],
+      "caption": "890円の香るアロマサプリが445円。5種類から選べます。",
+      "points": [
+        "890円から445円へ",
+        "ローズ・ピーチ・さくら・バニラ・グレープフルーツ",
+        "各約1ヶ月分・レビュー8,004件"
+      ],
       "description": "",
       "tags": [
         "送料無料"
@@ -29,7 +33,24 @@
       "postedAt": "2026-09-10",
       "bumpedAt": "2026-09-10T00:00:00",
       "lastSeen": "2026-09-10",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "香りのサプリを試したい人",
+        "problem": "香りものは好みが分かれる",
+        "use_case": "毎日",
+        "features": [
+          "5種類から選べる（ローズ・ピーチ・さくら・バニラ・グレープフルーツ）",
+          "各約1ヶ月分",
+          "レビュー8,004件・星4.30"
+        ],
+        "benefits": [
+          "香りを選べる"
+        ],
+        "hook": "5種類の香りから選べます。",
+        "body": "ローズ、ピーチ、さくら、バニラ、グレープフルーツ。\n各約1ヶ月分のお試しサイズです。",
+        "cta": "save"
+      }
     },
     {
       "id": "r4dae4a1ed",
@@ -48,17 +69,40 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2580,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "2,580円の39穀米800gが1,290円。ポスト投函・送料込み。",
       "tags": [
         "送料無料"
       ],
-      "points": [],
+      "points": [
+        "2,580円から1,290円へ",
+        "400g×2袋・国産",
+        "レビュー1,117件・★4.74"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-10",
       "bumpedAt": "2026-09-10T00:31:10",
       "lastSeen": "2026-09-10",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "白米に混ぜるものを探している人",
+        "problem": "雑穀は種類が多くて、どれを選べばいいか決めにくい",
+        "use_case": "毎日の炊飯",
+        "features": [
+          "39種類をブレンド",
+          "800g（400g×2袋）",
+          "国産",
+          "ポスト投函で送料込み",
+          "レビュー1,117件・星4.74"
+        ],
+        "benefits": [
+          "1袋ずつ開けられる"
+        ],
+        "hook": "39種類が混ざった雑穀です。",
+        "body": "400gが2袋で、合わせて800g。国産。\nポスト投函で送料込みです。",
+        "cta": "save"
+      }
     },
     {
       "id": "r28099416e",
