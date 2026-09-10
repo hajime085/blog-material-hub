@@ -158,6 +158,30 @@ def restatements(rows):
     return out
 
 
+def guess_measure(metric):
+    """指標の書き方から、何で測るかを見当づける。
+
+    見当がつかないときは "manual" を返す。勝手に別の数字で代用しない。
+    """
+    m = metric or ""
+    # 楽天のクリック数は管理画面にしかない。私からは見えない。
+    # 条件に混ざっていたら、見える半分だけで決めてはいけない。
+    # 2026-09-10: exp-004 は「表示合計とクリック数」の両方が条件なのに、
+    # 表示だけで決まるところだった。半分で決めるのは、
+    # 測っていないほうを「良かったこと」にするのと同じ。
+    if "クリック" in m or "成果" in m or "売上" in m:
+        return "manual"
+    if "フォロワー" in m:
+        return "followers"
+    if "いいね" in m and "返信" in m:
+        return "reactions"
+    if "1日あたりの表示合計" in m or "表示合計" in m:
+        return "views_total_per_day"
+    if "表示" in m:
+        return "views"
+    return "manual"
+
+
 def cuts(rows):
     """切り口ごとに、表示の中央値を出す。"""
     dims = DIMS
@@ -270,14 +294,45 @@ def main():
             print("\n試し %s は %s まで。いま %s、目標 %s。"
                   % (e["id"], e["until"], e["metric"], e["target"]))
             continue
-        now = st.median([g.get("views", 0) for x, g in rows
-                         if x["at"][:10] >= e["started"]] or [0])
-        e["result"] = {"median": now, "baseline": e["baseline"],
-                       "target": e["target"]}
+        # 何で測るかは、試しごとに書いてある。
+        #
+        # 2026-09-10: exp-002 の指標は「フォロワー数」なのに、
+        # 表示の中央値で判定して「戻す」と出した。フォロワーは31人で
+        # 目標15を大きく超えていたのに、別のものを測って落としていた。
+        # どの試しも表示で測る作りになっていた。
+        # 測れないものを黙って別の数字で代用するのが、いちばん危ない。
+        how = e.get("measure") or guess_measure(e.get("metric") or "")
+        if how == "views":
+            now = st.median([g.get("views", 0) for x, g in rows
+                             if x["at"][:10] >= e["started"]] or [0])
+            unit = "表示の中央値"
+        elif how == "followers":
+            now = followers()
+            unit = "フォロワー数"
+        elif how == "reactions":
+            now = sum((g.get("likes", 0) or 0) + (g.get("replies", 0) or 0)
+                      for _x, g in rows)
+            unit = "いいね＋返信の合計"
+        elif how == "views_total_per_day":
+            days = {}
+            for x, g in rows:
+                if x["at"][:10] >= e["started"]:
+                    days[x["at"][:10]] = days.get(x["at"][:10], 0) + (g.get("views", 0) or 0)
+            now = st.median(list(days.values()) or [0])
+            unit = "1日あたりの表示合計（中央値）"
+        else:
+            # 自分では測れない。勝手に決めない。
+            print("\n試し %s は期限を過ぎましたが、%s は私からは見えません。"
+                  "\n   数字をもらってから決めます。（目標 %s）"
+                  % (e["id"], e.get("metric"), e.get("target")))
+            e["status"] = "待ち"
+            continue
+        e["result"] = {"measured": now, "unit": unit,
+                       "baseline": e.get("baseline"), "target": e["target"]}
         e["status"] = "keep" if now >= e["target"] else "revert"
         e["decided"] = today
-        print("\n試し %s の結果: 中央値 %s（もとは %s、目標 %s）→ %s"
-              % (e["id"], now, e["baseline"], e["target"],
+        print("\n試し %s の結果: %s %s（もとは %s、目標 %s）→ %s"
+              % (e["id"], unit, now, e.get("baseline"), e["target"],
                  "続ける" if e["status"] == "keep" else "戻す"))
 
     save(LEDGER, led)
