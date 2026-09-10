@@ -214,7 +214,8 @@
     "tip:33",
     "tip:37",
     "tip:08",
-    "tip:20"
+    "tip:20",
+    "product:r4dae4a1ed"
   ],
   "log": [
     {
@@ -3182,6 +3183,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:r4dae4a1ed",
+      "id": "17966825447960341",
+      "at": "2026-09-10 22:20",
+      "kind": "product",
+      "slot": 22,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "food",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
