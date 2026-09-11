@@ -228,7 +228,8 @@
     "product:r334c4318f",
     "tip:41",
     "tip:42",
-    "tip:43"
+    "tip:43",
+    "tip:25"
   ],
   "log": [
     {
@@ -3385,6 +3386,20 @@
       "at": "2026-09-11 22:00",
       "kind": "tip",
       "slot": 22,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
+    },
+    {
+      "key": "tip:25",
+      "id": "18006452537967421",
+      "at": "2026-09-11 23:20",
+      "kind": "tip",
+      "slot": 23,
       "catchup": false,
       "cap": null,
       "hook_type": null,
