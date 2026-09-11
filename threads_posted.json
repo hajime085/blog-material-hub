@@ -221,7 +221,8 @@
     "tip:35",
     "tip:15",
     "tip:10",
-    "product:r21f099b64"
+    "product:r21f099b64",
+    "tip:39"
   ],
   "log": [
     {
@@ -3287,6 +3288,20 @@
       "category": "fashion",
       "logic_version": "marketing_v2",
       "link": "reply"
+    },
+    {
+      "key": "tip:39",
+      "id": "18094525553414668",
+      "at": "2026-09-11 14:20",
+      "kind": "tip",
+      "slot": 14,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
     }
   ]
 }
