@@ -118,7 +118,7 @@
       "body": "ローズ、ピーチ、さくら、バニラ、グレープフルーツ。\n各約1ヶ月分のお試しサイズです。",
       "cta": "save"
     },
-    "pitch_status": "ready",
+    "pitch_status": "pending",
     "_stashedAt": "2026-09-11"
   },
   "darkangel:10036348": {
@@ -1178,7 +1178,7 @@
       "body": "裾をしぼったジョガーパンツです。テーパードの細身で、サイドライン入り。",
       "cta": "save"
     },
-    "pitch_status": "ready",
+    "pitch_status": "pending",
     "_stashedAt": "2026-09-11"
   },
   "e-itto:10000001": {
@@ -2667,7 +2667,7 @@
     "_stashedAt": "2026-09-11"
   },
   "mi-215:10001489": {
-    "caption": "1,584円の無地長袖Tシャツが880円。男女兼用、キッズもあり。",
+    "caption": "無地長袖Tシャツが1,584円。男女兼用、キッズもあり。",
     "marketing": {
       "hook_type": "scene",
       "target": "重ね着用の一枚がほしい人",
@@ -4807,9 +4807,8 @@
     "_stashedAt": "2026-09-11"
   },
   "darkangel:10035695": {
-    "caption": "5,790円のワッフルカットソーが3,499円。ゆったりしたオーバーサイズ。",
+    "caption": "5,790円のワッフルカットソーが2,890円。ゆったりしたオーバーサイズ。",
     "points": [
-      "5,790円から3,499円へ",
       "ワッフル生地・ドロップショルダー",
       "長袖／半袖・大きいサイズあり"
     ],
@@ -6162,7 +6161,6 @@
       "ウォッチ中",
       "送料無料"
     ],
-    "listPrice": 2750,
     "_stashedAt": "2026-09-11"
   },
   "soukaidrink:10000912": {
@@ -6879,6 +6877,87 @@
       "送料無料"
     ],
     "listPrice": 4980,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-11"
+  },
+  "buono-buono:10000246": {
+    "tags": [
+      "送料無料",
+      "まとめ買い"
+    ],
+    "listPrice": 5998,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-11"
+  },
+  "jitdirect:10033773": {
+    "tags": [
+      "訳あり",
+      "アウトレット"
+    ],
+    "listPrice": 800,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-11"
+  },
+  "jitdirect:10003048": {
+    "tags": [
+      "訳あり",
+      "アウトレット"
+    ],
+    "listPrice": 1050,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-11"
+  },
+  "jitdirect:10003409": {
+    "tags": [
+      "訳あり",
+      "アウトレット"
+    ],
+    "listPrice": 800,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-11"
+  },
+  "jitdirect:10003244": {
+    "tags": [
+      "訳あり",
+      "アウトレット"
+    ],
+    "listPrice": 900,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-11"
+  },
+  "jitdirect:10034059": {
+    "tags": [
+      "訳あり",
+      "アウトレット"
+    ],
+    "listPrice": 800,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-11"
+  },
+  "jitdirect:10034041": {
+    "tags": [
+      "訳あり",
+      "アウトレット"
+    ],
+    "listPrice": 1200,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-11"
+  },
+  "jitdirect:10039508": {
+    "tags": [
+      "訳あり",
+      "アウトレット"
+    ],
+    "listPrice": 1150,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-11"
+  },
+  "jitdirect:10039422": {
+    "tags": [
+      "訳あり",
+      "アウトレット"
+    ],
+    "listPrice": 1100,
     "pitch_status": "pending",
     "_stashedAt": "2026-09-11"
   }
