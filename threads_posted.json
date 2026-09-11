@@ -220,7 +220,8 @@
     "tip:09",
     "tip:35",
     "tip:15",
-    "tip:10"
+    "tip:10",
+    "product:r21f099b64"
   ],
   "log": [
     {
@@ -3272,6 +3273,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:r21f099b64",
+      "id": "18116778445997571",
+      "at": "2026-09-11 13:00",
+      "kind": "product",
+      "slot": 13,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "fashion",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
