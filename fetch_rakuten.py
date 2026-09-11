@@ -1994,7 +1994,7 @@ def main():
             by_shop[shop] = by_shop.get(shop, 0) + 1
             by_cat[cat] = by_cat.get(cat, 0) + 1
             off = round((raw["listPrice"] - raw["price"]) / raw["listPrice"] * 100)
-            result[pid] = with_prev(existing.get(pid), {
+            _slot = with_prev(existing.get(pid), {
                 "id": pid, "category": cat,
                 "title": clean_title(raw["rawTitle"]), "rawTitle": raw["rawTitle"],
                 "price": raw["price"], "image": raw["image"],
@@ -2013,6 +2013,9 @@ def main():
                 "postedAt": today, "bumpedAt": today + "T00:00:00",
                 "lastSeen": today, "pitch_status": "pending",
             })
+            # 前に載せていて、いったん落ちた商品かもしれない。物置を見る。
+            restore_hand(attic, _slot)
+            result[pid] = _slot
             pre_added.append((clean_title(raw["rawTitle"]), raw["price"], off,
                               raw.get("startTime", "")))
 
@@ -2033,7 +2036,19 @@ def main():
             % (len(existing), len(history))
         )
 
-    # 消した商品の手書きぶんは物置に残す。また拾えたときに戻すため。
+    # 手で書いたぶんは、消える前に全部を物置に預ける。
+    #
+    # 2026-09-10 に with_prev を入れたが、翌朝また消えていた。
+    # 今度は「上書き」ではなく「いったん落ちて、空で拾い直された」。
+    # 物置に預けていたのは del を書いた2箇所だけで、
+    # 取得の窓から外れて静かに落ちた商品は預けられていなかった。
+    #
+    # 消えかたを1つずつ塞ぐのをやめる。どう消えたかに関係なく、
+    # 保存する前に全部を預ける。次に拾ったときに戻せる。
+    for _p in existing.values():
+        stash_hand(attic, _p)
+    for _p in result.values():
+        stash_hand(attic, _p)
     save_json("hand_attic.json", attic)
     save_json("products.json", {
         "_readme": "商品データ。手で書いた caption / points / description / tags / "

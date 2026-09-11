@@ -756,6 +756,15 @@ def rule_hand_writing_is_never_overwritten(ctx):
     if not src:
         return []
     out = []
+    # 消えかたは1つではない。
+    # 2026-09-10 に「上書き」を塞いだが、翌朝また消えていた。
+    # 今度は「いったん落ちて、空で拾い直された」。
+    # 物置に預けていたのは del を書いた2箇所だけで、
+    # 取得の窓から外れて静かに落ちた商品は預けられていなかった。
+    # 消えかたを1つずつ塞ぐのをやめ、保存前に全部を預けることにした。
+    if "for _p in existing.values():" not in src or "for _p in result.values():" not in src:
+        out.append("保存する前に、手で書いたぶんを全部は物置に預けていません。"
+                   "静かに落ちた商品は戻せません（2026-09-11）")
     if "def with_prev(" not in src:
         out.append("fetch_rakuten.py に with_prev がありません。"
                    "開始前の商品を作り直すたびに、書いたものが消えます"
@@ -872,7 +881,8 @@ PROBES = {
          ("fetch_py", "class UpstreamError", "remove")],
     "書いたものを自動で消さない":
         [("fetch_py", "def with_prev(", "remove"),
-         ("fetch_py", "with_prev(existing.get(pid)", "remove")],
+         ("fetch_py", "with_prev(existing.get(pid)", "remove"),
+         ("fetch_py", "for _p in existing.values():", "remove")],
     "学びを止めない": [],
 }
 
