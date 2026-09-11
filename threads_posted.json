@@ -224,7 +224,8 @@
     "product:r21f099b64",
     "tip:39",
     "tip:11",
-    "tip:40"
+    "tip:40",
+    "product:r334c4318f"
   ],
   "log": [
     {
@@ -3332,6 +3333,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:r334c4318f",
+      "id": "18127462816825745",
+      "at": "2026-09-11 18:00",
+      "kind": "product",
+      "slot": 18,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "compare",
+      "cta_type": "experience",
+      "category": "fashion",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
