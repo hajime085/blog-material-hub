@@ -1257,7 +1257,6 @@
     "tags": [
       "送料無料"
     ],
-    "listPrice": 1480,
     "marketing": {
       "hook_type": "compare",
       "target": "中身の濃さで選びたい人",
@@ -2669,7 +2668,6 @@
   },
   "mi-215:10001489": {
     "caption": "1,584円の無地長袖Tシャツが880円。男女兼用、キッズもあり。",
-    "listPrice": 1584,
     "marketing": {
       "hook_type": "scene",
       "target": "重ね着用の一枚がほしい人",
@@ -3939,6 +3937,7 @@
   },
   "mixsim:10000708": {
     "caption": "超軽量スリッポンが2,780円。立ったまま履けます。",
+    "listPrice": 5960,
     "marketing": {
       "hook_type": "compare",
       "target": "履くときの手間を減らしたい人",
@@ -5129,6 +5128,7 @@
       "送料無料",
       "まとめ買い"
     ],
+    "listPrice": 1000,
     "_stashedAt": "2026-09-11"
   },
   "bugyo:10004467": {
@@ -6832,6 +6832,54 @@
       "送料無料",
       "アウトレット"
     ],
+    "_stashedAt": "2026-09-11"
+  },
+  "kumamoto-food:10002922": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 3000,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-11"
+  },
+  "tozuka:10003793": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2299,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-11"
+  },
+  "kumamoto-food:10003001": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 4000,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-11"
+  },
+  "darkangel:10035933": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 3790,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-11"
+  },
+  "darkangel:10036221": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 5890,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-11"
+  },
+  "rioty:10039869": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 4980,
+    "pitch_status": "pending",
     "_stashedAt": "2026-09-11"
   }
 }
