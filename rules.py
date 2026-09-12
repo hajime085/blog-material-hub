@@ -827,6 +827,45 @@ def rule_event_calendar_is_not_empty(ctx):
     return out
 
 
+def rule_failures_are_visible_everywhere(ctx):
+    """落ちたことが、どの段で落ちても私に見える。
+
+    2026-09-12: 利用者から「GitHubがエラーを出しているが大丈夫か」と
+    聞かれた。実際に3回落ちていたのに、私は「失敗の記録はありません」と
+    報告していた。理由は仕組みの掛け方:
+      ・--doctor は「投稿しようとして失敗した記録」しか見ない
+      ・ops/failures.md は見張りの1つの段にしか掛かっていない
+    落ちていたのは git を送り返す段で、どちらの網にも入らなかった。
+
+    「見えている範囲に無い」を「起きていない」と読み替えたのが間違い。
+    3つを見る:
+      1. --doctor が、実行そのものの失敗を数えて出すか
+      2. 両方の手順に、どの段で落ちても記録する受け皿があるか
+      3. その受け皿が、最後の段に置いてあるか
+         （落ちる段より前に置くと動かない）
+    """
+    import os
+    out = []
+    src = ctx.get("threads_py") or ""
+    if src and 'r[2] == "failure"' not in src:
+        out.append("--doctor が、予定実行そのものの失敗を見ていません"
+                   "（2026-09-12）")
+    here = os.path.dirname(os.path.abspath(__file__))
+    for name, key in (("threads.yml", "threads_yml"), ("watch.yml", "watch_yml")):
+        wf = ctx.get(key) or ""
+        if not wf:
+            continue
+        if "どこかで落ちたら記録する" not in wf:
+            out.append("%s に、どの段で落ちても記録する受け皿がありません"
+                       % name)
+            continue
+        # 受け皿は最後になければ、落ちた段のあとに動かない。
+        if wf.rstrip().rfind("- name:") > wf.rfind("どこかで落ちたら記録する"):
+            out.append("%s の受け皿が最後の段ではありません。"
+                       "落ちた段より前に置くと動きません" % name)
+    return out
+
+
 RULES = [
     ("投稿は商品理解のあるものだけ", rule_post_needs_pitch),
     ("「どんな商品？」が出る", rule_what_is_it),
@@ -861,6 +900,7 @@ RULES = [
     ("向こうの不調で全部を落とさない", rule_server_errors_are_retried),
     ("書いたものを自動で消さない", rule_hand_writing_is_never_overwritten),
     ("先の予定を切らさない", rule_event_calendar_is_not_empty),
+    ("落ちたことが必ず見える", rule_failures_are_visible_everywhere),
     ("学びを止めない", rule_keep_learning),
 ]
 
@@ -930,6 +970,10 @@ PROBES = {
          ("fetch_py", "for _p in existing.values():", "remove")],
     "先の予定を切らさない":
         [("threads_py", "次の日程は、楽天からまだ発表されていません", "remove")],
+    "落ちたことが必ず見える":
+        [("threads_py", 'r[2] == "failure"', "remove"),
+         ("threads_yml", "どこかで落ちたら記録する", "remove"),
+         ("watch_yml", "どこかで落ちたら記録する", "remove")],
     "学びを止めない": [],
 }
 

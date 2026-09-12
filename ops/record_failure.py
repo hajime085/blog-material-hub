@@ -21,10 +21,15 @@ def main():
     log = sys.argv[1] if len(sys.argv) > 1 else ".watch_log.txt"
     what = sys.argv[2] if len(sys.argv) > 2 else "見張り"
     p = os.path.join(ROOT, log)
-    tail = "（ログが残っていません）"
+    tail = ""
     if os.path.exists(p):
         with open(p, encoding="utf-8", errors="replace") as f:
             tail = "".join(f.readlines()[-40:]).rstrip()
+    if not tail.strip():
+        # ログの無い段（gitの送り返しなど）で落ちることがある。
+        # 2026-09-12: そこで落ちていたのに、記録が1つも残っていなかった。
+        tail = ("（この段にはログがありません。Actions の実行画面で "
+                "どの段が赤いかを見てください）")
 
     when = (datetime.datetime.utcnow()
             + datetime.timedelta(hours=9)).strftime("%Y-%m-%d %H:%M")

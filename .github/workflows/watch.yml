@@ -190,3 +190,19 @@ jobs:
       - name: 実行結果を残す
         if: always()
         run: cat .run_summary.txt >> "$GITHUB_STEP_SUMMARY" || true
+
+      # どの段で落ちても記録を残す受け皿。
+      # 2026-09-12: 記録の仕組みを「価格を見に行く」段にしか掛けていなかった。
+      # 実際に落ちていたのは「変化があれば反映する」段で、何も残らなかった。
+      - name: どこかで落ちたら記録する
+        if: failure()
+        run: |
+          python3 ops/record_failure.py .watch_log.txt "特価の見張り"
+          git config user.name "yasumiru-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add ops/failures.md
+          git commit -m "auto: 見張りの手順が落ちた記録" || exit 0
+          for i in 1 2 3 4 5; do
+            git pull --rebase --autostash origin main && git push origin main && exit 0
+            sleep $((i * 10))
+          done

@@ -129,9 +129,34 @@ jobs:
           fi
           git add threads_posted.json
           git commit -m "auto: Threadsへ投稿"
-          for i in 1 2 3; do
+          # 見張りの回と同じ時刻に終わることが多く、送り返しがぶつかる。
+          # 2026-09-11・09-12 の失敗は3回ともここだった。
+          # 5秒おきに3回では、相手が大きな commit を押している間に諦める。
+          for i in 1 2 3 4 5 6 7 8; do
+            git fetch origin main --quiet || true
             git pull --rebase --autostash origin main && git push origin main && exit 0
             echo "やり直します ($i)"
-            sleep 5
+            sleep $((i * 10))
           done
+          echo "::warning::記録を送れませんでした"
+          python3 ops/record_failure.py /dev/null "投稿の記録の送信"
           exit 1
+
+      # どの段で落ちても記録を残す受け皿。
+      #
+      # 2026-09-12: 利用者から「GitHubがエラーを出している」と聞かれた。
+      # 実際に落ちていたのに、こちらは「失敗の記録はありません」と答えていた。
+      # 記録の仕組みを、見張りの1つの段にしか掛けていなかったため。
+      # 「見えている範囲に無い」を「起きていない」と読み替えていた。
+      - name: どこかで落ちたら記録する
+        if: failure()
+        run: |
+          python3 ops/record_failure.py /dev/null "Threadsへ投稿"
+          git config user.name "yasumiru-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add ops/failures.md
+          git commit -m "auto: 投稿の手順が落ちた記録" || exit 0
+          for i in 1 2 3 4 5; do
+            git pull --rebase --autostash origin main && git push origin main && exit 0
+            sleep $((i * 10))
+          done

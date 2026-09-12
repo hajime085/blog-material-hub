@@ -1620,6 +1620,23 @@ def doctor(days=7):
               "python3 threads.py --serve --until HH:MM を手元で走らせてください。")
     else:
         print("直近 %.1f時間以内に動いています。" % gap)
+    # 予定実行そのものが落ちていないか。
+    #
+    # 2026-09-12: 利用者から「GitHubがエラーを出しているが大丈夫か」と
+    # 聞かれた。実際に3回落ちていたのに、私は「失敗の記録はありません」と
+    # 報告していた。
+    #   report_failures() … 投稿しようとして失敗した記録しか見ない
+    #   ops/failures.md  … 見張りの1つの段にしか掛かっていない
+    # どちらも「gitを送り返す段で落ちた」を見られない。
+    # 回数はこうして数えているのに、結果は見ていなかった。
+    ng = [r for r in rows if r[2] == "failure"]
+    if ng:
+        print("\n⚠️  この%d日で %d回、予定実行そのものが落ちています:" % (days, len(ng)))
+        for t, name, _c, _e in ng[-8:]:
+            print("   %s %s" % (t.strftime("%m/%d %H:%M"), name))
+        print("   理由は ops/failures.md か、Actions の実行の要約にあります。")
+    else:
+        print("この%d日、予定実行はすべて成功しています。" % days)
     check_duplicates()
     report_failures()
 
