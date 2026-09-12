@@ -245,7 +245,8 @@
     "tip:27",
     "product:r4b9a55bd5",
     "product:r15ad388df",
-    "product:r5bb34a57a"
+    "product:r5bb34a57a",
+    "schedule:2026-W36-0"
   ],
   "log": [
     {
@@ -3653,6 +3654,20 @@
       "category": "pc",
       "logic_version": "marketing_v2",
       "link": "reply"
+    },
+    {
+      "key": "schedule:2026-W36-0",
+      "id": "18114633620070154",
+      "at": "2026-09-13 07:21",
+      "kind": "schedule",
+      "slot": 7,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
     }
   ]
 }
