@@ -783,6 +783,50 @@ def rule_hand_writing_is_never_overwritten(ctx):
     return out
 
 
+def rule_event_calendar_is_not_empty(ctx):
+    """先の予定が切れたまま放置しない。
+
+    2026-09-11: スーパーSALEが終わった時点で events.json の予定が空になり、
+    予定の投稿（表示の中央値110、いちばん見られている型）が沈黙した。
+    翌日まで誰も気づかなかった。利用者に指摘されて分かった。
+
+    楽天が次を発表するまで日程は書けない。だから「空だと鳴る」検査にする。
+    鳴ったら、発表されているか見に行って、出ていれば入れる。
+    出ていなければ、投稿は「まだ発表されていません」と言う（threads.py）。
+    予想で埋めない。
+    """
+    from datetime import datetime
+    doc = load("events.json", {}) or {}
+    now = datetime.now().strftime("%Y-%m-%d %H:%M")
+    ahead = [e for e in doc.get("events", [])
+             if ((e.get("end") or e.get("start") or "")[:16]) >= now]
+    out = []
+    # セールが終わった直後に予定が空なのは普通のこと。楽天がまだ出していない。
+    # そこで鳴らすと、発表までの数日ずっと赤いままになる。
+    # 狼が来ないのに鳴く検査は、そのうち誰も見なくなる。
+    # 「終わってから1週間たっても次が無い」なら、発表を見落としている。
+    if not ahead:
+        ends = sorted((e.get("end") or e.get("start") or "")[:16]
+                      for e in doc.get("events", []))
+        last = ends[-1] if ends else ""
+        gap = 99
+        if last:
+            from datetime import datetime as _dt
+            try:
+                gap = (_dt.now() - _dt.strptime(last, "%Y-%m-%d %H:%M")).days
+            except ValueError:
+                gap = 99
+        if gap >= 7:
+            out.append("前のセールが終わって%d日、これから先の予定が1つもありません。"
+                       "楽天の発表を見落としていないか見てください（2026-09-11）" % gap)
+    # 予定が無いときに投稿が黙らないことも見る。
+    src = ctx.get("threads_py") or ""
+    if src and "次の日程は、楽天からまだ発表されていません" not in src:
+        out.append("予定が無いとき、予定の投稿が何も出さずに黙ります。"
+                   "いちばん見られている型が止まります（2026-09-11）")
+    return out
+
+
 RULES = [
     ("投稿は商品理解のあるものだけ", rule_post_needs_pitch),
     ("「どんな商品？」が出る", rule_what_is_it),
@@ -816,6 +860,7 @@ RULES = [
     ("落ちた理由を読める場所に残す", rule_reports_land_where_readable),
     ("向こうの不調で全部を落とさない", rule_server_errors_are_retried),
     ("書いたものを自動で消さない", rule_hand_writing_is_never_overwritten),
+    ("先の予定を切らさない", rule_event_calendar_is_not_empty),
     ("学びを止めない", rule_keep_learning),
 ]
 
@@ -883,6 +928,8 @@ PROBES = {
         [("fetch_py", "def with_prev(", "remove"),
          ("fetch_py", "with_prev(existing.get(pid)", "remove"),
          ("fetch_py", "for _p in existing.values():", "remove")],
+    "先の予定を切らさない":
+        [("threads_py", "次の日程は、楽天からまだ発表されていません", "remove")],
     "学びを止めない": [],
 }
 
