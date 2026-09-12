@@ -243,7 +243,8 @@
     "tip:03",
     "tip:29",
     "tip:27",
-    "product:r4b9a55bd5"
+    "product:r4b9a55bd5",
+    "product:r15ad388df"
   ],
   "log": [
     {
@@ -3621,6 +3622,20 @@
       "hook_type": "discovery",
       "cta_type": "save",
       "category": "food",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r15ad388df",
+      "id": "18109630391030633",
+      "at": "2026-09-13 00:21",
+      "kind": "product",
+      "slot": 0,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "car",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
