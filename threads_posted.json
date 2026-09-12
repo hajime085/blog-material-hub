@@ -242,7 +242,8 @@
     "tip:26",
     "tip:03",
     "tip:29",
-    "tip:27"
+    "tip:27",
+    "product:r4b9a55bd5"
   ],
   "log": [
     {
@@ -3602,6 +3603,26 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:r20fdbf7fa",
+      "at": "2026-09-12 23:21",
+      "failed": true,
+      "error": "HTTP Error 500: Internal Server Error"
+    },
+    {
+      "key": "product:r4b9a55bd5",
+      "id": "17870146683601877",
+      "at": "2026-09-12 23:46",
+      "kind": "product",
+      "slot": 23,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "food",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
