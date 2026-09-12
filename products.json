@@ -80,7 +80,9 @@
       "postedAt": "2026-09-12",
       "bumpedAt": "2026-09-12T07:34:02",
       "lastSeen": "2026-09-12",
-      "pitch_status": "pending"
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "同じ店・同じ値段が3件。2件までにする（ジットストア 600円）"
     },
     {
       "id": "r20fdbf7fa",
@@ -99,17 +101,39 @@
       "endTime": "",
       "listPrice": 2980,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "2,980円の粉末調味料4点セットが1,490円。メール便・送料込み。",
       "tags": [
         "送料無料"
       ],
-      "points": [],
+      "points": [
+        "2,980円から1,490円へ",
+        "キムチ革命・万能調味料・ふりかけ革命・塩こんぶ",
+        "無添加と表示"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-12",
       "bumpedAt": "2026-09-12T11:30:44",
       "lastSeen": "2026-09-12",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "朝の支度を短くしたい人",
+        "problem": "時短のものは添加物が気になることが多い",
+        "use_case": "朝食・弁当",
+        "features": [
+          "4点セット（キムチ革命・万能調味料・ふりかけ革命・塩こんぶ）",
+          "無添加と表示",
+          "粉末調味料",
+          "メール便・送料込み"
+        ],
+        "benefits": [
+          "4種類をまとめて試せる"
+        ],
+        "hook": "粉末の調味料4種類のお試しセットです。",
+        "body": "キムチ革命、万能調味料、ふりかけ革命、塩こんぶの4点。\n無添加と書かれています。メール便で送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "r15ad388df",
@@ -128,17 +152,41 @@
       "endTime": "",
       "listPrice": 2980,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,980円の傘型サンシェードが1,490円。中棒が曲がるタイプ。",
       "tags": [
         "送料無料"
       ],
-      "points": [],
+      "points": [
+        "2,980円から1,490円へ",
+        "強化十本骨・収納ポーチ付き",
+        "六ヶ月保証・レビュー719件"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-12",
       "bumpedAt": "2026-09-12T07:38:20",
       "lastSeen": "2026-09-12",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "車の日よけを買い替える人",
+        "problem": "傘型は中棒がまっすぐで、フロントに沿わないことがある",
+        "use_case": "駐車中",
+        "features": [
+          "中棒が曲がる",
+          "強化十本骨",
+          "UVカット・遮光・断熱",
+          "収納ポーチ付き",
+          "六ヶ月保証",
+          "レビュー719件・星4.48"
+        ],
+        "benefits": [
+          "フロントの角度に合わせられる"
+        ],
+        "hook": "中棒が曲がるタイプの傘型サンシェードです。",
+        "body": "十本骨の強化タイプ。収納ポーチ付きです。\n六ヶ月の保証が付いています。",
+        "cta": "save"
+      }
     },
     {
       "id": "r4b9a55bd5",
@@ -157,17 +205,39 @@
       "endTime": "",
       "listPrice": 4280,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "4,280円のみかんの皮粉末800gが2,140円。200g×4袋。",
       "tags": [
         "送料無料"
       ],
-      "points": [],
+      "points": [
+        "4,280円から2,140円へ",
+        "殺菌済みで食用可",
+        "樽の味"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-12",
       "bumpedAt": "2026-09-12T11:30:44",
       "lastSeen": "2026-09-12",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "陳皮を使ってみたい人",
+        "problem": "みかんの皮は自分で干すと手間がかかる",
+        "use_case": "料理・お茶",
+        "features": [
+          "200g×4袋",
+          "殺菌済みで食用可",
+          "粉末",
+          "樽の味"
+        ],
+        "benefits": [
+          "干す手間なしで使える"
+        ],
+        "hook": "みかんの皮を粉末にしたものです。",
+        "body": "200gが4袋のセット。殺菌済みで食用にできると書かれています。",
+        "cta": "save"
+      }
     },
     {
       "id": "rc98af3a0e",
@@ -186,18 +256,40 @@
       "endTime": "2026-09-14 09:59",
       "listPrice": 800,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "800円のエプソン純正IC50が400円。箱なしアウトレット。",
       "tags": [
         "訳あり",
         "アウトレット"
       ],
-      "points": [],
+      "points": [
+        "800円から400円へ",
+        "中身は純正、無いのは箱",
+        "レビュー677件・★4.70"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-11",
       "bumpedAt": "2026-09-11T21:15:09",
       "lastSeen": "2026-09-12",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "エプソンのプリンタを使っている人",
+        "problem": "純正は高い。互換は不安が残る",
+        "use_case": "家庭のプリンタ",
+        "features": [
+          "エプソン純正 IC50シリーズ",
+          "箱なしアウトレット",
+          "訳あり扱い",
+          "レビュー677件・星4.70"
+        ],
+        "benefits": [
+          "中身は純正のまま、箱が無いぶん安い"
+        ],
+        "hook": "中身は純正で、無いのは箱です。",
+        "body": "エプソン純正のIC50シリーズです。\n箱なしのアウトレットとして売られています。",
+        "cta": "save"
+      }
     },
     {
       "id": "r971373c7f",
@@ -227,7 +319,9 @@
       "postedAt": "2026-09-11",
       "bumpedAt": "2026-09-11T21:15:09",
       "lastSeen": "2026-09-12",
-      "pitch_status": "pending"
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "同じ店・同じ値段が10件。2件までにする（ジットストア 400円）"
     },
     {
       "id": "r594fbaef3",
@@ -257,7 +351,9 @@
       "postedAt": "2026-09-11",
       "bumpedAt": "2026-09-11T21:15:09",
       "lastSeen": "2026-09-12",
-      "pitch_status": "pending"
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "同じ店・同じ値段が10件。2件までにする（ジットストア 400円）"
     },
     {
       "id": "rc1fe87a23",
@@ -287,7 +383,9 @@
       "postedAt": "2026-09-11",
       "bumpedAt": "2026-09-11T22:03:25",
       "lastSeen": "2026-09-12",
-      "pitch_status": "pending"
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "同じ店・同じ値段が10件。2件までにする（ジットストア 400円）"
     },
     {
       "id": "r24ec2b7c9",
@@ -317,7 +415,9 @@
       "postedAt": "2026-09-11",
       "bumpedAt": "2026-09-11T22:03:25",
       "lastSeen": "2026-09-12",
-      "pitch_status": "pending"
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "同じ店・同じ値段が10件。2件までにする（ジットストア 400円）"
     },
     {
       "id": "r6d1021121",
@@ -347,7 +447,9 @@
       "postedAt": "2026-09-11",
       "bumpedAt": "2026-09-11T22:03:25",
       "lastSeen": "2026-09-12",
-      "pitch_status": "pending"
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "同じ店・同じ値段が10件。2件までにする（ジットストア 400円）"
     },
     {
       "id": "r9a3cdc314",
@@ -366,18 +468,41 @@
       "endTime": "2026-09-14 09:59",
       "listPrice": 800,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "800円のキヤノン純正BCI-380S/381Sが400円。箱なしアウトレット。",
       "tags": [
         "訳あり",
         "アウトレット"
       ],
-      "points": [],
+      "points": [
+        "800円から400円へ",
+        "中身は純正、無いのは箱",
+        "小容量・レビュー33件"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-11",
       "bumpedAt": "2026-09-11T22:03:25",
       "lastSeen": "2026-09-12",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "純正インクを使いたいが、値段で迷う人",
+        "problem": "純正は高い。互換は不安が残る",
+        "use_case": "家庭のプリンタ",
+        "features": [
+          "キヤノン純正 BCI-380S/381Sシリーズ",
+          "小容量",
+          "箱なしアウトレット",
+          "訳あり扱い",
+          "レビュー33件・星4.64"
+        ],
+        "benefits": [
+          "中身は純正のまま、箱が無いぶん安い"
+        ],
+        "hook": "中身は純正で、無いのは箱です。",
+        "body": "キヤノン純正のBCI-380S/381Sシリーズ、小容量タイプです。\n箱なしのアウトレットとして売られています。",
+        "cta": "save"
+      }
     },
     {
       "id": "rd41c17b51",
@@ -407,7 +532,9 @@
       "postedAt": "2026-09-11",
       "bumpedAt": "2026-09-11T22:03:25",
       "lastSeen": "2026-09-12",
-      "pitch_status": "pending"
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "同じ店・同じ値段が10件。2件までにする（ジットストア 400円）"
     },
     {
       "id": "ree074f31a",
@@ -437,7 +564,9 @@
       "postedAt": "2026-09-11",
       "bumpedAt": "2026-09-11T22:03:25",
       "lastSeen": "2026-09-12",
-      "pitch_status": "pending"
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "同じ店・同じ値段が10件。2件までにする（ジットストア 400円）"
     },
     {
       "id": "rf4fbc566e",
@@ -456,18 +585,39 @@
       "endTime": "2026-09-14 09:59",
       "listPrice": 900,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "900円のエプソン純正IC69が450円。箱なしアウトレット。",
       "tags": [
         "訳あり",
         "アウトレット"
       ],
-      "points": [],
+      "points": [
+        "900円から450円へ",
+        "砂時計の絵柄",
+        "レビュー178件・★4.62"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-11",
       "bumpedAt": "2026-09-11T21:15:09",
       "lastSeen": "2026-09-12",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "エプソンのプリンタを使っている人",
+        "problem": "型番が合うか分からないまま互換品を買いにくい",
+        "use_case": "家庭のプリンタ",
+        "features": [
+          "エプソン純正 IC69シリーズ（砂時計）",
+          "箱なしアウトレット",
+          "レビュー178件・星4.62"
+        ],
+        "benefits": [
+          "純正の型番そのまま"
+        ],
+        "hook": "砂時計の絵柄、IC69シリーズの純正です。",
+        "body": "箱なしのアウトレットとして売られている純正インクです。",
+        "cta": "save"
+      }
     },
     {
       "id": "r5bb34a57a",
@@ -486,18 +636,40 @@
       "endTime": "2026-09-14 09:59",
       "listPrice": 900,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "900円のキヤノン純正BC-90/91が450円。箱なしアウトレット。",
       "tags": [
         "訳あり",
         "アウトレット"
       ],
-      "points": [],
+      "points": [
+        "900円から450円へ",
+        "ゆうパケット対応不可",
+        "レビュー58件・★4.69"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-11",
       "bumpedAt": "2026-09-11T22:03:25",
       "lastSeen": "2026-09-12",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "キヤノンの古い機種を使っている人",
+        "problem": "古い型番のインクは店頭から消えていく",
+        "use_case": "家庭のプリンタ",
+        "features": [
+          "キヤノン純正 BC-90/91",
+          "箱なしアウトレット",
+          "ゆうパケット対応不可",
+          "レビュー58件・星4.69"
+        ],
+        "benefits": [
+          "現行ではない型番が手に入る"
+        ],
+        "hook": "BC-90/91、まだ売っています。",
+        "body": "キヤノン純正の箱なしアウトレットです。\nゆうパケットでは送れない大きさです。",
+        "cta": "save"
+      }
     },
     {
       "id": "rd4be0ad1a",
@@ -527,7 +699,9 @@
       "postedAt": "2026-09-11",
       "bumpedAt": "2026-09-11T22:03:25",
       "lastSeen": "2026-09-12",
-      "pitch_status": "pending"
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "同じ店・同じ値段が3件。2件までにする（ジットストア 450円）"
     },
     {
       "id": "r319e3b4a4",
@@ -592,18 +766,40 @@
       "endTime": "2026-09-14 09:59",
       "listPrice": 1050,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,050円のキヤノン純正BCI-350XL/351XLが525円。大容量。",
       "tags": [
         "訳あり",
         "アウトレット"
       ],
-      "points": [],
+      "points": [
+        "1,050円から525円へ",
+        "箱なしアウトレット",
+        "レビュー618件・★4.72"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-11",
       "bumpedAt": "2026-09-11T21:15:09",
       "lastSeen": "2026-09-12",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "印刷の量が多い人",
+        "problem": "標準容量だとすぐ切れる",
+        "use_case": "家庭のプリンタ",
+        "features": [
+          "キヤノン純正 BCI-350XL/351XLシリーズ",
+          "大容量",
+          "箱なしアウトレット",
+          "レビュー618件・星4.72"
+        ],
+        "benefits": [
+          "大容量の型番を安く買える"
+        ],
+        "hook": "大容量のXLシリーズです。",
+        "body": "キヤノン純正、箱なしのアウトレットです。",
+        "cta": "save"
+      }
     },
     {
       "id": "r24e194561",
@@ -622,18 +818,40 @@
       "endTime": "2026-09-14 09:59",
       "listPrice": 1100,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,100円のエプソン純正KUI-Lが550円。増量タイプ。",
       "tags": [
         "訳あり",
         "アウトレット"
       ],
-      "points": [],
+      "points": [
+        "1,100円から550円へ",
+        "クマノミの絵柄",
+        "レビュー98件・★4.83"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-11",
       "bumpedAt": "2026-09-11T21:15:09",
       "lastSeen": "2026-09-12",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "印刷の量が多い人",
+        "problem": "増量タイプは値段が上がる",
+        "use_case": "家庭のプリンタ",
+        "features": [
+          "エプソン純正 KUI-Lシリーズ（クマノミ）",
+          "増量タイプ",
+          "箱なしアウトレット",
+          "レビュー98件・星4.83"
+        ],
+        "benefits": [
+          "増量タイプを安く買える"
+        ],
+        "hook": "クマノミの絵柄、増量タイプです。",
+        "body": "エプソン純正のKUI-Lシリーズ。箱なしのアウトレットです。",
+        "cta": "save"
+      }
     },
     {
       "id": "r89c3f72dc",
@@ -652,18 +870,40 @@
       "endTime": "2026-09-14 09:59",
       "listPrice": 1150,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,150円のキヤノン純正BCI-380/381が575円。標準容量。",
       "tags": [
         "訳あり",
         "アウトレット"
       ],
-      "points": [],
+      "points": [
+        "1,150円から575円へ",
+        "箱なしアウトレット",
+        "レビュー128件・★4.79"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-11",
       "bumpedAt": "2026-09-11T21:15:09",
       "lastSeen": "2026-09-12",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "キヤノンのプリンタを使っている人",
+        "problem": "純正は高い",
+        "use_case": "家庭のプリンタ",
+        "features": [
+          "キヤノン純正 BCI-380/381シリーズ",
+          "標準容量",
+          "箱なしアウトレット",
+          "レビュー128件・星4.79"
+        ],
+        "benefits": [
+          "中身は純正のまま安い"
+        ],
+        "hook": "BCI-380/381の標準容量、純正です。",
+        "body": "箱なしのアウトレットとして売られています。",
+        "cta": "save"
+      }
     },
     {
       "id": "r8ef3976a9",
@@ -682,18 +922,40 @@
       "endTime": "2026-09-14 09:59",
       "listPrice": 1200,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,200円のエプソン純正IC80Lが600円。増量タイプ。",
       "tags": [
         "訳あり",
         "アウトレット"
       ],
-      "points": [],
+      "points": [
+        "1,200円から600円へ",
+        "箱なしアウトレット",
+        "レビュー158件・★4.65"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-11",
       "bumpedAt": "2026-09-11T21:15:09",
       "lastSeen": "2026-09-12",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "印刷の量が多い人",
+        "problem": "増量タイプは値段が上がる",
+        "use_case": "家庭のプリンタ",
+        "features": [
+          "エプソン純正 IC80Lシリーズ",
+          "増量タイプ",
+          "箱なしアウトレット",
+          "レビュー158件・星4.65"
+        ],
+        "benefits": [
+          "増量タイプを安く買える"
+        ],
+        "hook": "IC80Lの増量タイプです。",
+        "body": "エプソン純正、箱なしのアウトレットです。",
+        "cta": "save"
+      }
     },
     {
       "id": "rabf4c18bc",
@@ -712,18 +974,40 @@
       "endTime": "2026-09-14 09:59",
       "listPrice": 1200,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,200円のブラザー純正LC115が600円。大容量。",
       "tags": [
         "訳あり",
         "アウトレット"
       ],
-      "points": [],
+      "points": [
+        "1,200円から600円へ",
+        "箱なしアウトレット",
+        "レビュー35件・★4.77"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-11",
       "bumpedAt": "2026-09-11T22:03:25",
       "lastSeen": "2026-09-12",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "ブラザーのプリンタを使っている人",
+        "problem": "大容量は在庫が少ない",
+        "use_case": "家庭のプリンタ",
+        "features": [
+          "ブラザー純正 LC115シリーズ",
+          "大容量",
+          "箱なしアウトレット",
+          "レビュー35件・星4.77"
+        ],
+        "benefits": [
+          "大容量の純正を安く買える"
+        ],
+        "hook": "LC115の大容量、純正です。",
+        "body": "箱なしのアウトレットとして売られています。",
+        "cta": "save"
+      }
     },
     {
       "id": "r49599a6f6",
@@ -742,18 +1026,40 @@
       "endTime": "2026-09-14 09:59",
       "listPrice": 1350,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,350円のキヤノン純正BCI-380XL/381XLが675円。大容量。",
       "tags": [
         "訳あり",
         "アウトレット"
       ],
-      "points": [],
+      "points": [
+        "1,350円から675円へ",
+        "箱なしアウトレット",
+        "レビュー32件・★4.69"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-11",
       "bumpedAt": "2026-09-11T22:03:25",
       "lastSeen": "2026-09-12",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "印刷の量が多い人",
+        "problem": "XLは値段が高い",
+        "use_case": "家庭のプリンタ",
+        "features": [
+          "キヤノン純正 BCI-380XL/381XLシリーズ",
+          "大容量",
+          "箱なしアウトレット",
+          "レビュー32件・星4.69"
+        ],
+        "benefits": [
+          "XLを安く買える"
+        ],
+        "hook": "XLシリーズの純正です。",
+        "body": "キヤノン純正、箱なしのアウトレットです。",
+        "cta": "save"
+      }
     },
     {
       "id": "r30a492105",
@@ -772,17 +1078,39 @@
       "endTime": "",
       "listPrice": 2299,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,299円のお試し米1kgが1,145円。ポスト投函・送料込み。",
       "tags": [
         "送料無料"
       ],
-      "points": [],
+      "points": [
+        "2,299円から1,145円へ",
+        "五ツ星お米マイスターが精米と表示",
+        "ネコポス配送"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-11",
       "bumpedAt": "2026-09-11T16:29:34",
       "lastSeen": "2026-09-12",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "米を少量ずつ買いたい人",
+        "problem": "米は重くて、試しに買いにくい",
+        "use_case": "毎日の食事",
+        "features": [
+          "1kg（1袋）",
+          "五ツ星お米マイスターが精米と表示",
+          "ネコポスでポスト投函",
+          "送料込み"
+        ],
+        "benefits": [
+          "1kgから試せる"
+        ],
+        "hook": "1kgだけのお試しサイズです。",
+        "body": "五ツ星お米マイスターが精米したものとして売られています。\nポスト投函で届きます。送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "rb40cd4809",
@@ -801,17 +1129,40 @@
       "endTime": "",
       "listPrice": 3000,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "3,000円の二十五雑穀米900gが1,348円。450g×2袋。",
       "tags": [
         "送料無料"
       ],
-      "points": [],
+      "points": [
+        "3,000円から1,348円へ",
+        "国産・発芽玄米ともち麦入り",
+        "レビュー612件・★4.72"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-11",
       "bumpedAt": "2026-09-11T16:29:34",
       "lastSeen": "2026-09-11",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "白米に混ぜるものを探している人",
+        "problem": "雑穀は少量だとすぐ無くなる",
+        "use_case": "毎日の炊飯",
+        "features": [
+          "二十五雑穀米",
+          "900g（450g×2袋）",
+          "国産",
+          "熊本県産の発芽玄米・もち麦入り",
+          "レビュー612件・星4.72"
+        ],
+        "benefits": [
+          "2袋に分かれている"
+        ],
+        "hook": "25種類が入った雑穀米です。",
+        "body": "450gが2袋で900g。国産で、発芽玄米ともち麦が入っています。",
+        "cta": "save"
+      }
     },
     {
       "id": "rf05138318",
@@ -830,17 +1181,39 @@
       "endTime": "2026-09-14 09:59",
       "listPrice": 3790,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "3,790円のTシャツが1,690円。半袖と長袖から選べます。",
       "tags": [
         "送料無料"
       ],
-      "points": [],
+      "points": [
+        "3,790円から1,690円へ",
+        "クルーネック・無地",
+        "レビュー6,389件・★4.32"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-11",
       "bumpedAt": "2026-09-11T16:32:30",
       "lastSeen": "2026-09-12",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "一年中着られる無地のTシャツを探している人",
+        "problem": "無地のTシャツは季節ごとに買い分けることになる",
+        "use_case": "普段着",
+        "features": [
+          "半袖と長袖から選べる",
+          "クルーネック・無地",
+          "オーバーサイズ",
+          "レビュー6,389件・星4.32"
+        ],
+        "benefits": [
+          "袖丈を選べる"
+        ],
+        "hook": "半袖と長袖、どちらも選べます。",
+        "body": "無地のクルーネックです。ゆったりしたシルエット。",
+        "cta": "save"
+      }
     },
     {
       "id": "raf1300d6e",
@@ -859,17 +1232,39 @@
       "endTime": "",
       "listPrice": 4000,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "4,000円の青汁180gが2,000円。3g×60包。",
       "tags": [
         "送料無料"
       ],
-      "points": [],
+      "points": [
+        "4,000円から2,000円へ",
+        "国産の大麦若葉",
+        "送料込み"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-11",
       "bumpedAt": "2026-09-11T16:31:14",
       "lastSeen": "2026-09-11",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "青汁を続けたい人",
+        "problem": "青汁は1袋が大きく、飲みきれないことがある",
+        "use_case": "毎日",
+        "features": [
+          "3g×60包（180g）",
+          "国産の大麦若葉",
+          "プラセンタ・食物繊維を配合",
+          "送料込み"
+        ],
+        "benefits": [
+          "1包ずつ小分けになっている"
+        ],
+        "hook": "3gの小分けが60包です。",
+        "body": "国産の大麦若葉を使った青汁です。プラセンタと食物繊維も入っています。",
+        "cta": "save"
+      }
     },
     {
       "id": "r334c4318f",
@@ -965,17 +1360,41 @@
       "endTime": "2026-09-15 17:59",
       "listPrice": 5890,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "5,890円のロングスカートが2,990円。前後にスリット。",
       "tags": [
         "送料無料"
       ],
-      "points": [],
+      "points": [
+        "5,890円から2,990円へ",
+        "Iライン・ポケット付き",
+        "レビュー2,191件・★4.05"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-11",
       "bumpedAt": "2026-09-11T16:32:30",
       "lastSeen": "2026-09-12",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "きれいめのスカートを探している人",
+        "problem": "タイトなスカートは歩きにくい",
+        "use_case": "通勤・普段着",
+        "features": [
+          "Iラインのロングスカート",
+          "フロントスリット",
+          "バックスリット",
+          "ポケット付き",
+          "接触冷感",
+          "レビュー2,191件・星4.05"
+        ],
+        "benefits": [
+          "スリットで歩幅を取れる"
+        ],
+        "hook": "前と後ろ、両方にスリットが入っています。",
+        "body": "Iラインのロング丈。ポケット付きです。\n接触冷感の生地を使っています。",
+        "cta": "save"
+      }
     },
     {
       "id": "r67ba60ba8",
@@ -994,18 +1413,41 @@
       "endTime": "2026-09-12 09:59",
       "listPrice": 5998,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "5,998円の冷凍からあげが2,999円から。1kg〜10kgで選べます。",
       "tags": [
         "送料無料",
         "まとめ買い"
       ],
-      "points": [],
+      "points": [
+        "5,998円から2,999円へ",
+        "北海道から・レンジ調理",
+        "送料込み"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-11",
       "bumpedAt": "2026-09-11T21:10:08",
       "lastSeen": "2026-09-12",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "冷凍庫に主菜を常備したい人",
+        "problem": "揚げ物は作るのも片づけるのも手間",
+        "use_case": "夕飯・弁当",
+        "features": [
+          "1kg・2kg・4kg・10kgから選べる",
+          "北海道から",
+          "レンジ調理",
+          "送料込み",
+          "レビュー129件・星4.49"
+        ],
+        "benefits": [
+          "量を選んで買える"
+        ],
+        "hook": "1kgから10kgまで選べます。",
+        "body": "北海道からの冷凍からあげです。レンジで温めるタイプ。送料込み。",
+        "cta": "save"
+      }
     },
     {
       "id": "r21f099b64",
@@ -1542,19 +1984,39 @@
       "endTime": "2026-09-11 01:59",
       "listPrice": 2480,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,480円のSwitchケースが1,240円。迷彩柄、有機EL対応。",
       "tags": [
         "送料無料"
       ],
-      "points": [],
+      "points": [
+        "2,480円から1,240円へ",
+        "ジョイコンごと収納",
+        "無印・有機ELモデル対応"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-07",
       "bumpedAt": "2026-09-07T16:38:30",
       "lastSeen": "2026-09-10",
-      "pitch_status": "pending",
-      "hidden": true,
-      "hiddenReason": "同じ店・同じ値段のSwitchケースが5件。柄違いは2件までにする"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "Switchを持ち歩く人",
+        "problem": "同じ形のケースが並ぶと、自分のものか分かりにくい",
+        "use_case": "持ち運び",
+        "features": [
+          "Nintendo Switch用のケース",
+          "ジョイコンごと収納",
+          "迷彩柄",
+          "無印・有機ELモデル対応"
+        ],
+        "benefits": [
+          "柄で見分けがつく"
+        ],
+        "hook": "迷彩柄のSwitchケースです。",
+        "body": "本体とジョイコンをまとめて入れるタイプです。\n無印と有機ELモデルに対応しています。",
+        "cta": "save"
+      }
     },
     {
       "id": "r89aaccb59",
@@ -1585,7 +2047,7 @@
       "lastSeen": "2026-09-10",
       "pitch_status": "pending",
       "hidden": true,
-      "hiddenReason": "同じ店・同じ値段のSwitchケースが5件。柄違いは2件までにする"
+      "hiddenReason": "同じ店・同じ値段が4件。2件までにする（woodgreen スマホケースの町 1240円）"
     },
     {
       "id": "rba2388b7c",
@@ -1616,7 +2078,7 @@
       "lastSeen": "2026-09-10",
       "pitch_status": "pending",
       "hidden": true,
-      "hiddenReason": "同じ店・同じ値段のSwitchケースが5件。柄違いは2件までにする"
+      "hiddenReason": "同じ店・同じ値段が4件。2件までにする（woodgreen スマホケースの町 1240円）"
     },
     {
       "id": "r3ec61b9a2",
@@ -2109,7 +2571,9 @@
         "hook": "インクは、買ったと思ったらもう減っている。",
         "body": "エプソン純正のインクです。箱なしのアウトレット品。IC46シリーズ。",
         "cta": "save"
-      }
+      },
+      "hidden": true,
+      "hiddenReason": "同じ店・同じ値段が10件。2件までにする（ジットストア 400円）"
     },
     {
       "id": "r1d6a5cd3d",
@@ -6021,10 +6485,11 @@
       "endTime": "2026-09-13 09:59",
       "listPrice": 1999,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,999円のフレアパンツが1,480円。ダンボールニット。",
       "points": [
-        "フレア型のレギンス",
-        "接触冷感"
+        "1,999円から1,480円へ",
+        "ポケット付き・丈を選べる",
+        "レビュー3,781件・★4.15"
       ],
       "description": "裾がフレアに広がるレギンスパンツです。脚長に見せることを狙った形。\nよく伸びる生地なので、しゃがんでも突っ張りません。接触冷感の生地を使っています。",
       "tags": [
@@ -6035,22 +6500,23 @@
       "lastSeen": "2026-09-12",
       "bumpedAt": "2026-08-28T21:33:08",
       "marketing": {
-        "hook_type": "relatable",
-        "target": "レギンスを外でも履きたい人",
-        "problem": "レギンス1枚だと、そのまま出かけるには心もとない",
+        "hook_type": "discovery",
+        "target": "秋冬にはけるパンツを探している人",
+        "problem": "レギンスは一枚だと心もとない",
         "use_case": "普段着",
         "features": [
-          "裾がフレア",
+          "ダンボールニットのフレアパンツ",
+          "ポケット付き",
           "ストレッチ",
-          "レギンスパンツ"
+          "丈を選べる",
+          "レビュー3,781件・星4.15"
         ],
         "benefits": [
-          "裾に広がりがある",
-          "伸びるので動きやすい"
+          "丈を選べる"
         ],
-        "hook": "レギンス1枚だと、さすがに出かけづらい。",
-        "body": "裾がフレアになったレギンスパンツです。\nストレッチが効いています。",
-        "cta": "empathy"
+        "hook": "ダンボールニットのフレアパンツです。",
+        "body": "ポケット付きで、丈は選べます。\nストレッチが効いた生地です。",
+        "cta": "save"
       },
       "pitch_status": "ready"
     },
