@@ -244,7 +244,8 @@
     "tip:29",
     "tip:27",
     "product:r4b9a55bd5",
-    "product:r15ad388df"
+    "product:r15ad388df",
+    "product:r5bb34a57a"
   ],
   "log": [
     {
@@ -3636,6 +3637,20 @@
       "hook_type": "discovery",
       "cta_type": "save",
       "category": "car",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r5bb34a57a",
+      "id": "18223172497332594",
+      "at": "2026-09-13 01:00",
+      "kind": "product",
+      "slot": 1,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "pc",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
