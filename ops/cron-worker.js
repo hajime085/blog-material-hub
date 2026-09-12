@@ -159,9 +159,21 @@ async function tokenExpiry(token) {
 export default {
   async scheduled(event, env, ctx) {
     // 山場の10分おきは、投稿だけを出す。
+    //
+    // 山場が終わったあとも、セール用に足した cron（毎時 0,10,30,40,50分）は
+    // 残ったままになる。それをそのまま planFor に渡すと、
+    // 「その時間の通常の予定」を1晩に6回ずつ実行してしまう。
+    //
+    // 2026-09-12: 実際にそうなっていた。9/11にセールが終わったのに、
+    // 21:01〜21:51 に投稿と見張りを6回ずつ起こしていた。
+    // git を送り返す段が毎晩ぶつかって落ちていたのは、これが原因。
+    //
+    // 通常の予定は、自分の分（:20）でだけ動かす。
+    // ほかの分に来た cron は、山場でなければ用が無い。
+    const minute = new Date(event.scheduledTime).getUTCMinutes();
     const jobs = isBurst(event.scheduledTime)
       ? [T]
-      : planFor(event.scheduledTime);
+      : (minute === 20 ? planFor(event.scheduledTime) : []);
     if (!jobs.length) return;            // この時刻は用が無い
     if (!env.GH_TOKEN) {
       console.log("GH_TOKEN が入っていません");

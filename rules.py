@@ -866,6 +866,36 @@ def rule_failures_are_visible_everywhere(ctx):
     return out
 
 
+def rule_leftover_cron_does_nothing(ctx):
+    """セール用に足した起動が、終わったあとに悪さをしない。
+
+    2026-09-12: 9/11にセールが終わったのに、毎晩 21:01〜21:51 に
+    投稿と見張りを6回ずつ起こしていた。
+    セール用に足した cron（毎時 0,10,30,40,50分）が残っていて、
+    山場の判定を外れたあとは planFor に素通りし、
+    「その時間の通常の予定」をそのまま実行していた。
+
+    git を送り返す段が毎晩ぶつかって落ちていたのは、これが原因。
+    見えていたのは「落ちた」という結果だけで、
+    余分に6回起きていることには気づいていなかった。
+
+    通常の予定は自分の分（:20）でだけ動かす。
+    ほかの分に来た cron は、山場でなければ用が無い。
+    """
+    import os
+    p = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                     "ops", "cron-worker.js")
+    if not os.path.exists(p):
+        return []
+    with open(p, encoding="utf-8") as f:
+        src = f.read()
+    if "minute === 20 ? planFor" not in src:
+        return ["cron-worker.js が、通常の予定を自分の分（:20）に限っていません。"
+                "セール用に足した起動が残ると、1晩に6回ずつ実行されます"
+                "（2026-09-12）"]
+    return []
+
+
 RULES = [
     ("投稿は商品理解のあるものだけ", rule_post_needs_pitch),
     ("「どんな商品？」が出る", rule_what_is_it),
@@ -901,6 +931,7 @@ RULES = [
     ("書いたものを自動で消さない", rule_hand_writing_is_never_overwritten),
     ("先の予定を切らさない", rule_event_calendar_is_not_empty),
     ("落ちたことが必ず見える", rule_failures_are_visible_everywhere),
+    ("残った起動が悪さをしない", rule_leftover_cron_does_nothing),
     ("学びを止めない", rule_keep_learning),
 ]
 
