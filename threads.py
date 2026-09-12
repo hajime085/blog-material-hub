@@ -87,7 +87,20 @@ def credentials():
     return uid, token
 
 
-def api(method, path, params, token):
+def api(method, path, params, token, retry=0):
+    """Threads へ問い合わせる。
+
+    retry を渡すと、向こう側の一時的な不調（5xx）と通信のつまずきだけ
+    やり直す。設定の間違い（4xx）はやり直さない。待っても直らない。
+
+    2026-09-12 23:21: 投稿が HTTP 500 で1本落ちた。
+    楽天側は 9/8 に「一時的な不調は待つ」を入れたのに、
+    Threads 側には何も無かった。同じ形の穴を片側だけ塞いでいた。
+
+    ただし「公開」だけは、ここでやり直してはいけない。
+    向こうに届いたあとで返事が失われた場合、やり直すと二重に出る。
+    2026-09-04 に一度やっている。publish() で別に面倒を見る。
+    """
     params = dict(params or {})
     params["access_token"] = token
     url = "%s/%s" % (API, path.lstrip("/"))
@@ -97,8 +110,24 @@ def api(method, path, params, token):
     else:
         req = urllib.request.Request(url, data=data, method="POST")
     req.add_header("User-Agent", "yasumiru/1.0")
-    with urllib.request.urlopen(req, timeout=30) as r:
-        return json.loads(r.read().decode("utf-8"))
+    for attempt in range(retry + 1):
+        try:
+            with urllib.request.urlopen(req, timeout=30) as r:
+                return json.loads(r.read().decode("utf-8"))
+        except urllib.error.HTTPError as ex:
+            if ex.code < 500 or attempt >= retry:
+                raise
+            wait = 5 * (attempt + 1)
+            print("     （Threadsが %d を返しました。%d秒待ちます）"
+                  % (ex.code, wait), file=sys.stderr)
+            time.sleep(wait)
+        except (urllib.error.URLError, OSError) as ex:
+            if attempt >= retry:
+                raise
+            wait = 5 * (attempt + 1)
+            print("     （つながりませんでした: %s。%d秒待ちます）"
+                  % (type(ex).__name__, wait), file=sys.stderr)
+            time.sleep(wait)
 
 
 def yen(n):
@@ -121,7 +150,8 @@ def recent_posts(uid, token, n=25):
     for attempt in range(3):
         try:
             d = api("GET", "%s/threads" % uid,
-                    {"fields": "id,timestamp,text", "limit": n}, token)
+                    {"fields": "id,timestamp,text", "limit": n}, token,
+                    retry=1)
             return d.get("data") or []
         except Exception as ex:                               # noqa: BLE001
             if attempt == 2:
@@ -794,14 +824,35 @@ def publish(uid, token, text, reply_to=None):
     params = {"media_type": "TEXT", "text": text}
     if reply_to:
         params["reply_to_id"] = reply_to
-    c = api("POST", "%s/threads" % uid, params, token)
+    # 入れ物づくりは、やり直しても害がない。使わなかった入れ物は
+    # 向こうで期限切れになるだけで、投稿にはならない。
+    c = api("POST", "%s/threads" % uid, params, token, retry=2)
     cid = c.get("id")
     if not cid:
         raise RuntimeError("入れ物を作れませんでした: %s" % c)
     # 作ってすぐ公開すると失敗することがあるので、少し待つ
     time.sleep(3)
-    r = api("POST", "%s/threads_publish" % uid, {"creation_id": cid}, token)
-    return r.get("id")
+    # 公開は、ここで黙ってやり直してはいけない。
+    # 向こうに届いたあとで返事が失われた場合、二重に出る（2026-09-04）。
+    # 5xx のときだけ、本当に出ていないかをアカウントで確かめてから、
+    # 出ていなければ一度だけやり直す。
+    try:
+        r = api("POST", "%s/threads_publish" % uid, {"creation_id": cid}, token)
+        return r.get("id")
+    except urllib.error.HTTPError as ex:
+        if ex.code < 500:
+            raise
+        print("     （公開で %d。出ていないか確かめます）" % ex.code,
+              file=sys.stderr)
+        time.sleep(10)
+        live = recent_posts(uid, token, n=5) or []
+        head = head_of(text)
+        if any(head_of(x.get("text")) == head for x in live):
+            print("     （もう出ていました。やり直しません）", file=sys.stderr)
+            return next(x.get("id") for x in live
+                        if head_of(x.get("text")) == head)
+        r = api("POST", "%s/threads_publish" % uid, {"creation_id": cid}, token)
+        return r.get("id")
 
 
 def token_expiry(token):

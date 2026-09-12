@@ -903,6 +903,34 @@ def rule_leftover_cron_does_nothing(ctx):
     return out
 
 
+def rule_upstream_hiccups_are_retried_everywhere(ctx):
+    """向こう側の一時的な不調は、楽天にもThreadsにも同じように備える。
+
+    2026-09-08: 楽天APIの5xxを再試行するようにした。
+    2026-09-12 23:21: 今度はThreadsが500を返して投稿が1本落ちた。
+    同じ形の穴を、片側だけ塞いでいた。
+
+    ただし「公開」だけは黙ってやり直してはいけない。
+    向こうに届いたあとで返事が失われた場合、やり直すと二重に出る。
+    2026-09-04 に一度やっている。
+    出ていないかをアカウントで確かめてから、出ていなければ一度だけ。
+    """
+    out = []
+    fetch = ctx.get("fetch_py") or ""
+    if fetch and "500, 502, 503, 504" not in fetch:
+        out.append("fetch_rakuten.py が楽天側の5xxを再試行していません")
+    src = ctx.get("threads_py") or ""
+    if not src:
+        return out
+    if "def api(method, path, params, token, retry=0)" not in src:
+        out.append("threads.py の api() に、やり直しの仕組みがありません"
+                   "（2026-09-12）")
+    if "出ていないか確かめます" not in src:
+        out.append("公開が5xxで落ちたとき、出ていないか確かめずにいます。"
+                   "黙ってやり直すと二重に出ます（2026-09-04）")
+    return out
+
+
 RULES = [
     ("投稿は商品理解のあるものだけ", rule_post_needs_pitch),
     ("「どんな商品？」が出る", rule_what_is_it),
@@ -939,6 +967,7 @@ RULES = [
     ("先の予定を切らさない", rule_event_calendar_is_not_empty),
     ("落ちたことが必ず見える", rule_failures_are_visible_everywhere),
     ("残った起動が悪さをしない", rule_leftover_cron_does_nothing),
+    ("一時的な不調は両方で待つ", rule_upstream_hiccups_are_retried_everywhere),
     ("学びを止めない", rule_keep_learning),
 ]
 
@@ -1012,6 +1041,9 @@ PROBES = {
         [("threads_py", 'r[2] == "failure"', "remove"),
          ("threads_yml", "どこかで落ちたら記録する", "remove"),
          ("watch_yml", "どこかで落ちたら記録する", "remove")],
+    "一時的な不調は両方で待つ":
+        [("threads_py", "def api(method, path, params, token, retry=0)", "remove"),
+         ("threads_py", "出ていないか確かめます", "remove")],
     "学びを止めない": [],
 }
 
