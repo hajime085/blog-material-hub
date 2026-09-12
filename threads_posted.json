@@ -239,7 +239,8 @@
     "tip:02",
     "tip:14",
     "tip:23",
-    "tip:26"
+    "tip:26",
+    "tip:03"
   ],
   "log": [
     {
@@ -3550,6 +3551,20 @@
       "at": "2026-09-12 18:00",
       "kind": "tip",
       "slot": 18,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
+    },
+    {
+      "key": "tip:03",
+      "id": "17956174719227872",
+      "at": "2026-09-12 20:00",
+      "kind": "tip",
+      "slot": 20,
       "catchup": false,
       "cap": null,
       "hook_type": null,
