@@ -889,11 +889,18 @@ def rule_leftover_cron_does_nothing(ctx):
         return []
     with open(p, encoding="utf-8") as f:
         src = f.read()
+    out = []
     if "minute === 20 ? planFor" not in src:
-        return ["cron-worker.js が、通常の予定を自分の分（:20）に限っていません。"
-                "セール用に足した起動が残ると、1晩に6回ずつ実行されます"
-                "（2026-09-12）"]
-    return []
+        out.append("cron-worker.js が、通常の予定を自分の分（:20）に限っていません。"
+                   "セール用に足した起動が残ると、1晩に6回ずつ実行されます"
+                   "（2026-09-12）")
+    # 貼り替えた版が動いているかを、外から確かめられるようにしておく。
+    # 2026-08-末に構文エラーで数日デプロイが通らなかったとき、
+    # 気づく手立てが無かった。状態表示に版を出す。
+    if "const VERSION" not in src or "版 ${VERSION}" not in src:
+        out.append("cron-worker.js が、動いている版を状態表示に出していません。"
+                   "貼り替えが反映されたか確かめられません（2026-09-12）")
+    return out
 
 
 RULES = [
