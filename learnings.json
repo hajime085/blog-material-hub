@@ -690,8 +690,8 @@
   "lastRun": "2026-09-13",
   "snapshot": {
     "date": "2026-09-13",
-    "posts": 256,
-    "views": 7291,
+    "posts": 259,
+    "views": 7359,
     "replies": 1,
     "followers": 36,
     "cuts": {
@@ -715,9 +715,9 @@
           "max": 659
         },
         "tip": {
-          "n": 88,
+          "n": 90,
           "median": 15.0,
-          "mean": 30.4,
+          "mean": 30.3,
           "max": 163
         },
         "product": {
@@ -735,9 +735,9 @@
           "max": 11
         },
         "none": {
-          "n": 95,
+          "n": 97,
           "median": 20,
-          "mean": 43.1,
+          "mean": 42.7,
           "max": 659
         },
         "reply": {
@@ -959,16 +959,16 @@
           "max": 52
         },
         "21": {
-          "n": 8,
-          "median": 12.0,
-          "mean": 20.9,
+          "n": 9,
+          "median": 13,
+          "mean": 20.0,
           "max": 78
         },
         "22": {
-          "n": 1,
-          "median": 7,
-          "mean": 7.0,
-          "max": 7
+          "n": 2,
+          "median": 19.0,
+          "mean": 19.0,
+          "max": 31
         },
         "23": {
           "n": 2,
