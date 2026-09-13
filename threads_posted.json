@@ -253,7 +253,8 @@
     "tip:28",
     "tip:05",
     "tip:12",
-    "product:raf1300d6e"
+    "product:raf1300d6e",
+    "product:rb40cd4809"
   ],
   "log": [
     {
@@ -3771,6 +3772,20 @@
       "hook_type": "discovery",
       "cta_type": "save",
       "category": "beauty",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:rb40cd4809",
+      "id": "17863141833679212",
+      "at": "2026-09-13 20:00",
+      "kind": "product",
+      "slot": 20,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "food",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
