@@ -256,7 +256,8 @@
     "product:raf1300d6e",
     "product:rb40cd4809",
     "product:r9a3cdc314",
-    "product:r49599a6f6"
+    "product:r49599a6f6",
+    "product:rc98af3a0e"
   ],
   "log": [
     {
@@ -3811,6 +3812,20 @@
       "at": "2026-09-13 22:00",
       "kind": "product",
       "slot": 22,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "pc",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:rc98af3a0e",
+      "id": "18136542457620735",
+      "at": "2026-09-13 23:21",
+      "kind": "product",
+      "slot": 23,
       "catchup": false,
       "cap": true,
       "hook_type": "discovery",
