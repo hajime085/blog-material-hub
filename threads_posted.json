@@ -246,7 +246,8 @@
     "product:r4b9a55bd5",
     "product:r15ad388df",
     "product:r5bb34a57a",
-    "schedule:2026-W36-0"
+    "schedule:2026-W36-0",
+    "tip:16"
   ],
   "log": [
     {
@@ -3661,6 +3662,20 @@
       "at": "2026-09-13 07:21",
       "kind": "schedule",
       "slot": 7,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
+    },
+    {
+      "key": "tip:16",
+      "id": "18187741861410513",
+      "at": "2026-09-13 09:21",
+      "kind": "tip",
+      "slot": 9,
       "catchup": false,
       "cap": null,
       "hook_type": null,
