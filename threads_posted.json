@@ -259,7 +259,8 @@
     "product:r49599a6f6",
     "product:rc98af3a0e",
     "product:r30a492105",
-    "product:r4514c9fb3"
+    "product:r4514c9fb3",
+    "tip:17"
   ],
   "log": [
     {
@@ -3863,6 +3864,20 @@
       "category": "pc",
       "logic_version": "marketing_v2",
       "link": "reply"
+    },
+    {
+      "key": "tip:17",
+      "id": "18181485619423939",
+      "at": "2026-09-14 07:21",
+      "kind": "tip",
+      "slot": 7,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
     }
   ]
 }
