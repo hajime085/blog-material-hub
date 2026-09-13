@@ -248,7 +248,8 @@
     "product:r5bb34a57a",
     "schedule:2026-W36-0",
     "tip:16",
-    "tip:30"
+    "tip:30",
+    "product:r9a2f372af"
   ],
   "log": [
     {
@@ -3698,6 +3699,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:r9a2f372af",
+      "id": "18126839911746147",
+      "at": "2026-09-13 13:00",
+      "kind": "product",
+      "slot": 13,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "fashion",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
