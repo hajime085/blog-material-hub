@@ -257,7 +257,8 @@
     "product:rb40cd4809",
     "product:r9a3cdc314",
     "product:r49599a6f6",
-    "product:rc98af3a0e"
+    "product:rc98af3a0e",
+    "product:r30a492105"
   ],
   "log": [
     {
@@ -3831,6 +3832,20 @@
       "hook_type": "discovery",
       "cta_type": "save",
       "category": "pc",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r30a492105",
+      "id": "17942508693340899",
+      "at": "2026-09-14 00:01",
+      "kind": "product",
+      "slot": 0,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "food",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
