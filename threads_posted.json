@@ -255,7 +255,8 @@
     "tip:12",
     "product:raf1300d6e",
     "product:rb40cd4809",
-    "product:r9a3cdc314"
+    "product:r9a3cdc314",
+    "product:r49599a6f6"
   ],
   "log": [
     {
@@ -3796,6 +3797,20 @@
       "at": "2026-09-13 21:00",
       "kind": "product",
       "slot": 21,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "pc",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r49599a6f6",
+      "id": "18091353521147383",
+      "at": "2026-09-13 22:00",
+      "kind": "product",
+      "slot": 22,
       "catchup": false,
       "cap": true,
       "hook_type": "discovery",
