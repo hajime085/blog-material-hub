@@ -931,6 +931,43 @@ def rule_upstream_hiccups_are_retried_everywhere(ctx):
     return out
 
 
+def rule_daily_summary_keeps_the_alarms(ctx):
+    """日次の要点から、警報を落とさない。
+
+    2026-09-13: トークンを減らすため、手順1〜8を ops/daily.py にまとめ、
+    判断に要ることだけを返すようにした（出力は約3割になった）。
+
+    削るのは正しい。ただ、先週まさに「見えていない」を「起きていない」と
+    読み替えて、落ちている実行を「落ちていません」と報告した（2026-09-12）。
+    要点に出さなかった項目は、私には無いのと同じになる。
+
+    だから、次の警報は要点に必ず残す:
+      ビルドの警告／書くもの／予定実行そのものの失敗／投稿の失敗／
+      ops/failures.md／決まり／自己診断／期限の来た試し
+    """
+    import os
+    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ops", "daily.py")
+    if not os.path.exists(p):
+        return []
+    with open(p, encoding="utf-8") as f:
+        src = f.read()
+    need = {
+        "ビルドの警告": 'startswith("⚠")',
+        "書くもの": "def gaps(",
+        "予定実行そのものの失敗": '"--doctor"',
+        "ops/failures.md": "failures.md",
+        "決まり": '"rules.py"',
+        "自己診断": '"--selftest"',
+        "期限の来た試し": "数字をもらってから",
+    }
+    miss = [k for k, v in need.items() if v not in src]
+    if miss:
+        return ["ops/daily.py の要点から、警報が落ちています: %s"
+                "（見えないものは、無いのと同じになる。2026-09-12）"
+                % "、".join(miss)]
+    return []
+
+
 RULES = [
     ("投稿は商品理解のあるものだけ", rule_post_needs_pitch),
     ("「どんな商品？」が出る", rule_what_is_it),
@@ -968,6 +1005,7 @@ RULES = [
     ("落ちたことが必ず見える", rule_failures_are_visible_everywhere),
     ("残った起動が悪さをしない", rule_leftover_cron_does_nothing),
     ("一時的な不調は両方で待つ", rule_upstream_hiccups_are_retried_everywhere),
+    ("日次の要点から警報を落とさない", rule_daily_summary_keeps_the_alarms),
     ("学びを止めない", rule_keep_learning),
 ]
 

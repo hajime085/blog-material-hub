@@ -690,8 +690,8 @@
   "lastRun": "2026-09-13",
   "snapshot": {
     "date": "2026-09-13",
-    "posts": 248,
-    "views": 6797,
+    "posts": 256,
+    "views": 7291,
     "replies": 1,
     "followers": 36,
     "cuts": {
@@ -715,13 +715,13 @@
           "max": 659
         },
         "tip": {
-          "n": 81,
-          "median": 15,
-          "mean": 31.1,
+          "n": 88,
+          "median": 15.0,
+          "mean": 30.4,
           "max": 163
         },
         "product": {
-          "n": 127,
+          "n": 129,
           "median": 10,
           "mean": 16.6,
           "max": 230
@@ -735,15 +735,15 @@
           "max": 11
         },
         "none": {
-          "n": 88,
-          "median": 19.0,
-          "mean": 44.7,
+          "n": 95,
+          "median": 20,
+          "mean": 43.1,
           "max": 659
         },
         "reply": {
-          "n": 128,
+          "n": 130,
           "median": 10.0,
-          "mean": 16.6,
+          "mean": 16.5,
           "max": 230
         }
       },
@@ -755,9 +755,9 @@
           "max": 230
         },
         "experience": {
-          "n": 11,
-          "median": 8,
-          "mean": 8.7,
+          "n": 12,
+          "median": 9.0,
+          "mean": 9.3,
           "max": 18
         },
         "none": {
@@ -767,9 +767,9 @@
           "max": 30
         },
         "save": {
-          "n": 81,
-          "median": 10,
-          "mean": 13.0,
+          "n": 82,
+          "median": 10.0,
+          "mean": 12.9,
           "max": 140
         },
         "question": {
@@ -781,7 +781,7 @@
         "empathy": {
           "n": 11,
           "median": 13,
-          "mean": 21.7,
+          "mean": 21.8,
           "max": 71
         },
         "compare": {
@@ -799,9 +799,9 @@
           "max": 230
         },
         "discovery": {
-          "n": 35,
-          "median": 10,
-          "mean": 12.0,
+          "n": 36,
+          "median": 10.0,
+          "mean": 11.8,
           "max": 42
         },
         "scene": {
@@ -812,8 +812,8 @@
         },
         "problem": {
           "n": 26,
-          "median": 10.0,
-          "mean": 18.4,
+          "median": 10.5,
+          "mean": 18.5,
           "max": 211
         },
         "relatable": {
@@ -829,9 +829,9 @@
           "max": 35
         },
         "compare": {
-          "n": 17,
-          "median": 9,
-          "mean": 11.9,
+          "n": 18,
+          "median": 9.5,
+          "mean": 12.1,
           "max": 38
         },
         "problem_price": {
@@ -845,13 +845,13 @@
         "beauty": {
           "n": 31,
           "median": 9,
-          "mean": 14.9,
+          "mean": 15.0,
           "max": 140
         },
         "fashion": {
-          "n": 33,
+          "n": 35,
           "median": 9,
-          "mean": 12.6,
+          "mean": 12.4,
           "max": 71
         },
         "kaden": {
@@ -881,7 +881,7 @@
         "books": {
           "n": 9,
           "median": 10,
-          "mean": 8.7,
+          "mean": 8.9,
           "max": 14
         },
         "sports": {
@@ -893,13 +893,13 @@
         "baby-toy": {
           "n": 5,
           "median": 17,
-          "mean": 17.6,
+          "mean": 17.8,
           "max": 42
         },
         "pc": {
           "n": 9,
           "median": 10,
-          "mean": 10.6,
+          "mean": 10.7,
           "max": 29
         },
         "pet": {
@@ -913,13 +913,13 @@
         "None": {
           "n": 3,
           "median": 44,
-          "mean": 73.7,
+          "mean": 74.0,
           "max": 163
         },
         "14": {
-          "n": 13,
-          "median": 58,
-          "mean": 67.1,
+          "n": 14,
+          "median": 57.5,
+          "mean": 66.4,
           "max": 149
         },
         "19": {
@@ -929,33 +929,33 @@
           "max": 44
         },
         "7": {
-          "n": 7,
-          "median": 21,
-          "mean": 29.1,
+          "n": 8,
+          "median": 22.0,
+          "mean": 28.4,
           "max": 68
         },
         "9": {
-          "n": 8,
-          "median": 7.0,
+          "n": 9,
+          "median": 8,
           "mean": 9.8,
           "max": 28
         },
         "12": {
-          "n": 8,
-          "median": 15.0,
-          "mean": 18.9,
+          "n": 9,
+          "median": 17,
+          "mean": 19.3,
           "max": 32
         },
         "17": {
-          "n": 8,
-          "median": 15.0,
-          "mean": 38.5,
+          "n": 9,
+          "median": 15,
+          "mean": 37.7,
           "max": 97
         },
         "15": {
-          "n": 4,
-          "median": 13.0,
-          "mean": 20.8,
+          "n": 5,
+          "median": 7,
+          "mean": 18.0,
           "max": 52
         },
         "21": {
@@ -995,9 +995,9 @@
           "max": 1
         },
         "20": {
-          "n": 6,
-          "median": 4.5,
-          "mean": 21.7,
+          "n": 7,
+          "median": 5,
+          "mean": 20.1,
           "max": 61
         }
       },
@@ -1029,7 +1029,7 @@
         "21": {
           "n": 30,
           "median": 7.0,
-          "mean": 9.7,
+          "mean": 9.8,
           "max": 35
         },
         "23": {
@@ -1051,9 +1051,9 @@
           "max": 140
         },
         "18": {
-          "n": 6,
-          "median": 5.0,
-          "mean": 11.5,
+          "n": 7,
+          "median": 8,
+          "mean": 12.0,
           "max": 41
         },
         "22": {
@@ -1069,10 +1069,10 @@
           "max": 42
         },
         "13": {
-          "n": 5,
-          "median": 10,
-          "mean": 9.8,
-          "max": 12
+          "n": 6,
+          "median": 10.0,
+          "mean": 8.7,
+          "max": 13
         }
       }
     }
