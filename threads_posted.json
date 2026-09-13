@@ -254,7 +254,8 @@
     "tip:05",
     "tip:12",
     "product:raf1300d6e",
-    "product:rb40cd4809"
+    "product:rb40cd4809",
+    "product:r9a3cdc314"
   ],
   "log": [
     {
@@ -3786,6 +3787,20 @@
       "hook_type": "discovery",
       "cta_type": "save",
       "category": "food",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r9a3cdc314",
+      "id": "18632196598005607",
+      "at": "2026-09-13 21:00",
+      "kind": "product",
+      "slot": 21,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "pc",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
