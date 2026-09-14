@@ -256,7 +256,12 @@
     "product:raf1300d6e",
     "product:rb40cd4809",
     "product:r9a3cdc314",
-    "product:r49599a6f6"
+    "product:r49599a6f6",
+    "product:rc98af3a0e",
+    "product:r30a492105",
+    "product:r4514c9fb3",
+    "tip:17",
+    "tip:31"
   ],
   "log": [
     {
@@ -3818,6 +3823,76 @@
       "category": "pc",
       "logic_version": "marketing_v2",
       "link": "reply"
+    },
+    {
+      "key": "product:rc98af3a0e",
+      "id": "18136542457620735",
+      "at": "2026-09-13 23:21",
+      "kind": "product",
+      "slot": 23,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "pc",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r30a492105",
+      "id": "17942508693340899",
+      "at": "2026-09-14 00:01",
+      "kind": "product",
+      "slot": 0,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "food",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r4514c9fb3",
+      "id": "17946977802282591",
+      "at": "2026-09-14 01:00",
+      "kind": "product",
+      "slot": 1,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "pc",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "tip:17",
+      "id": "18181485619423939",
+      "at": "2026-09-14 07:21",
+      "kind": "tip",
+      "slot": 7,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
+    },
+    {
+      "key": "tip:31",
+      "id": "17954784552250278",
+      "at": "2026-09-14 09:21",
+      "kind": "tip",
+      "slot": 9,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
     }
   ]
 }
