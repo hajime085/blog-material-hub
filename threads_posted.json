@@ -266,7 +266,8 @@
     "product:r68cde95f1",
     "tip:06",
     "tip:18",
-    "tip:32"
+    "tip:32",
+    "product:r5e8c9afce"
   ],
   "log": [
     {
@@ -3968,6 +3969,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:r5e8c9afce",
+      "id": "18097772195561722",
+      "at": "2026-09-14 18:00",
+      "kind": "product",
+      "slot": 18,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "save",
+      "category": "kitchen",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
