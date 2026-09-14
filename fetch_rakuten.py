@@ -693,6 +693,16 @@ def fetch_category(cat, app_id, access_key, aff_id, hits, site_url, ng_keyword="
     for g in genres:
         for kw in sale_keywords:
             queries.append((g, kw))
+    # ジャンル内だけをレビュー数順に見ると、レビュー数は日々ほとんど
+    # 動かないため、上位の顔ぶれが何日たっても変わらない
+    # （2026-09-14: 利用者から「毎回同じ商品ばかり」との指摘）。
+    # keywords はカテゴリ設定に元々あったが、genres が埋まっている
+    # カテゴリでは使われずに死んでいた。ジャンルを絞ったまま
+    # 商品タイプで絞り込む検索を足し、上位以外の顔ぶれにも出会えるようにする。
+    if genres:
+        for g in genres:
+            for kw in (cat.get("keywords") or []):
+                queries.append((g, kw))
 
     # APIは1回30件までしか返さない。hits がそれより多ければページを送る。
     # 見る母数が増えるほど、値下がりに出くわす機会も増える。
