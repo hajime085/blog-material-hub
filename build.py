@@ -662,6 +662,7 @@ def render_featured(cfg):
     if not os.path.exists(path):
         return ""
     items = (load("featured.json") or {}).get("items") or []
+    items = [p for p in items if not sale_over(p)]
     if not items:
         return ""
 
@@ -2425,6 +2426,31 @@ def check_expired_sales(products):
             print("   %-28s %s" % (rel, pid))
 
 
+def check_featured_freshness():
+    """編集部の棚（featured.json）が、腐ったまま放っておかれていないか調べる。
+
+    featured.txt / featured.json は watch.yml では自動更新されず、
+    手で `python3 fetch_rakuten.py --featured` を叩かない限り増えない。
+    2026-09-08 に組んでから6日間そのままになり、載っていた12件のうち
+    5件がセール終了後の値段のまま表示され続けていた（render_featured が
+    sale_over を見ていなかったため）。表示側は直したが、
+    「棚そのものが古い」ことにも気づけるようにしておく。
+    """
+    doc = load("featured.json") or {}
+    items = doc.get("items") or []
+    if not items:
+        print("⚠ 編集部の棚が空です。featured.txt に商品URLを足して"
+              " `python3 fetch_rakuten.py --featured` を実行してください。")
+        return
+    # 日数の古さは rules.py の rule_featured_fresh が見ている。
+    # ここで見るのは別の壊れ方: 日数はまだ新しくても、載っている商品の
+    # セールがもう終わっていて、表示から静かに消えている場合。
+    alive = [p for p in items if not sale_over(p)]
+    if len(alive) < len(items) * 0.5 or len(alive) <= 2:
+        print("⚠ 編集部の棚 %d件のうち、セールが終わっていないのは %d件だけです。"
+              " featured.txt を入れ替えてください。" % (len(items), len(alive)))
+
+
 def check_caption_prices(products):
     """キャプションに書いた金額が、いまの価格と食い違っていないか調べる。
 
@@ -2736,6 +2762,7 @@ def main():
         check_internal_links()
         check_caption_prices(products)
         check_expired_sales(products)
+        check_featured_freshness()
         check_guide_toc(guides)
         # 決めたことを機械で守らせる。書き置きでは戻ってしまう。
         try:

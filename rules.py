@@ -399,7 +399,7 @@ def rule_featured_fresh(ctx):
         days = (datetime.now() - datetime.strptime(at, "%Y-%m-%d")).days
     except ValueError:
         return ["featured.json の更新日が読めません: %s" % at]
-    if days > 7:
+    if days > 5:
         return ["編集部の棚が %d日 更新されていません（%s）。"
                 "顔ぶれを見直してください" % (days, at)]
     return []
