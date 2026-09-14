@@ -268,7 +268,8 @@
     "tip:18",
     "tip:32",
     "product:r5e8c9afce",
-    "product:r20fdbf7fa"
+    "product:r20fdbf7fa",
+    "product:r67ba60ba8"
   ],
   "log": [
     {
@@ -3991,6 +3992,20 @@
       "at": "2026-09-14 20:00",
       "kind": "product",
       "slot": 20,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "food",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r67ba60ba8",
+      "id": "17957919630208660",
+      "at": "2026-09-14 21:00",
+      "kind": "product",
+      "slot": 21,
       "catchup": false,
       "cap": true,
       "hook_type": "discovery",
