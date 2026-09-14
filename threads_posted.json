@@ -262,7 +262,8 @@
     "product:r4514c9fb3",
     "tip:17",
     "tip:31",
-    "tip:34"
+    "tip:34",
+    "product:r68cde95f1"
   ],
   "log": [
     {
@@ -3908,6 +3909,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:r68cde95f1",
+      "id": "18086165486251745",
+      "at": "2026-09-14 13:00",
+      "kind": "product",
+      "slot": 13,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "problem",
+      "cta_type": "save",
+      "category": "pet",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
