@@ -274,7 +274,8 @@
     "tip:36",
     "tip:07",
     "tip:19",
-    "schedule:2026-W37-2"
+    "schedule:2026-W37-2",
+    "tip:33"
   ],
   "log": [
     {
@@ -4081,6 +4082,20 @@
       "at": "2026-09-15 07:21",
       "kind": "schedule",
       "slot": 7,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
+    },
+    {
+      "key": "tip:33",
+      "id": "18214387492349143",
+      "at": "2026-09-15 09:21",
+      "kind": "tip",
+      "slot": 9,
       "catchup": false,
       "cap": null,
       "hook_type": null,
