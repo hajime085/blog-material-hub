@@ -1700,8 +1700,8 @@
       "body": "マキシ丈のキャミワンピースです。Vネックで背中が開いた形。\n重ね着にも使えます。",
       "cta": "save"
     },
-    "pitch_status": "ready",
-    "_stashedAt": "2026-09-12"
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-15"
   },
   "suisosum-shop:10000192": {
     "caption": "1,780円のシリコン製シャンプーブラシが1,000円。",
@@ -2622,8 +2622,8 @@
       "body": "ストレッチのきいたレギンスパンツです。SからXXXLまで6サイズ。",
       "cta": "empathy"
     },
-    "pitch_status": "ready",
-    "_stashedAt": "2026-09-12"
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-15"
   },
   "karei-fuku:10060821": {
     "caption": "2,580円のカラーレギンスが770円。ストレッチ、SからXXXLまで。",
@@ -2648,8 +2648,8 @@
       "body": "ストレッチのきいたカラーレギンスです。SからXXXLまで。",
       "cta": "compare"
     },
-    "pitch_status": "ready",
-    "_stashedAt": "2026-09-12"
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-15"
   },
   "rioty:10039973": {
     "caption": "3,980円のドット柄ブラウスが796円。Vネックにフリル袖。",
@@ -2749,8 +2749,8 @@
       "body": "半袖のサマーニットとワイドパンツのセットです。冷感素材。\nパンツはスリット入り。",
       "cta": "save"
     },
-    "pitch_status": "ready",
-    "_stashedAt": "2026-09-12"
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-15"
   },
   "rioty:10033881": {
     "caption": "6,980円のTシャツとガウチョパンツのセットが1,396円。冷感素材。",
@@ -2776,8 +2776,8 @@
       "body": "冷感素材のTシャツとガウチョパンツのセットです。\nスリットが入っています。",
       "cta": "empathy"
     },
-    "pitch_status": "ready",
-    "_stashedAt": "2026-09-12"
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-15"
   },
   "levante:10000471": {
     "caption": "2,980円のリポソームビタミンCが1,490円。30日分、日本製。",
@@ -7009,7 +7009,7 @@
     ],
     "listPrice": 4980,
     "pitch_status": "pending",
-    "_stashedAt": "2026-09-12"
+    "_stashedAt": "2026-09-15"
   },
   "buono-buono:10000246": {
     "caption": "5,998円の冷凍からあげが2,999円から。1kg〜10kgで選べます。",
@@ -7642,6 +7642,14 @@
       "cta_text": null
     },
     "pitch_status": "ready",
+    "_stashedAt": "2026-09-15"
+  },
+  "darkangel:10035705": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 3580,
+    "pitch_status": "pending",
     "_stashedAt": "2026-09-15"
   }
 }
