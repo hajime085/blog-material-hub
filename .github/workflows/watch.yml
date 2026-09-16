@@ -83,6 +83,7 @@ jobs:
           git commit -m "auto: 見張りが落ちた記録" || exit 0
           for i in 1 2 3; do
             git pull --rebase --autostash origin main && git push origin main && exit 0
+            git rebase --abort 2>/dev/null || true
             sleep 5
           done
 
@@ -181,6 +182,7 @@ jobs:
           for i in 1 2 3 4 5 6; do
             git pull --rebase --autostash origin main && git push origin main && exit 0
             echo "やり直します ($i)"
+            git rebase --abort 2>/dev/null || true
             sleep $((i * 10))
           done
           echo "::warning::記録を送れませんでした。次の回が取り込みます"
@@ -204,5 +206,6 @@ jobs:
           git commit -m "auto: 見張りの手順が落ちた記録" || exit 0
           for i in 1 2 3 4 5; do
             git pull --rebase --autostash origin main && git push origin main && exit 0
+            git rebase --abort 2>/dev/null || true
             sleep $((i * 10))
           done

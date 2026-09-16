@@ -960,6 +960,33 @@ def rule_upstream_hiccups_are_retried_everywhere(ctx):
     return out
 
 
+def rule_rebase_retry_clears_conflict(ctx):
+    """pull --rebase をやり直す前に、失敗したrebaseを片付ける。
+
+    2026-09-16 02:20: 見張りが送ろうとしたコミットと、手元から送った分が
+    ぶつかり、1回目の git pull --rebase が本物のコンフリクトで失敗した。
+    ループは6回やり直したが、rebase が未解決のまま残るため
+    2回目以降は毎回 "Pulling is not possible because you have
+    unmerged files" で即座に失敗し、実質1回しか試せていなかった。
+
+    git pull --rebase を含むリトライのfor文には、次に回す前に
+    git rebase --abort を挟む（進行中でなければ無害）。
+    """
+    out = []
+    for name, key in (("watch.yml", "watch_yml"), ("threads.yml", "threads_yml")):
+        src = ctx.get(key) or ""
+        if not src:
+            continue
+        pulls = src.count("git pull --rebase")
+        aborts = src.count("git rebase --abort")
+        if pulls and aborts < pulls:
+            out.append("%s の git pull --rebase（%d箇所）のうち、"
+                       "git rebase --abort が無い所が %d箇所あります。"
+                       "本物のコンフリクトだと、やり直しが空回りします"
+                       % (name, pulls, pulls - aborts))
+    return out
+
+
 def rule_daily_summary_keeps_the_alarms(ctx):
     """日次の要点から、警報を落とさない。
 
@@ -1034,6 +1061,7 @@ RULES = [
     ("落ちたことが必ず見える", rule_failures_are_visible_everywhere),
     ("残った起動が悪さをしない", rule_leftover_cron_does_nothing),
     ("一時的な不調は両方で待つ", rule_upstream_hiccups_are_retried_everywhere),
+    ("pull --rebase のやり直しは空回りしない", rule_rebase_retry_clears_conflict),
     ("日次の要点から警報を落とさない", rule_daily_summary_keeps_the_alarms),
     ("学びを止めない", rule_keep_learning),
     ("試しの形が learn.py と合っている", rule_experiment_schema_is_sound),
@@ -1114,6 +1142,8 @@ PROBES = {
          ("threads_py", "出ていないか確かめます", "remove")],
     "学びを止めない": [],
     "試しの形が learn.py と合っている": [],
+    "pull --rebase のやり直しは空回りしない":
+        [("watch_yml", "git rebase --abort", "remove")],
 }
 
 
