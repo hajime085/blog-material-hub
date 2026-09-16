@@ -290,7 +290,8 @@
     "tip:42",
     "tip:43",
     "tip:25",
-    "tip:01"
+    "tip:01",
+    "product:rddadd2009"
   ],
   "log": [
     {
@@ -4328,6 +4329,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:rddadd2009",
+      "id": "18195674029379166",
+      "at": "2026-09-16 14:21",
+      "kind": "product",
+      "slot": 13,
+      "catchup": true,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "save",
+      "category": "fashion",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
