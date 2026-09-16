@@ -298,7 +298,8 @@
     "tip:00",
     "product:rf89fb2824",
     "product:re9854c5ff",
-    "product:r9fc239c09"
+    "product:r9fc239c09",
+    "product:r99f9de20b"
   ],
   "log": [
     {
@@ -4441,6 +4442,20 @@
       "at": "2026-09-16 22:00",
       "kind": "product",
       "slot": 22,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "save",
+      "category": "fashion",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r99f9de20b",
+      "id": "17860839714696921",
+      "at": "2026-09-16 23:21",
+      "kind": "product",
+      "slot": 23,
       "catchup": false,
       "cap": true,
       "hook_type": "scene",
