@@ -293,7 +293,8 @@
     "tip:01",
     "product:rddadd2009",
     "tip:13",
-    "tip:22"
+    "tip:22",
+    "product:r5c79accf8"
   ],
   "log": [
     {
@@ -4373,6 +4374,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:r5c79accf8",
+      "id": "17888721768458270",
+      "at": "2026-09-16 18:00",
+      "kind": "product",
+      "slot": 18,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "save",
+      "category": "sports",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
