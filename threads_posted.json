@@ -297,7 +297,8 @@
     "product:r5c79accf8",
     "tip:00",
     "product:rf89fb2824",
-    "product:re9854c5ff"
+    "product:re9854c5ff",
+    "product:r9fc239c09"
   ],
   "log": [
     {
@@ -4431,6 +4432,20 @@
       "hook_type": "discovery",
       "cta_type": "save",
       "category": "food",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r9fc239c09",
+      "id": "18087231071485552",
+      "at": "2026-09-16 22:00",
+      "kind": "product",
+      "slot": 22,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "save",
+      "category": "fashion",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
