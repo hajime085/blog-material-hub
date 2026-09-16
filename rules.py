@@ -488,6 +488,35 @@ def rule_keep_learning(ctx):
 
 
 
+def rule_experiment_schema_is_sound(ctx):
+    """試し（learnings.json の experiments）の形が、learn.py の読み方と合っている。
+
+    2026-09-16: exp-005/006 は "started" ではなく "start" というキーで
+    書かれ、target も「30以上（19時の5より明確に上）」のような文章に
+    なっていた。learn.py は e["started"] と数値の e["target"] を前提に
+    しているため、期限が来ても KeyError / TypeError で毎回落ち、
+    「学びを止めない」の検査は“決着していない”としか言わず、
+    本当の原因（読めない形で書かれている）が見えなかった。
+    書く場所を間違えると、決まりごと機能しなくなる。ここで形そのものを見る。
+    """
+    led = load("learnings.json", None)
+    if not led:
+        return []
+    out = []
+    numeric_measures = {"views", "followers", "reactions", "views_total_per_day"}
+    for e in led.get("experiments") or []:
+        eid = e.get("id") or "?"
+        if not e.get("started"):
+            out.append("試し %s に started がありません（'start' などの別名で"
+                       "書いていないか確認してください）" % eid)
+        how = e.get("measure")
+        if how in numeric_measures and not isinstance(e.get("target"), (int, float)):
+            out.append("試し %s の target が数値ではありません（%r）。"
+                       "文章にするなら target_why に分けてください"
+                       % (eid, e.get("target")))
+    return out
+
+
 def rule_no_lookalike_pileup(ctx):
     """同じ店の似た商品を並べない。
 
@@ -1007,6 +1036,7 @@ RULES = [
     ("一時的な不調は両方で待つ", rule_upstream_hiccups_are_retried_everywhere),
     ("日次の要点から警報を落とさない", rule_daily_summary_keeps_the_alarms),
     ("学びを止めない", rule_keep_learning),
+    ("試しの形が learn.py と合っている", rule_experiment_schema_is_sound),
 ]
 
 
@@ -1083,6 +1113,7 @@ PROBES = {
         [("threads_py", "def api(method, path, params, token, retry=0)", "remove"),
          ("threads_py", "出ていないか確かめます", "remove")],
     "学びを止めない": [],
+    "試しの形が learn.py と合っている": [],
 }
 
 
