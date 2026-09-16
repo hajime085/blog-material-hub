@@ -1,6 +1,6 @@
 {
   "darkangel:10035877": {
-    "caption": "3,790円のコクーンパンツが1,960円。速乾でUVカット、洗濯機で洗える。",
+    "caption": "3,790円のコクーンパンツが1,990円。速乾でUVカット、洗濯機で洗える。",
     "points": [
       "速乾・UVカット・洗濯機可",
       "レビュー4,903件・★4.28"
@@ -7733,42 +7733,120 @@
     "_stashedAt": "2026-09-16"
   },
   "chiranichibanyama:10000165": {
+    "caption": "3,000円の鹿児島県産抹茶パウダーが2,000円。100g。",
     "tags": [
       "送料無料"
     ],
     "listPrice": 3000,
-    "pitch_status": "pending",
+    "marketing": {
+      "hook_type": "discovery",
+      "target": "抹茶パウダーを探している人",
+      "problem": "抹茶は産地や品質で味が変わるので、選び方に迷う。",
+      "hook": "鹿児島県産の抹茶、見つけました。",
+      "body": "鹿児島県産の抹茶パウダー100g。レビューは3,659件、星4.72。",
+      "features": [
+        "鹿児島県産",
+        "抹茶パウダー100g",
+        "レビュー3,659件・星4.72"
+      ],
+      "cta": "save",
+      "cta_text": null
+    },
+    "pitch_status": "ready",
     "_stashedAt": "2026-09-16"
   },
   "oga:10267401": {
+    "caption": "1,000円の酪酸菌サプリが498円。約1ヶ月分。",
     "tags": [
       "送料無料"
     ],
     "listPrice": 1000,
-    "pitch_status": "pending",
+    "marketing": {
+      "hook_type": "discovery",
+      "target": "腸活サプリを探している人",
+      "problem": "種類が多くて、何を基準に選べばいいか分かりにくい。",
+      "hook": "酪酸菌のサプリ、成分を見てみました。",
+      "body": "酪酸菌配合で、乳酸菌・ビフィズス菌とあわせて摂れる設計。約1ヶ月分で、初めての方は半額。レビューは1,566件、星4.34。",
+      "features": [
+        "酪酸菌配合",
+        "乳酸菌・ビフィズス菌とあわせて摂れる",
+        "約1ヶ月分",
+        "レビュー1,566件・星4.34"
+      ],
+      "cta": "none",
+      "cta_text": null
+    },
+    "pitch_status": "ready",
     "_stashedAt": "2026-09-16"
   },
   "nadesiko:10003849": {
+    "caption": "2,980円の浴衣2点セットが1,980円。ヘコ帯は12柄から選べます。",
     "listPrice": 2980,
-    "pitch_status": "pending",
+    "marketing": {
+      "hook_type": "scene",
+      "target": "夏のイベント用に浴衣を探している人",
+      "problem": "浴衣は帯とセットで選ぶのが手間で、組み合わせに迷う。",
+      "hook": "浴衣、帯まで込みで選べたら楽ですよね。",
+      "body": "浴衣とヘコ帯の2点セット。ヘコ帯は12柄から選べる。レビューは4,800件、星4.41。",
+      "features": [
+        "浴衣・ヘコ帯の2点セット",
+        "ヘコ帯は12柄から選べる",
+        "レビュー4,800件・星4.41"
+      ],
+      "cta": "save",
+      "cta_text": null
+    },
+    "pitch_status": "ready",
     "_stashedAt": "2026-09-16"
   },
   "pennepenne:10001389": {
+    "caption": "1,490円のパンプスが980円。6.5cmヒール、3E幅で歩きやすい設計。",
     "tags": [
       "アウトレット",
       "在庫処分"
     ],
     "listPrice": 1490,
-    "pitch_status": "pending",
+    "marketing": {
+      "hook_type": "scene",
+      "target": "オフィスで長時間履いても疲れにくいパンプスを探している人",
+      "problem": "パンプスは見た目重視だと足が痛くなりやすい。",
+      "hook": "パンプス、履きやすさも見て選びたいですよね。",
+      "body": "6.5cmヒールで3E幅、抗菌・抗ウイルス加工つき。オフィスにもフォーマルにも使えるスクエアトゥ。レビューは61件、星4.2。",
+      "features": [
+        "6.5cmヒール",
+        "3E幅で歩きやすい",
+        "抗菌・抗ウイルス加工",
+        "レビュー61件・星4.2"
+      ],
+      "cta": "save",
+      "cta_text": null
+    },
+    "pitch_status": "ready",
     "_stashedAt": "2026-09-16"
   },
   "pennepenne:10003896": {
+    "caption": "1,490円のパンプスが980円。4.5cmヒール、3E幅で歩きやすい設計。",
     "tags": [
       "アウトレット",
       "在庫処分"
     ],
     "listPrice": 1490,
-    "pitch_status": "pending",
+    "marketing": {
+      "hook_type": "scene",
+      "target": "オフィスで長時間履いても疲れにくいパンプスを探している人",
+      "problem": "パンプスは見た目重視だと足が痛くなりやすい。",
+      "hook": "パンプス、履きやすさも見て選びたいですよね。",
+      "body": "4.5cmヒールで3E幅、抗菌・抗ウイルス加工つき。オフィスにもフォーマルにも使えるオブリークトゥ。レビューは57件、星4.21。",
+      "features": [
+        "4.5cmヒール",
+        "3E幅で歩きやすい",
+        "抗菌・抗ウイルス加工",
+        "レビュー57件・星4.21"
+      ],
+      "cta": "save",
+      "cta_text": null
+    },
+    "pitch_status": "ready",
     "_stashedAt": "2026-09-16"
   },
   "pennepenne:10001367": {
@@ -7778,45 +7856,195 @@
     ],
     "listPrice": 1490,
     "pitch_status": "pending",
+    "hidden": true,
+    "hiddenReason": "似た商品（同じ店・同じ値段のパンプス）が並んだため、レビューが一番少ない1件を伏せた",
     "_stashedAt": "2026-09-16"
   },
   "auc-t-link:10009056": {
+    "caption": "1,650円のパロディTシャツが1,100円。在庫処分。",
     "tags": [
       "在庫処分"
     ],
     "listPrice": 1650,
-    "pitch_status": "pending",
+    "marketing": {
+      "hook_type": "scene",
+      "target": "個性的なデザインTシャツを探している人",
+      "problem": "定番デザインばかりで、人と被らないTシャツが見つからない。",
+      "hook": "ちょっと攻めたデザイン、探してみました。",
+      "body": "レインボーのおもしろデザイン、コットン素材でM〜Lサイズ展開。在庫処分価格。レビューは26件、星4.69。",
+      "features": [
+        "個性的なデザイン",
+        "コットン素材",
+        "M〜Lサイズ展開",
+        "レビュー26件・星4.69"
+      ],
+      "cta": "save",
+      "cta_text": null
+    },
+    "pitch_status": "ready",
     "_stashedAt": "2026-09-16"
   },
   "auc-t-link:10000111": {
+    "caption": "1,650円のパロディTシャツが1,100円。バーコード柄、在庫処分。",
     "tags": [
       "在庫処分"
     ],
     "listPrice": 1650,
-    "pitch_status": "pending",
+    "marketing": {
+      "hook_type": "scene",
+      "target": "個性的なデザインTシャツを探している人",
+      "problem": "定番デザインばかりで、人と被らないTシャツが見つからない。",
+      "hook": "ちょっと攻めたデザイン、探してみました。",
+      "body": "バーコード柄のモノクロデザイン、クルーネックで大きいサイズもある。在庫処分価格。レビューは15件、星4.2。",
+      "features": [
+        "バーコード柄デザイン",
+        "クルーネック",
+        "大きいサイズあり",
+        "レビュー15件・星4.2"
+      ],
+      "cta": "save",
+      "cta_text": null
+    },
+    "pitch_status": "ready",
     "_stashedAt": "2026-09-16"
   },
   "mar-c:10006563": {
+    "caption": "2,970円のハンズフリーサンダルが1,980円。5cmヒール、軽量230g。",
     "tags": [
       "送料無料"
     ],
     "listPrice": 2970,
-    "pitch_status": "pending",
+    "marketing": {
+      "hook_type": "scene",
+      "target": "旅行や外出で歩きやすいサンダルを探している人",
+      "problem": "サンダルは脱ぎ履きのたびに手を使うのが地味に面倒。",
+      "hook": "サンダル、手を使わず履けたら楽ですよね。",
+      "body": "手を使わず履けるハンズフリー設計。5cmヒールで軽量230g、弾力ソールで歩きやすい。レビューは25件、星4.36。",
+      "features": [
+        "ハンズフリーで履ける",
+        "5cmヒール・軽量230g",
+        "弾力ソール",
+        "レビュー25件・星4.36"
+      ],
+      "cta": "save",
+      "cta_text": null
+    },
+    "pitch_status": "ready",
     "_stashedAt": "2026-09-16"
   },
   "darkangel:10033013": {
+    "caption": "3,980円のリネンワイドパンツが2,590円。低身長さん向けのウエストゴム仕様。",
     "tags": [
       "送料無料"
     ],
     "listPrice": 3980,
-    "pitch_status": "pending",
+    "marketing": {
+      "hook_type": "scene",
+      "target": "低身長でパンツの丈が合いにくい人",
+      "problem": "ワイドパンツは丈が長すぎて、裾上げが必要になることが多い。",
+      "hook": "ワイドパンツ、低身長さん向けの丈があると助かりますよね。",
+      "body": "リネン素材のワイドパンツ、ウエストゴムで低身長さん向けの丈に作られている。カラー展開あり。レビューは5,971件、星3.89。",
+      "features": [
+        "低身長さん向けの丈",
+        "リネン素材・ウエストゴム",
+        "カラー展開あり",
+        "レビュー5,971件・星3.89"
+      ],
+      "cta": "save",
+      "cta_text": null
+    },
+    "pitch_status": "ready",
     "_stashedAt": "2026-09-16"
   },
   "gjapan-beauty:10000907": {
+    "caption": "1,936円のシートマスク60枚入りが1,000円。",
     "tags": [
       "送料無料"
     ],
     "listPrice": 1936,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-16"
+  },
+  "buono-buono:10002040": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2160,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-16"
+  },
+  "otbj:10001077": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 1540,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-16"
+  },
+  "fumiyaryohin:10000048": {
+    "tags": [
+      "送料無料",
+      "在庫処分"
+    ],
+    "listPrice": 1499,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-16"
+  },
+  "hecmarket:10000177": {
+    "tags": [
+      "送料無料",
+      "訳あり",
+      "アウトレット"
+    ],
+    "listPrice": 1580,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-16"
+  },
+  "aiwo:10000040": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 1099,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-16"
+  },
+  "motteru:10000000": {
+    "listPrice": 2990,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-16"
+  },
+  "hecmarket:10000008": {
+    "tags": [
+      "送料無料",
+      "訳あり",
+      "アウトレット"
+    ],
+    "listPrice": 1480,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-16"
+  },
+  "book:20977760": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2678,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-16"
+  },
+  "barsado:10009571": {
+    "tags": [
+      "送料無料",
+      "在庫処分"
+    ],
+    "listPrice": 990,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-16"
+  },
+  "patri:10002511": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 750,
     "pitch_status": "pending",
     "_stashedAt": "2026-09-16"
   }
