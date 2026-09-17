@@ -7476,7 +7476,7 @@
     "pitch_status": "pending",
     "hidden": true,
     "hiddenReason": "同じ店・同じ値段が3件。2件までにする（ジットストア 450円）",
-    "_stashedAt": "2026-09-14"
+    "_stashedAt": "2026-09-17"
   },
   "jitdirect:10034039": {
     "tags": [
@@ -7490,9 +7490,8 @@
     "_stashedAt": "2026-09-17"
   },
   "bjc-shop:10001712": {
-    "caption": "2,980円の傘型サンシェードが1,490円。中棒が曲がるタイプ。",
+    "caption": "2,980円の傘型サンシェードが1,290円。中棒が曲がるタイプ。",
     "points": [
-      "2,980円から1,490円へ",
       "強化十本骨・収納ポーチ付き",
       "六ヶ月保証・レビュー719件"
     ],
@@ -8087,6 +8086,44 @@
       "送料無料"
     ],
     "listPrice": 1290,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-17"
+  },
+  "oga:10225061": {
+    "listPrice": 790,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-17"
+  },
+  "oga:10126950": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 1580,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-17"
+  },
+  "jitdirect:10034042": {
+    "tags": [
+      "訳あり",
+      "アウトレット"
+    ],
+    "listPrice": 800,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-17"
+  },
+  "anker:10000436": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 1359,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-17"
+  },
+  "drwanwan:10000046": {
+    "tags": [
+      "まとめ買い"
+    ],
+    "listPrice": 1600,
     "pitch_status": "pending",
     "_stashedAt": "2026-09-17"
   }
