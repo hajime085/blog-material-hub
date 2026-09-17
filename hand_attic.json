@@ -868,10 +868,10 @@
       "body": "エプソン純正のインクです。箱なしのアウトレット品。IC46シリーズ。",
       "cta": "save"
     },
-    "pitch_status": "ready",
+    "pitch_status": "pending",
     "hidden": true,
     "hiddenReason": "同じ店・同じ値段が10件。2件までにする（ジットストア 400円）",
-    "_stashedAt": "2026-09-15"
+    "_stashedAt": "2026-09-17"
   },
   "deconail-seisakujo:10002837": {
     "caption": "1,222円のカラージェルセットが611円。好きな色を選べる、UV/LED対応。",
@@ -6939,7 +6939,7 @@
     "_stashedAt": "2026-09-17"
   },
   "darkangel:10035933": {
-    "caption": "1,799円のTシャツが1,699円。半袖と長袖から選べます。",
+    "caption": "3,790円のTシャツが1,699円。半袖と長袖から選べます。",
     "points": [
       "クルーネック・無地",
       "レビュー6,389件・★4.32"
@@ -7090,8 +7090,8 @@
       "body": "エプソン純正のIC50シリーズです。\n箱なしのアウトレットとして売られています。",
       "cta": "save"
     },
-    "pitch_status": "ready",
-    "_stashedAt": "2026-09-14"
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-17"
   },
   "jitdirect:10003048": {
     "caption": "1,050円のキヤノン純正BCI-350XL/351XLが525円。大容量。",
@@ -7123,8 +7123,8 @@
       "body": "キヤノン純正、箱なしのアウトレットです。",
       "cta": "save"
     },
-    "pitch_status": "ready",
-    "_stashedAt": "2026-09-14"
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-17"
   },
   "jitdirect:10003409": {
     "tags": [
@@ -7135,7 +7135,7 @@
     "pitch_status": "pending",
     "hidden": true,
     "hiddenReason": "同じ店・同じ値段が10件。2件までにする（ジットストア 400円）",
-    "_stashedAt": "2026-09-14"
+    "_stashedAt": "2026-09-17"
   },
   "jitdirect:10003244": {
     "caption": "900円のエプソン純正IC69が450円。箱なしアウトレット。",
@@ -7166,8 +7166,8 @@
       "body": "箱なしのアウトレットとして売られている純正インクです。",
       "cta": "save"
     },
-    "pitch_status": "ready",
-    "_stashedAt": "2026-09-14"
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-17"
   },
   "jitdirect:10034059": {
     "tags": [
@@ -7178,7 +7178,7 @@
     "pitch_status": "pending",
     "hidden": true,
     "hiddenReason": "同じ店・同じ値段が10件。2件までにする（ジットストア 400円）",
-    "_stashedAt": "2026-09-15"
+    "_stashedAt": "2026-09-17"
   },
   "jitdirect:10034041": {
     "caption": "1,200円のエプソン純正IC80Lが600円。増量タイプ。",
@@ -7210,8 +7210,8 @@
       "body": "エプソン純正、箱なしのアウトレットです。",
       "cta": "save"
     },
-    "pitch_status": "ready",
-    "_stashedAt": "2026-09-14"
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-17"
   },
   "jitdirect:10039508": {
     "caption": "1,150円のキヤノン純正BCI-380/381が575円。標準容量。",
@@ -7243,8 +7243,8 @@
       "body": "箱なしのアウトレットとして売られています。",
       "cta": "save"
     },
-    "pitch_status": "ready",
-    "_stashedAt": "2026-09-14"
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-17"
   },
   "jitdirect:10039422": {
     "caption": "1,100円のエプソン純正KUI-Lが550円。増量タイプ。",
@@ -8045,6 +8045,32 @@
       "送料無料"
     ],
     "listPrice": 750,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-17"
+  },
+  "jitdirect:10034049": {
+    "tags": [
+      "訳あり",
+      "アウトレット"
+    ],
+    "listPrice": 800,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-17"
+  },
+  "jitdirect:10038233": {
+    "tags": [
+      "訳あり",
+      "アウトレット"
+    ],
+    "listPrice": 800,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-17"
+  },
+  "karatsu-iwamoto:10000296": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2160,
     "pitch_status": "pending",
     "_stashedAt": "2026-09-17"
   }
