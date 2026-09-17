@@ -304,7 +304,8 @@
     "product:rea64170ab",
     "tip:21",
     "schedule:2026-W37-4",
-    "tip:24"
+    "tip:24",
+    "product:raad85aa48"
   ],
   "log": [
     {
@@ -4538,6 +4539,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:raad85aa48",
+      "id": "18191820154401993",
+      "at": "2026-09-17 13:00",
+      "kind": "product",
+      "slot": 13,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "none",
+      "category": "beauty",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
