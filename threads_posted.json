@@ -306,7 +306,8 @@
     "schedule:2026-W37-4",
     "tip:24",
     "product:raad85aa48",
-    "tip:02"
+    "tip:02",
+    "tip:14"
   ],
   "log": [
     {
@@ -4561,6 +4562,20 @@
       "at": "2026-09-17 14:21",
       "kind": "tip",
       "slot": 14,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
+    },
+    {
+      "key": "tip:14",
+      "id": "17973054714005920",
+      "at": "2026-09-17 17:21",
+      "kind": "tip",
+      "slot": 17,
       "catchup": false,
       "cap": null,
       "hook_type": null,
