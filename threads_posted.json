@@ -325,7 +325,8 @@
     "product:ra7866fff3",
     "tip:31",
     "product:r17092504c",
-    "product:r7bd4c8968"
+    "product:r7bd4c8968",
+    "product:raabc7c834"
   ],
   "log": [
     {
@@ -4851,6 +4852,20 @@
       "hook_type": "discovery",
       "cta_type": "none",
       "category": "beauty",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:raabc7c834",
+      "id": "18075500207414196",
+      "at": "2026-09-18 23:21",
+      "kind": "product",
+      "slot": 22,
+      "catchup": true,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "food",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
