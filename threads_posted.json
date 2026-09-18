@@ -327,7 +327,8 @@
     "product:r17092504c",
     "product:r7bd4c8968",
     "product:raabc7c834",
-    "product:rc752e0b3f"
+    "product:rc752e0b3f",
+    "product:rc88f3d500"
   ],
   "log": [
     {
@@ -4881,6 +4882,20 @@
       "hook_type": "scene",
       "cta_type": "save",
       "category": "fashion",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:rc88f3d500",
+      "id": "18137164930529075",
+      "at": "2026-09-19 00:20",
+      "kind": "product",
+      "slot": 0,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "problem",
+      "cta_type": "save",
+      "category": "car",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
