@@ -2516,7 +2516,7 @@
     "_stashedAt": "2026-09-18"
   },
   "sionkobe:10001367": {
-    "caption": "4,800円の竹レーヨンパジャマ上下が2,400円。冷感で抗菌・消臭。",
+    "caption": "竹レーヨンパジャマ上下が2,400円。冷感で抗菌・消臭。",
     "tags": [
       "送料無料"
     ],
@@ -3845,7 +3845,7 @@
       "body": "裏起毛のカシミア風。それでも通勤やきれいめに寄せた形です。\n丈は選べるので、身長に合わせて。ポケット付き。",
       "cta": "empathy"
     },
-    "pitch_status": "ready",
+    "pitch_status": "pending",
     "_stashedAt": "2026-09-18"
   },
   "mixsim:10000439": {
@@ -6004,6 +6004,7 @@
       "ウォッチ中",
       "送料無料"
     ],
+    "listPrice": 2310,
     "_stashedAt": "2026-09-18"
   },
   "gubal:10001761": {
@@ -8495,6 +8496,44 @@
       "在庫処分"
     ],
     "listPrice": 1690,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-18"
+  },
+  "meat-21:10001267": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2880,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-18"
+  },
+  "meat-21:10000071": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 1460,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-18"
+  },
+  "sanwa-junkei:10000536": {
+    "listPrice": 2980,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-18"
+  },
+  "nswshop:10000125": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2680,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-18"
+  },
+  "animestore:10000895": {
+    "tags": [
+      "送料無料",
+      "在庫処分"
+    ],
+    "listPrice": 2980,
     "pitch_status": "pending",
     "_stashedAt": "2026-09-18"
   }
