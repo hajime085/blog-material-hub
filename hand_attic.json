@@ -1192,7 +1192,7 @@
       "cta": "save"
     },
     "pitch_status": "pending",
-    "_stashedAt": "2026-09-16"
+    "_stashedAt": "2026-09-18"
   },
   "e-itto:10000001": {
     "caption": "1,470円の靴用バイオ消臭剤が500円。除菌・殺菌つき。",
@@ -3765,7 +3765,7 @@
     "_stashedAt": "2026-09-18"
   },
   "darkangel:10036320": {
-    "caption": "1,999円のフレアパンツが1,499円。ダンボールニット。",
+    "caption": "1,999円のフレアパンツが1,370円。ダンボールニット。",
     "points": [
       "ポケット付き・丈を選べる",
       "レビュー3,781件・★4.15"
@@ -4814,7 +4814,7 @@
     "_stashedAt": "2026-09-18"
   },
   "darkangel:10035695": {
-    "caption": "5,790円のワッフルカットソーが2,699円。ゆったりしたオーバーサイズ。",
+    "caption": "5,790円のワッフルカットソーが2,299円。ゆったりしたオーバーサイズ。",
     "points": [
       "ワッフル生地・ドロップショルダー",
       "長袖／半袖・大きいサイズあり"
@@ -6725,6 +6725,7 @@
       "送料無料",
       "まとめ買い"
     ],
+    "listPrice": 3980,
     "_stashedAt": "2026-09-18"
   },
   "dondon:10003669": {
@@ -6969,7 +6970,7 @@
     "_stashedAt": "2026-09-18"
   },
   "darkangel:10036221": {
-    "caption": "5,890円のロングスカートが2,699円。前後にスリット。",
+    "caption": "5,890円のロングスカートが2,299円。前後にスリット。",
     "points": [
       "Iライン・ポケット付き",
       "レビュー2,191件・★4.05"
@@ -7933,7 +7934,7 @@
     "_stashedAt": "2026-09-18"
   },
   "darkangel:10033013": {
-    "caption": "3,980円のリネンワイドパンツが2,590円。低身長さん向けのウエストゴム仕様。",
+    "caption": "3,980円のリネンワイドパンツが1,999円。低身長さん向けのウエストゴム仕様。",
     "tags": [
       "送料無料"
     ],
@@ -8534,6 +8535,76 @@
       "在庫処分"
     ],
     "listPrice": 2980,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-18"
+  },
+  "levante:10000326": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2160,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-18"
+  },
+  "omuraisu-n:10000000": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 5998,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-18"
+  },
+  "zakkoku-okome:10002093": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2580,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-18"
+  },
+  "umamido:10000607": {
+    "tags": [
+      "送料無料",
+      "訳あり"
+    ],
+    "listPrice": 2000,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-18"
+  },
+  "babycresco:10000329": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2580,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-18"
+  },
+  "washington:10061056": {
+    "listPrice": 1980,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-18"
+  },
+  "11shop:10000325": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 1880,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-18"
+  },
+  "cat-land:10000487": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 3280,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-18"
+  },
+  "unotea:10000596": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2400,
     "pitch_status": "pending",
     "_stashedAt": "2026-09-18"
   }
