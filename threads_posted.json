@@ -328,7 +328,8 @@
     "product:r7bd4c8968",
     "product:raabc7c834",
     "product:rc752e0b3f",
-    "product:rc88f3d500"
+    "product:rc88f3d500",
+    "product:r69ce63f26"
   ],
   "log": [
     {
@@ -4896,6 +4897,20 @@
       "hook_type": "problem",
       "cta_type": "save",
       "category": "car",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r69ce63f26",
+      "id": "17902987296568844",
+      "at": "2026-09-19 01:00",
+      "kind": "product",
+      "slot": 1,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "none",
+      "category": "beauty",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
