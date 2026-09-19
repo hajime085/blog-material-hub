@@ -333,7 +333,8 @@
     "tip:34",
     "schedule:2026-W37-6",
     "tip:06",
-    "product:r9b6eb00be"
+    "product:r9b6eb00be",
+    "tip:18"
   ],
   "log": [
     {
@@ -4973,6 +4974,20 @@
       "category": "fashion",
       "logic_version": "marketing_v2",
       "link": "reply"
+    },
+    {
+      "key": "tip:18",
+      "id": "18438510559131867",
+      "at": "2026-09-19 14:20",
+      "kind": "tip",
+      "slot": 14,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
     }
   ]
 }
