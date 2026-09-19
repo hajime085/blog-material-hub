@@ -19,7 +19,7 @@
       "endTime": "",
       "listPrice": 1705,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,705円の肝臓系サプリが540円。返金保証つき。",
       "tags": [
         "送料無料"
       ],
@@ -29,7 +29,22 @@
       "postedAt": "2026-09-19",
       "bumpedAt": "2026-09-19T21:31:53",
       "lastSeen": "2026-09-19",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "お酒をよく飲む人でサプリを探している人",
+        "problem": "サプリは成分が多くて、何が入っているか分かりにくい。",
+        "hook": "肝臓系サプリ、成分を見てみました。",
+        "body": "ウコン・高吸収クルクミン・オルチニン・しじみエキスなどを配合。返金保証つき。レビューは3,066件、星4.69。",
+        "features": [
+          "ウコン・高吸収クルクミン配合",
+          "オルチニン・しじみエキス配合",
+          "返金保証つき",
+          "レビュー3,066件・星4.69"
+        ],
+        "cta": "none",
+        "cta_text": null
+      }
     },
     {
       "id": "rc1b583414",
@@ -141,7 +156,7 @@
       "endTime": "2026-09-24 01:59",
       "listPrice": 2000,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,000円のタイ産コーヒー豆100gが1,000円。豆か粉を選べます。",
       "tags": [
         "送料無料"
       ],
@@ -151,7 +166,22 @@
       "postedAt": "2026-09-19",
       "bumpedAt": "2026-09-19T21:29:57",
       "lastSeen": "2026-09-19",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "コーヒー豆をちょっと珍しいもので選びたい人",
+        "problem": "いつも同じ産地ばかりで、違うコーヒーを試したい。",
+        "hook": "タイ産のコーヒー豆、見つけました。",
+        "body": "タイ産の深煎りコーヒー豆100g。豆か粉かを選べる。2点購入で使えるクーポンあり。レビューは26件、星4.69。",
+        "features": [
+          "タイ産・深煎り100g",
+          "豆か粉かを選べる",
+          "2点購入クーポンあり",
+          "レビュー26件・星4.69"
+        ],
+        "cta": "save",
+        "cta_text": null
+      }
     },
     {
       "id": "r36aae00f2",
@@ -170,7 +200,7 @@
       "endTime": "2026-09-24 01:59",
       "listPrice": 2400,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,400円の鹿児島茶ティーバッグ100個入りが1,190円。",
       "points": [],
       "description": "",
       "tags": [
@@ -180,7 +210,22 @@
       "postedAt": "2026-09-19",
       "bumpedAt": "2026-09-19T00:00:00",
       "lastSeen": "2026-09-19",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "お茶をたっぷり淹れたい人",
+        "problem": "急須でお茶を淹れるのは、手間がかかって続かない。",
+        "hook": "ティーバッグなら、お茶がもっと気軽になります。",
+        "body": "鹿児島茶の深蒸し緑茶ティーバッグ、2.5g×100個入り。水出しにも使える。レビューは2,159件、星4.73。",
+        "features": [
+          "鹿児島茶の深蒸し緑茶",
+          "2.5g×100個入り",
+          "水出しにも使える",
+          "レビュー2,159件・星4.73"
+        ],
+        "cta": "save",
+        "cta_text": null
+      }
     },
     {
       "id": "r8550b30d9",
@@ -246,7 +291,7 @@
       "endTime": "2026-09-21 09:59",
       "listPrice": 1995,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,995円のワイドパンツが1,290円。24時間限定。",
       "tags": [
         "送料無料"
       ],
@@ -256,7 +301,22 @@
       "postedAt": "2026-09-19",
       "bumpedAt": "2026-09-19T07:34:46",
       "lastSeen": "2026-09-19",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "ワイドパンツを探している人",
+        "problem": "パンツは締め付けが気になって、長時間はくのがつらい。",
+        "hook": "ワイドパンツ、ゆったりはけると楽ですよね。",
+        "body": "ストレッチのきいたワイドパンツ。ゆったりしたシルエットで、24時間限定価格。レビューは49,230件、星4.14。",
+        "features": [
+          "ストレッチ素材",
+          "ゆったりシルエット",
+          "24時間限定価格",
+          "レビュー49,230件・星4.14"
+        ],
+        "cta": "save",
+        "cta_text": null
+      }
     },
     {
       "id": "rb40cd4809",
@@ -420,7 +480,7 @@
       "endTime": "",
       "listPrice": 2998,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,998円のミョウバン不使用の天然生ウニ100gが1,499円。",
       "tags": [],
       "points": [],
       "description": "",
@@ -428,7 +488,21 @@
       "postedAt": "2026-09-19",
       "bumpedAt": "2026-09-19T11:30:04",
       "lastSeen": "2026-09-19",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "海鮮丼やお寿司を自宅で楽しみたい人",
+        "problem": "生ウニは添加物が気になったり、値段が高かったりする。",
+        "hook": "ミョウバン不使用のウニ、見つけました。",
+        "body": "天然生ウニ100g、ミョウバン不使用の完全無添加。レビューは5,453件、星4.32。",
+        "features": [
+          "天然生ウニ100g",
+          "ミョウバン不使用・無添加",
+          "レビュー5,453件・星4.32"
+        ],
+        "cta": "save",
+        "cta_text": null
+      }
     },
     {
       "id": "re3b6c7dd8",
@@ -447,7 +521,7 @@
       "endTime": "2026-09-25 09:59",
       "listPrice": 2180,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,180円の芒硝入浴剤が1,526円。サンダルウッド・ネロリの香り。",
       "tags": [
         "送料無料"
       ],
@@ -457,7 +531,22 @@
       "postedAt": "2026-09-19",
       "bumpedAt": "2026-09-19T11:31:05",
       "lastSeen": "2026-09-19",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "お風呂の時間を楽しみたい人",
+        "problem": "毎日のお風呂がただの作業になりがち。",
+        "hook": "入浴剤、香りで選ぶと変わります。",
+        "body": "芒硝のにごり湯タイプ入浴剤。自然由来成分98.3%で、サンダルウッドとネロリの香り。レビューは281件、星4.72。",
+        "features": [
+          "芒硝のにごり湯",
+          "自然由来成分98.3%",
+          "サンダルウッド・ネロリの香り",
+          "レビュー281件・星4.72"
+        ],
+        "cta": "save",
+        "cta_text": null
+      }
     },
     {
       "id": "rdfa66b603",
@@ -476,7 +565,7 @@
       "endTime": "2026-09-24 01:59",
       "listPrice": 2980,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "2,980円のマルチビタミン＆ミネラルが1,980円。栄養機能食品。",
       "tags": [
         "送料無料"
       ],
@@ -486,7 +575,22 @@
       "postedAt": "2026-09-19",
       "bumpedAt": "2026-09-19T16:33:40",
       "lastSeen": "2026-09-19",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "複数のビタミン・ミネラルをまとめて摂りたい人",
+        "problem": "ビタミンやミネラルを別々に買うと、飲む数が増えて続けにくい。",
+        "hook": "マルチビタミン、成分を見てみました。",
+        "body": "ビタミンとミネラルを一緒に摂れる栄養機能食品。スポーツをする人向けの設計。レビューは23件、星4.65。",
+        "features": [
+          "ビタミン・ミネラル配合",
+          "栄養機能食品",
+          "スポーツ向け設計",
+          "レビュー23件・星4.65"
+        ],
+        "cta": "none",
+        "cta_text": null
+      }
     },
     {
       "id": "r1bbcfb83d",
@@ -505,7 +609,7 @@
       "endTime": "2026-09-26 11:59",
       "listPrice": 5980,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "5,980円の銚子産骨取りさば1kgが2,990円。無塩、訳あり。",
       "tags": [
         "訳あり"
       ],
@@ -515,7 +619,22 @@
       "postedAt": "2026-09-19",
       "bumpedAt": "2026-09-19T11:30:04",
       "lastSeen": "2026-09-19",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "魚を常備しておきたい人",
+        "problem": "骨のある魚は、下処理が面倒で食卓に出しにくい。",
+        "hook": "骨取りの鯖、あると助かります。",
+        "body": "銚子産の無塩・骨取りさば。訳ありで、1kgか2kgを選べる。冷凍で保存でき、26日正午までの半額価格。レビューは889件、星4.6。",
+        "features": [
+          "銚子産・無塩・骨取り",
+          "1kg/2kgから選べる",
+          "冷凍保存",
+          "レビュー889件・星4.6"
+        ],
+        "cta": "save",
+        "cta_text": null
+      }
     },
     {
       "id": "r9a690796d",
@@ -534,7 +653,7 @@
       "endTime": "2026-09-26 11:59",
       "listPrice": 6980,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "6,980円の北欧産骨取りさば1kgが3,490円。有塩、訳あり。",
       "points": [],
       "description": "",
       "tags": [
@@ -544,7 +663,22 @@
       "postedAt": "2026-09-19",
       "bumpedAt": "2026-09-19T11:28:35",
       "lastSeen": "2026-09-19",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "魚を常備しておきたい人",
+        "problem": "骨のある魚は、下処理が面倒で食卓に出しにくい。",
+        "hook": "骨取りの鯖、あると助かります。",
+        "body": "ノルウェー産・イギリス産の有塩・骨取りさば。訳ありで、1kgか2kgを選べる。冷凍で保存でき、26日正午までの半額価格。レビューは16,814件、星4.77。",
+        "features": [
+          "北欧産・有塩・骨取り",
+          "1kg/2kgから選べる",
+          "冷凍保存",
+          "レビュー16,814件・星4.77"
+        ],
+        "cta": "save",
+        "cta_text": null
+      }
     },
     {
       "id": "r319e3b4a4",
@@ -609,7 +743,7 @@
       "endTime": "2026-09-24 01:59",
       "listPrice": 1800,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,800円の竹レーヨンのゆるキャミソールが900円。カップ付き。",
       "tags": [
         "送料無料",
         "在庫処分"
@@ -620,7 +754,22 @@
       "postedAt": "2026-09-18",
       "bumpedAt": "2026-09-18T11:34:33",
       "lastSeen": "2026-09-19",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "締め付けの少ないインナーを探している人",
+        "problem": "インナーは、締め付けや蒸れが気になる。",
+        "hook": "インナー、さらっと着られると楽ですよね。",
+        "body": "竹レーヨン素材のゆるいタンクトップ型キャミソール。カップ付きで締め付けが少ない。レビューは103件、星4.12。",
+        "features": [
+          "竹レーヨン素材",
+          "カップ付き",
+          "締め付けが少ない",
+          "レビュー103件・星4.12"
+        ],
+        "cta": "save",
+        "cta_text": null
+      }
     },
     {
       "id": "r397a29c44",
@@ -684,7 +833,7 @@
       "endTime": "",
       "listPrice": 1980,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,980円のスリッポンが990円。柔らかい素材のフラットシューズ。",
       "tags": [],
       "points": [],
       "description": "",
@@ -692,7 +841,22 @@
       "postedAt": "2026-09-18",
       "bumpedAt": "2026-09-18T21:33:29",
       "lastSeen": "2026-09-19",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "歩きやすい靴を探している人",
+        "problem": "靴は、履き始めは足が痛くなりやすい。",
+        "hook": "スリッポン、柔らかいと履きやすいですよね。",
+        "body": "柔らかい素材のスリッポン型フラットシューズ。ローファー風でゆったり履ける。半額クーポン対象。レビューは454件、星4.42。",
+        "features": [
+          "柔らかい素材",
+          "ローファー風のスリッポン",
+          "ゆったり履ける",
+          "レビュー454件・星4.42"
+        ],
+        "cta": "save",
+        "cta_text": null
+      }
     },
     {
       "id": "r4097dc932",
@@ -711,7 +875,7 @@
       "endTime": "2026-09-24 01:59",
       "listPrice": 2160,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,160円の九州唐津産わかめ徳用大袋が1,000円。無添加。",
       "tags": [
         "送料無料"
       ],
@@ -721,7 +885,22 @@
       "postedAt": "2026-09-18",
       "bumpedAt": "2026-09-18T11:30:46",
       "lastSeen": "2026-09-19",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "味噌汁やサラダにわかめを使いたい人",
+        "problem": "わかめは量が少ないパックだと、すぐ無くなる。",
+        "hook": "わかめ、大袋だと安心ですよね。",
+        "body": "九州唐津産の乾燥カットわかめ、徳用大袋。無添加・無着色。レビューは6,353件、星4.7。",
+        "features": [
+          "九州唐津産",
+          "無添加・無着色",
+          "徳用大袋",
+          "レビュー6,353件・星4.7"
+        ],
+        "cta": "save",
+        "cta_text": null
+      }
     },
     {
       "id": "re2144096f",
@@ -740,7 +919,7 @@
       "endTime": "",
       "listPrice": 2000,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,000円のビーフカレー200g×4袋が1,000円。甘口・辛口を選べます。",
       "tags": [
         "送料無料",
         "訳あり"
@@ -751,7 +930,21 @@
       "postedAt": "2026-09-18",
       "bumpedAt": "2026-09-18T21:30:01",
       "lastSeen": "2026-09-19",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "カレーをストックしておきたい人",
+        "problem": "忙しい日に、ごはんを作る気力がない。",
+        "hook": "レトルトカレー、ストックがあると助かります。",
+        "body": "ビーフカレー200g×4袋。甘口か辛口を選べる。レビューは12件、星4.58。",
+        "features": [
+          "ビーフカレー200g×4袋",
+          "甘口・辛口を選べる",
+          "レビュー12件・星4.58"
+        ],
+        "cta": "save",
+        "cta_text": null
+      }
     },
     {
       "id": "r845a962d3",
@@ -770,7 +963,7 @@
       "endTime": "2026-09-24 01:59",
       "listPrice": 1460,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,460円の鶏の炭火焼き100g×3袋が1,000円。国産鶏肉100%。",
       "tags": [
         "送料無料"
       ],
@@ -780,7 +973,22 @@
       "postedAt": "2026-09-18",
       "bumpedAt": "2026-09-18T16:31:10",
       "lastSeen": "2026-09-19",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "おつまみや時短おかずを探している人",
+        "problem": "晩酌のおつまみを毎日考えるのが面倒。",
+        "hook": "宮崎名物の炭火焼き、試しやすい3袋です。",
+        "body": "国産鶏肉100%の鶏の炭火焼き100g×3袋。無添加の塩味で、常温保存2年。レビューは21,789件、星4.26。",
+        "features": [
+          "国産鶏肉100%・100g×3袋",
+          "無添加の塩味",
+          "常温保存2年",
+          "レビュー21,789件・星4.26"
+        ],
+        "cta": "save",
+        "cta_text": null
+      }
     },
     {
       "id": "ra3310b37a",
@@ -843,7 +1051,7 @@
       "endTime": "2026-09-24 01:59",
       "listPrice": 1690,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,690円の竹レーヨンのショートパンツが1,000円。ポケット付き。",
       "tags": [
         "送料無料",
         "在庫処分"
@@ -854,7 +1062,22 @@
       "postedAt": "2026-09-18",
       "bumpedAt": "2026-09-18T11:34:33",
       "lastSeen": "2026-09-19",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "夏〜秋のボトムを探している人",
+        "problem": "ショートパンツは蒸れたり、ポケットが無かったりする。",
+        "hook": "ショートパンツ、さらっとはけると楽ですよね。",
+        "body": "竹レーヨン95%のショートパンツ。ポケットつきで、ペチコート付き。大きいサイズもある。レビューは126件、星4.7。",
+        "features": [
+          "竹レーヨン95%",
+          "ポケット・ペチコート付き",
+          "大きいサイズあり",
+          "レビュー126件・星4.7"
+        ],
+        "cta": "save",
+        "cta_text": null
+      }
     },
     {
       "id": "re5c565234",
@@ -873,7 +1096,7 @@
       "endTime": "2026-09-24 23:59",
       "listPrice": 1880,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,880円のSwitch有機EL用キャリングケースが1,000円。",
       "tags": [
         "送料無料"
       ],
@@ -883,7 +1106,22 @@
       "postedAt": "2026-09-18",
       "bumpedAt": "2026-09-18T21:39:35",
       "lastSeen": "2026-09-19",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "Switch有機ELモデルを持ち歩く人",
+        "problem": "本体を裸で持ち歩くと、傷が心配。",
+        "hook": "Switchのケース、持ち運びにあると安心ですよね。",
+        "body": "有機ELモデル対応のハードキャリングケース。液晶保護シート付き、ゲームカードも収納できる。レビューは283件、星4.47。",
+        "features": [
+          "有機ELモデル対応",
+          "液晶保護シート付き",
+          "ゲームカード収納",
+          "レビュー283件・星4.47"
+        ],
+        "cta": "save",
+        "cta_text": null
+      }
     },
     {
       "id": "r0f980c899",
@@ -902,7 +1140,7 @@
       "endTime": "",
       "listPrice": 2680,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,680円の犬用伸縮リード5mが1,000円。LEDライト付き。",
       "tags": [
         "送料無料"
       ],
@@ -912,7 +1150,22 @@
       "postedAt": "2026-09-18",
       "bumpedAt": "2026-09-18T16:42:32",
       "lastSeen": "2026-09-19",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "大型犬の散歩用リードを探している人",
+        "problem": "散歩中にリードを落としたり、夜の散歩が暗くて不安。",
+        "hook": "犬のリード、夜でも見やすいと安心ですよね。",
+        "body": "5mの伸縮リードで、LEDライトつき。手首ストラップ付きで落としにくい。大型犬にも使える。レビューは829件、星4.56。",
+        "features": [
+          "5m伸縮リード",
+          "LEDライト付き",
+          "手首ストラップ付き",
+          "レビュー829件・星4.56"
+        ],
+        "cta": "save",
+        "cta_text": null
+      }
     },
     {
       "id": "r4110cd3c0",
@@ -1068,7 +1321,7 @@
       "endTime": "2026-09-24 01:59",
       "listPrice": 2880,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,880円の鶏の炭火焼き100g×6袋が1,320円。個包装。",
       "tags": [
         "送料無料"
       ],
@@ -1078,7 +1331,22 @@
       "postedAt": "2026-09-18",
       "bumpedAt": "2026-09-18T16:31:10",
       "lastSeen": "2026-09-19",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "おつまみや時短おかずを探している人",
+        "problem": "晩酌のおつまみを毎日考えるのが面倒。",
+        "hook": "宮崎名物の炭火焼き、6袋セットです。",
+        "body": "国産鶏肉100%の鶏の炭火焼き100g×6袋。調味料アミノ酸・香料・保存料不使用、個包装。レビューは6,252件、星4.48。",
+        "features": [
+          "国産鶏肉100%・100g×6袋",
+          "調味料アミノ酸・香料・保存料不使用",
+          "個包装",
+          "レビュー6,252件・星4.48"
+        ],
+        "cta": "save",
+        "cta_text": null
+      }
     },
     {
       "id": "r9b6eb00be",
@@ -1192,7 +1460,7 @@
       "endTime": "2026-09-24 01:59",
       "listPrice": 2580,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,580円の葉酸サプリ30日分が1,580円。無添加。",
       "tags": [
         "送料無料"
       ],
@@ -1202,7 +1470,22 @@
       "postedAt": "2026-09-18",
       "bumpedAt": "2026-09-18T21:31:57",
       "lastSeen": "2026-09-19",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "葉酸サプリを探している人",
+        "problem": "葉酸サプリは種類が多く、成分の違いが分かりにくい。",
+        "hook": "葉酸サプリ、成分を見てみました。",
+        "body": "葉酸に鉄・カルシウム・ビタミン・ミネラル・DHA・乳酸菌を配合した無添加サプリ、30日分。レビューは142件、星4.61。",
+        "features": [
+          "葉酸・鉄・カルシウム配合",
+          "DHA・乳酸菌配合",
+          "無添加・30日分",
+          "レビュー142件・星4.61"
+        ],
+        "cta": "none",
+        "cta_text": null
+      }
     },
     {
       "id": "rf05138318",
@@ -1367,7 +1650,7 @@
       "endTime": "2026-09-28 08:59",
       "listPrice": 2980,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,980円の車載扇風機が1,999円。後部座席用のツインファン。",
       "tags": [
         "送料無料",
         "在庫処分"
@@ -1378,7 +1661,22 @@
       "postedAt": "2026-09-18",
       "bumpedAt": "2026-09-18T16:43:05",
       "lastSeen": "2026-09-19",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "車の後部座席にも風を送りたい人",
+        "problem": "後部座席は前席のエアコンの風が届きにくい。",
+        "hook": "車の後ろにも、扇風機があると違います。",
+        "body": "ヘッドレストに取り付ける、ツインファンの車載扇風機。シガーソケットから給電、USB対応。レビューは1,883件、星4.59。",
+        "features": [
+          "ヘッドレスト取付・ツインファン",
+          "シガーソケット給電",
+          "USB対応",
+          "レビュー1,883件・星4.59"
+        ],
+        "cta": "save",
+        "cta_text": null
+      }
     },
     {
       "id": "rafcdbe910",
@@ -1397,7 +1695,7 @@
       "endTime": "2026-09-25 23:59",
       "listPrice": 2980,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,980円の名古屋コーチンつくね1kgが2,086円。冷凍。",
       "tags": [],
       "points": [],
       "description": "",
@@ -1405,7 +1703,22 @@
       "postedAt": "2026-09-18",
       "bumpedAt": "2026-09-18T16:31:10",
       "lastSeen": "2026-09-19",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "お弁当や鍋のおかずを探している人",
+        "problem": "つくねは手作りだと手間がかかる。",
+        "hook": "名古屋コーチンのつくね、冷凍でストックできます。",
+        "body": "名古屋コーチンのつくね、1kgか2kgの冷凍大容量。鍋・お弁当・おつまみに使える。レビューは3,755件、星4.78。",
+        "features": [
+          "名古屋コーチンのつくね",
+          "1kg/2kgの大容量",
+          "冷凍ストック",
+          "レビュー3,755件・星4.78"
+        ],
+        "cta": "save",
+        "cta_text": null
+      }
     },
     {
       "id": "r72e12aba9",
@@ -1470,7 +1783,7 @@
       "endTime": "",
       "listPrice": 3280,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "3,280円のペットキャリーが2,280円。上開きの2way。",
       "tags": [
         "送料無料"
       ],
@@ -1480,7 +1793,22 @@
       "postedAt": "2026-09-18",
       "bumpedAt": "2026-09-18T21:40:03",
       "lastSeen": "2026-09-19",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "小型犬・猫と外出する人",
+        "problem": "ペットを連れて出かけるとき、キャリーの出し入れが大変。",
+        "hook": "ペットのキャリー、上から出し入れできると楽です。",
+        "body": "上開きで、持ち手とショルダーの2way使いができるペットキャリー。メッシュで軽量、収納スペース付き。小型犬・猫向け。レビューは1,063件、星4.45。",
+        "features": [
+          "上開きで出し入れしやすい",
+          "持ち手・ショルダーの2way",
+          "軽量・収納スペース付き",
+          "レビュー1,063件・星4.45"
+        ],
+        "cta": "save",
+        "cta_text": null
+      }
     },
     {
       "id": "r99780be55",
