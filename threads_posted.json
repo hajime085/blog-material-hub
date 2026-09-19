@@ -340,7 +340,8 @@
     "tip:26",
     "product:r8235fa28b",
     "product:r3cc0a9fb8",
-    "product:r58a9a1952"
+    "product:r58a9a1952",
+    "product:re3b6c7dd8"
   ],
   "log": [
     {
@@ -5076,6 +5077,20 @@
       "hook_type": "discovery",
       "cta_type": "save",
       "category": "food",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:re3b6c7dd8",
+      "id": "18105769160350456",
+      "at": "2026-09-19 23:45",
+      "kind": "product",
+      "slot": 23,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "save",
+      "category": "kitchen",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
