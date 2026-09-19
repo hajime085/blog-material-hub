@@ -330,7 +330,8 @@
     "product:rc752e0b3f",
     "product:rc88f3d500",
     "product:r69ce63f26",
-    "tip:34"
+    "tip:34",
+    "schedule:2026-W37-6"
   ],
   "log": [
     {
@@ -4921,6 +4922,20 @@
       "at": "2026-09-19 07:20",
       "kind": "tip",
       "slot": 7,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
+    },
+    {
+      "key": "schedule:2026-W37-6",
+      "id": "18069429407754428",
+      "at": "2026-09-19 09:20",
+      "kind": "schedule",
+      "slot": 9,
       "catchup": false,
       "cap": null,
       "hook_type": null,
