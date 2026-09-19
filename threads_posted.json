@@ -338,7 +338,8 @@
     "tip:32",
     "product:r1bfd13684",
     "tip:26",
-    "product:r8235fa28b"
+    "product:r8235fa28b",
+    "product:r3cc0a9fb8"
   ],
   "log": [
     {
@@ -5046,6 +5047,20 @@
       "hook_type": "scene",
       "cta_type": "save",
       "category": "pc",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r3cc0a9fb8",
+      "id": "17948750412273157",
+      "at": "2026-09-19 21:00",
+      "kind": "product",
+      "slot": 21,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "save",
+      "category": "beauty",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
