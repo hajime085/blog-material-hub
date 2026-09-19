@@ -5904,6 +5904,7 @@
       "ウォッチ中",
       "送料無料"
     ],
+    "listPrice": 1990,
     "_stashedAt": "2026-09-19"
   },
   "mitsuyoshi:10007681": {
@@ -8650,6 +8651,14 @@
       "送料無料"
     ],
     "listPrice": 2180,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-19"
+  },
+  "realstyle4u:10002477": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2980,
     "pitch_status": "pending",
     "_stashedAt": "2026-09-19"
   }
