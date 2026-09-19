@@ -341,7 +341,8 @@
     "product:r8235fa28b",
     "product:r3cc0a9fb8",
     "product:r58a9a1952",
-    "product:re3b6c7dd8"
+    "product:re3b6c7dd8",
+    "product:r66bffbed8"
   ],
   "log": [
     {
@@ -5091,6 +5092,20 @@
       "hook_type": "scene",
       "cta_type": "save",
       "category": "kitchen",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r66bffbed8",
+      "id": "18066124463784558",
+      "at": "2026-09-20 00:20",
+      "kind": "product",
+      "slot": 0,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "save",
+      "category": "pet",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
