@@ -1672,8 +1672,8 @@
       "body": "国産25種類の雑穀です。無添加で、熊本県産のもち麦が入っています。\n白米に混ぜて炊くだけ。送料込み。",
       "cta": "save"
     },
-    "pitch_status": "ready",
-    "_stashedAt": "2026-09-17"
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-19"
   },
   "rioty:10040018": {
     "caption": "4,980円のマキシ丈キャミワンピが996円。Vネックで背中開き。",
@@ -1779,8 +1779,8 @@
       "body": "熊本のとんこつラーメン、生麺で6食分です。\n一度に届くので、食べたい日にすぐ作れます。送料込み。",
       "cta": "empathy"
     },
-    "pitch_status": "ready",
-    "_stashedAt": "2026-09-11"
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-19"
   },
   "kumamoto-food:10002290": {
     "caption": "2,760円のあご入りだしパックが1,380円。国産、送料込み。",
@@ -1807,8 +1807,8 @@
       "body": "国産のあご入りだしパックです。袋ごと煮出すだけ。\nかつお節と昆布が入った減塩タイプ。送料込み。",
       "cta": "save"
     },
-    "pitch_status": "ready",
-    "_stashedAt": "2026-09-11"
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-19"
   },
   "yskcase-shop:10007770": {
     "caption": "2,880円の防水Bluetoothスピーカーが1,500円。18時間連続再生。",
@@ -6871,8 +6871,8 @@
       "body": "450gが2袋で900g。国産で、発芽玄米ともち麦が入っています。",
       "cta": "save"
     },
-    "pitch_status": "ready",
-    "_stashedAt": "2026-09-17"
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-19"
   },
   "tozuka:10003793": {
     "caption": "2,299円のお試し米1kgが1,145円。ポスト投函・送料込み。",
@@ -8613,6 +8613,43 @@
       "送料無料"
     ],
     "listPrice": 1995,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-19"
+  },
+  "yamagoiida:10000077": {
+    "tags": [
+      "訳あり"
+    ],
+    "listPrice": 6980,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-19"
+  },
+  "yamagoiida:10000084": {
+    "tags": [
+      "訳あり"
+    ],
+    "listPrice": 6980,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-19"
+  },
+  "sfd-ymt:10000712": {
+    "listPrice": 2998,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-19"
+  },
+  "yamagoiida:10000146": {
+    "tags": [
+      "訳あり"
+    ],
+    "listPrice": 5980,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-19"
+  },
+  "flemo:10000000": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2180,
     "pitch_status": "pending",
     "_stashedAt": "2026-09-19"
   }
