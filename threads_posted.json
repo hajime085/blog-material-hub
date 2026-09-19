@@ -336,7 +336,8 @@
     "product:r9b6eb00be",
     "tip:18",
     "tip:32",
-    "product:r1bfd13684"
+    "product:r1bfd13684",
+    "tip:26"
   ],
   "log": [
     {
@@ -5018,6 +5019,20 @@
       "category": "books",
       "logic_version": "marketing_v2",
       "link": "reply"
+    },
+    {
+      "key": "tip:26",
+      "id": "17861768076694773",
+      "at": "2026-09-19 19:20",
+      "kind": "tip",
+      "slot": 19,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
     }
   ]
 }
