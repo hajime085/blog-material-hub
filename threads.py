@@ -230,14 +230,26 @@ TAILS = [
 #
 # 期間が過ぎたら自動でサイト経由に戻る。
 # 手で戻す作りにすると、戻し忘れてそのままになる。
-SALE_UNTIL = "2026-09-11 01:59"
+
+
+def sale_now(now=None):
+    """いま、楽天のセール（スーパーSALE・お買い物マラソン）の期間か。
+
+    2026-09-20: 期間を「2026-09-11 01:59」と直書きしていたため、
+    9/11に終わったあと、9/19 20:00 からのお買い物マラソンでも
+    速報（安い順・楽天へ直接リンク・山場の10分おき）が働かなかった。
+    利用者から「セール時のように商品を速報的に流す作業を継続させて」と指示。
+
+    events.json に「確定」で書いたセール・マラソンの期間を見る。
+    次のセールを events.json に足せば、コードを触らずに速報が働く。
+    """
+    return active_event(now) is not None
 
 
 def link_for(p, site):
     """返信に貼るリンク。セール中は楽天へ直接、それ以外はサイトの商品ページへ。"""
     url = (p.get("url") or "").strip()
-    now = datetime.now(JST).strftime("%Y-%m-%d %H:%M")
-    if now <= SALE_UNTIL and url.startswith("https://hb.afl.rakuten.co.jp/"):
+    if sale_now() and url.startswith("https://hb.afl.rakuten.co.jp/"):
         # 広告であることは親の投稿の【PR】でも示しているが、
         # リンクだけを見た人にも分かるように、返信にも書く。
         return "※PR\n" + url
@@ -390,9 +402,11 @@ def event_posts(site, ev, n_kaimawari):
     return out
 
 
-def active_event():
+def active_event(now=None):
     doc = load("events.json", {}) or {}
-    now = datetime.now(JST).replace(tzinfo=None)
+    if now is None:
+        now = datetime.now(JST)
+    now = now.replace(tzinfo=None)
     for ev in doc.get("events", []):
         if ev.get("status") != "確定" or ev.get("kind") not in ("marathon", "sale"):
             continue
@@ -697,7 +711,7 @@ def pick(cfg, posted, want, slot_hour=None, live_heads=None):
     # 新しい順に出すと、たまたま今朝拾った20%OFFが先に出て、
     # 昨日拾った70%OFFが後ろに回る。目玉が埋もれる。
     # 2026-09-04: 利用者から「通常の投稿じゃない。とっておきを出せ」と指摘。
-    if datetime.now(JST).strftime("%Y-%m-%d %H:%M") <= SALE_UNTIL:
+    if sale_now():
         items.sort(key=lambda p: (p.get("d") or 0, p.get("at") or ""), reverse=True)
     else:
         items.sort(key=lambda p: p.get("at") or "", reverse=True)
@@ -1378,7 +1392,7 @@ def burst_now(t):
     山場だけは枠を見ない。間隔（minGapMin）は run_once が
     アカウントの最後の投稿と突き合わせて守るので、そちらに任せる。
     """
-    if datetime.now(JST).strftime("%Y-%m-%d %H:%M") > SALE_UNTIL:
+    if not sale_now(t):
         return False
     return t.hour in (20, 21)
 

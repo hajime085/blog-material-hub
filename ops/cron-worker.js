@@ -31,7 +31,7 @@
 // 数日間デプロイが通っていなかった。それに気づけなかった。
 // 2026-09-12: 直したのに「本当に反映されたか」を確かめる手立てが無かった。
 // 状態表示に版を出しておけば、URLを開くだけで分かる。
-const VERSION = "2026-09-12";
+const VERSION = "2026-09-20";
 
 const REPO = "hajime085/blog-material-hub";
 
@@ -76,6 +76,45 @@ const PLAN = {
 // 期間が過ぎたら自動でもとに戻る。
 // 手で戻す作りにすると、戻し忘れてそのままになる。
 const SALE_UNTIL = Date.parse("2026-09-10T16:59:59Z");  // JST 9/11 01:59
+
+// 2026-09-20: セールの期間を、ここに直書きしたままにしていた。
+// 9/11に終わったあと、9/19 20:00 のお買い物マラソンでは、
+// 起こす回数を増やす仕組みが動かなかった。
+// 利用者から「セール時のように速報的に流すのを継続させて」と指示。
+//
+// 期間は events.json（サイトのカレンダーと同じもの）から読む。
+// 次のセールを events.json に足せば、この Worker は貼り替えなくても動く。
+// 読めなかったときは、上の SALE_UNTIL（過去の日付）にもどる = 通常運転。
+// 読めないからといってセール扱いにはしない（無駄に起こさないため）。
+const EVENTS_URL =
+  "https://raw.githubusercontent.com/hajime085/blog-material-hub/main/events.json";
+
+function jstToMs(s) {
+  // "2026-09-19 20:00" → JST として解釈
+  const t = Date.parse(String(s).slice(0, 16).replace(" ", "T") + ":00+09:00");
+  return Number.isNaN(t) ? null : t;
+}
+
+async function saleWindows() {
+  try {
+    const res = await fetch(EVENTS_URL, { cf: { cacheTtl: 300 } });
+    if (!res.ok) return null;
+    const doc = await res.json();
+    return (doc.events || [])
+      .filter((e) => e.status === "確定" &&
+                     (e.kind === "sale" || e.kind === "marathon"))
+      .map((e) => [jstToMs(e.start), jstToMs(e.end || e.start)])
+      .filter(([a, b]) => a !== null && b !== null);
+  } catch (e) {
+    console.log(`events.json を読めませんでした: ${e}`);
+    return null;
+  }
+}
+
+function inSale(when, windows) {
+  if (windows) return windows.some(([a, b]) => a <= when && when <= b);
+  return when <= SALE_UNTIL;   // 読めなかったとき
+}
 const SALE_EXTRA = {
   4:  [T],      // JST 13:20  昼の商品
   5:  [W],      // JST 14:20  昼の見張り
@@ -100,16 +139,16 @@ const SALE_EXTRA = {
 const BURST_HOURS = [11, 12];   // UTC。JST 20時台・21時台
 
 
-function isBurst(when) {
+function isBurst(when, windows) {
   const d = new Date(when);
-  return when <= SALE_UNTIL && BURST_HOURS.includes(d.getUTCHours())
+  return inSale(when, windows) && BURST_HOURS.includes(d.getUTCHours())
          && d.getUTCMinutes() !== 20;
 }
 
-function planFor(when) {
+function planFor(when, windows) {
   const hour = new Date(when).getUTCHours();
   const base = PLAN[hour] || [];
-  if (when > SALE_UNTIL) return base;
+  if (!inSale(when, windows)) return base;
   const extra = (SALE_EXTRA[hour] || []).filter((f) => !base.includes(f));
   return base.concat(extra);
 }
@@ -180,9 +219,10 @@ export default {
     // 通常の予定は、自分の分（:20）でだけ動かす。
     // ほかの分に来た cron は、山場でなければ用が無い。
     const minute = new Date(event.scheduledTime).getUTCMinutes();
-    const jobs = isBurst(event.scheduledTime)
+    const windows = await saleWindows();
+    const jobs = isBurst(event.scheduledTime, windows)
       ? [T]
-      : (minute === 20 ? planFor(event.scheduledTime) : []);
+      : (minute === 20 ? planFor(event.scheduledTime, windows) : []);
     if (!jobs.length) return;            // この時刻は用が無い
     if (!env.GH_TOKEN) {
       console.log("GH_TOKEN が入っていません");
@@ -203,13 +243,14 @@ export default {
     // PLAN だけを出すと、セール中の増えたぶんが見えない。
     const hours = new Set(
       [...Object.keys(PLAN), ...Object.keys(SALE_EXTRA)].map(Number));
-    const sale = now.getTime() <= SALE_UNTIL;
+    const windows = await saleWindows();
+    const sale = inSale(now.getTime(), windows);
     const rows = [...hours]
       .map((k) => {
         const at = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(),
                             now.getUTCDate(), k, 20);
         return `JST ${String((k + 9) % 24).padStart(2, "0")}:20  ` +
-               planFor(at).join(" + ");
+               planFor(at, windows).join(" + ");
       })
       .filter((r) => !r.endsWith("  "))
       .sort();
@@ -218,8 +259,10 @@ export default {
         `ヤスミルの予定実行（版 ${VERSION}）`,
         `いま UTC ${h}時。トークン: ${env.GH_TOKEN ? "あり" : "なし"}`,
         `トークンの期限: ${exp}`,
-        sale ? "セール中：見張りを1日8回に増やしています（9/11 01:59まで）"
+        sale ? "セール中：見張りを1日8回に増やし、20・21時台は10分おきに投稿します（期間は events.json から読みます）"
              : "通常運転：見張りは1日4回",
+        windows === null ? "※ events.json を読めませんでした（通常運転にもどしています）"
+                         : `events.json のセール・マラソン: ${windows.length}件`,
         "",
         ...rows,
       ].join("\n"),

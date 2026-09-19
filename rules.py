@@ -987,6 +987,36 @@ def rule_rebase_retry_clears_conflict(ctx):
     return out
 
 
+def rule_sale_mode_follows_events(ctx):
+    """セールの速報（安い順・楽天へ直リンク・山場の10分おき）は、
+    events.json の期間に従う。日付を直書きしない。
+
+    2026-09-20: 期間が「2026-09-11 01:59」の直書きだったため、
+    9/19 20:00 からのお買い物マラソンで速報が働かなかった。
+    利用者から「セール時のように商品を速報的に流すのを継続させて」と指示。
+    次のセールは events.json に足すだけで動くようにしてある。
+    """
+    out = []
+    tp = ctx.get("threads_py") or ""
+    if tp:
+        import re as _re
+        if _re.search(r'^SALE_UNTIL\s*=\s*"', tp, _re.M):
+            out.append("threads.py にセール期間の日付が直書きされています。"
+                       "events.json から読んでください（2026-09-20）")
+        if "def sale_now" not in tp or "active_event(now)" not in tp:
+            out.append("threads.py の sale_now() が events.json を見ていません")
+    import os
+    p = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                     "ops", "cron-worker.js")
+    if os.path.exists(p):
+        with open(p, encoding="utf-8") as f:
+            w = f.read()
+        if "saleWindows" not in w or "raw.githubusercontent.com" not in w:
+            out.append("cron-worker.js が、セール期間を events.json から読んでいません。"
+                       "次のセールで、起こす回数が増えません（2026-09-20）")
+    return out
+
+
 def rule_daily_summary_keeps_the_alarms(ctx):
     """日次の要点から、警報を落とさない。
 
@@ -1062,6 +1092,7 @@ RULES = [
     ("残った起動が悪さをしない", rule_leftover_cron_does_nothing),
     ("一時的な不調は両方で待つ", rule_upstream_hiccups_are_retried_everywhere),
     ("pull --rebase のやり直しは空回りしない", rule_rebase_retry_clears_conflict),
+    ("セールの速報は events.json の期間に従う", rule_sale_mode_follows_events),
     ("日次の要点から警報を落とさない", rule_daily_summary_keeps_the_alarms),
     ("学びを止めない", rule_keep_learning),
     ("試しの形が learn.py と合っている", rule_experiment_schema_is_sound),
@@ -1144,6 +1175,8 @@ PROBES = {
     "試しの形が learn.py と合っている": [],
     "pull --rebase のやり直しは空回りしない":
         [("watch_yml", "git rebase --abort", "remove")],
+    "セールの速報は events.json の期間に従う":
+        [("threads_py", "def sale_now", "remove")],
 }
 
 
