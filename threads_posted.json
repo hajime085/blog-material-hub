@@ -352,7 +352,8 @@
     "tip:19",
     "product:r0bd7af7f8",
     "tip:33",
-    "product:r0f980c899"
+    "product:r0f980c899",
+    "product:r8eaf9d31e"
   ],
   "log": [
     {
@@ -5256,6 +5257,20 @@
       "hook_type": "scene",
       "cta_type": "save",
       "category": "pet",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r8eaf9d31e",
+      "id": "18094903181123693",
+      "at": "2026-09-20 20:20",
+      "kind": "product",
+      "slot": 20,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "save",
+      "category": "baby-toy",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
