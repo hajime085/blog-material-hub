@@ -346,7 +346,8 @@
     "product:r88125ed6c",
     "page:kaimawari:2026-09-19",
     "tip:04",
-    "tip:36"
+    "tip:36",
+    "product:rf043ed8eb"
   ],
   "log": [
     {
@@ -5168,6 +5169,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:rf043ed8eb",
+      "id": "18415800184086204",
+      "at": "2026-09-20 13:00",
+      "kind": "product",
+      "slot": 13,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "food",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
