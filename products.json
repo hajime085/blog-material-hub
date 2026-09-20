@@ -19,7 +19,7 @@
       "endTime": "",
       "listPrice": 698,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "698円のカラージェル5個セットが488円。全80色から選べます。",
       "tags": [],
       "points": [],
       "description": "",
@@ -27,7 +27,22 @@
       "postedAt": "2026-09-20",
       "bumpedAt": "2026-09-20T07:32:25",
       "lastSeen": "2026-09-20",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "セルフネイルを楽しみたい人",
+        "problem": "ネイルの色は、買い足すほど数が増えて置き場所に困る。",
+        "hook": "ジェルの色、混ぜて作れたら楽しいですよね。",
+        "body": "カラージェル3g×5個セット。全80色から選べ、混ぜてオリジナルカラーも作れるコンテナ型。メール便送料無料。レビューは7,682件、星4.27。",
+        "features": [
+          "3g×5個セット",
+          "全80色から選べる",
+          "混ぜてオリジナルカラーが作れる",
+          "レビュー7,682件・星4.27"
+        ],
+        "cta": "save",
+        "cta_text": null
+      }
     },
     {
       "id": "r1bdf1e95f",
@@ -46,7 +61,7 @@
       "endTime": "",
       "listPrice": 1500,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,500円のマウスピース（簡単型取り）が1,000円。ケース付き。",
       "tags": [
         "送料無料"
       ],
@@ -56,7 +71,22 @@
       "postedAt": "2026-09-20",
       "bumpedAt": "2026-09-20T07:32:25",
       "lastSeen": "2026-09-20",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "就寝時用のマウスピースを探している人",
+        "problem": "歯科で作るマウスピースは、時間も費用もかかる。",
+        "hook": "自宅で型取りするタイプのマウスピース、見つけました。",
+        "body": "簡単型取りタイプのマウスピース、2ピース入りでケース付き。マラソン期間の特価。レビューは3,120件、星4.17。",
+        "features": [
+          "簡単型取りタイプ",
+          "1箱2ピース・ケース付き",
+          "マラソン期間の特価",
+          "レビュー3,120件・星4.17"
+        ],
+        "cta": "none",
+        "cta_text": null
+      }
     },
     {
       "id": "r0adfa36e1",
@@ -75,7 +105,7 @@
       "endTime": "",
       "listPrice": 1500,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,500円のマウスピース（簡単装着）が1,000円。ケース付き。",
       "tags": [
         "送料無料"
       ],
@@ -85,7 +115,22 @@
       "postedAt": "2026-09-20",
       "bumpedAt": "2026-09-20T07:32:25",
       "lastSeen": "2026-09-20",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "就寝時用のマウスピースを探している人",
+        "problem": "型取りが面倒なものは、初めてだと手が出にくい。",
+        "hook": "型取り不要の、簡単装着タイプもあります。",
+        "body": "簡単装着タイプのマウスピース、2ピース入りでケース付き。初心者向け。マラソン期間の特価。レビューは2,585件、星4.01。",
+        "features": [
+          "簡単装着タイプ",
+          "1箱2ピース・ケース付き",
+          "初心者向け",
+          "レビュー2,585件・星4.01"
+        ],
+        "cta": "none",
+        "cta_text": null
+      }
     },
     {
       "id": "r021914337",
@@ -104,7 +149,7 @@
       "endTime": "",
       "listPrice": 1650,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,650円のヨガ用レギンスが1,100円。デザインレギンス。",
       "tags": [
         "送料無料",
         "アウトレット"
@@ -115,7 +160,22 @@
       "postedAt": "2026-09-20",
       "bumpedAt": "2026-09-20T07:36:50",
       "lastSeen": "2026-09-20",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "ヨガやピラティス用のレギンスを探している人",
+        "problem": "運動用のウェアは、柄や着心地で選ぶと値段が上がりがち。",
+        "hook": "ヨガ用のレギンス、アウトレットで探してみました。",
+        "body": "デザインレギンスのヨガパンツ。ヨガ・ピラティス・ランニングに使える。クーポン配布中。レビューは312件、星4.56。",
+        "features": [
+          "デザインレギンス",
+          "ヨガ・ピラティス・ランニング向け",
+          "クーポン配布中",
+          "レビュー312件・星4.56"
+        ],
+        "cta": "save",
+        "cta_text": null
+      }
     },
     {
       "id": "r36aae00f2",
@@ -178,7 +238,7 @@
       "endTime": "",
       "listPrice": 1980,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,980円のペット用ファン付きベストが1,386円。USB充電式。",
       "tags": [
         "送料無料",
         "在庫処分"
@@ -189,7 +249,22 @@
       "postedAt": "2026-09-20",
       "bumpedAt": "2026-09-20T07:40:55",
       "lastSeen": "2026-09-20",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "暑がりの犬・猫と暮らしている人",
+        "problem": "夏場の散歩や室内は、ペットが暑がって落ち着かない。",
+        "hook": "ペット用のファン付きベスト、見つけました。",
+        "body": "メッシュ素材のファン付きペット服。3段階の風量調節、USB充電式で、ファンは取り外せる。在庫処分価格。レビューは37件、星3.97。",
+        "features": [
+          "ファン付きメッシュのペット服",
+          "3段階の風量調節・USB充電式",
+          "ファンは取り外せる",
+          "レビュー37件・星3.97"
+        ],
+        "cta": "save",
+        "cta_text": null
+      }
     },
     {
       "id": "re2ba8b80a",
@@ -208,7 +283,7 @@
       "endTime": "",
       "listPrice": 2480,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,480円の珪藻土バスマットが1,480円。ノンアスベスト。",
       "tags": [],
       "points": [],
       "description": "",
@@ -216,7 +291,22 @@
       "postedAt": "2026-09-20",
       "bumpedAt": "2026-09-20T07:31:26",
       "lastSeen": "2026-09-20",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "お風呂上がりのマットを探している人",
+        "problem": "バスマットは濡れたまま使うと、乾きにくく気になる。",
+        "hook": "珪藻土のバスマット、大判もあります。",
+        "body": "ノンアスベストの珪藻土バスマット。Lサイズ60cm・Mサイズ40cmから選べる。最大15%OFFクーポン対象。レビューは2,562件、星4.26。",
+        "features": [
+          "ノンアスベストの珪藻土",
+          "Lサイズ60cm/Mサイズ40cm",
+          "15%OFFクーポン対象",
+          "レビュー2,562件・星4.26"
+        ],
+        "cta": "save",
+        "cta_text": null
+      }
     },
     {
       "id": "rddeb3b6e5",
@@ -235,7 +325,7 @@
       "endTime": "",
       "listPrice": 2490,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,490円の国産NMNサプリ30日分が1,490円。",
       "tags": [],
       "points": [],
       "description": "",
@@ -243,7 +333,22 @@
       "postedAt": "2026-09-20",
       "bumpedAt": "2026-09-20T07:32:25",
       "lastSeen": "2026-09-20",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "NMNサプリを探している人",
+        "problem": "NMNのサプリは種類が多く、何を基準に選べばいいか分かりにくい。",
+        "hook": "NMNサプリ、内容を見てみました。",
+        "body": "国産・日本製のNMNサプリ、30日分。お買い物マラソン限定の特価。レビューは7,125件、星4.52。",
+        "features": [
+          "国産・日本製",
+          "30日分",
+          "マラソン限定の特価",
+          "レビュー7,125件・星4.52"
+        ],
+        "cta": "none",
+        "cta_text": null
+      }
     },
     {
       "id": "r8eaf9d31e",
@@ -262,7 +367,7 @@
       "endTime": "",
       "listPrice": 2980,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,980円の日本製ガーゼおくるみが1,490円。",
       "tags": [],
       "points": [],
       "description": "",
@@ -270,7 +375,22 @@
       "postedAt": "2026-09-20",
       "bumpedAt": "2026-09-20T07:39:05",
       "lastSeen": "2026-09-20",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "出産祝いを探している人",
+        "problem": "ベビー用品は肌に触れるので、素材が気になる。",
+        "hook": "出産祝い、日本製のおくるみはいかがでしょう。",
+        "body": "日本製のコットンガーゼのおくるみ（スワドル）。やわらかく、男の子にも女の子にも使える。マラソン期間の特価。レビューは62件、星4.68。",
+        "features": [
+          "日本製のコットンガーゼ",
+          "男女どちらにも使える",
+          "出産祝いにも",
+          "レビュー62件・星4.68"
+        ],
+        "cta": "save",
+        "cta_text": null
+      }
     },
     {
       "id": "r862262bb4",
@@ -289,7 +409,7 @@
       "endTime": "",
       "listPrice": 2999,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,999円のゆるカーゴパンツが1,499円。ハイウエスト。",
       "tags": [],
       "points": [],
       "description": "",
@@ -297,7 +417,22 @@
       "postedAt": "2026-09-20",
       "bumpedAt": "2026-09-20T07:34:01",
       "lastSeen": "2026-09-20",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "楽に穿けるパンツを探している人",
+        "problem": "きれいめのパンツは、ウエストがきつくて疲れることがある。",
+        "hook": "ゆるく穿けるカーゴパンツ、見つけました。",
+        "body": "ハイウエストのゆるいカーゴ風テーパードパンツ。ワークパンツ調。半額クーポン対象。レビューは293件、星4.13。",
+        "features": [
+          "ハイウエスト・ゆるいシルエット",
+          "カーゴ風テーパード",
+          "半額クーポン対象",
+          "レビュー293件・星4.13"
+        ],
+        "cta": "save",
+        "cta_text": null
+      }
     },
     {
       "id": "r05aae1d7c",
@@ -316,7 +451,7 @@
       "endTime": "",
       "listPrice": 3293,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "3,293円のエレコム キーボード・マウスセットが2,069円。",
       "tags": [],
       "points": [],
       "description": "",
@@ -324,7 +459,22 @@
       "postedAt": "2026-09-20",
       "bumpedAt": "2026-09-20T16:36:56",
       "lastSeen": "2026-09-20",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "デスク周りを整えたい人",
+        "problem": "キーボードとマウスは、別々に選ぶと手間がかかる。",
+        "hook": "キーボードとマウス、セットで揃うと楽ですよね。",
+        "body": "エレコムのワイヤレスキーボード・マウスセット、Windows11対応。ブラック。エントリーで最大2万ポイントが当たるキャンペーン対象（9/25まで）。レビューは68件、星4.13。",
+        "features": [
+          "エレコム製・ワイヤレスセット",
+          "Windows11対応",
+          "キャンペーン対象（9/25まで）",
+          "レビュー68件・星4.13"
+        ],
+        "cta": "save",
+        "cta_text": null
+      }
     },
     {
       "id": "r88125ed6c",
