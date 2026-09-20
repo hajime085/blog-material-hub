@@ -356,7 +356,8 @@
     "product:r8eaf9d31e",
     "product:rddd92e946",
     "product:r862262bb4",
-    "product:ra3310b37a"
+    "product:ra3310b37a",
+    "product:re5c565234"
   ],
   "log": [
     {
@@ -5316,6 +5317,20 @@
       "hook_type": "discovery",
       "cta_type": "save",
       "category": "beauty",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:re5c565234",
+      "id": "17887040499617918",
+      "at": "2026-09-21 00:20",
+      "kind": "product",
+      "slot": 0,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "save",
+      "category": "books",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
