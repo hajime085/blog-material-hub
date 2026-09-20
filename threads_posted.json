@@ -349,7 +349,8 @@
     "tip:36",
     "product:rf043ed8eb",
     "tip:07",
-    "tip:19"
+    "tip:19",
+    "product:r0bd7af7f8"
   ],
   "log": [
     {
@@ -5213,6 +5214,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:r0bd7af7f8",
+      "id": "18135361447624781",
+      "at": "2026-09-20 18:00",
+      "kind": "product",
+      "slot": 18,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "save",
+      "category": "fashion",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
