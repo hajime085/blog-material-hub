@@ -6161,6 +6161,7 @@
       "ウォッチ中",
       "送料無料"
     ],
+    "listPrice": 2750,
     "_stashedAt": "2026-09-20"
   },
   "soukaidrink:10000912": {
@@ -8807,7 +8808,7 @@
       "cta": "save",
       "cta_text": null
     },
-    "pitch_status": "ready",
+    "pitch_status": "pending",
     "_stashedAt": "2026-09-20"
   },
   "darkangel:10034443": {
@@ -9062,6 +9063,11 @@
       "在庫処分"
     ],
     "listPrice": 1980,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-20"
+  },
+  "biccamera:12456249": {
+    "listPrice": 3293,
     "pitch_status": "pending",
     "_stashedAt": "2026-09-20"
   }
