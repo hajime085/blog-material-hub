@@ -353,7 +353,8 @@
     "product:r0bd7af7f8",
     "tip:33",
     "product:r0f980c899",
-    "product:r8eaf9d31e"
+    "product:r8eaf9d31e",
+    "product:rddd92e946"
   ],
   "log": [
     {
@@ -5271,6 +5272,20 @@
       "hook_type": "scene",
       "cta_type": "save",
       "category": "baby-toy",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:rddd92e946",
+      "id": "18413179417085341",
+      "at": "2026-09-20 21:20",
+      "kind": "product",
+      "slot": 21,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "food",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
