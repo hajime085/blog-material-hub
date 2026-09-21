@@ -360,7 +360,8 @@
     "product:re5c565234",
     "product:r1bbcfb83d",
     "tip:37",
-    "schedule:2026-W38-1"
+    "schedule:2026-W38-1",
+    "tip:08"
   ],
   "log": [
     {
@@ -5371,6 +5372,20 @@
       "at": "2026-09-21 09:20",
       "kind": "schedule",
       "slot": 9,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
+    },
+    {
+      "key": "tip:08",
+      "id": "18100827953317324",
+      "at": "2026-09-21 12:20",
+      "kind": "tip",
+      "slot": 12,
       "catchup": false,
       "cap": null,
       "hook_type": null,
