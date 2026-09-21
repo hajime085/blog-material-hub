@@ -371,7 +371,8 @@
     "product:r9a690796d",
     "product:r200edc308",
     "product:re0c5d56c4",
-    "product:r05aae1d7c"
+    "product:r05aae1d7c",
+    "product:re2144096f"
   ],
   "log": [
     {
@@ -5541,6 +5542,20 @@
       "hook_type": "scene",
       "cta_type": "save",
       "category": "pc",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:re2144096f",
+      "id": "18117405122067717",
+      "at": "2026-09-22 00:21",
+      "kind": "product",
+      "slot": 0,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "save",
+      "category": "food",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
