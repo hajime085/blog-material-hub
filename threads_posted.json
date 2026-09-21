@@ -364,7 +364,8 @@
     "tip:08",
     "product:rfb7323f9a",
     "tip:20",
-    "tip:38"
+    "tip:38",
+    "product:rddeb3b6e5"
   ],
   "log": [
     {
@@ -5438,6 +5439,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:rddeb3b6e5",
+      "id": "17944554048339989",
+      "at": "2026-09-21 18:00",
+      "kind": "product",
+      "slot": 18,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "none",
+      "category": "beauty",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
