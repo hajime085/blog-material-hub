@@ -368,7 +368,8 @@
     "product:rddeb3b6e5",
     "tip:09",
     "product:re2ba8b80a",
-    "product:r9a690796d"
+    "product:r9a690796d",
+    "product:r200edc308"
   ],
   "log": [
     {
@@ -5496,6 +5497,20 @@
       "hook_type": "scene",
       "cta_type": "save",
       "category": "food",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r200edc308",
+      "id": "18098597615638232",
+      "at": "2026-09-21 21:21",
+      "kind": "product",
+      "slot": 21,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "save",
+      "category": "fashion",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
