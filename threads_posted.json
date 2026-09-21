@@ -361,7 +361,8 @@
     "product:r1bbcfb83d",
     "tip:37",
     "schedule:2026-W38-1",
-    "tip:08"
+    "tip:08",
+    "product:rfb7323f9a"
   ],
   "log": [
     {
@@ -5393,6 +5394,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:rfb7323f9a",
+      "id": "18126278092865784",
+      "at": "2026-09-21 13:00",
+      "kind": "product",
+      "slot": 13,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "save",
+      "category": "fashion",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
