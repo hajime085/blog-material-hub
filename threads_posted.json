@@ -369,7 +369,8 @@
     "tip:09",
     "product:re2ba8b80a",
     "product:r9a690796d",
-    "product:r200edc308"
+    "product:r200edc308",
+    "product:re0c5d56c4"
   ],
   "log": [
     {
@@ -5511,6 +5512,20 @@
       "hook_type": "scene",
       "cta_type": "save",
       "category": "fashion",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:re0c5d56c4",
+      "id": "17932485792400996",
+      "at": "2026-09-21 23:21",
+      "kind": "product",
+      "slot": 22,
+      "catchup": true,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "none",
+      "category": "beauty",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
