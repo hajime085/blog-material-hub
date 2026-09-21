@@ -372,7 +372,8 @@
     "product:r200edc308",
     "product:re0c5d56c4",
     "product:r05aae1d7c",
-    "product:re2144096f"
+    "product:re2144096f",
+    "product:r021914337"
   ],
   "log": [
     {
@@ -5556,6 +5557,20 @@
       "hook_type": "scene",
       "cta_type": "save",
       "category": "food",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r021914337",
+      "id": "18633051367010323",
+      "at": "2026-09-22 01:00",
+      "kind": "product",
+      "slot": 1,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "save",
+      "category": "sports",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
