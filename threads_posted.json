@@ -381,7 +381,8 @@
     "tip:11",
     "tip:40",
     "product:r22dbad363",
-    "tip:41"
+    "tip:41",
+    "product:r41ae75086"
   ],
   "log": [
     {
@@ -5693,6 +5694,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:r41ae75086",
+      "id": "18037489763840065",
+      "at": "2026-09-22 20:00",
+      "kind": "product",
+      "slot": 20,
+      "catchup": false,
+      "cap": false,
+      "hook_type": "scene",
+      "cta_type": "empathy",
+      "category": "pc",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
