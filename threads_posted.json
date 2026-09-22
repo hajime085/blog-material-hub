@@ -385,7 +385,8 @@
     "product:r41ae75086",
     "product:r47c99089f",
     "product:rb3df77f15",
-    "product:r1bdf1e95f"
+    "product:r1bdf1e95f",
+    "product:r90112e1f5"
   ],
   "log": [
     {
@@ -5751,6 +5752,20 @@
       "hook_type": "discovery",
       "cta_type": "none",
       "category": "beauty",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r90112e1f5",
+      "id": "18340069132253712",
+      "at": "2026-09-22 23:46",
+      "kind": "product",
+      "slot": 23,
+      "catchup": false,
+      "cap": false,
+      "hook_type": "scene",
+      "cta_type": "empathy",
+      "category": "books",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
