@@ -387,7 +387,8 @@
     "product:rb3df77f15",
     "product:r1bdf1e95f",
     "product:r90112e1f5",
-    "product:r67e62908e"
+    "product:r67e62908e",
+    "product:r0adfa36e1"
   ],
   "log": [
     {
@@ -5781,6 +5782,20 @@
       "hook_type": "scene",
       "cta_type": "save",
       "category": "pet",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r0adfa36e1",
+      "id": "18621382579029575",
+      "at": "2026-09-23 01:00",
+      "kind": "product",
+      "slot": 1,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "none",
+      "category": "beauty",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
