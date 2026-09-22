@@ -384,7 +384,8 @@
     "tip:41",
     "product:r41ae75086",
     "product:r47c99089f",
-    "product:rb3df77f15"
+    "product:rb3df77f15",
+    "product:r1bdf1e95f"
   ],
   "log": [
     {
@@ -5736,6 +5737,20 @@
       "hook_type": "scene",
       "cta_type": "empathy",
       "category": "baby-toy",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r1bdf1e95f",
+      "id": "18094062515125482",
+      "at": "2026-09-22 23:21",
+      "kind": "product",
+      "slot": 22,
+      "catchup": true,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "none",
+      "category": "beauty",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
