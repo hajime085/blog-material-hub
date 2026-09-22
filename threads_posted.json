@@ -383,7 +383,8 @@
     "product:r22dbad363",
     "tip:41",
     "product:r41ae75086",
-    "product:r47c99089f"
+    "product:r47c99089f",
+    "product:rb3df77f15"
   ],
   "log": [
     {
@@ -5721,6 +5722,20 @@
       "hook_type": "scene",
       "cta_type": "save",
       "category": "food",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:rb3df77f15",
+      "id": "18110752787166677",
+      "at": "2026-09-22 21:21",
+      "kind": "product",
+      "slot": 21,
+      "catchup": false,
+      "cap": false,
+      "hook_type": "scene",
+      "cta_type": "empathy",
+      "category": "baby-toy",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
