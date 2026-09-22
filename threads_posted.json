@@ -382,7 +382,8 @@
     "tip:40",
     "product:r22dbad363",
     "tip:41",
-    "product:r41ae75086"
+    "product:r41ae75086",
+    "product:r47c99089f"
   ],
   "log": [
     {
@@ -5706,6 +5707,20 @@
       "hook_type": "scene",
       "cta_type": "empathy",
       "category": "pc",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r47c99089f",
+      "id": "18107562113147921",
+      "at": "2026-09-22 20:21",
+      "kind": "product",
+      "slot": 20,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "save",
+      "category": "food",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
