@@ -7596,7 +7596,7 @@
     "tags": [
       "まとめ買い"
     ],
-    "listPrice": 1510,
+    "listPrice": 2160,
     "marketing": {
       "hook_type": "scene",
       "target": "コンロ周りの掃除をラクにしたい人",
@@ -9233,6 +9233,27 @@
   },
   "ken:10000480": {
     "listPrice": 3998,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-22"
+  },
+  "aiwo:10000025": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2800,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-22"
+  },
+  "ponopono:10002097": {
+    "listPrice": 1990,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-22"
+  },
+  "smahoservice:10003338": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 1380,
     "pitch_status": "pending",
     "_stashedAt": "2026-09-22"
   }
