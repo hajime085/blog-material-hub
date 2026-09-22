@@ -388,7 +388,8 @@
     "product:r1bdf1e95f",
     "product:r90112e1f5",
     "product:r67e62908e",
-    "product:r0adfa36e1"
+    "product:r0adfa36e1",
+    "tip:42"
   ],
   "log": [
     {
@@ -5798,6 +5799,20 @@
       "category": "beauty",
       "logic_version": "marketing_v2",
       "link": "reply"
+    },
+    {
+      "key": "tip:42",
+      "id": "17944745211299936",
+      "at": "2026-09-23 07:21",
+      "kind": "tip",
+      "slot": 7,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
     }
   ]
 }
