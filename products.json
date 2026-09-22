@@ -73,7 +73,21 @@
       "postedAt": "2026-09-22",
       "bumpedAt": "2026-09-22T16:42:49",
       "lastSeen": "2026-09-22",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "Switch2の有機ELモデルを持っている人",
+        "problem": "本体をそのまま持ち歩くと、傷や落下が気になる。",
+        "hook": "ケース、うっかり忘れがちですよね。",
+        "body": "有機ELモデル対応の保護ケース、液晶保護フィルム付き。レビューは919件、星4.21。",
+        "features": [
+          "有機ELモデル対応",
+          "液晶保護フィルム付き",
+          "レビュー919件・星4.21"
+        ],
+        "cta": "empathy",
+        "cta_text": null
+      }
     },
     {
       "id": "r41ae75086",
@@ -102,7 +116,22 @@
       "postedAt": "2026-09-22",
       "bumpedAt": "2026-09-22T16:38:19",
       "lastSeen": "2026-09-22",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "外出先で充電切れが心配な人",
+        "problem": "モバイルバッテリーは、複数の機器を同時に充電できないと不便。",
+        "hook": "充電切れ、焦りますよね。",
+        "body": "20000mAhの大容量モバイルバッテリー、ケーブル内蔵で5台同時充電できる。LCD残量表示付き。レビューは1,228件、星4.49。",
+        "features": [
+          "20000mAh・ケーブル内蔵",
+          "5台同時充電",
+          "LCD残量表示",
+          "レビュー1,228件・星4.49"
+        ],
+        "cta": "empathy",
+        "cta_text": null
+      }
     },
     {
       "id": "r605e5512e",
@@ -131,7 +160,22 @@
       "postedAt": "2026-09-22",
       "bumpedAt": "2026-09-22T11:29:17",
       "lastSeen": "2026-09-22",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "カリウムを摂りたい人",
+        "problem": "カリウムサプリは種類が多く、成分の違いが分かりにくい。",
+        "hook": "カリウムサプリ、成分を見てみました。",
+        "body": "塩化カリウム1,200mg配合の栄養機能食品、ビタミンB群も含む。30日分。レビューは692件、星4.5。",
+        "features": [
+          "塩化カリウム1,200mg配合",
+          "ビタミンB群配合",
+          "栄養機能食品・30日分",
+          "レビュー692件・星4.5"
+        ],
+        "cta": "none",
+        "cta_text": null
+      }
     },
     {
       "id": "r36aae00f2",
@@ -202,7 +246,21 @@
       "postedAt": "2026-09-22",
       "bumpedAt": "2026-09-22T16:41:21",
       "lastSeen": "2026-09-22",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "新生児のおくるみを探している人",
+        "problem": "おくるみは、季節や体格に合わないと使いにくい。",
+        "hook": "おくるみ、サイズ選び悩みますよね。",
+        "body": "2重ガーゼ・綿100%のスワドルブランケット、100×100cm。レビューは128件、星4.63。",
+        "features": [
+          "2重ガーゼ・綿100%",
+          "100×100cm",
+          "レビュー128件・星4.63"
+        ],
+        "cta": "empathy",
+        "cta_text": null
+      }
     },
     {
       "id": "rdd90d8099",
@@ -231,7 +289,22 @@
       "postedAt": "2026-09-22",
       "bumpedAt": "2026-09-22T11:29:17",
       "lastSeen": "2026-09-22",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "白米だけの食事が気になる人",
+        "problem": "雑穀米は続けたいけれど、毎回計量するのが面倒。",
+        "hook": "雑穀米、混ぜる量地味に悩みますよね。",
+        "body": "39種類の穀物をブレンドした雑穀米、400g×2袋。無添加・無着色。レビューは643件、星4.75。",
+        "features": [
+          "39穀米ブレンド",
+          "400g×2袋",
+          "無添加・無着色",
+          "レビュー643件・星4.75"
+        ],
+        "cta": "empathy",
+        "cta_text": null
+      }
     },
     {
       "id": "r7bb81ce74",
@@ -258,7 +331,21 @@
       "postedAt": "2026-09-22",
       "bumpedAt": "2026-09-22T11:30:42",
       "lastSeen": "2026-09-22",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "晩ごはんにあと一品欲しい人",
+        "problem": "焼売は手作りだと手間がかかる。",
+        "hook": "あと一品、地味に悩みますよね。",
+        "body": "大粒の肉焼売30個、15個入りトレー×2の冷凍。レビューは478件、星4.5。",
+        "features": [
+          "大粒肉焼売30個",
+          "冷凍・トレー2つ入り",
+          "レビュー478件・星4.5"
+        ],
+        "cta": "empathy",
+        "cta_text": null
+      }
     },
     {
       "id": "ra2f9ea19e",
@@ -287,7 +374,21 @@
       "postedAt": "2026-09-22",
       "bumpedAt": "2026-09-22T11:29:17",
       "lastSeen": "2026-09-22",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "子どもの食事や仕送りを用意したい人",
+        "problem": "手作りのオムライスは手間がかかり、毎回は難しい。",
+        "hook": "手作りが大変な日、ありますよね。",
+        "body": "冷凍オムライス210g×8袋。電子レンジで温めるだけ。レビューは1,548件、星4.5。",
+        "features": [
+          "冷凍オムライス210g×8袋",
+          "電子レンジ対応",
+          "レビュー1,548件・星4.5"
+        ],
+        "cta": "empathy",
+        "cta_text": null
+      }
     },
     {
       "id": "rf0e26deba",
@@ -416,7 +517,22 @@
       "postedAt": "2026-09-21",
       "bumpedAt": "2026-09-21T16:31:56",
       "lastSeen": "2026-09-22",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "タオルを買い替えたい人",
+        "problem": "タオルは使ううちに薄くなったり、吸水が悪くなったりする。",
+        "hook": "タオル、へたるの早いですよね。",
+        "body": "今治タオルのフェイスタオル4枚セット、薄手で速乾。約34×80cm、日本製。レビューは391件、星4.37。",
+        "features": [
+          "今治タオル・日本製",
+          "薄手・速乾",
+          "フェイスタオル4枚セット",
+          "レビュー391件・星4.37"
+        ],
+        "cta": "empathy",
+        "cta_text": null
+      }
     },
     {
       "id": "r21f099b64",
