@@ -376,7 +376,8 @@
     "product:r021914337",
     "tip:35",
     "tip:15",
-    "tip:10"
+    "tip:10",
+    "product:rdfa66b603"
   ],
   "log": [
     {
@@ -5618,6 +5619,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:rdfa66b603",
+      "id": "18070140971490446",
+      "at": "2026-09-22 13:00",
+      "kind": "product",
+      "slot": 13,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "none",
+      "category": "beauty",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
