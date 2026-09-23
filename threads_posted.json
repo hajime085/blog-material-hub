@@ -397,16 +397,10 @@
     "tip:13",
     "product:rb3ba592b2",
     "tip:22",
-    "tip:00"
+    "tip:00",
+    "tip:21"
   ],
   "log": [
-    {
-      "key": "guide:price-trick",
-      "id": "18110111183327546",
-      "at": "2026-08-25 17:16",
-      "kind": "guide",
-      "link": "body"
-    },
     {
       "key": "schedule:2026-08-25",
       "id": "18069858914719061",
@@ -5917,6 +5911,20 @@
       "key": "tip:00",
       "id": "18049183415607073",
       "at": "2026-09-23 20:00",
+      "kind": "tip",
+      "slot": 20,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
+    },
+    {
+      "key": "tip:21",
+      "id": "18093843308134715",
+      "at": "2026-09-23 20:21",
       "kind": "tip",
       "slot": 20,
       "catchup": false,
