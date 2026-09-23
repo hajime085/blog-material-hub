@@ -391,7 +391,8 @@
     "product:r0adfa36e1",
     "tip:42",
     "tip:43",
-    "tip:25"
+    "tip:25",
+    "product:rd2ffe5464"
   ],
   "log": [
     {
@@ -5843,6 +5844,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:rd2ffe5464",
+      "id": "17976947588916039",
+      "at": "2026-09-23 13:00",
+      "kind": "product",
+      "slot": 13,
+      "catchup": false,
+      "cap": false,
+      "hook_type": "scene",
+      "cta_type": "empathy",
+      "category": "kitchen",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
