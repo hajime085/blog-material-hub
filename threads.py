@@ -738,6 +738,11 @@ def pick(cfg, posted, want, slot_hour=None, live_heads=None):
     if recent_cats:
         fresh_cat = [q for q in items if q.get("c") not in recent_cats]
         if fresh_cat:
+            # 2026-09-16の気づき（exp-009, 2026-09-24開始）: food は fashion の
+            # 1.9倍見られている（中央値17 対 9、n=16対36）。9/23時点でも
+            # 食品20・ファッション10と同じ向き。選べるときは食品を先に出す。
+            # 値引き・新しさの順は保ったまま、同じ優先度の中でだけ並べ替える。
+            fresh_cat.sort(key=lambda q: q.get("c") != "food")
             items = fresh_cat + [q for q in items if q not in fresh_cat]
 
     n_done = len([k for k in (posted.get("keys") or []) if k.startswith("product:")])
