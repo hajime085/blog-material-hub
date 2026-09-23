@@ -394,7 +394,8 @@
     "tip:25",
     "product:rd2ffe5464",
     "tip:01",
-    "tip:13"
+    "tip:13",
+    "product:rb3ba592b2"
   ],
   "log": [
     {
@@ -5888,6 +5889,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:rb3ba592b2",
+      "id": "18152780374522375",
+      "at": "2026-09-23 18:00",
+      "kind": "product",
+      "slot": 18,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "save",
+      "category": "beauty",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
