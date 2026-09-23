@@ -398,17 +398,10 @@
     "product:rb3ba592b2",
     "tip:22",
     "tip:00",
-    "tip:21"
+    "tip:21",
+    "tip:24"
   ],
   "log": [
-    {
-      "key": "schedule:2026-08-25",
-      "id": "18069858914719061",
-      "at": "2026-08-25 20:31",
-      "kind": "schedule",
-      "cap": null,
-      "link": "none"
-    },
     {
       "key": "guide:marathon",
       "id": "18102469454264221",
@@ -5927,6 +5920,20 @@
       "at": "2026-09-23 20:21",
       "kind": "tip",
       "slot": 20,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
+    },
+    {
+      "key": "tip:24",
+      "id": "17965236573195316",
+      "at": "2026-09-23 21:21",
+      "kind": "tip",
+      "slot": 21,
       "catchup": false,
       "cap": null,
       "hook_type": null,
