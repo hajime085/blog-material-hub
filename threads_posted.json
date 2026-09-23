@@ -402,17 +402,10 @@
     "tip:24",
     "tip:02",
     "tip:14",
-    "tip:39"
+    "tip:39",
+    "tip:23"
   ],
   "log": [
-    {
-      "key": "tip:00",
-      "id": "18112902394799703",
-      "at": "2026-08-26 12:47",
-      "kind": "tip",
-      "cap": null,
-      "link": "none"
-    },
     {
       "key": "product:rb91539b1f",
       "id": "18186842002404467",
@@ -5955,6 +5948,20 @@
       "at": "2026-09-24 00:21",
       "kind": "tip",
       "slot": 0,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
+    },
+    {
+      "key": "tip:23",
+      "id": "18133534948656490",
+      "at": "2026-09-24 01:00",
+      "kind": "tip",
+      "slot": 1,
       "catchup": false,
       "cap": null,
       "hook_type": null,
