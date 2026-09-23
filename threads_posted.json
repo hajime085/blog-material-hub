@@ -400,17 +400,10 @@
     "tip:00",
     "tip:21",
     "tip:24",
-    "tip:02"
+    "tip:02",
+    "tip:14"
   ],
   "log": [
-    {
-      "key": "schedule:2026-08-26",
-      "id": "17944416516278151",
-      "at": "2026-08-26 00:45",
-      "kind": "schedule",
-      "cap": null,
-      "link": "none"
-    },
     {
       "key": "guide:super-sale",
       "id": "18038536442837587",
@@ -5942,6 +5935,20 @@
       "kind": "tip",
       "slot": 22,
       "catchup": true,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
+    },
+    {
+      "key": "tip:14",
+      "id": "18056812088795036",
+      "at": "2026-09-23 23:46",
+      "kind": "tip",
+      "slot": 23,
+      "catchup": false,
       "cap": null,
       "hook_type": null,
       "cta_type": null,
