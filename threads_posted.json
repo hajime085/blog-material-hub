@@ -392,7 +392,8 @@
     "tip:42",
     "tip:43",
     "tip:25",
-    "product:rd2ffe5464"
+    "product:rd2ffe5464",
+    "tip:01"
   ],
   "log": [
     {
@@ -5858,6 +5859,20 @@
       "category": "kitchen",
       "logic_version": "marketing_v2",
       "link": "reply"
+    },
+    {
+      "key": "tip:01",
+      "id": "17910925032500632",
+      "at": "2026-09-23 14:21",
+      "kind": "tip",
+      "slot": 14,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
     }
   ]
 }
