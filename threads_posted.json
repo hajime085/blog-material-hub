@@ -415,23 +415,10 @@
     "tip:05",
     "tip:12",
     "tip:31",
-    "tip:34"
+    "tip:34",
+    "tip:06"
   ],
   "log": [
-    {
-      "key": "schedule:2026-W34-6",
-      "id": "18024767297752383",
-      "at": "2026-08-29 07:00",
-      "kind": "schedule",
-      "slot": 7,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none"
-    },
     {
       "key": "product:r88d870d5e",
       "id": "18151268305515562",
@@ -6002,6 +5989,20 @@
       "at": "2026-09-24 23:46",
       "kind": "tip",
       "slot": 23,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
+    },
+    {
+      "key": "tip:06",
+      "id": "18341312188285546",
+      "at": "2026-09-25 00:21",
+      "kind": "tip",
+      "slot": 0,
       "catchup": false,
       "cap": null,
       "hook_type": null,
