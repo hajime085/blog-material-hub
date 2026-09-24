@@ -29,7 +29,22 @@
       "postedAt": "2026-09-24",
       "bumpedAt": "2026-09-24T07:31:22",
       "lastSeen": "2026-09-24",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "旅行の荷物をコンパクにまとめたい人",
+        "problem": "旅行のスーツケースは、服がかさばって入りきらないことがある。",
+        "hook": "荷造り、かさばるの悩みますよね。",
+        "body": "軽量・撥水の圧縮ポーチセット。M・Lサイズで、おむつポーチにも使える。レビューは141件、星4.43。",
+        "features": [
+          "軽量・撥水素材",
+          "M・Lサイズセット",
+          "おむつポーチにも使える",
+          "レビュー141件・星4.43"
+        ],
+        "cta": "empathy",
+        "cta_text": null
+      }
     },
     {
       "id": "r5e8c9afce",
