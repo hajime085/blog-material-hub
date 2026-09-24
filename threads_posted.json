@@ -408,21 +408,10 @@
     "schedule:2026-W38-4",
     "tip:29",
     "product:r47c8ba6f2",
-    "tip:27"
+    "tip:27",
+    "tip:16"
   ],
   "log": [
-    {
-      "key": "product:r079bc53f2",
-      "id": "17995978208816733",
-      "at": "2026-08-27 21:47",
-      "kind": "product",
-      "cap": true,
-      "hook_type": "discovery",
-      "cta_type": "experience",
-      "category": "kaden",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:r4dcf8a139",
       "id": "18618163636065053",
@@ -5989,6 +5978,20 @@
       "at": "2026-09-24 14:21",
       "kind": "tip",
       "slot": 14,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
+    },
+    {
+      "key": "tip:16",
+      "id": "18449268262124297",
+      "at": "2026-09-24 17:21",
+      "kind": "tip",
+      "slot": 17,
       "catchup": false,
       "cap": null,
       "hook_type": null,
