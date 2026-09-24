@@ -406,19 +406,10 @@
     "tip:23",
     "tip:03",
     "schedule:2026-W38-4",
-    "tip:29"
+    "tip:29",
+    "product:r47c8ba6f2"
   ],
   "log": [
-    {
-      "key": "product:rb2dfeec36",
-      "id": "18104527604589326",
-      "at": "2026-08-27 01:34",
-      "kind": "product",
-      "cap": false,
-      "link": "reply",
-      "logic_version": "legacy_v1",
-      "category": "beauty"
-    },
     {
       "key": "product:rf05138318",
       "id": "18136143658610622",
@@ -5986,6 +5977,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:r47c8ba6f2",
+      "id": "18095971667425235",
+      "at": "2026-09-24 13:00",
+      "kind": "product",
+      "slot": 13,
+      "catchup": false,
+      "cap": false,
+      "hook_type": "scene",
+      "cta_type": "empathy",
+      "category": "kitchen",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
