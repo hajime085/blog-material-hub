@@ -417,23 +417,10 @@
     "tip:31",
     "tip:34",
     "tip:06",
-    "tip:18"
+    "tip:18",
+    "tip:32"
   ],
   "log": [
-    {
-      "key": "product:rf04123caa",
-      "id": "17900801757355614",
-      "at": "2026-08-29 12:00",
-      "kind": "product",
-      "slot": 12,
-      "catchup": false,
-      "cap": false,
-      "hook_type": null,
-      "cta_type": null,
-      "category": "books",
-      "logic_version": "legacy_v1",
-      "link": "reply"
-    },
     {
       "key": "product:r1961b4c2e",
       "id": "18113503337072862",
@@ -6004,6 +5991,20 @@
       "at": "2026-09-25 01:00",
       "kind": "tip",
       "slot": 1,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
+    },
+    {
+      "key": "tip:32",
+      "id": "18095219138422710",
+      "at": "2026-09-25 07:21",
+      "kind": "tip",
+      "slot": 7,
       "catchup": false,
       "cap": null,
       "hook_type": null,
