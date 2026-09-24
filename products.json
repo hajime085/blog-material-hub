@@ -19,17 +19,39 @@
       "endTime": "",
       "listPrice": 1000,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,000円のクレンジングのお試し品が500円。4g×14包の個包装、日本製。",
       "tags": [
         "送料無料"
       ],
-      "points": [],
+      "points": [
+        "500円で送料込み",
+        "4g×14包の個包装",
+        "日本製"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-24",
       "bumpedAt": "2026-09-24T16:33:47",
       "lastSeen": "2026-09-25",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "旅行や外出先でもメイクを落としたい人",
+        "problem": "クレンジングのボトルを持ち歩くとかさばる",
+        "use_case": "旅行・外泊",
+        "features": [
+          "4g×14包",
+          "1包ずつの個包装",
+          "日本製",
+          "ポスト投函"
+        ],
+        "benefits": [
+          "持ち出す数を包の数で決められる"
+        ],
+        "hook": "旅行のたびに、クレンジングを小さい容器へ詰め替えている。",
+        "body": "4gずつの個包装が14包入ったお試し品です。\n1回分ずつ分かれているので、持ち出す数を決めやすそうです。",
+        "cta": "none"
+      }
     },
     {
       "id": "r47c8ba6f2",
@@ -48,11 +70,15 @@
       "endTime": "",
       "listPrice": 899,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "899円の衣類用圧縮ポーチが599円。MとLのセットで撥水。",
       "tags": [
         "送料無料"
       ],
-      "points": [],
+      "points": [
+        "599円で送料込み",
+        "MとLのセット",
+        "撥水・ファスナー付き"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-24",
@@ -180,17 +206,40 @@
       "endTime": "2026-09-29 17:59",
       "listPrice": 2480,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,480円のペチコートが1,299円。2タイプから選べて、黒とベージュ。",
       "tags": [
         "送料無料"
       ],
-      "points": [],
+      "points": [
+        "1,299円で送料込み",
+        "2タイプから選べる（パンツは8分丈）",
+        "ブラック・ベージュ、M・L"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-24",
       "bumpedAt": "2026-09-24T16:35:34",
       "lastSeen": "2026-09-25",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "problem",
+        "target": "スカートの下にはくものを探している人",
+        "problem": "スカートの下に何をはくか迷う",
+        "use_case": "スカートを着る日",
+        "features": [
+          "ペチコート",
+          "選べる2タイプ",
+          "パンツは8分丈",
+          "ブラック・ベージュ",
+          "M・L"
+        ],
+        "benefits": [
+          "色とタイプを選べる"
+        ],
+        "hook": "スカートの下に何をはくか、毎回迷う。",
+        "body": "スカートの下にはくペチコートです。\n2タイプから選べて、色はブラックとベージュ、サイズはMとL。",
+        "cta": "none"
+      }
     },
     {
       "id": "rddadd2009",
@@ -253,17 +302,41 @@
       "endTime": "",
       "listPrice": null,
       "priceBasis": null,
-      "caption": "",
+      "caption": "九州産小麦の生パスタ8食分が2,000円。2食×4袋、1袋180g。",
       "tags": [
         "送料無料"
       ],
-      "points": [],
+      "points": [
+        "2,000円で送料込み",
+        "2食×4袋の8食分",
+        "出荷は7〜14営業日以内"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-24",
       "bumpedAt": "2026-09-24T11:30:28",
       "lastSeen": "2026-09-25",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "家で生パスタを食べたい人",
+        "problem": "乾麺ばかりで変化がない",
+        "use_case": "家での昼食・夕食",
+        "features": [
+          "九州産小麦",
+          "生パスタ",
+          "2食×4袋の8食分",
+          "1袋180g",
+          "フェットチーネ・リングイネ",
+          "7〜14営業日以内に出荷"
+        ],
+        "benefits": [
+          "2食ずつ袋が分かれている"
+        ],
+        "hook": "家のパスタが、いつも同じ乾麺になっている。",
+        "body": "九州産小麦の生パスタです。\n2食ずつ4袋に分かれた8食分。出荷は7〜14営業日以内です。",
+        "cta": "none"
+      }
     },
     {
       "id": "r99780be55",
@@ -457,15 +530,37 @@
       "endTime": "2026-09-30 10:20",
       "listPrice": 5960,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "5,960円のショートブーツが2,580円。太めのヒール、22.5〜25.0cm。",
       "tags": [],
-      "points": [],
+      "points": [
+        "2,580円",
+        "色はブラック・ブラウン・アイボリー・キャメル",
+        "22.5〜25.0cm"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-24",
       "bumpedAt": "2026-09-24T16:35:34",
       "lastSeen": "2026-09-25",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "秋冬の通勤に合わせる靴を探している人",
+        "problem": "通勤に合わせるブーツが決まらない",
+        "use_case": "秋冬の通勤",
+        "features": [
+          "ショートブーツ",
+          "チャンキーヒール",
+          "ブラック・ブラウン・アイボリー・キャメルの4色",
+          "22.5〜25.0cm"
+        ],
+        "benefits": [
+          "色を4色から選べる"
+        ],
+        "hook": "秋の通勤に合わせるブーツを、まだ決めていない。",
+        "body": "太めのヒールのショートブーツです。\n色は4色、サイズは22.5cmから25.0cmまで。",
+        "cta": "none"
+      }
     },
     {
       "id": "r5e8c9afce",
