@@ -407,19 +407,10 @@
     "tip:03",
     "schedule:2026-W38-4",
     "tip:29",
-    "product:r47c8ba6f2"
+    "product:r47c8ba6f2",
+    "tip:27"
   ],
   "log": [
-    {
-      "key": "product:rf05138318",
-      "id": "18136143658610622",
-      "at": "2026-08-27 13:30",
-      "kind": "product",
-      "cap": true,
-      "link": "reply",
-      "logic_version": "marketing_v2",
-      "category": "fashion"
-    },
     {
       "key": "product:r079bc53f2",
       "id": "17995978208816733",
@@ -5991,6 +5982,20 @@
       "category": "kitchen",
       "logic_version": "marketing_v2",
       "link": "reply"
+    },
+    {
+      "key": "tip:27",
+      "id": "18034770698851410",
+      "at": "2026-09-24 14:21",
+      "kind": "tip",
+      "slot": 14,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
     }
   ]
 }
