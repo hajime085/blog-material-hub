@@ -411,23 +411,10 @@
     "tip:27",
     "tip:16",
     "tip:30",
-    "tip:28"
+    "tip:28",
+    "tip:05"
   ],
   "log": [
-    {
-      "key": "tip:12",
-      "id": "18047531990807884",
-      "at": "2026-08-28 16:15",
-      "kind": "tip",
-      "slot": 14,
-      "catchup": true,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none"
-    },
     {
       "key": "product:r27423d12b",
       "id": "18378395221231702",
@@ -5998,6 +5985,20 @@
       "at": "2026-09-24 19:21",
       "kind": "tip",
       "slot": 19,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
+    },
+    {
+      "key": "tip:05",
+      "id": "18165667591480893",
+      "at": "2026-09-24 20:00",
+      "kind": "tip",
+      "slot": 20,
       "catchup": false,
       "cap": null,
       "hook_type": null,
