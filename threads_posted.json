@@ -429,23 +429,10 @@
     "product:rb99ad5b1c",
     "product:rf236a0f31",
     "tip:37",
-    "product:rec4994635"
+    "product:rec4994635",
+    "product:r02480df33"
   ],
   "log": [
-    {
-      "key": "product:r319e3b4a4",
-      "id": "17953537110237486",
-      "at": "2026-08-30 23:20",
-      "kind": "product",
-      "slot": 23,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "scene",
-      "cta_type": "empathy",
-      "category": "fashion",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:re70adb7d5",
       "id": "17927111169166097",
@@ -6021,6 +6008,20 @@
       "hook_type": "relatable",
       "cta_type": "none",
       "category": "food",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r02480df33",
+      "id": "18024688685860441",
+      "at": "2026-09-26 01:00",
+      "kind": "product",
+      "slot": 1,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "none",
+      "category": "baby-toy",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
