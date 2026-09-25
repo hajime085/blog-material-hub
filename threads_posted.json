@@ -425,23 +425,10 @@
     "tip:36",
     "tip:07",
     "product:r232e9ae82",
-    "tip:19"
+    "tip:19",
+    "product:rb99ad5b1c"
   ],
   "log": [
-    {
-      "key": "product:rb505b66ae",
-      "id": "18076857782345200",
-      "at": "2026-08-30 17:20",
-      "kind": "product",
-      "slot": 17,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "surprise",
-      "cta_type": "question",
-      "category": "sports",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "tip:13",
       "id": "18466073164114040",
@@ -6019,6 +6006,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:rb99ad5b1c",
+      "id": "18133473166655084",
+      "at": "2026-09-25 20:00",
+      "kind": "product",
+      "slot": 20,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "none",
+      "category": "beauty",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
