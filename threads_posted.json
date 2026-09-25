@@ -428,23 +428,10 @@
     "tip:19",
     "product:rb99ad5b1c",
     "product:rf236a0f31",
-    "tip:37"
+    "tip:37",
+    "product:rec4994635"
   ],
   "log": [
-    {
-      "key": "product:r4cfa93d04",
-      "id": "17916094665244234",
-      "at": "2026-08-30 21:00",
-      "kind": "product",
-      "slot": 21,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "compare",
-      "cta_type": "none",
-      "category": "books",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:r319e3b4a4",
       "id": "17953537110237486",
@@ -6022,6 +6009,20 @@
       "category": null,
       "logic_version": null,
       "link": "none"
+    },
+    {
+      "key": "product:rec4994635",
+      "id": "18126318181844641",
+      "at": "2026-09-26 00:21",
+      "kind": "product",
+      "slot": 0,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "relatable",
+      "cta_type": "none",
+      "category": "food",
+      "logic_version": "marketing_v2",
+      "link": "reply"
     }
   ]
 }
