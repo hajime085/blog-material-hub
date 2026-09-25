@@ -418,23 +418,10 @@
     "tip:34",
     "tip:06",
     "tip:18",
-    "tip:32"
+    "tip:32",
+    "tip:26"
   ],
   "log": [
-    {
-      "key": "product:r1961b4c2e",
-      "id": "18113503337072862",
-      "at": "2026-08-29 22:27",
-      "kind": "product",
-      "slot": 21,
-      "catchup": false,
-      "cap": false,
-      "hook_type": null,
-      "cta_type": null,
-      "category": "sports",
-      "logic_version": "legacy_v1",
-      "link": "reply"
-    },
     {
       "key": "product:r710d74505",
       "id": "17870640222593415",
@@ -6005,6 +5992,20 @@
       "at": "2026-09-25 07:21",
       "kind": "tip",
       "slot": 7,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
+    },
+    {
+      "key": "tip:26",
+      "id": "18206137336375020",
+      "at": "2026-09-25 09:21",
+      "kind": "tip",
+      "slot": 9,
       "catchup": false,
       "cap": null,
       "hook_type": null,
