@@ -427,23 +427,10 @@
     "product:r232e9ae82",
     "tip:19",
     "product:rb99ad5b1c",
-    "product:rf236a0f31"
+    "product:rf236a0f31",
+    "tip:37"
   ],
   "log": [
-    {
-      "key": "product:r2e3c35a08",
-      "id": "18149072209547044",
-      "at": "2026-08-30 20:00",
-      "kind": "product",
-      "slot": 20,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "relatable",
-      "cta_type": "question",
-      "category": "pc",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:r4cfa93d04",
       "id": "17916094665244234",
@@ -6021,6 +6008,20 @@
       "category": "fashion",
       "logic_version": "marketing_v2",
       "link": "reply"
+    },
+    {
+      "key": "tip:37",
+      "id": "18351599506219572",
+      "at": "2026-09-25 23:21",
+      "kind": "tip",
+      "slot": 22,
+      "catchup": true,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
     }
   ]
 }
