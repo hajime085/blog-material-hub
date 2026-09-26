@@ -9605,5 +9605,23 @@
     },
     "pitch_status": "ready",
     "_stashedAt": "2026-09-26"
+  },
+  "jitdirect:10034044": {
+    "tags": [
+      "訳あり",
+      "アウトレット"
+    ],
+    "listPrice": 1500,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-26"
+  },
+  "jitdirect:10034046": {
+    "tags": [
+      "訳あり",
+      "アウトレット"
+    ],
+    "listPrice": 1500,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-26"
   }
 }
