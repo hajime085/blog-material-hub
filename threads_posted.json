@@ -437,23 +437,10 @@
     "tip:35",
     "tip:15",
     "tip:10",
-    "tip:17"
+    "tip:17",
+    "tip:11"
   ],
   "log": [
-    {
-      "key": "product:r3e3b6bf23",
-      "id": "18132059785572033",
-      "at": "2026-08-31 20:00",
-      "kind": "product",
-      "slot": 20,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "problem",
-      "cta_type": "save",
-      "category": "kitchen",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:rce7af8604",
       "id": "18099536816360433",
@@ -6024,6 +6011,20 @@
       "at": "2026-09-26 18:00",
       "kind": "tip",
       "slot": 18,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
+    },
+    {
+      "key": "tip:11",
+      "id": "17910248085539559",
+      "at": "2026-09-26 19:20",
+      "kind": "tip",
+      "slot": 19,
       "catchup": false,
       "cap": null,
       "hook_type": null,
