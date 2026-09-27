@@ -450,23 +450,10 @@
     "schedule:2026-W38-0",
     "tip:21",
     "tip:24",
-    "tip:02"
+    "tip:02",
+    "tip:33"
   ],
   "log": [
-    {
-      "key": "product:rbcd9e1bc8",
-      "id": "18118158910902416",
-      "at": "2026-09-02 00:01",
-      "kind": "product",
-      "slot": 0,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "problem",
-      "cta_type": "empathy",
-      "category": "kitchen",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "tip:26",
       "id": "18020920790872738",
@@ -6037,6 +6024,20 @@
       "at": "2026-09-27 17:20",
       "kind": "tip",
       "slot": 17,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
+    },
+    {
+      "key": "tip:33",
+      "id": "18029603792909523",
+      "at": "2026-09-27 18:00",
+      "kind": "tip",
+      "slot": 18,
       "catchup": false,
       "cap": null,
       "hook_type": null,
