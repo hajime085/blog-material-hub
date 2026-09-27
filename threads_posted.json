@@ -457,23 +457,10 @@
     "tip:39",
     "tip:23",
     "product:re2f665d39",
-    "product:r5d00a688d"
+    "product:r5d00a688d",
+    "product:r397a29c44"
   ],
   "log": [
-    {
-      "key": "product:r37783ebd3",
-      "id": "18094617689545719",
-      "at": "2026-09-02 20:00",
-      "kind": "product",
-      "slot": 20,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "scene",
-      "cta_type": "experience",
-      "category": "kitchen",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:rc87b2ba45",
       "id": "18626108941017782",
@@ -6049,6 +6036,20 @@
       "hook_type": "discovery",
       "cta_type": "save",
       "category": "pc",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r397a29c44",
+      "id": "18134166190724374",
+      "at": "2026-09-28 01:00",
+      "kind": "product",
+      "slot": 1,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "save",
+      "category": "fashion",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
