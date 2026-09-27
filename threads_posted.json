@@ -456,23 +456,10 @@
     "tip:08",
     "tip:39",
     "tip:23",
-    "product:re2f665d39"
+    "product:re2f665d39",
+    "product:r5d00a688d"
   ],
   "log": [
-    {
-      "key": "tip:15",
-      "id": "18024545534913371",
-      "at": "2026-09-02 19:20",
-      "kind": "tip",
-      "slot": 19,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none"
-    },
     {
       "key": "product:r37783ebd3",
       "id": "18094617689545719",
@@ -6048,6 +6035,20 @@
       "hook_type": "problem_price",
       "cta_type": "save",
       "category": "kitchen",
+      "logic_version": "marketing_v2",
+      "link": "reply"
+    },
+    {
+      "key": "product:r5d00a688d",
+      "id": "18100864097373900",
+      "at": "2026-09-28 00:01",
+      "kind": "product",
+      "slot": 0,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "pc",
       "logic_version": "marketing_v2",
       "link": "reply"
     }
