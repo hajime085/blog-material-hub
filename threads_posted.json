@@ -452,23 +452,10 @@
     "tip:24",
     "tip:02",
     "tip:33",
-    "tip:14"
+    "tip:14",
+    "tip:08"
   ],
   "log": [
-    {
-      "key": "product:rf994cdd4f",
-      "id": "17959591074194418",
-      "at": "2026-09-02 09:20",
-      "kind": "product",
-      "slot": 9,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "problem_price",
-      "cta_type": "save",
-      "category": "fashion",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:rbde6613d0",
       "id": "18124079548795344",
@@ -6039,6 +6026,20 @@
       "at": "2026-09-27 19:20",
       "kind": "tip",
       "slot": 19,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
+    },
+    {
+      "key": "tip:08",
+      "id": "17882474247623003",
+      "at": "2026-09-27 20:00",
+      "kind": "tip",
+      "slot": 20,
       "catchup": false,
       "cap": null,
       "hook_type": null,
