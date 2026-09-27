@@ -1,7 +1,163 @@
 {
   "_readme": "商品データ。手で書いた caption / points / description / tags / marketing / hidden は、更新でも、いったん外して拾い直したときでも 残ります（外すときは hand_attic.json に預けています）。",
-  "updatedAt": "2026-09-26",
+  "updatedAt": "2026-09-27",
   "products": [
+    {
+      "id": "r328f7d9b9",
+      "category": "kaden",
+      "pinned": true,
+      "title": "ブリタ カートリッジ 互換 マクストラ MAXTRA PRO MAXTRA+ 新旧型対応 3個 6個…",
+      "rawTitle": "ブリタ カートリッジ 互換 マクストラ MAXTRA PRO MAXTRA+ 新旧型対応 3個 6個 9個 セット 1年分 2年分 3年分 PFAS除去 スタイルエコ マレーラ アルーナ リクエリ フロー グラスジャグ SORERUN",
+      "price": 1100,
+      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/nishi-ryutu/cabinet/13881349/maxtra-6.jpg?_ex=600x600",
+      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00t06r7.jeifo626.g00t06r7.jeifpae7/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnishi-ryutu%2Fmaxtra-6%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fnishi-ryutu%2Fi%2F10087267%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+      "shop": "消耗品と互換品のH・ディンガー",
+      "reviewAverage": 4.54,
+      "reviewCount": 1819,
+      "itemCode": "nishi-ryutu:10087267",
+      "genreId": "212491",
+      "startTime": "",
+      "endTime": "",
+      "listPrice": null,
+      "priceBasis": null,
+      "caption": "ブリタのマクストラ対応互換カートリッジ。3個・6個・9個から選べて1,100円から。",
+      "points": [
+        "1,100円から",
+        "マクストラ対応・新旧型対応",
+        "レビュー1,819件・★4.54"
+      ],
+      "description": "",
+      "tags": [
+        "送料無料"
+      ],
+      "unitNote": null,
+      "postedAt": "2026-09-27",
+      "bumpedAt": "2026-09-27T07:17:25",
+      "lastSeen": "2026-09-27",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "ブリタのポットを使っている人",
+        "problem": "交換用カートリッジの出費が続く",
+        "use_case": "ポット型浄水器のカートリッジ交換",
+        "features": [
+          "マクストラ（MAXTRA PRO・MAXTRA+）対応の互換品",
+          "新旧型対応",
+          "3個・6個・9個から選べる",
+          "レビュー1,819件・星4.54"
+        ],
+        "benefits": [
+          "まとめ数を選んで買える"
+        ],
+        "hook": "ブリタのカートリッジ、互換品という選び方もあります。",
+        "body": "マクストラ対応の互換品で、新旧どちらの型にも対応。3個・6個・9個から選べます。",
+        "cta": "none"
+      },
+      "pitch_status": "ready"
+    },
+    {
+      "id": "rbde6613d0",
+      "category": "fashion",
+      "pinned": true,
+      "title": "速乾 UVカット イージー コクーンパンツ レディース ボトム パンツ カーブパンツ チノパンツ…",
+      "rawTitle": "42%OFF!【期間限定：3,790円→2,190円！】速乾 UVカット イージー コクーンパンツ レディース ボトム パンツ カーブパンツ チノパンツ バレルレッグ 春 夏 秋 冬 低身長 高身長 洗濯可【 イージーコクーンパンツ】",
+      "price": 2190,
+      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/darkangel/cabinet/12863863/13830759/3635-main-260903.jpg?_ex=600x600",
+      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00q8qj7.jeifo2ee.g00q8qj7.jeifpbbc/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdarkangel%2Fpa2301-3635%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fdarkangel%2Fi%2F10035877%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+      "shop": "Dark Angel (ダークエンジェル)",
+      "reviewAverage": 4.28,
+      "reviewCount": 5220,
+      "itemCode": "darkangel:10035877",
+      "genreId": "206440",
+      "startTime": "2026-09-25 09:00",
+      "endTime": "2026-09-29 09:59",
+      "listPrice": 3790,
+      "priceBasis": "title",
+      "caption": "3,790円のイージーコクーンパンツが2,190円。速乾、UVカット。",
+      "points": [
+        "3,790円から2,190円へ",
+        "速乾・UVカット",
+        "洗濯可"
+      ],
+      "description": "",
+      "tags": [
+        "送料無料"
+      ],
+      "unitNote": null,
+      "postedAt": "2026-09-27",
+      "bumpedAt": "2026-09-27T07:17:25",
+      "lastSeen": "2026-09-27",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "季節を問わずはけるパンツを探している人",
+        "problem": "洗濯してすぐはきたい日に乾いていない",
+        "use_case": "普段着",
+        "features": [
+          "速乾",
+          "UVカット",
+          "イージータイプ",
+          "洗濯可",
+          "レビュー5,220件・星4.28"
+        ],
+        "benefits": [
+          "洗濯できて乾きが早い素材を選べる"
+        ],
+        "hook": "コクーン型のイージーパンツ、3,790円が2,190円です。",
+        "body": "速乾でUVカット。家で洗濯できます。",
+        "cta": "none"
+      },
+      "pitch_status": "needs_review"
+    },
+    {
+      "id": "rbd400d609",
+      "category": "books",
+      "pinned": true,
+      "title": "Switch2 充電 Switch2 充電スタンド ジョイコン 充電 スタンド アクセサリー 周辺機器…",
+      "rawTitle": "Switch2 充電 Switch2 充電スタンド ジョイコン 充電 スタンド アクセサリー 周辺機器 Switch2 ジョイコン 充電 switch 充電 スタンド ケーブル 不要 JoyCon 充電器 コントローラー 任天堂 スイッチ2 保護 機能 ドック 対応 ジョイコン FIRME",
+      "price": 2380,
+      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/mywaysmart/cabinet/switch/ntdsw-joyc-dk_n.jpg?_ex=600x600",
+      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00sca37.jeifo1ba.g00sca37.jeifp960/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmywaysmart%2Fntdsw-joyc-dk%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fmywaysmart%2Fi%2F10041283%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+      "shop": "MY WAY SMART 楽天市場店",
+      "reviewAverage": 4.51,
+      "reviewCount": 771,
+      "itemCode": "mywaysmart:10041283",
+      "genreId": "568773",
+      "startTime": "",
+      "endTime": "",
+      "listPrice": null,
+      "priceBasis": null,
+      "caption": "Switch2のジョイコン用充電スタンド。2,380円。",
+      "points": [
+        "2,380円",
+        "ジョイコンを立てて充電",
+        "レビュー771件・★4.51"
+      ],
+      "description": "",
+      "tags": [
+        "送料無料"
+      ],
+      "unitNote": null,
+      "postedAt": "2026-09-27",
+      "bumpedAt": "2026-09-27T07:17:25",
+      "lastSeen": "2026-09-27",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "Switch2を持っている人",
+        "problem": "ジョイコンの充電をいちいち本体につないでいる",
+        "use_case": "ジョイコンの充電と置き場所",
+        "features": [
+          "Switch2のジョイコン用充電スタンド",
+          "ケーブル不要",
+          "レビュー771件・星4.51"
+        ],
+        "benefits": [
+          "ジョイコンを立てて置きながら充電できる"
+        ],
+        "hook": "Switch2のジョイコン、置き場所ついでに充電できます。",
+        "body": "ジョイコンを差して立てておく充電スタンドです。2,380円。",
+        "cta": "none"
+      },
+      "pitch_status": "needs_review"
+    },
     {
       "id": "r5d00a688d",
       "category": "pc",
@@ -19,18 +175,40 @@
       "endTime": "2026-09-28 09:59",
       "listPrice": 1500,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,500円のキヤノン純正BC-310/311が750円。標準容量。",
       "tags": [
         "訳あり",
         "アウトレット"
       ],
-      "points": [],
+      "points": [
+        "1,500円から750円へ",
+        "箱なしアウトレット",
+        "レビュー87件・★4.68"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-26",
       "bumpedAt": "2026-09-26T16:36:52",
       "lastSeen": "2026-09-26",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "キヤノンのプリンタでBC-310/311を使っている人",
+        "problem": "純正のカートリッジは値段が気になる",
+        "use_case": "家庭のプリンタ",
+        "features": [
+          "キヤノン純正 BC-310/311",
+          "標準容量",
+          "箱なしアウトレット（訳あり）",
+          "レビュー87件・星4.68"
+        ],
+        "benefits": [
+          "純正の型番を箱なしで選べる"
+        ],
+        "hook": "BC-310/311の純正、箱なしのアウトレットです。",
+        "body": "標準容量。箱が無いぶんの訳あり品として売られています。",
+        "cta": "save"
+      }
     },
     {
       "id": "r4f6b44c0f",
@@ -49,18 +227,40 @@
       "endTime": "2026-09-28 09:59",
       "listPrice": 1500,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,500円のキヤノン純正BC-340XL/341XLが750円。大容量。",
       "tags": [
         "訳あり",
         "アウトレット"
       ],
-      "points": [],
+      "points": [
+        "1,500円から750円へ",
+        "箱なしアウトレット",
+        "レビュー73件・★4.63"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-26",
       "bumpedAt": "2026-09-26T16:36:52",
       "lastSeen": "2026-09-26",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "compare",
+        "target": "印刷の量が多い人",
+        "problem": "標準容量だと交換の回数が増える",
+        "use_case": "家庭のプリンタ",
+        "features": [
+          "キヤノン純正 BC-340XL/341XL",
+          "大容量",
+          "箱なしアウトレット（訳あり）",
+          "レビュー73件・星4.63"
+        ],
+        "benefits": [
+          "大容量の型番を箱なしで選べる"
+        ],
+        "hook": "BC-340/341の、標準より多いXLのほうです。",
+        "body": "キヤノン純正の大容量。箱なしのアウトレットとして売られています。",
+        "cta": "save"
+      }
     },
     {
       "id": "re2f665d39",
@@ -79,15 +279,38 @@
       "endTime": "",
       "listPrice": 3280,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "3,280円の簡易トイレ50回分が1,580円。15年保存の凝固剤タイプ。",
       "tags": [],
-      "points": [],
+      "points": [
+        "3,280円から1,580円へ",
+        "50回分・1回あたり約32円",
+        "15年保存"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-26",
       "bumpedAt": "2026-09-26T21:30:45",
-      "lastSeen": "2026-09-26",
-      "pitch_status": "pending"
+      "lastSeen": "2026-09-27",
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "problem_price",
+        "target": "災害用の備えを見直したい人",
+        "problem": "断水すると、家のトイレがそのままでは使えなくなる",
+        "use_case": "断水時や外出時の備え",
+        "features": [
+          "50回分",
+          "15年保存",
+          "凝固剤タイプ",
+          "レビュー110件・星4.57"
+        ],
+        "benefits": [
+          "50回分を1,580円でそろえられる"
+        ],
+        "hook": "非常用トイレ50回分が、1,580円です。",
+        "body": "凝固剤タイプで、15年保存。1回あたり約32円です。",
+        "cta": "save"
+      },
+      "pinned": true
     },
     {
       "id": "rc98af3a0e",
@@ -232,7 +455,7 @@
       "unitNote": null,
       "postedAt": "2026-09-25",
       "bumpedAt": "2026-09-25T21:37:44",
-      "lastSeen": "2026-09-26",
+      "lastSeen": "2026-09-27",
       "pitch_status": "pending",
       "marketing": {
         "hook_type": "scene",
@@ -249,7 +472,8 @@
         "cta_text": null
       },
       "hidden": true,
-      "hiddenReason": "同じ店・同じ値段が3件。2件までにする（ジットストア 400円）。レビューが一番少ない1件を伏せた"
+      "hiddenReason": "同じ店・同じ値段が3件。2件までにする（ジットストア 400円）。レビューが一番少ない1件を伏せた",
+      "pinned": true
     },
     {
       "id": "rd41c17b51",
@@ -3610,7 +3834,7 @@
       "unitNote": null,
       "postedAt": "2026-09-14",
       "bumpedAt": "2026-09-14T10:00:35",
-      "lastSeen": "2026-09-26",
+      "lastSeen": "2026-09-27",
       "marketing": {
         "hook_type": "problem",
         "target": "災害用の備えを見直したい人",
@@ -3689,7 +3913,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00uf1p7.jeifobba.g00uf1p7.jeifp0d3/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fteinei-tsuhan%2Fkomachi%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fteinei-tsuhan%2Fi%2F10000000%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "ていねい通販 楽天市場店",
       "reviewAverage": 4.6,
-      "reviewCount": 3598,
+      "reviewCount": 3603,
       "itemCode": "teinei-tsuhan:10000000",
       "genreId": "567605",
       "startTime": "",
@@ -3705,7 +3929,7 @@
       "unitNote": null,
       "postedAt": "2026-09-14",
       "bumpedAt": "2026-09-14T10:00:35",
-      "lastSeen": "2026-09-26",
+      "lastSeen": "2026-09-27",
       "marketing": {
         "hook_type": "discovery",
         "target": "コラーゲン系サプリを探している人",
@@ -3806,8 +4030,7 @@
         "hook": "中棒が曲がるタイプの傘型サンシェードです。",
         "body": "十本骨の強化タイプ。収納ポーチ付きです。\n六ヶ月の保証が付いています。",
         "cta": "save"
-      },
-      "pinned": true
+      }
     },
     {
       "id": "r4b9a55bd5",
@@ -4228,8 +4451,8 @@
       "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/chakasho-dina/cabinet/13405148/13405157/imgrc0137197300.jpg?_ex=600x600",
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00u5757.jeifoa3a.g00u5757.jeifp05a/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fchakasho-dina%2F535dahuoji%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fchakasho-dina%2Fi%2F10000783%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "chakashodina",
-      "reviewAverage": 4.59,
-      "reviewCount": 103,
+      "reviewAverage": 4.55,
+      "reviewCount": 105,
       "itemCode": "chakasho-dina:10000783",
       "genreId": "101909",
       "startTime": "2026-09-04 20:00",
@@ -4249,7 +4472,7 @@
       "unitNote": null,
       "postedAt": "2026-09-08",
       "bumpedAt": "2026-09-08T07:34:27",
-      "lastSeen": "2026-09-26",
+      "lastSeen": "2026-09-27",
       "marketing": {
         "hook_type": "discovery",
         "target": "仏壇やキャンドルに火を使う人",
@@ -7053,7 +7276,7 @@
       "unitNote": null,
       "postedAt": "2026-08-31",
       "bumpedAt": "2026-08-31T18:46:20",
-      "lastSeen": "2026-09-26",
+      "lastSeen": "2026-09-27",
       "marketing": {
         "hook_type": "scene",
         "target": "買い物のたびに袋を忘れる人",
@@ -7522,7 +7745,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00sows7.jeifoe24.g00sows7.jeifp9d6/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ff406091-aka%2F3x2%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Ff406091-aka%2Fi%2F10000539%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "福岡県赤村",
       "reviewAverage": 4.47,
-      "reviewCount": 4594,
+      "reviewCount": 4611,
       "itemCode": "f406091-aka:10000539",
       "genreId": "201184",
       "startTime": "",
@@ -7539,7 +7762,7 @@
       "unitNote": null,
       "postedAt": "2026-08-31",
       "bumpedAt": "2026-08-31T18:52:36",
-      "lastSeen": "2026-09-26",
+      "lastSeen": "2026-09-27",
       "marketing": {
         "hook_type": "surprise",
         "target": "ふるさと納税の返礼品を選んでいる人",
@@ -7588,7 +7811,7 @@
       "unitNote": null,
       "postedAt": "2026-08-31",
       "bumpedAt": "2026-08-31T18:52:36",
-      "lastSeen": "2026-09-26",
+      "lastSeen": "2026-09-27",
       "marketing": {
         "hook_type": "problem",
         "target": "防災リュックを一から用意する人",
@@ -9649,7 +9872,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00uaej7.jeifo180.g00uaej7.jeifp8aa/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fexception5251%2Fex-x01028%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fexception5251%2Fi%2F10000794%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "EXCEPTION本店",
       "reviewAverage": 4.64,
-      "reviewCount": 899,
+      "reviewCount": 920,
       "itemCode": "exception5251:10000794",
       "genreId": "201184",
       "startTime": "",
@@ -9666,7 +9889,7 @@
       "tags": [],
       "unitNote": null,
       "postedAt": "2026-08-21",
-      "lastSeen": "2026-09-26",
+      "lastSeen": "2026-09-27",
       "bumpedAt": "2026-08-21T00:00:00"
     },
     {
