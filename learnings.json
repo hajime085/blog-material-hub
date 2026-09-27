@@ -850,7 +850,14 @@
       "until": "2026-09-28",
       "target": 20,
       "target_why": "いまの全体の中央値は11〜16。20なら明確に上。",
-      "status": "running"
+      "status": "revert",
+      "result": {
+        "measured": 10,
+        "unit": "表示の中央値",
+        "baseline": null,
+        "target": 20
+      },
+      "decided": "2026-09-28"
     },
     {
       "id": "exp-009",
@@ -866,31 +873,31 @@
       "status": "running"
     }
   ],
-  "lastRun": "2026-09-27",
+  "lastRun": "2026-09-28",
   "snapshot": {
-    "date": "2026-09-27",
+    "date": "2026-09-28",
     "posts": 399,
-    "views": 9483,
+    "views": 9895,
     "replies": 2,
-    "followers": 55,
+    "followers": 56,
     "cuts": {
       "投稿の種類": {
         "product": {
-          "n": 174,
+          "n": 168,
           "median": 10.0,
-          "mean": 16.1,
+          "mean": 17.0,
           "max": 140
         },
         "tip": {
-          "n": 187,
-          "median": 18,
-          "mean": 29.9,
+          "n": 192,
+          "median": 18.0,
+          "mean": 29.7,
           "max": 237
         },
         "schedule": {
           "n": 9,
-          "median": 45,
-          "mean": 60.2,
+          "median": 47,
+          "mean": 60.4,
           "max": 174
         },
         "page": {
@@ -902,41 +909,41 @@
       },
       "リンクの位置": {
         "reply": {
-          "n": 176,
+          "n": 170,
           "median": 10.0,
-          "mean": 16.0,
+          "mean": 16.9,
           "max": 140
         },
         "none": {
-          "n": 196,
-          "median": 20.5,
-          "mean": 31.3,
+          "n": 201,
+          "median": 20,
+          "mean": 31.1,
           "max": 237
         }
       },
       "締めの型": {
         "save": {
-          "n": 134,
+          "n": 130,
           "median": 10.0,
-          "mean": 16.4,
+          "mean": 16.6,
           "max": 140
         },
-        "experience": {
-          "n": 10,
-          "median": 9.5,
-          "mean": 9.5,
-          "max": 20
-        },
         "none": {
-          "n": 13,
-          "median": 8,
-          "mean": 22.8,
+          "n": 16,
+          "median": 7.0,
+          "mean": 26.1,
           "max": 103
         },
+        "experience": {
+          "n": 6,
+          "median": 10.0,
+          "mean": 11.7,
+          "max": 20
+        },
         "empathy": {
-          "n": 13,
-          "median": 11,
-          "mean": 13.8,
+          "n": 12,
+          "median": 11.0,
+          "mean": 13.9,
           "max": 50
         },
         "compare": {
@@ -947,85 +954,67 @@
         }
       },
       "入口の型": {
-        "discovery": {
-          "n": 64,
-          "median": 10.5,
-          "mean": 18.9,
-          "max": 103
-        },
-        "scene": {
-          "n": 67,
-          "median": 9,
-          "mean": 15.8,
-          "max": 140
-        },
-        "compare": {
-          "n": 16,
-          "median": 9.5,
-          "mean": 13.1,
-          "max": 46
-        },
-        "relatable": {
-          "n": 2,
-          "median": 32.0,
-          "mean": 32.0,
-          "max": 50
-        },
-        "problem": {
-          "n": 23,
-          "median": 10,
-          "mean": 11.1,
-          "max": 21
-        },
-        "problem_price": {
-          "n": 1,
-          "median": 13,
-          "mean": 13.0,
-          "max": 13
-        },
         "surprise": {
           "n": 1,
           "median": 5,
           "mean": 5.0,
           "max": 5
+        },
+        "compare": {
+          "n": 14,
+          "median": 10.5,
+          "mean": 14.6,
+          "max": 48
+        },
+        "problem": {
+          "n": 22,
+          "median": 10.0,
+          "mean": 11.2,
+          "max": 21
+        },
+        "scene": {
+          "n": 65,
+          "median": 9,
+          "mean": 15.9,
+          "max": 140
+        },
+        "discovery": {
+          "n": 64,
+          "median": 10.5,
+          "mean": 20.0,
+          "max": 103
+        },
+        "relatable": {
+          "n": 2,
+          "median": 40.0,
+          "mean": 40.0,
+          "max": 50
         }
       },
       "売場": {
         "kitchen": {
-          "n": 11,
-          "median": 9,
-          "mean": 15.8,
+          "n": 8,
+          "median": 7.0,
+          "mean": 17.4,
           "max": 80
-        },
-        "food": {
-          "n": 25,
-          "median": 14,
-          "mean": 19.8,
-          "max": 61
-        },
-        "kaden": {
-          "n": 3,
-          "median": 9,
-          "mean": 7.3,
-          "max": 10
-        },
-        "fashion": {
-          "n": 45,
-          "median": 9,
-          "mean": 12.1,
-          "max": 50
-        },
-        "baby-toy": {
-          "n": 6,
-          "median": 18.5,
-          "mean": 23.0,
-          "max": 48
         },
         "pet": {
           "n": 8,
           "median": 12.0,
           "mean": 17.5,
           "max": 65
+        },
+        "fashion": {
+          "n": 42,
+          "median": 9.0,
+          "mean": 12.0,
+          "max": 50
+        },
+        "food": {
+          "n": 25,
+          "median": 21,
+          "mean": 20.9,
+          "max": 61
         },
         "sports": {
           "n": 9,
@@ -1034,10 +1023,16 @@
           "max": 41
         },
         "beauty": {
-          "n": 39,
-          "median": 9,
-          "mean": 18.1,
+          "n": 40,
+          "median": 8.5,
+          "mean": 17.9,
           "max": 140
+        },
+        "kaden": {
+          "n": 2,
+          "median": 9.5,
+          "mean": 9.5,
+          "max": 10
         },
         "books": {
           "n": 9,
@@ -1051,6 +1046,12 @@
           "mean": 21.2,
           "max": 67
         },
+        "baby-toy": {
+          "n": 6,
+          "median": 34.5,
+          "mean": 37.8,
+          "max": 91
+        },
         "car": {
           "n": 3,
           "median": 12,
@@ -1059,41 +1060,41 @@
         }
       },
       "時刻（豆知識）": {
-        "14": {
-          "n": 24,
-          "median": 37.0,
-          "mean": 52.6,
-          "max": 157
-        },
-        "19": {
-          "n": 15,
-          "median": 23,
-          "mean": 24.1,
-          "max": 68
-        },
         "7": {
-          "n": 16,
-          "median": 16.0,
-          "mean": 17.7,
-          "max": 45
+          "n": 17,
+          "median": 18,
+          "mean": 25.1,
+          "max": 108
         },
         "9": {
-          "n": 18,
-          "median": 10.5,
-          "mean": 20.0,
+          "n": 19,
+          "median": 10,
+          "mean": 19.4,
           "max": 77
         },
         "12": {
-          "n": 22,
-          "median": 11.5,
-          "mean": 15.2,
+          "n": 23,
+          "median": 11,
+          "mean": 14.7,
           "max": 35
         },
+        "14": {
+          "n": 23,
+          "median": 37,
+          "mean": 52.0,
+          "max": 157
+        },
         "17": {
-          "n": 22,
-          "median": 20.5,
-          "mean": 43.8,
+          "n": 23,
+          "median": 16,
+          "mean": 42.1,
           "max": 237
+        },
+        "19": {
+          "n": 14,
+          "median": 24.0,
+          "mean": 26.3,
+          "max": 68
         },
         "15": {
           "n": 9,
@@ -1108,9 +1109,9 @@
           "max": 78
         },
         "22": {
-          "n": 8,
-          "median": 33.5,
-          "mean": 54.2,
+          "n": 9,
+          "median": 33,
+          "mean": 49.3,
           "max": 135
         },
         "23": {
@@ -1120,9 +1121,9 @@
           "max": 57
         },
         "0": {
-          "n": 7,
-          "median": 55,
-          "mean": 56.1,
+          "n": 8,
+          "median": 38.0,
+          "mean": 50.1,
           "max": 124
         },
         "13": {
@@ -1144,77 +1145,59 @@
           "max": 62
         },
         "1": {
-          "n": 5,
-          "median": 24,
-          "mean": 22.4,
+          "n": 6,
+          "median": 18.0,
+          "mean": 19.8,
           "max": 41
         }
       },
       "時刻（商品）": {
-        "9": {
-          "n": 2,
-          "median": 15.0,
-          "mean": 15.0,
-          "max": 17
-        },
-        "12": {
-          "n": 2,
-          "median": 11.0,
-          "mean": 11.0,
-          "max": 12
-        },
-        "17": {
-          "n": 2,
-          "median": 2.0,
-          "mean": 2.0,
-          "max": 3
-        },
-        "20": {
-          "n": 40,
-          "median": 9.0,
-          "mean": 16.3,
-          "max": 140
-        },
-        "21": {
-          "n": 35,
-          "median": 8,
-          "mean": 11.7,
-          "max": 72
-        },
         "23": {
-          "n": 16,
-          "median": 11.0,
-          "mean": 19.6,
+          "n": 15,
+          "median": 11,
+          "mean": 19.9,
           "max": 80
         },
         "0": {
           "n": 16,
-          "median": 14.0,
-          "mean": 17.4,
+          "median": 15.5,
+          "mean": 18.4,
           "max": 50
         },
+        "20": {
+          "n": 39,
+          "median": 9,
+          "mean": 16.1,
+          "max": 140
+        },
+        "21": {
+          "n": 34,
+          "median": 8.5,
+          "mean": 12.1,
+          "max": 72
+        },
         "18": {
-          "n": 17,
-          "median": 8,
-          "mean": 14.4,
+          "n": 18,
+          "median": 6.0,
+          "mean": 13.9,
           "max": 65
         },
         "22": {
           "n": 13,
           "median": 15,
-          "mean": 19.4,
+          "mean": 19.5,
           "max": 52
         },
         "1": {
-          "n": 14,
-          "median": 25.0,
-          "mean": 30.4,
+          "n": 15,
+          "median": 25,
+          "mean": 34.5,
           "max": 103
         },
         "13": {
-          "n": 17,
-          "median": 10,
-          "mean": 10.5,
+          "n": 18,
+          "median": 10.0,
+          "mean": 11.2,
           "max": 40
         }
       }
