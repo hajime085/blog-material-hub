@@ -448,23 +448,10 @@
     "tip:22",
     "tip:00",
     "schedule:2026-W38-0",
-    "tip:21"
+    "tip:21",
+    "tip:24"
   ],
   "log": [
-    {
-      "key": "product:r3661d4a90",
-      "id": "18128918512781701",
-      "at": "2026-09-01 21:00",
-      "kind": "product",
-      "slot": 21,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "compare",
-      "cta_type": "experience",
-      "category": "baby-toy",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:rc789b8f62",
       "id": "18114432358977900",
@@ -6035,6 +6022,20 @@
       "at": "2026-09-27 13:00",
       "kind": "tip",
       "slot": 13,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
+    },
+    {
+      "key": "tip:24",
+      "id": "18008163443778361",
+      "at": "2026-09-27 14:20",
+      "kind": "tip",
+      "slot": 14,
       "catchup": false,
       "cap": null,
       "hook_type": null,
