@@ -32,7 +32,7 @@
       ],
       "unitNote": null,
       "postedAt": "2026-09-27",
-      "bumpedAt": "2026-09-27T07:17:25",
+      "bumpedAt": "2026-09-27T22:59:11",
       "lastSeen": "2026-09-27",
       "marketing": {
         "hook_type": "discovery",
@@ -84,7 +84,7 @@
       ],
       "unitNote": null,
       "postedAt": "2026-09-27",
-      "bumpedAt": "2026-09-27T07:17:25",
+      "bumpedAt": "2026-09-27T22:59:11",
       "lastSeen": "2026-09-27",
       "marketing": {
         "hook_type": "scene",
@@ -101,11 +101,11 @@
         "benefits": [
           "洗濯できて乾きが早い素材を選べる"
         ],
-        "hook": "コクーン型のイージーパンツ、3,790円が2,190円です。",
-        "body": "速乾でUVカット。家で洗濯できます。",
+        "hook": "コクーン型のイージーパンツ。速乾でUVカットです。",
+        "body": "家で洗濯できます。",
         "cta": "none"
       },
-      "pitch_status": "needs_review"
+      "pitch_status": "ready"
     },
     {
       "id": "rbd400d609",
@@ -137,7 +137,7 @@
       ],
       "unitNote": null,
       "postedAt": "2026-09-27",
-      "bumpedAt": "2026-09-27T07:17:25",
+      "bumpedAt": "2026-09-27T22:59:11",
       "lastSeen": "2026-09-27",
       "marketing": {
         "hook_type": "scene",
@@ -153,10 +153,10 @@
           "ジョイコンを立てて置きながら充電できる"
         ],
         "hook": "Switch2のジョイコン、置き場所ついでに充電できます。",
-        "body": "ジョイコンを差して立てておく充電スタンドです。2,380円。",
+        "body": "ジョイコンを差して立てておく充電スタンドです。",
         "cta": "none"
       },
-      "pitch_status": "needs_review"
+      "pitch_status": "ready"
     },
     {
       "id": "r5d00a688d",
@@ -291,7 +291,6 @@
       "postedAt": "2026-09-26",
       "bumpedAt": "2026-09-26T21:30:45",
       "lastSeen": "2026-09-27",
-<<<<<<< HEAD
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "problem_price",
@@ -312,9 +311,6 @@
         "cta": "save"
       },
       "pinned": true
-=======
-      "pitch_status": "pending"
->>>>>>> origin/main
     },
     {
       "id": "rc98af3a0e",
@@ -348,7 +344,7 @@
       "postedAt": "2026-09-25",
       "bumpedAt": "2026-09-25T16:35:53",
       "lastSeen": "2026-09-27",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
         "target": "エプソンのプリンタを使っている人",
@@ -460,7 +456,7 @@
       "postedAt": "2026-09-25",
       "bumpedAt": "2026-09-25T21:37:44",
       "lastSeen": "2026-09-27",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
         "target": "プリンターのインク代を抑えたい人",
@@ -607,7 +603,7 @@
       "postedAt": "2026-09-25",
       "bumpedAt": "2026-09-25T16:35:53",
       "lastSeen": "2026-09-27",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
         "target": "エプソンのプリンタを使っている人",
@@ -690,7 +686,7 @@
       "postedAt": "2026-09-25",
       "bumpedAt": "2026-09-25T16:35:53",
       "lastSeen": "2026-09-27",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
         "target": "印刷の量が多い人",
@@ -742,7 +738,7 @@
       "postedAt": "2026-09-25",
       "bumpedAt": "2026-09-25T16:35:53",
       "lastSeen": "2026-09-27",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
         "target": "印刷の量が多い人",
@@ -794,7 +790,7 @@
       "postedAt": "2026-09-25",
       "bumpedAt": "2026-09-25T16:35:53",
       "lastSeen": "2026-09-27",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
         "target": "キヤノンのプリンタを使っている人",
@@ -896,7 +892,7 @@
       "postedAt": "2026-09-25",
       "bumpedAt": "2026-09-25T16:35:53",
       "lastSeen": "2026-09-27",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
         "target": "印刷の量が多い人",
@@ -948,7 +944,7 @@
       "postedAt": "2026-09-25",
       "bumpedAt": "2026-09-25T21:37:44",
       "lastSeen": "2026-09-27",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
         "target": "ブラザーのプリンタを使っている人",
@@ -1000,7 +996,7 @@
       "postedAt": "2026-09-25",
       "bumpedAt": "2026-09-25T21:37:44",
       "lastSeen": "2026-09-27",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
         "target": "印刷の量が多い人",
@@ -1101,7 +1097,7 @@
       "postedAt": "2026-09-25",
       "bumpedAt": "2026-09-25T16:33:42",
       "lastSeen": "2026-09-27",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
         "target": "夏〜秋にかけて蒸れにくいインナーを探している人",
@@ -1244,7 +1240,7 @@
       "postedAt": "2026-09-24",
       "bumpedAt": "2026-09-24T21:32:26",
       "lastSeen": "2026-09-27",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
         "target": "かかとの角質が気になる人",
@@ -1466,7 +1462,7 @@
       "postedAt": "2026-09-24",
       "bumpedAt": "2026-09-24T16:35:34",
       "lastSeen": "2026-09-27",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "marketing": {
         "hook_type": "relatable",
         "target": "冬でも通勤にはける、あたたかいパンツを探している人",
@@ -1564,7 +1560,7 @@
       "postedAt": "2026-09-24",
       "bumpedAt": "2026-09-24T16:35:34",
       "lastSeen": "2026-09-27",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
         "target": "式や式典で一日履く靴を用意したい人",
@@ -1661,7 +1657,7 @@
       "postedAt": "2026-09-22",
       "bumpedAt": "2026-09-22T16:32:52",
       "lastSeen": "2026-09-23",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
         "target": "コンロ周りの掃除をラクにしたい人",
@@ -1883,7 +1879,7 @@
       "postedAt": "2026-09-21",
       "bumpedAt": "2026-09-21T07:34:32",
       "lastSeen": "2026-09-27",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
         "target": "通勤にも普段にも履けるパンツを探している人",
@@ -2150,7 +2146,7 @@
       "postedAt": "2026-09-19",
       "bumpedAt": "2026-09-19T11:30:04",
       "lastSeen": "2026-09-24",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
         "target": "白米に混ぜるものを探している人",
@@ -2466,7 +2462,7 @@
       "postedAt": "2026-09-18",
       "bumpedAt": "2026-09-18T11:34:33",
       "lastSeen": "2026-09-27",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
         "target": "一年中着られる無地のTシャツを探している人",
@@ -2601,7 +2597,7 @@
       "postedAt": "2026-09-17",
       "bumpedAt": "2026-09-17T11:37:10",
       "lastSeen": "2026-09-17",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "marketing": {
         "hook_type": "problem",
         "target": "純正にこだわりたい人",
@@ -3517,7 +3513,7 @@
       "postedAt": "2026-09-15",
       "bumpedAt": "2026-09-15T16:35:20",
       "lastSeen": "2026-09-27",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
         "target": "家でも外でも履けるボトムスがほしい人",
@@ -3564,7 +3560,7 @@
       "postedAt": "2026-09-15",
       "bumpedAt": "2026-09-15T16:35:20",
       "lastSeen": "2026-09-27",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "marketing": {
         "hook_type": "compare",
         "target": "色違いで揃えたい人",
@@ -3610,7 +3606,7 @@
       "postedAt": "2026-09-15",
       "bumpedAt": "2026-09-15T16:35:20",
       "lastSeen": "2026-09-27",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
         "target": "一枚で決まる服がほしい人",
@@ -3658,7 +3654,7 @@
       "postedAt": "2026-09-15",
       "bumpedAt": "2026-09-15T16:35:20",
       "lastSeen": "2026-09-27",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
         "target": "上下を考えるのが面倒な人",
@@ -3705,7 +3701,7 @@
       "postedAt": "2026-09-15",
       "bumpedAt": "2026-09-15T16:35:20",
       "lastSeen": "2026-09-27",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "marketing": {
         "hook_type": "relatable",
         "target": "一枚で決まる服がほしい人",
@@ -3845,7 +3841,7 @@
       "postedAt": "2026-09-14",
       "bumpedAt": "2026-09-14T11:30:52",
       "lastSeen": "2026-09-17",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
         "target": "パスタをよく作る人",
@@ -4413,13 +4409,8 @@
       "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/chakasho-dina/cabinet/13405148/13405157/imgrc0137197300.jpg?_ex=600x600",
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00u5757.jeifoa3a.g00u5757.jeifp05a/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fchakasho-dina%2F535dahuoji%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fchakasho-dina%2Fi%2F10000783%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "chakashodina",
-<<<<<<< HEAD
       "reviewAverage": 4.55,
       "reviewCount": 105,
-=======
-      "reviewAverage": 4.59,
-      "reviewCount": 104,
->>>>>>> origin/main
       "itemCode": "chakasho-dina:10000783",
       "genreId": "101909",
       "startTime": "2026-09-04 20:00",
@@ -7712,11 +7703,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00sows7.jeifoe24.g00sows7.jeifp9d6/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ff406091-aka%2F3x2%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Ff406091-aka%2Fi%2F10000539%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "福岡県赤村",
       "reviewAverage": 4.47,
-<<<<<<< HEAD
       "reviewCount": 4611,
-=======
-      "reviewCount": 4600,
->>>>>>> origin/main
       "itemCode": "f406091-aka:10000539",
       "genreId": "201184",
       "startTime": "",
@@ -9843,11 +9830,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00uaej7.jeifo180.g00uaej7.jeifp8aa/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fexception5251%2Fex-x01028%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fexception5251%2Fi%2F10000794%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "EXCEPTION本店",
       "reviewAverage": 4.64,
-<<<<<<< HEAD
       "reviewCount": 920,
-=======
-      "reviewCount": 904,
->>>>>>> origin/main
       "itemCode": "exception5251:10000794",
       "genreId": "201184",
       "startTime": "",
