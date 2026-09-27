@@ -454,23 +454,10 @@
     "tip:33",
     "tip:14",
     "tip:08",
-    "tip:39"
+    "tip:39",
+    "tip:23"
   ],
   "log": [
-    {
-      "key": "tip:03",
-      "id": "18013433849926874",
-      "at": "2026-09-02 14:20",
-      "kind": "tip",
-      "slot": 14,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none"
-    },
     {
       "key": "product:r68630cc41",
       "id": "17897262447600070",
@@ -6041,6 +6028,20 @@
       "at": "2026-09-27 21:00",
       "kind": "tip",
       "slot": 21,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
+    },
+    {
+      "key": "tip:23",
+      "id": "18132223906708407",
+      "at": "2026-09-27 22:00",
+      "kind": "tip",
+      "slot": 22,
       "catchup": false,
       "cap": null,
       "hook_type": null,
