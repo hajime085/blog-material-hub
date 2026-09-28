@@ -209,14 +209,21 @@ def link_clicks(since, until=None):
     return out
 
 
-def ab_status(e, log, clicks):
+def ab_status(e, log, clicks=None, rows=None):
     """ab の試しの、いまの数字。側ごとに {posts, clicks, rate}。
 
-    同じ商品はいつも同じ側に出る（threads.link_arm）。
-    その側のリンクに付いたクリックだけを、その側に数える。
+    ab.metric で何を数えるかを決める（書いていなければ clicks）。
+      clicks   リンクのクリック。同じ商品はいつも同じ側に出る（threads.link_arm）
+               ので、その側のリンクに付いたクリックだけを、その側に数える
+      replies / likes / views / reactions（いいね＋返信）  投稿ごとの成績を足す
+    キーの名前は、どの指標でも "clicks" に入れる（台帳の形をそろえるため）。
     """
     ab = e["ab"]
     field = ab["field"]
+    metric = ab.get("metric", "clicks")
+    perf = {}
+    for x, g in (rows or []):
+        perf[x.get("id")] = g
     arms = {a: {"posts": 0, "ids": set(), "clicks": 0} for a in ab["arms"]}
     for x in log:
         if x.get("kind") != "product" or (x.get("at") or "") < e["started"]:
@@ -226,8 +233,15 @@ def ab_status(e, log, clicks):
             continue
         arms[a]["posts"] += 1
         arms[a]["ids"].add((x.get("key") or "").split(":", 1)[-1])
+        if metric != "clicks":
+            g = perf.get(x.get("id")) or {}
+            if metric == "reactions":
+                arms[a]["clicks"] += (g.get("likes", 0) or 0) + (g.get("replies", 0) or 0)
+            else:
+                arms[a]["clicks"] += g.get(metric, 0) or 0
     for a, v in arms.items():
-        v["clicks"] = sum(clicks.get((i, a), 0) for i in v["ids"])
+        if metric == "clicks":
+            v["clicks"] = sum((clicks or {}).get((i, a), 0) for i in v["ids"])
         v["rate"] = round(v["clicks"] / v["posts"], 3) if v["posts"] else 0
         del v["ids"]
     return arms
@@ -409,7 +423,10 @@ def main():
             continue
         if e.get("measure") == "ab_clicks":
             try:
-                arms = ab_status(e, log, link_clicks(e["started"]))
+                if e["ab"].get("metric", "clicks") == "clicks":
+                    arms = ab_status(e, log, clicks=link_clicks(e["started"]))
+                else:
+                    arms = ab_status(e, log, rows=rows)
             except Exception as ex:                        # noqa: BLE001
                 # 取れなかった日に、取れた分だけで決めない。
                 print("\n⚠ 試し %s のクリック数を取れませんでした: %s"

@@ -107,7 +107,10 @@ def save(name, obj):
 
 
 def text_of(m):
-    return "\n".join([str(m.get("hook") or ""), str(m.get("body") or "")])
+    # 締めの問い（cta_text）と、試しで差し替える問い（ask）も外に出る文なので調べる。
+    # 2026-09-28 まで cta_text は検査の外にあった。
+    return "\n".join([str(m.get("hook") or ""), str(m.get("body") or ""),
+                      str(m.get("cta_text") or ""), str(m.get("ask") or "")])
 
 
 def validate(m, p):
@@ -130,6 +133,11 @@ def validate(m, p):
         issues.append("締めの型が不明: %s" % cta)
     if cta == "question" and not (m.get("cta_text") or "").strip():
         issues.append("cta が question なのに cta_text が空")
+    # ask: 読む人に聞く締め（exp-011）。半分の投稿でだけ、締めをこれに差し替える。
+    # 答えたくなる問いにする。相手を名指しし（「○○の人」）、疑問で終える。
+    ask = (m.get("ask") or "").strip()
+    if ask and not ask.endswith(("？", "?")):
+        issues.append("ask が問いで終わっていない: %s" % ask)
 
     t = text_of(m)
     cat = p.get("category", "")

@@ -258,15 +258,41 @@ def link_policy():
     同じ期間の中で半分ずつ出して、クリック数で決める（exp-010）。
     決着したら、コードを触らずに勝ったほうへ揃う。
     """
+    return ab_policy("link_arm", "direct")
+
+
+def ab_policy(field, default):
+    """learnings.json の、field を振り分ける試しの状態。
+
+    走っていれば "split"、決着していれば勝った側、無ければ default。
+    """
     led = load("learnings.json", {}) or {}
     for e in led.get("experiments", []):
-        if (e.get("ab") or {}).get("field") != "link_arm":
+        ab = e.get("ab") or {}
+        if ab.get("field") != field:
             continue
         if e.get("status") == "running":
             return "split"
-        if e.get("winner") in ("direct", "site"):
+        if e.get("winner") in (ab.get("arms") or []):
             return e["winner"]
-    return "direct"
+    return default
+
+
+def cta_arm(p, policy=None):
+    """締めを、読む人への問い（ask）にするか、いつもの締め（base）にするか。
+
+    2026-09-28: 界隈で反応の多い投稿は、締めが読む人への問いだった
+    （research.json pat-02）。うちは130本が「保存しておくと〜」で、問いは0本。
+    問い（mk2.ask）を持つ商品だけを、商品IDで半分ずつ振り分けて比べる（exp-011）。
+    リンクの振り分けとは別の種で混ぜるので、両方の試しが重ならない。
+    """
+    if not ((p.get("mk2") or {}).get("ask") or "").strip():
+        return None
+    policy = policy or ab_policy("cta_arm", "base")
+    if policy != "split":
+        return policy
+    h = int(hashlib.md5(("cta:" + p["id"]).encode("utf-8")).hexdigest(), 16)
+    return "ask" if h % 2 == 0 else "base"
 
 
 def link_arm(p, policy=None):
@@ -340,7 +366,9 @@ def compose_product(p, site, pr, reply_link=False, ev=None, seq=0):
         # 締めは商品に合わせて選んだものを使う。
         # 決めていなければ、これまでどおり順に回す。
         cta = mk.get("cta")
-        if cta == "question":
+        if cta_arm(p) == "ask":
+            tailtext = "\n\n" + mk["ask"].strip()
+        elif cta == "question":
             tailtext = "\n\n" + (mk.get("cta_text") or "").strip()
         elif cta in CTA_TEXT:
             t2 = CTA_TEXT[cta]
@@ -1288,6 +1316,9 @@ def run_once(cfg, posted, slot_hour=None, dry=False, late=False):
             (link_arm(x, _pol) if (x.get("url") or "").startswith(
                 "https://hb.afl.rakuten.co.jp/") else "site")
             for x in _feed}
+    # 締めを問いにしたか（ask）、いつもの締めか（base）。問いを持たない商品は None。
+    _cpol = ab_policy("cta_arm", "base")
+    cta_arms = {("product:" + x["id"]): cta_arm(x, _cpol) for x in _feed}
     # どちらの組み立てで出したか。あとで旧と新を比べるため。
     # 商品理解を持っているものだけが新しいほうを通る。
     vers = {("product:" + x["id"]):
@@ -1350,6 +1381,7 @@ def run_once(cfg, posted, slot_hour=None, dry=False, late=False):
             "link": ("none" if kind in ("tip", "schedule")
                      else ("reply" if link else "body")),
             "link_arm": arms.get(key) if kind == "product" else None,
+            "cta_arm": cta_arms.get(key) if kind == "product" else None,
         })
         ok += 1
         print("  ✅ %s → %s" % (key, pid))

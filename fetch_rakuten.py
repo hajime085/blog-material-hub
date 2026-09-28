@@ -29,6 +29,7 @@ products.json の listPrice を手で書いた場合はそちらが優先され�
 翌日以降に通常運転で回すと、値下がりを検知したものから %OFF が付いていきます。
 """
 
+import collections
 import hashlib
 import http.client
 import json
@@ -1618,6 +1619,9 @@ def main():
     sale_keywords = cfg["rakuten"].get("saleKeywords") or []
 
     kept, added, dropped = 0, 0, 0
+    # 見送りの理由ごとの数。2026-09-28: 1回で7,000件以上を見送り、新規が1件の日が
+    # 続いたが、どこで落ちているかが出力に無く、原因を言えなかった。
+    why_drop = collections.Counter()
     price_drops, fresh = [], []
     pinned_stale = []
     not_on_sale = []
@@ -1691,6 +1695,7 @@ def main():
                 not_on_sale.append((clean_title(raw["rawTitle"]),
                                     "条件つきの値段（%s円）を掲げている" % "{:,}".format(cond)))
                 excluded.add(pid)
+                why_drop["条件つきの値段"] += 1
                 continue
 
             # いま買えるか。既存の商品にも適用する。
@@ -1718,15 +1723,18 @@ def main():
                 # 30日の保持ルールで復活させてはいけない。
                 excluded.add(pid)
                 dropped += 1
+                why_drop["いま買えない"] += 1
                 continue
 
             # 実績のない商品は載せない。ランキングAPIが無い以上、
             # レビュー数と評価が「多くの人が実際に買った」ことの唯一の手がかりになる。
             if (raw.get("reviewCount") or 0) < min_reviews:
                 dropped += 1
+                why_drop["レビューが少ない"] += 1
                 continue
             if float(raw.get("reviewAverage") or 0) < min_rating:
                 dropped += 1
+                why_drop["評価が低い"] += 1
                 continue
             records = update_history(history, pid, raw["price"], today)
 
@@ -1739,6 +1747,7 @@ def main():
                                    min(v for _, v in records), raw["price"]))
                 excluded.add(pid)
                 dropped += 1
+                why_drop["値段が戻った"] += 1
                 continue
 
             prev = existing.get(pid, {})
@@ -1794,6 +1803,7 @@ def main():
                 if not prev and added >= max_new:
                     # 1回で載せる新規の上限。一気に増やさず、じわじわ増やす。
                     dropped += 1
+                    why_drop["新規の上限"] += 1
                     continue
                 # 記録は上限を通ったあとで。弾いたものまで数えると、
                 # 実際に載った件数と履歴の記述が食い違う。
@@ -1836,6 +1846,8 @@ def main():
                 continue
             elif not prev:
                 dropped += 1
+                why_drop["値引きの裏付けが無い" if not item.get("listPrice")
+                         else "値引きが%d%%未満" % min_off] += 1
                 continue          # 通常モードでは、値下がりしていない新規は載せない
 
             # 前に載せていて外した商品が、また拾えることがある。
@@ -2077,6 +2089,8 @@ def main():
     no_caption = sum(1 for p in products if not p.get("caption"))
     print("\n✅ products.json を更新しました")
     print("   新規 %d件 / 更新 %d件 / 見送り %d件 → 合計 %d件" % (added, kept, dropped, len(products)))
+    if why_drop:
+        print("   見送りの内訳: " + " / ".join("%s %d" % kv for kv in why_drop.most_common()))
     if pre_added:
         print("\n   開始前の特価を %d件 拾いました（巡回の途中で見つけたもの）:"
               % len(pre_added))

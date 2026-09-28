@@ -53,6 +53,17 @@ def gaps():
     def missing(p):
         return not p.get("marketing") and not (p.get("description") or "").strip()
 
+    # 投稿の窓（載せてから freshDays 日以内）に入っているのに、商品理解が
+    # ready でない商品。threads.py はこれを出さない。
+    # 2026-09-28: 説明文があるだけで「書くもの 0件」と出ていたが、
+    # 実際には作りかけで止まった商品が投稿から漏れていた。
+    days = ((load("config.json", {}) or {}).get("threads") or {}).get("freshDays", 3)
+    window = (datetime.now() - timedelta(days=days)).strftime("%Y-%m-%d")
+
+    def not_ready(p):
+        return (p.get("pitch_status") != "ready"
+                and (p.get("bumpedAt") or p.get("postedAt") or "")[:10] >= window)
+
     out = []
     for p in ps:
         if p.get("hidden"):
@@ -66,6 +77,8 @@ def gaps():
         if missing(p) and (live or (st > now and st <= soon)
                            or p.get("itemCode") in feat):
             need.append("商品理解")
+        elif not_ready(p) and live:
+            need.append("商品理解（投稿用・pitch.py --pending）")
         if need:
             out.append((p, need))
     return out

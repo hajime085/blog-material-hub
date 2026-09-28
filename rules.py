@@ -1089,6 +1089,29 @@ def rule_keep_learning_from_others(ctx):
     return out
 
 
+def rule_pitches_carry_an_ask(ctx):
+    """締めを問いにする試し（cta_arm）が走っている間は、商品理解に問い（ask）を書く。
+
+    2026-09-28: exp-011 は ask を持つ商品だけを振り分ける。
+    書き忘れると、試しに入る商品が増えず、いつまでも決着しない。
+    exp-003 は測らないまま放置されて決着しなかった。同じことを起こさない。
+    """
+    led = load("learnings.json", None) or {}
+    running = any((e.get("ab") or {}).get("field") == "cta_arm"
+                  and e.get("status") == "running"
+                  for e in led.get("experiments") or [])
+    if not running:
+        return []
+    miss = [p for p in ctx["products"]
+            if p.get("pitch_status") == "ready"
+            and (p.get("postedAt") or "") >= "2026-09-28"
+            and not ((p.get("marketing") or {}).get("ask") or "").strip()]
+    if miss:
+        return ["商品理解に問い（ask）が無い商品が %d件あります（%s など）。"
+                "exp-011 に入りません" % (len(miss), miss[0].get("title", "")[:20])]
+    return []
+
+
 def rule_daily_summary_keeps_the_alarms(ctx):
     """日次の要点から、警報を落とさない。
 
@@ -1167,6 +1190,7 @@ RULES = [
     ("セールの速報は events.json の期間に従う", rule_sale_mode_follows_events),
     ("リンクの出し方は試しで決める", rule_link_follows_experiment),
     ("周りから学ぶのを止めない", rule_keep_learning_from_others),
+    ("商品理解に問いを書く", rule_pitches_carry_an_ask),
     ("日次の要点から警報を落とさない", rule_daily_summary_keeps_the_alarms),
     ("学びを止めない", rule_keep_learning),
     ("試しの形が learn.py と合っている", rule_experiment_schema_is_sound),
@@ -1197,6 +1221,10 @@ MUTATIONS = {
     "同じ店・同じ値段を3件作る":
         lambda ps: ps + [dict(ps[0], id="probe%d" % i, shop="probe店",
                               price=12345, hidden=False) for i in range(3)],
+    "今日書いた商品理解から問いを消す":
+        lambda ps: ps + [dict(ps[0], id="probe-ask", postedAt="2099-01-01",
+                              pitch_status="ready",
+                              marketing=dict(ps[0].get("marketing") or {}, ask=""))],
 }
 
 
@@ -1254,6 +1282,8 @@ PROBES = {
     "リンクの出し方は試しで決める":
         [("threads_py", '"link_arm":', "remove"),
          ("threads_py", "def link_policy", "remove")],
+    "商品理解に問いを書く":
+        [("products", "今日書いた商品理解から問いを消す", "mutate")],
     "周りから学ぶのを止めない":
         [("research", "", "empty"),
          ("daily_routine", "research.json", "remove")],
