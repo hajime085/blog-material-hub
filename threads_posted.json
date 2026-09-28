@@ -470,23 +470,10 @@
     "product:r6a303066b",
     "product:r99780be55",
     "product:ra5ca72a05",
-    "product:rcea54ddf3"
+    "product:rcea54ddf3",
+    "product:r19cb78652"
   ],
   "log": [
-    {
-      "key": "product:rdac42fc8f",
-      "id": "18077575214354916",
-      "at": "2026-09-04 00:01",
-      "kind": "product",
-      "slot": 0,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "problem",
-      "cta_type": "experience",
-      "category": "kitchen",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "schedule:2026-W35-5",
       "id": "18460939027185613",
@@ -6084,6 +6071,22 @@
       "link": "reply",
       "link_arm": "site",
       "cta_arm": "ask"
+    },
+    {
+      "key": "product:r19cb78652",
+      "id": "18109150847604187",
+      "at": "2026-09-29 00:01",
+      "kind": "product",
+      "slot": 0,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "problem",
+      "cta_type": "empathy",
+      "category": "kaden",
+      "logic_version": "marketing_v2",
+      "link": "reply",
+      "link_arm": "direct",
+      "cta_arm": "base"
     }
   ]
 }
