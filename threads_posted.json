@@ -464,23 +464,10 @@
     "tip:27",
     "product:rc3a278550",
     "tip:16",
-    "tip:30"
+    "tip:30",
+    "product:raed0bb059"
   ],
   "log": [
-    {
-      "key": "tip:16",
-      "id": "17909485560286889",
-      "at": "2026-09-03 14:20",
-      "kind": "tip",
-      "slot": 14,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none"
-    },
     {
       "key": "tip:30",
       "id": "18165034039463938",
@@ -6066,6 +6053,22 @@
       "link": "none",
       "link_arm": null,
       "cta_arm": null
+    },
+    {
+      "key": "product:raed0bb059",
+      "id": "18120447346734366",
+      "at": "2026-09-28 18:00",
+      "kind": "product",
+      "slot": 18,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "save",
+      "category": "pc",
+      "logic_version": "marketing_v2",
+      "link": "reply",
+      "link_arm": "direct",
+      "cta_arm": "ask"
     }
   ]
 }
