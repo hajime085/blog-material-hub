@@ -510,6 +510,15 @@ def rule_experiment_schema_is_sound(ctx):
             out.append("試し %s に started がありません（'start' などの別名で"
                        "書いていないか確認してください）" % eid)
         how = e.get("measure")
+        # 2026-09-28: 半分ずつ出して比べる試し。決め方を始める前に書いておく。
+        # 書いていないと、結果を見てから線を引くことになる。
+        if how == "ab_clicks":
+            ab = e.get("ab") or {}
+            need = ("field", "arms", "min_posts", "min_clicks", "gap", "tie")
+            miss = [k for k in need if k not in ab]
+            if miss or len(ab.get("arms") or []) != 2 or ab.get("tie") not in (ab.get("arms") or []):
+                out.append("試し %s（ab_clicks）の決め方が書けていません: %s"
+                           % (eid, "、".join(miss) or "arms は2つ、tie はそのどちらか"))
         if how in numeric_measures and not isinstance(e.get("target"), (int, float)):
             out.append("試し %s の target が数値ではありません（%r）。"
                        "文章にするなら target_why に分けてください"
@@ -1017,12 +1026,15 @@ def rule_sale_mode_follows_events(ctx):
     return out
 
 
-def rule_product_posts_link_rakuten_directly(ctx):
-    """商品の投稿は、セールでなくても楽天へ直接つなぐ。
+def rule_link_follows_experiment(ctx):
+    """返信のリンクを楽天へ直接にするかは、試しの結果で決める。
 
-    2026-09-28: link_for() がセール中だけ楽天へ直接にしていたため、
-    マラソンが終わった 9/24 から商品の投稿がサイト経由に戻っていた。
-    利用者から「直接商品リンクを貼る形にすると言っていたのに、なっていない」と指摘。
+    2026-09-28: link_for() がセール中だけ楽天へ直接にしていた。
+    どちらが良いのかを一度も比べず、効いたのがリンクかセールかも言えなかった。
+    利用者から「検証して、良いものを残し、ダメなものをやめる形にしたい」。
+    いまは learnings.json の試し（ab の field が link_arm）に従い、
+    走っている間は半分ずつ、決着したら勝ったほうに揃える。
+    セールの有無で切り替える形に戻さない。どちらで出したかを記録から落とさない。
     """
     tp = ctx.get("threads_py") or ""
     if not tp:
@@ -1030,10 +1042,15 @@ def rule_product_posts_link_rakuten_directly(ctx):
     import re as _re
     m = _re.search(r"^def link_for\(.*?(?=^def )", tp, _re.M | _re.S)
     body = m.group(0) if m else ""
-    if not body or "hb.afl.rakuten.co.jp" not in body or "sale_now()" in body:
-        return ["threads.py の link_for() が、商品の投稿を楽天へ直接つないでいません。"
-                "セールの時だけにしないでください（2026-09-28）"]
-    return []
+    out = []
+    if not body or "link_arm(" not in body or "sale_now()" in body:
+        out.append("threads.py の link_for() が、試し（link_arm）で決めていません。"
+                   "セールの有無で切り替えないでください（2026-09-28）")
+    if '"link_arm":' not in tp:
+        out.append("threads.py が、どちらのリンクで出したか（link_arm）を記録していません")
+    if "def link_policy" not in tp or "learnings.json" not in tp:
+        out.append("threads.py の link_policy() が learnings.json の試しを見ていません")
+    return out
 
 
 def rule_daily_summary_keeps_the_alarms(ctx):
@@ -1112,7 +1129,7 @@ RULES = [
     ("一時的な不調は両方で待つ", rule_upstream_hiccups_are_retried_everywhere),
     ("pull --rebase のやり直しは空回りしない", rule_rebase_retry_clears_conflict),
     ("セールの速報は events.json の期間に従う", rule_sale_mode_follows_events),
-    ("商品の投稿は楽天へ直接つなぐ", rule_product_posts_link_rakuten_directly),
+    ("リンクの出し方は試しで決める", rule_link_follows_experiment),
     ("日次の要点から警報を落とさない", rule_daily_summary_keeps_the_alarms),
     ("学びを止めない", rule_keep_learning),
     ("試しの形が learn.py と合っている", rule_experiment_schema_is_sound),
@@ -1197,8 +1214,9 @@ PROBES = {
         [("watch_yml", "git rebase --abort", "remove")],
     "セールの速報は events.json の期間に従う":
         [("threads_py", "def sale_now", "remove")],
-    "商品の投稿は楽天へ直接つなぐ":
-        [("threads_py", 'url.startswith("https://hb.afl.rakuten.co.jp/")', "remove")],
+    "リンクの出し方は試しで決める":
+        [("threads_py", '"link_arm":', "remove"),
+         ("threads_py", "def link_policy", "remove")],
 }
 
 

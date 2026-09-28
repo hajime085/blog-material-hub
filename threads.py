@@ -23,6 +23,7 @@ XのAPIは2026年2月から従量課金だけになり、URLを含む投稿は1�
     python3 threads.py --limit       いまの残り投稿数を見る
 """
 
+import hashlib
 import json
 import os
 import random
@@ -246,17 +247,52 @@ def sale_now(now=None):
     return active_event(now) is not None
 
 
-def link_for(p, site):
-    """返信に貼るリンク。いつも楽天へ直接。
+def link_policy():
+    """返信のリンクを、いまどう決めるか。learnings.json の試しに従う。
 
-    2026-09-28: セール中だけ楽天へ直接、それ以外はサイトの商品ページへ、
-    という作りだった。9/24 にマラソンが終わってからサイト経由に戻り、
-    利用者から「直接商品リンクを貼る形にすると言っていたのに、なっていない」と指摘。
-    投稿→サイト→楽天の段を1つ減らすのを、セールに限らず常設にする。
-    楽天の転送URLが無い商品だけ、サイトの商品ページへ送る。
+      "split"  試しが走っている。商品ごとに半分ずつ振り分ける
+      "direct" / "site"  決着した。勝ったほうに揃える
+
+    2026-09-28: 直接リンクはセールの時だけ入れていたので、
+    効いたのかセールが効いたのか分からなかった。
+    同じ期間の中で半分ずつ出して、クリック数で決める（exp-010）。
+    決着したら、コードを触らずに勝ったほうへ揃う。
+    """
+    led = load("learnings.json", {}) or {}
+    for e in led.get("experiments", []):
+        if (e.get("ab") or {}).get("field") != "link_arm":
+            continue
+        if e.get("status") == "running":
+            return "split"
+        if e.get("winner") in ("direct", "site"):
+            return e["winner"]
+    return "direct"
+
+
+def link_arm(p, policy=None):
+    """この商品を、楽天へ直接つなぐか（direct）、サイトへ送るか（site）。
+
+    振り分けは商品IDで決める。同じ商品はいつも同じ側に出るので、
+    リンクごとのクリック数を、そのまま側ごとに足せる。
+    投稿の順で交互にすると、同じ商品が両側に出て数が混ざる。
+    """
+    policy = policy or link_policy()
+    if policy != "split":
+        return policy
+    h = int(hashlib.md5(p["id"].encode("utf-8")).hexdigest(), 16)
+    return "direct" if h % 2 == 0 else "site"
+
+
+def link_for(p, site, policy=None):
+    """返信に貼るリンク。楽天へ直接か、サイトの商品ページか。
+
+    2026-09-28: セール中だけ楽天へ直接、それ以外はサイトへ、という作りで、
+    どちらが良いのかを一度も比べていなかった。
+    いまは link_arm() が決める。楽天の転送URLが無い商品はサイトへ送る。
     """
     url = (p.get("url") or "").strip()
-    if url.startswith("https://hb.afl.rakuten.co.jp/"):
+    if (link_arm(p, policy) == "direct"
+            and url.startswith("https://hb.afl.rakuten.co.jp/")):
         # 広告であることは親の投稿の【PR】でも示しているが、
         # リンクだけを見た人にも分かるように、返信にも書く。
         return "※PR\n" + url
@@ -1246,6 +1282,12 @@ def run_once(cfg, posted, slot_hour=None, dry=False, late=False):
     ctas = {("product:" + x["id"]): (x.get("mk2") or {}).get("cta")
             for x in _feed}
     cats = {("product:" + x["id"]): x.get("c") for x in _feed}
+    # 返信のリンクを楽天へ直接にしたか、サイトへ送ったか。クリック数を側ごとに足すため。
+    _pol = link_policy()
+    arms = {("product:" + x["id"]):
+            (link_arm(x, _pol) if (x.get("url") or "").startswith(
+                "https://hb.afl.rakuten.co.jp/") else "site")
+            for x in _feed}
     # どちらの組み立てで出したか。あとで旧と新を比べるため。
     # 商品理解を持っているものだけが新しいほうを通る。
     vers = {("product:" + x["id"]):
@@ -1307,6 +1349,7 @@ def run_once(cfg, posted, slot_hour=None, dry=False, late=False):
             # 記録が無いと、伸びた理由が本文か返信かを言えなくなる。
             "link": ("none" if kind in ("tip", "schedule")
                      else ("reply" if link else "body")),
+            "link_arm": arms.get(key) if kind == "product" else None,
         })
         ok += 1
         print("  ✅ %s → %s" % (key, pid))

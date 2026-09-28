@@ -158,6 +158,110 @@ def restatements(rows):
     return out
 
 
+def link_clicks(since, until=None):
+    """投稿に貼ったリンクが押された回数を、商品ごと・側ごとに返す。
+
+    {(商品ID, "direct" | "site"): 回数}
+
+    2026-09-28 まで、楽天へのクリックは「管理画面にしかない」として
+    手で測る扱いにしていた。そのせいで exp-003・exp-004 は測られないまま
+    決着せず、直接リンクが効いたのかどうかを言えなかった。
+    Threads の API はリンクごとのクリック数を返す。これを使う。
+    """
+    import re
+    import time
+    sys.path.insert(0, ROOT)
+    import threads as T
+
+    uid, token = T.credentials()
+    t0 = int(datetime.strptime(since[:10], "%Y-%m-%d").timestamp())
+    t1 = int(time.time()) if until is None else \
+        int(datetime.strptime(until[:10], "%Y-%m-%d").timestamp())
+    d = T.api("GET", "%s/threads_insights" % uid,
+              {"metric": "clicks", "since": t0, "until": t1}, token)
+    vals = []
+    for m in d.get("data", []):
+        if m.get("name") == "clicks":
+            vals = m.get("link_total_values") or []
+
+    # 楽天の転送URLは商品ごとに /hgc/<符号>/ が違う。符号から商品IDを引く。
+    def hgc(u):
+        x = re.search(r"/hgc/([^/?]+)", u or "")
+        return x.group(1) if x else None
+
+    by_code = {}
+    for p in (load("products.json", {}) or {}).get("products", []):
+        c = hgc(p.get("affiliateUrl"))
+        if c:
+            by_code[c] = p["id"]
+
+    out = collections.Counter()
+    for v in vals:
+        u = v.get("link_url") or ""
+        n = v.get("value") or 0
+        s = re.search(r"sozaino\.com/p/([^/?#]+)", u)
+        if s:
+            out[(s.group(1), "site")] += n
+            continue
+        c = hgc(u)
+        if c and c in by_code:
+            out[(by_code[c], "direct")] += n
+    return out
+
+
+def ab_status(e, log, clicks):
+    """ab の試しの、いまの数字。側ごとに {posts, clicks, rate}。
+
+    同じ商品はいつも同じ側に出る（threads.link_arm）。
+    その側のリンクに付いたクリックだけを、その側に数える。
+    """
+    ab = e["ab"]
+    field = ab["field"]
+    arms = {a: {"posts": 0, "ids": set(), "clicks": 0} for a in ab["arms"]}
+    for x in log:
+        if x.get("kind") != "product" or (x.get("at") or "") < e["started"]:
+            continue
+        a = x.get(field)
+        if a not in arms:
+            continue
+        arms[a]["posts"] += 1
+        arms[a]["ids"].add((x.get("key") or "").split(":", 1)[-1])
+    for a, v in arms.items():
+        v["clicks"] = sum(clicks.get((i, a), 0) for i in v["ids"])
+        v["rate"] = round(v["clicks"] / v["posts"], 3) if v["posts"] else 0
+        del v["ids"]
+    return arms
+
+
+def ab_decide(e, arms, today):
+    """始める前に書いておいた線で決める。後から線を動かさない。
+
+    ab に書くもの:
+      min_posts  側ごとに、これだけ出すまで決めない
+      min_clicks 両側の合計が、これに届くまで決めない
+      gap        勝ちと言うための倍率
+      tie        差がつかなかったときに選ぶ側（理由も書いておく）
+      extend_days 足りなかったとき、1度だけ延ばす日数
+    戻り値: ("keep", 勝った側, 理由) / ("extend", None, 理由)
+    """
+    ab = e["ab"]
+    a, b = ab["arms"]
+    ra, rb = arms[a], arms[b]
+    total = ra["clicks"] + rb["clicks"]
+    short = (min(ra["posts"], rb["posts"]) < ab.get("min_posts", 15)
+             or total < ab.get("min_clicks", 10))
+    if short and not e.get("extended"):
+        return "extend", None, ("数が足りない（投稿 %d/%d、クリック %d）"
+                                % (ra["posts"], rb["posts"], total))
+    hi, lo = (a, b) if ra["rate"] >= rb["rate"] else (b, a)
+    if arms[hi]["rate"] >= max(arms[lo]["rate"], 0.001) * ab.get("gap", 1.3) \
+            and not short:
+        return "keep", hi, ("%s が %s の %.1f倍"
+                            % (hi, lo, arms[hi]["rate"] / max(arms[lo]["rate"], 0.001)))
+    return "keep", ab["tie"], ("差がつかなかった。決めておいたとおり %s（%s）"
+                              % (ab["tie"], ab.get("tie_why", "")))
+
+
 def guess_measure(metric):
     """指標の書き方から、何で測るかを見当づける。
 
@@ -169,6 +273,9 @@ def guess_measure(metric):
     # 2026-09-10: exp-004 は「表示合計とクリック数」の両方が条件なのに、
     # 表示だけで決まるところだった。半分で決めるのは、
     # 測っていないほうを「良かったこと」にするのと同じ。
+    # 2026-09-28: Threads の API（threads_insights metric=clicks）から
+    # リンクごとのクリック数が取れると分かった。ただし「どのリンクを比べるか」は
+    # 試しごとに違うので、見当では決めない。ab を書いた試しだけ ab_clicks で測る。
     if "クリック" in m or "成果" in m or "売上" in m:
         return "manual"
     if "フォロワー" in m:
@@ -219,6 +326,14 @@ def report(rows, cut):
     f = followers()
     if f is not None:
         print("フォロワー %d人" % f)
+    # クリックは売上にいちばん近い数字。表示やいいねより先に見る。
+    try:
+        c = link_clicks((datetime.now() - timedelta(days=7)).strftime("%Y-%m-%d"))
+        print("リンクのクリック（直近7日） 楽天へ直接 %d / サイトへ %d"
+              % (sum(v for (_i, a), v in c.items() if a == "direct"),
+                 sum(v for (_i, a), v in c.items() if a == "site")))
+    except Exception as ex:                                # noqa: BLE001
+        print("⚠ リンクのクリック数を取れませんでした: %s" % str(ex)[:120])
     print()
     for name, b in cut.items():
         rank = sorted(b.items(), key=lambda kv: -kv[1]["median"])
@@ -287,8 +402,41 @@ def main():
         print("\n新しく分かったこと: %s" % led["findings"][-1]["claim"])
 
     # ---- 走っている試しの決着をつける ----
+    log = [x for x in (load("threads_posted.json", {}) or {}).get("log", [])
+           if x.get("id")]
     for e in led["experiments"]:
         if e.get("status") != "running":
+            continue
+        if e.get("measure") == "ab_clicks":
+            try:
+                arms = ab_status(e, log, link_clicks(e["started"]))
+            except Exception as ex:                        # noqa: BLE001
+                # 取れなかった日に、取れた分だけで決めない。
+                print("\n⚠ 試し %s のクリック数を取れませんでした: %s"
+                      % (e["id"], str(ex)[:120]))
+                continue
+            e["progress_now"] = {"date": today, "arms": arms}
+            line = "  ".join("%s 投稿%d クリック%d（1本あたり%.2f）"
+                             % (k, v["posts"], v["clicks"], v["rate"])
+                             for k, v in arms.items())
+            if today < e["until"]:
+                print("\n試し %s は %s まで。いま %s" % (e["id"], e["until"], line))
+                continue
+            how, win, why = ab_decide(e, arms, today)
+            if how == "extend":
+                days = e["ab"].get("extend_days", 7)
+                e["extended"] = True
+                e["until"] = (datetime.strptime(today, "%Y-%m-%d")
+                              + timedelta(days=days)).strftime("%Y-%m-%d")
+                print("\n試し %s は%s。決めておいたとおり1度だけ %s まで延ばします。"
+                      % (e["id"], why, e["until"]))
+                continue
+            e["status"] = "keep"
+            e["winner"] = win
+            e["decided"] = today
+            e["result"] = {"arms": arms, "why": why}
+            print("\n試し %s の結果: %s → %s に揃えます。（%s）"
+                  % (e["id"], line, win, why))
             continue
         if today < e["until"]:
             print("\n試し %s は %s まで。いま %s、目標 %s。"
