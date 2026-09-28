@@ -1053,6 +1053,42 @@ def rule_link_follows_experiment(ctx):
     return out
 
 
+def rule_keep_learning_from_others(ctx):
+    """周りの投稿から学ぶのを止めない。
+
+    2026-09-28: 自分の数字だけを見て、同じ組み立てで399本出し、
+    表示の中央値は10前後のまま動かなかった。入口の型を変えても差が出ないのは、
+    型の中身が似たものどうしだったから。界隈で反応の多い投稿の形を
+    一度も見ていなかった。利用者から「周りがどういう型で反応を取っているかを
+    リサーチして、自分の投稿に活かしてほしい」。
+
+    日次の挨拶でブラウザを開いたついでに research.json へ書き足す。
+    ・4日以上ほったらかしにしない
+    ・型（patterns）を寝かせない。試し中も採用も不採用も無いまま、候補だけが
+      たまっていくのは、見て終わりにしているということ
+    """
+    from datetime import datetime, timedelta
+    r = ctx.get("research")
+    if not r:
+        return ["research.json がありません。界隈の投稿を集めてください（2026-09-28）"]
+    out = []
+    limit = (datetime.now() - timedelta(days=4)).strftime("%Y-%m-%d")
+    if (r.get("lastRun") or "") < limit:
+        out.append("界隈の投稿を %s から集めていません。挨拶のついでに research.json へ"
+                   % (r.get("lastRun") or "一度も"))
+    pats = r.get("patterns") or []
+    moving = [p for p in pats if not str(p.get("status", "")).startswith("候補")]
+    old = [o for o in (r.get("observations") or []) if (o.get("date") or "") < (
+        datetime.now() - timedelta(days=14)).strftime("%Y-%m-%d")]
+    if pats and not moving and old:
+        out.append("research.json の型が候補のまま2週間たっています。"
+                   "1つ選んで、半分ずつ出す試しにしてください")
+    routine = ctx.get("daily_routine") or ""
+    if routine and "research.json" not in routine:
+        out.append("日次の手順に、界隈の投稿を集める工程（research.json）がありません")
+    return out
+
+
 def rule_daily_summary_keeps_the_alarms(ctx):
     """日次の要点から、警報を落とさない。
 
@@ -1130,6 +1166,7 @@ RULES = [
     ("pull --rebase のやり直しは空回りしない", rule_rebase_retry_clears_conflict),
     ("セールの速報は events.json の期間に従う", rule_sale_mode_follows_events),
     ("リンクの出し方は試しで決める", rule_link_follows_experiment),
+    ("周りから学ぶのを止めない", rule_keep_learning_from_others),
     ("日次の要点から警報を落とさない", rule_daily_summary_keeps_the_alarms),
     ("学びを止めない", rule_keep_learning),
     ("試しの形が learn.py と合っている", rule_experiment_schema_is_sound),
@@ -1217,6 +1254,9 @@ PROBES = {
     "リンクの出し方は試しで決める":
         [("threads_py", '"link_arm":', "remove"),
          ("threads_py", "def link_policy", "remove")],
+    "周りから学ぶのを止めない":
+        [("research", "", "empty"),
+         ("daily_routine", "research.json", "remove")],
 }
 
 
@@ -1312,6 +1352,7 @@ def context():
         "watch_yml": load(".github/workflows/watch.yml", ""),
         "threads_yml": load(".github/workflows/threads.yml", ""),
         "learn_py": load("learn.py", ""),
+        "research": load("research.json", None),
         "failed_posts_py": load("ops/failed_posts.py", ""),
         "daily_routine": _routine(),
         "index_html": load("index.html", ""),
