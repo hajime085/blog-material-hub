@@ -1112,6 +1112,25 @@ def rule_pitches_carry_an_ask(ctx):
     return []
 
 
+def rule_dated_tips_expire(ctx):
+    """日付を書いた豆知識には期限（until）を付ける。
+
+    2026-09-28: 「9月4日20時から」と書いた豆知識が、スーパーSALEの
+    終わったあとも出る状態になっていた。終わった日付を流すと、
+    「安く見えて安くない」を批判しているサイトが、自分で古い情報を配ることになる。
+    例として日付を出すだけのものは dated: false を付ける。
+    """
+    import re as _re
+    tips = (ctx.get("tips") or {}).get("tips") or []
+    bad = [i for i, t in enumerate(tips)
+           if _re.search(r"\d+月\d+日", (t.get("title") or "") + (t.get("body") or ""))
+           and not t.get("until") and t.get("dated") is not False]
+    if bad:
+        return ["tips.json の %s 番に日付がありますが、until がありません"
+                % "・".join(str(i) for i in bad)]
+    return []
+
+
 def rule_daily_summary_keeps_the_alarms(ctx):
     """日次の要点から、警報を落とさない。
 
@@ -1191,6 +1210,7 @@ RULES = [
     ("リンクの出し方は試しで決める", rule_link_follows_experiment),
     ("周りから学ぶのを止めない", rule_keep_learning_from_others),
     ("商品理解に問いを書く", rule_pitches_carry_an_ask),
+    ("日付を書いた豆知識は期限で止める", rule_dated_tips_expire),
     ("日次の要点から警報を落とさない", rule_daily_summary_keeps_the_alarms),
     ("学びを止めない", rule_keep_learning),
     ("試しの形が learn.py と合っている", rule_experiment_schema_is_sound),
@@ -1221,6 +1241,9 @@ MUTATIONS = {
     "同じ店・同じ値段を3件作る":
         lambda ps: ps + [dict(ps[0], id="probe%d" % i, shop="probe店",
                               price=12345, hidden=False) for i in range(3)],
+    "日付入りの豆知識から期限を消す":
+        lambda d: dict(d, tips=[{k: v for k, v in t.items() if k != "until"}
+                                for t in (d.get("tips") or [])]),
     "今日書いた商品理解から問いを消す":
         lambda ps: ps + [dict(ps[0], id="probe-ask", postedAt="2099-01-01",
                               pitch_status="ready",
@@ -1282,6 +1305,8 @@ PROBES = {
     "リンクの出し方は試しで決める":
         [("threads_py", '"link_arm":', "remove"),
          ("threads_py", "def link_policy", "remove")],
+    "日付を書いた豆知識は期限で止める":
+        [("tips", "日付入りの豆知識から期限を消す", "mutate")],
     "商品理解に問いを書く":
         [("products", "今日書いた商品理解から問いを消す", "mutate")],
     "周りから学ぶのを止めない":
@@ -1383,6 +1408,7 @@ def context():
         "threads_yml": load(".github/workflows/threads.yml", ""),
         "learn_py": load("learn.py", ""),
         "research": load("research.json", None),
+        "tips": load("tips.json", None),
         "failed_posts_py": load("ops/failed_posts.py", ""),
         "daily_routine": _routine(),
         "index_html": load("index.html", ""),

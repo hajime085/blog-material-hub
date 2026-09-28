@@ -508,7 +508,9 @@ def tip_posts():
     return [{"key": "tip:%02d" % i, "title": t.get("title", ""),
              "lead": t.get("body", ""), "cat": t.get("cat", ""),
              "to": t.get("to", "")}
-            for i, t in enumerate(rows) if t.get("title")]
+            for i, t in enumerate(rows) if t.get("title")
+            # 日付を書いたものは、その日を過ぎたら出さない（tips.json の until）。
+            and (t.get("until") or "9999") >= datetime.now(JST).strftime("%Y-%m-%d")]
 
 
 # 予定の投稿を、次に出すまで何日あけるか。
@@ -744,6 +746,7 @@ def pick(cfg, posted, want, slot_hour=None, live_heads=None):
     # 数を埋めるために古いものを引っぱり出すくらいなら、知識を出したほうがいい。
     fresh_days = th.get("freshDays", 3)
     limit = (datetime.now(JST) - timedelta(days=fresh_days)).strftime("%Y-%m-%d")
+    verified = (datetime.now(JST) - timedelta(days=1)).strftime("%Y-%m-%d")
     now_s = datetime.now(JST).strftime("%Y-%m-%d %H:%M")
 
     items = []
@@ -766,7 +769,15 @@ def pick(cfg, posted, want, slot_hour=None, live_heads=None):
         if not p.get("cap") and not (p.get("d") or p.get("et")):
             continue
         if (p.get("at") or "")[:10] < limit:
-            continue
+            # 見つけたのが古くても、昨日以降に楽天で値段を確かめ直していて、
+            # いまも値引きが続いているものは出してよい。
+            # 2026-09-28: 4日の線は「古い値段を新しいふりで流さない」ためだった。
+            # だが見張りは1日4回値段を取り直している。確かめた値段なら古くない。
+            # この線のせいで、商品理解も値引きもある20件が出番を失い、
+            # 商品の枠が豆知識で埋まっていた（1日12本）。
+            # 並びは新しい順のままなので、新しく見つけたものが先に出る。
+            if not (p.get("d") and (p.get("ls") or "") >= verified):
+                continue
         # 終わったセールは出さない。
         # サイトの作り直しから投稿までに終わることがあるので、ここでも見る。
         et = (p.get("et") or "").strip()

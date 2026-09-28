@@ -1786,6 +1786,9 @@ def build_feed_json(cfg, products, cats):
             # 終了時刻。ビルドの間隔（最大6時間）のあいだに終わるセールを
             # 読む人の時刻で判定できるように、そのまま渡す。
             "et": (p.get("endTime") or "").strip(),
+            # 最後に楽天で値段を確かめた日。投稿の鮮度を、見つけた日ではなく
+            # 確かめた日で見るため（threads.py pick）。
+            "ls": p.get("lastSeen") or "",
             # 投稿の「用途」の型で使う。箇条書きは事実だけを書いてある。
             "pt": (p.get("points") or [])[:3],
             # 親投稿のもと。pitch.py が作って、決まりに照らして通ったものだけ。
