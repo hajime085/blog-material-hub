@@ -1017,6 +1017,25 @@ def rule_sale_mode_follows_events(ctx):
     return out
 
 
+def rule_product_posts_link_rakuten_directly(ctx):
+    """商品の投稿は、セールでなくても楽天へ直接つなぐ。
+
+    2026-09-28: link_for() がセール中だけ楽天へ直接にしていたため、
+    マラソンが終わった 9/24 から商品の投稿がサイト経由に戻っていた。
+    利用者から「直接商品リンクを貼る形にすると言っていたのに、なっていない」と指摘。
+    """
+    tp = ctx.get("threads_py") or ""
+    if not tp:
+        return []
+    import re as _re
+    m = _re.search(r"^def link_for\(.*?(?=^def )", tp, _re.M | _re.S)
+    body = m.group(0) if m else ""
+    if not body or "hb.afl.rakuten.co.jp" not in body or "sale_now()" in body:
+        return ["threads.py の link_for() が、商品の投稿を楽天へ直接つないでいません。"
+                "セールの時だけにしないでください（2026-09-28）"]
+    return []
+
+
 def rule_daily_summary_keeps_the_alarms(ctx):
     """日次の要点から、警報を落とさない。
 
@@ -1093,6 +1112,7 @@ RULES = [
     ("一時的な不調は両方で待つ", rule_upstream_hiccups_are_retried_everywhere),
     ("pull --rebase のやり直しは空回りしない", rule_rebase_retry_clears_conflict),
     ("セールの速報は events.json の期間に従う", rule_sale_mode_follows_events),
+    ("商品の投稿は楽天へ直接つなぐ", rule_product_posts_link_rakuten_directly),
     ("日次の要点から警報を落とさない", rule_daily_summary_keeps_the_alarms),
     ("学びを止めない", rule_keep_learning),
     ("試しの形が learn.py と合っている", rule_experiment_schema_is_sound),
@@ -1177,6 +1197,8 @@ PROBES = {
         [("watch_yml", "git rebase --abort", "remove")],
     "セールの速報は events.json の期間に従う":
         [("threads_py", "def sale_now", "remove")],
+    "商品の投稿は楽天へ直接つなぐ":
+        [("threads_py", 'url.startswith("https://hb.afl.rakuten.co.jp/")', "remove")],
 }
 
 
