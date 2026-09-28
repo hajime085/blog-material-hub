@@ -459,23 +459,10 @@
     "product:re2f665d39",
     "product:r5d00a688d",
     "product:r397a29c44",
-    "tip:03"
+    "tip:03",
+    "tip:29"
   ],
   "log": [
-    {
-      "key": "product:rc2ad25e52",
-      "id": "18008769749967274",
-      "at": "2026-09-02 23:20",
-      "kind": "product",
-      "slot": 23,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "surprise",
-      "cta_type": "save",
-      "category": "kitchen",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:r82d75cbfc",
       "id": "17899951740590273",
@@ -6046,6 +6033,20 @@
       "at": "2026-09-28 07:20",
       "kind": "tip",
       "slot": 7,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none"
+    },
+    {
+      "key": "tip:29",
+      "id": "17899122822669333",
+      "at": "2026-09-28 09:20",
+      "kind": "tip",
+      "slot": 9,
       "catchup": false,
       "cap": null,
       "hook_type": null,
