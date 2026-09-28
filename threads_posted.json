@@ -462,23 +462,10 @@
     "tip:03",
     "tip:29",
     "tip:27",
-    "product:rc3a278550"
+    "product:rc3a278550",
+    "tip:16"
   ],
   "log": [
-    {
-      "key": "tip:27",
-      "id": "18092026937651567",
-      "at": "2026-09-03 09:20",
-      "kind": "tip",
-      "slot": 9,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none"
-    },
     {
       "key": "tip:04",
       "id": "18095381309175501",
@@ -6060,6 +6047,22 @@
       "link": "reply",
       "link_arm": "site",
       "cta_arm": "ask"
+    },
+    {
+      "key": "tip:16",
+      "id": "18056674760798792",
+      "at": "2026-09-28 14:20",
+      "kind": "tip",
+      "slot": 14,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
+      "link_arm": null,
+      "cta_arm": null
     }
   ]
 }
