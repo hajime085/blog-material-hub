@@ -484,23 +484,10 @@
     "product:r4b0f82943",
     "product:rdaaae0255",
     "product:rb1b29fab5",
-    "product:r584f51b15"
+    "product:r584f51b15",
+    "product:r3979f8f60"
   ],
   "log": [
-    {
-      "key": "page:kaimawari:2026-09-04",
-      "id": "18107731628594593",
-      "at": "2026-09-05 07:20",
-      "kind": "page",
-      "slot": 7,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "reply"
-    },
     {
       "key": "tip:18",
       "id": "18091723169138731",
@@ -6125,6 +6112,22 @@
       "logic_version": "marketing_v2",
       "link": "reply",
       "link_arm": "site",
+      "cta_arm": "base"
+    },
+    {
+      "key": "product:r3979f8f60",
+      "id": "18115711151001718",
+      "at": "2026-09-30 00:20",
+      "kind": "product",
+      "slot": 0,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "empathy",
+      "category": "fashion",
+      "logic_version": "marketing_v2",
+      "link": "reply",
+      "link_arm": "direct",
       "cta_arm": "base"
     }
   ]
