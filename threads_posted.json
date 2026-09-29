@@ -478,23 +478,10 @@
     "tip:31",
     "product:raa9e7d458",
     "tip:34",
-    "tip:06"
+    "tip:06",
+    "product:re61bb9b21"
   ],
   "log": [
-    {
-      "key": "product:r644cfb152",
-      "id": "18131936536561325",
-      "at": "2026-09-04 21:20",
-      "kind": "product",
-      "slot": 20,
-      "catchup": true,
-      "cap": true,
-      "hook_type": "scene",
-      "cta_type": "save",
-      "category": "fashion",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:r6f992d128",
       "id": "18331283722275589",
@@ -6108,6 +6095,22 @@
       "link": "none",
       "link_arm": null,
       "cta_arm": null
+    },
+    {
+      "key": "product:re61bb9b21",
+      "id": "17987141274096933",
+      "at": "2026-09-29 18:00",
+      "kind": "product",
+      "slot": 18,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "save",
+      "category": "pc",
+      "logic_version": "marketing_v2",
+      "link": "reply",
+      "link_arm": "site",
+      "cta_arm": "ask"
     }
   ]
 }
