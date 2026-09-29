@@ -479,23 +479,10 @@
     "product:raa9e7d458",
     "tip:34",
     "tip:06",
-    "product:re61bb9b21"
+    "product:re61bb9b21",
+    "tip:18"
   ],
   "log": [
-    {
-      "key": "product:r6f992d128",
-      "id": "18331283722275589",
-      "at": "2026-09-04 22:20",
-      "kind": "product",
-      "slot": 21,
-      "catchup": true,
-      "cap": true,
-      "hook_type": "compare",
-      "cta_type": "save",
-      "category": "beauty",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:r4ec2cd68a",
       "id": "18120996926477477",
@@ -6111,6 +6098,22 @@
       "link": "reply",
       "link_arm": "site",
       "cta_arm": "ask"
+    },
+    {
+      "key": "tip:18",
+      "id": "18184992484423280",
+      "at": "2026-09-29 19:20",
+      "kind": "tip",
+      "slot": 19,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
+      "link_arm": null,
+      "cta_arm": null
     }
   ]
 }
