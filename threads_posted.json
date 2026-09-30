@@ -494,23 +494,10 @@
     "tip:04",
     "tip:36",
     "product:r97818e2c0",
-    "tip:07"
+    "tip:07",
+    "product:r7aee2bc40"
   ],
   "log": [
-    {
-      "key": "product:rb4a28eb5d",
-      "id": "18095904590433130",
-      "at": "2026-09-05 21:20",
-      "kind": "product",
-      "slot": 21,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "problem",
-      "cta_type": "empathy",
-      "category": "pc",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:r989f74d15",
       "id": "18135884902542462",
@@ -6156,6 +6143,22 @@
       "link": "none",
       "link_arm": null,
       "cta_arm": null
+    },
+    {
+      "key": "product:r7aee2bc40",
+      "id": "18250357402308550",
+      "at": "2026-09-30 20:00",
+      "kind": "product",
+      "slot": 20,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "none",
+      "category": "food",
+      "logic_version": "marketing_v2",
+      "link": "reply",
+      "link_arm": "site",
+      "cta_arm": "base"
     }
   ]
 }
