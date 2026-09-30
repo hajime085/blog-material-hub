@@ -497,23 +497,10 @@
     "tip:07",
     "product:r7aee2bc40",
     "product:r6e0aed3cd",
-    "product:r731fc33f1"
+    "product:r731fc33f1",
+    "product:rf6e19b46e"
   ],
   "log": [
-    {
-      "key": "product:r330c9bc42",
-      "id": "18118872641485345",
-      "at": "2026-09-06 00:01",
-      "kind": "product",
-      "slot": 0,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "compare",
-      "cta_type": "save",
-      "category": "beauty",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:rfb02220a0",
       "id": "18115436146976244",
@@ -6165,6 +6152,22 @@
       "link": "reply",
       "link_arm": "site",
       "cta_arm": "ask"
+    },
+    {
+      "key": "product:rf6e19b46e",
+      "id": "18137852707620399",
+      "at": "2026-09-30 23:20",
+      "kind": "product",
+      "slot": 23,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "none",
+      "category": "pc",
+      "logic_version": "marketing_v2",
+      "link": "reply",
+      "link_arm": "direct",
+      "cta_arm": "base"
     }
   ]
 }
