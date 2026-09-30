@@ -490,23 +490,10 @@
     "tip:32",
     "tip:26",
     "schedule:2026-W39-3",
-    "product:rc23c39486"
+    "product:rc23c39486",
+    "tip:04"
   ],
   "log": [
-    {
-      "key": "product:r5ac1f69f1",
-      "id": "18077092166421113",
-      "at": "2026-09-05 18:00",
-      "kind": "product",
-      "slot": 18,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "scene",
-      "cta_type": "save",
-      "category": "sports",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "tip:19",
       "id": "18336424702287707",
@@ -6144,6 +6131,22 @@
       "link": "reply",
       "link_arm": "site",
       "cta_arm": "base"
+    },
+    {
+      "key": "tip:04",
+      "id": "18118353188076722",
+      "at": "2026-09-30 14:20",
+      "kind": "tip",
+      "slot": 14,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
+      "link_arm": null,
+      "cta_arm": null
     }
   ]
 }
