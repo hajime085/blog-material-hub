@@ -5012,7 +5012,6 @@
       "ウォッチ中",
       "送料無料"
     ],
-    "listPrice": 726,
     "marketing": {
       "hook_type": "relatable",
       "target": "タオルを買い替えたい人",
@@ -8029,8 +8028,8 @@
       "cta": "save",
       "cta_text": null
     },
-    "pitch_status": "ready",
-    "_stashedAt": "2026-09-24"
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-30"
   },
   "buono-buono:10002040": {
     "tags": [
@@ -9910,6 +9909,11 @@
   },
   "a-mobi:10001670": {
     "listPrice": 980,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-09-30"
+  },
+  "mixsim:10000337": {
+    "listPrice": 5960,
     "pitch_status": "pending",
     "_stashedAt": "2026-09-30"
   }
