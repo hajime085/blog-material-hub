@@ -21,31 +21,35 @@
       "priceBasis": "history",
       "caption": "1,995円のジョガーパンツが500円。テーパードの細身、サイドライン入り。",
       "tags": [],
-      "points": [],
+      "points": [
+        "1,995円から500円へ",
+        "テーパードの細身・サイドライン入り",
+        "レビュー2,413件・★4.29"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-30",
       "bumpedAt": "2026-09-30T07:35:18",
       "lastSeen": "2026-09-30",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "marketing": {
-        "hook_type": "scene",
-        "target": "部屋着と外着を兼ねたい人",
-        "problem": "スウェットは家用に見える",
-        "use_case": "普段着・近所",
+        "hook_type": "discovery",
+        "target": "部屋着や運動用のパンツを探している人",
+        "problem": "スウェットはだぼっとしがち",
+        "use_case": "部屋着・運動",
         "features": [
-          "ジョガーパンツ",
-          "テーパード",
-          "サイドライン",
+          "ジョガー＆テーパード",
           "細身",
-          "メンズ"
+          "サイドライン",
+          "スウェット素材"
         ],
         "benefits": [
-          "裾がしぼってあるので外でも着られる"
+          "裾に向かって細い形"
         ],
-        "hook": "スウェットは楽だけど、そのまま外に出ると部屋着に見える。",
-        "body": "裾をしぼったジョガーパンツです。テーパードの細身で、サイドライン入り。",
-        "cta": "save"
+        "hook": "スウェットパンツでも、細身のテーパードがあります。",
+        "body": "裾に向かって細くなるジョガーの形で、横にラインが入っています。",
+        "cta": "none",
+        "ask": "部屋着のパンツ、細身とゆったり、どちらを選びますか？"
       }
     },
     {
@@ -65,15 +69,37 @@
       "endTime": "",
       "listPrice": 980,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "980円のタイプC充電ケーブルが624円。両端がUSB-Cで、iPhone16・15にも使える形。",
       "tags": [],
-      "points": [],
+      "points": [
+        "980円から624円へ",
+        "USB-C同士をつなぐケーブル",
+        "レビュー4,899件・★4.53"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-30",
       "bumpedAt": "2026-09-30T07:37:51",
       "lastSeen": "2026-09-30",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "USB-Cのスマホを使っている人",
+        "problem": "ケーブル1本を部屋から部屋へ持ち歩く",
+        "use_case": "寝室・居間・職場に置く",
+        "features": [
+          "USB-C to USB-C",
+          "iPhone16/15対応と商品名にある",
+          "2本目半額と商品名にある"
+        ],
+        "benefits": [
+          "置き場所ごとに1本ずつ用意できる"
+        ],
+        "hook": "充電ケーブル、1本を部屋から部屋へ持ち歩いていませんか。",
+        "body": "両端がUSB-Cのケーブルです。商品名には2本目半額とあります。",
+        "cta": "none",
+        "ask": "充電ケーブル、家に何本置いていますか？"
+      }
     },
     {
       "id": "r12544ab75",
@@ -92,15 +118,37 @@
       "endTime": "",
       "listPrice": 980,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "980円のシリコン製タイプCケーブルが624円。長さは1mと2mから選べる。",
       "tags": [],
-      "points": [],
+      "points": [
+        "980円から624円へ",
+        "シリコン製・USB-C to USB-C",
+        "1m / 2m"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-30",
       "bumpedAt": "2026-09-30T07:37:51",
       "lastSeen": "2026-09-30",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "ケーブルの長さが足りない人",
+        "problem": "ベッドからコンセントまで届かない",
+        "use_case": "寝室・ソファ",
+        "features": [
+          "シリコン製",
+          "USB-C to USB-C",
+          "1mと2m"
+        ],
+        "benefits": [
+          "置き場所に合わせて長さを選べる"
+        ],
+        "hook": "充電ケーブル、長さで選べます。",
+        "body": "シリコン製のUSB-Cケーブルで、1mと2mがあります。",
+        "cta": "none",
+        "ask": "充電ケーブル、1mと2m、どちらを使っていますか？"
+      }
     },
     {
       "id": "re2144096f",
@@ -124,26 +172,35 @@
         "送料無料",
         "訳あり"
       ],
-      "points": [],
+      "points": [
+        "2,000円から1,000円へ",
+        "200g×4袋・甘口／辛口",
+        "送料込み"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-30",
       "bumpedAt": "2026-09-30T16:30:34",
       "lastSeen": "2026-09-30",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
-        "target": "カレーをストックしておきたい人",
-        "problem": "忙しい日に、ごはんを作る気力がない。",
-        "hook": "レトルトカレー、ストックがあると助かります。",
-        "body": "ビーフカレー200g×4袋。甘口か辛口を選べる。レビューは12件、星4.58。",
+        "target": "ごはんを作れない日がある人",
+        "problem": "作る気力がない日がある",
+        "use_case": "忙しい日の夕飯・備蓄",
         "features": [
-          "ビーフカレー200g×4袋",
+          "ビーフカレー",
+          "200g×4袋",
           "甘口・辛口を選べる",
-          "レビュー12件・星4.58"
+          "レトルト"
         ],
-        "cta": "save",
-        "cta_text": null
+        "benefits": [
+          "置いておける"
+        ],
+        "hook": "作れない日のために、レトルトを置いておく。",
+        "body": "ビーフカレー200g×4袋。甘口と辛口から選べます。",
+        "cta": "none",
+        "ask": "レトルトカレー、家に置いておく派ですか？"
       }
     },
     {
@@ -163,8 +220,12 @@
       "endTime": "2026-10-09 01:59",
       "listPrice": 2000,
       "priceBasis": "history",
-      "caption": "",
-      "points": [],
+      "caption": "2,000円の訳ありおつまみ3種類が1,000円。タコカマや貝ひも、ししゃもなどから選べる。",
+      "points": [
+        "2,000円から1,000円へ",
+        "訳あり・おためしの3種類",
+        "送料込み"
+      ],
       "description": "",
       "tags": [
         "送料無料",
@@ -174,7 +235,25 @@
       "postedAt": "2026-09-30",
       "bumpedAt": "2026-09-30T00:00:00",
       "lastSeen": "2026-09-30",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "晩酌する人",
+        "problem": "つまみを毎回買いに行く",
+        "use_case": "晩酌",
+        "features": [
+          "選べる3種類",
+          "タコカマ・貝ひも・ししゃも・いわしなど",
+          "訳あり・おためし"
+        ],
+        "benefits": [
+          "海のおつまみをまとめて選べる"
+        ],
+        "hook": "晩酌のつまみを、3種類まとめて選べます。",
+        "body": "タコカマや貝ひも、ししゃもなどの海のおつまみです。訳ありのおためし品。",
+        "cta": "none",
+        "ask": "晩酌のおつまみ、海のものと肉のもの、どちら派ですか？"
+      }
     },
     {
       "id": "r3e85e3fb2",
@@ -193,8 +272,12 @@
       "endTime": "2026-10-09 01:59",
       "listPrice": 2000,
       "priceBasis": "history",
-      "caption": "",
-      "points": [],
+      "caption": "2,000円のいわしせんべい150gが1,000円。パリパリの、おやつにもおつまみにもなる一袋。",
+      "points": [
+        "2,000円から1,000円へ",
+        "いわしせんべい150g",
+        "送料込み"
+      ],
       "description": "",
       "tags": [
         "送料無料"
@@ -203,7 +286,25 @@
       "postedAt": "2026-09-30",
       "bumpedAt": "2026-09-30T00:00:00",
       "lastSeen": "2026-09-30",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "relatable",
+        "target": "おやつやおつまみを探している人",
+        "problem": "甘いおやつばかりになる",
+        "use_case": "おやつ・おつまみ",
+        "features": [
+          "いわしせんべい",
+          "150g",
+          "パリパリ"
+        ],
+        "benefits": [
+          "甘くないおやつになる"
+        ],
+        "hook": "甘くないおやつ、いわしのせんべいがあります。",
+        "body": "いわしをせんべいにしたもので、150g入り。おやつにも、おつまみにも。",
+        "cta": "none",
+        "ask": "甘くないおやつ、何を食べていますか？"
+      }
     },
     {
       "id": "r731fc33f1",
@@ -222,17 +323,40 @@
       "endTime": "",
       "listPrice": 1999,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "1,999円の有線イヤホンが1,197円。マイク付きで、音量も手元で変えられる。",
       "tags": [
         "送料無料"
       ],
-      "points": [],
+      "points": [
+        "1,999円から1,197円へ",
+        "有線・マイク付き",
+        "音量調節・送料込み"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-30",
       "bumpedAt": "2026-09-30T07:37:51",
       "lastSeen": "2026-09-30",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "ワイヤレスの電池切れが気になる人",
+        "problem": "ワイヤレスイヤホンの電池が切れる",
+        "use_case": "通勤・通話",
+        "features": [
+          "有線",
+          "マイク付き",
+          "音量調節",
+          "通話対応"
+        ],
+        "benefits": [
+          "充電がいらない"
+        ],
+        "hook": "有線イヤホンは、充電がいりません。",
+        "body": "マイク付きで通話にも使えて、手元で音量を変えられます。",
+        "cta": "none",
+        "ask": "イヤホン、有線とワイヤレス、どちらを使っていますか？"
+      }
     },
     {
       "id": "r7aee2bc40",
@@ -251,18 +375,41 @@
       "endTime": "",
       "listPrice": 2290,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,290円の神戸の味噌だれ餃子が1,428円。ひとくちサイズの冷凍餃子。",
       "tags": [
         "あす楽",
         "訳あり"
       ],
-      "points": [],
+      "points": [
+        "2,290円から1,428円へ",
+        "味噌だれで食べる神戸のひとくち餃子",
+        "冷凍・業務用の大容量"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-30",
       "bumpedAt": "2026-09-30T16:30:34",
       "lastSeen": "2026-09-30",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "冷凍餃子を常備している人",
+        "problem": "餃子のたれがいつも同じ",
+        "use_case": "夕飯・おつまみ",
+        "features": [
+          "神戸の餃子",
+          "味噌だれ",
+          "ひとくちサイズ",
+          "冷凍・業務用"
+        ],
+        "benefits": [
+          "いつもと違うたれで食べられる"
+        ],
+        "hook": "味噌だれで食べる、神戸の餃子です。",
+        "body": "ひとくちサイズの冷凍餃子で、業務用の大容量です。",
+        "cta": "none",
+        "ask": "餃子のたれ、いつも何をつけていますか？"
+      }
     },
     {
       "id": "r6e0aed3cd",
@@ -281,15 +428,38 @@
       "endTime": "2026-10-09 10:20",
       "listPrice": 5960,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "5,960円の厚底スニーカーが2,080円。軽量で、サイズは23.0〜25.0cm。",
       "tags": [],
-      "points": [],
+      "points": [
+        "5,960円から2,080円へ",
+        "厚底のダッドスニーカー",
+        "軽量・23.0〜25.0cm"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-30",
       "bumpedAt": "2026-09-30T11:35:03",
       "lastSeen": "2026-09-30",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "ボリュームのある靴を探している人",
+        "problem": "厚底は重そう",
+        "use_case": "普段履き",
+        "features": [
+          "厚底",
+          "ダッドスニーカー",
+          "軽量とうたう",
+          "23.0〜25.0cm"
+        ],
+        "benefits": [
+          "厚底で軽量のものを選べる"
+        ],
+        "hook": "厚底でも、軽量とうたうスニーカーです。",
+        "body": "ダッドスニーカーの形で、サイズは23.0〜25.0cm。",
+        "cta": "none",
+        "ask": "スニーカー、厚底と薄底、どちらを履いていますか？"
+      }
     },
     {
       "id": "r72e12aba9",
@@ -310,32 +480,36 @@
       "priceBasis": "title",
       "caption": "5,160円の裏起毛ワイドパンツが2,280円。丈が選べて、ポケット付き。",
       "tags": [],
-      "points": [],
+      "points": [
+        "5,160円から2,280円へ",
+        "裏起毛・カシミア風",
+        "丈が選べる・ポケット付き"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-30",
       "bumpedAt": "2026-09-30T16:34:25",
       "lastSeen": "2026-09-30",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "marketing": {
-        "hook_type": "relatable",
-        "target": "冬でも通勤にはける、あたたかいパンツを探している人",
-        "problem": "あたたかいパンツほど、部屋着っぽい見た目になりやすい",
-        "use_case": "通勤・秋冬の普段着",
+        "hook_type": "scene",
+        "target": "冬に暖かいパンツがほしい人",
+        "problem": "冬のパンツが寒い",
+        "use_case": "冬の通勤",
         "features": [
-          "裏起毛のカシミア風生地",
-          "通勤・きれいめを想定した形",
+          "裏起毛",
+          "カシミア風",
+          "ワイド",
           "丈が選べる",
           "ポケット付き"
         ],
         "benefits": [
-          "あたたかい生地でも通勤の服装に合わせやすい",
-          "身長に合わせて丈を選べる"
+          "内側が起毛"
         ],
-        "hook": "冬のパンツ、あたたかいものほど部屋着に見えてくる。",
-        "body": "裏起毛のカシミア風。それでも通勤やきれいめに寄せた形です。\n丈は選べるので、身長に合わせて。ポケット付き。",
-        "cta": "empathy",
-        "ask": "通勤の人、冬のパンツは裏起毛派ですか、タイツを重ねる派ですか？"
+        "hook": "冬の通勤に、裏起毛のワイドパンツ。",
+        "body": "内側が起毛で、カシミア風の生地です。丈が選べて、ポケットも付いています。",
+        "cta": "none",
+        "ask": "冬の通勤、パンツの下に何か履いていますか？"
       }
     },
     {
@@ -355,29 +529,37 @@
       "endTime": "",
       "listPrice": 698,
       "priceBasis": "history",
-      "caption": "698円のカラージェル5個セットが488円。全80色から選べます。",
+      "caption": "698円のカラージェル5個セットが349円。全80色から選べて、混ぜて色を作れる。",
       "tags": [],
-      "points": [],
+      "points": [
+        "698円から349円へ",
+        "3g×5個・全80色",
+        "混ぜて色を作れるコンテナ型"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-29",
       "bumpedAt": "2026-09-29T21:33:03",
       "lastSeen": "2026-09-30",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "marketing": {
-        "hook_type": "scene",
-        "target": "セルフネイルを楽しみたい人",
-        "problem": "ネイルの色は、買い足すほど数が増えて置き場所に困る。",
-        "hook": "ジェルの色、混ぜて作れたら楽しいですよね。",
-        "body": "カラージェル3g×5個セット。全80色から選べ、混ぜてオリジナルカラーも作れるコンテナ型。メール便送料無料。レビューは7,682件、星4.27。",
+        "hook_type": "discovery",
+        "target": "セルフでジェルネイルをする人",
+        "problem": "欲しい色が売っていない",
+        "use_case": "セルフネイル",
         "features": [
-          "3g×5個セット",
-          "全80色から選べる",
-          "混ぜてオリジナルカラーが作れる",
-          "レビュー7,682件・星4.27"
+          "3g×5個",
+          "全80色",
+          "コンテナ型",
+          "混ぜて色を作れる"
         ],
-        "cta": "save",
-        "cta_text": null
+        "benefits": [
+          "色を自分で作れる"
+        ],
+        "hook": "ジェルネイル、欲しい色は混ぜて作れます。",
+        "body": "3gのカラージェル5個セットで、全80色から選べます。コンテナ型で混ぜやすい形。",
+        "cta": "none",
+        "ask": "セルフネイルの人、色は混ぜて作りますか？"
       }
     },
     {
@@ -449,18 +631,40 @@
       "endTime": "",
       "listPrice": 3300,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "3,300円の国産ごぼう茶60包が1,320円。賞味期限2027年3月の訳あり品。",
       "tags": [
         "送料無料",
         "訳あり"
       ],
-      "points": [],
+      "points": [
+        "3,300円から1,320円へ",
+        "鹿児島県産ごぼう・60包",
+        "賞味期限2027年3月の訳あり"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-29",
       "bumpedAt": "2026-09-29T21:30:52",
       "lastSeen": "2026-09-30",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "麦茶以外のお茶を探している人",
+        "problem": "家のお茶がいつも同じ",
+        "use_case": "家で飲むお茶",
+        "features": [
+          "鹿児島県産ごぼう",
+          "ティーバッグ60包",
+          "訳あり（賞味期限2027年3月）"
+        ],
+        "benefits": [
+          "いつもと違うお茶を試せる"
+        ],
+        "hook": "ごぼうのお茶があります。",
+        "body": "鹿児島県産のごぼうを使ったティーバッグで、60包入り。訳あり品です。",
+        "cta": "none",
+        "ask": "家で飲むお茶、麦茶以外に何がありますか？"
+      }
     },
     {
       "id": "rb1b29fab5",
@@ -530,18 +734,42 @@
       "endTime": "",
       "listPrice": 2990,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,990円の裾レースのワイドパンツが1,990円。ウエストゴムの薄手。",
       "tags": [
         "送料無料",
         "在庫処分"
       ],
-      "points": [],
+      "points": [
+        "2,990円から1,990円へ",
+        "裾にレース・刺繍",
+        "ウエストゴム・薄手"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-09-29",
       "bumpedAt": "2026-09-29T21:34:49",
       "lastSeen": "2026-09-30",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "ワンピースに重ね着する人",
+        "problem": "ワンピースの裾が物足りない",
+        "use_case": "重ね着",
+        "features": [
+          "裾レース",
+          "ワイドパンツ",
+          "ペチパンツとして重ね着",
+          "ウエストゴム",
+          "薄手"
+        ],
+        "benefits": [
+          "裾からレースを見せられる"
+        ],
+        "hook": "ワンピースの下から、レースの裾をのぞかせる。",
+        "body": "裾にレースが付いたワイドパンツで、重ね着用のペチパンツにもなります。ウエストゴムの薄手。",
+        "cta": "none",
+        "ask": "ワンピースの下、何か重ねて履きますか？"
+      }
     },
     {
       "id": "ra48e7b82d",
