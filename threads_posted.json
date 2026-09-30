@@ -496,23 +496,10 @@
     "product:r97818e2c0",
     "tip:07",
     "product:r7aee2bc40",
-    "product:r6e0aed3cd"
+    "product:r6e0aed3cd",
+    "product:r731fc33f1"
   ],
   "log": [
-    {
-      "key": "product:re719455ba",
-      "id": "17922157902424480",
-      "at": "2026-09-05 23:21",
-      "kind": "product",
-      "slot": 23,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "problem",
-      "cta_type": "empathy",
-      "category": "fashion",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:r330c9bc42",
       "id": "18118872641485345",
@@ -6162,6 +6149,22 @@
       "link": "reply",
       "link_arm": "direct",
       "cta_arm": "base"
+    },
+    {
+      "key": "product:r731fc33f1",
+      "id": "18043270946819036",
+      "at": "2026-09-30 22:00",
+      "kind": "product",
+      "slot": 22,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "none",
+      "category": "pc",
+      "logic_version": "marketing_v2",
+      "link": "reply",
+      "link_arm": "site",
+      "cta_arm": "ask"
     }
   ]
 }
