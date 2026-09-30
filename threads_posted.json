@@ -489,23 +489,10 @@
     "product:ra8d91264c",
     "tip:32",
     "tip:26",
-    "schedule:2026-W39-3"
+    "schedule:2026-W39-3",
+    "product:rc23c39486"
   ],
   "log": [
-    {
-      "key": "tip:07",
-      "id": "18115147498785996",
-      "at": "2026-09-05 17:20",
-      "kind": "tip",
-      "slot": 17,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none"
-    },
     {
       "key": "product:r5ac1f69f1",
       "id": "18077092166421113",
@@ -6141,6 +6128,22 @@
       "link": "none",
       "link_arm": null,
       "cta_arm": null
+    },
+    {
+      "key": "product:rc23c39486",
+      "id": "18134490976732889",
+      "at": "2026-09-30 13:00",
+      "kind": "product",
+      "slot": 13,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "save",
+      "category": "fashion",
+      "logic_version": "marketing_v2",
+      "link": "reply",
+      "link_arm": "site",
+      "cta_arm": "base"
     }
   ]
 }
