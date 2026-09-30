@@ -495,23 +495,10 @@
     "tip:36",
     "product:r97818e2c0",
     "tip:07",
-    "product:r7aee2bc40"
+    "product:r7aee2bc40",
+    "product:r6e0aed3cd"
   ],
   "log": [
-    {
-      "key": "product:r989f74d15",
-      "id": "18135884902542462",
-      "at": "2026-09-05 22:20",
-      "kind": "product",
-      "slot": 22,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "scene",
-      "cta_type": "save",
-      "category": "sports",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:re719455ba",
       "id": "17922157902424480",
@@ -6158,6 +6145,22 @@
       "logic_version": "marketing_v2",
       "link": "reply",
       "link_arm": "site",
+      "cta_arm": "base"
+    },
+    {
+      "key": "product:r6e0aed3cd",
+      "id": "18015382232747052",
+      "at": "2026-09-30 21:00",
+      "kind": "product",
+      "slot": 21,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "none",
+      "category": "fashion",
+      "logic_version": "marketing_v2",
+      "link": "reply",
+      "link_arm": "direct",
       "cta_arm": "base"
     }
   ]
