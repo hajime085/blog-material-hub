@@ -96,6 +96,75 @@
       "pointCap": 7000,
       "maxRate": 10,
       "_source": "楽天のお買い物マラソン公式ページで確認（2026-09-18）"
+    },
+    {
+      "name": "お買い物マラソン",
+      "kind": "marathon",
+      "status": "確定",
+      "start": "2026-10-04 20:00",
+      "end": "2026-10-09 01:59",
+      "note": "1ショップ税込1,000円以上の買いまわりでポイントが上がります。倍率と上限は、楽天の発表を待って書き足します。",
+      "links": [
+        {
+          "label": "エントリーする",
+          "to": "marathon"
+        },
+        {
+          "label": "買いまわりの手順",
+          "to": "/guide/rakuten-marathon/"
+        },
+        {
+          "label": "買いまわり用の商品",
+          "to": "/kaimawari/"
+        }
+      ],
+      "_source": "楽天のお買い物マラソン日程ページ https://event.rakuten.co.jp/campaign/point-up/marathon/schedule/ で確認（2026-10-01）。倍率・上限・エントリー期間はまだ載っていない。"
+    },
+    {
+      "name": "お買い物マラソン",
+      "kind": "marathon",
+      "status": "確定",
+      "start": "2026-10-14 20:00",
+      "end": "2026-10-17 09:59",
+      "note": "1ショップ税込1,000円以上の買いまわりでポイントが上がります。倍率と上限は、楽天の発表を待って書き足します。",
+      "links": [
+        {
+          "label": "エントリーする",
+          "to": "marathon"
+        },
+        {
+          "label": "買いまわりの手順",
+          "to": "/guide/rakuten-marathon/"
+        },
+        {
+          "label": "買いまわり用の商品",
+          "to": "/kaimawari/"
+        }
+      ],
+      "_source": "楽天のお買い物マラソン日程ページ https://event.rakuten.co.jp/campaign/point-up/marathon/schedule/ で確認（2026-10-01）。倍率・上限・エントリー期間はまだ載っていない。"
+    },
+    {
+      "name": "お買い物マラソン",
+      "kind": "marathon",
+      "status": "確定",
+      "start": "2026-10-24 20:00",
+      "end": "2026-10-27 09:59",
+      "note": "1ショップ税込1,000円以上の買いまわりでポイントが上がります。倍率と上限は、楽天の発表を待って書き足します。",
+      "links": [
+        {
+          "label": "エントリーする",
+          "to": "marathon"
+        },
+        {
+          "label": "買いまわりの手順",
+          "to": "/guide/rakuten-marathon/"
+        },
+        {
+          "label": "買いまわり用の商品",
+          "to": "/kaimawari/"
+        }
+      ],
+      "_source": "楽天のお買い物マラソン日程ページ https://event.rakuten.co.jp/campaign/point-up/marathon/schedule/ で確認（2026-10-01）。倍率・上限・エントリー期間はまだ載っていない。"
     }
   ],
   "recurring": [

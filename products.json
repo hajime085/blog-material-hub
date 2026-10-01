@@ -116,15 +116,37 @@
       "endTime": "",
       "listPrice": 980,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "980円のタイプCケーブルが686円。長さは20cmから3mまで、2本目半額の表記あり。",
       "tags": [],
-      "points": [],
+      "points": [
+        "980円から686円へ",
+        "長さは20cm・1m・2m・3m",
+        "2本目半額の表記あり"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-10-01",
       "bumpedAt": "2026-10-01T07:36:49",
       "lastSeen": "2026-10-01",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "ベッドやソファから離れた場所で充電している人",
+        "problem": "コンセントが遠くて、充電しながらだと手元で使えない",
+        "use_case": "寝室やリビングでの充電",
+        "features": [
+          "タイプC",
+          "長さ20cm・1m・2m・3m",
+          "2本目半額の表記"
+        ],
+        "benefits": [
+          "置く場所に合わせて長さを選べる"
+        ],
+        "hook": "コンセントが遠い部屋、ケーブルの長さで決まります。",
+        "body": "タイプCのケーブルで、長さは20cmから3mまで。\n2本目半額の表記もあります。",
+        "cta": "none",
+        "ask": "充電ケーブル、何mのを使ってますか？"
+      }
     },
     {
       "id": "rc46fe7976",
@@ -143,15 +165,38 @@
       "endTime": "",
       "listPrice": 980,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "980円のシリコンのC to Cケーブルが686円。長さは1mと2m、2本目半額・3本目99％OFFの表記あり。",
       "tags": [],
-      "points": [],
+      "points": [
+        "980円から686円へ",
+        "シリコン素材のC to C",
+        "2本目半額・3本目99％OFFの表記あり"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-10-01",
       "bumpedAt": "2026-10-01T07:36:49",
       "lastSeen": "2026-10-01",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "relatable",
+        "target": "ケーブルが絡まりがちな人",
+        "problem": "かばんの中でケーブルがからまる",
+        "use_case": "持ち歩き・家での充電",
+        "features": [
+          "シリコン素材",
+          "C to C",
+          "長さ1m・2m",
+          "2本目半額・3本目99％OFFの表記"
+        ],
+        "benefits": [
+          "家用と持ち歩き用で本数をそろえられる"
+        ],
+        "hook": "充電ケーブル、家に何本あれば足りるんだろう。",
+        "body": "シリコン素材のC to Cケーブル。長さは1mと2m。\n2本目半額、3本目99％OFFの表記つき。",
+        "cta": "none",
+        "ask": "家と持ち歩きで、ケーブルを分けてる人いますか？"
+      }
     },
     {
       "id": "rcdc29d064",
@@ -170,15 +215,37 @@
       "endTime": "",
       "listPrice": 980,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "980円のタイプCの充電ケーブルが686円。iPhoneとAndroidの両方の表記あり、2本目半額・3本目99％OFF。",
       "tags": [],
-      "points": [],
+      "points": [
+        "980円から686円へ",
+        "タイプCの充電ケーブル",
+        "2本目半額・3本目99％OFFの表記あり"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-10-01",
       "bumpedAt": "2026-10-01T07:36:49",
       "lastSeen": "2026-10-01",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "compare",
+        "target": "iPhoneとAndroidを家族で混ぜて使っている家庭",
+        "problem": "機種ごとにケーブルを分けている",
+        "use_case": "家族共用の充電",
+        "features": [
+          "タイプC",
+          "iPhoneとAndroidの表記",
+          "2本目半額・3本目99％OFFの表記"
+        ],
+        "benefits": [
+          "タイプC同士なら機種をまたいで使える"
+        ],
+        "hook": "iPhoneもAndroidも、いまはタイプC。",
+        "body": "タイプCの充電ケーブルで、iPhoneとAndroidの両方の表記があります。\n2本目半額、3本目99％OFF。",
+        "cta": "none",
+        "ask": "家族でケーブル、共用してますか？"
+      }
     },
     {
       "id": "re923138ba",
@@ -205,7 +272,8 @@
       "postedAt": "2026-10-01",
       "bumpedAt": "2026-10-01T07:36:49",
       "lastSeen": "2026-10-01",
-      "pitch_status": "pending"
+      "pitch_status": "pending",
+      "hidden": true
     },
     {
       "id": "r16675c0e1",
@@ -224,15 +292,37 @@
       "endTime": "",
       "listPrice": 980,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "980円のUSB Type-Cケーブルが686円。長さは20cmから3mまで、2本目半額の表記あり。",
       "tags": [],
-      "points": [],
+      "points": [
+        "980円から686円へ",
+        "長さは20cm・1m・2m・3m",
+        "2本目半額の表記あり"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-10-01",
       "bumpedAt": "2026-10-01T07:36:49",
       "lastSeen": "2026-10-01",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "車や机の上など短い距離で充電したい人",
+        "problem": "長いケーブルが余って邪魔になる",
+        "use_case": "机・車での充電",
+        "features": [
+          "USB Type-C",
+          "長さ20cm・1m・2m・3m",
+          "2本目半額の表記"
+        ],
+        "benefits": [
+          "短い20cmから選べる"
+        ],
+        "hook": "20cmという長さのケーブルもあります。",
+        "body": "USB Type-Cのケーブルで、長さは20cmから3mまで。\n2本目半額の表記つき。",
+        "cta": "none",
+        "ask": "いちばん短いケーブル、どこで使ってますか？"
+      }
     },
     {
       "id": "r5d2ec24e7",
@@ -354,8 +444,12 @@
       "endTime": "2026-10-09 01:59",
       "listPrice": 2200,
       "priceBasis": "history",
-      "caption": "",
-      "points": [],
+      "caption": "2,200円のワンタフトブラシ10本セットが1,050円。10/4 20:00から10/9 1:59まで。",
+      "points": [
+        "2,200円から1,050円へ",
+        "ワンタフトブラシ10本セット",
+        "メール便を選ぶと送料無料"
+      ],
       "description": "",
       "tags": [],
       "unitNote": null,
@@ -385,32 +479,35 @@
       "tags": [
         "送料無料"
       ],
-      "points": [],
+      "points": [
+        "3,500円から1,750円へ",
+        "名前入りのタンクトップ",
+        "56犬種のシルエットに対応"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-10-01",
       "bumpedAt": "2026-10-01T11:39:59",
       "lastSeen": "2026-10-01",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
-        "target": "犬とおそろいにしたい人",
-        "problem": "犬服はサイズと犬種で合わない",
-        "use_case": "秋冬の散歩・写真",
+        "target": "犬とおそろいの服を着たい飼い主",
+        "problem": "うちの子だけの服がほしい",
+        "use_case": "散歩・写真",
         "features": [
-          "犬用タンクトップ",
-          "名入れできる",
-          "56犬種のシルエットに対応",
-          "人とペアルックにできる",
-          "送料込み"
+          "名入れ",
+          "タンクトップ",
+          "56犬種のシルエット",
+          "ペアルック"
         ],
         "benefits": [
-          "名前を入れられる",
-          "犬種を選べる"
+          "名前と犬種のシルエットを入れられる"
         ],
-        "hook": "犬の服は、犬種によって同じサイズでも全然違う。",
-        "body": "名前を入れられる犬用のタンクトップです。56犬種のシルエットに対応。\n人とおそろいにもできます。送料込み。",
-        "cta": "save"
+        "hook": "服に、うちの子の名前と犬種のシルエット。",
+        "body": "名前を入れられる犬用のタンクトップです。\nシルエットは56犬種から。飼い主とのペアルックもあります。",
+        "cta": "none",
+        "ask": "犬を飼ってる人、おそろいの服って持ってますか？"
       }
     },
     {
@@ -430,15 +527,38 @@
       "endTime": "2026-10-09 13:59",
       "listPrice": 2690,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "2,690円の国産うなぎ白焼き120gが1,780円。自家製ぽんず付き、10/2 14:00から。",
       "tags": [],
-      "points": [],
+      "points": [
+        "2,690円から1,780円へ",
+        "国産うなぎの白焼き120g・1尾",
+        "自家製ぽんず付き"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-10-01",
       "bumpedAt": "2026-10-01T11:29:48",
       "lastSeen": "2026-10-01",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "surprise",
+        "target": "うなぎを蒲焼き以外で食べてみたい人",
+        "problem": "うなぎはタレの味しか知らない",
+        "use_case": "夕食・おつまみ",
+        "features": [
+          "国産うなぎ",
+          "白焼き",
+          "120g・1尾",
+          "自家製ぽんず付き"
+        ],
+        "benefits": [
+          "タレではなく、ぽんずで食べる形"
+        ],
+        "hook": "うなぎにタレじゃなく、ぽんず。",
+        "body": "国産うなぎの白焼き、120gを1尾。\nうなぎ屋さん自家製のぽんずが付いてきます。",
+        "cta": "none",
+        "ask": "うなぎ、白焼きと蒲焼きならどっち派ですか？"
+      }
     },
     {
       "id": "re9854c5ff",
@@ -461,26 +581,35 @@
       "tags": [
         "送料無料"
       ],
-      "points": [],
+      "points": [
+        "3,000円から2,000円へ",
+        "鹿児島県産の抹茶パウダー100g",
+        "送料込み"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-10-01",
       "bumpedAt": "2026-10-01T11:29:48",
       "lastSeen": "2026-10-01",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "marketing": {
-        "hook_type": "discovery",
-        "target": "抹茶パウダーを探している人",
-        "problem": "抹茶は産地や品質で味が変わるので、選び方に迷う。",
-        "hook": "鹿児島県産の抹茶、見つけました。",
-        "body": "鹿児島県産の抹茶パウダー100g。レビューは3,659件、星4.72。",
+        "hook_type": "scene",
+        "target": "家で抹茶ラテやお菓子を作る人",
+        "problem": "抹茶パウダーを少量ずつ買っている",
+        "use_case": "抹茶ラテ・お菓子作り",
         "features": [
           "鹿児島県産",
-          "抹茶パウダー100g",
-          "レビュー3,659件・星4.72"
+          "抹茶パウダー",
+          "100g",
+          "送料込み"
         ],
-        "cta": "save",
-        "cta_text": null
+        "benefits": [
+          "100gまとめて手元に置ける"
+        ],
+        "hook": "家で抹茶ラテを作るなら、粉は100gあると心強い。",
+        "body": "鹿児島県産の抹茶パウダー、100g入り。\n送料込みです。",
+        "cta": "none",
+        "ask": "抹茶パウダー、ラテ用ですか、お菓子用ですか？"
       }
     },
     {
@@ -500,18 +629,41 @@
       "endTime": "",
       "listPrice": 5990,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "5,990円のヘアアイロンが在庫処分で3,990円。32mmと38mm、送料込み。",
       "tags": [
         "送料無料",
         "在庫処分"
       ],
-      "points": [],
+      "points": [
+        "在庫処分で5,990円から3,990円へ",
+        "太さは32mmと38mm",
+        "セラミックコーティング"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-10-01",
       "bumpedAt": "2026-10-01T11:30:17",
       "lastSeen": "2026-10-01",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "compare",
+        "target": "巻き髪をコテで作る人",
+        "problem": "コテの太さで迷う",
+        "use_case": "毎朝の髪のセット",
+        "features": [
+          "カールアイロン",
+          "32mm・38mm",
+          "セラミックコーティング",
+          "在庫処分価格"
+        ],
+        "benefits": [
+          "32mmと38mmから太さを選べる"
+        ],
+        "hook": "32mmか38mmか、コテの太さで巻きの大きさが変わる。",
+        "body": "セラミックコーティングのカールアイロン。太さは32mmと38mm。\n在庫処分の価格になっています。",
+        "cta": "none",
+        "ask": "コテを使う人、何mmを選んでますか？"
+      }
     },
     {
       "id": "re2144096f",
@@ -7100,8 +7252,12 @@
       "endTime": "",
       "listPrice": null,
       "priceBasis": null,
-      "caption": "",
-      "points": [],
+      "caption": "防災セットの2人用が22,800円。防災士と災害備蓄管理士の監修、期限管理アプリ付き。",
+      "points": [
+        "2人用の防災セット",
+        "期限管理アプリ付き",
+        "送料込み"
+      ],
       "description": "",
       "tags": [
         "送料無料"
