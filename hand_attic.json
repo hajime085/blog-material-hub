@@ -763,7 +763,7 @@
       "body": "名前を入れられる犬用のタンクトップです。56犬種のシルエットに対応。\n人とおそろいにもできます。送料込み。",
       "cta": "save"
     },
-    "pitch_status": "ready",
+    "pitch_status": "pending",
     "_stashedAt": "2026-10-01"
   },
   "lorelife:10000085": {
@@ -7813,7 +7813,7 @@
       "cta": "save",
       "cta_text": null
     },
-    "pitch_status": "ready",
+    "pitch_status": "pending",
     "_stashedAt": "2026-10-01"
   },
   "oga:10267401": {
@@ -8271,7 +8271,7 @@
     "_stashedAt": "2026-10-01"
   },
   "jitdirect:10034049": {
-    "caption": "800円のエプソン純正インクが400円。箱なしアウトレット。",
+    "caption": "エプソン純正インクが800円。箱なしアウトレット。",
     "tags": [
       "訳あり",
       "アウトレット"
@@ -10005,9 +10005,8 @@
     "_stashedAt": "2026-10-01"
   },
   "a-mobi:10001102": {
-    "caption": "980円のタイプC充電ケーブルが624円。両端がUSB-Cで、iPhone16・15にも使える形。",
+    "caption": "980円のタイプC充電ケーブルが546円。両端がUSB-Cで、iPhone16・15にも使える形。",
     "points": [
-      "980円から624円へ",
       "USB-C同士をつなぐケーブル",
       "レビュー4,899件・★4.53"
     ],
@@ -10156,7 +10155,7 @@
       "cta": "none",
       "ask": "晩酌のおつまみ、海のものと肉のもの、どちら派ですか？"
     },
-    "pitch_status": "ready",
+    "pitch_status": "pending",
     "_stashedAt": "2026-10-01"
   },
   "e-iki:10000152": {
@@ -10188,7 +10187,7 @@
       "cta": "none",
       "ask": "甘くないおやつ、何を食べていますか？"
     },
-    "pitch_status": "ready",
+    "pitch_status": "pending",
     "_stashedAt": "2026-10-01"
   },
   "xoxoxoxo:10000223": {
@@ -10230,6 +10229,25 @@
       "訳あり"
     ],
     "listPrice": 3000,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-01"
+  },
+  "kawasui:10000265": {
+    "listPrice": 2690,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-01"
+  },
+  "areti:10000003": {
+    "tags": [
+      "送料無料",
+      "在庫処分"
+    ],
+    "listPrice": 5990,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-01"
+  },
+  "d-fit:10004017": {
+    "listPrice": 2200,
     "pitch_status": "pending",
     "_stashedAt": "2026-10-01"
   }
