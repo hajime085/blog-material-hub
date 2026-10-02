@@ -515,23 +515,10 @@
     "product:r9ada9dea6",
     "product:rcdc29d064",
     "product:r16675c0e1",
-    "tip:15"
+    "tip:15",
+    "tip:10"
   ],
   "log": [
-    {
-      "key": "product:r73bd1c0f8",
-      "id": "18077148122414419",
-      "at": "2026-09-06 21:21",
-      "kind": "product",
-      "slot": 21,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "scene",
-      "cta_type": "save",
-      "category": "sports",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:r57bb79dd9",
       "id": "17879669379528599",
@@ -6210,6 +6197,22 @@
       "at": "2026-10-02 07:20",
       "kind": "tip",
       "slot": 7,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
+      "link_arm": null,
+      "cta_arm": null
+    },
+    {
+      "key": "tip:10",
+      "id": "18020164577938085",
+      "at": "2026-10-02 09:20",
+      "kind": "tip",
+      "slot": 9,
       "catchup": false,
       "cap": null,
       "hook_type": null,
