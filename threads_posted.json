@@ -523,23 +523,10 @@
     "tip:41",
     "product:r9d136164f",
     "tip:43",
-    "product:rfb8afa044"
+    "product:rfb8afa044",
+    "product:r040c0f1d0"
   ],
   "log": [
-    {
-      "key": "schedule:2026-W36-1",
-      "id": "18088220357658549",
-      "at": "2026-09-07 07:21",
-      "kind": "schedule",
-      "slot": 7,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none"
-    },
     {
       "key": "tip:35",
       "id": "17924634114420242",
@@ -6243,6 +6230,22 @@
       "link": "reply",
       "link_arm": "direct",
       "cta_arm": "base"
+    },
+    {
+      "key": "product:r040c0f1d0",
+      "id": "18146782570560743",
+      "at": "2026-10-02 21:00",
+      "kind": "product",
+      "slot": 21,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "problem_price",
+      "cta_type": "none",
+      "category": "pc",
+      "logic_version": "marketing_v2",
+      "link": "reply",
+      "link_arm": "direct",
+      "cta_arm": "ask"
     }
   ]
 }
