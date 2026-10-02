@@ -524,23 +524,10 @@
     "product:r9d136164f",
     "tip:43",
     "product:rfb8afa044",
-    "product:r040c0f1d0"
+    "product:r040c0f1d0",
+    "product:r146120f19"
   ],
   "log": [
-    {
-      "key": "tip:35",
-      "id": "17924634114420242",
-      "at": "2026-09-07 09:21",
-      "kind": "tip",
-      "slot": 9,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none"
-    },
     {
       "key": "tip:10",
       "id": "18131048935639066",
@@ -6242,6 +6229,22 @@
       "hook_type": "problem_price",
       "cta_type": "none",
       "category": "pc",
+      "logic_version": "marketing_v2",
+      "link": "reply",
+      "link_arm": "direct",
+      "cta_arm": "ask"
+    },
+    {
+      "key": "product:r146120f19",
+      "id": "17967377454183096",
+      "at": "2026-10-03 00:21",
+      "kind": "product",
+      "slot": 0,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "none",
+      "category": "fashion",
       "logic_version": "marketing_v2",
       "link": "reply",
       "link_arm": "direct",
