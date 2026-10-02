@@ -518,23 +518,10 @@
     "tip:15",
     "tip:10",
     "tip:17",
-    "product:re783e2082"
+    "product:re783e2082",
+    "tip:11"
   ],
   "log": [
-    {
-      "key": "product:r0b880f618",
-      "id": "17925621957181455",
-      "at": "2026-09-06 21:51",
-      "kind": "product",
-      "slot": 21,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "problem",
-      "cta_type": "save",
-      "category": "fashion",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:r4097dc932",
       "id": "18091276730146679",
@@ -6228,6 +6215,22 @@
       "link": "reply",
       "link_arm": "direct",
       "cta_arm": "base"
+    },
+    {
+      "key": "tip:11",
+      "id": "18486148885109747",
+      "at": "2026-10-02 14:21",
+      "kind": "tip",
+      "slot": 14,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
+      "link_arm": null,
+      "cta_arm": null
     }
   ]
 }
