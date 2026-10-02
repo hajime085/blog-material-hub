@@ -519,23 +519,10 @@
     "tip:10",
     "tip:17",
     "product:re783e2082",
-    "tip:11"
+    "tip:11",
+    "tip:41"
   ],
   "log": [
-    {
-      "key": "product:r4097dc932",
-      "id": "18091276730146679",
-      "at": "2026-09-06 22:21",
-      "kind": "product",
-      "slot": 22,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "scene",
-      "cta_type": "save",
-      "category": "food",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:rb9808baba",
       "id": "17989457726852902",
@@ -6222,6 +6209,22 @@
       "at": "2026-10-02 14:21",
       "kind": "tip",
       "slot": 14,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
+      "link_arm": null,
+      "cta_arm": null
+    },
+    {
+      "key": "tip:41",
+      "id": "18105784547460160",
+      "at": "2026-10-02 17:21",
+      "kind": "tip",
+      "slot": 17,
       "catchup": false,
       "cap": null,
       "hook_type": null,
