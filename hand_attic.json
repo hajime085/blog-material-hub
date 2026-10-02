@@ -1405,7 +1405,7 @@
       "cta": "save"
     },
     "pitch_status": "pending",
-    "_stashedAt": "2026-09-24"
+    "_stashedAt": "2026-10-02"
   },
   "woodgreen:13235143": {
     "caption": "2,480円のSwitchケースが1,240円。水彩のボタニカル柄、送料込み。",
@@ -10421,6 +10421,46 @@
       "メール便を選ぶと送料無料"
     ],
     "listPrice": 2200,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-02"
+  },
+  "menzsap:10001323": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2780,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-02"
+  },
+  "oga:10127229": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 1480,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-02"
+  },
+  "oga:10215539": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 1980,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-02"
+  },
+  "seedcoms:10007532": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2570,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-02"
+  },
+  "seedcoms:10007399": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2570,
     "pitch_status": "pending",
     "_stashedAt": "2026-10-02"
   }
