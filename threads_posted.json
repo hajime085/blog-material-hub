@@ -521,23 +521,10 @@
     "product:re783e2082",
     "tip:11",
     "tip:41",
-    "product:r9d136164f"
+    "product:r9d136164f",
+    "tip:43"
   ],
   "log": [
-    {
-      "key": "product:refcdc1c00",
-      "id": "17980528593113846",
-      "at": "2026-09-07 00:01",
-      "kind": "product",
-      "slot": 0,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "discovery",
-      "cta_type": "save",
-      "category": "pet",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:r7ff263388",
       "id": "18175312654432694",
@@ -6237,6 +6224,22 @@
       "link": "reply",
       "link_arm": "site",
       "cta_arm": "ask"
+    },
+    {
+      "key": "tip:43",
+      "id": "18168046324480305",
+      "at": "2026-10-02 19:21",
+      "kind": "tip",
+      "slot": 19,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
+      "link_arm": null,
+      "cta_arm": null
     }
   ]
 }
