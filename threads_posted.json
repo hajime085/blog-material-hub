@@ -517,23 +517,10 @@
     "product:r16675c0e1",
     "tip:15",
     "tip:10",
-    "tip:17"
+    "tip:17",
+    "product:re783e2082"
   ],
   "log": [
-    {
-      "key": "product:r0e73010c4",
-      "id": "18099264176571904",
-      "at": "2026-09-06 21:41",
-      "kind": "product",
-      "slot": 21,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "scene",
-      "cta_type": "save",
-      "category": "baby-toy",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:r0b880f618",
       "id": "17925621957181455",
@@ -6225,6 +6212,22 @@
       "link": "none",
       "link_arm": null,
       "cta_arm": null
+    },
+    {
+      "key": "product:re783e2082",
+      "id": "18129899101688300",
+      "at": "2026-10-02 13:00",
+      "kind": "product",
+      "slot": 13,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "compare",
+      "category": "pc",
+      "logic_version": "marketing_v2",
+      "link": "reply",
+      "link_arm": "direct",
+      "cta_arm": "base"
     }
   ]
 }
