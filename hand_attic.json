@@ -8709,8 +8709,8 @@
       "cta": "save",
       "cta_text": null
     },
-    "pitch_status": "ready",
-    "_stashedAt": "2026-09-24"
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-03"
   },
   "sanwa-junkei:10000536": {
     "caption": "2,980円の名古屋コーチンつくね1kgが2,086円。冷凍。",
@@ -10470,7 +10470,7 @@
       "cta": "none",
       "ask": "ワンタフトブラシ、普段の歯ブラシと使い分けていますか？"
     },
-    "pitch_status": "ready",
+    "pitch_status": "pending",
     "_stashedAt": "2026-10-03"
   },
   "menzsap:10001323": {
@@ -10821,6 +10821,70 @@
       "送料無料"
     ],
     "listPrice": 1330,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-03"
+  },
+  "auc-satouseicha:10000177": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2600,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-03"
+  },
+  "shinmainichi:10000032": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2750,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-03"
+  },
+  "seedcoms:10006662": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 1000,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-03"
+  },
+  "seedcoms:10004174": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 1600,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-03"
+  },
+  "seedcoms:10007430": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 1700,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-03"
+  },
+  "seedcoms:10007014": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 1600,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-03"
+  },
+  "seedcoms:10003996": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 1600,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-03"
+  },
+  "pierrot:10014126": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2290,
     "pitch_status": "pending",
     "_stashedAt": "2026-10-03"
   }
