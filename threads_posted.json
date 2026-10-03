@@ -539,23 +539,10 @@
     "tip:21",
     "tip:02",
     "tip:33",
-    "tip:14"
+    "tip:14",
+    "tip:08"
   ],
   "log": [
-    {
-      "key": "product:r89fbae1af",
-      "id": "17904698706560172",
-      "at": "2026-09-07 21:31",
-      "kind": "product",
-      "slot": 21,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "scene",
-      "cta_type": "save",
-      "category": "books",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:rd7371e81c",
       "id": "18167986429460273",
@@ -6282,6 +6269,22 @@
       "at": "2026-10-04 00:20",
       "kind": "tip",
       "slot": 0,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
+      "link_arm": null,
+      "cta_arm": null
+    },
+    {
+      "key": "tip:08",
+      "id": "18112528454332655",
+      "at": "2026-10-04 01:00",
+      "kind": "tip",
+      "slot": 1,
       "catchup": false,
       "cap": null,
       "hook_type": null,
