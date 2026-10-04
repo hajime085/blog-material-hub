@@ -553,23 +553,10 @@
     "product:rbb1390a0a",
     "product:r24e194561",
     "product:rc18459c03",
-    "product:r58b64002e"
+    "product:r58b64002e",
+    "product:r39b33bb3c"
   ],
   "log": [
-    {
-      "key": "product:rc13b17364",
-      "id": "18100526282198474",
-      "at": "2026-09-08 18:21",
-      "kind": "product",
-      "slot": 18,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "problem",
-      "cta_type": "save",
-      "category": "pc",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:r4110cd3c0",
       "id": "18407280490092230",
@@ -6333,6 +6320,22 @@
       "link": "reply",
       "link_arm": "site",
       "cta_arm": "base"
+    },
+    {
+      "key": "product:r39b33bb3c",
+      "id": "18128238976827997",
+      "at": "2026-10-04 21:11",
+      "kind": "product",
+      "slot": 21,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "none",
+      "category": "baby-toy",
+      "logic_version": "marketing_v2",
+      "link": "reply",
+      "link_arm": "direct",
+      "cta_arm": "ask"
     }
   ]
 }
