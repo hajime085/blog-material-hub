@@ -556,23 +556,10 @@
     "product:r58b64002e",
     "product:r39b33bb3c",
     "product:rf4fbc566e",
-    "product:r1e9d84928"
+    "product:r1e9d84928",
+    "product:reafc8e86c"
   ],
   "log": [
-    {
-      "key": "product:r60c611df5",
-      "id": "18094947149453378",
-      "at": "2026-09-08 20:21",
-      "kind": "product",
-      "slot": 20,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "discovery",
-      "cta_type": "save",
-      "category": "beauty",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:raa7d94a42",
       "id": "18205177417372102",
@@ -6342,6 +6329,22 @@
       "link": "reply",
       "link_arm": "site",
       "cta_arm": "ask"
+    },
+    {
+      "key": "product:reafc8e86c",
+      "id": "18124307780491372",
+      "at": "2026-10-04 21:41",
+      "kind": "product",
+      "slot": 21,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "none",
+      "category": "food",
+      "logic_version": "marketing_v2",
+      "link": "reply",
+      "link_arm": "direct",
+      "cta_arm": "base"
     }
   ]
 }
