@@ -552,23 +552,10 @@
     "product:r03b46f609",
     "product:rbb1390a0a",
     "product:r24e194561",
-    "product:rc18459c03"
+    "product:rc18459c03",
+    "product:r58b64002e"
   ],
   "log": [
-    {
-      "key": "tip:01",
-      "id": "18407291437087458",
-      "at": "2026-09-08 17:46",
-      "kind": "tip",
-      "slot": 17,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none"
-    },
     {
       "key": "product:rc13b17364",
       "id": "18100526282198474",
@@ -6330,6 +6317,22 @@
       "link": "reply",
       "link_arm": "direct",
       "cta_arm": "ask"
+    },
+    {
+      "key": "product:r58b64002e",
+      "id": "18635501959043200",
+      "at": "2026-10-04 21:01",
+      "kind": "product",
+      "slot": 21,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "none",
+      "category": "food",
+      "logic_version": "marketing_v2",
+      "link": "reply",
+      "link_arm": "site",
+      "cta_arm": "base"
     }
   ]
 }
