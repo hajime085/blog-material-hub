@@ -9,6 +9,8 @@
 ## food
 https://item.rakuten.co.jp/f406091-aka/3x2/
 https://item.rakuten.co.jp/exception5251/ex-x01028/
+kumamoto-food:10002290 # あご入りだしパック 2,760円→1,380円 ★4.65
+meat-21:10000071       # 鶏の炭火焼き 3袋 1,460円→1,000円 ★4.26（〜10/9）
 # https://item.rakuten.co.jp/matsuya/us30/  ← 予約販売限定で、楽天のAPIが商品を返さない。掲載除外
 
 ## kitchen
@@ -18,7 +20,8 @@ https://item.rakuten.co.jp/h2brothers/portabletoilet01/
 469kobo:10000325       # 簡易トイレ 50回分 15年保存 3,280円→1,580円 ★4.57
 
 ## fashion
-https://item.rakuten.co.jp/darkangel/pa2301-3635/
+# https://item.rakuten.co.jp/darkangel/pa2301-3635/  ← 10/4 セール終了（9/29）のため外した
+pierrot:10014126       # カシミヤタッチニット 2,290円→1,590円 ★4.31（マラソン〜10/9）
 https://item.rakuten.co.jp/gossipstar/bm1638/
 
 ## baby-toy
@@ -35,7 +38,8 @@ https://item.rakuten.co.jp/teinei-tsuhan/komachi/
 nishi-ryutu:10087267   # ブリタ カートリッジ 79%OFF ★4.54/1,749件
 
 ## pc
-jitdirect:10039896     # 純正インク 箱なしアウトレット キヤノン 57%OFF ★4.76
+# jitdirect:10039896     # 純正インク キヤノン BCI-380S  ← 10/4 セール終了（9/28）のため外した
+jitdirect:10003048     # 純正インク 箱なしアウトレット キヤノン BCI-350XL/351XL 50%OFF ★4.72
 # https://item.rakuten.co.jp/jitdirect/out-bc340341xl/  ← BC-340XL/341XL。APIで商品コードが引けない（9/27）
 
 ## books
