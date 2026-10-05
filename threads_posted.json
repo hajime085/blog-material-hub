@@ -567,23 +567,10 @@
     "tip:24",
     "tip:12",
     "product:r6cab14301",
-    "tip:34"
+    "tip:34",
+    "tip:06"
   ],
   "log": [
-    {
-      "key": "product:rc8139d923",
-      "id": "18006124370993475",
-      "at": "2026-09-09 00:01",
-      "kind": "product",
-      "slot": 0,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "discovery",
-      "cta_type": "save",
-      "category": "beauty",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:r460f4734a",
       "id": "18115157218761804",
@@ -6366,6 +6353,22 @@
       "at": "2026-10-05 14:00",
       "kind": "tip",
       "slot": 14,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
+      "link_arm": null,
+      "cta_arm": null
+    },
+    {
+      "key": "tip:06",
+      "id": "18105814385186917",
+      "at": "2026-10-05 17:21",
+      "kind": "tip",
+      "slot": 17,
       "catchup": false,
       "cap": null,
       "hook_type": null,
