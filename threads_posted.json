@@ -566,23 +566,10 @@
     "page:kaimawari:2026-10-04",
     "tip:24",
     "tip:12",
-    "product:r6cab14301"
+    "product:r6cab14301",
+    "tip:34"
   ],
   "log": [
-    {
-      "key": "product:rd0fc22355",
-      "id": "18188546590397731",
-      "at": "2026-09-08 23:00",
-      "kind": "product",
-      "slot": 23,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "discovery",
-      "cta_type": "save",
-      "category": "fashion",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:rc8139d923",
       "id": "18006124370993475",
@@ -6372,6 +6359,22 @@
       "link": "reply",
       "link_arm": "site",
       "cta_arm": "base"
+    },
+    {
+      "key": "tip:34",
+      "id": "18105918170616173",
+      "at": "2026-10-05 14:00",
+      "kind": "tip",
+      "slot": 14,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
+      "link_arm": null,
+      "cta_arm": null
     }
   ]
 }
