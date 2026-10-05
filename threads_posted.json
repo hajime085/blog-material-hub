@@ -563,23 +563,10 @@
     "product:r55a773204",
     "product:r387b8d8b1",
     "product:rb356d28ef",
-    "page:kaimawari:2026-10-04"
+    "page:kaimawari:2026-10-04",
+    "tip:24"
   ],
   "log": [
-    {
-      "key": "product:r36aae00f2",
-      "id": "18141116332603144",
-      "at": "2026-09-08 21:41",
-      "kind": "product",
-      "slot": 21,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "scene",
-      "cta_type": "save",
-      "category": "food",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:r0f909586a",
       "id": "18007018922978680",
@@ -6361,6 +6348,22 @@
       "category": null,
       "logic_version": null,
       "link": "reply",
+      "link_arm": null,
+      "cta_arm": null
+    },
+    {
+      "key": "tip:24",
+      "id": "17919336090450738",
+      "at": "2026-10-05 09:20",
+      "kind": "tip",
+      "slot": 9,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
       "link_arm": null,
       "cta_arm": null
     }
