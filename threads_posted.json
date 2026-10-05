@@ -565,23 +565,10 @@
     "product:rb356d28ef",
     "page:kaimawari:2026-10-04",
     "tip:24",
-    "tip:12"
+    "tip:12",
+    "product:r6cab14301"
   ],
   "log": [
-    {
-      "key": "product:r6cbef6122",
-      "id": "18196575100381055",
-      "at": "2026-09-08 22:21",
-      "kind": "product",
-      "slot": 22,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "compare",
-      "cta_type": "compare",
-      "category": "beauty",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:rd0fc22355",
       "id": "18188546590397731",
@@ -6369,6 +6356,22 @@
       "link": "none",
       "link_arm": null,
       "cta_arm": null
+    },
+    {
+      "key": "product:r6cab14301",
+      "id": "17990835759058560",
+      "at": "2026-10-05 13:00",
+      "kind": "product",
+      "slot": 13,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "none",
+      "category": "kaden",
+      "logic_version": "marketing_v2",
+      "link": "reply",
+      "link_arm": "site",
+      "cta_arm": "base"
     }
   ]
 }
