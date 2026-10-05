@@ -564,23 +564,10 @@
     "product:r387b8d8b1",
     "product:rb356d28ef",
     "page:kaimawari:2026-10-04",
-    "tip:24"
+    "tip:24",
+    "tip:12"
   ],
   "log": [
-    {
-      "key": "product:r0f909586a",
-      "id": "18007018922978680",
-      "at": "2026-09-08 21:51",
-      "kind": "product",
-      "slot": 21,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "discovery",
-      "cta_type": "save",
-      "category": "beauty",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:r6cbef6122",
       "id": "18196575100381055",
@@ -6357,6 +6344,22 @@
       "at": "2026-10-05 09:20",
       "kind": "tip",
       "slot": 9,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
+      "link_arm": null,
+      "cta_arm": null
+    },
+    {
+      "key": "tip:12",
+      "id": "18465340852137826",
+      "at": "2026-10-05 12:20",
+      "kind": "tip",
+      "slot": 12,
       "catchup": false,
       "cap": null,
       "hook_type": null,
