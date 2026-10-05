@@ -572,23 +572,10 @@
     "product:r6cd2f4fca",
     "tip:18",
     "product:r845a962d3",
-    "product:r046a28edd"
+    "product:r046a28edd",
+    "product:r9880ca98f"
   ],
   "log": [
-    {
-      "key": "product:rc1a34b77f",
-      "id": "18364787665244406",
-      "at": "2026-09-09 13:00",
-      "kind": "product",
-      "slot": 13,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "discovery",
-      "cta_type": "save",
-      "category": "books",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "tip:00",
       "id": "18106706773950368",
@@ -6389,6 +6376,22 @@
       "logic_version": "marketing_v2",
       "link": "reply",
       "link_arm": "site",
+      "cta_arm": "base"
+    },
+    {
+      "key": "product:r9880ca98f",
+      "id": "18461352274140765",
+      "at": "2026-10-05 20:21",
+      "kind": "product",
+      "slot": 20,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "question",
+      "category": "pc",
+      "logic_version": "marketing_v2",
+      "link": "reply",
+      "link_arm": "direct",
       "cta_arm": "base"
     }
   ]
