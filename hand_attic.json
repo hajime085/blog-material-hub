@@ -4184,7 +4184,7 @@
       "cta": "empathy",
       "ask": "リモコンの電池、充電池にしている人はどのくらいいますか？"
     },
-    "pitch_status": "ready",
+    "pitch_status": "pending",
     "_stashedAt": "2026-10-05"
   },
   "forc-wear:10000328": {
@@ -5110,11 +5110,11 @@
     ],
     "description": "髪を拭くためのマイクロファイバータオルです。バスタオルより小さめのスリム型。\n吸水と速乾に振っているので、洗ってもすぐ乾きます。髪を拭く時間そのものが短くなります。",
     "tags": [
-      "ウォッチ中",
-      "送料無料",
-      "まとめ買い"
+      "送料無料"
     ],
-    "_stashedAt": "2026-10-02"
+    "listPrice": 1760,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-05"
   },
   "toucher-home:10000264": {
     "caption": "圧縮して届くタオル。かさばらないうえに890円、送料もなし。",
@@ -11536,6 +11536,14 @@
       "送料無料"
     ],
     "listPrice": 1480,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-05"
+  },
+  "lax:10032452": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 3990,
     "pitch_status": "pending",
     "_stashedAt": "2026-10-05"
   }
