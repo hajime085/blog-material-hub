@@ -592,23 +592,10 @@
     "schedule:2026-W40-2",
     "tip:17",
     "tip:11",
-    "tip:41"
+    "tip:41",
+    "product:r5d2ec24e7"
   ],
   "log": [
-    {
-      "key": "product:r1941d2a91",
-      "id": "18078666515705432",
-      "at": "2026-09-10 01:21",
-      "kind": "product",
-      "slot": 1,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "compare",
-      "cta_type": "save",
-      "category": "beauty",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "tip:29",
       "id": "18167541796460034",
@@ -6450,6 +6437,22 @@
       "link": "none",
       "link_arm": null,
       "cta_arm": null
+    },
+    {
+      "key": "product:r5d2ec24e7",
+      "id": "17927635290182958",
+      "at": "2026-10-06 18:00",
+      "kind": "product",
+      "slot": 18,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "discovery",
+      "cta_type": "none",
+      "category": "food",
+      "logic_version": "marketing_v2",
+      "link": "reply",
+      "link_arm": "site",
+      "cta_arm": "base"
     }
   ]
 }
