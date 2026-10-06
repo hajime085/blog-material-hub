@@ -596,23 +596,10 @@
     "product:r5d2ec24e7",
     "tip:43",
     "product:r275035dce",
-    "product:rd1d4a269e"
+    "product:rd1d4a269e",
+    "product:r8550da93e"
   ],
   "log": [
-    {
-      "key": "tip:16",
-      "id": "17904314928557234",
-      "at": "2026-09-10 13:00",
-      "kind": "tip",
-      "slot": 13,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none"
-    },
     {
       "key": "tip:30",
       "id": "17966700579175380",
@@ -6458,6 +6445,22 @@
       "hook_type": "discovery",
       "cta_type": "empathy",
       "category": "kitchen",
+      "logic_version": "marketing_v2",
+      "link": "reply",
+      "link_arm": "site",
+      "cta_arm": "ask"
+    },
+    {
+      "key": "product:r8550da93e",
+      "id": "18231754876324385",
+      "at": "2026-10-06 20:20",
+      "kind": "product",
+      "slot": 20,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "none",
+      "category": "fashion",
       "logic_version": "marketing_v2",
       "link": "reply",
       "link_arm": "site",
