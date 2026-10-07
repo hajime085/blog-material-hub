@@ -612,23 +612,10 @@
     "tip:14",
     "tip:08",
     "tip:23",
-    "tip:03"
+    "tip:03",
+    "product:rc498bfa25"
   ],
   "log": [
-    {
-      "key": "tip:20",
-      "id": "18114495712782507",
-      "at": "2026-09-10 21:50",
-      "kind": "tip",
-      "slot": 21,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none"
-    },
     {
       "key": "product:r4dae4a1ed",
       "id": "17966825447960341",
@@ -6510,6 +6497,22 @@
       "link": "none",
       "link_arm": null,
       "cta_arm": null
+    },
+    {
+      "key": "product:rc498bfa25",
+      "id": "18105292466191808",
+      "at": "2026-10-07 13:00",
+      "kind": "product",
+      "slot": 13,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "cta_type": "none",
+      "category": "kitchen",
+      "logic_version": "marketing_v2",
+      "link": "reply",
+      "link_arm": "site",
+      "cta_arm": "ask"
     }
   ]
 }
