@@ -31,7 +31,7 @@
       "postedAt": "2026-10-06",
       "bumpedAt": "2026-10-06T14:30:11",
       "lastSeen": "2026-10-07",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
         "target": "だしを取って料理する人",
@@ -83,25 +83,28 @@
       "postedAt": "2026-10-06",
       "bumpedAt": "2026-10-06T14:30:11",
       "lastSeen": "2026-10-07",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "marketing": {
-        "hook_type": "relatable",
-        "target": "炭酸水をまとめて買う人",
-        "problem": "ペットボトルのラベルをはがすのが面倒",
-        "use_case": "家で飲む炭酸水・割り材",
+        "hook_type": "discovery",
+        "target": "炭酸水をまとめ買いする人",
+        "problem": "炭酸水は箱で買うとき、味や本数を選ぶ",
+        "use_case": "家での飲み物・割り材",
         "features": [
-          "アイリスオーヤマ公式",
+          "最短賞味期限は2026年10月",
+          "訳あり",
           "ラベルレス",
-          "無糖の強炭酸",
+          "無糖・0kcal",
+          "500ml48本／1L15本",
           "レモン・グレープフルーツ・プレーン",
-          "最短賞味期限2026年10月の訳あり品"
+          "送料無料"
         ],
         "benefits": [
-          "捨てるときにラベルをはがさなくていい"
+          "ラベルレスで無糖の強炭酸"
         ],
-        "hook": "炭酸水のラベルはがし、地味に面倒。",
-        "body": "アイリスオーヤマの強炭酸水です。ラベルレスで無糖。\n最短賞味期限が2026年10月の訳あり品で、レモン・グレープフルーツ・プレーンがあります。",
-        "cta": "none"
+        "hook": "最短賞味期限が2026年10月の、訳あり強炭酸水です。",
+        "body": "ラベルレスで無糖、0kcal。\n500mlの48本と1Lの15本があり、味はレモン・グレープフルーツ・プレーン。",
+        "cta": "none",
+        "ask": "炭酸水を箱買いする人、味はプレーンとレモンのどちらを選びますか？"
       }
     },
     {
@@ -121,15 +124,38 @@
       "endTime": "",
       "listPrice": 2200,
       "priceBasis": "title",
-      "caption": "",
+      "caption": "2,200円のトリートメント240gが1,540円。11月中旬のリニューアルに伴う30%OFF。",
       "tags": [],
-      "points": [],
+      "points": [
+        "240g・単品",
+        "11月中旬リニューアルに伴うセール"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-10-06",
       "bumpedAt": "2026-10-06T14:32:14",
       "lastSeen": "2026-10-07",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "クイーンズバスルームのトリートメントを使う人",
+        "problem": "11月中旬のリニューアル前に買い足すか迷う",
+        "use_case": "バスルーム",
+        "features": [
+          "240g",
+          "30%OFFセール",
+          "11月中旬に商品リニューアル予定",
+          "4本セットはセール終了・単品で購入",
+          "レビュー6,640件・星4.6"
+        ],
+        "benefits": [
+          "リニューアルに伴うセールで30%OFF"
+        ],
+        "hook": "クイーンズバスルームのトリートメントが、リニューアルに伴って30%OFFです。",
+        "body": "240gの単品。\n11月中旬に商品がリニューアルする予定で、4本セットはセールの対象外です。",
+        "cta": "none",
+        "ask": "トリートメントを買い足す人、リニューアル前のセールでまとめて買いますか？"
+      }
     },
     {
       "id": "rc498bfa25",
@@ -148,17 +174,40 @@
       "endTime": "",
       "listPrice": 3000,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "3,000円の災害用簡易トイレが1,800円。20回分・50回分・100回分から選べる。",
       "tags": [
         "送料無料"
       ],
-      "points": [],
+      "points": [
+        "凝固剤・吸水ポリマーのシートタイプ",
+        "20・50・100回分"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-10-06",
       "bumpedAt": "2026-10-06T14:31:13",
       "lastSeen": "2026-10-07",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "防災グッズをそろえている人",
+        "problem": "災害時のトイレの備えをどれだけ持つか決める",
+        "use_case": "防災・非常用",
+        "features": [
+          "20回分／50回分／100回分",
+          "凝固剤",
+          "吸水ポリマーのシートタイプ",
+          "災害用",
+          "送料無料"
+        ],
+        "benefits": [
+          "回数を選んで備えられる"
+        ],
+        "hook": "災害用の簡易トイレです。20回分・50回分・100回分から選べます。",
+        "body": "凝固剤と、吸水ポリマーのシートがセットになったタイプです。",
+        "cta": "none",
+        "ask": "防災グッズをそろえている人、トイレは何回分ありますか？"
+      }
     },
     {
       "id": "r99780be55",
@@ -190,7 +239,7 @@
       "postedAt": "2026-10-06",
       "bumpedAt": "2026-10-06T20:33:39",
       "lastSeen": "2026-10-07",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
         "target": "ゆったりした長袖を探している人",
@@ -242,7 +291,7 @@
       "postedAt": "2026-10-06",
       "bumpedAt": "2026-10-06T20:33:39",
       "lastSeen": "2026-10-07",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
         "target": "きれいめのスカートを探している人",
@@ -261,7 +310,8 @@
         ],
         "hook": "前と後ろ、両方にスリットが入っています。",
         "body": "Iラインのロング丈。ポケット付きです。\n接触冷感の生地を使っています。",
-        "cta": "save"
+        "cta": "save",
+        "ask": "ロングスカートを選ぶ人、前後にスリットがあるタイプは気になりますか？"
       }
     },
     {
@@ -334,8 +384,11 @@
       "endTime": "2026-10-08 23:59",
       "listPrice": 5000,
       "priceBasis": "title",
-      "caption": "",
-      "points": [],
+      "caption": "5,000円の歯みがき粉とマウスウォッシュのセットが2,500円。",
+      "points": [
+        "歯みがき粉120g・マウスウォッシュ300ml",
+        "医薬部外品・日本製"
+      ],
       "description": "",
       "tags": [
         "送料無料"
@@ -344,7 +397,28 @@
       "postedAt": "2026-10-06",
       "bumpedAt": "2026-10-06T14:28:43",
       "lastSeen": "2026-10-07",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "歯みがき用品をセットで買う人",
+        "problem": "歯みがき粉とマウスウォッシュを別々にそろえる",
+        "use_case": "毎日の歯みがき",
+        "features": [
+          "歯みがき粉120g＋マウスウォッシュ300ml",
+          "医薬部外品",
+          "日本製",
+          "大人・子供向け",
+          "送料無料",
+          "10/8 20:00開始の半額"
+        ],
+        "benefits": [
+          "歯みがき粉とマウスウォッシュが1セット"
+        ],
+        "hook": "歯みがき粉120gとマウスウォッシュ300mlのセットです。",
+        "body": "医薬部外品で、日本製。\n大人も子供も使える作りです。",
+        "cta": "none",
+        "ask": "歯みがき粉とマウスウォッシュ、同じメーカーでそろえる人はいますか？"
+      }
     },
     {
       "id": "r8097c41af",
@@ -363,18 +437,43 @@
       "endTime": "",
       "listPrice": 4980,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "4,980円のセラミックヒーターが3,280円。人感センサーと転倒時の自動OFF付き。",
       "tags": [
         "送料無料",
         "在庫処分"
       ],
-      "points": [],
+      "points": [
+        "950W・送風／弱／強",
+        "人感センサー・オフタイマー・転倒自動OFF"
+      ],
       "description": "",
       "unitNote": null,
       "postedAt": "2026-10-06",
       "bumpedAt": "2026-10-06T14:30:41",
       "lastSeen": "2026-10-07",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "足元を温めたい人",
+        "problem": "足元用の小型ヒーターを探している",
+        "use_case": "デスク・足元",
+        "features": [
+          "950W",
+          "送風／弱／強",
+          "人感センサー",
+          "オフタイマー",
+          "転倒自動OFF",
+          "小型・軽量",
+          "送料無料"
+        ],
+        "benefits": [
+          "小型で、人感センサーと転倒時の自動OFF付き"
+        ],
+        "hook": "足元用の小型セラミックヒーターです。",
+        "body": "人感センサーとオフタイマー付き。\n転倒したときは自動でOFFになります。",
+        "cta": "none",
+        "ask": "足元を温めたい人、ヒーターは人感センサー付きを選びますか？"
+      }
     },
     {
       "id": "r3979f8f60",
@@ -1813,7 +1912,7 @@
       "postedAt": "2026-10-03",
       "bumpedAt": "2026-10-03T11:33:06",
       "lastSeen": "2026-10-07",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "marketing": {
         "hook_type": "compare",
         "target": "ビタミンとミネラルのサプリを探している人",
