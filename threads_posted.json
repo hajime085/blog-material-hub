@@ -621,23 +621,10 @@
     "product:rd9f0abb0f",
     "tip:16",
     "tip:30",
-    "tip:28"
+    "tip:28",
+    "tip:05"
   ],
   "log": [
-    {
-      "key": "tip:11",
-      "id": "17863357314677965",
-      "at": "2026-09-11 15:00",
-      "kind": "tip",
-      "slot": 15,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none"
-    },
     {
       "key": "tip:40",
       "id": "18131656228636874",
@@ -6526,6 +6513,22 @@
       "key": "tip:28",
       "id": "18109107005228009",
       "at": "2026-10-07 20:31",
+      "kind": "tip",
+      "slot": 20,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
+      "link_arm": null,
+      "cta_arm": null
+    },
+    {
+      "key": "tip:05",
+      "id": "18088661729662923",
+      "at": "2026-10-07 20:41",
       "kind": "tip",
       "slot": 20,
       "catchup": false,
