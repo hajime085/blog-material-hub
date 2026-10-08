@@ -642,23 +642,10 @@
     "tip:09",
     "product:r9fe46b7eb",
     "tip:35",
-    "tip:15"
+    "tip:15",
+    "tip:10"
   ],
   "log": [
-    {
-      "key": "product:r4b9a55bd5",
-      "id": "17870146683601877",
-      "at": "2026-09-12 23:46",
-      "kind": "product",
-      "slot": 23,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "discovery",
-      "cta_type": "save",
-      "category": "food",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:r15ad388df",
       "id": "18109630391030633",
@@ -6597,6 +6584,22 @@
       "key": "tip:15",
       "id": "18020954426948584",
       "at": "2026-10-08 20:00",
+      "kind": "tip",
+      "slot": 20,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
+      "link_arm": null,
+      "cta_arm": null
+    },
+    {
+      "key": "tip:10",
+      "id": "18629597809026035",
+      "at": "2026-10-08 20:10",
       "kind": "tip",
       "slot": 20,
       "catchup": false,
