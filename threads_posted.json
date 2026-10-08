@@ -640,23 +640,10 @@
     "product:rdecd9caed",
     "tip:38",
     "tip:09",
-    "product:r9fe46b7eb"
+    "product:r9fe46b7eb",
+    "tip:35"
   ],
   "log": [
-    {
-      "key": "tip:27",
-      "id": "18087525749680366",
-      "at": "2026-09-12 22:00",
-      "kind": "tip",
-      "slot": 22,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none"
-    },
     {
       "key": "product:r20fdbf7fa",
       "at": "2026-09-12 23:21",
@@ -6594,6 +6581,22 @@
       "link": "reply",
       "link_arm": "direct",
       "cta_arm": "ask"
+    },
+    {
+      "key": "tip:35",
+      "id": "18587903512066041",
+      "at": "2026-10-08 19:00",
+      "kind": "tip",
+      "slot": 19,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
+      "link_arm": null,
+      "cta_arm": null
     }
   ]
 }
