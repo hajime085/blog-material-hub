@@ -11886,5 +11886,29 @@
     "listPrice": 2400,
     "pitch_status": "pending",
     "_stashedAt": "2026-10-09"
+  },
+  "unotea:10000875": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2600,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-09"
+  },
+  "unotea:10000480": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2500,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-09"
+  },
+  "unotea:10000174": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 1800,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-09"
   }
 }
