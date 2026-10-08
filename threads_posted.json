@@ -643,23 +643,10 @@
     "product:r9fe46b7eb",
     "tip:35",
     "tip:15",
-    "tip:10"
+    "tip:10",
+    "tip:17"
   ],
   "log": [
-    {
-      "key": "product:r15ad388df",
-      "id": "18109630391030633",
-      "at": "2026-09-13 00:21",
-      "kind": "product",
-      "slot": 0,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "discovery",
-      "cta_type": "save",
-      "category": "car",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:r5bb34a57a",
       "id": "18223172497332594",
@@ -6600,6 +6587,22 @@
       "key": "tip:10",
       "id": "18629597809026035",
       "at": "2026-10-08 20:10",
+      "kind": "tip",
+      "slot": 20,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
+      "link_arm": null,
+      "cta_arm": null
+    },
+    {
+      "key": "tip:17",
+      "id": "18023662079865961",
+      "at": "2026-10-08 20:20",
       "kind": "tip",
       "slot": 20,
       "catchup": false,
