@@ -641,15 +641,10 @@
     "tip:38",
     "tip:09",
     "product:r9fe46b7eb",
-    "tip:35"
+    "tip:35",
+    "tip:15"
   ],
   "log": [
-    {
-      "key": "product:r20fdbf7fa",
-      "at": "2026-09-12 23:21",
-      "failed": true,
-      "error": "HTTP Error 500: Internal Server Error"
-    },
     {
       "key": "product:r4b9a55bd5",
       "id": "17870146683601877",
@@ -6588,6 +6583,22 @@
       "at": "2026-10-08 19:00",
       "kind": "tip",
       "slot": 19,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
+      "link_arm": null,
+      "cta_arm": null
+    },
+    {
+      "key": "tip:15",
+      "id": "18020954426948584",
+      "at": "2026-10-08 20:00",
+      "kind": "tip",
+      "slot": 20,
       "catchup": false,
       "cap": null,
       "hook_type": null,
