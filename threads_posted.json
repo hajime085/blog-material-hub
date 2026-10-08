@@ -652,23 +652,10 @@
     "tip:01",
     "tip:13",
     "tip:22",
-    "tip:00"
+    "tip:00",
+    "tip:21"
   ],
   "log": [
-    {
-      "key": "product:raf1300d6e",
-      "id": "18619140355009373",
-      "at": "2026-09-13 18:00",
-      "kind": "product",
-      "slot": 18,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "discovery",
-      "cta_type": "save",
-      "category": "beauty",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:rb40cd4809",
       "id": "17863141833679212",
@@ -6627,6 +6614,22 @@
       "key": "tip:00",
       "id": "17966390079207414",
       "at": "2026-10-08 21:41",
+      "kind": "tip",
+      "slot": 21,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
+      "link_arm": null,
+      "cta_arm": null
+    },
+    {
+      "key": "tip:21",
+      "id": "18220661239354468",
+      "at": "2026-10-08 21:51",
       "kind": "tip",
       "slot": 21,
       "catchup": false,
