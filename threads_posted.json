@@ -651,23 +651,10 @@
     "tip:25",
     "tip:01",
     "tip:13",
-    "tip:22"
+    "tip:22",
+    "tip:00"
   ],
   "log": [
-    {
-      "key": "tip:12",
-      "id": "18131965222581661",
-      "at": "2026-09-13 17:21",
-      "kind": "tip",
-      "slot": 17,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none"
-    },
     {
       "key": "product:raf1300d6e",
       "id": "18619140355009373",
@@ -6624,6 +6611,22 @@
       "key": "tip:22",
       "id": "18080162210349599",
       "at": "2026-10-08 21:31",
+      "kind": "tip",
+      "slot": 21,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
+      "link_arm": null,
+      "cta_arm": null
+    },
+    {
+      "key": "tip:00",
+      "id": "17966390079207414",
+      "at": "2026-10-08 21:41",
       "kind": "tip",
       "slot": 21,
       "catchup": false,
