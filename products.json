@@ -1,7 +1,401 @@
 {
   "_readme": "商品データ。手で書いた caption / points / description / tags / marketing / hidden は、更新でも、いったん外して拾い直したときでも 残ります（外すときは hand_attic.json に預けています）。",
-  "updatedAt": "2026-10-09",
+  "updatedAt": "2026-10-10",
   "products": [
+    {
+      "id": "rc1fe87a23",
+      "category": "pc",
+      "title": "【標準容量】純正インク 箱なしアウトレット ブラザー LC113シリーズ【訳あり】",
+      "rawTitle": "【標準容量】純正インク 箱なしアウトレット ブラザー LC113シリーズ【訳あり】",
+      "price": 400,
+      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/jitdirect/cabinet/outoretto/out-lc113.jpg?_ex=600x600",
+      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00pyxx7.jeifo8cd.g00pyxx7.jeifpaf9/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fjitdirect%2Fout-lc113%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fjitdirect%2Fi%2F10034060%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+      "shop": "ジットストア",
+      "reviewAverage": 4.85,
+      "reviewCount": 71,
+      "itemCode": "jitdirect:10034060",
+      "genreId": "502185",
+      "startTime": "2026-10-09 18:00",
+      "endTime": "2026-10-13 09:59",
+      "listPrice": 800,
+      "priceBasis": "history",
+      "caption": "",
+      "tags": [
+        "訳あり",
+        "アウトレット"
+      ],
+      "points": [],
+      "description": "",
+      "unitNote": null,
+      "postedAt": "2026-10-10",
+      "bumpedAt": "2026-10-10T07:36:59",
+      "lastSeen": "2026-10-10",
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "同じ店・同じ値段が10件。2件までにする（ジットストア 400円）"
+    },
+    {
+      "id": "r24ec2b7c9",
+      "category": "pc",
+      "title": "【標準容量】純正インク 箱なしアウトレット エプソン IC80シリーズ とうもろこし 【訳あり】",
+      "rawTitle": "【標準容量】純正インク 箱なしアウトレット エプソン IC80シリーズ とうもろこし 【訳あり】",
+      "price": 400,
+      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/jitdirect/cabinet/outoretto/out-ic80.jpg?_ex=600x600",
+      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00pyxx7.jeifo8cd.g00pyxx7.jeifpaf9/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fjitdirect%2Fout-ic80%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fjitdirect%2Fi%2F10034040%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+      "shop": "ジットストア",
+      "reviewAverage": 4.73,
+      "reviewCount": 63,
+      "itemCode": "jitdirect:10034040",
+      "genreId": "502185",
+      "startTime": "2026-10-09 18:00",
+      "endTime": "2026-10-13 09:59",
+      "listPrice": 800,
+      "priceBasis": "history",
+      "caption": "",
+      "tags": [
+        "訳あり",
+        "アウトレット"
+      ],
+      "points": [],
+      "description": "",
+      "unitNote": null,
+      "postedAt": "2026-10-10",
+      "bumpedAt": "2026-10-10T07:36:59",
+      "lastSeen": "2026-10-10",
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "同じ店・同じ値段が10件。2件までにする（ジットストア 400円）"
+    },
+    {
+      "id": "r9a3cdc314",
+      "category": "pc",
+      "title": "純正インク 箱なしアウトレット キヤノン BCI-380S/381Sシリーズ【小容量】【訳あり】",
+      "rawTitle": "純正インク 箱なしアウトレット キヤノン BCI-380S/381Sシリーズ【小容量】【訳あり】",
+      "price": 400,
+      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/jitdirect/cabinet/outoretto/bci-380381s2.jpg?_ex=600x600",
+      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00pyxx7.jeifo8cd.g00pyxx7.jeifpaf9/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fjitdirect%2Fout-bci-380381s%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fjitdirect%2Fi%2F10039896%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+      "shop": "ジットストア",
+      "reviewAverage": 4.64,
+      "reviewCount": 33,
+      "itemCode": "jitdirect:10039896",
+      "genreId": "502185",
+      "startTime": "2026-10-09 18:00",
+      "endTime": "2026-10-13 09:59",
+      "listPrice": 800,
+      "priceBasis": "history",
+      "caption": "800円のキヤノン純正インクが箱なしアウトレットで登場。BCI-380S/381S、小容量。",
+      "tags": [
+        "訳あり",
+        "アウトレット"
+      ],
+      "points": [],
+      "description": "",
+      "unitNote": null,
+      "postedAt": "2026-10-10",
+      "bumpedAt": "2026-10-10T07:36:59",
+      "lastSeen": "2026-10-10",
+      "pitch_status": "pending",
+      "marketing": {
+        "hook_type": "scene",
+        "target": "プリンターのインク代を抑えたい人",
+        "problem": "純正インクは正規箱入りだと割高に感じる。",
+        "hook": "純正インク、箱なしアウトレットなら安く買えます。",
+        "body": "キヤノンBCI-380S/381Sシリーズの純正インク（小容量）。箱なしアウトレットの訳あり品。レビューは33件、星4.64。",
+        "features": [
+          "キヤノンBCI-380S/381Sシリーズ純正インク",
+          "小容量・箱なしアウトレット",
+          "レビュー33件・星4.64"
+        ],
+        "cta": "save",
+        "cta_text": null
+      },
+      "hidden": true,
+      "hiddenReason": "同じ店・同じ値段が3件。2件までにする（ジットストア 400円）。レビューが一番少ない1件を伏せた"
+    },
+    {
+      "id": "rd41c17b51",
+      "category": "pc",
+      "title": "純正インク 箱なしアウトレット エプソン YTH(ヨット)シリーズ【訳あり】",
+      "rawTitle": "純正インク 箱なしアウトレット エプソン YTH(ヨット)シリーズ【訳あり】",
+      "price": 400,
+      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/jitdirect/cabinet/outoretto/out-yth.jpg?_ex=600x600",
+      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00pyxx7.jeifo8cd.g00pyxx7.jeifpaf9/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fjitdirect%2Fout-yth%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fjitdirect%2Fi%2F10039420%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+      "shop": "ジットストア",
+      "reviewAverage": 4.65,
+      "reviewCount": 31,
+      "itemCode": "jitdirect:10039420",
+      "genreId": "502185",
+      "startTime": "2026-10-09 18:00",
+      "endTime": "2026-10-13 09:59",
+      "listPrice": 800,
+      "priceBasis": "history",
+      "caption": "",
+      "tags": [
+        "訳あり",
+        "アウトレット"
+      ],
+      "points": [],
+      "description": "",
+      "unitNote": null,
+      "postedAt": "2026-10-10",
+      "bumpedAt": "2026-10-10T07:36:59",
+      "lastSeen": "2026-10-10",
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "同じ店・同じ値段が10件。2件までにする（ジットストア 400円）"
+    },
+    {
+      "id": "ree074f31a",
+      "category": "pc",
+      "title": "【大容量】純正インク 箱なしアウトレット ブラザー LC215シリーズ【訳あり】",
+      "rawTitle": "【大容量】純正インク 箱なしアウトレット ブラザー LC215シリーズ【訳あり】",
+      "price": 400,
+      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/jitdirect/cabinet/outoretto/out-lc215.jpg?_ex=600x600",
+      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00pyxx7.jeifo8cd.g00pyxx7.jeifpaf9/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fjitdirect%2Fout-lc215%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fjitdirect%2Fi%2F10034063%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+      "shop": "ジットストア",
+      "reviewAverage": 5.0,
+      "reviewCount": 20,
+      "itemCode": "jitdirect:10034063",
+      "genreId": "502185",
+      "startTime": "2026-10-09 18:00",
+      "endTime": "2026-10-13 09:59",
+      "listPrice": 800,
+      "priceBasis": "history",
+      "caption": "",
+      "tags": [
+        "訳あり",
+        "アウトレット"
+      ],
+      "points": [],
+      "description": "",
+      "unitNote": null,
+      "postedAt": "2026-10-10",
+      "bumpedAt": "2026-10-10T07:36:59",
+      "lastSeen": "2026-10-10",
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "同じ店・同じ値段が10件。2件までにする（ジットストア 400円）"
+    },
+    {
+      "id": "rd4be0ad1a",
+      "category": "pc",
+      "title": "【標準容量】純正インク 箱なしアウトレット ブラザー LC213シリーズ【訳あり】",
+      "rawTitle": "【標準容量】純正インク 箱なしアウトレット ブラザー LC213シリーズ【訳あり】",
+      "price": 450,
+      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/jitdirect/cabinet/outoretto/out-lc213.jpg?_ex=600x600",
+      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00pyxx7.jeifo8cd.g00pyxx7.jeifpaf9/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fjitdirect%2Fout-lc213%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fjitdirect%2Fi%2F10034062%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+      "shop": "ジットストア",
+      "reviewAverage": 4.59,
+      "reviewCount": 17,
+      "itemCode": "jitdirect:10034062",
+      "genreId": "502185",
+      "startTime": "2026-10-09 18:00",
+      "endTime": "2026-10-13 09:59",
+      "listPrice": 900,
+      "priceBasis": "history",
+      "caption": "",
+      "tags": [
+        "訳あり",
+        "アウトレット"
+      ],
+      "points": [],
+      "description": "",
+      "unitNote": null,
+      "postedAt": "2026-10-10",
+      "bumpedAt": "2026-10-10T07:36:59",
+      "lastSeen": "2026-10-10",
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "同じ店・同じ値段が3件。2件までにする（ジットストア 450円）"
+    },
+    {
+      "id": "r24e194561",
+      "category": "pc",
+      "title": "【増量】純正インク 箱なしアウトレット エプソン KUI-L(クマノミ)シリーズ【訳あり】",
+      "rawTitle": "【増量】純正インク 箱なしアウトレット エプソン KUI-L(クマノミ)シリーズ【訳あり】",
+      "price": 550,
+      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/jitdirect/cabinet/outoretto/out-kui-l.jpg?_ex=600x600",
+      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00pyxx7.jeifo8cd.g00pyxx7.jeifpaf9/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fjitdirect%2Fout-kui-l%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fjitdirect%2Fi%2F10039422%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+      "shop": "ジットストア",
+      "reviewAverage": 4.83,
+      "reviewCount": 98,
+      "itemCode": "jitdirect:10039422",
+      "genreId": "502185",
+      "startTime": "2026-10-09 18:00",
+      "endTime": "2026-10-13 09:59",
+      "listPrice": 1100,
+      "priceBasis": "history",
+      "caption": "1,100円のエプソン純正KUI-Lが550円。増量タイプ。",
+      "tags": [
+        "訳あり",
+        "アウトレット"
+      ],
+      "points": [
+        "1,100円から550円へ",
+        "クマノミの絵柄",
+        "レビュー98件・★4.83"
+      ],
+      "description": "",
+      "unitNote": null,
+      "postedAt": "2026-10-10",
+      "bumpedAt": "2026-10-10T07:36:59",
+      "lastSeen": "2026-10-10",
+      "pitch_status": "pending",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "エプソンのプリンターを使う人",
+        "problem": "純正インクは高い",
+        "use_case": "家庭の印刷",
+        "features": [
+          "エプソン純正KUI-L",
+          "増量タイプ",
+          "箱なしアウトレット"
+        ],
+        "benefits": [
+          "純正を安く買える"
+        ],
+        "hook": "エプソンの純正インク、箱が無いだけで半額のものがあります。",
+        "body": "KUI-L（クマノミ）の増量タイプ。\n中身は純正で、外箱の無いアウトレットです。",
+        "cta": "none",
+        "ask": "エプソンのプリンターを使っている人、インクは純正と互換のどちらですか？"
+      }
+    },
+    {
+      "id": "rabf4c18bc",
+      "category": "pc",
+      "title": "【大容量】純正インク 箱なしアウトレット ブラザー LC115シリーズ【訳あり】",
+      "rawTitle": "【大容量】純正インク 箱なしアウトレット ブラザー LC115シリーズ【訳あり】",
+      "price": 600,
+      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/jitdirect/cabinet/outoretto/out-lc115.jpg?_ex=600x600",
+      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00pyxx7.jeifo8cd.g00pyxx7.jeifpaf9/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fjitdirect%2Fout-lc115%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fjitdirect%2Fi%2F10034061%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+      "shop": "ジットストア",
+      "reviewAverage": 4.77,
+      "reviewCount": 35,
+      "itemCode": "jitdirect:10034061",
+      "genreId": "502185",
+      "startTime": "2026-10-09 18:00",
+      "endTime": "2026-10-13 09:59",
+      "listPrice": 1200,
+      "priceBasis": "history",
+      "caption": "1,200円のブラザー純正LC115が600円。大容量。",
+      "tags": [
+        "訳あり",
+        "アウトレット"
+      ],
+      "points": [
+        "1,200円から600円へ",
+        "箱なしアウトレット",
+        "レビュー35件・★4.77"
+      ],
+      "description": "",
+      "unitNote": null,
+      "postedAt": "2026-10-10",
+      "bumpedAt": "2026-10-10T07:36:59",
+      "lastSeen": "2026-10-10",
+      "pitch_status": "pending",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "ブラザーのプリンターを使う人",
+        "problem": "純正インクは高い",
+        "use_case": "家庭の印刷",
+        "features": [
+          "ブラザー純正LC115",
+          "大容量",
+          "箱なしアウトレット"
+        ],
+        "benefits": [
+          "純正を安く買える"
+        ],
+        "hook": "ブラザーの純正インク、箱なしのアウトレットです。",
+        "body": "LC115シリーズの大容量タイプ。\n中身は純正で、外箱がありません。",
+        "cta": "none",
+        "ask": "ブラザーのプリンターの人、インクはまとめ買いしますか？"
+      }
+    },
+    {
+      "id": "r05a1e1d6c",
+      "category": "pc",
+      "title": "【大容量】純正インク 箱なしアウトレット エプソン IC76シリーズ 地球儀 【訳あり】",
+      "rawTitle": "【大容量】純正インク 箱なしアウトレット エプソン IC76シリーズ 地球儀 【訳あり】",
+      "price": 600,
+      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/jitdirect/cabinet/outoretto/out-ic76.jpg?_ex=600x600",
+      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00pyxx7.jeifo8cd.g00pyxx7.jeifpaf9/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fjitdirect%2Fout-ic76%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fjitdirect%2Fi%2F10034039%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+      "shop": "ジットストア",
+      "reviewAverage": 4.65,
+      "reviewCount": 17,
+      "itemCode": "jitdirect:10034039",
+      "genreId": "502185",
+      "startTime": "2026-10-09 18:00",
+      "endTime": "2026-10-13 09:59",
+      "listPrice": 1200,
+      "priceBasis": "history",
+      "caption": "",
+      "tags": [
+        "訳あり",
+        "アウトレット"
+      ],
+      "points": [],
+      "description": "",
+      "unitNote": null,
+      "postedAt": "2026-10-10",
+      "bumpedAt": "2026-10-10T07:36:59",
+      "lastSeen": "2026-10-10",
+      "pitch_status": "pending",
+      "hidden": true,
+      "hiddenReason": "同じ店・同じ値段が3件。2件までにする（ジットストア 600円）"
+    },
+    {
+      "id": "r49599a6f6",
+      "category": "pc",
+      "title": "【大容量】純正インク 箱なしアウトレット キヤノン BCI-380XL/381XLシリーズ【訳あり】",
+      "rawTitle": "【大容量】純正インク 箱なしアウトレット キヤノン BCI-380XL/381XLシリーズ【訳あり】",
+      "price": 675,
+      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/jitdirect/cabinet/outoretto/out-bci-380381xl.jpg?_ex=600x600",
+      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00pyxx7.jeifo8cd.g00pyxx7.jeifpaf9/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fjitdirect%2Fout-bci-380381xl%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fjitdirect%2Fi%2F10043192%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+      "shop": "ジットストア",
+      "reviewAverage": 4.69,
+      "reviewCount": 32,
+      "itemCode": "jitdirect:10043192",
+      "genreId": "502185",
+      "startTime": "2026-10-09 18:00",
+      "endTime": "2026-10-13 09:59",
+      "listPrice": 1350,
+      "priceBasis": "history",
+      "caption": "1,350円のキヤノン純正BCI-380XL/381XLが675円。大容量。",
+      "tags": [
+        "訳あり",
+        "アウトレット"
+      ],
+      "points": [
+        "1,350円から675円へ",
+        "箱なしアウトレット",
+        "レビュー32件・★4.69"
+      ],
+      "description": "",
+      "unitNote": null,
+      "postedAt": "2026-10-10",
+      "bumpedAt": "2026-10-10T07:36:59",
+      "lastSeen": "2026-10-10",
+      "pitch_status": "pending",
+      "marketing": {
+        "hook_type": "discovery",
+        "target": "キヤノンのプリンターを使う人",
+        "problem": "純正インクは高い",
+        "use_case": "家庭の印刷",
+        "features": [
+          "キヤノン純正BCI-380XL/381XL",
+          "大容量",
+          "箱なしアウトレット"
+        ],
+        "benefits": [
+          "純正を安く買える"
+        ],
+        "hook": "キヤノンの大容量インク、箱なしで半額です。",
+        "body": "BCI-380XL/381XLシリーズ。\n中身は純正で、外箱の無いアウトレットです。",
+        "cta": "none",
+        "ask": "キヤノンのプリンターの人、大容量と標準のどちらを選んでいますか？"
+      }
+    },
     {
       "id": "rc98af3a0e",
       "category": "pc",
@@ -33,7 +427,7 @@
       "unitNote": null,
       "postedAt": "2026-10-09",
       "bumpedAt": "2026-10-09T21:37:26",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending",
       "marketing": {
         "hook_type": "discovery",
@@ -80,7 +474,7 @@
       "unitNote": null,
       "postedAt": "2026-10-09",
       "bumpedAt": "2026-10-09T21:37:26",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending",
       "marketing": {
         "hook_type": "problem",
@@ -128,7 +522,7 @@
       "unitNote": null,
       "postedAt": "2026-10-09",
       "bumpedAt": "2026-10-09T21:37:26",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending",
       "hidden": true,
       "hiddenReason": "同じ店・同じ値段が10件。2件までにする（ジットストア 400円）"
@@ -160,7 +554,7 @@
       "unitNote": null,
       "postedAt": "2026-10-09",
       "bumpedAt": "2026-10-09T21:37:26",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending",
       "hidden": true,
       "hiddenReason": "同じ店・同じ値段が10件。2件までにする（ジットストア 400円）"
@@ -192,7 +586,7 @@
       "unitNote": null,
       "postedAt": "2026-10-09",
       "bumpedAt": "2026-10-09T21:37:26",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending",
       "hidden": true,
       "hiddenReason": "似た商品（同じ店・同じ値段の純正インクアウトレット）が並んだため、レビューが少ない方を伏せた"
@@ -228,7 +622,7 @@
       "unitNote": null,
       "postedAt": "2026-10-09",
       "bumpedAt": "2026-10-09T21:37:26",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending",
       "marketing": {
         "hook_type": "discovery",
@@ -280,7 +674,7 @@
       "unitNote": null,
       "postedAt": "2026-10-09",
       "bumpedAt": "2026-10-09T21:37:26",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending",
       "marketing": {
         "hook_type": "discovery",
@@ -332,7 +726,7 @@
       "unitNote": null,
       "postedAt": "2026-10-09",
       "bumpedAt": "2026-10-09T21:37:26",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending",
       "marketing": {
         "hook_type": "discovery",
@@ -384,7 +778,7 @@
       "unitNote": null,
       "postedAt": "2026-10-09",
       "bumpedAt": "2026-10-09T21:37:26",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending",
       "marketing": {
         "hook_type": "discovery",
@@ -415,7 +809,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00q8qj7.jeifo2ee.g00q8qj7.jeifpbbc/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdarkangel%2Fto2305-1114%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fdarkangel%2Fi%2F10036035%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "Dark Angel (ダークエンジェル)",
       "reviewAverage": 4.31,
-      "reviewCount": 20293,
+      "reviewCount": 20315,
       "itemCode": "darkangel:10036035",
       "genreId": "303656",
       "startTime": "2026-10-10 10:00",
@@ -431,7 +825,7 @@
       "unitNote": null,
       "postedAt": "2026-10-09",
       "bumpedAt": "2026-10-09T16:35:31",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending",
       "marketing": {
         "hook_type": "scene",
@@ -475,7 +869,7 @@
       "unitNote": null,
       "postedAt": "2026-10-09",
       "bumpedAt": "2026-10-09T07:30:03",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending"
     },
     {
@@ -504,7 +898,7 @@
       "unitNote": null,
       "postedAt": "2026-10-09",
       "bumpedAt": "2026-10-09T11:30:02",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending"
     },
     {
@@ -537,39 +931,10 @@
       "pitch_status": "pending"
     },
     {
-      "id": "r1ccc56d7f",
-      "category": "beauty",
-      "title": "「プラセンタ10倍」シミ対策する美容ゲル【薬用プリエネージュ プラセリッチゲル(50g/約1ヶ月分)】国…",
-      "rawTitle": "楽天1位！「プラセンタ10倍」シミ対策する美容ゲル【薬用プリエネージュ プラセリッチゲル(50g/約1ヶ月分)】国産プラセンタ 美白オールインワン しみ くすみ 無添加 保湿 シワ 買い回り 白くま化粧品",
-      "price": 1000,
-      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/shirokuma-cosme/cabinet/pri-gel-01/prigel50g_2503.jpg?_ex=600x600",
-      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00sqyn7.jeifo703.g00sqyn7.jeifp87d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fshirokuma-cosme%2Fpri-gel-02%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fshirokuma-cosme%2Fi%2F10000020%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
-      "shop": "白くま化粧品",
-      "reviewAverage": 4.42,
-      "reviewCount": 2959,
-      "itemCode": "shirokuma-cosme:10000020",
-      "genreId": "563728",
-      "startTime": "2026-10-14 20:00",
-      "endTime": "2026-10-17 09:59",
-      "listPrice": 2200,
-      "priceBasis": "history",
-      "caption": "",
-      "points": [],
-      "description": "",
-      "tags": [
-        "送料無料"
-      ],
-      "unitNote": null,
-      "postedAt": "2026-10-09",
-      "bumpedAt": "2026-10-09T00:00:00",
-      "lastSeen": "2026-10-09",
-      "pitch_status": "pending"
-    },
-    {
       "id": "r5ef347374",
       "category": "food",
-      "title": "＜お買い物マラソン 半額＞ 58%OFF ジャスミン茶 送料無料 中国茶 ジャスミン ティーバッグ…",
-      "rawTitle": "＜お買い物マラソン 半額＞ 58%OFF ジャスミン茶 送料無料 中国茶 ジャスミン ティーバッグ 30個入 ティーパック ティーバッグ 銀毫 ネコポス 鵜ノ池製茶",
+      "title": "＜期間限定 半額＞ 58%OFF ジャスミン茶 送料無料 中国茶 ジャスミン ティーバッグ 30個入…",
+      "rawTitle": "＜期間限定 半額＞ 58%OFF ジャスミン茶 送料無料 中国茶 ジャスミン ティーバッグ 30個入 ティーパック ティーバッグ 銀毫 ネコポス 鵜ノ池製茶",
       "price": 1080,
       "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/unotea/cabinet/12359252/imgrc0093082325.jpg?_ex=600x600",
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00t45k7.jeifod74.g00t45k7.jeifp454/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Funotea%2Fpremiumu-jasmine%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Funotea%2Fi%2F10000875%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
@@ -591,7 +956,7 @@
       "unitNote": null,
       "postedAt": "2026-10-09",
       "bumpedAt": "2026-10-09T07:30:03",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending"
     },
     {
@@ -618,7 +983,7 @@
       "unitNote": null,
       "postedAt": "2026-10-09",
       "bumpedAt": "2026-10-09T16:29:43",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending"
     },
     {
@@ -630,8 +995,8 @@
       "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/kiroran/cabinet/13890768/26dl.jpg?_ex=600x600",
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00ufk67.jeifo1eb.g00ufk67.jeifpf2c/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkiroran%2Fdl%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fkiroran%2Fi%2F10000196%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "FULNG 楽天市場店",
-      "reviewAverage": 4.67,
-      "reviewCount": 5679,
+      "reviewAverage": 4.66,
+      "reviewCount": 5680,
       "itemCode": "kiroran:10000196",
       "genreId": "565605",
       "startTime": "",
@@ -647,7 +1012,7 @@
       "unitNote": null,
       "postedAt": "2026-10-09",
       "bumpedAt": "2026-10-09T16:32:34",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "marketing": {
         "hook_type": "problem",
         "target": "風呂の排水口の掃除が苦手な人",
@@ -694,7 +1059,7 @@
       "unitNote": null,
       "postedAt": "2026-10-09",
       "bumpedAt": "2026-10-09T21:34:53",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending",
       "marketing": {
         "hook_type": "problem",
@@ -743,7 +1108,7 @@
       "unitNote": null,
       "postedAt": "2026-10-09",
       "bumpedAt": "2026-10-09T07:30:03",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending"
     },
     {
@@ -772,7 +1137,7 @@
       "unitNote": null,
       "postedAt": "2026-10-09",
       "bumpedAt": "2026-10-09T16:35:31",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending"
     },
     {
@@ -801,7 +1166,7 @@
       "unitNote": null,
       "postedAt": "2026-10-09",
       "bumpedAt": "2026-10-09T11:30:02",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending"
     },
     {
@@ -830,7 +1195,7 @@
       "unitNote": null,
       "postedAt": "2026-10-09",
       "bumpedAt": "2026-10-09T11:30:02",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending"
     },
     {
@@ -886,36 +1251,7 @@
       "unitNote": null,
       "postedAt": "2026-10-09",
       "bumpedAt": "2026-10-09T16:35:31",
-      "lastSeen": "2026-10-09",
-      "pitch_status": "pending"
-    },
-    {
-      "id": "r8688e57d6",
-      "category": "fashion",
-      "title": "16円～ 【10/11 10時〜24H限定：3枚購入&クーポン利用で3枚目が99％OFF】ブラトップ…",
-      "rawTitle": "16円～!【10/11 10時〜24H限定：3枚購入&クーポン利用で3枚目が99％OFF】ブラトップ キャミソール タンクトップ カップ付きインナー リブフィットタンク リブフィットキャミソール 下着 ノンワイヤー 伸縮性 部屋着 秋 冬 30代 40代 50代 裏起毛以外がページ内最安",
-      "price": 1590,
-      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/darkangel/cabinet/12863863/10/5336-main-261008.jpg?_ex=600x600",
-      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00q8qj7.jeifo2ee.g00q8qj7.jeifpbbc/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdarkangel%2Fin2603-5336%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fdarkangel%2Fi%2F10037880%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
-      "shop": "Dark Angel (ダークエンジェル)",
-      "reviewAverage": 3.82,
-      "reviewCount": 3011,
-      "itemCode": "darkangel:10037880",
-      "genreId": "566018",
-      "startTime": "2026-10-11 10:00",
-      "endTime": "2026-10-12 09:59",
-      "listPrice": 2799,
-      "priceBasis": "history",
-      "caption": "",
-      "points": [],
-      "description": "",
-      "tags": [
-        "送料無料"
-      ],
-      "unitNote": null,
-      "postedAt": "2026-10-09",
-      "bumpedAt": "2026-10-09T00:00:00",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending"
     },
     {
@@ -973,7 +1309,7 @@
       "unitNote": null,
       "postedAt": "2026-10-09",
       "bumpedAt": "2026-10-09T16:38:05",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending"
     },
     {
@@ -1000,7 +1336,7 @@
       "unitNote": null,
       "postedAt": "2026-10-09",
       "bumpedAt": "2026-10-09T11:33:28",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending"
     },
     {
@@ -1031,7 +1367,7 @@
       "unitNote": null,
       "postedAt": "2026-10-09",
       "bumpedAt": "2026-10-09T16:35:31",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending",
       "marketing": {
         "hook_type": "scene",
@@ -1078,7 +1414,7 @@
       "unitNote": null,
       "postedAt": "2026-10-09",
       "bumpedAt": "2026-10-09T16:35:31",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending"
     },
     {
@@ -1087,7 +1423,7 @@
       "title": "エミュール公式 フットブラシ 足洗いマット 足裏ブラシ 足洗いブラシ フットケア 角質ケア 足裏ケア…",
       "rawTitle": "【 10/10限定★全品 10％OFFクーポン 】【 半額 】エミュール公式 フットブラシ 足洗いマット 足裏ブラシ 足洗いブラシ フットケア 角質ケア 足裏ケア 足洗い ボディブラシ 背中ケア やわらか素材 送料無料 [M便1/1]【代引不可】【ネコポス便】",
       "price": 2980,
-      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/emurshop/cabinet/12951684/12967331/12980794/imgrc0109426027.jpg?_ex=600x600",
+      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/emurshop/cabinet/14002688/imgrc0122706342.jpg?_ex=600x600",
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00r3xr7.jeifo17a.g00r3xr7.jeifpc59/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Femurshop%2Ffoot-brush%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Femurshop%2Fi%2F10000276%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "エミュール入浴剤&シャワーヘッド",
       "reviewAverage": 4.58,
@@ -1107,7 +1443,7 @@
       "unitNote": null,
       "postedAt": "2026-10-09",
       "bumpedAt": "2026-10-09T11:31:57",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending"
     },
     {
@@ -1134,7 +1470,7 @@
       "unitNote": null,
       "postedAt": "2026-10-09",
       "bumpedAt": "2026-10-09T16:35:31",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending"
     },
     {
@@ -1161,14 +1497,14 @@
       "unitNote": null,
       "postedAt": "2026-10-09",
       "bumpedAt": "2026-10-09T16:35:31",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending"
     },
     {
       "id": "r1686e59b9",
       "category": "kaden",
       "title": "ドライヤー 大風量 テスコム マイナスイオン 1200w ヘアドライヤー 折りたたみ式 お手入れ簡単…",
-      "rawTitle": "【在庫処分特価5,500円→3,278円】 ドライヤー 大風量 テスコム マイナスイオン 1200w ヘアドライヤー 折りたたみ式 お手入れ簡単 大風量 騒音抑制 騒音を軽減 TESCOM TD460B 公式店 日本メーカー",
+      "rawTitle": "【P5倍 10日限定】 【在庫処分特価5,500円→3,278円】 ドライヤー 大風量 テスコム マイナスイオン 1200w ヘアドライヤー 折りたたみ式 お手入れ簡単 大風量 騒音抑制 騒音を軽減 TESCOM TD460B 公式店 日本メーカー",
       "price": 3278,
       "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/tescom-japan/cabinet/thum/remove/td460b_sp_0.jpg?_ex=600x600",
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00tc8c7.jeifo847.g00tc8c7.jeifp844/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftescom-japan%2Ftd460%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Ftescom-japan%2Fi%2F10000163%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
@@ -1190,7 +1526,7 @@
       "unitNote": null,
       "postedAt": "2026-10-09",
       "bumpedAt": "2026-10-09T16:31:58",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending"
     },
     {
@@ -1217,7 +1553,7 @@
       "unitNote": null,
       "postedAt": "2026-10-09",
       "bumpedAt": "2026-10-09T16:35:31",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending"
     },
     {
@@ -1247,7 +1583,7 @@
       "unitNote": null,
       "postedAt": "2026-10-07",
       "bumpedAt": "2026-10-07T14:32:46",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending"
     },
     {
@@ -1276,7 +1612,7 @@
       "unitNote": null,
       "postedAt": "2026-10-07",
       "bumpedAt": "2026-10-07T14:32:46",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending"
     },
     {
@@ -1289,7 +1625,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00q8qj7.jeifo2ee.g00q8qj7.jeifpbbc/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdarkangel%2Fpt2311-3854%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fdarkangel%2Fi%2F10036348%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "Dark Angel (ダークエンジェル)",
       "reviewAverage": 4.01,
-      "reviewCount": 2336,
+      "reviewCount": 2338,
       "itemCode": "darkangel:10036348",
       "genreId": "206440",
       "startTime": "2026-10-09 10:00",
@@ -1308,7 +1644,7 @@
       "unitNote": null,
       "postedAt": "2026-10-07",
       "bumpedAt": "2026-10-07T16:33:46",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending",
       "marketing": {
         "hook_type": "discovery",
@@ -1396,7 +1732,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00qjlv7.jeifob85.g00qjlv7.jeifp00d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fque-bath%2F100000025%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fque-bath%2Fi%2F10000065%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "クイーンズバスルーム楽天市場支店",
       "reviewAverage": 4.6,
-      "reviewCount": 6644,
+      "reviewCount": 6645,
       "itemCode": "que-bath:10000065",
       "genreId": "210695",
       "startTime": "",
@@ -1413,7 +1749,7 @@
       "unitNote": null,
       "postedAt": "2026-10-06",
       "bumpedAt": "2026-10-06T14:32:14",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
@@ -1465,7 +1801,7 @@
       "unitNote": null,
       "postedAt": "2026-10-06",
       "bumpedAt": "2026-10-06T14:31:13",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
@@ -1676,7 +2012,7 @@
       "unitNote": null,
       "postedAt": "2026-10-06",
       "bumpedAt": "2026-10-06T14:30:41",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
@@ -1727,7 +2063,7 @@
       "unitNote": null,
       "postedAt": "2026-10-05",
       "bumpedAt": "2026-10-05T14:33:54",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
@@ -1774,7 +2110,7 @@
       "unitNote": null,
       "postedAt": "2026-10-05",
       "bumpedAt": "2026-10-05T14:33:54",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
@@ -1825,7 +2161,7 @@
       "unitNote": null,
       "postedAt": "2026-10-05",
       "bumpedAt": "2026-10-05T11:31:59",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
@@ -1876,7 +2212,7 @@
       "unitNote": null,
       "postedAt": "2026-10-05",
       "bumpedAt": "2026-10-05T11:31:25",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
@@ -1923,7 +2259,7 @@
       "unitNote": null,
       "postedAt": "2026-10-05",
       "bumpedAt": "2026-10-05T14:33:54",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
@@ -1972,7 +2308,7 @@
       "unitNote": null,
       "postedAt": "2026-10-05",
       "bumpedAt": "2026-10-05T14:33:54",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
@@ -2020,7 +2356,7 @@
       "unitNote": null,
       "postedAt": "2026-10-05",
       "bumpedAt": "2026-10-05T14:33:54",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "relatable",
@@ -2125,7 +2461,7 @@
       "unitNote": null,
       "postedAt": "2026-10-04",
       "bumpedAt": "2026-10-04T20:36:00",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
@@ -2175,7 +2511,7 @@
       "unitNote": null,
       "postedAt": "2026-10-04",
       "bumpedAt": "2026-10-04T20:36:29",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
@@ -2194,55 +2530,6 @@
         "body": "ヨガやピラティス、ランニングに使えるデザインレギンス。\nアウトレット品です。",
         "cta": "none",
         "ask": "ヨガをする人、レギンスは無地と柄、どちらが多いですか？"
-      }
-    },
-    {
-      "id": "r36aae00f2",
-      "category": "food",
-      "title": "＜期間限定 半額＞ 50%OFF 鹿児島茶 送料無料 緑茶ティーバッグ お徳用 お茶…",
-      "rawTitle": "＜期間限定 半額＞ 50%OFF 鹿児島茶 送料無料 緑茶ティーバッグ お徳用 お茶 2.5g×100個入 緑茶 深蒸し茶 ティーパック 大容量 カテキン パック 100包 水出し 冷茶 オフィス 業務用 深むし茶 茶葉 日本茶 煎茶 健康 ネコポス ポイント消化 鵜ノ池製茶",
-      "price": 1200,
-      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/unotea/cabinet/08285670/itudoko-new-hot.jpg?_ex=600x600",
-      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00t45k7.jeifod74.g00t45k7.jeifp454/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Funotea%2Fitudoko%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Funotea%2Fi%2F10000596%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
-      "shop": "鵜ノ池製茶",
-      "reviewAverage": 4.73,
-      "reviewCount": 2176,
-      "itemCode": "unotea:10000596",
-      "genreId": "100361",
-      "startTime": "2026-10-04 20:00",
-      "endTime": "2026-10-09 22:59",
-      "listPrice": 2400,
-      "priceBasis": "history",
-      "caption": "2,400円の鹿児島茶ティーバッグ100個入りが1,200円。",
-      "tags": [
-        "送料無料"
-      ],
-      "points": [],
-      "description": "",
-      "unitNote": null,
-      "postedAt": "2026-10-04",
-      "bumpedAt": "2026-10-04T16:31:27",
-      "lastSeen": "2026-10-09",
-      "pitch_status": "ready",
-      "marketing": {
-        "hook_type": "discovery",
-        "target": "緑茶をよく飲む人",
-        "problem": "急須で淹れるのが手間",
-        "use_case": "家・オフィス",
-        "features": [
-          "鹿児島茶",
-          "深蒸し茶",
-          "2.5g×100個",
-          "水出し可",
-          "送料込み"
-        ],
-        "benefits": [
-          "ティーバッグで淹れられる"
-        ],
-        "hook": "緑茶のティーバッグが100個入っています。",
-        "body": "鹿児島の深蒸し茶で、1袋2.5g。\n水出しにも使えます。",
-        "cta": "none",
-        "ask": "緑茶を飲む人、急須とティーバッグ、どちらが多いですか？"
       }
     },
     {
@@ -2326,7 +2613,7 @@
       "unitNote": null,
       "postedAt": "2026-10-04",
       "bumpedAt": "2026-10-04T20:30:12",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
@@ -2591,7 +2878,7 @@
       "unitNote": null,
       "postedAt": "2026-10-03",
       "bumpedAt": "2026-10-03T16:32:10",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
@@ -2643,7 +2930,7 @@
       "unitNote": null,
       "postedAt": "2026-10-03",
       "bumpedAt": "2026-10-03T11:33:06",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
@@ -2691,7 +2978,7 @@
       "unitNote": null,
       "postedAt": "2026-10-03",
       "bumpedAt": "2026-10-03T11:33:06",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
@@ -2743,7 +3030,7 @@
       "unitNote": null,
       "postedAt": "2026-10-03",
       "bumpedAt": "2026-10-03T11:33:06",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
@@ -2793,7 +3080,7 @@
       "unitNote": null,
       "postedAt": "2026-10-03",
       "bumpedAt": "2026-10-03T11:33:06",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "compare",
@@ -2827,7 +3114,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00r8h17.jeifob48.g00r8h17.jeifp49a/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fseedcoms%2F10007117%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fseedcoms%2Fi%2F10007117%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "サプリ専門SHOP シードコムス",
       "reviewAverage": 4.45,
-      "reviewCount": 2036,
+      "reviewCount": 2037,
       "itemCode": "seedcoms:10007117",
       "genreId": "402667",
       "startTime": "2026-10-04 20:00",
@@ -2847,7 +3134,7 @@
       "unitNote": null,
       "postedAt": "2026-10-03",
       "bumpedAt": "2026-10-03T00:00:00",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
@@ -2900,7 +3187,7 @@
       "unitNote": null,
       "postedAt": "2026-10-03",
       "bumpedAt": "2026-10-03T11:33:06",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
@@ -2932,7 +3219,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00r8h17.jeifob48.g00r8h17.jeifp49a/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fseedcoms%2F10004174%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fseedcoms%2Fi%2F10004174%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "サプリ専門SHOP シードコムス",
       "reviewAverage": 4.63,
-      "reviewCount": 15657,
+      "reviewCount": 15659,
       "itemCode": "seedcoms:10004174",
       "genreId": "214781",
       "startTime": "2026-10-04 20:00",
@@ -2952,7 +3239,7 @@
       "unitNote": null,
       "postedAt": "2026-10-03",
       "bumpedAt": "2026-10-03T16:32:10",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
@@ -3000,7 +3287,7 @@
       "unitNote": null,
       "postedAt": "2026-10-03",
       "bumpedAt": "2026-10-03T00:00:00",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending",
       "hidden": true,
       "hiddenReason": "同じ店・同じ値段が6件。2件までにする（シードコムス 848円）。レビューの少ない4件を伏せた"
@@ -3031,7 +3318,7 @@
       "unitNote": null,
       "postedAt": "2026-10-03",
       "bumpedAt": "2026-10-03T11:33:06",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending",
       "hidden": true,
       "hiddenReason": "同じ店・同じ値段が6件。2件までにする（シードコムス 848円）。レビューの少ない4件を伏せた"
@@ -3066,7 +3353,7 @@
       "unitNote": null,
       "postedAt": "2026-10-03",
       "bumpedAt": "2026-10-03T11:33:06",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
@@ -3114,7 +3401,7 @@
       "unitNote": null,
       "postedAt": "2026-10-03",
       "bumpedAt": "2026-10-03T16:32:10",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending",
       "hidden": true,
       "hiddenReason": "同じ店・同じ値段が6件。2件までにする（シードコムス 848円）。レビューの少ない4件を伏せた"
@@ -3149,7 +3436,7 @@
       "unitNote": null,
       "postedAt": "2026-10-03",
       "bumpedAt": "2026-10-03T16:32:10",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
@@ -3196,7 +3483,7 @@
       "unitNote": null,
       "postedAt": "2026-10-03",
       "bumpedAt": "2026-10-03T16:32:10",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending",
       "hidden": true,
       "hiddenReason": "同じ店・同じ値段が6件。2件までにする（シードコムス 848円）。レビューの少ない4件を伏せた"
@@ -3231,7 +3518,7 @@
       "unitNote": null,
       "postedAt": "2026-10-03",
       "bumpedAt": "2026-10-03T16:31:15",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "problem",
@@ -3281,7 +3568,7 @@
       "unitNote": null,
       "postedAt": "2026-10-03",
       "bumpedAt": "2026-10-03T21:34:59",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
@@ -3333,7 +3620,7 @@
       "unitNote": null,
       "postedAt": "2026-10-03",
       "bumpedAt": "2026-10-03T16:30:14",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
@@ -3464,7 +3751,7 @@
       "id": "r319e3b4a4",
       "category": "fashion",
       "title": "ジョガーパンツ メンズ スウェットパンツ / ジョガー＆テーパードパンツ / おしゃれ 下 スリム…",
-      "rawTitle": "【最大90％OFFマラソンSALE】【クーポン対象外】ジョガーパンツ メンズ スウェットパンツ / ジョガー＆テーパードパンツ / おしゃれ 下 スリム 細身 スキニー ジョガー サイドライン スウェット ジャージ ゴルフ ヨガ パンツ スエットパンツ ラインパンツ 30代 40代 夏服",
+      "rawTitle": "【クーポン対象外】ジョガーパンツ メンズ スウェットパンツ / ジョガー＆テーパードパンツ / おしゃれ 下 スリム 細身 スキニー ジョガー サイドライン スウェット ジャージ ゴルフ ヨガ パンツ スエットパンツ ラインパンツ 30代 40代 夏服",
       "price": 500,
       "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/jiggys-shop/cabinet/sale/240919/sale_img/r-1-250.jpg?_ex=600x600",
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00qbh67.jeifo94c.g00qbh67.jeifp081/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fjiggys-shop%2Fr-1-250%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fjiggys-shop%2Fi%2F10014221%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
@@ -3473,8 +3760,8 @@
       "reviewCount": 2414,
       "itemCode": "jiggys-shop:10014221",
       "genreId": "558846",
-      "startTime": "2026-10-02 18:00",
-      "endTime": "2026-10-09 23:59",
+      "startTime": "2026-10-10 00:00",
+      "endTime": "2026-10-13 15:59",
       "listPrice": 1995,
       "priceBasis": "history",
       "caption": "1,995円のジョガーパンツが500円。テーパードの細身、サイドライン入り。",
@@ -3488,7 +3775,7 @@
       "unitNote": null,
       "postedAt": "2026-10-02",
       "bumpedAt": "2026-10-02T21:33:23",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
@@ -3511,61 +3798,12 @@
       }
     },
     {
-      "id": "re5c565234",
-      "category": "books",
-      "title": "Nintendo Switch キャリングケース switch 有機ELモデル OLED 液晶保護…",
-      "rawTitle": "【999円ポッキリ】Nintendo Switch キャリングケース switch 有機ELモデル OLED 液晶保護 シート付き ハードケース 収納バッグ ゲームカード収納 最大10枚収納 ニンテンドー スウィッチ ケース 大容量 液晶保護フィルム付き ゲーム機収納袋 優れた柔軟性 防水性 衝撃吸収",
-      "price": 999,
-      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/11shop/cabinet/0220/100221-01.jpg?_ex=600x600",
-      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00sjiq7.jeifo93d.g00sjiq7.jeifp557/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2F11shop%2F100221%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2F11shop%2Fi%2F10000325%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
-      "shop": "11SHOP",
-      "reviewAverage": 4.47,
-      "reviewCount": 283,
-      "itemCode": "11shop:10000325",
-      "genreId": "565955",
-      "startTime": "2026-10-02 18:00",
-      "endTime": "2026-10-09 23:59",
-      "listPrice": 1880,
-      "priceBasis": "history",
-      "caption": "1,880円のSwitch有機EL用キャリングケースが999円。",
-      "tags": [
-        "送料無料"
-      ],
-      "points": [
-        "1,880円から999円へ、送料無料",
-        "有機ELモデル対応・液晶保護シート付き",
-        "レビュー283件・★4.47"
-      ],
-      "description": "",
-      "unitNote": null,
-      "postedAt": "2026-10-02",
-      "bumpedAt": "2026-10-02T21:39:21",
-      "lastSeen": "2026-10-09",
-      "pitch_status": "ready",
-      "marketing": {
-        "hook_type": "scene",
-        "target": "Switch有機ELモデルを持ち歩く人",
-        "problem": "本体を裸で持ち歩くと、傷が心配。",
-        "hook": "Switchのケース、持ち運びにあると安心ですよね。",
-        "body": "有機ELモデル対応のハードキャリングケース。液晶保護シート付き、ゲームカードも収納できる。レビューは283件、星4.47。",
-        "features": [
-          "有機ELモデル対応",
-          "液晶保護シート付き",
-          "ゲームカード収納",
-          "レビュー283件・星4.47"
-        ],
-        "cta": "save",
-        "cta_text": null,
-        "ask": "Switchを持ち出すとき、ケースに入れていますか？"
-      }
-    },
-    {
       "id": "rce0bc870d",
       "category": "beauty",
       "title": "ビタミンC （約3ヶ月分） ビタミンC サプリ ビタミン サプリ チュアブル 食事で不足 1粒あたり…",
       "rawTitle": "【32%OFFセール】《楽天1位》 ビタミンC （約3ヶ月分） ビタミンC サプリ ビタミン サプリ チュアブル 食事で不足 1粒あたり L-アスコルビン酸 173.7mg配合 ベース サプリメント ビタミンC 美容液よりも手軽 オーガランド ポイント消費 送料無料",
       "price": 1000,
-      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/oga/cabinet/designer/241129_vc_1_03.jpg?_ex=600x600",
+      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/oga/cabinet/item_img/shohin/241129_vc_3_03.jpg?_ex=600x600",
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00pzam7.jeifo070.g00pzam7.jeifp958/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Foga%2F1495097%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Foga%2Fi%2F10127229%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "サプリ専門店 オーガランド",
       "reviewAverage": 4.63,
@@ -3589,7 +3827,7 @@
       "unitNote": null,
       "postedAt": "2026-10-02",
       "bumpedAt": "2026-10-02T11:32:37",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
@@ -3618,7 +3856,7 @@
       "title": "やさい酵素（約3ヶ月分） 酵素 サプリ サプリメント 野菜不足 野菜酵素 ダイエットサプリ 野菜不足…",
       "rawTitle": "【30%OFFセール】やさい酵素（約3ヶ月分） 酵素 サプリ サプリメント 野菜不足 野菜酵素 ダイエットサプリ 野菜不足 送料無料 生酵素 あけび アケビ ダイエットサプリ えごま油 アマニ油 亜麻仁油 小麦ふすま ポイント消化 オーガランド",
       "price": 1380,
-      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/oga/cabinet/designer/241031_yk_4_03.jpg?_ex=600x600",
+      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/oga/cabinet/kikaku/2610/shohin/261002_ts_yk_3.jpg?_ex=600x600",
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00pzam7.jeifo070.g00pzam7.jeifp958/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Foga%2F3enz%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Foga%2Fi%2F10215539%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "サプリ専門店 オーガランド",
       "reviewAverage": 4.23,
@@ -3642,7 +3880,7 @@
       "unitNote": null,
       "postedAt": "2026-10-02",
       "bumpedAt": "2026-10-02T11:32:37",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
@@ -3746,7 +3984,7 @@
       "unitNote": null,
       "postedAt": "2026-10-02",
       "bumpedAt": "2026-10-02T21:38:06",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
@@ -3798,7 +4036,7 @@
       "unitNote": null,
       "postedAt": "2026-10-01",
       "bumpedAt": "2026-10-01T11:39:59",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
@@ -3900,7 +4138,7 @@
       "unitNote": null,
       "postedAt": "2026-10-01",
       "bumpedAt": "2026-10-01T11:29:48",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
@@ -3953,7 +4191,7 @@
       "unitNote": null,
       "postedAt": "2026-10-01",
       "bumpedAt": "2026-10-01T11:30:17",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "compare",
@@ -4006,7 +4244,7 @@
       "unitNote": null,
       "postedAt": "2026-09-30",
       "bumpedAt": "2026-09-30T16:30:34",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
@@ -4058,7 +4296,7 @@
       "unitNote": null,
       "postedAt": "2026-09-30",
       "bumpedAt": "2026-09-30T07:37:51",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
@@ -4111,7 +4349,7 @@
       "unitNote": null,
       "postedAt": "2026-09-30",
       "bumpedAt": "2026-09-30T16:30:34",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
@@ -4160,7 +4398,7 @@
       "unitNote": null,
       "postedAt": "2026-09-30",
       "bumpedAt": "2026-09-30T11:35:03",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
@@ -4213,7 +4451,7 @@
       "unitNote": null,
       "postedAt": "2026-09-29",
       "bumpedAt": "2026-09-29T21:30:52",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
@@ -4420,7 +4658,7 @@
       "unitNote": null,
       "postedAt": "2026-09-26",
       "bumpedAt": "2026-09-26T21:30:45",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "problem_price",
@@ -4519,7 +4757,7 @@
       "unitNote": null,
       "postedAt": "2026-09-25",
       "bumpedAt": "2026-09-25T16:33:42",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
@@ -4567,7 +4805,7 @@
       "unitNote": null,
       "postedAt": "2026-09-24",
       "bumpedAt": "2026-09-24T16:33:47",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
@@ -4612,7 +4850,7 @@
       "unitNote": null,
       "postedAt": "2026-09-24",
       "bumpedAt": "2026-09-24T16:35:34",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
@@ -4709,7 +4947,7 @@
       "unitNote": null,
       "postedAt": "2026-09-22",
       "bumpedAt": "2026-09-22T16:42:49",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
@@ -4735,8 +4973,8 @@
       "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/aiwo/cabinet/hyg069-main.jpg?_ex=600x600",
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00uhf47.jeifo201.g00uhf47.jeifpbdb/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Faiwo%2Fhyg069%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Faiwo%2Fi%2F10000025%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "EVOPOW JAPAN 楽天市場店",
-      "reviewAverage": 4.5,
-      "reviewCount": 1231,
+      "reviewAverage": 4.49,
+      "reviewCount": 1232,
       "itemCode": "aiwo:10000025",
       "genreId": "564277",
       "startTime": "",
@@ -4752,7 +4990,7 @@
       "unitNote": null,
       "postedAt": "2026-09-22",
       "bumpedAt": "2026-09-22T16:38:19",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
@@ -4841,7 +5079,7 @@
       "unitNote": null,
       "postedAt": "2026-09-20",
       "bumpedAt": "2026-09-20T07:40:55",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
@@ -5066,7 +5304,7 @@
       "unitNote": null,
       "postedAt": "2026-09-19",
       "bumpedAt": "2026-09-19T16:42:57",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "problem",
@@ -5182,7 +5420,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00tqd57.jeifo9d4.g00tqd57.jeifp2e5/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fyamagoiida%2F10000119%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fyamagoiida%2Fi%2F10000146%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "骨取り魚の飯田商店",
       "reviewAverage": 4.59,
-      "reviewCount": 1018,
+      "reviewCount": 1020,
       "itemCode": "yamagoiida:10000146",
       "genreId": "304578",
       "startTime": "2026-10-04 12:00",
@@ -5198,7 +5436,7 @@
       "unitNote": null,
       "postedAt": "2026-09-19",
       "bumpedAt": "2026-09-19T11:30:04",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
@@ -5242,7 +5480,7 @@
       "unitNote": null,
       "postedAt": "2026-09-19",
       "bumpedAt": "2026-09-19T11:28:35",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
@@ -5330,7 +5568,7 @@
       "unitNote": null,
       "postedAt": "2026-09-17",
       "bumpedAt": "2026-09-17T21:40:32",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
@@ -5507,7 +5745,7 @@
       "unitNote": null,
       "postedAt": "2026-09-16",
       "bumpedAt": "2026-09-16T16:42:25",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
@@ -5551,7 +5789,7 @@
       "unitNote": null,
       "postedAt": "2026-09-16",
       "bumpedAt": "2026-09-16T16:37:59",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
@@ -5597,7 +5835,7 @@
       "unitNote": null,
       "postedAt": "2026-09-16",
       "bumpedAt": "2026-09-16T12:27:59",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
@@ -5642,7 +5880,7 @@
       "unitNote": null,
       "postedAt": "2026-09-16",
       "bumpedAt": "2026-09-16T12:27:59",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "pending",
       "hidden": true,
       "hiddenReason": "似た商品（同じ店・同じ値段のパンプス）が並んだため、レビューが一番少ない1件を伏せた"
@@ -5719,7 +5957,7 @@
       "unitNote": null,
       "postedAt": "2026-09-16",
       "bumpedAt": "2026-09-16T16:35:26",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "problem",
@@ -5766,7 +6004,7 @@
       "unitNote": null,
       "postedAt": "2026-09-16",
       "bumpedAt": "2026-09-16T16:37:59",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
@@ -5812,7 +6050,7 @@
       "unitNote": null,
       "postedAt": "2026-09-16",
       "bumpedAt": "2026-09-16T16:37:59",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
@@ -5856,7 +6094,7 @@
       "unitNote": null,
       "postedAt": "2026-09-16",
       "bumpedAt": "2026-09-16T12:27:59",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
@@ -5900,7 +6138,7 @@
       "unitNote": null,
       "postedAt": "2026-09-16",
       "bumpedAt": "2026-09-16T12:27:59",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
@@ -5942,7 +6180,7 @@
       "unitNote": null,
       "postedAt": "2026-09-16",
       "bumpedAt": "2026-09-16T12:27:59",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
@@ -5983,7 +6221,7 @@
       "unitNote": null,
       "postedAt": "2026-09-16",
       "bumpedAt": "2026-09-16T16:37:59",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
@@ -6072,7 +6310,7 @@
       "unitNote": null,
       "postedAt": "2026-09-15",
       "bumpedAt": "2026-09-15T21:37:15",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
@@ -6116,7 +6354,7 @@
       "unitNote": null,
       "postedAt": "2026-09-15",
       "bumpedAt": "2026-09-15T16:35:20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
@@ -6161,7 +6399,7 @@
       "unitNote": null,
       "postedAt": "2026-09-14",
       "bumpedAt": "2026-09-14T10:00:35",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "marketing": {
         "hook_type": "problem",
         "target": "災害用の備えを見直したい人",
@@ -6240,7 +6478,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00uf1p7.jeifobba.g00uf1p7.jeifp0d3/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fteinei-tsuhan%2Fkomachi%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fteinei-tsuhan%2Fi%2F10000000%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "ていねい通販 楽天市場店",
       "reviewAverage": 4.6,
-      "reviewCount": 3668,
+      "reviewCount": 3672,
       "itemCode": "teinei-tsuhan:10000000",
       "genreId": "567605",
       "startTime": "",
@@ -6256,7 +6494,7 @@
       "unitNote": null,
       "postedAt": "2026-09-14",
       "bumpedAt": "2026-09-14T10:00:35",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "marketing": {
         "hook_type": "discovery",
         "target": "コラーゲン系サプリを探している人",
@@ -6452,7 +6690,7 @@
       "unitNote": null,
       "postedAt": "2026-09-11",
       "bumpedAt": "2026-09-11T16:32:30",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "compare",
@@ -6637,7 +6875,7 @@
       "category": "baby-toy",
       "pinned": true,
       "title": "USB充電式 電子ライター プラズマライター アークライター Type-C充電式 風に強い 火が出ない…",
-      "rawTitle": "【今すぐ使える！店内全品45％OFFクーポン】《36％OFFクーポン》【楽天1位】 USB充電式 電子ライター プラズマライター アークライター Type-C充電式 風に強い 火が出ない 安全ロック付き LED電量表示 ロングタイプ 線香ライター キャンドルライター ガス不要 オイル不要",
+      "rawTitle": "【0のつく日×40％OFFクーポン】【楽天1位】 USB充電式 電子ライター プラズマライター アークライター Type-C充電式 風に強い 火が出ない 安全ロック付き LED電量表示 ロングタイプ 線香ライター キャンドルライター ガス不要 オイル不要",
       "price": 2080,
       "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/chakasho-dina/cabinet/13405148/13405157/imgrc0137197300.jpg?_ex=600x600",
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00u5757.jeifoa3a.g00u5757.jeifp05a/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fchakasho-dina%2F535dahuoji%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fchakasho-dina%2Fi%2F10000783%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
@@ -6663,7 +6901,7 @@
       "unitNote": null,
       "postedAt": "2026-09-08",
       "bumpedAt": "2026-09-08T07:34:27",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "marketing": {
         "hook_type": "discovery",
         "target": "仏壇やキャンドルに火を使う人",
@@ -8252,7 +8490,7 @@
       "unitNote": null,
       "postedAt": "2026-09-01",
       "bumpedAt": "2026-09-01T00:00:00",
-      "lastSeen": "2026-10-02",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
@@ -8350,7 +8588,7 @@
       "unitNote": null,
       "postedAt": "2026-08-31",
       "bumpedAt": "2026-08-31T18:46:20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "marketing": {
         "hook_type": "scene",
         "target": "買い物のたびに袋を忘れる人",
@@ -8377,7 +8615,7 @@
       "id": "r27281ecec",
       "category": "pc",
       "title": "airpods pro ケース airpodspro ケース カラビナ付き おしゃれ airpods3…",
-      "rawTitle": "【本日24時まで、10%OFF条件なし】airpods pro ケース airpodspro ケース カラビナ付き おしゃれ airpods3 ケース かわいい airpodsproケース クリア airpods 第3世代 第2世代 第1世代 クリアケース airpods2 ケース 透明 保護ケース 耐衝撃 リング付き",
+      "rawTitle": "【本日24時まで、15%OFF条件なし】airpods pro ケース airpodspro ケース カラビナ付き おしゃれ airpods3 ケース かわいい airpodsproケース クリア airpods 第3世代 第2世代 第1世代 クリアケース airpods2 ケース 透明 保護ケース 耐衝撃 リング付き",
       "price": 1740,
       "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/gift-present/cabinet/smart-acc/chromepods/chromepods-main-01-2.jpg?_ex=600x600",
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00s0ra7.jeifo985.g00s0ra7.jeifp2b6/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fgift-present%2Fchromepods%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fgift-present%2Fi%2F10000657%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
@@ -8397,7 +8635,7 @@
       "unitNote": null,
       "postedAt": "2026-08-31",
       "bumpedAt": "2026-08-31T00:00:00",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
@@ -8447,7 +8685,7 @@
       "unitNote": null,
       "postedAt": "2026-08-31",
       "bumpedAt": "2026-08-31T10:17:54",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "surprise",
@@ -8496,7 +8734,7 @@
       "unitNote": null,
       "postedAt": "2026-08-31",
       "bumpedAt": "2026-08-31T10:17:54",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "compare",
@@ -8545,7 +8783,7 @@
       "unitNote": null,
       "postedAt": "2026-08-31",
       "bumpedAt": "2026-08-31T10:17:35",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "compare",
@@ -8647,7 +8885,7 @@
       "unitNote": null,
       "postedAt": "2026-08-31",
       "bumpedAt": "2026-08-31T18:52:36",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "marketing": {
         "hook_type": "surprise",
         "target": "ふるさと納税の返礼品を選んでいる人",
@@ -8701,7 +8939,7 @@
       "unitNote": null,
       "postedAt": "2026-08-31",
       "bumpedAt": "2026-08-31T18:52:36",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "marketing": {
         "hook_type": "problem",
         "target": "防災リュックを一から用意する人",
@@ -8750,7 +8988,7 @@
       "unitNote": null,
       "postedAt": "2026-08-28",
       "bumpedAt": "2026-08-28T21:33:58",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "problem_price",
@@ -8837,7 +9075,7 @@
       "unitNote": null,
       "postedAt": "2026-08-28",
       "bumpedAt": "2026-08-28T23:30:02",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "scene",
@@ -8883,7 +9121,7 @@
       "unitNote": null,
       "postedAt": "2026-08-28",
       "bumpedAt": "2026-08-28T23:30:02",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "discovery",
@@ -8929,7 +9167,7 @@
       "unitNote": null,
       "postedAt": "2026-08-28",
       "bumpedAt": "2026-08-28T23:30:02",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "relatable",
@@ -8958,7 +9196,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00skps7.jeifo982.g00skps7.jeifp82d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Faidort%2Fslub-1286a1%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Faidort%2Fi%2F10003548%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "愛度楽天市場店",
       "reviewAverage": 4.14,
-      "reviewCount": 809,
+      "reviewCount": 810,
       "itemCode": "aidort:10003548",
       "genreId": "502835",
       "startTime": "",
@@ -8974,7 +9212,7 @@
       "unitNote": null,
       "postedAt": "2026-08-28",
       "bumpedAt": "2026-08-28T23:30:02",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "problem",
@@ -9021,7 +9259,7 @@
       "unitNote": null,
       "postedAt": "2026-08-28",
       "bumpedAt": "2026-08-28T21:31:54",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "pitch_status": "ready",
       "marketing": {
         "hook_type": "problem_price",
@@ -9112,7 +9350,7 @@
       "unitNote": null,
       "postedAt": "2026-08-26",
       "bumpedAt": "2026-08-26T07:39:36",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "marketing": {
         "hook_type": "problem",
         "target": "外でも室内でも扇風機を使いたい人",
@@ -9283,7 +9521,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00skps7.jeifo982.g00skps7.jeifp82d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Faidort%2Fslub-1378%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Faidort%2Fi%2F10003438%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "愛度楽天市場店",
       "reviewAverage": 4.36,
-      "reviewCount": 17686,
+      "reviewCount": 17694,
       "itemCode": "aidort:10003438",
       "genreId": "502835",
       "listPrice": 1380,
@@ -9300,7 +9538,7 @@
       "description": "インナーイヤー型のワイヤレスイヤホンです。Bluetooth 6.1で自動ペアリングします。\nENCマイク付きなので通話にも使えます。この値段なら、なくしたときの諦めがつきます。",
       "unitNote": null,
       "postedAt": "2026-08-22",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-22T00:00:00",
@@ -9336,7 +9574,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00tstg7.jeifo50d.g00tstg7.jeifpe87/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmeisei%2F1378%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fmeisei%2Fi%2F10002326%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "明誠ショップ",
       "reviewAverage": 4.4,
-      "reviewCount": 3337,
+      "reviewCount": 3339,
       "itemCode": "meisei:10002326",
       "genreId": "502835",
       "startTime": "",
@@ -9355,7 +9593,7 @@
       "description": "上と同じ形のワイヤレスイヤホンを、別のショップが同じ値段で扱っています。\nインナーイヤー型で、耳を密閉しません。周りの音が聞こえるので、外を歩くときにも使えます。",
       "unitNote": null,
       "postedAt": "2026-08-22",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "bumpedAt": "2026-08-22T00:00:00"
     },
     {
@@ -9387,7 +9625,7 @@
       "description": "ケーブルの要らないモバイルバッテリーです。本体のコネクターをスマホに直接挿して充電します。\n5000mAhで、1日ぶんの継ぎ足しに向く容量。iPhone用とType-Cのコネクターが両方付いています。",
       "unitNote": null,
       "postedAt": "2026-08-22",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "bumpedAt": "2026-08-22T23:55:42",
       "marketing": {
         "hook_type": "discovery",
@@ -9420,7 +9658,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00skps7.jeifo982.g00skps7.jeifp82d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Faidort%2Fslub-1286%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Faidort%2Fi%2F10003547%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "愛度楽天市場店",
       "reviewAverage": 4.14,
-      "reviewCount": 8829,
+      "reviewCount": 8834,
       "itemCode": "aidort:10003547",
       "genreId": "502835",
       "startTime": "",
@@ -9439,7 +9677,7 @@
       "description": "耳を挟んで装着するイヤーカフ構造の骨伝導イヤホンです。耳の穴をふさぎません。\n周りの音が聞こえたままなので、外を歩くときや、家で呼ばれるのに気づきたいときに向きます。",
       "unitNote": null,
       "postedAt": "2026-08-22",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "bumpedAt": "2026-08-22T00:00:00"
     },
     {
@@ -9472,7 +9710,7 @@
       "description": "卵の形をしたパーツを開いて、色と形を合わせるパズルです。6色ぶんの組み合わせがあります。\n開ける、はめる、合わせるという動きが一つのおもちゃに入っているので、手を動かす遊びとして長く持ちます。",
       "unitNote": null,
       "postedAt": "2026-08-22",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "bumpedAt": "2026-08-22T00:00:00",
       "marketing": {
         "hook_type": "discovery",
@@ -9524,7 +9762,7 @@
       "description": "ハイウエストのストレッチスキニーです。腰の位置が上がるぶん、脚が長く見えます。\n白と黒の無地なので、合わせるものを選びません。",
       "unitNote": null,
       "postedAt": "2026-08-22",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "bumpedAt": "2026-08-22T00:00:00"
     },
     {
@@ -9537,7 +9775,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00ur7n7.jeifoce9.g00ur7n7.jeifp0c4/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fideazakkaten%2Fy-436%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fideazakkaten%2Fi%2F10000170%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "アイディア雑貨店",
       "reviewAverage": 4.39,
-      "reviewCount": 5798,
+      "reviewCount": 5801,
       "itemCode": "ideazakkaten:10000170",
       "genreId": "205818",
       "startTime": "",
@@ -9556,7 +9794,7 @@
       ],
       "unitNote": null,
       "postedAt": "2026-08-21",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "bumpedAt": "2026-08-21T00:00:00"
     },
     {
@@ -9569,7 +9807,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00ufk67.jeifo1eb.g00ufk67.jeifpf2c/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkiroran%2Fdl-xmt%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fkiroran%2Fi%2F10000205%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "FULNG 楽天市場店",
       "reviewAverage": 4.64,
-      "reviewCount": 4973,
+      "reviewCount": 4977,
       "itemCode": "kiroran:10000205",
       "genreId": "565605",
       "startTime": "",
@@ -9588,7 +9826,7 @@
       ],
       "unitNote": null,
       "postedAt": "2026-08-21",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "bumpedAt": "2026-08-21T00:00:00"
     },
     {
@@ -9601,7 +9839,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00s7h37.jeifoabf.g00s7h37.jeifpd22/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsinkatec%2Fhu_shair_catcher%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fsinkatec%2Fi%2F10000425%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "SINKATEC 公式ショップ 楽天市場店",
       "reviewAverage": 4.68,
-      "reviewCount": 11685,
+      "reviewCount": 11694,
       "itemCode": "sinkatec:10000425",
       "genreId": "101838",
       "startTime": "",
@@ -9620,7 +9858,7 @@
       ],
       "unitNote": null,
       "postedAt": "2026-08-21",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "bumpedAt": "2026-08-21T00:00:00"
     },
     {
@@ -9634,7 +9872,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00uaej7.jeifo180.g00uaej7.jeifp8aa/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fexception5251%2Fex-x01028%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fexception5251%2Fi%2F10000794%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "EXCEPTION本店",
       "reviewAverage": 4.65,
-      "reviewCount": 1048,
+      "reviewCount": 1049,
       "itemCode": "exception5251:10000794",
       "genreId": "201184",
       "startTime": "",
@@ -9651,7 +9889,7 @@
       "tags": [],
       "unitNote": null,
       "postedAt": "2026-08-21",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "bumpedAt": "2026-08-21T00:00:00"
     },
     {
@@ -9682,7 +9920,7 @@
       "description": "マーブル模様の個人印鑑です。12.0mmで、認印としても銀行印としても使えます。\n色は12色。認印は切らしてから慌てるものなので、予備を1本持っておくと困りません。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -9693,7 +9931,7 @@
       "title": "【スグポチ公式】プッシュポップ 知育 玩具 欧米 大流行 大人気 プッシュポップポップ スクイーズ…",
       "rawTitle": "【スグポチ公式】プッシュポップ 知育 玩具 欧米 大流行 大人気 プッシュポップポップ スクイーズ カラフル ストレス ストレス解消 バブル感覚 減圧グッズ フィジェットおもちゃ プッシュポップバブル 発展 レインボー",
       "price": 599,
-      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/sugupochi/cabinet/ir4/1952_01_r_s.jpg?_ex=600x600",
+      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/sugupochi/cabinet/tool108/20261009_134656/000/1952_pup.jpg?_ex=600x600",
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00ritd7.jeifo2d2.g00ritd7.jeifp4f3/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsugupochi%2F1952%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fsugupochi%2Fi%2F10025939%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "スグポチ",
       "reviewAverage": 4.42,
@@ -9715,7 +9953,7 @@
       "description": "押すとぷちぷち音が鳴る、繰り返し遊べるおもちゃです。電池も消耗品も使いません。\n静かな場所での手持ち無沙汰や、車の中での時間つぶしに向いています。洗えるので、汚れても扱いに困りません。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -9748,7 +9986,7 @@
       "description": "日本製のフェイスタオルです。約34×86cmで、ホテルスタイルの厚手。\nタオルは消耗品なので、1枚単位で買い足せるかどうかが効いてきます。楽天1位を取っている定番です。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00",
@@ -9799,7 +10037,7 @@
       "description": "色を覚えるための知育絵本です。バーゲン本なので、この値段で新品が手に入ります。\nバーゲン本は出版社が価格を下げて放出したもので、中身は通常品と同じです。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -9832,7 +10070,7 @@
       "description": "T10のウェッジ球をLEDにする交換用バルブです。ポジション灯、ナンバー灯、ルームランプに使えます。\n交換は工具なしで抜き差しするだけの箇所が多く、店に頼めばかかる工賃がまるごと浮きます。無極性なので、向きを気にせず挿せます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -9847,7 +10085,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00qcmk7.jeifoeeb.g00qcmk7.jeifp3b0/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftoucher-home%2F10000264%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Ftoucher-home%2Fi%2F10000264%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "タオル直販店 ヒオリエ/日織恵",
       "reviewAverage": 4.49,
-      "reviewCount": 117899,
+      "reviewCount": 117900,
       "itemCode": "toucher-home:10000264",
       "genreId": "551732",
       "listPrice": null,
@@ -9865,7 +10103,7 @@
       "description": "日本製のビッグフェイスタオル、約40×100cmです。圧縮された状態で届きます。\nバスタオルより小さく、フェイスタオルより大きい。この大きさなら洗濯機の場所も取りません。レビューは11万件を超えています。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00",
@@ -9916,7 +10154,7 @@
       "description": "薄手のUVカットラッシュガードパーカーです。全色でUVカット率98.9％以上。\nフードとジップが付いているので、羽織って前を開けたままでも使えます。涼感素材なので夏でも着ていられます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00",
@@ -9967,7 +10205,7 @@
       "description": "上のパーカーと同じシリーズのトレンカです。UVカット率99.5％以上。\n上下そろえても2,000円を切ります。水着の上から履けるので、体型カバーとしても使えます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -9976,9 +10214,9 @@
       "id": "rfb9cbb123",
       "category": "kitchen",
       "title": "印鑑 実印 はんこ 銀行印 認印 個人印鑑 黒水牛 印鑑ケース 付 10.5 ～ 18.0mm ハンコ…",
-      "rawTitle": "【限定クーポン配布中】 印鑑 実印 はんこ 銀行印 認印 個人印鑑 黒水牛 印鑑ケース 付 10.5 ～ 18.0mm ハンコ 印鑑 【選】はんこ 実印 判子 印鑑 作成 ケース付き 印鑑セット 女性 男性 子供 買いまわり 買い回り ポイント消化 (HK080)",
+      "rawTitle": "【枚数限定★100円OFFクーポン有】 印鑑 実印 はんこ 銀行印 認印 個人印鑑 黒水牛 印鑑ケース 付 10.5 ～ 18.0mm ハンコ 印鑑 【選】はんこ 実印 判子 印鑑 作成 ケース付き 印鑑セット 女性 男性 子供 買いまわり 買い回り ポイント消化 (HK080)",
       "price": 999,
-      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/hankomaturi/cabinet/img_item_kuro_new/kuro-opt2-cart.jpg?_ex=600x600",
+      "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/hankomaturi/cabinet/pointup_thumbnail/kurosui.jpg?_ex=600x600",
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00qh5n7.jeifoa37.g00qh5n7.jeifp126/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fhankomaturi%2F1457238%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fhankomaturi%2Fi%2F10001696%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "はんこ祭り",
       "reviewAverage": 4.54,
@@ -10000,7 +10238,7 @@
       "description": "黒水牛の実印です。印鑑ケースが付いてきます。サイズは10.5mmから18.0mmまで選べます。\n実印は作る機会が急に来るものです。ケース込みで揃うので、そのまま持ち歩けます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -10032,7 +10270,7 @@
       "description": "三菱鉛筆のジェットストリーム4&1に、名前を刻印できるものです。\n4色のボールペンとシャープペンが1本にまとまっています。名入れができるので、贈り物としても使えます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -10065,7 +10303,7 @@
       "description": "粉末のコラーゲンです。味がほとんど付いていないので、コーヒーでも味噌汁でも混ぜられます。\n続けるものなので、飲み物を変えずに足せるかどうかが実際には効いてきます。レビューは7万件を超えています。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00",
@@ -10115,7 +10353,7 @@
       "description": "iPhone用のライトニングケーブルです。MFi認証を取ったApple認証品。\n認証品はiOSの更新で使えなくなる心配がありません。2.4Aの急速充電に対応します。ケーブルは切れると即困るので、予備を1本置いておくものです。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -10130,7 +10368,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00u4ix7.jeifo023.g00u4ix7.jeifpfbe/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftyb-family%2Fs1%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Ftyb-family%2Fi%2F10000012%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "TYB ダイレクト楽天市場店",
       "reviewAverage": 4.61,
-      "reviewCount": 25695,
+      "reviewCount": 25697,
       "itemCode": "tyb-family:10000012",
       "genreId": "564278",
       "listPrice": null,
@@ -10148,7 +10386,7 @@
       "description": "シリコン被覆のライトニングケーブルです。硬くなりにくく、絡まりにくい。\nMFi認証品なので、iOSの更新で弾かれることがありません。カバンに入れて持ち歩く用に向いています。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -10156,8 +10394,8 @@
     {
       "id": "re26c1acdd",
       "category": "car",
-      "title": "T10 2.5W パワーLED ウェッジ球 ホワイト 2個1セット…",
-      "rawTitle": "【事前告知! 10日は10％OFF】T10 2.5W パワーLED ウェッジ球 ホワイト 2個1セット 【ポジション・ライセンス・ルームランプのLED化に最適】【車検対応】 【視認性抜群 】[1]",
+      "title": "【5と0の付く日】T10 2.5W パワーLED ウェッジ球 ホワイト 2個1セット…",
+      "rawTitle": "【本日10％OFF】【5と0の付く日】T10 2.5W パワーLED ウェッジ球 ホワイト 2個1セット 【ポジション・ライセンス・ルームランプのLED化に最適】【車検対応】 【視認性抜群 】[1]",
       "price": 1000,
       "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/atv-yours/cabinet/thum/2ten5w_led_01.jpg?_ex=600x600",
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00qda77.jeifo522.g00qda77.jeifpe86/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fatv-yours%2Ft10-25w-wh-led%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fatv-yours%2Fi%2F10001453%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
@@ -10181,7 +10419,7 @@
       "description": "T10のLEDバルブ2個セットです。車検対応をうたっています。\nポジション灯は左右2つで1組なので、2個セットが最小の買い方になります。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -10214,7 +10452,7 @@
       "description": "ガラス系のコーティング剤50mlです。業務用のものを小容量にしたお試しサイズ。\n洗車のあとに塗って拭き上げるだけなので、専用の道具は要りません。まず自分の車で効き目を見たいときに。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -10229,7 +10467,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00q0207.jeifod2d.g00q0207.jeifp6a9/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fogawahan%2F10002465%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fogawahan%2Fi%2F10002465%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "印鑑はんこ製造直売店@小川祥雲堂",
       "reviewAverage": 4.73,
-      "reviewCount": 28634,
+      "reviewCount": 28635,
       "itemCode": "ogawahan:10002465",
       "genreId": "216081",
       "listPrice": null,
@@ -10247,7 +10485,7 @@
       "description": "シヤチハタのキャップレス9です。フタがないので、片手でそのまま押せます。\nキャップは失くすものですし、探す時間もかかります。その両方がなくなります。全26色。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -10280,7 +10518,7 @@
       "description": "シヤチハタのキャップレス9で、印面が入った状態で届きます。開けたその日から押せます。\n別注品なので名前が入ります。浸透印なのでスタンプ台は要りません。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -10313,7 +10551,7 @@
       "description": "AEAJ認定の精油を6本選べるセットです。ラベンダー、グレープフルーツ、ユーカリなどから組み合わせられます。\n天然100％で、アロマディフューザーにもアロマストーンにも使えます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -10345,7 +10583,7 @@
       "description": "車のヘッドレストに吊り下げて使うティッシュケースです。抗菌加工がされています。\n吊り下げのほか、壁掛けや縦置きでも使えるので、車をやめたあとも洗面所などに回せます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -10360,7 +10598,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00rdi07.jeifof7c.g00rdi07.jeifp42b/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fgreenlabel%2Fotoku-set-8%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fgreenlabel%2Fi%2F10000267%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "GreenLabel",
       "reviewAverage": 4.55,
-      "reviewCount": 10996,
+      "reviewCount": 10997,
       "itemCode": "greenlabel:10000267",
       "genreId": "502185",
       "listPrice": null,
@@ -10378,7 +10616,7 @@
       "description": "キヤノンのプリンタ用の互換インクです。型番と色を選んで8本まとめられます。\n純正だと1本ずつ買うことになりますが、まとめて必要な色だけ揃えられます。よく切れる色を多めに、という買い方ができます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -10393,7 +10631,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00qfdw7.jeifofb3.g00qfdw7.jeifp387/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fhankoya-shop%2Fk-jituin%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fhankoya-shop%2Fi%2F10000001%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "ハンコヤストア",
       "reviewAverage": 4.6,
-      "reviewCount": 47534,
+      "reviewCount": 47535,
       "itemCode": "hankoya-shop:10000001",
       "genreId": "401760",
       "listPrice": null,
@@ -10410,7 +10648,7 @@
       "description": "黒水牛の印鑑に、もみ革のケースが付いたセットです。サイズは10.5mmから15.0mmまで。\n実印・銀行印・認印のどれとしても作れます。カラーの認印も付きます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00",
@@ -10463,7 +10701,7 @@
       "description": "有明産の焼き海苔です。訳あり扱いですが、理由は形やサイズが揃わないこと。\n巻いてしまえば見た目は変わりません。全型・半切から枚数を選べます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00",
@@ -10513,7 +10751,7 @@
       "description": "エプソンのIC6CL50に対応する互換インク6色セットです。\n残量表示のICチップが付いているので、あとどれくらい残っているかが本体で分かります。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -10545,7 +10783,7 @@
       "description": "水につけるとビーズ同士がくっついて、立体的な形が作れます。のりも接着剤も使いません。\n約3,000粒入りなので、しばらく遊べる量が最初から揃っています。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -10577,7 +10815,7 @@
       "description": "シヤチハタのキャップレス9に、伸びるリールのキーホルダーが付いたものです。\nカバンに着けたまま押せるので、取り出す手間も、置き忘れる心配もありません。別注品なので名前が入ります。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -10610,7 +10848,7 @@
       "description": "6重のガーゼで織られたおくるみです。ガーゼは洗うほど柔らかくなり、乾きも早い生地です。\n春夏はケットとして、肌寒い時期は重ねて使えます。退院時から保育園のお昼寝まで、長く使える1枚です。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -10625,7 +10863,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00twkc7.jeifo828.g00twkc7.jeifpd47/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fyokadoh-shop%2Fc004%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fyokadoh-shop%2Fi%2F10000013%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "LaLUCA 楽天市場店",
       "reviewAverage": 4.39,
-      "reviewCount": 3626,
+      "reviewCount": 3627,
       "itemCode": "yokadoh-shop:10000013",
       "genreId": "210771",
       "listPrice": null,
@@ -10643,7 +10881,7 @@
       "description": "脱げにくいことを狙った犬用ハーネスです。ロック付きで、超小型犬から大型犬まで対応します。\nハンドルが付いているので、いざというときに掴んで止められます。介護の補助としても使えます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -10675,7 +10913,7 @@
       "description": "よく伸びるストレッチ素材のスキニーパンツです。累計60万本を売っている定番。\n神戸レタスの商品で、30代から50代向けに作られています。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -10709,7 +10947,7 @@
       "description": "アンチバースト仕様のバランスボールです。45cm・55cm・65cmから選べます。\nアンチバーストは、穴が開いても一気に破裂せず、ゆっくり空気が抜ける作りです。ポンプと説明書、エクササイズガイドが付きます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -10741,7 +10979,7 @@
       "description": "日本製の革のブックカバーです。文庫、新書、四六判、B6、A5、コミックまでサイズを選べます。\nサイズオーダーにも対応しているので、手持ちの本に合わせられます。イニシャルの名入れが付きます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -10774,7 +11012,7 @@
       "description": "犬にも猫にも使える顆粒タイプの乳酸菌サプリです。日本産。\nナノ型乳酸菌、ビフィズス菌、オリゴ糖が入っています。顆粒なので、いつものごはんに振りかけるだけで足せます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -10807,7 +11045,7 @@
       "description": "BOTANISTのシャンプーとトリートメントの2本セットです。ノンシリコンのボタニカルシリーズ。\n2本まとめてこの値段なので、単品で買い足すより計算が合います。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00",
@@ -10890,7 +11128,7 @@
       "description": "キヤノンのBCI-351XL+350XL/6MPに対応する大容量の互換インク6色セットです。\n顔料の黒が付いています。大容量タイプなので、印刷枚数が多い人ほど差が出ます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -10922,7 +11160,7 @@
       "description": "くまの形をした木のパーツに、ひもを通して遊ぶおもちゃです。指先を使う遊びとして、幼児教室の教材にも使われています。\n色分けされているので、ひも通しに慣れたら色や数を数える遊びにも移れます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -10937,7 +11175,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00q0207.jeifod2d.g00q0207.jeifp6a9/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fogawahan%2F10002596%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fogawahan%2Fi%2F10002596%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "印鑑はんこ製造直売店@小川祥雲堂",
       "reviewAverage": 4.81,
-      "reviewCount": 17031,
+      "reviewCount": 17033,
       "itemCode": "ogawahan:10002596",
       "genreId": "216081",
       "listPrice": null,
@@ -10955,7 +11193,7 @@
       "description": "シヤチハタのネーム9、直径9.5mmの別注品です。書体と色を選んで注文します。\n浸透印なのでスタンプ台が要りません。就職や引っ越しの祝いとしても選ばれています。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -10988,7 +11226,7 @@
       "description": "ジョイコンのスティックが勝手に動く、いわゆるドリフトを自分で直すためのセットです。交換用パーツと工具が23点入っています。\n修理に出すと日数も費用もかかりますが、これなら手元で終わります。分解の作業が必要なので、細かい作業が苦にならない人向けです。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -11021,7 +11259,7 @@
       "description": "Bluetooth 5.4のワイヤレスヘッドセットです。充電ケースが付きます。\nケースと本体の両方にバッテリー残量が出ます。防水防滴なので、汗をかく場面でも使えます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -11105,7 +11343,7 @@
       "description": "九州産の黄金生姜と熟成黒生姜を、丸ごと乾燥させた粉末です。無着色・無添加。\n粉末なので、味噌汁でも紅茶でも後から足せます。生の生姜のようにすりおろす手間がありません。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -11119,8 +11357,8 @@
       "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/epcat/cabinet/shouhin/33l_2023.jpg?_ex=600x600",
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00s8ni7.jeifo68b.g00s8ni7.jeifp8c9/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fepcat%2Fpellet-30%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fepcat%2Fi%2F10000002%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "愛媛ペレキャット",
-      "reviewAverage": 4.5,
-      "reviewCount": 3065,
+      "reviewAverage": 4.49,
+      "reviewCount": 3066,
       "itemCode": "epcat:10000002",
       "genreId": "204174",
       "listPrice": null,
@@ -11137,7 +11375,7 @@
       "description": "木質ペレットの猫砂です。20kg（約33リットル）入っています。\n1kgあたり97円ほど。木の素材なので、燃えるごみとして出せる自治体が多いものです。まとめ買い向けの量です。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -11152,7 +11390,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00tfbh7.jeifo7dc.g00tfbh7.jeifpe5f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnext-online%2F10000180%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fnext-online%2Fi%2F10000180%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "Nextオンライン",
       "reviewAverage": 4.6,
-      "reviewCount": 42125,
+      "reviewCount": 42131,
       "itemCode": "next-online:10000180",
       "genreId": "211876",
       "listPrice": null,
@@ -11170,7 +11408,7 @@
       "description": "洗濯機の下に噛ませて底上げする台、4個セットです。防振と防音を兼ねます。\n持ち上がったぶん下に手が入るので、たまる埃を掃除できるようになります。ドラム式にも縦型にも使えます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00",
@@ -11220,7 +11458,7 @@
       "description": "接触冷感の生地を使ったUVカットパーカーです。メッシュで通気を取っています。\n羽織るだけなので、日焼け止めを塗り直さずに済みます。レディースとメンズの両方があります。年間ランキング2位。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -11253,7 +11491,7 @@
       "description": "厚手のヨガマットです。10mmと15mmから選べます。\n収納ケースとバンドが両方付くので、丸めてそのまま片付けられます。男女兼用で、宅トレ用としても使えます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -11286,7 +11524,7 @@
       "description": "凹凸の異なる2種類を1本にしたフォームローラーです。強さを使い分けられます。\nミニローラーも付くので、肩まわりなど狭いところにも当てられます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -11301,7 +11539,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00rqrk7.jeifo5bf.g00rqrk7.jeifp04a/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsuzukachan%2F540%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fsuzukachan%2Fi%2F10000000%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "UVカットマスク通販 MARUFUKU",
       "reviewAverage": 4.66,
-      "reviewCount": 7619,
+      "reviewCount": 7622,
       "itemCode": "suzukachan:10000000",
       "genreId": "568384",
       "listPrice": null,
@@ -11318,7 +11556,7 @@
       "description": "ヤケーヌのフェイスカバー、スタンダードのマジック式です。公式ショップからの発送。\n顔から首までを覆いますが、息苦しくならない作りになっています。洗えるので繰り返し使えます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -11333,7 +11571,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00ts1j7.jeifo698.g00ts1j7.jeifp689/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsun-shop-r%2Fomocya103%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fsun-shop-r%2Fi%2F10000259%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "キッズ服&雑貨のお店 Sun",
       "reviewAverage": 4.8,
-      "reviewCount": 1241,
+      "reviewCount": 1242,
       "itemCode": "sun-shop-r:10000259",
       "genreId": "201632",
       "listPrice": null,
@@ -11350,7 +11588,7 @@
       "description": "洗えるぬいぐるみです。赤ちゃんが口に入れたり、床に落としたりする前提で選べます。\nあひる・犬・羊などから選べて、はじめてのおもちゃとしても、贈り物としても使えます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -11383,7 +11621,7 @@
       "description": "洗えるタイプの動物のぬいぐるみです。くま・犬・うさぎ・ぞう・ユニコーンから選べます。\n赤ちゃんが持つものは汚れるのが前提なので、洗えるかどうかは実用上いちばん大きい違いになります。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -11416,7 +11654,7 @@
       "description": "北海道産のエゾシカの角です。極太サイズで、犬のおもちゃとして使います。\n角は硬く、噛んでも減りにくいので長持ちします。甘噛みやいたずらの向け先として、デンタルケアと口臭対策も兼ねられます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -11449,7 +11687,7 @@
       "description": "日本ブランドTOKAIZの傘型サンシェードです。UVカット99.9%、UPF50+をうたっています。\n中棒が曲がるので、フロントガラスの角度に沿わせられます。骨が10本あり、たわみにくい作りです。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -11482,7 +11720,7 @@
       "description": "HMBのサプリで、1袋432粒入りです。原料も生産も国内で行っています。\n粒数が多いぶん、1粒あたりの単価は下がります。続けて飲む前提の商品です。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -11514,7 +11752,7 @@
       "description": "木質ペレット20kgです。猫砂としても、ペレットストーブの燃料としても使えます。\n崩れるタイプなので、システムトイレの下段に落とす使い方ができます。用途が2つあるぶん、余っても行き先があります。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -11547,7 +11785,7 @@
       "description": "猫砂用の木質ペレットです。33リットルから容量を選べます。\n木の素材なので、燃えるごみとして出せる自治体が多いものです。まとめ買いで単価が下がります。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -11562,7 +11800,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00tna67.jeifodd2.g00tna67.jeifp8a1/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fattenir%2F166011%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fattenir%2Fi%2F10000250%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "アテニア公式ショップ 楽天市場店",
       "reviewAverage": 4.75,
-      "reviewCount": 40235,
+      "reviewCount": 40236,
       "itemCode": "attenir:10000250",
       "genreId": "405061",
       "listPrice": null,
@@ -11580,7 +11818,7 @@
       "description": "アテニアのクレンジングオイル175mLです。公式ショップからの発送になります。\nW洗顔が不要なので、これ1本でメイク落としが終わります。手間と洗顔料の両方が減る作りです。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00",
@@ -11630,7 +11868,7 @@
       "description": "潤滑剤のLSベルハンマーゴールド、スプレー420mlです。1人1本かぎりのお試し企画になっています。\n2回目以降の注文は自動でキャンセルされる決まりなので、まとめ買いはできません。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -11662,7 +11900,7 @@
       "description": "ノースリーブのマキシ丈ワンピースです。丈が2種類から選べます。\n吸水速乾でUVカット。マタニティでも着られる形なので、体型が変わる時期でも使えます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -11695,7 +11933,7 @@
       "description": "ふわふわの手ざわりを売りにしたぬいぐるみです。うさぎ・くま・いぬから選べます。\nランキングで連続して1位を取っている商品で、出産祝いの定番として選ばれています。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -11728,7 +11966,7 @@
       "description": "PUPPIAのベスト型ソフトハーネスです。世界で累計170万個売れています。\nメッシュのベスト型なので、面で支えます。首だけに力がかからないぶん、引っぱる犬でも負担が散ります。XSからLまで。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -11760,7 +11998,7 @@
       "description": "Nintendo Switch用の『ふたりで!にゃんこ大戦争』です。追加コンテンツのDLCが同梱されています。\n2人で一緒に遊べるので、家に1本あると来客時にも使えます。即日出荷の扱いです。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -11793,7 +12031,7 @@
       "description": "ボタンを押すと童謡が鳴る絵本です。幼稚園の先生が選んだ曲が入っています。\n0歳から5歳ごろまで幅があり、手遊びやカラオケとしても使えます。ギフト包装が無料なので、贈り物にそのまま回せます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -11826,7 +12064,7 @@
       "description": "『ポケットモンスター ソード・シールド』の追加コンテンツ、エキスパンションパスのダウンロード版です。\n本編がないと遊べません。すでに持っている人向けの追加要素です。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "2020-01-10 00:00",
       "endTime": "2050-12-31 23:59",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -11841,7 +12079,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00teot7.jeifo1c5.g00teot7.jeifpc26/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftreesoyc%2Ftc001%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Ftreesoyc%2Fi%2F10000020%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "trees楽天市場店",
       "reviewAverage": 4.64,
-      "reviewCount": 3812,
+      "reviewCount": 3813,
       "itemCode": "treesoyc:10000020",
       "genreId": "304413",
       "listPrice": 2750,
@@ -11859,7 +12097,7 @@
       "description": "屋外に置いたタイヤを覆うカバーです。防水と紫外線対策の両方をうたっています。\nタイヤはゴムなので、日に当て続けるとひび割れます。保管場所が屋外なら、掛けておくかどうかで寿命が変わります。位置シートが付いていて、どのタイヤをどこに履かせていたか記録できます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -11892,7 +12130,7 @@
       "description": "次亜塩素酸水のサライウォーター2Lです。薄めずにそのまま使えます。\n除菌と消臭の両方に使えるので、キッチン、トイレ、ペットのにおい、靴と1本で回せます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -11924,7 +12162,7 @@
       "description": "クリスタルガイザーの500mlが48本入ったケースです。1本あたり58円ほど。\nカリフォルニアの採水地から届く定番の水です。箱で置いておけば、買い足す頻度が減ります。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -11939,7 +12177,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00tpxd7.jeifo292.g00tpxd7.jeifp00d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flogicool%2Fmk235%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Flogicool%2Fi%2F10000292%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "ロジクール 公式ストア",
       "reviewAverage": 4.16,
-      "reviewCount": 285,
+      "reviewCount": 286,
       "itemCode": "logicool:10000292",
       "genreId": "565173",
       "listPrice": null,
@@ -11957,7 +12195,7 @@
       "description": "ロジクールのワイヤレスキーボードとマウスのセット、MK235です。国内正規品。\n耐水設計で、2年間の無償保証が付きます。有線をやめたいときの、いちばん確実な選択肢です。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -11990,7 +12228,7 @@
       "description": "自動連射の機能が付いた無線コントローラーです。Switch 2、Switch、Lite、有機ELモデルに対応します。\nPCのSteamでも使えるので、1つで複数の環境に回せます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -12023,7 +12261,7 @@
       "description": "薄型のワイヤレスキーボードとマウスのセットです。充電式で、電池を買い足す必要がありません。\n2.4GHzとBluetoothの両方に対応するので、パソコンとタブレットで使い分けられます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -12056,7 +12294,7 @@
       "description": "セパレートのフィットネス水着に、ゴーグル・タオル・バッグ・スイムキャップが付いたセットです。\n泳ぎに行くのに要るものが一度に揃います。半袖でめくれ防止、UVカット付き。大きいサイズもあります。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -12089,7 +12327,7 @@
       "description": "吸盤で取り付ける車載スマホホルダーです。年間ランキングで4年連続1位を取っています。\n吸盤タイプは貼る場所を選べるぶん、外して付け替えるのも簡単です。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -12123,7 +12361,7 @@
       "description": "ウエストがゴムのストレッチスキニーです。SからXXXLまでサイズが揃っています。\nデニム見えしますが履き心地はレギンスに近く、長時間座る日でも楽です。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00",
@@ -12175,7 +12413,7 @@
       "description": "綿を使ったノンワイヤーのブラトップです。締めつけないことを狙った作り。\n3wayで着られるので、部屋着としても外出時のインナーとしても回せます。デザインは4種類から。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -12208,7 +12446,7 @@
       "description": "ロング丈のフレアワイドパンツです。色が11色あり、形も2タイプから選べます。\nストレッチが効いているので、ヨガやリラックス用としても使えます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -12223,7 +12461,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00scnq7.jeifo536.g00scnq7.jeifp16c/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftorreya-shop%2F100000013%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Ftorreya-shop%2Fi%2F10000022%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "Torreya 楽天市場店",
       "reviewAverage": 4.66,
-      "reviewCount": 15403,
+      "reviewCount": 15406,
       "itemCode": "torreya-shop:10000022",
       "genreId": "563788",
       "listPrice": null,
@@ -12241,7 +12479,7 @@
       "description": "LEDとUVの両方に対応した48Wのジェルネイルライトです。セルフネイル用。\n低ヒート機能があるので、硬化するときの熱さを抑えられます。レジンクラフトにも使えます。1年保証付き。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -12274,7 +12512,7 @@
       "description": "野草と野菜、果物を発酵・熟成させた酵素のカプセルです。約6ヶ月分が入っています。\n1日あたり17円ほど。半年ぶんまとめて買うことで、この単価になっています。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -12307,7 +12545,7 @@
       "description": "Nintendo Switch Online の12ヶ月券、ダウンロード版です。\n1ヶ月あたり250円。1ヶ月券を毎月買うより、まとめたほうが安くなります。オンライン対戦とセーブデータの預かりが使えます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "2018-09-19 00:00",
       "endTime": "2050-12-31 23:59",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -12322,7 +12560,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00sw2c7.jeifoa6f.g00sw2c7.jeifp63c/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fe-kit%2Fek-kbmr01mcl%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fe-kit%2Fi%2F10042595%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "e-kit(いーきっと)",
       "reviewAverage": 4.67,
-      "reviewCount": 16431,
+      "reviewCount": 16432,
       "itemCode": "e-kit:10042595",
       "genreId": "101766",
       "listPrice": null,
@@ -12340,7 +12578,7 @@
       "description": "冷蔵庫の下に敷く透明のポリカーボネート製マットです。床のへこみとキズを防ぎます。\n賃貸では、退去時に床の跡が問題になることがあります。敷いておけば、そこを気にせずに済みます。床暖房にも対応。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -12373,7 +12611,7 @@
       "description": "グリニーズプラスのデンタルガム、超小型犬用60本です。体重2〜7kgが対象。\n1本あたり53円で、約2ヶ月分にあたります。総合栄養食なので、おやつでありながら栄養の基準も満たしています。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -12406,7 +12644,7 @@
       "description": "重ねる、並べる、崩すという遊びができるカップのセットです。積み木より軽く、当たっても痛くありません。\n6か月ごろから3歳ごろまで、遊び方を変えながら使えます。北欧のブランド mushie の製品です。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -12439,7 +12677,7 @@
       "description": "ベビーサークルの拡張用パネル2枚組です。単体では囲いになりません。\nすでに同じシリーズを持っていて、もう少し広げたい、形を変えたいというときのための追加パーツです。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -12472,7 +12710,7 @@
       "description": "循環式の自動給水器です。1.8Lの蛇口式で、浄水しながら回します。\n静音をうたっていて、寝室に置いても気になりにくい作り。3年保証が付きます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -12558,7 +12796,7 @@
       "description": "ロジクールのMK270B/MK270Gです。定番の無線キーボードとマウスのセット。\n防滴設計で、2年間の無償保証が付きます。WindowsとChromeに対応。Unifyingには非対応です。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -12591,7 +12829,7 @@
       "description": "日本製の木の積み木です。無垢の木を使った手作りで、玩具安全基準のPSCに対応しています。\n木の積み木は握った感触と音が違うので、最初の1セットとして選ばれることが多いものです。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -12624,7 +12862,7 @@
       "description": "DABADAのトレッキングポール2本セットです。アルミ製で1本220gと軽量。\nSGマークを取得しています。最少56.5cmまで縮むので、ザックに挿して持ち運べます。熊よけ鈴と収納袋、キャップが付きます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -12657,7 +12895,7 @@
       "description": "ファブリックカバーが付いたバランスボールです。45cm・55cm・65cmから選べます。\nカバーがあると床で滑りにくく、そのまま椅子代わりにも使えます。アンチバースト仕様で、ポンプとエクササイズガイドが付きます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -12666,7 +12904,7 @@
       "id": "r7f426b354",
       "category": "kaden",
       "title": "加湿器 超音波加湿器 次亜塩素酸水対応 タワー型 おしゃれ 卓上加湿器 超音波式加湿器 アロマ加湿器…",
-      "rawTitle": "[クーポンで5％OFF] 加湿器 超音波加湿器 次亜塩素酸水対応 タワー型 おしゃれ 卓上加湿器 超音波式加湿器 アロマ加湿器 卓上 オフィス 大容量 小型 コンパクト 自動停止機能 LEDライト付き 静音 省エネ 節電 エコ",
+      "rawTitle": "[クーポンで6%OFF] [即日出荷] 加湿器 超音波加湿器 次亜塩素酸水対応 タワー型 おしゃれ 卓上加湿器 超音波式加湿器 アロマ加湿器 卓上 オフィス 大容量 小型 コンパクト 自動停止機能 LEDライト付き 静音 省エネ 節電 エコ",
       "price": 3999,
       "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/dondon/cabinet/htjs-002_3.jpg?_ex=600x600",
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00qqpq7.jeifo37e.g00qqpq7.jeifp771/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdondon%2Fhtjs-002%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fdondon%2Fi%2F10003669%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
@@ -12690,7 +12928,7 @@
       "description": "タワー型の超音波加湿器です。次亜塩素酸水にも対応しています。\n水がなくなると自動で止まります。卓上に置ける大きさなので、部屋全体ではなく手元を加湿する使い方に向いています。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -12723,7 +12961,7 @@
       "description": "リビングに置くことを想定したベビーサークルです。ドア付きで、大人もまたがずに出入りできます。\n生活空間に置きっぱなしになるものなので、色はベージュ・グレー・ホワイトから選べます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -12756,7 +12994,7 @@
       "description": "ストレートとカールの両方に使える2WAYアイロンです。全4色。\nチタニウムのプレートで、海外の電圧にも対応します。1本で済むので、旅行に持っていくものを減らせます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -12771,7 +13009,7 @@
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00r23n7.jeifoddc.g00r23n7.jeifp65c/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkobe-beauty-labo%2Fmain-salo3%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fkobe-beauty-labo%2Fi%2F10000050%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "shop": "アンド ハビット",
       "reviewAverage": 4.25,
-      "reviewCount": 31410,
+      "reviewCount": 31411,
       "itemCode": "kobe-beauty-labo:10000050",
       "genreId": "562667",
       "listPrice": null,
@@ -12789,7 +13027,7 @@
       "description": "サロニアの2WAYアイロン、32mmです。ストレートにもカールにも使えます。\n32mmは太めなので、ゆるめのカールを作る幅です。1年保証と海外対応付き。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -12798,7 +13036,7 @@
       "id": "rec227a2ec",
       "category": "kaden",
       "title": "ヒーター 人感センサー 電気ストーブ 足元 オフィス 省エネ おしゃれ 即暖 セラミックヒーター…",
-      "rawTitle": "[クーポンで5％OFF] [レビュー14000件超え／高評価4.4点] ヒーター 人感センサー 電気ストーブ 足元 オフィス 省エネ おしゃれ 即暖 セラミックヒーター ファンヒーター セラミックファンヒーター パネルヒーター コンパクト 薄型 小型",
+      "rawTitle": "[クーポンで6%OFF] [即日出荷] [レビュー14000件超え／高評価4.4点] ヒーター 人感センサー 電気ストーブ 足元 オフィス 省エネ おしゃれ 即暖 セラミックヒーター ファンヒーター セラミックファンヒーター パネルヒーター コンパクト 薄型 小型",
       "price": 5999,
       "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/dondon/cabinet/dyh01_3.jpg?_ex=600x600",
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00qqpq7.jeifo37e.g00qqpq7.jeifp771/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdondon%2Fmdht-001%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fdondon%2Fi%2F10004204%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
@@ -12822,7 +13060,7 @@
       "description": "人感センサー付きのセラミックファンヒーターです。人がいなくなると止まります。\nすぐ温まるので、足元だけを短時間あたためる使い方に向いています。薄型でコンパクト。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
@@ -12855,7 +13093,7 @@
       "description": "recolteのフードプロセッサーです。刻む、混ぜる、砕く、泡立てるなど7つの役目をこなします。\n容量は500ml。大根おろしから離乳食、氷を砕くところまで1台で回せます。",
       "unitNote": null,
       "postedAt": "2026-08-20",
-      "lastSeen": "2026-10-09",
+      "lastSeen": "2026-10-10",
       "startTime": "",
       "endTime": "",
       "bumpedAt": "2026-08-20T00:00:00"
