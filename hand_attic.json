@@ -111,7 +111,7 @@
     "_stashedAt": "2026-09-14"
   },
   "darkangel:10036348": {
-    "caption": "5,990円のワイドパンツが1,990円。センタープレス入り・ウエストゴム。",
+    "caption": "5,990円のワイドパンツが1,999円。センタープレス入り・ウエストゴム。",
     "points": [
       "梨地のストレッチ生地",
       "M・Lの2サイズ・レビュー2,301件"
@@ -3910,7 +3910,7 @@
       "cta": "none",
       "ask": "冬の通勤、パンツの下に何か履いていますか？"
     },
-    "pitch_status": "ready",
+    "pitch_status": "pending",
     "_stashedAt": "2026-10-09"
   },
   "mixsim:10000439": {
@@ -4156,7 +4156,7 @@
     "_stashedAt": "2026-10-09"
   },
   "3rwebshop:10005834": {
-    "caption": "1,820円の単4充電池4本が860円。ケース付き。",
+    "caption": "1,820円の単4充電池4本が890円。ケース付き。",
     "points": [
       "950mAh・4本＋ケース",
       "レビュー4,379件・★4.54"
@@ -7017,9 +7017,8 @@
     "_stashedAt": "2026-09-26"
   },
   "kumamoto-food:10003001": {
-    "caption": "4,000円の青汁180gが2,000円。3g×60包。",
+    "caption": "青汁180gが2,000円。3g×60包。",
     "points": [
-      "4,000円から2,000円へ",
       "国産の大麦若葉",
       "送料込み"
     ],
@@ -8443,7 +8442,7 @@
       "cta_text": null
     },
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-04"
+    "_stashedAt": "2026-10-09"
   },
   "oga:10225061": {
     "caption": "790円の野菜酵素サプリが398円。約1ヶ月分。",
@@ -10224,9 +10223,8 @@
     "_stashedAt": "2026-10-02"
   },
   "mixsim:10000337": {
-    "caption": "5,960円の厚底スニーカーが2,080円。軽量で、サイズは23.0〜25.0cm。",
+    "caption": "2,280円の厚底スニーカーが2,080円。軽量で、サイズは23.0〜25.0cm。",
     "points": [
-      "5,960円から2,080円へ",
       "厚底のダッドスニーカー",
       "軽量・23.0〜25.0cm"
     ],
@@ -11959,6 +11957,60 @@
       "送料無料"
     ],
     "listPrice": 3500,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-09"
+  },
+  "motunabe:10001907": {
+    "listPrice": 2282,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-09"
+  },
+  "tescom-japan:10000163": {
+    "tags": [
+      "在庫処分"
+    ],
+    "listPrice": 5500,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-09"
+  },
+  "darkangel:10023599": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2890,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-09"
+  },
+  "mixsim:10000328": {
+    "listPrice": 3960,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-09"
+  },
+  "mixsim:10000412": {
+    "listPrice": 5960,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-09"
+  },
+  "mixsim:10000420": {
+    "listPrice": 5960,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-09"
+  },
+  "mixsim:10000419": {
+    "listPrice": 5960,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-09"
+  },
+  "mixsim:10000410": {
+    "listPrice": 5960,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-09"
+  },
+  "spaceindustry:10000453": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 12099,
     "pitch_status": "pending",
     "_stashedAt": "2026-10-09"
   }
