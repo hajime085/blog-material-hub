@@ -662,23 +662,10 @@
     "tip:03",
     "schedule:2026-W40-5",
     "tip:31",
-    "tip:29"
+    "tip:29",
+    "tip:27"
   ],
   "log": [
-    {
-      "key": "product:r68cde95f1",
-      "id": "18086165486251745",
-      "at": "2026-09-14 13:00",
-      "kind": "product",
-      "slot": 13,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "problem",
-      "cta_type": "save",
-      "category": "pet",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "tip:06",
       "id": "18087753563223454",
@@ -6659,6 +6646,22 @@
       "at": "2026-10-09 14:20",
       "kind": "tip",
       "slot": 14,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
+      "link_arm": null,
+      "cta_arm": null
+    },
+    {
+      "key": "tip:27",
+      "id": "18642276274053253",
+      "at": "2026-10-09 17:20",
+      "kind": "tip",
+      "slot": 17,
       "catchup": false,
       "cap": null,
       "hook_type": null,
