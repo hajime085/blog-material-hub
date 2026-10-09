@@ -4009,7 +4009,6 @@
   },
   "mixsim:10000708": {
     "caption": "超軽量スリッポンが2,780円。立ったまま履けます。",
-    "listPrice": 5960,
     "marketing": {
       "hook_type": "compare",
       "target": "履くときの手間を減らしたい人",
@@ -7027,7 +7026,6 @@
     "tags": [
       "送料無料"
     ],
-    "listPrice": 4000,
     "marketing": {
       "hook_type": "discovery",
       "target": "青汁を続けたい人",
@@ -10232,7 +10230,7 @@
       "厚底のダッドスニーカー",
       "軽量・23.0〜25.0cm"
     ],
-    "listPrice": 5960,
+    "listPrice": 2280,
     "marketing": {
       "hook_type": "discovery",
       "target": "ボリュームのある靴を探している人",
@@ -11908,6 +11906,59 @@
       "送料無料"
     ],
     "listPrice": 1800,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-09"
+  },
+  "himalaya:10000409": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2000,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-09"
+  },
+  "oculu:10156770": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2700,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-09"
+  },
+  "gotouchi-food:10000736": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2760,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-09"
+  },
+  "santarosa:10000568": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 1998,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-09"
+  },
+  "emurshop:10000276": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2980,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-09"
+  },
+  "mixsim:10000573": {
+    "listPrice": 5160,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-09"
+  },
+  "everypet:10010032": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 3500,
     "pitch_status": "pending",
     "_stashedAt": "2026-10-09"
   }
