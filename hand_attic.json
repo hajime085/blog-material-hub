@@ -12066,5 +12066,14 @@
     "listPrice": 2736,
     "pitch_status": "pending",
     "_stashedAt": "2026-10-10"
+  },
+  "nexmoov:10000009": {
+    "tags": [
+      "送料無料",
+      "在庫処分"
+    ],
+    "listPrice": 5980,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-10"
   }
 }
