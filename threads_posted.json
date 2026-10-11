@@ -690,23 +690,10 @@
     "tip:43",
     "tip:25",
     "tip:01",
-    "tip:13"
+    "tip:13",
+    "tip:22"
   ],
   "log": [
-    {
-      "key": "product:rddadd2009",
-      "id": "18195674029379166",
-      "at": "2026-09-16 14:21",
-      "kind": "product",
-      "slot": 13,
-      "catchup": true,
-      "cap": true,
-      "hook_type": "scene",
-      "cta_type": "save",
-      "category": "fashion",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "tip:13",
       "id": "17908348575521397",
@@ -6743,6 +6730,22 @@
       "at": "2026-10-11 14:20",
       "kind": "tip",
       "slot": 14,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
+      "link_arm": null,
+      "cta_arm": null
+    },
+    {
+      "key": "tip:22",
+      "id": "18151965484558944",
+      "at": "2026-10-11 17:20",
+      "kind": "tip",
+      "slot": 17,
       "catchup": false,
       "cap": null,
       "hook_type": null,
