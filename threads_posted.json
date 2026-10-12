@@ -704,23 +704,10 @@
     "tip:31",
     "schedule:2026-W41-1",
     "tip:29",
-    "tip:27"
+    "tip:27",
+    "tip:16"
   ],
   "log": [
-    {
-      "key": "product:raad85aa48",
-      "id": "18191820154401993",
-      "at": "2026-09-17 13:00",
-      "kind": "product",
-      "slot": 13,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "discovery",
-      "cta_type": "none",
-      "category": "beauty",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "tip:02",
       "id": "17888391330457427",
@@ -6785,6 +6772,22 @@
       "at": "2026-10-12 14:20",
       "kind": "tip",
       "slot": 14,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
+      "link_arm": null,
+      "cta_arm": null
+    },
+    {
+      "key": "tip:16",
+      "id": "18034190462668853",
+      "at": "2026-10-12 17:21",
+      "kind": "tip",
+      "slot": 17,
       "catchup": false,
       "cap": null,
       "hook_type": null,
