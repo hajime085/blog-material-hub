@@ -739,23 +739,10 @@
     "page:kaimawari:2026-10-14",
     "tip:02",
     "tip:33",
-    "tip:14"
+    "tip:14",
+    "tip:07"
   ],
   "log": [
-    {
-      "key": "product:r58a9a1952",
-      "id": "18096803651093386",
-      "at": "2026-09-19 23:20",
-      "kind": "product",
-      "slot": 22,
-      "catchup": true,
-      "cap": true,
-      "hook_type": "discovery",
-      "cta_type": "save",
-      "category": "food",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:re3b6c7dd8",
       "id": "18105769160350456",
@@ -6888,6 +6875,22 @@
       "key": "tip:14",
       "id": "18130923013612459",
       "at": "2026-10-14 20:31",
+      "kind": "tip",
+      "slot": 20,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
+      "link_arm": null,
+      "cta_arm": null
+    },
+    {
+      "key": "tip:07",
+      "id": "18129666736769324",
+      "at": "2026-10-14 20:41",
       "kind": "tip",
       "slot": 20,
       "catchup": false,
