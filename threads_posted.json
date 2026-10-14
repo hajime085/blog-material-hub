@@ -736,23 +736,10 @@
     "tip:00",
     "tip:12",
     "tip:21",
-    "page:kaimawari:2026-10-14"
+    "page:kaimawari:2026-10-14",
+    "tip:02"
   ],
   "log": [
-    {
-      "key": "tip:26",
-      "id": "17861768076694773",
-      "at": "2026-09-19 19:20",
-      "kind": "tip",
-      "slot": 19,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none"
-    },
     {
       "key": "product:r8235fa28b",
       "id": "18104562161229115",
@@ -6888,6 +6875,22 @@
       "category": null,
       "logic_version": null,
       "link": "reply",
+      "link_arm": null,
+      "cta_arm": null
+    },
+    {
+      "key": "tip:02",
+      "id": "18157299082508369",
+      "at": "2026-10-14 20:11",
+      "kind": "tip",
+      "slot": 20,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
       "link_arm": null,
       "cta_arm": null
     }
