@@ -8464,7 +8464,7 @@
     "_stashedAt": "2026-09-28"
   },
   "oga:10126950": {
-    "caption": "1,580円のマルチビタミンサプリが1,050円。約3ヶ月分。",
+    "caption": "1,580円のマルチビタミンサプリが1,000円。約3ヶ月分。",
     "tags": [
       "送料無料"
     ],
@@ -11568,8 +11568,8 @@
       "cta": "none",
       "ask": "頭を自分で剃っている人、何を使っていますか？"
     },
-    "pitch_status": "ready",
-    "_stashedAt": "2026-10-09"
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-14"
   },
   "osyarewotanosimu:10004162": {
     "caption": "3,280円のフェイクファーベストが1,990円。ノーカラーの前開きで、重ね着できる。",
@@ -12150,6 +12150,92 @@
       "送料無料"
     ],
     "listPrice": 2980,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-14"
+  },
+  "auc-ky-honpo:10001613": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2000,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-14"
+  },
+  "tanesho-factory-label:10017526": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2160,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-14"
+  },
+  "likaman:10003529": {
+    "tags": [
+      "送料無料",
+      "訳あり",
+      "アウトレット"
+    ],
+    "listPrice": 2698,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-14"
+  },
+  "cellar:10004160": {
+    "tags": [
+      "送料無料",
+      "訳あり",
+      "アウトレット"
+    ],
+    "listPrice": 2698,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-14"
+  },
+  "beer-the-world:10000451": {
+    "tags": [
+      "送料無料",
+      "訳あり",
+      "アウトレット"
+    ],
+    "listPrice": 2698,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-14"
+  },
+  "baselab:10000412": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 7980,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-14"
+  },
+  "baselab:10000347": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 6980,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-14"
+  },
+  "baselab:10000402": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 6980,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-14"
+  },
+  "kensen:10000010": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 4280,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-14"
+  },
+  "baselab:10000405": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 6980,
     "pitch_status": "pending",
     "_stashedAt": "2026-10-14"
   }
