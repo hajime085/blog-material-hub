@@ -1411,8 +1411,8 @@
       "cta": "save",
       "ask": "仕事のシャツ、ボタンダウンとレギュラーのどちらを選びますか？"
     },
-    "pitch_status": "ready",
-    "_stashedAt": "2026-10-09"
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-14"
   },
   "woodgreen:13235143": {
     "caption": "2,480円のSwitchケースが1,240円。水彩のボタニカル柄、送料込み。",
@@ -8484,8 +8484,8 @@
       "cta": "none",
       "cta_text": null
     },
-    "pitch_status": "ready",
-    "_stashedAt": "2026-09-28"
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-14"
   },
   "jitdirect:10034042": {
     "tags": [
@@ -9138,8 +9138,8 @@
       "cta": "none",
       "ask": "家で海鮮丼を作るとき、ウニはのせますか？"
     },
-    "pitch_status": "ready",
-    "_stashedAt": "2026-10-09"
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-14"
   },
   "yamagoiida:10000146": {
     "caption": "5,980円の銚子産骨取りさば1kgが2,990円。無塩、訳あり。",
@@ -12102,6 +12102,54 @@
       "送料無料"
     ],
     "listPrice": 2280,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-14"
+  },
+  "seedcoms:10007442": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2489,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-14"
+  },
+  "seedcoms:10007320": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 949,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-14"
+  },
+  "seedcoms:10007422": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 1999,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-14"
+  },
+  "seedcoms:10004677": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2224,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-14"
+  },
+  "seedcoms:10006706": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 1600,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-14"
+  },
+  "oga:10127376": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2980,
     "pitch_status": "pending",
     "_stashedAt": "2026-10-14"
   }
