@@ -735,23 +735,10 @@
     "tip:24",
     "tip:00",
     "tip:12",
-    "tip:21"
+    "tip:21",
+    "page:kaimawari:2026-10-14"
   ],
   "log": [
-    {
-      "key": "product:r1bfd13684",
-      "id": "18133571371678742",
-      "at": "2026-09-19 18:00",
-      "kind": "product",
-      "slot": 18,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "scene",
-      "cta_type": "save",
-      "category": "books",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "tip:26",
       "id": "17861768076694773",
@@ -6885,6 +6872,22 @@
       "category": null,
       "logic_version": null,
       "link": "none",
+      "link_arm": null,
+      "cta_arm": null
+    },
+    {
+      "key": "page:kaimawari:2026-10-14",
+      "id": "17989513776070038",
+      "at": "2026-10-14 20:00",
+      "kind": "page",
+      "slot": 20,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "reply",
       "link_arm": null,
       "cta_arm": null
     }
