@@ -751,23 +751,10 @@
     "tip:35",
     "tip:10",
     "tip:28",
-    "tip:34"
+    "tip:34",
+    "tip:06"
   ],
   "log": [
-    {
-      "key": "product:r0f980c899",
-      "id": "18443311234135123",
-      "at": "2026-09-20 20:00",
-      "kind": "product",
-      "slot": 20,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "scene",
-      "cta_type": "save",
-      "category": "pet",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:r8eaf9d31e",
       "id": "18094903181123693",
@@ -6926,6 +6913,22 @@
       "at": "2026-10-15 01:21",
       "kind": "tip",
       "slot": 1,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
+      "link_arm": null,
+      "cta_arm": null
+    },
+    {
+      "key": "tip:06",
+      "id": "17912980224493063",
+      "at": "2026-10-15 07:21",
+      "kind": "tip",
+      "slot": 7,
       "catchup": false,
       "cap": null,
       "hook_type": null,
