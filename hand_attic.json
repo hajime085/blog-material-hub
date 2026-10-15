@@ -6276,6 +6276,7 @@
       "ウォッチ中",
       "送料無料"
     ],
+    "listPrice": 2750,
     "_stashedAt": "2026-10-15"
   },
   "soukaidrink:10000912": {
@@ -8878,7 +8879,7 @@
     ],
     "listPrice": 2580,
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-12"
+    "_stashedAt": "2026-10-15"
   },
   "umamido:10000607": {
     "caption": "2,000円のビーフカレー200g×4袋が1,000円。甘口・辛口を選べます。",
@@ -12336,6 +12337,15 @@
       "送料無料"
     ],
     "listPrice": 1500,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-15"
+  },
+  "yokolee:10000656": {
+    "tags": [
+      "送料無料",
+      "訳あり"
+    ],
+    "listPrice": 2500,
     "pitch_status": "pending",
     "_stashedAt": "2026-10-15"
   }
