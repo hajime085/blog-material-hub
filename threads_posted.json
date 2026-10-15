@@ -758,23 +758,10 @@
     "tip:32",
     "tip:26",
     "tip:04",
-    "tip:36"
+    "tip:36",
+    "tip:19"
   ],
   "log": [
-    {
-      "key": "tip:37",
-      "id": "18021587465920410",
-      "at": "2026-09-21 07:20",
-      "kind": "tip",
-      "slot": 7,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none"
-    },
     {
       "key": "schedule:2026-W38-1",
       "id": "18365970973245390",
@@ -6947,6 +6934,22 @@
       "at": "2026-10-15 18:00",
       "kind": "tip",
       "slot": 18,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
+      "link_arm": null,
+      "cta_arm": null
+    },
+    {
+      "key": "tip:19",
+      "id": "17871029535644633",
+      "at": "2026-10-15 19:00",
+      "kind": "tip",
+      "slot": 19,
       "catchup": false,
       "cap": null,
       "hook_type": null,
