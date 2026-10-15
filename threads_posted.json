@@ -756,23 +756,10 @@
     "tip:18",
     "schedule:2026-W41-4",
     "tip:32",
-    "tip:26"
+    "tip:26",
+    "tip:04"
   ],
   "log": [
-    {
-      "key": "product:re5c565234",
-      "id": "17887040499617918",
-      "at": "2026-09-21 00:20",
-      "kind": "product",
-      "slot": 0,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "scene",
-      "cta_type": "save",
-      "category": "books",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:r1bbcfb83d",
       "id": "18070551605723997",
@@ -6941,6 +6928,22 @@
       "at": "2026-10-15 14:00",
       "kind": "tip",
       "slot": 14,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
+      "link_arm": null,
+      "cta_arm": null
+    },
+    {
+      "key": "tip:04",
+      "id": "18116641120806896",
+      "at": "2026-10-15 17:21",
+      "kind": "tip",
+      "slot": 17,
       "catchup": false,
       "cap": null,
       "hook_type": null,
