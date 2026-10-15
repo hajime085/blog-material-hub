@@ -763,23 +763,10 @@
     "tip:37",
     "tip:20",
     "tip:38",
-    "tip:09"
+    "tip:09",
+    "tip:15"
   ],
   "log": [
-    {
-      "key": "tip:38",
-      "id": "18078868196349376",
-      "at": "2026-09-21 17:21",
-      "kind": "tip",
-      "slot": 17,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none"
-    },
     {
       "key": "product:rddeb3b6e5",
       "id": "17944554048339989",
@@ -6960,6 +6947,22 @@
       "key": "tip:09",
       "id": "18128145676856182",
       "at": "2026-10-15 20:31",
+      "kind": "tip",
+      "slot": 20,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
+      "link_arm": null,
+      "cta_arm": null
+    },
+    {
+      "key": "tip:15",
+      "id": "18028803716879316",
+      "at": "2026-10-15 20:51",
       "kind": "tip",
       "slot": 20,
       "catchup": false,
