@@ -6226,7 +6226,6 @@
     ],
     "description": "ブラ紐を隠しつつ、脇汗も受けるタンクトップです。1枚で2つの役目をこなします。\n接触冷感の生地なので、夏でもインナーを1枚増やす負担が小さい。3枚セットでの購入になります。",
     "tags": [
-      "ウォッチ中",
       "送料無料"
     ],
     "listPrice": 2699,
@@ -6248,8 +6247,9 @@
       "body": "これ1枚で両方をカバーするタンクトップです。\n接触冷感の生地で、3枚セットになっています。",
       "cta": "empathy"
     },
-    "pitch_status": "ready",
-    "_stashedAt": "2026-10-05"
+    "pitch_status": "pending",
+    "unitNote": "1枚あたり690円",
+    "_stashedAt": "2026-10-16"
   },
   "rdownload:18331799": {
     "caption": "ソード・シールドの追加コンテンツが2,711円。",
@@ -7397,7 +7397,7 @@
     "pitch_status": "pending",
     "hidden": true,
     "hiddenReason": "同じ店・同じ値段が10件。2件までにする（ジットストア 400円）",
-    "_stashedAt": "2026-10-13"
+    "_stashedAt": "2026-10-16"
   },
   "jitdirect:10034040": {
     "tags": [
@@ -7408,7 +7408,7 @@
     "pitch_status": "pending",
     "hidden": true,
     "hiddenReason": "同じ店・同じ値段が10件。2件までにする（ジットストア 400円）",
-    "_stashedAt": "2026-10-13"
+    "_stashedAt": "2026-10-16"
   },
   "jitdirect:10039419": {
     "tags": [
@@ -7451,8 +7451,8 @@
       "body": "キヤノン純正の箱なしアウトレットです。\nゆうパケットでは送れない大きさです。",
       "cta": "save"
     },
-    "pitch_status": "ready",
-    "_stashedAt": "2026-09-14"
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-16"
   },
   "jitdirect:10034061": {
     "caption": "1,200円のブラザー純正LC115が600円。大容量。",
@@ -7485,7 +7485,7 @@
       "ask": "ブラザーのプリンターの人、インクはまとめ買いしますか？"
     },
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-13"
+    "_stashedAt": "2026-10-16"
   },
   "jitdirect:10039896": {
     "caption": "800円のキヤノン純正インクが箱なしアウトレットで登場。BCI-380S/381S、小容量。",
@@ -7511,7 +7511,7 @@
     "pitch_status": "pending",
     "hidden": true,
     "hiddenReason": "同じ店・同じ値段が3件。2件までにする（ジットストア 400円）。レビューが一番少ない1件を伏せた",
-    "_stashedAt": "2026-10-13"
+    "_stashedAt": "2026-10-16"
   },
   "jitdirect:10043192": {
     "caption": "1,350円のキヤノン純正BCI-380XL/381XLが675円。大容量。",
@@ -7544,7 +7544,7 @@
       "ask": "キヤノンのプリンターの人、大容量と標準のどちらを選んでいますか？"
     },
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-13"
+    "_stashedAt": "2026-10-16"
   },
   "jitdirect:10039420": {
     "tags": [
@@ -7555,7 +7555,7 @@
     "pitch_status": "pending",
     "hidden": true,
     "hiddenReason": "同じ店・同じ値段が10件。2件までにする（ジットストア 400円）",
-    "_stashedAt": "2026-10-13"
+    "_stashedAt": "2026-10-16"
   },
   "jitdirect:10034063": {
     "tags": [
@@ -7566,7 +7566,7 @@
     "pitch_status": "pending",
     "hidden": true,
     "hiddenReason": "同じ店・同じ値段が10件。2件までにする（ジットストア 400円）",
-    "_stashedAt": "2026-10-13"
+    "_stashedAt": "2026-10-16"
   },
   "jitdirect:10034062": {
     "tags": [
@@ -7577,7 +7577,7 @@
     "pitch_status": "pending",
     "hidden": true,
     "hiddenReason": "同じ店・同じ値段が3件。2件までにする（ジットストア 450円）",
-    "_stashedAt": "2026-10-13"
+    "_stashedAt": "2026-10-16"
   },
   "jitdirect:10034039": {
     "tags": [
@@ -12370,6 +12370,15 @@
   },
   "shoe-square:10003527": {
     "listPrice": 1980,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-16"
+  },
+  "ohgiya-f:10000239": {
+    "tags": [
+      "送料無料",
+      "訳あり"
+    ],
+    "listPrice": 1750,
     "pitch_status": "pending",
     "_stashedAt": "2026-10-16"
   }
