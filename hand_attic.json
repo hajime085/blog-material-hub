@@ -874,7 +874,7 @@
     "pitch_status": "pending",
     "hidden": true,
     "hiddenReason": "同じ店・同じ値段が10件。2件までにする（ジットストア 400円）",
-    "_stashedAt": "2026-10-14"
+    "_stashedAt": "2026-10-16"
   },
   "deconail-seisakujo:10002837": {
     "caption": "1,222円のカラージェルセットが611円。好きな色を選べる、UV/LED対応。",
@@ -7199,7 +7199,7 @@
       "ask": "年末に向けて、プリンターのインクの残りは気になりますか？"
     },
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-13"
+    "_stashedAt": "2026-10-16"
   },
   "jitdirect:10003048": {
     "caption": "1,050円のキヤノン純正BCI-350XL/351XLが525円。大容量。",
@@ -7232,7 +7232,7 @@
       "ask": "キヤノンのインク、箱が無くても気にならない人はいますか？"
     },
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-13"
+    "_stashedAt": "2026-10-16"
   },
   "jitdirect:10003409": {
     "tags": [
@@ -7243,7 +7243,7 @@
     "pitch_status": "pending",
     "hidden": true,
     "hiddenReason": "同じ店・同じ値段が10件。2件までにする（ジットストア 400円）",
-    "_stashedAt": "2026-10-13"
+    "_stashedAt": "2026-10-16"
   },
   "jitdirect:10003244": {
     "caption": "900円のエプソン純正IC69が450円。箱なしアウトレット。",
@@ -7276,7 +7276,7 @@
       "ask": "エプソンのプリンター、いちばん早く減るのは何色ですか？"
     },
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-13"
+    "_stashedAt": "2026-10-16"
   },
   "jitdirect:10034059": {
     "tags": [
@@ -7287,7 +7287,7 @@
     "pitch_status": "pending",
     "hidden": true,
     "hiddenReason": "同じ店・同じ値段が10件。2件までにする（ジットストア 400円）",
-    "_stashedAt": "2026-10-13"
+    "_stashedAt": "2026-10-16"
   },
   "jitdirect:10034041": {
     "caption": "1,200円のエプソン純正IC80Lが600円。増量タイプ。",
@@ -7320,7 +7320,7 @@
       "ask": "家のプリンター、月にどれくらい印刷しますか？"
     },
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-13"
+    "_stashedAt": "2026-10-16"
   },
   "jitdirect:10039508": {
     "caption": "1,150円のキヤノン純正BCI-380/381が575円。標準容量。",
@@ -7353,7 +7353,7 @@
       "ask": "プリンターをたまにしか使わない人、インクは標準容量で足りていますか？"
     },
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-13"
+    "_stashedAt": "2026-10-16"
   },
   "jitdirect:10039422": {
     "caption": "1,100円のエプソン純正KUI-Lが550円。増量タイプ。",
@@ -7386,7 +7386,7 @@
       "ask": "エプソンのプリンターを使っている人、インクは純正と互換のどちらですか？"
     },
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-13"
+    "_stashedAt": "2026-10-16"
   },
   "jitdirect:10034060": {
     "tags": [
@@ -8338,6 +8338,7 @@
       "訳あり",
       "アウトレット"
     ],
+    "listPrice": 800,
     "marketing": {
       "hook_type": "scene",
       "target": "プリンターのインク代を抑えたい人",
@@ -8364,7 +8365,7 @@
     "pitch_status": "pending",
     "hidden": true,
     "hiddenReason": "似た商品（同じ店・同じ値段の純正インクアウトレット）が並んだため、レビューが少ない方を伏せた",
-    "_stashedAt": "2026-10-13"
+    "_stashedAt": "2026-10-16"
   },
   "karatsu-iwamoto:10000296": {
     "caption": "2,160円の九州唐津産わかめ徳用大袋が1,000円。無添加。",
