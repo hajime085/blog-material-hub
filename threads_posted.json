@@ -784,23 +784,10 @@
     "product:r427b49bd8",
     "tip:23",
     "tip:03",
-    "tip:31"
+    "tip:31",
+    "tip:29"
   ],
   "log": [
-    {
-      "key": "product:r1bdf1e95f",
-      "id": "18094062515125482",
-      "at": "2026-09-22 23:21",
-      "kind": "product",
-      "slot": 22,
-      "catchup": true,
-      "cap": true,
-      "hook_type": "discovery",
-      "cta_type": "none",
-      "category": "beauty",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:r90112e1f5",
       "id": "18340069132253712",
@@ -7023,6 +7010,22 @@
       "key": "tip:31",
       "id": "18027438515700414",
       "at": "2026-10-16 20:10",
+      "kind": "tip",
+      "slot": 20,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
+      "link_arm": null,
+      "cta_arm": null
+    },
+    {
+      "key": "tip:29",
+      "id": "18012266636969205",
+      "at": "2026-10-16 20:20",
       "kind": "tip",
       "slot": 20,
       "catchup": false,
