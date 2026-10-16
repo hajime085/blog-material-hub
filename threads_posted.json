@@ -783,23 +783,10 @@
     "tip:07",
     "product:r427b49bd8",
     "tip:23",
-    "tip:03"
+    "tip:03",
+    "tip:31"
   ],
   "log": [
-    {
-      "key": "product:rb3df77f15",
-      "id": "18110752787166677",
-      "at": "2026-09-22 21:21",
-      "kind": "product",
-      "slot": 21,
-      "catchup": false,
-      "cap": false,
-      "hook_type": "scene",
-      "cta_type": "empathy",
-      "category": "baby-toy",
-      "logic_version": "marketing_v2",
-      "link": "reply"
-    },
     {
       "key": "product:r1bdf1e95f",
       "id": "18094062515125482",
@@ -7020,6 +7007,22 @@
       "key": "tip:03",
       "id": "18125645629930321",
       "at": "2026-10-16 20:00",
+      "kind": "tip",
+      "slot": 20,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
+      "link_arm": null,
+      "cta_arm": null
+    },
+    {
+      "key": "tip:31",
+      "id": "18027438515700414",
+      "at": "2026-10-16 20:10",
       "kind": "tip",
       "slot": 20,
       "catchup": false,
