@@ -793,23 +793,10 @@
     "tip:35",
     "tip:10",
     "tip:28",
-    "tip:34"
+    "tip:34",
+    "tip:06"
   ],
   "log": [
-    {
-      "key": "tip:13",
-      "id": "17953110327270790",
-      "at": "2026-09-23 17:21",
-      "kind": "tip",
-      "slot": 17,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none"
-    },
     {
       "key": "product:rb3ba592b2",
       "id": "18152780374522375",
@@ -7050,6 +7037,22 @@
       "key": "tip:34",
       "id": "17939869317380189",
       "at": "2026-10-16 21:40",
+      "kind": "tip",
+      "slot": 21,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
+      "link_arm": null,
+      "cta_arm": null
+    },
+    {
+      "key": "tip:06",
+      "id": "18103819478021436",
+      "at": "2026-10-16 21:50",
       "kind": "tip",
       "slot": 21,
       "catchup": false,
