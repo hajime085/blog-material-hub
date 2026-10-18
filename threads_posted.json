@@ -821,23 +821,10 @@
     "tip:21",
     "tip:02",
     "tip:33",
-    "tip:14"
+    "tip:14",
+    "tip:07"
   ],
   "log": [
-    {
-      "key": "tip:36",
-      "id": "17908760529519240",
-      "at": "2026-09-25 14:21",
-      "kind": "tip",
-      "slot": 14,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none"
-    },
     {
       "key": "tip:07",
       "id": "17930063985164132",
@@ -7136,6 +7123,22 @@
       "at": "2026-10-18 20:00",
       "kind": "tip",
       "slot": 20,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
+      "link_arm": null,
+      "cta_arm": null
+    },
+    {
+      "key": "tip:07",
+      "id": "18119121287000500",
+      "at": "2026-10-18 21:00",
+      "kind": "tip",
+      "slot": 21,
       "catchup": false,
       "cap": null,
       "hook_type": null,
