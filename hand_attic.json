@@ -8394,7 +8394,7 @@
       "ask": "味噌汁を作る人、わかめは乾燥と生、どちらを使っていますか？"
     },
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-17"
+    "_stashedAt": "2026-10-19"
   },
   "lax:10044115": {
     "caption": "4,990円のオーバーサイズデニムジャケットが2,990円。24時間限定。",
@@ -8527,7 +8527,7 @@
       "ask": "充電ケーブルを使う人、家に何本くらいありますか？"
     },
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-17"
+    "_stashedAt": "2026-10-19"
   },
   "drwanwan:10000046": {
     "caption": "1,600円の国産鹿肉ジャーキーが800円。無添加。",
@@ -12405,6 +12405,11 @@
     "listPrice": 1699,
     "pitch_status": "pending",
     "unitNote": "1枚あたり590円",
+    "_stashedAt": "2026-10-19"
+  },
+  "gracevally:10000008": {
+    "listPrice": 4299,
+    "pitch_status": "pending",
     "_stashedAt": "2026-10-19"
   }
 }
