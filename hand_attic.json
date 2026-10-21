@@ -5054,6 +5054,7 @@
       "ウォッチ中",
       "送料無料"
     ],
+    "listPrice": 690,
     "marketing": {
       "hook_type": "relatable",
       "target": "タオルを買い替えたい人",
@@ -12433,6 +12434,28 @@
       "送料無料"
     ],
     "listPrice": 1699,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-21"
+  },
+  "jajauma:10001356": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 1080,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-21"
+  },
+  "kanehidebio-shop:10000267": {
+    "tags": [
+      "送料無料",
+      "訳あり"
+    ],
+    "listPrice": 2980,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-21"
+  },
+  "d-fit:10010268": {
+    "listPrice": 2760,
     "pitch_status": "pending",
     "_stashedAt": "2026-10-21"
   }
