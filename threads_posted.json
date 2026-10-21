@@ -863,25 +863,10 @@
     "tip:33",
     "tip:18",
     "tip:14",
-    "tip:07"
+    "tip:07",
+    "tip:04"
   ],
   "log": [
-    {
-      "key": "tip:30",
-      "id": "18169952770454674",
-      "at": "2026-09-28 17:21",
-      "kind": "tip",
-      "slot": 17,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
     {
       "key": "product:raed0bb059",
       "id": "18120447346734366",
@@ -7256,6 +7241,22 @@
       "at": "2026-10-21 20:00",
       "kind": "tip",
       "slot": 20,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
+      "link_arm": null,
+      "cta_arm": null
+    },
+    {
+      "key": "tip:04",
+      "id": "18100197386657316",
+      "at": "2026-10-21 21:00",
+      "kind": "tip",
+      "slot": 21,
       "catchup": false,
       "cap": null,
       "hook_type": null,
