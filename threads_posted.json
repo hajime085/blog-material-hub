@@ -861,25 +861,10 @@
     "schedule:2026-W42-3",
     "tip:02",
     "tip:33",
-    "tip:18"
+    "tip:18",
+    "tip:14"
   ],
   "log": [
-    {
-      "key": "product:rc3a278550",
-      "id": "18565788331074467",
-      "at": "2026-09-28 13:00",
-      "kind": "product",
-      "slot": 13,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "problem_price",
-      "cta_type": "empathy",
-      "category": "food",
-      "logic_version": "marketing_v2",
-      "link": "reply",
-      "link_arm": "site",
-      "cta_arm": "ask"
-    },
     {
       "key": "tip:16",
       "id": "18056674760798792",
@@ -7254,6 +7239,22 @@
       "at": "2026-10-21 18:00",
       "kind": "tip",
       "slot": 18,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
+      "link_arm": null,
+      "cta_arm": null
+    },
+    {
+      "key": "tip:14",
+      "id": "17915656902526571",
+      "at": "2026-10-21 19:20",
+      "kind": "tip",
+      "slot": 19,
       "catchup": false,
       "cap": null,
       "hook_type": null,
