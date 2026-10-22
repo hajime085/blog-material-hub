@@ -875,25 +875,10 @@
     "tip:35",
     "tip:10",
     "tip:28",
-    "tip:25"
+    "tip:25",
+    "tip:34"
   ],
   "log": [
-    {
-      "key": "product:raa9e7d458",
-      "id": "17984085723088972",
-      "at": "2026-09-29 13:00",
-      "kind": "product",
-      "slot": 13,
-      "catchup": false,
-      "cap": true,
-      "hook_type": "discovery",
-      "cta_type": "none",
-      "category": "baby-toy",
-      "logic_version": "marketing_v2",
-      "link": "reply",
-      "link_arm": "site",
-      "cta_arm": "base"
-    },
     {
       "key": "tip:34",
       "id": "17909209440514730",
@@ -7268,6 +7253,22 @@
       "at": "2026-10-22 18:00",
       "kind": "tip",
       "slot": 18,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
+      "link_arm": null,
+      "cta_arm": null
+    },
+    {
+      "key": "tip:34",
+      "id": "18102890048570916",
+      "at": "2026-10-22 19:21",
+      "kind": "tip",
+      "slot": 19,
       "catchup": false,
       "cap": null,
       "hook_type": null,
