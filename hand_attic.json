@@ -874,7 +874,7 @@
     "pitch_status": "pending",
     "hidden": true,
     "hiddenReason": "同じ店・同じ値段が10件。2件までにする（ジットストア 400円）",
-    "_stashedAt": "2026-10-22"
+    "_stashedAt": "2026-10-23"
   },
   "deconail-seisakujo:10002837": {
     "caption": "1,222円のカラージェルセットが611円。好きな色を選べる、UV/LED対応。",
@@ -1201,7 +1201,7 @@
       "ask": "部屋着のパンツ、細身とゆったり、どちらを選びますか？"
     },
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-20"
+    "_stashedAt": "2026-10-23"
   },
   "e-itto:10000001": {
     "caption": "1,470円の靴用バイオ消臭剤が500円。除菌・殺菌つき。",
@@ -7193,7 +7193,7 @@
       "ask": "年末に向けて、プリンターのインクの残りは気になりますか？"
     },
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-19"
+    "_stashedAt": "2026-10-23"
   },
   "jitdirect:10003048": {
     "caption": "1,050円のキヤノン純正BCI-350XL/351XLが525円。大容量。",
@@ -7226,7 +7226,7 @@
       "ask": "キヤノンのインク、箱が無くても気にならない人はいますか？"
     },
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-19"
+    "_stashedAt": "2026-10-23"
   },
   "jitdirect:10003409": {
     "tags": [
@@ -7237,7 +7237,7 @@
     "pitch_status": "pending",
     "hidden": true,
     "hiddenReason": "同じ店・同じ値段が10件。2件までにする（ジットストア 400円）",
-    "_stashedAt": "2026-10-19"
+    "_stashedAt": "2026-10-23"
   },
   "jitdirect:10003244": {
     "caption": "900円のエプソン純正IC69が450円。箱なしアウトレット。",
@@ -7270,7 +7270,7 @@
       "ask": "エプソンのプリンター、いちばん早く減るのは何色ですか？"
     },
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-19"
+    "_stashedAt": "2026-10-23"
   },
   "jitdirect:10034059": {
     "tags": [
@@ -7281,7 +7281,7 @@
     "pitch_status": "pending",
     "hidden": true,
     "hiddenReason": "同じ店・同じ値段が10件。2件までにする（ジットストア 400円）",
-    "_stashedAt": "2026-10-19"
+    "_stashedAt": "2026-10-23"
   },
   "jitdirect:10034041": {
     "caption": "1,200円のエプソン純正IC80Lが600円。増量タイプ。",
@@ -8769,7 +8769,7 @@
       "cta_text": null
     },
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-19"
+    "_stashedAt": "2026-10-23"
   },
   "nswshop:10000125": {
     "caption": "2,680円の犬用伸縮リード5mが1,000円。LEDライト付き。",
@@ -8937,7 +8937,7 @@
       "ask": "葉酸サプリ、成分表を見比べて選びますか？"
     },
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-19"
+    "_stashedAt": "2026-10-23"
   },
   "washington:10061056": {
     "caption": "2,490円のスリッポンが990円。柔らかい素材のフラットシューズ。",
@@ -9052,7 +9052,7 @@
     "_stashedAt": "2026-10-10"
   },
   "darkangel:10034443": {
-    "caption": "1,999円のワイドパンツが1,000円。24時間限定。",
+    "caption": "1,999円のワイドパンツが999円。24時間限定。",
     "tags": [
       "送料無料"
     ],
@@ -12574,6 +12574,11 @@
       "送料無料"
     ],
     "listPrice": 2970,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-23"
+  },
+  "kyoetsu-orosiya:10009338": {
+    "listPrice": 1950,
     "pitch_status": "pending",
     "_stashedAt": "2026-10-23"
   }
