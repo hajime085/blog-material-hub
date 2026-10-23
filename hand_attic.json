@@ -1412,7 +1412,7 @@
       "ask": "仕事のシャツ、ボタンダウンとレギュラーのどちらを選びますか？"
     },
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-19"
+    "_stashedAt": "2026-10-23"
   },
   "woodgreen:13235143": {
     "caption": "2,480円のSwitchケースが1,240円。水彩のボタニカル柄、送料込み。",
@@ -1583,7 +1583,7 @@
       "ask": "モバイルバッテリーとケーブル、別々に持ち歩いていますか？"
     },
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-19"
+    "_stashedAt": "2026-10-23"
   },
   "irie-irie:10000559": {
     "caption": "6,600円のロング丈ヨガトップスが2,673円。2wayのメッシュ素材。",
@@ -5793,6 +5793,7 @@
       "ウォッチ中",
       "送料無料"
     ],
+    "listPrice": 1880,
     "_stashedAt": "2026-10-23"
   },
   "epcat:10000002": {
@@ -10995,7 +10996,7 @@
       "ask": "レトルトカレーを買い置きする人、何個くらい家にありますか？"
     },
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-17"
+    "_stashedAt": "2026-10-23"
   },
   "whithwhite:10000131": {
     "caption": "5,000円の歯みがき粉とマウスウォッシュのセットが2,500円。",
@@ -12524,6 +12525,55 @@
       "送料無料"
     ],
     "listPrice": 1600,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-23"
+  },
+  "seedcoms:10006708": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 1600,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-23"
+  },
+  "seedcoms:10004739": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 1600,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-23"
+  },
+  "seedcoms:10003650": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 1600,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-23"
+  },
+  "sankyo:10070856": {
+    "tags": [
+      "訳あり",
+      "アウトレット"
+    ],
+    "listPrice": 2900,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-23"
+  },
+  "cheermam:10005109": {
+    "tags": [
+      "アウトレット"
+    ],
+    "listPrice": 2384,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-23"
+  },
+  "cheermam:10001377": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2970,
     "pitch_status": "pending",
     "_stashedAt": "2026-10-23"
   }
