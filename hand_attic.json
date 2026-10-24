@@ -6271,6 +6271,7 @@
       "ウォッチ中",
       "送料無料"
     ],
+    "listPrice": 2750,
     "_stashedAt": "2026-10-24"
   },
   "soukaidrink:10000912": {
@@ -9296,7 +9297,7 @@
       "ask": "サプリを選ぶ人、日本製かどうかは見ていますか？"
     },
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-17"
+    "_stashedAt": "2026-10-24"
   },
   "ashiya:10000009": {
     "caption": "1,500円のマウスピース（簡単型取り）が1,000円。ケース付き。",
@@ -9323,7 +9324,7 @@
       "ask": "歯ぎしりを家族に言われたことがある人、何か使っていますか？"
     },
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-17"
+    "_stashedAt": "2026-10-24"
   },
   "ashiya:10000004": {
     "caption": "1,500円のマウスピース（簡単装着）が1,000円。ケース付き。",
@@ -9351,7 +9352,7 @@
       "ask": "マウスピースを使ったことがない人、気になっていることは何ですか？"
     },
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-17"
+    "_stashedAt": "2026-10-24"
   },
   "petitprice:10000993": {
     "caption": "698円のカラージェル5個セットが349円。全80色から選べて、混ぜて色を作れる。",
@@ -12280,7 +12281,7 @@
     ],
     "listPrice": 1780,
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-17"
+    "_stashedAt": "2026-10-24"
   },
   "duen1102:10000001": {
     "tags": [
@@ -12288,7 +12289,7 @@
     ],
     "listPrice": 1980,
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-17"
+    "_stashedAt": "2026-10-24"
   },
   "duen1102:10000122": {
     "tags": [
@@ -12296,7 +12297,7 @@
     ],
     "listPrice": 2000,
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-17"
+    "_stashedAt": "2026-10-24"
   },
   "duen1102:10000118": {
     "tags": [
@@ -12304,7 +12305,7 @@
     ],
     "listPrice": 2000,
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-17"
+    "_stashedAt": "2026-10-24"
   },
   "duen1102:10000027": {
     "tags": [
@@ -12312,7 +12313,7 @@
     ],
     "listPrice": 2000,
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-17"
+    "_stashedAt": "2026-10-24"
   },
   "jiggys-shop:10019040": {
     "listPrice": 1995,
@@ -12590,6 +12591,14 @@
       "送料無料"
     ],
     "listPrice": 3200,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-24"
+  },
+  "duen1102:10000008": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 1580,
     "pitch_status": "pending",
     "_stashedAt": "2026-10-24"
   }
