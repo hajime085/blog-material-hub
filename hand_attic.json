@@ -12601,5 +12601,13 @@
     "listPrice": 1580,
     "pitch_status": "pending",
     "_stashedAt": "2026-10-25"
+  },
+  "missin:10000140": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2200,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-25"
   }
 }
