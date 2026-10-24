@@ -7303,6 +7303,24 @@
       "link": "none",
       "link_arm": null,
       "cta_arm": null
+    },
+    {
+      "key": "skip:17",
+      "id": null,
+      "at": "2026-10-24 17:20",
+      "kind": "skip",
+      "slot": 17,
+      "catchup": false,
+      "link": "none"
+    },
+    {
+      "key": "skip:18",
+      "id": null,
+      "at": "2026-10-24 18:00",
+      "kind": "skip",
+      "slot": 18,
+      "catchup": false,
+      "link": "none"
     }
   ]
 }
