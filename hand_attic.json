@@ -1801,7 +1801,7 @@
       "cta": "empathy"
     },
     "pitch_status": "pending",
-    "_stashedAt": "2026-09-24"
+    "_stashedAt": "2026-10-24"
   },
   "kumamoto-food:10002290": {
     "caption": "2,760円のあご入りだしパックが1,380円。国産、送料込み。",
@@ -4155,7 +4155,7 @@
     "_stashedAt": "2026-10-24"
   },
   "3rwebshop:10005834": {
-    "caption": "1,820円の単4充電池4本が890円。ケース付き。",
+    "caption": "1,320円の単4充電池4本が890円。ケース付き。",
     "points": [
       "950mAh・4本＋ケース",
       "レビュー4,379件・★4.54"
@@ -7504,7 +7504,7 @@
     "pitch_status": "pending",
     "hidden": true,
     "hiddenReason": "同じ店・同じ値段が3件。2件までにする（ジットストア 400円）。レビューが一番少ない1件を伏せた",
-    "_stashedAt": "2026-10-19"
+    "_stashedAt": "2026-10-24"
   },
   "jitdirect:10043192": {
     "caption": "1,350円のキヤノン純正BCI-380XL/381XLが675円。大容量。",
@@ -7548,7 +7548,7 @@
     "pitch_status": "pending",
     "hidden": true,
     "hiddenReason": "同じ店・同じ値段が10件。2件までにする（ジットストア 400円）",
-    "_stashedAt": "2026-10-19"
+    "_stashedAt": "2026-10-24"
   },
   "jitdirect:10034063": {
     "tags": [
@@ -7559,7 +7559,7 @@
     "pitch_status": "pending",
     "hidden": true,
     "hiddenReason": "同じ店・同じ値段が10件。2件までにする（ジットストア 400円）",
-    "_stashedAt": "2026-10-19"
+    "_stashedAt": "2026-10-24"
   },
   "jitdirect:10034062": {
     "tags": [
@@ -7570,7 +7570,7 @@
     "pitch_status": "pending",
     "hidden": true,
     "hiddenReason": "同じ店・同じ値段が3件。2件までにする（ジットストア 450円）",
-    "_stashedAt": "2026-10-19"
+    "_stashedAt": "2026-10-24"
   },
   "jitdirect:10034039": {
     "tags": [
@@ -7581,7 +7581,7 @@
     "pitch_status": "pending",
     "hidden": true,
     "hiddenReason": "同じ店・同じ値段が3件。2件までにする（ジットストア 600円）",
-    "_stashedAt": "2026-10-19"
+    "_stashedAt": "2026-10-24"
   },
   "bjc-shop:10001712": {
     "caption": "2,980円の傘型サンシェードが1,290円。中棒が曲がるタイプ。",
@@ -8519,7 +8519,7 @@
       "ask": "充電ケーブルを使う人、家に何本くらいありますか？"
     },
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-22"
+    "_stashedAt": "2026-10-24"
   },
   "drwanwan:10000046": {
     "caption": "1,600円の国産鹿肉ジャーキーが800円。無添加。",
@@ -9454,7 +9454,7 @@
     "_stashedAt": "2026-09-24"
   },
   "angelsmile:10000682": {
-    "caption": "1,980円のペット用ファン付きベストが1,386円。USB充電式。",
+    "caption": "ペット用ファン付きベストが1,386円。USB充電式。",
     "tags": [
       "送料無料",
       "在庫処分"
