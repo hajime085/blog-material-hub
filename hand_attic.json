@@ -8747,7 +8747,7 @@
       "ask": "晩酌のおつまみ、常温で置いておけるものを探している人はいますか？"
     },
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-17"
+    "_stashedAt": "2026-10-24"
   },
   "sanwa-junkei:10000536": {
     "caption": "2,980円の名古屋コーチンつくね1kgが2,086円。冷凍。",
@@ -11391,7 +11391,7 @@
     ],
     "listPrice": 2980,
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-23"
+    "_stashedAt": "2026-10-24"
   },
   "zakkoku-okome:10001781": {
     "tags": [
@@ -12582,6 +12582,14 @@
   },
   "yonekyu:10002024": {
     "listPrice": 2890,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-24"
+  },
+  "ochamura:10001044": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 3200,
     "pitch_status": "pending",
     "_stashedAt": "2026-10-24"
   }
