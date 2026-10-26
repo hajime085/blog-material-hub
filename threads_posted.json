@@ -7618,6 +7618,15 @@
       "slot": 23,
       "catchup": false,
       "link": "none"
+    },
+    {
+      "key": "skip:0",
+      "id": null,
+      "at": "2026-10-27 00:00",
+      "kind": "skip",
+      "slot": 0,
+      "catchup": false,
+      "link": "none"
     }
   ]
 }
