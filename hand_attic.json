@@ -12691,5 +12691,33 @@
     "listPrice": 2282,
     "pitch_status": "pending",
     "_stashedAt": "2026-10-28"
+  },
+  "happybox1:10000845": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 3190,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-28"
+  },
+  "bookoffonline:15049069": {
+    "listPrice": 1815,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-28"
+  },
+  "ashu:10002549": {
+    "listPrice": 2596,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-28"
+  },
+  "ashudog:10009059": {
+    "listPrice": 2336,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-28"
+  },
+  "catfood:10018353": {
+    "listPrice": 2336,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-28"
   }
 }
