@@ -12678,7 +12678,6 @@
     "tags": [
       "送料無料"
     ],
-    "listPrice": 6690,
     "pitch_status": "pending",
     "_stashedAt": "2026-10-28"
   },
@@ -12717,6 +12716,14 @@
   },
   "catfood:10018353": {
     "listPrice": 2336,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-10-28"
+  },
+  "darkangel:10025100": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2690,
     "pitch_status": "pending",
     "_stashedAt": "2026-10-28"
   }
