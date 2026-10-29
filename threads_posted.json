@@ -7951,6 +7951,24 @@
       "slot": 18,
       "catchup": false,
       "link": "none"
+    },
+    {
+      "key": "skip:19",
+      "id": null,
+      "at": "2026-10-29 19:20",
+      "kind": "skip",
+      "slot": 19,
+      "catchup": false,
+      "link": "none"
+    },
+    {
+      "key": "skip:20",
+      "id": null,
+      "at": "2026-10-29 20:00",
+      "kind": "skip",
+      "slot": 20,
+      "catchup": false,
+      "link": "none"
     }
   ]
 }
