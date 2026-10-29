@@ -7987,6 +7987,24 @@
       "slot": 22,
       "catchup": false,
       "link": "none"
+    },
+    {
+      "key": "skip:23",
+      "id": null,
+      "at": "2026-10-29 23:20",
+      "kind": "skip",
+      "slot": 23,
+      "catchup": false,
+      "link": "none"
+    },
+    {
+      "key": "skip:0",
+      "id": null,
+      "at": "2026-10-30 00:00",
+      "kind": "skip",
+      "slot": 0,
+      "catchup": false,
+      "link": "none"
     }
   ]
 }
