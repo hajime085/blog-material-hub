@@ -8257,6 +8257,15 @@
       "slot": 0,
       "catchup": false,
       "link": "none"
+    },
+    {
+      "key": "skip:1",
+      "id": null,
+      "at": "2026-11-01 01:00",
+      "kind": "skip",
+      "slot": 1,
+      "catchup": false,
+      "link": "none"
     }
   ]
 }
