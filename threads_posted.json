@@ -8221,6 +8221,15 @@
       "slot": 20,
       "catchup": false,
       "link": "none"
+    },
+    {
+      "key": "skip:21",
+      "id": null,
+      "at": "2026-10-31 21:00",
+      "kind": "skip",
+      "slot": 21,
+      "catchup": false,
+      "link": "none"
     }
   ]
 }
