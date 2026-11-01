@@ -8768,7 +8768,7 @@
     "_stashedAt": "2026-10-27"
   },
   "nswshop:10000125": {
-    "caption": "2,680円の犬用伸縮リード5mが1,000円。LEDライト付き。",
+    "caption": "犬用伸縮リード5mが1,000円。LEDライト付き。",
     "tags": [
       "送料無料"
     ],
@@ -12771,6 +12771,14 @@
       "送料無料"
     ],
     "listPrice": 2640,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-01"
+  },
+  "book:19931524": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 3278,
     "pitch_status": "pending",
     "_stashedAt": "2026-11-01"
   }
