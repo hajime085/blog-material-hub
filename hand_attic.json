@@ -12840,5 +12840,13 @@
     "listPrice": 1990,
     "pitch_status": "pending",
     "_stashedAt": "2026-11-03"
+  },
+  "uptou:10000004": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 1980,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-03"
   }
 }
