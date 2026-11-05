@@ -8860,6 +8860,15 @@
       "slot": 21,
       "catchup": false,
       "link": "none"
+    },
+    {
+      "key": "skip:22",
+      "id": null,
+      "at": "2026-11-05 22:00",
+      "kind": "skip",
+      "slot": 22,
+      "catchup": false,
+      "link": "none"
     }
   ]
 }
