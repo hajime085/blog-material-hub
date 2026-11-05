@@ -874,7 +874,7 @@
     "pitch_status": "pending",
     "hidden": true,
     "hiddenReason": "同じ店・同じ値段が10件。2件までにする（ジットストア 400円）",
-    "_stashedAt": "2026-11-02"
+    "_stashedAt": "2026-11-05"
   },
   "deconail-seisakujo:10002837": {
     "caption": "1,222円のカラージェルセットが611円。好きな色を選べる、UV/LED対応。",
@@ -7072,7 +7072,7 @@
     "_stashedAt": "2026-10-15"
   },
   "darkangel:10036221": {
-    "caption": "5,890円のロングスカートが1,990円。前後にスリット。",
+    "caption": "2,990円のロングスカートが1,980円。前後にスリット。",
     "points": [
       "Iライン・ポケット付き",
       "レビュー2,191件・★4.05"
@@ -7080,7 +7080,7 @@
     "tags": [
       "送料無料"
     ],
-    "listPrice": 2990,
+    "listPrice": 5890,
     "marketing": {
       "hook_type": "discovery",
       "target": "きれいめのスカートを探している人",
@@ -7193,7 +7193,7 @@
       "ask": "年末に向けて、プリンターのインクの残りは気になりますか？"
     },
     "pitch_status": "pending",
-    "_stashedAt": "2026-11-02"
+    "_stashedAt": "2026-11-05"
   },
   "jitdirect:10003048": {
     "caption": "1,050円のキヤノン純正BCI-350XL/351XLが525円。大容量。",
@@ -7226,7 +7226,7 @@
       "ask": "キヤノンのインク、箱が無くても気にならない人はいますか？"
     },
     "pitch_status": "pending",
-    "_stashedAt": "2026-11-02"
+    "_stashedAt": "2026-11-05"
   },
   "jitdirect:10003409": {
     "tags": [
@@ -7237,7 +7237,7 @@
     "pitch_status": "pending",
     "hidden": true,
     "hiddenReason": "同じ店・同じ値段が10件。2件までにする（ジットストア 400円）",
-    "_stashedAt": "2026-11-02"
+    "_stashedAt": "2026-11-05"
   },
   "jitdirect:10003244": {
     "caption": "900円のエプソン純正IC69が450円。箱なしアウトレット。",
@@ -7270,7 +7270,7 @@
       "ask": "エプソンのプリンター、いちばん早く減るのは何色ですか？"
     },
     "pitch_status": "pending",
-    "_stashedAt": "2026-11-02"
+    "_stashedAt": "2026-11-05"
   },
   "jitdirect:10034059": {
     "tags": [
@@ -7281,7 +7281,7 @@
     "pitch_status": "pending",
     "hidden": true,
     "hiddenReason": "同じ店・同じ値段が10件。2件までにする（ジットストア 400円）",
-    "_stashedAt": "2026-11-02"
+    "_stashedAt": "2026-11-05"
   },
   "jitdirect:10034041": {
     "caption": "1,200円のエプソン純正IC80Lが600円。増量タイプ。",
@@ -7314,7 +7314,7 @@
       "ask": "家のプリンター、月にどれくらい印刷しますか？"
     },
     "pitch_status": "pending",
-    "_stashedAt": "2026-11-02"
+    "_stashedAt": "2026-11-05"
   },
   "jitdirect:10039508": {
     "caption": "1,150円のキヤノン純正BCI-380/381が575円。標準容量。",
@@ -8864,7 +8864,7 @@
     ],
     "listPrice": 2580,
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-17"
+    "_stashedAt": "2026-11-05"
   },
   "umamido:10000607": {
     "caption": "2,000円のビーフカレー200g×4袋が1,000円。甘口・辛口を選べます。",
@@ -11381,7 +11381,7 @@
     ],
     "listPrice": 2980,
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-27"
+    "_stashedAt": "2026-11-05"
   },
   "zakkoku-okome:10001781": {
     "tags": [
@@ -11450,7 +11450,7 @@
       "ask": "サプリを飲んでいる人、いつも何か月分ずつ買っていますか？"
     },
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-07"
+    "_stashedAt": "2026-11-05"
   },
   "baselab:10000460": {
     "caption": "6,980円のストレートアイロンが4,188円。36mmのワイドプレートで、最高230℃。",
@@ -11942,7 +11942,7 @@
     ],
     "listPrice": 2699,
     "pitch_status": "pending",
-    "_stashedAt": "2026-11-04"
+    "_stashedAt": "2026-11-05"
   },
   "mixsim:10000328": {
     "pitch_status": "pending",
@@ -12651,7 +12651,7 @@
     ],
     "listPrice": 2880,
     "pitch_status": "pending",
-    "_stashedAt": "2026-10-28"
+    "_stashedAt": "2026-11-05"
   },
   "premium-interior:10004388": {
     "tags": [
@@ -12733,6 +12733,7 @@
     "tags": [
       "送料無料"
     ],
+    "listPrice": 3250,
     "pitch_status": "pending",
     "_stashedAt": "2026-11-05"
   },
@@ -12940,6 +12941,14 @@
       "在庫処分"
     ],
     "listPrice": 1300,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-05"
+  },
+  "fukucha:10000480": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2680,
     "pitch_status": "pending",
     "_stashedAt": "2026-11-05"
   }
