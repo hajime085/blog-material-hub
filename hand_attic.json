@@ -7994,7 +7994,7 @@
     "_stashedAt": "2026-11-05"
   },
   "auc-t-link:10000111": {
-    "caption": "1,650円のパロディTシャツが1,100円。バーコード柄、在庫処分。",
+    "caption": "パロディTシャツが1,100円。バーコード柄、在庫処分。",
     "tags": [
       "在庫処分"
     ],
@@ -11906,6 +11906,7 @@
     "tags": [
       "送料無料"
     ],
+    "listPrice": 2980,
     "pitch_status": "pending",
     "_stashedAt": "2026-11-05"
   },
@@ -12403,7 +12404,6 @@
     "tags": [
       "送料無料"
     ],
-    "listPrice": 1999,
     "pitch_status": "pending",
     "_stashedAt": "2026-11-05"
   },
@@ -12915,6 +12915,22 @@
       "送料無料"
     ],
     "listPrice": 3168,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-05"
+  },
+  "nagomisabo:10001670": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 1080,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-05"
+  },
+  "rennkou-syouji:10015369": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 3960,
     "pitch_status": "pending",
     "_stashedAt": "2026-11-05"
   }
