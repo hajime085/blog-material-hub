@@ -111,7 +111,7 @@
     "_stashedAt": "2026-09-14"
   },
   "darkangel:10036348": {
-    "caption": "2,790円のワイドパンツが1,990円。センタープレス入り・ウエストゴム。",
+    "caption": "2,790円のワイドパンツが1,999円。センタープレス入り・ウエストゴム。",
     "points": [
       "梨地のストレッチ生地",
       "M・Lの2サイズ・レビュー2,301件"
@@ -1543,8 +1543,8 @@
       "body": "綿100%の厚手プルオーバーパーカーです。ビッグシルエットで、中に着込めます。\n大きいサイズもあります。",
       "cta": "save"
     },
-    "pitch_status": "ready",
-    "_stashedAt": "2026-09-11"
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-07"
   },
   "motteru:10000105": {
     "caption": "3,490円のモバイルバッテリーが1,980円。USB-C内蔵、PD20Wで2台同時。",
@@ -7103,7 +7103,7 @@
       "cta": "save",
       "ask": "ロングスカートを選ぶ人、前後にスリットがあるタイプは気になりますか？"
     },
-    "pitch_status": "ready",
+    "pitch_status": "pending",
     "_stashedAt": "2026-11-07"
   },
   "rioty:10039869": {
@@ -13025,6 +13025,15 @@
       "送料無料"
     ],
     "listPrice": 1199,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-07"
+  },
+  "toucher-home:10002932": {
+    "tags": [
+      "送料無料",
+      "まとめ買い"
+    ],
+    "listPrice": 3916,
     "pitch_status": "pending",
     "_stashedAt": "2026-11-07"
   }
