@@ -1583,11 +1583,19 @@ def serve(cfg, until_s=None, window_h=4.0, gap_min=25, max_late_h=3,
         else:
             # 出すものが無い枠で止まると、そこから先に進めなくなる。
             # 出せなかったことを記録して次の枠へ送る。
-            posted.setdefault("log", []).append({
+            entry = {
                 "key": "skip:%d" % h, "id": None,
                 "at": t.strftime("%Y-%m-%d %H:%M"), "kind": "skip",
                 "slot": h, "catchup": False, "link": "none",
-            })
+                "why": why,
+            }
+            if why == "blind":
+                # 自分の投稿を確認できないままの枠（トークン死に等）。
+                # 従来の skip と区別し、ops/failed_posts.py が
+                # workflow の要約で警告を出すよう failed を付ける。
+                entry["failed"] = True
+                entry["error"] = "blind: 自分の投稿を確認できない（トークン期限切れの可能性）"
+            posted.setdefault("log", []).append(entry)
             save(STATE, posted)
 
 
@@ -1859,6 +1867,11 @@ def main():
         uid, token = credentials()
         ok, msg = token_expiry(token)
         print("トークン: %s" % ("使えます" if ok else "使えません — %s" % msg))
+        if not ok:
+            # 死んだトークンで緑のまま通すと、投稿が止まったまま
+            # 誰も気づけない（2026-10-24〜11-09 の16日間の空転がそれ）。
+            # workflow の最初の段で赤く落として、ここで止める。
+            sys.exit(1)
         if ok:
             used, total = publishing_limit(uid, token)
             print("24時間の投稿数: %s / %s" % (used, total))
