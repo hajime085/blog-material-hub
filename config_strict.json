@@ -1,0 +1,323 @@
+{
+  "site": {
+    "name": "ヤスミル",
+    "nameEn": "YASUMIRU",
+    "tagline": "安いを、見る。",
+    "description": "二度見する安さだけを集めた特価フィード。家電も食品も日用品も、値下がりした瞬間だけを縦に流します。",
+    "url": "https://sozaino.com",
+    "locale": "ja_JP",
+    "author": "@hiyoko_web",
+    "twitter": "",
+    "threads": "https://www.threads.net/@hiyoko_web",
+    "contactFormUrl": "https://forms.gle/Htpo5D625T3HVCDj8",
+    "operator": {
+      "_comment": "運営者情報。name は表示名なので、本名でもハンドルでも好きなものに変えてください。",
+      "name": "@hiyoko_web",
+      "role": "ヤスミル 運営",
+      "bio": "毎日、楽天市場の値下がりを見ています。自分が二度見した安さだけを、このサイトと Threads に流しています。",
+      "avatar": "/assets/img/operator.png",
+      "avatarSmall": "/assets/img/operator-sm.png",
+      "threadsLabel": "@hiyoko_web"
+    },
+    "coupon": {
+      "_comment": "楽天にクーポンAPIが無いため手動。until を YYYY-MM-DD で入れるとその日を過ぎて枠ごと自動で消える。空なら消えない。クーポンが入れ替わるページを指しているので、label に特定の割引率は書かないこと。",
+      "label": "買う前に、のぞいておく",
+      "note": "楽天で配布中のクーポンが並んでいます。日によって中身が入れ替わります。",
+      "until": "",
+      "url": "https://a.r10.to/h5DSdE"
+    },
+    "prLabel": "【PR】",
+    "_prLabelNote": "Xへの投稿文の先頭に付ける広告表記。空にすると付けなくなる。楽天アフィリエイトの基本機能だけを使い、商品提供やクーポン施策のやり取りが無い場合、表記は義務ではなく任意。ただし楽天のガイドラインは表示位置を「ファーストビューの上部」と定めており、下部やハッシュタグの列に混ぜるのはNG例とされている。だから先頭に置く。商品提供を受けた投稿では必須になる。"
+  },
+  "rakuten": {
+    "_comment": "認証情報はここに書かず、.env に入れてください (RAKUTEN_APP_ID / RAKUTEN_ACCESS_KEY / RAKUTEN_AFFILIATE_ID)。fetch_rakuten.py が読み込みます。",
+    "appId": "",
+    "affiliateId": "",
+    "hits": 150,
+    "minDiscountRate": 30,
+    "accessKey": "",
+    "ngKeyword": "ふるさと納税 福袋 予約 抽選 ジャンク品 サプリメント 健康食品 機能性表示食品",
+    "_seedNote": "--seed 実行時、カテゴリごとに seedPerCategory 件まで採用します。同一ショップからは maxPerShop 件までに制限し、同じ商品の色違い・サイズ違いが並ぶのを防ぎます。",
+    "seedPerCategory": 14,
+    "maxPerShop": 2,
+    "sort": "-reviewCount",
+    "_qualityNote": "レビュー数順で取得します。ランキングAPIが使えないため、「実際に買った人が多い」を売れ筋の代わりにしています。minReviewCount / minReviewAverage を下回るものは掲載しません。",
+    "minReviewCount": 5,
+    "minReviewAverage": 3.8,
+    "_genreNote": "genres は実際にAPIを叩いて中身を確認したジャンルIDです。ジャンル検索APIが使えないため実測で同定しました。ジャンル指定があるカテゴリは、そのジャンル内だけを検索するのでカテゴリ違いの商品が混ざりません。",
+    "_retentionNote": "retentionDays: APIの結果から外れた商品を、何日間そのまま掲載し続けるか。レビュー数順の上位30件しか取らないため、売り切れていなくても順位が落ちただけで結果から外れる。すぐ消すとThreadsに貼ったリンクが次々404になるので猶予を持たせる。 maxNewPerRun: 1回の取得で新しく載せる上限。一気に増えすぎないように。",
+    "retentionDays": 30,
+    "maxNewPerRun": 20,
+    "featuredMaxPrice": 0,
+    "featuredPerSection": 4,
+    "featuredMax": 12,
+    "_featuredNote": "featured.txt から取り込む「編集部が選んだもの」の基準。featuredMaxPrice を超えるもの、レビューが少ないものは機械的に弾く。楽天の売れ筋一覧は発生報酬額の順なので高額・高料率の商品が上に来るが、このサイトは安さを紹介する場所なので順位は使わず、安い順に並べ替える。featuredPerSection は「## ジャンル名」ごとの上限。1ジャンルが棚を占領しないように。",
+    "saleStartToleranceHours": 36,
+    "_saleNote": "在庫あり(availability=1)でも販売開始前の商品がある。買えない商品を載せないため startTime/endTime を見る。saleStartToleranceHours は「何時間先までの開始を許容するか」。当日夜の数量限定などは予告として載せる価値があるので既定24時間。",
+    "watchMaxNewPerRun": 10,
+    "_watchNote": "--watch（見張り）で1回に足す新規の上限。1日4回動くので、最大で1日36件増える。以前は1日7回×5件だったが、予定実行が届かなくなったので回数を減らし、1回あたりを増やして1日の合計を保っている。",
+    "_hitsNote": "1カテゴリあたり何件まで見るか。APIは1回30件が上限なので、30を超えるぶんはページを送って取る。母数が増えるほど値下がりに出くわす機会も増えるが、そのぶん実行時間も延びる（秒間1リクエストが目安）。",
+    "saleKeywords": [
+      "半額",
+      "70%OFF",
+      "80%OFF",
+      "OFF",
+      "タイムセール"
+    ],
+    "_saleKeywordsNote": "値引きを謳っている商品を直接探すための検索語。レビュー数順に並べるだけでは値段の動かない定番商品ばかりが並び、実測で4日間に値段が動いたのは追跡3,089件中39件しかなかった。同じ300件でも、レビュー数順なら0件、「半額」で探すと10件の値下がりが見つかる。見つけた商品にも、タイトルの「◯円→◯円」が実売価格と一致するかの検査は同じようにかかる。",
+    "eventKeywords": [
+      "半額",
+      "70%OFF",
+      "80%OFF",
+      "1000円ポッキリ",
+      "ポッキリ 送料無料",
+      "20時",
+      "タイムセール",
+      "数量限定",
+      "限定価格",
+      "値下げ"
+    ],
+    "eventAheadHours": 120,
+    "eventMaxPerShop": 2,
+    "eventMaxPerCategory": 5,
+    "eventMaxNew": 22,
+    "eventMaxNewPerRun": 3,
+    "eventMaxTotal": 40,
+    "eventLeadHours": 36,
+    "_watchMaxNewPerRun": "1回の巡回で新しく載せる上限。深く下がっている順に採る。9件だったころは、79%OFFの商品が16%OFFの商品に押し出されて捨てられていた。2026-09-03: セール中は巡回を1日4回→8回に増やしたので、20→10に下げた。1日に拾う総数は変えない。拾っても文章が追いつかなければ、載らない商品が積み上がるだけで、読む人には何も変わらないため。",
+    "_eventLeadHours": "イベント開始の何時間前から、開始前の商品を探しにいくか。2026年9月のスーパーSALEは先行セールがあり、楽天モバイル利用者は前日20時からポイントアップ期間に入る。12時間では前日ぶんを取りこぼすので36時間にした。",
+    "everydayMaxNewPerRun": 4,
+    "everydayMaxTotal": 14,
+    "_everyday": "イベントの期間外でも、開始前の特価を少しずつ足す。以前はイベント中しか拾わず、トップの「まもなく始まる特価」が月のほとんどの日で2〜3件しかなかった。イベント中は eventMaxTotal(40件) まで、それ以外は everydayMaxTotal(14件) まで。",
+    "ngGenres": [
+      "101240",
+      "300011",
+      "553676"
+    ],
+    "_ngGenres": "載せない売場のジャンルID。101240 は「CD・DVD・楽器」。300011 と 553676 は、そこから実際に入ってきた音楽の子ジャンル。親を外しても子は別の検索に現れるので、IDでも弾く。",
+    "eventMinDiscountRate": 40,
+    "_eventMinDiscountRate": "開始前の特価として載せる、値引きの下限。元値が取れないもの（安いと言えないもの）と、これ未満のものは入れない。通常のフィード（minDiscountRate=15）より厳しくしてある。セールの目玉として並べる枠なので、いつもより少し安い程度では意味がない。",
+    "_minDiscountRate": "載せる値引きの下限。裏付け（題名の「◯円→◯円」か自前の価格履歴）が取れて、これ以上下がっているものだけ載せる。15%だったころは、掲載191件のうち142件が割引ゼロだった。40%まで上げたところ、掲載・投稿の増える量が絞られすぎた（2026-09-16: 7,201件見て新規1件）。「二度見する安さ」の質は保ちつつ量も見たいので、30%へ調整した。",
+    "_saleKeywords": "値引きを謳っている商品を直接探す語。「ポイント10倍」は値引きではないので外した。深い値引きを名指しで探す語（70%OFF・80%OFF・半額）を増やしている。",
+    "_featuredMaxPrice": "編集部が選んだ棚の値段の上限。0 で上限なし。自動で拾う枠には基準が要るが、ここは人が選ぶ枠なので掛けない。防災セットのような高額品も、編集者が選んだのなら載せる。",
+    "_eventMaxNewPerRun": "開始前の商品を1回で載せる上限。巡回を8回に増やしたぶん 6→3 に下げた。",
+    "_ngKeywordStrictNote": "config_strict.json で追加: サプリメント / 健康食品 / 機能性表示食品。掲載基準（検証可能性）により取得段階から除外する。",
+    "_saleKeywordsStrictNote": "config_strict.json で変更: アウトレット / 在庫処分 / 限界価格 を除去。fetch_category() が saleKeywords を全カテゴリ×全ジャンルに付加して検索するため、ここに残すとアウトレット寄りの取得が続いてしまう。残りは 半額 / 70%OFF / 80%OFF / OFF / タイムセール。",
+    "_cadenceNote": "config_strict.json で各カテゴリに cadence (daily/weekly) を追加した。現行 fetch_rakuten.py はこのフィールドを読まない（main() のカテゴリ選択はコマンドラインの slug 引数のみ）。効かせるには main() の cats 絞り込みに cadence フィルタを足す小さな改修が要る。詳細は改築メモ参照。",
+    "_strictNote": "厳格版の取得設定（2026-11-09）。主力3カテゴリを毎日、準主力5カテゴリを週次で深く観測する。books / car / sports は廃止。サプリ・健康食品はジャンル・キーワード・NGキーワードの三重で除外。キーワードはアウトレット寄り（訳あり / アウトレット / 在庫処分）から定番・売れ筋寄りへ変更（並び順は rakuten.sort=-reviewCount のまま）。food の maxPrice のみ 3500→5000 に変更（米5kg が 3,500円帯ではほぼ買えないため）。"
+  },
+  "feed": {
+    "perPage": 10,
+    "relatedCount": 4
+  },
+  "categories": [
+    {
+      "slug": "food",
+      "label": "食品・飲料・お酒",
+      "short": "食品",
+      "icon": "food",
+      "keywords": [
+        "水 2L まとめ買い 送料無料",
+        "米 5kg 送料無料",
+        "レトルト 詰め合わせ 送料無料",
+        "調味料 まとめ買い"
+      ],
+      "minPrice": 300,
+      "maxPrice": 5000,
+      "genres": [
+        "100227",
+        "100316",
+        "510915"
+      ],
+      "cadence": "daily"
+    },
+    {
+      "slug": "kitchen",
+      "label": "キッチン・日用品・DIY",
+      "short": "日用品",
+      "icon": "kitchen",
+      "keywords": [
+        "洗剤 詰め替え 大容量",
+        "ティッシュ まとめ買い",
+        "トイレットペーパー まとめ買い",
+        "日用品 詰め替え まとめ買い",
+        "大掃除 洗剤 まとめ買い"
+      ],
+      "minPrice": 300,
+      "maxPrice": 3000,
+      "genres": [
+        "215783"
+      ],
+      "cadence": "daily"
+    },
+    {
+      "slug": "kaden",
+      "label": "家電・カメラ・AV機器",
+      "short": "家電",
+      "icon": "kaden",
+      "keywords": [
+        "乾電池 まとめ買い",
+        "LED電球 セット",
+        "モバイルバッテリー 大容量",
+        "電気ケトル"
+      ],
+      "minPrice": 700,
+      "maxPrice": 8000,
+      "genres": [
+        "562637"
+      ],
+      "cadence": "daily"
+    },
+    {
+      "slug": "baby-toy",
+      "label": "ベビー・キッズ",
+      "short": "ベビー",
+      "icon": "baby-toy",
+      "keywords": [
+        "おむつ まとめ買い",
+        "おしりふき まとめ買い",
+        "粉ミルク",
+        "ベビー用 洗剤"
+      ],
+      "minPrice": 500,
+      "maxPrice": 4000,
+      "genres": [
+        "201632",
+        "201606",
+        "205272",
+        "200840",
+        "508430"
+      ],
+      "cadence": "weekly"
+    },
+    {
+      "slug": "pet",
+      "label": "ペット用品",
+      "short": "ペット",
+      "icon": "pet",
+      "keywords": [
+        "ペットフード まとめ買い",
+        "ペットシーツ 大容量",
+        "猫砂 まとめ買い"
+      ],
+      "minPrice": 500,
+      "maxPrice": 4000,
+      "genres": [
+        "101213"
+      ],
+      "cadence": "weekly"
+    },
+    {
+      "slug": "beauty",
+      "label": "ドラッグストア・美容",
+      "short": "美容",
+      "icon": "beauty",
+      "keywords": [
+        "シャンプー 詰め替え 大容量",
+        "ボディソープ 詰め替え 大容量",
+        "日焼け止め"
+      ],
+      "minPrice": 300,
+      "maxPrice": 3000,
+      "genres": [
+        "100939",
+        "100938"
+      ],
+      "cadence": "weekly"
+    },
+    {
+      "slug": "pc",
+      "label": "パソコン・スマホ・事務",
+      "short": "PC",
+      "icon": "pc",
+      "keywords": [
+        "ワイヤレスマウス",
+        "USB 充電器 急速充電",
+        "スマホアクセサリー まとめ買い"
+      ],
+      "minPrice": 400,
+      "maxPrice": 3500,
+      "genres": [
+        "211742",
+        "565173",
+        "564277",
+        "502185",
+        "564278"
+      ],
+      "cadence": "weekly"
+    },
+    {
+      "slug": "fashion",
+      "label": "服・靴・バッグ・時計",
+      "short": "ファッション",
+      "icon": "fashion",
+      "keywords": [
+        "靴下 セット まとめ買い",
+        "インナーシャツ セット",
+        "Tシャツ セット メンズ 送料無料"
+      ],
+      "minPrice": 500,
+      "maxPrice": 3500,
+      "genres": [
+        "100371",
+        "551177",
+        "558885"
+      ],
+      "cadence": "weekly"
+    },
+    {
+      "slug": "seasonal",
+      "label": "季節・イベント",
+      "short": "季節",
+      "icon": "food",
+      "keywords": [
+        "おせち 予約 送料無料",
+        "ずわい蟹 姿 送料無料",
+        "クリスマスケーキ 予約 送料無料",
+        "ふるさと納税 肉 送料無料"
+      ],
+      "minPrice": 3000,
+      "maxPrice": 30000,
+      "genres": [
+        "100227"
+      ],
+      "cadence": "daily"
+    }
+  ],
+  "threads": {
+    "postsPerRun": 1,
+    "prOn": [
+      "product"
+    ],
+    "_prOn": "【PR】を付ける投稿の種類。product / guide / page から選ぶ。",
+    "linkPlacement": "reply",
+    "_linkPlacement": "商品リンクを body（本文の末尾）と reply（自分の投稿への返信）のどちらに置くか。",
+    "freshDays": 4,
+    "_freshDays": "商品を出すのは、載せてから何日以内のものまでか。古い値段を新しいふりで流さないため。",
+    "productShare": 0.7,
+    "_productShare": "商品の投稿が占める割合。残りが知識・記事・予定。特価のサイトなので商品を主にする。",
+    "slots": {
+      "7": "plain",
+      "9": "plain",
+      "12": "plain",
+      "14": "plain",
+      "17": "plain",
+      "20": "product",
+      "21": "product",
+      "23": "product",
+      "0": "product",
+      "13": "product",
+      "18": "product",
+      "22": "product",
+      "1": "product",
+      "19": "plain"
+    },
+    "_slots": "時刻ごとに商品(product)か、それ以外(plain)かを決める。2026-09-04: セール中は商品を4→8本に増やした（13/18/20/21/22/23/0/1時）。実際に何時に起きるかは Cloudflare 側の PLAN が決める。9/11を過ぎると増やした4つの時刻には起動が来ないので、この4行は自然に使われなくなる。そのとき残すか消すかを決める。",
+    "catchupGapMin": 25,
+    "_catchupGapMin": "落ちた枠を埋めるとき、投稿と投稿のあいだに空ける分。まとめ出しに見えないように。",
+    "maxLateHours": 3,
+    "_maxLateHours": "枠の時刻から何時間まで遅れて埋めてよいか。これを過ぎた枠は捨てる。夜に朝の枠をまとめて出しても、時間帯ごとの反応を比べる材料にならないため。",
+    "minGapMin": 7,
+    "_minGapMin": "出す前に、アカウントの最後の投稿から何分たったかを見る。これより短ければ出さない。錠はファイルなので同じ機械でしか効かず、手元とGitHubが重なったときはここでしか止められない。2026-09-04: セールの山場を10分おきにしたので 10→7 に下げた。本当の二重投稿は数十秒〜2分差で起きるので、7分でも止められる。"
+  }
+}

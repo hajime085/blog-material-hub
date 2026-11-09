@@ -21,6 +21,7 @@
   --ink-08:  rgba(26, 20, 16, .08);
   --sale-bg: #FFE9E7;
   --fresh-bg:#E1F5F0;
+  --cream-chip: #FFF6E8;  /* 事実チップの地（デザイン移植 rev.3 で追加） */
 
   /* --- タイポ --- */
   --f-display: 'Dela Gothic One', 'Zen Kaku Gothic New', sans-serif;
@@ -33,10 +34,10 @@
   --side:     320px;   /* PCのサイドバー */
   --wide:     1060px;  /* 本文＋サイドバーの外枠 */
   --gutter:   16px;
-  --radius:   18px;
+  --radius:   20px;
   --header-h: 68px;
 
-  --shadow-card: 0 1px 2px rgba(26,20,16,.05), 0 8px 24px rgba(26,20,16,.06);
+  --shadow-card: 0 1px 2px rgba(26,20,16,.05), 0 10px 28px rgba(26,20,16,.07);
   --shadow-lift: 0 2px 4px rgba(26,20,16,.07), 0 14px 34px rgba(26,20,16,.11);
 }
 
@@ -60,7 +61,7 @@ h1, h2, h3, .card-title, .hero-title, .page-title, .cal-ev-name {
 body {
   font-family: var(--f-body);
   font-size: 16px;
-  line-height: 1.85;
+  line-height: 1.9;
   color: var(--ink);
   background: var(--ground);
   font-feature-settings: "palt" 1;
@@ -325,9 +326,9 @@ a.ticker-item:hover::before { background: var(--pop); }
   .layout-main { margin-inline: 0; }
 
   /* サイドバーは「ひとつのスクロール箱」にしない。
-     max-height と overflow-y を親に持たせると、3枚のパネルが
-     同じ箱に閉じ込められて内側にスクロールバーが出る。
-     代わりに各パネルを個別に追従させ、それぞれ独立して動かす。 */
+     max-height と overflow-y を親に持たせると、パネルが
+     箱に閉じ込められて内側にスクロールバーが出る。
+     制約を持たせず、ページの流れに全部並べる（2026-11-10 furu 決定）。 */
   .layout-side {
     margin-top: 0;
     align-self: start;
@@ -337,38 +338,25 @@ a.ticker-item:hover::before { background: var(--pop); }
     flex-direction: column;
     gap: 18px;
   }
-  /* 3枚は一体で動かす。個別に貼り付けると重なって読めなくなる。
-     内側にスクロール箱は作らない（max-height / overflow を親に持たせない）。
-     そのかわりサイドバー自体を画面に収まる高さまで詰めてある。 */
+  /* パネルは素の縦積み。追従もしないので position は持たせない。 */
   .layout .layout-side > * { flex: 0 0 auto; position: static; }
 }
 
-/* サイドバーは3枚まとめて動かす。
-
-   サイドバーが画面より高いとき、top を正の値にすると
-   はみ出した下端（売場から探す）が永久に見えなくなる。
-   かといって bottom 指定の sticky は「下にある要素を引き上げる」動作なので、
-   通り過ぎた要素を留める働きはない。
-
-   正解は top に負の値を入れること。
-   「画面の高さ − サイドバーの高さ」を top にすると、
-   スクロールに合わせて普通に上がってきて、下端が画面の底に来たところで止まる。
-   高さは中身で変わるので、その値だけ app.js が測って入れる。
-   JSが動かない場合も、下のフォールバックで上端に貼り付く。 */
+/* サイドバーは追従させない（2026-11-10 furu 決定）。
+   sticky で画面に貼り付けると「サイドバーだけ別に動く」感じになり、
+   高さが画面を超える場合は下のブロックに届きにくい。
+   ページの流れに全部並べる方が分かりやすい、という判断で素の縦積みにした。
+   app.js の stickyRail は style.top を書くだけで、追従を外した今は効かない。 */
 @media (min-width: 1000px) {
-  .layout-side {
-    position: sticky;
-    top: calc(var(--header-h) + 18px);
-  }
   .hero-title { max-width: var(--col); }
 }
 
 .side-card {
-  background: var(--paper);
-  border: 1px solid var(--ink-14);
-  border-radius: 14px;
+  background: #fff;
+  border: 1px solid #26282e;
+  border-radius: 2px;
   overflow: hidden;
-  box-shadow: var(--shadow-card);
+  box-shadow: none;
 }
 
 /* パネルの頭はサイトヘッダーと同じ黒帯。
@@ -376,19 +364,19 @@ a.ticker-item:hover::before { background: var(--pop); }
    ページで一番強い構造をここでも使う。 */
 .side-head {
   display: flex; align-items: center; gap: 8px;
-  background: var(--ink);
+  background: #1a1c24;
   color: #fff;
   padding: 13px 15px;
   font-family: var(--f-body); font-weight: 900;
   font-size: 0.969rem; letter-spacing: .01em;
 }
-.side-head .ic { color: var(--pop); width: 1.05em; height: 1.05em; }
+.side-head .ic { color: #c83333; width: 1.05em; height: 1.05em; }
 .side-body { padding: 10px 14px 16px; }
 .side-body-tight { padding: 12px; }
 
 .side-note {
   margin: 12px 3px 0; padding-top: 12px;
-  border-top: 1px dashed var(--ink-14);
+  border-top: 1px dashed #d8dce3;
   font-size: 0.769rem; color: var(--ink-52); line-height: 1.7;
 }
 
@@ -406,25 +394,24 @@ a.ticker-item:hover::before { background: var(--pop); }
 .rank:last-child { border-bottom: 0; }
 .rank:hover { background: var(--ground); }
 
-/* 順位マーカーは値札POPの縮小版。傾きも値札と揃える。 */
+/* 順位マーカーは新デザインの四角バッジ（2026-11-10 サイドバー改修）。
+   旧デザインの値札POP型（傾き＋ギザギザ）はやめ、黒の角なしバッジに統一。
+   1位だけアクセントの赤にする。 */
 .rank-no {
   display: grid; place-content: center;
   width: 26px; height: 26px;
-  background: var(--pop);
-  color: var(--ink);
-  font-family: var(--f-price); font-weight: 400;
-  font-size: 1rem; line-height: 1;
-  transform: rotate(-3.2deg);
-  clip-path: polygon(0 0, 100% 0, 100% 80%, 83% 100%, 66% 80%,
-                     50% 100%, 33% 80%, 16% 100%, 0 80%);
-  padding-bottom: 4px;
+  background: #1a1c24;
+  color: #fff;
+  border-radius: 2px;
+  font-weight: 800;
+  font-size: 0.95rem; line-height: 1;
 }
-.rank:first-child .rank-no { background: var(--sale); color: #fff; }
+.rank:first-child .rank-no { background: #c83333; color: #fff; }
 
 .rank-img {
-  width: 62px; height: 62px; border-radius: 8px;
+  width: 62px; height: 62px; border-radius: 2px;
   object-fit: cover; background: var(--ground);
-  border: 1px solid var(--ink-08);
+  border: 1px solid #d8dce3;
 }
 .rank-body { min-width: 0; }
 .rank-title {
@@ -439,16 +426,16 @@ a.ticker-item:hover::before { background: var(--pop); }
 }
 .ic-star { width: .85em; height: .85em; color: #F5A623; vertical-align: -.08em; margin-right: 2px; }
 .rank-meta b {
-  font-family: var(--f-price); font-weight: 400;
+  font-weight: 800;
   font-size: 0.88rem; color: var(--ink); margin: 0 2px;
 }
 .rank-price {
   justify-self: end;
   text-align: right;
   white-space: nowrap;
-  font-family: var(--f-price); font-weight: 400;
-  font-size: 1.3rem; line-height: 1.1;
-  color: var(--sale);
+  font-weight: 900;
+  font-size: 1.08rem; line-height: 1.1;
+  color: #c83333;
 }
 .rank-price i { font-style: normal; font-size: .68em; margin-right: 1px; }
 
@@ -459,9 +446,9 @@ a.ticker-item:hover::before { background: var(--pop); }
 .side-cat {
   display: flex; align-items: center; gap: 7px;
   padding: 11px 10px;
-  border: 1.5px solid var(--ink-14);
-  border-radius: 9px;
-  background: var(--paper);
+  border: 1px solid #26282e;
+  border-radius: 2px;
+  background: #fff;
   text-decoration: none;
   font-size: 0.85rem; font-weight: 700; line-height: 1.25;
   transition: background .16s ease, border-color .16s ease, color .16s ease;
@@ -469,16 +456,16 @@ a.ticker-item:hover::before { background: var(--pop); }
 .side-cat .ic { width: 1.1em; height: 1.1em; color: var(--ink-52); }
 .sc-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .sc-count {
-  font-family: var(--f-price); font-weight: 400;
+  font-weight: 700;
   font-size: 0.85rem; color: var(--ink-52);
 }
-.side-cat:hover { border-color: var(--ink); }
-.side-cat:hover .ic { color: var(--sale); }
+.side-cat:hover { border-color: #1a1c24; }
+.side-cat:hover .ic { color: #c83333; }
 .side-cat.is-active {
-  background: var(--ink); border-color: var(--ink); color: #fff;
+  background: #1a1c24; border-color: #1a1c24; color: #fff;
 }
-.side-cat.is-active .ic,
-.side-cat.is-active .sc-count { color: var(--pop); }
+.side-cat.is-active .ic { color: #c83333; }
+.side-cat.is-active .sc-count { color: #fff; }
 
 /* =========================================================
    PAGER  ── 10件ごとに切る。素のリンクで動く。
@@ -536,6 +523,49 @@ a.ticker-item:hover::before { background: var(--pop); }
 }
 .featured-title .ic { color: var(--sale); }
 .featured-note { font-size: 0.835rem; color: var(--ink-52); }
+
+/* =========================================================
+   EVENTS ── 特集
+   季節の特集ページへの入口。フィードの選定とは別軸なので、
+   featured と同じ見た目の文法で、独立した棚として置く。
+   ========================================================= */
+.events { padding-block: 22px 4px; }
+.events-head { margin-bottom: 12px; }
+.events-title {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--f-body); font-weight: 900;
+  font-size: 1.06rem;
+  margin-bottom: 4px;
+}
+.events-title .ic { color: var(--sale); }
+.events-note { font-size: 0.835rem; color: var(--ink-52); }
+
+.events-list {
+  display: grid; gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+.ev-card {
+  display: block;
+  background: var(--paper);
+  border: 1px solid var(--ink-08);
+  border-radius: 14px;
+  padding: 14px 15px 13px;
+  text-decoration: none;
+  box-shadow: var(--shadow-card);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.ev-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); }
+.ev-card-title { display: block; font-weight: 900; font-size: 1rem; line-height: 1.5; }
+.ev-card-desc {
+  display: block;
+  font-size: 0.835rem; color: var(--ink-52); line-height: 1.6;
+  margin-top: 4px;
+}
+.ev-card-go {
+  display: flex; align-items: center; gap: 4px;
+  font-size: 0.835rem; font-weight: 700; color: var(--sale);
+  margin-top: 8px;
+}
 
 .featured-rail {
   display: flex; gap: 12px;
@@ -840,19 +870,19 @@ a.ticker-item:hover::before { background: var(--pop); }
 /* 記事は増えていく。黒帯を何枚も積むと主張が強すぎるので、
    1枚の中に区切り線で並べる。 */
 .guide-shelf {
-  background: var(--ink);
+  background: #1a1c24;
+  border: 1px solid #1a1c24;
   color: #fff;
-  border-radius: 14px;
+  border-radius: 2px;
   padding: 16px 16px 18px;
-  box-shadow: 4px 4px 0 rgba(26,20,16,.22);
+  box-shadow: none;
 }
 .gb-item {
   display: block;
   text-decoration: none;
   color: inherit;
-  transition: transform .16s ease;
 }
-.gb-item:hover { transform: translateX(2px); }
+.gb-item:hover .gb-label { text-decoration: underline; }
 .gb-item + .gb-item {
   margin-top: 15px;
   padding-top: 15px;
@@ -860,16 +890,17 @@ a.ticker-item:hover::before { background: var(--pop); }
 }
 .gb-eyebrow {
   display: inline-flex; align-items: center; gap: 6px;
-  font-family: var(--f-price); font-weight: 400;
+  font-weight: 800;
   font-size: 0.769rem; letter-spacing: .14em;
-  color: var(--pop);
+  color: #fff;
   margin-bottom: 10px;
 }
+.gb-eyebrow .ic { color: #c83333; }
 .gb-label {
   display: block;
-  font-family: var(--f-hand);
-  font-size: 1.28rem; line-height: 1.45;
-  color: var(--pop);
+  font-weight: 800;
+  font-size: 1.15rem; line-height: 1.45;
+  color: #fff;
   margin-bottom: 6px;
 }
 .gb-note {
@@ -881,78 +912,68 @@ a.ticker-item:hover::before { background: var(--pop); }
 .gb-go {
   display: inline-flex; align-items: center; gap: 5px;
   font-size: 0.85rem; font-weight: 700;
-  border-bottom: 2px solid var(--pop);
+  border-bottom: 2px solid #c83333;
   padding-bottom: 2px;
 }
 
 /* =========================================================
    TICKET  ── クーポン券
-   値札(POPカード)とは別の物体。切り取り線と、
-   ちぎるためのミシン目のえぐれを持たせる。
+   旧デザインでは黄色い券＋ミシン目の物体だったが、
+   2026-11-10 のサイドバー改修で新デザイン（白ボックス＋濃枠＋
+   角なし）に統一した。区切りは破線だけ残す。
    ========================================================= */
 .ticket {
   position: relative;
-  background: var(--pop);
-  border: 2px solid var(--ink);
-  border-radius: 12px;
-  box-shadow: 4px 4px 0 var(--ink);
+  background: #fff;
+  border: 1px solid #26282e;
+  border-radius: 2px;
+  box-shadow: none;
   overflow: hidden;
 }
 .ticket-top { padding: 18px 17px 15px; }
 
 .ticket-eyebrow {
   display: inline-flex; align-items: center; gap: 5px;
-  font-family: var(--f-price); font-weight: 400;
+  font-weight: 800;
   font-size: 0.769rem; letter-spacing: .18em;
-  color: var(--sale);
+  color: #c83333;
   margin-bottom: 7px;
 }
-.ticket-eyebrow .ic { color: var(--ink); }
+.ticket-eyebrow .ic { color: #c83333; }
 
 .ticket-label {
-  font-family: var(--f-hand);
-  font-size: 1.3rem; line-height: 1.45;
-  color: var(--ink);
+  font-weight: 800;
+  font-size: 1.15rem; line-height: 1.45;
+  color: #17181c;
   margin-bottom: 6px;
 }
 .ticket-note {
   font-size: 0.85rem; line-height: 1.85;
-  color: rgba(26,20,16,.78);
+  color: #4a4e57;
 }
 .ticket-stamp {
   display: inline-block;
   margin-top: 9px;
-  background: var(--ink); color: var(--pop);
+  background: #1a1c24; color: #fff;
   font-family: var(--f-body); font-weight: 700;
   font-size: 0.752rem;
   padding: 3px 9px 4px;
-  border-radius: 3px;
+  border-radius: 2px;
 }
 
-/* 切り取り線。両端のえぐれは、地の色の円を半分だけ載せて作る。 */
+/* 区切り線。新デザインでは両端のえぐれ（ミシン目の丸）はやめ、
+   破線だけのフラットな区切りにする。 */
 .ticket-tear {
   position: relative;
   height: 0;
-  border-top: 2px dashed rgba(26,20,16,.42);
+  border-top: 1px dashed #d8dce3;
   margin: 0 14px;
   display: flex; align-items: center; justify-content: flex-start;
 }
-.ticket-tear::before,
-.ticket-tear::after {
-  content: "";
-  position: absolute; top: 50%;
-  width: 18px; height: 18px;
-  background: var(--ground);
-  border: 2px solid var(--ink);
-  border-radius: 50%;
-  transform: translateY(-50%);
-}
-.ticket-tear::before { left: -25px; }
-.ticket-tear::after  { right: -25px; }
 .ic-scissors {
   width: 15px; height: 15px;
-  color: rgba(26,20,16,.5);
-  background: var(--pop);
+  color: #8a8f98;
+  background: #fff;
   margin-left: 6px;
   transform: translateY(-1px);
 }
@@ -960,13 +981,12 @@ a.ticker-item:hover::before { background: var(--pop); }
 .ticket-bottom { padding: 15px 17px 18px; }
 
 .btn-ticket {
-  background: var(--sale); color: #fff;
+  background: #c83333; color: #fff;
   font-size: 0.923rem; padding: 13px 16px;
-  border-radius: 10px;
-  box-shadow: 0 3px 0 var(--ink);
+  border-radius: 2px;
+  box-shadow: none;
 }
-.btn-ticket:hover { background: #E02733; transform: translateY(-2px); box-shadow: 0 5px 0 var(--ink); }
-.btn-ticket:active { transform: translateY(3px); box-shadow: 0 0 0 var(--ink); }
+.btn-ticket:hover { background: #a92a2a; }
 
 /* =========================================================
    POPキット ── 売場の手書き部品
@@ -2066,6 +2086,7 @@ a.ticker-item:hover::before { background: var(--pop); }
     transition-duration: .001ms !important;
   }
   .ticker-track { animation: none; transform: none; }
+  .v-notice-track { animation: none; transform: none; }
   .card:hover { transform: none; }
 }
 
@@ -2558,160 +2579,222 @@ a.ticker-item:hover::before { background: var(--pop); }
 
 /* =========================================================
    CALENDAR  ── サイドバーの楽天イベント
-   ボタン類の黒フチは「押すもの」の語彙なので、ここでは使わない。
-   カレンダーは読むものなので、売場に貼ってある紙の月暦くらいの軽さにする。
+   2026-11-10 のサイドバー改修で新デザイン（v11 文法）に統一：
+   月の見出しは黒帯、日セルは丸塗りでなく四角、書体はゴシック、
+   アクセントは赤 #c83333。種別の色分け（sale=赤 / marathon=紫 /
+   deadline=琥珀 #D97706）は情報として維持する。
+   2026-11-10 コンパクト化：コンテナに上限幅を付け、セルを
+   正方形から平たく（高さ＝幅の 0.75 倍）した。セルが置かれる幅に
+   比例して際限なく大きくなるのを防ぐため。予定一覧・凡例も
+   コンテナ幅に収まる。間隔も全体に少し詰めた。
+   2026-11-10 バランス修正：上限を 340px → 400px に緩め、左寄せを
+   やめて margin-inline: auto で中央に置く。340px 左寄せだと、
+   サイドバーが全幅に積まれるレイアウト（タブレット／スマホの
+   スタック時）でブロック枠は全幅なのに中身が左に張り付き、
+   右に大きな空白ができて「置き忘れた」見た目になったため。
+   上限＋中央寄せなら、空白は左右均等に分かれて意図した余白に
+   見える。サイドバー内（約250px）では上限に当たらず従来どおり
+   幅いっぱい、スマホ実幅（約390px）でもほぼ幅いっぱいになる。
+   2026-11-10 2カラム化：上限＋中央寄せは廃し、カレンダーの置かれる
+   枠（.v-cal-body / カレンダーカードの .side-body）をコンテナにして、
+   内幅 520px 以上の文脈では「左＝月グリッド／右＝予定一覧」の
+   2カラムにする。右列は左列と同じ高さで、中だけがスクロールする
+   （予定は増える前提で、calendar.js は最大8件まで出す）。
+   細いサイドバー（TOP 250px／共通 320px）では物理的に並ばないので
+   従来どおり縦積みで、一覧は CSS で3件までに見せる。
+   あわせて「5と0のつく日」の印を下の点から数字を囲む丸に変えた。
    ========================================================= */
-.cal-loading { text-align: center; padding: 22px 0; font-size: 0.88rem; color: var(--ink-52); }
+/* カレンダーの置かれる枠をコンテナにする（2カラム化の判定はこの幅）。 */
+.v-cal-body, .side-card.cal-card .side-body { container-type: inline-size; }
 
-/* 月の見出しは黄色の帯。値札と同じ色なので、サイトの中で浮かない。 */
+/* 既定は縦積み：グリッド → 通知＋一覧 → 注記（DOM の順どおり）。 */
+.cal-cols { display: flex; flex-direction: column; }
+
+/* 細い文脈では一覧を3件までに見せる（従来の見え方を変えない）。 */
+.cal-list .cal-ev:nth-child(n+4) { display: none; }
+
+/* 幅が足りる文脈では2カラム。左に月グリッド、右に予定一覧。
+   右列の高さは左列に揃え（flex の stretch）、中身は絶対配置の
+   スクロール領域に逃がすので、一覧が長くても列は伸びない。 */
+@container (min-width: 520px) {
+  .cal-cols { flex-direction: row; gap: 18px; }
+  .cal-main { flex: 0 0 44%; max-width: 360px; min-width: 0; }
+  .cal-side { flex: 1 1 auto; min-width: 0; position: relative; }
+  .cal-side-scroll {
+    position: absolute; inset: 0; overflow-y: auto;
+    padding-right: 4px;
+    scrollbar-width: thin; scrollbar-color: #c6cad2 transparent;
+  }
+  .cal-side-scroll::-webkit-scrollbar { width: 6px; }
+  .cal-side-scroll::-webkit-scrollbar-thumb { background: #c6cad2; border-radius: 3px; }
+  .cal-side-scroll::-webkit-scrollbar-track { background: transparent; }
+  .cal-list .cal-ev:nth-child(n+4) { display: list-item; }
+  .cal-today-note { margin-top: 0; }
+}
+
+.cal-loading { text-align: center; padding: 16px 0; font-size: 0.88rem; color: var(--ink-52); }
+
+/* 月の見出しはサイドバーの見出しと同じ黒帯。 */
 .cal-head {
   display: flex; align-items: center; justify-content: space-between;
-  background: var(--pop);
-  border-radius: 11px;
-  padding: 7px 8px;
-  margin-bottom: 11px;
+  background: #1a1c24;
+  border-radius: 2px;
+  padding: 6px 8px;
+  margin-bottom: 8px;
 }
 .cal-title {
-  font-family: var(--f-price); font-weight: 400;
-  font-size: 1.02rem; letter-spacing: .04em; color: var(--ink);
+  font-weight: 800;
+  font-size: 0.95rem; letter-spacing: .04em; color: #fff;
 }
 .cal-nav {
   width: 26px; height: 26px; line-height: 1;
-  background: rgba(255,255,255,.66); border: 0; border-radius: 8px;
-  font-size: 1.05rem; cursor: pointer; color: var(--ink);
-  transition: background .14s ease, transform .12s ease;
+  background: transparent; border: 1px solid rgba(255,255,255,.4); border-radius: 2px;
+  font-size: 1.05rem; cursor: pointer; color: #fff;
+  transition: background .14s ease;
 }
-.cal-nav:hover { background: #fff; }
-.cal-nav:active { transform: scale(.9); }
+.cal-nav:hover { background: rgba(255,255,255,.22); }
 
 .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
 .cal-wd {
   text-align: center; font-size: 0.734rem; font-weight: 700;
-  color: var(--ink-52); padding-bottom: 4px;
+  color: #6b7078; padding-bottom: 2px;
 }
-.cal-wd.is-sun { color: var(--sale); }
-.cal-wd.is-sat { color: #3D7BD6; }
+.cal-wd.is-sun { color: #c83333; }
+.cal-wd.is-sat { color: #54719c; }
 
 .cal-cell {
   position: relative;
   display: grid; place-items: center;
-  aspect-ratio: 1 / 1;
-  font-family: var(--f-price); font-weight: 400;
-  font-size: 0.895rem;
-  border-radius: 50%;
+  aspect-ratio: 4 / 3;
+  font-weight: 600;
+  font-size: 0.85rem;
+  border-radius: 2px;
   color: var(--ink);
 }
 .cal-cell.is-blank { visibility: hidden; }
-.cal-cell.is-past { color: rgba(26,20,16,.22); }
+.cal-cell.is-past { color: #b9bdc5; }
 
-/* 5と0のつく日。丸で囲わず、下に点を置くだけ。 */
-.cal-cell.is-five::after {
-  content: ""; position: absolute; left: 50%; bottom: 2px;
-  width: 4px; height: 4px; margin-left: -2px;
-  border-radius: 50%; background: var(--fresh);
+/* 数字の座布団。全日で同じ大きさの透明な丸を持たせて、
+   囲んだ日だけ枠が見えるようにする（大きさが揃うので行が揺れない）。 */
+.cal-d {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 1.5em; height: 1.5em; box-sizing: border-box;
+  border: 1.5px solid transparent; border-radius: 50%;
 }
-.cal-cell.is-past.is-five::after { opacity: .3; }
 
-/* イベント日は丸く塗る。塗りは薄めにして、数字が読めるようにする。 */
-.cal-cell.has-ev { font-weight: 400; }
-.cal-cell.has-ev.ev-sale     { background: var(--sale); color: #fff; }
+/* 5と0のつく日。数字を丸で囲む（下の点は小さくて分かりにくかった）。
+   色は数字と同じ currentColor：通常日は濃色、種別の塗りの上では白、
+   過去日は数字ごと薄くなる。今日の四角（セル側のリング）とは
+   場所が違うので、重なっても両方読める。 */
+.cal-cell.is-five .cal-d { border-color: currentColor; }
+
+/* イベント日は四角く塗る。種別の色は情報として維持する。 */
+.cal-cell.has-ev { font-weight: 700; }
+.cal-cell.has-ev.ev-sale     { background: #c83333; color: #fff; }
 .cal-cell.has-ev.ev-marathon { background: #8E6BEA; color: #fff; }
+.cal-cell.has-ev.ev-deadline { background: #D97706; color: #fff; }
 .cal-cell.has-ev.ev-point    { background: transparent; }
 .cal-cell.has-ev.is-past     { opacity: .35; }
 
-/* 予想は塗らず、点線の輪にする。確定とひと目で見分けられるように。 */
+/* 予想は塗らず、点線の枠にする。確定とひと目で見分けられるように。 */
 .cal-cell.has-ev.is-guess {
   background: transparent; color: var(--ink);
-  border: 2px dashed var(--sale);
+  border: 1.5px dashed #c83333;
 }
 .cal-cell.has-ev.is-guess.ev-marathon { border-color: #8E6BEA; }
+.cal-cell.has-ev.is-guess.ev-deadline { border-color: #D97706; }
 
-/* 今日。黄色の丸で、いちばん目に入る。 */
+/* 今日。塗りは変えず、内側に黒のリングを引いて示す。 */
 .cal-cell.is-today {
-  background: var(--pop); color: var(--ink); font-weight: 700;
-  box-shadow: 0 0 0 3px rgba(255,211,31,.34);
+  font-weight: 800;
+  box-shadow: inset 0 0 0 2px #1a1c24;
 }
 .cal-cell.is-today.has-ev.ev-sale,
 .cal-cell.is-today.has-ev.ev-marathon { color: #fff; }
-.cal-cell.is-today.has-ev.ev-sale     { background: var(--sale); box-shadow: 0 0 0 3px rgba(245,51,63,.28); }
-.cal-cell.is-today.has-ev.ev-marathon { background: #8E6BEA; box-shadow: 0 0 0 3px rgba(142,107,234,.3); }
 
 /* 終わったイベント。日の塗りは残して、薄くして見分ける。
    いつ何があったかを、あとから辿れるようにしておく。 */
 .cal-cell.has-ev.is-done { opacity: .42; }
 .cal-done {
   display: inline-block;
-  background: var(--paper-2, #f2ece2); color: var(--ink-70);
-  border-radius: 999px; padding: 1px 8px; margin-left: 6px;
+  background: #eceef2; color: #4a4e57;
+  border-radius: 2px; padding: 1px 8px; margin-left: 6px;
   font-size: .74rem; font-weight: 700;
 }
 
 .cal-legend {
   display: flex; flex-wrap: wrap; align-items: center; gap: 5px;
-  font-size: 0.752rem; color: var(--ink-52);
-  margin: 12px 0 4px;
+  font-size: 0.752rem; color: #6b7078;
+  margin: 8px 0 2px;
 }
-.cal-key { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
-.cal-key.ev-sale { background: var(--sale); }
+.cal-key { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+.cal-key.ev-sale { background: #c83333; }
 .cal-key.ev-marathon { background: #8E6BEA; }
-.cal-key.is-five { width: 5px; height: 5px; background: var(--fresh); }
+.cal-key.ev-deadline { background: #D97706; }
+.cal-key.is-five {
+  width: 11px; height: 11px; border-radius: 50%;
+  background: transparent; border: 1.5px solid #1a1c24; box-sizing: border-box;
+}
 .cal-legend .cal-key:not(:first-child) { margin-left: 7px; }
 
 /* 今日が5と0のつく日などのとき、そこだけ短く出す */
 .cal-today-note {
-  background: var(--ground);
-  border-radius: 11px;
-  padding: 11px 12px;
-  margin: 10px 0 2px;
+  background: #f2f4f8;
+  border: 1px solid #d8dce3;
+  border-radius: 2px;
+  padding: 9px 11px;
+  margin: 8px 0 2px;
 }
-.cal-today-name { font-family: var(--f-hand); font-size: 0.963rem; margin-bottom: 3px; }
+.cal-today-name { font-weight: 800; font-size: 0.963rem; margin-bottom: 3px; }
 .cal-today-body { font-size: 0.819rem; line-height: 1.7; color: var(--ink-70); }
 
-.cal-list { list-style: none; margin: 12px 0 0; padding: 0; }
+.cal-list { list-style: none; margin: 9px 0 0; padding: 0; }
 .cal-ev {
-  background: var(--ground);
-  border-radius: 12px;
-  padding: 12px 13px;
-  margin-bottom: 9px;
+  background: #fff;
+  border: 1px solid #d8dce3;
+  border-radius: 2px;
+  padding: 10px 11px;
+  margin-bottom: 7px;
 }
-.cal-ev.is-live { background: var(--sale-bg); }
+.cal-ev.is-live { background: #fdeaea; }
 .cal-ev-name { font-size: 0.937rem; font-weight: 900; margin-bottom: 3px; }
-.cal-ev.ev-sale .cal-ev-name { color: var(--sale); }
+.cal-ev.ev-sale .cal-ev-name { color: #c83333; }
 .cal-ev.ev-marathon .cal-ev-name { color: #6A4BC4; }
+.cal-ev.ev-deadline .cal-ev-name { color: #B45309; }
 .cal-guess {
   display: inline-block; margin-left: 6px;
   font-size: 0.716rem; font-weight: 700;
-  background: rgba(26,20,16,.08); color: var(--ink-52);
-  border-radius: 999px; padding: 2px 8px; vertical-align: 2px;
+  background: #eceef2; color: #4a4e57;
+  border-radius: 2px; padding: 2px 8px; vertical-align: 2px;
 }
 .cal-ev-when { font-size: 0.819rem; color: var(--ink-70); }
 .cal-live {
   display: inline-block; margin-left: 6px;
-  background: var(--sale); color: #fff;
-  font-size: 0.752rem; border-radius: 999px; padding: 1px 9px;
+  background: #c83333; color: #fff;
+  font-size: 0.752rem; border-radius: 2px; padding: 1px 9px;
 }
 .cal-in { margin-left: 6px; color: var(--ink-52); }
 .cal-ev-note { font-size: 0.819rem; line-height: 1.7; color: var(--ink-70); margin-top: 5px; }
 
-/* 押せるところ。丸いタブ型にして、カレンダーの軽さに合わせる。 */
-.cal-ev-btns { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+/* 押せるところ。新デザインの四角ボタンに合わせる。 */
+.cal-ev-btns { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
 .cal-btn {
   display: inline-flex; align-items: center;
-  background: var(--paper); color: var(--ink);
+  background: #fff; color: #17181c;
+  border: 1px solid #26282e;
   font-size: 0.819rem; font-weight: 700;
   text-decoration: none;
-  border-radius: 999px;
+  border-radius: 2px;
   padding: 7px 13px;
-  transition: transform .12s ease, background .14s ease, color .14s ease;
+  transition: background .14s ease, color .14s ease;
 }
-.cal-btn:hover { transform: translateY(-1px); }
 /* 楽天へ出ていくものは赤。サイト内は白のまま。行き先が色で分かる。 */
-.cal-btn.is-ext { background: var(--sale); color: #fff; }
-.cal-btn.is-ext:hover { background: #FF4551; }
-.cal-btn:not(.is-ext):hover { background: var(--ink); color: #fff; }
+.cal-btn.is-ext { background: #c83333; border-color: #c83333; color: #fff; }
+.cal-btn.is-ext:hover { background: #a92a2a; }
+.cal-btn:not(.is-ext):hover { background: #1a1c24; color: #fff; }
 
 .cal-none { font-size: 0.865rem; color: var(--ink-52); padding: 10px 0; }
-.cal-note { font-size: 0.769rem; line-height: 1.7; color: var(--ink-52); margin-top: 10px; }
+.cal-note { font-size: 0.769rem; line-height: 1.7; color: var(--ink-52); margin-top: 8px; }
 
 /* =========================================================
    SOON  ── まもなく始まる特価
@@ -3032,3 +3115,261 @@ a.ticker-item:hover::before { background: var(--pop); }
   white-space: nowrap;
 }
 .card-foot .btn-rakuten { margin-left: 8px; }
+
+/* --- 商品ページ: 価格の推移（自前の観測記録） --- */
+.hist {
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  padding-block: 14px;
+  padding-inline: 16px;
+  margin-bottom: 20px;
+}
+.hist-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+.hist-badge {
+  font-size: .78rem;
+  font-weight: 700;
+  padding-block: 3px;
+  padding-inline: 10px;
+  border-radius: 99px;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+}
+.hist-badge.is-low  { background: var(--sale); border-color: var(--sale); color: #fff; }
+.hist-badge.is-drop { background: var(--pop); }
+.hist-badge.is-free { background: var(--fresh-bg); }
+.hist-summary { font-size: .95rem; margin-bottom: 8px; }
+.hist-summary b { color: var(--sale); }
+.hist-chart { display: block; width: 100%; height: auto; }
+.hist-line { fill: none; stroke: var(--sale); stroke-width: 2.5; stroke-linejoin: round; }
+.hist-area { fill: var(--sale); opacity: .07; stroke: none; }
+.hist-grid { stroke: var(--ink-14); stroke-width: 1; stroke-dasharray: 3 4; }
+.hist-dot  { fill: var(--sale); stroke: var(--paper); stroke-width: 2; }
+.hist-t     { fill: var(--ink-70); font-size: 12px; }
+.hist-t-now { fill: var(--sale); font-size: 14px; font-weight: 800; }
+.hist-fact { font-size: .92rem; margin-top: 8px; }
+.hist-note { font-size: .78rem; color: var(--ink-70); margin-top: 4px; }
+
+/* =========================================================
+   rev.3 ── デザイン移植（2026-11-09 / 試作 sample-design 承認版）
+   試作で確定した数値を本番へ移植した上書き層。
+   - 本文 16px / 行間 1.9（:root と body で反映済み）
+   - カードは角丸20px・余白広め、商品画像は「自然な縦横比で幅いっぱい」
+     （切り取り cover も、白帯が出る固定枠も使わない）
+   - 価格まわりの賑やかさ（値札POP・割引シール）は従来どおり維持
+   ========================================================= */
+
+/* --- フィード / カード --- */
+.feed { gap: 28px; }
+.card-media { aspect-ratio: auto; background: var(--paper); }
+.card-media img { height: auto; object-fit: initial; aspect-ratio: auto; display: block; }
+.card-body { padding: 20px 22px 24px; }
+.card-title { font-size: 1.08rem; line-height: 1.55; }
+.card-cap { line-height: 1.85; }
+.card-tags { gap: 8px; }
+.tag { padding: 4px 10px; border-radius: 999px; }
+
+/* --- ヒーロー / 特集欄（トップ） --- */
+.hero-title { line-height: 1.5; }
+.hero-lead { line-height: 1.9; }
+.events-list { gap: 14px; }
+.ev-card { border-radius: 20px; padding: 20px 22px; box-shadow: var(--shadow-card); }
+.ev-card-title { font-size: 1.08rem; }
+
+/* --- セクション見出し / 注記 --- */
+.section-title { font-family: var(--f-display); font-size: 1.32rem; line-height: 1.5; letter-spacing: .01em; }
+.pop-note { border-radius: 18px; border-top: 6px solid var(--pop); box-shadow: var(--shadow-card); }
+.guide-h2 { font-size: 1.32rem; line-height: 1.5; }
+
+/* --- 商品ページ --- */
+.detail-media { border-radius: 20px; box-shadow: var(--shadow-card); overflow: hidden; background: var(--paper); }
+.detail-media img { height: auto; object-fit: initial; aspect-ratio: auto; padding: 0; display: block; }
+.detail-title { line-height: 1.55; }
+.detail-cap { line-height: 1.9; }
+
+/* --- 価格履歴ブロック（中身・ロジックは不変、見た目だけ rev.3 に合わせる） --- */
+.hist { background: var(--paper); border: 1px solid var(--ink-08); border-radius: 20px; box-shadow: var(--shadow-card); padding: 22px 22px 18px; }
+.hist-summary { font-size: 1rem; line-height: 1.8; }
+.hist-fact { line-height: 1.8; }
+
+/* ===== v11 TOPデザイン（確定版 試作 sample-design-top11i の本番移植） =====
+   試作のクラス名は既存CSSと衝突するため、すべて v- 接頭辞で移植した。
+   カテゴリ・ガイド等の旧ページは旧クラスで描画し、共通ヘッダー/フッターだけ v- を使う。 */
+body.v11{background:#f2f4f8;color:#17181c;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP","Yu Gothic UI","Yu Gothic",Meiryo,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.v-page{max-width:1150px;margin:0 auto;padding:0 14px}
+.v-rd{color:#c83333}
+.v-nw{white-space:nowrap}
+
+/* ヘッダー（黒・2段） */
+.v-hd{background:#000;color:#fff;position:relative;z-index:30}
+.v-hd1-in{display:flex;align-items:center;gap:22px;padding-top:13px;padding-bottom:13px}
+.v-logo{color:#fff;font-weight:900;font-size:30px;line-height:1;text-decoration:none;letter-spacing:.02em;display:flex;align-items:baseline;gap:9px;white-space:nowrap}
+.v-logo-sub{font-size:10.5px;font-weight:700;color:#9aa0ab;letter-spacing:.28em}
+.v-topnav{display:flex;gap:20px;font-size:13.5px;font-weight:700;margin-left:10px}
+.v-topnav a{color:#e8e9ec;text-decoration:none}
+.v-topnav button{background:none;border:none;color:#e8e9ec;font:inherit;cursor:pointer;padding:0}
+.v-hd-cta{margin-left:auto;background:#c83333;color:#fff;font-weight:800;font-size:13px;padding:9px 15px;text-decoration:none;border-radius:2px;white-space:nowrap}
+.v-menu-btn{flex:0 0 auto;width:36px;height:36px;display:grid;place-items:center;background:transparent;border:1px solid rgba(255,255,255,.4);border-radius:2px;color:#fff;cursor:pointer}
+.v-menu-btn:hover{background:rgba(255,255,255,.18)}
+.v-menu-btn .ic{width:20px;height:20px}
+.v-hd2{background:#26292f;border-top:1px solid #33373f}
+.v-hd2-in{display:flex;gap:8px;padding-top:8px;padding-bottom:8px;overflow-x:auto;scrollbar-width:none}
+.v-hd2-in::-webkit-scrollbar{display:none}
+.v-cat-btn{flex:0 0 auto;background:#26292f;border:1px solid #3a3e46;color:#fff;font-weight:700;font-size:12.5px;padding:6px 13px;border-radius:999px;text-decoration:none;white-space:nowrap}
+.v-cat-btn.v-feat{background:#c83333;border-color:#c83333}
+
+/* ヒーロー */
+.v-hero{background:#191c22;color:#fff;border-bottom:3px solid #c83333;display:flex;align-items:center;gap:22px;padding:26px 28px;margin-top:16px}
+.v-hero-main{min-width:0}
+.v-hero-title{font-size:29px;font-weight:900;line-height:1.45;margin:0 0 8px;letter-spacing:.01em}
+.v-hero-title .v-u{border-bottom:3px solid #c83333;padding-bottom:1px}
+.v-hero-title .v-seg{white-space:nowrap}
+.v-hero-sub{font-size:14px;color:#c9ccd4;margin:0}
+.v-hero-sub strong{color:#fff;font-size:16.5px}
+.v-hero-note{display:block;font-size:12.5px;color:#8f95a1;margin-top:2px}
+
+/* 速報帯 */
+.v-notice{background:#fdeaea;border:1px solid #f0c9c9;display:flex;align-items:center;gap:10px;padding:9px 14px;margin-top:12px;font-size:13.5px}
+.v-notice-badge{background:#c83333;color:#fff;font-weight:800;font-size:12px;padding:3px 9px;border-radius:2px;white-space:nowrap}
+.v-notice-viewport{flex:1 1 auto;min-width:0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 14px,#000 calc(100% - 14px),transparent);mask-image:linear-gradient(90deg,transparent,#000 14px,#000 calc(100% - 14px),transparent)}
+.v-notice-track{display:flex;width:max-content;animation:v-notice-scroll linear infinite}
+.v-notice:hover .v-notice-track{animation-play-state:paused}
+.v-notice-item{display:inline-flex;align-items:baseline;white-space:nowrap;color:inherit;text-decoration:none}
+.v-notice-item strong{font-size:14.5px}
+.v-notice-item:hover strong{text-decoration:underline}
+.v-notice-sep{color:#c83333;font-size:9px;margin:0 16px}
+@keyframes v-notice-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* キャンペーン特集カルーセル（ヒーロー直下、特集の露出はここ1か所） */
+.v-camp{margin-top:14px}
+.v-camp-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.v-camp-label{background:#c83333;color:#fff;font-weight:800;font-size:12.5px;padding:4px 10px;border-radius:2px}
+.v-camp-dots{display:inline-flex;gap:6px}
+.v-camp-dot{width:9px;height:9px;border-radius:50%;border:1px solid #26282e;background:#fff;padding:0;cursor:pointer}
+.v-camp-dot.v-on{background:#c83333;border-color:#c83333}
+.v-camp-track{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:2px}
+.v-camp-track::-webkit-scrollbar{display:none}
+.v-camp-slide{flex:0 0 100%;scroll-snap-align:start;display:block;background:#fff;border:1px solid #26282e;border-radius:2px;text-decoration:none;color:#17181c;min-width:0}
+.v-camp-img{width:100%;height:190px;object-fit:cover;display:block;background:#eceef2}
+.v-camp-cap{display:block;padding:9px 12px 11px}
+.v-camp-row{display:flex;align-items:center;gap:8px;margin-bottom:5px;flex-wrap:wrap}
+.v-camp-row .v-topic-deadline{margin-bottom:0}
+.v-camp-dl{font-size:12px;font-weight:700;color:#c83333}
+.v-camp-title{display:block;font-weight:800;font-size:15.5px;line-height:1.45}
+
+/* レイアウト（サイドバー左） */
+.v-layout{display:grid;grid-template-columns:250px minmax(0,1fr);gap:18px;margin-top:16px;align-items:start}
+.v-main{min-width:0}
+.v-side{display:flex;flex-direction:column;gap:16px}
+.v-side-block{background:#fff;border:1px solid #26282e}
+.v-side-head{background:#1a1c24;color:#fff;font-weight:800;font-size:14px;padding:9px 13px}
+.v-side-head-red{background:#c83333}
+.v-side-list{list-style:none;margin:0;padding:4px 13px 8px}
+.v-side-list li{padding:8px 0;border-bottom:1px dashed #d8dce3}
+.v-side-list li:last-child{border-bottom:none}
+.v-sd-date{font-size:12px;color:#c83333;font-weight:800}
+.v-sd-title{font-size:13.5px;font-weight:700;line-height:1.45}
+.v-sd-days{font-size:11.5px;color:#6b7078}
+.v-guide-link{display:block;color:#17181c;text-decoration:none;font-weight:700;font-size:13.5px;line-height:1.45}
+.v-guide-link:hover{color:#c83333}
+.v-cal-body{padding:10px 13px 12px}
+
+/* タブ */
+.v-tabs{display:flex;gap:8px;margin-bottom:14px}
+.v-tab{background:#fff;border:1px solid #26282e;color:#17181c;font-weight:800;font-size:14px;padding:8px 18px;text-decoration:none;border-radius:2px}
+.v-tab.v-on{background:#c83333;border-color:#c83333;color:#fff}
+
+/* ストリームカード */
+.v-stream{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.v-card{background:#fff;border:1px solid #26282e;border-radius:2px;display:flex;flex-direction:column;text-decoration:none;color:#17181c;min-width:0;overflow:hidden}
+.v-card-pick{border:2px solid #c83333}
+.v-card-img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block;background:#eceef2}
+.v-card-body{padding:10px 12px 12px;display:flex;flex-direction:column;flex:1;min-width:0}
+.v-cat-row{display:flex;align-items:center;gap:7px;margin-bottom:6px;min-width:0}
+.v-cat-label{border:1.5px solid #c83333;color:#c83333;font-weight:800;font-size:11.5px;padding:1px 7px;white-space:nowrap}
+.v-beige-badge{background:#efe6d8;color:#7a5c2e;font-weight:700;font-size:11px;padding:2px 7px;white-space:nowrap}
+.v-card-date{font-size:11.5px;color:#6b7078;margin-left:auto;white-space:nowrap}
+.v-card-title{font-size:15px;font-weight:800;line-height:1.5;margin:0 0 7px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;word-break:keep-all;line-break:strict}
+.v-topic-deadline{display:inline-block;background:#c83333;color:#fff;font-weight:800;font-size:12px;padding:3px 9px;border-radius:2px;margin-bottom:8px;align-self:flex-start}
+.v-price-row{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.v-price{font-size:21px;font-weight:900;color:#c83333}
+.v-price-old{font-size:13px;color:#6b7078;text-decoration:line-through}
+.v-off{font-size:14px;font-weight:900;color:#c83333}
+.v-card-rule{border-top:1px solid #e3e6eb;margin:9px 0 8px}
+.v-meta-row{display:flex;align-items:center;gap:8px;font-size:12.5px;min-width:0}
+.v-shop{color:#4a4e57;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.v-rev{margin-left:auto;font-weight:700;white-space:nowrap}
+.v-note-line{font-size:11px;color:#8a8f98;margin:6px 0 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.v-pick-cell{display:flex;flex-direction:column;gap:8px;min-width:0}
+.v-pick-cell .v-card{flex:1}
+.v-pick-note{font-size:12.5px;font-weight:700;color:#c83333;line-height:1.6}
+
+/* ページャー */
+.v-pager{display:flex;gap:6px;justify-content:center;margin:22px 0 6px;flex-wrap:wrap}
+.v-pager-btn{min-width:42px;height:42px;padding:0 12px;display:inline-flex;align-items:center;justify-content:center;background:#fff;border:1.5px solid #26282e;color:#17181c;font-weight:800;font-size:14px;text-decoration:none;border-radius:2px}
+.v-pager-btn.v-on{background:#c83333;border-color:#c83333;color:#fff}
+.v-pager-btn.v-off{opacity:.35}
+
+/* フッター */
+.v-footer{background:#000;color:#c9ccd4;margin-top:34px}
+.v-footer-in{padding:26px 14px 30px}
+.v-footer-logo{color:#fff;font-weight:900;font-size:22px}
+.v-footer-tag{font-size:12.5px;margin:4px 0 14px}
+.v-footer-nav{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;font-weight:700;margin-bottom:14px}
+.v-footer-nav a{color:#e8e9ec;text-decoration:none}
+.v-footer-nav button{background:none;border:none;color:#e8e9ec;font:inherit;cursor:pointer;padding:0}
+.v-disc{font-size:11.5px;color:#8f95a1;line-height:1.7;margin:0 0 12px;max-width:760px}
+.v-legal-nav{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;margin-bottom:12px}
+.v-legal-nav a{color:#9aa0ab;text-decoration:none}
+.v-copy{font-size:11.5px;color:#6b7078;margin:0}
+
+/* 掲載基準（ポップアップ＋商品ページの基準セクション共通） */
+.v-criteria-overlay{position:fixed;inset:0;background:rgba(10,10,14,.62);z-index:200;display:flex;align-items:flex-start;justify-content:center;padding:6vh 14px 14px}
+.v-criteria-overlay[hidden]{display:none}
+.v-criteria-box{background:#fff;width:100%;max-width:520px;border:1.5px solid #26282e;max-height:86vh;overflow-y:auto}
+.v-criteria-head{background:#000;color:#fff;font-weight:800;font-size:16px;padding:13px 16px;display:flex;align-items:center}
+.v-criteria-close{margin-left:auto;background:none;border:none;color:#fff;font-size:22px;line-height:1;cursor:pointer;padding:0 2px}
+.v-criteria-body{padding:16px}
+.v-gate{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px dashed #d8dce3}
+.v-gate:last-of-type{border-bottom:none}
+.v-gate-no{flex:0 0 auto;width:22px;height:22px;background:#c83333;color:#fff;font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;border-radius:2px;margin-top:1px}
+.v-gate-text{font-size:14.5px;font-weight:700;line-height:1.55}
+.v-gate-text small{display:block;font-size:12.5px;font-weight:500;color:#4a4e57;margin-top:2px}
+.v-criteria-def{font-size:13px;color:#4a4e57;line-height:1.7;margin:12px 0 0}
+.v-gate-goal{margin-top:14px;background:#fdeaea;border:1px solid #f0c9c9;font-size:15px;font-weight:800;text-align:center;padding:11px}
+.v-gate-goal em{font-style:normal;color:#c83333}
+.v-trust{background:#fff;border:1.5px solid #26282e;padding:6px 16px 14px;margin:14px 0}
+.v-trust .v-criteria-def{margin-top:10px}
+
+/* 商品ページの関連商品（ストリームカード流用） */
+.v-stream-rel{grid-template-columns:repeat(2,1fr);margin:14px 0 20px}
+
+/* 価格の推移ブロックの配色だけ新デザインに寄せる（数値・構造は不変） */
+body.v11 .hist{border-color:#26282e}
+body.v11 .hist-badge{background:#fdeaea;color:#c83333}
+body.v11 .hist-summary b,body.v11 .hist-fact b{color:#c83333}
+
+@media (max-width:1023px){
+  .v-layout{grid-template-columns:1fr}
+  .v-side{order:2}
+}
+@media (max-width:860px){
+  .v-hd1-in{flex-wrap:wrap;gap:10px 16px;padding-top:11px;padding-bottom:11px}
+  .v-logo{font-size:26px}
+  .v-topnav{order:3;width:100%;margin-left:0}
+  .v-hd-cta{margin-left:auto}
+  .v-hero{flex-direction:column;align-items:stretch;padding:20px 18px}
+  .v-hero-title{font-size:23px}
+  .v-camp-slide{flex-basis:86%}
+  .v-camp-img{height:148px}
+  .v-camp-title{font-size:14px}
+  .v-notice{padding:9px 10px;gap:8px}
+  .v-stream{grid-template-columns:1fr;gap:10px}
+  .v-card{flex-direction:row}
+  .v-card-img{width:132px;height:132px;flex:0 0 132px;aspect-ratio:auto}
+  .v-card-body{padding:9px 11px 10px}
+  .v-card-title{font-size:14px;-webkit-line-clamp:2}
+  .v-price{font-size:18px}
+  .v-stream-rel{grid-template-columns:1fr}
+}

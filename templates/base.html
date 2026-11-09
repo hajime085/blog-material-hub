@@ -15,7 +15,7 @@
 <meta property="og:image" content="{{OGIMAGE}}">
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#1A1410">
+<meta name="theme-color" content="#000000">
 <link rel="icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -30,85 +30,63 @@
 <body class="{{BODYCLASS}}">
 <a class="skip-link" href="#main">本文へスキップ</a>
 
-<header class="site-header">
-  <div class="header-inner">
-    <a class="logo" href="/">
-      ヤスミル<span class="logo-en">YASUMIRU</span>
-    </a>
-    <div class="header-spacer"></div>
-    <nav class="nav-desktop" aria-label="メインメニュー">
+<header class="v-hd">
+  <div class="v-hd1"><div class="v-hd1-in v-page">
+    <a class="v-logo" href="/">ヤス<span class="v-rd">ミ</span>ル<span class="v-logo-sub">YASUMIRU</span></a>
+    <nav class="v-topnav" aria-label="メインメニュー">
       <a href="/">特価フィード</a>
-      <a href="/categories/">カテゴリ</a>
-      <a href="/about/">ヤスミルとは</a>
+      <a href="/#topics">トピックス</a>
+      <button type="button" class="v-criteria-open">掲載基準</button>
     </nav>
-    <a class="icon-btn watch-nav" href="/watch/" aria-label="気になるリストを見る">{{IC_HEART}}<span class="watch-badge" data-watch-count hidden>0</span></a>
-    <button class="icon-btn" id="searchBtn" aria-label="商品を検索">{{IC_SEARCH}}</button>
-    <button class="icon-btn menu-btn" id="menuBtn" aria-label="メニューを開く" aria-expanded="false">{{IC_MENU}}</button>
-  </div>
+    <a class="v-hd-cta" href="{{THREADS_URL}}" target="_blank" rel="noopener me">Threadsで速報を受け取る</a>
+    <button class="v-menu-btn" id="menuBtn" type="button" aria-label="メニューを開く" aria-expanded="false">{{IC_MENU}}</button>
+  </div></div>
+  <div class="v-hd2"><div class="v-hd2-in v-page">{{CATSTRIP}}</div></div>
 </header>
-
-<div class="ticker">
-  <span class="sr-only">注目の商品</span>
-  <div class="ticker-track">{{TICKER}}</div>
-</div>
-
-{{CHIPBAR}}
 
 <main id="main">
 {{CONTENT}}
 </main>
 
-<footer class="site-footer">
-  <div class="footer-inner">
-    <p class="footer-brand">ヤスミル</p>
-    <p class="footer-tag">安いを、見る。</p>
-    <p class="footer-desc">
-      楽天市場で値下がりしたものだけを、毎日ひろって縦に並べています。<br>
-      新商品も話題の品も追いません。二度見する安さに出会ったときだけ、値札を貼ります。<br>
-      価格は毎日記録していて、下がった瞬間に割引率のシールが付きます。
-    </p>
-    {{FOOTER_OPERATOR}}
-    <div class="footer-cols">
-      <div class="footer-col">
-        <h3>カテゴリ</h3>
-        <ul>{{FOOTER_CATS}}</ul>
-      </div>
-      <div class="footer-col">
-        <h3>サイトについて</h3>
-        <ul>
-          <li><a href="/about/">ヤスミルとは</a></li>
-          {{GUIDE_LINKS}}
-          <li><a href="/quiz/">これ、いくら？（値段あてクイズ）</a></li>
-          <li><a href="/categories/">カテゴリ一覧</a></li>
-          <li><a href="/contact/">お問い合わせ</a></li>
-          {{THREADS_ITEM}}
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h3>規約</h3>
-        <ul>
-          <li><a href="/privacy/">プライバシーポリシー</a></li>
-          <li><a href="/disclaimer/">免責事項</a></li>
-          <li><a href="/terms/">利用規約</a></li>
-        </ul>
-      </div>
-    </div>
-    <p class="footer-legal">
-      当サイトは楽天アフィリエイトプログラムに参加しています。商品リンク経由で購入があった場合、当サイトが紹介料を受け取ることがあります。<br>
-      掲載している価格・在庫・送料は取得時点のものです。実際の販売条件は必ず楽天市場の商品ページでご確認ください。<br>
-      &copy; {{YEAR}} ヤスミル
-    </p>
+<footer class="v-footer">
+  <div class="v-footer-in v-page">
+    <div class="v-footer-logo">ヤスミル</div>
+    <p class="v-footer-tag">安いを、見る。</p>
+    <nav class="v-footer-nav" aria-label="フッター">
+      <a href="/">特価フィード</a>
+      <a href="/#topics">トピックス（季節の特集）</a>
+      <a href="/#deadline">締切</a>
+      <button type="button" class="v-criteria-open">掲載基準について</button>
+    </nav>
+    <nav class="v-footer-nav" aria-label="サイトについて">
+      {{GUIDE_LINKS_FOOTER}}
+    </nav>
+    <p class="v-disc">当サイトは楽天アフィリエイトプログラムに参加しています。商品リンク経由で購入があった場合、当サイトが紹介料を受け取ることがあります。掲載している価格・在庫・送料は取得時点のものです。実際の販売条件は必ず楽天市場の商品ページでご確認ください。</p>
+    <nav class="v-legal-nav" aria-label="サイト情報">
+      <a href="/categories/">カテゴリ一覧</a>
+      <a href="/about/">ヤスミルとは</a>
+      <a href="/contact/">お問い合わせ</a>
+      <a href="/privacy/">プライバシーポリシー</a>
+      <a href="/disclaimer/">免責事項</a>
+      <a href="/terms/">利用規約</a>
+    </nav>
+    <p class="v-copy">&copy; {{YEAR}} ヤスミル（sozaino.com）</p>
   </div>
 </footer>
 
-<!-- 検索シート -->
-<div class="search-sheet" id="searchSheet" data-open="false" role="dialog" aria-modal="true" aria-label="商品を検索">
-  <div class="search-panel">
-    <form class="search-row" id="searchForm" role="search">
-      <input class="search-input" id="searchInput" type="search" name="q" placeholder="商品名・キーワードで探す" autocomplete="off">
-      <button class="btn btn-rakuten" type="submit">探す</button>
-    </form>
-    <p class="search-hint">例：むぎ茶／サーキュレーター／詰め替え／2000円以下</p>
+<!-- 掲載基準ポップアップ -->
+<div class="v-criteria-overlay" id="criteriaModal" hidden>
+  <div class="v-criteria-box" role="dialog" aria-modal="true" aria-labelledby="criteriaTitle">
+    <div class="v-criteria-head"><span id="criteriaTitle">ヤスミルの掲載基準</span><button type="button" class="v-criteria-close" data-criteria-close aria-label="閉じる">×</button></div>
+    <div class="v-criteria-body">
+      <div class="v-gate"><span class="v-gate-no">1</span><span class="v-gate-text">価格履歴を30日以上、観測している</span></div>
+      <div class="v-gate"><span class="v-gate-no">2</span><span class="v-gate-text">いまの価格が、観測期間で最安</span></div>
+      <div class="v-gate"><span class="v-gate-no">3</span><span class="v-gate-text">中央値より −20%以上 安い</span></div>
+      <div class="v-gate"><span class="v-gate-no">4</span><span class="v-gate-text">レビュー100件以上・評価 ★4.2以上</span></div>
+      <div class="v-gate"><span class="v-gate-no">5</span><span class="v-gate-text">送料無料で、「なぜお得か」を一言で言える</span></div>
+      <p class="v-criteria-def">％OFFと比較価格（取消線）の比較元は、価格履歴30日以上の<strong>中央値</strong>です。</p>
+      <div class="v-gate-goal">全部通ったら <em>掲載 ＝ 推薦</em></div>
+    </div>
   </div>
 </div>
 
@@ -117,7 +95,7 @@
   <div class="drawer-panel">
     <div class="drawer-head">
       <span class="drawer-title">メニュー</span>
-      <button class="icon-btn" id="drawerClose" aria-label="メニューを閉じる">{{IC_CLOSE}}</button>
+      <button class="icon-btn" id="drawerClose" type="button" aria-label="メニューを閉じる">{{IC_CLOSE}}</button>
     </div>
     <ul class="drawer-list">
       <li><a href="/">{{IC_HOME}}特価フィード</a></li>
@@ -143,6 +121,31 @@
 
 <script src="{{JS_SRC}}" defer></script>
 <script src="{{CAL_SRC}}" defer></script>
+<script>
+(function () {
+  var overlay = document.getElementById('criteriaModal');
+  if (!overlay) return;
+  var open = function () {
+    overlay.hidden = false;
+    document.body.style.overflow = 'hidden';
+    var close = overlay.querySelector('.v-criteria-close');
+    if (close) close.focus();
+  };
+  var closeFn = function () {
+    overlay.hidden = true;
+    document.body.style.overflow = '';
+  };
+  Array.prototype.forEach.call(document.querySelectorAll('.v-criteria-open'), function (b) {
+    b.addEventListener('click', open);
+  });
+  overlay.addEventListener('click', function (ev) { if (ev.target === overlay) closeFn(); });
+  var closeBtn = overlay.querySelector('[data-criteria-close]');
+  if (closeBtn) closeBtn.addEventListener('click', closeFn);
+  document.addEventListener('keydown', function (ev) {
+    if (ev.key === 'Escape' && !overlay.hidden) closeFn();
+  });
+})();
+</script>
 {{SCRIPTS}}
 </body>
 </html>

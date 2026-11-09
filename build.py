@@ -13,6 +13,7 @@ import json
 import os
 import re
 import shutil
+import statistics
 import contextlib
 import io
 import hashlib
@@ -26,9 +27,22 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 JST = timezone(timedelta(hours=9))
 
 # 生成物。クリーンビルド時にこれらを消す。
-GENERATED_DIRS = ["p", "c", "categories", "page", "guide", "about", "contact", "privacy", "disclaimer", "terms"]
+GENERATED_DIRS = ["p", "c", "categories", "page", "off", "guide", "about", "contact", "privacy", "disclaimer", "terms"]
 GENERATED_FILES = ["index.html", "404.html", "sitemap.xml", "feed.xml", "robots.txt",
                    "assets/data/feed.json"]
+
+# 特集ページ（イベント×単一テーマ）。本文は生成物ではなく手で作る静的ページで、
+# 原本を event_src/<slug>/index.html に置き、ビルド時に event/<slug>/ へ写す。
+# （event/ は GENERATED_DIRS に入っていないので clean() では消えないが、
+#   出力側だけに置くと原本がどこか分からなくなるため、写す形に寄せた。）
+# 特集を足すときは、原本を event_src/ に置いてここに1行足すだけ。
+# sitemap とトップの「特集」欄はこの登録から自動で出る。
+EVENT_PAGES = [
+    {"slug": "osechi", "title": "おせち特集",
+     "desc": "早割・予約の締切カレンダーと、レビュー実績で選んだ楽天市場のおせち10選。"},
+    {"slug": "cake", "title": "クリスマスケーキ特集",
+     "desc": "予約・早割の締切カレンダーと、レビュー実績で選んだ楽天市場のクリスマスケーキ10選。"},
+]
 
 
 # ---------------------------------------------------------------- utilities
@@ -652,49 +666,6 @@ def render_operator(cfg):
                  role=e(op.get("role", "")), bio=e(op.get("bio", "")), link=link)
 
 
-def render_featured(cfg):
-    """注目商品。人が選んだものを横に並べる。
-
-    楽天の売上ランキングはAPIで取れず、アフィリエイトの注目商品ページも
-    ログインの中にある。そこで「選ぶのは人、集めるのは機械」に振り分けた。
-    通常のフィードとは出所が違うので、そう分かる見た目にしてある。"""
-    path = os.path.join(ROOT, "featured.json")
-    if not os.path.exists(path):
-        return ""
-    items = (load("featured.json") or {}).get("items") or []
-    items = [p for p in items if not sale_over(p)]
-    if not items:
-        return ""
-
-    cards = ""
-    for p in items:
-        tags = ""
-        if p.get("freeShipping"):
-            tags = '<span class="fe-tag">送料無料</span>'
-        cards += (
-            '<a class="fe-card" href="{url}" target="_blank" rel="nofollow sponsored noopener">'
-            '<span class="fe-media"><img src="{img}" alt="" width="300" height="300" loading="lazy"></span>'
-            '<span class="fe-body">'
-            '<span class="fe-title">{t}</span>'
-            '<span class="fe-price"><i>¥</i>{pr}</span>'
-            '<span class="fe-meta">{star}{ra}<b>{rc}</b>件{tags}</span>'
-            '</span></a>'
-        ).format(url=e(p.get("affiliateUrl") or "#"), img=e(p.get("image", "")),
-                 t=e(p.get("title", "")), pr=yen(p.get("price", 0)),
-                 star=icons.use("star", "ic-star"), ra=p.get("reviewAverage") or "-",
-                 rc=yen(p.get("reviewCount") or 0), tags=tags)
-
-    return """
-<section class="featured wrap-wide">
-  <div class="featured-head">
-    <h2 class="featured-title">{ic}編集部が選んだもの</h2>
-    <p class="featured-note">売れ筋や特集から、これはと思ったものを手で選んでいます。</p>
-  </div>
-  <div class="featured-rail">{cards}</div>
-</section>
-""".format(ic=icons.use("bolt"), cards=cards)
-
-
 def render_pager(page, total_pages, base):
     """ページ送り。フィードが長くなるので10件ずつに切る。
     JSに頼らず素のリンクで動かす（検索エンジンも人も同じものを辿れる）。"""
@@ -793,11 +764,16 @@ def page_shell(cfg, base, *, title, desc, path, content, ogtype="website",
         "GUIDE_LINKS": "".join(
             '<li><a href="/guide/%s/">%s</a></li>' % (e(g["slug"]), e(g.get("shortTitle", g["title"])))
             for g in (cfg.get("_guides") or [])),
+        "GUIDE_LINKS_FOOTER": "".join(
+            '<a href="/guide/%s/">%s</a>' % (e(g["slug"]), e(g.get("shortTitle", g["title"])))
+            for g in (cfg.get("_guides") or [])),
         "GUIDE_LINKS_DRAWER": "".join(
             '<li><a href="/guide/%s/">%s%s</a></li>'
             % (e(g["slug"]), icons.use("doc"), e(g.get("shortTitle", g["title"])))
             for g in (cfg.get("_guides") or [])),
         "THREADS_ITEM": threads_nav_item(cfg),
+        "CATSTRIP": render_catstrip(cfg),
+        "THREADS_URL": e((cfg.get("site") or {}).get("threads") or "#"),
     })
 
 
@@ -842,392 +818,534 @@ def jsonld_block(obj):
 
 
 # ---------------------------------------------------------------- builders
-def short_name(t, n=30):
-    """行に収める長さに切る。楽天の商品名は検索語の羅列なので、
-    長く出しても読めない。"""
-    t = (t or "").strip()
-    return t if len(t) <= n else t[:n].rstrip("…、 ") + "…"
+def event_lastmod(slug):
+    """特集ページの最終更新日。原本（event_src/）の mtime を使い、
+    原本が無ければビルド日で代用する。"""
+    src = os.path.join(ROOT, "event_src", slug, "index.html")
+    if os.path.isfile(src):
+        return datetime.fromtimestamp(os.path.getmtime(src), JST).strftime("%Y-%m-%d")
+    return datetime.now(JST).strftime("%Y-%m-%d")
 
 
-def upcoming_event():
-    """これから来るイベント。エントリーが始まっていれば、その間も返す。
+def build_events():
+    """特集ページの原本（event_src/）を出力（event/）へ写す。
+    原本が無い特集は写さない（sitemap・トップ欄には登録だけ出るので、
+    先に登録して後から本文を置く運用もできる）。"""
+    for ev in EVENT_PAGES:
+        src = os.path.join(ROOT, "event_src", ev["slug"], "index.html")
+        if not os.path.isfile(src):
+            continue
+        dst = os.path.join(ROOT, "event", ev["slug"], "index.html")
+        os.makedirs(os.path.dirname(dst), exist_ok=True)
+        shutil.copyfile(src, dst)
 
-    セールは始まってから動くものではない。エントリーは先に開いていて、
-    エントリー前の買い物は対象外になる。
-    だから「開催中かどうか」ではなく「エントリーが開いているか」で出す。
+
+# ================= TOP（v11デザイン・確定版の本番移植） =================
+# 確定デザイン: sample-design-top11i.html（試作）。
+# 試作のJS（並べ替え・ページ切り替え）は静的生成に置き換えた:
+#   「新着」= 通常ページ（/ と /page/N/）、「値下がり順」= /off/ の静的ページ、
+#   「特集」= トピックスへのアンカー。ページネーションは1ページ15件。
+TOP_PER_PAGE = 15
+WEEKDAY_JA = "月火水木金土日"
+# ヘッダー帯の並び。ベビーは帯に出さない（確定デザイン）。
+# 準主力のペット・季節ものも帯の枠には入れない（カテゴリ一覧・各カテゴリページから辿れる）。
+STRIP_ORDER = ["kitchen", "kaden", "food", "beauty", "pc", "fashion"]
+
+# トピックス（季節の特集）。締切の日付はここには書かない。
+# events.json の kind=deadline（deadlineKey = 各エントリの key）から引くので、
+# 締切が過ぎれば表示も消える。
+TOPICS = [
+    {"slug": "cake", "img": "/assets/img/event/cake/pick-01.jpg",
+     "imgAlt": "ルタオ クリスマスケーキ2個セット",
+     "badge": "クリスマス × ケーキ",
+     "title": "クリスマスケーキ予約2026｜実績と締切で選ぶ10選",
+     "copy": "有名パティスリーから定番の生クリーム、チョコ、少人数向けまで。締切カレンダー付きで、「いつまでに予約すればいいか」が分かります。",
+     "chips": "採用10件　レビュー実績と締切で選定",
+     "deadlineKey": "cake-sowari", "chip": True,
+     "revFmt": "締切：早割は %s まで"},
+    {"slug": "osechi", "img": "/assets/img/event/osechi/pick-06.jpg",
+     "imgAlt": "博多久松のおせち「博多」",
+     "badge": "年末 × おせち",
+     "title": "おせち予約2027｜実績と締切で選ぶ10選",
+     "copy": "レビュー5万件超の福袋おせちから、2.3万件の定番・博多久松まで。冷蔵・冷凍、段数と人数、最終受付を確認して掲載しています。",
+     "chips": "採用10件　少人数・ファミリー・豪華",
+     "deadlineKey": "osechi-final", "chip": False,
+     "revFmt": "締切：最終受付 %s"},
+]
+
+
+def render_catstrip(cfg):
+    """ヘッダー2段目のカテゴリ帯（単一トーン、特集だけ赤）。"""
+    by = {c["slug"]: c for c in cfg["categories"]}
+    out = []
+    for slug in STRIP_ORDER:
+        c = by.get(slug)
+        if c:
+            out.append('<a class="v-cat-btn" href="/c/%s/">%s</a>' % (slug, e(c["short"])))
+    out.append('<a class="v-cat-btn v-feat" href="/#topics">特集</a>')
+    return "".join(out)
+
+
+def median_off(p):
+    """検証の物差しでの値下がり。(中央値, OFF%) を返す。
+
+    取消線の価格は価格履歴（30日以上の観測）の中央値。
+    試作は13件とも中央値＝curated の median_price で一致していた。
+    履歴が無ければ (None, 0) を返し、呼び出し側は取消線を出さない。
+    """
+    f = history_facts(p)
+    if not f or not f["median"]:
+        return (None, 0)
+    med = int(round(f["median"]))
+    if med > int(p["price"]):
+        return (med, int(round((med - int(p["price"])) / med * 100)))
+    return (med, 0)
+
+
+def _md_label(dstr):
+    """'2026-11-09' → '11/9'"""
+    try:
+        d = datetime.strptime(dstr, "%Y-%m-%d").date()
+    except (ValueError, TypeError):
+        return ""
+    return "%d/%d" % (d.month, d.day)
+
+
+def _fetched_label(fetched):
+    try:
+        d = datetime.strptime(fetched, "%Y-%m-%d")
+        return "%d月%d日" % (d.month, d.day)
+    except (ValueError, TypeError):
+        return fetched or ""
+
+
+def deadline_entries():
+    """events.json から、今日以降・近い順の「締切」エントリを返す。
+
+    締切データは events.json に一本化した（旧 config の deadlines は廃止）。
+    対象は kind=deadline（特集の締切）と、kind=sale の開始日。
+    旧 config の deadlines には大型セールの開始日（ブラックフライデー／
+    スーパーSALE）も「締切」として載っていたので、従来の表示内容に合わせて
+    sale の開始日も含める（タイトルには「開始」を付ける）。
+    お買い物マラソンは頻度が高く、「逃すと困る締切」の趣旨に合わないので
+    ここには含めない（カレンダー本体には従来どおり出る）。
+    締切データの出どころは events.json 側の各エントリの _source に記録してある。
+    終わったものは自動で外れる（過去の締切を「近い順」に出し続けない）。
+    トピックスの締切参照（key）もこのエントリ経由。
     """
     if not os.path.exists(os.path.join(ROOT, "events.json")):
-        return None
-    now = datetime.now(JST).replace(tzinfo=None)
-    best = None
-    for ev in (load("events.json") or {}).get("events", []):
-        if ev.get("status") != "確定" or ev.get("kind") not in ("marathon", "sale"):
+        return []
+    doc = load("events.json")
+    today = datetime.now(JST).date()
+    out = []
+    for ev in doc.get("events") or []:
+        if not isinstance(ev, dict):
+            continue
+        kind = ev.get("kind")
+        if kind not in ("deadline", "sale"):
             continue
         try:
-            a = datetime.strptime(ev["start"][:16], "%Y-%m-%d %H:%M")
-            b = datetime.strptime((ev.get("end") or ev["start"])[:16], "%Y-%m-%d %H:%M")
-        except (ValueError, KeyError):
+            dt = datetime.strptime((ev.get("start") or "")[:10], "%Y-%m-%d").date()
+        except (ValueError, TypeError):
             continue
-        es = a
-        if ev.get("entryStart"):
-            try:
-                es = datetime.strptime(ev["entryStart"][:16], "%Y-%m-%d %H:%M")
-            except ValueError:
-                es = a
-        if es <= now <= b and (best is None or a < best[0]):
-            best = (a, b, es, ev)
-    return best
+        if dt < today:
+            continue
+        title = ev.get("name", "")
+        if kind == "sale":
+            title += " 開始"
+        label = ev.get("dateLabel") or "%d/%d（%s）" % (
+            dt.month, dt.day, WEEKDAY_JA[dt.weekday()])
+        out.append({"key": ev.get("key", ""), "date": dt, "label": label,
+                    "title": title, "note": ev.get("note", ""),
+                    "status": ev.get("status", ""), "noDays": bool(ev.get("noDays")),
+                    "days": (dt - today).days})
+    out.sort(key=lambda x: x["date"])
+    return out
 
 
-def render_event_banner():
-    """セールの助走と開催を知らせる。
-
-    件数の多い日ほど下が長くなるので、ここは高さを取らない。
-    出すのは、その日に効く事実だけにする。
-    """
-    got = upcoming_event()
-    if not got:
+def _sd_days_text(en):
+    if en["status"] == "予想":
+        return "予想"
+    if en["noDays"]:
         return ""
-    a, b, _es, ev = got
-    now = datetime.now(JST).replace(tzinfo=None)
-    links = load("links.json") or {}
-    running = a <= now <= b
+    return "あと%d日" % en["days"]
 
-    def when(d):
-        return "%d月%d日 %d:%02d" % (d.month, d.day, d.hour, d.minute)
 
-    if running:
-        head = "開催中"
-        title = "%sは %s まで" % (ev["name"], when(b))
+def render_top_sidebar(entries, guides=None):
+    # 並びは「セールカレンダー → 締切が近い順 → 読んでおく」。
+    # 特集バナーはヒーロー直下のカルーセルに一本化した（旧・キャンペーン情報）。
+    # カレンダーは他ページのサイドバーと同じ仕組み（id="calendar" 枠＋
+    # calendar.js ＋ events.json）。見出しも既存ページに合わせて「楽天のイベント」。
+    blocks = ('<div class="v-side-block"><div class="v-side-head">楽天のイベント</div>'
+              '<div class="v-cal-body"><div id="calendar">'
+              '<p class="cal-loading">読み込んでいます…</p></div></div></div>')
+    if entries:
+        # 締切帯の廃止に伴い「全部見る」リンク（#deadline）は無くし、
+        # 代わりに表示件数を 4 → 6 に増やした。全件は上のカレンダーで辿れる。
+        lis = "".join(
+            '<li><div class="v-sd-date">%s</div><div class="v-sd-title">%s</div>'
+            '<div class="v-sd-days">%s</div></li>'
+            % (e(en["label"]), e(en["title"]), e(_sd_days_text(en)))
+            for en in entries[:6])
+        blocks += ('<div class="v-side-block"><div class="v-side-head">締切が近い順</div>'
+                   '<ul class="v-side-list">%s</ul></div>' % lis)
+    if guides:
+        # SEOガイドへの導線。旧 TOP にあった「読んでおく」ガイドバー
+        # （gb-item）の後継としてサイドバーに置く。帯そのものは復活させない。
+        # 文言はガイドデータの shortTitle（無ければ title）の範囲に限る。
+        glis = "".join(
+            '<li><a class="v-guide-link" href="/guide/%s/">%s</a></li>'
+            % (e(g["slug"]), e(g.get("shortTitle", g["title"])))
+            for g in guides)
+        blocks += ('<div class="v-side-block"><div class="v-side-head">読んでおく</div>'
+                   '<ul class="v-side-list">%s</ul></div>' % glis)
+    return '<aside class="v-side">%s</aside>' % blocks
+
+
+def render_stream_card(p, cats, badge, cat_label=None):
+    """確定デザインのストリームカード。リンク先は商品ページ（/p/）。
+
+    試作は楽天へ直リンクだったが、本番はサイト内の回遊（商品ページの
+    価格推移・掲載基準の実測）を優先し、既存の /p/ 方式に合わせた。
+    タイトルは商品名そのまま（CSSで3行まで）。短縮名は作らない（創作回避）。
+    """
+    c = cats.get(p["category"], {})
+    med, off = median_off(p)
+    price_row = '<span class="v-price">¥%s</span>' % yen(p["price"])
+    if med and off:
+        price_row += ('<span class="v-price-old">¥%s</span>'
+                      '<span class="v-off">%d%%OFF</span>' % (yen(med), off))
+    rev = ""
+    if p.get("reviewAverage"):
+        rev = ('<span class="v-rev">★★%s（%s件）</span>'
+               % (e(p["reviewAverage"]), yen(p.get("reviewCount", 0))))
+    ship = '・<span class="v-nw">送料無料</span>' if free_shipping(p) else ""
+    note = ('<p class="v-note-line">比較元：30日の中央値・%s確認%s</p>'
+            % (_md_label(p.get("lastSeen", "")), ship))
+    return (
+        '<a class="v-card" href="/p/{id}/">'
+        '<img class="v-card-img" src="{img}" alt="{alt}" loading="lazy">'
+        '<div class="v-card-body">'
+        '<div class="v-cat-row"><span class="v-cat-label">{label}</span>'
+        '<span class="v-beige-badge">{badge}</span>'
+        '<span class="v-card-date">{date}</span></div>'
+        '<h3 class="v-card-title">{title}</h3>'
+        '<div class="v-price-row">{price_row}</div>'
+        '<div class="v-card-rule"></div>'
+        '<div class="v-meta-row"><span class="v-shop">{shop}</span>{rev}</div>'
+        '{note}</div></a>'
+    ).format(id=e(p["id"]), img=e(p["image"]), alt=e(p["title"]),
+             label=e(cat_label or c.get("short") or c.get("label") or ""),
+             badge=e(badge), date=e(_md_label(p.get("lastSeen", ""))),
+             title=e(p["title"]), price_row=price_row,
+             shop=e(p.get("shop", "楽天市場")), rev=rev, note=note)
+
+
+def select_pickup(live):
+    """PICK UP の選定。最大OFFで機械的に選ばない（確定ルール）。
+
+    1) curated.json の feed エントリに "pickup": true の明示フラグがあれば最優先。
+    2) 無ければ fallback: レビュー1,000件以上の検証通過アイテムの中で
+       「レビュー数 × 値下がり幅（中央値比OFF%）」のスコア上位を1件。
+    戻り値: (商品, "flag" | "score")
+    """
+    if not live:
+        return None, ""
+    if os.path.exists(os.path.join(ROOT, "curated.json")):
+        try:
+            cur = load("curated.json")
+            flagged = {en.get("id") for en in (cur.get("feed") or []) if en.get("pickup")}
+        except Exception:
+            flagged = set()
+        for p in live:
+            if p["id"] in flagged:
+                return p, "flag"
+    cand = [p for p in live if (p.get("reviewCount") or 0) >= 1000] or list(live)
+    best = max(cand, key=lambda p: (p.get("reviewCount") or 0) * median_off(p)[1])
+    return best, "score"
+
+
+def pickup_note(pick, live):
+    """PICK UP カード下の選定理由。試作の正直な注記の形式で、事実だけを書く。"""
+    offs = sorted((median_off(p)[1] for p in live), reverse=True)
+    _med, off = median_off(pick)
+    rank = offs.index(off) + 1 if off in offs else len(offs)
+    rc = yen(pick.get("reviewCount", 0))
+    if rank <= 1:
+        return ("↑ 値下がり幅も今日いちばん。レビュー%s件の実績とあわせて、"
+                "今日の顔にしました。" % rc)
+    return ("↑ 値下がり幅は%d番手。でもレビュー%s件の実績で、"
+            "今日の顔にしました。" % (rank, rc))
+
+
+def top_units(live):
+    """TOP のストリームを (種類, 商品) の列にする。
+    PICK UP → フィード（新着順、PICK UP を除く）。全件ユニーク（再掲なし）。"""
+    ordered = sorted(live, key=feed_order, reverse=True)
+    pick, _how = select_pickup(ordered)
+    feed = [p for p in ordered if pick is None or p["id"] != pick["id"]]
+    units = []
+    if pick is not None:
+        units.append(("pick", pick))
+    units += [("feed", p) for p in feed]
+    return ordered, pick, units
+
+
+def render_unit(kind, p, cats, live):
+    if kind == "pick":
+        card = render_stream_card(p, cats, "本日のイチオシ")
+        card = card.replace('class="v-card"', 'class="v-card v-card-pick"', 1)
+        return ('<div class="v-pick-cell">%s<p class="v-pick-note">%s</p></div>'
+                % (card, e(pickup_note(p, live))))
+    return render_stream_card(p, cats, "検証済み")
+
+
+CAROUSEL_JS = (
+    '<script>(function(){'
+    'var t=document.querySelector(".v-camp-track");if(!t)return;'
+    'var d=document.querySelectorAll(".v-camp-dot");if(!d.length)return;'
+    'function w(){var s=t.querySelector(".v-camp-slide");'
+    'return s?s.getBoundingClientRect().width+10:1;}'
+    'function cur(){return Math.min(d.length-1,Math.round(t.scrollLeft/w()));}'
+    'var raf=0;'
+    't.addEventListener("scroll",function(){if(raf)return;'
+    'raf=requestAnimationFrame(function(){raf=0;var i=cur();'
+    'd.forEach(function(b,j){b.classList.toggle("v-on",j===i);});});'
+    '},{passive:true});'
+    'd.forEach(function(b,j){b.addEventListener("click",function(){'
+    't.scrollTo({left:j*w(),behavior:"smooth"});});});'
+    '})();</script>')
+
+
+def render_campaign_carousel(entries):
+    """キャンペーン特集カルーセル（ヒーロー直下）。特集の露出はここ1か所に
+    集約する（旧・サイドバーのキャンペーン情報とストリーム内の特集カードを
+    畳んだ）。スライドは TOPICS から生成し、増減に追従する。
+    締切は events.json から引く。締切エントリが無い・過ぎた場合は日付まわり
+    の表示ごと省く（日付の創作をしない）。id="topics" は特集タブ／カテゴリ
+    帯のアンカーとして維持する。"""
+    by_key = {en["key"]: en for en in entries}
+    slides = []
+    for t in TOPICS:
+        en = by_key.get(t["deadlineKey"])
+        extra = ""
+        if en is not None:
+            md = "%d/%d" % (en["date"].month, en["date"].day)
+            if t["chip"]:
+                extra = '<span class="v-topic-deadline">早割は%sまで</span>' % md
+            else:
+                extra = ('<span class="v-camp-dl">%s</span>'
+                         % e(t["revFmt"] % md))
+        slides.append(
+            '<a class="v-camp-slide" href="/event/{slug}/">'
+            '<img class="v-camp-img" src="{img}" alt="{alt}" loading="lazy">'
+            '<span class="v-camp-cap">'
+            '<span class="v-camp-row"><span class="v-beige-badge">{badge}</span>'
+            '{extra}</span>'
+            '<span class="v-camp-title">{title}</span>'
+            '</span></a>'.format(
+                slug=t["slug"], img=e(t["img"]), alt=e(t["imgAlt"]),
+                badge=e(t["badge"]), extra=extra, title=e(t["title"])))
+    dots = ""
+    if len(slides) > 1:
+        dots = ('<span class="v-camp-dots">%s</span>' % "".join(
+            '<button type="button" class="v-camp-dot%s" '
+            'aria-label="%d枚目の特集へ"></button>'
+            % (" v-on" if i == 0 else "", i + 1)
+            for i in range(len(slides))))
+    return ('<section class="v-camp" id="topics" aria-label="キャンペーン特集">'
+            '<div class="v-camp-top">'
+            '<span class="v-camp-label">キャンペーン特集</span>%s</div>'
+            '<div class="v-camp-track">%s</div></section>'
+            % (dots, "".join(slides)))
+
+
+def render_top_hero(live_n, fetched):
+    """ヒーロー。数字はすべてビルドの実データから単一集計する:
+    観測数 = price_history.json のキー数、掲載数 = live 件数、最終確認 = 取得日。"""
+    obs = "{:,}".format(len(price_history()))
+    return (
+        '<section class="v-hero"><div class="v-hero-main">'
+        '<h1 class="v-hero-title"><span class="v-seg">今日の特価は、</span>'
+        '<span class="v-seg"><span class="v-u">検証</span>を通った</span>'
+        '<span class="v-seg">ものだけ。</span></h1>'
+        '<p class="v-hero-sub">価格を観測しているのは<strong>%s品</strong>。'
+        'その全部をチェックして、価格履歴・レビュー・送料まで検証できたものだけを載せました。<br>'
+        '<strong>本日の掲載 %d件</strong>｜最終確認 <strong>%s</strong>'
+        '<span class="v-hero-note">（観測中%s品 → 検証通過%d件）</span></p></div>'
+        '</section>'
+        % (obs, live_n, e(_fetched_label(fetched)), obs, live_n))
+
+
+def render_notice(live):
+    """速報帯: その日の検証通過アイテムから OFF 上位5件（同率はレビュー数順）。
+    帯の中はティッカーで流し、各アイテムから商品ページへリンクする。
+    商品名は切らずに全文を流す。ループを継ぎ目なくするため同じ並びを
+    2周ぶん並べ、2周目は読み上げとタブ移動の対象から外す。"""
+    top = sorted(live, key=lambda p: (median_off(p)[1], p.get("reviewCount") or 0),
+                 reverse=True)[:5]
+    if not top:
+        return ""
+
+    def item(p, dup=False):
+        _med, off = median_off(p)
+        return ('<a class="v-notice-item" href="/p/%s/"%s>'
+                '<strong>%s</strong> %d%%OFF ¥%s'
+                '<span class="v-notice-sep" aria-hidden="true">◆</span></a>'
+                % (e(p["id"]), ' tabindex="-1" aria-hidden="true"' if dup else "",
+                   e(p["title"]), off, yen(p["price"])))
+
+    seq = "".join(item(p) for p in top)
+    dup = "".join(item(p, dup=True) for p in top)
+    # 流れる速さがアイテムの総量で変わらないよう、文字数から duration を出す
+    # （約11px/文字 ÷ およそ55px/秒 ≒ 5文字で1秒、下限18秒・上限90秒）。
+    chars = sum(len(p["title"]) + 14 for p in top)
+    dur = min(90, max(18, round(chars / 5)))
+    return ('<div class="v-notice"><span class="v-notice-badge">速報</span>'
+            '<div class="v-notice-viewport"><div class="v-notice-track" '
+            'style="animation-duration:%ds">%s%s</div></div></div>'
+            % (dur, seq, dup))
+
+
+def render_top_tabs(active):
+    tabs = [("new", "新着", "/"), ("off", "値下がり順", "/off/"),
+            ("topics", "特集", "/#topics")]
+    return '<nav class="v-tabs">%s</nav>' % "".join(
+        '<a class="v-tab%s" href="%s">%s</a>'
+        % (" v-on" if k == active else "", href, label)
+        for k, label, href in tabs)
+
+
+def render_pager_v11(page, total_pages, base):
+    """確定デザインのページャー（四角ボタン、現在ページ赤、前へ/次へ）。
+    総ページ数が1なら出さない。"""
+    if total_pages <= 1:
+        return ""
+
+    def url(n):
+        return base if n == 1 else "%spage/%d/" % (base, n)
+
+    parts = []
+    if page > 1:
+        parts.append('<a class="v-pager-btn" href="%s">前へ</a>' % url(page - 1))
     else:
-        days = (a.date() - now.date()).days
-        head = ("今日 %d:%02d から" % (a.hour, a.minute) if days == 0
-                else "あと%d日" % days)
-        title = "%sは %s から" % (ev["name"], when(a))
-
-    # 事実だけを並べる。書いていないことは出さない。
-    facts = []
-    if not running and ev.get("entryStart"):
-        facts.append("エントリーはもう始まっています。押すだけ、無料")
-    facts.append("買いまわりは1ショップ税込1,000円以上で1カウント")
-    if ev.get("pointCap"):
-        facts.append("もらえる上限は%sポイント（期間限定）" % "{:,}".format(ev["pointCap"]))
-
-    btns = []
-    for lk in (ev.get("links") or [])[:2]:
-        to = lk.get("to") or ""
-        url = to if to.startswith("/") else (link_url(links, to) or "")
-        if not url:
-            continue
-        ext = ' target="_blank" rel="nofollow sponsored noopener"' if url.startswith("http") else ""
-        btns.append('<a class="evb-btn" href="%s"%s>%s</a>' % (url, ext, lk.get("label", "見る")))
-
-    return """
-<section class="evbar wrap-narrow">
-  <p class="evb-eyebrow">{ic}{head}</p>
-  <h2 class="evb-title">{title}</h2>
-  <ul class="evb-facts">{facts}</ul>
-  <div class="evb-btns">{btns}</div>
-</section>
-""".format(ic=icons.use("bolt"), head=e(head), title=e(title),
-           facts="".join("<li>%s</li>" % e(f) for f in facts),
-           btns="".join(btns))
+        parts.append('<span class="v-pager-btn v-off">前へ</span>')
+    for n in range(1, total_pages + 1):
+        if n == page:
+            parts.append('<span class="v-pager-btn v-on">%d</span>' % n)
+        else:
+            parts.append('<a class="v-pager-btn" href="%s">%d</a>' % (url(n), n))
+    if page < total_pages:
+        parts.append('<a class="v-pager-btn" href="%s">次へ</a>' % url(page + 1))
+    else:
+        parts.append('<span class="v-pager-btn v-off">次へ</span>')
+    return '<nav class="v-pager">%s</nav>' % "".join(parts)
 
 
-def render_soon(products, cats):
-    """セールの特価をまとめる枠。ヒーローのすぐ下に置く。
-
-    開始前のものは、その時刻まで買えないので通常のフィードには並べず、
-    ここにだけ集めて、いつ買えるのかを最初に言う。
-
-    始まったものも、イベントの最中はここに残す。
-    以前は開始と同時にこの枠から消していたが、それは逆だった。
-    いちばん見せたいのは「いま実際に買える特価」であって、
-    始まった瞬間に221件のフィードへ紛れ込ませては、探せなくなる。
-    セールが終わるか、イベントの期間が終われば、自然に消える。
-
-    該当が無い日は、枠ごと出さない。空の箱を置いておかない。
-    """
-    ev = active_kaimawari_event()
-    # 開催中でなくても、これから来るイベントの商品なら、その名前で出す。
-    # 中身がスーパーSALEの目玉なのに「まもなく始まる特価」と名乗るのは、
-    # 実態と合わないし、いちばん強い言葉を捨てている。
-    coming = upcoming_event()
-
-    def in_event(p):
-        """このイベントで始まった（始まる）特価かどうか。
-
-        イベントの開始12時間前から終了までに売り出しが始まるものを、
-        そのイベントの特価とみなす。売り出しの予告は前日から出るため。
-        """
-        if not ev:
-            return False
-        st = (p.get("startTime") or "").strip()
-        if not st:
-            return False
-        try:
-            t = datetime.strptime(st[:16], "%Y-%m-%d %H:%M")
-            a = datetime.strptime(ev["start"][:16], "%Y-%m-%d %H:%M")
-            b = datetime.strptime((ev.get("end") or ev["start"])[:16], "%Y-%m-%d %H:%M")
-        except (ValueError, KeyError):
-            return False
-        return a - timedelta(hours=12) <= t <= b
-
-    soon = [p for p in products if not sale_over(p)
-            and (sale_soon(p) or in_event(p))]
-    if not soon:
-        return ""
-
-    def key(p):
-        # 買えるものを先に。次に開始の早い順。
-        return (1 if sale_soon(p) else 0, (p.get("startTime") or ""),
-                -discount_rate(p))
-    soon.sort(key=key)
-
-    n_live = sum(1 for p in soon if not sale_soon(p))
-    head = (("%s 開催中" % ev["name"]) if (ev and n_live)
-            else sale_starts_label(soon[0]))
-
-    # この一覧が、来るイベントの品ぞろえかどうか。
-    # 開始48時間前から終わりまでに売り出すものを、そのイベントの品とみなす。
-    ev_name = None
-    if coming:
-        a, b, _es, cev = coming
-        n_in = 0
-        for p in soon:
-            st = (p.get("startTime") or "").strip()
-            try:
-                t = datetime.strptime(st[:16], "%Y-%m-%d %H:%M")
-            except ValueError:
-                continue
-            if a - timedelta(hours=48) <= t <= b:
-                n_in += 1
-        # 半分以上がそのイベントのものなら、イベント名で出す
-        if soon and n_in * 2 >= len(soon):
-            ev_name = cev["name"]
-
-    def row(p):
-        """1件ぶんの行。カードだと縦を使いすぎる。
-
-        件数が少ない日でも枠だけが大きく残っていた。
-        写真・時刻・名前・値段を1行に収めて、必要な高さだけ使う。
-        """
-        d = discount_rate(p)
-        cat = cats.get(p["category"], {})
-        when = sale_starts_label(p) if sale_soon(p) else "いま買えます"
-        return (
-            '<a class="soon-row" href="/p/{id}/">'
-            '<img class="soon-thumb" src="{img}" alt="" loading="lazy" '
-            'width="56" height="56">'
-            '<span class="soon-main">'
-            '<span class="soon-when-in">{ic}{when}</span>'
-            '<span class="soon-name">{t}</span>'
-            '</span>'
-            '<span class="soon-fig">'
-            '<span class="soon-yen"><i>¥</i>{pr}</span>'
-            '{off}{ship}'
-            '</span></a>'
-        ).format(
-            id=e(p["id"]), img=e(p["image"]), t=e(short_name(p["title"])),
-            ic=icons.use("calendar", "ic-when"), when=e(when),
-            pr=yen(p["price"]),
-            off=('<span class="soon-off-s">%d%%OFF</span>' % d) if d else "",
-            # 送料込みは、黙っていないで言う。
-            # 「¥1,000 ＋送料」は、それだけで買えない値段に見える。
-            # 実際は14件中ほとんどが送料込みだった。
-            # 言わなければ伝わらないし、言えば強みになる。
-            ship=('<span class="soon-ship-in">送料込み</span>' if free_shipping(p)
-                  else '<span class="soon-ship-s">＋送料</span>'),
-            cic=icons.use(cat.get("icon", "tag")))
-
-    # 開始時刻ごとにまとめず、1本の一覧にする。
-    # 各行に時刻を書けば、見出しで分ける必要がない。
-    # 見出しを挟むぶんだけ縦が伸びていた。
-    soon.sort(key=lambda p: (1 if sale_soon(p) else 0, p.get("startTime") or ""))
-    n_soon = sum(1 for p in soon if sale_soon(p))
-
-    # 最初の何件かは、たたまずに必ず見せる。
-    #
-    # 全部をたたむと、件数が増えても見出し1行しか見えない。
-    # 件数が少ないときは寂しく、多いときは中身が伝わらない。
-    # 上を開いたまま、あふれたぶんだけ「ほかに◯件」に入れる。
-    SHOWN = 5
-    head_rows = "".join(row(p) for p in soon[:SHOWN])
-    rest = soon[SHOWN:]
-    more = ""
-    if rest:
-        more = ("""
-  <details class="soon-more">
-    <summary class="soon-more-sum">ほかに%d件<span class="soon-toggle" aria-hidden="true"></span></summary>
-    <div class="soon-list">%s</div>
-  </details>""" % (len(rest), "".join(row(p) for p in rest)))
-
-    return """
-<section class="soon wrap-narrow">
-  <div class="soon-sum">
-    <span class="soon-sum-main">
-      <span class="soon-eyebrow">{ic}{head}</span>
-      <span class="soon-title-main">{title}<b class="soon-count">{n}件</b></span>
-    </span>
-  </div>
-  <p class="soon-note">{note}</p>
-  <div class="soon-list">{rows}</div>
-  {more}
-  {kwlink}
-</section>
-""".format(ic=icons.use("bolt"), head=e(head), n=len(soon), rows=head_rows,
-           more=more,
-           kwlink=('<a class="soon-kw" href="/kaimawari/">%s買いまわりに使えるものを見る%s</a>'
-                   % (icons.use("check", "ic-km"),
-                      icons.use("arrow-right", "ic-arrow"))) if ev else "",
-           title=(("%sで始まる特価" % ev_name) if (ev_name and not n_live)
-                  else ("このセールの特価" if n_live else "まもなく始まる特価")),
-           note=("「いま買えます」のものは、押せばその値段で買えます。"
-                 "数量限定のものは早いもの勝ちです。"
-                 "開始前のものは、その時刻まで買えません。"
-                 if n_live else
-                 "開始まではまだ買えません。時間になったら楽天のページで"
-                 "値段が変わります。数量限定のものは、早いもの勝ちになります。"))
-
-
-def render_gacha():
-    """トップのガチャ。中身はJSが /assets/data/feed.json から引く。
-
-    174件を上から順に眺めるのは骨が折れる。
-    レバーを引いて1件出すだけの遊びだが、売場を回る入口になる。
-    """
-    return """
-<div class="wrap-narrow"><section class="gacha">
-  <p class="gacha-eyebrow">{ic}TODAY'S PICK</p>
-  <h2 class="gacha-title">今日の一発、引いてみます？</h2>
-  <p class="gacha-note">掲載中の特価から、1件だけ出します。</p>
-  <div class="gacha-slot" id="gachaSlot"></div>
-  <button class="btn-gacha" type="button" id="gachaGo">{ic2}まわす</button>
-  <br><a class="gacha-more" href="/quiz/">値段あてクイズであそぶ{arrow}</a>
-</section></div>
-""".format(ic=icons.use("capsule"), ic2=icons.use("capsule", "ic-capsule"),
-           arrow=icons.use("arrow-right", "ic-arrow"))
+def _render_top(cfg, base, products, cats, *, units, live, active_tab, page,
+                total_pages, pager_base, title, desc, path, robots, jsonld):
+    fetched = last_fetch_date(products)
+    entries = deadline_entries()
+    start = (page - 1) * TOP_PER_PAGE
+    chunk = units[start: start + TOP_PER_PAGE]
+    cards = []
+    for kind, p in chunk:
+        cards.append(render_unit(kind, p, cats, live))
+    stream = "".join(cards)
+    content = (
+        '<div class="v-page">'
+        + render_top_hero(len(live), fetched)
+        + (render_campaign_carousel(entries) if page == 1 else "")
+        + render_notice(live)
+        + '<div class="v-layout">'
+        + render_top_sidebar(entries, cfg.get("_guides") or [])
+        + '<div class="v-main">'
+        + render_top_tabs(active_tab)
+        + '<section class="v-stream" id="stream">%s</section>' % stream
+        + render_pager_v11(page, total_pages, pager_base)
+        + '</div></div></div>'
+    )
+    return page_shell(
+        cfg, base, title=title,
+        ogtitle="%s ── %s" % (cfg["site"]["name"], cfg["site"]["tagline"]),
+        desc=desc, path=path, content=content, jsonld=jsonld,
+        bodyclass="v11", robots=robots, products=products, cats=cats,
+        scripts=CAROUSEL_JS if page == 1 and len(TOPICS) > 1 else "")
 
 
 def build_index(cfg, base, products, cats):
-    per = cfg["feed"]["perPage"]
-    fetched = last_fetch_date(products)
-    # 終わったセールは特価フィードに並べない。
+    # 終わったセール・始まっていないセールは特価フィードに並べない。
     # 商品ページは残す（Xに貼ったリンクが死なないように）。
     live = [p for p in products if not sale_over(p) and not sale_soon(p)]
-    ordered = sorted(live, key=feed_order, reverse=True)
-    total_pages = max(1, -(-len(ordered) // per))
-    # 買いまわりの印はイベントの最中だけ出す。
-    # 何も無い日に「買いまわり対象」と書いても意味がない。
-    km = shop_totals(products) if active_kaimawari_event() else None
-
-    counts = {}
-    for p in products:
-        counts[p["category"]] = counts.get(p["category"], 0) + 1
-
-    today = datetime.now(JST).strftime("%-m月%-d日")
-    best = max((discount_rate(p) for p in live), default=0)
-    # 値下がりを検知した商品の数。0なら「割引率」で並べ替えても何も起きないので、
-    # そのボタン自体を出さない（押しても動かないボタンは壊れて見える）。
-    n_off = sum(1 for p in products if discount_rate(p) >= 5)
-    if best:
-        third = "{ic}最大{best}%OFF".format(ic=icons.use("bolt"), best=best)
-    else:
-        third = "{ic}値下がりを監視中".format(ic=icons.use("bolt"))
-
+    _ordered, _pick, units = top_units(live)
+    total_pages = max(1, -(-len(units) // TOP_PER_PAGE))
     site_url = cfg["site"]["url"].rstrip("/")
 
     for page in range(1, total_pages + 1):
-        chunk = ordered[(page - 1) * per: page * per]
-        cards = "".join(render_card(p, cats, fetched, km) for p in chunk)
         path = "/" if page == 1 else "/page/%d/" % page
-
-        head = """
-<section class="hero wrap-narrow">
-  <h1 class="hero-title">二度見する安さ、<br><span class="hl">ぜんぶここに。</span></h1>
-  <p class="hero-lead">{lead}</p>
-  <div class="hero-meta">
-    <span>{ic_cal}{today}更新</span>
-    <span>{ic_box}掲載{count}件</span>
-    <span>{third}</span>
-  </div>
-</section>
-""".format(lead=e(cfg["site"]["description"]), today=today, count=len(ordered),
-           third=third, ic_cal=icons.use("calendar"), ic_box=icons.use("box"))
-        if page > 1:
-            head = """
-<section class="page-head wrap-narrow">
-  <p class="page-eyebrow">{ic}特価フィード</p>
-  <h1 class="page-title">特価フィード</h1>
-  <p class="page-lead">{count}件を新しい順に。いまは{page}ページ目です。</p>
-</section>
-""".format(ic=icons.use("bolt"), count=len(ordered), page=page)
-
-        content = head + """
-{evbar}
-{soon}
-{featured}
-{gacha}
-<div class="layout wrap-wide">
-<div class="layout-main">
-  <div class="toolbar">
-    <p class="result-count"><b id="resultCount">{count}</b> 件の特価</p>
-    <div class="sorter" role="group" aria-label="並べ替え">
-      <button type="button" data-sort="new" aria-pressed="true">新着</button>
-      {off_sort}
-      <button type="button" data-sort="cheap" aria-pressed="false">安い順</button>
-    </div>
-  </div>
-  <div class="pricebar" role="group" aria-label="価格で絞り込む">
-    <button type="button" data-price="all" aria-pressed="true">すべて</button>
-    <button type="button" data-price="0-1000" aria-pressed="false">〜1,000円</button>
-    <button type="button" data-price="1000-2000" aria-pressed="false">1,000〜2,000円</button>
-    <button type="button" data-price="2000-3000" aria-pressed="false">2,000〜3,000円</button>
-    <button type="button" data-price="3000-" aria-pressed="false">3,000円〜</button>
-  </div>
-  <div class="feed" id="feed">{cards}</div>
-  {pager}
-  <p class="affiliate-note">当サイトは楽天アフィリエイトプログラムに参加しています。価格・在庫・送料は取得時点のもので、変動します。購入前に楽天市場の商品ページで最新の条件をご確認ください。</p>
-</div>
-{sidebar}
-</div>
-""".format(count=len(products), cards=cards,
-           evbar=(render_event_banner() if page == 1 else ""),
-           soon=(render_soon(products, cats) if page == 1 else ""),
-           featured=(render_featured(cfg) if page == 1 else ""),
-           gacha=(render_gacha() if page == 1 else ""),
-           off_sort=('<button type="button" data-sort="off" aria-pressed="false">割引率</button>'
-                     if n_off else ''),
-           pager=render_pager(page, total_pages, "/"),
-           sidebar=render_sidebar(cfg, products, cats))
-
         links = ""
         if page > 1:
             links += '<link rel="prev" href="%s">' % (
                 site_url + ("/" if page == 2 else "/page/%d/" % (page - 1)))
         if page < total_pages:
             links += '<link rel="next" href="%s/page/%d/">' % (site_url, page + 1)
-
         jsonld = jsonld_block({
             "@context": "https://schema.org", "@type": "WebSite",
             "name": cfg["site"]["name"], "url": cfg["site"]["url"],
             "description": cfg["site"]["description"], "inLanguage": "ja",
         }) + links
-
         title = "%s｜%s" % (cfg["site"]["name"], cfg["site"]["tagline"])
         desc = cfg["site"]["description"]
         if page > 1:
             title = "特価フィード %dページ目｜%s" % (page, cfg["site"]["name"])
             desc = "%s（%dページ目）" % (cfg["site"]["description"], page)
-
-        html = page_shell(
-            cfg, base, title=title,
-            ogtitle="%s ── %s" % (cfg["site"]["name"], cfg["site"]["tagline"]),
-            desc=desc, path=path, content=content,
-            chipbar=render_chipbar(cfg), jsonld=jsonld, products=products, cats=cats,
+        html = _render_top(
+            cfg, base, products, cats, units=units, live=live,
+            active_tab="new", page=page, total_pages=total_pages,
+            pager_base="/", title=title, desc=desc, path=path,
             robots=('<meta name="robots" content="noindex,follow">' if page > 1 else ""),
-        )
+            jsonld=jsonld)
         write("index.html" if page == 1 else "page/%d/index.html" % page, html)
+
+
+def build_off_index(cfg, base, products, cats):
+    """タブ「値下がり順」の静的ページ（/off/ と /off/page/N/）。
+
+    並べ替えビューなので全ページ noindex,follow（sitemap にも入れない）。
+    PICK UP は先頭に据え置き、残り（フィード全件）を OFF 順に並べ替える。
+    """
+    live = [p for p in products if not sale_over(p) and not sale_soon(p)]
+    ordered, pick, base_units = top_units(live)
+    # TOP のストリーム（PICK UP＋フィード）から PICK UP を除いたユニットを、
+    # 値下がり幅の大きい順に並べ替える（試作の「値下がり順」タブと同じ対象）。
+    rest_units = [(k, p) for k, p in base_units if k != "pick"]
+    rest_units.sort(
+        key=lambda kp: (median_off(kp[1])[1], kp[1].get("reviewCount") or 0),
+        reverse=True)
+    units = ([("pick", pick)] if pick is not None else []) + rest_units
+    total_pages = max(1, -(-len(units) // TOP_PER_PAGE))
+    site_url = cfg["site"]["url"].rstrip("/")
+
+    for page in range(1, total_pages + 1):
+        path = "/off/" if page == 1 else "/off/page/%d/" % page
+        links = ""
+        if page > 1:
+            links += '<link rel="prev" href="%s">' % (
+                site_url + ("/off/" if page == 2 else "/off/page/%d/" % (page - 1)))
+        if page < total_pages:
+            links += '<link rel="next" href="%s/off/page/%d/">' % (site_url, page + 1)
+        title = "値下がり順の特価｜%s" % cfg["site"]["name"]
+        desc = "検証を通った特価を、値下がり幅（価格履歴の中央値比）の大きい順に並べたページです。"
+        if page > 1:
+            title = "値下がり順の特価 %dページ目｜%s" % (page, cfg["site"]["name"])
+            desc = "%s（%dページ目）" % (desc, page)
+        html = _render_top(
+            cfg, base, products, cats, units=units, live=live,
+            active_tab="off", page=page, total_pages=total_pages,
+            pager_base="/off/", title=title, desc=desc, path=path,
+            robots='<meta name="robots" content="noindex,follow">',
+            jsonld=links)
+        write("off/index.html" if page == 1 else "off/page/%d/index.html" % page, html)
 
 
 def build_categories(cfg, base, products, cats):
@@ -1325,6 +1443,253 @@ def build_categories(cfg, base, products, cats):
             ))
 
 
+_PRICE_HISTORY = None
+
+
+def price_history():
+    """price_history.json（自前で観測した価格の記録）を読み込む。"""
+    global _PRICE_HISTORY
+    if _PRICE_HISTORY is None:
+        path = os.path.join(ROOT, "price_history.json")
+        _PRICE_HISTORY = load("price_history.json") if os.path.exists(path) else {}
+    return _PRICE_HISTORY
+
+
+def history_facts(p):
+    """その商品の価格履歴から、ページに出せる事実だけを組み立てる。
+
+    数字はすべて price_history.json の実測から取る。履歴が無い・
+    観測が1件だけなら None を返し、ページ側は何も出さない。
+    言えることと言えないことを分けるのが役目:
+      - 中央値・最安は全観測から機械的に出せるので常に出せる
+      - 「いつからこの価格か」は、履歴の最後の観測価格がいまの価格と
+        一致しているときだけ言える（後ろ向きに同じ価格が続く範囲＝
+        現在価格の開始日）。一致しなければ、開始日は主張しない
+    """
+    raw = price_history().get(p["id"]) or []
+    obs = []
+    for dstr, val in raw:
+        try:
+            d = datetime.strptime(dstr, "%Y-%m-%d").date()
+        except (ValueError, TypeError):
+            continue
+        obs.append((d, int(val)))
+    obs.sort(key=lambda x: x[0])
+    if len(obs) < 2:
+        return None
+
+    prices = [v for _d, v in obs]
+    cur = int(p["price"])
+    median = statistics.median(prices)
+    drop_pct = (median - cur) / median * 100 if median else 0.0
+
+    facts = {
+        "obs": obs,
+        "n": len(obs),
+        "first": obs[0][0],
+        "last": obs[-1][0],
+        "median": median,
+        "min_price": min(prices),
+        "max_price": max(prices),
+        "drop_pct": drop_pct,
+        "is_lowest": cur == min(prices),
+        "drop_start": None,   # 現在価格が始まった日（言えるときだけ入る）
+        "prev_price": None,   # 下落直前の価格
+        "days_held": None,    # 現在価格のまま観測が続いた日数（両端含む）
+        "flat_since_start": False,  # 観測開始から一度も値段が変わっていない
+    }
+
+    if obs[-1][1] == cur:
+        i = len(obs)
+        while i > 0 and obs[i - 1][1] == cur:
+            i -= 1
+        facts["days_held"] = (obs[-1][0] - obs[i][0]).days + 1
+        if i == 0:
+            facts["flat_since_start"] = True
+        else:
+            facts["drop_start"] = obs[i][0]
+            facts["prev_price"] = obs[i - 1][1]
+    return facts
+
+
+def _pct_label(x):
+    """75.3 → '75.3'、50.0 → '50'。"""
+    return "%g" % round(x, 1)
+
+
+def render_history_chart(f):
+    """価格履歴のステップグラフ（インラインSVG）。
+
+    観測は日次のスナップショットで、価格は階段状に動く。
+    点を直線で結ぶと「なだらかに下がった」ように見えて実測と違うので、
+    横線→縦線のステップで描く。描画範囲は全期間。ただし観測期間が
+    90日を超えるものは直近90日に絞る（それより古い動きは
+    今回の値段の根拠として弱い）。
+    """
+    obs = f["obs"]
+    if (f["last"] - f["first"]).days > 90:
+        from datetime import timedelta as _td
+        cut = f["last"] - _td(days=90)
+        obs = [o for o in obs if o[0] >= cut] or obs[-2:]
+    d0, d1 = obs[0][0], obs[-1][0]
+    vals = [v for _d, v in obs]
+    vmax, vmin = max(vals), min(vals)
+
+    W, H = 660, 250
+    x_l, x_r = 56.0, 652.0        # 左は価格ラベル置き場
+    y_t, y_b = 34.0, 208.0        # 上は現在価格ラベル、下は日付ラベル置き場
+    span_days = max((d1 - d0).days, 1)
+
+    def X(d):
+        return x_l + (x_r - x_l) * (d - d0).days / span_days
+
+    def Y(v):
+        if vmax == vmin:
+            return (y_t + y_b) / 2
+        return y_b - (y_b - y_t) * (v - vmin) / (vmax - vmin)
+
+    # ステップ状のパス
+    pts = [(X(d), Y(v)) for d, v in obs]
+    path = ["M %.1f,%.1f" % pts[0]]
+    for (px, py), (cx, cy) in zip(pts, pts[1:]):
+        if cx > px:
+            path.append("H %.1f" % cx)
+        if cy != py:
+            path.append("V %.1f" % cy)
+    line = "".join(path)
+    area = line + " L %.1f,%.1f L %.1f,%.1f Z" % (pts[-1][0], y_b, pts[0][0], y_b)
+
+    out = ['<svg class="hist-chart" viewBox="0 0 %d %d" width="100%%" role="img" '
+           'aria-label="価格の推移グラフ">' % (W, H)]
+    # 最安と最高の水準線＋価格ラベル
+    for v, anchor_y in ((vmax, Y(vmax)), (vmin, Y(vmin))):
+        out.append('<line class="hist-grid" x1="%.0f" y1="%.1f" x2="%.0f" y2="%.1f"/>'
+                   % (x_l, anchor_y, x_r, anchor_y))
+        out.append('<text class="hist-t" x="%.0f" y="%.1f" text-anchor="end">¥%s</text>'
+                   % (x_l - 6, anchor_y + 4, yen(v)))
+    out.append('<path class="hist-area" d="%s"/>' % area)
+    out.append('<path class="hist-line" d="%s"/>' % line)
+
+    # 下落の開始点（言えるときだけ）
+    if f["drop_start"] and f["prev_price"] and f["prev_price"] > 0:
+        mx, my = X(f["drop_start"]), Y(vals[-1])
+        out.append('<circle class="hist-dot" cx="%.1f" cy="%.1f" r="5"/>' % (mx, my))
+        mid_y = (Y(f["prev_price"]) + my) / 2
+        if mx < 240:
+            out.append('<text class="hist-t" x="%.1f" y="%.1f">%d/%dに下落</text>'
+                       % (mx + 10, mid_y + 4, f["drop_start"].month, f["drop_start"].day))
+        else:
+            out.append('<text class="hist-t" x="%.1f" y="%.1f" text-anchor="end">%d/%dに下落</text>'
+                       % (mx - 10, mid_y + 4, f["drop_start"].month, f["drop_start"].day))
+
+    # 終端: いまの観測価格
+    last_v = vals[-1]
+    now_txt = "いま ¥%s%s" % (yen(last_v), "（過去最安）" if last_v == f["min_price"] else "")
+    out.append('<text class="hist-t-now" x="%.0f" y="%.1f" text-anchor="end">%s</text>'
+               % (x_r, max(Y(last_v) - 10, 14), now_txt))
+    # 始端の価格
+    out.append('<text class="hist-t" x="%.1f" y="%.1f">¥%s</text>'
+               % (pts[0][0] + 2, max(Y(vals[0]) - 8, 14), yen(vals[0])))
+    # 日付ラベル
+    out.append('<text class="hist-t" x="%.0f" y="%.0f">%02d/%02d</text>'
+               % (x_l, H - 6, d0.month, d0.day))
+    out.append('<text class="hist-t" x="%.0f" y="%.0f" text-anchor="end">%02d/%02d</text>'
+               % (x_r, H - 6, d1.month, d1.day))
+    out.append("</svg>")
+    return "".join(out)
+
+
+def render_history_block(p):
+    """商品ページの「価格の推移」ブロック。価格ブロック＋グラフ＋事実文。
+
+    数字の出どころは price_history.json のみ。店の言う参考価格とは
+    完全に別の物として置く（ここは当サイトが観測した記録）。
+    """
+    f = history_facts(p)
+    if not f:
+        return ""
+    cur = int(p["price"])
+
+    badges = []
+    if f["is_lowest"]:
+        badges.append('<span class="hist-badge is-low">過去最安</span>')
+    if f["drop_start"] and f["prev_price"] and f["prev_price"] > cur and f["days_held"]:
+        badges.append('<span class="hist-badge is-drop">%02d/%02dから値下げ中（%d日目）</span>'
+                      % (f["drop_start"].month, f["drop_start"].day, f["days_held"]))
+    if free_shipping(p):
+        badges.append('<span class="hist-badge is-free">送料無料</span>')
+    badge_html = '<div class="hist-badges">%s</div>' % "".join(badges) if badges else ""
+
+    ship_txt = "送料無料" if free_shipping(p) else "送料は別途かかります"
+    summary = ('<p class="hist-summary">いま <b>¥%s</b>（%s）／'
+               '当サイトが観測した価格の中央値 ¥%s から <b>−%s%%</b></p>'
+               % (yen(cur), ship_txt, yen(f["median"]), _pct_label(f["drop_pct"])))
+
+    fact = ""
+    if f["drop_start"] and f["prev_price"] and f["prev_price"] > cur:
+        ds = f["drop_start"]
+        if f["days_held"] and f["days_held"] >= 2:
+            fact = ('<p class="hist-fact">%d月%d日に ¥%s から ¥%s へ下落。'
+                    'それから %d 日間、この価格のままです。</p>'
+                    % (ds.month, ds.day, yen(f["prev_price"]), yen(cur), f["days_held"]))
+        else:
+            fact = ('<p class="hist-fact">%d月%d日に ¥%s から ¥%s へ下落しました。</p>'
+                    % (ds.month, ds.day, yen(f["prev_price"]), yen(cur)))
+    elif f["flat_since_start"]:
+        fact = ('<p class="hist-fact">観測を始めた %d月%d日 から、ずっとこの価格です。</p>'
+                % (f["first"].month, f["first"].day))
+
+    note = ('<p class="hist-note">当サイトが %d月%d日〜%d月%d日 に %d 回観測した価格の記録です。</p>'
+            % (f["first"].month, f["first"].day, f["last"].month, f["last"].day, f["n"]))
+
+    return ('<h2 class="section-title">価格の推移</h2>'
+            '<div class="hist">%s%s%s%s%s</div>'
+            % (badge_html, summary, render_history_chart(f), fact, note))
+
+
+def render_criteria_block(p):
+    """商品ページの「掲載基準と、この商品の実測」。
+
+    5ゲートの文言は掲載基準ポップアップと同一。各ゲートに添える実測値は
+    products.json と価格履歴（history_facts）の実測だけから作る。
+    算出できない項目は数値を出さず、文言のみにする（創作禁止）。
+    """
+    f = history_facts(p)
+    smalls = ["", "", "", "", ""]
+    if f:
+        span = (f["last"] - f["first"]).days + 1
+        smalls[0] = "実測：%s〜%sに%d回観測（%d日間）" % (
+            f["first"].strftime("%-m月%-d日"), f["last"].strftime("%-m月%-d日"),
+            f["n"], span)
+        if f["is_lowest"]:
+            smalls[1] = "実測：いまの価格 ¥%s は、観測期間の最安です" % yen(p["price"])
+        else:
+            smalls[1] = "実測：観測期間の最安は ¥%s です" % yen(f["min_price"])
+        smalls[2] = "実測：中央値 ¥%s に対して −%s%%（現在 ¥%s）" % (
+            yen(f["median"]), _pct_label(f["drop_pct"]), yen(p["price"]))
+    if p.get("reviewAverage"):
+        smalls[3] = "実測：評価 ★%s・レビュー %s件" % (
+            e(p["reviewAverage"]), yen(p.get("reviewCount", 0)))
+    smalls[4] = ("実測：送料無料です" if free_shipping(p)
+                 else "実測：送料は別途かかります")
+    gates = [
+        "価格履歴を30日以上、観測している",
+        "いまの価格が、観測期間で最安",
+        "中央値より −20%以上 安い",
+        "レビュー100件以上・評価 ★4.2以上",
+        "送料無料で、「なぜお得か」を一言で言える",
+    ]
+    rows = "".join(
+        '<div class="v-gate"><span class="v-gate-no">%d</span>'
+        '<span class="v-gate-text">%s%s</span></div>'
+        % (i + 1, g, ("<small>%s</small>" % smalls[i]) if smalls[i] else "")
+        for i, g in enumerate(gates))
+    return ('<h2 class="section-title">掲載基準と、この商品の実測</h2>'
+            '<div class="v-trust">%s'
+            '<p class="v-criteria-def">％OFFと比較価格（取消線）の比較元は、'
+            '価格履歴30日以上の<strong>中央値</strong>です。</p></div>' % rows)
+
+
 def build_products(cfg, base, products, cats):
     fetched = last_fetch_date(products)
     by_cat = {}
@@ -1380,22 +1745,27 @@ def build_products(cfg, base, products, cats):
                 "" if not is_stale(p, fetched) else "<br><small>それ以降は変わっている可能性があります</small>")))
         spec = "".join("<tr><th>%s</th>%s</tr>" % (k, v) for k, v in rows)
 
-        # 関連商品（同カテゴリの他商品）
-        rel_items = [x for x in by_cat.get(p["category"], []) if x["id"] != p["id"]]
-        rel_items.sort(key=lambda x: -discount_rate(x))
-        rel = "".join(
-            '<a class="rel" href="/p/{id}/"><div class="rel-media">'
-            '<img src="{img}" alt="{alt}" loading="lazy" width="300" height="300"></div>'
-            '<div class="rel-body"><p class="rel-title">{t}</p>'
-            '<p class="rel-price">¥{pr}</p></div></a>'.format(
-                id=e(x["id"]), img=e(x["image"]), alt=e(x["title"]),
-                t=e(x["title"]), pr=yen(x["price"]))
-            for x in rel_items[:cfg["feed"]["relatedCount"]]
-        )
+        # 関連商品（同カテゴリ）。ページが生成される商品だけをリンクする。
+        # 厳格モードでは公開対象が選定分だけなので、対象外の商品を関連に
+        # 出すと、存在しないページへのリンク（死にリンク）になる。
+        # 候補は products.json 全体から取り、生成されるものを優先して
+        # 並べたうえで、生成されるものだけに絞る。
+        _all = load("products.json")
+        _all = _all["products"] if isinstance(_all, dict) else _all
+        generated_ids = {x["id"] for x in products}
+        rel_cands = [x for x in _all
+                     if x.get("category") == p["category"] and x["id"] != p["id"]
+                     and not x.get("hidden")]
+        rel_cands.sort(key=lambda x: (x["id"] not in generated_ids, -discount_rate(x)))
+        # 関連は TOP と同じストリームカードで出す（最大6件）。
+        # 候補の絞り込みは従来どおり「生成される商品だけ」なのでリンク切れは起きない。
+        rel_items = [x for x in rel_cands
+                     if x["id"] in generated_ids][:6]
+        rel = "".join(render_stream_card(x, cats, "検証済み") for x in rel_items)
         rel_block = ""
         if rel:
             rel_block = ('<h2 class="section-title">同じ売場のもの</h2>'
-                         '<div class="related">%s</div>' % rel)
+                         '<div class="v-stream v-stream-rel">%s</div>' % rel)
 
         cap = ""
         if p.get("caption"):
@@ -1485,6 +1855,10 @@ def build_products(cfg, base, products, cats):
   <h2 class="section-title">商品情報</h2>
   <table class="spec"><tbody>{spec}</tbody></table>
 
+  {hist_block}
+
+  {criteria_block}
+
   {desc_block}
 
   <p class="affiliate-note">当サイトは楽天アフィリエイトプログラムに参加しています。上のリンクから購入があった場合、当サイトが紹介料を受け取ることがあります。</p>
@@ -1506,7 +1880,9 @@ def build_products(cfg, base, products, cats):
                if is_stale(p, fetched)
                else "値段は毎日見にいってます。買う前に楽天でも確かめてね（%s時点）" % e(p.get("lastSeen") or "")),
            url=e(p.get("affiliateUrl") or "#"),
-           spec=spec, arrow=icons.use("arrow-right", "ic-arrow"),
+           spec=spec, hist_block=render_history_block(p),
+           criteria_block=render_criteria_block(p),
+           arrow=icons.use("arrow-right", "ic-arrow"),
            desc_block=desc_block, rel_block=rel_block,
            share_top=render_share(p, cfg, "top"),
            watch=render_watch_btn(p, "detail"),
@@ -1569,7 +1945,7 @@ def build_products(cfg, base, products, cats):
             path="/p/%s/" % p["id"], content=content, ogtype="article",
             chipbar=render_chipbar(cfg, active=p["category"]),
             jsonld=jsonld_block(prod_ld) + jsonld_block(crumb_ld),
-            bodyclass="has-sticky-cta",
+            bodyclass="has-sticky-cta v11",
             ogimage=(site_url + p["image"]) if p["image"].startswith("/") else p["image"],
             products=products, cats=cats,
         ))
@@ -2242,7 +2618,14 @@ def build_sitemap(cfg, products):
     urls = [(site_url + "/", now, "1.0", "daily"),
             (site_url + "/categories/", now, "0.6", "weekly")]
     per = cfg["feed"]["perPage"]
-    total = max(1, -(-len(products) // per))
+    # TOP は v11 移植で 15件/ページ（TOP_PER_PAGE）になり、並ぶのは
+    # PICK UP＋フィードのユニット列（全件ユニーク）。/page/N/ は build_index と
+    # 同じユニット数から出す（単一集計でないと、実在するページが sitemap から
+    # 漏れたり、無いページを載せたりする）。
+    # 値下がり順（/off/）は並べ替えビューで noindex のため sitemap に入れない。
+    _live = [p for p in products if not sale_over(p) and not sale_soon(p)]
+    _ordered, _pick, _units = top_units(_live)
+    total = max(1, -(-len(_units) // TOP_PER_PAGE))
     for n in range(2, total + 1):
         urls.append((site_url + "/page/%d/" % n, now, "0.5", "daily"))
     for c in cfg["categories"]:
@@ -2254,6 +2637,9 @@ def build_sitemap(cfg, products):
         urls.append((site_url + "/p/%s/" % p["id"], p.get("postedAt", now), "0.7", "weekly"))
     for g in (cfg.get("_guides") or []):
         urls.append((site_url + "/guide/%s/" % g["slug"], g.get("updated", now), "0.9", "monthly"))
+    for ev in EVENT_PAGES:
+        urls.append((site_url + "/event/%s/" % ev["slug"],
+                     event_lastmod(ev["slug"]), "0.8", "weekly"))
     urls.append((site_url + "/quiz/", now, "0.6", "weekly"))
     urls.append((site_url + "/kaimawari/", now, "0.7", "daily"))
     for slug in ("about", "contact", "privacy", "disclaimer", "terms"):
@@ -2732,7 +3118,28 @@ def main():
 
     unknown = {p["category"] for p in products} - set(cats)
     if unknown:
-        raise SystemExit("config.json に無いカテゴリが products.json にあります: %s" % ", ".join(sorted(unknown)))
+        # 厳格版 config（2026-11-09）で廃止したカテゴリ（books / car / sports）は、
+        # products.json には残したまま、ビルド対象からだけ外す。
+        # 以前は SystemExit で止めていたが、カテゴリ廃止が通常運用になったため、
+        # 止めずに落として件数を知らせる。
+        n_dropped_cat = sum(1 for p in products if p["category"] in unknown)
+        products = [p for p in products if p["category"] not in unknown]
+        print("config.json に無いカテゴリの商品 %d件をビルド対象から外しました: %s"
+              % (n_dropped_cat, ", ".join(sorted(unknown))))
+
+    # 厳格選定（改築 2026-11-09）: curated.json があれば、公開対象を
+    # select_strict.py の掲載分だけに絞る。「掲載 = 推薦」のフィードを
+    # トップ・カテゴリ・商品ページ・sitemap 等すべての生成の前提にする。
+    # curated.json を消せば従来どおり全件ビルドに戻る。
+    curated_path = os.path.join(ROOT, "curated.json")
+    if os.path.exists(curated_path):
+        curated = load("curated.json")
+        keep_ids = {en["id"] for en in curated.get("feed", [])}
+        n_before = len(products)
+        products = [p for p in products if p["id"] in keep_ids]
+        cfg["_strict"] = True
+        print("厳格選定: 公開対象を %d件 → %d件に絞りました（curated.json）"
+              % (n_before, len(products)))
 
     build_icon_sprite()
     ensure_placeholders(cfg, products)
@@ -2741,7 +3148,9 @@ def main():
 
     guides = load_guides()
     cfg["_guides"] = guides
+    build_events()
     build_index(cfg, base, products, cats)
+    build_off_index(cfg, base, products, cats)
     build_guides(cfg, base, products, cats, guides)
     build_categories(cfg, base, products, cats)
     build_products(cfg, base, products, cats)

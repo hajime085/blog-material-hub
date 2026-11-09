@@ -105,7 +105,9 @@
       if (evs.length && ds < today) cls += ' is-done';
       if (evs.some(function (e) { return e.status === '予想'; })) cls += ' is-guess';
       if (five) cls += ' is-five';
-      cells += '<span class="' + cls + '">' + d + '</span>';
+      // 数字は .cal-d で包む。5と0のつく日は CSS でこの輪を丸く囲む
+      // （点だと小さくて分かりにくい、という指摘で丸に変えた）。
+      cells += '<span class="' + cls + '"><span class="cal-d">' + d + '</span></span>';
     }
 
     // 一覧に出すのはセールとマラソンだけ。
@@ -130,19 +132,29 @@
       return end + 12 * 3600000 >= Date.now();
     }).sort(function (a, b) { return parseJst(a.start) - parseJst(b.start); });
 
-    var list = upcoming.slice(0, 3).map(function (ev) {
+    // DOM には最大8件まで出す。幅が足りる文脈では右列のスクロールで
+    // 全部見せ、細いサイドバーでは CSS が4件目以降を隠して従来どおり
+    // 3件に収める（並びは開始順なので、隠れるのは先の予定から）。
+    var list = upcoming.slice(0, 8).map(function (ev) {
       var a = parseJst(ev.start), b = parseJst(ev.end || ev.start);
       var live = Date.now() >= a && Date.now() <= b;
       // 日をまたぐかどうかで数える。今夜20時開始を「あと1日」と言わない。
       var startDay = (ev.start || '').slice(0, 10);
+      var endDay = (ev.end || ev.start || '').slice(0, 10);
       var days2 = Math.round(
         (parseJst(startDay + ' 00:00') - parseJst(today + ' 00:00')) / 86400000);
+      // 締切（kind=deadline）の当日・期間中は「開催中」と言わない。
+      // 単日なら「今日まで」、お届け期間のような幅のあるものは「期間中」。
+      var liveLabel = '開催中';
+      if (ev.kind === 'deadline') {
+        liveLabel = (startDay === endDay) ? '今日まで' : '期間中';
+      }
       return '<li class="cal-ev ev-' + (ev.kind || 'other') + (live ? ' is-live' : '') + '">' +
         '<p class="cal-ev-name">' + esc(ev.name) +
           (ev.status === '予想' ? '<span class="cal-guess">予想</span>' : '') +
         '</p>' +
         '<p class="cal-ev-when">' + fmt(ev.start, true) + ' 〜 ' + fmt(ev.end, true) +
-          (live ? '<b class="cal-live">開催中</b>'
+          (live ? '<b class="cal-live">' + liveLabel + '</b>'
                 : (Date.now() > b ? '<span class="cal-done">終了</span>'
                    : days2 === 0 ? '<span class="cal-in">今日から</span>'
                    : days2 === 1 ? '<span class="cal-in">明日から</span>'
@@ -153,7 +165,14 @@
       '</li>';
     }).join('');
 
+    // 構造は「左＝月グリッド（見出し＋凡例）／右＝今日の通知＋予定一覧」。
+    // 幅が足りる文脈では CSS のコンテナクエリで2カラムになり、右列は
+    // 左列と同じ高さで中だけスクロールする。細いサイドバーでは
+    // そのまま縦に積む（cal-main → cal-side の順はそのまま読む順）。
+    // 注記はどちらの形でも下に全幅で出す。
     host.innerHTML =
+      '<div class="cal-cols">' +
+      '<div class="cal-main">' +
       '<div class="cal-head">' +
         '<button class="cal-nav" type="button" data-mv="-1" aria-label="前の月">‹</button>' +
         '<span class="cal-title">' + y + '年 ' + (mo + 1) + '月</span>' +
@@ -167,11 +186,16 @@
       '<p class="cal-legend">' +
         '<span class="cal-key ev-sale"></span>スーパーSALE' +
         '<span class="cal-key ev-marathon"></span>マラソン' +
+        '<span class="cal-key ev-deadline"></span>締切' +
         '<span class="cal-key is-five"></span>5と0のつく日' +
       '</p>' +
+      '</div>' +
+      '<div class="cal-side"><div class="cal-side-scroll">' +
       todayNote(events, today) +
       (list ? '<ul class="cal-list">' + list + '</ul>'
             : '<p class="cal-none">' + (past ? 'この月のイベントはありません。' : '予定が入っていません。') + '</p>') +
+      '</div></div>' +
+      '</div>' +
       '<p class="cal-note">日程は楽天の発表によります。' +
       '「予想」は過去の傾向からの見込みで、変わることがあります。</p>';
   }

@@ -1569,7 +1569,7 @@ def main():
     # ここも同じ形をしている。--wach と打てば見張りのつもりで巡回が走り、
     # products.json を書き換える。
     known = {"--featured", "--event", "--genres", "--seed", "--watch",
-             "--dry-run", "--scheduled", "--force"}
+             "--dry-run", "--scheduled", "--force", "--daily", "--weekly"}
     unknown = [a for a in args if a.startswith("-") and a not in known]
     if unknown:
         sys.exit("知らない指定です: %s\n使えるのは: %s"
@@ -1599,6 +1599,14 @@ def main():
     cats = [c for c in cfg["categories"] if not only or c["slug"] in only]
     if only and not cats:
         sys.exit("該当するカテゴリがありません: %s" % ", ".join(sorted(only)))
+    # 厳格版 config の cadence（daily/weekly）対応。--daily / --weekly を付けた
+    # ときだけ、その cadence のカテゴリに絞る（cron 側で毎日/週次を呼び分ける）。
+    # cadence 未指定のカテゴリは daily 扱い。指定が無ければ従来どおり全カテゴリ。
+    if "--daily" in args or "--weekly" in args:
+        want_cadence = "daily" if "--daily" in args else "weekly"
+        cats = [c for c in cats if c.get("cadence", "daily") == want_cadence]
+        if not cats:
+            sys.exit("cadence=%s のカテゴリがありません" % want_cadence)
 
     existing_doc = load_json("products.json", {}) or {}
     existing = {p["id"]: p for p in existing_doc.get("products", [])}
