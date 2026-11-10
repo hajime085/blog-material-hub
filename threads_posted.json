@@ -908,25 +908,10 @@
     "tip:07",
     "tip:04",
     "feature:cake:2026-11-30",
-    "feature:osechi:2026-11-30"
+    "feature:osechi:2026-11-30",
+    "tip:31"
   ],
   "log": [
-    {
-      "key": "tip:14",
-      "id": "18130923013612459",
-      "at": "2026-10-14 20:31",
-      "kind": "tip",
-      "slot": 20,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
     {
       "key": "tip:07",
       "id": "18129666736769324",
@@ -5697,6 +5682,21 @@
       "category": null,
       "logic_version": null,
       "link": "reply",
+      "link_arm": null
+    },
+    {
+      "key": "tip:31",
+      "id": "17966022012229314",
+      "at": "2026-11-10 19:20",
+      "kind": "tip",
+      "slot": 19,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "ask_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
       "link_arm": null
     }
   ]
