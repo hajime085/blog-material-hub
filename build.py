@@ -42,6 +42,10 @@ EVENT_PAGES = [
      "desc": "早割・予約の締切カレンダーと、レビュー実績で選んだ楽天市場のおせち10選。"},
     {"slug": "cake", "title": "クリスマスケーキ特集",
      "desc": "予約・早割の締切カレンダーと、レビュー実績で選んだ楽天市場のクリスマスケーキ10選。"},
+    {"slug": "blackfriday", "title": "ブラックフライデー特集",
+     "desc": "楽天ブラックフライデー（11/20〜11/27・予想）に向け、価格履歴の実測で「待たなくていい」商品と「様子見」商品を分けた検証型特集。"},
+    {"slug": "winter", "title": "冬物・防寒特集",
+     "desc": "裏起毛ボトムス・ニットから加湿器・ヒーターまで、レビュー実績と価格履歴で選んだ冬の防寒10選。"},
 ]
 
 
@@ -832,6 +836,22 @@ STRIP_ORDER = ["kitchen", "kaden", "food", "beauty", "pc", "fashion"]
 # events.json の kind=deadline（deadlineKey = 各エントリの key）から引くので、
 # 締切が過ぎれば表示も消える。
 TOPICS = [
+    {"slug": "blackfriday", "img": "/assets/img/event/blackfriday/pick-01.jpg",
+     "imgAlt": "D-クリア ファンデーション",
+     "badge": "セール × 検証",
+     "title": "ブラックフライデー2026｜価格履歴で「待つ／待たない」を分ける",
+     "copy": "いま期間最安値の商品は待たなくていい。最安より上の商品は様子見。セールの看板ではなく、最大60日の価格履歴の実測で分けました。",
+     "chips": "採用10件　待たなくていい7件／様子見3件",
+     "deadlineKey": "blackfriday-2026", "chip": False,
+     "revFmt": "開始 %s（予想）"},
+    {"slug": "winter", "img": "/assets/img/event/winter/pick-01.jpg",
+     "imgAlt": "裏起毛デニム風ワイドパンツ",
+     "badge": "冬物 × 防寒",
+     "title": "冬物・防寒｜裏起毛と部屋の暖かさを実績で選ぶ10選",
+     "copy": "裏起毛ボトムス・ニット、充電式カイロ、加湿器とヒーター。レビュー実績と価格履歴で確かめた冬の10件です。",
+     "chips": "採用10件　裏起毛5件／暖房・加湿5件",
+     "deadlineKey": "winter-none", "chip": False,
+     "revFmt": ""},
     {"slug": "cake", "img": "/assets/img/event/cake/pick-01.jpg",
      "imgAlt": "ルタオ クリスマスケーキ2個セット",
      "badge": "クリスマス × ケーキ",
