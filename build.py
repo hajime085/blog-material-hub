@@ -736,7 +736,6 @@ def page_shell(cfg, base, *, title, desc, path, content, ogtype="website",
         "IC_CLOSE": icons.use("close"),
         "IC_HOME": icons.use("home"),
         "IC_GRID": icons.use("grid"),
-        "IC_QUIZ": icons.use("quiz"),
         "IC_HEART": icons.use("heart"),
         "CSS_HREF": asset_url("/assets/css/style.css"),
         "JS_SRC": asset_url("/assets/js/app.js"),
@@ -2270,46 +2269,6 @@ def build_feed_json(cfg, products, cats):
             ensure_ascii=False, separators=(",", ":")))
 
 
-def build_quiz(cfg, base, products, cats):
-    """値段あてクイズのページ。
-
-    このサイトのテーマは「安さを見抜く」なので、遊びも同じ筋にしてある。
-    出題データは商品一覧と同じ feed.json をJSが引く。
-    サーバー側の記録は持たない（自己最高だけ端末に残す）。
-    """
-    site_url = cfg["site"]["url"].rstrip("/")
-    content = """
-<section class="page-head wrap-narrow">
-  <p class="page-eyebrow">{ic}あそぶ</p>
-  <h1 class="page-title">これ、いくら？</h1>
-  <p class="page-lead">写真と商品名だけ見て、値段を当ててください。全5問です。
-  出題はすべて、いま実際に掲載している商品から選んでいます。</p>
-</section>
-
-<div class="layout wrap-wide">
-<div class="layout-main">
-  <div id="quiz" data-sprite="{sprite}" data-url="{site}">
-    <div class="q-card"><p class="q-ask">読み込んでいます…</p></div>
-  </div>
-  <p class="affiliate-note">当サイトは楽天アフィリエイトプログラムに参加しています。
-  出題に使っている価格は取得時点のもので、変動します。
-  購入前に楽天市場の商品ページで最新の条件をご確認ください。</p>
-</div>
-{sidebar}
-</div>
-""".format(ic=icons.use("quiz"), sprite=e(icons.sprite_href()), site=e(site_url),
-           sidebar=render_sidebar(cfg, products, cats))
-
-    write("quiz/index.html", page_shell(
-        cfg, base,
-        title="これ、いくら？｜値段あてクイズ",
-        desc="写真と商品名だけ見て、楽天の特価商品の値段を当てるクイズです。全5問。"
-             "出題はすべて、ヤスミルが実際に掲載している商品から選んでいます。",
-        path="/quiz/",
-        content=content,
-        products=products, cats=cats, bodyclass="v11",
-        scripts='<script src="%s" defer></script>' % asset_url("/assets/js/quiz.js")))
-
 
 def build_kaimawari(cfg, base, products, cats):
     """買いまわりに使えるものだけを集めたページ。
@@ -2677,7 +2636,6 @@ def build_sitemap(cfg, products):
     for ev in EVENT_PAGES:
         urls.append((site_url + "/event/%s/" % ev["slug"],
                      event_lastmod(ev["slug"]), "0.8", "weekly"))
-    urls.append((site_url + "/quiz/", now, "0.6", "weekly"))
     urls.append((site_url + "/kaimawari/", now, "0.7", "daily"))
     for slug in ("about", "contact", "privacy", "disclaimer", "terms"):
         urls.append((site_url + "/%s/" % slug, now, "0.3", "monthly"))
@@ -3192,7 +3150,6 @@ def main():
     build_categories(cfg, base, products, cats)
     build_products(cfg, base, products, cats)
     build_static_pages(cfg, base, products, cats)
-    build_quiz(cfg, base, products, cats)
     build_watchlist(cfg, base, products, cats)
     build_kaimawari(cfg, base, products, cats)
     build_postboard(cfg, base, products, cats)
