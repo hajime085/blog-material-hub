@@ -1828,7 +1828,7 @@ def build_products(cfg, base, products, cats):
         detail_off = ('<span class="detail-off">%d%%OFF</span>' % d) if d > 0 else ""
         sidebar = render_sidebar(cfg, products, cats, active=p["category"])
         content = """
-<div class="layout wrap-wide">
+<div class="layout layout-left wrap-wide">
   <div class="layout-main">
   <nav class="breadcrumb" aria-label="パンくず">
     <a href="/">ホーム</a><span class="sep">›</span>

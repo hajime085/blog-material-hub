@@ -339,6 +339,19 @@ a.ticker-item:hover::before { background: #fdeaea; }
   .layout .layout-side > * { flex: 0 0 auto; position: static; }
 }
 
+/* 商品ページだけサイドバーを左に置く（v9・2026-11-10）。
+   TOP（.v-layout）はサイドバー左が確定形だが、.layout は本文→サイドバーの
+   順（PC では右）だった。DOM の順序はスマホ表示（本文→サイドバーの縦積み）
+   と読み上げ順を保つため変えず、PC では列定義と配置で左に寄せる。
+   列幅は .layout の標準（--side）のまま、左右だけを入れ替える。 */
+@media (min-width: 1000px) {
+  .layout-left {
+    grid-template-columns: var(--side) minmax(0, var(--col));
+  }
+  .layout-left .layout-side { grid-column: 1; grid-row: 1; }
+  .layout-left .layout-main { grid-column: 2; grid-row: 1; }
+}
+
 /* サイドバーは追従させない（2026-11-10 furu 決定）。
    sticky で画面に貼り付けると「サイドバーだけ別に動く」感じになり、
    高さが画面を超える場合は下のブロックに届きにくい。
