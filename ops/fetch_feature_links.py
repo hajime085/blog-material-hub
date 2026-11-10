@@ -16,10 +16,12 @@
 
 やり方:
 
-    fetch_rakuten.py の API 接続（認証・間隔・エラー処理）をそのまま借りて、
-    商品コードで 1 件ずつ引き直し、返ってきた affiliateUrl に href を
-    差し替える。認証情報は fetch_rakuten と同じ .env / config.json から
-    読む（このファイルには書かない）。
+    fetch_rakuten.py の仕組み（認証・商品コードの特定・API 接続）をそのまま
+    借りる。URL の末尾（スラッグ）は商品コードとは別物で、そのまま API に
+    渡すと「itemCode is not valid」になる。まず fetch_rakuten の
+    item_code_from_url で数字の商品コードを特定してから引き直し、
+    返ってきた affiliateUrl に href を差し替える。認証情報は
+    fetch_rakuten と同じ .env / config.json から読む（ここには書かない）。
 
     ショップのカテゴリページ（/<shop>/c/...）は「商品」ではないので
     商品 API では引けない。対象外として最後に報告だけする。
@@ -89,13 +91,27 @@ def main():
         print("差し替える商品リンクはありません。")
         return 0
 
+    ctx = (app_id, access_key, aff_id, site_url)
     mapping = {}
     missed = []
     consecutive_fail = 0
-    for i, (url, shop, code) in enumerate(items, 1):
+    for i, (url, shop, slug) in enumerate(items, 1):
         if i > 1:
             time.sleep(fr.REQUEST_INTERVAL)
-        item_code = "%s:%s" % (shop, code)
+        # URL のスラッグは商品コードではない。まず数字のコードを特定する。
+        try:
+            item_code = fr.item_code_from_url(url, ctx)
+        except SystemExit as ex:
+            item_code = None
+            print("  × %d/%d %s（コード特定でエラー: %s）"
+                  % (i, len(items), url, str(ex).splitlines()[0] if str(ex) else "接続失敗"))
+        if not item_code:
+            missed.append((url, "商品コードを特定できない"))
+            consecutive_fail += 1
+            if consecutive_fail >= 3:
+                print("失敗が3回続いたので中断します。")
+                return 1
+            continue
         params = {
             "applicationId": app_id,
             "accessKey": access_key,
@@ -107,7 +123,9 @@ def main():
         try:
             data = fr.api_get(fr.ITEM_API, params, site_url)
         except SystemExit as ex:
-            missed.append((url, "APIエラー: %s" % (ex.code if ex.code else "接続失敗")))
+            msg = str(ex).splitlines()[0] if str(ex) else "接続失敗"
+            missed.append((url, "APIエラー: %s" % msg))
+            print("  × %d/%d %s（APIエラー: %s）" % (i, len(items), item_code, msg))
             consecutive_fail += 1
             if consecutive_fail >= 3:
                 print("APIエラーが3回続いたので中断します。認証情報を確認してください。")
