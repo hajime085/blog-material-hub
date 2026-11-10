@@ -905,25 +905,10 @@
     "schedule:2026-W45-1",
     "tip:26",
     "tip:14",
-    "tip:07"
+    "tip:07",
+    "tip:04"
   ],
   "log": [
-    {
-      "key": "page:kaimawari:2026-10-14",
-      "id": "17989513776070038",
-      "at": "2026-10-14 20:00",
-      "kind": "page",
-      "slot": 20,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "reply",
-      "link_arm": null,
-      "cta_arm": null
-    },
     {
       "key": "tip:02",
       "id": "18157299082508369",
@@ -5688,6 +5673,22 @@
       "at": "2026-11-10 07:20",
       "kind": "tip",
       "slot": 7,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "cta_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "none",
+      "link_arm": null,
+      "cta_arm": null
+    },
+    {
+      "key": "tip:04",
+      "id": "18650874334004132",
+      "at": "2026-11-10 09:20",
+      "kind": "tip",
+      "slot": 9,
       "catchup": false,
       "cap": null,
       "hook_type": null,
