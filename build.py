@@ -2853,6 +2853,25 @@ def check_featured_freshness():
               " featured.txt を入れ替えてください。" % (len(items), len(alive)))
 
 
+def check_event_affiliate_links():
+    """特集ページに、素の楽天リンク（アフィリエイトでない）が残っていないか調べる。
+
+    フィードのリンクは API が affiliateUrl を返すので問題ないが、特集は
+    商品 URL を手で貼って作るため、素の item.rakuten.co.jp リンクが
+    混ざりやすい。踏まれても報酬が入らないので、混ざっていたら警告する。
+    直し方: `python3 ops/fetch_feature_links.py` を実行して差し替える。
+    """
+    import glob as _glob
+    for path in sorted(_glob.glob(os.path.join(ROOT, "event", "*", "index.html"))):
+        with open(path, encoding="utf-8") as f:
+            text = f.read()
+        n = text.count('href="https://item.rakuten.co.jp')
+        if n:
+            slug = os.path.basename(os.path.dirname(path))
+            print("⚠ 特集「%s」にアフィリエイトでない楽天リンクが %d件あります。"
+                  " ops/fetch_feature_links.py を実行してください。" % (slug, n))
+
+
 def check_caption_prices(products):
     """キャプションに書いた金額が、いまの価格と食い違っていないか調べる。
 
@@ -3187,6 +3206,7 @@ def main():
         check_caption_prices(products)
         check_expired_sales(products)
         check_featured_freshness()
+        check_event_affiliate_links()
         check_guide_toc(guides)
         # 決めたことを機械で守らせる。書き置きでは戻ってしまう。
         try:
