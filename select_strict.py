@@ -18,7 +18,7 @@ select_strict.py — ヤスミル (sozaino.com) 改築版の厳格選定モジ�
     1. 価格履歴の観測日数が30日以上
     2. 現在価格が履歴の最安値と一致
     3. 現在価格が履歴中央値から20%以上下落
-    4. レビュー100件以上 かつ 評価4.2以上
+    4. レビュー100件以上 かつ 評価3.8以上
     5. 送料無料（products の tags に '送料無料'。送料専用フィールドはデータに存在しない）
     6. キャプション有り（これだけ落ちたものは caption_needed へ回す）
   構成ルール:
@@ -40,7 +40,7 @@ from pathlib import Path
 MIN_OBS_DAYS = 30          # ゲート1: 観測日数
 MIN_DROP_VS_MEDIAN = 0.20  # ゲート3: 中央値比の下落率
 MIN_REVIEWS = 100          # ゲート4
-MIN_RATING = 4.2           # ゲート4
+MIN_RATING = 3.8           # ゲート4
 FREE_SHIPPING_TAG = "送料無料"  # ゲート5: tags 内の表記
 
 SERIES_JACCARD = 0.42      # シリーズ判定の閾値
@@ -275,7 +275,7 @@ def main() -> int:
     gate("ゲート3: 中央値比 -20%以上",
          lambda m: m["drop_vs_median"] is not None
          and m["drop_vs_median"] >= MIN_DROP_VS_MEDIAN)
-    gate("ゲート4: レビュー100件以上・評価4.2以上",
+    gate("ゲート4: レビュー100件以上・評価3.8以上",
          lambda m: m["review_count"] >= MIN_REVIEWS and m["review_average"] >= MIN_RATING)
     gate("ゲート5: 送料無料", lambda m: m["free_shipping"])
 
