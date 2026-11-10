@@ -1,0 +1,327 @@
+diff --git a/.github/workflows/watch.yml b/.github/workflows/watch.yml
+index cd1f416..e05cf78 100644
+--- a/.github/workflows/watch.yml
++++ b/.github/workflows/watch.yml
+@@ -157,37 +157,17 @@ jobs:
+             echo "::warning::直していない警告があります。実行の要約を見てください"
+           fi
+ 
++      # 反映の本体は ops/publish_watch.sh に切り出した（2026-11-10）。
++      # push が競合で弾かれたら、最新の土台に乗り直して取得とビルドから
++      # やり直す回復経路を持つ。理由はスクリプト冒頭、
++      # 検証は ops/test_publish_watch.sh にある。
++      # やり直しで取得を回すので、この段にも楽天の鍵が要る。
+       - name: 変化があれば反映する
+-        run: |
+-          git config user.name "yasumiru-bot"
+-          git config user.email "bot@users.noreply.github.com"
+-          if [ "$(cat .run_changed 2>/dev/null)" = "no" ]; then
+-            echo "見に行ったが、伝える変化はなかった。反映しない。"
+-            echo "（価格の確認日が変わるその日の1回目は、動きが無くても反映する）"
+-            git checkout -- . || true
+-            exit 0
+-          fi
+-          if git diff --quiet && git diff --cached --quiet; then
+-            echo "変化なし。何もしません。"
+-            exit 0
+-          fi
+-          git add -A
+-          git commit -F .run_summary.txt
+-          # 手元からの push と重なったときのために、取り込んでから送る。
+-          #
+-          # 2026-09-08: 9/7 11:20 の失敗はここだった（0.3分で終了）。
+-          # 私が手元から続けて push していた時間帯と重なっている。
+-          # 5秒おきに3回では、押し合いが続くと抜けられない。
+-          # 待ち時間を延ばして回数も増やす。集めた値段を捨てるほうが惜しい。
+-          for i in 1 2 3 4 5 6; do
+-            git pull --rebase --autostash origin main && git push origin main && exit 0
+-            echo "やり直します ($i)"
+-            git rebase --abort 2>/dev/null || true
+-            sleep $((i * 10))
+-          done
+-          echo "::warning::記録を送れませんでした。次の回が取り込みます"
+-          python3 ops/record_failure.py .run_summary.txt "記録の送信"
+-          exit 1
++        env:
++          RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
++          RAKUTEN_ACCESS_KEY: ${{ secrets.RAKUTEN_ACCESS_KEY }}
++          RAKUTEN_AFFILIATE_ID: ${{ secrets.RAKUTEN_AFFILIATE_ID }}
++        run: bash ops/publish_watch.sh "python3 fetch_rakuten.py --watch && python3 build.py"
+ 
+       - name: 実行結果を残す
+         if: always()
+diff --git a/ops/publish_watch.sh b/ops/publish_watch.sh
+new file mode 100755
+index 0000000..ef49e19
+--- /dev/null
++++ b/ops/publish_watch.sh
+@@ -0,0 +1,106 @@
++#!/usr/bin/env bash
++# 変化をサイトへ反映する（コミットして push する）。watch.yml の
++# 「変化があれば反映する」段から呼ばれる。単体でテストできるよう、
++# 段の中身をここへ切り出した（ops/test_publish_watch.sh が相手）。
++#
++# 2026-11-10: run #409 の失敗を受けて、回復経路を足した。
++# 価格の取得は正常に終わっていたのに、反映の段で落ちた。
++# 実行中に割り込んだ手作業の push（★3.8 の全面再生成）と同じ
++# 生成ファイル（index.html など）を双方が作り直していたため、
++# こちらの自動コミットを乗せ直す（rebase）たびに同じ場所で衝突し、
++# 6回繰り返して諦めた（便の警告「記録を送れませんでした」）。
++# 衝突はタイミングではなく内容で決まる。同じ土台で繰り返しても直らない。
++#
++# だから、乗せ直しの衝突を検知したら、古い土台の自動コミットは捨てて、
++# 最新の origin/main に乗り直し、取得とビルドからやり直して送る。
++# やり直しは最大2回まで。それでも送れなければ、従来どおり
++# 警告＋ops/failures.md への記録で終わる（exit 1）。
++# 競合が無いときの動きは、従来の段と変えていない。
++#
++# 使い方: ops/publish_watch.sh "やり直しのときに実行するコマンド"
++#   watch.yml からは取得（fetch_rakuten.py --watch）と
++#   ビルド（build.py）を渡す。テストでは中身を差し替えられる。
++#
++# PUBLISH_WATCH_SLEEP: リトライ間隔の倍率（既定10＝従来どおり i*10 秒）。
++#   テストでは 0 にして待たない。
++
++set -u
++cd "$(dirname "$0")/.."
++
++REDO_CMD="${1:-}"
++SLEEP_BASE="${PUBLISH_WATCH_SLEEP:-10}"
++MAX_REDO=2
++
++git config user.name "yasumiru-bot"
++git config user.email "bot@users.noreply.github.com"
++
++give_up() {
++  # $1=警告文 $2=記録の見出し。従来どおり、記録して失敗で終わる。
++  echo "::warning::$1"
++  python3 ops/record_failure.py .run_summary.txt "$2"
++  exit 1
++}
++
++commit_changes() {
++  # 戻り値: 0=コミットした / 1=反映するものがない（正常に終えてよい）
++  if [ "$(cat .run_changed 2>/dev/null)" = "no" ]; then
++    echo "見に行ったが、伝える変化はなかった。反映しない。"
++    echo "（価格の確認日が変わるその日の1回目は、動きが無くても反映する）"
++    git checkout -- . || true
++    return 1
++  fi
++  if git diff --quiet && git diff --cached --quiet; then
++    echo "変化なし。何もしません。"
++    return 1
++  fi
++  git add -A
++  git commit -F .run_summary.txt
++  return 0
++}
++
++try_push() {
++  # 従来どおり、取り込んでから送る。
++  # 戻り値: 0=送れた / 1=送れなかった（押し合いなど） /
++  #         2=乗せ直しが衝突した（この土台では何度やっても直らない）
++  local i
++  for i in 1 2 3 4 5 6; do
++    if git pull --rebase --autostash origin main; then
++      if git push origin main; then
++        return 0
++      fi
++    elif [ -d .git/rebase-merge ] || [ -d .git/rebase-apply ]; then
++      git rebase --abort 2>/dev/null || true
++      echo "乗せ直しが衝突しました。古い土台のままでは直りません。"
++      return 2
++    fi
++    echo "やり直します ($i)"
++    sleep $((i * SLEEP_BASE))
++  done
++  return 1
++}
++
++redo=0
++while :; do
++  commit_changes || exit 0
++  rc=0
++  try_push || rc=$?
++  [ "$rc" = 0 ] && exit 0
++  redo=$((redo + 1))
++  if [ "$redo" -gt "$MAX_REDO" ] || [ -z "$REDO_CMD" ]; then
++    give_up "記録を送れませんでした。次の回が取り込みます" "記録の送信"
++  fi
++  echo "最新の土台に乗り直して、取得からやり直します（$redo 回目）"
++  if ! git fetch origin main; then
++    sleep $((2 * SLEEP_BASE))
++    git fetch origin main \
++      || give_up "記録を送れませんでした。次の回が取り込みます" "記録の送信"
++  fi
++  # 古い土台の自動コミットと、その生成物を捨てる。
++  # .run_changed / .run_summary.txt は .gitignore 側なので残るが、
++  # このあとの取得が作り直す。
++  git reset --hard origin/main
++  if ! bash -c "$REDO_CMD"; then
++    give_up "やり直しの取得／ビルドが落ちました。記録を送れませんでした" \
++      "記録の送信（やり直し）"
++  fi
++done
+diff --git a/ops/test_publish_watch.sh b/ops/test_publish_watch.sh
+new file mode 100755
+index 0000000..773d730
+--- /dev/null
++++ b/ops/test_publish_watch.sh
+@@ -0,0 +1,157 @@
++#!/usr/bin/env bash
++# ops/publish_watch.sh の再現テスト。ネットワークも楽天APIも使わない。
++#
++# ローカルに bare リモートを作り、run #409 と同じ状況を再現する:
++#   土台Aで自動コミット → リモートが「同じ生成ファイルを作り直す
++#   手動 push」で前進 → 旧来の乗せ直し（rebase）は衝突する。
++# 新しい publish_watch.sh が、最新 main の上に乗り直して
++# 「手動の変更が残り、価格の更新が乗る」形で着地することを確かめる。
++# ついでに、競合が無い通常経路と、やり直し自体が落ちたときの
++# 記録（ops/failures.md）も確かめる。
++#
++# 使い方: bash ops/test_publish_watch.sh
++
++set -u
++REPO_ROOT=$(cd "$(dirname "$0")/.." && pwd)
++TMP=$(mktemp -d)
++trap 'rm -rf "$TMP"' EXIT
++export PUBLISH_WATCH_SLEEP=0
++
++NG=0
++ok()   { echo "OK  $1"; }
++ng()   { echo "NG  $1"; NG=$((NG + 1)); }
++check() { # check <説明> <条件コマンド...>
++  local desc="$1"; shift
++  if "$@" >/dev/null 2>&1; then ok "$desc"; else ng "$desc"; fi
++}
++
++# ---- 土台を用意する -------------------------------------------------
++# ops のスクリプトと regen.sh は、本番と同じく最初から tracked にしておく。
++# （自動コミットにしか無いファイルは、乗り直しの reset で消える。
++#   本番の fetch_rakuten.py / build.py / ops/* は tracked なので消えない）
++git init --bare -q -b main "$TMP/remote.git"
++git clone -q "$TMP/remote.git" "$TMP/seed"
++cd "$TMP/seed"
++git config user.name seed; git config user.email seed@example
++mkdir -p assets/data p/demo ops
++cp "$REPO_ROOT/ops/publish_watch.sh" ops/
++cp "$REPO_ROOT/ops/record_failure.py" ops/
++cat > regen.sh <<'EOS'
++#!/usr/bin/env bash
++# 取得（fetch_rakuten --watch）とビルド（build.py）の代わり。
++# 外の世界の値段 external.txt から、データと生成物を作り直す。
++set -eu
++cd "$(dirname "$0")"
++P=$(cat external.txt)
++printf 'price=%s\n' "$P" > prices.txt
++printf 'gen price=%s\n' "$P" > index.html
++printf '{"price":%s}\n' "$P" > assets/data/feed.json
++printf 'page price=%s\n' "$P" > p/demo/index.html
++printf 'auto: 価格の見張り %s\n' "$P" > .run_summary.txt
++printf 'yes\n' > .run_changed
++EOS
++printf '.run_summary.txt\n.run_changed\nexternal.txt\n' > .gitignore
++printf 'price=1000\n'        > prices.txt
++printf 'gen v1 price=1000\n' > index.html
++printf '{"v":1,"price":1000}\n' > assets/data/feed.json
++printf 'page v1\n'           > p/demo/index.html
++printf 'サイトの手書きメモ\n' > site-note.txt
++git add -A; git commit -qm "初期状態"
++git push -q origin main
++
++# watch 側クローン（土台は clone で揃う）
++make_watch() { # $1=ディレクトリ名
++  git clone -q "$TMP/remote.git" "$TMP/$1"
++}
++
++origin_file() { # リモート main のファイル中身
++  git -C "$TMP/seed" fetch -q origin
++  git -C "$TMP/seed" show "origin/main:$1"
++}
++file_is()  { [ "$(origin_file "$1")" = "$2" ]; }
++file_has() { origin_file "$1" | grep -q "$2"; }
++parent_is_manual() { [ "$(top_parent)" = "$MANUAL_SHA" ]; }
++subject_is_auto900() { [ "$(top_subject)" = 'auto: 価格の見張り 900' ]; }
++top_parent() {
++  git -C "$TMP/seed" fetch -q origin
++  git -C "$TMP/seed" rev-parse origin/main^
++}
++top_subject() {
++  git -C "$TMP/seed" fetch -q origin
++  git -C "$TMP/seed" log -1 --format=%s origin/main
++}
++
++# ---- シナリオ1: 競合 → 回復して着地する ------------------------------
++make_watch watch1
++cd "$TMP/watch1"
++echo 900 > external.txt
++bash regen.sh                      # 土台Aで取得＋ビルド済みの状態
++
++# その最中に、手作業の push が同じ生成ファイルを作り直して前進する
++git clone -q "$TMP/remote.git" "$TMP/manual"
++cd "$TMP/manual"
++git config user.name human; git config user.email human@example
++printf 'gen v2 price=1000\n'        > index.html
++printf '{"v":2,"price":1000}\n'     > assets/data/feed.json
++printf '手作業で足したもの\n'       > manual.txt
++printf 'サイトの手書きメモ（手動で追記）\n' >> site-note.txt
++git add -A; git commit -qm "手動: 全面再生成"
++git push -q origin main
++MANUAL_SHA=$(git rev-parse HEAD)
++
++cd "$TMP/watch1"
++OUT=$(bash ops/publish_watch.sh "bash regen.sh" 2>&1)
++RC=$?
++echo "$OUT" | sed 's/^/  [watch1] /'
++[ "$RC" = 0 ] && ok "シナリオ1: 終了コード0" || ng "シナリオ1: 終了コード0 (rc=$RC)"
++echo "$OUT" | grep -q "衝突"     && ok "シナリオ1: 衝突を検知した" || ng "シナリオ1: 衝突を検知した"
++echo "$OUT" | grep -q "乗り直し" && ok "シナリオ1: 回復経路に入った" || ng "シナリオ1: 回復経路に入った"
++check "シナリオ1: 手動の追加ファイルが残っている" \
++  file_is manual.txt '手作業で足したもの'
++check "シナリオ1: 手動の追記が残っている" \
++  file_has site-note.txt '手動で追記'
++check "シナリオ1: 価格の更新が乗っている" \
++  file_is index.html 'gen price=900'
++check "シナリオ1: prices.txt も新しい値" \
++  file_is prices.txt 'price=900'
++check "シナリオ1: 自動コミットの親が手動コミット" \
++  parent_is_manual
++check "シナリオ1: コミットメッセージは取得の要約" \
++  subject_is_auto900
++
++# ---- シナリオ2: 競合なし（通常経路は従来どおり） ---------------------
++make_watch watch2
++cd "$TMP/watch2"
++echo 800 > external.txt
++bash regen.sh
++OUT=$(bash ops/publish_watch.sh "bash regen.sh" 2>&1)
++RC=$?
++[ "$RC" = 0 ] && ok "シナリオ2: 終了コード0" || ng "シナリオ2: 終了コード0 (rc=$RC)"
++echo "$OUT" | grep -q "乗り直し" \
++  && ng "シナリオ2: 回復経路に入らない" || ok "シナリオ2: 回復経路に入らない"
++check "シナリオ2: 価格の更新が乗っている" \
++  file_is index.html 'gen price=800'
++
++# ---- シナリオ3: やり直し自体が落ちたら、警告＋記録で終わる -----------
++make_watch watch3
++cd "$TMP/watch3"
++echo 700 > external.txt
++bash regen.sh
++git clone -q "$TMP/remote.git" "$TMP/manual3"
++cd "$TMP/manual3"
++git config user.name human; git config user.email human@example
++printf 'gen v3 price=800\n' > index.html
++git add -A; git commit -qm "手動: また作り直し"
++git push -q origin main
++cd "$TMP/watch3"
++OUT=$(bash ops/publish_watch.sh "false" 2>&1)
++RC=$?
++[ "$RC" != 0 ] && ok "シナリオ3: 終了コードが0でない" || ng "シナリオ3: 終了コードが0でない"
++echo "$OUT" | grep -q "::warning::" \
++  && ok "シナリオ3: 警告が出た" || ng "シナリオ3: 警告が出た"
++grep -q "記録の送信（やり直し）" "$TMP/watch3/ops/failures.md" \
++  && ok "シナリオ3: ops/failures.md に記録された" \
++  || ng "シナリオ3: ops/failures.md に記録された"
++
++echo
++if [ "$NG" = 0 ]; then echo "全部 OK"; else echo "NG: $NG 件"; exit 1; fi

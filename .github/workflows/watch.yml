@@ -157,37 +157,17 @@ jobs:
             echo "::warning::直していない警告があります。実行の要約を見てください"
           fi
 
+      # 反映の本体は ops/publish_watch.sh に切り出した（2026-11-10）。
+      # push が競合で弾かれたら、最新の土台に乗り直して取得とビルドから
+      # やり直す回復経路を持つ。理由はスクリプト冒頭、
+      # 検証は ops/test_publish_watch.sh にある。
+      # やり直しで取得を回すので、この段にも楽天の鍵が要る。
       - name: 変化があれば反映する
-        run: |
-          git config user.name "yasumiru-bot"
-          git config user.email "bot@users.noreply.github.com"
-          if [ "$(cat .run_changed 2>/dev/null)" = "no" ]; then
-            echo "見に行ったが、伝える変化はなかった。反映しない。"
-            echo "（価格の確認日が変わるその日の1回目は、動きが無くても反映する）"
-            git checkout -- . || true
-            exit 0
-          fi
-          if git diff --quiet && git diff --cached --quiet; then
-            echo "変化なし。何もしません。"
-            exit 0
-          fi
-          git add -A
-          git commit -F .run_summary.txt
-          # 手元からの push と重なったときのために、取り込んでから送る。
-          #
-          # 2026-09-08: 9/7 11:20 の失敗はここだった（0.3分で終了）。
-          # 私が手元から続けて push していた時間帯と重なっている。
-          # 5秒おきに3回では、押し合いが続くと抜けられない。
-          # 待ち時間を延ばして回数も増やす。集めた値段を捨てるほうが惜しい。
-          for i in 1 2 3 4 5 6; do
-            git pull --rebase --autostash origin main && git push origin main && exit 0
-            echo "やり直します ($i)"
-            git rebase --abort 2>/dev/null || true
-            sleep $((i * 10))
-          done
-          echo "::warning::記録を送れませんでした。次の回が取り込みます"
-          python3 ops/record_failure.py .run_summary.txt "記録の送信"
-          exit 1
+        env:
+          RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
+          RAKUTEN_ACCESS_KEY: ${{ secrets.RAKUTEN_ACCESS_KEY }}
+          RAKUTEN_AFFILIATE_ID: ${{ secrets.RAKUTEN_AFFILIATE_ID }}
+        run: bash ops/publish_watch.sh "python3 fetch_rakuten.py --watch && python3 build.py"
 
       - name: 実行結果を残す
         if: always()
