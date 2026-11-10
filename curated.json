@@ -32,11 +32,11 @@
     },
     {
       "step": "ゲート6: キャプション有り（無しは caption_needed へ）",
-      "remaining": 20
+      "remaining": 21
     },
     {
       "step": "シリーズ圧縮（同ショップ・タイトル類似 0.42 以上）",
-      "remaining": 20
+      "remaining": 21
     },
     {
       "step": "テーマ上限10%適用後",
@@ -333,18 +333,7 @@
       "siblings": []
     }
   ],
-  "caption_needed": [
-    {
-      "id": "r509d25f43",
-      "title": "父の日仕様の訳あり 在庫処分 アウトレット 父の日スリーブ&専用コースター付 究極のビール…",
-      "shop": "お酒の専門店 リカマン楽天市場店",
-      "category": "food",
-      "price": 1599,
-      "drop_pct_vs_median": 20.0,
-      "reviewCount": 437,
-      "reviewAverage": 4.53
-    }
-  ],
+  "caption_needed": [],
   "excluded": {
     "supplement_count": 23,
     "model_specific_count": 15,

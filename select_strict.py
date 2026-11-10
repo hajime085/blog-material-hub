@@ -5,6 +5,8 @@ select_strict.py — ヤスミル (sozaino.com) 改築版の厳格選定モジ�
 
 「掲載 = 推薦」の基準を、既存データ (products.json / price_history.json) に適用する。
 既存スクリプト (fetch_rakuten.py / build.py / threads.py) には一切触れない独立モジュール。
+選定パイプライン本体は evaluate() に切り出してあり、見張り便の自動適用
+(apply_selection.py) も同じ evaluate() を使う（ゲートの正本はここだけ）。
 
 使い方:
     python3 select_strict.py [--products products.json] [--history price_history.json]
@@ -218,18 +220,19 @@ def interleave(clusters: list) -> list:
 
 # ---------------------------------------------------------------- メイン
 
-def main() -> int:
-    ap = argparse.ArgumentParser(description="ヤスミル厳格選定（ドライラン）")
-    here = Path(__file__).resolve().parent
-    ap.add_argument("--products", default=str(here / "products.json"))
-    ap.add_argument("--history", default=str(here / "price_history.json"))
-    ap.add_argument("--out-json", default=str(DEFAULT_OUT_JSON))
-    ap.add_argument("--out-md", default=str(DEFAULT_OUT_MD))
-    args = ap.parse_args()
+def evaluate(products: list, history: dict):
+    """選定パイプライン本体（正本）。CLI のドライランと、見張り便の自動適用
+    (apply_selection.py) の両方がここを使う。ゲートを別実装しないこと。
 
-    products = json.loads(Path(args.products).read_text(encoding="utf-8"))["products"]
-    history = json.loads(Path(args.history).read_text(encoding="utf-8"))
-
+    戻り値: (result, decisions)
+      result: 現行の出力 JSON と同形式（generated_by / total_products /
+              funnel / feed / caption_needed / excluded）
+      decisions: {商品id: {"outcome": ..., "detail": {...}}}
+        outcome は feed / caption_needed / excluded_supplement /
+        excluded_model_specific / gate1..gate5 / series_sibling / theme_cap。
+        落ちた理由をあとから説明するための記録で、result には含めない。
+    """
+    decisions = {}
     funnel = []  # (ステップ名, 残数)
     total = len(products)
     funnel.append(("掲載候補（現行 products.json）", total))
@@ -243,19 +246,22 @@ def main() -> int:
         if kw:
             excluded["supplement"].append({"id": p["id"], "title": p.get("title"),
                                             "matched": kw})
+            decisions[p["id"]] = {"outcome": "excluded_supplement",
+                                  "detail": {"matched": kw}}
             continue
         kw = hit_keyword(text, INK_KEYWORDS)
         if kw:
             excluded["model_specific"].append({"id": p["id"], "title": p.get("title"),
                                                 "matched": kw})
+            decisions[p["id"]] = {"outcome": "excluded_model_specific",
+                                  "detail": {"matched": kw}}
             continue
         pool.append(p)
-    n_excl = len(excluded["supplement"]) + len(excluded["model_specific"])
     funnel.append((f"除外を除く（サプリ系 {len(excluded['supplement'])}件 / "
                    f"型番系 {len(excluded['model_specific'])}件）", len(pool)))
 
     # ---- ゲート ------------------------------------------------------------
-    def gate(name, key_fn):
+    def gate(name, key_fn, outcome):
         nonlocal pool
         kept, dropped = [], []
         for p in pool:
@@ -263,36 +269,60 @@ def main() -> int:
             (kept if key_fn(m) else dropped).append(p)
         funnel.append((name, len(kept)))
         pool = kept
+        for p in dropped:
+            decisions[p["id"]] = {"outcome": outcome,
+                                  "detail": {"metrics": dict(p["_m"])}}
         return dropped
 
     for p in pool:
         p["_m"] = metrics_for(p, history)
         p["_theme"] = theme_of(p)
 
-    gate("ゲート1: 観測30日以上", lambda m: m["obs_days"] >= MIN_OBS_DAYS)
+    gate("ゲート1: 観測30日以上", lambda m: m["obs_days"] >= MIN_OBS_DAYS, "gate1")
     gate("ゲート2: 現在価格 = 履歴最安",
-         lambda m: m["min_price"] is not None and m["current_price"] == m["min_price"])
+         lambda m: m["min_price"] is not None and m["current_price"] == m["min_price"],
+         "gate2")
     gate("ゲート3: 中央値比 -20%以上",
          lambda m: m["drop_vs_median"] is not None
-         and m["drop_vs_median"] >= MIN_DROP_VS_MEDIAN)
+         and m["drop_vs_median"] >= MIN_DROP_VS_MEDIAN, "gate3")
     gate("ゲート4: レビュー100件以上・評価3.8以上",
-         lambda m: m["review_count"] >= MIN_REVIEWS and m["review_average"] >= MIN_RATING)
-    gate("ゲート5: 送料無料", lambda m: m["free_shipping"])
+         lambda m: m["review_count"] >= MIN_REVIEWS and m["review_average"] >= MIN_RATING,
+         "gate4")
+    gate("ゲート5: 送料無料", lambda m: m["free_shipping"], "gate5")
 
     # ゲート6: キャプション（これだけ落ちたものは caption_needed へ）
     caption_needed, passed = [], []
     for p in pool:
         (passed if p["_m"]["has_caption"] else caption_needed).append(p)
     funnel.append(("ゲート6: キャプション有り（無しは caption_needed へ）", len(passed)))
+    for p in caption_needed:
+        decisions[p["id"]] = {"outcome": "caption_needed",
+                              "detail": {"metrics": dict(p["_m"])}}
 
     # ---- 構成ルール ---------------------------------------------------------
     items = [{"product": p, "metrics": p["_m"], "theme": p["_theme"]} for p in passed]
     clusters = cluster_series(items)
     funnel.append((f"シリーズ圧縮（同ショップ・タイトル類似 {SERIES_JACCARD} 以上）",
                    len(clusters)))
+    for c in clusters:
+        for s in c["siblings"]:
+            decisions[s["product"]["id"]] = {
+                "outcome": "series_sibling",
+                "detail": {"rep_id": c["rep"]["product"]["id"],
+                           "rep_title": c["rep"]["product"].get("title"),
+                           "metrics": dict(s["metrics"])}}
+    reps_before = {c["rep"]["product"]["id"]: c for c in clusters}
     capped = apply_theme_cap(clusters)
+    reps_after = {c["rep"]["product"]["id"] for c in capped}
+    for rid, c in reps_before.items():
+        if rid not in reps_after:
+            decisions[rid] = {"outcome": "theme_cap",
+                              "detail": {"theme": c["rep"]["theme"],
+                                         "metrics": dict(c["rep"]["metrics"])}}
     funnel.append(("テーマ上限10%適用後", len(capped)))
     feed_clusters = interleave(capped)
+    for c in feed_clusters:
+        decisions[c["rep"]["product"]["id"]] = {"outcome": "feed", "detail": {}}
 
     # ---- 出力データ ---------------------------------------------------------
     def feed_entry(c):
@@ -345,6 +375,25 @@ def main() -> int:
             "model_specific": excluded["model_specific"],
         },
     }
+    return result, decisions
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description="ヤスミル厳格選定（ドライラン）")
+    here = Path(__file__).resolve().parent
+    ap.add_argument("--products", default=str(here / "products.json"))
+    ap.add_argument("--history", default=str(here / "price_history.json"))
+    ap.add_argument("--out-json", default=str(DEFAULT_OUT_JSON))
+    ap.add_argument("--out-md", default=str(DEFAULT_OUT_MD))
+    args = ap.parse_args()
+
+    products = json.loads(Path(args.products).read_text(encoding="utf-8"))["products"]
+    history = json.loads(Path(args.history).read_text(encoding="utf-8"))
+
+    result, _decisions = evaluate(products, history)
+    total = result["total_products"]
+    funnel = [(f["step"], f["remaining"]) for f in result["funnel"]]
+    excluded = result["excluded"]
 
     out_json = Path(args.out_json)
     out_json.parent.mkdir(parents=True, exist_ok=True)
@@ -386,6 +435,7 @@ def main() -> int:
     lines.append("")
     lines.append("## caption_needed（ゲート1〜5通過・キャプションのみ欠落）")
     lines.append("")
+    caption_needed_out = result["caption_needed"]
     lines.append(f"**{len(caption_needed_out)}件** — キャプションを書けば掲載候補に戻る。"
                  "黙って落とさず別枠で保持。")
     for e in caption_needed_out:
