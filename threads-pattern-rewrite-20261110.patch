@@ -1,0 +1,1415 @@
+diff --git a/.github/workflows/learn.yml b/.github/workflows/learn.yml
+new file mode 100644
+index 0000000..8578348
+--- /dev/null
++++ b/.github/workflows/learn.yml
+@@ -0,0 +1,87 @@
++name: learn
++
++# 成績の測定（learn.py）を毎日1回、自動で回す。
++#
++# 2026-11-10 に設置した。それまでは learn.py は ops/daily.py
++# （手元の手作業）からしか呼ばれておらず、その手順が止まった
++# 2026-10-06 から測定が止まっていた。build の警告
++# 「学びを止めない：成績を測っていません」が付き続けた理由。
++# 測定は読み取りだけ（Threads の insights を見る）で、投稿はしない。
++#
++# 起動は Cloudflare の cron（ops/cron-worker.js）が workflow_dispatch で行う。
++# threads.yml と同じ流儀で、このファイル自体に schedule は書かない。
++
++on:
++  workflow_dispatch:
++
++permissions:
++  contents: write
++
++concurrency:
++  group: learn
++  cancel-in-progress: false
++
++jobs:
++  learn:
++    runs-on: ubuntu-latest
++    timeout-minutes: 40
++    steps:
++      - uses: actions/checkout@v4
++        with:
++          fetch-depth: 0
++
++      - uses: actions/setup-python@v5
++        with:
++          python-version: "3.12"
++
++      - name: 成績を測る
++        id: measure
++        env:
++          THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
++          THREADS_USER_ID: ${{ secrets.THREADS_USER_ID }}
++          TZ: Asia/Tokyo
++        run: python3 learn.py
++
++      - name: 台帳を反映する
++        if: steps.measure.outcome == 'success'
++        env:
++          TZ: Asia/Tokyo
++        run: |
++          set -e
++          git config user.name "github-actions[bot]"
++          git config user.email "github-actions[bot]@users.noreply.github.com"
++          # learn.py が書き換えるのは learnings.json だけ。
++          git add learnings.json
++          if git diff --cached --quiet; then
++            echo "台帳に変化なし"
++            exit 0
++          fi
++          git commit -m "Threadsの成績を測定（learn.py 自動）"
++          for i in 1 2 3 4 5 6; do
++            if git push origin HEAD:main; then
++              echo "反映しました"
++              exit 0
++            fi
++            echo "push が競合しました。再baseします（$i/6）"
++            if ! git pull --rebase origin main; then
++              # 台帳は累積なので、競合したら今回分は捨ててよい。
++              # 明日の測定で同じ数字がまた入る。無理に押し込まない。
++              git rebase --abort || true
++              echo "台帳の反映は明日の測定に回します"
++              exit 0
++            fi
++          done
++          echo "::warning::台帳を反映できませんでした"
++          exit 1
++
++      - name: 失敗を記録する
++        if: failure()
++        env:
++          TZ: Asia/Tokyo
++        run: |
++          python3 ops/record_failure.py learn || true
++          git config user.name "github-actions[bot]"
++          git config user.email "github-actions[bot]@users.noreply.github.com"
++          git add ops/failures.md
++          git diff --cached --quiet || git commit -m "測定の失敗を記録"
++          git push origin HEAD:main || true
+diff --git a/assets/data/feed.json b/assets/data/feed.json
+index 080860b..0511384 100644
+--- a/assets/data/feed.json
++++ b/assets/data/feed.json
+@@ -1 +1 @@
+-[{"id":"red6052d5f","t":"EEIVOL モバイルバッテリー 軽量 薄型 大容量 15000mAh 機内持ち込み ピンク グリーン…","cap":"1,199円のモバイルバッテリー15000mAhが799円。薄型で2台同時充電、送料無料。","mk":3,"c":"pc","ci":"pc","cl":"PC","pr":799,"lp":1199,"d":33,"b":"以前","rc":563,"ra":4.45,"u":null,"img":"https://thumbnail.image.rakuten.co.jp/@0_mall/aiwo/cabinet/10479293/1600x1600-076-01.jpg?_ex=600x600","url":"https://hb.afl.rakuten.co.jp/hgc/g00uhf47.jeifo201.g00uhf47.jeifpbdb/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Faiwo%2Fhyg076-copy%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Faiwo%2Fi%2F10000030%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d","shop":"EVOPOW JAPAN 楽天市場店","tags":["送料無料"],"at":"2026-11-07T11:32:18","et":"","ls":"2026-11-10","pt":[],"mk2":{"ask":"モバイルバッテリー、何mAhのを持ち歩いていますか？","benefits":["2台同時に充電できる"],"body":"2台同時に充電できます。\n色はピンクとグリーンがあります。","cta":"save","features":["15000mAh","薄型・軽量","2台同時充電","機内持ち込み可"],"hook":"15000mAhのモバイルバッテリー、薄型タイプです。","hook_type":"problem","problem":"外出先でスマホの電池が切れると困る","target":"外出先でスマホの電池が切れがちな人","use_case":"外出時の充電"}},{"id":"r1bdf1e95f","t":"≪品質と安心にこだわった≫ 歯ぎしり マウスピース 簡単型取りタイプ 1箱(2ピース)…","cap":"1,500円のマウスピース（簡単型取り）が1,000円。ケース付き。","mk":5,"c":"beauty","ci":"beauty","cl":"美容","pr":1000,"lp":1500,"d":33,"b":"以前","rc":3135,"ra":4.17,"u":null,"img":"https://thumbnail.image.rakuten.co.jp/@0_mall/ashiya/cabinet/dq/mouthpiece2/hgs2-0001.jpg?_ex=600x600","url":"https://hb.afl.rakuten.co.jp/hgc/g00t2xl7.jeifo578.g00t2xl7.jeifpfa7/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fashiya%2F10000005%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fashiya%2Fi%2F10000009%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d","shop":"芦屋品質 楽天市場店","tags":["送料無料"],"at":"2026-11-04T21:29:09","et":"","ls":"2026-11-10","pt":[],"mk2":{"hook_type":"problem","target":"寝ているときの歯ぎしりが気になる人","problem":"歯ぎしりや食いしばりが気になる","use_case":"就寝時","features":["簡単型取りタイプ","1箱2ピース","ケース付き"],"benefits":["自分で型を取って使える"],"hook":"歯ぎしり用のマウスピース、自分で型を取るタイプです。","body":"1箱に2ピース入りで、ケースが付いています。\nナイトガードとも呼ばれるものです。","cta":"none","ask":"歯ぎしりを家族に言われたことがある人、何か使っていますか？"}},{"id":"r841f65348","t":"4/6枚セット シール ボンボンシール ドロップシール セット ぷっくりシール ぷくぷくシール…","cap":"1,980円のぷっくりシール4/6枚セットが490円。立体感のあるデコシール、送料無料。","mk":1,"c":"kitchen","ci":"kitchen","cl":"日用品","pr":490,"lp":1980,"d":75,"b":"以前","rc":1931,"ra":4.66,"u":null,"img":"https://thumbnail.image.rakuten.co.jp/@0_mall/anahaimu/cabinet/12466868/bb02-917.jpg?_ex=600x600","url":"https://hb.afl.rakuten.co.jp/hgc/g00uszc7.jeifo768.g00uszc7.jeifp954/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fanahaimu%2Fbb02%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fanahaimu%2Fi%2F10000434%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d","shop":"あなはいむ店","tags":["送料無料"],"at":"2026-11-04T16:22:15","et":"","ls":"2026-11-10","pt":[],"mk2":{"ask":"シールは、手帳に貼る派ですか？","benefits":["枚数がまとまっている"],"body":"ドロップシールとも呼ばれるタイプ。\n手帳やノート、スマホケースに貼るデコ用です。","cta":"experience","features":["4/6枚セット","立体感のあるデコシール（ぷっくりシール）","送料無料"],"hook":"ぷっくりした立体感のあるシール、4枚か6枚のセットです。","hook_type":"discovery","problem":"デコ用のシールは、枚数が少ないとテーマをそろえる前に終わる","target":"手帳やノートをシールでデコる人","use_case":"手帳・ノート・スマホケースのデコ"}},{"id":"r9598a3d07","t":"ヘアアイロン は アレティ ｜ ストレート カール 2way 髪の負担を抑える 20mm…","cap":"7,490円のアレティの2WAYヘアアイロンが4,980円。20mm、35段階の温度調整、送料無料。","mk":5,"c":"kaden","ci":"kaden","cl":"家電","pr":4980,"lp":7490,"d":34,"b":"以前","rc":13302,"ra":4.49,"u":null,"img":"https://thumbnail.image.rakuten.co.jp/@0_mall/areti/cabinet/i679gd/i679gd.jpg?_ex=600x600","url":"https://hb.afl.rakuten.co.jp/hgc/g00rv6y7.jeifo92b.g00rv6y7.jeifp34c/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fareti%2F10000009%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fareti%2Fi%2F10000009%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d","shop":"Areti(アレティ)楽天市場店","tags":["送料無料"],"at":"2026-11-04T16:21:52","et":"","ls":"2026-11-10","pt":["20mm・2WAY","35段階の温度調整・海外対応"],"mk2":{"ask":"ヘアアイロン、ストレートとカールどっちで使うことが多いですか？","benefits":["1本でストレートとカール"],"body":"温度は35段階、最高230℃まで選べます。\nセラミックコーティングで、海外でも使える対応です。","cta":"experience","features":["ストレート/カール 2WAY","20mm","35段階の温度調整（最高230℃）","セラミックコーティング","海外対応"],"hook":"ストレートとカールの2WAY、20mmのヘアアイロンです。","hook_type":"compare","problem":"ストレート用とカール用で、アイロンを2本持ちにしている","target":"ストレートとカールの両方をやる人","use_case":"毎朝のスタイリング"}},{"id":"r99dc0d242","t":"[大袋]とろりんスープ昆布と海藻[50杯分] 200g×1袋 選べる2種（プレーン・うめ味)…","cap":"3,160円のとろりんスープ昆布50杯分が1,580円。200gの大袋で、味は2種から選べる。送料無料。","mk":5,"c":"food","ci":"food","cl":"食品","pr":1580,"lp":3160,"d":50,"b":"以前","rc":5531,"ra":4.71,"u":null,"img":"https://thumbnail.image.rakuten.co.jp/@0_mall/konbu-genzouya/cabinet/04433867/261104/thum_520025.jpg?_ex=600x600","url":"https://hb.afl.rakuten.co.jp/hgc/g00rhas7.jeifo7d7.g00rhas7.jeifpa72/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkonbu-genzouya%2F520025%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fkonbu-genzouya%2Fi%2F10000200%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d","shop":"昆布専門問屋 源蔵屋","tags":["送料無料"],"at":"2026-11-04T11:21:44","et":"2026-11-11 01:59","ls":"2026-11-10","pt":[],"mk2":{"ask":"昆布のスープ、飲んだことある人いますか？","benefits":["お湯で作るスープの素"],"body":"200g入りで、味はプレーンとうめ味の2種から選べます。\n昆布専門の問屋のものです。","cta":"experience","features":["50杯分・200gの大袋","プレーン・うめ味の2種から選べる","昆布専門問屋 源蔵屋"],"hook":"昆布のスープ、50杯分の大袋です。","hook_type":"scene","problem":"汁物を一から作るのは手間な日がある","target":"汁物を手軽に足したい人","use_case":"食事の汁物"}},{"id":"r8550b30d9","t":"くまもとラーメン たっぷり 6人前 送料無料 くまもと らーめん 6食セット 生麺 とんこつラーメン…","cap":"2,560円のくまもとラーメン6食分が1,280円。生麺のとんこつ、送料込み。","mk":4,"c":"food","ci":"food","cl":"食品","pr":1280,"lp":2560,"d":50,"b":"以前","rc":1784,"ra":4.4,"u":null,"img":"https://thumbnail.image.rakuten.co.jp/@0_mall/kumamoto-food/cabinet/item/ramen/r_ramen001_15.jpg?_ex=600x600","url":"https://hb.afl.rakuten.co.jp/hgc/g00qovc7.jeifo5b6.g00qovc7.jeifpa50/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkumamoto-food%2F10002744%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fkumamoto-food%2Fi%2F10002744%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d","shop":"【 くまもと風土 】","tags":["送料無料"],"at":"2026-11-04T11:21:44","et":"","ls":"2026-11-10","pt":[],"mk2":{"hook_type":"scene","target":"家でラーメンを食べたい人","problem":"夜、急にとんこつが食べたくなる","use_case":"週末の昼、夜食","features":["生麺 6食セット","とんこつ","熊本","送料込み"],"benefits":["まとめて置いておける"],"hook":"夜中に急にとんこつが食べたくなる日、ある。","body":"熊本のとんこつラーメン、生麺で6食分です。\n一度に届くので、食べたい日にすぐ作れます。送料込み。","cta":"empathy","ask":"夜食にラーメンを食べる人、いますか？"}},{"id":"r845a962d3","t":"お試し3袋 鶏の炭火焼き 100g×3袋 国産鶏肉100％ 自社製造 宮崎名物 無添加 塩味 レトルト…","cap":"1,460円の鶏の炭火焼き100g×3袋が1,000円。国産鶏肉100%。","mk":3,"c":"food","ci":"food","cl":"食品","pr":1000,"lp":1460,"d":32,"b":"以前","rc":21792,"ra":4.26,"u":null,"img":"https://thumbnail.image.rakuten.co.jp/@0_mall/meat-21/cabinet/03087268/10po/torisumisyou33.jpg?_ex=600x600","url":"https://hb.afl.rakuten.co.jp/hgc/g00ri7y7.jeifo99b.g00ri7y7.jeifpac1/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmeat-21%2F10po%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fmeat-21%2Fi%2F10000071%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d","shop":"ミート21ショップ 楽天市場店","tags":["送料無料"],"at":"2026-11-04T11:21:44","et":"2026-11-11 01:59","ls":"2026-11-10","pt":["1,460円から1,000円へ","国産鶏肉100%・塩味","常温保存2年の個包装×3"],"mk2":{"hook_type":"scene","target":"晩酌のおつまみを探す人","problem":"おつまみの買い置き","use_case":"晩酌","features":["国産鶏肉100%","塩味","常温保存2年","個包装100g×3"],"benefits":["常温で置いておける"],"hook":"宮崎名物の鶏の炭火焼き、お試しの3袋です。","body":"国産鶏肉100%の塩味。\nレトルトの個包装で、常温で2年もちます。","cta":"none","ask":"晩酌のおつまみ、常温で置いておけるものを探している人はいますか？"}},{"id":"rd34567de1","t":"選べるネックテレコリブカットソー レディース ファッション カットソー トップス 長袖 リブ インナー…","cap":"1,990円のテレコリブカットソーが1,390円。ネックの形が選べる長袖、送料無料。","mk":2,"c":"fashion","ci":"fashion","cl":"ファッション","pr":1390,"lp":1990,"d":30,"b":"セール前","rc":2334,"ra":4.33,"u":null,"img":"https://thumbnail.image.rakuten.co.jp/@0_mall/pierrot/cabinet/1104_sale/imgrc0089547893.jpg?_ex=600x600","url":"https://hb.afl.rakuten.co.jp/hgc/g00q5017.jeifoa00.g00q5017.jeifpe6d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fpierrot%2Fb2004-011442%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fpierrot%2Fi%2F10014231%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d","shop":"Pierrot【ピエロ】","tags":["送料無料"],"at":"2026-11-03T11:30:47","et":"2026-11-11 01:59","ls":"2026-11-10","pt":[],"mk2":{"ask":"長袖カットソー、ネックの形はどれが好きですか？","benefits":["形違いから選べる"],"body":"リブ素材のトップスで、インナーにも使えます。\nネックの形違いから選べます。","cta":"compare","features":["ネックの形が選べる","テレコリブ素材","長袖"],"hook":"ネックの形を選べる、テレコリブの長袖カットソーです。","hook_type":"discovery","problem":"ネックの形が合わないと、重ね着で首元が合わない","target":"長袖のインナーを探している人","use_case":"インナー・重ね着"}},{"id":"r0726ed879","t":"ファンデーション カバー力 崩れにくい パウダー【D-クリア ファンデーション 12g】 毛穴レス…","cap":"2,400円のD-クリア ファンデーション12gが1,200円。パウダータイプ、送料無料。","mk":3,"c":"beauty","ci":"beauty","cl":"美容","pr":1200,"lp":2400,"d":50,"b":"以前","rc":16718,"ra":4.43,"u":null,"img":"https://thumbnail.image.rakuten.co.jp/@0_mall/d-ray/cabinet/09802265/10566858/imgrc0114585827.jpg?_ex=600x600","url":"https://hb.afl.rakuten.co.jp/hgc/g00sq5r7.jeifod0d.g00sq5r7.jeifp545/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fd-ray%2Fpakuto1%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fd-ray%2Fi%2F10000001%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d","shop":"D-RAY","tags":["送料無料"],"at":"2026-11-03T11:29:32","et":"2026-11-11 01:59","ls":"2026-11-10","pt":[],"mk2":{"ask":"ファンデはパウダー派ですか、リキッド派ですか？","benefits":["カバー力をうたうタイプ"],"body":"D-RAYの「D-クリア」。\nカバー力をうたう系統のパウダーです。","cta":"compare","features":["パウダータイプ","12g入り","D-RAY"],"hook":"パウダータイプのファンデーション、12g入りです。","hook_type":"compare","problem":"ファンデーションはタイプが多く、どれを選ぶかで迷う","target":"パウダータイプのファンデーションを探している人","use_case":"毎日のメイク"}},{"id":"r58b64002e","t":"ほんのり香る フレーバーティー 選べる2袋 ティーバッグ 日本茶 ベース ハーブティー 国産 無添加…","cap":"2,600円のフレーバーティー2袋が1,300円。日本茶ベースで、国産・無添加。","mk":1,"c":"food","ci":"food","cl":"食品","pr":1300,"lp":2600,"d":50,"b":"以前","rc":487,"ra":4.68,"u":null,"img":"https://thumbnail.image.rakuten.co.jp/@0_mall/auc-satouseicha/cabinet/selecttea/imgrc0189237009.jpg?_ex=600x600","url":"https://hb.afl.rakuten.co.jp/hgc/g00r6hn7.jeifoc22.g00r6hn7.jeifp672/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fauc-satouseicha%2Fflavor-1%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fauc-satouseicha%2Fi%2F10000177%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d","shop":"佐とう製茶","tags":["送料無料"],"at":"2026-11-03T11:28:01","et":"2026-11-11 01:59","ls":"2026-11-10","pt":["2,600円から1,300円へ","緑茶・ほうじ茶にハーブやゆず","選べる2袋・送料込み"],"mk2":{"hook_type":"discovery","target":"お茶をよく飲む人","problem":"いつも同じお茶","use_case":"家でのお茶","features":["日本茶ベース","ハーブ・ゆず","国産・無添加","選べる2袋"],"benefits":["香りを選べる"],"hook":"日本茶に、ハーブやゆずを合わせたティーバッグです。","body":"緑茶やほうじ茶がベースで、ハーブやゆずの香り。\n国産・無添加で、2袋を選べます。","cta":"none","ask":"お茶は、香りのついたものも飲みますか？"}},{"id":"redc4f51e4","t":"【神トク】＼W割引で最大69％OFF→1袋あたり620円 11月4日20:00-11月11日01:59／…","cap":"2,000円のシートマスク30枚が1,000円。大容量のフェイスパック、送料無料。","mk":3,"c":"beauty","ci":"beauty","cl":"美容","pr":1000,"lp":2000,"d":50,"b":"以前","rc":2669,"ra":4.54,"u":null,"img":"https://thumbnail.image.rakuten.co.jp/@0_mall/suisosum-shop/cabinet/h_/facesheetmask/11150273/facesheet_sa_53.jpg?_ex=600x600","url":"https://hb.afl.rakuten.co.jp/hgc/g00szo97.jeifo9e5.g00szo97.jeifpb78/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsuisosum-shop%2Fh_and_facemask%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fsuisosum-shop%2Fi%2F10000217%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d","shop":"SUISOSUM公式 楽天市場店","tags":["送料無料"],"at":"2026-11-03T00:00:00","et":"2026-11-11 01:59","ls":"2026-11-10","pt":[],"mk2":{"ask":"シートマスク、毎日使う人いますか？","benefits":["枚数がまとまっている"],"body":"1袋に30枚。\nこまめに使う人向けの枚数です。","cta":"experience","features":["30枚入り","大容量のフェイスパック","送料無料"],"hook":"シートマスク、30枚入りの大容量パックです。","hook_type":"problem","problem":"1枚ずつ買うタイプは、買い置きがすぐ切れる","target":"シートマスクの買い置きがすぐ終わる人","use_case":"毎日のフェイスパック"}},{"id":"rb482690c5","t":"充電式カイロ モバイルバッテリー 薄型 貼らない かいろ 長時間 薄型 コンパクト 軽量…","cap":"2,740円の充電式カイロが1,096円。モバイルバッテリー兼用、ポーチ付き。送料無料。","mk":2,"c":"kaden","ci":"kaden","cl":"家電","pr":1096,"lp":2740,"d":60,"b":"以前","rc":4455,"ra":4.33,"u":null,"img":"https://thumbnail.image.rakuten.co.jp/@0_mall/mottole-shop/cabinet/product/e/mtl-e007_01.jpg?_ex=600x600","url":"https://hb.afl.rakuten.co.jp/hgc/g00tc8d7.jeifo856.g00tc8d7.jeifpa13/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmottole-shop%2Fmtl-e007%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fmottole-shop%2Fi%2F10000075%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d","shop":"mottole(モットル)","tags":["送料無料"],"at":"2026-11-02T11:28:16","et":"","ls":"2026-11-10","pt":[],"mk2":{"ask":"カイロは使い捨て派ですか、充電派ですか？","benefits":["充電して繰り返し使える"],"body":"充電して使うカイロで、モバイルバッテリーにもなります。\n薄型で、ポーチが付いています。","cta":"experience","features":["充電式（貼らないタイプ）","モバイルバッテリー兼用","薄型・コンパクト","ポーチ付き"],"hook":"貼らないタイプの、充電式カイロです。","hook_type":"problem","problem":"使い捨てカイロは、買い置きと捨てる手間が毎回かかる","target":"使い捨てカイロをよく買う人","use_case":"外出時の防寒"}},{"id":"rd429b31ad","t":"山形県産 ジュース・スムージー用 りんご サンふじ 5kg～ ※日時指定はメールで※【山形県産 リンゴ…","cap":"3,370円の山形県産サンふじ5kgが2,170円。ジュース・スムージー用の家庭用、送料無料。","mk":5,"c":"food","ci":"food","cl":"食品","pr":2170,"lp":3370,"d":36,"b":"以前","rc":3892,"ra":4.28,"u":null,"img":"https://thumbnail.image.rakuten.co.jp/@0_mall/ultra-taste/cabinet/daiiti/daiiti_0219.jpg?_ex=600x600","url":"https://hb.afl.rakuten.co.jp/hgc/g00reg57.jeifob5f.g00reg57.jeifp118/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fultra-taste%2Fringo_01jh%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fultra-taste%2Fi%2F10000190%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d","shop":"竹城青果","tags":["送料無料"],"at":"2026-10-31T07:28:12","et":"2027-04-30 13:59","ls":"2026-11-10","pt":[],"mk2":{"ask":"りんご、ジュースやスムージーに使う人いますか？","benefits":["量がまとまっている"],"body":"ジュース・スムージー用として出ている、家庭用のりんごです。","cta":"experience","features":["山形県産サンふじ","5kg入り","ジュース・スムージー用の家庭用"],"hook":"山形県産のサンふじ、5kg入りです。","hook_type":"discovery","problem":"ジュース用には、まとまった量のりんごが要る","target":"りんごをジュースやスムージーにする人","use_case":"ジュース・スムージー"}},{"id":"rc2e11945a","t":"スクイーズおもちゃ 癒しグッズ ストレス解消 かわいいキャラクター 触感 ふわふわ もちもち デスク用…","cap":"1,699円のスクイーズおもちゃが990円。ふわふわ・もちもちの触感、送料無料。","mk":2,"c":"baby-toy","ci":"baby-toy","cl":"ベビー","pr":990,"lp":1699,"d":42,"b":"以前","rc":110,"ra":4.3,"u":null,"img":"https://thumbnail.image.rakuten.co.jp/@0_mall/snnm0726/cabinet/12901538/0001.jpg?_ex=600x600","url":"https://hb.afl.rakuten.co.jp/hgc/g00ursz7.jeifoc0f.g00ursz7.jeifp6cd/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsnnm0726%2Fdd0117-1%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fsnnm0726%2Fi%2F10001421%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d","shop":"Life-Stay","tags":["送料無料"],"at":"2026-10-20T21:37:36","et":"","ls":"2026-11-10","pt":[],"mk2":{"ask":"デスクにこういうの置いてる人、いますか？","benefits":["握って遊ぶタイプのおもちゃ"],"body":"デスクに置くタイプのおもちゃ。\nキャラクターもので、握って遊びます。","cta":"empathy","features":["ふわふわ・もちもちの触感","キャラクターもの","デスク用"],"hook":"ふわふわ、もちもちの触感のスクイーズです。","hook_type":"scene","problem":"デスクワークの合間に、触るものが何もない","target":"デスクに置く小物が好きな人","use_case":"デスクでの息抜き"}}]
+\ No newline at end of file
++[{"id":"red6052d5f","t":"EEIVOL モバイルバッテリー 軽量 薄型 大容量 15000mAh 機内持ち込み ピンク グリーン…","cap":"1,199円のモバイルバッテリー15000mAhが799円。薄型で2台同時充電、送料無料。","mk":3,"c":"pc","ci":"pc","cl":"PC","pr":799,"lp":1199,"d":33,"b":"以前","rc":563,"ra":4.45,"u":null,"img":"https://thumbnail.image.rakuten.co.jp/@0_mall/aiwo/cabinet/10479293/1600x1600-076-01.jpg?_ex=600x600","url":"https://hb.afl.rakuten.co.jp/hgc/g00uhf47.jeifo201.g00uhf47.jeifpbdb/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Faiwo%2Fhyg076-copy%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Faiwo%2Fi%2F10000030%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d","shop":"EVOPOW JAPAN 楽天市場店","tags":["送料無料"],"at":"2026-11-07T11:32:18","et":"","ls":"2026-11-10","pt":[],"mk2":{"ask":"モバイルバッテリー、何mAhのを持ち歩いていますか？","benefits":["2台同時に充電できる"],"body":"薄型で、2台同時に充電できます。\n色はピンクとグリーン。機内持ち込みもできます。","features":["15000mAh","薄型・軽量","2台同時充電","機内持ち込み可"],"hook":"え、15,000mAhで799円。","hook_type":"price","problem":"外出先でスマホの電池が切れると困る","target":"外出先でスマホの電池が切れがちな人","use_case":"外出時の充電","ask_type":"choice"}},{"id":"r1bdf1e95f","t":"≪品質と安心にこだわった≫ 歯ぎしり マウスピース 簡単型取りタイプ 1箱(2ピース)…","cap":"1,500円のマウスピース（簡単型取り）が1,000円。ケース付き。","mk":5,"c":"beauty","ci":"beauty","cl":"美容","pr":1000,"lp":1500,"d":33,"b":"以前","rc":3135,"ra":4.17,"u":null,"img":"https://thumbnail.image.rakuten.co.jp/@0_mall/ashiya/cabinet/dq/mouthpiece2/hgs2-0001.jpg?_ex=600x600","url":"https://hb.afl.rakuten.co.jp/hgc/g00t2xl7.jeifo578.g00t2xl7.jeifpfa7/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fashiya%2F10000005%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fashiya%2Fi%2F10000009%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d","shop":"芦屋品質 楽天市場店","tags":["送料無料"],"at":"2026-11-04T21:29:09","et":"","ls":"2026-11-10","pt":[],"mk2":{"hook_type":"count","target":"寝ているときの歯ぎしりが気になる人","problem":"歯ぎしりや食いしばりが気になる","use_case":"就寝時","features":["簡単型取りタイプ","1箱2ピース","ケース付き"],"benefits":["自分で型を取って使える"],"hook":"マウスピースに、レビューが3,135件。","body":"自分で型を取るタイプで、1箱に2ピース入っています。ケース付き。\nナイトガードとも呼ばれるものです。","ask":"歯ぎしりを家族に言われたことがある人、何か使っていますか？","ask_type":"usage"}},{"id":"r841f65348","t":"4/6枚セット シール ボンボンシール ドロップシール セット ぷっくりシール ぷくぷくシール…","cap":"1,980円のぷっくりシール4/6枚セットが490円。立体感のあるデコシール、送料無料。","mk":1,"c":"kitchen","ci":"kitchen","cl":"日用品","pr":490,"lp":1980,"d":75,"b":"以前","rc":1931,"ra":4.66,"u":null,"img":"https://thumbnail.image.rakuten.co.jp/@0_mall/anahaimu/cabinet/12466868/bb02-917.jpg?_ex=600x600","url":"https://hb.afl.rakuten.co.jp/hgc/g00uszc7.jeifo768.g00uszc7.jeifp954/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fanahaimu%2Fbb02%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fanahaimu%2Fi%2F10000434%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d","shop":"あなはいむ店","tags":["送料無料"],"at":"2026-11-04T16:22:15","et":"","ls":"2026-11-10","pt":[],"mk2":{"ask":"シールは、手帳に貼る派ですか？","benefits":["枚数がまとまっている"],"body":"ぷっくりしたデコシール、4枚か6枚のセットです。\nドロップシールとも呼ばれるタイプ。手帳やノート、スマホケースに貼るものです。","features":["4/6枚セット","立体感のあるデコシール（ぷっくりシール）","送料無料"],"hook":"この立体感、反則じゃないですか。","hook_type":"look","problem":"デコ用のシールは、枚数が少ないとテーマをそろえる前に終わる","target":"手帳やノートをシールでデコる人","use_case":"手帳・ノート・スマホケースのデコ","ask_type":"choice"}},{"id":"r9598a3d07","t":"ヘアアイロン は アレティ ｜ ストレート カール 2way 髪の負担を抑える 20mm…","cap":"7,490円のアレティの2WAYヘアアイロンが4,980円。20mm、35段階の温度調整、送料無料。","mk":5,"c":"kaden","ci":"kaden","cl":"家電","pr":4980,"lp":7490,"d":34,"b":"以前","rc":13302,"ra":4.49,"u":null,"img":"https://thumbnail.image.rakuten.co.jp/@0_mall/areti/cabinet/i679gd/i679gd.jpg?_ex=600x600","url":"https://hb.afl.rakuten.co.jp/hgc/g00rv6y7.jeifo92b.g00rv6y7.jeifp34c/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fareti%2F10000009%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fareti%2Fi%2F10000009%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d","shop":"Areti(アレティ)楽天市場店","tags":["送料無料"],"at":"2026-11-04T16:21:52","et":"","ls":"2026-11-10","pt":["20mm・2WAY","35段階の温度調整・海外対応"],"mk2":{"ask":"ヘアアイロン、ストレートとカールどっちで使うことが多いですか？","benefits":["1本でストレートとカール"],"body":"20mmの2WAYで、温度は35段階（最高230℃）から選べます。\nセラミックコーティングで、海外でも使える対応です。","features":["ストレート/カール 2WAY","20mm","35段階の温度調整（最高230℃）","セラミックコーティング","海外対応"],"hook":"ストレートとカール、1本で済むやつ。","hook_type":"look","problem":"ストレート用とカール用で、アイロンを2本持ちにしている","target":"ストレートとカールの両方をやる人","use_case":"毎朝のスタイリング","ask_type":"choice"}},{"id":"r99dc0d242","t":"[大袋]とろりんスープ昆布と海藻[50杯分] 200g×1袋 選べる2種（プレーン・うめ味)…","cap":"3,160円のとろりんスープ昆布50杯分が1,580円。200gの大袋で、味は2種から選べる。送料無料。","mk":5,"c":"food","ci":"food","cl":"食品","pr":1580,"lp":3160,"d":50,"b":"以前","rc":5531,"ra":4.71,"u":null,"img":"https://thumbnail.image.rakuten.co.jp/@0_mall/konbu-genzouya/cabinet/04433867/261104/thum_520025.jpg?_ex=600x600","url":"https://hb.afl.rakuten.co.jp/hgc/g00rhas7.jeifo7d7.g00rhas7.jeifpa72/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkonbu-genzouya%2F520025%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fkonbu-genzouya%2Fi%2F10000200%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d","shop":"昆布専門問屋 源蔵屋","tags":["送料無料"],"at":"2026-11-04T11:21:44","et":"2026-11-11 01:59","ls":"2026-11-10","pt":[],"mk2":{"ask":"昆布のスープ、飲んだことある人いますか？","benefits":["お湯で作るスープの素"],"body":"200gの大袋で、味はプレーンとうめ味の2種から選べます。\n昆布専門の問屋、源蔵屋のものです。","features":["50杯分・200gの大袋","プレーン・うめ味の2種から選べる","昆布専門問屋 源蔵屋"],"hook":"昆布のスープ、50杯分で1,580円。","hook_type":"price","problem":"汁物を一から作るのは手間な日がある","target":"汁物を手軽に足したい人","use_case":"食事の汁物","ask_type":"usage"}},{"id":"r8550b30d9","t":"くまもとラーメン たっぷり 6人前 送料無料 くまもと らーめん 6食セット 生麺 とんこつラーメン…","cap":"2,560円のくまもとラーメン6食分が1,280円。生麺のとんこつ、送料込み。","mk":4,"c":"food","ci":"food","cl":"食品","pr":1280,"lp":2560,"d":50,"b":"以前","rc":1784,"ra":4.4,"u":null,"img":"https://thumbnail.image.rakuten.co.jp/@0_mall/kumamoto-food/cabinet/item/ramen/r_ramen001_15.jpg?_ex=600x600","url":"https://hb.afl.rakuten.co.jp/hgc/g00qovc7.jeifo5b6.g00qovc7.jeifpa50/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkumamoto-food%2F10002744%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fkumamoto-food%2Fi%2F10002744%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d","shop":"【 くまもと風土 】","tags":["送料無料"],"at":"2026-11-04T11:21:44","et":"","ls":"2026-11-10","pt":[],"mk2":{"hook_type":"scene","target":"家でラーメンを食べたい人","problem":"夜、急にとんこつが食べたくなる","use_case":"週末の昼、夜食","features":["生麺 6食セット","とんこつ","熊本","送料込み"],"benefits":["まとめて置いておける"],"hook":"夜中に急にとんこつが食べたくなる日、ある。","body":"熊本のとんこつラーメン、生麺で6食分です。\n食べたい日にすぐ作れる、買い置きの分。送料込み。","ask":"夜食にラーメンを食べる人、いますか？","ask_type":"usage"}},{"id":"r845a962d3","t":"お試し3袋 鶏の炭火焼き 100g×3袋 国産鶏肉100％ 自社製造 宮崎名物 無添加 塩味 レトルト…","cap":"1,460円の鶏の炭火焼き100g×3袋が1,000円。国産鶏肉100%。","mk":3,"c":"food","ci":"food","cl":"食品","pr":1000,"lp":1460,"d":32,"b":"以前","rc":21792,"ra":4.26,"u":null,"img":"https://thumbnail.image.rakuten.co.jp/@0_mall/meat-21/cabinet/03087268/10po/torisumisyou33.jpg?_ex=600x600","url":"https://hb.afl.rakuten.co.jp/hgc/g00ri7y7.jeifo99b.g00ri7y7.jeifpac1/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmeat-21%2F10po%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fmeat-21%2Fi%2F10000071%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d","shop":"ミート21ショップ 楽天市場店","tags":["送料無料"],"at":"2026-11-04T11:21:44","et":"2026-11-11 01:59","ls":"2026-11-10","pt":["1,460円から1,000円へ","国産鶏肉100%・塩味","常温保存2年の個包装×3"],"mk2":{"hook_type":"count","target":"晩酌のおつまみを探す人","problem":"おつまみの買い置き","use_case":"晩酌","features":["国産鶏肉100%","塩味","常温保存2年","個包装100g×3"],"benefits":["常温で置いておける"],"hook":"21,792件もレビューがある、鶏の炭火焼き。","body":"宮崎名物で、国産鶏肉100%の塩味。100gの個包装が3袋です。\nレトルトで、常温で2年もちます。","ask":"おつまみの買い置き、常温で置けるものにしてますか？","ask_type":"usage"}},{"id":"rd34567de1","t":"選べるネックテレコリブカットソー レディース ファッション カットソー トップス 長袖 リブ インナー…","cap":"1,990円のテレコリブカットソーが1,390円。ネックの形が選べる長袖、送料無料。","mk":2,"c":"fashion","ci":"fashion","cl":"ファッション","pr":1390,"lp":1990,"d":30,"b":"セール前","rc":2334,"ra":4.33,"u":null,"img":"https://thumbnail.image.rakuten.co.jp/@0_mall/pierrot/cabinet/1104_sale/imgrc0089547893.jpg?_ex=600x600","url":"https://hb.afl.rakuten.co.jp/hgc/g00q5017.jeifoa00.g00q5017.jeifpe6d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fpierrot%2Fb2004-011442%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fpierrot%2Fi%2F10014231%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d","shop":"Pierrot【ピエロ】","tags":["送料無料"],"at":"2026-11-03T11:30:47","et":"2026-11-11 01:59","ls":"2026-11-10","pt":[],"mk2":{"ask":"長袖カットソー、ネックの形はどれが好きですか？","benefits":["形違いから選べる"],"body":"テレコリブの長袖カットソー。ネックの形違いから選べます。\nインナーにも使えるタイプです。","features":["ネックの形が選べる","テレコリブ素材","長袖"],"hook":"重ね着の首元、形が合わないとずっと気になる。","hook_type":"scene","problem":"ネックの形が合わないと、重ね着で首元が合わない","target":"長袖のインナーを探している人","use_case":"インナー・重ね着","ask_type":"choice"}},{"id":"r0726ed879","t":"ファンデーション カバー力 崩れにくい パウダー【D-クリア ファンデーション 12g】 毛穴レス…","cap":"2,400円のD-クリア ファンデーション12gが1,200円。パウダータイプ、送料無料。","mk":3,"c":"beauty","ci":"beauty","cl":"美容","pr":1200,"lp":2400,"d":50,"b":"以前","rc":16718,"ra":4.43,"u":null,"img":"https://thumbnail.image.rakuten.co.jp/@0_mall/d-ray/cabinet/09802265/10566858/imgrc0114585827.jpg?_ex=600x600","url":"https://hb.afl.rakuten.co.jp/hgc/g00sq5r7.jeifod0d.g00sq5r7.jeifp545/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fd-ray%2Fpakuto1%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fd-ray%2Fi%2F10000001%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d","shop":"D-RAY","tags":["送料無料"],"at":"2026-11-03T11:29:32","et":"2026-11-11 01:59","ls":"2026-11-10","pt":[],"mk2":{"ask":"ファンデはパウダー派ですか、リキッド派ですか？","benefits":["カバー力をうたうタイプ"],"body":"D-RAYの『D-クリア』、12g入りです。\nカバー力をうたう系統のパウダー。","features":["パウダータイプ","12g入り","D-RAY"],"hook":"レビュー16,718件のパウダーファンデが、半額。","hook_type":"count","problem":"ファンデーションはタイプが多く、どれを選ぶかで迷う","target":"パウダータイプのファンデーションを探している人","use_case":"毎日のメイク","ask_type":"choice"}},{"id":"r58b64002e","t":"ほんのり香る フレーバーティー 選べる2袋 ティーバッグ 日本茶 ベース ハーブティー 国産 無添加…","cap":"2,600円のフレーバーティー2袋が1,300円。日本茶ベースで、国産・無添加。","mk":1,"c":"food","ci":"food","cl":"食品","pr":1300,"lp":2600,"d":50,"b":"以前","rc":487,"ra":4.68,"u":null,"img":"https://thumbnail.image.rakuten.co.jp/@0_mall/auc-satouseicha/cabinet/selecttea/imgrc0189237009.jpg?_ex=600x600","url":"https://hb.afl.rakuten.co.jp/hgc/g00r6hn7.jeifoc22.g00r6hn7.jeifp672/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fauc-satouseicha%2Fflavor-1%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fauc-satouseicha%2Fi%2F10000177%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d","shop":"佐とう製茶","tags":["送料無料"],"at":"2026-11-03T11:28:01","et":"2026-11-11 01:59","ls":"2026-11-10","pt":["2,600円から1,300円へ","緑茶・ほうじ茶にハーブやゆず","選べる2袋・送料込み"],"mk2":{"hook_type":"scene","target":"お茶をよく飲む人","problem":"いつも同じお茶","use_case":"家でのお茶","features":["日本茶ベース","ハーブ・ゆず","国産・無添加","選べる2袋"],"benefits":["香りを選べる"],"hook":"毎日同じお茶だと、さすがに飽きる。","body":"日本茶がベースのティーバッグで、ハーブやゆずの香りが付いています。\n国産・無添加で、2袋を選べます。","ask":"お茶は、香りのついたものも飲みますか？","ask_type":"usage"}},{"id":"redc4f51e4","t":"【神トク】＼W割引で最大69％OFF→1袋あたり620円 11月4日20:00-11月11日01:59／…","cap":"2,000円のシートマスク30枚が1,000円。大容量のフェイスパック、送料無料。","mk":3,"c":"beauty","ci":"beauty","cl":"美容","pr":1000,"lp":2000,"d":50,"b":"以前","rc":2669,"ra":4.54,"u":null,"img":"https://thumbnail.image.rakuten.co.jp/@0_mall/suisosum-shop/cabinet/h_/facesheetmask/11150273/facesheet_sa_53.jpg?_ex=600x600","url":"https://hb.afl.rakuten.co.jp/hgc/g00szo97.jeifo9e5.g00szo97.jeifpb78/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsuisosum-shop%2Fh_and_facemask%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fsuisosum-shop%2Fi%2F10000217%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d","shop":"SUISOSUM公式 楽天市場店","tags":["送料無料"],"at":"2026-11-03T00:00:00","et":"2026-11-11 01:59","ls":"2026-11-10","pt":[],"mk2":{"ask":"シートマスク、毎日使う人いますか？","benefits":["枚数がまとまっている"],"body":"大容量のフェイスパックです。\nこまめに使う人向けの枚数。","features":["30枚入り","大容量のフェイスパック","送料無料"],"hook":"シートマスク30枚で1,000円。1枚あたり約33円。","hook_type":"price","problem":"1枚ずつ買うタイプは、買い置きがすぐ切れる","target":"シートマスクの買い置きがすぐ終わる人","use_case":"毎日のフェイスパック","ask_type":"usage"}},{"id":"rb482690c5","t":"充電式カイロ モバイルバッテリー 薄型 貼らない かいろ 長時間 薄型 コンパクト 軽量…","cap":"2,740円の充電式カイロが1,096円。モバイルバッテリー兼用、ポーチ付き。送料無料。","mk":2,"c":"kaden","ci":"kaden","cl":"家電","pr":1096,"lp":2740,"d":60,"b":"以前","rc":4455,"ra":4.33,"u":null,"img":"https://thumbnail.image.rakuten.co.jp/@0_mall/mottole-shop/cabinet/product/e/mtl-e007_01.jpg?_ex=600x600","url":"https://hb.afl.rakuten.co.jp/hgc/g00tc8d7.jeifo856.g00tc8d7.jeifpa13/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmottole-shop%2Fmtl-e007%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fmottole-shop%2Fi%2F10000075%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d","shop":"mottole(モットル)","tags":["送料無料"],"at":"2026-11-02T11:28:16","et":"","ls":"2026-11-10","pt":[],"mk2":{"ask":"カイロは使い捨て派ですか、充電派ですか？","benefits":["充電して繰り返し使える"],"body":"貼らない薄型で、ポーチが付いています。\n充電して繰り返し使うタイプです。","features":["充電式（貼らないタイプ）","モバイルバッテリー兼用","薄型・コンパクト","ポーチ付き"],"hook":"充電式カイロが1,096円。しかもモバイルバッテリー兼用。","hook_type":"price","problem":"使い捨てカイロは、買い置きと捨てる手間が毎回かかる","target":"使い捨てカイロをよく買う人","use_case":"外出時の防寒","ask_type":"choice"}},{"id":"rd429b31ad","t":"山形県産 ジュース・スムージー用 りんご サンふじ 5kg～ ※日時指定はメールで※【山形県産 リンゴ…","cap":"3,370円の山形県産サンふじ5kgが2,170円。ジュース・スムージー用の家庭用、送料無料。","mk":5,"c":"food","ci":"food","cl":"食品","pr":2170,"lp":3370,"d":36,"b":"以前","rc":3892,"ra":4.28,"u":null,"img":"https://thumbnail.image.rakuten.co.jp/@0_mall/ultra-taste/cabinet/daiiti/daiiti_0219.jpg?_ex=600x600","url":"https://hb.afl.rakuten.co.jp/hgc/g00reg57.jeifob5f.g00reg57.jeifp118/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fultra-taste%2Fringo_01jh%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fultra-taste%2Fi%2F10000190%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d","shop":"竹城青果","tags":["送料無料"],"at":"2026-10-31T07:28:12","et":"2027-04-30 13:59","ls":"2026-11-10","pt":[],"mk2":{"ask":"りんご、ジュースやスムージーに使う人いますか？","benefits":["量がまとまっている"],"body":"山形県産のサンふじです。\nジュース・スムージー用に出ている、家庭用のりんご。","features":["山形県産サンふじ","5kg入り","ジュース・スムージー用の家庭用"],"hook":"りんごを5kgで買う、という買い方。","hook_type":"look","problem":"ジュース用には、まとまった量のりんごが要る","target":"りんごをジュースやスムージーにする人","use_case":"ジュース・スムージー","ask_type":"usage"}},{"id":"rc2e11945a","t":"スクイーズおもちゃ 癒しグッズ ストレス解消 かわいいキャラクター 触感 ふわふわ もちもち デスク用…","cap":"1,699円のスクイーズおもちゃが990円。ふわふわ・もちもちの触感、送料無料。","mk":2,"c":"baby-toy","ci":"baby-toy","cl":"ベビー","pr":990,"lp":1699,"d":42,"b":"以前","rc":110,"ra":4.3,"u":null,"img":"https://thumbnail.image.rakuten.co.jp/@0_mall/snnm0726/cabinet/12901538/0001.jpg?_ex=600x600","url":"https://hb.afl.rakuten.co.jp/hgc/g00ursz7.jeifoc0f.g00ursz7.jeifp6cd/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsnnm0726%2Fdd0117-1%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fsnnm0726%2Fi%2F10001421%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d","shop":"Life-Stay","tags":["送料無料"],"at":"2026-10-20T21:37:36","et":"","ls":"2026-11-10","pt":[],"mk2":{"ask":"デスクにこういうの置いてる人、いますか？","benefits":["握って遊ぶタイプのおもちゃ"],"body":"デスクに置くタイプのスクイーズです。\nキャラクターもので、握って遊びます。","features":["ふわふわ・もちもちの触感","キャラクターもの","デスク用"],"hook":"ふわふわ、もちもち。名前だけで触感が分かる。","hook_type":"look","problem":"デスクワークの合間に、触るものが何もない","target":"デスクに置く小物が好きな人","use_case":"デスクでの息抜き","ask_type":"usage"}}]
+\ No newline at end of file
+diff --git a/learn.py b/learn.py
+index 626a7fc..08fd768 100644
+--- a/learn.py
++++ b/learn.py
+@@ -109,7 +109,10 @@ def followers():
+ DIMS = {
+         "投稿の種類": (lambda x: x.get("kind") or "?", None),
+         "リンクの位置": (lambda x: x.get("link") or "?", None),
+-        "締めの型": (lambda x: x.get("cta_type") or "（なし）", "product"),
++        # 2026-11-10: 締めは「問い」に統一した。旧い投稿の cta_type は
++        # 歴史として残し、ask_type を優先して読む。
++        "問いの型": (lambda x: x.get("ask_type") or x.get("cta_type")
++                     or "（なし）", "product"),
+         "入口の型": (lambda x: x.get("hook_type") or "（なし）", "product"),
+         "売場": (lambda x: x.get("category") or "（なし）", "product"),
+         # 時刻をそのまま切ると、種類との交絡になる。
+diff --git a/learnings.json b/learnings.json
+index 5b8bab7..e20a91d 100644
+--- a/learnings.json
++++ b/learnings.json
+@@ -1276,7 +1276,7 @@
+       "id": "exp-010",
+       "started": "2026-09-28",
+       "until": "2026-10-13",
+-      "status": "running",
++      "status": "中止",
+       "measure": "ab_clicks",
+       "hypothesis": "投稿→サイト→楽天の段を1つ減らして楽天へ直接つなげば、楽天へ届くクリックが増える。",
+       "change": "商品の投稿の返信リンクを、商品IDで半分ずつ「楽天へ直接（direct）」「サイトの商品ページ（site）」に振り分ける（threads.link_arm）。どちらで出したかを threads_posted.json の link_arm に残す。",
+@@ -1312,13 +1312,22 @@
+           }
+         }
+       },
+-      "extended": true
++      "extended": true,
++      "conclusion": "2026-11-10 に終了（未決着）。最終確認（2026-10-06 台帳）で direct 31本／7クリック（1本あたり0.226）、site 38本／2クリック（0.053）。min_posts は満たしたが、クリック合計9が min_clicks の10に届かなかった。その後、2026-10-24 のトークン失効で投稿が止まり、母集団が途中で切れたため、この設計のままでは決着できない。判定は後継の exp-012 に引き継ぐ。",
++      "progress": {
++        "posts_direct": 31,
++        "posts_site": 38,
++        "clicks_direct": 7,
++        "clicks_site": 2,
++        "at": "2026-10-06"
++      },
++      "closed_at": "2026-11-10"
+     },
+     {
+       "id": "exp-011",
+       "started": "2026-09-28",
+       "until": "2026-10-12",
+-      "status": "running",
++      "status": "中止",
+       "measure": "ab_clicks",
+       "hypothesis": "締めを読む人への問いにすると、返信やいいねが付きやすくなる（界隈で反応の多い投稿は、締めが問いだった。research.json pat-02）。",
+       "change": "商品理解に ask（読む人への問い）を書き、ask を持つ商品だけを商品IDで半分ずつ「締めを ask に差し替える（ask）」「いつもの締め（base）」に振り分ける（threads.cta_arm）。どちらで出したかは threads_posted.json の cta_arm に残す。リンクの試し（exp-010）とは別の種で振り分けるので重ならない。",
+@@ -1354,7 +1363,47 @@
+             "rate": 0.0
+           }
+         }
+-      }
++      },
++      "conclusion": "2026-11-10 に終了（判定不能）。ask 38本／反応0、base 30本／反応0で、指標（reactions）の差が観測できなかった。締めの問い自体は、外部の観測（型カタログ T2／research.json pat-02）の証拠の強さで2026-11-10 に商品投稿の標準として採用した。実験の勝ちではなく、外部証拠による採用であることを明記する。問いどうしの差は、ask_type（usage／choice／problem）の集計でこれから見る。",
++      "closed_at": "2026-11-10"
++    },
++    {
++      "id": "exp-012",
++      "title": "リンクの置き方（楽天へ直接 vs 商品ページ）・再試行",
++      "started": "2026-11-11",
++      "until": "2026-11-25",
++      "status": "running",
++      "change": "exp-010 と同じ設計。投稿の組み立ては 2026-11-10 の標準形に統一されているので、リンクの置き方だけが差になる。振り分け（threads.link_arm）も exp-010 と同じ。",
++      "metric": "クリック（Threads の insights の link_clicks）",
++      "conclusion": "",
++      "ab": {
++        "field": "link_arm",
++        "arms": [
++          "direct",
++          "site"
++        ],
++        "decide": {
++          "min_posts": 15,
++          "min_clicks": 10,
++          "gap": 1.3,
++          "tie": "direct"
++        },
++        "extends": 0,
++        "metric": "clicks"
++      },
++      "progress": {},
++      "note": "exp-010（2026-09-29〜、未決着で終了）の後継。母集団がトークン失効で2つに割れたため、同じ設計で取り直す。"
++    },
++    {
++      "id": "exp-013",
++      "title": "画像つき投稿 vs 文字だけ",
++      "started": "2026-11-10",
++      "until": "",
++      "status": "待ち",
++      "change": "商品投稿に画像を付けるかどうか。いまの公開経路（threads.py publish）は文字だけ。実装は画像の権利確認（楽天の商品画像の利用可否）と、Threads API のメディア投稿の配線が前提。",
++      "metric": "閲覧数と反応（learn.py の集計）",
++      "conclusion": "",
++      "note": "型カタログ T3（画像・動画が主役）の検証。前提が整うまで 待ち。始める条件がそろったら status を running にする。 started は登録日（2026-11-10）。実施開始時に実際の開始日へ直す。"
+     }
+   ],
+   "lastRun": "2026-10-06",
+diff --git a/ops/cron-worker.js b/ops/cron-worker.js
+index 7e27069..c980e63 100644
+--- a/ops/cron-worker.js
++++ b/ops/cron-worker.js
+@@ -31,7 +31,11 @@
+ // 数日間デプロイが通っていなかった。それに気づけなかった。
+ // 2026-09-12: 直したのに「本当に反映されたか」を確かめる手立てが無かった。
+ // 状態表示に版を出しておけば、URLを開くだけで分かる。
+-const VERSION = "2026-09-20";
++// 2026-11-10: 成績の測定（learn.yml）を毎日1回足した。その日の最初の
++// 投稿（JST 7:20）より前に測るため、UTC 20時（JST 5:20）に置く。
++// それまでは learn.py は手元の手作業からしか呼ばれておらず、
++// 手順が止まった 2026-10-06 から測定が止まっていた。
++const VERSION = "2026-11-10";
+ 
+ const REPO = "hajime085/blog-material-hub";
+ 
+@@ -45,8 +49,10 @@ const REPO = "hajime085/blog-material-hub";
+ // workflow_dispatch は取りこぼさないので、長く生かす必要はない。
+ const T = "threads.yml";
+ const W = "watch.yml";
++const L = "learn.yml";
+ 
+ const PLAN = {
++  20: [L],      // JST  5:20  成績の測定（1日1回、その日の投稿より前）
+   22: [T, W],   // JST  7:20  投稿(7時の枠) + 見張り
+   0:  [T],      // JST  9:20  投稿(9時の枠)
+   2:  [W],      // JST 11:20  見張り
+diff --git a/p/r0726ed879/index.html b/p/r0726ed879/index.html
+index 4ed85b2..116ef70 100644
+--- a/p/r0726ed879/index.html
++++ b/p/r0726ed879/index.html
+@@ -76,7 +76,7 @@
+   </div>
+   <p class="pop-note">値段は毎日見にいってます。買う前に楽天でも確かめてね（2026-11-10時点）</p>
+ 
+-  <h2 class="section-title">どんな商品？</h2><div class="prose prose-card"><p>D-RAYの「D-クリア」。</p><p>カバー力をうたう系統のパウダーです。</p><ul class="prose-points"><li>パウダータイプ</li><li>12g入り</li><li>D-RAY</li></ul></div>
++  <h2 class="section-title">どんな商品？</h2><div class="prose prose-card"><p>D-RAYの『D-クリア』、12g入りです。</p><p>カバー力をうたう系統のパウダー。</p><ul class="prose-points"><li>パウダータイプ</li><li>12g入り</li><li>D-RAY</li></ul></div>
+ 
+   <h2 class="section-title">商品情報</h2>
+   <table class="spec"><tbody><tr><th>価格</th><td class="price-cell">¥1,200</td></tr><tr><th>以前の価格</th><td>¥2,400（50%OFF）<br><small>当サイトが過去60日で観測した最高値です</small></td></tr><tr><th>カテゴリ</th><td><a class="inline-cat" href="/c/beauty/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg?v=64ebb500#ic-beauty"></use></svg>ドラッグストア・美容</a></td></tr><tr><th>送料</th><td>無料（楽天のデータより）</td></tr><tr><th>ショップ</th><td>D-RAY</td></tr><tr><th>レビュー</th><td><svg class="ic ic-star" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg?v=64ebb500#ic-star"></use></svg>4.43（16,718件）</td></tr><tr><th>掲載日</th><td>2026-11-03</td></tr><tr><th>価格の確認日</th><td>2026-11-10</td></tr></tbody></table>
+diff --git a/p/r1bdf1e95f/index.html b/p/r1bdf1e95f/index.html
+index 66aa1d6..66a773a 100644
+--- a/p/r1bdf1e95f/index.html
++++ b/p/r1bdf1e95f/index.html
+@@ -76,7 +76,7 @@
+   </div>
+   <p class="pop-note">値段は毎日見にいってます。買う前に楽天でも確かめてね（2026-11-10時点）</p>
+ 
+-  <h2 class="section-title">どんな商品？</h2><div class="prose prose-card"><p>1箱に2ピース入りで、ケースが付いています。</p><p>ナイトガードとも呼ばれるものです。</p><ul class="prose-points"><li>簡単型取りタイプ</li><li>1箱2ピース</li><li>ケース付き</li></ul></div>
++  <h2 class="section-title">どんな商品？</h2><div class="prose prose-card"><p>自分で型を取るタイプで、1箱に2ピース入っています。ケース付き。</p><p>ナイトガードとも呼ばれるものです。</p><ul class="prose-points"><li>簡単型取りタイプ</li><li>1箱2ピース</li><li>ケース付き</li></ul></div>
+ 
+   <h2 class="section-title">商品情報</h2>
+   <table class="spec"><tbody><tr><th>価格</th><td class="price-cell">¥1,000</td></tr><tr><th>以前の価格</th><td>¥1,500（33%OFF）<br><small>当サイトが過去60日で観測した最高値です</small></td></tr><tr><th>カテゴリ</th><td><a class="inline-cat" href="/c/beauty/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg?v=64ebb500#ic-beauty"></use></svg>ドラッグストア・美容</a></td></tr><tr><th>送料</th><td>無料（楽天のデータより）</td></tr><tr><th>ショップ</th><td>芦屋品質 楽天市場店</td></tr><tr><th>レビュー</th><td><svg class="ic ic-star" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg?v=64ebb500#ic-star"></use></svg>4.17（3,135件）</td></tr><tr><th>掲載日</th><td>2026-11-04</td></tr><tr><th>価格の確認日</th><td>2026-11-10</td></tr></tbody></table>
+diff --git a/p/r58b64002e/index.html b/p/r58b64002e/index.html
+index 52fb996..22b4011 100644
+--- a/p/r58b64002e/index.html
++++ b/p/r58b64002e/index.html
+@@ -76,7 +76,7 @@
+   </div>
+   <p class="pop-note">値段は毎日見にいってます。買う前に楽天でも確かめてね（2026-11-10時点）</p>
+ 
+-  <h2 class="section-title">どんな商品？</h2><div class="prose prose-card"><p>緑茶やほうじ茶がベースで、ハーブやゆずの香り。</p><p>国産・無添加で、2袋を選べます。</p><ul class="prose-points"><li>2,600円から1,300円へ</li><li>緑茶・ほうじ茶にハーブやゆず</li><li>選べる2袋・送料込み</li></ul></div>
++  <h2 class="section-title">どんな商品？</h2><div class="prose prose-card"><p>日本茶がベースのティーバッグで、ハーブやゆずの香りが付いています。</p><p>国産・無添加で、2袋を選べます。</p><ul class="prose-points"><li>2,600円から1,300円へ</li><li>緑茶・ほうじ茶にハーブやゆず</li><li>選べる2袋・送料込み</li></ul></div>
+ 
+   <h2 class="section-title">商品情報</h2>
+   <table class="spec"><tbody><tr><th>価格</th><td class="price-cell">¥1,300</td></tr><tr><th>以前の価格</th><td>¥2,600（50%OFF）<br><small>当サイトが過去60日で観測した最高値です</small></td></tr><tr><th>カテゴリ</th><td><a class="inline-cat" href="/c/food/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg?v=64ebb500#ic-food"></use></svg>食品・飲料・お酒</a></td></tr><tr><th>送料</th><td>無料（楽天のデータより）</td></tr><tr><th>ショップ</th><td>佐とう製茶</td></tr><tr><th>レビュー</th><td><svg class="ic ic-star" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg?v=64ebb500#ic-star"></use></svg>4.68（487件）</td></tr><tr><th>掲載日</th><td>2026-11-03</td></tr><tr><th>価格の確認日</th><td>2026-11-10</td></tr></tbody></table>
+diff --git a/p/r841f65348/index.html b/p/r841f65348/index.html
+index 0e3b9ff..9c1d7ad 100644
+--- a/p/r841f65348/index.html
++++ b/p/r841f65348/index.html
+@@ -76,7 +76,7 @@
+   </div>
+   <p class="pop-note">値段は毎日見にいってます。買う前に楽天でも確かめてね（2026-11-10時点）</p>
+ 
+-  <h2 class="section-title">どんな商品？</h2><div class="prose prose-card"><p>ドロップシールとも呼ばれるタイプ。</p><p>手帳やノート、スマホケースに貼るデコ用です。</p><ul class="prose-points"><li>4/6枚セット</li><li>立体感のあるデコシール（ぷっくりシール）</li><li>送料無料</li></ul></div>
++  <h2 class="section-title">どんな商品？</h2><div class="prose prose-card"><p>ぷっくりしたデコシール、4枚か6枚のセットです。</p><p>ドロップシールとも呼ばれるタイプ。手帳やノート、スマホケースに貼るものです。</p><ul class="prose-points"><li>4/6枚セット</li><li>立体感のあるデコシール（ぷっくりシール）</li><li>送料無料</li></ul></div>
+ 
+   <h2 class="section-title">商品情報</h2>
+   <table class="spec"><tbody><tr><th>価格</th><td class="price-cell">¥490</td></tr><tr><th>以前の価格</th><td>¥1,980（75%OFF）<br><small>当サイトが過去60日で観測した最高値です</small></td></tr><tr><th>カテゴリ</th><td><a class="inline-cat" href="/c/kitchen/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg?v=64ebb500#ic-kitchen"></use></svg>キッチン・日用品・DIY</a></td></tr><tr><th>送料</th><td>無料（楽天のデータより）</td></tr><tr><th>ショップ</th><td>あなはいむ店</td></tr><tr><th>レビュー</th><td><svg class="ic ic-star" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg?v=64ebb500#ic-star"></use></svg>4.66（1,931件）</td></tr><tr><th>掲載日</th><td>2026-11-04</td></tr><tr><th>価格の確認日</th><td>2026-11-10</td></tr></tbody></table>
+diff --git a/p/r845a962d3/index.html b/p/r845a962d3/index.html
+index 14fbcb1..271af7b 100644
+--- a/p/r845a962d3/index.html
++++ b/p/r845a962d3/index.html
+@@ -76,7 +76,7 @@
+   </div>
+   <p class="pop-note">値段は毎日見にいってます。買う前に楽天でも確かめてね（2026-11-10時点）</p>
+ 
+-  <h2 class="section-title">どんな商品？</h2><div class="prose prose-card"><p>国産鶏肉100%の塩味。</p><p>レトルトの個包装で、常温で2年もちます。</p><ul class="prose-points"><li>1,460円から1,000円へ</li><li>国産鶏肉100%・塩味</li><li>常温保存2年の個包装×3</li></ul></div>
++  <h2 class="section-title">どんな商品？</h2><div class="prose prose-card"><p>宮崎名物で、国産鶏肉100%の塩味。100gの個包装が3袋です。</p><p>レトルトで、常温で2年もちます。</p><ul class="prose-points"><li>1,460円から1,000円へ</li><li>国産鶏肉100%・塩味</li><li>常温保存2年の個包装×3</li></ul></div>
+ 
+   <h2 class="section-title">商品情報</h2>
+   <table class="spec"><tbody><tr><th>価格</th><td class="price-cell">¥1,000</td></tr><tr><th>以前の価格</th><td>¥1,460（32%OFF）<br><small>当サイトが過去60日で観測した最高値です</small></td></tr><tr><th>カテゴリ</th><td><a class="inline-cat" href="/c/food/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg?v=64ebb500#ic-food"></use></svg>食品・飲料・お酒</a></td></tr><tr><th>送料</th><td>無料（楽天のデータより）</td></tr><tr><th>ショップ</th><td>ミート21ショップ 楽天市場店</td></tr><tr><th>レビュー</th><td><svg class="ic ic-star" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg?v=64ebb500#ic-star"></use></svg>4.26（21,792件）</td></tr><tr><th>掲載日</th><td>2026-11-04</td></tr><tr><th>価格の確認日</th><td>2026-11-10</td></tr></tbody></table>
+diff --git a/p/r8550b30d9/index.html b/p/r8550b30d9/index.html
+index 3a155ef..5a9600e 100644
+--- a/p/r8550b30d9/index.html
++++ b/p/r8550b30d9/index.html
+@@ -76,7 +76,7 @@
+   </div>
+   <p class="pop-note">値段は毎日見にいってます。買う前に楽天でも確かめてね（2026-11-10時点）</p>
+ 
+-  <h2 class="section-title">どんな商品？</h2><div class="prose prose-card"><p>熊本のとんこつラーメン、生麺で6食分です。</p><p>一度に届くので、食べたい日にすぐ作れます。送料込み。</p><ul class="prose-points"><li>生麺 6食セット</li><li>とんこつ</li><li>熊本</li><li>送料込み</li></ul></div>
++  <h2 class="section-title">どんな商品？</h2><div class="prose prose-card"><p>熊本のとんこつラーメン、生麺で6食分です。</p><p>食べたい日にすぐ作れる、買い置きの分。送料込み。</p><ul class="prose-points"><li>生麺 6食セット</li><li>とんこつ</li><li>熊本</li><li>送料込み</li></ul></div>
+ 
+   <h2 class="section-title">商品情報</h2>
+   <table class="spec"><tbody><tr><th>価格</th><td class="price-cell">¥1,280</td></tr><tr><th>以前の価格</th><td>¥2,560（50%OFF）<br><small>当サイトが過去60日で観測した最高値です</small></td></tr><tr><th>カテゴリ</th><td><a class="inline-cat" href="/c/food/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg?v=64ebb500#ic-food"></use></svg>食品・飲料・お酒</a></td></tr><tr><th>送料</th><td>無料（楽天のデータより）</td></tr><tr><th>ショップ</th><td>【 くまもと風土 】</td></tr><tr><th>レビュー</th><td><svg class="ic ic-star" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg?v=64ebb500#ic-star"></use></svg>4.4（1,784件）</td></tr><tr><th>掲載日</th><td>2026-11-04</td></tr><tr><th>価格の確認日</th><td>2026-11-10</td></tr></tbody></table>
+diff --git a/p/r99dc0d242/index.html b/p/r99dc0d242/index.html
+index 86b29d8..39cb93e 100644
+--- a/p/r99dc0d242/index.html
++++ b/p/r99dc0d242/index.html
+@@ -76,7 +76,7 @@
+   </div>
+   <p class="pop-note">値段は毎日見にいってます。買う前に楽天でも確かめてね（2026-11-10時点）</p>
+ 
+-  <h2 class="section-title">どんな商品？</h2><div class="prose prose-card"><p>200g入りで、味はプレーンとうめ味の2種から選べます。</p><p>昆布専門の問屋のものです。</p><ul class="prose-points"><li>50杯分・200gの大袋</li><li>プレーン・うめ味の2種から選べる</li><li>昆布専門問屋 源蔵屋</li></ul></div>
++  <h2 class="section-title">どんな商品？</h2><div class="prose prose-card"><p>200gの大袋で、味はプレーンとうめ味の2種から選べます。</p><p>昆布専門の問屋、源蔵屋のものです。</p><ul class="prose-points"><li>50杯分・200gの大袋</li><li>プレーン・うめ味の2種から選べる</li><li>昆布専門問屋 源蔵屋</li></ul></div>
+ 
+   <h2 class="section-title">商品情報</h2>
+   <table class="spec"><tbody><tr><th>価格</th><td class="price-cell">¥1,580</td></tr><tr><th>以前の価格</th><td>¥3,160（50%OFF）<br><small>当サイトが過去60日で観測した最高値です</small></td></tr><tr><th>カテゴリ</th><td><a class="inline-cat" href="/c/food/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg?v=64ebb500#ic-food"></use></svg>食品・飲料・お酒</a></td></tr><tr><th>送料</th><td>無料（楽天のデータより）</td></tr><tr><th>ショップ</th><td>昆布専門問屋 源蔵屋</td></tr><tr><th>レビュー</th><td><svg class="ic ic-star" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg?v=64ebb500#ic-star"></use></svg>4.71（5,531件）</td></tr><tr><th>掲載日</th><td>2026-11-04</td></tr><tr><th>価格の確認日</th><td>2026-11-10</td></tr></tbody></table>
+diff --git a/p/rb482690c5/index.html b/p/rb482690c5/index.html
+index 712aead..351f78a 100644
+--- a/p/rb482690c5/index.html
++++ b/p/rb482690c5/index.html
+@@ -76,7 +76,7 @@
+   </div>
+   <p class="pop-note">値段は毎日見にいってます。買う前に楽天でも確かめてね（2026-11-10時点）</p>
+ 
+-  <h2 class="section-title">どんな商品？</h2><div class="prose prose-card"><p>充電して使うカイロで、モバイルバッテリーにもなります。</p><p>薄型で、ポーチが付いています。</p><ul class="prose-points"><li>充電式（貼らないタイプ）</li><li>モバイルバッテリー兼用</li><li>薄型・コンパクト</li><li>ポーチ付き</li></ul></div>
++  <h2 class="section-title">どんな商品？</h2><div class="prose prose-card"><p>貼らない薄型で、ポーチが付いています。</p><p>充電して繰り返し使うタイプです。</p><ul class="prose-points"><li>充電式（貼らないタイプ）</li><li>モバイルバッテリー兼用</li><li>薄型・コンパクト</li><li>ポーチ付き</li></ul></div>
+ 
+   <h2 class="section-title">商品情報</h2>
+   <table class="spec"><tbody><tr><th>価格</th><td class="price-cell">¥1,096</td></tr><tr><th>以前の価格</th><td>¥2,740（60%OFF）<br><small>当サイトが過去60日で観測した最高値です</small></td></tr><tr><th>カテゴリ</th><td><a class="inline-cat" href="/c/kaden/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg?v=64ebb500#ic-kaden"></use></svg>家電・カメラ・AV機器</a></td></tr><tr><th>送料</th><td>無料（楽天のデータより）</td></tr><tr><th>ショップ</th><td>mottole(モットル)</td></tr><tr><th>レビュー</th><td><svg class="ic ic-star" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg?v=64ebb500#ic-star"></use></svg>4.33（4,455件）</td></tr><tr><th>掲載日</th><td>2026-11-02</td></tr><tr><th>価格の確認日</th><td>2026-11-10</td></tr></tbody></table>
+diff --git a/p/rc2e11945a/index.html b/p/rc2e11945a/index.html
+index 3f3a177..e7c76f4 100644
+--- a/p/rc2e11945a/index.html
++++ b/p/rc2e11945a/index.html
+@@ -76,7 +76,7 @@
+   </div>
+   <p class="pop-note">値段は毎日見にいってます。買う前に楽天でも確かめてね（2026-11-10時点）</p>
+ 
+-  <h2 class="section-title">どんな商品？</h2><div class="prose prose-card"><p>デスクに置くタイプのおもちゃ。</p><p>キャラクターもので、握って遊びます。</p><ul class="prose-points"><li>ふわふわ・もちもちの触感</li><li>キャラクターもの</li><li>デスク用</li></ul></div>
++  <h2 class="section-title">どんな商品？</h2><div class="prose prose-card"><p>デスクに置くタイプのスクイーズです。</p><p>キャラクターもので、握って遊びます。</p><ul class="prose-points"><li>ふわふわ・もちもちの触感</li><li>キャラクターもの</li><li>デスク用</li></ul></div>
+ 
+   <h2 class="section-title">商品情報</h2>
+   <table class="spec"><tbody><tr><th>価格</th><td class="price-cell">¥990</td></tr><tr><th>以前の価格</th><td>¥1,699（42%OFF）<br><small>当サイトが過去60日で観測した最高値です</small></td></tr><tr><th>カテゴリ</th><td><a class="inline-cat" href="/c/baby-toy/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg?v=64ebb500#ic-baby-toy"></use></svg>ベビー・キッズ</a></td></tr><tr><th>送料</th><td>無料（楽天のデータより）</td></tr><tr><th>ショップ</th><td>Life-Stay</td></tr><tr><th>レビュー</th><td><svg class="ic ic-star" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg?v=64ebb500#ic-star"></use></svg>4.3（110件）</td></tr><tr><th>掲載日</th><td>2026-10-20</td></tr><tr><th>価格の確認日</th><td>2026-11-10</td></tr></tbody></table>
+diff --git a/p/rd34567de1/index.html b/p/rd34567de1/index.html
+index 221046a..edf2963 100644
+--- a/p/rd34567de1/index.html
++++ b/p/rd34567de1/index.html
+@@ -76,7 +76,7 @@
+   </div>
+   <p class="pop-note">値段は毎日見にいってます。買う前に楽天でも確かめてね（2026-11-10時点）</p>
+ 
+-  <h2 class="section-title">どんな商品？</h2><div class="prose prose-card"><p>リブ素材のトップスで、インナーにも使えます。</p><p>ネックの形違いから選べます。</p><ul class="prose-points"><li>ネックの形が選べる</li><li>テレコリブ素材</li><li>長袖</li></ul></div>
++  <h2 class="section-title">どんな商品？</h2><div class="prose prose-card"><p>テレコリブの長袖カットソー。ネックの形違いから選べます。</p><p>インナーにも使えるタイプです。</p><ul class="prose-points"><li>ネックの形が選べる</li><li>テレコリブ素材</li><li>長袖</li></ul></div>
+ 
+   <h2 class="section-title">商品情報</h2>
+   <table class="spec"><tbody><tr><th>価格</th><td class="price-cell">¥1,390</td></tr><tr><th>セール前の価格</th><td>¥1,990（30%OFF）<br><small>ショップが商品名に書いていた値で、実売価格と一致することを確かめています。当サイトが以前に観測した値ではありません</small></td></tr><tr><th>カテゴリ</th><td><a class="inline-cat" href="/c/fashion/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg?v=64ebb500#ic-fashion"></use></svg>服・靴・バッグ・時計</a></td></tr><tr><th>送料</th><td>無料（楽天のデータより）</td></tr><tr><th>ショップ</th><td>Pierrot【ピエロ】</td></tr><tr><th>レビュー</th><td><svg class="ic ic-star" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg?v=64ebb500#ic-star"></use></svg>4.33（2,334件）</td></tr><tr><th>掲載日</th><td>2026-11-03</td></tr><tr><th>価格の確認日</th><td>2026-11-10</td></tr></tbody></table>
+diff --git a/p/rd429b31ad/index.html b/p/rd429b31ad/index.html
+index 6e70bfe..e50ce32 100644
+--- a/p/rd429b31ad/index.html
++++ b/p/rd429b31ad/index.html
+@@ -76,7 +76,7 @@
+   </div>
+   <p class="pop-note">値段は毎日見にいってます。買う前に楽天でも確かめてね（2026-11-10時点）</p>
+ 
+-  <h2 class="section-title">どんな商品？</h2><div class="prose prose-card"><p>ジュース・スムージー用として出ている、家庭用のりんごです。</p><ul class="prose-points"><li>山形県産サンふじ</li><li>5kg入り</li><li>ジュース・スムージー用の家庭用</li></ul></div>
++  <h2 class="section-title">どんな商品？</h2><div class="prose prose-card"><p>山形県産のサンふじです。</p><p>ジュース・スムージー用に出ている、家庭用のりんご。</p><ul class="prose-points"><li>山形県産サンふじ</li><li>5kg入り</li><li>ジュース・スムージー用の家庭用</li></ul></div>
+ 
+   <h2 class="section-title">商品情報</h2>
+   <table class="spec"><tbody><tr><th>価格</th><td class="price-cell">¥2,170</td></tr><tr><th>以前の価格</th><td>¥3,370（36%OFF）<br><small>当サイトが過去60日で観測した最高値です</small></td></tr><tr><th>カテゴリ</th><td><a class="inline-cat" href="/c/food/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg?v=64ebb500#ic-food"></use></svg>食品・飲料・お酒</a></td></tr><tr><th>送料</th><td>無料（楽天のデータより）</td></tr><tr><th>ショップ</th><td>竹城青果</td></tr><tr><th>レビュー</th><td><svg class="ic ic-star" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg?v=64ebb500#ic-star"></use></svg>4.28（3,892件）</td></tr><tr><th>掲載日</th><td>2026-10-31</td></tr><tr><th>価格の確認日</th><td>2026-11-10</td></tr></tbody></table>
+diff --git a/p/red6052d5f/index.html b/p/red6052d5f/index.html
+index 8f9a85e..b937eab 100644
+--- a/p/red6052d5f/index.html
++++ b/p/red6052d5f/index.html
+@@ -76,7 +76,7 @@
+   </div>
+   <p class="pop-note">値段は毎日見にいってます。買う前に楽天でも確かめてね（2026-11-10時点）</p>
+ 
+-  <h2 class="section-title">どんな商品？</h2><div class="prose prose-card"><p>2台同時に充電できます。</p><p>色はピンクとグリーンがあります。</p><ul class="prose-points"><li>15000mAh</li><li>薄型・軽量</li><li>2台同時充電</li><li>機内持ち込み可</li></ul></div>
++  <h2 class="section-title">どんな商品？</h2><div class="prose prose-card"><p>薄型で、2台同時に充電できます。</p><p>色はピンクとグリーン。機内持ち込みもできます。</p><ul class="prose-points"><li>15000mAh</li><li>薄型・軽量</li><li>2台同時充電</li><li>機内持ち込み可</li></ul></div>
+ 
+   <h2 class="section-title">商品情報</h2>
+   <table class="spec"><tbody><tr><th>価格</th><td class="price-cell">¥799</td></tr><tr><th>以前の価格</th><td>¥1,199（33%OFF）<br><small>当サイトが過去60日で観測した最高値です</small></td></tr><tr><th>カテゴリ</th><td><a class="inline-cat" href="/c/pc/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg?v=64ebb500#ic-pc"></use></svg>パソコン・スマホ・事務</a></td></tr><tr><th>送料</th><td>無料（楽天のデータより）</td></tr><tr><th>ショップ</th><td>EVOPOW JAPAN 楽天市場店</td></tr><tr><th>レビュー</th><td><svg class="ic ic-star" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg?v=64ebb500#ic-star"></use></svg>4.45（563件）</td></tr><tr><th>掲載日</th><td>2026-11-07</td></tr><tr><th>価格の確認日</th><td>2026-11-10</td></tr></tbody></table>
+diff --git a/p/redc4f51e4/index.html b/p/redc4f51e4/index.html
+index 988fe96..e298d5c 100644
+--- a/p/redc4f51e4/index.html
++++ b/p/redc4f51e4/index.html
+@@ -76,7 +76,7 @@
+   </div>
+   <p class="pop-note">値段は毎日見にいってます。買う前に楽天でも確かめてね（2026-11-10時点）</p>
+ 
+-  <h2 class="section-title">どんな商品？</h2><div class="prose prose-card"><p>1袋に30枚。</p><p>こまめに使う人向けの枚数です。</p><ul class="prose-points"><li>30枚入り</li><li>大容量のフェイスパック</li><li>送料無料</li></ul></div>
++  <h2 class="section-title">どんな商品？</h2><div class="prose prose-card"><p>大容量のフェイスパックです。</p><p>こまめに使う人向けの枚数。</p><ul class="prose-points"><li>30枚入り</li><li>大容量のフェイスパック</li><li>送料無料</li></ul></div>
+ 
+   <h2 class="section-title">商品情報</h2>
+   <table class="spec"><tbody><tr><th>価格</th><td class="price-cell">¥1,000</td></tr><tr><th>以前の価格</th><td>¥2,000（50%OFF）<br><small>当サイトが過去60日で観測した最高値です</small></td></tr><tr><th>カテゴリ</th><td><a class="inline-cat" href="/c/beauty/"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg?v=64ebb500#ic-beauty"></use></svg>ドラッグストア・美容</a></td></tr><tr><th>送料</th><td>無料（楽天のデータより）</td></tr><tr><th>ショップ</th><td>SUISOSUM公式 楽天市場店</td></tr><tr><th>レビュー</th><td><svg class="ic ic-star" aria-hidden="true" focusable="false"><use href="/assets/img/icons.svg?v=64ebb500#ic-star"></use></svg>4.54（2,669件）</td></tr><tr><th>掲載日</th><td>2026-11-03</td></tr><tr><th>価格の確認日</th><td>2026-11-10</td></tr></tbody></table>
+diff --git a/pitch.py b/pitch.py
+index 52d6dde..cc1aad7 100644
+--- a/pitch.py
++++ b/pitch.py
+@@ -30,28 +30,34 @@ import sys
+ 
+ ROOT = os.path.dirname(os.path.abspath(__file__))
+ 
+-# 入口の型。pitch_rules.md と対応している。
++# 入口の型（2026-11-10 の標準形）。pitch_rules.md と対応している。
++#
++# それまでの7種（悩み・あるある・利用シーン・発見・比較・意外性・
++# 悩み＋価格）は、どれも「商品説明の言い切り」の仲間どうしで、
++# 自アカウントでは差が出なかった（入口の型の中央値 7.5〜11）。
++# 界隈で伸びている投稿（型カタログ T1）は、1行目が
++# 事実への短い反応になっている。驚けるのは見て分かる事実だけ。
++#   price … 価格の事実への第一声（現在価格・OFF を含んでよい）
++#   count … レビュー件数・評価の事実への第一声
++#   look  … 見た目・仕様の事実への第一声（写真で分かること）
++#   scene … 利用場面への第一声（あるあるを反応の形で）
+ HOOK_TYPES = {
+-    "problem":       "悩み",
+-    "relatable":     "あるある",
+-    "scene":         "利用シーン",
+-    "discovery":     "発見",
+-    "compare":       "比較",
+-    "surprise":      "意外性",
+-    "problem_price": "悩み＋価格",
++    "price": "価格への第一声",
++    "count": "件数への第一声",
++    "look":  "見た目・仕様への第一声",
++    "scene": "場面への第一声",
+ }
+ 
+-REQUIRED = ("hook_type", "target", "problem", "hook", "body")
+-
+-# 締めの一言。商品に合うものを選ぶ。同じ問いを毎回続けない。
+-# none も立派な選択肢。問いかけが不自然な商品に無理に付けない。
+-CTA_TYPES = {
+-    "experience": "これ、使ってる人います？",
+-    "compare":    "もっといいのあったら教えてください。",
+-    "empathy":    "同じこと思ってる人、いません？",
+-    "save":       "保存しておくと、あとで見返せます。",
+-    "question":   None,   # 商品ごとの問い。cta_text に書く
+-    "none":       "",
++REQUIRED = ("hook_type", "target", "problem", "hook", "body", "ask", "ask_type")
++
++# 締めの問い（ask）の種類。締めは全投稿このどれかで統一する。
++# それまでの締めローテーション（experience／compare／empathy／save／
++# question／none）は廃止した。定型の文を回すのではなく、
++# 商品ごとの問いを書く。種類は「何を聞くか」の分類だけに使う。
++ASK_TYPES = {
++    "usage":   "使っている人を聞く",
++    "choice":  "選び方・派を聞く",
++    "problem": "困りごとを聞く",
+ }
+ 
+ # 判定は3階層で見る。「〜そう」が付いているかどうかでは決めない。
+@@ -107,10 +113,9 @@ def save(name, obj):
+ 
+ 
+ def text_of(m):
+-    # 締めの問い（cta_text）と、試しで差し替える問い（ask）も外に出る文なので調べる。
+-    # 2026-09-28 まで cta_text は検査の外にあった。
++    # 締めの問い（ask）も外に出る文なので調べる。
+     return "\n".join([str(m.get("hook") or ""), str(m.get("body") or ""),
+-                      str(m.get("cta_text") or ""), str(m.get("ask") or "")])
++                      str(m.get("ask") or "")])
+ 
+ 
+ def validate(m, p):
+@@ -128,16 +133,15 @@ def validate(m, p):
+         issues.append("features が空（何を根拠にしたか残らない）")
+     if m.get("hook_type") not in HOOK_TYPES:
+         issues.append("入口の型が不明: %s" % m.get("hook_type"))
+-    cta = m.get("cta")
+-    if cta is not None and cta not in CTA_TYPES:
+-        issues.append("締めの型が不明: %s" % cta)
+-    if cta == "question" and not (m.get("cta_text") or "").strip():
+-        issues.append("cta が question なのに cta_text が空")
+-    # ask: 読む人に聞く締め（exp-011）。半分の投稿でだけ、締めをこれに差し替える。
+-    # 答えたくなる問いにする。相手を名指しし（「○○の人」）、疑問で終える。
++    # 締めの問い（ask）は必須。答えたくなる問いにする。
++    # 相手を名指しし（「○○の人」）、疑問で終える。
+     ask = (m.get("ask") or "").strip()
+-    if ask and not ask.endswith(("？", "?")):
++    if not ask:
++        issues.append("ask が空（締めの問いは必須）")
++    elif not ask.endswith(("？", "?")):
+         issues.append("ask が問いで終わっていない: %s" % ask)
++    if m.get("ask_type") not in ASK_TYPES:
++        issues.append("問いの種類が不明: %s" % m.get("ask_type"))
+ 
+     t = text_of(m)
+     cat = p.get("category", "")
+@@ -161,11 +165,27 @@ def validate(m, p):
+                 issues.append("体型が変わる言い方「%s」" % w)
+                 break
+ 
+-    # 値段は本文に置かない。threads.py が最後に付ける。
+-    # ただし「悩み＋価格」型は値段から入るので、そこだけ許す。
+-    if m.get("hook_type") != "problem_price":
+-        if re.search(r"[\d,]{3,}\s*円", t):
+-            issues.append("本文に値段が入っている（価格は組み立て側で付ける）")
++    # 値段の置き場所。
++    # 事実ブロック（組み立て側が最後に付ける）以外では、本文（body）と
++    # 問い（ask）に値段を書かない。二重に出すと告知の列挙になる。
++    # 第一声（hook）だけは、型が price のときに価格の事実を使える。
++    # その場合も、書けるのは実在の金額（現在価格・定価）か、
++    # 「1杯あたり約32円」のような算術で出る単価だけ。
++    body_ask = "\n".join([str(m.get("body") or ""), ask])
++    if re.search(r"[\d,]{2,}\s*円", body_ask):
++        issues.append("本文・問いに値段が入っている（価格は組み立て側で付ける）")
++    if m.get("hook_type") != "price":
++        if re.search(r"[\d,]{2,}\s*円", str(m.get("hook") or "")):
++            issues.append("hook に値段が入っている（価格の第一声は型 price のときだけ）")
++    else:
++        allowed = {p.get("price"), p.get("listPrice")}
++        for mt in re.finditer(r"([\d,]{2,})\s*円", str(m.get("hook") or "")):
++            val = int(mt.group(1).replace(",", ""))
++            before = (m.get("hook") or "")[max(0, mt.start() - 10):mt.start()]
++            if val in allowed or "あたり" in before or "約" in before:
++                continue
++            issues.append("hook の金額 %s円 が商品データに無い" % mt.group(1))
++            break
+ 
+     # レベル3に当たる述語が入っていないか。
+     # 「〜そう」が付いているかどうかでは判定しない。
+@@ -286,7 +306,10 @@ def main():
+                 miss += 1
+                 continue
+             issues = validate(m, p)
+-            body = {k: v for k, v in m.items() if k != "id"}
++            # 旧形式の締め（cta／cta_text）は取り込まない。
++            # 残すと「組み立てが2つある」状態がデータ側に残る。
++            body = {k: v for k, v in m.items()
++                    if k not in ("id", "cta", "cta_text")}
+             p["marketing"] = body
+             p["pitch_status"] = "needs_review" if issues else "ready"
+             if issues:
+diff --git a/pitch_rules.md b/pitch_rules.md
+index 1d7cfca..5dbb5d6 100644
+--- a/pitch_rules.md
++++ b/pitch_rules.md
+@@ -15,19 +15,30 @@ Threadsの親投稿を作るときの決まり。
+ 
+ 全部を本文に入れる必要はない。説明しすぎると広告に見える。
+ 
+-## 入口の型（毎回変える）
++## 入口の型（事実への第一声）
+ 
+-| 型 | 例 |
+-|---|---|
+-| 悩み | 猫砂、重いのを運ぶのがしんどい。 |
+-| あるある | タオル、気づくと全部くたびれている。 |
+-| 利用シーン | 一日中デスクにいる日は、デニムだと夕方につらい。 |
+-| 発見 | 洗濯機の下に、台を噛ませるという手があります。 |
+-| 比較 | バスタオルとフェイスタオルの、ちょうど間くらい。 |
+-| 意外性 | 訳ありの理由が、味ではなく形でした。 |
+-| 悩み＋価格 | 印鑑が急に必要になっても、1,297円で揃います。 |
++2026-11-10 に全面変更した。それまでの7種（悩み・あるある・
++利用シーン・発見・比較・意外性・悩み＋価格）は、どれも
++「商品説明の言い切り」の仲間どうしで、自アカウントでは差が出なかった。
++界隈で伸びている投稿は、1行目が事実への短い反応になっている
++（型カタログ T1／research.json の記録）。入口は「反応」で、
++商品名や仕様の説明から始めない。
+ 
+-悩み型ばかりにしない。「◯◯が面倒」「◯◯が気になる」が続くと単調になる。
++| 型 | 反応する事実 | 例 |
++|---|---|---|
++| 価格（price） | 現在価格・OFF | え、15,000mAhで799円。 |
++| 件数（count） | レビュー件数・評価 | マウスピースに、レビューが3,135件。 |
++| 見た目・仕様（look） | 写真で分かること、仕様 | この立体感、反則じゃないですか。 |
++| 場面（scene） | 利用場面 | 夜中に急にとんこつが食べたくなる日、ある。 |
++
++- 驚けるのは「見て分かる事実」だけ。価格・件数・見た目・仕様・
++  システムが測った事実（期間最安値・中央値比）以外に驚かない。
++- **使ったことがあるような感想は書かない。** 使っていないので嘘になる。
++  反応は事実にだけ向ける（「安い」「多い」「立体的」までは事実、
++  「使いやすかった」「軽くて驚いた」は体験の捏造）。
++- 価格を書けるのは型 price のときだけ。現在価格か定価か、
++  算術で出る単価（「1杯あたり約32円」）に限る。
++- 型は毎回変える。同じ商品でも、別の事実に反応できる。
+ 
+ ## 悩みの作り方
+ 
+@@ -84,20 +95,20 @@ Threadsの親投稿を作るときの決まり。
+   「レビュー6,206件」は可。「6,206人が買った」は不可
+ - 使っていない商品の体験談
+ 
+-## 締めの一言
++## 締めは、読む人への問い（ask）で統一する
+ 
+-商品に合うものを選ぶ。同じ問いを毎回続けない。付けないのも選択肢。
++2026-11-10 に全面変更した。それまでの締めローテーション
++（使ってる人いますか／保存しておくと〜／教えてください 等の
++定型を回す形）は廃止。問いと定型が混ざると、組み立てが2つになる。
+ 
+-| 型 | 文 |
+-|---|---|
+-| experience | これ、使ってる人います？ |
+-| compare | もっといいのあったら教えてください。 |
+-| empathy | 同じこと思ってる人、いません？ |
+-| save | 保存しておくと、あとで見返せます。 |
+-| question | 商品ごとの問いを cta_text に書く |
+-| none | 付けない |
+-
+-問いかけが不自然な商品に、無理に付けない。
++- 締めは全投稿、商品ごとの問い（ask）で終える。**必須**。
++- 問いは「相手を名指しして、答えを1つ選べる形」にする。
++  - usage … 使っているかを聞く（「毎日使う人いますか？」）
++  - choice … 派・選び方を聞く（「使い捨て派ですか、充電派ですか？」）
++  - problem … 困りごとを聞く（「排水口、どうしていますか？」）
++- 種類（ask_type）も必ず付ける。問いどうしの反応の差は、
++  あとで learn.py が「問いの型べつ」に集計する。
++- ask には値段を書かない（価格は事実ブロックの仕事）。
+ 
+ ## 言葉づかい
+ 
+diff --git a/products.json b/products.json
+index 0e443ba..c5874ef 100644
+--- a/products.json
++++ b/products.json
+@@ -631,19 +631,19 @@
+         "benefits": [
+           "2台同時に充電できる"
+         ],
+-        "body": "2台同時に充電できます。\n色はピンクとグリーンがあります。",
+-        "cta": "save",
++        "body": "薄型で、2台同時に充電できます。\n色はピンクとグリーン。機内持ち込みもできます。",
+         "features": [
+           "15000mAh",
+           "薄型・軽量",
+           "2台同時充電",
+           "機内持ち込み可"
+         ],
+-        "hook": "15000mAhのモバイルバッテリー、薄型タイプです。",
+-        "hook_type": "problem",
++        "hook": "え、15,000mAhで799円。",
++        "hook_type": "price",
+         "problem": "外出先でスマホの電池が切れると困る",
+         "target": "外出先でスマホの電池が切れがちな人",
+-        "use_case": "外出時の充電"
++        "use_case": "外出時の充電",
++        "ask_type": "choice"
+       }
+     },
+     {
+@@ -1434,18 +1434,18 @@
+         "benefits": [
+           "枚数がまとまっている"
+         ],
+-        "body": "ドロップシールとも呼ばれるタイプ。\n手帳やノート、スマホケースに貼るデコ用です。",
+-        "cta": "experience",
++        "body": "ぷっくりしたデコシール、4枚か6枚のセットです。\nドロップシールとも呼ばれるタイプ。手帳やノート、スマホケースに貼るものです。",
+         "features": [
+           "4/6枚セット",
+           "立体感のあるデコシール（ぷっくりシール）",
+           "送料無料"
+         ],
+-        "hook": "ぷっくりした立体感のあるシール、4枚か6枚のセットです。",
+-        "hook_type": "discovery",
++        "hook": "この立体感、反則じゃないですか。",
++        "hook_type": "look",
+         "problem": "デコ用のシールは、枚数が少ないとテーマをそろえる前に終わる",
+         "target": "手帳やノートをシールでデコる人",
+-        "use_case": "手帳・ノート・スマホケースのデコ"
++        "use_case": "手帳・ノート・スマホケースのデコ",
++        "ask_type": "choice"
+       }
+     },
+     {
+@@ -1641,7 +1641,7 @@
+       "lastSeen": "2026-11-10",
+       "pitch_status": "ready",
+       "marketing": {
+-        "hook_type": "scene",
++        "hook_type": "count",
+         "target": "晩酌のおつまみを探す人",
+         "problem": "おつまみの買い置き",
+         "use_case": "晩酌",
+@@ -1654,10 +1654,10 @@
+         "benefits": [
+           "常温で置いておける"
+         ],
+-        "hook": "宮崎名物の鶏の炭火焼き、お試しの3袋です。",
+-        "body": "国産鶏肉100%の塩味。\nレトルトの個包装で、常温で2年もちます。",
+-        "cta": "none",
+-        "ask": "晩酌のおつまみ、常温で置いておけるものを探している人はいますか？"
++        "hook": "21,792件もレビューがある、鶏の炭火焼き。",
++        "body": "宮崎名物で、国産鶏肉100%の塩味。100gの個包装が3袋です。\nレトルトで、常温で2年もちます。",
++        "ask": "おつまみの買い置き、常温で置けるものにしてますか？",
++        "ask_type": "usage"
+       }
+     },
+     {
+@@ -1776,7 +1776,7 @@
+       "lastSeen": "2026-11-10",
+       "pitch_status": "ready",
+       "marketing": {
+-        "hook_type": "problem",
++        "hook_type": "count",
+         "target": "寝ているときの歯ぎしりが気になる人",
+         "problem": "歯ぎしりや食いしばりが気になる",
+         "use_case": "就寝時",
+@@ -1788,10 +1788,10 @@
+         "benefits": [
+           "自分で型を取って使える"
+         ],
+-        "hook": "歯ぎしり用のマウスピース、自分で型を取るタイプです。",
+-        "body": "1箱に2ピース入りで、ケースが付いています。\nナイトガードとも呼ばれるものです。",
+-        "cta": "none",
+-        "ask": "歯ぎしりを家族に言われたことがある人、何か使っていますか？"
++        "hook": "マウスピースに、レビューが3,135件。",
++        "body": "自分で型を取るタイプで、1箱に2ピース入っています。ケース付き。\nナイトガードとも呼ばれるものです。",
++        "ask": "歯ぎしりを家族に言われたことがある人、何か使っていますか？",
++        "ask_type": "usage"
+       }
+     },
+     {
+@@ -1891,9 +1891,9 @@
+           "まとめて置いておける"
+         ],
+         "hook": "夜中に急にとんこつが食べたくなる日、ある。",
+-        "body": "熊本のとんこつラーメン、生麺で6食分です。\n一度に届くので、食べたい日にすぐ作れます。送料込み。",
+-        "cta": "empathy",
+-        "ask": "夜食にラーメンを食べる人、いますか？"
++        "body": "熊本のとんこつラーメン、生麺で6食分です。\n食べたい日にすぐ作れる、買い置きの分。送料込み。",
++        "ask": "夜食にラーメンを食べる人、いますか？",
++        "ask_type": "usage"
+       }
+     },
+     {
+@@ -2073,18 +2073,18 @@
+         "benefits": [
+           "お湯で作るスープの素"
+         ],
+-        "body": "200g入りで、味はプレーンとうめ味の2種から選べます。\n昆布専門の問屋のものです。",
+-        "cta": "experience",
++        "body": "200gの大袋で、味はプレーンとうめ味の2種から選べます。\n昆布専門の問屋、源蔵屋のものです。",
+         "features": [
+           "50杯分・200gの大袋",
+           "プレーン・うめ味の2種から選べる",
+           "昆布専門問屋 源蔵屋"
+         ],
+-        "hook": "昆布のスープ、50杯分の大袋です。",
+-        "hook_type": "scene",
++        "hook": "昆布のスープ、50杯分で1,580円。",
++        "hook_type": "price",
+         "problem": "汁物を一から作るのは手間な日がある",
+         "target": "汁物を手軽に足したい人",
+-        "use_case": "食事の汁物"
++        "use_case": "食事の汁物",
++        "ask_type": "usage"
+       }
+     },
+     {
+@@ -2392,8 +2392,7 @@
+         "benefits": [
+           "1本でストレートとカール"
+         ],
+-        "body": "温度は35段階、最高230℃まで選べます。\nセラミックコーティングで、海外でも使える対応です。",
+-        "cta": "experience",
++        "body": "20mmの2WAYで、温度は35段階（最高230℃）から選べます。\nセラミックコーティングで、海外でも使える対応です。",
+         "features": [
+           "ストレート/カール 2WAY",
+           "20mm",
+@@ -2401,11 +2400,12 @@
+           "セラミックコーティング",
+           "海外対応"
+         ],
+-        "hook": "ストレートとカールの2WAY、20mmのヘアアイロンです。",
+-        "hook_type": "compare",
++        "hook": "ストレートとカール、1本で済むやつ。",
++        "hook_type": "look",
+         "problem": "ストレート用とカール用で、アイロンを2本持ちにしている",
+         "target": "ストレートとカールの両方をやる人",
+-        "use_case": "毎朝のスタイリング"
++        "use_case": "毎朝のスタイリング",
++        "ask_type": "choice"
+       }
+     },
+     {
+@@ -2490,18 +2490,18 @@
+         "benefits": [
+           "枚数がまとまっている"
+         ],
+-        "body": "1袋に30枚。\nこまめに使う人向けの枚数です。",
+-        "cta": "experience",
++        "body": "大容量のフェイスパックです。\nこまめに使う人向けの枚数。",
+         "features": [
+           "30枚入り",
+           "大容量のフェイスパック",
+           "送料無料"
+         ],
+-        "hook": "シートマスク、30枚入りの大容量パックです。",
+-        "hook_type": "problem",
++        "hook": "シートマスク30枚で1,000円。1枚あたり約33円。",
++        "hook_type": "price",
+         "problem": "1枚ずつ買うタイプは、買い置きがすぐ切れる",
+         "target": "シートマスクの買い置きがすぐ終わる人",
+-        "use_case": "毎日のフェイスパック"
++        "use_case": "毎日のフェイスパック",
++        "ask_type": "usage"
+       }
+     },
+     {
+@@ -2698,18 +2698,18 @@
+         "benefits": [
+           "カバー力をうたうタイプ"
+         ],
+-        "body": "D-RAYの「D-クリア」。\nカバー力をうたう系統のパウダーです。",
+-        "cta": "compare",
++        "body": "D-RAYの『D-クリア』、12g入りです。\nカバー力をうたう系統のパウダー。",
+         "features": [
+           "パウダータイプ",
+           "12g入り",
+           "D-RAY"
+         ],
+-        "hook": "パウダータイプのファンデーション、12g入りです。",
+-        "hook_type": "compare",
++        "hook": "レビュー16,718件のパウダーファンデが、半額。",
++        "hook_type": "count",
+         "problem": "ファンデーションはタイプが多く、どれを選ぶかで迷う",
+         "target": "パウダータイプのファンデーションを探している人",
+-        "use_case": "毎日のメイク"
++        "use_case": "毎日のメイク",
++        "ask_type": "choice"
+       }
+     },
+     {
+@@ -2794,7 +2794,7 @@
+       "lastSeen": "2026-11-10",
+       "pitch_status": "ready",
+       "marketing": {
+-        "hook_type": "discovery",
++        "hook_type": "scene",
+         "target": "お茶をよく飲む人",
+         "problem": "いつも同じお茶",
+         "use_case": "家でのお茶",
+@@ -2807,10 +2807,10 @@
+         "benefits": [
+           "香りを選べる"
+         ],
+-        "hook": "日本茶に、ハーブやゆずを合わせたティーバッグです。",
+-        "body": "緑茶やほうじ茶がベースで、ハーブやゆずの香り。\n国産・無添加で、2袋を選べます。",
+-        "cta": "none",
+-        "ask": "お茶は、香りのついたものも飲みますか？"
++        "hook": "毎日同じお茶だと、さすがに飽きる。",
++        "body": "日本茶がベースのティーバッグで、ハーブやゆずの香りが付いています。\n国産・無添加で、2袋を選べます。",
++        "ask": "お茶は、香りのついたものも飲みますか？",
++        "ask_type": "usage"
+       }
+     },
+     {
+@@ -2875,18 +2875,18 @@
+         "benefits": [
+           "形違いから選べる"
+         ],
+-        "body": "リブ素材のトップスで、インナーにも使えます。\nネックの形違いから選べます。",
+-        "cta": "compare",
++        "body": "テレコリブの長袖カットソー。ネックの形違いから選べます。\nインナーにも使えるタイプです。",
+         "features": [
+           "ネックの形が選べる",
+           "テレコリブ素材",
+           "長袖"
+         ],
+-        "hook": "ネックの形を選べる、テレコリブの長袖カットソーです。",
+-        "hook_type": "discovery",
++        "hook": "重ね着の首元、形が合わないとずっと気になる。",
++        "hook_type": "scene",
+         "problem": "ネックの形が合わないと、重ね着で首元が合わない",
+         "target": "長袖のインナーを探している人",
+-        "use_case": "インナー・重ね着"
++        "use_case": "インナー・重ね着",
++        "ask_type": "choice"
+       }
+     },
+     {
+@@ -3162,19 +3162,19 @@
+         "benefits": [
+           "充電して繰り返し使える"
+         ],
+-        "body": "充電して使うカイロで、モバイルバッテリーにもなります。\n薄型で、ポーチが付いています。",
+-        "cta": "experience",
++        "body": "貼らない薄型で、ポーチが付いています。\n充電して繰り返し使うタイプです。",
+         "features": [
+           "充電式（貼らないタイプ）",
+           "モバイルバッテリー兼用",
+           "薄型・コンパクト",
+           "ポーチ付き"
+         ],
+-        "hook": "貼らないタイプの、充電式カイロです。",
+-        "hook_type": "problem",
++        "hook": "充電式カイロが1,096円。しかもモバイルバッテリー兼用。",
++        "hook_type": "price",
+         "problem": "使い捨てカイロは、買い置きと捨てる手間が毎回かかる",
+         "target": "使い捨てカイロをよく買う人",
+-        "use_case": "外出時の防寒"
++        "use_case": "外出時の防寒",
++        "ask_type": "choice"
+       }
+     },
+     {
+@@ -3520,18 +3520,18 @@
+         "benefits": [
+           "量がまとまっている"
+         ],
+-        "body": "ジュース・スムージー用として出ている、家庭用のりんごです。",
+-        "cta": "experience",
++        "body": "山形県産のサンふじです。\nジュース・スムージー用に出ている、家庭用のりんご。",
+         "features": [
+           "山形県産サンふじ",
+           "5kg入り",
+           "ジュース・スムージー用の家庭用"
+         ],
+-        "hook": "山形県産のサンふじ、5kg入りです。",
+-        "hook_type": "discovery",
++        "hook": "りんごを5kgで買う、という買い方。",
++        "hook_type": "look",
+         "problem": "ジュース用には、まとまった量のりんごが要る",
+         "target": "りんごをジュースやスムージーにする人",
+-        "use_case": "ジュース・スムージー"
++        "use_case": "ジュース・スムージー",
++        "ask_type": "usage"
+       }
+     },
+     {
+@@ -4848,18 +4848,18 @@
+         "benefits": [
+           "握って遊ぶタイプのおもちゃ"
+         ],
+-        "body": "デスクに置くタイプのおもちゃ。\nキャラクターもので、握って遊びます。",
+-        "cta": "empathy",
++        "body": "デスクに置くタイプのスクイーズです。\nキャラクターもので、握って遊びます。",
+         "features": [
+           "ふわふわ・もちもちの触感",
+           "キャラクターもの",
+           "デスク用"
+         ],
+-        "hook": "ふわふわ、もちもちの触感のスクイーズです。",
+-        "hook_type": "scene",
++        "hook": "ふわふわ、もちもち。名前だけで触感が分かる。",
++        "hook_type": "look",
+         "problem": "デスクワークの合間に、触るものが何もない",
+         "target": "デスクに置く小物が好きな人",
+-        "use_case": "デスクでの息抜き"
++        "use_case": "デスクでの息抜き",
++        "ask_type": "usage"
+       }
+     },
+     {
+@@ -5092,7 +5092,7 @@
+       "lastSeen": "2026-11-10",
+       "pitch_status": "ready",
+       "marketing": {
+-        "hook_type": "problem",
++        "hook_type": "scene",
+         "target": "ペットシーツを毎日替えている人",
+         "problem": "使い捨てだと減りが早い",
+         "use_case": "犬・猫のトイレまわり、介護",
+@@ -5110,7 +5110,8 @@
+         ],
+         "hook": "ペットシーツ、気づくと箱がもう空になっている。",
+         "body": "洗って繰り返し使える布のペットシーツです。防水で滑り止め付き。\n大判と特大があります。",
+-        "cta": "experience"
++        "ask": "ペットシーツ、使い捨てと洗えるタイプ、どっちを使っていますか？",
++        "ask_type": "choice"
+       }
+     },
+     {
+@@ -5183,8 +5184,8 @@
+           "箱なしアウトレット",
+           "レビュー197件・星4.83"
+         ],
+-        "cta": "save",
+-        "cta_text": null
++        "ask": "プリンターのインク、純正と互換どっちを使っていますか？",
++        "ask_type": "choice"
+       }
+     },
+     {
+@@ -5525,7 +5526,7 @@
+       "bumpedAt": "2026-10-14T16:31:12",
+       "lastSeen": "2026-11-10",
+       "marketing": {
+-        "hook_type": "problem",
++        "hook_type": "scene",
+         "target": "風呂の排水口の掃除が苦手な人",
+         "problem": "髪の毛を取るのが毎回いやになる",
+         "use_case": "浴室の掃除",
+@@ -5540,7 +5541,8 @@
+         ],
+         "hook": "風呂の排水口、毎回いやになる場所。",
+         "body": "ユニットバス用のヘアキャッチャーです。\n実用新案を出願しているとのこと。",
+-        "cta": "empathy"
++        "ask": "風呂の排水口、髪の毛取りはどうしていますか？",
++        "ask_type": "problem"
+       },
+       "pitch_status": "ready"
+     },
+diff --git a/research.json b/research.json
+index ec3f990..50d8da4 100644
+--- a/research.json
++++ b/research.json
+@@ -8,7 +8,7 @@
+     "同じ型が3件以上たまったら patterns に上げる。patterns から1つずつ、半分ずつ出して比べる試し（ab）にする。",
+     "うちの数字と並べて見る: 商品投稿の表示の中央値は約10、いいねは399本で18。"
+   ],
+-  "lastRun": "2026-10-06",
++  "lastRun": "2026-11-10",
+   "observations": [
+     {
+       "date": "2026-09-28",
+@@ -396,6 +396,83 @@
+       "url": "https://www.threads.com/@iwatetu/post/DeJPgUEE5-E",
+       "shape": "「皆さんのnote見せて欲しいです。いいのがあったら購入するかも」と、見せ合いを呼びかけ。",
+       "why": "買うかもという見返りの匂わせで、noteを持つ人が返信しやすい。pat-07 と同じ『見返りを示して繋がりを募る』型（記録だけ。真似しない）。"
++    },
++    {
++      "date": "2026-11-10",
++      "source": "Threads コネクタ検索（自アカウント @hiyoko_web 経由）",
++      "account": "@ffoox6486（サクラのファッションビューティ）",
++      "followers": 10706,
++      "post": "ケトル紹介（動画カルーセル×2）",
++      "likes": 8367,
++      "replies": 115,
++      "reposts": 88,
++      "quotes": 8,
++      "first_line": "「何これ、可愛い！」系の感想2行だけ。価格もリンクも本文に無し。",
++      "pattern": "pat-01"
++    },
++    {
++      "date": "2026-11-10",
++      "source": "Threads コネクタ検索",
++      "account": "@midzen_lines（あなたのインテリア）",
++      "followers": 5443,
++      "post": "DKeR4i-zlcm（画像カルーセル6枚）",
++      "likes": 1462,
++      "replies": 10,
++      "reposts": 17,
++      "quotes": 1,
++      "first_line": "驚きの感想から入り、機能の説明、締めは「楽天評価☆4.7」。価格は書かない。",
++      "pattern": "pat-01"
++    },
++    {
++      "date": "2026-11-10",
++      "source": "Threads コネクタ検索",
++      "account": "@takken.mama8315",
++      "followers": 783,
++      "post": "Ddn1CWxk0c0（文字だけ）",
++      "likes": 352,
++      "replies": 32,
++      "first_line": "困りごと＋条件を箇条書き、締めはおすすめを聞く問い。",
++      "pattern": "pat-02"
++    },
++    {
++      "date": "2026-11-10",
++      "source": "Threads コネクタ検索",
++      "account": "@yu_kichi__（認証済み）",
++      "post": "倉庫型セールの現地レポート（写真4枚、2026-11-08）",
++      "likes": 236,
++      "replies": 11,
++      "first_line": "本人の体験談（行ってきた、買った）。",
++      "pattern": "pat-04 寄り（現場報告）"
++    },
++    {
++      "date": "2026-11-10",
++      "source": "Threads コネクタ検索",
++      "account": "@yuyunv3（楽天ROOM）",
++      "post": "「今日限定」8商品のまとめ（価格・OFF%・締切を列挙、本文にリンク、ハッシュタグ）",
++      "likes": 1,
++      "replies": 0,
++      "first_line": "価格の列挙型のまとめ告知。反応はほぼ無し。",
++      "pattern": "pat-08（負の型）"
++    },
++    {
++      "date": "2026-11-10",
++      "source": "Threads コネクタ検索",
++      "account": "@yururi_lifehack",
++      "post": "スーパーSALE のまとめ（2026-11-04、メディア11件カルーセル、プロフィール誘導、保存CTA）",
++      "likes": 6,
++      "replies": 2,
++      "first_line": "まとめ告知型。反応は小さい。",
++      "pattern": "pat-08（負の型）"
++    },
++    {
++      "date": "2026-11-10",
++      "source": "Threads コネクタ検索",
++      "account": "@good_items_lab",
++      "post": "[PR] ハイチェア紹介（投稿後約6時間）",
++      "likes": 0,
++      "replies": 2,
++      "first_line": "問いかけ型の1行目＋⏰締切＋レビュー8,008件・4.57。投稿が新しく根拠は弱い。",
++      "pattern": "pat-02 への注意（問いを1行目に置く形は未検証）"
+     }
+   ],
+   "patterns": [
+@@ -405,7 +482,8 @@
+       "shape": "1行目を、商品を見た人の短い驚きやツッコミにする（「え、これで○円？」）。値段や【PR】の説明から入らない。",
+       "evidence": "midzen_lines 1390いいね。うちの商品投稿は全部「商品名＋値段」から入っていて、入口の型を変えても表示の中央値はどれも9〜10.5で差が出ていない。 2026-09-28: nico_select.2 228いいね（「【朗報】…実は勝ち組」で始める）。yu_meko_nokurashi_ 209いいね（「完全に騙された」で始める）と合わせて3件。",
+       "caution": "驚くのは見て分かることだけ（値段・デザイン・量）。使った感想にしない。PRの表示は外さない（位置は投稿の頭のまま）。",
+-      "status": "候補（3件そろった。exp-011 が決着したら次に試す。商品投稿の形を2つ同時に変えると、どちらが効いたか分からなくなるため）"
++      "status": "候補（3件そろった。exp-011 が決着したら次に試す。商品投稿の形を2つ同時に変えると、どちらが効いたか分からなくなるため）",
++      "evidence_2026_11_10": "@ffoox6486 いいね8,367（感想2行だけ）／@midzen_lines いいね1,462（感想→特徴→評価）。価格は本文に書かない形が大きい。"
+     },
+     {
+       "id": "pat-02",
+@@ -413,7 +491,8 @@
+       "shape": "最後の1行を、答えたくなる問いにする（「○○の人、どれ使ってます？」）。",
+       "evidence": "takken.mama8315 357いいね・32返信、oga__017 125いいね・41返信。うちは締めの130本が「保存しておくと、あとで見返せます」で、問いは0本。 2026-09-28: nalu.life40 95いいね・46返信（「同じ人いる？」で終える）。",
+       "caution": "返信が来たら、事実だけで返す。助言や体験談は書かない。",
+-      "status": "試し中 exp-011"
++      "status": "試し中 exp-011",
++      "evidence_2026_11_10": "@takken.mama8315 いいね352・返信32（締めの問い）。問いを1行目に置く形は @good_items_lab で反応0（約6時間時点、根拠弱）。"
+     },
+     {
+       "id": "pat-03",
+@@ -454,7 +533,15 @@
+       "evidence": "2026-10-03: himawari_vnnv_ 68いいね・46返信、kei_mama_items 34いいね・26返信、s_12_15_e 75いいね・27返信。過去に miina_goods 83いいね・68返信（9/18）も同じ形。 2026-10-04: riko410__ 32いいね・17返信（マラソン前に訪問を約束）。 2026-10-06: mashiro_ikujiitem 63いいね・35返信、mama.nokurashi 60いいね・67返信、sona_chotto_life 48いいね・20返信、ruru.run.03 32いいね・7返信（マラソン中、すべて経由購入の話）。",
+       "caution": "うちはサイトで、経由購入の約束はできないし、すべきでもない（購入を交換条件にする形）。真似しない。",
+       "status": "見送り（記録だけ。約束を伴う形のため）"
++    },
++    {
++      "id": "pat-08",
++      "name": "まとめ告知（価格列挙型）",
++      "status": "見送り",
++      "observed": "2026-11-10",
++      "evidence": "@yuyunv3 いいね1・返信0（8商品の価格列挙＋本文リンク）／@yururi_lifehack いいね6・返信2（11メディアのまとめ）。価格と商品名を並べる告知は、カルーセルでも伸びない。",
++      "note": "ヤスミルの商品投稿は、事実ブロック（価格・レビュー・締切）を残すが、先頭には置かない。1行目は事実への第一声（pat-01）にする。"
+     }
+   ],
+-  "next": "exp-011（締めを問いに）が走っている。決着したら pat-01（感想の第一声）を試す。pat-04（手探りの正直な報告）はその次。"
++  "next": "exp-012（リンクの置き方・再試行）が 2026-11-25 までの予定で走っている。次に見るのは exp-013（画像つき vs 文字だけ）の前提確認（楽天の商品画像の権利）と、ask_type（usage／choice／problem）どうしの反応差。pat-01 の第一声は 2026-11-10 に標準形へ反映済み。"
+ }
+diff --git a/rules.py b/rules.py
+index f1cc122..c879306 100644
+--- a/rules.py
++++ b/rules.py
+@@ -50,9 +50,11 @@ def rule_post_needs_pitch(ctx):
+     2026-08-31: キャプションのあとに楽天の商品名を貼る古い型で投稿していた。
+     「犬 猫 DHA/EPA 活性オメガ3オイル 100ml ふりかけ…」と切れて出た。
+     作り直す前の形に戻っていた。
++    2026-11-10: 標準形の変更に合わせて、条件は「第一声（hook）と
++    締めの問い（ask）の両方があること」に強めた。
+     """
+     src = ctx["threads_py"]
+-    if 'if not p.get("mk2"):' not in src:
++    if 'if not mk.get("hook") or not (mk.get("ask") or "").strip():' not in src:
+         return ["threads.py の pick() に、商品理解の無い商品を外す条件がありません"]
+     return []
+ 
+@@ -1090,25 +1092,25 @@ def rule_keep_learning_from_others(ctx):
+ 
+ 
+ def rule_pitches_carry_an_ask(ctx):
+-    """締めを問いにする試し（cta_arm）が走っている間は、商品理解に問い（ask）を書く。
+-
+-    2026-09-28: exp-011 は ask を持つ商品だけを振り分ける。
+-    書き忘れると、試しに入る商品が増えず、いつまでも決着しない。
+-    exp-003 は測らないまま放置されて決着しなかった。同じことを起こさない。
++    """商品理解には、締めの問い（ask）を書く。常時効く決まり。
++
++    2026-09-28: 界隈で反応の多い投稿は、締めが読む人への問いだった
++    （research.json pat-02）。問いを持つ商品だけを半分ずつ当てる
++    試し（exp-011）を回したが、ask 群・base 群とも反応は0件で
++    差がつかず、判定できなかった。
++    2026-11-10: 外部の証拠の強さを優先して、問いを商品投稿の
++    標準の締めに採用した（型カタログ T2）。試しの対象ではなく
++    全投稿の必須にしたので、この決まりは実験が走っていなくても効く。
++    問いが無い商品理解は、新しい組み立てで投稿できない。
+     """
+-    led = load("learnings.json", None) or {}
+-    running = any((e.get("ab") or {}).get("field") == "cta_arm"
+-                  and e.get("status") == "running"
+-                  for e in led.get("experiments") or [])
+-    if not running:
+-        return []
+     miss = [p for p in ctx["products"]
+             if p.get("pitch_status") == "ready"
+             and (p.get("postedAt") or "") >= "2026-09-28"
+             and not ((p.get("marketing") or {}).get("ask") or "").strip()]
+     if miss:
+         return ["商品理解に問い（ask）が無い商品が %d件あります（%s など）。"
+-                "exp-011 に入りません" % (len(miss), miss[0].get("title", "")[:20])]
++                "新しい組み立てでは投稿できません"
++                % (len(miss), miss[0].get("title", "")[:20])]
+     return []
+ 
+ 
+diff --git a/threads.py b/threads.py
+index 1672a40..9f0be5d 100644
+--- a/threads.py
++++ b/threads.py
+@@ -201,25 +201,25 @@ def ends_label(et):
+                                  m.group(4).lstrip("0") or "0", m.group(5))
+ 
+ 
+-# 締めの一言。付けるかどうかは投稿ごとに回す。
+-# 「使ったことある人いますか」は、こちらが使ったとは言っていないので嘘にならない。
+-# 締めの型。pitch.py の CTA_TYPES と対応している。
+-CTA_TEXT = {
+-    "experience": "これ、使ってる人います？",
+-    "compare":    "もっといいのあったら教えてください。",
+-    "empathy":    "同じこと思ってる人、いません？",
+-    "save":       "保存しておくと、あとで見返せます。",
+-    "none":       "",
+-}
+-
+-TAILS = [
+-    "",
+-    "\n\nこれ、使ってる人います？",
+-    "\n\n保存しておくと、あとで見返せます。",
+-    "",
+-    "\n\nもっといいのあったら教えてください。",
+-    "",
+-]
++# 商品投稿の組み立て（2026-11-10 全面作り直し）。
++#
++# 界隈で伸びている投稿の型を集めた結果（research.json／型カタログ
++# threads-viral-patterns-20261110.md）、入口と締めを決め直した。
++#
++#   入口 … 事実への第一声（T1）。商品説明の言い切りで始めない。
++#          驚けるのは見て分かる事実だけ（価格・レビュー件数・
++#          見た目や仕様・利用場面）。使った感想は書かない。
++#   締め … 読む人への問い（T2）。商品ごとの問い（mk2.ask）で必ず終える。
++#
++# それまでの締めローテーション（CTA_TEXT／TAILS）は廃止した。
++# 問いの A/B（exp-011）は ask 群・base 群とも反応0で判定できず、
++# 外部の証拠の強さで「問いを標準に採用」と決めて閉じた。
++# 残っているのは事実ブロック（価格・レビュー・締切）で、
++# これは「判断材料」として後ろに置く。先頭に置くと、
++# 価格を列挙するだけの「まとめ告知」の文法になる（負の型 N1）。
++#
++# 入口の型（pitch.py の HOOK_TYPES と対応）。
++NEW_HOOK_TYPES = ("price", "count", "look", "scene")
+ 
+ 
+ # セールの間だけ、商品リンクを楽天へ直接つなぐ。
+@@ -278,23 +278,6 @@ def ab_policy(field, default):
+     return default
+ 
+ 
+-def cta_arm(p, policy=None):
+-    """締めを、読む人への問い（ask）にするか、いつもの締め（base）にするか。
+-
+-    2026-09-28: 界隈で反応の多い投稿は、締めが読む人への問いだった
+-    （research.json pat-02）。うちは130本が「保存しておくと〜」で、問いは0本。
+-    問い（mk2.ask）を持つ商品だけを、商品IDで半分ずつ振り分けて比べる（exp-011）。
+-    リンクの振り分けとは別の種で混ぜるので、両方の試しが重ならない。
+-    """
+-    if not ((p.get("mk2") or {}).get("ask") or "").strip():
+-        return None
+-    policy = policy or ab_policy("cta_arm", "base")
+-    if policy != "split":
+-        return policy
+-    h = int(hashlib.md5(("cta:" + p["id"]).encode("utf-8")).hexdigest(), 16)
+-    return "ask" if h % 2 == 0 else "base"
+-
+-
+ def link_arm(p, policy=None):
+     """この商品を、楽天へ直接つなぐか（direct）、サイトへ送るか（site）。
+ 
+@@ -326,21 +309,23 @@ def link_for(p, site, policy=None):
+ 
+ 
+ def compose_product(p, site, pr, reply_link=False, ev=None, seq=0, fact=None):
+-    """商品の投稿文。
++    """商品の投稿文（2026-11-10 の標準形）。
+ 
+-    キャプションがあればそれを先頭に置く。人が書いた文なので、いちばん読ませる。
+-    無ければ、手元のデータだけで組み立てる。
+-    キャプションを待っていると、今朝見つけた79%OFFを流せるのが明日になる。
+-    セールの訴求は鮮度がすべてなので、待たないほうを選ぶ。
++    組み立ては1つだけに決める。形を投稿ごとに変えると、
++    何が効いたのか分からなくなる。変えるのは中身（第一声と問い）で、
++    骨格は固定する。
+ 
+-    形は投稿ごとに変える。1行目だけ入れ替えても、
+-    組み立てが同じなら同じ投稿に見える。
++        【PR】＋ 第一声（hook）   … 事実への短い反応。商品説明で始めない
++        本文（body）              … 何の商品かと、見分けになる事実1〜2行
++        事実ブロック              … 価格・送料・レビュー・締切の実測値
++        締め                      … 読む人への問い（ask）。必ず付ける
+ 
+     fact は再掲のときの「前回と違う事実」（値下げ・最安値への復帰・
+     セール開始）。案Aの決まりで、再掲では必ず1行目に置く。
++    その場合は第一声を2行目に回す。
+     """
+     mk = p.get("mk2") or None
+-    if mk and mk.get("hook"):
++    if mk and mk.get("hook") and (mk.get("ask") or "").strip():
+         # 事前に作って、決まりに照らして通した商品理解を使う。
+         # 何を先に出すか、誰に向けて書くかは、ここで決めてある。
+         # 投稿するときに考えると毎回ぶれるし、確かめる機会もない。
+@@ -369,33 +354,21 @@ def compose_product(p, site, pr, reply_link=False, ev=None, seq=0, fact=None):
+             tail += "\n%sまで。" % ends.replace(" まで", "")
+         lines += ["", tail]
+ 
+-        # 締めは商品に合わせて選んだものを使う。
+-        # 決めていなければ、これまでどおり順に回す。
+-        cta = mk.get("cta")
+-        if cta_arm(p) == "ask":
+-            tailtext = "\n\n" + mk["ask"].strip()
+-        elif cta == "question":
+-            tailtext = "\n\n" + (mk.get("cta_text") or "").strip()
+-        elif cta in CTA_TEXT:
+-            t2 = CTA_TEXT[cta]
+-            tailtext = ("\n\n" + t2) if t2 else ""
+-        else:
+-            tailtext = TAILS[seq % len(TAILS)]
+-
+-        body = "\n".join(lines) + tailtext
++        # 締めは、商品ごとの問い（ask）で必ず終える。
++        body = "\n".join(lines) + "\n\n" + mk["ask"].strip()
+         url = link_for(p, site)
+         if reply_link:
+             return body, url
+         return body + "\n\n" + url, None
+ 
+-    # 商品理解の無い商品は、pick() が候補から外している。
++    # 商品理解の無い商品、問いの無い商品は、pick() が候補から外している。
+     # ここへは来ない。来たら、それは決まりが壊れている合図なので、
+-    # 黙って古い形で出さずに、出さないことを選ぶ。
++    # 黙って別の形で出さずに、出さないことを選ぶ。
+     #
+-    # 以前はここに「キャプション＋商品名」と「値札型など7種」という
+-    # 古い道が残っていた。使わないのに残していたので、
+-    # pick() の条件が外れた拍子にそこへ落ち、
+-    # 楽天の商品名をそのまま貼った投稿が出た（2026-08-31）。
++    # 以前はここに「キャプション＋商品名」の古い道や、
++    # 締めのローテーションに落ちる道が残っていた。
++    # 使わない道を残すと、条件が外れた拍子にそこへ落ちて
++    # 旧い形の投稿が出る（2026-08-31 に実際に起きた）。
+     # 使わなくなった道は残さない。残せば、いつか落ちる。
+     return None, None
+ 
+@@ -950,7 +923,12 @@ def pick(cfg, posted, want, slot_hour=None, live_heads=None):
+         # 「誰に・どんな悩みに・どの特徴が効くか」を先に考える、という
+         # 作り直しの趣旨そのものからも外れている。
+         # 出せるものが無い枠は、知識や記事で埋める。そちらのほうがましだ。
+-        if not p.get("mk2"):
++        #
++        # 2026-11-10 の標準形では、締めの問い（ask）も必須にした。
++        # 問いが無い商品理解は、旧い形のまま残っているもの。
++        # 混ぜて出すと組み立てが2つあることになるので、候補から外す。
++        mk = p.get("mk2") or {}
++        if not mk.get("hook") or not (mk.get("ask") or "").strip():
+             continue
+         # キャプションが無くても、言えることがあるなら出す。
+         # 値引きが取れているか、期限が分かっていること。
+@@ -1426,8 +1404,9 @@ def report():
+               lambda x: x.get("logic_version"), only_product=True)
+     summarize("入口の型べつ",
+               lambda x: x.get("hook_type") or "（型なし）", only_product=True)
+-    summarize("締めべつ",
+-              lambda x: x.get("cta_type") or "（回しているもの）", only_product=True)
++    summarize("問いの型べつ",
++              lambda x: x.get("ask_type") or x.get("cta_type")
++              or "（型なし）", only_product=True)
+     summarize("売場べつ",
+               lambda x: x.get("category"), only_product=True)
+ 
+@@ -1529,8 +1508,8 @@ def run_once(cfg, posted, slot_hour=None, dry=False, late=False):
+     caps = {("product:" + x["id"]): bool(x.get("cap")) for x in _feed}
+     hooks = {("product:" + x["id"]): (x.get("mk2") or {}).get("hook_type")
+              for x in _feed}
+-    ctas = {("product:" + x["id"]): (x.get("mk2") or {}).get("cta")
+-            for x in _feed}
++    ask_types = {("product:" + x["id"]): (x.get("mk2") or {}).get("ask_type")
++                 for x in _feed}
+     cats = {("product:" + x["id"]): x.get("c") for x in _feed}
+     # 返信のリンクを楽天へ直接にしたか、サイトへ送ったか。クリック数を側ごとに足すため。
+     _pol = link_policy()
+@@ -1538,13 +1517,15 @@ def run_once(cfg, posted, slot_hour=None, dry=False, late=False):
+             (link_arm(x, _pol) if (x.get("url") or "").startswith(
+                 "https://hb.afl.rakuten.co.jp/") else "site")
+             for x in _feed}
+-    # 締めを問いにしたか（ask）、いつもの締めか（base）。問いを持たない商品は None。
+-    _cpol = ab_policy("cta_arm", "base")
+-    cta_arms = {("product:" + x["id"]): cta_arm(x, _cpol) for x in _feed}
+     # どちらの組み立てで出したか。あとで旧と新を比べるため。
+     # 商品理解を持っているものだけが新しいほうを通る。
++    # 2026-11-10 の標準形（第一声＋問い）で書かれた商品理解は pattern_v3、
++    # それ以前の形は marketing_v2 として残す。
+     vers = {("product:" + x["id"]):
+-            ("marketing_v2" if x.get("mk2") else "legacy_v1") for x in _feed}
++            ("pattern_v3" if (x.get("mk2") or {}).get("hook_type")
++             in NEW_HOOK_TYPES else
++             "marketing_v2" if x.get("mk2") else "legacy_v1")
++            for x in _feed}
+     ok = 0
+     for key, text, link in picks:
+         try:
+@@ -1592,8 +1573,8 @@ def run_once(cfg, posted, slot_hour=None, dry=False, late=False):
+             "cap": caps.get(key, None),
+             # どの入口の型で出したか。あとでどれが伸びたかを見るため。
+             "hook_type": hooks.get(key),
+-            # どの締めで出したか。反応の差を見るため。
+-            "cta_type": ctas.get(key),
++            # 締めの問いの種類。問いどうしで反応の差を見るため。
++            "ask_type": ask_types.get(key),
+             # 売場。売場によって伸び方が違うかもしれない。
+             "category": cats.get(key),
+             # 旧い組み立てか、新しい組み立てか。
+@@ -1604,7 +1585,6 @@ def run_once(cfg, posted, slot_hour=None, dry=False, late=False):
+             "link": ("none" if kind in ("tip", "schedule")
+                      else ("reply" if link else "body")),
+             "link_arm": arms.get(key) if kind == "product" else None,
+-            "cta_arm": cta_arms.get(key) if kind == "product" else None,
+         })
+         ok += 1
+         print("  ✅ %s → %s" % (key, pid))
