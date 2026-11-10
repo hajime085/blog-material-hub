@@ -32,3 +32,6 @@ backup/
 .threads.lock
 .build_log.txt
 .watch_log.txt
+
+# 適用用 patch（サイトに混ざらないように）
+*.patch
