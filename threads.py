@@ -325,7 +325,7 @@ def link_for(p, site, policy=None):
     return "%s/p/%s/" % (site, p["id"])
 
 
-def compose_product(p, site, pr, reply_link=False, ev=None, seq=0):
+def compose_product(p, site, pr, reply_link=False, ev=None, seq=0, fact=None):
     """商品の投稿文。
 
     キャプションがあればそれを先頭に置く。人が書いた文なので、いちばん読ませる。
@@ -335,13 +335,19 @@ def compose_product(p, site, pr, reply_link=False, ev=None, seq=0):
 
     形は投稿ごとに変える。1行目だけ入れ替えても、
     組み立てが同じなら同じ投稿に見える。
+
+    fact は再掲のときの「前回と違う事実」（値下げ・最安値への復帰・
+    セール開始）。案Aの決まりで、再掲では必ず1行目に置く。
     """
     mk = p.get("mk2") or None
     if mk and mk.get("hook"):
         # 事前に作って、決まりに照らして通した商品理解を使う。
         # 何を先に出すか、誰に向けて書くかは、ここで決めてある。
         # 投稿するときに考えると毎回ぶれるし、確かめる機会もない。
-        lines = [pr + mk["hook"]]
+        if fact:
+            lines = [pr + fact, "", mk["hook"]]
+        else:
+            lines = [pr + mk["hook"]]
         if mk.get("body"):
             lines += ["", mk["body"]]
 
@@ -696,6 +702,178 @@ def compose_plain(x, site="", i=0):
     return body, lines[i % len(lines)] + "\n" + site + to
 
 
+# ---------------------------------------------------------------- 再掲と特集
+
+def price_on(history, day):
+    """価格の履歴から、その日に効いていた値段。
+
+    履歴は [日付, 値段] の並び。その日以前の最後の値段が、
+    その日に効いていた値段。履歴が始まる前は None。
+    """
+    cur = None
+    for d, pr in sorted(history or []):
+        if d <= day:
+            cur = pr
+        else:
+            break
+    return cur
+
+
+def last_product_post(posted, pid):
+    """その商品を最後に出した記録。
+
+    記録（log）に残っていれば {"at": 時刻}。
+    記録の窓から落ちたが投稿済みの印（keys）だけある場合は {"at": None}
+    （窓のいちばん古い記録より前＝間隔は十分に空いている）。
+    一度も出していなければ None。
+    """
+    key = "product:" + pid
+    for x in reversed(posted.get("log") or []):
+        if x.get("failed"):
+            continue
+        if x.get("key") != key:
+            continue
+        try:
+            return {"at": datetime.strptime(x["at"], "%Y-%m-%d %H:%M")}
+        except (ValueError, KeyError):
+            return {"at": None}
+    if key in set(posted.get("keys") or []):
+        return {"at": None}
+    return None
+
+
+def repost_trigger(p, posted, hist=None, ev="unset", now=None):
+    """再掲のきっかけ。新しい事実があるときだけ (種別, 1行目の文) を返す。
+
+    判定できるのは、手元の実データで確かめられる3つだけ。
+      low … 一度上がって、観測期間の最安値に戻った
+      drop … 前回出したときより値段が下がった
+      sale … 前回出したあとに、確定したセール・マラソンが始まった
+    hist / ev は、机上で確かめるときに差し替えられるようにしてある。
+    """
+    if now is None:
+        now = datetime.now(JST).replace(tzinfo=None)
+    info = last_product_post(posted, p["id"])
+    if not info or info["at"] is None:
+        return None
+    last = info["at"]
+    if hist is None:
+        hist = (load("price_history.json", {}) or {}).get(p["id"]) or []
+    cur = p.get("pr") or 0
+    prev = price_on(hist, last.strftime("%Y-%m-%d"))
+    if hist and cur:
+        prices = [pr for _d, pr in hist]
+        after = [pr for d, pr in hist if d > last.strftime("%Y-%m-%d")]
+        if (cur == min(prices) and after and max(after) > cur
+                and prev is not None and prev >= cur):
+            if prev > cur:
+                return ("low", "一度上がっていましたが、最安値に戻りました。"
+                        "（前回は%s円、いまは%s円）" % (yen(prev), yen(cur)))
+            return ("low", "一度上がっていましたが、最安値に戻りました。")
+        if prev is not None and cur < prev:
+            return ("drop", "前回（%d月%d日）に出したときは%s円でした。"
+                    "いまは%s円です。" % (last.month, last.day,
+                                          yen(prev), yen(cur)))
+    if ev == "unset":
+        ev = active_event(now)
+    if ev and p.get("d"):
+        try:
+            start = datetime.strptime(ev["start"][:16], "%Y-%m-%d %H:%M")
+        except (ValueError, KeyError):
+            start = None
+        if start and start > last:
+            return ("sale", "%sが始まっています。" % ev["name"])
+    return None
+
+
+def _ev_dt(s, end=False):
+    """events.json の日時。日付だけのものは、開始なら 0:00、終了なら 23:59。"""
+    s = (s or "").strip()
+    try:
+        if len(s) <= 10:
+            return datetime.strptime(s + (" 23:59" if end else " 00:00"),
+                                     "%Y-%m-%d %H:%M")
+        return datetime.strptime(s[:16], "%Y-%m-%d %H:%M")
+    except ValueError:
+        return None
+
+
+# 特集の案内。締切までの日数を数えて出す。
+#
+# 特集は季節ものなので、締切が遠いうちは出さない。
+# 近づいてから（45日以内）数え始め、同じ特集は間隔を空ける。
+# 中身は events.json の締切の事実だけ。予約の埋まり具合や人気は
+# 確かめる材料が無いので書かない。
+FEATURE_THEMES = (
+    # (キー, 締切名に含まれる語, 行き先, 特集の名)
+    ("cake", "ケーキ", "/event/cake/", "クリスマスケーキ"),
+    ("osechi", "おせち", "/event/osechi/", "おせち"),
+)
+FEATURE_LEAD_DAYS = 45
+
+
+def feature_posts(site, posted, reply_link=False, now=None, gap_days=3):
+    """公開中の特集（ケーキ／おせち）の案内。締切のカウントダウン。"""
+    if now is None:
+        now = datetime.now(JST).replace(tzinfo=None)
+    doc = load("events.json", {}) or {}
+    deadlines = [e for e in doc.get("events", []) if e.get("kind") == "deadline"]
+    recent = {}
+    for x in posted.get("log") or []:
+        if x.get("failed"):
+            continue
+        k = x.get("key") or ""
+        if not k.startswith("feature:"):
+            continue
+        try:
+            t = datetime.strptime(x["at"], "%Y-%m-%d %H:%M")
+        except (ValueError, KeyError):
+            continue
+        theme = k.split(":")[1]
+        if theme not in recent or t > recent[theme]:
+            recent[theme] = t
+    out = []
+    for theme, word, path, label in FEATURE_THEMES:
+        rows = []
+        for e in deadlines:
+            if word not in (e.get("name") or ""):
+                continue
+            a = _ev_dt(e.get("start"))
+            b = _ev_dt(e.get("end") or e.get("start"), end=True)
+            if a and b:
+                rows.append((a, b, e))
+        if not rows:
+            continue
+        if theme in recent and (now - recent[theme]).days < gap_days:
+            continue
+        future = [r for r in rows if r[1] >= now]
+        if not future:
+            continue
+        a, _b, e = min(future)
+        days = (a.date() - now.date()).days
+        if days > FEATURE_LEAD_DAYS:
+            continue
+        if days <= 0:
+            title = "%sは、今日 %d月%d日です。" % (e["name"], a.month, a.day)
+        else:
+            title = "%s（%d月%d日）まで、あと%d日です。" % (
+                e["name"], a.month, a.day, days)
+        if theme == "cake":
+            lead = "%sの候補と締切を、特集にまとめました。" % label
+        else:
+            lead = "%sの締切は、店ごとに段階的に来ます。\n" \
+                   "残りの締切を特集にまとめました。" % label
+            for a2, b2, e2 in rows:
+                if "お届け" in (e2.get("name") or ""):
+                    lead += "\nお届けは%d月%d日〜%d月%d日です。" % (
+                        a2.month, a2.day, b2.month, b2.day)
+                    break
+        x = {"key": "feature:%s:%s" % (theme, a.strftime("%Y-%m-%d")),
+             "title": title, "lead": lead, "path": path}
+        out.append((x["key"], compose_page(x, site, "", reply_link)))
+    return out
+
+
 # ---------------------------------------------------------------- 選ぶ
 
 def pick(cfg, posted, want, slot_hour=None, live_heads=None):
@@ -705,8 +883,11 @@ def pick(cfg, posted, want, slot_hour=None, live_heads=None):
     全部にリンクが入っていると、読む側から見れば宣伝の列にしかならない。
     間に知識や予定を挟むことで、読んで終わりでいい投稿が混ざる。
 
-    一度出したものは二度と出さない。
-    ただし知識（tip）だけは、出し切ったら古いものから回す。
+    商品はローテーションで回す（案A）。
+    一度出したら間隔（rotationDays、既定7日）を空ける。ただし
+    前回と違う事実（値下げ・最安値への復帰・セール開始）があれば、
+    その事実を1行目に置いて間隔の内側でも再掲する。
+    知識（tip）は、出し切ったら古いものから回す。
     種類が有限で、時間が経てば読む人も変わるため。
     """
     site = cfg["site"]["url"].rstrip("/")
@@ -727,32 +908,40 @@ def pick(cfg, posted, want, slot_hour=None, live_heads=None):
     reply_link = placement == "reply"
     # 商品。ここが主役。
     linked = []
-    # 記事とセールの案内。リンクは付くが、中身は読み物なので
-    # 「商品以外」として数える。
-    other = []
-    for e in event_posts(site, ev, n_km):
-        if e["key"] not in done:
-            other.append((e["key"], compose_page(e, site, pr, reply_link)))
-    for g in guide_posts(site):
-        if g["key"] not in done:
-            other.append((g["key"], compose_guide(g, site, pr, reply_link)))
-    # 商品は新しいものだけを出す。
+    # 鮮度は「見つけた日」ではなく「確かめた日」で見る。
     #
-    # 掲載中の商品は日が経つほど溜まっていく。古い順に消化していくと、
-    # 何日も前に見つけた値段を、いま見つけたかのように流すことになる。
-    # 値段は毎日動くので、それは古い情報を配っているのと同じ。
+    # 掲載中の商品は日が経つほど溜まっていく。見つけた日が古くても、
+    # 見張りが昨日以降に楽天で値段を確かめ直していて、いまも値引きが
+    # 続いているものは古くない。確かめた値段なら出してよい。
+    # ローテーションの再掲も、同じ条件で鮮度を担保する。
     #
-    # 出せる新しい商品が無い日は、商品を出さない。
-    # 数を埋めるために古いものを引っぱり出すくらいなら、知識を出したほうがいい。
+    # 2026-09-28: 4日の線は「古い値段を新しいふりで流さない」ためだった。
+    # だが見張りは1日4回値段を取り直している。この線のせいで、
+    # 商品理解も値引きもある20件が出番を失い、
+    # 商品の枠が豆知識で埋まっていた（1日12本）。
     fresh_days = th.get("freshDays", 3)
     limit = (datetime.now(JST) - timedelta(days=fresh_days)).strftime("%Y-%m-%d")
     verified = (datetime.now(JST) - timedelta(days=1)).strftime("%Y-%m-%d")
     now_s = datetime.now(JST).strftime("%Y-%m-%d %H:%M")
+    now_dt = datetime.now(JST).replace(tzinfo=None)
+    rotation_days = int(th.get("rotationDays", 7))
+    hist_all = load("price_history.json", {}) or {}
 
     items = []
+    last_posts = {}
+    trigs = {}
     for p in feed:
-        if ("product:" + p["id"]) in done:
-            continue
+        info = last_product_post(posted, p["id"])
+        if info is not None and info["at"] is not None:
+            last_posts[p["id"]] = info["at"]
+            if (now_dt - info["at"]).days < rotation_days:
+                # 間隔が空いていない。再掲は、新しい事実があるときだけ。
+                trig = repost_trigger(p, posted,
+                                      hist=hist_all.get(p["id"]) or [],
+                                      now=now_dt)
+                if not trig:
+                    continue
+                trigs[p["id"]] = trig[1]
         # 商品理解のあるものだけを出す。
         #
         # 以前は、商品理解が無ければキャプションと商品名を並べる
@@ -770,12 +959,7 @@ def pick(cfg, posted, want, slot_hour=None, live_heads=None):
             continue
         if (p.get("at") or "")[:10] < limit:
             # 見つけたのが古くても、昨日以降に楽天で値段を確かめ直していて、
-            # いまも値引きが続いているものは出してよい。
-            # 2026-09-28: 4日の線は「古い値段を新しいふりで流さない」ためだった。
-            # だが見張りは1日4回値段を取り直している。確かめた値段なら古くない。
-            # この線のせいで、商品理解も値引きもある20件が出番を失い、
-            # 商品の枠が豆知識で埋まっていた（1日12本）。
-            # 並びは新しい順のままなので、新しく見つけたものが先に出る。
+            # いまも値引きが続いているものは出してよい（上の鮮度の考え方）。
             if not (p.get("d") and (p.get("ls") or "") >= verified):
                 continue
         # 終わったセールは出さない。
@@ -786,8 +970,8 @@ def pick(cfg, posted, want, slot_hour=None, live_heads=None):
         items.append(p)
     # 並べ方。
     #
-    # ふだんは新しい順。値段は日々動くので、古い値引きを
-    # 今見つけたかのように流さないため。
+    # ふだんはローテーションの順。出していないもの → 前回が古いもの。
+    # 安定ソートなので、同じ区分の中では新しい順（見つけた順）が保たれる。
     #
     # セールの間はそうしない。セール中は「安い順に見たい」人が来る。
     # 新しい順に出すと、たまたま今朝拾った20%OFFが先に出て、
@@ -797,6 +981,7 @@ def pick(cfg, posted, want, slot_hour=None, live_heads=None):
         items.sort(key=lambda p: (p.get("d") or 0, p.get("at") or ""), reverse=True)
     else:
         items.sort(key=lambda p: p.get("at") or "", reverse=True)
+        items.sort(key=lambda p: last_posts.get(p["id"]) or datetime.min)
 
     # 売場を回す。
     #
@@ -830,15 +1015,29 @@ def pick(cfg, posted, want, slot_hour=None, live_heads=None):
     n_done = len([k for k in (posted.get("keys") or []) if k.startswith("product:")])
     for n, p in enumerate(items):
         linked.append(("product:" + p["id"],
-                       compose_product(p, site, pr, reply_link, ev, n_done + n)))
+                       compose_product(p, site, pr, reply_link, ev, n_done + n,
+                                       fact=trigs.get(p["id"]))))
 
-    # ---- 商品以外 ----
-    # 記事・セールの案内・知識・予定をまとめて扱う。
-    # 読む人から見れば、どれも「いま買うもの」ではない。
-    plain = list(other)
+    # ---- 種類ごとの候補 ----
+    # 枠は4種類（商品・知識・イベント告知・特集）。種類ごとに候補を持ち、
+    # 枠の種類から取る。空だったら、決めた順でほかの種類から埋める。
+    pools = {"product": linked, "tip": [], "event": [], "feature": []}
+    # イベント告知。予定（events.json）と、開催中セールの買いまわり案内。
     for x in (schedule_post() if not schedule_recent(posted) else []):
         if x["key"] not in done:
-            plain.append((x["key"], compose_plain(x, site)))
+            pools["event"].append((x["key"], compose_plain(x, site)))
+    for e in event_posts(site, ev, n_km):
+        if e["key"] not in done:
+            pools["event"].append((e["key"], compose_page(e, site, pr, reply_link)))
+    # 特集とガイド。リンクは付くが、中身は読み物。
+    pools["feature"] = feature_posts(
+        site, posted, reply_link,
+        gap_days=int(th.get("featureGapDays", 3)))
+    for g in guide_posts(site):
+        if g["key"] not in done:
+            pools["feature"].append(
+                (g["key"], compose_guide(g, site, pr, reply_link)))
+    # 知識。
     tips = tip_posts()
     fresh = [t for t in tips if t["key"] not in done]
     if not fresh:
@@ -857,11 +1056,11 @@ def pick(cfg, posted, want, slot_hour=None, live_heads=None):
     for n, t in enumerate(fresh):
         # 一言は順番に入れ替える。同じ文が毎回続くと機械が貼っているのが見える。
         seq = len([k for k in (posted.get("keys") or []) if k.startswith("tip:")]) + n
-        plain.append((t["key"], compose_plain(t, site, seq)))
+        pools["tip"].append((t["key"], compose_plain(t, site, seq)))
 
-    # ---- どちらを先に取るか ----
+    # ---- どちらの枠か ----
     #
-    # 時刻ごとに、商品を出す枠か、それ以外を出す枠かを決めてある。
+    # 時刻ごとに、どの種類を出す枠かを決めてある。
     # 動的に決めていたころは、足りない日に商品が偏って比率が揺れた。
     # 枠で固定すれば、1日の内訳が毎日同じになる。
     # 検証のあいだは、この安定のほうが要る。
@@ -883,7 +1082,10 @@ def pick(cfg, posted, want, slot_hour=None, live_heads=None):
             kind = slots[near]
         else:
             kind = "product"
-    want_plain = (kind == "plain")
+    if kind == "plain":
+        kind = "tip"           # 旧設定（plain）の読み替え
+    if kind not in pools:
+        kind = "product"
 
     # すでにアカウントに載っているものは、候補の段階で外す。
     #
@@ -891,25 +1093,34 @@ def pick(cfg, posted, want, slot_hour=None, live_heads=None):
     # 同じものをまた選ぶ。出す直前に止めるだけだと、その枠は空振りになる。
     # 候補から外しておけば、次の候補が出る。枠を落とさない。
     if live_heads:
-        def fresh(pair):
+        def not_live(pair):
             _k, (body, _l) = pair
             return head_of(body) not in live_heads
-        before = len(linked) + len(plain)
-        linked = [x for x in linked if fresh(x)]
-        plain = [x for x in plain if fresh(x)]
-        gone = before - len(linked) - len(plain)
+        before = sum(len(v) for v in pools.values())
+        for name in pools:
+            pools[name] = [x for x in pools[name] if not_live(x)]
+        gone = before - sum(len(v) for v in pools.values())
         if gone:
             print("すでに載っているものを%d件、候補から外しました。" % gone)
 
-    # 出すものが無い枠は、もう片方で埋める。投稿を落とさない。
+    # 出すものが無い枠は、ほかの種類で埋める。投稿を落とさない。
+    # 埋める順は種類ごとに決めてある。知識で埋めるのは最後にする
+    # （リンクのある読み物や商品を先に出すため）。
+    ORDER = {
+        "product": ["product", "feature", "event", "tip"],
+        "tip": ["tip", "event", "feature", "product"],
+        "event": ["event", "feature", "product", "tip"],
+        "feature": ["feature", "event", "product", "tip"],
+    }
     out = []
-    while len(out) < want and (linked or plain):
-        pool = plain if want_plain else linked
-        if not pool:
-            pool = linked if want_plain else plain
-        key, (body, link) = pool.pop(0)
-        out.append((key, body, link))
-        want_plain = not want_plain
+    while len(out) < want:
+        for name in ORDER[kind]:
+            if pools[name]:
+                key, (body, link) = pools[name].pop(0)
+                out.append((key, body, link))
+                break
+        else:
+            break
     return out
 
 
@@ -1367,6 +1578,7 @@ def run_once(cfg, posted, slot_hour=None, dry=False, late=False):
         kind = ("tip" if key.startswith("tip:") else
                 "schedule" if key.startswith("schedule:") else
                 "product" if key.startswith("product:") else
+                "feature" if key.startswith("feature:") else
                 "guide" if key.startswith("guide:") else "page")
         posted["log"].append({
             "key": key, "id": pid, "at": now, "kind": kind,
