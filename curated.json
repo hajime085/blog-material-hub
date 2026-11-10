@@ -32,15 +32,15 @@
     },
     {
       "step": "ゲート6: キャプション有り（無しは caption_needed へ）",
-      "remaining": 14
+      "remaining": 20
     },
     {
       "step": "シリーズ圧縮（同ショップ・タイトル類似 0.42 以上）",
-      "remaining": 14
+      "remaining": 20
     },
     {
       "step": "テーマ上限10%適用後",
-      "remaining": 14
+      "remaining": 16
     }
   ],
   "feed": [
@@ -81,21 +81,21 @@
       "siblings": []
     },
     {
-      "id": "r8550b30d9",
-      "title": "くまもとラーメン たっぷり 6人前 送料無料 くまもと らーめん 6食セット 生麺 とんこつラーメン…",
-      "shop": "【 くまもと風土 】",
+      "id": "r99dc0d242",
+      "title": "[大袋]とろりんスープ昆布と海藻[50杯分] 200g×1袋 選べる2種（プレーン・うめ味)…",
+      "shop": "昆布専門問屋 源蔵屋",
       "category": "food",
       "theme": "food",
-      "price": 1280,
-      "median_price": 2560.0,
-      "min_price": 1280,
+      "price": 1580,
+      "median_price": 3160.0,
+      "min_price": 1580,
       "drop_pct_vs_median": 50.0,
-      "obs_days": 40,
-      "reviewCount": 1784,
-      "reviewAverage": 4.4,
+      "obs_days": 44,
+      "reviewCount": 5531,
+      "reviewAverage": 4.71,
       "free_shipping": true,
-      "caption": "2,560円のくまもとラーメン6食分が1,280円。生麺のとんこつ、送料込み。",
-      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00qovc7.jeifo5b6.g00qovc7.jeifpa50/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkumamoto-food%2F10002744%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fkumamoto-food%2Fi%2F10002744%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+      "caption": "3,160円のとろりんスープ昆布50杯分が1,580円。200gの大袋で、味は2種から選べる。送料無料。",
+      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00rhas7.jeifo7d7.g00rhas7.jeifpa72/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkonbu-genzouya%2F520025%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fkonbu-genzouya%2Fi%2F10000200%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "siblings": []
     },
     {
@@ -117,21 +117,21 @@
       "siblings": []
     },
     {
-      "id": "r99dc0d242",
-      "title": "[大袋]とろりんスープ昆布と海藻[50杯分] 200g×1袋 選べる2種（プレーン・うめ味)…",
-      "shop": "昆布専門問屋 源蔵屋",
-      "category": "food",
-      "theme": "food",
-      "price": 1580,
-      "median_price": 3160.0,
-      "min_price": 1580,
+      "id": "r8e972c23b",
+      "title": "※超特価【12時間タイムセール：1点1,000円】 裏起毛フェイクタイツ 裏起毛タイツ タイツ 裏起毛…",
+      "shop": "Dark Angel (ダークエンジェル)",
+      "category": "fashion",
+      "theme": "fashion",
+      "price": 1000,
+      "median_price": 1999,
+      "min_price": 1000,
       "drop_pct_vs_median": 50.0,
-      "obs_days": 44,
-      "reviewCount": 5531,
-      "reviewAverage": 4.71,
+      "obs_days": 33,
+      "reviewCount": 3851,
+      "reviewAverage": 3.88,
       "free_shipping": true,
-      "caption": "3,160円のとろりんスープ昆布50杯分が1,580円。200gの大袋で、味は2種から選べる。送料無料。",
-      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00rhas7.jeifo7d7.g00rhas7.jeifpa72/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkonbu-genzouya%2F520025%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fkonbu-genzouya%2Fi%2F10000200%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+      "caption": "2,699円の裏起毛フェイクタイツが1,000円。観測33日の最安値で、中央値より50%安い。送料無料。",
+      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00q8qj7.jeifo2ee.g00q8qj7.jeifpbbc/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdarkangel%2F312-535-01216sss%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fdarkangel%2Fi%2F10023599%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "siblings": []
     },
     {
@@ -153,21 +153,21 @@
       "siblings": []
     },
     {
-      "id": "r58b64002e",
-      "title": "ほんのり香る フレーバーティー 選べる2袋 ティーバッグ 日本茶 ベース ハーブティー 国産 無添加…",
-      "shop": "佐とう製茶",
-      "category": "food",
-      "theme": "food",
-      "price": 1300,
-      "median_price": 2600.0,
-      "min_price": 1300,
-      "drop_pct_vs_median": 50.0,
-      "obs_days": 44,
-      "reviewCount": 487,
-      "reviewAverage": 4.68,
+      "id": "rc67a0d0c5",
+      "title": "充電ケーブル タイプC 高速 スパイラルケーブル 巻き取り マグネット ケーブル 1m 2m USB…",
+      "shop": "ホビナビ 楽天市場店",
+      "category": "pc",
+      "theme": "pc",
+      "price": 980,
+      "median_price": 1780.0,
+      "min_price": 980,
+      "drop_pct_vs_median": 44.9,
+      "obs_days": 60,
+      "reviewCount": 16112,
+      "reviewAverage": 4.14,
       "free_shipping": true,
-      "caption": "2,600円のフレーバーティー2袋が1,300円。日本茶ベースで、国産・無添加。",
-      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00r6hn7.jeifoc22.g00r6hn7.jeifp672/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fauc-satouseicha%2Fflavor-1%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fauc-satouseicha%2Fi%2F10000177%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+      "caption": "1,780円のスパイラル式Type-Cケーブルが980円。観測60日の最安値で、中央値より44.9%安い。送料無料。",
+      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00qff77.jeifo05e.g00qff77.jeifp6eb/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fhobinavi%2Fcode-mf-100%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fhobinavi%2Fi%2F10497734%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "siblings": []
     },
     {
@@ -189,6 +189,42 @@
       "siblings": []
     },
     {
+      "id": "r8688e57d6",
+      "title": "※超特価【12時間タイムセール：1点1,000円~】 ブラトップ キャミソール タンクトップ…",
+      "shop": "Dark Angel (ダークエンジェル)",
+      "category": "fashion",
+      "theme": "fashion",
+      "price": 1000,
+      "median_price": 1690.0,
+      "min_price": 1000,
+      "drop_pct_vs_median": 40.8,
+      "obs_days": 60,
+      "reviewCount": 3035,
+      "reviewAverage": 3.82,
+      "free_shipping": true,
+      "caption": "2,799円のカップ付きブラトップが1,000円。観測60日の最安値で、中央値より40.8%安い。送料無料。",
+      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00q8qj7.jeifo2ee.g00q8qj7.jeifpbbc/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdarkangel%2Fin2603-5336%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fdarkangel%2Fi%2F10037880%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+      "siblings": []
+    },
+    {
+      "id": "r6b77c88d6",
+      "title": "在庫処分 残りわずか ネッククーラー ネックファン 瞬間冷却 首掛け扇風機 冷却プレート…",
+      "shop": "名城インテリ",
+      "category": "kaden",
+      "theme": "kaden",
+      "price": 2980,
+      "median_price": 4980.0,
+      "min_price": 2980,
+      "drop_pct_vs_median": 40.2,
+      "obs_days": 44,
+      "reviewCount": 115,
+      "reviewAverage": 4.14,
+      "free_shipping": true,
+      "caption": "4,980円のネッククーラー（冷却プレート付き）が2,980円。観測44日の最安値で、中央値より40.2%安い。送料無料。",
+      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00uncu7.jeifo2ee.g00uncu7.jeifp5a5/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmeijo%2Fm-fn90wh%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fmeijo%2Fi%2F10000026%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+      "siblings": []
+    },
+    {
       "id": "rd429b31ad",
       "title": "山形県産 ジュース・スムージー用 りんご サンふじ 5kg～ ※日時指定はメールで※【山形県産 リンゴ…",
       "shop": "竹城青果",
@@ -204,6 +240,24 @@
       "free_shipping": true,
       "caption": "3,370円の山形県産サンふじ5kgが2,170円。ジュース・スムージー用の家庭用、送料無料。",
       "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00reg57.jeifob5f.g00reg57.jeifp118/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fultra-taste%2Fringo_01jh%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fultra-taste%2Fi%2F10000190%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+      "siblings": []
+    },
+    {
+      "id": "rd5df705a4",
+      "title": "《累計70万枚突破》のびーるハイウエストストレッチ美脚 スキニーレギンスパンツ レギパン レディース…",
+      "shop": "aimoha",
+      "category": "fashion",
+      "theme": "fashion",
+      "price": 1590,
+      "median_price": 2409.0,
+      "min_price": 1590,
+      "drop_pct_vs_median": 34.0,
+      "obs_days": 60,
+      "reviewCount": 4620,
+      "reviewAverage": 4.02,
+      "free_shipping": true,
+      "caption": "2,409円のハイウエスト・ストレッチレギンスパンツが1,590円。観測60日の最安値で、中央値より34%安い。送料無料。",
+      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00rxf47.jeifo9a9.g00rxf47.jeifp99b/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Faimoha%2F20005302%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Faimoha%2Fi%2F10000701%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
       "siblings": []
     },
     {
@@ -261,24 +315,6 @@
       "siblings": []
     },
     {
-      "id": "rd34567de1",
-      "title": "選べるネックテレコリブカットソー レディース ファッション カットソー トップス 長袖 リブ インナー…",
-      "shop": "Pierrot【ピエロ】",
-      "category": "fashion",
-      "theme": "fashion",
-      "price": 1390,
-      "median_price": 1990.0,
-      "min_price": 1390,
-      "drop_pct_vs_median": 30.2,
-      "obs_days": 34,
-      "reviewCount": 2334,
-      "reviewAverage": 4.33,
-      "free_shipping": true,
-      "caption": "1,990円のテレコリブカットソーが1,390円。ネックの形が選べる長袖、送料無料。",
-      "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00q5017.jeifoa00.g00q5017.jeifpe6d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fpierrot%2Fb2004-011442%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fpierrot%2Fi%2F10014231%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
-      "siblings": []
-    },
-    {
       "id": "r9598a3d07",
       "title": "ヘアアイロン は アレティ ｜ ストレート カール 2way 髪の負担を抑える 20mm…",
       "shop": "Areti(アレティ)楽天市場店",
@@ -298,66 +334,6 @@
     }
   ],
   "caption_needed": [
-    {
-      "id": "rbd40d7c42",
-      "title": "パンツ ワイドパンツ ジャガード 立体柄 冷感 プリーツパンツ ロング フレア 春 夏 ロングパンツ…",
-      "shop": "MISSIN楽天市場店",
-      "category": "fashion",
-      "price": 1100,
-      "drop_pct_vs_median": 50.0,
-      "reviewCount": 205,
-      "reviewAverage": 4.19
-    },
-    {
-      "id": "r8e972c23b",
-      "title": "※超特価【12時間タイムセール：1点1,000円】 裏起毛フェイクタイツ 裏起毛タイツ タイツ 裏起毛…",
-      "shop": "Dark Angel (ダークエンジェル)",
-      "category": "fashion",
-      "price": 1000,
-      "drop_pct_vs_median": 50.0,
-      "reviewCount": 3851,
-      "reviewAverage": 3.88
-    },
-    {
-      "id": "rc67a0d0c5",
-      "title": "充電ケーブル タイプC 高速 スパイラルケーブル 巻き取り マグネット ケーブル 1m 2m USB…",
-      "shop": "ホビナビ 楽天市場店",
-      "category": "pc",
-      "price": 980,
-      "drop_pct_vs_median": 44.9,
-      "reviewCount": 16112,
-      "reviewAverage": 4.14
-    },
-    {
-      "id": "r8688e57d6",
-      "title": "※超特価【12時間タイムセール：1点1,000円~】 ブラトップ キャミソール タンクトップ…",
-      "shop": "Dark Angel (ダークエンジェル)",
-      "category": "fashion",
-      "price": 1000,
-      "drop_pct_vs_median": 40.8,
-      "reviewCount": 3035,
-      "reviewAverage": 3.82
-    },
-    {
-      "id": "r6b77c88d6",
-      "title": "在庫処分 残りわずか ネッククーラー ネックファン 瞬間冷却 首掛け扇風機 冷却プレート…",
-      "shop": "名城インテリ",
-      "category": "kaden",
-      "price": 2980,
-      "drop_pct_vs_median": 40.2,
-      "reviewCount": 115,
-      "reviewAverage": 4.14
-    },
-    {
-      "id": "rd5df705a4",
-      "title": "《累計70万枚突破》のびーるハイウエストストレッチ美脚 スキニーレギンスパンツ レギパン レディース…",
-      "shop": "aimoha",
-      "category": "fashion",
-      "price": 1590,
-      "drop_pct_vs_median": 34.0,
-      "reviewCount": 4620,
-      "reviewAverage": 4.02
-    },
     {
       "id": "r509d25f43",
       "title": "父の日仕様の訳あり 在庫処分 アウトレット 父の日スリーブ&専用コースター付 究極のビール…",
