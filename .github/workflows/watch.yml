@@ -87,6 +87,36 @@ jobs:
             sleep 5
           done
 
+      # 選定を回し直す（2026-11-10〜）。
+      #
+      # それまで選定（select_strict.py）は手作業で、curated.json は固定の
+      # 切り取りだった。価格が動いても顔ぶれは変わらなかった。
+      # 価格を取り直した直後に選定も回し、curated.json が変われば
+      # この便の自動コミットに一緒に入る。選定ロジックは
+      # select_strict.evaluate() が正本で、ここでは適用だけをする。
+      # 入れ替えの記録は ops/selection_log.md とコミットメッセージに残る。
+      # 大きな入れ替えやデータ異常では apply_selection.py が自分で見送る
+      # （止め方は apply_selection.py の冒頭に書いてある）。
+      - name: 選定を回す
+        run: python3 apply_selection.py 2>&1 | tee .selection_log.txt
+
+      # 見送り・要確認は、実行の要約にも出す（警告を埋もれさせない）。
+      - name: 選定の見送りと要確認を残す
+        if: always()
+        run: |
+          if grep -q "見送り\|要確認" .selection_log.txt 2>/dev/null; then
+            {
+              echo "## ⚠ 選定の見送り／要確認があります"
+              echo ""
+              echo '```'
+              cat .selection_log.txt
+              echo '```'
+              echo ""
+              echo "記録は ops/selection_log.md にも残っています。"
+            } >> "$GITHUB_STEP_SUMMARY"
+            echo "::warning::選定の見送り／要確認があります。実行の要約を見てください"
+          fi
+
       # 決まりが本当に鳴るかを、材料を壊して機械で確かめる。
       #
       # 2026-09-07: 手で壊して確かめる限り、確かめ忘れた決まりは静かに死ぬ。
@@ -162,12 +192,14 @@ jobs:
       # やり直す回復経路を持つ。理由はスクリプト冒頭、
       # 検証は ops/test_publish_watch.sh にある。
       # やり直しで取得を回すので、この段にも楽天の鍵が要る。
+      # やり直しのときも順序は同じ（取得→選定→ビルド）。選定を飛ばすと、
+      # 最新の価格で作ったページに古い選定が混ざる。
       - name: 変化があれば反映する
         env:
           RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
           RAKUTEN_ACCESS_KEY: ${{ secrets.RAKUTEN_ACCESS_KEY }}
           RAKUTEN_AFFILIATE_ID: ${{ secrets.RAKUTEN_AFFILIATE_ID }}
-        run: bash ops/publish_watch.sh "python3 fetch_rakuten.py --watch && python3 build.py"
+        run: bash ops/publish_watch.sh "python3 fetch_rakuten.py --watch && python3 apply_selection.py && python3 build.py"
 
       - name: 実行結果を残す
         if: always()
