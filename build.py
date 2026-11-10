@@ -1235,13 +1235,31 @@ def render_notice(live):
             % (dur, seq, dup))
 
 
+TOP_TAB_SCRIPT = (
+    "<script>(function(){var tabs=[].slice.call(document.querySelectorAll('.v-tabs .v-tab'));"
+    "if(!tabs.length)return;var topics=null,home=null;"
+    "tabs.forEach(function(t){var h=t.getAttribute('href')||'';"
+    "if(h.indexOf('#topics')>-1)topics=t;if(h==='/')home=t;});"
+    "if(!topics||!home)return;"
+    "try{if(new URL(topics.href).pathname!==location.pathname)return;}catch(e){return;}"
+    "function on(t){tabs.forEach(function(x){x.classList.toggle('v-on',x===t);});}"
+    "if(location.hash==='#topics')on(topics);"
+    "topics.addEventListener('click',function(){on(topics);});"
+    "window.addEventListener('hashchange',function(){if(location.hash==='#topics')on(topics);});"
+    "var te=document.getElementById('topics'),se=document.getElementById('stream');"
+    "if('IntersectionObserver' in window&&te&&se){"
+    "var spy=new IntersectionObserver(function(es){es.forEach(function(en){"
+    "if(!en.isIntersecting)return;on(en.target===te?topics:home);});},"
+    "{rootMargin:'-40% 0px -50% 0px'});spy.observe(te);spy.observe(se);}})();</script>")
+
+
 def render_top_tabs(active):
     tabs = [("new", "新着", "/"), ("off", "値下がり順", "/off/"),
             ("topics", "特集", "/#topics")]
     return '<nav class="v-tabs">%s</nav>' % "".join(
         '<a class="v-tab%s" href="%s">%s</a>'
         % (" v-on" if k == active else "", href, label)
-        for k, label, href in tabs)
+        for k, label, href in tabs) + TOP_TAB_SCRIPT
 
 
 def render_pager_v11(page, total_pages, base):
