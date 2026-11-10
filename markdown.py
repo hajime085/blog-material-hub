@@ -6,6 +6,15 @@
 見出し / 段落 / 太字 / リンク / 箇条書き / 番号付き / チェックリスト /
 表 / 引用 / 区切り線。
 
+生HTMLパススルー（図解SVGとQ&Aアコーディオン用）:
+- 行の stripped が ``<figure`` で始まる場合、その行から ``</figure>`` を
+  含む行までを生のまま（エスケープも整形もせず）出力する。開始前に
+  開いているリスト等を閉じる（close(stack)）。
+- 行の stripped が ``<details`` で始まる行、``</details>`` の行、
+  ``<summary`` で始まる行は、close(stack) してその行を生のまま出力する。
+  それ以外の内側の行は通常のマークダウン処理（段落・箇条書き等）で
+  処理される（details の中身は従来記法で書ける）。
+
 引用(>)は「ここだけ覚えて帰ってほしい一文」に使われるので、
 売場の手書きPOPとして描く。
 チェックリストは買う直前に使う道具なので、実際に押せるようにする。
@@ -74,6 +83,30 @@ def render(md, heading_offset=1, cta_renderer=None):
             close(stack)
             if cta_renderer:
                 out.append(cta_renderer(m.group(1)))
+            i += 1
+            continue
+
+        # 生HTMLパススルー（図解SVG）: <figure> … </figure> を生のまま通す。
+        # 表・見出し等の判定より前に置くこと。
+        if stripped.startswith("<figure"):
+            close(stack)
+            buf = []
+            while i < len(lines):
+                buf.append(lines[i])
+                done = "</figure>" in lines[i]
+                i += 1
+                if done:
+                    break
+            out.append("\n".join(buf))
+            continue
+
+        # 生HTMLパススルー（Q&Aアコーディオン）: <details> / </details> /
+        # <summary> の行だけを生のまま通し、内側は通常処理に委ねる。
+        if (stripped.startswith("<details")
+                or stripped.startswith("</details>")
+                or stripped.startswith("<summary")):
+            close(stack)
+            out.append(line)
             i += 1
             continue
 

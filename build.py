@@ -666,29 +666,6 @@ def render_operator(cfg):
                  role=e(op.get("role", "")), bio=e(op.get("bio", "")), link=link)
 
 
-def render_pager(page, total_pages, base):
-    """ページ送り。フィードが長くなるので10件ずつに切る。
-    JSに頼らず素のリンクで動かす（検索エンジンも人も同じものを辿れる）。"""
-    if total_pages <= 1:
-        return ""
-
-    def href(n):
-        return base if n == 1 else "%spage/%d/" % (base, n)
-
-    prev_btn = (
-        '<a class="pager-btn" href="%s" rel="prev">%s前のページ</a>' % (
-            e(href(page - 1)), icons.use("arrow-right", "ic-arrow ic-flip"))
-        if page > 1 else '<span class="pager-btn is-off">前のページ</span>')
-    next_btn = (
-        '<a class="pager-btn pager-next" href="%s" rel="next">次のページ%s</a>' % (
-            e(href(page + 1)), icons.use("arrow-right", "ic-arrow"))
-        if page < total_pages else '<span class="pager-btn is-off">次のページ</span>')
-
-    return ('<nav class="pager" aria-label="ページ送り">%s'
-            '<span class="pager-count"><b>%d</b><i>/</i>%d</span>%s</nav>'
-            % (prev_btn, page, total_pages, next_btn))
-
-
 def render_chipbar(cfg, active=None):
     chips = '<a class="chip" href="/"%s>%sすべて</a>' % (
         ' aria-current="true"' if active is None else "", icons.use("tag"))
@@ -877,12 +854,11 @@ TOPICS = [
 def render_catstrip(cfg):
     """ヘッダー2段目のカテゴリ帯（単一トーン、特集だけ赤）。"""
     by = {c["slug"]: c for c in cfg["categories"]}
-    out = []
+    out = ['<a class="v-cat-btn v-feat" href="/#topics">特集</a>']
     for slug in STRIP_ORDER:
         c = by.get(slug)
         if c:
             out.append('<a class="v-cat-btn" href="/c/%s/">%s</a>' % (slug, e(c["short"])))
-    out.append('<a class="v-cat-btn v-feat" href="/#topics">特集</a>')
     return "".join(out)
 
 
@@ -1027,7 +1003,7 @@ def render_stream_card(p, cats, badge, cat_label=None):
         '<img class="v-card-img" src="{img}" alt="{alt}" loading="lazy">'
         '<div class="v-card-body">'
         '<div class="v-cat-row"><span class="v-cat-label">{label}</span>'
-        '<span class="v-beige-badge">{badge}</span>'
+        '<span class="v-note-badge">{badge}</span>'
         '<span class="v-card-date">{date}</span></div>'
         '<h3 class="v-card-title">{title}</h3>'
         '<div class="v-price-row">{price_row}</div>'
@@ -1112,8 +1088,31 @@ CAROUSEL_JS = (
     'raf=requestAnimationFrame(function(){raf=0;var i=cur();'
     'd.forEach(function(b,j){b.classList.toggle("v-on",j===i);});});'
     '},{passive:true});'
+    # 自動再生。5秒ごとに次へ送り、末尾からは先頭へ戻る。
+    # 操作中（ホバー／タッチ／スクロール／ドット操作）は止め、
+    # 操作が終わって6秒後に再開する。タブが非表示の間は止める。
+    # prefers-reduced-motion の環境では最初から動かさない。
+    # ドットが無い（特集1件）ときは上の return で終了しているので動かない。
+    'var DELAY=5000,RESUME=6000,timer=null,resumeTimer=null;'
+    'var mq=window.matchMedia("(prefers-reduced-motion: reduce)");'
+    'function go(n){t.scrollTo({left:n*w(),behavior:"smooth"});}'
+    'function step(){go((cur()+1)%d.length);}'
+    'function start(){if(timer||mq.matches)return;'
+    'timer=setInterval(function(){if(document.hidden)return;step();},DELAY);}'
+    'function stop(){if(timer){clearInterval(timer);timer=null;}}'
+    'function kick(){stop();if(resumeTimer)clearTimeout(resumeTimer);'
+    'resumeTimer=setTimeout(start,RESUME);}'
     'd.forEach(function(b,j){b.addEventListener("click",function(){'
-    't.scrollTo({left:j*w(),behavior:"smooth"});});});'
+    'go(j);kick();});});'
+    'var sec=t.closest(".v-camp");'
+    'if(sec){sec.addEventListener("pointerenter",stop);'
+    'sec.addEventListener("pointerleave",start);}'
+    't.addEventListener("pointerdown",kick);'
+    't.addEventListener("touchstart",kick,{passive:true});'
+    't.addEventListener("wheel",kick,{passive:true});'
+    'document.addEventListener("visibilitychange",function(){'
+    'if(document.hidden)stop();else start();});'
+    'start();'
     '})();</script>')
 
 
@@ -1140,7 +1139,7 @@ def render_campaign_carousel(entries):
             '<a class="v-camp-slide" href="/event/{slug}/">'
             '<img class="v-camp-img" src="{img}" alt="{alt}" loading="lazy">'
             '<span class="v-camp-cap">'
-            '<span class="v-camp-row"><span class="v-beige-badge">{badge}</span>'
+            '<span class="v-camp-row"><span class="v-note-badge">{badge}</span>'
             '{extra}</span>'
             '<span class="v-camp-title">{title}</span>'
             '</span></a>'.format(
@@ -1371,7 +1370,7 @@ def build_categories(cfg, base, products, cats):
         cfg, base, title="カテゴリ一覧｜%s" % cfg["site"]["name"],
         desc="ヤスミルの全カテゴリ。食品・家電・日用品など、売場ごとに特価をまとめています。",
         path="/categories/", content=content, chipbar=render_chipbar(cfg),
-        products=products, cats=cats,
+        products=products, cats=cats, bodyclass="v11",
     ))
 
     # 各カテゴリ
@@ -1391,8 +1390,11 @@ def build_categories(cfg, base, products, cats):
         for page in range(1, total_pages + 1):
             chunk = items[(page - 1) * per: page * per]
             if chunk:
-                body = '<div class="feed">%s</div>' % "".join(
-                    render_card(p, cats, fetched, km) for p in chunk)
+                # v4: 旧・横長カード（render_card）をやめ、TOP と同じ
+                # ストリーム型カードに統一する。PC は2カラムグリッド、
+                # スマホは横長行（.v-stream の既存レイアウトが担う）。
+                body = '<div class="v-stream v-stream-cat">%s</div>' % "".join(
+                    render_stream_card(p, cats, "検証済み") for p in chunk)
             else:
                 body = ('<div class="empty">' + icons.use("tag", "ic-xxl") +
                         '<p class="empty-title">この売場はまだ空っぽです</p>'
@@ -1416,7 +1418,7 @@ def build_categories(cfg, base, products, cats):
 {sidebar}
 </div>
 """.format(icon=icons.use(c["icon"]), label=e(c["label"]), lead=lead, body=body,
-           pager=render_pager(page, total_pages, cbase),
+           pager=render_pager_v11(page, total_pages, cbase),
            sidebar=render_sidebar(cfg, products, cats, active=c["slug"]))
 
             links = ""
@@ -1438,7 +1440,7 @@ def build_categories(cfg, base, products, cats):
                 desc="%sの値下がり商品だけをまとめています。%s" % (c["label"], cfg["site"]["description"]),
                 path=path, content=content, jsonld=links,
                 chipbar=render_chipbar(cfg, active=c["slug"]),
-                products=products, cats=cats,
+                products=products, cats=cats, bodyclass="v11",
                 robots=('<meta name="robots" content="noindex,follow">' if page > 1 else ""),
             ))
 
@@ -1819,8 +1821,15 @@ def build_products(cfg, base, products, cats):
             desc_block = ('<h2 class="section-title">どんな商品？</h2>'
                           '<div class="prose prose-card">%s%s</div>' % (paras, plist))
 
+        # 項目の並び（v4で見直し）：「どんな商品？」を仕様表より前に置く。
+        # 読む人はまず「何の商品か」を知りたいのであって、表は確かめに来た
+        # 人のもの。価格の検証（履歴・基準）はその後に続ける。
+        # 冒頭のシェアボタンは末尾と重複するので外した（末尾だけに残す）。
+        detail_off = ('<span class="detail-off">%d%%OFF</span>' % d) if d > 0 else ""
+        sidebar = render_sidebar(cfg, products, cats, active=p["category"])
         content = """
-<div class="wrap">
+<div class="layout wrap-wide">
+  <div class="layout-main">
   <nav class="breadcrumb" aria-label="パンくず">
     <a href="/">ホーム</a><span class="sep">›</span>
     <a href="/c/{cslug}/">{clabel}</a><span class="sep">›</span>
@@ -1829,16 +1838,13 @@ def build_products(cfg, base, products, cats):
 
   <div class="detail-media">
     <img src="{img}" alt="{alt}" width="800" height="800">
-    {tag}
-    {sticker}
-    {burst}
+    {detail_off}
   </div>
 
   <h1 class="detail-title">{title}</h1>
   {over_notice}
   {cap}
   <div class="detail-actions">{watch}</div>
-  {share_top}
 
   <div class="sticky-cta">
     <div class="sticky-cta-inner">
@@ -1852,6 +1858,8 @@ def build_products(cfg, base, products, cats):
   </div>
   <p class="pop-note{stale_cls}">{freshness}</p>
 
+  {desc_block}
+
   <h2 class="section-title">商品情報</h2>
   <table class="spec"><tbody>{spec}</tbody></table>
 
@@ -1859,18 +1867,17 @@ def build_products(cfg, base, products, cats):
 
   {criteria_block}
 
-  {desc_block}
-
   <p class="affiliate-note">当サイトは楽天アフィリエイトプログラムに参加しています。上のリンクから購入があった場合、当サイトが紹介料を受け取ることがあります。</p>
 
   {share_bottom}
 
   {rel_block}
+  </div>
+  {sidebar}
 </div>
 """.format(cslug=e(p["category"]), clabel=e(c.get("label", "")),
            short=e(p["title"] if len(p["title"]) <= 18 else p["title"][:18] + "…"), img=e(p["image"]), alt=e(p["title"]),
-           tag=render_pricetag(p), sticker=render_sticker(p),
-           burst=render_burst(p), title=e(p["title"]),
+           detail_off=detail_off, sidebar=sidebar, title=e(p["title"]),
            cap=cap, price=yen(p["price"]), cta_sub=cta_sub,
            price_label=e(price_label(p)),
            stale_cls=(" pop-note-stale" if is_stale(p, fetched) else ""),
@@ -2017,10 +2024,7 @@ def build_guides(cfg, base, products, cats, guides):
 
   <div class="layout wrap-wide">
     <div class="layout-main">
-      <nav class="guide-toc" aria-label="この記事の目次">
-        <p class="guide-toc-head">{ic_grid}売場案内</p>
-        <ol>{toc}</ol>
-      </nav>
+      <details class="guide-toc-acc"><summary class="guide-toc-head">{ic_grid}目次</summary><nav aria-label="この記事の目次"><ol>{toc}</ol></nav></details>
 
       <div class="guide-body prose-guide">{body}</div>
 
@@ -2059,6 +2063,7 @@ def build_guides(cfg, base, products, cats, guides):
             path="/guide/%s/" % g["slug"],
             content=content, ogtype="article", jsonld=jsonld,
             chipbar=render_chipbar(cfg), products=products, cats=cats,
+            bodyclass="v11",
         ))
 
 
@@ -2119,6 +2124,7 @@ def build_static_pages(cfg, base, products, cats):
             title="%s｜%s" % (pg["title"], site["name"]),
             desc=pg["description"], path="/%s/" % slug, content=content,
             chipbar=render_chipbar(cfg), products=products, cats=cats,
+            bodyclass="v11",
             robots='<meta name="robots" content="index,follow">',
         ))
 
@@ -2127,7 +2133,7 @@ def build_static_pages(cfg, base, products, cats):
 <div class="wrap">
   <div class="empty">
     {ic}
-    <p class="empty-title">この値札は見つかりませんでした</p>
+    <p class="empty-title">ページが見つかりませんでした</p>
     <p>売り切れたか、URLが変わったようです。</p>
     <p style="margin-top:20px"><a class="btn btn-rakuten btn-lg" href="/">特価フィードへ戻る</a></p>
   </div>
@@ -2137,6 +2143,7 @@ def build_static_pages(cfg, base, products, cats):
         cfg, base, title="ページが見つかりません｜%s" % site["name"],
         desc="お探しのページは見つかりませんでした。", path="/404.html",
         content=content, chipbar=render_chipbar(cfg), products=products, cats=cats,
+        bodyclass="v11",
         robots='<meta name="robots" content="noindex,follow">',
     ))
 
@@ -2270,7 +2277,7 @@ def build_quiz(cfg, base, products, cats):
              "出題はすべて、ヤスミルが実際に掲載している商品から選んでいます。",
         path="/quiz/",
         content=content,
-        products=products, cats=cats,
+        products=products, cats=cats, bodyclass="v11",
         scripts='<script src="%s" defer></script>' % asset_url("/assets/js/quiz.js")))
 
 
@@ -2392,7 +2399,7 @@ def build_kaimawari(cfg, base, products, cats):
              "別々の店から1つずつ選ぶ組み方も出しています。",
         path="/kaimawari/",
         content=content,
-        products=products, cats=cats))
+        products=products, cats=cats, bodyclass="v11"))
 
 
 def build_watchlist(cfg, base, products, cats):
@@ -2439,7 +2446,7 @@ def build_watchlist(cfg, base, products, cats):
              "保存先はお使いのブラウザの中だけで、サーバーには送信されません。",
         path="/watch/",
         content=content,
-        products=products, cats=cats,
+        products=products, cats=cats, bodyclass="v11",
         robots='<meta name="robots" content="noindex,follow">'))
 
 
