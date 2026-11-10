@@ -833,35 +833,42 @@ WEEKDAY_JA = "月火水木金土日"
 STRIP_ORDER = ["kitchen", "kaden", "food", "beauty", "pc", "fashion"]
 
 # トピックス（季節の特集）。締切の日付はここには書かない。
+# img は各特集のアイキャッチ（文字入り）。pos はカルーセルの cover 切り取りで
+# アイキャッチ内のタイトル＋コピーが読める範囲に収まるよう実測で調整した
+# object-position（横はモバイルで左端の文字が切れないよう 0% 固定）。
 # events.json の kind=deadline（deadlineKey = 各エントリの key）から引くので、
 # 締切が過ぎれば表示も消える。
 TOPICS = [
-    {"slug": "blackfriday", "img": "/assets/img/event/blackfriday/pick-01.jpg",
-     "imgAlt": "D-クリア ファンデーション",
+    {"slug": "blackfriday", "img": "/assets/img/event/blackfriday/eyecatch.jpg",
+     "imgAlt": "ブラックフライデー特集アイキャッチ｜その安さ、本物ですか",
+     "pos": "0% 18%",
      "badge": "セール × 検証",
      "title": "ブラックフライデー2026｜価格履歴で「待つ／待たない」を分ける",
      "copy": "いま期間最安値の商品は待たなくていい。最安より上の商品は様子見。セールの看板ではなく、最大60日の価格履歴の実測で分けました。",
      "chips": "採用10件　待たなくていい7件／様子見3件",
      "deadlineKey": "blackfriday-2026", "chip": False,
      "revFmt": "開始 %s（予想）"},
-    {"slug": "winter", "img": "/assets/img/event/winter/pick-01.jpg",
-     "imgAlt": "裏起毛デニム風ワイドパンツ",
+    {"slug": "winter", "img": "/assets/img/event/winter/eyecatch.jpg",
+     "imgAlt": "冬物・防寒特集アイキャッチ｜寒さは、待ってくれない",
+     "pos": "0% 13%",
      "badge": "冬物 × 防寒",
      "title": "冬物・防寒｜裏起毛と部屋の暖かさを実績で選ぶ10選",
      "copy": "裏起毛ボトムス・ニット、充電式カイロ、加湿器とヒーター。レビュー実績と価格履歴で確かめた冬の10件です。",
      "chips": "採用10件　裏起毛5件／暖房・加湿5件",
      "deadlineKey": "winter-none", "chip": False,
      "revFmt": ""},
-    {"slug": "cake", "img": "/assets/img/event/cake/pick-01.jpg",
-     "imgAlt": "ルタオ クリスマスケーキ2個セット",
+    {"slug": "cake", "img": "/assets/img/event/cake/eyecatch.jpg",
+     "imgAlt": "クリスマスケーキ特集アイキャッチ｜今年のケーキ、もう決めた？",
+     "pos": "0% 10%",
      "badge": "クリスマス × ケーキ",
      "title": "クリスマスケーキ予約2026｜実績と締切で選ぶ10選",
      "copy": "有名パティスリーから定番の生クリーム、チョコ、少人数向けまで。締切カレンダー付きで、「いつまでに予約すればいいか」が分かります。",
      "chips": "採用10件　レビュー実績と締切で選定",
      "deadlineKey": "cake-sowari", "chip": True,
      "revFmt": "締切：早割は %s まで"},
-    {"slug": "osechi", "img": "/assets/img/event/osechi/pick-06.jpg",
-     "imgAlt": "博多久松のおせち「博多」",
+    {"slug": "osechi", "img": "/assets/img/event/osechi/eyecatch.jpg",
+     "imgAlt": "おせち特集アイキャッチ｜最初の締切は、11月30日",
+     "pos": "0% 18%",
      "badge": "年末 × おせち",
      "title": "おせち予約2027｜実績と締切で選ぶ10選",
      "copy": "レビュー5万件超の福袋おせちから、2.3万件の定番・博多久松まで。冷蔵・冷凍、段数と人数、最終受付を確認して掲載しています。",
@@ -1158,13 +1165,15 @@ def render_campaign_carousel(entries):
                          % e(t["revFmt"] % md))
         slides.append(
             '<a class="v-camp-slide" href="/event/{slug}/">'
-            '<img class="v-camp-img" src="{img}" alt="{alt}" loading="lazy">'
+            '<img class="v-camp-img" src="{img}" alt="{alt}" loading="lazy" '
+            'style="object-position:{pos}">'
             '<span class="v-camp-cap">'
             '<span class="v-camp-row"><span class="v-note-badge">{badge}</span>'
             '{extra}</span>'
             '<span class="v-camp-title">{title}</span>'
             '</span></a>'.format(
                 slug=t["slug"], img=e(t["img"]), alt=e(t["imgAlt"]),
+                pos=e(t["pos"]),
                 badge=e(t["badge"]), extra=extra, title=e(t["title"])))
     dots = ""
     if len(slides) > 1:

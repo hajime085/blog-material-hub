@@ -50,9 +50,11 @@ def rule_post_needs_pitch(ctx):
     2026-08-31: キャプションのあとに楽天の商品名を貼る古い型で投稿していた。
     「犬 猫 DHA/EPA 活性オメガ3オイル 100ml ふりかけ…」と切れて出た。
     作り直す前の形に戻っていた。
+    2026-11-10: 標準形の変更に合わせて、条件は「第一声（hook）と
+    締めの問い（ask）の両方があること」に強めた。
     """
     src = ctx["threads_py"]
-    if 'if not p.get("mk2"):' not in src:
+    if 'if not mk.get("hook") or not (mk.get("ask") or "").strip():' not in src:
         return ["threads.py の pick() に、商品理解の無い商品を外す条件がありません"]
     return []
 
@@ -1090,25 +1092,25 @@ def rule_keep_learning_from_others(ctx):
 
 
 def rule_pitches_carry_an_ask(ctx):
-    """締めを問いにする試し（cta_arm）が走っている間は、商品理解に問い（ask）を書く。
+    """商品理解には、締めの問い（ask）を書く。常時効く決まり。
 
-    2026-09-28: exp-011 は ask を持つ商品だけを振り分ける。
-    書き忘れると、試しに入る商品が増えず、いつまでも決着しない。
-    exp-003 は測らないまま放置されて決着しなかった。同じことを起こさない。
+    2026-09-28: 界隈で反応の多い投稿は、締めが読む人への問いだった
+    （research.json pat-02）。問いを持つ商品だけを半分ずつ当てる
+    試し（exp-011）を回したが、ask 群・base 群とも反応は0件で
+    差がつかず、判定できなかった。
+    2026-11-10: 外部の証拠の強さを優先して、問いを商品投稿の
+    標準の締めに採用した（型カタログ T2）。試しの対象ではなく
+    全投稿の必須にしたので、この決まりは実験が走っていなくても効く。
+    問いが無い商品理解は、新しい組み立てで投稿できない。
     """
-    led = load("learnings.json", None) or {}
-    running = any((e.get("ab") or {}).get("field") == "cta_arm"
-                  and e.get("status") == "running"
-                  for e in led.get("experiments") or [])
-    if not running:
-        return []
     miss = [p for p in ctx["products"]
             if p.get("pitch_status") == "ready"
             and (p.get("postedAt") or "") >= "2026-09-28"
             and not ((p.get("marketing") or {}).get("ask") or "").strip()]
     if miss:
         return ["商品理解に問い（ask）が無い商品が %d件あります（%s など）。"
-                "exp-011 に入りません" % (len(miss), miss[0].get("title", "")[:20])]
+                "新しい組み立てでは投稿できません"
+                % (len(miss), miss[0].get("title", "")[:20])]
     return []
 
 

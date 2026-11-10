@@ -31,7 +31,11 @@
 // 数日間デプロイが通っていなかった。それに気づけなかった。
 // 2026-09-12: 直したのに「本当に反映されたか」を確かめる手立てが無かった。
 // 状態表示に版を出しておけば、URLを開くだけで分かる。
-const VERSION = "2026-09-20";
+// 2026-11-10: 成績の測定（learn.yml）を毎日1回足した。その日の最初の
+// 投稿（JST 7:20）より前に測るため、UTC 20時（JST 5:20）に置く。
+// それまでは learn.py は手元の手作業からしか呼ばれておらず、
+// 手順が止まった 2026-10-06 から測定が止まっていた。
+const VERSION = "2026-11-10";
 
 const REPO = "hajime085/blog-material-hub";
 
@@ -45,8 +49,10 @@ const REPO = "hajime085/blog-material-hub";
 // workflow_dispatch は取りこぼさないので、長く生かす必要はない。
 const T = "threads.yml";
 const W = "watch.yml";
+const L = "learn.yml";
 
 const PLAN = {
+  20: [L],      // JST  5:20  成績の測定（1日1回、その日の投稿より前）
   22: [T, W],   // JST  7:20  投稿(7時の枠) + 見張り
   0:  [T],      // JST  9:20  投稿(9時の枠)
   2:  [W],      // JST 11:20  見張り

@@ -109,7 +109,10 @@ def followers():
 DIMS = {
         "投稿の種類": (lambda x: x.get("kind") or "?", None),
         "リンクの位置": (lambda x: x.get("link") or "?", None),
-        "締めの型": (lambda x: x.get("cta_type") or "（なし）", "product"),
+        # 2026-11-10: 締めは「問い」に統一した。旧い投稿の cta_type は
+        # 歴史として残し、ask_type を優先して読む。
+        "問いの型": (lambda x: x.get("ask_type") or x.get("cta_type")
+                     or "（なし）", "product"),
         "入口の型": (lambda x: x.get("hook_type") or "（なし）", "product"),
         "売場": (lambda x: x.get("category") or "（なし）", "product"),
         # 時刻をそのまま切ると、種類との交絡になる。

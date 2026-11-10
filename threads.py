@@ -201,25 +201,25 @@ def ends_label(et):
                                  m.group(4).lstrip("0") or "0", m.group(5))
 
 
-# 締めの一言。付けるかどうかは投稿ごとに回す。
-# 「使ったことある人いますか」は、こちらが使ったとは言っていないので嘘にならない。
-# 締めの型。pitch.py の CTA_TYPES と対応している。
-CTA_TEXT = {
-    "experience": "これ、使ってる人います？",
-    "compare":    "もっといいのあったら教えてください。",
-    "empathy":    "同じこと思ってる人、いません？",
-    "save":       "保存しておくと、あとで見返せます。",
-    "none":       "",
-}
-
-TAILS = [
-    "",
-    "\n\nこれ、使ってる人います？",
-    "\n\n保存しておくと、あとで見返せます。",
-    "",
-    "\n\nもっといいのあったら教えてください。",
-    "",
-]
+# 商品投稿の組み立て（2026-11-10 全面作り直し）。
+#
+# 界隈で伸びている投稿の型を集めた結果（research.json／型カタログ
+# threads-viral-patterns-20261110.md）、入口と締めを決め直した。
+#
+#   入口 … 事実への第一声（T1）。商品説明の言い切りで始めない。
+#          驚けるのは見て分かる事実だけ（価格・レビュー件数・
+#          見た目や仕様・利用場面）。使った感想は書かない。
+#   締め … 読む人への問い（T2）。商品ごとの問い（mk2.ask）で必ず終える。
+#
+# それまでの締めローテーション（CTA_TEXT／TAILS）は廃止した。
+# 問いの A/B（exp-011）は ask 群・base 群とも反応0で判定できず、
+# 外部の証拠の強さで「問いを標準に採用」と決めて閉じた。
+# 残っているのは事実ブロック（価格・レビュー・締切）で、
+# これは「判断材料」として後ろに置く。先頭に置くと、
+# 価格を列挙するだけの「まとめ告知」の文法になる（負の型 N1）。
+#
+# 入口の型（pitch.py の HOOK_TYPES と対応）。
+NEW_HOOK_TYPES = ("price", "count", "look", "scene")
 
 
 # セールの間だけ、商品リンクを楽天へ直接つなぐ。
@@ -278,23 +278,6 @@ def ab_policy(field, default):
     return default
 
 
-def cta_arm(p, policy=None):
-    """締めを、読む人への問い（ask）にするか、いつもの締め（base）にするか。
-
-    2026-09-28: 界隈で反応の多い投稿は、締めが読む人への問いだった
-    （research.json pat-02）。うちは130本が「保存しておくと〜」で、問いは0本。
-    問い（mk2.ask）を持つ商品だけを、商品IDで半分ずつ振り分けて比べる（exp-011）。
-    リンクの振り分けとは別の種で混ぜるので、両方の試しが重ならない。
-    """
-    if not ((p.get("mk2") or {}).get("ask") or "").strip():
-        return None
-    policy = policy or ab_policy("cta_arm", "base")
-    if policy != "split":
-        return policy
-    h = int(hashlib.md5(("cta:" + p["id"]).encode("utf-8")).hexdigest(), 16)
-    return "ask" if h % 2 == 0 else "base"
-
-
 def link_arm(p, policy=None):
     """この商品を、楽天へ直接つなぐか（direct）、サイトへ送るか（site）。
 
@@ -326,21 +309,23 @@ def link_for(p, site, policy=None):
 
 
 def compose_product(p, site, pr, reply_link=False, ev=None, seq=0, fact=None):
-    """商品の投稿文。
+    """商品の投稿文（2026-11-10 の標準形）。
 
-    キャプションがあればそれを先頭に置く。人が書いた文なので、いちばん読ませる。
-    無ければ、手元のデータだけで組み立てる。
-    キャプションを待っていると、今朝見つけた79%OFFを流せるのが明日になる。
-    セールの訴求は鮮度がすべてなので、待たないほうを選ぶ。
+    組み立ては1つだけに決める。形を投稿ごとに変えると、
+    何が効いたのか分からなくなる。変えるのは中身（第一声と問い）で、
+    骨格は固定する。
 
-    形は投稿ごとに変える。1行目だけ入れ替えても、
-    組み立てが同じなら同じ投稿に見える。
+        【PR】＋ 第一声（hook）   … 事実への短い反応。商品説明で始めない
+        本文（body）              … 何の商品かと、見分けになる事実1〜2行
+        事実ブロック              … 価格・送料・レビュー・締切の実測値
+        締め                      … 読む人への問い（ask）。必ず付ける
 
     fact は再掲のときの「前回と違う事実」（値下げ・最安値への復帰・
     セール開始）。案Aの決まりで、再掲では必ず1行目に置く。
+    その場合は第一声を2行目に回す。
     """
     mk = p.get("mk2") or None
-    if mk and mk.get("hook"):
+    if mk and mk.get("hook") and (mk.get("ask") or "").strip():
         # 事前に作って、決まりに照らして通した商品理解を使う。
         # 何を先に出すか、誰に向けて書くかは、ここで決めてある。
         # 投稿するときに考えると毎回ぶれるし、確かめる機会もない。
@@ -369,33 +354,21 @@ def compose_product(p, site, pr, reply_link=False, ev=None, seq=0, fact=None):
             tail += "\n%sまで。" % ends.replace(" まで", "")
         lines += ["", tail]
 
-        # 締めは商品に合わせて選んだものを使う。
-        # 決めていなければ、これまでどおり順に回す。
-        cta = mk.get("cta")
-        if cta_arm(p) == "ask":
-            tailtext = "\n\n" + mk["ask"].strip()
-        elif cta == "question":
-            tailtext = "\n\n" + (mk.get("cta_text") or "").strip()
-        elif cta in CTA_TEXT:
-            t2 = CTA_TEXT[cta]
-            tailtext = ("\n\n" + t2) if t2 else ""
-        else:
-            tailtext = TAILS[seq % len(TAILS)]
-
-        body = "\n".join(lines) + tailtext
+        # 締めは、商品ごとの問い（ask）で必ず終える。
+        body = "\n".join(lines) + "\n\n" + mk["ask"].strip()
         url = link_for(p, site)
         if reply_link:
             return body, url
         return body + "\n\n" + url, None
 
-    # 商品理解の無い商品は、pick() が候補から外している。
+    # 商品理解の無い商品、問いの無い商品は、pick() が候補から外している。
     # ここへは来ない。来たら、それは決まりが壊れている合図なので、
-    # 黙って古い形で出さずに、出さないことを選ぶ。
+    # 黙って別の形で出さずに、出さないことを選ぶ。
     #
-    # 以前はここに「キャプション＋商品名」と「値札型など7種」という
-    # 古い道が残っていた。使わないのに残していたので、
-    # pick() の条件が外れた拍子にそこへ落ち、
-    # 楽天の商品名をそのまま貼った投稿が出た（2026-08-31）。
+    # 以前はここに「キャプション＋商品名」の古い道や、
+    # 締めのローテーションに落ちる道が残っていた。
+    # 使わない道を残すと、条件が外れた拍子にそこへ落ちて
+    # 旧い形の投稿が出る（2026-08-31 に実際に起きた）。
     # 使わなくなった道は残さない。残せば、いつか落ちる。
     return None, None
 
@@ -950,7 +923,12 @@ def pick(cfg, posted, want, slot_hour=None, live_heads=None):
         # 「誰に・どんな悩みに・どの特徴が効くか」を先に考える、という
         # 作り直しの趣旨そのものからも外れている。
         # 出せるものが無い枠は、知識や記事で埋める。そちらのほうがましだ。
-        if not p.get("mk2"):
+        #
+        # 2026-11-10 の標準形では、締めの問い（ask）も必須にした。
+        # 問いが無い商品理解は、旧い形のまま残っているもの。
+        # 混ぜて出すと組み立てが2つあることになるので、候補から外す。
+        mk = p.get("mk2") or {}
+        if not mk.get("hook") or not (mk.get("ask") or "").strip():
             continue
         # キャプションが無くても、言えることがあるなら出す。
         # 値引きが取れているか、期限が分かっていること。
@@ -1426,8 +1404,9 @@ def report():
               lambda x: x.get("logic_version"), only_product=True)
     summarize("入口の型べつ",
               lambda x: x.get("hook_type") or "（型なし）", only_product=True)
-    summarize("締めべつ",
-              lambda x: x.get("cta_type") or "（回しているもの）", only_product=True)
+    summarize("問いの型べつ",
+              lambda x: x.get("ask_type") or x.get("cta_type")
+              or "（型なし）", only_product=True)
     summarize("売場べつ",
               lambda x: x.get("category"), only_product=True)
 
@@ -1529,8 +1508,8 @@ def run_once(cfg, posted, slot_hour=None, dry=False, late=False):
     caps = {("product:" + x["id"]): bool(x.get("cap")) for x in _feed}
     hooks = {("product:" + x["id"]): (x.get("mk2") or {}).get("hook_type")
              for x in _feed}
-    ctas = {("product:" + x["id"]): (x.get("mk2") or {}).get("cta")
-            for x in _feed}
+    ask_types = {("product:" + x["id"]): (x.get("mk2") or {}).get("ask_type")
+                 for x in _feed}
     cats = {("product:" + x["id"]): x.get("c") for x in _feed}
     # 返信のリンクを楽天へ直接にしたか、サイトへ送ったか。クリック数を側ごとに足すため。
     _pol = link_policy()
@@ -1538,13 +1517,15 @@ def run_once(cfg, posted, slot_hour=None, dry=False, late=False):
             (link_arm(x, _pol) if (x.get("url") or "").startswith(
                 "https://hb.afl.rakuten.co.jp/") else "site")
             for x in _feed}
-    # 締めを問いにしたか（ask）、いつもの締めか（base）。問いを持たない商品は None。
-    _cpol = ab_policy("cta_arm", "base")
-    cta_arms = {("product:" + x["id"]): cta_arm(x, _cpol) for x in _feed}
     # どちらの組み立てで出したか。あとで旧と新を比べるため。
     # 商品理解を持っているものだけが新しいほうを通る。
+    # 2026-11-10 の標準形（第一声＋問い）で書かれた商品理解は pattern_v3、
+    # それ以前の形は marketing_v2 として残す。
     vers = {("product:" + x["id"]):
-            ("marketing_v2" if x.get("mk2") else "legacy_v1") for x in _feed}
+            ("pattern_v3" if (x.get("mk2") or {}).get("hook_type")
+             in NEW_HOOK_TYPES else
+             "marketing_v2" if x.get("mk2") else "legacy_v1")
+            for x in _feed}
     ok = 0
     for key, text, link in picks:
         try:
@@ -1592,8 +1573,8 @@ def run_once(cfg, posted, slot_hour=None, dry=False, late=False):
             "cap": caps.get(key, None),
             # どの入口の型で出したか。あとでどれが伸びたかを見るため。
             "hook_type": hooks.get(key),
-            # どの締めで出したか。反応の差を見るため。
-            "cta_type": ctas.get(key),
+            # 締めの問いの種類。問いどうしで反応の差を見るため。
+            "ask_type": ask_types.get(key),
             # 売場。売場によって伸び方が違うかもしれない。
             "category": cats.get(key),
             # 旧い組み立てか、新しい組み立てか。
@@ -1604,7 +1585,6 @@ def run_once(cfg, posted, slot_hour=None, dry=False, late=False):
             "link": ("none" if kind in ("tip", "schedule")
                      else ("reply" if link else "body")),
             "link_arm": arms.get(key) if kind == "product" else None,
-            "cta_arm": cta_arms.get(key) if kind == "product" else None,
         })
         ok += 1
         print("  ✅ %s → %s" % (key, pid))

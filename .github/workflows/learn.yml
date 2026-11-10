@@ -1,0 +1,87 @@
+name: learn
+
+# 成績の測定（learn.py）を毎日1回、自動で回す。
+#
+# 2026-11-10 に設置した。それまでは learn.py は ops/daily.py
+# （手元の手作業）からしか呼ばれておらず、その手順が止まった
+# 2026-10-06 から測定が止まっていた。build の警告
+# 「学びを止めない：成績を測っていません」が付き続けた理由。
+# 測定は読み取りだけ（Threads の insights を見る）で、投稿はしない。
+#
+# 起動は Cloudflare の cron（ops/cron-worker.js）が workflow_dispatch で行う。
+# threads.yml と同じ流儀で、このファイル自体に schedule は書かない。
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: learn
+  cancel-in-progress: false
+
+jobs:
+  learn:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 成績を測る
+        id: measure
+        env:
+          THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
+          THREADS_USER_ID: ${{ secrets.THREADS_USER_ID }}
+          TZ: Asia/Tokyo
+        run: python3 learn.py
+
+      - name: 台帳を反映する
+        if: steps.measure.outcome == 'success'
+        env:
+          TZ: Asia/Tokyo
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          # learn.py が書き換えるのは learnings.json だけ。
+          git add learnings.json
+          if git diff --cached --quiet; then
+            echo "台帳に変化なし"
+            exit 0
+          fi
+          git commit -m "Threadsの成績を測定（learn.py 自動）"
+          for i in 1 2 3 4 5 6; do
+            if git push origin HEAD:main; then
+              echo "反映しました"
+              exit 0
+            fi
+            echo "push が競合しました。再baseします（$i/6）"
+            if ! git pull --rebase origin main; then
+              # 台帳は累積なので、競合したら今回分は捨ててよい。
+              # 明日の測定で同じ数字がまた入る。無理に押し込まない。
+              git rebase --abort || true
+              echo "台帳の反映は明日の測定に回します"
+              exit 0
+            fi
+          done
+          echo "::warning::台帳を反映できませんでした"
+          exit 1
+
+      - name: 失敗を記録する
+        if: failure()
+        env:
+          TZ: Asia/Tokyo
+        run: |
+          python3 ops/record_failure.py learn || true
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add ops/failures.md
+          git diff --cached --quiet || git commit -m "測定の失敗を記録"
+          git push origin HEAD:main || true

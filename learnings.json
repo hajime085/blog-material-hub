@@ -1276,7 +1276,7 @@
       "id": "exp-010",
       "started": "2026-09-28",
       "until": "2026-10-13",
-      "status": "running",
+      "status": "中止",
       "measure": "ab_clicks",
       "hypothesis": "投稿→サイト→楽天の段を1つ減らして楽天へ直接つなげば、楽天へ届くクリックが増える。",
       "change": "商品の投稿の返信リンクを、商品IDで半分ずつ「楽天へ直接（direct）」「サイトの商品ページ（site）」に振り分ける（threads.link_arm）。どちらで出したかを threads_posted.json の link_arm に残す。",
@@ -1312,13 +1312,22 @@
           }
         }
       },
-      "extended": true
+      "extended": true,
+      "conclusion": "2026-11-10 に終了（未決着）。最終確認（2026-10-06 台帳）で direct 31本／7クリック（1本あたり0.226）、site 38本／2クリック（0.053）。min_posts は満たしたが、クリック合計9が min_clicks の10に届かなかった。その後、2026-10-24 のトークン失効で投稿が止まり、母集団が途中で切れたため、この設計のままでは決着できない。判定は後継の exp-012 に引き継ぐ。",
+      "progress": {
+        "posts_direct": 31,
+        "posts_site": 38,
+        "clicks_direct": 7,
+        "clicks_site": 2,
+        "at": "2026-10-06"
+      },
+      "closed_at": "2026-11-10"
     },
     {
       "id": "exp-011",
       "started": "2026-09-28",
       "until": "2026-10-12",
-      "status": "running",
+      "status": "中止",
       "measure": "ab_clicks",
       "hypothesis": "締めを読む人への問いにすると、返信やいいねが付きやすくなる（界隈で反応の多い投稿は、締めが問いだった。research.json pat-02）。",
       "change": "商品理解に ask（読む人への問い）を書き、ask を持つ商品だけを商品IDで半分ずつ「締めを ask に差し替える（ask）」「いつもの締め（base）」に振り分ける（threads.cta_arm）。どちらで出したかは threads_posted.json の cta_arm に残す。リンクの試し（exp-010）とは別の種で振り分けるので重ならない。",
@@ -1354,7 +1363,47 @@
             "rate": 0.0
           }
         }
-      }
+      },
+      "conclusion": "2026-11-10 に終了（判定不能）。ask 38本／反応0、base 30本／反応0で、指標（reactions）の差が観測できなかった。締めの問い自体は、外部の観測（型カタログ T2／research.json pat-02）の証拠の強さで2026-11-10 に商品投稿の標準として採用した。実験の勝ちではなく、外部証拠による採用であることを明記する。問いどうしの差は、ask_type（usage／choice／problem）の集計でこれから見る。",
+      "closed_at": "2026-11-10"
+    },
+    {
+      "id": "exp-012",
+      "title": "リンクの置き方（楽天へ直接 vs 商品ページ）・再試行",
+      "started": "2026-11-11",
+      "until": "2026-11-25",
+      "status": "running",
+      "change": "exp-010 と同じ設計。投稿の組み立ては 2026-11-10 の標準形に統一されているので、リンクの置き方だけが差になる。振り分け（threads.link_arm）も exp-010 と同じ。",
+      "metric": "クリック（Threads の insights の link_clicks）",
+      "conclusion": "",
+      "ab": {
+        "field": "link_arm",
+        "arms": [
+          "direct",
+          "site"
+        ],
+        "decide": {
+          "min_posts": 15,
+          "min_clicks": 10,
+          "gap": 1.3,
+          "tie": "direct"
+        },
+        "extends": 0,
+        "metric": "clicks"
+      },
+      "progress": {},
+      "note": "exp-010（2026-09-29〜、未決着で終了）の後継。母集団がトークン失効で2つに割れたため、同じ設計で取り直す。"
+    },
+    {
+      "id": "exp-013",
+      "title": "画像つき投稿 vs 文字だけ",
+      "started": "2026-11-10",
+      "until": "",
+      "status": "待ち",
+      "change": "商品投稿に画像を付けるかどうか。いまの公開経路（threads.py publish）は文字だけ。実装は画像の権利確認（楽天の商品画像の利用可否）と、Threads API のメディア投稿の配線が前提。",
+      "metric": "閲覧数と反応（learn.py の集計）",
+      "conclusion": "",
+      "note": "型カタログ T3（画像・動画が主役）の検証。前提が整うまで 待ち。始める条件がそろったら status を running にする。 started は登録日（2026-11-10）。実施開始時に実際の開始日へ直す。"
     }
   ],
   "lastRun": "2026-10-06",
