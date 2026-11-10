@@ -13,9 +13,12 @@
     A. 商品ページを大きめに読み直し（3MB）、埋まっている商品コード
        候補を全部試す（URL が一致したものだけ採用）。
     B. 名前を短い言葉に割って店内検索する（「田舎の」「手づくり」
-       「ちこり村」など）。1 回の取得件数を 100 件に広げ、広い
-       キーワードでは 3 ページまで見る。当たりは必ず商品 URL が
-       元の URL と一致するかで確かめるので、誤採用は起きない。
+       「ちこり村」など）。API は 1 回に 30 件までしか返さないので、
+       ページを送って探す。
+    C. 最後に、キーワードなしで店の商品を「レビュー件数の多い順」
+       （fetch_rakuten が使う並び）に並べて端から照合する。売れ筋の
+       季節商品なら上の方にいる。当たりは必ず商品 URL が元の URL と
+       一致するかで確かめるので、誤採用は起きない。
 
 認証情報は fetch_rakuten.py と同じ .env / config.json から読む。
 """
@@ -120,7 +123,7 @@ def main():
 
     def url_matches(it, shop, slug):
         raw = urllib.parse.unquote(it.get("itemUrl") or "")
-        return ("/%s/%s/" % (shop, slug)) in raw
+        return ("/%s/%s/" % (shop, slug)) in raw or raw.rstrip("/").endswith("/%s/%s" % (shop, slug))
 
     mapping = {}
     missed = []
@@ -152,7 +155,8 @@ def main():
                     time.sleep(fr.REQUEST_INTERVAL)
                     try:
                         data = fr.api_get(fr.ITEM_API, dict(
-                            base, shopCode=shop, keyword=kw, hits=100, page=page), site_url)
+                            base, shopCode=shop, keyword=kw, hits=30, page=page,
+                            sort="-reviewCount"), site_url)
                     except SystemExit:
                         data = {}
                     for it in data.get("Items", []):
@@ -162,6 +166,22 @@ def main():
                     if found or page >= (data.get("pageCount") or 1):
                         break
                 if found:
+                    break
+        if not found:
+            # C. 店の商品をレビュー件数の多い順に端から照合する
+            for page in range(1, 11):
+                time.sleep(fr.REQUEST_INTERVAL)
+                try:
+                    data = fr.api_get(fr.ITEM_API, dict(
+                        base, shopCode=shop, hits=30, page=page,
+                        sort="-reviewCount"), site_url)
+                except SystemExit:
+                    break
+                for it in data.get("Items", []):
+                    if it.get("affiliateUrl") and url_matches(it, shop, slug):
+                        found = it["affiliateUrl"]
+                        break
+                if found or page >= (data.get("pageCount") or 1):
                     break
         if found:
             mapping[url] = found
