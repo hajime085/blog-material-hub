@@ -3200,12 +3200,12 @@ body{background:#f2f4f8;color:#17181c;font-family:-apple-system,BlinkMacSystemFo
 /* ヘッダー（黒・2段） */
 .v-hd{background:#000;color:#fff;position:relative;z-index:30}
 .v-hd1-in{display:flex;align-items:center;gap:22px;padding-top:13px;padding-bottom:13px}
-.v-logo{color:#fff;font-weight:900;font-size:30px;line-height:1;text-decoration:none;letter-spacing:.02em;display:flex;align-items:baseline;gap:9px;white-space:nowrap}
+.v-logo{color:#fff;font-weight:900;font-size:36px;line-height:1;text-decoration:none;letter-spacing:.02em;display:flex;align-items:baseline;gap:9px;white-space:nowrap}
 .v-logo-sub{font-size:10.5px;font-weight:700;color:#9aa0ab;letter-spacing:.28em}
 .v-topnav{display:flex;gap:20px;font-size:13.5px;font-weight:700;margin-left:10px}
 .v-topnav a{color:#e8e9ec;text-decoration:none}
 .v-topnav button{background:none;border:none;color:#e8e9ec;font:inherit;cursor:pointer;padding:0}
-.v-hd-cta{margin-left:auto;background:#c83333;color:#fff;font-weight:800;font-size:13px;padding:9px 15px;text-decoration:none;border-radius: 2px;white-space:nowrap}
+.v-hd-cta{margin-left:auto;background:#c83333;color:#fff;font-weight:800;font-size:11.5px;padding:6px 10px;text-decoration:none;border-radius: 2px;white-space:nowrap}
 .v-menu-btn{flex:0 0 auto;width:36px;height:36px;display:grid;place-items:center;background:transparent;border:1px solid rgba(255,255,255,.4);border-radius: 2px;color:#fff;cursor:pointer}
 .v-menu-btn:hover{background:rgba(255,255,255,.18)}
 .v-menu-btn .ic{width:20px;height:20px}
@@ -3352,7 +3352,7 @@ body{background:#f2f4f8;color:#17181c;font-family:-apple-system,BlinkMacSystemFo
 }
 @media (max-width:860px){
   .v-hd1-in{flex-wrap:wrap;gap:10px 16px;padding-top:11px;padding-bottom:11px}
-  .v-logo{font-size:26px}
+  .v-logo{font-size:31px}
   .v-topnav{order:3;width:100%;margin-left:0}
   .v-hd-cta{margin-left:auto}
   .v-hero{flex-direction:column;align-items:stretch;padding:20px 18px}
@@ -3460,3 +3460,7 @@ body{background:#f2f4f8;color:#17181c;font-family:-apple-system,BlinkMacSystemFo
   font-size: .78rem; color: #6b7078; line-height: 1.6;
   margin-top: 10px;
 }
+
+/* ヘッダー帯: いま見ているカテゴリは白地に反転、押した瞬間も反転 (2026-11-10) */
+.v-cat-btn[aria-current="true"]{background:#fff;color:#17181c;border-color:#fff}
+.v-cat-btn:active{background:#fff;color:#17181c;border-color:#fff}

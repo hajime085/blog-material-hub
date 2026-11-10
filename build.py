@@ -698,7 +698,7 @@ def render_ticker(products, cats):
 # ---------------------------------------------------------------- page shell
 def page_shell(cfg, base, *, title, desc, path, content, ogtype="website",
          chipbar="", jsonld="", bodyclass="", ogimage=None, robots="", scripts="",
-         products=None, cats=None, ogtitle=None):
+         products=None, cats=None, ogtitle=None, cat_active=None):
     site = cfg["site"]
     canonical = site["url"].rstrip("/") + path
     footer_cats = "".join(
@@ -706,7 +706,7 @@ def page_shell(cfg, base, *, title, desc, path, content, ogtype="website",
         for c in cfg["categories"]
     )
     drawer_cats = "".join(
-        '<li><a href="/c/%s/">%s%s</a></li>' % (c["slug"], icons.use(c["icon"]), e(c["label"]))
+        '<li><a href="/c/%s/">%s%s</a></li>' % (c["slug"], icons.use(c["icon"]), e(c["short"]))
         for c in cfg["categories"]
     )
     return fill(base, {
@@ -749,7 +749,7 @@ def page_shell(cfg, base, *, title, desc, path, content, ogtype="website",
             % (e(g["slug"]), icons.use("doc"), e(g.get("shortTitle", g["title"])))
             for g in (cfg.get("_guides") or [])),
         "THREADS_ITEM": threads_nav_item(cfg),
-        "CATSTRIP": render_catstrip(cfg),
+        "CATSTRIP": render_catstrip(cfg, cat_active),
         "THREADS_URL": e((cfg.get("site") or {}).get("threads") or "#"),
     })
 
@@ -851,14 +851,15 @@ TOPICS = [
 ]
 
 
-def render_catstrip(cfg):
+def render_catstrip(cfg, active=None):
     """ヘッダー2段目のカテゴリ帯（単一トーン、特集だけ赤）。"""
     by = {c["slug"]: c for c in cfg["categories"]}
     out = ['<a class="v-cat-btn v-feat" href="/#topics">特集</a>']
     for slug in STRIP_ORDER:
         c = by.get(slug)
         if c:
-            out.append('<a class="v-cat-btn" href="/c/%s/">%s</a>' % (slug, e(c["short"])))
+            cur = ' aria-current="true"' if active == slug else ""
+            out.append('<a class="v-cat-btn" href="/c/%s/"%s>%s</a>' % (slug, cur, e(c["short"])))
     return "".join(out)
 
 
@@ -1439,7 +1440,7 @@ def build_categories(cfg, base, products, cats):
                 cfg, base, title=title,
                 desc="%sの値下がり商品だけをまとめています。%s" % (c["label"], cfg["site"]["description"]),
                 path=path, content=content, jsonld=links,
-                chipbar=render_chipbar(cfg, active=c["slug"]),
+                chipbar=render_chipbar(cfg, active=c["slug"]), cat_active=c["slug"],
                 products=products, cats=cats, bodyclass="v11",
                 robots=('<meta name="robots" content="noindex,follow">' if page > 1 else ""),
             ))
@@ -1950,7 +1951,7 @@ def build_products(cfg, base, products, cats):
             ogtitle=ogtitle,
             desc=(p.get("caption") or p["title"])[:110],
             path="/p/%s/" % p["id"], content=content, ogtype="article",
-            chipbar=render_chipbar(cfg, active=p["category"]),
+            chipbar=render_chipbar(cfg, active=p["category"]), cat_active=p["category"],
             jsonld=jsonld_block(prod_ld) + jsonld_block(crumb_ld),
             bodyclass="has-sticky-cta v11",
             ogimage=(site_url + p["image"]) if p["image"].startswith("/") else p["image"],
