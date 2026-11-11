@@ -537,8 +537,30 @@ def schedule_recent(posted, days=SCHEDULE_GAP_DAYS):
     return False
 
 
+def schedule_link(rows):
+    """予定の投稿の返信に付ける行き先。いちばん近いイベントに合わせる。
+
+    2026-11-11: それまで予定の投稿はリンク無しで出ていた。
+    いちばん見られている型（表示の中央値60回）に受け皿が無く、
+    クリックが週9件に留まっていた。行き先は「その回の買い方」が
+    読める場所にする。合う読み物が無いときは、安く見える仕組みを
+    暴くガイド（既存の文面で「買い方はこちら」と案内している先）。
+    """
+    if not rows:
+        return "/guide/price-trick/"
+    _a, _b, ev = rows[0]
+    name = ev.get("name", "")
+    if "スーパーSALE" in name:
+        return "/guide/rakuten-super-sale/"
+    if "ブラックフライデー" in name:
+        return "/event/blackfriday/"
+    if ev.get("kind") == "marathon" or "マラソン" in name or "大感謝祭" in name:
+        return "/guide/rakuten-marathon/"
+    return "/guide/price-trick/"
+
+
 def schedule_post():
-    """次に来るイベントの予定。リンクは貼らない。
+    """次に来るイベントの予定。本文にはリンクを入れず、返信で案内する。
 
     「予想」の日程は予想と明記する。
     発表前の日程を確定のように書くのは、
@@ -568,6 +590,7 @@ def schedule_post():
         # 無い日程を予想で埋めるより、「まだ出ていない」ほうが正しい。
         return [{
             "key": "schedule:%s" % now.strftime("%Y-W%W-%w"),
+            "to": "/guide/price-trick/",
             "title": "楽天のイベント予定",
             "lead": ("いま開催中のセールはありません。\n"
                      "次の日程は、楽天からまだ発表されていません。\n\n"
@@ -622,7 +645,8 @@ def schedule_post():
     body = "\n".join(lines)
     if tail:
         body += "\n\n" + "\n".join(tail)
-    return [{"key": key, "title": "楽天のイベント予定", "lead": body}]
+    return [{"key": key, "title": "楽天のイベント予定", "lead": body,
+             "to": schedule_link(rows)}]
 
 
 # 返信で案内するときの一言。行き先ごとに変える。
@@ -1608,8 +1632,9 @@ def run_once(cfg, posted, slot_hour=None, dry=False, late=False):
                                       "legacy_v1" if kind == "product" else None),
             # あとで比べるために、どの出し方で出したかを残す。
             # 記録が無いと、伸びた理由が本文か返信かを言えなくなる。
-            "link": ("none" if kind in ("tip", "schedule")
-                     else ("reply" if link else "body")),
+            "link": ("none" if kind == "tip"
+                     else ("reply" if link else
+                           ("none" if kind == "schedule" else "body"))),
             "link_arm": arms.get(key) if kind == "product" else None,
         })
         ok += 1

@@ -2996,6 +2996,37 @@ def check_expired_sales(products):
             print("   %-28s %s" % (rel, pid))
 
 
+def check_events_coverage(doc=None):
+    """イベント台帳（events.json）に、先の見通しが立っているか調べる。
+
+    2026-11-04〜11 のお買い物マラソンが台帳に無く、開催中なのに
+    Threads の告知が「開催中のセールはありません」と流れた。
+    台帳の欠落は静かに起きるので、見通しが切れたら警告で気づける
+    ようにする。予想の日程でよいので、先行して登録しておくこと。
+    """
+    if doc is None:
+        doc = load("events.json") or {}
+    now = datetime.now(JST).replace(tzinfo=None)
+    horizon = now + timedelta(days=14)
+    upcoming = []
+    for ev in doc.get("events", []):
+        if ev.get("kind") not in ("sale", "marathon"):
+            continue
+        try:
+            a = datetime.strptime(ev["start"][:16], "%Y-%m-%d %H:%M")
+            b = datetime.strptime((ev.get("end") or ev["start"])[:16],
+                                  "%Y-%m-%d %H:%M")
+        except (ValueError, KeyError):
+            continue
+        if b >= now:
+            upcoming.append(a)
+    if any(a <= horizon for a in upcoming):
+        return
+    print("⚠ イベント台帳の見通しが切れています: 14日以内に始まる"
+          "セール／マラソンが events.json にありません。"
+          "次の日程を（予想でよいので）登録してください。")
+
+
 def check_featured_freshness():
     """編集部の棚（featured.json）が、腐ったまま放っておかれていないか調べる。
 
@@ -3422,6 +3453,7 @@ def main():
         check_internal_links()
         check_caption_prices(checks_products)
         check_expired_sales(checks_products)
+        check_events_coverage()
         check_featured_freshness()
         check_event_affiliate_links()
         check_guide_toc(guides)
