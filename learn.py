@@ -460,7 +460,8 @@ def main():
             continue
         if today < e["until"]:
             print("\n試し %s は %s まで。いま %s、目標 %s。"
-                  % (e["id"], e["until"], e["metric"], e["target"]))
+                  % (e["id"], e["until"], e["metric"],
+                     e.get("target") or "（目標は未設定）"))
             continue
         # 何で測るかは、試しごとに書いてある。
         #
@@ -493,6 +494,13 @@ def main():
             print("\n試し %s は期限を過ぎましたが、%s は私からは見えません。"
                   "\n   数字をもらってから決めます。（目標 %s）"
                   % (e["id"], e.get("metric"), e.get("target")))
+            e["status"] = "待ち"
+            continue
+        if e.get("target") is None:
+            # 目標が書かれていない試しは、数字だけでは決めない。
+            print("\n試し %s は期限を過ぎましたが、目標が未設定なので決めません。"
+                  "\n   目標を書いてから決めます。（%s %s）"
+                  % (e["id"], unit, now))
             e["status"] = "待ち"
             continue
         e["result"] = {"measured": now, "unit": unit,

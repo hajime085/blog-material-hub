@@ -1373,6 +1373,8 @@
       "started": "2026-11-11",
       "until": "2026-11-25",
       "status": "running",
+      "measure": "ab_clicks",
+      "target": "direct の1本あたりクリックが site の1.3倍以上なら direct",
       "change": "exp-010 と同じ設計。投稿の組み立ては 2026-11-10 の標準形に統一されているので、リンクの置き方だけが差になる。振り分け（threads.link_arm）も exp-010 と同じ。",
       "metric": "クリック（Threads の insights の link_clicks）",
       "conclusion": "",
