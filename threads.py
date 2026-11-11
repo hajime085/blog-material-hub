@@ -502,6 +502,25 @@ def tip_posts():
 SCHEDULE_GAP_DAYS = 3
 
 
+def sale_boost(th, day=None):
+    """セール期の告知増量（config の threads.saleBoost）が効いていればそれを返す。
+
+    期間の外では None。通常運転には何も足さない。
+    期間が終われば、放っておいても通常に戻る。
+    """
+    b = (th or {}).get("saleBoost") or {}
+    if not b.get("slots"):
+        return None
+    if day is None:
+        day = datetime.now(JST).date()
+    try:
+        a = datetime.strptime(b["from"], "%Y-%m-%d").date()
+        z = datetime.strptime(b["to"], "%Y-%m-%d").date()
+    except (KeyError, ValueError):
+        return None
+    return b if a <= day <= z else None
+
+
 def schedule_recent(posted, days=SCHEDULE_GAP_DAYS):
     """最近この型を出したか。予定の投稿が続けざまに並ぶのを避ける。"""
     now = datetime.now(JST).replace(tzinfo=None)
@@ -1001,7 +1020,11 @@ def pick(cfg, posted, want, slot_hour=None, live_heads=None):
     # 枠の種類から取る。空だったら、決めた順でほかの種類から埋める。
     pools = {"product": linked, "tip": [], "event": [], "feature": []}
     # イベント告知。予定（events.json）と、開催中セールの買いまわり案内。
-    for x in (schedule_post() if not schedule_recent(posted) else []):
+    # セール期の増量中は、予定の投稿の間隔を詰める（日替わりで残り日数が変わるため）。
+    boost = sale_boost(th)
+    gap = int(boost.get("scheduleGapDays", SCHEDULE_GAP_DAYS)) if boost \
+        else SCHEDULE_GAP_DAYS
+    for x in (schedule_post() if not schedule_recent(posted, days=gap) else []):
         if x["key"] not in done:
             pools["event"].append((x["key"], compose_plain(x, site)))
     for e in event_posts(site, ev, n_km):
@@ -1049,7 +1072,10 @@ def pick(cfg, posted, want, slot_hour=None, live_heads=None):
     # 「本来その投稿が出るはずだった時刻」の枠に従う。
     # そうしないと、朝の枠を昼に埋めた瞬間に中身が昼のものに変わる。
     hour = datetime.now(JST).hour if slot_hour is None else int(slot_hour)
-    slots = th.get("slots") or {}
+    if boost:
+        print("  セール期の告知増量中（%s〜%s）: 告知系の枠を厚くしています"
+              % (boost["from"], boost["to"]))
+    slots = (boost.get("slots") if boost else None) or th.get("slots") or {}
     kind = slots.get(str(hour))
     if kind is None:
         # 枠から外れた時刻に走ったとき（手で実行した場合など）は、
