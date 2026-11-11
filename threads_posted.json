@@ -912,25 +912,10 @@
     "tip:31",
     "product:red6052d5f",
     "tip:29",
-    "product:rd429b31ad"
+    "product:rd429b31ad",
+    "product:r841f65348"
   ],
   "log": [
-    {
-      "key": "tip:31",
-      "id": "18568634038076903",
-      "at": "2026-10-14 21:11",
-      "kind": "tip",
-      "slot": 21,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
     {
       "key": "tip:29",
       "id": "18342400033287159",
@@ -5698,6 +5683,21 @@
       "logic_version": "pattern_v3",
       "link": "reply",
       "link_arm": "site"
+    },
+    {
+      "key": "product:r841f65348",
+      "id": "17891982741686458",
+      "at": "2026-11-11 14:20",
+      "kind": "product",
+      "slot": 14,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "look",
+      "ask_type": "choice",
+      "category": "kitchen",
+      "logic_version": "pattern_v3",
+      "link": "reply",
+      "link_arm": "direct"
     }
   ]
 }
