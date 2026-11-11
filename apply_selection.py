@@ -1,51 +1,68 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-apply_selection.py — 厳格選定の自動適用（見張り便用）
+apply_selection.py — 掲載台帳（ストリーム方式）の自動メンテナンス（見張り便用）
 
-select_strict.evaluate()（選定の正本）を現行データに適用し、結果を
-curated.json に反映する。2026-11-10 までは選定は手作業で、curated.json は
-固定スナップショットだった。見張り（fetch_rakuten.py --watch）が価格を
-取り直すたびに、ここで選定も回し直す。
+2026-11-11 に掲載モデルを「通常のサイト方式（蓄積型ストリーム）」へ移行した。
+旧方式は、見張りのたびに選定を回し直して curated.json を丸ごと入れ替える
+方式で、基準から外れた商品はその場でページごと消えていた。そのため
+掲載が 16件 → 11件に目減りし、サイトに記事が蓄積されなかった。
 
-    watch.yml の順序: 価格を見に行く → 選定を回す（このスクリプト）
+新方式（このスクリプトの仕事）:
+  入る門は不変。select_strict.evaluate()（選定の正本）の全ゲート
+  （観測30日以上／期間最安／中央値比-20%以上／レビュー100件以上・
+  ★3.8以上／送料無料／キャプション必須）を通った商品だけが、
+  その日の新規掲載として台帳（listings.json）に入る。
+  出ていく規則だけが違う:
+    (a) 新規に全ゲート通過した商品を台帳へ追加する（掲載日＝当日）
+    (b) プール（products.json）に残っている掲載中商品は、スナップ
+        ショットを最新の観測値に更新する（価格は生き続ける）
+    (c) 掲載から30日を超えた商品を台帳から外す（期限切れ）
+    (d) 価格が戻っても落選はしない。%OFF や「検証済み」の表示を
+        外すかどうかは、ビルド時に build.py が現況で判定する。
+
+    watch.yml の順序: 価格を見に行く → 台帳を手入れする（このスクリプト）
                       → サイトを作り直す → 反映する
 
 記録（あとから追えることが必須）:
-  - ops/selection_log.md に、適用・見送りのたびに追記する
-    （追加／落選と、その理由＝どのゲートで落ちたか、まで書く）。
-  - 自動コミットのメッセージ（.run_summary.txt）にも選定の行を足す。
+  - ops/selection_log.md に、追加／期限切れを理由つきで追記する。
+  - 自動コミットのメッセージ（.run_summary.txt）にも台帳の行を足す。
   - 見送りのときも .run_changed を yes にして、記録だけはコミットに残す。
 
-安全弁（黙って大きく入れ替わらないための歯止め）:
-  - データ異常ガード: 商品数・価格履歴の総件数が、前回「適用した」ときの
-    記録から大きく減っていたら見送る（取得失敗で履歴が欠けた状態で
-    大量落選させないため）。
-  - 大量落選ガード: 落選が現在の掲載の半分以上（かつ5件以上）なら見送る。
-    掲載が0件になる場合も見送る。
-  - 入れ替え量: 追加+落選が 6〜7件なら適用して「要確認」を付ける。
-    8件以上なら見送って、提案（追加・落選と理由）を記録に残す。
-  見送った提案は、次の回のデータで毎回判定し直す（自動では適用しない）。
-  furu / マル が中身を確認して適用してよいと判断したら、手で
+安全弁:
+  - データ異常ガードだけを残す: 商品数・価格履歴の総件数が、前回適用時の
+    記録から大きく減っていたら、その回は台帳を一切触らない（取得失敗で
+    履歴が欠けた状態で、追加も期限切れもさせない）。
+  - 旧方式の「入れ替え量」ガード（8件以上で見送り）は廃止した。
+    出ていくのが年齢だけになったので、健全な追加まで巻き添えで
+    止まる害のほうが大きい。追加は全ゲート通過が条件で頭打ちになる。
+  見送りを無効化して手入れを強行するときは:
     python3 apply_selection.py --force
-  を回す（見送りを無効化して適用する。データ異常ガードも含む。
-  適用したことは記録に「強制適用」と残る）。
+  （データ異常ガードも含めて無効化する。記録に「強制適用」と残る）
 
-ゼロ件の日（新規通過なし・落選なし）は正常として扱う（何もしない）。
-掲載 = 推薦の原則として、枠を埋めるための掲載はしない。
+テーマ上限:
+  evaluate() 自身のテーマ上限（最終フィードの10%）はそのまま使う。
+  さらに台帳全体に対しても、追加の時点で「現在の台帳＋当日追加分」の
+  合計で同じ物差し（合計20件以上で、1テーマ max(3, 10%) 件まで）を
+  効かせる。超過する追加はレビュー最少のものから落とす。すでに掲載中の
+  商品は年齢以外では外さないので、上限を満たせない場合は追加を落とす
+  側だけで調整する（それでも超過する場合は記録に残して追加を優先する）。
+
+ゼロ件の日（新規通過なし・期限切れなし）は正常として扱う（スナップ
+ショットの更新だけして終わる）。掲載 = 推薦の原則として、枠を埋める
+ための掲載はしない。
 
 止め方（ロールバック）:
   - 自動化を止める: watch.yml の「選定を回す」段を消すか、その段の env に
-    YASUMIRU_SELECTION_AUTO=0 を付ける。curated.json は最後に適用された
-    状態のまま固定スナップショットに戻る。
-  - 選定結果を巻き戻す: curated.json を git で任意のコミットの版に戻す。
-  - 厳格選定そのものを外す: curated.json を消すと build.py は従来どおり
-    全件ビルドに戻る（最終手段。掲載 = 推薦 の担保が外れる）。
+    YASUMIRU_SELECTION_AUTO=0 を付ける。listings.json は最後の状態のまま
+    固定される。
+  - 旧方式に戻す: listings.json を消すと build.py は curated.json の
+    従来選定に戻る（curated.json は移行後も消さずに残してある）。
 
 使い方:
     python3 apply_selection.py [--dry-run] [--force] [--strict]
-      --dry-run  何も書かず、適用／見送りの判定と中身だけ表示する
-      --force    見送り（安全弁）を無効化して適用する
+      --dry-run  何も書かず、追加／期限切れの判定と中身だけ表示する
+      --force    見送り（データ異常ガード）を無効化して適用する
       --strict   異常時に終了コード 1 を返す（手動実行・テスト用。
                  既定は見張りを止めないよう 0 で終わる）
 """
@@ -64,21 +81,25 @@ JST = timezone(timedelta(hours=9))
 sys.path.insert(0, str(ROOT))
 import select_strict  # noqa: E402  選定の正本。ゲートはここだけに置く
 
-# ---------------------------------------------------------------- 安全弁の値
-# 選定ゲートの基準値（★3.8・-20%・30日・100件）とは別物で、
-# 「自動でどこまで入れ替えてよいか」の運用値。変えるときは記録に残すこと。
-CHURN_NOTICE = 6        # 追加+落選がこれ以上: 適用するが「要確認」を付ける
-CHURN_HOLD = 8          # 追加+落選がこれ以上: 見送る
-MASS_DROP_MIN = 5       # 大量落選ガードの下限件数
+# ---------------------------------------------------------------- 運用値
+# 選定ゲートの基準値（★3.8・-20%・30日・100件）とは別物。
+RETENTION_DAYS = 30     # 掲載日からこの日数を超えたら期限切れ
 PRODUCTS_SHRINK = 0.8   # 商品数が前回適用時の8割未満: データ異常として見送る
 HISTORY_SHRINK = 0.9    # 履歴総件数が前回適用時の9割未満: 同上
+# テーマ上限の物差しは select_strict と同じ値を使う
+THEME_CAP_RATIO = select_strict.THEME_CAP_RATIO
+THEME_CAP_MIN_FEED = select_strict.THEME_CAP_MIN_FEED
+THEME_CAP_MIN = select_strict.THEME_CAP_MIN
 
+LISTINGS_PATH = ROOT / "listings.json"
+CURATED_PATH = ROOT / "curated.json"
 LOG_PATH = ROOT / "ops" / "selection_log.md"
 LOG_HEADER = """# 選定の自動回し直し 記録
 
-`apply_selection.py` が見張りのたびに追記する。追加／落選とその理由
-（どのゲートで落ちたか）、見送りとその理由を残す。
-サイトの掲載はこの記録のとおりに変わっている（見送りの回は変わっていない）。
+`apply_selection.py` が見張りのたびに追記する。追加／期限切れとその理由、
+見送りとその理由を残す。
+2026-11-11 から掲載モデルがストリーム方式（掲載したら30日残る）に
+変わった。それ以前の記録は旧方式（選定の回し直し）のもの。
 
 """
 
@@ -91,6 +112,24 @@ def now_jst() -> datetime:
     return datetime.now(JST)
 
 
+def today_jst():
+    return now_jst().date()
+
+
+def parse_date(s):
+    try:
+        return datetime.strptime((s or "")[:10], "%Y-%m-%d").date()
+    except (ValueError, TypeError):
+        return None
+
+
+def sanitize(product: dict) -> dict:
+    """スナップショット用に、評価時の一時キー（_m / _theme 等）を除いた
+    商品データの複製を返す。"""
+    return {k: json.loads(json.dumps(v)) for k, v in product.items()
+            if not k.startswith("_")}
+
+
 # ---------------------------------------------------------------- 理由の文面
 
 def reason_added(entry: dict, was_caption_needed: bool) -> str:
@@ -100,42 +139,10 @@ def reason_added(entry: dict, was_caption_needed: bool) -> str:
             f"観測 {entry['obs_days']}日）")
 
 
-def reason_removed(pid: str, decisions: dict, product_ids: set) -> str:
-    if pid not in product_ids:
-        return "products.json に無くなった（取得側の掲載終了・値段戻り・保持期限切れなど）"
-    d = decisions.get(pid)
-    if d is None:
-        return "理由を特定できなかった（要調査）"
-    o = d["outcome"]
-    m = (d.get("detail") or {}).get("metrics") or {}
-    if o == "excluded_supplement":
-        return f"サプリ・健康食品の除外対象になった（キーワード: {d['detail'].get('matched')}）"
-    if o == "excluded_model_specific":
-        return f"型番依存テーマの除外対象になった（キーワード: {d['detail'].get('matched')}）"
-    if o == "gate1":
-        return f"観測日数が {m.get('obs_days')}日で、30日に届かない"
-    if o == "gate2":
-        return (f"現在価格 ¥{yen(m.get('current_price'))} が履歴最安 "
-                f"¥{yen(m.get('min_price'))} ではなくなった（値上がり）")
-    if o == "gate3":
-        drop = m.get("drop_vs_median")
-        pct = "?" if drop is None else f"{drop * 100:.1f}"
-        return f"中央値比の下落が {pct}% で、20%以上に届かない"
-    if o == "gate4":
-        return (f"レビュー {m.get('review_count')}件・評価 ★{m.get('review_average')} で、"
-                "基準（100件以上・★3.8以上）に届かない")
-    if o == "gate5":
-        return "送料無料でなくなった"
-    if o == "caption_needed":
-        return "キャプションが無くなった（caption_needed 行き）"
-    if o == "series_sibling":
-        rep = (d["detail"].get("rep_title") or "")[:30]
-        return f"シリーズ圧縮で「{rep}…」の代表に統合された"
-    if o == "theme_cap":
-        return f"テーマ上限のため（テーマ: {d['detail'].get('theme')}）"
-    if o == "feed":
-        return "選定では通過している（並び替えのみの変動のはず。要調査）"
-    return o
+def reason_expired(entry: dict, today) -> str:
+    listed = parse_date(entry.get("listed_on"))
+    age = (today - listed).days if listed else "?"
+    return f"掲載から{age}日経過（{entry.get('listed_on')} 掲載、{RETENTION_DAYS}日で引退）"
 
 
 # ---------------------------------------------------------------- 記録まわり
@@ -149,7 +156,7 @@ def append_log(text: str) -> None:
 
 
 def append_run_summary(lines: list, retitle: str | None = None) -> None:
-    """自動コミットのメッセージに選定の行を足す。見張りの外では何もしない。"""
+    """自動コミットのメッセージに台帳の行を足す。見張りの外では何もしない。"""
     path = ROOT / ".run_summary.txt"
     if not path.exists():
         return
@@ -174,118 +181,203 @@ def item_line(mark: str, title: str, note: str) -> str:
     return f"- {mark}: {(title or '')[:60]} — {note}"
 
 
+# ---------------------------------------------------------------- 台帳の読み書き
+
+def load_listings() -> dict:
+    if LISTINGS_PATH.exists():
+        return json.loads(LISTINGS_PATH.read_text(encoding="utf-8"))
+    return {"version": 1, "model": "stream", "retention_days": RETENTION_DAYS,
+            "listings": []}
+
+
+def seed_from_curated(products_by_id: dict) -> list:
+    """listings.json が無いときの初期台帳。curated.json の feed を
+    「今日掲載された」ものとして取り込む（移行の正規手順では、
+    git 履歴から掲載日を復元した listings.json がリポジトリに
+    入っているので、ここは非常用の経路）。"""
+    if not CURATED_PATH.exists():
+        return []
+    curated = json.loads(CURATED_PATH.read_text(encoding="utf-8"))
+    today = today_jst().isoformat()
+    entries = []
+    for en in curated.get("feed") or []:
+        p = products_by_id.get(en["id"])
+        if p is not None:
+            snap = sanitize(p)
+        else:
+            snap = {"id": en["id"], "title": en.get("title"),
+                    "shop": en.get("shop"), "category": en.get("category"),
+                    "price": en.get("price"), "caption": en.get("caption"),
+                    "affiliateUrl": en.get("affiliateUrl"),
+                    "reviewCount": en.get("reviewCount"),
+                    "reviewAverage": en.get("reviewAverage"),
+                    "image": "", "tags": ["送料無料"] if en.get("free_shipping") else []}
+        entries.append({"id": en["id"], "listed_on": today,
+                        "theme": en.get("theme"),
+                        "last_seen": (snap.get("lastSeen") or today),
+                        "snapshot_updated": today, "snapshot": snap})
+    return entries
+
+
 # ---------------------------------------------------------------- 本体
 
 def run(force: bool, dry_run: bool) -> int:
     stamp = now_jst().strftime("%Y-%m-%d %H:%M JST")
+    today = today_jst()
     products_doc = json.loads((ROOT / "products.json").read_text(encoding="utf-8"))
     products = products_doc["products"]
+    products_by_id = {p["id"]: p for p in products}
     history = json.loads((ROOT / "price_history.json").read_text(encoding="utf-8"))
     history_entries = sum(len(v) for v in history.values())
 
-    curated_path = ROOT / "curated.json"
-    old = None
-    if curated_path.exists():
-        old = json.loads(curated_path.read_text(encoding="utf-8"))
-    old_feed = (old or {}).get("feed") or []
-    old_ids = [e["id"] for e in old_feed]
-    old_by_id = {e["id"]: e for e in old_feed}
-    old_caption_needed = {e["id"] for e in (old or {}).get("caption_needed") or []}
+    doc = load_listings()
+    seeded = False
+    if not doc.get("listings") and not LISTINGS_PATH.exists():
+        doc["listings"] = seed_from_curated(products_by_id)
+        seeded = True
+    entries = {en["id"]: en for en in doc.get("listings") or []}
+    old_count = len(entries)
+    meta = doc.get("automation") or {}
 
-    result, decisions = select_strict.evaluate(products, history)
-    new_feed = result["feed"]
-    new_ids = [e["id"] for e in new_feed]
-    new_by_id = {e["id"]: e for e in new_feed}
+    result, _decisions = select_strict.evaluate(products, history)
+    feed = result["feed"]
+    feed_by_id = {en["id"]: en for en in feed}
+    old_caption_needed = {e["id"] for e in result.get("caption_needed") or []}
+    # caption_needed の「前回」判定の補助: 前回 curated.json があれば
+    # その caption_needed も見る（理由文の出し分けだけに使う）。
+    if CURATED_PATH.exists():
+        try:
+            prev_curated = json.loads(CURATED_PATH.read_text(encoding="utf-8"))
+            old_caption_needed |= {e["id"] for e in prev_curated.get("caption_needed") or []}
+        except Exception:
+            pass
 
-    product_ids = {p["id"] for p in products}
-    added = [pid for pid in new_ids if pid not in old_by_id]
-    removed = [pid for pid in old_ids if pid not in new_by_id]
-    churn = len(added) + len(removed)
-
-    added_lines = [item_line("追加", new_by_id[p]["title"],
-                             reason_added(new_by_id[p], p in old_caption_needed))
-                   for p in added]
-    removed_lines = [item_line("落選", old_by_id[p]["title"],
-                               reason_removed(p, decisions, product_ids))
-                     for p in removed]
-    caption_note = (f"caption_needed: {len(result['caption_needed'])}件"
-                    "（ゲート1〜5通過・キャプションを書けば掲載候補）")
-
-    print(f"選定: 現在 {len(old_ids)}件 → 新しい選定 {len(new_ids)}件"
-          f"（追加 {len(added)}件 / 落選 {len(removed)}件）")
-    for line in added_lines + removed_lines:
-        print("  " + line)
-
-    # ---- 安全弁 -------------------------------------------------------------
+    # ---- 安全弁（データ異常ガード） --------------------------------------
     holds = []
-    meta = (old or {}).get("automation") or {}
-    base_products = meta.get("products_count", (old or {}).get("total_products"))
-    base_history = meta.get("history_entries")
-    if old is not None and not force:
+    if not force and meta:
+        base_products = meta.get("products_count")
+        base_history = meta.get("history_entries")
         if base_products and len(products) < base_products * PRODUCTS_SHRINK:
             holds.append(f"商品数が前回適用時 {base_products}件 → {len(products)}件に"
                          "減った（データ異常の疑い）")
         if base_history and history_entries < base_history * HISTORY_SHRINK:
             holds.append(f"価格履歴の総件数が前回適用時 {base_history:,}件 → "
                          f"{history_entries:,}件に減った（データ異常の疑い）")
-        if len(removed) >= MASS_DROP_MIN and len(removed) * 2 >= len(old_ids):
-            holds.append(f"落選が {len(removed)}件で、現在の掲載 {len(old_ids)}件の"
-                         "半分以上にあたる")
-        if old_ids and not new_ids:
-            holds.append("新しい選定が0件になった（掲載が空になる）")
-        if churn >= CHURN_HOLD:
-            holds.append(f"入れ替えが合計 {churn}件で、上限 {CHURN_HOLD}件以上にあたる")
 
-    # curated.json が無い状態は、厳格選定が外れているということ。
-    # 復旧が安全方向なので、入れ替え量の見送りは効かせない（データ異常も
-    # 基準が無いので判定しない）。
-    restored = old is None
-
-    if holds and not restored:
-        head = f"## {stamp} — 見送り（掲載は {len(old_ids)}件のまま）"
+    if holds:
+        head = f"## {stamp} — 見送り（台帳は {old_count}件のまま）"
         body = [head, ""]
         body += [f"- 見送りの理由: {h}" for h in holds]
-        body.append("- 提案の中身（適用しなかった）:")
-        body += ["  " + line for line in added_lines + removed_lines]
-        body.append("- " + caption_note)
         body.append("")
         text = "\n".join(body)
-        print("⚠ 選定を見送りました: " + " / ".join(holds))
+        print("⚠ 台帳の手入れを見送りました: " + " / ".join(holds))
         if not dry_run:
             append_log(text)
             append_run_summary(
-                [f"選定: ⚠ 見送りました（{' / '.join(holds)}）。"
-                 "提案は ops/selection_log.md にあります"])
+                [f"台帳: ⚠ 見送りました（{' / '.join(holds)}）"])
             mark_changed()
         return 0
 
-    if churn == 0 and meta and not restored:
-        print("選定: 入れ替えなし。そのままにします。")
-        return 0
+    # ---- (c) 期限切れ ------------------------------------------------------
+    expired = []
+    for pid, en in list(entries.items()):
+        listed = parse_date(en.get("listed_on"))
+        if listed and (today - listed).days > RETENTION_DAYS:
+            expired.append(pid)
+    expired_lines = []
+    for pid in expired:
+        en = entries.pop(pid)
+        expired_lines.append(item_line(
+            "期限切れ", (en.get("snapshot") or {}).get("title"),
+            reason_expired(en, today)))
 
-    # ---- 適用 ---------------------------------------------------------------
-    notice = churn >= CHURN_NOTICE
-    new_curated = dict(result)
-    new_curated["generated_by"] = "select_strict.py + apply_selection.py（自動選定）"
-    new_curated["automation"] = {
-        "applied_at": now_jst().isoformat(timespec="seconds"),
-        "products_count": len(products),
-        "history_entries": history_entries,
-        "added": added,
-        "removed": removed,
-        "forced": bool(force),
-    }
-    if restored:
-        head = f"## {stamp} — 復旧（curated.json が無かったので選定を再生成。掲載 {len(new_ids)}件）"
-    elif churn == 0:
-        head = f"## {stamp} — 初期化（選定の記録を開始。掲載 {len(new_ids)}件のまま）"
+    # ---- (a) 追加 ----------------------------------------------------------
+    added = [pid for pid in feed_by_id if pid not in entries]
+
+    # テーマ上限（台帳＋追加分の合計に対して効かせる）
+    def theme_of_entry(pid):
+        if pid in feed_by_id:
+            return feed_by_id[pid].get("theme")
+        en = entries.get(pid) or {}
+        return en.get("theme") or select_strict.theme_of(en.get("snapshot") or {})
+
+    cap_dropped = []
+    while added:
+        total = len(entries) + len(added)
+        if total < THEME_CAP_MIN_FEED:
+            break
+        cap = max(THEME_CAP_MIN, int(total * THEME_CAP_RATIO))
+        from collections import Counter
+        counts = Counter(theme_of_entry(pid)
+                         for pid in list(entries) + added)
+        over = {t for t, c in counts.items() if c > cap}
+        if not over:
+            break
+        droppable = [pid for pid in added if theme_of_entry(pid) in over]
+        if not droppable:
+            # 掲載中だけで上限を超えている。掲載中は年齢以外で外さないので、
+            # これ以上は調整できない。記録に残して追加を優先する。
+            print("  テーマ上限: 掲載中だけで上限を超えているテーマがあります"
+                  "（追加側では調整不可）")
+            break
+        victim = min(droppable,
+                     key=lambda pid: feed_by_id[pid]["reviewCount"])
+        added.remove(victim)
+        cap_dropped.append(victim)
+
+    added_lines = []
+    for pid in added:
+        fe = feed_by_id[pid]
+        p = products_by_id[pid]
+        entries[pid] = {
+            "id": pid,
+            "listed_on": today.isoformat(),
+            "theme": fe.get("theme"),
+            "last_seen": p.get("lastSeen") or today.isoformat(),
+            "snapshot_updated": today.isoformat(),
+            "snapshot": sanitize(p),
+        }
+        added_lines.append(item_line(
+            "追加", fe["title"], reason_added(fe, pid in old_caption_needed)))
+    cap_lines = [item_line("追加見送り", feed_by_id[pid]["title"],
+                           f"テーマ上限のため（テーマ: {feed_by_id[pid].get('theme')}）")
+                 for pid in cap_dropped]
+
+    # ---- (b) スナップショット更新 ------------------------------------------
+    refreshed = 0
+    for pid, en in entries.items():
+        if pid in added:
+            continue
+        p = products_by_id.get(pid)
+        if p is None:
+            continue  # プールに無い = 凍結。スナップショットはそのまま
+        en["snapshot"] = sanitize(p)
+        en["last_seen"] = p.get("lastSeen") or en.get("last_seen") or ""
+        en["snapshot_updated"] = today.isoformat()
+        refreshed += 1
+
+    caption_note = (f"caption_needed: {len(result['caption_needed'])}件"
+                    "（ゲート1〜5通過・キャプションを書けば掲載候補）")
+
+    print(f"台帳: 現在 {old_count}件 → {len(entries)}件"
+          f"（追加 {len(added)}件 / 期限切れ {len(expired)}件 / "
+          f"スナップショット更新 {refreshed}件）")
+    for line in added_lines + cap_lines + expired_lines:
+        print("  " + line)
+
+    # ---- 記録と書き出し -----------------------------------------------------
+    if seeded:
+        head = f"## {stamp} — 初期化（curated.json から台帳を起こした。掲載 {len(entries)}件）"
+    elif added or expired:
+        head = (f"## {stamp} — 適用（追加 {len(added)}件／期限切れ {len(expired)}件、"
+                f"掲載 {old_count}件 → {len(entries)}件）"
+                + (" ※強制適用" if force else ""))
     else:
-        head = (f"## {stamp} — 適用（追加 {len(added)}件／落選 {len(removed)}件、"
-                f"掲載 {len(old_ids)}件 → {len(new_ids)}件）"
-                + (" ※入れ替えが大きめ・要確認" if notice else "")
-                + (" ※強制適用" if force and (added or removed) else ""))
+        head = (f"## {stamp} — 更新（追加・期限切れなし。"
+                f"スナップショット {refreshed}件を最新化、掲載 {len(entries)}件）")
     body = [head, ""]
-    body += added_lines + removed_lines
+    body += added_lines + cap_lines + expired_lines
+    body.append(f"- スナップショット更新: {refreshed}件")
     body.append("- " + caption_note)
     body.append("")
     text = "\n".join(body)
@@ -295,51 +387,62 @@ def run(force: bool, dry_run: bool) -> int:
         print(text)
         return 0
 
-    curated_path.write_text(json.dumps(new_curated, ensure_ascii=False, indent=2),
-                            encoding="utf-8")
+    doc["listings"] = [entries[pid] for pid in
+                       sorted(entries, key=lambda x: (entries[x].get("listed_on") or "",
+                                                      x))]
+    doc["automation"] = {
+        "applied_at": now_jst().isoformat(timespec="seconds"),
+        "products_count": len(products),
+        "history_entries": history_entries,
+        "added": added,
+        "expired": expired,
+        "forced": bool(force),
+    }
+    LISTINGS_PATH.write_text(json.dumps(doc, ensure_ascii=False, indent=2),
+                             encoding="utf-8")
     append_log(text)
 
-    summary = [f"選定: 追加 {len(added)}件／落選 {len(removed)}件"
-               f"（掲載 {len(old_ids)}件 → {len(new_ids)}件）"
-               + (" ※要確認" if notice else "")]
-    for p in added:
-        e = new_by_id[p]
+    summary = [f"台帳: 追加 {len(added)}件／期限切れ {len(expired)}件"
+               f"（掲載 {old_count}件 → {len(entries)}件）"]
+    for pid in added:
+        e = feed_by_id[pid]
         summary.append(f"  + {(e['title'] or '')[:38]}  ¥{yen(e['price'])}"
                        f"（中央値比 -{e['drop_pct_vs_median']}%）")
-    for p in removed:
-        summary.append(f"  − {(old_by_id[p]['title'] or '')[:38]}  "
-                       + reason_removed(p, decisions, product_ids))
+    for pid in expired:
+        summary.append(f"  − 期限切れ（{RETENTION_DAYS}日経過）")
     append_run_summary(summary,
-                       retitle=f"auto: 選定のみ変更（追加{len(added)}件／落選{len(removed)}件）"
-                       if churn else None)
-    # curated.json を書いた以上、その差分が「変更なし」で捨てられないようにする
-    mark_changed()
-    print("選定を適用しました" + ("（要確認）" if notice else ""))
+                       retitle=f"auto: 台帳のみ変更（追加{len(added)}件／期限切れ{len(expired)}件）"
+                       if (added or expired) else None)
+    if added or expired:
+        # 追加・期限切れは「変更なし」で捨てられないようにする。
+        # スナップショットだけの更新は、価格側の変更と一緒に流れる。
+        mark_changed()
+    print("台帳を更新しました")
     return 0
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description="ヤスミル厳格選定の自動適用")
+    ap = argparse.ArgumentParser(description="ヤスミル掲載台帳（ストリーム方式）の自動メンテナンス")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--strict", action="store_true")
     args = ap.parse_args()
 
     if os.environ.get("YASUMIRU_SELECTION_AUTO") == "0" and not args.force:
-        print("選定の自動適用は止められています（YASUMIRU_SELECTION_AUTO=0）。"
-              "curated.json はそのままです。")
+        print("台帳の自動メンテナンスは止められています（YASUMIRU_SELECTION_AUTO=0）。"
+              "listings.json はそのままです。")
         return 0
     try:
         return run(force=args.force, dry_run=args.dry_run)
     except Exception:
         traceback.print_exc()
-        print("⚠ 選定で予期しないエラー。前回の選定（curated.json）のままにします。")
+        print("⚠ 台帳の手入れで予期しないエラー。前回の台帳（listings.json）のままにします。")
         if not args.dry_run:
             try:
                 append_log(f"## {now_jst().strftime('%Y-%m-%d %H:%M JST')} — "
-                           "エラーで見送り（curated.json は変更していない）\n\n"
+                           "エラーで見送り（listings.json は変更していない）\n\n"
                            "```\n" + traceback.format_exc()[-1500:] + "\n```\n")
-                append_run_summary(["選定: ⚠ エラーで見送りました"
+                append_run_summary(["台帳: ⚠ エラーで見送りました"
                                     "（ops/selection_log.md に記録）"])
                 mark_changed()
             except Exception:

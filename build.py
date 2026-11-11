@@ -403,9 +403,12 @@ def render_sidebar(cfg, products, cats, active=None, guides=None, current_guide=
     ヘッダーと同じ黒帯をパネルの頭に載せて、本体と地続きに見せる。
     順位マーカーは値札POPの縮小版。順位そのものに意味があるので番号を振る。"""
     fetched = last_fetch_date(products)
-    fresh = [p for p in products
+    # ストリーム方式: 凍結品（プール外）は順位にも件数にも混ぜない
+    pool_only = [p for p in products if p.get("_state") != "frozen"] \
+        if any("_state" in p for p in products) else products
+    fresh = [p for p in pool_only
              if not is_stale(p, fetched) and not sale_over(p)
-             and not sale_soon(p)] or products
+             and not sale_soon(p)] or pool_only
     ranked = sorted(fresh, key=lambda p: -(p.get("reviewCount") or 0))[:5]
     rows = ""
     for i, p in enumerate(ranked, 1):
@@ -425,7 +428,7 @@ def render_sidebar(cfg, products, cats, active=None, guides=None, current_guide=
                  pr=yen(p["price"]))
 
     counts = {}
-    for p in products:
+    for p in pool_only:
         counts[p["category"]] = counts.get(p["category"], 0) + 1
     cat_rows = "".join(
         '<a class="side-cat%s" href="/c/%s/">%s<span class="sc-name">%s</span>'
@@ -685,7 +688,10 @@ def render_ticker(products, cats):
     同じ内容を2周ぶん並べて途切れなく流す。"""
     # 終わったセールは流さない。ここは割引率の高い順なので、
     # 何もしないと「終了した半額」ほど先頭に出てしまう。
-    live = [x for x in products if not sale_over(x) and not sale_soon(x)]
+    # ストリーム方式では「いまも値下がりしている」もの（_state == "deal"）
+    # だけを流す。凍結品・価格戻り品のOFFをここで出さない。
+    live = [x for x in products if not sale_over(x) and not sale_soon(x)
+            and x.get("_state", "deal") == "deal"]
     ranked = sorted(live, key=lambda x: (-discount_rate(x), -(x.get("reviewCount") or 0)))[:10]
     items = []
     for p in ranked:
@@ -1011,9 +1017,19 @@ def render_stream_card(p, cats, badge, cat_label=None):
     試作は楽天へ直リンクだったが、本番はサイト内の回遊（商品ページの
     価格推移・掲載基準の実測）を優先し、既存の /p/ 方式に合わせた。
     タイトルは商品名そのまま（CSSで3行まで）。短縮名は作らない（創作回避）。
+
+    ストリーム方式（2026-11-11〜）では、商品に _state が付く:
+      deal   … いまも検証の物差しで「お得」と言える。従来どおり
+               中央値の取消線＋%OFF＋「比較元」注記を出す。
+      listed … 掲載中だが価格が戻った。%OFF も取消線も出さず、
+               いまの価格をそのまま出す（お得とは言わない）。
+      frozen … 観測プールから消えた。スナップショットの価格を
+               「最終確認」の日付つきで出す。今の価格とは言わない。
+    _state が無い商品（従来経路）は deal と同じ描き方にする。
     """
     c = cats.get(p["category"], {})
-    med, off = median_off(p)
+    state = p.get("_state", "deal")
+    med, off = median_off(p) if state == "deal" else (None, 0)
     price_row = '<span class="v-price">¥%s</span>' % yen(p["price"])
     if med and off:
         price_row += ('<span class="v-price-old">¥%s</span>'
@@ -1023,8 +1039,15 @@ def render_stream_card(p, cats, badge, cat_label=None):
         rev = ('<span class="v-rev">★★%s（%s件）</span>'
                % (e(p["reviewAverage"]), yen(p.get("reviewCount", 0))))
     ship = '・<span class="v-nw">送料無料</span>' if free_shipping(p) else ""
-    note = ('<p class="v-note-line">比較元：30日の中央値・%s確認%s</p>'
-            % (_md_label(p.get("lastSeen", "")), ship))
+    if state == "frozen":
+        note = ('<p class="v-note-line">最終確認：%s・その時点の価格です%s</p>'
+                % (_md_label(p.get("lastSeen", "")), ship))
+    elif state == "listed":
+        note = ('<p class="v-note-line">%s確認の価格です%s</p>'
+                % (_md_label(p.get("lastSeen", "")), ship))
+    else:
+        note = ('<p class="v-note-line">比較元：30日の中央値・%s確認%s</p>'
+                % (_md_label(p.get("lastSeen", "")), ship))
     return (
         '<a class="v-card" href="/p/{id}/">'
         '<img class="v-card-img" src="{img}" alt="{alt}" loading="lazy">'
@@ -1047,22 +1070,27 @@ def render_stream_card(p, cats, badge, cat_label=None):
 def select_pickup(live):
     """PICK UP の選定。最大OFFで機械的に選ばない（確定ルール）。
 
-    1) curated.json の feed エントリに "pickup": true の明示フラグがあれば最優先。
+    1) 台帳（listings.json、旧 curated.json）のエントリに "pickup": true の
+       明示フラグがあれば最優先。
     2) 無ければ fallback: レビュー1,000件以上の検証通過アイテムの中で
        「レビュー数 × 値下がり幅（中央値比OFF%）」のスコア上位を1件。
     戻り値: (商品, "flag" | "score")
     """
     if not live:
         return None, ""
-    if os.path.exists(os.path.join(ROOT, "curated.json")):
-        try:
-            cur = load("curated.json")
-            flagged = {en.get("id") for en in (cur.get("feed") or []) if en.get("pickup")}
-        except Exception:
-            flagged = set()
-        for p in live:
-            if p["id"] in flagged:
-                return p, "flag"
+    flagged = set()
+    for name, key in (("listings.json", "listings"), ("curated.json", "feed")):
+        if os.path.exists(os.path.join(ROOT, name)):
+            try:
+                doc = load(name)
+                flagged = {en.get("id") for en in (doc.get(key) or [])
+                           if en.get("pickup")}
+            except Exception:
+                flagged = set()
+            break
+    for p in live:
+        if p["id"] in flagged:
+            return p, "flag"
     cand = [p for p in live if (p.get("reviewCount") or 0) >= 1000] or list(live)
     best = max(cand, key=lambda p: (p.get("reviewCount") or 0) * median_off(p)[1])
     return best, "score"
@@ -1100,7 +1128,15 @@ def render_unit(kind, p, cats, live):
         card = card.replace('class="v-card"', 'class="v-card v-card-pick"', 1)
         return ('<div class="v-pick-cell">%s<p class="v-pick-note">%s</p></div>'
                 % (card, e(pickup_note(p, live))))
-    return render_stream_card(p, cats, "検証済み")
+    # バッジは状態で出し分ける。「検証済み」は、いまも物差しを通っている
+    # ものだけ（_state == "deal"、または従来経路の商品）。
+    return render_stream_card(p, cats, stream_badge(p))
+
+
+def stream_badge(p):
+    """ストリーム方式の状態バッジ。_state が無い商品は「検証済み」。"""
+    return {"deal": "検証済み", "listed": "掲載中",
+            "frozen": "最終確認"}.get(p.get("_state"), "検証済み")
 
 
 CAROUSEL_JS = (
@@ -1205,6 +1241,106 @@ def render_top_hero(live_n, fetched):
         % (obs, live_n, e(_fetched_label(fetched)), obs, live_n))
 
 
+# ---------------------------------------------------------------- ストリーム方式
+# 掲載モデル（2026-11-11〜）: 台帳（listings.json）に載った商品は30日残る。
+# 入る門は select_strict の全ゲート（apply_selection.py が台帳へ追加）。
+# ここでは台帳を「描く」だけをする。状態の意味:
+#   deal   … プールに残っていて、いまも価格ゲートを通っている
+#   listed … プールに残っているが、価格が戻った（お得とは言わない）
+#   frozen … プールから消えた。スナップショット＋最終確認日で描く
+
+def load_listings():
+    """listings.json（掲載台帳）があれば {id: entry} を返す。無ければ None。
+    None のとき build は従来方式（curated.json の選定）にフォールバックする。"""
+    path = os.path.join(ROOT, "listings.json")
+    if not os.path.exists(path):
+        return None
+    doc = load("listings.json")
+    return {en["id"]: en for en in doc.get("listings") or []}
+
+
+def listing_deal(p, history):
+    """いま現在も「お得」と言えるか。掲載の門（select_strict のゲート1〜5）と
+    同じ物差しで、ビルド時点のプールの価格と価格履歴から判定する。
+    シリーズ圧縮・テーマ上限は「並べ方」の規則なのでここでは見ない。
+    セール終了・開始前も、従来のフィードと同じく「お得」には数えない。"""
+    import select_strict
+    m = select_strict.metrics_for(p, history)
+    return (m["obs_days"] >= select_strict.MIN_OBS_DAYS
+            and m["min_price"] is not None
+            and m["current_price"] == m["min_price"]
+            and m["drop_vs_median"] is not None
+            and m["drop_vs_median"] >= select_strict.MIN_DROP_VS_MEDIAN
+            and m["review_count"] >= select_strict.MIN_REVIEWS
+            and m["review_average"] >= select_strict.MIN_RATING
+            and m["free_shipping"]
+            and not sale_over(p) and not sale_soon(p))
+
+
+def listing_products(pool_by_id, listings):
+    """台帳から描画用の商品リストを作る。
+    プールに残っているものはライブデータ、消えたものは台帳のスナップショット。
+    各商品に _state（deal/listed/frozen）と _listed_on、_last_seen を付ける。"""
+    history = price_history()
+    out = []
+    for pid, en in listings.items():
+        live = pool_by_id.get(pid)
+        if live is not None:
+            p = dict(live)
+            p["_state"] = "deal" if listing_deal(p, history) else "listed"
+            p["_last_seen"] = p.get("lastSeen") or en.get("last_seen") or ""
+        else:
+            p = dict(en.get("snapshot") or {})
+            if not p:
+                continue
+            p["_state"] = "frozen"
+            p["_last_seen"] = en.get("last_seen") or p.get("lastSeen") or ""
+            # 凍結品の確認日はスナップショットの日付（＝最終確認日）。
+            # lastSeen を差し替えて、既存の描画・鮮度判定にそのまま乗せる。
+            p["lastSeen"] = p["_last_seen"]
+        p["_listed_on"] = en.get("listed_on") or ""
+        out.append(p)
+    return out
+
+
+def stream_units(listed, deals):
+    """ストリーム方式の並び。(PICK UP, [(種類, 商品), ...]) を返す。
+
+    並びは掲載日（listed_on）の新しい順。同日内は deal → レビュー数の順で
+    安定させる。PICK UP は検証通過（deal）の中から現行ルールで選ぶ。
+    deal が1件も無い日は、落とさずプール内の掲載品から代替を選ぶ。
+    """
+    live_listed = [p for p in listed if p["_state"] != "frozen"]
+    cands = deals if deals else live_listed
+    pick, _how = select_pickup(cands) if cands else (None, "")
+    rest = [p for p in listed if pick is None or p["id"] != pick["id"]]
+    rest.sort(key=lambda p: (p.get("_listed_on") or "",
+                             1 if p["_state"] == "deal" else 0,
+                             p.get("reviewCount") or 0), reverse=True)
+    units = ([("pick", pick)] if pick is not None else []) \
+        + [("feed", p) for p in rest]
+    return pick, units
+
+
+def render_stream_hero(total_n, new_n, fetched):
+    """ストリーム方式のヒーロー。数字はビルドの実データから:
+    観測数 = price_history.json のキー数、掲載中 = 台帳の件数、
+    本日の新規 = 今日掲載された件数、最終確認 = 取得日。"""
+    obs = "{:,}".format(len(price_history()))
+    return (
+        '<section class="v-hero"><div class="v-hero-main">'
+        '<h1 class="v-hero-title"><span class="v-seg">安さは、</span>'
+        '<span class="v-seg"><span class="v-u">確かめて</span>から</span>'
+        '<span class="v-seg">載せる。</span></h1>'
+        '<p class="v-hero-sub">価格を観測しているのは<strong>%s品</strong>。'
+        '価格履歴・レビュー・送料の検証を通ったものだけを載せて、'
+        '<strong>30日</strong>並べます。値段が戻ったものは「お得」の表示を外し、'
+        '今の価格をそのまま出します。<br>'
+        '<strong>掲載中 %d件</strong>（本日の新規 %d件）｜最終確認 <strong>%s</strong></p></div>'
+        '</section>'
+        % (obs, total_n, new_n, e(_fetched_label(fetched))))
+
+
 def render_notice(live):
     """速報帯: その日の検証通過アイテムから OFF 上位5件（同率はレビュー数順）。
     帯の中はティッカーで流し、各アイテムから商品ページへリンクする。
@@ -1289,7 +1425,8 @@ def render_pager_v11(page, total_pages, base):
 
 
 def _render_top(cfg, base, products, cats, *, units, live, active_tab, page,
-                total_pages, pager_base, title, desc, path, robots, jsonld):
+                total_pages, pager_base, title, desc, path, robots, jsonld,
+                stream_ctx=None):
     fetched = last_fetch_date(products)
     entries = deadline_entries()
     start = (page - 1) * TOP_PER_PAGE
@@ -1298,11 +1435,20 @@ def _render_top(cfg, base, products, cats, *, units, live, active_tab, page,
     for kind, p in chunk:
         cards.append(render_unit(kind, p, cats, live))
     stream = "".join(cards)
+    if stream_ctx is not None:
+        # ストリーム方式: 看板は「掲載中／本日の新規」、速報は「今も値下がり
+        # している」ものだけから作る（凍結品・価格戻り品のOFFを混ぜない）。
+        hero_html = render_stream_hero(len(stream_ctx["total"]),
+                                       len(stream_ctx["new_today"]), fetched)
+        notice_html = render_notice(stream_ctx["deals"])
+    else:
+        hero_html = render_top_hero(len(live), fetched)
+        notice_html = render_notice(live)
     content = (
         '<div class="v-page">'
-        + render_top_hero(len(live), fetched)
+        + hero_html
         + (render_campaign_carousel(entries) if page == 1 else "")
-        + render_notice(live)
+        + notice_html
         + '<div class="v-layout">'
         + render_top_sidebar(entries, cfg.get("_guides") or [])
         + '<div class="v-main">'
@@ -1319,11 +1465,17 @@ def _render_top(cfg, base, products, cats, *, units, live, active_tab, page,
         scripts=CAROUSEL_JS if page == 1 and len(TOPICS) > 1 else "")
 
 
-def build_index(cfg, base, products, cats):
+def build_index(cfg, base, products, cats, stream_ctx=None):
     # 終わったセール・始まっていないセールは特価フィードに並べない。
     # 商品ページは残す（Xに貼ったリンクが死なないように）。
-    live = [p for p in products if not sale_over(p) and not sale_soon(p)]
-    _ordered, _pick, units = top_units(live)
+    if stream_ctx is not None:
+        # ストリーム方式: 並びは台帳（掲載日の新しい順）。セール終了・開始前
+        # の商品も掲載中なら並べる（残ることがモデルの核）。
+        live = list(stream_ctx["live"])
+        _pick, units = stream_units(stream_ctx["total"], stream_ctx["deals"])
+    else:
+        live = [p for p in products if not sale_over(p) and not sale_soon(p)]
+        _ordered, _pick, units = top_units(live)
     total_pages = max(1, -(-len(units) // TOP_PER_PAGE))
     site_url = cfg["site"]["url"].rstrip("/")
 
@@ -1350,15 +1502,17 @@ def build_index(cfg, base, products, cats):
             active_tab="new", page=page, total_pages=total_pages,
             pager_base="/", title=title, desc=desc, path=path,
             robots=('<meta name="robots" content="noindex,follow">' if page > 1 else ""),
-            jsonld=jsonld)
+            jsonld=jsonld, stream_ctx=stream_ctx)
         write("index.html" if page == 1 else "page/%d/index.html" % page, html)
 
 
-def build_off_index(cfg, base, products, cats):
+def build_off_index(cfg, base, products, cats, stream_ctx=None):
     """タブ「値下がり順」の静的ページ（/off/ と /off/page/N/）。
 
     並べ替えビューなので全ページ noindex,follow（sitemap にも入れない）。
     PICK UP は先頭に据え置き、残り（フィード全件）を OFF 順に並べ替える。
+    ストリーム方式では products に「今も値下がりしている」もの（deal）だけが
+    渡る。凍結品・価格戻り品の歴史的なOFFは混ぜない。
     """
     live = [p for p in products if not sale_over(p) and not sale_soon(p)]
     ordered, pick, base_units = top_units(live)
@@ -1390,7 +1544,7 @@ def build_off_index(cfg, base, products, cats):
             active_tab="off", page=page, total_pages=total_pages,
             pager_base="/off/", title=title, desc=desc, path=path,
             robots='<meta name="robots" content="noindex,follow">',
-            jsonld=links)
+            jsonld=links, stream_ctx=stream_ctx)
         write("off/index.html" if page == 1 else "off/page/%d/index.html" % page, html)
 
 
@@ -1441,7 +1595,7 @@ def build_categories(cfg, base, products, cats):
                 # ストリーム型カードに統一する。PC は2カラムグリッド、
                 # スマホは横長行（.v-stream の既存レイアウトが担う）。
                 body = '<div class="v-stream v-stream-cat">%s</div>' % "".join(
-                    render_stream_card(p, cats, "検証済み") for p in chunk)
+                    render_stream_card(p, cats, stream_badge(p)) for p in chunk)
             else:
                 body = ('<div class="empty">' + icons.use("tag", "ic-xxl") +
                         '<p class="empty-title">この売場はまだ空っぽです</p>'
@@ -1789,9 +1943,16 @@ def build_products(cfg, base, products, cats):
                 yen(p.get("reviewCount", 0)))))
         rows.append(("掲載日", "<td>%s</td>" % e(p.get("postedAt", ""))))
         if p.get("lastSeen"):
-            rows.append(("価格の確認日", "<td>%s%s</td>" % (
-                e(p["lastSeen"]),
-                "" if not is_stale(p, fetched) else "<br><small>それ以降は変わっている可能性があります</small>")))
+            if p.get("_state") == "frozen":
+                # 凍結品: 「確認日」ではなく「最終確認日」。その日の価格のまま
+                # 掲載していることを明記する（今の価格とは言わない）。
+                rows.append(("最終確認日", "<td>%s<br><small>観測プールから外れたため、"
+                             "この日の価格のまま掲載しています</small></td>"
+                             % e(p["lastSeen"])))
+            else:
+                rows.append(("価格の確認日", "<td>%s%s</td>" % (
+                    e(p["lastSeen"]),
+                    "" if not is_stale(p, fetched) else "<br><small>それ以降は変わっている可能性があります</small>")))
         spec = "".join("<tr><th>%s</th>%s</tr>" % (k, v) for k, v in rows)
 
         # 関連商品（同カテゴリ）。ページが生成される商品だけをリンクする。
@@ -1808,9 +1969,12 @@ def build_products(cfg, base, products, cats):
         rel_cands.sort(key=lambda x: (x["id"] not in generated_ids, -discount_rate(x)))
         # 関連は TOP と同じストリームカードで出す（最大6件）。
         # 候補の絞り込みは従来どおり「生成される商品だけ」なのでリンク切れは起きない。
-        rel_items = [x for x in rel_cands
+        # 描画は products 引数の辞書（ストリーム方式では _state 付き）を使う。
+        _by_id = {x["id"]: x for x in products}
+        rel_items = [_by_id[x["id"]] for x in rel_cands
                      if x["id"] in generated_ids][:6]
-        rel = "".join(render_stream_card(x, cats, "検証済み") for x in rel_items)
+        rel = "".join(render_stream_card(x, cats, stream_badge(x))
+                      for x in rel_items)
         rel_block = ""
         if rel:
             rel_block = ('<h2 class="section-title">同じ売場のもの</h2>'
@@ -2626,7 +2790,7 @@ def build_postboard(cfg, base, products, cats):
         scripts='<script src="%s" defer></script>' % asset_url("/assets/js/post.js")))
 
 
-def build_sitemap(cfg, products):
+def build_sitemap(cfg, products, stream_ctx=None):
     site_url = cfg["site"]["url"].rstrip("/")
     now = datetime.now(JST).strftime("%Y-%m-%d")
     urls = [(site_url + "/", now, "1.0", "daily"),
@@ -2637,14 +2801,19 @@ def build_sitemap(cfg, products):
     # 同じユニット数から出す（単一集計でないと、実在するページが sitemap から
     # 漏れたり、無いページを載せたりする）。
     # 値下がり順（/off/）は並べ替えビューで noindex のため sitemap に入れない。
-    _live = [p for p in products if not sale_over(p) and not sale_soon(p)]
-    _ordered, _pick, _units = top_units(_live)
+    if stream_ctx is not None:
+        _pick, _units = stream_units(stream_ctx["total"], stream_ctx["deals"])
+        cat_source = stream_ctx["live"]
+    else:
+        _live = [p for p in products if not sale_over(p) and not sale_soon(p)]
+        _ordered, _pick, _units = top_units(_live)
+        cat_source = products
     total = max(1, -(-len(_units) // TOP_PER_PAGE))
     for n in range(2, total + 1):
         urls.append((site_url + "/page/%d/" % n, now, "0.5", "daily"))
     for c in cfg["categories"]:
         urls.append((site_url + "/c/%s/" % c["slug"], now, "0.8", "daily"))
-        n_items = sum(1 for p in products if p["category"] == c["slug"])
+        n_items = sum(1 for p in cat_source if p["category"] == c["slug"])
         for n in range(2, max(1, -(-n_items // per)) + 1):
             urls.append((site_url + "/c/%s/page/%d/" % (c["slug"], n), now, "0.4", "daily"))
     for p in products:
@@ -2795,20 +2964,19 @@ def check_guide_toc(guides):
 
 
 def check_expired_sales(products):
-    """終わったセールが、一覧やデータに残っていないか確かめる。
+    """終わったセールが、「特価の顔」で出ていないか確かめる。
 
-    「24時間限定 半額」の商品は、時刻を過ぎると値段が戻る。
-    それを載せ続けるのは、このサイトが批判している「安く見えて安くない」
-    そのものになる。商品ページは残すが、一覧・ティッカー・RSS・
-    ブラウザ用データからは消えていなければならない。
+    ストリーム方式（2026-11-11〜）では、セールが終わった商品も
+    「掲載中」として一覧に残るのが仕様で、その場合は %OFF の
+    打ち出しをしない。ただし RSS・投稿素材（feed.json）・
+    値下がり順（/off/）は「今の特価」だけを出す場所なので、
+    終わったセールがそこに出ていたら漏れとして警告する。
     """
     over = [p["id"] for p in products if sale_over(p)]
     if not over:
         return
 
-    targets = ["index.html", "feed.xml", "assets/data/feed.json", "categories/index.html"]
-    targets += ["c/%s/index.html" % c for c in
-                sorted({p["category"] for p in products})]
+    targets = ["feed.xml", "assets/data/feed.json", "off/index.html"]
 
     leaked = []
     for rel in targets:
@@ -2821,9 +2989,9 @@ def check_expired_sales(products):
             if pid in text:
                 leaked.append((rel, pid))
 
-    print("   終了したセール %d件 を一覧から外しました" % len(over))
+    print("   終了したセール %d件 は「掲載中」扱い（特価の場所からは除外）" % len(over))
     if leaked:
-        print("\n⚠ 終了したセールが残っています:")
+        print("\n⚠ 終了したセールが特価の場所に残っています:")
         for rel, pid in leaked[:10]:
             print("   %-28s %s" % (rel, pid))
 
@@ -3163,8 +3331,11 @@ def main():
     # select_strict.py の掲載分だけに絞る。「掲載 = 推薦」のフィードを
     # トップ・カテゴリ・商品ページ・sitemap 等すべての生成の前提にする。
     # curated.json を消せば従来どおり全件ビルドに戻る。
+    # ただしストリーム方式（listings.json があるとき）は台帳が公開対象の
+    # 正本なので、この絞り込みはしない（台帳の新規追加が curated.json に
+    # 無くても、プールのライブデータを引けるようにするため）。
     curated_path = os.path.join(ROOT, "curated.json")
-    if os.path.exists(curated_path):
+    if os.path.exists(curated_path) and load_listings() is None:
         curated = load("curated.json")
         keep_ids = {en["id"] for en in curated.get("feed", [])}
         n_before = len(products)
@@ -3181,18 +3352,64 @@ def main():
     guides = load_guides()
     cfg["_guides"] = guides
     build_events()
-    build_index(cfg, base, products, cats)
-    build_off_index(cfg, base, products, cats)
-    build_guides(cfg, base, products, cats, guides)
-    build_categories(cfg, base, products, cats)
-    build_products(cfg, base, products, cats)
-    build_static_pages(cfg, base, products, cats)
-    build_watchlist(cfg, base, products, cats)
-    build_kaimawari(cfg, base, products, cats)
-    build_postboard(cfg, base, products, cats)
-    build_feed_json(cfg, products, cats)
-    build_sitemap(cfg, products)
-    build_rss(cfg, products)
+
+    listings = load_listings()
+    if listings is not None:
+        # ストリーム方式（2026-11-11〜）: 公開対象は掲載台帳（listings.json）。
+        # 台帳に載った商品は30日残る。プールに残っているものはライブデータ、
+        # 消えたものはスナップショット＋最終確認日で描く。
+        #   TOP ストリーム … 台帳の全件（掲載日の新しい順、15件/ページ）
+        #   /off/ ………… いまも値下がりしている deal だけ
+        #   feed.json …… deal だけ（Threads に凍結品・価格戻り品を
+        #                 現在の特価として投稿させない）
+        #   商品ページ …… 台帳の全件（凍結品も残す）
+        #   カテゴリ等 …… プールに残っている掲載品だけ
+        pool_by_id = {p["id"]: p for p in products}
+        listed = listing_products(pool_by_id, listings)
+        deals = [p for p in listed if p["_state"] == "deal"]
+        live_listed = [p for p in listed if p["_state"] != "frozen"]
+        today_s = datetime.now(JST).strftime("%Y-%m-%d")
+        stream_ctx = {
+            "total": listed,
+            "deals": deals,
+            "live": live_listed,
+            "new_today": [p for p in listed
+                          if p.get("_listed_on") == today_s],
+        }
+        cfg["_strict"] = True
+        checks_products = live_listed
+        n_public = len(listed)
+        print("ストリーム方式: 掲載中 %d件（値下がり中 %d件 / 価格戻り %d件 / "
+              "凍結 %d件）" % (len(listed), len(deals),
+                             len(live_listed) - len(deals),
+                             len(listed) - len(live_listed)))
+        build_index(cfg, base, listed, cats, stream_ctx=stream_ctx)
+        build_off_index(cfg, base, deals, cats, stream_ctx=stream_ctx)
+        build_guides(cfg, base, live_listed, cats, guides)
+        build_categories(cfg, base, live_listed, cats)
+        build_products(cfg, base, listed, cats)
+        build_static_pages(cfg, base, live_listed, cats)
+        build_watchlist(cfg, base, live_listed, cats)
+        build_kaimawari(cfg, base, live_listed, cats)
+        build_postboard(cfg, base, live_listed, cats)
+        build_feed_json(cfg, deals, cats)
+        build_sitemap(cfg, listed, stream_ctx=stream_ctx)
+        build_rss(cfg, live_listed)
+    else:
+        checks_products = products
+        n_public = len(products)
+        build_index(cfg, base, products, cats)
+        build_off_index(cfg, base, products, cats)
+        build_guides(cfg, base, products, cats, guides)
+        build_categories(cfg, base, products, cats)
+        build_products(cfg, base, products, cats)
+        build_static_pages(cfg, base, products, cats)
+        build_watchlist(cfg, base, products, cats)
+        build_kaimawari(cfg, base, products, cats)
+        build_postboard(cfg, base, products, cats)
+        build_feed_json(cfg, products, cats)
+        build_sitemap(cfg, products)
+        build_rss(cfg, products)
 
     # 検査の出力を捕まえておく。
     # そのまま流すと、あとから出る「ビルド完了」に押し流されて、
@@ -3203,8 +3420,8 @@ def main():
     with contextlib.redirect_stdout(buf):
         check_padding_collisions()
         check_internal_links()
-        check_caption_prices(products)
-        check_expired_sales(products)
+        check_caption_prices(checks_products)
+        check_expired_sales(checks_products)
         check_featured_freshness()
         check_event_affiliate_links()
         check_guide_toc(guides)
@@ -3219,7 +3436,7 @@ def main():
     warned = checks.count("⚠")
 
     print("✅ ビルド完了")
-    print("   商品 %d件 / カテゴリ %d件" % (len(products), len(cfg["categories"])))
+    print("   商品 %d件 / カテゴリ %d件" % (n_public, len(cfg["categories"])))
     print("   生成: index.html, c/, p/, categories/, 固定ページ, sitemap.xml, feed.xml")
     if warned:
         # 末尾3行だけ見ても必ず目に入る位置に出す。

@@ -1,0 +1,1079 @@
+{
+  "version": 1,
+  "model": "stream",
+  "retention_days": 30,
+  "generated_by": "stream-model seed 2026-11-11（curated.json の feed 16件から移行。listed_on は curated.json の git 履歴で各商品が初めて feed に現れたコミットの日付。プール外の商品の snapshot は products.json のgit 履歴から最後に残っていた版を復元した）",
+  "listings": [
+    {
+      "id": "r0726ed879",
+      "listed_on": "2026-11-10",
+      "theme": "beauty",
+      "last_seen": "2026-11-10",
+      "snapshot_updated": "2026-11-10",
+      "snapshot": {
+        "id": "r0726ed879",
+        "category": "beauty",
+        "title": "ファンデーション カバー力 崩れにくい パウダー【D-クリア ファンデーション 12g】 毛穴レス…",
+        "rawTitle": "【50％OFF★お買い物マラソン半額は11/11(水)1:59まで】 ファンデーション カバー力 崩れにくい パウダー【D-クリア ファンデーション 12g】 毛穴レス 陶器肌 フィルター肌 敏感肌 混合肌 インナードライ 韓国コスメ ミネラル 60代 プレゼント プチプラ d-ray",
+        "price": 1200,
+        "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/d-ray/cabinet/09802265/10566858/imgrc0114585827.jpg?_ex=600x600",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00sq5r7.jeifod0d.g00sq5r7.jeifp545/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fd-ray%2Fpakuto1%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fd-ray%2Fi%2F10000001%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+        "shop": "D-RAY",
+        "reviewAverage": 4.43,
+        "reviewCount": 16729,
+        "itemCode": "d-ray:10000001",
+        "genreId": "405324",
+        "startTime": "2026-11-04 20:00",
+        "endTime": "2026-11-11 01:59",
+        "listPrice": 2400,
+        "priceBasis": "history",
+        "caption": "2,400円のD-クリア ファンデーション12gが1,200円。パウダータイプ、送料無料。",
+        "tags": [
+          "送料無料"
+        ],
+        "points": [],
+        "description": "",
+        "unitNote": null,
+        "postedAt": "2026-11-03",
+        "bumpedAt": "2026-11-03T11:29:32",
+        "lastSeen": "2026-11-10",
+        "pitch_status": "ready",
+        "marketing": {
+          "ask": "ファンデはパウダー派ですか、リキッド派ですか？",
+          "benefits": [
+            "カバー力をうたうタイプ"
+          ],
+          "body": "D-RAYの『D-クリア』、12g入りです。\nカバー力をうたう系統のパウダー。",
+          "features": [
+            "パウダータイプ",
+            "12g入り",
+            "D-RAY"
+          ],
+          "hook": "レビュー16,718件のパウダーファンデが、半額。",
+          "hook_type": "count",
+          "problem": "ファンデーションはタイプが多く、どれを選ぶかで迷う",
+          "target": "パウダータイプのファンデーションを探している人",
+          "use_case": "毎日のメイク",
+          "ask_type": "choice"
+        }
+      }
+    },
+    {
+      "id": "r1bdf1e95f",
+      "listed_on": "2026-11-10",
+      "theme": "beauty",
+      "last_seen": "2026-11-10",
+      "snapshot_updated": "2026-11-10",
+      "snapshot": {
+        "id": "r1bdf1e95f",
+        "category": "beauty",
+        "title": "≪品質と安心にこだわった≫ 歯ぎしり マウスピース 簡単型取りタイプ 1箱(2ピース)…",
+        "rawTitle": "＼楽天172週間1位受賞／【1,500円⇒33％OFF★マラソン大特価】≪品質と安心にこだわった≫ 歯ぎしり マウスピース 簡単型取りタイプ 1箱(2ピース) ケース付【Dr.Qolis正規店】食いしばり 歯軋り 防止 ナイトガード 歯ぎしり対策 グッズ マウスピース マウスガード/歯ぎしり2",
+        "price": 1000,
+        "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/ashiya/cabinet/dq/mouthpiece2/hgs2-0001.jpg?_ex=600x600",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00t2xl7.jeifo578.g00t2xl7.jeifpfa7/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fashiya%2F10000005%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fashiya%2Fi%2F10000009%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+        "shop": "芦屋品質 楽天市場店",
+        "reviewAverage": 4.17,
+        "reviewCount": 3135,
+        "itemCode": "ashiya:10000009",
+        "genreId": "208203",
+        "startTime": "",
+        "endTime": "",
+        "listPrice": 1500,
+        "priceBasis": "history",
+        "caption": "1,500円のマウスピース（簡単型取り）が1,000円。ケース付き。",
+        "tags": [
+          "送料無料"
+        ],
+        "points": [],
+        "description": "",
+        "unitNote": null,
+        "postedAt": "2026-11-04",
+        "bumpedAt": "2026-11-04T21:29:09",
+        "lastSeen": "2026-11-10",
+        "pitch_status": "ready",
+        "marketing": {
+          "hook_type": "count",
+          "target": "寝ているときの歯ぎしりが気になる人",
+          "problem": "歯ぎしりや食いしばりが気になる",
+          "use_case": "就寝時",
+          "features": [
+            "簡単型取りタイプ",
+            "1箱2ピース",
+            "ケース付き"
+          ],
+          "benefits": [
+            "自分で型を取って使える"
+          ],
+          "hook": "マウスピースに、レビューが3,135件。",
+          "body": "自分で型を取るタイプで、1箱に2ピース入っています。ケース付き。\nナイトガードとも呼ばれるものです。",
+          "ask": "歯ぎしりを家族に言われたことがある人、何か使っていますか？",
+          "ask_type": "usage"
+        }
+      }
+    },
+    {
+      "id": "r6b77c88d6",
+      "listed_on": "2026-11-10",
+      "theme": "kaden",
+      "last_seen": "2026-11-10",
+      "snapshot_updated": "2026-11-11",
+      "snapshot": {
+        "id": "r6b77c88d6",
+        "category": "kaden",
+        "title": "在庫処分 残りわずか ネッククーラー ネックファン 瞬間冷却 首掛け扇風機 冷却プレート…",
+        "rawTitle": "★在庫処分！残りわずか★ネッククーラー ネックファン 瞬間冷却 首掛け扇風機 冷却プレート 首掛けクーラー 首掛けファン くびかけ扇風機 5段階風量調節 360°強力送風 静音設計 羽根なし ポータブルファン 熱中症対策 マスク蒸れ対策 暑さ対策",
+        "price": 2980,
+        "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/meijo/cabinet/11012444/11676844/imgrc0083163992.jpg?_ex=600x600",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00uncu7.jeifo2ee.g00uncu7.jeifp5a5/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmeijo%2Fm-fn90wh%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fmeijo%2Fi%2F10000026%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+        "shop": "名城インテリ",
+        "reviewAverage": 4.14,
+        "reviewCount": 115,
+        "itemCode": "meijo:10000026",
+        "genreId": "208375",
+        "startTime": "",
+        "endTime": "",
+        "listPrice": 4980,
+        "priceBasis": "history",
+        "caption": "4,980円のネッククーラー（冷却プレート付き）が2,980円。観測44日の最安値で、中央値より40.2%安い。送料無料。",
+        "tags": [
+          "送料無料",
+          "在庫処分"
+        ],
+        "points": [],
+        "description": "",
+        "unitNote": null,
+        "postedAt": "2026-10-26",
+        "bumpedAt": "2026-10-26T20:31:41",
+        "lastSeen": "2026-11-10",
+        "pitch_status": "ready",
+        "marketing": {
+          "ask": "扇風機、手持ち派ですか？ 首掛け派ですか？",
+          "ask_type": "choice",
+          "benefits": [
+            "両手が空く形"
+          ],
+          "body": "首にかけるタイプの扇風機で、冷却プレート付きです。\n風量は5段階調節。羽根なしの形です。",
+          "features": [
+            "冷却プレート付き",
+            "風量5段階調節",
+            "羽根なし",
+            "首掛けタイプ",
+            "送料無料"
+          ],
+          "hook": "羽根が見えない、首にかける扇風機。",
+          "hook_type": "look",
+          "problem": "手持ち扇風機だと片手が塞がる",
+          "target": "夏の通勤や屋外作業で首元を冷やしたい人",
+          "use_case": "通勤・屋外作業"
+        }
+      }
+    },
+    {
+      "id": "r841f65348",
+      "listed_on": "2026-11-10",
+      "theme": "kitchen",
+      "last_seen": "2026-11-11",
+      "snapshot_updated": "2026-11-11",
+      "snapshot": {
+        "id": "r841f65348",
+        "category": "kitchen",
+        "title": "4/6枚セット シール ボンボンシール ドロップシール セット ぷっくりシール ぷくぷくシール…",
+        "rawTitle": "【半額SALE★楽天1位】 4/6枚セット シール ボンボンシール ドロップシール セット ぷっくりシール ぷくぷくシール おはじきシール つやつや 硬い 3d 立体シール 平成レトロ かわいい シール帳 スマホケース デコ シール交換 大量 キャラクター 送料無料",
+        "price": 490,
+        "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/anahaimu/cabinet/12466868/bb02-917.jpg?_ex=600x600",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00uszc7.jeifo768.g00uszc7.jeifp954/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fanahaimu%2Fbb02%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fanahaimu%2Fi%2F10000434%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+        "shop": "あなはいむ店",
+        "reviewAverage": 4.66,
+        "reviewCount": 1931,
+        "itemCode": "anahaimu:10000434",
+        "genreId": "111163",
+        "startTime": "",
+        "endTime": "",
+        "listPrice": 1980,
+        "priceBasis": "history",
+        "caption": "1,980円のぷっくりシール4/6枚セットが490円。立体感のあるデコシール、送料無料。",
+        "tags": [
+          "送料無料"
+        ],
+        "points": [],
+        "description": "",
+        "unitNote": null,
+        "postedAt": "2026-11-04",
+        "bumpedAt": "2026-11-04T16:22:15",
+        "lastSeen": "2026-11-11",
+        "pitch_status": "ready",
+        "marketing": {
+          "ask": "シールは、手帳に貼る派ですか？",
+          "benefits": [
+            "枚数がまとまっている"
+          ],
+          "body": "ぷっくりしたデコシール、4枚か6枚のセットです。\nドロップシールとも呼ばれるタイプ。手帳やノート、スマホケースに貼るものです。",
+          "features": [
+            "4/6枚セット",
+            "立体感のあるデコシール（ぷっくりシール）",
+            "送料無料"
+          ],
+          "hook": "この立体感、反則じゃないですか。",
+          "hook_type": "look",
+          "problem": "デコ用のシールは、枚数が少ないとテーマをそろえる前に終わる",
+          "target": "手帳やノートをシールでデコる人",
+          "use_case": "手帳・ノート・スマホケースのデコ",
+          "ask_type": "choice"
+        }
+      }
+    },
+    {
+      "id": "r845a962d3",
+      "listed_on": "2026-11-10",
+      "theme": "food",
+      "last_seen": "2026-11-10",
+      "snapshot_updated": "2026-11-10",
+      "snapshot": {
+        "id": "r845a962d3",
+        "category": "food",
+        "title": "お試し3袋 鶏の炭火焼き 100g×3袋 国産鶏肉100％ 自社製造 宮崎名物 無添加 塩味 レトルト…",
+        "rawTitle": "お試し3袋 鶏の炭火焼き 100g×3袋 国産鶏肉100％ 自社製造 宮崎名物 無添加 塩味 レトルト 常温保存2年 個包装 高評価★4.2 レビュー2万件超 まずは味見 晩酌 家飲み 時短おかず 九州グルメ ポイント消化 買い回り おつまみ",
+        "price": 1000,
+        "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/meat-21/cabinet/03087268/10po/torisumisyou33.jpg?_ex=600x600",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00ri7y7.jeifo99b.g00ri7y7.jeifpac1/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmeat-21%2F10po%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fmeat-21%2Fi%2F10000071%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+        "shop": "ミート21ショップ 楽天市場店",
+        "reviewAverage": 4.26,
+        "reviewCount": 21792,
+        "itemCode": "meat-21:10000071",
+        "genreId": "404951",
+        "startTime": "2026-11-04 09:00",
+        "endTime": "2026-11-11 01:59",
+        "listPrice": 1460,
+        "priceBasis": "history",
+        "caption": "1,460円の鶏の炭火焼き100g×3袋が1,000円。国産鶏肉100%。",
+        "tags": [
+          "送料無料"
+        ],
+        "points": [
+          "1,460円から1,000円へ",
+          "国産鶏肉100%・塩味",
+          "常温保存2年の個包装×3"
+        ],
+        "description": "",
+        "unitNote": null,
+        "postedAt": "2026-11-04",
+        "bumpedAt": "2026-11-04T11:21:44",
+        "lastSeen": "2026-11-10",
+        "pitch_status": "ready",
+        "marketing": {
+          "hook_type": "count",
+          "target": "晩酌のおつまみを探す人",
+          "problem": "おつまみの買い置き",
+          "use_case": "晩酌",
+          "features": [
+            "国産鶏肉100%",
+            "塩味",
+            "常温保存2年",
+            "個包装100g×3"
+          ],
+          "benefits": [
+            "常温で置いておける"
+          ],
+          "hook": "21,792件もレビューがある、鶏の炭火焼き。",
+          "body": "宮崎名物で、国産鶏肉100%の塩味。100gの個包装が3袋です。\nレトルトで、常温で2年もちます。",
+          "ask": "おつまみの買い置き、常温で置けるものにしてますか？",
+          "ask_type": "usage"
+        }
+      }
+    },
+    {
+      "id": "r8688e57d6",
+      "listed_on": "2026-11-10",
+      "theme": "fashion",
+      "last_seen": "2026-11-11",
+      "snapshot_updated": "2026-11-11",
+      "snapshot": {
+        "id": "r8688e57d6",
+        "category": "fashion",
+        "title": "※超特価【12時間タイムセール：1点1000円~】 ブラトップ キャミソール タンクトップ…",
+        "rawTitle": "※超特価【12時間タイムセール：1点1000円~】 ブラトップ キャミソール タンクトップ カップ付きインナー リブフィットタンク リブフィットキャミソール 下着 ノンワイヤー 伸縮性 部屋着 秋 冬 30代 40代 50代 裏起毛以外がページ内最安",
+        "price": 1000,
+        "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/darkangel/cabinet/12863863/10/5336-main-261008.jpg?_ex=600x600",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00q8qj7.jeifo2ee.g00q8qj7.jeifpbbc/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdarkangel%2Fin2603-5336%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fdarkangel%2Fi%2F10037880%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+        "shop": "Dark Angel (ダークエンジェル)",
+        "reviewAverage": 3.82,
+        "reviewCount": 3036,
+        "itemCode": "darkangel:10037880",
+        "genreId": "566018",
+        "startTime": "2026-11-11 09:00",
+        "endTime": "2026-11-11 20:59",
+        "listPrice": 2799,
+        "priceBasis": "history",
+        "caption": "2,799円のカップ付きブラトップが1,000円。観測60日の最安値で、中央値より40.8%安い。送料無料。",
+        "tags": [
+          "送料無料"
+        ],
+        "points": [],
+        "description": "",
+        "unitNote": null,
+        "postedAt": "2026-11-10",
+        "bumpedAt": "2026-11-10T16:39:37",
+        "lastSeen": "2026-11-11",
+        "pitch_status": "ready",
+        "marketing": {
+          "ask": "カップ付きインナー、部屋着にも使っている人いますか？",
+          "ask_type": "usage",
+          "benefits": [
+            "一枚でインナーと部屋着を兼ねる"
+          ],
+          "body": "カップ付きのキャミソールとタンクトップです。ノンワイヤーで、リブ素材。\nインナーにも部屋着にも使えます。",
+          "features": [
+            "カップ付き",
+            "ノンワイヤー",
+            "リブ素材",
+            "キャミソール／タンクトップ",
+            "送料無料"
+          ],
+          "hook": "",
+          "hook_type": "price",
+          "problem": "部屋着のままでは宅配の受け取りに出にくい",
+          "target": "部屋着とインナーを兼ねたい人",
+          "use_case": "部屋着・インナー"
+        }
+      }
+    },
+    {
+      "id": "r8e972c23b",
+      "listed_on": "2026-11-10",
+      "theme": "fashion",
+      "last_seen": "2026-11-11",
+      "snapshot_updated": "2026-11-11",
+      "snapshot": {
+        "id": "r8e972c23b",
+        "category": "fashion",
+        "title": "※超特価【12時間タイムセール：1点1000円】 裏起毛フェイクタイツ 裏起毛タイツ タイツ 裏起毛…",
+        "rawTitle": "※超特価【12時間タイムセール：1点1000円】 裏起毛フェイクタイツ 裏起毛タイツ タイツ 裏起毛 厚手 防寒 着圧 1200デニール 600デニール ストッキング 極厚 あったか あたたかい 冷え取り 毛布【選べる1200D / 600D / 80D フェイクタイツ】ダークエンジェル",
+        "price": 1000,
+        "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/darkangel/cabinet/12863863/13830759/01216sss-main-0904-1.jpg?_ex=600x600",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00q8qj7.jeifo2ee.g00q8qj7.jeifpbbc/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdarkangel%2F312-535-01216sss%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fdarkangel%2Fi%2F10023599%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+        "shop": "Dark Angel (ダークエンジェル)",
+        "reviewAverage": 3.88,
+        "reviewCount": 3852,
+        "itemCode": "darkangel:10023599",
+        "genreId": "206440",
+        "startTime": "2026-11-11 09:00",
+        "endTime": "2026-11-11 20:59",
+        "listPrice": 2699,
+        "priceBasis": "history",
+        "caption": "2,699円の裏起毛フェイクタイツが1,000円。観測33日の最安値で、中央値より50%安い。送料無料。",
+        "tags": [
+          "送料無料"
+        ],
+        "points": [],
+        "description": "",
+        "unitNote": null,
+        "postedAt": "2026-11-10",
+        "bumpedAt": "2026-11-10T16:39:37",
+        "lastSeen": "2026-11-11",
+        "pitch_status": "ready",
+        "marketing": {
+          "ask": "冬のタイツ、厚手1枚派ですか？ 重ね履き派ですか？",
+          "ask_type": "choice",
+          "benefits": [
+            "見た目はストッキングのまま、厚さが選べる"
+          ],
+          "body": "見た目はストッキング、中は裏起毛のフェイクタイツです。\n厚さは1200デニール・600デニール・80デニールから選べます。",
+          "features": [
+            "裏起毛",
+            "厚さは1200D／600D／80Dから選べる",
+            "着圧タイプ",
+            "送料無料"
+          ],
+          "hook": "",
+          "hook_type": "price",
+          "problem": "冬は薄いタイツだと寒いが、厚手だと見た目が重い",
+          "target": "冬でもスカートやワンピースを着たい人",
+          "use_case": "冬のスカート・ワンピース合わせ"
+        }
+      }
+    },
+    {
+      "id": "r9598a3d07",
+      "listed_on": "2026-11-10",
+      "theme": "kaden",
+      "last_seen": "2026-11-11",
+      "snapshot_updated": "2026-11-11",
+      "snapshot": {
+        "id": "r9598a3d07",
+        "category": "kaden",
+        "title": "ヘアアイロン は アレティ ｜ ストレート カール 2way 髪の負担を抑える 20mm…",
+        "rawTitle": "【11/11 9:59まで4980円】 ヘアアイロン は アレティ ｜ ストレート カール 2way 髪の負担を抑える 20mm 熱を均一に伝える なめらかな滑り セラミックコーティング 230℃まで35段階の温度調整 海外対応 前髪 ハイクオリティモデル Areti-i679GD ピンクゴールド",
+        "price": 4980,
+        "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/areti/cabinet/i679gd/i679gd.jpg?_ex=600x600",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00rv6y7.jeifo92b.g00rv6y7.jeifp34c/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fareti%2F10000009%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fareti%2Fi%2F10000009%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+        "shop": "Areti(アレティ)楽天市場店",
+        "reviewAverage": 4.49,
+        "reviewCount": 13302,
+        "itemCode": "areti:10000009",
+        "genreId": "509412",
+        "startTime": "",
+        "endTime": "",
+        "listPrice": 7490,
+        "priceBasis": "history",
+        "caption": "7,490円のアレティの2WAYヘアアイロンが4,980円。20mm、35段階の温度調整、送料無料。",
+        "tags": [
+          "送料無料"
+        ],
+        "points": [
+          "20mm・2WAY",
+          "35段階の温度調整・海外対応"
+        ],
+        "description": "アレティの2WAYヘアアイロン、20mmです。セラミックコーティングで滑りをよくしています。\n温度が35段階（最高230℃）で選べるので、髪質に合わせて 低めから使えます。前髪にも届く幅です。",
+        "unitNote": null,
+        "postedAt": "2026-11-04",
+        "bumpedAt": "2026-11-04T16:21:52",
+        "lastSeen": "2026-11-11",
+        "pitch_status": "ready",
+        "marketing": {
+          "ask": "ヘアアイロン、ストレートとカールどっちで使うことが多いですか？",
+          "benefits": [
+            "1本でストレートとカール"
+          ],
+          "body": "20mmの2WAYで、温度は35段階（最高230℃）から選べます。\nセラミックコーティングで、海外でも使える対応です。",
+          "features": [
+            "ストレート/カール 2WAY",
+            "20mm",
+            "35段階の温度調整（最高230℃）",
+            "セラミックコーティング",
+            "海外対応"
+          ],
+          "hook": "ストレートとカール、1本で済むやつ。",
+          "hook_type": "look",
+          "problem": "ストレート用とカール用で、アイロンを2本持ちにしている",
+          "target": "ストレートとカールの両方をやる人",
+          "use_case": "毎朝のスタイリング",
+          "ask_type": "choice"
+        }
+      }
+    },
+    {
+      "id": "r99dc0d242",
+      "listed_on": "2026-11-10",
+      "theme": "food",
+      "last_seen": "2026-11-10",
+      "snapshot_updated": "2026-11-10",
+      "snapshot": {
+        "id": "r99dc0d242",
+        "category": "food",
+        "title": "[大袋]とろりんスープ昆布と海藻[50杯分] 200g×1袋 選べる2種（プレーン・うめ味)…",
+        "rawTitle": "【50%OFF★お買い物マラソン限定！】[大袋]とろりんスープ昆布と海藻[50杯分] 200g×1袋 選べる2種（プレーン・うめ味) とろろ昆布 インスタントスープ 海藻スープ 即席スープ 国産昆布 がごめ昆布入り 白とろろ 昆布スープ 和風スープ お湯を注ぐだけ 簡単調理 時短 朝食",
+        "price": 1580,
+        "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/konbu-genzouya/cabinet/04433867/261104/thum_520025.jpg?_ex=600x600",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00rhas7.jeifo7d7.g00rhas7.jeifpa72/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkonbu-genzouya%2F520025%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fkonbu-genzouya%2Fi%2F10000200%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+        "shop": "昆布専門問屋 源蔵屋",
+        "reviewAverage": 4.71,
+        "reviewCount": 5531,
+        "itemCode": "konbu-genzouya:10000200",
+        "genreId": "100276",
+        "startTime": "2026-11-04 20:00",
+        "endTime": "2026-11-11 01:59",
+        "listPrice": 3160,
+        "priceBasis": "history",
+        "caption": "3,160円のとろりんスープ昆布50杯分が1,580円。200gの大袋で、味は2種から選べる。送料無料。",
+        "tags": [
+          "送料無料"
+        ],
+        "points": [],
+        "description": "",
+        "unitNote": null,
+        "postedAt": "2026-11-04",
+        "bumpedAt": "2026-11-04T11:21:44",
+        "lastSeen": "2026-11-10",
+        "pitch_status": "ready",
+        "marketing": {
+          "ask": "昆布のスープ、飲んだことある人いますか？",
+          "benefits": [
+            "お湯で作るスープの素"
+          ],
+          "body": "200gの大袋で、味はプレーンとうめ味の2種から選べます。\n昆布専門の問屋、源蔵屋のものです。",
+          "features": [
+            "50杯分・200gの大袋",
+            "プレーン・うめ味の2種から選べる",
+            "昆布専門問屋 源蔵屋"
+          ],
+          "hook": "昆布のスープ、50杯分で1,580円。",
+          "hook_type": "price",
+          "problem": "汁物を一から作るのは手間な日がある",
+          "target": "汁物を手軽に足したい人",
+          "use_case": "食事の汁物",
+          "ask_type": "usage"
+        }
+      }
+    },
+    {
+      "id": "rb482690c5",
+      "listed_on": "2026-11-10",
+      "theme": "kaden",
+      "last_seen": "2026-11-11",
+      "snapshot_updated": "2026-11-11",
+      "snapshot": {
+        "id": "rb482690c5",
+        "category": "kaden",
+        "title": "充電式カイロ モバイルバッテリー 薄型 貼らない かいろ 長時間 薄型 コンパクト 軽量…",
+        "rawTitle": "＼60%OFF／充電式カイロ モバイルバッテリー 薄型 貼らない かいろ 長時間 薄型 コンパクト 軽量 くり返し使える ハンドウォーマー 携帯カイロ USB充電 通勤 通学 レジャー 革ひも ポーチ付き MTL-E007",
+        "price": 1096,
+        "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/mottole-shop/cabinet/product/e/mtl-e007_01.jpg?_ex=600x600",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00tc8d7.jeifo856.g00tc8d7.jeifpa13/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmottole-shop%2Fmtl-e007%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fmottole-shop%2Fi%2F10000075%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+        "shop": "mottole(モットル)",
+        "reviewAverage": 4.33,
+        "reviewCount": 4457,
+        "itemCode": "mottole-shop:10000075",
+        "genreId": "565128",
+        "startTime": "",
+        "endTime": "",
+        "listPrice": 2740,
+        "priceBasis": "history",
+        "caption": "2,740円の充電式カイロが1,096円。モバイルバッテリー兼用、ポーチ付き。送料無料。",
+        "tags": [
+          "送料無料"
+        ],
+        "points": [],
+        "description": "",
+        "unitNote": null,
+        "postedAt": "2026-11-02",
+        "bumpedAt": "2026-11-02T11:28:16",
+        "lastSeen": "2026-11-11",
+        "pitch_status": "ready",
+        "marketing": {
+          "ask": "カイロは使い捨て派ですか、充電派ですか？",
+          "benefits": [
+            "充電して繰り返し使える"
+          ],
+          "body": "貼らない薄型で、ポーチが付いています。\n充電して繰り返し使うタイプです。",
+          "features": [
+            "充電式（貼らないタイプ）",
+            "モバイルバッテリー兼用",
+            "薄型・コンパクト",
+            "ポーチ付き"
+          ],
+          "hook": "充電式カイロが1,096円。しかもモバイルバッテリー兼用。",
+          "hook_type": "price",
+          "problem": "使い捨てカイロは、買い置きと捨てる手間が毎回かかる",
+          "target": "使い捨てカイロをよく買う人",
+          "use_case": "外出時の防寒",
+          "ask_type": "choice"
+        }
+      }
+    },
+    {
+      "id": "rc2e11945a",
+      "listed_on": "2026-11-10",
+      "theme": "baby-toy",
+      "last_seen": "2026-11-11",
+      "snapshot_updated": "2026-11-11",
+      "snapshot": {
+        "id": "rc2e11945a",
+        "category": "baby-toy",
+        "title": "スクイーズおもちゃ 癒しグッズ ストレス解消 かわいいキャラクター 触感 ふわふわ もちもち デスク用…",
+        "rawTitle": "スクイーズおもちゃ 癒しグッズ ストレス解消 かわいいキャラクター 触感 ふわふわ もちもち デスク用 癒しアイテム プレゼント子供大人用SNS ご褒美 ギフト ふわふわ感触 人気キャラクター ぬいぐるみ 自宅やオフィスでリラックス",
+        "price": 990,
+        "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/snnm0726/cabinet/12901538/0001.jpg?_ex=600x600",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00ursz7.jeifoc0f.g00ursz7.jeifp6cd/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsnnm0726%2Fdd0117-1%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fsnnm0726%2Fi%2F10001421%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+        "shop": "Life-Stay",
+        "reviewAverage": 4.3,
+        "reviewCount": 110,
+        "itemCode": "snnm0726:10001421",
+        "genreId": "201632",
+        "startTime": "",
+        "endTime": "",
+        "listPrice": 1699,
+        "priceBasis": "history",
+        "caption": "1,699円のスクイーズおもちゃが990円。ふわふわ・もちもちの触感、送料無料。",
+        "tags": [
+          "送料無料"
+        ],
+        "points": [],
+        "description": "",
+        "unitNote": null,
+        "postedAt": "2026-10-20",
+        "bumpedAt": "2026-10-20T21:37:36",
+        "lastSeen": "2026-11-11",
+        "pitch_status": "ready",
+        "marketing": {
+          "ask": "デスクにこういうの置いてる人、いますか？",
+          "benefits": [
+            "握って遊ぶタイプのおもちゃ"
+          ],
+          "body": "デスクに置くタイプのスクイーズです。\nキャラクターもので、握って遊びます。",
+          "features": [
+            "ふわふわ・もちもちの触感",
+            "キャラクターもの",
+            "デスク用"
+          ],
+          "hook": "ふわふわ、もちもち。名前だけで触感が分かる。",
+          "hook_type": "look",
+          "problem": "デスクワークの合間に、触るものが何もない",
+          "target": "デスクに置く小物が好きな人",
+          "use_case": "デスクでの息抜き",
+          "ask_type": "usage"
+        }
+      }
+    },
+    {
+      "id": "rc67a0d0c5",
+      "listed_on": "2026-11-10",
+      "theme": "pc",
+      "last_seen": "2026-11-11",
+      "snapshot_updated": "2026-11-11",
+      "snapshot": {
+        "id": "rc67a0d0c5",
+        "category": "pc",
+        "title": "充電ケーブル タイプC 高速 スパイラルケーブル 巻き取り マグネット ケーブル 1m 2m USB…",
+        "rawTitle": "充電ケーブル タイプC 高速 スパイラルケーブル 巻き取り マグネット ケーブル 1m 2m USB Type-C USB-C USB-PD3.1 iPhone16 iPhone Android iPad 充電器 急速充電 断線 柔らかい 持ち運び便利 収納 かわいい おしゃれ",
+        "price": 980,
+        "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/hobinavi/cabinet/goods/pdc020/imgrc0129231355.jpg?_ex=600x600",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00qff77.jeifo05e.g00qff77.jeifp6eb/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fhobinavi%2Fcode-mf-100%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fhobinavi%2Fi%2F10497734%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+        "shop": "ホビナビ 楽天市場店",
+        "reviewAverage": 4.14,
+        "reviewCount": 16112,
+        "itemCode": "hobinavi:10497734",
+        "genreId": "564278",
+        "startTime": "",
+        "endTime": "",
+        "listPrice": 1780,
+        "priceBasis": "history",
+        "caption": "1,780円のスパイラル式Type-Cケーブルが980円。観測60日の最安値で、中央値より44.9%安い。送料無料。",
+        "tags": [
+          "送料無料"
+        ],
+        "points": [],
+        "description": "",
+        "unitNote": null,
+        "postedAt": "2026-11-06",
+        "bumpedAt": "2026-11-06T21:32:22",
+        "lastSeen": "2026-11-11",
+        "pitch_status": "ready",
+        "marketing": {
+          "ask": "充電ケーブル、巻き取り式と普通のと、どっち派ですか？",
+          "ask_type": "choice",
+          "benefits": [
+            "巻き取って持ち運べる"
+          ],
+          "body": "スパイラル式で、使わないときは巻き取っておけるType-Cケーブルです。\nUSB PD 3.1対応で、長さは1mと2m。マグネットでまとまります。",
+          "features": [
+            "スパイラル式・巻き取り収納",
+            "USB PD 3.1対応",
+            "長さ1m／2m",
+            "マグネット付き",
+            "送料無料"
+          ],
+          "hook": "Type-Cケーブルに、レビューが16,112件。",
+          "hook_type": "count",
+          "problem": "ケーブルがバッグの中で絡まる",
+          "target": "充電ケーブルを何本も持ち歩く人",
+          "use_case": "スマホ・タブレットの充電"
+        }
+      }
+    },
+    {
+      "id": "rd429b31ad",
+      "listed_on": "2026-11-10",
+      "theme": "food",
+      "last_seen": "2026-11-10",
+      "snapshot_updated": "2026-11-11",
+      "snapshot": {
+        "id": "rd429b31ad",
+        "category": "food",
+        "title": "山形県産 ジュース・スムージー用 りんご サンふじ 5kg～ ※日時指定はメールで※【山形県産 リンゴ…",
+        "rawTitle": "＼11/10(火)23:59まで！店内全品10%OFFクーポン配布中！／ 山形県産 ジュース・スムージー用 りんご サンふじ 5kg～ ※日時指定はメールで※【山形県産 リンゴ 林檎 apple 苹果 蘋果 蜜入り さんふじ 自宅用 家庭用 果物 フルーツ 人気 売れ筋 送料無料】",
+        "price": 2170,
+        "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/ultra-taste/cabinet/daiiti/daiiti_0219.jpg?_ex=600x600",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00reg57.jeifob5f.g00reg57.jeifp118/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fultra-taste%2Fringo_01jh%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fultra-taste%2Fi%2F10000190%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+        "shop": "竹城青果",
+        "reviewAverage": 4.28,
+        "reviewCount": 3893,
+        "itemCode": "ultra-taste:10000190",
+        "genreId": "304633",
+        "startTime": "2026-06-01 10:00",
+        "endTime": "2027-04-30 13:59",
+        "listPrice": 3370,
+        "priceBasis": "history",
+        "caption": "3,370円の山形県産サンふじ5kgが2,170円。ジュース・スムージー用の家庭用、送料無料。",
+        "tags": [
+          "送料無料"
+        ],
+        "points": [],
+        "description": "",
+        "unitNote": null,
+        "postedAt": "2026-10-31",
+        "bumpedAt": "2026-10-31T07:28:12",
+        "lastSeen": "2026-11-10",
+        "pitch_status": "ready",
+        "marketing": {
+          "ask": "りんご、ジュースやスムージーに使う人いますか？",
+          "benefits": [
+            "量がまとまっている"
+          ],
+          "body": "山形県産のサンふじです。\nジュース・スムージー用に出ている、家庭用のりんご。",
+          "features": [
+            "山形県産サンふじ",
+            "5kg入り",
+            "ジュース・スムージー用の家庭用"
+          ],
+          "hook": "りんごを5kgで買う、という買い方。",
+          "hook_type": "look",
+          "problem": "ジュース用には、まとまった量のりんごが要る",
+          "target": "りんごをジュースやスムージーにする人",
+          "use_case": "ジュース・スムージー",
+          "ask_type": "usage"
+        }
+      }
+    },
+    {
+      "id": "rd5df705a4",
+      "listed_on": "2026-11-10",
+      "theme": "fashion",
+      "last_seen": "2026-11-11",
+      "snapshot_updated": "2026-11-11",
+      "snapshot": {
+        "id": "rd5df705a4",
+        "category": "fashion",
+        "title": "《累計70万枚突破》のびーるハイウエストストレッチ美脚 スキニーレギンスパンツ レギパン レディース…",
+        "rawTitle": "《累計70万枚突破》のびーるハイウエストストレッチ美脚 スキニーレギンスパンツ レギパン レディース 春 スキニーパンツ レギンス 通勤 ハイウエスト 美脚 大きいサイズ 軽い パンツ【2026CR】★",
+        "price": 1590,
+        "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/aimoha/cabinet/itempic/05790311/20005302_01.jpg?_ex=600x600",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00rxf47.jeifo9a9.g00rxf47.jeifp99b/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Faimoha%2F20005302%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Faimoha%2Fi%2F10000701%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+        "shop": "aimoha",
+        "reviewAverage": 4.02,
+        "reviewCount": 4620,
+        "itemCode": "aimoha:10000701",
+        "genreId": "206440",
+        "startTime": "",
+        "endTime": "",
+        "listPrice": 2409,
+        "priceBasis": "history",
+        "caption": "2,409円のハイウエスト・ストレッチレギンスパンツが1,590円。観測60日の最安値で、中央値より34%安い。送料無料。",
+        "tags": [
+          "送料無料"
+        ],
+        "points": [],
+        "description": "",
+        "unitNote": null,
+        "postedAt": "2026-11-09",
+        "bumpedAt": "2026-11-09T07:31:15",
+        "lastSeen": "2026-11-11",
+        "pitch_status": "ready",
+        "marketing": {
+          "ask": "レギンスパンツ、通勤に履いている人いますか？",
+          "ask_type": "usage",
+          "benefits": [
+            "パンツの形で、レギンスの伸び"
+          ],
+          "body": "ハイウエストのスキニータイプで、ストレッチ素材のレギンスパンツです。\n大きいサイズもあります。",
+          "features": [
+            "ハイウエスト",
+            "ストレッチ素材",
+            "スキニータイプ",
+            "大きいサイズあり",
+            "送料無料"
+          ],
+          "hook": "レギンスパンツに、レビューが4,620件。",
+          "hook_type": "count",
+          "problem": "スキニーは窮屈で、レギンスだけでは外出着にしにくい",
+          "target": "通勤にも使える楽なパンツを探す人",
+          "use_case": "通勤・普段着"
+        }
+      }
+    },
+    {
+      "id": "red6052d5f",
+      "listed_on": "2026-11-10",
+      "theme": "pc",
+      "last_seen": "2026-11-11",
+      "snapshot_updated": "2026-11-11",
+      "snapshot": {
+        "id": "red6052d5f",
+        "category": "pc",
+        "title": "EEIVOL モバイルバッテリー 軽量 薄型 大容量 15000mAh 機内持ち込み ピンク グリーン…",
+        "rawTitle": "EEIVOL モバイルバッテリー 軽量 薄型 大容量 15000mAh 機内持ち込み ピンク グリーン 2台同時充電 USB出入力小型 LED残量表示 スマホ充電器 旅行 出張 停電対策 地震 災害 iPhone android対応PSE認証済 日本語説明書付き",
+        "price": 799,
+        "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/aiwo/cabinet/10479293/1600x1600-076-01.jpg?_ex=600x600",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00uhf47.jeifo201.g00uhf47.jeifpbdb/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Faiwo%2Fhyg076-copy%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Faiwo%2Fi%2F10000030%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+        "shop": "EVOPOW JAPAN 楽天市場店",
+        "reviewAverage": 4.45,
+        "reviewCount": 563,
+        "itemCode": "aiwo:10000030",
+        "genreId": "564277",
+        "startTime": "",
+        "endTime": "",
+        "listPrice": 1199,
+        "priceBasis": "history",
+        "caption": "1,199円のモバイルバッテリー15000mAhが799円。薄型で2台同時充電、送料無料。",
+        "tags": [
+          "送料無料"
+        ],
+        "points": [],
+        "description": "",
+        "unitNote": null,
+        "postedAt": "2026-11-07",
+        "bumpedAt": "2026-11-07T11:32:18",
+        "lastSeen": "2026-11-11",
+        "pitch_status": "ready",
+        "marketing": {
+          "ask": "モバイルバッテリー、何mAhのを持ち歩いていますか？",
+          "benefits": [
+            "2台同時に充電できる"
+          ],
+          "body": "薄型で、2台同時に充電できます。\n色はピンクとグリーン。機内持ち込みもできます。",
+          "features": [
+            "15000mAh",
+            "薄型・軽量",
+            "2台同時充電",
+            "機内持ち込み可"
+          ],
+          "hook": "え、15,000mAhで799円。",
+          "hook_type": "price",
+          "problem": "外出先でスマホの電池が切れると困る",
+          "target": "外出先でスマホの電池が切れがちな人",
+          "use_case": "外出時の充電",
+          "ask_type": "choice"
+        }
+      }
+    },
+    {
+      "id": "redc4f51e4",
+      "listed_on": "2026-11-10",
+      "theme": "beauty",
+      "last_seen": "2026-11-10",
+      "snapshot_updated": "2026-11-10",
+      "snapshot": {
+        "id": "redc4f51e4",
+        "category": "beauty",
+        "title": "【神トク】＼W割引で最大69％OFF→1袋あたり620円 11月4日20:00-11月11日01:59／…",
+        "rawTitle": "【神トク】＼W割引で最大69％OFF→1袋あたり620円★11月4日20:00-11月11日01:59／ シートマスク パック フェイスマスク 30枚 大容量 ナイアシンアミド プロテオグリカン CICA ビタミンC コラーゲン 高保湿 マスク フェイスパック マスクパック スキンケア 美容マスク",
+        "price": 1000,
+        "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/suisosum-shop/cabinet/h_/facesheetmask/11150273/facesheet_sa_53.jpg?_ex=600x600",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00szo97.jeifo9e5.g00szo97.jeifpb78/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsuisosum-shop%2Fh_and_facemask%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fsuisosum-shop%2Fi%2F10000217%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+        "shop": "SUISOSUM公式 楽天市場店",
+        "reviewAverage": 4.54,
+        "reviewCount": 2670,
+        "itemCode": "suisosum-shop:10000217",
+        "genreId": "503020",
+        "startTime": "2026-11-04 20:00",
+        "endTime": "2026-11-11 01:59",
+        "listPrice": 2000,
+        "priceBasis": "history",
+        "caption": "2,000円のシートマスク30枚が1,000円。大容量のフェイスパック、送料無料。",
+        "points": [],
+        "description": "",
+        "tags": [
+          "送料無料"
+        ],
+        "unitNote": null,
+        "postedAt": "2026-11-03",
+        "bumpedAt": "2026-11-03T00:00:00",
+        "lastSeen": "2026-11-10",
+        "pitch_status": "ready",
+        "marketing": {
+          "ask": "シートマスク、毎日使う人いますか？",
+          "benefits": [
+            "枚数がまとまっている"
+          ],
+          "body": "大容量のフェイスパックです。\nこまめに使う人向けの枚数。",
+          "features": [
+            "30枚入り",
+            "大容量のフェイスパック",
+            "送料無料"
+          ],
+          "hook": "シートマスク30枚で1,000円。1枚あたり約33円。",
+          "hook_type": "price",
+          "problem": "1枚ずつ買うタイプは、買い置きがすぐ切れる",
+          "target": "シートマスクの買い置きがすぐ終わる人",
+          "use_case": "毎日のフェイスパック",
+          "ask_type": "usage"
+        }
+      }
+    },
+    {
+      "id": "r509d25f43",
+      "listed_on": "2026-11-11",
+      "theme": "food",
+      "last_seen": "2026-11-09",
+      "snapshot_updated": "2026-11-11",
+      "snapshot": {
+        "id": "r509d25f43",
+        "category": "food",
+        "title": "父の日仕様の訳あり 在庫処分 アウトレット 父の日スリーブ&専用コースター付 究極のビール…",
+        "rawTitle": "父の日仕様の訳あり 在庫処分 アウトレット 父の日スリーブ&専用コースター付 究極のビール イネディット 750ml×2本セット ギフト 贈り物 プレゼント スペイン ダム RSL",
+        "price": 1599,
+        "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/likaman/cabinet/rakuten75/302222-2pa_500_gift.jpg?_ex=600x600",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00qo2r7.jeifoa73.g00qo2r7.jeifp1cd/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flikaman%2F302222-2%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Flikaman%2Fi%2F10003529%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+        "shop": "お酒の専門店 リカマン楽天市場店",
+        "reviewAverage": 4.53,
+        "reviewCount": 437,
+        "itemCode": "likaman:10003529",
+        "genreId": "110626",
+        "startTime": "",
+        "endTime": "",
+        "listPrice": 2698,
+        "priceBasis": "history",
+        "caption": "2,698円のスペインビール「イネディット」750ml×2本セットが1,599円。観測60日の最安値で、中央値より20%安い。送料無料。",
+        "tags": [
+          "送料無料",
+          "訳あり",
+          "アウトレット"
+        ],
+        "points": [],
+        "description": "",
+        "unitNote": null,
+        "postedAt": "2026-11-02",
+        "bumpedAt": "2026-11-02T16:27:46",
+        "lastSeen": "2026-11-09",
+        "pitch_status": "ready",
+        "marketing": {
+          "hook_type": "count",
+          "target": "スペインビールを飲んでみたい人",
+          "problem": "訳あり品は理由が分からないと手を出しにくい",
+          "hook": "スペインビールの2本セットに、レビューが437件。",
+          "body": "スペインのビール「イネディット」、750ml×2本のセットです。\n父の日仕様のスリーブと専用コースター付き。訳あり・アウトレットの在庫処分品です。",
+          "features": [
+            "750ml×2本セット",
+            "スペインのビール",
+            "父の日仕様スリーブ付き",
+            "専用コースター付き",
+            "訳あり・アウトレット",
+            "送料無料"
+          ],
+          "benefits": [
+            "ギフト仕様のままのセット"
+          ],
+          "use_case": "家飲み",
+          "ask": "ビール、缶派ですか？ 瓶派ですか？",
+          "ask_type": "choice"
+        }
+      }
+    },
+    {
+      "id": "r58b64002e",
+      "listed_on": "2026-11-11",
+      "theme": "food",
+      "last_seen": "2026-11-10",
+      "snapshot_updated": "2026-11-11",
+      "snapshot": {
+        "id": "r58b64002e",
+        "category": "food",
+        "title": "ほんのり香る フレーバーティー 選べる2袋 ティーバッグ 日本茶 ベース ハーブティー 国産 無添加…",
+        "rawTitle": "【10%OFFクーポン】＼10日20時スタート！ラスト6時間限定／＼期間限定 半額セール／ ほんのり香る フレーバーティー 選べる2袋 ティーバッグ 日本茶 ベース ハーブティー 国産 無添加 緑茶 ハーブ ほうじ茶 ミント ローズマリー レモングラス ゆず",
+        "price": 1300,
+        "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/auc-satouseicha/cabinet/selecttea/imgrc0189237009.jpg?_ex=600x600",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00r6hn7.jeifoc22.g00r6hn7.jeifp672/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fauc-satouseicha%2Fflavor-1%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fauc-satouseicha%2Fi%2F10000177%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+        "shop": "佐とう製茶",
+        "reviewAverage": 4.68,
+        "reviewCount": 487,
+        "itemCode": "auc-satouseicha:10000177",
+        "genreId": "100361",
+        "startTime": "2026-11-04 20:00",
+        "endTime": "2026-11-11 01:59",
+        "listPrice": 2600,
+        "priceBasis": "history",
+        "caption": "2,600円のフレーバーティー2袋が1,300円。日本茶ベースで、国産・無添加。",
+        "tags": [
+          "送料無料"
+        ],
+        "points": [
+          "2,600円から1,300円へ",
+          "緑茶・ほうじ茶にハーブやゆず",
+          "選べる2袋・送料込み"
+        ],
+        "description": "",
+        "unitNote": null,
+        "postedAt": "2026-11-03",
+        "bumpedAt": "2026-11-03T11:28:01",
+        "lastSeen": "2026-11-10",
+        "pitch_status": "ready",
+        "marketing": {
+          "hook_type": "scene",
+          "target": "お茶をよく飲む人",
+          "problem": "いつも同じお茶",
+          "use_case": "家でのお茶",
+          "features": [
+            "日本茶ベース",
+            "ハーブ・ゆず",
+            "国産・無添加",
+            "選べる2袋"
+          ],
+          "benefits": [
+            "香りを選べる"
+          ],
+          "hook": "毎日同じお茶だと、さすがに飽きる。",
+          "body": "日本茶がベースのティーバッグで、ハーブやゆずの香りが付いています。\n国産・無添加で、2袋を選べます。",
+          "ask": "お茶は、香りのついたものも飲みますか？",
+          "ask_type": "usage"
+        }
+      }
+    },
+    {
+      "id": "r8550b30d9",
+      "listed_on": "2026-11-11",
+      "theme": "food",
+      "last_seen": "2026-11-11",
+      "snapshot_updated": "2026-11-11",
+      "snapshot": {
+        "id": "r8550b30d9",
+        "category": "food",
+        "title": "くまもとラーメン たっぷり 6人前 送料無料 くまもと らーめん 6食セット 生麺 とんこつラーメン…",
+        "rawTitle": "【セールで半額1280円】くまもとラーメン たっぷり 6人前 送料無料 くまもと らーめん 6食セット 生麺 とんこつラーメン 豚骨ラーメン 買い回り 熊本 《3-7営業以内出荷(土日祝日除)》|",
+        "price": 1280,
+        "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/kumamoto-food/cabinet/item/ramen/r_ramen001_15.jpg?_ex=600x600",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00qovc7.jeifo5b6.g00qovc7.jeifpa50/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkumamoto-food%2F10002744%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fkumamoto-food%2Fi%2F10002744%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+        "shop": "【 くまもと風土 】",
+        "reviewAverage": 4.4,
+        "reviewCount": 1784,
+        "itemCode": "kumamoto-food:10002744",
+        "genreId": "110487",
+        "startTime": "",
+        "endTime": "",
+        "listPrice": 2560,
+        "priceBasis": "history",
+        "caption": "2,560円のくまもとラーメン6食分が1,280円。生麺のとんこつ、送料込み。",
+        "tags": [
+          "送料無料"
+        ],
+        "points": [],
+        "description": "",
+        "unitNote": null,
+        "postedAt": "2026-11-04",
+        "bumpedAt": "2026-11-04T11:21:44",
+        "lastSeen": "2026-11-11",
+        "pitch_status": "ready",
+        "marketing": {
+          "hook_type": "scene",
+          "target": "家でラーメンを食べたい人",
+          "problem": "夜、急にとんこつが食べたくなる",
+          "use_case": "週末の昼、夜食",
+          "features": [
+            "生麺 6食セット",
+            "とんこつ",
+            "熊本",
+            "送料込み"
+          ],
+          "benefits": [
+            "まとめて置いておける"
+          ],
+          "hook": "夜中に急にとんこつが食べたくなる日、ある。",
+          "body": "熊本のとんこつラーメン、生麺で6食分です。\n食べたい日にすぐ作れる、買い置きの分。送料込み。",
+          "ask": "夜食にラーメンを食べる人、いますか？",
+          "ask_type": "usage"
+        }
+      }
+    }
+  ],
+  "automation": {
+    "applied_at": "2026-11-11T15:34:14+09:00",
+    "products_count": 308,
+    "history_entries": 353696,
+    "added": [
+      "r8550b30d9",
+      "r58b64002e",
+      "r509d25f43"
+    ],
+    "expired": [],
+    "forced": false
+  }
+}
