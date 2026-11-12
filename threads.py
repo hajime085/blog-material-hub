@@ -502,6 +502,22 @@ def tip_posts():
 SCHEDULE_GAP_DAYS = 3
 
 
+def _window_active(b, day=None):
+    """{from, to} の期間設定が、その日を含んでいれば True。
+
+    日付が読めない設定は「効いていない」として扱う。
+    壊れた設定で告知が止まったり、逆に増量が暴走したりしないように。
+    """
+    if day is None:
+        day = datetime.now(JST).date()
+    try:
+        a = datetime.strptime(b["from"], "%Y-%m-%d").date()
+        z = datetime.strptime(b["to"], "%Y-%m-%d").date()
+    except (KeyError, ValueError, TypeError):
+        return False
+    return a <= day <= z
+
+
 def sale_boost(th, day=None):
     """セール期の告知増量（config の threads.saleBoost）が効いていればそれを返す。
 
@@ -511,14 +527,35 @@ def sale_boost(th, day=None):
     b = (th or {}).get("saleBoost") or {}
     if not b.get("slots"):
         return None
-    if day is None:
-        day = datetime.now(JST).date()
-    try:
-        a = datetime.strptime(b["from"], "%Y-%m-%d").date()
-        z = datetime.strptime(b["to"], "%Y-%m-%d").date()
-    except (KeyError, ValueError):
+    return b if _window_active(b, day) else None
+
+
+def pre_boost(th, day=None):
+    """増量の直前（config の threads.preBoost）が効いていればそれを返す。
+
+    saleBoost と同形の窓だが、こちらは枠を変えない。
+    予定の投稿の間隔だけを、通常より少し詰める。
+    """
+    b = (th or {}).get("preBoost") or {}
+    if not b.get("scheduleGapDays"):
         return None
-    return b if a <= day <= z else None
+    return b if _window_active(b, day) else None
+
+
+def schedule_gap_days(th, day=None):
+    """その日の、予定の投稿の間隔（日）。
+
+    増量中は saleBoost の値、直前は preBoost の値、それ以外は既定の3日。
+    2026-11-12: ブラックフライデーが近づくにつれ残り日数の情報価値が
+    上がるので、増量の開始（11/20）を待たずに間隔を詰める（furu 承認）。
+    """
+    b = sale_boost(th, day)
+    if b:
+        return int(b.get("scheduleGapDays", SCHEDULE_GAP_DAYS))
+    p = pre_boost(th, day)
+    if p:
+        return int(p.get("scheduleGapDays", SCHEDULE_GAP_DAYS))
+    return SCHEDULE_GAP_DAYS
 
 
 def schedule_recent(posted, days=SCHEDULE_GAP_DAYS):
@@ -649,6 +686,99 @@ def schedule_post():
              "to": schedule_link(rows)}]
 
 
+# 観測報告の締めの問い。体験談を装うものは入れない。
+# 「狙っているものはありますか」のような、読む人の話を聞く問いだけ。
+REPORT_ASKS = [
+    "値下がり待ちで狙っているもの、ありますか？",
+    "最近、買ってよかったものはありますか？",
+    "セールまで待つ派ですか、必要なときに買う派ですか？",
+    "この時期、買い足しておきたい日用品はありますか？",
+]
+
+
+def report_post(feed, hist, today=None):
+    """今日の観測報告（19時の枠）。材料は全部、その時点の実データだけ。
+
+    形は商品の投稿（pattern_v3）と同じ骨格にする。
+        1行目 … 具体的な観測事実（掲載件数と、いま期間最安の件数）
+        本文   … 今日の新顔・最安値への復帰・いちばん大きい値下がり。
+                 ある事実だけを書く。無い事実は並べない
+        締め   … 読む人への問い（固定プールから日替わり）
+
+    材料が薄い日（いま期間最安のものが無く、新顔も無い日）は出さない。
+    空のリストを返し、呼び出し側が豆知識で枠を埋める。
+    盛った数字を1行目に置くくらいなら、黙るほうがまし、という判断。
+
+    【PR】は付けない。理由は compose_guide / compose_page と同じで、
+    この投稿そのものにはアフィリエイトリンクが含まれず、
+    行き先は自サイトの「値下がり順」のページだから。
+    特集の案内が同じ扱いなのも、同じ理由。
+    """
+    if today is None:
+        today = datetime.now(JST).strftime("%Y-%m-%d")
+    rows = (load("listings.json", {}) or {}).get("listings") or []
+    if not rows:
+        return []
+
+    # 観測期間の最安値にいるもの。履歴が無いものは数に入れない
+    # （確かめていないことを、確かめたように数えない）。
+    at_low, returned = [], []
+    for p in feed or []:
+        h = sorted(hist.get(p["id"]) or [])
+        prices = [pr for _d, pr in h if pr]
+        if not prices or (p.get("pr") or 0) > min(prices):
+            continue
+        at_low.append(p)
+        prev = [pr for d, pr in h if d < today and pr]
+        if prev and prev[-1] > p["pr"]:
+            returned.append(p)
+    new = [x for x in rows if x.get("listed_on") == today]
+    if not at_low and not new:
+        return []
+
+    def fact_line(p):
+        # 商品の事実は、サイト側で実測から作った文（cap）をそのまま使う。
+        # 無いときだけ、商品名の頭と値段で作る。
+        cap = (p.get("cap") or "").strip()
+        if cap:
+            return cap
+        return "%s（%s円）" % ((p.get("t") or "")[:40], yen(p.get("pr") or 0))
+
+    if at_low:
+        title = "今日の観測、掲載%d件のうち、観測期間の最安値は%d件。" \
+                % (len(rows), len(at_low))
+    else:
+        title = "今日の観測、掲載%d件。新しく載せたものが%d件あります。" \
+                % (len(rows), len(new))
+
+    lines, used = [], set()
+    for x in new[:2]:
+        cap = ((x.get("snapshot") or {}).get("caption") or "").strip()
+        if cap:
+            lines.append("新規：%s" % cap)
+            used.add(x["id"])
+    rest = [p for p in returned if p["id"] not in used]
+    if rest and len(lines) < 3:
+        p = max(rest, key=lambda q: q.get("d") or 0)
+        lines.append("最安値に復帰：%s" % fact_line(p))
+        used.add(p["id"])
+    rest = [p for p in at_low if p["id"] not in used]
+    if rest and len(lines) < 3:
+        p = max(rest, key=lambda q: q.get("d") or 0)
+        if (p.get("d") or 0) > 0:
+            lines.append("いちばん大きい値下がり：%s" % fact_line(p))
+            used.add(p["id"])
+
+    day = datetime.strptime(today, "%Y-%m-%d").date()
+    ask = REPORT_ASKS[day.toordinal() % len(REPORT_ASKS)]
+    lead = "\n".join(lines)
+    if lead:
+        lead += "\n\n"
+    lead += ask
+    return [{"key": "report:%s" % today, "title": title, "lead": lead,
+             "to": "/off/"}]
+
+
 # 返信で案内するときの一言。行き先ごとに変える。
 # どこへ送るのかと噛み合っていないと、押した人が肩透かしを食う。
 # 同じ文が毎回続くと機械が貼っているのが見えるので、数を用意しておく。
@@ -689,6 +819,11 @@ FOLLOW = {
         "買いまわりの条件もクーポンの併用も、書いてあります。",
         "次のセールで迷わないように、先に読んでおくと楽です。",
         "こういう仕組みの話も、ヤスミルでまとめています。",
+    ],
+    "/off/": [
+        "値下がり幅の大きい順に、全部並べてあります。",
+        "いま安い順に並べ替えてあります。数字は今日の観測です。",
+        "掲載中のもの全部、値下がり順で見られます。",
     ],
     "/kaimawari/": [
         "条件に合う商品、集めてあります。",
@@ -1042,12 +1177,13 @@ def pick(cfg, posted, want, slot_hour=None, live_heads=None):
     # ---- 種類ごとの候補 ----
     # 枠は4種類（商品・知識・イベント告知・特集）。種類ごとに候補を持ち、
     # 枠の種類から取る。空だったら、決めた順でほかの種類から埋める。
-    pools = {"product": linked, "tip": [], "event": [], "feature": []}
+    pools = {"product": linked, "tip": [], "event": [], "feature": [],
+             "report": []}
     # イベント告知。予定（events.json）と、開催中セールの買いまわり案内。
-    # セール期の増量中は、予定の投稿の間隔を詰める（日替わりで残り日数が変わるため）。
+    # 増量中とその直前は、予定の投稿の間隔を詰める
+    # （日替わりで残り日数が変わるため）。間隔の決め方は schedule_gap_days。
     boost = sale_boost(th)
-    gap = int(boost.get("scheduleGapDays", SCHEDULE_GAP_DAYS)) if boost \
-        else SCHEDULE_GAP_DAYS
+    gap = schedule_gap_days(th)
     for x in (schedule_post() if not schedule_recent(posted, days=gap) else []):
         if x["key"] not in done:
             pools["event"].append((x["key"], compose_plain(x, site)))
@@ -1082,6 +1218,11 @@ def pick(cfg, posted, want, slot_hour=None, live_heads=None):
         # 一言は順番に入れ替える。同じ文が毎回続くと機械が貼っているのが見える。
         seq = len([k for k in (posted.get("keys") or []) if k.startswith("tip:")]) + n
         pools["tip"].append((t["key"], compose_plain(t, site, seq)))
+    # 観測報告（19時枠の主役）。材料が薄い日は候補が空になり、
+    # 埋め合わせの順で豆知識に落ちる。枠そのものは落とさない。
+    for x in report_post(feed, hist_all):
+        if x["key"] not in done:
+            pools["report"].append((x["key"], compose_plain(x, site)))
 
     # ---- どちらの枠か ----
     #
@@ -1099,6 +1240,9 @@ def pick(cfg, posted, want, slot_hour=None, live_heads=None):
     if boost:
         print("  セール期の告知増量中（%s〜%s）: 告知系の枠を厚くしています"
               % (boost["from"], boost["to"]))
+    elif pre_boost(th):
+        print("  増量の直前（〜%s）: 予定の投稿の間隔を%d日に詰めています"
+              % (pre_boost(th)["to"], gap))
     slots = (boost.get("slots") if boost else None) or th.get("slots") or {}
     kind = slots.get(str(hour))
     if kind is None:
@@ -1112,6 +1256,11 @@ def pick(cfg, posted, want, slot_hour=None, live_heads=None):
             kind = "product"
     if kind == "plain":
         kind = "tip"           # 旧設定（plain）の読み替え
+    # 19時の枠は、増量の期間を除いて観測報告にする（2026-11-12 furu 承認）。
+    # 設定のほうの種類は tip のままにしておき、差し替えはここに閉じる。
+    # 候補が空の日は、埋め合わせの順で豆知識に落ちる。
+    if not boost and str(hour) == "19" and kind == "tip":
+        kind = "report"
     if kind not in pools:
         kind = "product"
 
@@ -1139,6 +1288,9 @@ def pick(cfg, posted, want, slot_hour=None, live_heads=None):
         "tip": ["tip", "event", "feature", "product"],
         "event": ["event", "feature", "product", "tip"],
         "feature": ["feature", "event", "product", "tip"],
+        # 観測報告は1日1本きりの日付つき投稿なので、
+        # ほかの枠の埋め合わせには使わない。自分の枠だけで使う。
+        "report": ["report", "tip", "event", "feature", "product"],
     }
     out = []
     while len(out) < want:
@@ -1608,6 +1760,7 @@ def run_once(cfg, posted, slot_hour=None, dry=False, late=False):
         posted["keys"].append(key)
         kind = ("tip" if key.startswith("tip:") else
                 "schedule" if key.startswith("schedule:") else
+                "report" if key.startswith("report:") else
                 "product" if key.startswith("product:") else
                 "feature" if key.startswith("feature:") else
                 "guide" if key.startswith("guide:") else "page")
@@ -1632,9 +1785,14 @@ def run_once(cfg, posted, slot_hour=None, dry=False, late=False):
                                       "legacy_v1" if kind == "product" else None),
             # あとで比べるために、どの出し方で出したかを残す。
             # 記録が無いと、伸びた理由が本文か返信かを言えなくなる。
-            "link": ("none" if kind == "tip"
-                     else ("reply" if link else
-                           ("none" if kind == "schedule" else "body"))),
+            #
+            # 2026-11-12: 豆知識は種類だけで "none" と決め打ちしていたが、
+            # 実際は全件、案内文つきの返信リンクを持って出ている。
+            # そのせいで「リンクの位置」の切り口が実態とずれ、
+            # リンク無しの投稿が157件もあるように見えていた。
+            # 種類で決めず、実際に出た形（返信に貼った／本文の中／無し）で書く。
+            "link": ("reply" if link else
+                     ("body" if "http" in (text or "") else "none")),
             "link_arm": arms.get(key) if kind == "product" else None,
         })
         ok += 1

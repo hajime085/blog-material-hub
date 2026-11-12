@@ -212,6 +212,42 @@ def link_clicks(since, until=None):
     return out
 
 
+def link_clicks_7d():
+    """直近7日のリンククリック。楽天へ直接／サイトへの合計と、日別の内訳。
+
+    {(商品ID, 側)} の生の形は試しの判定に使うもので、
+    台帳（snapshot）に残すのは、人が読む集計だけにする。
+    これが無いと「今週いくつ押されたか」が learnings.json に残らず、
+    日ごとの増減も追えなかった（2026-11-12）。
+
+    日別は、日ごとに窓を区切って取り直す。途中で取れなくなったら、
+    日別は付けずに合計だけを返す（半端な内訳を残さない）。
+    """
+    def totals(c):
+        return {
+            "direct": sum(v for (_i, a), v in c.items() if a == "direct"),
+            "site": sum(v for (_i, a), v in c.items() if a == "site"),
+        }
+
+    today = datetime.now().date()
+    out = totals(link_clicks((today - timedelta(days=7)).strftime("%Y-%m-%d")))
+    by_day = []
+    for i in range(7, 0, -1):
+        d0 = today - timedelta(days=i)
+        d1 = d0 + timedelta(days=1)
+        try:
+            c = link_clicks(d0.strftime("%Y-%m-%d"), d1.strftime("%Y-%m-%d"))
+        except Exception:                                  # noqa: BLE001
+            by_day = None
+            break
+        row = {"date": d0.strftime("%Y-%m-%d")}
+        row.update(totals(c))
+        by_day.append(row)
+    if by_day is not None:
+        out["byDay"] = by_day
+    return out
+
+
 def ab_status(e, log, clicks=None, rows=None):
     """ab の試しの、いまの数字。側ごとに {posts, clicks, rate}。
 
@@ -394,6 +430,14 @@ def main():
                        "replies": sum(g.get("replies", 0) for _, g in rows),
                        "followers": followers(),
                        "cuts": cut}
+    # クリックは売上にいちばん近い数字。表示の切り口だけでは
+    # 「今週いくつ押されたか」が台帳に残らなかったので、足す（2026-11-12）。
+    # 取れない日に、測定そのものを落とさない。警告だけ出す。
+    try:
+        led["snapshot"]["linkClicks7d"] = link_clicks_7d()
+    except Exception as ex:                                # noqa: BLE001
+        print("⚠ リンクのクリック数を台帳に残せませんでした: %s"
+              % str(ex)[:120])
 
     # ---- 分かったことを拾う ----
     known = {f["dim"] for f in led["findings"]}
