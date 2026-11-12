@@ -3,24 +3,36 @@
   "category": "books",
   "code": "gamedarake:10004747"
  },
+ "r01f3a5dc1": {
+  "category": "beauty",
+  "code": "seedcoms:10007285"
+ },
  "r02036b3a2": {
   "category": "kaden",
   "code": "next-online:10000180"
  },
  "r021914337": {
+  "category": "sports",
   "code": "moto-furniture:10000070"
  },
  "r02346b614": {
+  "category": "beauty",
   "code": "levante:10000379"
  },
  "r02480df33": {
+  "category": "baby-toy",
   "code": "hakuaiya:10002958"
+ },
+ "r027de4428": {
+  "category": "pc",
+  "code": "jitdirect:10040062"
  },
  "r02ea8eda5": {
   "category": "fashion",
   "code": "mobacaba:10017761"
  },
  "r03b46f609": {
+  "category": "food",
   "code": "kumamoto-food:10002290"
  },
  "r03be4b654": {
@@ -28,7 +40,12 @@
   "code": "cheermam:10001377"
  },
  "r040c0f1d0": {
+  "category": "pc",
   "code": "smahoservice:10002193"
+ },
+ "r045c3ee62": {
+  "category": "beauty",
+  "code": "seedcoms:10004890"
  },
  "r046a28edd": {
   "category": "fashion",
@@ -43,6 +60,7 @@
   "code": "jitdirect:10034039"
  },
  "r05aae1d7c": {
+  "category": "pc",
   "code": "biccamera:12456249"
  },
  "r0602be82c": {
@@ -66,9 +84,11 @@
   "code": "pennepenne:10001367"
  },
  "r067468cac": {
+  "category": "pet",
   "code": "cat-land:10013227"
  },
  "r070fef20f": {
+  "category": "kaden",
   "code": "baselab:10000412"
  },
  "r0723e8856": {
@@ -80,6 +100,7 @@
   "code": "d-ray:10000001"
  },
  "r079bc53f2": {
+  "category": "kaden",
   "code": "monoworld:10002063"
  },
  "r07c06d72e": {
@@ -95,13 +116,20 @@
   "code": "kireispot:10071006"
  },
  "r080276d93": {
+  "category": "fashion",
   "code": "teddyshop:10016729"
  },
  "r08de2ee6c": {
+  "category": "beauty",
   "code": "sincerite-s:10000008"
  },
  "r090091a8d": {
+  "category": "sports",
   "code": "xexymix:10001540"
+ },
+ "r09be2957c": {
+  "category": "food",
+  "code": "namiefutomen:10000133"
  },
  "r0a0a4946f": {
   "category": "kaden",
@@ -116,12 +144,15 @@
   "code": "ashiya:10000004"
  },
  "r0b36c5830": {
+  "category": "fashion",
   "code": "darkangel:10023350"
  },
  "r0b3bae9cf": {
+  "category": "food",
   "code": "yuuzen:10000525"
  },
  "r0b4c6a3d9": {
+  "category": "food",
   "code": "kanekichionline:10000049"
  },
  "r0b558cb8b": {
@@ -129,18 +160,23 @@
   "code": "catfood:10018353"
  },
  "r0b85466e0": {
+  "category": "food",
   "code": "kyunan:10001653"
  },
  "r0b880f618": {
+  "category": "fashion",
   "code": "teddyshop:10018028"
  },
  "r0b8f9d669": {
+  "category": "fashion",
   "code": "darkangel:10025100"
  },
  "r0b95ed690": {
+  "category": "food",
   "code": "himalaya:10000409"
  },
  "r0bd7af7f8": {
+  "category": "fashion",
   "code": "washington:10061056"
  },
  "r0c08d9066": {
@@ -150,6 +186,10 @@
  "r0c3e2bce8": {
   "category": "pc",
   "code": "chips:10000402"
+ },
+ "r0d04233b3": {
+  "category": "fashion",
+  "code": "jiggys-shop:10011867"
  },
  "r0d3321ca3": {
   "category": "fashion",
@@ -171,6 +211,14 @@
   "category": "beauty",
   "code": "duen1102:10000107"
  },
+ "r0effb07e3": {
+  "category": "car",
+  "code": "roomwear-ht:10000038"
+ },
+ "r0f909586a": {
+  "category": "beauty",
+  "code": "itsumococo:10000096"
+ },
  "r0f980c899": {
   "category": "pet",
   "code": "nswshop:10000125"
@@ -178,6 +226,10 @@
  "r0fc8f48ee": {
   "category": "pet",
   "code": "ichikawa929:10000637"
+ },
+ "r10a06927c": {
+  "category": "books",
+  "code": "feimiao:10000022"
  },
  "r10d70d280": {
   "category": "baby-toy",
@@ -187,11 +239,20 @@
   "category": "pc",
   "code": "jitdirect:10003126"
  },
+ "r11520c672": {
+  "category": "kaden",
+  "code": "excitech:10000313"
+ },
+ "r116f95eb2": {
+  "category": "beauty",
+  "code": "q1st:10000002"
+ },
  "r11c22f335": {
   "category": "fashion",
   "code": "tu-hacci:10005040"
  },
  "r120d44438": {
+  "category": "beauty",
   "code": "vertrich-cosmetics:10000024"
  },
  "r123e4e6c5": {
@@ -199,16 +260,23 @@
   "code": "gossipstar:10012436"
  },
  "r12544ab75": {
+  "category": "pc",
   "code": "a-mobi:10001670"
  },
  "r12cb8e732": {
   "category": "kaden",
   "code": "baselab:10000405"
  },
+ "r1383f77b8": {
+  "category": "beauty",
+  "code": "seedcoms:10004832"
+ },
  "r146120f19": {
+  "category": "fashion",
   "code": "darkangel:10033624"
  },
  "r14ad7cdf6": {
+  "category": "kaden",
   "code": "cholylife:10000085"
  },
  "r15175e5e3": {
@@ -220,6 +288,7 @@
   "code": "ideazakkaten:10000170"
  },
  "r15ad388df": {
+  "category": "car",
   "code": "bjc-shop:10001712"
  },
  "r165d6d5d8": {
@@ -227,34 +296,56 @@
   "code": "bambi-water:10000004"
  },
  "r16675c0e1": {
+  "category": "pc",
   "code": "a-mobi:10001286"
  },
  "r1686e59b9": {
+  "category": "kaden",
   "code": "tescom-japan:10000163"
  },
  "r16dd55b4a": {
+  "category": "fashion",
   "code": "kmc-fashion:10000696"
  },
  "r17092504c": {
+  "category": "pc",
   "code": "anker:10000436"
  },
  "r175a7e244": {
   "category": "kitchen",
   "code": "toucher-home:10002965"
  },
+ "r185d6c2da": {
+  "category": "books",
+  "code": "sonagimart:10005911"
+ },
+ "r1890b4bc0": {
+  "category": "beauty",
+  "code": "oga:10127040"
+ },
  "r18c466a35": {
   "category": "pc",
   "code": "logicool:10000392"
  },
  "r1941d2a91": {
+  "category": "beauty",
   "code": "1fukuya:10000818"
  },
  "r1958b5561": {
   "category": "books",
   "code": "bookoffonline:15049069"
  },
+ "r1961b4c2e": {
+  "category": "sports",
+  "code": "irie-irie:10000045"
+ },
  "r19936e0b3": {
+  "category": "fashion",
   "code": "woodgreen:12437942"
+ },
+ "r199e7eb85": {
+  "category": "pc",
+  "code": "dasimon:10000055"
  },
  "r19cb78652": {
   "category": "kaden",
@@ -280,11 +371,16 @@
   "category": "fashion",
   "code": "darkangel:10037061"
  },
+ "r1b2bb1d56": {
+  "category": "food",
+  "code": "donmai:10000465"
+ },
  "r1bbcfb83d": {
   "category": "food",
   "code": "yamagoiida:10000146"
  },
  "r1bdf176c4": {
+  "category": "beauty",
   "code": "seedcoms:10007430"
  },
  "r1bdf1e95f": {
@@ -296,6 +392,7 @@
   "code": "barsado:10009571"
  },
  "r1c1ef022f": {
+  "category": "beauty",
   "code": "naturalcosmetic:10002006"
  },
  "r1c776bd2d": {
@@ -303,15 +400,27 @@
   "code": "auc-t-link:10000111"
  },
  "r1ccc56d7f": {
+  "category": "beauty",
   "code": "shirokuma-cosme:10000020"
  },
+ "r1d0ceb3f2": {
+  "category": "beauty",
+  "code": "feellife:10000603"
+ },
  "r1d0e2ea9d": {
+  "category": "beauty",
   "code": "seedcoms:10007409"
  },
  "r1d6a5cd3d": {
+  "category": "books",
   "code": "woodgreen:13235173"
  },
+ "r1dff659ef": {
+  "category": "baby-toy",
+  "code": "namosee:10000003"
+ },
  "r1e1ed90c9": {
+  "category": "pet",
   "code": "cordy:10000018"
  },
  "r1e6d6428b": {
@@ -323,12 +432,15 @@
   "code": "shoe-square:10003527"
  },
  "r1e9d84928": {
+  "category": "beauty",
   "code": "nayamikaiketsulab:10000036"
  },
  "r200edc308": {
+  "category": "fashion",
   "code": "sionkobe:10001474"
  },
  "r20caebe4a": {
+  "category": "kitchen",
   "code": "toucher-home:10000507"
  },
  "r20fdbf7fa": {
@@ -351,15 +463,33 @@
   "category": "beauty",
   "code": "seedcoms:10003650"
  },
+ "r2294569fe": {
+  "category": "food",
+  "code": "lifedrinkcompany:10000004"
+ },
  "r22dbad363": {
+  "category": "car",
   "code": "animestore:10000895"
  },
  "r230be61b3": {
+  "category": "beauty",
   "code": "levante:10000442"
  },
  "r232e9ae82": {
   "category": "fashion",
   "code": "mixsim:10000311"
+ },
+ "r24977c8d5": {
+  "category": "food",
+  "code": "jyonetsubatake:10000484"
+ },
+ "r24aaebd2e": {
+  "category": "kitchen",
+  "code": "next-online:10000139"
+ },
+ "r24b91f85c": {
+  "category": "baby-toy",
+  "code": "base-coast:10000099"
  },
  "r24cf41c08": {
   "category": "fashion",
@@ -373,12 +503,21 @@
   "category": "pc",
   "code": "jitdirect:10034040"
  },
+ "r253fbb57e": {
+  "category": "books",
+  "code": "woodgreen:13235145"
+ },
  "r25a05910e": {
   "category": "seasonal",
   "code": "yamagoiida:10000096"
  },
  "r25a5adb3f": {
+  "category": "food",
   "code": "tarunoaji:10000590"
+ },
+ "r2700db50d": {
+  "category": "kitchen",
+  "code": "shopworld:10129265"
  },
  "r27281ecec": {
   "category": "pc",
@@ -393,15 +532,19 @@
   "code": "d-fit:10004017"
  },
  "r27c585ade": {
+  "category": "fashion",
   "code": "shitorasu:10000955"
  },
  "r27eaec69d": {
+  "category": "pc",
   "code": "bjc-shop:10000732"
  },
  "r28099416e": {
+  "category": "fashion",
   "code": "lunasea:10000353"
  },
  "r28f079dd9": {
+  "category": "fashion",
   "code": "anderis:10000033"
  },
  "r29ee12183": {
@@ -409,9 +552,15 @@
   "code": "kensen:10000023"
  },
  "r29ff6dd93": {
+  "category": "beauty",
   "code": "ease-aroma:10000347"
  },
+ "r2a30b6cbf": {
+  "category": "food",
+  "code": "vox-official-store:10000000"
+ },
  "r2b2fcd4c0": {
+  "category": "pc",
   "code": "xoxoxoxo:10000223"
  },
  "r2b37d9ea2": {
@@ -426,14 +575,20 @@
   "category": "kitchen",
   "code": "primelife:10000007"
  },
+ "r2d761e1c6": {
+  "category": "food",
+  "code": "jshop-web:10000863"
+ },
  "r2de52a571": {
   "category": "kitchen",
   "code": "g-sarai:10000074"
  },
  "r2e3c35a08": {
+  "category": "pc",
   "code": "uauu:10000357"
  },
  "r2ec35388e": {
+  "category": "pet",
   "code": "ashudog:10013295"
  },
  "r2fd665f92": {
@@ -441,9 +596,11 @@
   "code": "469kobo:10000005"
  },
  "r30a492105": {
+  "category": "food",
   "code": "tozuka:10003793"
  },
  "r30fd7f42a": {
+  "category": "food",
   "code": "hisamatsu:10000170"
  },
  "r311e7bdcc": {
@@ -455,13 +612,19 @@
   "code": "ashu:10006044"
  },
  "r319e3b4a4": {
+  "category": "fashion",
   "code": "jiggys-shop:10014221"
+ },
+ "r321f5491f": {
+  "category": "food",
+  "code": "aarti:10000089"
  },
  "r3287cef70": {
   "category": "fashion",
   "code": "darkangel:10036193"
  },
  "r328f7d9b9": {
+  "category": "kaden",
   "code": "nishi-ryutu:10087267"
  },
  "r32a160bc7": {
@@ -472,6 +635,7 @@
   "code": "smahoservice:10002189"
  },
  "r32c05e926": {
+  "category": "beauty",
   "code": "1fukuya:10000789"
  },
  "r330c9bc42": {
@@ -483,9 +647,19 @@
   "code": "mikimotobeans:10000809"
  },
  "r334c4318f": {
+  "category": "fashion",
   "code": "mixsim:10000708"
  },
+ "r3401797db": {
+  "category": "fashion",
+  "code": "avril:10000034"
+ },
+ "r344ef5304": {
+  "category": "kaden",
+  "code": "moosoo:10000127"
+ },
  "r346950440": {
+  "category": "beauty",
   "code": "duen1102:10000110"
  },
  "r36091d231": {
@@ -505,9 +679,11 @@
   "code": "baselab:10000469"
  },
  "r37074f40b": {
+  "category": "sports",
   "code": "casualbox:10001176"
  },
  "r373a6f28f": {
+  "category": "food",
   "code": "konbu-genzouya:10000817"
  },
  "r37783ebd3": {
@@ -527,12 +703,19 @@
   "code": "primelife:10000036"
  },
  "r387b8d8b1": {
+  "category": "food",
   "code": "e-iki:10000081"
  },
+ "r387f57741": {
+  "category": "kitchen",
+  "code": "handmade-amane:10001224"
+ },
  "r38aefbf21": {
+  "category": "sports",
   "code": "teddyshop:10017559"
  },
  "r3925e51dd": {
+  "category": "books",
   "code": "pipi:10002724"
  },
  "r3979f8f60": {
@@ -547,6 +730,14 @@
   "category": "baby-toy",
   "code": "edute:10000344"
  },
+ "r39cdcc2c7": {
+  "category": "pc",
+  "code": "hakkutsu-market:10001245"
+ },
+ "r3a59b4de4": {
+  "category": "beauty",
+  "code": "seedcoms:10006846"
+ },
  "r3abf8ad26": {
   "category": "kitchen",
   "code": "tees-factory:10019229"
@@ -556,12 +747,22 @@
   "code": "sankyo:10070856"
  },
  "r3c11bc6b4": {
+  "category": "kitchen",
   "code": "decollections:10004730"
  },
  "r3c141da28": {
   "code": "buono-buono:10002040"
  },
+ "r3c179f388": {
+  "category": "books",
+  "code": "joyskytech:10000026"
+ },
+ "r3c2717695": {
+  "category": "pc",
+  "code": "gracevally:10000035"
+ },
  "r3c3bd5dc4": {
+  "category": "fashion",
   "code": "mixsim:10000815"
  },
  "r3c704e3e9": {
@@ -569,9 +770,11 @@
   "code": "dog-kan:10005368"
  },
  "r3cc0a9fb8": {
+  "category": "beauty",
   "code": "otbj:10001077"
  },
  "r3d15f2f62": {
+  "category": "food",
   "code": "yamagoiida:10000077"
  },
  "r3d3c7e6d3": {
@@ -607,6 +810,7 @@
   "code": "online-kobo:10000055"
  },
  "r3ec61b9a2": {
+  "category": "food",
   "code": "rexim:10000023"
  },
  "r3f047b1c2": {
@@ -637,25 +841,44 @@
   "category": "fashion",
   "code": "shirtshouse:10007710"
  },
+ "r417309087": {
+  "category": "kaden",
+  "code": "orlando:10000091"
+ },
+ "r41903b6a6": {
+  "category": "pc",
+  "code": "livelylife:10002608"
+ },
  "r41ae75086": {
   "category": "pc",
   "code": "aiwo:10000025"
  },
  "r423631bbb": {
+  "category": "books",
   "code": "woodgreen:13235159"
  },
  "r427b49bd8": {
   "category": "pc",
   "code": "jitdirect:10034049"
  },
+ "r42814538b": {
+  "category": "pc",
+  "code": "tabtab:10003266"
+ },
+ "r429d5ab72": {
+  "category": "beauty",
+  "code": "itsumococo:10000012"
+ },
  "r43609d6c8": {
   "category": "food",
   "code": "tarunoaji:10000692"
  },
  "r441e0c6c3": {
+  "category": "food",
   "code": "santarosa:10000568"
  },
  "r44f84559e": {
+  "category": "beauty",
   "code": "seedcoms:10007154"
  },
  "r4514c9fb3": {
@@ -667,6 +890,7 @@
   "code": "llic:10001112"
  },
  "r460f4734a": {
+  "category": "fashion",
   "code": "joinus2020:10001059"
  },
  "r463511ccd": {
@@ -677,19 +901,28 @@
   "category": "kaden",
   "code": "areti:10000115"
  },
+ "r472b024c2": {
+  "category": "fashion",
+  "code": "e-zakkamania:10073588"
+ },
  "r476ecfd42": {
+  "category": "fashion",
   "code": "darkangel:10020528"
  },
  "r47c8ba6f2": {
+  "category": "kitchen",
   "code": "bubustores2023:10000604"
  },
  "r47c99089f": {
+  "category": "food",
   "code": "tarunoaji:10000637"
  },
  "r47fd79de2": {
+  "category": "kitchen",
   "code": "auc-risecreation:10005057"
  },
  "r4806fb062": {
+  "category": "kaden",
   "code": "brita:10000161"
  },
  "r48506bfe4": {
@@ -699,6 +932,10 @@
  "r48b5c7eee": {
   "category": "food",
   "code": "kumamoto-food:10003740"
+ },
+ "r48c6c030a": {
+  "category": "beauty",
+  "code": "seedcoms:10004807"
  },
  "r48edf7264": {
   "category": "books",
@@ -712,11 +949,16 @@
   "category": "pc",
   "code": "jitdirect:10043192"
  },
+ "r49e11cc1a": {
+  "category": "fashion",
+  "code": "e-zakkamania:10096769"
+ },
  "r4b0f82943": {
   "category": "kitchen",
   "code": "toucher-home:10000530"
  },
  "r4b9a55bd5": {
+  "category": "food",
   "code": "tarunoaji:10000239"
  },
  "r4c5b1daf5": {
@@ -724,6 +966,7 @@
   "code": "jitdirect:10003108"
  },
  "r4cae94327": {
+  "category": "fashion",
   "code": "forc-wear:10000317"
  },
  "r4ccaabc81": {
@@ -731,29 +974,51 @@
   "code": "fukucha:10000480"
  },
  "r4cdbb0d91": {
+  "category": "car",
   "code": "batterystore:10000498"
  },
  "r4ce6a0e47": {
+  "category": "fashion",
   "code": "teddyshop:10014594"
+ },
+ "r4cfa93d04": {
+  "category": "books",
+  "code": "joy-parts1:10000086"
  },
  "r4d7086c16": {
   "category": "sports",
   "code": "suzukachan:10000000"
  },
  "r4dad00d5f": {
+  "category": "beauty",
   "code": "seedcoms:10001433"
  },
+ "r4dae4a1ed": {
+  "category": "food",
+  "code": "zakkoku-okome:10001749"
+ },
+ "r4dbeb3476": {
+  "category": "sports",
+  "code": "yiprefer:10001591"
+ },
  "r4dcf8a139": {
+  "category": "food",
   "code": "hokkaido-gourmation:10040923"
  },
  "r4ec2cd68a": {
   "category": "kaden",
   "code": "mf-hirameki:10000004"
  },
+ "r4ec848038": {
+  "category": "sports",
+  "code": "teddyshop:10013208"
+ },
  "r4f6b44c0f": {
+  "category": "pc",
   "code": "jitdirect:10034046"
  },
  "r50323df02": {
+  "category": "food",
   "code": "ochamura:10001044"
  },
  "r509d25f43": {
@@ -761,18 +1026,47 @@
   "code": "likaman:10003529"
  },
  "r51aa10d15": {
+  "category": "fashion",
   "code": "kibounomori:10000022"
  },
+ "r51cd61d3b": {
+  "category": "beauty",
+  "code": "seedcoms:10003775"
+ },
+ "r52588c48a": {
+  "category": "beauty",
+  "code": "nayamikaiketsulab:10000044"
+ },
  "r528c4512a": {
+  "category": "beauty",
   "code": "seedcoms:10007117"
  },
+ "r52a32d6db": {
+  "category": "baby-toy",
+  "code": "mercadomercado:10000789"
+ },
+ "r530e757a7": {
+  "category": "baby-toy",
+  "code": "tsutsu-uraura:10011786"
+ },
+ "r532257289": {
+  "category": "food",
+  "code": "okcoffee:10000000"
+ },
  "r53836647c": {
+  "category": "fashion",
   "code": "hillnup:10000013"
  },
+ "r547ce1424": {
+  "category": "pet",
+  "code": "next-online:10000161"
+ },
  "r548079cd7": {
+  "category": "sports",
   "code": "style-depot:10001017"
  },
  "r54d38a047": {
+  "category": "beauty",
   "code": "oga:10126866"
  },
  "r54fde5ada": {
@@ -780,6 +1074,7 @@
   "code": "novi-z:10004047"
  },
  "r55a773204": {
+  "category": "beauty",
   "code": "seedcoms:10007014"
  },
  "r55aa7abc3": {
@@ -787,9 +1082,23 @@
   "code": "geoonline1:11764868"
  },
  "r563ad3c1c": {
+  "category": "fashion",
   "code": "joinus2020:10000031"
  },
+ "r563bde476": {
+  "category": "fashion",
+  "code": "kmc-fashion:10000459"
+ },
+ "r566ab8fbb": {
+  "category": "beauty",
+  "code": "lorelife:10000011"
+ },
+ "r56c8bea98": {
+  "category": "fashion",
+  "code": "darkangel:10037257"
+ },
  "r5750ebe74": {
+  "category": "beauty",
   "code": "miraclim:10002523"
  },
  "r575386dcc": {
@@ -817,6 +1126,7 @@
   "code": "auc-satouseicha:10000177"
  },
  "r58c2dc426": {
+  "category": "fashion",
   "code": "auc-arcade:10004429"
  },
  "r58f41c3b2": {
@@ -832,22 +1142,31 @@
   "code": "likaman:10029059"
  },
  "r5a0bdbb2d": {
+  "category": "pc",
   "code": "aidort:10003512"
  },
  "r5a63772a3": {
+  "category": "beauty",
   "code": "oga:10215539"
  },
  "r5ac1f69f1": {
+  "category": "sports",
   "code": "hysshop:10002258"
+ },
+ "r5ad80aa12": {
+  "category": "beauty",
+  "code": "fiorello:10028917"
  },
  "r5b2add0c3": {
   "category": "car",
   "code": "bell-hammer-shop:10000106"
  },
  "r5b97cfdf8": {
+  "category": "beauty",
   "code": "deconail-seisakujo:10006039"
  },
  "r5bb34a57a": {
+  "category": "pc",
   "code": "jitdirect:10034043"
  },
  "r5bbf5fbf0": {
@@ -857,6 +1176,10 @@
  "r5c2656d58": {
   "category": "fashion",
   "code": "jiggys-shop:10012889"
+ },
+ "r5c3b8026c": {
+  "category": "books",
+  "code": "kpopfactory:10004283"
  },
  "r5c67baef2": {
   "category": "pet",
@@ -871,6 +1194,7 @@
   "code": "kbwine:10035431"
  },
  "r5d00a688d": {
+  "category": "pc",
   "code": "jitdirect:10034044"
  },
  "r5d2ec24e7": {
@@ -878,6 +1202,7 @@
   "code": "e-iki:10000160"
  },
  "r5e8c9afce": {
+  "category": "kitchen",
   "code": "kaleidolife:10000272"
  },
  "r5ee0da3b4": {
@@ -885,6 +1210,7 @@
   "code": "hanwha:10001171"
  },
  "r5ef347374": {
+  "category": "food",
   "code": "unotea:10000875"
  },
  "r5eff8f293": {
@@ -892,12 +1218,23 @@
   "code": "1fukuya:10019826"
  },
  "r5fba09e43": {
+  "category": "beauty",
   "code": "seedcoms:10004677"
  },
  "r605e5512e": {
+  "category": "beauty",
   "code": "levante:10000326"
  },
+ "r60c611df5": {
+  "category": "beauty",
+  "code": "itsumococo:10000001"
+ },
+ "r612c171ce": {
+  "category": "pc",
+  "code": "dasimon:10000002"
+ },
  "r614069325": {
+  "category": "food",
   "code": "shizennoyakata:10000720"
  },
  "r61bdeabd4": {
@@ -905,7 +1242,16 @@
   "code": "jitdirect:10034037"
  },
  "r61e31c4c8": {
+  "category": "beauty",
   "code": "nayamikaiketsulab:10000059"
+ },
+ "r620914106": {
+  "category": "fashion",
+  "code": "5000cshop:10000196"
+ },
+ "r62dda1b94": {
+  "category": "pet",
+  "code": "cordy:10000017"
  },
  "r63ee63728": {
   "category": "fashion",
@@ -923,10 +1269,16 @@
   "category": "food",
   "code": "likaman:10027290"
  },
+ "r667d493ad": {
+  "category": "food",
+  "code": "storyme:10000028"
+ },
  "r66bffbed8": {
+  "category": "pet",
   "code": "cat-land:10000487"
  },
  "r670e1970b": {
+  "category": "books",
   "code": "woodgreen:13235161"
  },
  "r6713aad0e": {
@@ -934,6 +1286,7 @@
   "code": "marine-blue:10000915"
  },
  "r67425784a": {
+  "category": "beauty",
   "code": "seedcoms:10007422"
  },
  "r6753bf0e2": {
@@ -941,6 +1294,7 @@
   "code": "ogawahan:10002465"
  },
  "r67ba60ba8": {
+  "category": "food",
   "code": "buono-buono:10000246"
  },
  "r67e62908e": {
@@ -948,9 +1302,11 @@
   "code": "angelsmile:10000682"
  },
  "r68630cc41": {
+  "category": "fashion",
   "code": "fumiyaryohin:10000044"
  },
  "r68a1741d7": {
+  "category": "beauty",
   "code": "seedcoms:10007399"
  },
  "r68cde95f1": {
@@ -961,10 +1317,16 @@
   "category": "kaden",
   "code": "rennkou-syouji:10015369"
  },
+ "r69a7992a4": {
+  "category": "fashion",
+  "code": "limited2nd:10000692"
+ },
  "r69ce63f26": {
+  "category": "beauty",
   "code": "oga:10126950"
  },
  "r69f200578": {
+  "category": "books",
   "code": "woodgreen:13235148"
  },
  "r6a303066b": {
@@ -972,6 +1334,7 @@
   "code": "e-zakka-one:10000583"
  },
  "r6a3f5d015": {
+  "category": "books",
   "code": "book:20461605"
  },
  "r6b77c88d6": {
@@ -983,40 +1346,55 @@
   "code": "baselab:10000403"
  },
  "r6cb042838": {
+  "category": "fashion",
   "code": "sionkobe:10001367"
  },
  "r6cbef6122": {
+  "category": "beauty",
   "code": "sincerite-s:10000184"
  },
  "r6cc912bd9": {
+  "category": "kitchen",
   "code": "eunicedress:10001955"
  },
  "r6cd2f4fca": {
   "category": "pc",
   "code": "aidort:10003511"
  },
+ "r6cfbfd715": {
+  "category": "beauty",
+  "code": "llic:10000777"
+ },
  "r6d1021121": {
   "category": "pc",
   "code": "jitdirect:10039419"
  },
  "r6d214984e": {
+  "category": "beauty",
   "code": "deconail-seisakujo:10005443"
  },
  "r6d6034ccc": {
+  "category": "food",
   "code": "edoshounin:10000513"
  },
  "r6e0aed3cd": {
+  "category": "fashion",
   "code": "mixsim:10000337"
  },
  "r6e502c10a": {
   "category": "beauty",
   "code": "velus:10000092"
  },
+ "r6e9b1d806": {
+  "category": "food",
+  "code": "yuuzen:10000636"
+ },
  "r6f1c0b943": {
   "category": "fashion",
   "code": "muzistyle:10000542"
  },
  "r6f5d177d0": {
+  "category": "pc",
   "code": "gracevally:10000003"
  },
  "r6f8e71132": {
@@ -1024,31 +1402,47 @@
   "code": "importshopaqua:10002910"
  },
  "r6f992d128": {
+  "category": "beauty",
   "code": "seedcoms:10007532"
  },
  "r6fc06acf2": {
+  "category": "fashion",
   "code": "mobacaba:10019824"
  },
  "r6fe208e74": {
   "category": "baby-toy",
   "code": "sun-shop-r:10000243"
  },
+ "r6ff5a7369": {
+  "category": "fashion",
+  "code": "avril:10000048"
+ },
  "r701d933c3": {
   "category": "baby-toy",
   "code": "sun-shop-r:10000259"
+ },
+ "r710d74505": {
+  "category": "baby-toy",
+  "code": "stela1:10000000"
  },
  "r7137293a1": {
   "category": "fashion",
   "code": "mixsim:10000420"
  },
  "r714d716c2": {
+  "category": "books",
   "code": "livelylife:10002584"
  },
  "r7188d0a70": {
   "category": "fashion",
   "code": "tou-shou:10000057"
  },
+ "r7299ae396": {
+  "category": "beauty",
+  "code": "seedcoms:10007421"
+ },
  "r72e12aba9": {
+  "category": "fashion",
   "code": "mixsim:10000801"
  },
  "r731fc33f1": {
@@ -1056,18 +1450,23 @@
   "code": "kagayaki-trading:10000102"
  },
  "r732ca4b6f": {
+  "category": "beauty",
   "code": "d-fit:10007938"
  },
  "r732efbe1d": {
+  "category": "beauty",
   "code": "chashoan:10001733"
  },
  "r73bd1c0f8": {
+  "category": "sports",
   "code": "irie-irie:10000559"
  },
  "r745b79de8": {
+  "category": "fashion",
   "code": "pierrot:10016400"
  },
  "r7476dcde3": {
+  "category": "beauty",
   "code": "kdcare:10000060"
  },
  "r74c371b4d": {
@@ -1079,13 +1478,23 @@
   "code": "kirei-store:10010156"
  },
  "r75ed201d8": {
+  "category": "fashion",
   "code": "kilakila:10000696"
+ },
+ "r7690820f1": {
+  "category": "food",
+  "code": "edoshounin:10000375"
  },
  "r76c6783d9": {
   "category": "beauty",
   "code": "kyunan:10001288"
  },
+ "r76e7f7a54": {
+  "category": "books",
+  "code": "seimina:10000066"
+ },
  "r770ff1652": {
+  "category": "pc",
   "code": "gekiyasukan:10001572"
  },
  "r77604f3df": {
@@ -1096,8 +1505,17 @@
   "category": "kitchen",
   "code": "sinkatec:10000425"
  },
+ "r778bcf75c": {
+  "category": "baby-toy",
+  "code": "bubustores2023:10000626"
+ },
  "r77cfaf544": {
+  "category": "books",
   "code": "woodgreen:13235165"
+ },
+ "r78a4b405c": {
+  "category": "beauty",
+  "code": "seedcoms:10007439"
  },
  "r791ac5607": {
   "category": "fashion",
@@ -1107,7 +1525,12 @@
   "category": "kaden",
   "code": "kensen:10000000"
  },
+ "r7970e2350": {
+  "category": "books",
+  "code": "mywaysmart:10041873"
+ },
  "r7aa4e3dfa": {
+  "category": "fashion",
   "code": "and-cubesugar:10041022"
  },
  "r7aee2bc40": {
@@ -1115,6 +1538,7 @@
   "code": "gyo-za83:10000720"
  },
  "r7b22a0b04": {
+  "category": "kaden",
   "code": "baselab:10000347"
  },
  "r7b894890e": {
@@ -1122,38 +1546,63 @@
   "code": "yamagoiida:10000115"
  },
  "r7bb81ce74": {
+  "category": "food",
   "code": "ken:10000480"
  },
+ "r7bcc60553": {
+  "category": "kaden",
+  "code": "daiwasangyou:10000124"
+ },
  "r7bd4c8968": {
+  "category": "beauty",
   "code": "oga:10225061"
  },
  "r7c05622de": {
+  "category": "books",
   "code": "woodgreen:13235162"
  },
  "r7ca40280f": {
   "category": "fashion",
   "code": "uptou:10000004"
  },
+ "r7f0546e89": {
+  "category": "food",
+  "code": "tsukiji-ousama:10000130"
+ },
  "r7f426b354": {
+  "category": "kaden",
   "code": "dondon:10003669"
  },
  "r7f64fe0b8": {
+  "category": "food",
   "code": "buono-buono:10001968"
  },
+ "r7faee57e6": {
+  "category": "beauty",
+  "code": "cosmeplatinum:10000103"
+ },
  "r7ff263388": {
+  "category": "fashion",
   "code": "e-itto:10000001"
  },
  "r8097c41af": {
+  "category": "kaden",
   "code": "u-denki:10037359"
+ },
+ "r81238d1b9": {
+  "category": "car",
+  "code": "roomwear-ht:10000159"
  },
  "r8146b2a99": {
   "category": "sports",
   "code": "kodawari-ichiban:10092971"
  },
  "r815ad9360": {
+  "category": "fashion",
   "code": "style-cafe:10066992"
  },
  "r81bdfa488": {
+  "category": "food",
   "code": "unotea:10000059"
  },
  "r8235fa28b": {
@@ -1161,7 +1610,12 @@
   "code": "hecmarket:10000177"
  },
  "r825692469": {
+  "category": "pc",
   "code": "astera:10000494"
+ },
+ "r82a64c2e1": {
+  "category": "fashion",
+  "code": "igusakotatu:10040440"
  },
  "r82d75cbfc": {
   "category": "kitchen",
@@ -1172,6 +1626,7 @@
   "code": "kira-kira:10001774"
  },
  "r83d99a75f": {
+  "category": "fashion",
   "code": "radianne:10000736"
  },
  "r841f65348": {
@@ -1183,6 +1638,7 @@
   "code": "meat-21:10000071"
  },
  "r84c4f248d": {
+  "category": "beauty",
   "code": "borra-brand:10000125"
  },
  "r84f91dbd7": {
@@ -1198,9 +1654,11 @@
   "code": "f-odekake:10003752"
  },
  "r8620ad376": {
+  "category": "food",
   "code": "unotea:10000658"
  },
  "r862262bb4": {
+  "category": "fashion",
   "code": "hhh-style:10027389"
  },
  "r8677aa818": {
@@ -1219,10 +1677,24 @@
   "category": "kaden",
   "code": "e-zakka-one:10000584"
  },
+ "r8744dac51": {
+  "category": "baby-toy",
+  "code": "juntakushop:10000243"
+ },
  "r8797a6820": {
+  "category": "beauty",
   "code": "duen1102:10000053"
  },
+ "r87aa72b34": {
+  "category": "food",
+  "code": "wakuwakuen:10000394"
+ },
+ "r87f4e7efe": {
+  "category": "kitchen",
+  "code": "toucher-home:10002825"
+ },
  "r8800019bb": {
+  "category": "fashion",
   "code": "kira-kira:10008558"
  },
  "r88125ed6c": {
@@ -1234,9 +1706,11 @@
   "code": "rdownload:18331799"
  },
  "r88d870d5e": {
+  "category": "car",
   "code": "auto1direct:10001183"
  },
  "r8944c3d05": {
+  "category": "fashion",
   "code": "753ya:10003103"
  },
  "r8956e508d": {
@@ -1244,6 +1718,7 @@
   "code": "hanico:10000803"
  },
  "r89aaccb59": {
+  "category": "books",
   "code": "woodgreen:13235172"
  },
  "r89c3f72dc": {
@@ -1255,11 +1730,16 @@
   "code": "que-bath:10000036"
  },
  "r89fbae1af": {
+  "category": "books",
   "code": "woodgreen:13235143"
  },
  "r8b4fac8be": {
   "category": "beauty",
   "code": "pmone:10030011"
+ },
+ "r8d09ebfbb": {
+  "category": "food",
+  "code": "tobidasu-baisenjo:10000145"
  },
  "r8d2139d2f": {
   "category": "kaden",
@@ -1270,6 +1750,7 @@
   "code": "cocobeau:10001801"
  },
  "r8d8ab117e": {
+  "category": "food",
   "code": "gotouchi-food:10000736"
  },
  "r8db1e8835": {
@@ -1281,9 +1762,15 @@
   "code": "mago1shop:10000543"
  },
  "r8e116cfef": {
+  "category": "kaden",
   "code": "treesoyc:10000002"
  },
+ "r8e74eebe4": {
+  "category": "fashion",
+  "code": "love-onlinestore:10007179"
+ },
  "r8e80d45c9": {
+  "category": "pet",
   "code": "catfood:10058837"
  },
  "r8e83bde18": {
@@ -1294,8 +1781,17 @@
   "category": "fashion",
   "code": "darkangel:10023599"
  },
+ "r8ea0fef62": {
+  "category": "books",
+  "code": "case-by-case:10002067"
+ },
  "r8eaf9d31e": {
+  "category": "baby-toy",
   "code": "komesichi:10024913"
+ },
+ "r8ed120acd": {
+  "category": "food",
+  "code": "biyoudou:10000164"
  },
  "r8ef3976a9": {
   "category": "pc",
@@ -1314,6 +1810,7 @@
   "code": "treesoyc:10000020"
  },
  "r90112e1f5": {
+  "category": "books",
   "code": "smahoservice:10003338"
  },
  "r905dd1c56": {
@@ -1321,6 +1818,7 @@
   "code": "chips:10005256"
  },
  "r918b6efe0": {
+  "category": "books",
   "code": "book:20977760"
  },
  "r91d67b9a5": {
@@ -1335,7 +1833,16 @@
   "category": "pc",
   "code": "jitdirect:10034042"
  },
+ "r92be2a70a": {
+  "category": "pet",
+  "code": "auc-nbreed:10000141"
+ },
+ "r936d1970e": {
+  "category": "sports",
+  "code": "honest-online:10000742"
+ },
  "r93bd11101": {
+  "category": "books",
   "code": "woodgreen:13235146"
  },
  "r94a752345": {
@@ -1347,14 +1854,20 @@
   "code": "yonekyu:10002024"
  },
  "r954e87b1b": {
+  "category": "pet",
   "code": "soyott-camp:10000172"
  },
  "r958d1a9b7": {
+  "category": "books",
   "code": "woodgreen:13235144"
  },
  "r9598a3d07": {
   "category": "kaden",
   "code": "areti:10000009"
+ },
+ "r9599f9e79": {
+  "category": "books",
+  "code": "joy-parts1:10000087"
  },
  "r95f9c9687": {
   "category": "beauty",
@@ -1372,26 +1885,40 @@
   "category": "pc",
   "code": "jitdirect:10003409"
  },
+ "r975b17873": {
+  "category": "pc",
+  "code": "hobinavi:10586219"
+ },
  "r97818e2c0": {
   "category": "pc",
   "code": "aidort:10003439"
  },
  "r97eb34d64": {
+  "category": "fashion",
   "code": "rioty:10039973"
  },
  "r98464856b": {
+  "category": "beauty",
   "code": "levante:10000461"
  },
+ "r984d91c11": {
+  "category": "pet",
+  "code": "next-online:10000237"
+ },
  "r9880ca98f": {
+  "category": "pc",
   "code": "smahoservice:10003207"
  },
  "r989f74d15": {
+  "category": "sports",
   "code": "teddyshop:10016525"
  },
  "r99038cde1": {
+  "category": "books",
   "code": "woodgreen:12640222"
  },
  "r992796b74": {
+  "category": "beauty",
   "code": "lorelife:10000085"
  },
  "r996204f13": {
@@ -1402,7 +1929,12 @@
   "category": "fashion",
   "code": "darkangel:10035695"
  },
+ "r99b5a6b0f": {
+  "category": "beauty",
+  "code": "itsumococo:10000060"
+ },
  "r99d57c679": {
+  "category": "fashion",
   "code": "e-zakkamania:10092557"
  },
  "r99dc0d242": {
@@ -1410,6 +1942,7 @@
   "code": "konbu-genzouya:10000200"
  },
  "r99dc63c06": {
+  "category": "food",
   "code": "oculu:10156770"
  },
  "r99f9de20b": {
@@ -1417,6 +1950,7 @@
   "code": "pennepenne:10003896"
  },
  "r9a2b6f3fa": {
+  "category": "kitchen",
   "code": "angelingg:10001004"
  },
  "r9a2f372af": {
@@ -1436,9 +1970,11 @@
   "code": "mixsim:10000796"
  },
  "r9b344a98a": {
+  "category": "beauty",
   "code": "nayamikaiketsulab:10000051"
  },
  "r9b6eb00be": {
+  "category": "fashion",
   "code": "darkangel:10036320"
  },
  "r9bb8b6bad": {
@@ -1446,6 +1982,7 @@
   "code": "meijo:10000029"
  },
  "r9bbb2153e": {
+  "category": "food",
   "code": "soukaidrink:10000912"
  },
  "r9c5ee04a5": {
@@ -1460,32 +1997,52 @@
   "category": "pc",
   "code": "meisei:10002326"
  },
+ "r9ea6872f5": {
+  "category": "car",
+  "code": "auc-luft:10000069"
+ },
  "r9fc239c09": {
+  "category": "fashion",
   "code": "pennepenne:10001389"
  },
  "r9fe46b7eb": {
+  "category": "beauty",
   "code": "whithwhite:10000131"
  },
  "r9fe49d85a": {
+  "category": "pet",
   "code": "cat-land:10010935"
  },
  "ra04de3909": {
   "category": "baby-toy",
   "code": "baby-carino-carino:10000002"
  },
+ "ra0e841d27": {
+  "category": "food",
+  "code": "kyunan:10000248"
+ },
+ "ra21318b25": {
+  "category": "pc",
+  "code": "bonz:10033080"
+ },
  "ra24bd7228": {
+  "category": "fashion",
   "code": "darkangel:10002101"
  },
  "ra26063fcc": {
+  "category": "kitchen",
   "code": "h2brothers:10001880"
  },
  "ra2632d3b0": {
+  "category": "beauty",
   "code": "babycresco:10000975"
  },
  "ra2f9ea19e": {
+  "category": "food",
   "code": "omuraisu-n:10000000"
  },
  "ra3149b1fe": {
+  "category": "beauty",
   "code": "tsurunishi:10001227"
  },
  "ra32f97227": {
@@ -1496,11 +2053,16 @@
   "category": "beauty",
   "code": "gjapan-beauty:10000907"
  },
+ "ra36f8a0aa": {
+  "category": "baby-toy",
+  "code": "sym1interior:10000313"
+ },
  "ra37f39367": {
   "category": "fashion",
   "code": "rioty:10039869"
  },
  "ra3f2a9b1e": {
+  "category": "fashion",
   "code": "753ya:10004366"
  },
  "ra3f8304a5": {
@@ -1508,14 +2070,24 @@
   "code": "yama-oatmeal-institute:10000024"
  },
  "ra48e7b82d": {
+  "category": "fashion",
   "code": "darkangel:10036634"
  },
  "ra555d9717": {
+  "category": "pet",
   "code": "iliosmile:10001009"
+ },
+ "ra5603046f": {
+  "category": "beauty",
+  "code": "lorelife:10000110"
  },
  "ra5ca72a05": {
   "category": "food",
   "code": "irisplaza-r:10163799"
+ },
+ "ra67f4f058": {
+  "category": "baby-toy",
+  "code": "kurashikenkou:10215335"
  },
  "ra68cdd492": {
   "category": "beauty",
@@ -1530,6 +2102,7 @@
   "code": "torreya-shop:10000022"
  },
  "ra7866fff3": {
+  "category": "pet",
   "code": "drwanwan:10000046"
  },
  "ra7f58e88b": {
@@ -1537,6 +2110,7 @@
   "code": "ogawahan:10002596"
  },
  "ra839eb1fb": {
+  "category": "fashion",
   "code": "z-craft:10042820"
  },
  "ra8d91264c": {
@@ -1544,6 +2118,7 @@
   "code": "karei-fuku:10060821"
  },
  "raa7d94a42": {
+  "category": "pc",
   "code": "motteru:10000105"
  },
  "raa9e7d458": {
@@ -1551,20 +2126,27 @@
   "code": "gubal:10001041"
  },
  "raabc7c834": {
+  "category": "food",
   "code": "tarunoaji:10000594"
  },
  "raad85aa48": {
   "category": "beauty",
   "code": "oga:10267401"
  },
+ "rab879bafa": {
+  "category": "baby-toy",
+  "code": "dog-kan:10198247"
+ },
  "rabb597b01": {
   "category": "beauty",
   "code": "duen1102:10000118"
  },
  "rabb6779c0": {
+  "category": "food",
   "code": "buono-buono:10002030"
  },
  "rabe7aae3b": {
+  "category": "fashion",
   "code": "tu-hacci:10004413"
  },
  "rabf4c18bc": {
@@ -1580,12 +2162,19 @@
   "code": "baselab:10000402"
  },
  "racb4401f5": {
+  "category": "fashion",
   "code": "kibounomori:10000448"
  },
  "racddf60d5": {
+  "category": "beauty",
   "code": "sincerite-s:10000051"
  },
+ "racfa9ef4d": {
+  "category": "food",
+  "code": "namiefutomen:10000369"
+ },
  "rad20a9ef0": {
+  "category": "beauty",
   "code": "d-fit:10010268"
  },
  "raed0bb059": {
@@ -1597,17 +2186,23 @@
   "code": "rasta:10027536"
  },
  "raf00dd26d": {
+  "category": "sports",
   "code": "teddyshop:10014469"
  },
  "raf1300d6e": {
   "category": "beauty",
   "code": "kumamoto-food:10003001"
  },
+ "raf2707125": {
+  "category": "sports",
+  "code": "irie-irie:10000148"
+ },
  "raf3c7fe93": {
   "category": "fashion",
   "code": "mobacaba:10018778"
  },
  "rafcdbe910": {
+  "category": "food",
   "code": "sanwa-junkei:10000536"
  },
  "rb01f56dc5": {
@@ -1615,9 +2210,11 @@
   "code": "rinne:10008871"
  },
  "rb0f238890": {
+  "category": "fashion",
   "code": "teddyshop:10011741"
  },
  "rb171cb0af": {
+  "category": "kaden",
   "code": "brita:10000052"
  },
  "rb19876492": {
@@ -1625,16 +2222,23 @@
   "code": "mi-215:10001489"
  },
  "rb1b29fab5": {
+  "category": "fashion",
   "code": "darkangel:10036827"
  },
  "rb1d19d368": {
+  "category": "fashion",
   "code": "pierrot:10009777"
+ },
+ "rb1d3432f6": {
+  "category": "baby-toy",
+  "code": "value-create:10000010"
  },
  "rb1e00ceee": {
   "category": "fashion",
   "code": "kyoetsu-orosiya:10009338"
  },
  "rb22ebf786": {
+  "category": "food",
   "code": "kagoshimamasuya:10000351"
  },
  "rb280f865f": {
@@ -1654,12 +2258,15 @@
   "code": "darkangel:10037604"
  },
  "rb356d28ef": {
+  "category": "fashion",
   "code": "pierrot:10014126"
  },
  "rb3ba592b2": {
+  "category": "beauty",
   "code": "petitprice:10000993"
  },
  "rb3df77f15": {
+  "category": "baby-toy",
   "code": "ponopono:10002097"
  },
  "rb3f731a92": {
@@ -1667,9 +2274,15 @@
   "code": "l-a-caffellatte:10013336"
  },
  "rb40cd4809": {
+  "category": "food",
   "code": "kumamoto-food:10002922"
  },
+ "rb45241faf": {
+  "category": "books",
+  "code": "kanlove:10021967"
+ },
  "rb457504c0": {
+  "category": "kaden",
   "code": "kobe-beauty-labo:10000074"
  },
  "rb482690c5": {
@@ -1680,17 +2293,24 @@
   "category": "car",
   "code": "tees-factory:10031820"
  },
+ "rb4a28eb5d": {
+  "category": "pc",
+  "code": "smahoservice:10002188"
+ },
  "rb4e6cc98f": {
   "category": "fashion",
   "code": "mixsim:10000573"
  },
  "rb505b66ae": {
+  "category": "sports",
   "code": "goodgoods-center:10000256"
  },
  "rb582020a6": {
+  "category": "pet",
   "code": "cordy:10000010"
  },
  "rb6073b119": {
+  "category": "kaden",
   "code": "nexmoov:10000009"
  },
  "rb64fc243d": {
@@ -1698,7 +2318,12 @@
   "code": "gubal:10001761"
  },
  "rb68677931": {
+  "category": "beauty",
   "code": "seedcoms:10006708"
+ },
+ "rb6924c483": {
+  "category": "baby-toy",
+  "code": "soyott-camp:10000465"
  },
  "rb6df47bdd": {
   "category": "fashion",
@@ -1713,10 +2338,16 @@
   "code": "emurshop:10000276"
  },
  "rb78fbf6bb": {
+  "category": "fashion",
   "code": "washington:10060995"
  },
  "rb7e74186a": {
+  "category": "fashion",
   "code": "kira-kira:10014708"
+ },
+ "rb80891ec3": {
+  "category": "books",
+  "code": "seimina:10000076"
  },
  "rb87cd1a86": {
   "category": "pet",
@@ -1731,6 +2362,7 @@
   "code": "yamagoiida:10000095"
  },
  "rb91539b1f": {
+  "category": "beauty",
   "code": "seedcoms:10007320"
  },
  "rb9808baba": {
@@ -1742,12 +2374,15 @@
   "code": "natule:10000049"
  },
  "rba219da78": {
+  "category": "books",
   "code": "woodgreen:13235150"
  },
  "rba2388b7c": {
+  "category": "books",
   "code": "woodgreen:13235152"
  },
  "rba4a99622": {
+  "category": "beauty",
   "code": "deconail-seisakujo:10002837"
  },
  "rba60deef4": {
@@ -1759,13 +2394,19 @@
   "code": "shinmainichi:10000032"
  },
  "rbb2761911": {
+  "category": "pet",
   "code": "ashu:10002549"
+ },
+ "rbbe1a1a5c": {
+  "category": "baby-toy",
+  "code": "brilbe:10000137"
  },
  "rbcd9e1bc8": {
   "category": "kitchen",
   "code": "kiroran:10000196"
  },
  "rbd400d609": {
+  "category": "books",
   "code": "mywaysmart:10041283"
  },
  "rbd40d7c42": {
@@ -1773,35 +2414,51 @@
   "code": "missin:10000140"
  },
  "rbdaf5694e": {
+  "category": "fashion",
   "code": "jiggys-shop:10009726"
  },
  "rbdc0f8a25": {
+  "category": "beauty",
   "code": "shirokuma-cosme:10000256"
  },
  "rbde6613d0": {
+  "category": "fashion",
   "code": "darkangel:10035877"
+ },
+ "rbe83ed306": {
+  "category": "beauty",
+  "code": "itsumococo:10000044"
  },
  "rbfa26d4e4": {
   "category": "beauty",
   "code": "menzsap:10001323"
  },
  "rbff977e72": {
+  "category": "fashion",
   "code": "anderis:10000016"
+ },
+ "rc03822892": {
+  "category": "beauty",
+  "code": "seedcoms:10007340"
  },
  "rc092357bd": {
   "category": "beauty",
   "code": "patri:10004352"
  },
  "rc13b17364": {
+  "category": "pc",
   "code": "woodgreen:13018840"
  },
  "rc18459c03": {
+  "category": "beauty",
   "code": "seedcoms:10006840"
  },
  "rc1a34b77f": {
+  "category": "books",
   "code": "woodgreen:13235176"
  },
  "rc1b583414": {
+  "category": "food",
   "code": "kumamoto-food:10002270"
  },
  "rc1fe87a23": {
@@ -1820,11 +2477,16 @@
   "category": "pet",
   "code": "ashudog:10009059"
  },
+ "rc26554137": {
+  "category": "sports",
+  "code": "puravida:10000938"
+ },
  "rc2ad25e52": {
   "category": "kitchen",
   "code": "cottontown:10000441"
  },
  "rc2d104ddc": {
+  "category": "food",
   "code": "buono-buono:10001251"
  },
  "rc2e11945a": {
@@ -1836,6 +2498,7 @@
   "code": "felicity-wine:10009643"
  },
  "rc390b48b4": {
+  "category": "food",
   "code": "otogino:10042289"
  },
  "rc390e58d2": {
@@ -1847,6 +2510,7 @@
   "code": "likaman:10002072"
  },
  "rc46fe7976": {
+  "category": "pc",
   "code": "smartphonecase:10005517"
  },
  "rc47edf45b": {
@@ -1857,6 +2521,10 @@
   "category": "kitchen",
   "code": "aquatalk:10000314"
  },
+ "rc49e99d32": {
+  "category": "food",
+  "code": "wakuwakuen:10000494"
+ },
  "rc51c27dcc": {
   "category": "food",
   "code": "coffee-takamura:10000191"
@@ -1865,34 +2533,69 @@
   "category": "fashion",
   "code": "karei-fuku:10064232"
  },
+ "rc6203871e": {
+  "category": "books",
+  "code": "selectkoh:10000308"
+ },
  "rc67a0d0c5": {
   "category": "pc",
   "code": "hobinavi:10497734"
+ },
+ "rc73f70ca2": {
+  "category": "baby-toy",
+  "code": "toucher-home:10001870"
  },
  "rc7497d255": {
   "category": "baby-toy",
   "code": "ryoyo:10000098"
  },
  "rc752e0b3f": {
+  "category": "fashion",
   "code": "lax:10044115"
  },
  "rc77304b15": {
+  "category": "pet",
   "code": "ashu:10009365"
  },
  "rc789b8f62": {
+  "category": "food",
   "code": "tanesho-factory-label:10012156"
  },
+ "rc7fd01a56": {
+  "category": "car",
+  "code": "lohas1:10011400"
+ },
  "rc7fec7f81": {
+  "category": "beauty",
   "code": "seedcoms:10003996"
  },
  "rc8139d923": {
+  "category": "beauty",
   "code": "1fukuya:10000838"
  },
+ "rc87ae1a49": {
+  "category": "books",
+  "code": "bagsaifufavori:10008398"
+ },
  "rc87b2ba45": {
+  "category": "fashion",
   "code": "zoeetree:10000248"
  },
  "rc88f3d500": {
+  "category": "car",
   "code": "patri:10002511"
+ },
+ "rc8cd634a2": {
+  "category": "beauty",
+  "code": "seedcoms:10007155"
+ },
+ "rc8d3bf208": {
+  "category": "food",
+  "code": "wakuwakuen:10000595"
+ },
+ "rc8fe31971": {
+  "category": "kaden",
+  "code": "myhomeshop:10000460"
  },
  "rc968e0173": {
   "category": "fashion",
@@ -1911,9 +2614,15 @@
   "code": "attenir:10000250"
  },
  "rcb1617c6a": {
+  "category": "fashion",
   "code": "muzistyle:10000537"
  },
+ "rcc5a62526": {
+  "category": "beauty",
+  "code": "oga:10215797"
+ },
  "rcd0cf2e95": {
+  "category": "beauty",
   "code": "levante:10000414"
  },
  "rcd6b502c1": {
@@ -1921,12 +2630,15 @@
   "code": "dogskip:10000752"
  },
  "rcdc29d064": {
+  "category": "pc",
   "code": "smartphonecase:10000893"
  },
  "rce0bc870d": {
+  "category": "beauty",
   "code": "oga:10127229"
  },
  "rce2a261f1": {
+  "category": "beauty",
   "code": "duen1102:10000008"
  },
  "rce7af8604": {
@@ -1942,18 +2654,23 @@
   "code": "auc-my-mama:10007431"
  },
  "rd0188c0f0": {
+  "category": "kitchen",
   "code": "decollections:10007111"
  },
  "rd051c0933": {
+  "category": "beauty",
   "code": "duen1102:10000013"
  },
  "rd0b184716": {
+  "category": "fashion",
   "code": "sionkobe:10001198"
  },
  "rd0b5f354b": {
+  "category": "fashion",
   "code": "yokolee:10000035"
  },
  "rd0fc22355": {
+  "category": "fashion",
   "code": "hillnup:10000051"
  },
  "rd1cfe64ee": {
@@ -1968,13 +2685,24 @@
   "category": "food",
   "code": "gotouchi-food:10000001"
  },
+ "rd2b89974e": {
+  "category": "kitchen",
+  "code": "lotus01:10006723"
+ },
  "rd2ffe5464": {
+  "category": "kitchen",
   "code": "toucher-home:10002933"
  },
  "rd305591d7": {
+  "category": "beauty",
   "code": "levante:10000284"
  },
+ "rd32bd6cc6": {
+  "category": "beauty",
+  "code": "a-cueb:10003383"
+ },
  "rd33447219": {
+  "category": "pc",
   "code": "krdirect:10002212"
  },
  "rd34567de1": {
@@ -1982,9 +2710,11 @@
   "code": "pierrot:10014231"
  },
  "rd3a9d4a91": {
+  "category": "beauty",
   "code": "seedcoms:10006706"
  },
  "rd3dab9479": {
+  "category": "food",
   "code": "tarunoaji:10000484"
  },
  "rd41c17b51": {
@@ -1996,6 +2726,7 @@
   "code": "ultra-taste:10000190"
  },
  "rd43a1f2c9": {
+  "category": "fashion",
   "code": "joinus2020:10000000"
  },
  "rd4be0ad1a": {
@@ -2015,16 +2746,28 @@
   "code": "teinei-tsuhan:10000000"
  },
  "rd6405051c": {
+  "category": "pet",
   "code": "cordy:10000004"
  },
+ "rd65011161": {
+  "category": "pc",
+  "code": "crossroad:10039863"
+ },
  "rd7371e81c": {
+  "category": "fashion",
   "code": "kira-kira:10017575"
  },
  "rd75da733d": {
+  "category": "fashion",
   "code": "753ya:10015436"
  },
  "rd7c26e94b": {
+  "category": "car",
   "code": "creaswing:10000036"
+ },
+ "rd8159e85e": {
+  "category": "fashion",
+  "code": "avril:10000118"
  },
  "rd836d100f": {
   "category": "pc",
@@ -2051,7 +2794,16 @@
   "code": "fumiyaryohin:10000048"
  },
  "rdac42fc8f": {
+  "category": "kitchen",
   "code": "suisosum-shop:10000192"
+ },
+ "rdacf13a21": {
+  "category": "pc",
+  "code": "qisi:10000176"
+ },
+ "rdb176f0a9": {
+  "category": "food",
+  "code": "morigen:10000567"
  },
  "rdb7e75acf": {
   "category": "beauty",
@@ -2061,18 +2813,28 @@
   "category": "food",
   "code": "zakkoku-okome:10001781"
  },
+ "rdc64e8492": {
+  "category": "food",
+  "code": "mariri-nz:10003695"
+ },
  "rdcec256e4": {
+  "category": "books",
   "code": "woodgreen:13235171"
  },
  "rdd3fc441a": {
   "category": "sports",
   "code": "rinne:10008892"
  },
+ "rdd864712f": {
+  "category": "food",
+  "code": "kensho-yame:10000016"
+ },
  "rdd90d8099": {
   "category": "food",
   "code": "zakkoku-okome:10002093"
  },
  "rddadd2009": {
+  "category": "fashion",
   "code": "darkangel:10033013"
  },
  "rddd92e946": {
@@ -2084,6 +2846,7 @@
   "code": "kyowashokken:10000036"
  },
  "rde3843085": {
+  "category": "fashion",
   "code": "753ya:10000227"
  },
  "rdecd9caed": {
@@ -2091,7 +2854,12 @@
   "code": "osyarewotanosimu:10004162"
  },
  "rdf14a502e": {
+  "category": "beauty",
   "code": "levante:10000471"
+ },
+ "rdf459af1f": {
+  "category": "kaden",
+  "code": "shopworld:10133124"
  },
  "rdf7eeb248": {
   "category": "kaden",
@@ -2102,9 +2870,11 @@
   "code": "realstyle4u:10002477"
  },
  "re07f791fe": {
+  "category": "books",
   "code": "woodgreen:13235147"
  },
  "re0b495c48": {
+  "category": "car",
   "code": "ysmya:10012332"
  },
  "re0c5d56c4": {
@@ -2112,7 +2882,16 @@
   "code": "babycresco:10000329"
  },
  "re147f94f0": {
+  "category": "fashion",
   "code": "e-zakkamania:10070545"
+ },
+ "re1767b0a2": {
+  "category": "food",
+  "code": "nagomisabo:10001124"
+ },
+ "re20097b6b": {
+  "category": "food",
+  "code": "storyme:10000030"
  },
  "re2144096f": {
   "category": "food",
@@ -2131,9 +2910,11 @@
   "code": "weiwei:10020393"
  },
  "re2c188bd0": {
+  "category": "sports",
   "code": "xexymix:10001820"
  },
  "re2f665d39": {
+  "category": "kitchen",
   "code": "469kobo:10000325"
  },
  "re31eee71d": {
@@ -2141,13 +2922,23 @@
   "code": "rioty:10040018"
  },
  "re33845cbc": {
+  "category": "sports",
   "code": "xexymix:10002031"
+ },
+ "re38f36b52": {
+  "category": "books",
+  "code": "seunnsironeko:10004357"
+ },
+ "re3a6181fa": {
+  "category": "car",
+  "code": "share-style:10000291"
  },
  "re3a9740ee": {
   "category": "pc",
   "code": "spaceindustry:10000453"
  },
  "re3b6c7dd8": {
+  "category": "kitchen",
   "code": "flemo:10000000"
  },
  "re41165eda": {
@@ -2155,17 +2946,23 @@
   "code": "kashima-tokeiten:10072358"
  },
  "re47007508": {
+  "category": "books",
   "code": "woodgreen:13235157"
  },
  "re528f9c50": {
   "category": "food",
   "code": "chashoan:10000381"
  },
+ "re53b58ebb": {
+  "category": "beauty",
+  "code": "seedcoms:10007338"
+ },
  "re59c086e5": {
   "category": "pet",
   "code": "farson:10002508"
  },
  "re5c565234": {
+  "category": "books",
   "code": "11shop:10000325"
  },
  "re5d9b3664": {
@@ -2176,6 +2973,10 @@
   "category": "fashion",
   "code": "nityukan0715:10002163"
  },
+ "re604c9b9f": {
+  "category": "baby-toy",
+  "code": "toucher-home:10002169"
+ },
  "re61bb9b21": {
   "category": "pc",
   "code": "hecmarket:10000008"
@@ -2185,16 +2986,31 @@
   "code": "brmslife:10000016"
  },
  "re63e00606": {
+  "category": "food",
   "code": "sonoshokuan:10000007"
+ },
+ "re64e60de9": {
+  "category": "kaden",
+  "code": "mikirona:10000085"
  },
  "re6a706d76": {
   "category": "pc",
   "code": "chips:10008797"
  },
+ "re6dca7069": {
+  "category": "food",
+  "code": "chirancha:10000313"
+ },
+ "re6f180928": {
+  "category": "beauty",
+  "code": "seedcoms:10006088"
+ },
  "re70adb7d5": {
+  "category": "sports",
   "code": "maxtop:10000050"
  },
  "re719455ba": {
+  "category": "fashion",
   "code": "hillnup:10001049"
  },
  "re783e2082": {
@@ -2205,8 +3021,21 @@
   "category": "fashion",
   "code": "aimoha:10000754"
  },
+ "re89007763": {
+  "category": "fashion",
+  "code": "e-zakkamania:10094608"
+ },
+ "re9072b835": {
+  "category": "fashion",
+  "code": "jiggys-shop:10012748"
+ },
  "re923138ba": {
+  "category": "pc",
   "code": "smartphonecase:10000674"
+ },
+ "re94acff3c": {
+  "category": "pc",
+  "code": "gracevally:10000026"
  },
  "re9854c5ff": {
   "category": "food",
@@ -2217,6 +3046,7 @@
   "code": "unotea:10000174"
  },
  "rea64170ab": {
+  "category": "fashion",
   "code": "mar-c:10006563"
  },
  "rea796a744": {
@@ -2228,11 +3058,20 @@
   "code": "darkangel:10036257"
  },
  "reaa482e64": {
+  "category": "books",
   "code": "case-by-case:10002027"
+ },
+ "reabc83916": {
+  "category": "pc",
+  "code": "bonz:10032759"
  },
  "read51c4a6": {
   "category": "fashion",
   "code": "mixsim:10000412"
+ },
+ "reaf9922d0": {
+  "category": "pc",
+  "code": "entamefactory:10000450"
  },
  "reafc8e86c": {
   "category": "food",
@@ -2246,6 +3085,18 @@
   "category": "sports",
   "code": "dabada:10000522"
  },
+ "reb9d0ff8a": {
+  "category": "fashion",
+  "code": "avril:10000248"
+ },
+ "rebc0d869f": {
+  "category": "baby-toy",
+  "code": "tsutsu-uraura:10011782"
+ },
+ "rec0e0e63e": {
+  "category": "beauty",
+  "code": "feellife:10003877"
+ },
  "rec227a2ec": {
   "category": "kaden",
   "code": "dondon:10004204"
@@ -2254,7 +3105,16 @@
   "category": "food",
   "code": "irisplaza-r:10136075"
  },
+ "rec61bdb47": {
+  "category": "pc",
+  "code": "photolink:10000003"
+ },
+ "recd1fd0b9": {
+  "category": "baby-toy",
+  "code": "kamiomutsu-honpo:10000119"
+ },
  "recd8d6de8": {
+  "category": "books",
   "code": "woodgreen:13235149"
  },
  "red6052d5f": {
@@ -2270,13 +3130,27 @@
   "code": "jitdirect:10034063"
  },
  "ree7a8eb0f": {
+  "category": "fashion",
   "code": "woodgreen:13022499"
  },
  "ree8e212af": {
   "category": "food",
   "code": "wakuwakuen:10000625"
  },
+ "reec95b18d": {
+  "category": "beauty",
+  "code": "seedcoms:10004998"
+ },
+ "ref3ad4e1a": {
+  "category": "books",
+  "code": "book:13267439"
+ },
+ "ref648701f": {
+  "category": "baby-toy",
+  "code": "base-coast:10000021"
+ },
  "ref6d6ff7f": {
+  "category": "pc",
   "code": "case-by-case:10002035"
  },
  "ref79a1c6a": {
@@ -2284,22 +3158,32 @@
   "code": "motunabe:10001907"
  },
  "refcdc1c00": {
+  "category": "pet",
   "code": "everypet:10009751"
  },
  "rf04123caa": {
+  "category": "books",
   "code": "smahoservice:10002186"
  },
  "rf043ed8eb": {
+  "category": "food",
   "code": "meat-21:10001267"
  },
  "rf05138318": {
+  "category": "fashion",
   "code": "darkangel:10035933"
  },
  "rf0639a415": {
+  "category": "beauty",
   "code": "seedcoms:10007351"
  },
  "rf0e26deba": {
+  "category": "books",
   "code": "gbz2:10000115"
+ },
+ "rf1438edd0": {
+  "category": "kaden",
+  "code": "azusa:10000130"
  },
  "rf188a52bc": {
   "category": "food",
@@ -2314,16 +3198,27 @@
   "code": "areti:10000003"
  },
  "rf236a0f31": {
+  "category": "fashion",
   "code": "darkangel:10034642"
+ },
+ "rf28c248e1": {
+  "category": "fashion",
+  "code": "cocacoca:10014556"
  },
  "rf35b6e6f3": {
   "category": "fashion",
   "code": "auc-t-link:10009056"
  },
+ "rf3cd56567": {
+  "category": "fashion",
+  "code": "lowtex:10253435"
+ },
  "rf4416810f": {
+  "category": "beauty",
   "code": "seedcoms:10004174"
  },
  "rf45fbb67e": {
+  "category": "pc",
   "code": "yskcase-shop:10007770"
  },
  "rf487f4b33": {
@@ -2335,6 +3230,7 @@
   "code": "jitdirect:10003244"
  },
  "rf58e6a8c3": {
+  "category": "beauty",
   "code": "1fukuya:10000797"
  },
  "rf5b603646": {
@@ -2342,11 +3238,16 @@
   "code": "kensen:10000001"
  },
  "rf5b71804c": {
+  "category": "kitchen",
   "code": "decollections:10002359"
  },
  "rf5f6782f1": {
   "category": "pc",
   "code": "aidort:10003547"
+ },
+ "rf6062604c": {
+  "category": "sports",
+  "code": "yiprefer:10001544"
  },
  "rf641b43d0": {
   "category": "pc",
@@ -2361,11 +3262,20 @@
   "code": "mittrom:10000067"
  },
  "rf6e19b46e": {
+  "category": "pc",
   "code": "a-mobi:10001102"
  },
  "rf7049c5ee": {
   "category": "beauty",
   "code": "kobe-beauty-labo:10000193"
+ },
+ "rf74a6f898": {
+  "category": "books",
+  "code": "takara-jiang:10031673"
+ },
+ "rf7cb19988": {
+  "category": "food",
+  "code": "maguronoyamashita:10000001"
  },
  "rf800bd0ca": {
   "category": "seasonal",
@@ -2380,6 +3290,7 @@
   "code": "nadesiko:10003849"
  },
  "rf994cdd4f": {
+  "category": "fashion",
   "code": "darkangel:10036035"
  },
  "rfa3c64eda": {
@@ -2387,13 +3298,23 @@
   "code": "ohgiya-f:10000239"
  },
  "rfab291e9f": {
+  "category": "food",
   "code": "baiouen:10003002"
+ },
+ "rfb02220a0": {
+  "category": "baby-toy",
+  "code": "toucher-home:10001504"
+ },
+ "rfb5671ffc": {
+  "category": "baby-toy",
+  "code": "ryouhin-monogatari:10000051"
  },
  "rfb66cdd99": {
   "category": "food",
   "code": "auc-ky-honpo:10001613"
  },
  "rfb7323f9a": {
+  "category": "fashion",
   "code": "sionkobe:10001519"
  },
  "rfb8afa044": {
@@ -2405,30 +3326,63 @@
   "code": "hankomaturi:10001696"
  },
  "rfba24b31d": {
+  "category": "fashion",
   "code": "forc-wear:10000328"
  },
  "rfbbe79a05": {
+  "category": "food",
   "code": "wakuwakuen:10000614"
  },
+ "rfc02727e1": {
+  "category": "fashion",
+  "code": "annekor:10000047"
+ },
  "rfcd2ebeff": {
+  "category": "sports",
   "code": "irie-irie:10000761"
+ },
+ "rfd1e8049a": {
+  "category": "baby-toy",
+  "code": "bebeanpang:10000068"
  },
  "rfd2ac0683": {
   "category": "food",
   "code": "motunabe:10000752"
  },
+ "rfdafdc622": {
+  "category": "fashion",
+  "code": "darkangel:10031059"
+ },
  "rfdce4f526": {
   "category": "fashion",
   "code": "jiggys-shop:10019040"
+ },
+ "rfedc89dbb": {
+  "category": "books",
+  "code": "kanlove:10023754"
+ },
+ "rfee3d8340": {
+  "category": "kaden",
+  "code": "jotimei:10000046"
+ },
+ "rff2b8e646": {
+  "category": "car",
+  "code": "lifeideakan:10000015"
  },
  "rff5507558": {
   "category": "beauty",
   "code": "seedcoms:10006662"
  },
  "rff631307d": {
+  "category": "beauty",
   "code": "oga:10126692"
  },
  "rff6385782": {
+  "category": "beauty",
   "code": "seedcoms:10007442"
+ },
+ "rff7bad81d": {
+  "category": "fashion",
+  "code": "kmc-fashion:10000114"
  }
 }
