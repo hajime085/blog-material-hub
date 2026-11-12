@@ -1149,6 +1149,71 @@ def stream_badge(p):
             "frozen": "最終確認"}.get(p.get("_state"), "検証済み")
 
 
+def render_cat_tabs(cats, listed, page):
+    """TOP 右端のカテゴリタブ（ファイルの見出しタブ風、縦書き）。
+
+    台帳に1件以上あるカテゴリだけを、件数の多い順（同数はカテゴリ
+    定義順）に並べる。先頭は「全部」。
+    1ページ目は JS で絞り込むので button、2ページ目以降は
+    「/#cat=<slug>」へのリンクにして、1ページ目の JS が引き継ぐ。
+    """
+    counts = {}
+    for p in listed:
+        counts[p["category"]] = counts.get(p["category"], 0) + 1
+    order = {slug: i for i, slug in enumerate(cats)}
+    slugs = sorted(counts, key=lambda s: (-counts[s], order.get(s, 99)))
+
+    def label(slug):
+        return e(cats.get(slug, {}).get("short") or slug)
+
+    items = []
+    if page == 1:
+        items.append('<button type="button" class="v-cattab v-on" '
+                     'data-cattab="all" aria-pressed="true">全部</button>')
+        for s in slugs:
+            items.append('<button type="button" class="v-cattab" '
+                         'data-cattab="%s" aria-pressed="false">%s</button>'
+                         % (e(s), label(s)))
+    else:
+        items.append('<a class="v-cattab v-on" href="/">全部</a>')
+        for s in slugs:
+            items.append('<a class="v-cattab" href="/#cat=%s">%s</a>'
+                         % (e(s), label(s)))
+    return ('<nav class="v-cattabs" aria-label="カテゴリで絞り込む">%s</nav>'
+            % "".join(items))
+
+
+CATTAB_JS = (
+    '<script>(function(){'
+    'var rail=document.querySelector(".v-cattabs");if(!rail)return;'
+    'var stream=document.querySelector(".v-stream");if(!stream)return;'
+    'var cards=[].slice.call(stream.querySelectorAll(".v-card[data-cat]"));'
+    'var pager=document.querySelector(".v-main .v-pager");'
+    'var tabs=[].slice.call(rail.querySelectorAll("[data-cattab]"));'
+    'function cell(card){return card.closest(".v-pick-cell")||card;}'
+    'function apply(cat){'
+    'var filtering=!!cat&&cat!=="all";'
+    'cards.forEach(function(card){'
+    'var show=filtering?card.getAttribute("data-cat")===cat'
+    ':!card.hasAttribute("data-extra");'
+    'cell(card).hidden=!show;});'
+    'if(pager)pager.hidden=filtering;'
+    'tabs.forEach(function(t){'
+    'var on=t.getAttribute("data-cattab")===(filtering?cat:"all");'
+    't.classList.toggle("v-on",on);'
+    't.setAttribute("aria-pressed",on?"true":"false");});}'
+    'tabs.forEach(function(t){'
+    't.addEventListener("click",function(){'
+    'var cat=t.getAttribute("data-cattab");apply(cat);'
+    'try{if(cat==="all")'
+    '{history.replaceState(null,"",location.pathname+location.search);}'
+    'else{history.replaceState(null,"","#cat="+cat);}}catch(e){}});});'
+    'var m=/(?:^|#)cat=([a-z0-9-]+)/.exec(location.hash||"");'
+    'if(m)apply(m[1]);'
+    '})();</script>'
+)
+
+
 CAROUSEL_JS = (
     '<script>(function(){'
     'var t=document.querySelector(".v-camp-track");if(!t)return;'
@@ -1436,14 +1501,27 @@ def render_pager_v11(page, total_pages, base):
 
 def _render_top(cfg, base, products, cats, *, units, live, active_tab, page,
                 total_pages, pager_base, title, desc, path, robots, jsonld,
-                stream_ctx=None):
+                stream_ctx=None, top_tabs=False):
     fetched = last_fetch_date(products)
     entries = deadline_entries()
     start = (page - 1) * TOP_PER_PAGE
-    chunk = units[start: start + TOP_PER_PAGE]
+    # カテゴリタブ有効時、1ページ目は全件を DOM に持つ（ページネーションの
+    # 壁を越えて JS で絞り込むため）。通常表示は先頭 TOP_PER_PAGE 件だけを
+    # 見せ、残りは data-extra + hidden で畳む。2ページ目以降は従来どおり。
+    if top_tabs and page == 1:
+        chunk = list(enumerate(units))
+    else:
+        chunk = list(enumerate(units[start: start + TOP_PER_PAGE], start))
     cards = []
-    for kind, p in chunk:
-        cards.append(render_unit(kind, p, cats, live))
+    for idx, (kind, p) in chunk:
+        card_html = render_unit(kind, p, cats, live)
+        if top_tabs:
+            inject = ' data-cat="%s"' % e(p.get("category", ""))
+            if page == 1 and idx >= TOP_PER_PAGE:
+                inject += ' data-extra="1" hidden'
+            card_html = card_html.replace(
+                '<a class="v-card', '<a' + inject + ' class="v-card', 1)
+        cards.append(card_html)
     stream = "".join(cards)
     if stream_ctx is not None:
         # ストリーム方式: 看板は「掲載中／本日の新規」、速報は「今も値下がり
@@ -1466,13 +1544,16 @@ def _render_top(cfg, base, products, cats, *, units, live, active_tab, page,
         + '<section class="v-stream" id="stream">%s</section>' % stream
         + render_pager_v11(page, total_pages, pager_base)
         + '</div></div></div>'
+        + (render_cat_tabs(cats, stream_ctx["total"], page)
+           if top_tabs and stream_ctx is not None else '')
     )
     return page_shell(
         cfg, base, title=title,
         ogtitle="%s ── %s" % (cfg["site"]["name"], cfg["site"]["tagline"]),
         desc=desc, path=path, content=content, jsonld=jsonld,
         bodyclass="v11", robots=robots, products=products, cats=cats,
-        scripts=CAROUSEL_JS if page == 1 and len(TOPICS) > 1 else "")
+        scripts=(CAROUSEL_JS if page == 1 and len(TOPICS) > 1 else "")
+        + (CATTAB_JS if top_tabs and page == 1 else ""))
 
 
 def build_index(cfg, base, products, cats, stream_ctx=None):
@@ -1512,7 +1593,8 @@ def build_index(cfg, base, products, cats, stream_ctx=None):
             active_tab="new", page=page, total_pages=total_pages,
             pager_base="/", title=title, desc=desc, path=path,
             robots=('<meta name="robots" content="noindex,follow">' if page > 1 else ""),
-            jsonld=jsonld, stream_ctx=stream_ctx)
+            jsonld=jsonld, stream_ctx=stream_ctx,
+            top_tabs=stream_ctx is not None)
         write("index.html" if page == 1 else "page/%d/index.html" % page, html)
 
 

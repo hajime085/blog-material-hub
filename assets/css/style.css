@@ -3354,3 +3354,20 @@ body{background:#f2f4f8;color:#17181c;font-family:-apple-system,BlinkMacSystemFo
 /* ヘッダー帯: いま見ているカテゴリは白地に反転、押した瞬間も反転 (2026-11-10) */
 .v-cat-btn[aria-current="true"]{background:#fff;color:#17181c;border-color:#fff}
 .v-cat-btn:active{background:#fff;color:#17181c;border-color:#fff}
+
+/* TOPカテゴリタブ: 画面右端に貼り付く縦書きの見出しタブ (2026-11-12)。
+   ファイルのインデックスタブのイメージ。押すとそのカテゴリだけに
+   絞り込む（TOP 1ページ目の JS）。選択中は赤。アニメーションなし。 */
+.v-cattabs{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:40;display:flex;flex-direction:column;gap:6px}
+.v-cattab{writing-mode:vertical-rl;text-orientation:upright;width:26px;margin:0;padding:12px 0;background:#26292f;color:#fff;border:1px solid #26292f;border-right:none;border-radius:2px 0 0 2px;font-family:inherit;font-size:12px;font-weight:700;letter-spacing:.14em;line-height:1;text-align:center;text-decoration:none;cursor:pointer}
+.v-cattab.v-on{background:#c83333;border-color:#c83333}
+/* カテゴリ絞り込みと「16件目以降の畳み」は hidden 属性で切り替える。
+   .v-card の display 指定に負けないよう、明示的に none を保証する。 */
+.v-stream [hidden],.v-pager[hidden]{display:none!important}
+@media (max-width:640px){
+  .v-cattab{width:24px;padding:10px 0;font-size:11px}
+}
+/* カテゴリタブはスマホだけ（PC では出さない。furu 指定 2026-11-12）。 */
+@media (min-width:900px){
+  .v-cattabs{display:none}
+}
