@@ -922,25 +922,10 @@
     "schedule:2026-W45-4",
     "product:rd5df705a4",
     "report:2026-11-12",
-    "product:rc2e11945a"
+    "product:rc2e11945a",
+    "tip:16"
   ],
   "log": [
-    {
-      "key": "tip:18",
-      "id": "18114300713040626",
-      "at": "2026-10-15 09:21",
-      "kind": "tip",
-      "slot": 9,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
     {
       "key": "schedule:2026-W41-4",
       "id": "18027948335858835",
@@ -5698,6 +5683,21 @@
       "logic_version": "pattern_v3",
       "link": "reply",
       "link_arm": "site"
+    },
+    {
+      "key": "tip:16",
+      "id": "18119888720069772",
+      "at": "2026-11-13 07:20",
+      "kind": "tip",
+      "slot": 7,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "ask_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "reply",
+      "link_arm": null
     }
   ]
 }
