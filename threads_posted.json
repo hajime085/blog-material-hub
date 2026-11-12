@@ -921,25 +921,10 @@
     "product:r8550b30d9",
     "schedule:2026-W45-4",
     "product:rd5df705a4",
-    "report:2026-11-12"
+    "report:2026-11-12",
+    "product:rc2e11945a"
   ],
   "log": [
-    {
-      "key": "tip:06",
-      "id": "17912980224493063",
-      "at": "2026-10-15 07:21",
-      "kind": "tip",
-      "slot": 7,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
     {
       "key": "tip:18",
       "id": "18114300713040626",
@@ -5698,6 +5683,21 @@
       "logic_version": null,
       "link": "reply",
       "link_arm": null
+    },
+    {
+      "key": "product:rc2e11945a",
+      "id": "18092690927263201",
+      "at": "2026-11-12 20:00",
+      "kind": "product",
+      "slot": 20,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "look",
+      "ask_type": "usage",
+      "category": "baby-toy",
+      "logic_version": "pattern_v3",
+      "link": "reply",
+      "link_arm": "site"
     }
   ]
 }
