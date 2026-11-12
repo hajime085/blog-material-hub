@@ -26,7 +26,10 @@ select_strict.py — ヤスミル (sozaino.com) 改築版の厳格選定モジ�
   構成ルール:
     - シリーズ圧縮: 同ショップ かつ タイトルの文字バイグラム Jaccard >= 0.42 を
       1クラスタとし、代表（レビュー最多）だけをフィードに残す
-    - テーマ上限: どのテーマも最終フィードの10%以下（超過分はレビュー少ない順に落とす）
+    - テーマ上限: 2026-11-12 に廃止。全ゲートを通った商品はテーマにかかわらず
+      フィードに残す（旧: どのテーマも最終フィードの10%以下に落としていた）。
+      流入の調整は台帳側（apply_selection.py の「1回の実行で同一テーマ最大2件」）
+      で行う。apply_theme_cap() は互換のため残してあるが、もう落とさない
     - 並び: 同テーマが隣り合わないようインターリーブ（基本は下落率の降順）
 """
 
@@ -173,27 +176,16 @@ THEME_CAP_MIN = 3          # 上限の下限（10%計算がこれ未満なら3�
 
 
 def apply_theme_cap(clusters: list) -> list:
-    """どのテーマも最終フィードの10%以下になるまで、超過テーマから
-    レビュー最少の代表を落とし続ける。
-    ただしフィードが THEME_CAP_MIN_FEED 未満の小規模な間は適用しない
-    （通過3件すべて同テーマ→上限1件のような機械的な切り捨てを防ぐ）。"""
-    reps = [c for c in clusters]
-    if len(reps) < THEME_CAP_MIN_FEED:
-        return reps
-    while reps:
-        n = len(reps)
-        cap = max(THEME_CAP_MIN, int(n * THEME_CAP_RATIO))
-        counts = Counter(c["rep"]["theme"] for c in reps)
-        over = {t for t, c in counts.items() if c > cap}
-        if not over:
-            break
-        # 超過テーマの中でレビュー最少のものを1つ落とす
-        victim = min(
-            (c for c in reps if c["rep"]["theme"] in over),
-            key=lambda c: c["rep"]["metrics"]["review_count"],
-        )
-        reps.remove(victim)
-    return reps
+    """テーマ上限（廃止済み・互換のために残す）。
+
+    2026-11-12 のルール変更で、全ゲートを通った商品はテーマにかかわらず
+    掲載することになった。かつては「どのテーマも最終フィードの10%以下」
+    になるよう超過分を落としていたが、全ゲート通過の商品（例: 中央値比
+    -50%のワイドパンツ）がテーマの椅子取りゲームだけで何週間も
+    止まる事態が起きたため、ここでは落とさない。
+    流入の調整は台帳側（apply_selection.py）が「1回の実行で同一テーマ
+    最大2件、残りは次回」で行う。ここは並べ替えもせず、そのまま返す。"""
+    return list(clusters)
 
 
 def interleave(clusters: list) -> list:
@@ -319,7 +311,7 @@ def evaluate(products: list, history: dict):
             decisions[rid] = {"outcome": "theme_cap",
                               "detail": {"theme": c["rep"]["theme"],
                                          "metrics": dict(c["rep"]["metrics"])}}
-    funnel.append(("テーマ上限10%適用後", len(capped)))
+    funnel.append(("テーマ上限（2026-11-12 廃止・全通過を残す）", len(capped)))
     feed_clusters = interleave(capped)
     for c in feed_clusters:
         decisions[c["rep"]["product"]["id"]] = {"outcome": "feed", "detail": {}}

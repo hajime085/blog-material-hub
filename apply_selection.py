@@ -40,13 +40,16 @@ apply_selection.py — 掲載台帳（ストリーム方式）の自動メンテ
     python3 apply_selection.py --force
   （データ異常ガードも含めて無効化する。記録に「強制適用」と残る）
 
-テーマ上限:
-  evaluate() 自身のテーマ上限（最終フィードの10%）はそのまま使う。
-  さらに台帳全体に対しても、追加の時点で「現在の台帳＋当日追加分」の
-  合計で同じ物差し（合計20件以上で、1テーマ max(3, 10%) 件まで）を
-  効かせる。超過する追加はレビュー最少のものから落とす。すでに掲載中の
-  商品は年齢以外では外さないので、上限を満たせない場合は追加を落とす
-  側だけで調整する（それでも超過する場合は記録に残して追加を優先する）。
+テーマの扱い（2026-11-12 変更）:
+  旧方式では evaluate() のフィード上限（10%）に加えて、台帳側でも
+  「台帳＋追加分」の合計に同じ物差しを効かせ、超過する追加を落として
+  いた。その結果、全ゲート通過の商品（中央値比 -50% のワイドパンツ）が
+  ファッションの上限だけで何週間も見送られ続けた。
+  新ルール: 全ゲートを通った商品は、テーマにかかわらず掲載する。
+  ただし無制限の流入を防ぐため、1回の実行で同じテーマは最大2件まで
+  追加し、超えた分は落とさずに次回の実行へ回す（次回もフィードに
+  残っていれば、その回に追加される）。evaluate() 側のテーマ上限も
+  同日に廃止済み（select_strict.apply_theme_cap は落とさない）。
 
 ゼロ件の日（新規通過なし・期限切れなし）は正常として扱う（スナップ
 ショットの更新だけして終わる）。掲載 = 推薦の原則として、枠を埋める
@@ -72,6 +75,7 @@ import json
 import os
 import sys
 import traceback
+from collections import Counter
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -86,10 +90,9 @@ import select_strict  # noqa: E402  選定の正本。ゲートはここだけ�
 RETENTION_DAYS = 30     # 掲載日からこの日数を超えたら期限切れ
 PRODUCTS_SHRINK = 0.8   # 商品数が前回適用時の8割未満: データ異常として見送る
 HISTORY_SHRINK = 0.9    # 履歴総件数が前回適用時の9割未満: 同上
-# テーマ上限の物差しは select_strict と同じ値を使う
-THEME_CAP_RATIO = select_strict.THEME_CAP_RATIO
-THEME_CAP_MIN_FEED = select_strict.THEME_CAP_MIN_FEED
-THEME_CAP_MIN = select_strict.THEME_CAP_MIN
+# 1回の実行で追加する同一テーマの上限（2026-11-12〜）。
+# 全ゲート通過は落とさない代わりに、流入の速度だけを絞る。
+MAX_ADD_PER_THEME_PER_RUN = 2
 
 LISTINGS_PATH = ROOT / "listings.json"
 CURATED_PATH = ROOT / "curated.json"
@@ -292,38 +295,23 @@ def run(force: bool, dry_run: bool) -> int:
             reason_expired(en, today)))
 
     # ---- (a) 追加 ----------------------------------------------------------
-    added = [pid for pid in feed_by_id if pid not in entries]
-
-    # テーマ上限（台帳＋追加分の合計に対して効かせる）
-    def theme_of_entry(pid):
-        if pid in feed_by_id:
-            return feed_by_id[pid].get("theme")
-        en = entries.get(pid) or {}
-        return en.get("theme") or select_strict.theme_of(en.get("snapshot") or {})
-
-    cap_dropped = []
-    while added:
-        total = len(entries) + len(added)
-        if total < THEME_CAP_MIN_FEED:
-            break
-        cap = max(THEME_CAP_MIN, int(total * THEME_CAP_RATIO))
-        from collections import Counter
-        counts = Counter(theme_of_entry(pid)
-                         for pid in list(entries) + added)
-        over = {t for t, c in counts.items() if c > cap}
-        if not over:
-            break
-        droppable = [pid for pid in added if theme_of_entry(pid) in over]
-        if not droppable:
-            # 掲載中だけで上限を超えている。掲載中は年齢以外で外さないので、
-            # これ以上は調整できない。記録に残して追加を優先する。
-            print("  テーマ上限: 掲載中だけで上限を超えているテーマがあります"
-                  "（追加側では調整不可）")
-            break
-        victim = min(droppable,
-                     key=lambda pid: feed_by_id[pid]["reviewCount"])
-        added.remove(victim)
-        cap_dropped.append(victim)
+    # テーマでは落とさない（2026-11-12〜）。全ゲート通過は全件が追加候補。
+    # ただし1回の実行で同じテーマは MAX_ADD_PER_THEME_PER_RUN 件まで。
+    # 超えた分は「見送り」ではなく次回送り（deferred）で、記録に残す。
+    # 並びはフィードの順（下落率の降順インターリーブ）のまま採る。
+    added = []
+    deferred = []
+    per_theme = Counter()
+    for fe in feed:
+        pid = fe["id"]
+        if pid in entries:
+            continue
+        theme = fe.get("theme")
+        if per_theme[theme] >= MAX_ADD_PER_THEME_PER_RUN:
+            deferred.append(pid)
+            continue
+        per_theme[theme] += 1
+        added.append(pid)
 
     added_lines = []
     for pid in added:
@@ -339,9 +327,10 @@ def run(force: bool, dry_run: bool) -> int:
         }
         added_lines.append(item_line(
             "追加", fe["title"], reason_added(fe, pid in old_caption_needed)))
-    cap_lines = [item_line("追加見送り", feed_by_id[pid]["title"],
-                           f"テーマ上限のため（テーマ: {feed_by_id[pid].get('theme')}）")
-                 for pid in cap_dropped]
+    cap_lines = [item_line("次回送り", feed_by_id[pid]["title"],
+                           f"テーマ別の追加上限（1回{MAX_ADD_PER_THEME_PER_RUN}件）のため"
+                           f"（テーマ: {feed_by_id[pid].get('theme')}）")
+                 for pid in deferred]
 
     # ---- (b) スナップショット更新 ------------------------------------------
     refreshed = 0
@@ -360,7 +349,8 @@ def run(force: bool, dry_run: bool) -> int:
                     "（ゲート1〜5通過・キャプションを書けば掲載候補）")
 
     print(f"台帳: 現在 {old_count}件 → {len(entries)}件"
-          f"（追加 {len(added)}件 / 期限切れ {len(expired)}件 / "
+          f"（追加 {len(added)}件 / 次回送り {len(deferred)}件 / "
+          f"期限切れ {len(expired)}件 / "
           f"スナップショット更新 {refreshed}件）")
     for line in added_lines + cap_lines + expired_lines:
         print("  " + line)

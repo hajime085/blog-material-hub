@@ -37,6 +37,7 @@ import os
 import re
 import sys
 import time
+import traceback
 import urllib.parse
 import urllib.error
 import urllib.request
@@ -128,6 +129,11 @@ def stash_hand(attic, p):
     if not code:
         return
     body = {k: p[k] for k in HAND_FIELDS if p.get(k)}
+    if p.get("captionAuto"):
+        # 履歴プールからの復活（expand_from_history）が付けた機械生成の
+        # キャプションは、人が書いたものではない。「手書きの物置」に
+        # 混ぜると、次に拾ったとき手書きとして戻ってきてしまう。
+        body.pop("caption", None)
     if body:
         body["_stashedAt"] = datetime.now(JST).strftime("%Y-%m-%d")
         attic[code] = body
@@ -667,6 +673,255 @@ def reference_price(records, current):
     """過去に観測した最高値。現在価格より高いときだけ比較基準になる。"""
     highs = [p for _, p in records if p > current]
     return max(highs) if highs else None
+
+
+# ------------------------------------------------------------------
+# 履歴プールからの復活（2026-11-12）
+#
+# 選定（select_strict.evaluate）の母集団は products.json だけだった。
+# いっぽう price_history.json には1万件超の観測が積もっていて、
+# 履歴が30日以上ある商品だけでも5,000件を超える。その大半は
+# 「検索の上位から外れて products.json を離れた」商品で、価格が
+# 大きく下がっていても選定の土俵に二度と上がらなかった。
+#
+# ここでは、価格履歴だけで価格系ゲート（観測30日／期間最安／
+# 中央値比-20%）を先に判定し、通ったものだけを楽天APIで引き直して
+# products.json に戻す。残りのゲート（レビュー・評価・送料・
+# キャプション要否）は従来どおり選定が判定する。
+# APIを叩くのは価格ゲート通過分だけ（通常は数十件規模）。
+#
+# 商品IDは itemCode のハッシュで一方向のため、引き直しには
+# item_codes.json（ID→itemCode の対応表）が要る。対応表は
+# このスクリプトが商品を見るたびに育て、種は
+# ops/build_item_codes.py が手元の材料（git履歴・物置・台帳）から作る。
+# 対応表に無い商品は引き直せないので、その回は見送って数だけ出す。
+
+ITEM_CODES_FILE = "item_codes.json"
+EXPAND_MAX_PER_RUN = 30      # 1回で引き直す上限（= API呼び出しの上限）
+
+
+def register_item_code(table, pid, code, category=None):
+    """対応表に1件足す。カテゴリは分かったときにだけ埋める。"""
+    if not pid or not code:
+        return
+    ent = table.setdefault(pid, {})
+    if ent.get("code") != code:
+        ent["code"] = code
+    if category and not ent.get("category"):
+        ent["category"] = category
+
+
+def load_item_codes(existing, attic):
+    """対応表を読み、products.json と物置から分かるぶんを先に埋める。"""
+    table = load_json(ITEM_CODES_FILE, {}) or {}
+    for pid, p in existing.items():
+        register_item_code(table, pid, p.get("itemCode"), p.get("category"))
+    for code in attic:
+        register_item_code(table, product_id(code), code)
+    listings = load_json("listings.json", {}) or {}
+    for en in listings.get("listings") or []:
+        snap = en.get("snapshot") or {}
+        if snap.get("itemCode"):
+            register_item_code(table, en.get("id") or product_id(snap["itemCode"]),
+                               snap["itemCode"], snap.get("category"))
+    return table
+
+
+def expansion_sieve(history, known_ids):
+    """価格履歴だけで価格系ゲートを判定する。
+
+    既知（products.json に居る）商品は除く。「現在価格」は履歴の
+    最終観測値で代用する。APIで引き直した実価格でゲート2が
+    崩れることはあり得るが、その判定は選定（evaluate）が
+    products.json の実価格に対して改めて行う。ここは安い篩。
+    戻り値: [(下落率, pid, 指標)] 下落率の大きい順。
+    """
+    import statistics
+
+    import select_strict  # ゲートの基準値は選定の正本から取る
+    out = []
+    for pid, entries in history.items():
+        if pid in known_ids:
+            continue
+        days = len({d for d, _ in entries})
+        if days < select_strict.MIN_OBS_DAYS:
+            continue
+        prices = [pr for _, pr in entries if pr]
+        if not prices:
+            continue
+        latest_day = max(d for d, _ in entries)
+        latest = [pr for d, pr in entries if d == latest_day][-1]
+        if latest != min(prices):
+            continue
+        med = statistics.median(prices)
+        if not med:
+            continue
+        drop = 1 - latest / med
+        if drop < select_strict.MIN_DROP_VS_MEDIAN:
+            continue
+        out.append((drop, pid, {"obs_days": days, "median": med,
+                                "latest": latest}))
+    out.sort(key=lambda x: -x[0])
+    return out
+
+
+def auto_caption(metrics):
+    """観測の事実だけで作るキャプション（当面の形）。
+
+    選定のゲート6はキャプション必須だが、履歴から復活した商品には
+    手書きのキャプションが無い（物置に残っていればそちらが付く）。
+    体験談のような嘘は書けないので、中央値・最安値・観測日数という
+    検証できる事実だけを1行にする。人が書き直したら captionAuto は
+    残っていても実害はない（表示は caption の中身だけを使う）。
+    """
+    med = metrics.get("median_price")
+    cur = metrics.get("current_price")
+    days = metrics.get("obs_days")
+    if med and cur and days:
+        return (f"観測{days}日の中央値{med:,.0f}円のところ{cur:,}円。"
+                f"いまが観測期間の最安値です。")
+    return ""
+
+
+def expand_from_history(cfg, history, result, existing, attic, codes,
+                        app_id, access_key, aff_id, site_url, today,
+                        sale_tolerance):
+    """価格ゲートを通った履歴商品をAPIで引き直し、result に足す。
+
+    戻り値: 足した件数。失敗しても見張り全体は止めない（呼び出し側で
+    例外を受け止める前提だが、個別の失敗はここでも飲み込む）。
+    """
+    import select_strict
+
+    genre_to_cat = {}
+    for cat in cfg["categories"]:
+        for g in cat.get("genres") or []:
+            genre_to_cat.setdefault(str(g), cat["slug"])
+    # 商品の genreId は末端のジャンルで、config の検索ジャンル（親）とは
+    # 一致しないことが多い（実測: 現行310件中48件だけ一致）。いま載って
+    # いる商品の「genreId → カテゴリ」の実績も対応表に足す。
+    # 同じジャンルの商品は同じ棚、という推定で、config より実績を優先する。
+    for p in existing.values():
+        if p.get("genreId") and p.get("category"):
+            genre_to_cat[str(p["genreId"])] = p["category"]
+
+    cands = expansion_sieve(history, set(result) | set(existing))
+    if not cands:
+        return 0
+    print("\n▼ 履歴プールからの復活（価格ゲート通過 %d件）" % len(cands))
+    stats = collections.Counter()
+    taken = 0
+    for _drop, pid, _m in cands:
+        if taken >= EXPAND_MAX_PER_RUN:
+            stats["上限で打ち切り"] += 1
+            continue
+        ent = codes.get(pid) or {}
+        code = ent.get("code")
+        if not code:
+            stats["itemCode不明"] += 1
+            continue
+        try:
+            data = api_get(ITEM_API, {
+                "applicationId": app_id, "accessKey": access_key,
+                "affiliateId": aff_id, "itemCode": code,
+                "format": "json", "formatVersion": 2,
+            }, site_url)
+        except Exception as ex:                      # noqa: BLE001
+            print("  × 引き直しに失敗（%s）: %s" % (code, ex), file=sys.stderr)
+            stats["API失敗"] += 1
+            time.sleep(REQUEST_INTERVAL)
+            continue
+        time.sleep(REQUEST_INTERVAL)
+        got = data.get("Items") or []
+        if not got:
+            stats["見つからない（販売終了）"] += 1
+            continue
+        it = got[0]
+        if product_id(it.get("itemCode") or "") != pid:
+            stats["別商品が返った"] += 1
+            continue
+        if str(it.get("genreId") or "") in NG_GENRES:
+            stats["載せない売場"] += 1
+            continue
+        raw_name = (it.get("itemName") or "").strip()
+        price = int(it.get("itemPrice") or 0)
+        if not raw_name or not price:
+            stats["情報不足"] += 1
+            continue
+        raw = {
+            "itemCode": code,
+            "title": clean_title(raw_name),
+            "rawTitle": raw_name,
+            "autoTags": tags_from_title(raw_name),
+            "unitNote": unit_note_from_title(raw_name),
+            "price": price,
+            "image": big_image(it.get("mediumImageUrls")
+                               or it.get("smallImageUrls")),
+            "affiliateUrl": it.get("affiliateUrl") or it.get("itemUrl") or "",
+            "shop": (it.get("shopName") or "").strip(),
+            "reviewAverage": it.get("reviewAverage") or None,
+            "reviewCount": it.get("reviewCount") or 0,
+            "genreId": str(it.get("genreId") or ""),
+            "startTime": it.get("startTime") or "",
+            "endTime": it.get("endTime") or "",
+            "freeShipping": it.get("postageFlag") == 0,
+        }
+        # いま買えるか、条件つきの値段でないかは、通常の取得と同じ物差し。
+        ok, _why, _start = sale_status(raw, sale_tolerance)
+        if not ok:
+            stats["いま買えない"] += 1
+            continue
+        if conditional_price(raw_name, price):
+            stats["条件つきの値段"] += 1
+            continue
+        category = ent.get("category") or genre_to_cat.get(raw["genreId"])
+        if not category:
+            stats["カテゴリ不明"] += 1
+            continue
+
+        records = update_history(history, pid, price, today)
+        title_ref = list_price_from_title(raw_name, price)
+        if title_ref:
+            list_price, basis = title_ref, "title"
+        else:
+            ref = reference_price(records, price)
+            list_price, basis = ref, ("history" if ref else None)
+        item = {
+            "id": pid, "category": category,
+            "title": raw["title"], "rawTitle": raw_name,
+            "price": price, "image": raw["image"],
+            "affiliateUrl": raw["affiliateUrl"], "shop": raw["shop"],
+            "reviewAverage": raw["reviewAverage"],
+            "reviewCount": raw["reviewCount"],
+            "itemCode": code, "genreId": raw["genreId"],
+            "startTime": raw["startTime"], "endTime": raw["endTime"],
+            "listPrice": list_price, "priceBasis": basis,
+            "caption": "", "points": [], "description": "",
+            "tags": list(raw["autoTags"]),
+            "unitNote": raw["unitNote"],
+            "postedAt": today, "bumpedAt": today + "T00:00:00",
+            "lastSeen": today, "pitch_status": "pending",
+        }
+        # 前に載っていた商品なら、手で書いた内容（キャプション含む）を戻す。
+        restore_hand(attic, item)
+        # 送料はAPIのフラグを正とする。物置から戻った古いタグより優先する。
+        item["tags"] = merge_shipping_tag(item.get("tags"),
+                                          raw["freeShipping"])
+        if not (item.get("caption") or "").strip():
+            cap = auto_caption(select_strict.metrics_for(item, history))
+            if cap:
+                item["caption"] = cap
+                item["captionAuto"] = True
+        result[pid] = item
+        taken += 1
+        print("  ↩ 復活: %s ¥%s（中央値比 -%.0f%% / レビュー %s件）"
+              % (item["title"][:30], "{:,}".format(price), _drop * 100,
+                 "{:,}".format(raw["reviewCount"])))
+    if stats:
+        print("   復活は %d件 / 見送り内訳: %s"
+              % (taken, " / ".join("%s %d" % kv
+                                   for kv in stats.most_common())))
+    return taken
 
 
 # ------------------------------------------------------------------ fetching
@@ -1613,6 +1868,9 @@ def main():
     # 手で書いた内容の物置。消した商品のぶんを預けてある。
     attic = load_json("hand_attic.json", {}) or {}
     history = load_json("price_history.json", {}) or {}
+    # 商品ID→itemCode の対応表。履歴だけが残った商品を引き直すために
+    # 要る（expand_from_history）。見るたびに育てて、最後に保存する。
+    codes = load_item_codes(existing, attic)
     today = datetime.now(JST).strftime("%Y-%m-%d")
     min_off = cfg["rakuten"].get("minDiscountRate", 15)
     ng_keyword = cfg["rakuten"].get("ngKeyword", "")
@@ -1694,6 +1952,7 @@ def main():
                 continue
 
             pid = product_id(raw["itemCode"])
+            register_item_code(codes, pid, raw["itemCode"], cat["slug"])
 
             # 「クーポンで◯円」のように、条件を満たさないと届かない値段を
             # 商品名に掲げているものは載せない。嘘ではないが、
@@ -1986,6 +2245,15 @@ def main():
                     p["priceBasis"] = "history" if ref else None
         p["reviewCount"] = it.get("reviewCount") or p.get("reviewCount")
         p["reviewAverage"] = it.get("reviewAverage") or p.get("reviewAverage")
+        # 送料も取り直す（2026-11-12 修正）。留め置きの更新は価格・題名・
+        # レビューだけを見ていて、postageFlag を tags に反映する経路が
+        # 無かった。そのため、送料無料の商品でもタグが付かないまま
+        # 選定のゲート5（送料無料）で落ち続ける漏れがあった
+        # （例: コシヒカリ r0c08d9066。手書きキャプションに
+        # 「送料もかからない」とあるのに tags は空のままだった）。
+        # 他の経路と同じく、APIのフラグを正として tags に反映する。
+        p["tags"] = merge_shipping_tag(p.get("tags"),
+                                        it.get("postageFlag") == 0)
         p["lastSeen"] = today
         time.sleep(REQUEST_INTERVAL)
 
@@ -2049,6 +2317,24 @@ def main():
             pre_added.append((clean_title(raw["rawTitle"]), raw["price"], off,
                               raw.get("startTime", "")))
 
+    # 履歴プールからの復活（2026-11-12）。価格履歴だけで価格ゲートを
+    # 通ったのに products.json に居ない商品を、APIで引き直して戻す。
+    # 選定の母集団を観測プール全体に広げるための入口はここだけにする
+    # （APIを叩けるのは認証情報のある取得の過程だけなので）。
+    # 種まきモードは候補の作りが違うので対象外。止めるときは
+    # 環境変数 YASUMIRU_POOL_EXPAND=0。
+    expanded = 0
+    if not seed and os.environ.get("YASUMIRU_POOL_EXPAND") != "0":
+        try:
+            expanded = expand_from_history(
+                cfg, history, result, existing, attic, codes,
+                app_id, access_key, aff_id, site_url, today, sale_tolerance)
+        except Exception as ex:                          # noqa: BLE001
+            # 復活の失敗で見張り全体を落とさない。通常分の更新は守る。
+            print("  × 履歴プールからの復活で失敗しました: %s" % ex,
+                  file=sys.stderr)
+            traceback.print_exc()
+
     products = sorted(result.values(),
                       key=lambda p: (p.get("postedAt", ""), -p.get("price", 0)), reverse=True)
 
@@ -2080,6 +2366,7 @@ def main():
     for _p in result.values():
         stash_hand(attic, _p)
     save_json("hand_attic.json", attic)
+    save_json("item_codes.json", codes)
     save_json("products.json", {
         "_readme": "商品データ。手で書いた caption / points / description / tags / "
                    "marketing / hidden は、更新でも、いったん外して拾い直したときでも "
