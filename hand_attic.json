@@ -7094,7 +7094,7 @@
     "_stashedAt": "2026-10-15"
   },
   "darkangel:10036221": {
-    "caption": "2,990円のロングスカートが1,990円。前後にスリット。",
+    "caption": "2,990円のロングスカートが1,999円。前後にスリット。",
     "points": [
       "Iライン・ポケット付き",
       "レビュー2,191件・★4.05"
@@ -10101,8 +10101,8 @@
       "cta": "none",
       "ask": "ワンピースの下、何か重ねて履きますか？"
     },
-    "pitch_status": "ready",
-    "_stashedAt": "2026-11-05"
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-12"
   },
   "nayamikaiketsulab:10000036": {
     "caption": "2,780円のビタミンCサプリが1,390円。1,000mg配合の栄養機能食品。",
@@ -10925,7 +10925,7 @@
       "ask": "三歳くらいの子へのプレゼント、何を選びましたか？"
     },
     "pitch_status": "pending",
-    "_stashedAt": "2026-11-11"
+    "_stashedAt": "2026-11-12"
   },
   "darkangel:10033624": {
     "caption": "7,290円のセンタープレステーパードパンツが2,490円。ストレッチでウエストゴム。",
@@ -13568,6 +13568,107 @@
       "送料無料"
     ],
     "listPrice": 2190,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-12"
+  },
+  "e-kurashi:10000628": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 3980,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-12"
+  },
+  "beautypalace:10000318": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 980,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-12"
+  },
+  "muzistyle:10000732": {
+    "listPrice": 2598,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-12"
+  },
+  "bjc-shop:10000730": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 980,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-12"
+  },
+  "graphic-lab:10000096": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2980,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-12"
+  },
+  "graphic-lab:10000423": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2980,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-12"
+  },
+  "graphic-lab:10000071": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2980,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-12"
+  },
+  "graphic-lab:10000306": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2980,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-12"
+  },
+  "graphic-lab:10000301": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2980,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-12"
+  },
+  "graphic-lab:10000236": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2980,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-12"
+  },
+  "graphic-lab:10000199": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2980,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-12"
+  },
+  "graphic-lab:10000365": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2980,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-12"
+  },
+  "outletshoes:10014261": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 2999,
     "pitch_status": "pending",
     "_stashedAt": "2026-11-12"
   }
