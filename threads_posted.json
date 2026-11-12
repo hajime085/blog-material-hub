@@ -918,25 +918,10 @@
     "tip:13",
     "product:rc67a0d0c5",
     "tip:27",
-    "product:r8550b30d9"
+    "product:r8550b30d9",
+    "schedule:2026-W45-4"
   ],
   "log": [
-    {
-      "key": "tip:10",
-      "id": "18056834636567974",
-      "at": "2026-10-14 23:00",
-      "kind": "tip",
-      "slot": 23,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
     {
       "key": "tip:28",
       "id": "17969367077965868",
@@ -5698,6 +5683,21 @@
       "logic_version": "pattern_v3",
       "link": "reply",
       "link_arm": "site"
+    },
+    {
+      "key": "schedule:2026-W45-4",
+      "id": "17946553425089600",
+      "at": "2026-11-12 14:20",
+      "kind": "schedule",
+      "slot": 14,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "ask_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "reply",
+      "link_arm": null
     }
   ]
 }
