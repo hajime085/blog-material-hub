@@ -1048,6 +1048,16 @@ def render_stream_card(p, cats, badge, cat_label=None):
     else:
         note = ('<p class="v-note-line">比較元：30日の中央値・%s確認%s</p>'
                 % (_md_label(p.get("lastSeen", "")), ship))
+    # カード右上の日付は「並びの基準」に合わせる（2026-11-12 修正）。
+    # ストリームは掲載日（_listed_on）の新しい順に並ぶので、確認日
+    # （lastSeen）を出すと日付がバラバラに飛んで見えた。確認日は
+    # 下の注記に出ているので情報は減らない。frozen はバッジ
+    # 「最終確認」と揃えて従来どおり lastSeen。_listed_on の無い
+    # 従来経路（関連表示など）も従来どおり lastSeen。
+    if state == "frozen" or not p.get("_listed_on"):
+        date_src = p.get("lastSeen", "")
+    else:
+        date_src = p["_listed_on"]
     return (
         '<a class="v-card" href="/p/{id}/">'
         '<img class="v-card-img" src="{img}" alt="{alt}" loading="lazy">'
@@ -1062,7 +1072,7 @@ def render_stream_card(p, cats, badge, cat_label=None):
         '{note}</div></a>'
     ).format(id=e(p["id"]), img=e(p["image"]), alt=e(p["title"]),
              label=e(cat_label or c.get("short") or c.get("label") or ""),
-             badge=e(badge), date=e(_md_label(p.get("lastSeen", ""))),
+             badge=e(badge), date=e(_md_label(date_src)),
              title=e(p["title"]), price_row=price_row,
              shop=e(p.get("shop", "楽天市場")), rev=rev, note=note)
 
