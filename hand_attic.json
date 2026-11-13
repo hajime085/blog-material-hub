@@ -13778,5 +13778,34 @@
     "listPrice": 3980,
     "pitch_status": "pending",
     "_stashedAt": "2026-11-13"
+  },
+  "matsuyafoods:10000266": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 7510,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-13"
+  },
+  "libetee:10000042": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 4980,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-13"
+  },
+  "bernice2021:10000733": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 3980,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-13"
+  },
+  "wegostore:10027346": {
+    "listPrice": 3299,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-13"
   }
 }
