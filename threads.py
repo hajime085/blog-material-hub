@@ -192,34 +192,28 @@ def publishing_limit(uid, token):
 
 # ---------------------------------------------------------------- 文面
 
-def ends_label(et):
-    """「8月27日 9:59まで」。終了時刻が分かるときだけ出す。"""
-    m = re.match(r"(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})", (et or "").strip())
-    if not m:
-        return ""
-    return "%d月%d日 %s:%s まで" % (int(m.group(2)), int(m.group(3)),
-                                 m.group(4).lstrip("0") or "0", m.group(5))
-
-
-# 商品投稿の組み立て（2026-11-10 全面作り直し）。
+# 商品投稿の組み立て（2026-11-13 全面作り直し。旧形は 2026-11-10）。
 #
-# 界隈で伸びている投稿の型を集めた結果（research.json／型カタログ
-# threads-viral-patterns-20261110.md）、入口と締めを決め直した。
+# 2026-11-10 の形（第一声→本文→事実ブロック→締めの問い）で
+# 実物の投稿を並べて確かめた結果（threads-copy-reaudit-20261113.md）：
+# いいねは全件0で、テキストだけの商品紹介という型そのものが
+# 規模を問わず届いていなかった。勝ち側は「写真＋本人の出来事＋
+# 損得判定」で、1行目は書き手の反応、事実は後ろに添えるだけ。
+# furu の決定で、文面は「生の反応＋商品名と価格＋短い一言」に変えた。
 #
-#   入口 … 事実への第一声（T1）。商品説明の言い切りで始めない。
-#          驚けるのは見て分かる事実だけ（価格・レビュー件数・
-#          見た目や仕様・利用場面）。使った感想は書かない。
-#   締め … 読む人への問い（T2）。商品ごとの問い（mk2.ask）で必ず終える。
+#   入口 … 価格を見たときの生の反応（mk2.hook）。口語で短く。
+#          観測者然とした言い回し（「観測60日の最安値」等）は出さない。
+#   価格 … 組み立て側が feed の実測で作る。いつもの値段（比較価格）との
+#          差が一言で言えるときだけ添える。
+#   締め … 短い一言（mk2.note）。問いは付けない。
 #
-# それまでの締めローテーション（CTA_TEXT／TAILS）は廃止した。
-# 問いの A/B（exp-011）は ask 群・base 群とも反応0で判定できず、
-# 外部の証拠の強さで「問いを標準に採用」と決めて閉じた。
-# 残っているのは事実ブロック（価格・レビュー・締切）で、
-# これは「判断材料」として後ろに置く。先頭に置くと、
-# 価格を列挙するだけの「まとめ告知」の文法になる（負の型 N1）。
+# 事実ブロック（送料・レビュー件数・星・締切）は付けない。
+# 数字は、組み立て側が feed の実測から作る価格の行にだけ置く。
+# 商品理解の文（hook・note）には金額も件数も書かない（pitch.py で検査）。
 #
-# 入口の型（pitch.py の HOOK_TYPES と対応）。
-NEW_HOOK_TYPES = ("price", "count", "look", "scene")
+# 入口の型（pitch.py の HOOK_TYPES と対応）。何への反応かの分類だけに使う。
+# 件数への第一声（count）は、件数を文面に出さない形になったので廃止した。
+NEW_HOOK_TYPES = ("price", "look", "scene")
 
 
 # セールの間だけ、商品リンクを楽天へ直接つなぐ。
@@ -309,59 +303,52 @@ def link_for(p, site, policy=None):
 
 
 def compose_product(p, site, pr, reply_link=False, ev=None, seq=0, fact=None):
-    """商品の投稿文（2026-11-10 の標準形）。
+    """商品の投稿文（2026-11-13 の標準形）。
 
     組み立ては1つだけに決める。形を投稿ごとに変えると、
-    何が効いたのか分からなくなる。変えるのは中身（第一声と問い）で、
-    骨格は固定する。
+    何が効いたのか分からなくなる。変えるのは中身（反応と一言）で、
+    骨格は固定する。全体で3〜4行に収める。
 
-        【PR】＋ 第一声（hook）   … 事実への短い反応。商品説明で始めない
-        本文（body）              … 何の商品かと、見分けになる事実1〜2行
-        事実ブロック              … 価格・送料・レビュー・締切の実測値
-        締め                      … 読む人への問い（ask）。必ず付ける
+        【PR】＋ 反応（hook）     … 価格を見たときの生の反応。口語で短く
+        商品名＋現在価格         … 組み立て側が feed の実測で作る。
+                                   いつもの値段（比較価格）との差が
+                                   一言で言えるときだけ添える
+        一言（note）             … 特徴や良さを、口語で一言
+
+    締めの問いと、事実ブロック（送料・レビュー件数・星・締切）は付けない。
+    数字は、組み立て側が feed の実測から作る価格の行にだけ置く。
 
     fact は再掲のときの「前回と違う事実」（値下げ・最安値への復帰・
     セール開始）。案Aの決まりで、再掲では必ず1行目に置く。
-    その場合は第一声を2行目に回す。
+    その場合は反応を2行目に回す。
     """
     mk = p.get("mk2") or None
-    if mk and mk.get("hook") and (mk.get("ask") or "").strip():
+    if mk and mk.get("hook") and (mk.get("name") or "").strip() \
+            and (mk.get("note") or "").strip():
         # 事前に作って、決まりに照らして通した商品理解を使う。
-        # 何を先に出すか、誰に向けて書くかは、ここで決めてある。
+        # 声の調子は、ここで決めてある。
         # 投稿するときに考えると毎回ぶれるし、確かめる機会もない。
         if fact:
-            lines = [pr + fact, "", mk["hook"]]
+            lines = [pr + fact, mk["hook"]]
         else:
             lines = [pr + mk["hook"]]
-        if mk.get("body"):
-            lines += ["", mk["body"]]
 
-        # 判断材料は最後に置く。値段から入ると売り込みの形になる。
-        facts = []
-        if p.get("d") and p.get("lp"):
-            facts.append("%s円 → %s円（%d%%OFF）" % (yen(p["lp"]), yen(p["pr"]), p["d"]))
-        else:
-            facts.append("%s円" % yen(p["pr"]))
-        facts.append("送料込み" if "送料無料" in (p.get("tags") or [])
-                     else "送料は別")
-        tail = "。".join(facts) + "。"
-        rc = p.get("rc") or 0
-        if rc >= 100:
-            # 件数のまま書く。買った人数に言い換えない。
-            tail += "\nレビュー%s件で、星%s。" % (yen(rc), p.get("ra", ""))
-        ends = ends_label(p.get("et"))
-        if ends:
-            tail += "\n%sまで。" % ends.replace(" まで", "")
-        lines += ["", tail]
+        # 価格の行は、組み立て側が feed の実測で作る。
+        # 商品理解の文に金額を書かせないのは、値段が動いたときに
+        # 古い金額がそのまま外へ出る事故を防ぐため（2026-08-31）。
+        price = "%s%s円だって。" % (mk["name"].strip(), yen(p["pr"]))
+        if p.get("lp") and p["lp"] > p["pr"]:
+            price += "いつもは%s円くらいするやつ。" % yen(p["lp"])
+        lines.append(price)
 
-        # 締めは、商品ごとの問い（ask）で必ず終える。
-        body = "\n".join(lines) + "\n\n" + mk["ask"].strip()
+        lines.append(mk["note"].strip())
+        body = "\n".join(lines)
         url = link_for(p, site)
         if reply_link:
             return body, url
         return body + "\n\n" + url, None
 
-    # 商品理解の無い商品、問いの無い商品は、pick() が候補から外している。
+    # 商品理解の無い商品、反応・一言の無い商品は、pick() が候補から外している。
     # ここへは来ない。来たら、それは決まりが壊れている合図なので、
     # 黙って別の形で出さずに、出さないことを選ぶ。
     #
@@ -1102,11 +1089,12 @@ def pick(cfg, posted, want, slot_hour=None, live_heads=None):
         # 作り直しの趣旨そのものからも外れている。
         # 出せるものが無い枠は、知識や記事で埋める。そちらのほうがましだ。
         #
-        # 2026-11-10 の標準形では、締めの問い（ask）も必須にした。
-        # 問いが無い商品理解は、旧い形のまま残っているもの。
+        # 2026-11-13 の標準形では、反応（hook）・短い商品名（name）・
+        # 一言（note）の3つを必須にした。締めの問い（ask）は廃止した。
+        # 欠けた商品理解は、旧い形のまま残っているもの。
         # 混ぜて出すと組み立てが2つあることになるので、候補から外す。
         mk = p.get("mk2") or {}
-        if not mk.get("hook") or not (mk.get("ask") or "").strip():
+        if not mk.get("hook") or not (mk.get("name") or "").strip() or not (mk.get("note") or "").strip():
             continue
         # キャプションが無くても、言えることがあるなら出す。
         # 値引きが取れているか、期限が分かっていること。
@@ -1721,11 +1709,11 @@ def run_once(cfg, posted, slot_hour=None, dry=False, late=False):
             for x in _feed}
     # どちらの組み立てで出したか。あとで旧と新を比べるため。
     # 商品理解を持っているものだけが新しいほうを通る。
-    # 2026-11-10 の標準形（第一声＋問い）で書かれた商品理解は pattern_v3、
+    # 2026-11-13 の標準形（反応＋価格＋一言）で書かれた商品理解は pattern_v4、
     # それ以前の形は marketing_v2 として残す。
     vers = {("product:" + x["id"]):
-            ("pattern_v3" if (x.get("mk2") or {}).get("hook_type")
-             in NEW_HOOK_TYPES else
+            ("pattern_v4" if (x.get("mk2") or {}).get("note")
+             and (x.get("mk2") or {}).get("hook_type") in NEW_HOOK_TYPES else
              "marketing_v2" if x.get("mk2") else "legacy_v1")
             for x in _feed}
     ok = 0

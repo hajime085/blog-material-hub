@@ -30,35 +30,29 @@ import sys
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
-# 入口の型（2026-11-10 の標準形）。pitch_rules.md と対応している。
+# 入口の型（2026-11-13 の標準形）。pitch_rules.md と対応している。
 #
-# それまでの7種（悩み・あるある・利用シーン・発見・比較・意外性・
-# 悩み＋価格）は、どれも「商品説明の言い切り」の仲間どうしで、
-# 自アカウントでは差が出なかった（入口の型の中央値 7.5〜11）。
-# 界隈で伸びている投稿（型カタログ T1）は、1行目が
-# 事実への短い反応になっている。驚けるのは見て分かる事実だけ。
-#   price … 価格の事実への第一声（現在価格・OFF を含んでよい）
-#   count … レビュー件数・評価の事実への第一声
-#   look  … 見た目・仕様の事実への第一声（写真で分かること）
-#   scene … 利用場面への第一声（あるあるを反応の形で）
+# 2026-11-10 の標準形は「事実への第一声」だった。だが実物の投稿を
+# 並べて確かめた結果、テキストだけの商品紹介という型そのものが
+# 届いておらず、第一声は「スペックの朗読」になっていた。
+# 2026-11-13、furu の決定で声を作り直した。1行目は、値段を見たときの
+# 生の反応（口語・柔らかい驚き）。数字は文に書かず、組み立て側が
+# feed の実測で価格の行を作る。型は「何への反応か」の分類だけに使う。
+#   price … 価格を見た反応
+#   look  … 見た目・仕様への反応
+#   scene … 利用場面への反応
+# 件数への第一声（count）は廃止した。レビュー件数・星は
+# 選ぶときの物差しとしては裏で使うが、文面には載せない。
 HOOK_TYPES = {
-    "price": "価格への第一声",
-    "count": "件数への第一声",
-    "look":  "見た目・仕様への第一声",
-    "scene": "場面への第一声",
+    "price": "価格への反応",
+    "look":  "見た目・仕様への反応",
+    "scene": "場面への反応",
 }
 
-REQUIRED = ("hook_type", "target", "problem", "hook", "body", "ask", "ask_type")
-
-# 締めの問い（ask）の種類。締めは全投稿このどれかで統一する。
-# それまでの締めローテーション（experience／compare／empathy／save／
-# question／none）は廃止した。定型の文を回すのではなく、
-# 商品ごとの問いを書く。種類は「何を聞くか」の分類だけに使う。
-ASK_TYPES = {
-    "usage":   "使っている人を聞く",
-    "choice":  "選び方・派を聞く",
-    "problem": "困りごとを聞く",
-}
+# 人が書く部分。hook（反応）→ 組み立て側が name＋価格の行を挟む →
+# note（短い一言）。body はサイトの「どんな商品？」に使う説明文で、
+# 投稿には出ない。target / problem / features は根拠の置き場。
+REQUIRED = ("hook_type", "target", "problem", "hook", "name", "body", "note")
 
 # 判定は3階層で見る。「〜そう」が付いているかどうかでは決めない。
 #
@@ -113,9 +107,9 @@ def save(name, obj):
 
 
 def text_of(m):
-    # 締めの問い（ask）も外に出る文なので調べる。
+    # 反応（hook）と一言（note）も外に出る文なので調べる。
     return "\n".join([str(m.get("hook") or ""), str(m.get("body") or ""),
-                      str(m.get("ask") or "")])
+                      str(m.get("note") or "")])
 
 
 def validate(m, p):
@@ -133,15 +127,9 @@ def validate(m, p):
         issues.append("features が空（何を根拠にしたか残らない）")
     if m.get("hook_type") not in HOOK_TYPES:
         issues.append("入口の型が不明: %s" % m.get("hook_type"))
-    # 締めの問い（ask）は必須。答えたくなる問いにする。
-    # 相手を名指しし（「○○の人」）、疑問で終える。
-    ask = (m.get("ask") or "").strip()
-    if not ask:
-        issues.append("ask が空（締めの問いは必須）")
-    elif not ask.endswith(("？", "?")):
-        issues.append("ask が問いで終わっていない: %s" % ask)
-    if m.get("ask_type") not in ASK_TYPES:
-        issues.append("問いの種類が不明: %s" % m.get("ask_type"))
+    # 締めの問い（ask）は 2026-11-13 に廃止した。締めは短い一言（note）。
+    # 「〜な人、いますか？」の所有確認は、答えても話が続かず、
+    # 返信ゼロの実績とも一致していた。note が必須なのは REQUIRED で見る。
 
     t = text_of(m)
     cat = p.get("category", "")
@@ -165,26 +153,20 @@ def validate(m, p):
                 issues.append("体型が変わる言い方「%s」" % w)
                 break
 
-    # 値段の置き場所。
-    # 事実ブロック（組み立て側が最後に付ける）以外では、本文（body）と
-    # 問い（ask）に値段を書かない。二重に出すと告知の列挙になる。
-    # 第一声（hook）だけは、型が price のときに価格の事実を使える。
-    # その場合も、書けるのは実在の金額（現在価格・定価）か、
-    # 「1杯あたり約32円」のような算術で出る単価だけ。
-    body_ask = "\n".join([str(m.get("body") or ""), ask])
-    if re.search(r"[\d,]{2,}\s*円", body_ask):
-        issues.append("本文・問いに値段が入っている（価格は組み立て側で付ける）")
-    if m.get("hook_type") != "price":
-        if re.search(r"[\d,]{2,}\s*円", str(m.get("hook") or "")):
-            issues.append("hook に値段が入っている（価格の第一声は型 price のときだけ）")
-    else:
-        allowed = {p.get("price"), p.get("listPrice")}
-        for mt in re.finditer(r"([\d,]{2,})\s*円", str(m.get("hook") or "")):
-            val = int(mt.group(1).replace(",", ""))
-            before = (m.get("hook") or "")[max(0, mt.start() - 10):mt.start()]
-            if val in allowed or "あたり" in before or "約" in before:
-                continue
-            issues.append("hook の金額 %s円 が商品データに無い" % mt.group(1))
+    # 値段の置き場所（2026-11-13 の標準形）。
+    # 投稿文の数字は、組み立て側が feed の実測で作る価格の行だけ。
+    # 人が書く文（hook・body・note）に金額を書くと、値段が動いたときに
+    # 古い金額がそのまま外へ出る。算術で出る単価も、文には書かない。
+    voice = "\n".join([str(m.get("hook") or ""), str(m.get("body") or ""),
+                       str(m.get("note") or "")])
+    if re.search(r"[\d,]+\s*円", voice):
+        issues.append("文に金額が入っている（金額は組み立て側が feed の実測で付ける）")
+    # 証拠数字（レビュー件数・星）も文面には入れない。
+    # 選ぶときの物差しとしては裏で使い続けるが、外に出す文には載せない
+    # （furu の線引き。カイカタXの「文面に証拠数字は載せない」と同じ）。
+    for w in ("レビュー", "星", "★"):
+        if w in str(m.get("hook") or "") or w in str(m.get("note") or ""):
+            issues.append("反応・一言に証拠数字（%s）が入っている" % w)
             break
 
     # レベル3に当たる述語が入っていないか。

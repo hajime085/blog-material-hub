@@ -52,9 +52,12 @@ def rule_post_needs_pitch(ctx):
     作り直す前の形に戻っていた。
     2026-11-10: 標準形の変更に合わせて、条件は「第一声（hook）と
     締めの問い（ask）の両方があること」に強めた。
+    2026-11-13: 標準形の作り直しに合わせて、条件は「反応（hook）・
+    短い商品名（name）・一言（note）の3つがあること」に変えた。
+    締めの問い（ask）は廃止した。
     """
     src = ctx["threads_py"]
-    if 'if not mk.get("hook") or not (mk.get("ask") or "").strip():' not in src:
+    if 'if not mk.get("hook") or not (mk.get("name") or "").strip() or not (mk.get("note") or "").strip():' not in src:
         return ["threads.py の pick() に、商品理解の無い商品を外す条件がありません"]
     return []
 
@@ -1091,24 +1094,33 @@ def rule_keep_learning_from_others(ctx):
     return out
 
 
-def rule_pitches_carry_an_ask(ctx):
-    """商品理解には、締めの問い（ask）を書く。常時効く決まり。
+def rule_pitches_carry_hook_and_note(ctx):
+    """投稿に出る商品理解には、反応（hook）・名前（name）・一言（note）を書く。
 
-    2026-09-28: 界隈で反応の多い投稿は、締めが読む人への問いだった
-    （research.json pat-02）。問いを持つ商品だけを半分ずつ当てる
-    試し（exp-011）を回したが、ask 群・base 群とも反応は0件で
-    差がつかず、判定できなかった。
-    2026-11-10: 外部の証拠の強さを優先して、問いを商品投稿の
-    標準の締めに採用した（型カタログ T2）。試しの対象ではなく
-    全投稿の必須にしたので、この決まりは実験が走っていなくても効く。
-    問いが無い商品理解は、新しい組み立てで投稿できない。
+    2026-09-28〜2026-11-10: 締めの問い（ask）を必須にする決まりだった。
+    界隈で反応の多い投稿は締めが問いだという外部の証拠（型カタログ T2）と、
+    自分たちの試し（exp-011、両群とも反応0で判定できず）が根拠だった。
+    2026-11-13: 実物の投稿を並べて確かめた結果、テキストだけの
+    商品紹介という型そのものが届いておらず、締めの問いは
+    「〜な人、いますか？」の所有確認に劣化していた（返信は累計0）。
+    furu の決定で標準形を「生の反応＋商品名と価格＋短い一言」に変え、
+    問いと事実ブロックは廃止した。人が書く部分は hook と note に
+    なったので、必須の決まりもそちらへ移す。
+
+    対象は、投稿台（feed.json）に出ている商品だけにする。
+    投稿に出ない過去の商品理解まで鳴らすと、狼少年になる。
     """
+    feed = load("assets/data/feed.json", []) or []
+    on_feed = {x.get("id") for x in feed}
     miss = [p for p in ctx["products"]
             if p.get("pitch_status") == "ready"
-            and (p.get("postedAt") or "") >= "2026-09-28"
-            and not ((p.get("marketing") or {}).get("ask") or "").strip()]
+            and p.get("id") in on_feed
+            and (not ((p.get("marketing") or {}).get("hook") or "").strip()
+                 or not ((p.get("marketing") or {}).get("name") or "").strip()
+                 or not ((p.get("marketing") or {}).get("note") or "").strip())]
     if miss:
-        return ["商品理解に問い（ask）が無い商品が %d件あります（%s など）。"
+        return ["投稿に出る商品理解に反応（hook）・名前（name）・一言（note）が"
+                "欠けた商品が %d件あります（%s など）。"
                 "新しい組み立てでは投稿できません"
                 % (len(miss), miss[0].get("title", "")[:20])]
     return []
@@ -1211,7 +1223,7 @@ RULES = [
     ("セールの速報は events.json の期間に従う", rule_sale_mode_follows_events),
     ("リンクの出し方は試しで決める", rule_link_follows_experiment),
     ("周りから学ぶのを止めない", rule_keep_learning_from_others),
-    ("商品理解に問いを書く", rule_pitches_carry_an_ask),
+    ("商品理解に反応と一言を書く", rule_pitches_carry_hook_and_note),
     ("日付を書いた豆知識は期限で止める", rule_dated_tips_expire),
     ("日次の要点から警報を落とさない", rule_daily_summary_keeps_the_alarms),
     ("学びを止めない", rule_keep_learning),
@@ -1235,6 +1247,23 @@ RULES = [
 # PROBES の各行は「この決まりは、この材料からこの文字列が消えたら
 # （または現れたら）鳴るはずだ」という宣言。
 # 商品データの壊し方。文字列の抜き差しでは作れないものはここに書く。
+def _without_note(ps):
+    """投稿台に出ている商品理解を1件複写し、一言（note）だけを消す。
+
+    「反応と一言」の決まりは投稿台（feed.json）に出ている商品だけを
+    見るので、壊す側も投稿台の商品から作らないと鳴らない。
+    IDは変えない（台に出ているかどうかはIDで見るため）。
+    """
+    feed = load("assets/data/feed.json", []) or []
+    on_feed = {x.get("id") for x in feed}
+    base = next((p for p in ps if p.get("id") in on_feed
+                 and (p.get("marketing") or {}).get("note")), None)
+    if base is None:
+        return ps
+    return ps + [dict(base, pitch_status="ready",
+                      marketing=dict(base.get("marketing") or {}, note=""))]
+
+
 MUTATIONS = {
     "リンクを楽天以外にする":
         lambda ps: [dict(p, affiliateUrl="https://example.com/") for p in ps],
@@ -1246,10 +1275,7 @@ MUTATIONS = {
     "日付入りの豆知識から期限を消す":
         lambda d: dict(d, tips=[{k: v for k, v in t.items() if k != "until"}
                                 for t in (d.get("tips") or [])]),
-    "今日書いた商品理解から問いを消す":
-        lambda ps: ps + [dict(ps[0], id="probe-ask", postedAt="2099-01-01",
-                              pitch_status="ready",
-                              marketing=dict(ps[0].get("marketing") or {}, ask=""))],
+    "投稿に出る商品理解から一言を消す": _without_note,
 }
 
 
@@ -1309,8 +1335,8 @@ PROBES = {
          ("threads_py", "def link_policy", "remove")],
     "日付を書いた豆知識は期限で止める":
         [("tips", "日付入りの豆知識から期限を消す", "mutate")],
-    "商品理解に問いを書く":
-        [("products", "今日書いた商品理解から問いを消す", "mutate")],
+    "商品理解に反応と一言を書く":
+        [("products", "投稿に出る商品理解から一言を消す", "mutate")],
     "周りから学ぶのを止めない":
         [("research", "", "empty"),
          ("daily_routine", "research.json", "remove")],
