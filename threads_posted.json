@@ -927,25 +927,10 @@
     "product:rbd40d7c42",
     "feature:cake:2026-11-30",
     "feature:osechi:2026-11-30",
-    "report:2026-11-13"
+    "report:2026-11-13",
+    "product:r24bdb7dbc"
   ],
   "log": [
-    {
-      "key": "tip:36",
-      "id": "18090924446201145",
-      "at": "2026-10-15 18:00",
-      "kind": "tip",
-      "slot": 18,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
     {
       "key": "tip:19",
       "id": "17871029535644633",
@@ -5698,6 +5683,21 @@
       "logic_version": null,
       "link": "reply",
       "link_arm": null
+    },
+    {
+      "key": "product:r24bdb7dbc",
+      "id": "18022729829733652",
+      "at": "2026-11-13 20:00",
+      "kind": "product",
+      "slot": 20,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "look",
+      "ask_type": null,
+      "category": "food",
+      "logic_version": "pattern_v4",
+      "link": "reply",
+      "link_arm": "direct"
     }
   ]
 }
