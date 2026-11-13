@@ -301,8 +301,8 @@
         "reviewCount": 3037,
         "itemCode": "darkangel:10037880",
         "genreId": "566018",
-        "startTime": "2026-11-12 21:00",
-        "endTime": "2026-11-13 08:59",
+        "startTime": "2026-11-13 09:00",
+        "endTime": "2026-11-13 20:59",
         "listPrice": 2799,
         "priceBasis": "history",
         "caption": "2,799円のカップ付きブラトップが1,000円。観測60日の最安値で、中央値より40.8%安い。送料無料。",
@@ -347,9 +347,9 @@
       "snapshot": {
         "id": "r8e972c23b",
         "category": "fashion",
-        "title": "※超特価【12時間タイムセール：一律1,000円ポッキリ 】 裏起毛フェイクタイツ 裏起毛タイツ…",
-        "rawTitle": "※超特価【12時間タイムセール：一律1,000円ポッキリ！】 裏起毛フェイクタイツ 裏起毛タイツ タイツ 裏起毛 厚手 防寒 着圧 1200デニール 600デニール ストッキング 極厚 あったか あたたかい 冷え取り 毛布【選べる1200D / 600D / 80D フェイクタイツ】ダークエンジェル",
-        "price": 1000,
+        "title": "※超特価【12時間タイムセール：一律999円 】 裏起毛フェイクタイツ 裏起毛タイツ タイツ 裏起毛…",
+        "rawTitle": "※超特価【12時間タイムセール：一律999円！】 裏起毛フェイクタイツ 裏起毛タイツ タイツ 裏起毛 厚手 防寒 着圧 1200デニール 600デニール ストッキング 極厚 あったか あたたかい 冷え取り 毛布【選べる1200D / 600D / 80D フェイクタイツ】ダークエンジェル",
+        "price": 999,
         "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/darkangel/cabinet/12863863/13830759/01216sss-main-0904-1.jpg?_ex=600x600",
         "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00q8qj7.jeifo2ee.g00q8qj7.jeifpbbc/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdarkangel%2F312-535-01216sss%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fdarkangel%2Fi%2F10023599%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
         "shop": "Dark Angel (ダークエンジェル)",
@@ -357,8 +357,8 @@
         "reviewCount": 3852,
         "itemCode": "darkangel:10023599",
         "genreId": "206440",
-        "startTime": "2026-11-12 21:00",
-        "endTime": "2026-11-13 08:59",
+        "startTime": "2026-11-13 09:00",
+        "endTime": "2026-11-13 20:59",
         "listPrice": 2699,
         "priceBasis": "history",
         "caption": "2,699円の裏起毛フェイクタイツが1,000円。観測33日の最安値で、中央値より50%安い。送料無料。",
@@ -368,8 +368,8 @@
         "points": [],
         "description": "",
         "unitNote": null,
-        "postedAt": "2026-11-10",
-        "bumpedAt": "2026-11-10T16:39:37",
+        "postedAt": "2026-11-13",
+        "bumpedAt": "2026-11-13T11:32:18",
         "lastSeen": "2026-11-13",
         "pitch_status": "ready",
         "marketing": {
@@ -1307,12 +1307,10 @@
     }
   ],
   "automation": {
-    "applied_at": "2026-11-13T07:33:15+09:00",
-    "products_count": 324,
-    "history_entries": 356380,
-    "added": [
-      "r24bdb7dbc"
-    ],
+    "applied_at": "2026-11-13T11:32:45+09:00",
+    "products_count": 323,
+    "history_entries": 356388,
+    "added": [],
     "expired": [],
     "forced": false
   }

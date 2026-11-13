@@ -25572,5 +25572,713 @@
   "rf17051c92": {
     "code": "konbu-genzouya:10000772",
     "category": "seasonal"
+  },
+  "rd58cbc614": {
+    "code": "yummy39:10000870",
+    "category": "food"
+  },
+  "r2b7b1799e": {
+    "code": "yummy39:10000186",
+    "category": "food"
+  },
+  "r22eea2752": {
+    "code": "cellar:10002724",
+    "category": "food"
+  },
+  "r7f36aa22a": {
+    "code": "zakkoku-okome:10001342",
+    "category": "food"
+  },
+  "r17c0752b8": {
+    "code": "natuland-asahi:10000014",
+    "category": "food"
+  },
+  "r4620809cb": {
+    "code": "yummy39:10000942",
+    "category": "food"
+  },
+  "r633fc4f9b": {
+    "code": "natuland-asahi:10001593",
+    "category": "food"
+  },
+  "rf7901218e": {
+    "code": "ashu:10003926",
+    "category": "kitchen"
+  },
+  "r613dd0ecd": {
+    "code": "townmart:10006700",
+    "category": "kitchen"
+  },
+  "rd1f3baa7c": {
+    "code": "toplus:10000262",
+    "category": "kaden"
+  },
+  "r7d6ac66e4": {
+    "code": "yoitas:10000018",
+    "category": "kaden"
+  },
+  "r67a17e978": {
+    "code": "tanakastore:10000102",
+    "category": "kaden"
+  },
+  "rdcb427af1": {
+    "code": "asumiru:10016671",
+    "category": "kaden"
+  },
+  "r34811c6b6": {
+    "code": "yurifashion:10022174",
+    "category": "kaden"
+  },
+  "r83cc45e4f": {
+    "code": "jijirai:10013334",
+    "category": "kaden"
+  },
+  "r0e2adcaf6": {
+    "code": "sofapotato:11149175",
+    "category": "kaden"
+  },
+  "rb8ca6af49": {
+    "code": "astershop:10815427",
+    "category": "kaden"
+  },
+  "rb29c7dc1f": {
+    "code": "officemtsd-2:10048355",
+    "category": "kaden"
+  },
+  "r882bcdade": {
+    "code": "clearstore2024:10110354",
+    "category": "kaden"
+  },
+  "rbfda09622": {
+    "code": "putera:10629532",
+    "category": "kaden"
+  },
+  "rd68ff3fb8": {
+    "code": "petiteshop:10093805",
+    "category": "kaden"
+  },
+  "r0a5284e02": {
+    "code": "at-life:12465459",
+    "category": "kaden"
+  },
+  "r89997df66": {
+    "code": "whitehalca:10172437",
+    "category": "kaden"
+  },
+  "r95d2096f7": {
+    "code": "kokubanstore:10153264",
+    "category": "kaden"
+  },
+  "r6bae0bda7": {
+    "code": "tomstore:10900557",
+    "category": "kaden"
+  },
+  "r34406ffbb": {
+    "code": "nikorashop:10065789",
+    "category": "kaden"
+  },
+  "r8a3e05912": {
+    "code": "seiyushop01:10843661",
+    "category": "kaden"
+  },
+  "rc98598ecf": {
+    "code": "kina1004:10120502",
+    "category": "kaden"
+  },
+  "r8722c64e8": {
+    "code": "superyou2nd:10027614",
+    "category": "kaden"
+  },
+  "r7506af9ec": {
+    "code": "lilishop6-store:10969390",
+    "category": "kaden"
+  },
+  "rabf018a25": {
+    "code": "blueberrry:10869258",
+    "category": "kaden"
+  },
+  "rb67072081": {
+    "code": "putera:10108850",
+    "category": "kaden"
+  },
+  "r2b144365b": {
+    "code": "lilishop6-store:10188049",
+    "category": "kaden"
+  },
+  "raa1c75b39": {
+    "code": "boardermkt:10027353",
+    "category": "kaden"
+  },
+  "raca34b510": {
+    "code": "lilishop6-store:10981144",
+    "category": "kaden"
+  },
+  "r4b993d6d9": {
+    "code": "miraiyuki:10217530",
+    "category": "kaden"
+  },
+  "rb2d6a8e7f": {
+    "code": "sunny-style:10006713",
+    "category": "baby-toy"
+  },
+  "r7108c1b50": {
+    "code": "calmblossom:10001010",
+    "category": "baby-toy"
+  },
+  "rb0e35a0bd": {
+    "code": "welove:10087562",
+    "category": "baby-toy"
+  },
+  "r342dddb0c": {
+    "code": "asucreate1983:10003899",
+    "category": "baby-toy"
+  },
+  "r7482c9519": {
+    "code": "gekiyasu-kagu:10010029",
+    "category": "baby-toy"
+  },
+  "re87822161": {
+    "code": "nokastore:10020006",
+    "category": "baby-toy"
+  },
+  "r46760ad4b": {
+    "code": "cliosi:10006186",
+    "category": "baby-toy"
+  },
+  "r086e65298": {
+    "code": "seisinr01:10233640",
+    "category": "baby-toy"
+  },
+  "r5800a8cbb": {
+    "code": "sunshoukai:10007564",
+    "category": "baby-toy"
+  },
+  "r4d41a08bc": {
+    "code": "oyamashoten:10061070",
+    "category": "baby-toy"
+  },
+  "r81af4c251": {
+    "code": "shop-an:10004723",
+    "category": "baby-toy"
+  },
+  "rf011f7af4": {
+    "code": "baby-days:10006604",
+    "category": "baby-toy"
+  },
+  "r2a3f60b5c": {
+    "code": "pie-no:10003452",
+    "category": "baby-toy"
+  },
+  "r88ddd58da": {
+    "code": "pie-no:10003451",
+    "category": "baby-toy"
+  },
+  "rc1aa64171": {
+    "code": "kingwa:10038836",
+    "category": "baby-toy"
+  },
+  "ree7e31cda": {
+    "code": "t-life21:10000211",
+    "category": "baby-toy"
+  },
+  "r1020d66d1": {
+    "code": "septastore:10032691",
+    "category": "baby-toy"
+  },
+  "r288b2fea8": {
+    "code": "hatfee:10010750",
+    "category": "baby-toy"
+  },
+  "rda5d2e976": {
+    "code": "vivi-baby:10000456",
+    "category": "baby-toy"
+  },
+  "r9ec7552be": {
+    "code": "rcmdfa:11227433",
+    "category": "baby-toy"
+  },
+  "r5b22f4694": {
+    "code": "riundou:10047105",
+    "category": "baby-toy"
+  },
+  "r39ff9bc24": {
+    "code": "aksky:10000857",
+    "category": "baby-toy"
+  },
+  "r6471f02e9": {
+    "code": "doridori:10003842",
+    "category": "baby-toy"
+  },
+  "r0cd97304c": {
+    "code": "zzicmisora:10013330",
+    "category": "baby-toy"
+  },
+  "r611a05cb9": {
+    "code": "happy11:10016132",
+    "category": "baby-toy"
+  },
+  "r3ad7a10f5": {
+    "code": "kingwa:10050925",
+    "category": "baby-toy"
+  },
+  "r82ef387d3": {
+    "code": "happy1991drink:10027367",
+    "category": "baby-toy"
+  },
+  "rd6d5465f7": {
+    "code": "activeshop:10054945",
+    "category": "baby-toy"
+  },
+  "r14e7ba920": {
+    "code": "asi-shop:10059880",
+    "category": "baby-toy"
+  },
+  "r3cc7a7bff": {
+    "code": "lirun:10006332",
+    "category": "baby-toy"
+  },
+  "r7e8acba83": {
+    "code": "lifesmile777:10028749",
+    "category": "baby-toy"
+  },
+  "r2b9ae03fd": {
+    "code": "kizuna13:10003712",
+    "category": "baby-toy"
+  },
+  "r801ca3806": {
+    "code": "asbeaute:10040558",
+    "category": "baby-toy"
+  },
+  "r71d135a86": {
+    "code": "asbeaute:10040550",
+    "category": "baby-toy"
+  },
+  "r59a8a554c": {
+    "code": "thiakusuto:10016137",
+    "category": "baby-toy"
+  },
+  "rafc35d22d": {
+    "code": "mumchan:10000490",
+    "category": "baby-toy"
+  },
+  "r76447ea8d": {
+    "code": "asbeaute:10040284",
+    "category": "baby-toy"
+  },
+  "r24e1fb950": {
+    "code": "pie-no:10003372",
+    "category": "baby-toy"
+  },
+  "ree8a12d0d": {
+    "code": "combimini:10071051",
+    "category": "baby-toy"
+  },
+  "r0abf069f3": {
+    "code": "combimini:10072122",
+    "category": "baby-toy"
+  },
+  "rb2f3ed68e": {
+    "code": "maytopia:10000185",
+    "category": "baby-toy"
+  },
+  "r92d2fad59": {
+    "code": "ashu:10009687",
+    "category": "pet"
+  },
+  "r7a9fed87c": {
+    "code": "ibis:10000058",
+    "category": "pet"
+  },
+  "r9f770956a": {
+    "code": "ashu:10008579",
+    "category": "pet"
+  },
+  "r446c9af3a": {
+    "code": "ashu:10004199",
+    "category": "pet"
+  },
+  "r3938acf6c": {
+    "code": "ashudog:10012548",
+    "category": "pet"
+  },
+  "r8a44db4ec": {
+    "code": "ashudog:10013607",
+    "category": "pet"
+  },
+  "r27837787d": {
+    "code": "ashudog:10008785",
+    "category": "pet"
+  },
+  "r9823ca4d1": {
+    "code": "catfood:10059137",
+    "category": "pet"
+  },
+  "ree1e8bf6e": {
+    "code": "shop-you-you2023:10002941",
+    "category": "pet"
+  },
+  "r624129d94": {
+    "code": "nichijyo:10005636",
+    "category": "pet"
+  },
+  "r5d73b52d5": {
+    "code": "toyu22:10018507",
+    "category": "pet"
+  },
+  "r7c6a32097": {
+    "code": "akiraten:10000509",
+    "category": "pet"
+  },
+  "r768405f3b": {
+    "code": "satoru-shop:10000242",
+    "category": "pet"
+  },
+  "rc03a61775": {
+    "code": "mondeselection:10074956",
+    "category": "pet"
+  },
+  "ref38c3224": {
+    "code": "smileterrace:10004488",
+    "category": "pet"
+  },
+  "rce8d8b671": {
+    "code": "shop-you-you2023:10003129",
+    "category": "pet"
+  },
+  "rc09fdf902": {
+    "code": "mmoon:10002781",
+    "category": "beauty"
+  },
+  "rb3d4c8c6c": {
+    "code": "happylife-shop:10001863",
+    "category": "beauty"
+  },
+  "r2b72b000e": {
+    "code": "ikum-shop:10000105",
+    "category": "beauty"
+  },
+  "r3b7d9ab7a": {
+    "code": "rinzo:10060466",
+    "category": "beauty"
+  },
+  "r5a3658a41": {
+    "code": "livlaboratories:10000090",
+    "category": "beauty"
+  },
+  "r289a01f61": {
+    "code": "morro:10053395",
+    "category": "beauty"
+  },
+  "rd594e954a": {
+    "code": "morro:10045109",
+    "category": "beauty"
+  },
+  "r5b02d3af3": {
+    "code": "serenebeauty1:10062963",
+    "category": "beauty"
+  },
+  "r6b960746e": {
+    "code": "goodlifeshopstore:10324620",
+    "category": "beauty"
+  },
+  "r7fd058929": {
+    "code": "happynight:10480635",
+    "category": "beauty"
+  },
+  "rd24983e2c": {
+    "code": "daily-store:10334165",
+    "category": "beauty"
+  },
+  "r32dde51a3": {
+    "code": "daily-store:10358519",
+    "category": "beauty"
+  },
+  "r81f9bb15c": {
+    "code": "myr2026:10015922",
+    "category": "beauty"
+  },
+  "r1c3e6a577": {
+    "code": "happynight:10480218",
+    "category": "beauty"
+  },
+  "r9720282e4": {
+    "code": "myr2026:10016411",
+    "category": "beauty"
+  },
+  "r50b7832e6": {
+    "code": "vlookupstore:10722493",
+    "category": "beauty"
+  },
+  "r4ea94d056": {
+    "code": "morro:10047425",
+    "category": "beauty"
+  },
+  "rf7fe13972": {
+    "code": "mies-shop:10000531",
+    "category": "beauty"
+  },
+  "rc83fe6baa": {
+    "code": "123success:10007301",
+    "category": "beauty"
+  },
+  "rce9bae425": {
+    "code": "sugarlight:10239536",
+    "category": "beauty"
+  },
+  "r0002b6cc6": {
+    "code": "goodwoods:10370214",
+    "category": "pc"
+  },
+  "r0f66c76db": {
+    "code": "zakkastore365:10017529",
+    "category": "pc"
+  },
+  "r8c6872675": {
+    "code": "murauchi-denki:142983254",
+    "category": "pc"
+  },
+  "reb3c6832c": {
+    "code": "goodwoods:10370227",
+    "category": "pc"
+  },
+  "r972520cdd": {
+    "code": "uguisumama:10164462",
+    "category": "pc"
+  },
+  "rda08939d2": {
+    "code": "yuzuriha-shop:10147744",
+    "category": "pc"
+  },
+  "rd8322da45": {
+    "code": "niconicoshop:10000567",
+    "category": "pc"
+  },
+  "re11cb7128": {
+    "code": "dailygoodsstore:10022649",
+    "category": "pc"
+  },
+  "r639be6168": {
+    "code": "sweetshopegami:10066476",
+    "category": "pc"
+  },
+  "r351e10dc1": {
+    "code": "select-tgk:10000518",
+    "category": "pc"
+  },
+  "rd2088b727": {
+    "code": "edion:10482005",
+    "category": "pc"
+  },
+  "r4c96a09e1": {
+    "code": "ecprime500:10102185",
+    "category": "pc"
+  },
+  "r86f322a9e": {
+    "code": "a-price:10292434",
+    "category": "pc"
+  },
+  "rd5cbeefbb": {
+    "code": "holly0211:10064966",
+    "category": "pc"
+  },
+  "rd8bef075a": {
+    "code": "kurashino-marche:10000094",
+    "category": "pc"
+  },
+  "r9e44d515d": {
+    "code": "onlyons:10102817",
+    "category": "pc"
+  },
+  "r837ed06a0": {
+    "code": "manmaru-fresta:10253591",
+    "category": "pc"
+  },
+  "rd2c1d52ac": {
+    "code": "lifezakkaevery:10013482",
+    "category": "pc"
+  },
+  "rb508d21f6": {
+    "code": "goodwoods:10369753",
+    "category": "pc"
+  },
+  "re94d9861b": {
+    "code": "homeystore:10130751",
+    "category": "pc"
+  },
+  "r3e67c4f5f": {
+    "code": "holly0211:10087316",
+    "category": "pc"
+  },
+  "r5ac03d019": {
+    "code": "triangle777:10031042",
+    "category": "pc"
+  },
+  "re2d573269": {
+    "code": "theskeletonworks:10003434",
+    "category": "pc"
+  },
+  "r64e694550": {
+    "code": "homeystore:10156738",
+    "category": "pc"
+  },
+  "r342f656e1": {
+    "code": "uguisumama:10164497",
+    "category": "pc"
+  },
+  "r0bd1d2512": {
+    "code": "spd-shop:10002796",
+    "category": "pc"
+  },
+  "r564531db1": {
+    "code": "rinzo:10020691",
+    "category": "pc"
+  },
+  "rbc405d19a": {
+    "code": "shop-you-you2023:10003493",
+    "category": "pc"
+  },
+  "r03103fe6b": {
+    "code": "rinzo:10038780",
+    "category": "pc"
+  },
+  "r7da6b601a": {
+    "code": "clickworks:10193612",
+    "category": "pc"
+  },
+  "rf13f50211": {
+    "code": "hanamaruryohin:10105388",
+    "category": "pc"
+  },
+  "r63b1b2d37": {
+    "code": "homeystore:10130728",
+    "category": "pc"
+  },
+  "re5095181f": {
+    "code": "spade1:10002691",
+    "category": "fashion"
+  },
+  "r1fd3278a0": {
+    "code": "jiggys-shop:10006481",
+    "category": "fashion"
+  },
+  "r17d153c66": {
+    "code": "pierrot:10010655",
+    "category": "fashion"
+  },
+  "r2eb0e3293": {
+    "code": "pierrot:10015430",
+    "category": "fashion"
+  },
+  "r29a5b2ea8": {
+    "code": "pierrot:10016050",
+    "category": "fashion"
+  },
+  "rff06445fe": {
+    "code": "auc-ecoloco:10008121",
+    "category": "fashion"
+  },
+  "r47cf69a26": {
+    "code": "auc-ecoloco:10008871",
+    "category": "fashion"
+  },
+  "r24221a2d7": {
+    "code": "auc-ecoloco:10008122",
+    "category": "fashion"
+  },
+  "red5d714bb": {
+    "code": "auc-ecoloco:10010976",
+    "category": "fashion"
+  },
+  "r57b27ead9": {
+    "code": "stylife:15881623",
+    "category": "fashion"
+  },
+  "r312cdc696": {
+    "code": "amiclothes:10160116",
+    "category": "fashion"
+  },
+  "r214ae4f6e": {
+    "code": "amiclothes:10160169",
+    "category": "fashion"
+  },
+  "r3d6231dde": {
+    "code": "amiclothes:10071702",
+    "category": "fashion"
+  },
+  "r50f47dd1d": {
+    "code": "prospo:10172089",
+    "category": "fashion"
+  },
+  "r021567041": {
+    "code": "kpi:10265587",
+    "category": "fashion"
+  },
+  "rb3d8480ce": {
+    "code": "amiclothes:10159494",
+    "category": "fashion"
+  },
+  "r449a09adc": {
+    "code": "amiclothes:10148910",
+    "category": "fashion"
+  },
+  "r804e6744f": {
+    "code": "amiclothes:10148889",
+    "category": "fashion"
+  },
+  "r46114d477": {
+    "code": "shunashuna:10002395",
+    "category": "fashion"
+  },
+  "r9b2aead37": {
+    "code": "sesto:10012678",
+    "category": "fashion"
+  },
+  "rafd3614bb": {
+    "code": "tanzan-shop:11027675",
+    "category": "fashion"
+  },
+  "rc367cb6ad": {
+    "code": "sturgeon-life:10016514",
+    "category": "fashion"
+  },
+  "re053d7596": {
+    "code": "lilishop6-store:10492886",
+    "category": "fashion"
+  },
+  "rf43ece4f4": {
+    "code": "lilishop6-store:10743515",
+    "category": "fashion"
+  },
+  "r4c784bc5a": {
+    "code": "showcase:10007734",
+    "category": "fashion"
+  },
+  "raa5933abd": {
+    "code": "goods-beauty:10003874",
+    "category": "fashion"
+  },
+  "r692c625ed": {
+    "code": "funlnn:10010322",
+    "category": "fashion"
+  },
+  "r24fc82685": {
+    "code": "astershop:10279997",
+    "category": "fashion"
+  },
+  "r2cd5cf066": {
+    "code": "emuland-store:10487922",
+    "category": "fashion"
+  },
+  "r893d01f4c": {
+    "code": "katyouhugetu:10128516",
+    "category": "fashion"
+  },
+  "r16df1e1e5": {
+    "code": "lifepartnershop:10004996",
+    "category": "fashion"
+  },
+  "rb3a6d9151": {
+    "code": "trovatore:10007770",
+    "category": "fashion"
   }
 }
