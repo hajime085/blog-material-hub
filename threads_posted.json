@@ -925,25 +925,10 @@
     "product:rc2e11945a",
     "tip:16",
     "product:rbd40d7c42",
-    "feature:cake:2026-11-30"
+    "feature:cake:2026-11-30",
+    "feature:osechi:2026-11-30"
   ],
   "log": [
-    {
-      "key": "tip:26",
-      "id": "18006326357790986",
-      "at": "2026-10-15 14:00",
-      "kind": "tip",
-      "slot": 14,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
     {
       "key": "tip:04",
       "id": "18116641120806896",
@@ -5690,6 +5675,21 @@
       "at": "2026-11-13 14:20",
       "kind": "feature",
       "slot": 14,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "ask_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "reply",
+      "link_arm": null
+    },
+    {
+      "key": "feature:osechi:2026-11-30",
+      "id": "18120131302803765",
+      "at": "2026-11-13 17:20",
+      "kind": "feature",
+      "slot": 17,
       "catchup": false,
       "cap": null,
       "hook_type": null,
