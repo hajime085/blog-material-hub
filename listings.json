@@ -148,8 +148,6 @@
         "lastSeen": "2026-11-10",
         "pitch_status": "ready",
         "marketing": {
-          "ask": "扇風機、手持ち派ですか？ 首掛け派ですか？",
-          "ask_type": "choice",
           "benefits": [
             "両手が空く形"
           ],
@@ -161,8 +159,10 @@
             "首掛けタイプ",
             "送料無料"
           ],
-          "hook": "羽根が見えない、首にかける扇風機。",
+          "hook": "羽根が見えない首掛け扇風機、気になる",
           "hook_type": "look",
+          "name": "ネッククーラー",
+          "note": "冷却プレート付きで、風量は5段階。両手が空く形です。",
           "problem": "手持ち扇風機だと片手が塞がる",
           "target": "夏の通勤や屋外作業で首元を冷やしたい人",
           "use_case": "通勤・屋外作業"
@@ -204,7 +204,6 @@
         "lastSeen": "2026-11-13",
         "pitch_status": "ready",
         "marketing": {
-          "ask": "シールは、手帳に貼る派ですか？",
           "benefits": [
             "枚数がまとまっている"
           ],
@@ -214,12 +213,13 @@
             "立体感のあるデコシール（ぷっくりシール）",
             "送料無料"
           ],
-          "hook": "この立体感、反則じゃないですか。",
+          "hook": "ぷっくりシールの立体感、反則じゃない？",
           "hook_type": "look",
+          "name": "ぷっくりシール",
+          "note": "手帳やスマホケースに貼るデコシール。4枚か6枚のセットです。",
           "problem": "デコ用のシールは、枚数が少ないとテーマをそろえる前に終わる",
           "target": "手帳やノートをシールでデコる人",
-          "use_case": "手帳・ノート・スマホケースのデコ",
-          "ask_type": "choice"
+          "use_case": "手帳・ノート・スマホケースのデコ"
         }
       }
     },
@@ -317,8 +317,6 @@
         "lastSeen": "2026-11-13",
         "pitch_status": "ready",
         "marketing": {
-          "ask": "カップ付きインナー、部屋着にも使っている人いますか？",
-          "ask_type": "usage",
           "benefits": [
             "一枚でインナーと部屋着を兼ねる"
           ],
@@ -330,11 +328,13 @@
             "キャミソール／タンクトップ",
             "送料無料"
           ],
-          "hook": "",
+          "hook": "え、カップ付きのブラトップが1,000円ポッキリ？",
           "hook_type": "price",
           "problem": "部屋着のままでは宅配の受け取りに出にくい",
           "target": "部屋着とインナーを兼ねたい人",
-          "use_case": "部屋着・インナー"
+          "use_case": "部屋着・インナー",
+          "name": "ブラトップ1,000円だって。いつもは2,799円くらいするやつ。",
+          "note": "ノンワイヤーでラクなやつ。インナーにも部屋着にも使える。"
         }
       }
     },
@@ -361,7 +361,7 @@
         "endTime": "2026-11-13 20:59",
         "listPrice": 2699,
         "priceBasis": "history",
-        "caption": "2,699円の裏起毛フェイクタイツが1,000円。観測33日の最安値で、中央値より50%安い。送料無料。",
+        "caption": "2,699円の裏起毛フェイクタイツが999円。観測33日の最安値で、中央値より50%安い。送料無料。",
         "tags": [
           "送料無料"
         ],
@@ -522,7 +522,7 @@
         "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00tc8d7.jeifo856.g00tc8d7.jeifpa13/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmottole-shop%2Fmtl-e007%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fmottole-shop%2Fi%2F10000075%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
         "shop": "mottole(モットル)",
         "reviewAverage": 4.33,
-        "reviewCount": 4460,
+        "reviewCount": 4463,
         "itemCode": "mottole-shop:10000075",
         "genreId": "565128",
         "startTime": "",
@@ -541,7 +541,6 @@
         "lastSeen": "2026-11-13",
         "pitch_status": "ready",
         "marketing": {
-          "ask": "カイロは使い捨て派ですか、充電派ですか？",
           "benefits": [
             "充電して繰り返し使える"
           ],
@@ -552,12 +551,13 @@
             "薄型・コンパクト",
             "ポーチ付き"
           ],
-          "hook": "充電式カイロが1,096円。しかもモバイルバッテリー兼用。",
+          "hook": "え、充電式カイロが半額以下になってる",
           "hook_type": "price",
+          "name": "充電式カイロ",
+          "note": "貼らない薄型で、モバイルバッテリーにもなる。ポーチ付きのやつ。",
           "problem": "使い捨てカイロは、買い置きと捨てる手間が毎回かかる",
           "target": "使い捨てカイロをよく買う人",
-          "use_case": "外出時の防寒",
-          "ask_type": "choice"
+          "use_case": "外出時の防寒"
         }
       }
     },
@@ -596,7 +596,6 @@
         "lastSeen": "2026-11-13",
         "pitch_status": "ready",
         "marketing": {
-          "ask": "デスクにこういうの置いてる人、いますか？",
           "benefits": [
             "握って遊ぶタイプのおもちゃ"
           ],
@@ -606,12 +605,13 @@
             "キャラクターもの",
             "デスク用"
           ],
-          "hook": "ふわふわ、もちもち。名前だけで触感が分かる。",
+          "hook": "ふわふわ、もちもち。名前だけで触感が分かる",
           "hook_type": "look",
+          "name": "スクイーズおもちゃ",
+          "note": "デスクに置いて、握って遊ぶやつ。キャラクターものです。",
           "problem": "デスクワークの合間に、触るものが何もない",
           "target": "デスクに置く小物が好きな人",
-          "use_case": "デスクでの息抜き",
-          "ask_type": "usage"
+          "use_case": "デスクでの息抜き"
         }
       }
     },
@@ -631,7 +631,7 @@
         "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00qff77.jeifo05e.g00qff77.jeifp6eb/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fhobinavi%2Fcode-mf-100%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fhobinavi%2Fi%2F10497734%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
         "shop": "ホビナビ 楽天市場店",
         "reviewAverage": 4.14,
-        "reviewCount": 16112,
+        "reviewCount": 16113,
         "itemCode": "hobinavi:10497734",
         "genreId": "564278",
         "startTime": "",
@@ -650,8 +650,6 @@
         "lastSeen": "2026-11-13",
         "pitch_status": "ready",
         "marketing": {
-          "ask": "充電ケーブル、巻き取り式と普通のと、どっち派ですか？",
-          "ask_type": "choice",
           "benefits": [
             "巻き取って持ち運べる"
           ],
@@ -663,8 +661,10 @@
             "マグネット付き",
             "送料無料"
           ],
-          "hook": "Type-Cケーブルに、レビューが16,112件。",
-          "hook_type": "count",
+          "hook": "巻き取り式のケーブル、もっと早く知りたかった",
+          "hook_type": "look",
+          "name": "巻き取り式のType-Cケーブル",
+          "note": "使わないときは巻き取っておける。長さは1mと2m、マグネットでまとまるやつ。",
           "problem": "ケーブルがバッグの中で絡まる",
           "target": "充電ケーブルを何本も持ち歩く人",
           "use_case": "スマホ・タブレットの充電"
@@ -706,7 +706,6 @@
         "lastSeen": "2026-11-10",
         "pitch_status": "ready",
         "marketing": {
-          "ask": "りんご、ジュースやスムージーに使う人いますか？",
           "benefits": [
             "量がまとまっている"
           ],
@@ -716,12 +715,13 @@
             "5kg入り",
             "ジュース・スムージー用の家庭用"
           ],
-          "hook": "りんごを5kgで買う、という買い方。",
-          "hook_type": "look",
+          "hook": "りんごを箱で買う季節、きた",
+          "hook_type": "scene",
+          "name": "山形県産のサンふじ",
+          "note": "ジュースやスムージー用に出てる家庭用のりんご。5kg入りです。",
           "problem": "ジュース用には、まとまった量のりんごが要る",
           "target": "りんごをジュースやスムージーにする人",
-          "use_case": "ジュース・スムージー",
-          "ask_type": "usage"
+          "use_case": "ジュース・スムージー"
         }
       }
     },
@@ -760,8 +760,6 @@
         "lastSeen": "2026-11-13",
         "pitch_status": "ready",
         "marketing": {
-          "ask": "レギンスパンツ、通勤に履いている人いますか？",
-          "ask_type": "usage",
           "benefits": [
             "パンツの形で、レギンスの伸び"
           ],
@@ -773,8 +771,10 @@
             "大きいサイズあり",
             "送料無料"
           ],
-          "hook": "レギンスパンツに、レビューが4,620件。",
-          "hook_type": "count",
+          "hook": "え、このレギンスパンツ今こんなに下がってるの",
+          "hook_type": "price",
+          "name": "レギンスパンツ",
+          "note": "のびる素材でハイウエスト。パンツの形だから、そのまま外にも出られるやつ。",
           "problem": "スキニーは窮屈で、レギンスだけでは外出着にしにくい",
           "target": "通勤にも使える楽なパンツを探す人",
           "use_case": "通勤・普段着"
@@ -816,7 +816,6 @@
         "lastSeen": "2026-11-13",
         "pitch_status": "ready",
         "marketing": {
-          "ask": "モバイルバッテリー、何mAhのを持ち歩いていますか？",
           "benefits": [
             "2台同時に充電できる"
           ],
@@ -827,12 +826,13 @@
             "2台同時充電",
             "機内持ち込み可"
           ],
-          "hook": "え、15,000mAhで799円。",
+          "hook": "え、この薄さで大容量なのにこの値段？",
           "hook_type": "price",
+          "name": "モバイルバッテリー",
+          "note": "薄型で軽くて、2台同時に充電できる。機内持ち込みもOKなやつ。",
           "problem": "外出先でスマホの電池が切れると困る",
           "target": "外出先でスマホの電池が切れがちな人",
-          "use_case": "外出時の充電",
-          "ask_type": "choice"
+          "use_case": "外出時の充電"
         }
       }
     },
@@ -1043,23 +1043,23 @@
         "lastSeen": "2026-11-11",
         "pitch_status": "ready",
         "marketing": {
-          "hook_type": "scene",
-          "target": "家でラーメンを食べたい人",
-          "problem": "夜、急にとんこつが食べたくなる",
-          "use_case": "週末の昼、夜食",
+          "benefits": [
+            "まとめて置いておける"
+          ],
+          "body": "熊本のとんこつラーメン、生麺で6食分です。\n食べたい日にすぐ作れる、買い置きの分。送料込み。",
           "features": [
             "生麺 6食セット",
             "とんこつ",
             "熊本",
             "送料込み"
           ],
-          "benefits": [
-            "まとめて置いておける"
-          ],
-          "hook": "夜中に急にとんこつが食べたくなる日、ある。",
-          "body": "熊本のとんこつラーメン、生麺で6食分です。\n食べたい日にすぐ作れる、買い置きの分。送料込み。",
-          "ask": "夜食にラーメンを食べる人、いますか？",
-          "ask_type": "usage"
+          "hook": "夜中に急にとんこつが食べたくなる日、ある",
+          "hook_type": "scene",
+          "name": "くまもとラーメン",
+          "note": "生麺のとんこつ、6食分。食べたい日にすぐ作れる、買い置きのやつ。",
+          "problem": "夜、急にとんこつが食べたくなる",
+          "target": "家でラーメンを食べたい人",
+          "use_case": "週末の昼、夜食"
         }
       }
     },
@@ -1079,7 +1079,7 @@
         "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00pui97.jeifoa18.g00pui97.jeifp764/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fe-kurashi%2F1338101%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fe-kurashi%2Fi%2F10000628%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
         "shop": "くらしのeショップ",
         "reviewAverage": 4.37,
-        "reviewCount": 4115,
+        "reviewCount": 4117,
         "itemCode": "e-kurashi:10000628",
         "genreId": "208397",
         "startTime": "",
@@ -1096,8 +1096,27 @@
         "postedAt": "2026-11-12",
         "bumpedAt": "2026-11-12T00:00:00",
         "lastSeen": "2026-11-13",
-        "pitch_status": "pending",
-        "captionAuto": true
+        "pitch_status": "ready",
+        "captionAuto": true,
+        "marketing": {
+          "benefits": [
+            "掛けても敷いても使える"
+          ],
+          "body": "掛け毛布としても敷き毛布としても使える電気毛布です。\n丸洗いできて、温度調節とダニ対策の機能もあります。",
+          "features": [
+            "掛け・敷き両用",
+            "丸洗いできる",
+            "ダニ対策",
+            "温度調節つき"
+          ],
+          "hook": "え、マジで今めっちゃ安いじゃん",
+          "hook_type": "price",
+          "name": "電気毛布",
+          "note": "掛けても敷いても使えて、丸洗いできるのも地味にいい。",
+          "problem": "寝る前の布団が冷たくて、なかなか温まらない",
+          "target": "冬の布団の冷えが気になる人",
+          "use_case": "就寝時の寒さ対策"
+        }
       }
     },
     {
@@ -1133,8 +1152,27 @@
         "postedAt": "2026-11-12",
         "bumpedAt": "2026-11-12T00:00:00",
         "lastSeen": "2026-11-13",
-        "pitch_status": "pending",
-        "captionAuto": true
+        "pitch_status": "ready",
+        "captionAuto": true,
+        "marketing": {
+          "benefits": [
+            "フラットに近い形"
+          ],
+          "body": "ローヒールのパンプスです。ヒールは2.5cmで、ポインテッドトゥ。\nサイズは22.0〜25.5cm、ワイズは3Eです。",
+          "features": [
+            "ローヒール 2.5cm",
+            "ポインテッドトゥ",
+            "22.0〜25.5cm",
+            "ワイズ3E"
+          ],
+          "hook": "ローヒールのパンプス、この値段は助かる",
+          "hook_type": "look",
+          "name": "ローヒールのパンプス",
+          "note": "ヒールは低めで、サイズは大きめまであり。通勤にも式にもいける形。",
+          "problem": "きれいめのパンプスはヒールが高くて歩きにくい",
+          "target": "通勤や式で使えるパンプスを探す人",
+          "use_case": "通勤・結婚式・入園式"
+        }
       }
     },
     {
@@ -1170,8 +1208,27 @@
         "postedAt": "2026-11-12",
         "bumpedAt": "2026-11-12T00:00:00",
         "lastSeen": "2026-11-13",
-        "pitch_status": "pending",
-        "captionAuto": true
+        "pitch_status": "ready",
+        "captionAuto": true,
+        "marketing": {
+          "benefits": [
+            "開けるまで中身が分からない形"
+          ],
+          "body": "POP MARTのブラインドボックスです。\nラブブとサンリオキャラクターズのコラボのぬいぐるみで、中身は開けるまで分かりません。",
+          "features": [
+            "POP MART ブラインドボックス",
+            "ラブブ×サンリオ コラボ",
+            "ぬいぐるみ",
+            "正規品保証"
+          ],
+          "hook": "え、ラブブのサンリオコラボがこの値段",
+          "hook_type": "price",
+          "name": "ラブブのブラインドボックス",
+          "note": "中身は開けてからのお楽しみ。正規品保証のやつです。",
+          "problem": "人気のコラボ商品は、定価ではなかなか手に入らない",
+          "target": "ラブブやサンリオのグッズを集める人",
+          "use_case": "コレクション"
+        }
       }
     },
     {
@@ -1209,8 +1266,6 @@
         "lastSeen": "2026-11-10",
         "pitch_status": "ready",
         "marketing": {
-          "ask": "パンツのウエスト、ゴム派ですか？ ベルト派ですか？",
-          "ask_type": "choice",
           "benefits": [
             "柄とプリーツのある形"
           ],
@@ -1223,8 +1278,10 @@
             "ロング丈",
             "送料無料"
           ],
-          "hook": "柄が立体的に浮き出る、ジャガードのワイドパンツ。",
-          "hook_type": "look",
+          "hook": "え、このワイドパンツ半額になってるじゃん",
+          "hook_type": "price",
+          "name": "ジャガード柄のワイドパンツ",
+          "note": "全面プリーツでウエストはゴム。立体感のあるジャガード織りです。",
           "problem": "ウエストゴムのパンツは手抜きに見えがち",
           "target": "楽なのにきちんと見えるボトムスを探す人",
           "use_case": "普段着からお出かけまで"
@@ -1264,8 +1321,27 @@
         "postedAt": "2026-11-12",
         "bumpedAt": "2026-11-12T00:00:00",
         "lastSeen": "2026-11-13",
-        "pitch_status": "pending",
-        "captionAuto": true
+        "pitch_status": "ready",
+        "captionAuto": true,
+        "marketing": {
+          "benefits": [
+            "持ち歩くケーブルが1本で済む形"
+          ],
+          "body": "3種類の端子が1本になった充電ケーブルです。\n巻き取り式で、Type-CにもLightningにも使えます。",
+          "features": [
+            "3in1（一本三役）",
+            "巻き取り式",
+            "Type-C／Lightning対応",
+            "USB両面挿入"
+          ],
+          "hook": "え、3本分が1本になってこの値段？",
+          "hook_type": "price",
+          "name": "3in1充電ケーブル",
+          "note": "Type-CもLightningもこれ1本。巻き取り式で、さっと出せるやつ。",
+          "problem": "端子ごとにケーブルが増えて、かばんの中で絡まる",
+          "target": "充電ケーブルを何本も持ち歩く人",
+          "use_case": "スマホ・タブレットの充電"
+        }
       }
     },
     {
@@ -1301,15 +1377,33 @@
         "postedAt": "2026-11-13",
         "bumpedAt": "2026-11-13T00:00:00",
         "lastSeen": "2026-11-13",
-        "pitch_status": "pending",
-        "captionAuto": true
+        "pitch_status": "ready",
+        "captionAuto": true,
+        "marketing": {
+          "benefits": [
+            "飲むだけの形"
+          ],
+          "body": "食品屋から生まれた、飲むタイプのインナービューティ商品です。\nアーユルヴェーダとハーブを組み合わせた、おうち美容のための飲み物です。",
+          "features": [
+            "アーユルヴェーダとハーブ",
+            "飲むタイプ",
+            "食品屋が作ったインナービューティ"
+          ],
+          "hook": "飲むエステって聞くと、ちょっと気になる",
+          "hook_type": "look",
+          "name": "美粉屋の飲むエステ",
+          "note": "アーユルヴェーダとハーブの飲み物。おうちでゆっくりしたい日に。",
+          "problem": "家で手軽に続けられる美容の習慣が欲しい",
+          "target": "おうちで美容のケアをしたい人",
+          "use_case": "おうち美容"
+        }
       }
     }
   ],
   "automation": {
-    "applied_at": "2026-11-13T11:32:45+09:00",
+    "applied_at": "2026-11-13T16:32:47+09:00",
     "products_count": 323,
-    "history_entries": 356388,
+    "history_entries": 356378,
     "added": [],
     "expired": [],
     "forced": false
