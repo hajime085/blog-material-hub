@@ -613,6 +613,71 @@ def sale_memo(rows):
     return "\n".join(lines)
 
 
+# Threads の投稿上限。本文はこれに収める。
+# 向こうの数え方とこちらの len() がずれる場合に備え、少し余して使う。
+POST_LIMIT = 500
+POST_MARGIN = 5
+
+
+def campaign_digest(rows, base_len=0, now=None):
+    """公式キャンペーンの要点まとめ。告知の本文と日程メモのあいだに添える。
+
+    2026-11-14: furu の指示で、楽天公式が発表したキャンペーン情報は
+    先取りして発信することになった。材料は events.json の campaignDigest
+    に持ち、ここは「有効な材料があれば、収まる分だけ付ける」だけをする。
+
+    載せるのは公式発表済みの事実だけ。未発表の詳細（クーポンの対象店舗や
+    条件など）は書かない。「最大47.5倍」のような合算の最大値も使わない
+    （材料側で入れない決まり。_source に理由を残してある）。
+
+    期限と範囲:
+    - until（日付）を過ぎたら付けない。イベントが始まったら、
+      「開始前のまとめ」は役目を終えたので付けない。
+    - 対象は、告知の本文に出ている先頭3件のイベントだけ。
+
+    文字数:
+    - 投稿の上限 POST_LIMIT に収まるよう、優先度順に詰めていき、
+      収まらなくなった行のところで打ち切る（それより優先度の低い行は
+      短くても入れない。優先度の意味を崩さないため）。
+      行を途中まで入れるようなこともしない。
+    - 優先度1の行（エントリー受付中と、後からでも対象になる話）だけは
+      必ず残す。これが入らないほど本文が長い場合は、材料を見直すこと。
+    base_len は、呼び出し側が「このブロックの前後に来る分の長さ」を渡す。
+    """
+    if now is None:
+        now = datetime.now(JST).replace(tzinfo=None)
+    today = now.strftime("%Y-%m-%d")
+    for a, _b, ev in rows[:3]:
+        d = ev.get("campaignDigest") or {}
+        raw = d.get("lines") or []
+        if not raw:
+            continue
+        if (d.get("until") or "") and today > str(d["until"])[:10]:
+            continue
+        if now >= a:
+            continue
+        texts = []
+        for x in sorted(raw, key=lambda y: y.get("priority", 999)
+                        if isinstance(y, dict) else 999):
+            t = (x.get("text") if isinstance(x, dict) else x) or ""
+            t = str(t).strip()
+            if t:
+                texts.append(t)
+        if not texts:
+            continue
+        title = d.get("title") or "公式情報まとめ"
+        room = POST_LIMIT - POST_MARGIN - base_len - len("\n\n") - len(title)
+        picked = []
+        for i, t in enumerate(texts):
+            cost = len("\n・") + len(t)
+            if i and cost > room:
+                break
+            picked.append(t)
+            room -= cost
+        return "\n".join([title] + ["・" + t for t in picked])
+    return ""
+
+
 def schedule_post():
     """次に来るイベントの予定。本文にはリンクを入れず、返信で案内する。
 
@@ -700,6 +765,13 @@ def schedule_post():
     if tail:
         body += "\n\n" + "\n".join(tail)
     memo = sale_memo(rows)
+    # 公式情報まとめは日程メモより前に置く（新しい公式情報のほうが、
+    # 日程の言い直しより読む価値がある）。文字数の予算は、メモの分まで
+    # 含めた最終形で数える。
+    digest = campaign_digest(
+        rows, base_len=len(body) + (len("\n\n" + memo) if memo else 0))
+    if digest:
+        body += "\n\n" + digest
     if memo:
         body += "\n\n" + memo
     return [{"key": key, "title": "楽天のイベント予定", "lead": body,
@@ -2079,16 +2151,37 @@ def push_state():
     1回の起動が数時間続くので、最後にまとめて送ると、
     途中で止まったときに「出したのに記録が無い」状態になり、
     次の起動が同じものをもう一度出してしまう。
+
+    ついでに、TOPの「Threadsの最近の投稿」欄の材料
+    （threads_recent.json）も取り込み直して一緒に送る。
+    鍵があるのはこの実行（投稿）だけなので、ここに相乗りする。
+    材料の取り込みは失敗しても記録の送信を止めない
+    （fetch_threads.refresh は例外を出さない）。
     """
     import subprocess
+    try:
+        import fetch_threads
+        fetch_threads.refresh()
+    except Exception:                                        # noqa: BLE001
+        pass
+    recent = "threads_recent.json"
+    # 材料がまだ無いうちは、add の対象に入れない（pathspec が合わずに
+    # 記録の送信ごと落ちるのを避ける）。
+    targets = [STATE]
+    if os.path.exists(os.path.join(ROOT, recent)):
+        targets.append(recent)
     cmds = [
-        ["git", "add", STATE],
+        ["git", "add"] + targets,
         ["git", "-c", "user.name=yasumiru-bot",
          "-c", "user.email=bot@users.noreply.github.com",
          "commit", "-m", "auto: Threadsへ投稿"],
     ]
     try:
-        if subprocess.run(["git", "diff", "--quiet", "--", STATE]).returncode == 0:
+        # 新規ファイル（未追跡）は git diff に出ないので、status で見る。
+        dirty = subprocess.run(
+            ["git", "status", "--porcelain", "--"] + targets,
+            capture_output=True, text=True).stdout.strip()
+        if not dirty:
             return True
         for c in cmds:
             subprocess.run(c, check=True)

@@ -3197,6 +3197,27 @@ body{background:#f2f4f8;color:#17181c;font-family:-apple-system,BlinkMacSystemFo
 .v-pager-btn.v-on{background:#c83333;border-color:#c83333;color:#fff}
 .v-pager-btn.v-off{opacity:.35}
 
+/* Threadsの速報（TOP・掲載ストリームの下＝メインカラム末尾。箱と見出し帯は
+   サイドバーと同格。材料が無い・古いときは build.py 側で欄ごと出ない。
+   当初はカルーセル直下＋欄内スクロールだったが、場所を取りすぎるうえ
+   ページスクロールと干渉するため、ストリームの下へ移し欄内スクロールは
+   廃止（2026-11-14 furu 追加指示）。投稿は自然な高さで並べ、省スペース
+   のため PC では2列グリッドにする。「さらに見る」はボタンとして置き、
+   Threads のプロフィールへ飛ばす） */
+.v-threads{margin-top:22px}
+.v-th-list{display:grid;grid-template-columns:1fr 1fr;column-gap:26px;padding:3px 13px 5px}
+.v-th-card{display:block;padding:9px 0 10px;border-bottom:1px dashed #d8dce3;text-decoration:none;color:#17181c}
+.v-th-card:hover .v-th-text{text-decoration:underline}
+.v-th-meta{display:flex;align-items:center;gap:8px;margin-bottom:3px}
+.v-th-date{font-size:11.5px;color:#c83333;font-weight:800}
+.v-th-text{display:block;font-size:13px;line-height:1.6}
+.v-th-more{display:block;margin:12px 13px 13px;padding:11px 12px;background:#c83333;color:#fff;font-size:14px;font-weight:800;text-align:center;text-decoration:none;border-radius:2px}
+.v-th-more:hover{opacity:.88}
+@media (max-width:860px){
+  /* スマホは1列に戻す（幅が狭く2列だと1行が短くなりすぎる） */
+  .v-th-list{grid-template-columns:1fr}
+}
+
 /* フッター */
 .v-footer{background:#000;color:#c9ccd4;margin-top:34px}
 .v-footer-in{padding:26px 14px 30px}

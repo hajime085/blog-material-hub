@@ -982,7 +982,7 @@ def _sd_days_text(en):
 
 def render_top_sidebar(entries, guides=None):
     # 並びは「セールカレンダー → 締切が近い順 → 読んでおく」。
-    # 特集バナーはヒーロー直下のカルーセルに一本化した（旧・キャンペーン情報）。
+    # 特集バナーは TOP 最上部のカルーセルに一本化した（旧・キャンペーン情報）。
     # カレンダーは他ページのサイドバーと同じ仕組み（id="calendar" 枠＋
     # calendar.js ＋ events.json）。見出しも既存ページに合わせて「楽天のイベント」。
     blocks = ('<div class="v-side-block"><div class="v-side-head">楽天のイベント</div>'
@@ -1255,7 +1255,7 @@ CAROUSEL_JS = (
 
 
 def render_campaign_carousel(entries):
-    """キャンペーン特集カルーセル（ヒーロー直下）。特集の露出はここ1か所に
+    """キャンペーン特集カルーセル（TOP最上部、ヘッダー直下）。特集の露出はここ1か所に
     集約する（旧・サイドバーのキャンペーン情報とストリーム内の特集カードを
     畳んだ）。スライドは TOPICS から生成し、増減に追従する。
     締切は events.json から引く。締切エントリが無い・過ぎた場合は日付まわり
@@ -1446,6 +1446,95 @@ def render_notice(live):
             % (dur, seq, dup))
 
 
+THREADS_RECENT_FILE = "threads_recent.json"
+THREADS_RECENT_MAX_AGE_H = 72    # これより古い材料は、欄ごと出さない
+THREADS_CARD_TEXT_MAX = 140
+
+
+def _thread_card_text(text, limit=THREADS_CARD_TEXT_MAX):
+    """カード用に投稿文を短くする。切るなら文の途中ではなく切れ目で。
+
+    画面に出る文字の「改行の自然さ」は字幕だけの話ではない、という
+    furu の基準に従う。制限を超えたら、範囲内でいちばん後ろにある
+    改行・句読点で切り、切れ目が無ければそのまま切って「…」を付ける。
+    """
+    t = (text or "").strip()
+    if len(t) <= limit:
+        return t
+    cut = t[:limit]
+    best = -1
+    for sep in ("\n", "。", "、", "！", "？", " "):
+        i = cut.rfind(sep)
+        if i > best:
+            best = i
+    if best >= limit // 2:
+        # 切れ目の句読点は落とす（「〜ように、…」のような形にしない）。
+        return cut[:best].rstrip() + "…"
+    return cut.rstrip() + "…"
+
+
+def _thread_date(ts):
+    """Threads API の timestamp（ISO形式）を「M月D日 H:MM」（日本時間）に。"""
+    s = re.sub(r"([+-]\d{2})(\d{2})$", r"\1:\2", (ts or "").strip())
+    try:
+        dt = datetime.fromisoformat(s.replace("Z", "+00:00"))
+    except ValueError:
+        return ""
+    if dt.tzinfo is None:
+        return ""
+    dt = dt.astimezone(JST)
+    return "%d月%d日 %d:%02d" % (dt.month, dt.day, dt.hour, dt.minute)
+
+
+def render_threads_section():
+    """TOP・掲載ストリームの下（メインカラム末尾）の「Threadsの速報」欄。
+
+    公式のタイムライン埋め込みが無いので、材料（threads_recent.json）を
+    投稿のついでに threads.py が取り込み直し（fetch_threads.py）、
+    ここでは静的に描くだけにする。
+
+    並びは 2026-11-14 の furu 指示: 当初カルーセル直下だったが、場所を
+    取りすぎる＋欄内スクロールがページスクロールと干渉するため、
+    ストリーム＋ページャーの後（メインカラム末尾）へ移し、欄内スク
+    ロールは廃止した。投稿は自然な高さで並び（PC は2列グリッド）、
+    「さらに見る」ボタンから Threads のプロフィールへ飛ばす
+    （レイアウトは style.css 側）。
+
+    材料が無い・古い（72時間超）・空なら、欄ごと出さない。
+    空の箱や壊れた見た目を残さないための決まり。
+    """
+    if not os.path.exists(os.path.join(ROOT, THREADS_RECENT_FILE)):
+        return ""
+    try:
+        data = load(THREADS_RECENT_FILE)
+        fetched = datetime.strptime(data.get("fetched_at") or "",
+                                    "%Y-%m-%d %H:%M").replace(tzinfo=JST)
+    except Exception:                                        # noqa: BLE001
+        return ""
+    if datetime.now(JST) - fetched > timedelta(hours=THREADS_RECENT_MAX_AGE_H):
+        return ""
+    posts = [p for p in (data.get("posts") or []) if p.get("permalink")]
+    if not posts:
+        return ""
+    cards = []
+    for p in posts[:6]:
+        media = {"IMAGE": "画像つき", "VIDEO": "動画つき"}.get(
+            p.get("media_type") or "")
+        badge = ('<span class="v-note-badge">%s</span>' % media) if media else ""
+        cards.append(
+            '<a class="v-th-card" href="%s">'
+            '<span class="v-th-meta"><span class="v-th-date">%s</span>%s</span>'
+            '<span class="v-th-text">%s</span></a>'
+            % (e(p["permalink"]), e(_thread_date(p.get("timestamp"))), badge,
+               e(_thread_card_text(p.get("text"))).replace("\n", "<br>")))
+    profile = data.get("profile_url") or "https://www.threads.com/@yasumiru_web"
+    return ('<section class="v-side-block v-threads">'
+            '<div class="v-side-head">Threadsの速報</div>'
+            '<div class="v-th-list">%s</div>'
+            '<a class="v-th-more" href="%s">さらに見る</a>'
+            '</section>' % ("".join(cards), e(profile)))
+
+
 TOP_TAB_SCRIPT = (
     "<script>(function(){var tabs=[].slice.call(document.querySelectorAll('.v-tabs .v-tab'));"
     "if(!tabs.length)return;var topics=null,home=null;"
@@ -1501,7 +1590,7 @@ def render_pager_v11(page, total_pages, base):
 
 def _render_top(cfg, base, products, cats, *, units, live, active_tab, page,
                 total_pages, pager_base, title, desc, path, robots, jsonld,
-                stream_ctx=None, top_tabs=False):
+                stream_ctx=None, top_tabs=False, home=False):
     fetched = last_fetch_date(products)
     entries = deadline_entries()
     start = (page - 1) * TOP_PER_PAGE
@@ -1524,25 +1613,43 @@ def _render_top(cfg, base, products, cats, *, units, live, active_tab, page,
         cards.append(card_html)
     stream = "".join(cards)
     if stream_ctx is not None:
-        # ストリーム方式: 看板は「掲載中／本日の新規」、速報は「今も値下がり
-        # している」ものだけから作る（凍結品・価格戻り品のOFFを混ぜない）。
-        hero_html = render_stream_hero(len(stream_ctx["total"]),
-                                       len(stream_ctx["new_today"]), fetched)
+        # 速報は「今も値下がりしている」ものだけから作る
+        # （凍結品・価格戻り品のOFFを混ぜない）。
         notice_html = render_notice(stream_ctx["deals"])
     else:
-        hero_html = render_top_hero(len(live), fetched)
         notice_html = render_notice(live)
+    if home:
+        # TOP（新着）の並び（2026-11-14 furu 指示で確定）:
+        # ヘッダー → 特集カルーセル → 速報ティッカー → 本文（ストリーム）
+        # → Threadsの速報（メインカラム末尾）。
+        # ヒーロー（黒い帯）は TOP からは廃止。掲載基準の説明は商品ページと
+        # ポップアップに残る。カルーセルと速報欄は1ページ目だけ。
+        head_html = (
+            (render_campaign_carousel(entries) if page == 1 else "")
+            + notice_html)
+    else:
+        # /off/ など TOP 以外は従来どおり（ヒーロー → カルーセル → 速報）。
+        if stream_ctx is not None:
+            # ストリーム方式: 看板は「掲載中／本日の新規」。
+            hero_html = render_stream_hero(len(stream_ctx["total"]),
+                                           len(stream_ctx["new_today"]),
+                                           fetched)
+        else:
+            hero_html = render_top_hero(len(live), fetched)
+        head_html = (
+            hero_html
+            + (render_campaign_carousel(entries) if page == 1 else "")
+            + notice_html)
     content = (
         '<div class="v-page">'
-        + hero_html
-        + (render_campaign_carousel(entries) if page == 1 else "")
-        + notice_html
+        + head_html
         + '<div class="v-layout">'
         + render_top_sidebar(entries, cfg.get("_guides") or [])
         + '<div class="v-main">'
         + render_top_tabs(active_tab)
         + '<section class="v-stream" id="stream">%s</section>' % stream
         + render_pager_v11(page, total_pages, pager_base)
+        + (render_threads_section() if home and page == 1 else "")
         + '</div></div></div>'
         + (render_cat_tabs(cats, stream_ctx["total"], page)
            if top_tabs and stream_ctx is not None else '')
@@ -1594,7 +1701,7 @@ def build_index(cfg, base, products, cats, stream_ctx=None):
             pager_base="/", title=title, desc=desc, path=path,
             robots=('<meta name="robots" content="noindex,follow">' if page > 1 else ""),
             jsonld=jsonld, stream_ctx=stream_ctx,
-            top_tabs=stream_ctx is not None)
+            top_tabs=stream_ctx is not None, home=True)
         write("index.html" if page == 1 else "page/%d/index.html" % page, html)
 
 
