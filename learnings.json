@@ -1396,17 +1396,17 @@
       "progress": {},
       "note": "exp-010（2026-09-29〜、未決着で終了）の後継。母集団がトークン失効で2つに割れたため、同じ設計で取り直す。",
       "progress_now": {
-        "date": "2026-11-14",
+        "date": "2026-11-15",
         "arms": {
           "direct": {
-            "posts": 3,
+            "posts": 4,
             "clicks": 0,
             "rate": 0.0
           },
           "site": {
-            "posts": 6,
-            "clicks": 0,
-            "rate": 0.0
+            "posts": 8,
+            "clicks": 2,
+            "rate": 0.25
           }
         }
       }
@@ -1423,51 +1423,57 @@
       "note": "型カタログ T3（画像・動画が主役）の検証。前提が整うまで 待ち。始める条件がそろったら status を running にする。 started は登録日（2026-11-10）。実施開始時に実際の開始日へ直す。"
     }
   ],
-  "lastRun": "2026-11-14",
+  "lastRun": "2026-11-15",
   "snapshot": {
-    "date": "2026-11-14",
+    "date": "2026-11-15",
     "posts": 170,
-    "views": 4047,
+    "views": 4272,
     "replies": 1,
-    "followers": 73,
+    "followers": 72,
     "cuts": {
       "投稿の種類": {
         "tip": {
-          "n": 146,
-          "median": 9.0,
-          "mean": 19.2,
+          "n": 141,
+          "median": 9,
+          "mean": 19.6,
           "max": 164
         },
         "product": {
-          "n": 6,
-          "median": 12.0,
-          "mean": 39.2,
+          "n": 9,
+          "median": 10,
+          "mean": 28.3,
           "max": 176
         },
         "schedule": {
-          "n": 4,
-          "median": 41.5,
-          "mean": 71.8,
-          "max": 192
+          "n": 5,
+          "median": 55,
+          "mean": 97.6,
+          "max": 201
         },
         "feature": {
           "n": 2,
           "median": 178.5,
           "mean": 178.5,
           "max": 334
+        },
+        "report": {
+          "n": 1,
+          "median": 2,
+          "mean": 2.0,
+          "max": 2
         }
       },
       "リンクの位置": {
         "none": {
-          "n": 150,
-          "median": 9.0,
-          "mean": 20.6,
+          "n": 145,
+          "median": 9,
+          "mean": 21.1,
           "max": 192
         },
         "reply": {
-          "n": 8,
-          "median": 18.5,
-          "mean": 74.0,
+          "n": 13,
+          "median": 13,
+          "mean": 62.7,
           "max": 334
         }
       },
@@ -1485,17 +1491,17 @@
           "max": 176
         },
         "usage": {
-          "n": 1,
-          "median": 10,
-          "mean": 10.0,
-          "max": 10
+          "n": 4,
+          "median": 7.5,
+          "mean": 7.5,
+          "max": 13
         }
       },
       "入口の型": {
         "scene": {
-          "n": 1,
-          "median": 6,
-          "mean": 6.0,
+          "n": 2,
+          "median": 4.0,
+          "mean": 4.0,
           "max": 6
         },
         "price": {
@@ -1505,15 +1511,15 @@
           "max": 176
         },
         "look": {
-          "n": 2,
-          "median": 5.5,
-          "mean": 5.5,
+          "n": 3,
+          "median": 5,
+          "mean": 5.3,
           "max": 10
         },
         "count": {
-          "n": 1,
-          "median": 14,
-          "mean": 14.0,
+          "n": 2,
+          "median": 13.5,
+          "mean": 13.5,
           "max": 14
         }
       },
@@ -1525,9 +1531,9 @@
           "max": 176
         },
         "food": {
-          "n": 1,
-          "median": 10,
-          "mean": 10.0,
+          "n": 2,
+          "median": 6.0,
+          "mean": 6.0,
           "max": 10
         },
         "kitchen": {
@@ -1541,21 +1547,21 @@
           "median": 28,
           "mean": 28.0,
           "max": 28
+        },
+        "fashion": {
+          "n": 1,
+          "median": 13,
+          "mean": 13.0,
+          "max": 13
+        },
+        "baby-toy": {
+          "n": 1,
+          "median": 5,
+          "mean": 5.0,
+          "max": 5
         }
       },
       "時刻（豆知識）": {
-        "19": {
-          "n": 11,
-          "median": 7,
-          "mean": 6.1,
-          "max": 10
-        },
-        "20": {
-          "n": 18,
-          "median": 5.0,
-          "mean": 17.3,
-          "max": 155
-        },
         "21": {
           "n": 19,
           "median": 7,
@@ -1565,8 +1571,8 @@
         "22": {
           "n": 9,
           "median": 25,
-          "mean": 35.6,
-          "max": 134
+          "mean": 35.7,
+          "max": 135
         },
         "23": {
           "n": 9,
@@ -1582,14 +1588,14 @@
         },
         "1": {
           "n": 10,
-          "median": 20.0,
-          "mean": 40.2,
+          "median": 20.5,
+          "mean": 40.3,
           "max": 164
         },
         "7": {
-          "n": 11,
-          "median": 6,
-          "mean": 9.5,
+          "n": 12,
+          "median": 5.5,
+          "mean": 9.0,
           "max": 31
         },
         "9": {
@@ -1622,6 +1628,18 @@
           "mean": 20.2,
           "max": 139
         },
+        "19": {
+          "n": 10,
+          "median": 6.0,
+          "mean": 5.7,
+          "max": 10
+        },
+        "20": {
+          "n": 13,
+          "median": 9,
+          "mean": 21.9,
+          "max": 155
+        },
         "18": {
           "n": 7,
           "median": 6,
@@ -1637,15 +1655,15 @@
           "max": 6
         },
         "20": {
-          "n": 2,
-          "median": 95.0,
-          "mean": 95.0,
+          "n": 3,
+          "median": 14,
+          "mean": 65.0,
           "max": 176
         },
         "9": {
-          "n": 1,
-          "median": 10,
-          "mean": 10.0,
+          "n": 2,
+          "median": 6.0,
+          "mean": 6.0,
           "max": 10
         },
         "14": {
@@ -1655,22 +1673,17 @@
           "max": 1
         },
         "17": {
-          "n": 1,
-          "median": 28,
-          "mean": 28.0,
+          "n": 2,
+          "median": 20.5,
+          "mean": 20.5,
           "max": 28
         }
       }
     },
     "linkClicks7d": {
       "direct": 0,
-      "site": 9,
+      "site": 11,
       "byDay": [
-        {
-          "date": "2026-11-07",
-          "direct": 0,
-          "site": 0
-        },
         {
           "date": "2026-11-08",
           "direct": 0,
@@ -1700,6 +1713,11 @@
           "date": "2026-11-13",
           "direct": 0,
           "site": 0
+        },
+        {
+          "date": "2026-11-14",
+          "direct": 0,
+          "site": 2
         }
       ]
     }
