@@ -931,25 +931,10 @@
     "product:r24bdb7dbc",
     "tip:08",
     "product:rdaba5f8cd",
-    "schedule:2026-W45-6"
+    "schedule:2026-W45-6",
+    "product:r1b657033c"
   ],
   "log": [
-    {
-      "key": "tip:38",
-      "id": "17907754089330981",
-      "at": "2026-10-15 20:21",
-      "kind": "tip",
-      "slot": 20,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
     {
       "key": "tip:09",
       "id": "18128145676856182",
@@ -5698,6 +5683,21 @@
       "logic_version": null,
       "link": "reply",
       "link_arm": null
+    },
+    {
+      "key": "product:r1b657033c",
+      "id": "17956909662036560",
+      "at": "2026-11-14 17:20",
+      "kind": "product",
+      "slot": 17,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "price",
+      "ask_type": null,
+      "category": "kaden",
+      "logic_version": "pattern_v4",
+      "link": "reply",
+      "link_arm": "site"
     }
   ]
 }
