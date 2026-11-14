@@ -398,6 +398,13 @@ def render_sticker(p):
     ) % d
 
 
+
+# 姉妹サイト「カイカタ」のバナー（サイドバー末尾、2026-11-14 furu 指示でフッターから移動）
+SISTER_BANNER_HTML = (
+    '<a class="v-sister" href="https://worelu.com/" target="_blank" rel="noopener">'
+    '<img src="/assets/img/banner-kaikata.png" alt="姉妹サイト カイカタ｜Amazonセールのカイカタ"'
+    ' width="1200" height="400" loading="lazy"></a>')
+
 def render_sidebar(cfg, products, cats, active=None, guides=None, current_guide=None):
     """フィードの脇（PC）／下（スマホ）に出る棚。
     ヘッダーと同じ黒帯をパネルの頭に載せて、本体と地続きに見せる。
@@ -523,9 +530,10 @@ def render_sidebar(cfg, products, cats, active=None, guides=None, current_guide=
       <div class="side-cats">{cat_rows}</div>
     </div>
   </section>
+  {sister}
 </aside>""".format(ic=icons.use("bolt"), ic2=icons.use("grid"), ic3=icons.use("calendar"),
                    rows=rows, cat_rows=cat_rows, coupon=coupon,
-                   guide_banner=guide_banner)
+                   guide_banner=guide_banner, sister=SISTER_BANNER_HTML)
 
 
 def render_share(p, cfg, place="top"):
@@ -1008,6 +1016,7 @@ def render_top_sidebar(entries, guides=None):
             for g in guides)
         blocks += ('<div class="v-side-block"><div class="v-side-head">読んでおく</div>'
                    '<ul class="v-side-list">%s</ul></div>' % glis)
+    blocks += SISTER_BANNER_HTML
     return '<aside class="v-side">%s</aside>' % blocks
 
 
