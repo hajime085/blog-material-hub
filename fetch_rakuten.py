@@ -27,6 +27,12 @@ products.json の listPrice を手で書いた場合はそちらが優先され�
 そのため初回だけ --seed を付けて実行します。これは値下がりを主張せず、
 「ウォッチ中」のタグを付けて商品を並べ、同時に価格を記録します。
 翌日以降に通常運転で回すと、値下がりを検知したものから %OFF が付いていきます。
+
+--watch では「観測枠」も効きます。値引きの裏付けが取れない新規でも、
+実績のある商品（レビュー100件以上・評価3.8以上）は上限付きで
+「ウォッチ中」として観測に入れ、価格履歴を積みます。掲載の選定には
+混ざりません。あわせて更新順（-updateTimestamp）の検索を記録だけの
+実測として足しています（ops/update_probe.md）。
 """
 
 import collections
@@ -1811,6 +1817,212 @@ def load_ng_genres(cfg):
     NG_GENRES.update(str(g) for g in (cfg.get("rakuten", {}).get("ngGenres") or []))
 
 
+# ------------------------------------------------------------------
+# 観測枠（ウォッチ枠）(2026-11-14)
+#
+# 新規の取り込みは「値引き率30%以上を証明できること」が必須だった。
+# そのため定価で売られている人気品は products.json に入らず、
+# 「観測して、値下がりを待つ」という本来の型が成立していなかった
+# （監査 patrol-search-audit-20261113.md の問題1）。
+#
+# 観測枠は、値引きの裏付けが取れない新規でも、実績のある商品
+# （レビュー100件以上・評価3.8以上＝選定のゲート4と同じ水準）を
+# 「ウォッチ中」として products.json に入れ、価格履歴だけを積む。
+# 選定（select_strict.evaluate）はウォッチ中を候補から外すので、
+# 観測に入っただけでは掲載には混ざらない。あとで通常の取り込み
+# 判定（off >= min_off）を通った回に、タグが外れて通常商品になる。
+#
+# 止めるときは環境変数 YASUMIRU_WATCH_FRAME=0（復活経路と同じ流儀）。
+
+def watch_frame_eligible(raw, min_reviews, min_rating):
+    """観測枠に入れてよいか。
+
+    値引きの裏付けは問わない。代わりに実績だけを見る。
+    サプリ・健康食品と型番系は通常の取り込みと同じく入れない。
+    検索の NGKeyword では抜けきらないので、選定と同じ
+    キーワード表（select_strict）で題名を見る。
+    """
+    if (raw.get("reviewCount") or 0) < min_reviews:
+        return False
+    if float(raw.get("reviewAverage") or 0) < min_rating:
+        return False
+    from select_strict import SUPPLEMENT_KEYWORDS, INK_KEYWORDS, hit_keyword
+    text = raw.get("title") or ""
+    if hit_keyword(text, SUPPLEMENT_KEYWORDS):
+        return False
+    if hit_keyword(text, INK_KEYWORDS):
+        return False
+    return True
+
+
+def pick_capped_candidates(candidates, per_category, max_per_shop,
+                           max_shop_total, room):
+    """候補から、ジャンルを均しながらレビュー数の多い順に拾う。
+
+    candidates は {カテゴリ: [(レビュー数, 店, ジャンル, id, 商品), ...]}。
+    まとめてレビュー数順に取ると、母数の大きいジャンルが売場を
+    まるごと占領してしまう（ベビーが全部おくるみになった）。
+    ジャンルごとに分けて順番に1件ずつ拾う回し方を、seed の採用と
+    観測枠で共用するために切り出した。
+
+    room は全体を通しての上限（これ以上は拾わない）。
+    戻り値: (拾った [(id, 商品), ...], 拾わなかった件数)
+    """
+    picked = []
+    total = sum(len(v) for v in candidates.values())
+    shop_total = {}
+    for slug, items in candidates.items():
+        buckets = {}
+        for entry in items:
+            buckets.setdefault(entry[2], []).append(entry)
+        for b in buckets.values():
+            b.sort(key=lambda x: -x[0])
+
+        per_shop, taken = {}, 0
+        order = list(buckets)
+        while (taken < per_category and len(picked) < room
+               and any(buckets[g] for g in order)):
+            for g in order:
+                if taken >= per_category or len(picked) >= room:
+                    break
+                while buckets[g]:
+                    _, shop, _, pid, item = buckets[g].pop(0)
+                    if per_shop.get(shop, 0) >= max_per_shop:
+                        continue
+                    if shop_total.get(shop, 0) >= max_shop_total:
+                        continue
+                    per_shop[shop] = per_shop.get(shop, 0) + 1
+                    shop_total[shop] = shop_total.get(shop, 0) + 1
+                    picked.append((pid, item))
+                    taken += 1
+                    break
+    return picked, total - len(picked)
+
+
+# ------------------------------------------------------------------
+# 更新順プローブ (2026-11-14)
+#
+# sort=-updateTimestamp（更新順）の検索を、カテゴリのジャンルごとに
+# 1ページだけ足す実測。価格変更が「更新」として現れるなら、
+# 値下がりの初動を通常の巡回（レビュー数順）より早く拾えるはず、
+# という推測を確かめるためのもの。取り込みは一切変えず、
+# 動きのあった商品だけを ops/update_probe.md に記録する。
+# 1週間ぶんの記録が溜まったら、プローブが拾った価格変化を
+# 通常の巡回が価格履歴に記録した日と比べて判定する。
+#
+# 止めるときは環境変数 YASUMIRU_UPDATE_PROBE=0。
+
+PROBE_LOG = os.path.join("ops", "update_probe.md")
+
+
+def probe_category_updates(cat, app_id, access_key, aff_id, site_url,
+                           ng_keyword, history, existing_ids, codes):
+    """更新順で1ページだけ見て、価格履歴と突き合わせる。
+
+    戻り値: (呼び出し回数, ヒット総数, 記録すべき行のリスト)
+    記録するのは「初めて見る商品」と「前回の観測価格と違う商品」だけ。
+    動きのない商品まで書くと、1日で数千行に膨れて読めなくなる。
+    """
+    rows = []
+    calls = 0
+    hits_total = 0
+    genres = cat.get("genres") or []
+    queries = [(g, None) for g in genres]
+    if not queries:
+        queries = [(None, k) for k in (cat.get("keywords") or [cat["label"]])]
+    for genre_id, keyword in queries:
+        params = {
+            "applicationId": app_id,
+            "accessKey": access_key,
+            "affiliateId": aff_id,
+            "keyword": keyword,
+            "genreId": genre_id,
+            "hits": 30,
+            "page": None,
+            "minPrice": cat.get("minPrice") or None,
+            "maxPrice": cat.get("maxPrice") or None,
+            "NGKeyword": ng_keyword or None,
+            "sort": "-updateTimestamp",
+            "imageFlag": 1,
+            "availability": 1,
+            "format": "json",
+            "formatVersion": 2,
+        }
+        calls += 1
+        try:
+            data = api_get(ITEM_API, params, site_url)
+        except SystemExit:
+            raise
+        except Exception as ex:                       # noqa: BLE001
+            print("  × 更新順プローブ %s%s の取得に失敗: %s"
+                  % (genre_id or "", keyword or "", ex), file=sys.stderr)
+            time.sleep(REQUEST_INTERVAL)
+            continue
+        for item in data.get("Items", []):
+            code = item.get("itemCode") or ""
+            if not code:
+                continue
+            if str(item.get("genreId") or "") in NG_GENRES:
+                continue
+            price = int(item.get("itemPrice") or 0)
+            if not price:
+                continue
+            hits_total += 1
+            pid = product_id(code)
+            register_item_code(codes, pid, code, cat["slug"])
+            recs = history.get(pid) or []
+            last_date, last_price = (recs[-1] if recs else (None, None))
+            if recs and last_price == price:
+                continue          # 前回と同じ値段。動きはない
+            rows.append({
+                "cat": cat["slug"], "pid": pid,
+                "title": clean_title((item.get("itemName") or "").strip()),
+                "price": price, "prev_price": last_price,
+                "prev_date": last_date,
+                "in_products": pid in existing_ids,
+            })
+        time.sleep(REQUEST_INTERVAL)
+    return calls, hits_total, rows
+
+
+def write_probe_log(rows, calls, hits_total):
+    """更新順プローブの記録を ops/update_probe.md に追記する。"""
+    path = os.path.join(ROOT, PROBE_LOG)
+    lines = []
+    if not os.path.exists(path):
+        lines += [
+            "# 更新順プローブの記録",
+            "",
+            "sort=-updateTimestamp の検索（ジャンルごとに1ページ）で見つけた、",
+            "「初めて見る商品」と「前回の観測価格と違う商品」の記録。",
+            "取り込みには使っていない。1週間ぶん溜まったら、ここに残った価格変化を",
+            "通常の巡回が price_history.json に記録した日と比べて、",
+            "「値下がりの初動を通常より早く拾えたか」を判定する。",
+            "",
+        ]
+    now = datetime.now(JST).strftime("%Y-%m-%d %H:%M")
+    new_ids = sum(1 for r in rows if r["prev_price"] is None)
+    lines.append("## %s（--watch）" % now)
+    lines.append("- 呼び出し %d回 / ヒット %d件 / 初めて見る商品 %d件 / "
+                 "価格が前回観測と違う商品 %d件"
+                 % (calls, hits_total, new_ids, len(rows) - new_ids))
+    if rows:
+        lines.append("")
+        lines.append("| カテゴリ | id | 価格 | 前回価格 | 前回観測日 | "
+                     "products在籍 | 商品名 |")
+        lines.append("|---|---|---|---|---|---|---|")
+        for r in rows:
+            lines.append("| %s | %s | %s | %s | %s | %s | %s |" % (
+                r["cat"], r["pid"], "{:,}".format(r["price"]),
+                "{:,}".format(r["prev_price"]) if r["prev_price"] else "（なし）",
+                r["prev_date"] or "（なし）",
+                "いる" if r["in_products"] else "いない",
+                r["title"][:40].replace("|", "｜")))
+    lines.append("")
+    with open(path, "a", encoding="utf-8") as f:
+        f.write("\n".join(lines) + "\n")
+
+
 def main():
     args = [a for a in sys.argv[1:]]
     cfg = load_json("config.json")
@@ -1895,6 +2107,11 @@ def main():
     excluded = set()          # 買えないと判断して外したもの。保持ルールの対象外。
     result = {}
     candidates = {}
+    watch_candidates = {}
+    watch_added = 0
+    probe_rows = []
+    probe_calls = 0
+    probe_hits = 0
     # 巡回の途中で見つかる「まだ始まっていない特価」。
     # これまでは捨てていた。開始前の枠へ回すために貯めておく。
     pre_start = {}
@@ -1906,6 +2123,23 @@ def main():
     pre_max_cat = cfg["rakuten"].get("eventMaxPerCategory", 5)
     seed_per_category = cfg["rakuten"].get("seedPerCategory", 12)
     max_per_shop = cfg["rakuten"].get("maxPerShop", 2)
+
+    # 観測枠（ウォッチ枠）。--watch のときだけ、種まき以外で効く。
+    # 止めるときは環境変数 YASUMIRU_WATCH_FRAME=0（復活経路と同じ流儀）。
+    watch_frame = (watch and not seed
+                   and os.environ.get("YASUMIRU_WATCH_FRAME") != "0")
+    watch_min_reviews = cfg["rakuten"].get("watchFrameMinReviews", 100)
+    watch_min_rating = cfg["rakuten"].get("watchFrameMinRating", 3.8)
+    watch_per_category = cfg["rakuten"].get("watchFramePerCategory", 3)
+    watch_max_new = cfg["rakuten"].get("watchFrameMaxNewPerRun", 10)
+    watch_max_total = cfg["rakuten"].get("watchFrameMaxTotal", 400)
+    watch_existing = sum(1 for p in existing.values()
+                         if "ウォッチ中" in (p.get("tags") or []))
+
+    # 更新順プローブ。--watch のときだけ、種まき以外で効く。
+    # 止めるときは環境変数 YASUMIRU_UPDATE_PROBE=0。
+    update_probe = (watch and not seed
+                    and os.environ.get("YASUMIRU_UPDATE_PROBE") != "0")
 
     def est_off(raw):
         """いまつかんでいる材料で、値引き率を見積もる。
@@ -1937,6 +2171,20 @@ def main():
         # 2026-09-06: 10回に2回、ここで例外が出て見張りが失敗していた。
         # 11売場のうち1つが応えないだけで、価格の更新も掲載終了の反映も
         # 全部止まっていた。落ちた売場は次の回に回せばよい。
+        if update_probe:
+            # 更新順プローブ。通常の取得が価格履歴を書き換える前に見る
+            # （前回の観測価格と比べるため）。記録だけが目的なので、
+            # ここが失敗しても巡回本体は止めない。
+            try:
+                c_, h_, r_ = probe_category_updates(
+                    cat, app_id, access_key, aff_id, site_url, ng_keyword,
+                    history, set(existing), codes)
+                probe_calls += c_
+                probe_hits += h_
+                probe_rows.extend(r_)
+            except Exception as ex:                      # noqa: BLE001
+                print("  × 更新順プローブ（%s）が失敗しました: %s"
+                      % (cat["label"], ex), file=sys.stderr)
         try:
             raws = sorted(fetch_category(cat, app_id, access_key, aff_id, hits,
                                          site_url, ng_keyword, sort_by,
@@ -2111,6 +2359,24 @@ def main():
                     (raw.get("reviewCount") or 0, raw.get("shop", ""),
                      raw.get("srcGenre", ""), pid, item))
                 continue
+            elif watch_frame and not prev:
+                # 観測枠。値引きの裏付けはまだ無いが、実績のある商品を
+                # 「ウォッチ中」として観測に入れる（詳細は
+                # watch_frame_eligible の説明）。この時点では候補に
+                # 貯めるだけで、採用は上限を見てループのあとで決める。
+                if watch_frame_eligible(raw, watch_min_reviews,
+                                         watch_min_rating):
+                    item["listPrice"] = None
+                    item["priceBasis"] = None
+                    if "ウォッチ中" not in item.get("tags", []):
+                        item["tags"] = ["ウォッチ中"] + item.get("tags", [])
+                    watch_candidates.setdefault(cat["slug"], []).append(
+                        (raw.get("reviewCount") or 0, raw.get("shop", ""),
+                         raw.get("srcGenre", ""), pid, item))
+                else:
+                    dropped += 1
+                    why_drop["観測枠の基準に届かない"] += 1
+                continue
             elif not prev:
                 dropped += 1
                 why_drop["値引きの裏付けが無い" if not item.get("listPrice")
@@ -2128,38 +2394,33 @@ def main():
                 added += 1
 
     # 種まきモード: カテゴリごとに、レビュー数の多い順から一定数だけ採用する
+    # （ジャンルを均す回し方は pick_capped_candidates に切り出してある）
     if seed:
-        shop_total = {}
-        max_total = max_per_shop * 2   # サイト全体では売場ごとの上限の2倍まで
-        for slug, items in candidates.items():
-            # ジャンルごとに分けてから順番に1件ずつ拾う。
-            # まとめてレビュー数順に取ると、母数の大きいジャンルが
-            # 売場をまるごと占領してしまう（ベビーが全部おくるみになった）。
-            buckets = {}
-            for entry in items:
-                buckets.setdefault(entry[2], []).append(entry)
-            for b in buckets.values():
-                b.sort(key=lambda x: -x[0])
+        picked, not_taken = pick_capped_candidates(
+            candidates, seed_per_category, max_per_shop, max_per_shop * 2,
+            room=sum(len(v) for v in candidates.values()))
+        for pid, item in picked:
+            result[pid] = item
+            added += 1
+        dropped += not_taken
 
-            per_shop, taken = {}, 0
-            order = list(buckets)
-            while taken < seed_per_category and any(buckets[g] for g in order):
-                for g in order:
-                    if taken >= seed_per_category:
-                        break
-                    while buckets[g]:
-                        _, shop, _, pid, item = buckets[g].pop(0)
-                        if per_shop.get(shop, 0) >= max_per_shop:
-                            continue
-                        if shop_total.get(shop, 0) >= max_total:
-                            continue
-                        per_shop[shop] = per_shop.get(shop, 0) + 1
-                        shop_total[shop] = shop_total.get(shop, 0) + 1
-                        result[pid] = item
-                        taken += 1
-                        added += 1
-                        break
-            dropped += max(0, len(items) - taken)
+    # 観測枠の採用。カテゴリごとに均し、1回ぶんの追加件数と、
+    # ウォッチ中の総数（既存ぶんを含む）の両方に上限を付ける。
+    # 総数の頭打ちは既存のウォッチ中件数を基準に数える（保持で残る
+    # ぶんが大半なので、実数とのずれは小さい。際限なく太らせない
+    # ための歯止めとして置く）。
+    if watch_frame and watch_candidates:
+        room = min(watch_max_new, max(0, watch_max_total - watch_existing))
+        picked, not_taken = pick_capped_candidates(
+            watch_candidates, watch_per_category, max_per_shop,
+            max_per_shop * 2, room)
+        for pid, item in picked:
+            if pid in result:
+                continue
+            result[pid] = item
+            added += 1
+            watch_added += 1
+        dropped += not_taken
 
     # APIの結果から外れた商品の扱い。
     # レビュー数順の上位しか取らないため、売り切れていなくても
@@ -2375,6 +2636,21 @@ def main():
         "products": products,
     })
     save_json("price_history.json", history)
+
+    if watch_added:
+        print("\n   観測枠（ウォッチ中）を %d件 追加しました"
+              "（ウォッチ中は合計 %d件）"
+              % (watch_added, watch_existing + watch_added))
+    if update_probe:
+        # 記録の書き出しで見張り全体を落とさない（復活経路と同じ扱い）。
+        try:
+            write_probe_log(probe_rows, probe_calls, probe_hits)
+            print("   更新順プローブ: 呼び出し %d回 / ヒット %d件 / "
+                  "動きのあった商品 %d件（ops/update_probe.md に記録）"
+                  % (probe_calls, probe_hits, len(probe_rows)))
+        except Exception as ex:                          # noqa: BLE001
+            print("  × 更新順プローブの記録に失敗しました: %s" % ex,
+                  file=sys.stderr)
 
     if failed_cats:
         print("\n⚠️  取れなかった売場が %d件あります: %s"

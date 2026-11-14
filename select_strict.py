@@ -221,7 +221,8 @@ def evaluate(products: list, history: dict):
               funnel / feed / caption_needed / excluded）
       decisions: {商品id: {"outcome": ..., "detail": {...}}}
         outcome は feed / caption_needed / excluded_supplement /
-        excluded_model_specific / gate1..gate5 / series_sibling / theme_cap。
+        excluded_model_specific / watching / gate1..gate5 /
+        series_sibling / theme_cap。
         落ちた理由をあとから説明するための記録で、result には含めない。
     """
     decisions = {}
@@ -230,9 +231,17 @@ def evaluate(products: list, history: dict):
     funnel.append(("掲載候補（現行 products.json）", total))
 
     # ---- 除外（フィード対象外） -------------------------------------------
-    excluded = {"supplement": [], "model_specific": []}
+    excluded = {"supplement": [], "model_specific": [], "watching": []}
     pool = []
     for p in products:
+        # 観測枠（ウォッチ中）は価格履歴を積むための在籍で、選定の候補では
+        # ない。値引きの裏付けが付いて通常の取り込みを通った回に
+        # fetch_rakuten 側でタグが外れるので、ここで外しても
+        # 昇格の邪魔にはならない（2026-11-14）。
+        if "ウォッチ中" in (p.get("tags") or []):
+            excluded["watching"].append({"id": p["id"], "title": p.get("title")})
+            decisions[p["id"]] = {"outcome": "watching", "detail": {}}
+            continue
         text = (p.get("title") or "") + (p.get("caption") or "")
         kw = hit_keyword(text, SUPPLEMENT_KEYWORDS)
         if kw:
@@ -250,7 +259,8 @@ def evaluate(products: list, history: dict):
             continue
         pool.append(p)
     funnel.append((f"除外を除く（サプリ系 {len(excluded['supplement'])}件 / "
-                   f"型番系 {len(excluded['model_specific'])}件）", len(pool)))
+                   f"型番系 {len(excluded['model_specific'])}件 / "
+                   f"観測枠 {len(excluded['watching'])}件）", len(pool)))
 
     # ---- ゲート ------------------------------------------------------------
     def gate(name, key_fn, outcome):
@@ -363,8 +373,10 @@ def evaluate(products: list, history: dict):
         "excluded": {
             "supplement_count": len(excluded["supplement"]),
             "model_specific_count": len(excluded["model_specific"]),
+            "watching_count": len(excluded["watching"]),
             "supplement": excluded["supplement"],
             "model_specific": excluded["model_specific"],
+            "watching": excluded["watching"],
         },
     }
     return result, decisions
@@ -440,6 +452,8 @@ def main() -> int:
                  "（キーワード判定のため過不足あり得る）")
     lines.append(f"- 型番依存テーマ（インク等）: **{len(excluded['model_specific'])}件**"
                  "（フィードではなく検索・関連商品で扱う）")
+    lines.append(f"- 観測枠（ウォッチ中）: **{len(excluded['watching'])}件**"
+                 "（価格履歴を積むための在籍で、選定の候補ではない）")
     lines.append("")
     lines.append("## データ上の注意")
     lines.append("")
@@ -456,7 +470,8 @@ def main() -> int:
 
     print(f"total={total} feed={len(feed)} caption_needed={len(caption_needed_out)} "
           f"excluded_supplement={len(excluded['supplement'])} "
-          f"excluded_model_specific={len(excluded['model_specific'])}")
+          f"excluded_model_specific={len(excluded['model_specific'])} "
+          f"watching={len(excluded['watching'])}")
     for step, n in funnel:
         print(f"  {step}: {n}")
     print(f"wrote: {out_json}")

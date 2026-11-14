@@ -56,6 +56,12 @@
   "_saleNote": "在庫あり(availability=1)でも販売開始前の商品がある。買えない商品を載せないため startTime/endTime を見る。saleStartToleranceHours は「何時間先までの開始を許容するか」。当日夜の数量限定などは予告として載せる価値があるので既定24時間。",
   "watchMaxNewPerRun": 10,
   "_watchNote": "--watch（見張り）で1回に足す新規の上限。1日4回動くので、最大で1日36件増える。以前は1日7回×5件だったが、予定実行が届かなくなったので回数を減らし、1回あたりを増やして1日の合計を保っている。",
+  "watchFrameMinReviews": 100,
+  "watchFrameMinRating": 3.8,
+  "watchFramePerCategory": 3,
+  "watchFrameMaxNewPerRun": 10,
+  "watchFrameMaxTotal": 400,
+  "_watchFrameNote": "観測枠（ウォッチ枠、2026-11-14）。--watch で、値引きの裏付けが取れない新規でも watchFrameMinReviews 件以上・評価 watchFrameMinRating 以上なら「ウォッチ中」として観測に入れる。1回あたり watchFrameMaxNewPerRun 件・カテゴリあたり watchFramePerCategory 件まで、ウォッチ中の総数は watchFrameMaxTotal 件を上限にする。選定には混ざらない。止めるときは環境変数 YASUMIRU_WATCH_FRAME=0。",
   "_hitsNote": "1カテゴリあたり何件まで見るか。APIは1回30件が上限なので、30を超えるぶんはページを送って取る。母数が増えるほど値下がりに出くわす機会も増えるが、そのぶん実行時間も延びる（秒間1リクエストが目安）。",
   "saleKeywords": [
    "半額",
@@ -162,7 +168,7 @@
     "電気ケトル"
    ],
    "minPrice": 700,
-   "maxPrice": 8000,
+   "maxPrice": 30000,
    "genres": [
     "562637"
    ],
