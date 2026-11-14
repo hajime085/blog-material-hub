@@ -1422,7 +1422,7 @@
         "endTime": "2026-11-16 09:59",
         "listPrice": 2399,
         "priceBasis": "history",
-        "caption": "2,399円のダンボールニットパンツが1,499円。丈が選べる3タイプ、24時間限定。",
+        "caption": "2,399円のダンボールニットパンツが1,480円。丈が選べる3タイプ、24時間限定。",
         "tags": [
           "送料無料"
         ],
@@ -1452,12 +1452,10 @@
     }
   ],
   "automation": {
-    "applied_at": "2026-11-14T07:33:27+09:00",
-    "products_count": 323,
-    "history_entries": 357585,
-    "added": [
-      "r04836f890"
-    ],
+    "applied_at": "2026-11-14T11:32:49+09:00",
+    "products_count": 322,
+    "history_entries": 357572,
+    "added": [],
     "expired": [],
     "forced": false
   }
