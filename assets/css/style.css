@@ -3230,6 +3230,8 @@ body{background:#f2f4f8;color:#17181c;font-family:-apple-system,BlinkMacSystemFo
 .v-legal-nav{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;margin-bottom:12px}
 .v-legal-nav a{color:#9aa0ab;text-decoration:none}
 .v-copy{font-size:11.5px;color:#6b7078;margin:0}
+.v-sister{display:block;margin:0 0 14px;max-width:760px}
+.v-sister img{display:block;width:100%;height:auto}
 
 /* 掲載基準（ポップアップ＋商品ページの基準セクション共通） */
 .v-criteria-overlay{position:fixed;inset:0;background:rgba(10,10,14,.62);z-index:200;display:flex;align-items:flex-start;justify-content:center;padding:6vh 14px 14px}
