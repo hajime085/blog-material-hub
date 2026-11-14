@@ -583,6 +583,36 @@ def schedule_link(rows):
     return "/guide/price-trick/"
 
 
+WEEKDAYS = "月火水木金土日"
+
+
+def sale_memo(rows):
+    """セール日程だけの短いメモ。告知の末尾に付ける（2026-11-14 の型）。
+
+    型の学習（threads-format-learning 台帳 2026-11-14）で、伸びている
+    投稿は「日程メモ」のような一覧で締めていて、保存されやすいことが
+    分かった。詳しい予定（上の本文）は締切（ケーキ早割など）も混ざる
+    ので、セールとマラソンだけを、日付と名前だけの短い形で別に添える。
+    furu の指示で、その日のうちに型へ入れた。
+
+    確定／予想の区別は1件ごとに付ける。本文側の断り書きと同じ扱い。
+    """
+    picked = [(a, b, ev) for a, b, ev in rows
+              if ev.get("kind") in ("sale", "marathon")][:3]
+    if not picked:
+        return ""
+    lines = ["セール日程メモ"]
+    for a, b, ev in picked:
+        name = ev["name"]
+        if name.startswith("楽天"):
+            name = name[2:]
+        lines.append("・%d月%d日（%s）〜%d月%d日（%s） %s（%s）" % (
+            a.month, a.day, WEEKDAYS[a.weekday()],
+            b.month, b.day, WEEKDAYS[b.weekday()],
+            name, ev.get("status") or "予想"))
+    return "\n".join(lines)
+
+
 def schedule_post():
     """次に来るイベントの予定。本文にはリンクを入れず、返信で案内する。
 
@@ -669,6 +699,9 @@ def schedule_post():
     body = "\n".join(lines)
     if tail:
         body += "\n\n" + "\n".join(tail)
+    memo = sale_memo(rows)
+    if memo:
+        body += "\n\n" + memo
     return [{"key": key, "title": "楽天のイベント予定", "lead": body,
              "to": schedule_link(rows)}]
 
