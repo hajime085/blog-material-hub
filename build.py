@@ -403,7 +403,7 @@ def render_sticker(p):
 SISTER_BANNER_HTML = (
     '<a class="v-sister" href="https://worelu.com/" target="_blank" rel="noopener">'
     '<img src="/assets/img/banner-kaikata.png" alt="姉妹サイト カイカタ｜Amazonセールのカイカタ"'
-    ' width="1200" height="400" loading="lazy"></a>')
+    ' width="1200" height="1200" loading="lazy"></a>')
 
 def render_sidebar(cfg, products, cats, active=None, guides=None, current_guide=None):
     """フィードの脇（PC）／下（スマホ）に出る棚。
