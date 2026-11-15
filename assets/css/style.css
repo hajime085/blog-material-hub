@@ -306,8 +306,16 @@ a.ticker-item:hover::before { background: #fdeaea; }
 /* =========================================================
    LAYOUT  ── スマホは1カラム、PCは本文＋サイドバー
    ========================================================= */
-.layout { display: block; }
+/* 外枠は .v-page（ヘッダー・バンド・フッターの共通枠）と揃える。
+   .wrap-wide の 1060px/16px のままだと、バンド（1150px/14px）に対して
+   2カラム全体が内側に寄り、サイドバーの左端が速報バーと揃わない（2026-11-15 furu 指摘）。
+   .layout は全て .wrap-wide と併用されるので、ここで上書きする。 */
+.layout { display: block; max-width: 1150px; margin-inline: auto; padding-inline: 14px; }
 .layout-main { max-width: var(--col); margin-inline: auto; }
+
+/* バンド直下に2カラムが続くページ（商品など）では、TOP の
+   .v-layout と同じ 16px の間を空ける（先頭ブロックが速報にくっつくため）。 */
+.v-page + .layout { margin-top: 16px; }
 
 .layout-side { margin-top: 34px; }
 .layout-side > * + * { margin-top: 18px; }
@@ -318,7 +326,9 @@ a.ticker-item:hover::before { background: #fdeaea; }
     grid-template-columns: minmax(0, var(--col)) var(--side);
     gap: 30px;
     align-items: start;
-    justify-content: center;
+    /* 中央寄せだと列の左端がバンドの左端と揃わない。外枠（.v-page）に
+       合わせて左端を共有するため start にする。 */
+    justify-content: start;
   }
   .layout-main { margin-inline: 0; }
 
