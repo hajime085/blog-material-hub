@@ -1857,7 +1857,7 @@ def build_categories(cfg, base, products, cats):
   <h1 class="page-title">{label}の特価</h1>
   <p class="page-lead">{lead}</p>
 </section>
-<div class="layout wrap-wide">
+<div class="layout layout-left wrap-wide">
 <div class="layout-main">{body}
   {pager}
   <p class="affiliate-note">当サイトは楽天アフィリエイトプログラムに参加しています。価格・在庫・送料は取得時点のものです。</p>
@@ -2479,7 +2479,7 @@ def build_guides(cfg, base, products, cats, guides):
     <p class="pop-note guide-warn">セールの条件は毎回変わります。買う前に楽天市場の公式ページで、その回の期間・上限・条件をかならず確かめてください。</p>
   </header>
 
-  <div class="layout wrap-wide">
+  <div class="layout layout-left wrap-wide">
     <div class="layout-main">
       <details class="guide-toc-acc"><summary class="guide-toc-head">{ic_grid}目次</summary><nav aria-label="この記事の目次"><ol>{toc}</ol></nav></details>
 
@@ -2781,7 +2781,7 @@ def build_kaimawari(cfg, base, products, cats):
 
 <div class="wrap-narrow">{basket}</div>
 
-<div class="layout wrap-wide">
+<div class="layout layout-left wrap-wide">
 <div class="layout-main">
   <div class="toolbar">
     <p class="result-count"><b>{n}</b> 件が条件を満たしています</p>
@@ -2833,7 +2833,7 @@ def build_watchlist(cfg, base, products, cats):
   <p class="page-lead">ハートを押した商品がここに並びます。登録も名前も要りません。</p>
 </section>
 
-<div class="layout wrap-wide">
+<div class="layout layout-left wrap-wide">
 <div class="layout-main">
   <div class="toolbar">
     <p class="result-count"><b id="watchCount">0</b> 件を保存中</p>
