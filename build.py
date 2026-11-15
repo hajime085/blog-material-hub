@@ -713,6 +713,29 @@ def render_ticker(products, cats):
     return row + row
 
 
+# ------------------------------------------------------- ヘッダー下バンド
+# 特集カルーセル＋速報ティッカーは、2026-11-15 の furu 決定で全ページの
+# ヘッダー直下に出す。中身（スライドと速報の顔ぶれ）は TOP と同一で
+# なければならないので、ビルドごとに1回だけ作って全ページで使い回す。
+# 速報の材料は main が決める（ストリーム方式では「いまも値下がりしている」
+# deal だけ。従来方式では販売中の全件）。page_shell と build_events は
+# ここに用意されたものを差すだけにする。
+_HEAD_BAND = {"html": ""}
+
+
+def prepare_head_band(notice_products):
+    entries = deadline_entries()
+    _HEAD_BAND["html"] = (render_campaign_carousel(entries)
+                          + render_notice(notice_products))
+
+
+def head_band_block():
+    """バンドを .v-page（TOP と同じ幅・余白）で包んだもの。未準備なら空。"""
+    if not _HEAD_BAND["html"]:
+        return ""
+    return '<div class="v-page">%s</div>' % _HEAD_BAND["html"]
+
+
 # ---------------------------------------------------------------- page shell
 def page_shell(cfg, base, *, title, desc, path, content, ogtype="website",
          chipbar="", jsonld="", bodyclass="", ogimage=None, robots="", scripts="",
@@ -727,6 +750,13 @@ def page_shell(cfg, base, *, title, desc, path, content, ogtype="website",
         '<li><a href="/c/%s/">%s%s</a></li>' % (c["slug"], icons.use(c["icon"]), e(c["short"]))
         for c in cfg["categories"]
     )
+    # 全ページ共通のヘッダー下バンド（特集カルーセル＋速報）を本文の先頭に
+    # 差す。カルーセルの JS もここで足す（従来は TOP だけが渡していた）。
+    band = head_band_block()
+    if band:
+        content = band + content
+        if len(TOPICS) > 1:
+            scripts = scripts + CAROUSEL_JS
     return fill(base, {
         "TITLE": e(title),
         "OGTITLE": e(ogtitle or title),
@@ -824,14 +854,32 @@ def event_lastmod(slug):
 def build_events():
     """特集ページの原本（event_src/）を出力（event/）へ写す。
     原本が無い特集は写さない（sitemap・トップ欄には登録だけ出るので、
-    先に登録して後から本文を置く運用もできる）。"""
+    先に登録して後から本文を置く運用もできる）。
+    写すときに、全ページ共通のヘッダー下バンド（特集カルーセル＋速報）を
+    <main> の先頭へ差し込む。原本は手書きのままにしておき、バンドの中身は
+    ビルドのたびに TOP と同じものへ差し替わるようにする（速報の顔ぶれと
+    価格を原本に固定して、古くならないため）。"""
+    band = head_band_block()
     for ev in EVENT_PAGES:
         src = os.path.join(ROOT, "event_src", ev["slug"], "index.html")
         if not os.path.isfile(src):
             continue
         dst = os.path.join(ROOT, "event", ev["slug"], "index.html")
         os.makedirs(os.path.dirname(dst), exist_ok=True)
-        shutil.copyfile(src, dst)
+        if not band:
+            shutil.copyfile(src, dst)
+            continue
+        with open(src, encoding="utf-8") as f:
+            text = f.read()
+        if '<main id="main">' in text:
+            text = text.replace('<main id="main">',
+                                '<main id="main">\n' + band, 1)
+        elif "</header>" in text:
+            text = text.replace("</header>", "</header>\n" + band, 1)
+        if len(TOPICS) > 1 and "</body>" in text:
+            text = text.replace("</body>", CAROUSEL_JS + "\n</body>", 1)
+        with open(dst, "w", encoding="utf-8") as f:
+            f.write(text)
 
 
 # ================= TOP（v11デザイン・確定版の本番移植） =================
@@ -1621,23 +1669,16 @@ def _render_top(cfg, base, products, cats, *, units, live, active_tab, page,
                 '<a class="v-card', '<a' + inject + ' class="v-card', 1)
         cards.append(card_html)
     stream = "".join(cards)
-    if stream_ctx is not None:
-        # 速報は「今も値下がりしている」ものだけから作る
-        # （凍結品・価格戻り品のOFFを混ぜない）。
-        notice_html = render_notice(stream_ctx["deals"])
-    else:
-        notice_html = render_notice(live)
+    # 特集カルーセルと速報ティッカーは、全ページ共通のヘッダー下バンド
+    # として page_shell が差す（2026-11-15）。ここでは二重に出さない。
     if home:
-        # TOP（新着）の並び（2026-11-14 furu 指示で確定）:
-        # ヘッダー → 特集カルーセル → 速報ティッカー → 本文（ストリーム）
-        # → Threadsの速報（メインカラム末尾）。
+        # TOP（新着）の並び: ヘッダー → バンド（カルーセル＋速報）
+        # → 本文（ストリーム）→ Threadsの速報（メインカラム末尾）。
         # ヒーロー（黒い帯）は TOP からは廃止。掲載基準の説明は商品ページと
-        # ポップアップに残る。カルーセルと速報欄は1ページ目だけ。
-        head_html = (
-            (render_campaign_carousel(entries) if page == 1 else "")
-            + notice_html)
+        # ポップアップに残る。
+        head_html = ""
     else:
-        # /off/ など TOP 以外は従来どおり（ヒーロー → カルーセル → 速報）。
+        # /off/ などはヒーローが本文の先頭（バンドはその上、ヘッダー直下）。
         if stream_ctx is not None:
             # ストリーム方式: 看板は「掲載中／本日の新規」。
             hero_html = render_stream_hero(len(stream_ctx["total"]),
@@ -1645,10 +1686,7 @@ def _render_top(cfg, base, products, cats, *, units, live, active_tab, page,
                                            fetched)
         else:
             hero_html = render_top_hero(len(live), fetched)
-        head_html = (
-            hero_html
-            + (render_campaign_carousel(entries) if page == 1 else "")
-            + notice_html)
+        head_html = hero_html
     content = (
         '<div class="v-page">'
         + head_html
@@ -1668,8 +1706,8 @@ def _render_top(cfg, base, products, cats, *, units, live, active_tab, page,
         ogtitle="%s ── %s" % (cfg["site"]["name"], cfg["site"]["tagline"]),
         desc=desc, path=path, content=content, jsonld=jsonld,
         bodyclass="v11", robots=robots, products=products, cats=cats,
-        scripts=(CAROUSEL_JS if page == 1 and len(TOPICS) > 1 else "")
-        + (CATTAB_JS if top_tabs and page == 1 else ""))
+        # カルーセルの JS は page_shell がバンドと一緒に足す。
+        scripts=(CATTAB_JS if top_tabs and page == 1 else ""))
 
 
 def build_index(cfg, base, products, cats, stream_ctx=None):
@@ -3590,7 +3628,6 @@ def main():
 
     guides = load_guides()
     cfg["_guides"] = guides
-    build_events()
 
     listings = load_listings()
     if listings is not None:
@@ -3622,6 +3659,10 @@ def main():
               "凍結 %d件）" % (len(listed), len(deals),
                              len(live_listed) - len(deals),
                              len(listed) - len(live_listed)))
+        # ヘッダー下バンドの速報は「今も値下がりしている」ものだけから作る
+        # （凍結品・価格戻り品のOFFを混ぜない。従来の TOP と同じ材料）。
+        prepare_head_band(stream_ctx["deals"])
+        build_events()
         build_index(cfg, base, listed, cats, stream_ctx=stream_ctx)
         build_off_index(cfg, base, deals, cats, stream_ctx=stream_ctx)
         build_guides(cfg, base, live_listed, cats, guides)
@@ -3637,6 +3678,9 @@ def main():
     else:
         checks_products = products
         n_public = len(products)
+        prepare_head_band([p for p in products
+                           if not sale_over(p) and not sale_soon(p)])
+        build_events()
         build_index(cfg, base, products, cats)
         build_off_index(cfg, base, products, cats)
         build_guides(cfg, base, products, cats, guides)
