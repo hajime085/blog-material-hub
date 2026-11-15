@@ -33,6 +33,10 @@ products.json の listPrice を手で書いた場合はそちらが優先され�
 「ウォッチ中」として観測に入れ、価格履歴を積みます。掲載の選定には
 混ざりません。あわせて更新順（-updateTimestamp）の検索を記録だけの
 実測として足しています（ops/update_probe.md）。
+
+ポイント倍率も、価格と同じ作法で観測します（2026-11-15〜）。
+商品レコードの pointInfo と point_history.json に残すだけで、
+掲載の判定にも表示にもまだ使いません（ポイント評価軸の第一段階）。
 """
 
 import collections
@@ -624,6 +628,168 @@ def update_history(history, pid, price, today):
     return history[pid]
 
 
+# ------------------------------------------------------------------ points
+# ポイント倍率の観測（2026-11-15、第一段階は取得・保存・履歴だけ）。
+#
+# 楽天の「安さ」の本体はポイント還元だが、サイトの物差しは本体価格の
+# 値下がりだけを見てきた。評価軸は分けたまま（倍率を価格の安さの
+# 証明にはしない）、倍率も価格と同じ作法で観測を始める。
+# 掲載の判定と表示はまだ変えない。
+#
+# APIの仕様で気を付けることが2つある。
+#   ・pointRate は通常ポイント1倍を含む総倍率（上乗せ分だけではない）
+#   ・終了まで24時間を切った倍率は API に出なくなる。だから一度
+#     取得した倍率は、保存した終了日時を正として扱う
+#
+# 取得の結果は3状態に分けて pointInfo の status に記録する。
+#   ok       … 取得できて、倍率フィールドが返った
+#   no_rate  … 取得できたが、倍率フィールドが返らなかった
+#   failed   … 取得そのものが失敗した
+# failed と no_rate では、保存済みの倍率データ（rate / start / end /
+# fetchedAt）には触らない。取得失敗を「倍率が終わった」と誤認すると、
+# 生きている倍率を消してしまう。checkedAt は「最後に取得を試みた
+# 日時」で、3状態とも更新する。保存した終了日時を過ぎた倍率は
+# 「有効な倍率」として扱わない（判定は後段。履歴には残す）。
+
+_POINT_DT_FORMATS = ("%Y-%m-%d %H:%M:%S", "%Y-%m-%d %H:%M",
+                     "%Y/%m/%d %H:%M:%S", "%Y/%m/%d %H:%M",
+                     "%Y-%m-%dT%H:%M:%S", "%Y-%m-%dT%H:%M",
+                     "%Y-%m-%d")
+
+
+def _fetched_stamp():
+    """取得日時の記録（bumpedAt と同じ書式に揃える）。"""
+    return datetime.now(JST).strftime("%Y-%m-%dT%H:%M:%S")
+
+
+def _parse_point_dt(value):
+    """ポイント期間の日時文字列を読む。読めなければ None。
+
+    APIが返す書式は揺れるので決め打ちにせず候補を総当たりする。
+    「読めない＝終わった」と決めつけないための戻り値。
+    """
+    s = (value or "").strip() if isinstance(value, str) else ""
+    if not s:
+        return None
+    for fmt in _POINT_DT_FORMATS:
+        try:
+            return datetime.strptime(s, fmt)
+        except ValueError:
+            continue
+    return None
+
+
+def point_info_from_api(item, fetched_at):
+    """APIの商品フィールドから、ポイントの観測を1件作る。
+
+    formatVersion 2 の応答はフラットで、pointRate /
+    pointRateStartTime / pointRateEndTime が商品フィールドに並ぶ。
+
+    pointRate が無い・解釈できない応答は「観測できなかった」として
+    None を返す。1倍（通常倍率）と偽って記録すると、あとから
+    「見に行って1倍だった」のか「見ていない」のか区別できない。
+    """
+    raw = item.get("pointRate")
+    if raw is None:
+        return None
+    try:
+        rate = int(raw)
+    except (TypeError, ValueError):
+        try:
+            rate = int(float(raw))
+        except (TypeError, ValueError):
+            return None
+    if rate < 1:
+        rate = 1
+
+    def _s(v):
+        return v if isinstance(v, str) else ("" if v is None else str(v))
+
+    return {
+        "rate": rate,
+        "start": _s(item.get("pointRateStartTime")),
+        "end": _s(item.get("pointRateEndTime")),
+        "fetchedAt": fetched_at,
+        "status": "ok",
+        "checkedAt": fetched_at,
+    }
+
+
+def merge_point_info(prev, fresh):
+    """保存済みのポイント情報に、新しい観測を重ねる。
+
+    終了まで24時間を切ると倍率が API から消える仕様がある。
+    そのため、保存済みの倍率（1倍超）の終了日時がまだ未来なら、
+    「1倍に戻った」という観測が来ても保存側を正とし、終了日時は
+    消さない。倍率データの取得日時（fetchedAt）も保存側のままにし、
+    「見に行った」事実は checkedAt にだけ残す。終了日時が
+    読めない・過ぎている場合は、新しい観測（1倍）をそのまま採用する。
+    """
+    if fresh is None:
+        return prev
+    if (fresh.get("rate") or 1) > 1:
+        return fresh
+    if prev and (prev.get("rate") or 1) > 1:
+        end = _parse_point_dt(prev.get("end"))
+        now = datetime.now(JST).replace(tzinfo=None)
+        if end is not None and end > now:
+            out = dict(prev)
+            out["status"] = "ok"
+            out["checkedAt"] = (fresh.get("checkedAt")
+                                or fresh.get("fetchedAt")
+                                or out.get("checkedAt"))
+            return out
+    return fresh
+
+
+def point_check_no_rate(prev, stamp):
+    """取得はできたが倍率フィールドが返らなかった、という記録。
+
+    保存済みの倍率データには触らず、status と checkedAt だけ進める。
+    まだ倍率を観測したことのない商品（prev が無い）には付ける
+    先が無いので None のままにする（「倍率なしの記録」は、
+    守るべき既存データがある場合にだけ意味を持つ）。
+    """
+    if not prev:
+        return None
+    out = dict(prev)
+    out["status"] = "no_rate"
+    out["checkedAt"] = stamp
+    return out
+
+
+def point_check_failed(prev, stamp):
+    """取得そのものが失敗した、という記録。
+
+    保存済みの倍率データには一切触らない。失敗を「倍率の終了」と
+    誤認して消すのが一番まずい。守るべきデータが無い商品には
+    付ける先が無いので None のままにする。
+    """
+    if not prev:
+        return None
+    out = dict(prev)
+    out["status"] = "failed"
+    out["checkedAt"] = stamp
+    return out
+
+
+def update_point_history(history, pid, rate, today):
+    """その日のポイント倍率を記録する。価格履歴と同じ作法。
+
+    同じ日に何度も見に行った場合は高いほうを残す。
+    「その日に◯倍だった」という事実は、その日の最高倍率で
+    代表させる。価格履歴が「その日の最高値」を残すのと同じ考え方。
+    """
+    rec = history.setdefault(pid, [])
+    if rec and rec[-1][0] == today:
+        rec[-1] = [today, max(rec[-1][1], rate)]
+    else:
+        rec.append([today, rate])
+    cutoff = (datetime.now(JST) - timedelta(days=HISTORY_DAYS)).strftime("%Y-%m-%d")
+    history[pid] = [r for r in rec if r[0] >= cutoff][-HISTORY_DAYS:]
+    return history[pid]
+
+
 def price_returned(records, current, tolerance=0.02):
     """セールが終わって、値段が元に戻ったか。
 
@@ -789,9 +955,9 @@ def auto_caption(metrics):
     return ""
 
 
-def expand_from_history(cfg, history, result, existing, attic, codes,
-                        app_id, access_key, aff_id, site_url, today,
-                        sale_tolerance):
+def expand_from_history(cfg, history, point_history, result, existing,
+                        attic, codes, app_id, access_key, aff_id, site_url,
+                        today, sale_tolerance):
     """価格ゲートを通った履歴商品をAPIで引き直し、result に足す。
 
     戻り値: 足した件数。失敗しても見張り全体は止めない（呼び出し側で
@@ -871,6 +1037,7 @@ def expand_from_history(cfg, history, result, existing, attic, codes,
             "startTime": it.get("startTime") or "",
             "endTime": it.get("endTime") or "",
             "freeShipping": it.get("postageFlag") == 0,
+            "pointInfo": point_info_from_api(it, _fetched_stamp()),
         }
         # いま買えるか、条件つきの値段でないかは、通常の取得と同じ物差し。
         ok, _why, _start = sale_status(raw, sale_tolerance)
@@ -886,6 +1053,9 @@ def expand_from_history(cfg, history, result, existing, attic, codes,
             continue
 
         records = update_history(history, pid, price, today)
+        if raw["pointInfo"] is not None:
+            update_point_history(point_history, pid,
+                                 raw["pointInfo"]["rate"], today)
         title_ref = list_price_from_title(raw_name, price)
         if title_ref:
             list_price, basis = title_ref, "title"
@@ -908,6 +1078,8 @@ def expand_from_history(cfg, history, result, existing, attic, codes,
             "postedAt": today, "bumpedAt": today + "T00:00:00",
             "lastSeen": today, "pitch_status": "pending",
         }
+        if raw.get("pointInfo") is not None:
+            item["pointInfo"] = raw["pointInfo"]
         # 前に載っていた商品なら、手で書いた内容（キャプション含む）を戻す。
         restore_hand(attic, item)
         # 送料はAPIのフラグを正とする。物置から戻った古いタグより優先する。
@@ -1038,6 +1210,9 @@ def fetch_category(cat, app_id, access_key, aff_id, hits, site_url, ng_keyword="
                 "endTime": item.get("endTime") or "",
                 # postageFlag: 0=送料込み, 1=送料別
                 "freeShipping": item.get("postageFlag") == 0,
+                # ポイント倍率の観測（生の観測値）。保存済みとの
+                # 突き合わせは、取り込む側で merge_point_info がやる。
+                "pointInfo": point_info_from_api(item, _fetched_stamp()),
             }
         print("  ・%-26s → %d件%s" % (
             ("ジャンル " + genre_id) if genre_id else ("「%s」" % keyword),
@@ -1345,6 +1520,7 @@ def build_featured(cfg, app_id, access_key, aff_id, site_url):
             "genreId": str(it.get("genreId") or ""),
             "startTime": (it.get("startTime") or "").strip(),
             "endTime": (it.get("endTime") or "").strip(),
+            "pointInfo": point_info_from_api(it, _fetched_stamp()),
             "autoTags": tags_from_title(raw_name),
             "listPrice": list_price_from_title(raw_name, price),
             "lastSeen": datetime.now(JST).strftime("%Y-%m-%d"),
@@ -1432,6 +1608,7 @@ def merge_featured_into_products(cfg, items):
     existing = {p["id"]: p for p in doc.get("products", [])}
     today = datetime.now(JST).strftime("%Y-%m-%d")
     history = load_json("price_history.json", {}) or {}
+    point_history = load_json("point_history.json", {}) or {}
 
     merged, no_section = 0, []
     keep_pinned = set()
@@ -1450,6 +1627,18 @@ def merge_featured_into_products(cfg, items):
         for f in API_FIELDS:
             if f in it:
                 p[f] = it[f]
+
+        # ポイント倍率は API_FIELDS に混ぜない。終了間際の倍率が
+        # APIから消える仕様があるので、保存済みとの突き合わせが要る。
+        if it.get("pointInfo") is not None:
+            pinfo = merge_point_info(prev.get("pointInfo"), it["pointInfo"])
+            if pinfo is not None:
+                p["pointInfo"] = pinfo
+                update_point_history(point_history, pid, pinfo["rate"], today)
+        elif prev.get("pointInfo"):
+            # 取得はできたが倍率フィールドが返らなかった回。
+            p["pointInfo"] = point_check_no_rate(prev["pointInfo"],
+                                                  _fetched_stamp())
 
         records = update_history(history, pid, it["price"], today)
         if prev.get("priceBasis") == "manual" and prev.get("listPrice"):
@@ -1496,6 +1685,7 @@ def merge_featured_into_products(cfg, items):
     doc["updatedAt"] = today
     save_json("products.json", doc)
     save_json("price_history.json", history)
+    save_json("point_history.json", point_history)
     return merged, no_section
 
 
@@ -1729,6 +1919,7 @@ def fetch_event(cfg, app_id, access_key, aff_id, site_url,
                         # ぜんぶ「＋送料」と表示されていた。
                         # 実際には送料無料のものばかりで、事実と逆だった。
                         "freeShipping": it.get("postageFlag") == 0,
+                        "pointInfo": point_info_from_api(it, _fetched_stamp()),
                     }
                 time.sleep(REQUEST_INTERVAL)
         print("  ・%-22s → ここまで %d件" % (cat["label"], len(found)))
@@ -1777,7 +1968,7 @@ def fetch_event(cfg, app_id, access_key, aff_id, site_url,
                  clean_title(v["rawTitle"])[:38]))
         if dry_run:
             continue
-        products.append({
+        _prod = {
             "id": pid, "category": v["category"],
             "title": clean_title(v["rawTitle"]), "rawTitle": v["rawTitle"],
             "price": v["price"], "image": v["image"],
@@ -1799,7 +1990,10 @@ def fetch_event(cfg, app_id, access_key, aff_id, site_url,
             "postedAt": today, "bumpedAt": stamp, "lastSeen": today,
             # 親投稿のもとはまだ無い。pitch.py で作る。
             "pitch_status": "pending",
-        })
+        }
+        if v.get("pointInfo") is not None:
+            _prod["pointInfo"] = v["pointInfo"]
+        products.append(_prod)
 
     if dry_run:
         print("\n  --dry-run なので products.json は書き換えていません。")
@@ -2080,6 +2274,7 @@ def main():
     # 手で書いた内容の物置。消した商品のぶんを預けてある。
     attic = load_json("hand_attic.json", {}) or {}
     history = load_json("price_history.json", {}) or {}
+    point_history = load_json("point_history.json", {}) or {}
     # 商品ID→itemCode の対応表。履歴だけが残った商品を引き直すために
     # 要る（expand_from_history）。見るたびに育てて、最後に保存する。
     codes = load_item_codes(existing, attic)
@@ -2253,6 +2448,23 @@ def main():
                 continue
             records = update_history(history, pid, raw["price"], today)
 
+            # ポイント倍率も、価格と同じ作法で観測する（第一段階は
+            # 記録だけ。掲載の判定にはまだ使わない）。API_FIELDS には
+            # 混ぜない。終了間際の倍率が API から消える仕様があるので、
+            # 保存済みとの突き合わせ（merge_point_info）が要る。
+            prev_pi = (existing.get(pid) or {}).get("pointInfo")
+            if raw.get("pointInfo") is not None:
+                pinfo = merge_point_info(prev_pi, raw["pointInfo"])
+                if pinfo is not None:
+                    update_point_history(point_history, pid,
+                                         pinfo["rate"], today)
+            elif prev_pi:
+                # 取得はできたが倍率フィールドが返らなかった回。
+                # 保存済みの倍率データには触らず、結果だけ記録する。
+                pinfo = point_check_no_rate(prev_pi, _fetched_stamp())
+            else:
+                pinfo = None
+
             # セールが終わって値段が戻った商品は落とす。
             # このサイトは値下がりした瞬間だけを載せるので、
             # 戻ったものを置いておく理由がない。
@@ -2272,6 +2484,8 @@ def main():
             for f in API_FIELDS:
                 if f in raw:
                     item[f] = raw[f]
+            if pinfo is not None:
+                item["pointInfo"] = pinfo
 
             # 基準価格の優先順位。手で書いたもの > タイトルの表記 > 価格履歴。
             # タイトルを履歴より上に置くのは、ショップが「3,790円→1,999円」と
@@ -2465,6 +2679,11 @@ def main():
             # 「確かめて残した」と「確かめられなかった」は違う。
             print("  留め置きの確認ができませんでした（%s）: %s"
                   % (p.get("title", "")[:24], ex), file=sys.stderr)
+            # ポイントの保存データは壊さない。「取得失敗」としてだけ
+            # 記録する（倍率が終わったことにはしない）。
+            if p.get("pointInfo"):
+                p["pointInfo"] = point_check_failed(p["pointInfo"],
+                                                     _fetched_stamp())
             time.sleep(REQUEST_INTERVAL)
             continue
         got = data.get("Items") or []
@@ -2506,6 +2725,17 @@ def main():
                     p["priceBasis"] = "history" if ref else None
         p["reviewCount"] = it.get("reviewCount") or p.get("reviewCount")
         p["reviewAverage"] = it.get("reviewAverage") or p.get("reviewAverage")
+        # ポイント倍率も取り直す（価格・題名・レビューと同じ扱い）。
+        fresh_pi = point_info_from_api(it, _fetched_stamp())
+        if fresh_pi is not None:
+            p["pointInfo"] = merge_point_info(p.get("pointInfo"), fresh_pi)
+            update_point_history(point_history, pid,
+                                 p["pointInfo"]["rate"], today)
+        elif p.get("pointInfo"):
+            # 取得はできたが倍率フィールドが返らなかった回。
+            # 保存済みの倍率データには触らず、結果だけ記録する。
+            p["pointInfo"] = point_check_no_rate(p["pointInfo"],
+                                                  _fetched_stamp())
         # 送料も取り直す（2026-11-12 修正）。留め置きの更新は価格・題名・
         # レビューだけを見ていて、postageFlag を tags に反映する経路が
         # 無かった。そのため、送料無料の商品でもタグが付かないまま
@@ -2574,6 +2804,8 @@ def main():
             })
             # 前に載せていて、いったん落ちた商品かもしれない。物置を見る。
             restore_hand(attic, _slot)
+            if raw.get("pointInfo") is not None:
+                _slot["pointInfo"] = raw["pointInfo"]
             result[pid] = _slot
             pre_added.append((clean_title(raw["rawTitle"]), raw["price"], off,
                               raw.get("startTime", "")))
@@ -2588,7 +2820,7 @@ def main():
     if not seed and os.environ.get("YASUMIRU_POOL_EXPAND") != "0":
         try:
             expanded = expand_from_history(
-                cfg, history, result, existing, attic, codes,
+                cfg, history, point_history, result, existing, attic, codes,
                 app_id, access_key, aff_id, site_url, today, sale_tolerance)
         except Exception as ex:                          # noqa: BLE001
             # 復活の失敗で見張り全体を落とさない。通常分の更新は守る。
@@ -2603,6 +2835,7 @@ def main():
     # 値下がりが1件も無い日に、サイトが丸ごと消えるのを防ぐ。
     if not products and existing:
         save_json("price_history.json", history)
+        save_json("point_history.json", point_history)
         raise SystemExit(
             "\n値下がりしている商品が1件も見つかりませんでした。\n"
             "既存の %d件 はそのまま残します（products.json は変更していません）。\n\n"
@@ -2636,6 +2869,7 @@ def main():
         "products": products,
     })
     save_json("price_history.json", history)
+    save_json("point_history.json", point_history)
 
     if watch_added:
         print("\n   観測枠（ウォッチ中）を %d件 追加しました"
