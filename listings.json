@@ -1079,7 +1079,7 @@
         "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00pui97.jeifoa18.g00pui97.jeifp764/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fe-kurashi%2F1338101%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fe-kurashi%2Fi%2F10000628%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
         "shop": "くらしのeショップ",
         "reviewAverage": 4.37,
-        "reviewCount": 4121,
+        "reviewCount": 4122,
         "itemCode": "e-kurashi:10000628",
         "genreId": "208397",
         "startTime": "",
@@ -1489,12 +1489,10 @@
     }
   ],
   "automation": {
-    "applied_at": "2026-11-15T07:33:06+09:00",
-    "products_count": 358,
-    "history_entries": 358850,
-    "added": [
-      "r3e6459925"
-    ],
+    "applied_at": "2026-11-15T11:34:00+09:00",
+    "products_count": 369,
+    "history_entries": 358816,
+    "added": [],
     "expired": [],
     "forced": false
   }
