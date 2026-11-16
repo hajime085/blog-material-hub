@@ -2403,6 +2403,43 @@ def build_products(cfg, base, products, cats):
                 % (yen(p["price"]), pt["rate"], yen(pt["pts"]),
                    yen(ref_price), e(period)))
 
+        # ポイントの目安シミュレーション（2026-11-16、furu 承認の3段方式）。
+        # 「SPU最大の人は◯円」という一つの数字は出さない（人ごとに到達
+        # 可能性が違い、上限到達済みの人には倍率が実質0になるため）。
+        # 代わりに条件を固定した3段で出す：
+        #   1段目：ショップポイントのみ（誰でも届く床）
+        #   2段目：＋楽天カード払い（通常分＝税込価格の1% ＋ 特典分＝
+        #          税抜価格の1%。実例 2026-11-16：13,200円の商品で
+        #          132pt＋120pt＝252pt、楽天の実表示 1,452pt と一致）
+        #   3段目：＋買いまわり最大（セール期間・10ショップで +9倍。
+        #          税抜価格の9%。期間上限 7,000pt は注記で担保）
+        sim_block = ""
+        if point_block:
+            tax_base = p["price"] / 1.1
+            pts1 = pt["pts"]
+            pts2 = pts1 + round(p["price"] * 0.01) + round(tax_base * 0.01)
+            pts3 = pts2 + round(tax_base * 0.09)
+            sim_block = (
+                '<div class="point-block point-sim">'
+                '<p class="point-block-head">ポイントの目安シミュレーション</p>'
+                '<dl class="point-rows">'
+                '<div><dt>ショップポイントのみ（誰でも）</dt>'
+                '<dd>約%spt → 実質 ¥%s</dd></div>'
+                '<div><dt>＋楽天カード払い</dt>'
+                '<dd>約%spt → 実質 ¥%s</dd></div>'
+                '<div><dt>＋買いまわり最大（セール期間）</dt>'
+                '<dd>約%spt → 実質 ¥%s</dd></div>'
+                '</dl>'
+                '<p class="point-block-note">カード払い・買いまわりは、条件を'
+                '満たした場合の目安です。買いまわりはセール期間中に'
+                '1ショップ税込1,000円以上の購入で1倍ずつ加算され、最大+9倍'
+                '（期間中の付与上限7,000pt）。各特典には月間の付与上限や'
+                '対象条件があります。</p>'
+                '</div>'
+                % (yen(pts1), yen(p["price"] - pts1),
+                   yen(pts2), yen(p["price"] - pts2),
+                   yen(pts3), yen(p["price"] - pts3)))
+
         # 項目の並び（v4で見直し）：「どんな商品？」を仕様表より前に置く。
         # 読む人はまず「何の商品か」を知りたいのであって、表は確かめに来た
         # 人のもの。価格の検証（履歴・基準）はその後に続ける。
@@ -2441,6 +2478,7 @@ def build_products(cfg, base, products, cats):
   <p class="pop-note{stale_cls}">{freshness}</p>
 
   {point_block}
+  {sim_block}
 
   {desc_block}
 
@@ -2471,7 +2509,7 @@ def build_products(cfg, base, products, cats):
                if is_stale(p, fetched)
                else "値段は毎日見にいってます。買う前に楽天でも確かめてね（%s時点）" % e(p.get("lastSeen") or "")),
            url=e(p.get("affiliateUrl") or "#"),
-           point_block=point_block,
+           point_block=point_block, sim_block=sim_block,
            spec=spec, hist_block=render_history_block(p),
            criteria_block=render_criteria_block(p),
            arrow=icons.use("arrow-right", "ic-arrow"),
