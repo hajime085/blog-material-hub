@@ -1093,10 +1093,13 @@ def render_stream_card(p, cats, badge, cat_label=None):
                       '<span class="v-off">%d%%OFF</span>' % (yen(med), off))
     if state == "point" and p.get("_point"):
         # ポイント軸のカードには、割引の「%OFF」に相当する目安として
-        # ポイント差引後の参考価格を併記する。金額だけでは「どれくらい
-        # お得か」が伝わらないため（2026-11-16 furu 指摘）。「実質」とは
-        # 言わず、参考価格（◯円相当）の表記に留める（表示ルール）。
-        price_row += ('<span class="v-off v-off-point">参考 ¥%s相当</span>'
+        # ポイント差引後の実質価格を併記する。金額だけでは「どれくらい
+        # お得か」が伝わらないため（2026-11-16 furu 指摘）。当初は
+        # 「参考価格（◯円相当）」表記だったが、弱くてクリックに繋がら
+        # ないという furu の判断で「実質 ¥◯」表記に変更（同日）。
+        # 獲得ポイントが目安であることは、直下の還元行（約◯pt還元）と
+        # 商品ページの注記で担保する。
+        price_row += ('<span class="v-off v-off-point">実質 ¥%s</span>'
                       % yen(p["price"] - p["_point"]["pts"]))
     rev = ""
     if p.get("reviewAverage"):
@@ -1139,12 +1142,14 @@ def render_stream_card(p, cats, badge, cat_label=None):
         date_src = p.get("lastSeen", "")
     else:
         date_src = p["_listed_on"]
+    # ポイント還元のバッジは赤地に白文字で目立たせる（2026-11-16 furu 指示）
+    badge_cls = " v-badge-point-main" if state == "point" else ""
     return (
         '<a class="v-card" href="/p/{id}/">'
         '<img class="v-card-img" src="{img}" alt="{alt}" loading="lazy">'
         '<div class="v-card-body">'
         '<div class="v-cat-row"><span class="v-cat-label">{label}</span>'
-        '<span class="v-note-badge">{badge}</span>{pbadge}'
+        '<span class="v-note-badge{badge_cls}">{badge}</span>{pbadge}'
         '<span class="v-card-date">{date}</span></div>'
         '<h3 class="v-card-title">{title}</h3>'
         '<div class="v-price-row">{price_row}</div>'
@@ -1153,7 +1158,7 @@ def render_stream_card(p, cats, badge, cat_label=None):
         '{note}</div></a>'
     ).format(id=e(p["id"]), img=e(p["image"]), alt=e(p["title"]),
              label=e(cat_label or c.get("short") or c.get("label") or ""),
-             badge=e(badge), pbadge=pbadge, date=e(_md_label(date_src)),
+             badge=e(badge), badge_cls=badge_cls, pbadge=pbadge, date=e(_md_label(date_src)),
              title=e(p["title"]), price_row=price_row,
              shop=e(p.get("shop", "楽天市場")), rev=rev, note=note)
 
@@ -2369,8 +2374,9 @@ def build_products(cfg, base, products, cats):
                           '<div class="prose prose-card">%s%s</div>' % (paras, plist))
 
         # ポイント情報の表示（2026-11-16）。倍率が今有効な商品だけに出す。
-        # 「実質◯円」とは大きく言わず、販売価格・倍率・獲得ポイント目安・
-        # 差引後の参考価格（◯円相当）を分けて出す（ポイント軸の表示ルール）。
+        # 販売価格・倍率・獲得ポイント目安・差引後の実質価格（目安）を
+        # 分けて出す（ポイント軸の表示ルール。実質表記は 2026-11-16 に
+        # furu の判断で採用。ポイントは目安である旨を注記で担保する）。
         point_block = ""
         pt = p.get("_point")
         if pt and p.get("_state") != "frozen":
@@ -2387,7 +2393,7 @@ def build_products(cfg, base, products, cats):
                 '<div><dt>販売価格</dt><dd>¥%s</dd></div>'
                 '<div><dt>ショップポイント</dt><dd>%d倍</dd></div>'
                 '<div><dt>獲得ポイント目安</dt><dd>約%spt</dd></div>'
-                '<div><dt>ポイント差引後の参考価格</dt><dd>¥%s相当</dd></div>'
+                '<div><dt>ポイント差引後の実質価格（目安）</dt><dd>¥%s</dd></div>'
                 '</dl>'
                 '<p class="point-block-period">対象期間：%s</p>'
                 '<p class="point-block-note">ポイントは税抜価格に対して付与されるため、'

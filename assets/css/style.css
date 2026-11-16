@@ -3187,6 +3187,7 @@ body{background:#f2f4f8;color:#17181c;font-family:-apple-system,BlinkMacSystemFo
 .v-cat-label{border:1.5px solid #c83333;color:#c83333;font-weight:800;font-size:11.5px;padding:1px 7px;white-space:nowrap}
 .v-note-badge{background:#f2f4f8;color:#4a4e57;font-weight:700;font-size:11px;padding:2px 7px;white-space:nowrap}
 .v-badge-point{background:#fbeed3;color:#8a5a00}
+.v-badge-point-main{background:#c83333;color:#fff}
 .point-block{border:1px solid #e3c878;background:#fffaf0;padding:14px 16px;margin:14px 0}
 .point-block-head{font-weight:800;font-size:15px;margin:0 0 8px;color:#8a5a00}
 .point-rows{margin:0}
