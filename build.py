@@ -1091,6 +1091,13 @@ def render_stream_card(p, cats, badge, cat_label=None):
     if med and off:
         price_row += ('<span class="v-price-old">¥%s</span>'
                       '<span class="v-off">%d%%OFF</span>' % (yen(med), off))
+    if state == "point" and p.get("_point"):
+        # ポイント軸のカードには、割引の「%OFF」に相当する目安として
+        # ポイント差引後の参考価格を併記する。金額だけでは「どれくらい
+        # お得か」が伝わらないため（2026-11-16 furu 指摘）。「実質」とは
+        # 言わず、参考価格（◯円相当）の表記に留める（表示ルール）。
+        price_row += ('<span class="v-off v-off-point">参考 ¥%s相当</span>'
+                      % yen(p["price"] - p["_point"]["pts"]))
     rev = ""
     if p.get("reviewAverage"):
         rev = ('<span class="v-rev">★★%s（%s件）</span>'
