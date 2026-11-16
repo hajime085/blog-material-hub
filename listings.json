@@ -8,36 +8,36 @@
       "id": "r0726ed879",
       "listed_on": "2026-11-10",
       "theme": "beauty",
-      "last_seen": "2026-11-10",
-      "snapshot_updated": "2026-11-10",
+      "last_seen": "2026-11-16",
+      "snapshot_updated": "2026-11-16",
       "snapshot": {
         "id": "r0726ed879",
         "category": "beauty",
         "title": "ファンデーション カバー力 崩れにくい パウダー【D-クリア ファンデーション 12g】 毛穴レス…",
-        "rawTitle": "【50％OFF★お買い物マラソン半額は11/11(水)1:59まで】 ファンデーション カバー力 崩れにくい パウダー【D-クリア ファンデーション 12g】 毛穴レス 陶器肌 フィルター肌 敏感肌 混合肌 インナードライ 韓国コスメ ミネラル 60代 プレゼント プチプラ d-ray",
-        "price": 1200,
-        "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/d-ray/cabinet/09802265/10566858/imgrc0114585827.jpg?_ex=600x600",
+        "rawTitle": "【11/18(水)10時～★半額以下！24h限定】 ファンデーション カバー力 崩れにくい パウダー【D-クリア ファンデーション 12g】 毛穴レス 陶器肌 フィルター肌 敏感肌 混合肌 インナードライ 韓国コスメ ミネラル 60代 プレゼント プチプラ d-ray",
+        "price": 1100,
+        "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/d-ray/cabinet/item/mine/minelp/imgrc0113019896.jpg?_ex=600x600",
         "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00sq5r7.jeifod0d.g00sq5r7.jeifp545/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fd-ray%2Fpakuto1%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fd-ray%2Fi%2F10000001%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
         "shop": "D-RAY",
         "reviewAverage": 4.43,
-        "reviewCount": 16729,
+        "reviewCount": 16758,
         "itemCode": "d-ray:10000001",
         "genreId": "405324",
-        "startTime": "2026-11-04 20:00",
-        "endTime": "2026-11-11 01:59",
+        "startTime": "2026-11-18 10:00",
+        "endTime": "2026-11-19 09:59",
         "listPrice": 2400,
         "priceBasis": "history",
         "caption": "2,400円のD-クリア ファンデーション12gが1,200円。パウダータイプ、送料無料。",
+        "points": [],
+        "description": "",
         "tags": [
           "送料無料"
         ],
-        "points": [],
-        "description": "",
         "unitNote": null,
-        "postedAt": "2026-11-03",
-        "bumpedAt": "2026-11-03T11:29:32",
-        "lastSeen": "2026-11-10",
-        "pitch_status": "ready",
+        "postedAt": "2026-11-16",
+        "bumpedAt": "2026-11-16T00:00:00",
+        "lastSeen": "2026-11-16",
+        "pitch_status": "pending",
         "marketing": {
           "ask": "ファンデはパウダー派ですか、リキッド派ですか？",
           "benefits": [
@@ -55,6 +55,14 @@
           "target": "パウダータイプのファンデーションを探している人",
           "use_case": "毎日のメイク",
           "ask_type": "choice"
+        },
+        "pointInfo": {
+          "rate": 1,
+          "start": "",
+          "end": "",
+          "fetchedAt": "2026-11-16T11:30:54",
+          "status": "ok",
+          "checkedAt": "2026-11-16T11:30:54"
         }
       }
     },
@@ -225,9 +233,9 @@
           "rate": 1,
           "start": "2026-08-01 15:00",
           "end": "9999-12-31 23:59",
-          "fetchedAt": "2026-11-16T07:27:20",
+          "fetchedAt": "2026-11-16T11:27:46",
           "status": "ok",
-          "checkedAt": "2026-11-16T07:27:20"
+          "checkedAt": "2026-11-16T11:27:46"
         }
       }
     },
@@ -571,9 +579,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-16T07:27:47",
+          "fetchedAt": "2026-11-16T11:28:14",
           "status": "ok",
-          "checkedAt": "2026-11-16T07:27:47"
+          "checkedAt": "2026-11-16T11:28:14"
         }
       }
     },
@@ -633,9 +641,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-16T07:28:03",
+          "fetchedAt": "2026-11-16T11:28:32",
           "status": "ok",
-          "checkedAt": "2026-11-16T07:28:03"
+          "checkedAt": "2026-11-16T11:28:32"
         }
       }
     },
@@ -697,9 +705,9 @@
           "rate": 10,
           "start": "2026-11-20 00:00",
           "end": "2026-11-20 23:59",
-          "fetchedAt": "2026-11-16T07:32:11",
+          "fetchedAt": "2026-11-16T11:33:00",
           "status": "ok",
-          "checkedAt": "2026-11-16T07:32:11"
+          "checkedAt": "2026-11-16T11:33:00"
         }
       }
     },
@@ -815,9 +823,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-16T07:32:19",
+          "fetchedAt": "2026-11-16T11:33:09",
           "status": "ok",
-          "checkedAt": "2026-11-16T07:32:19"
+          "checkedAt": "2026-11-16T11:33:09"
         }
       }
     },
@@ -856,31 +864,30 @@
         "lastSeen": "2026-11-16",
         "pitch_status": "ready",
         "marketing": {
-          "benefits": [
-            "2台同時に充電できる"
-          ],
-          "body": "薄型で、2台同時に充電できます。\n色はピンクとグリーン。機内持ち込みもできます。",
+          "hook_type": "scene",
+          "target": "外出先でスマホの電池が切れがちな人",
+          "problem": "外出先でスマホの電池が切れると困る",
           "features": [
             "15000mAh",
             "薄型・軽量",
             "2台同時充電",
             "機内持ち込み可"
           ],
-          "hook": "え、この薄さで大容量なのに、この値段…！",
-          "hook_type": "price",
+          "benefits": [
+            "2台同時に充電できる"
+          ],
+          "hook": "モバイルバッテリー、薄いやつって容量が心配にならない？",
           "name": "モバイルバッテリー",
-          "note": "薄型で軽くて、2台同時に充電できる。機内持ち込みもOKなやつ。",
-          "problem": "外出先でスマホの電池が切れると困る",
-          "target": "外出先でスマホの電池が切れがちな人",
-          "use_case": "外出時の充電"
+          "body": "薄型で、2台同時に充電できます。\n色はピンクとグリーン。機内持ち込みもできます。",
+          "note": "薄いのに15000mAhあって、2台同時に充電できる。機内持ち込みもOKだよ"
         },
         "pointInfo": {
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-16T07:31:00",
+          "fetchedAt": "2026-11-16T11:31:45",
           "status": "ok",
-          "checkedAt": "2026-11-16T07:31:00"
+          "checkedAt": "2026-11-16T11:31:45"
         }
       }
     },
@@ -1169,9 +1176,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-16T07:27:39",
+          "fetchedAt": "2026-11-16T11:28:07",
           "status": "ok",
-          "checkedAt": "2026-11-16T07:27:39"
+          "checkedAt": "2026-11-16T11:28:07"
         }
       }
     },
@@ -1233,9 +1240,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-16T07:32:36",
+          "fetchedAt": "2026-11-16T11:33:27",
           "status": "ok",
-          "checkedAt": "2026-11-16T07:32:36"
+          "checkedAt": "2026-11-16T11:33:27"
         }
       }
     },
@@ -1297,9 +1304,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-16T07:28:02",
+          "fetchedAt": "2026-11-16T11:28:31",
           "status": "ok",
-          "checkedAt": "2026-11-16T07:28:02"
+          "checkedAt": "2026-11-16T11:28:31"
         }
       }
     },
@@ -1383,7 +1390,7 @@
         "endTime": "",
         "listPrice": 900,
         "priceBasis": "history",
-        "caption": "980円の3in1巻き取り充電ケーブルが700円。観測60日の最安値で、中央値より22%安い。送料無料。",
+        "caption": "900円の3in1巻き取り充電ケーブルが700円。観測60日の最安値で、中央値より22%安い。送料無料。",
         "points": [],
         "description": "",
         "tags": [
@@ -1418,9 +1425,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-16T07:31:17",
+          "fetchedAt": "2026-11-16T11:32:03",
           "status": "ok",
-          "checkedAt": "2026-11-16T07:31:17"
+          "checkedAt": "2026-11-16T11:32:03"
         }
       }
     },
@@ -1481,9 +1488,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-16T07:26:24",
+          "fetchedAt": "2026-11-16T11:26:45",
           "status": "ok",
-          "checkedAt": "2026-11-16T07:26:24"
+          "checkedAt": "2026-11-16T11:26:45"
         }
       }
     },
@@ -1497,8 +1504,8 @@
         "id": "r04836f890",
         "category": "fashion",
         "title": "コーデュロイ パンツ 2WAY ダンボールニット レディース ジョガーパンツ ワイドパンツ 裏起毛…",
-        "rawTitle": "74%OFF!【11/15 10時〜24H限定：1,480円～1,890円！】 【年間ランキング16位】コーデュロイ パンツ 2WAY ダンボールニット レディース ジョガーパンツ ワイドパンツ 裏起毛 丈が【 選べる4タイプジョガーパンツ 】裏起毛以外がページ内最安[y_3999bag][y_3999bag]",
-        "price": 1480,
+        "rawTitle": "74%OFF!【24H限定：1,490円～1,990円！】 【年間ランキング16位】コーデュロイ パンツ 2WAY ダンボールニット レディース ジョガーパンツ ワイドパンツ 裏起毛 丈が【 選べる4タイプジョガーパンツ 】裏起毛以外がページ内最安[y_3999bag][y_3999bag]",
+        "price": 1490,
         "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/darkangel/cabinet/12863863/11/imgrc0135973015.jpg?_ex=600x600",
         "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00q8qj7.jeifo2ee.g00q8qj7.jeifpbbc/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdarkangel%2Fto2209-0916%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fdarkangel%2Fi%2F10035705%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
         "shop": "Dark Angel (ダークエンジェル)",
@@ -1506,8 +1513,8 @@
         "reviewCount": 5780,
         "itemCode": "darkangel:10035705",
         "genreId": "206440",
-        "startTime": "2026-11-15 10:00",
-        "endTime": "2026-11-16 09:59",
+        "startTime": "2026-11-16 10:00",
+        "endTime": "2026-11-17 10:10",
         "listPrice": 2399,
         "priceBasis": "history",
         "caption": "2,399円のダンボールニットパンツが1,480円。丈が選べる3タイプ、24時間限定。",
@@ -1540,9 +1547,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-16T07:32:45",
+          "fetchedAt": "2026-11-16T11:33:36",
           "status": "ok",
-          "checkedAt": "2026-11-16T07:32:45"
+          "checkedAt": "2026-11-16T11:33:36"
         }
       }
     },
@@ -1585,17 +1592,17 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-16T07:31:46",
+          "fetchedAt": "2026-11-16T11:32:33",
           "status": "ok",
-          "checkedAt": "2026-11-16T07:31:46"
+          "checkedAt": "2026-11-16T11:32:33"
         }
       }
     }
   ],
   "automation": {
-    "applied_at": "2026-11-16T07:33:45+09:00",
-    "products_count": 393,
-    "history_entries": 360021,
+    "applied_at": "2026-11-16T11:34:40+09:00",
+    "products_count": 407,
+    "history_entries": 360037,
     "added": [],
     "expired": [],
     "forced": false
