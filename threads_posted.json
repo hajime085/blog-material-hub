@@ -946,25 +946,10 @@
     "feature:cake:2026-11-30",
     "schedule:2026-W46-1",
     "report:2026-11-16",
-    "product:r63ee63728"
+    "product:r63ee63728",
+    "tip:06"
   ],
   "log": [
-    {
-      "key": "tip:02",
-      "id": "18112284089604985",
-      "at": "2026-10-16 12:20",
-      "kind": "tip",
-      "slot": 12,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
     {
       "key": "tip:33",
       "id": "18125736137313199",
@@ -5698,6 +5683,21 @@
       "logic_version": "pattern_v4",
       "link": "reply",
       "link_arm": "site"
+    },
+    {
+      "key": "tip:06",
+      "id": "17960094219289544",
+      "at": "2026-11-17 07:20",
+      "kind": "tip",
+      "slot": 7,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "ask_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "reply",
+      "link_arm": null
     }
   ]
 }
