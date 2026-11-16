@@ -356,7 +356,7 @@
       },
       "listPrice": 2799,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "2,799円の裏起毛モックネックニットが1,490円。裏ボアで暖かく、年間ランキング30位に入った定番。送料無料。",
       "tags": [
         "送料無料"
       ],
@@ -366,7 +366,21 @@
       "postedAt": "2026-11-16",
       "bumpedAt": "2026-11-16T11:34:08",
       "lastSeen": "2026-11-16",
-      "pitch_status": "pending"
+      "pitch_status": "ready",
+      "marketing": {
+        "body": "Dark Angelの『元祖裏起毛』モックネックニット。裏側がボア起毛で暖かく、首元まで覆うモックネックです。",
+        "features": [
+          "裏ボア起毛",
+          "モックネック",
+          "送料無料"
+        ],
+        "hook": "え、元祖裏起毛のニットが今いちばん安くなってる…！",
+        "hook_type": "price",
+        "name": "裏起毛モックネックニット",
+        "note": "裏ボアで1枚でも暖かいやつ。オフィスにも着ていけるきれいめな形だよ",
+        "problem": "普通のニット1枚だと寒いし、重ね着すると着ぶくれする",
+        "target": "冬のトップスを買い足したい人"
+      }
     },
     {
       "id": "r40835a6e2",
@@ -2392,7 +2406,7 @@
       "endTime": "",
       "listPrice": null,
       "priceBasis": null,
-      "caption": "",
+      "caption": "カプセルカッターボンヌが7,150円。刻む・混ぜる・砕く・泡立てまで1台で。送料無料。",
       "tags": [
         "ウォッチ中",
         "送料無料"
@@ -2429,7 +2443,7 @@
       "endTime": "",
       "listPrice": null,
       "priceBasis": null,
-      "caption": "",
+      "caption": "レコルトのコードレスカプセルカッターボンヌが12,100円。充電式で置き場所を選ばない。送料無料。",
       "tags": [
         "ウォッチ中",
         "送料無料"
@@ -2613,7 +2627,7 @@
       "endTime": "",
       "listPrice": null,
       "priceBasis": null,
-      "caption": "",
+      "caption": "シンガーのコンピュータミシン MM-115Pが29,800円。ひらがな文字縫いと自動糸通しつき。送料無料。",
       "tags": [
         "ウォッチ中",
         "送料無料"
@@ -3365,7 +3379,7 @@
       "endTime": "",
       "listPrice": null,
       "priceBasis": null,
-      "caption": "",
+      "caption": "レコルトの自動調理ポットが13,200円。豆乳もスープも、材料を入れて待つだけ。送料無料。",
       "tags": [
         "ウォッチ中",
         "送料無料"
@@ -3476,7 +3490,7 @@
       "endTime": "",
       "listPrice": null,
       "priceBasis": null,
-      "caption": "",
+      "caption": "ジャガーの電動ミシン MM-222Iが18,800円。自動糸通しとフットコントローラー付き。送料無料。",
       "tags": [
         "ウォッチ中",
         "送料無料"
@@ -3550,7 +3564,7 @@
       "endTime": "",
       "listPrice": null,
       "priceBasis": null,
-      "caption": "",
+      "caption": "ブラザーのコンピュータミシンが26,950円。レビュー4万件を超える人気シリーズ。送料無料。",
       "tags": [
         "ウォッチ中",
         "送料無料"

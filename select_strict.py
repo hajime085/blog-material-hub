@@ -38,7 +38,10 @@ import json
 import statistics
 import sys
 from collections import Counter, defaultdict
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
+
+JST = timezone(timedelta(hours=9))
 
 # ---------------------------------------------------------------- 定数（初期値）
 
@@ -121,6 +124,115 @@ def metrics_for(product: dict, history: dict) -> dict:
         "free_shipping": FREE_SHIPPING_TAG in (product.get("tags") or []),
         "has_caption": bool((product.get("caption") or "").strip()),
     }
+
+
+# ---------------------------------------------------------------- ポイント軸
+# ポイント評価軸（2026-11-16）。価格軸とは独立の物差しで、倍率を「価格が
+# 安い証拠」にはしない（絶対ルール）。判定の正本はここに置き、台帳の
+# 保持判定（apply_selection）と表示（build）も同じ関数を使う。
+#   期間限定（終了日時が保存されている）: 倍率5倍以上 かつ 獲得ポイント
+#     目安100pt以上 かつ 品質条件（レビュー100件以上・評価3.8以上・送料無料）
+#   常時（終了日時なし）: 倍率10倍以上 かつ 目安500pt以上 かつ 品質条件
+# 終了日時が保存されている倍率は、API の応答から消えても終了日時が正。
+# 終了日時のない倍率は、取得状態が no_rate になったら無効とみなす
+# （failed = 取得失敗は前回データを保持するので、有効のまま扱う）。
+
+POINT_MIN_RATE_LIMITED = 5     # 期間限定の下限倍率
+POINT_MIN_PTS_LIMITED = 100    # 期間限定の獲得ポイント目安の下限 (pt)
+POINT_MIN_RATE_PERMANENT = 10  # 常時の下限倍率
+POINT_MIN_PTS_PERMANENT = 500  # 常時の獲得ポイント目安の下限 (pt)
+
+
+def _parse_point_time(s):
+    if not s:
+        return None
+    try:
+        dt = datetime.fromisoformat(str(s).replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=JST)
+    return dt.astimezone(JST)
+
+
+def point_points(price, rate):
+    """獲得ポイントの目安。付与は税抜価格に対してなので price/1.1 で割る。
+    端数の扱いはショップで違うため、これは目安（表示でも目安と明記する）。"""
+    if not price or not rate:
+        return 0
+    return int(round((price / 1.1) * rate / 100.0))
+
+
+def point_state(product, now=None):
+    """商品のポイント倍率の現在状態。倍率が無い・無効なら None。
+    戻り値: {rate, start, end, permanent, pts}（start/end は datetime か None、
+    permanent のとき end は None）。"""
+    pi = product.get("pointInfo") or {}
+    rate = pi.get("rate") or 1
+    if rate < 2:
+        return None
+    now = now or datetime.now(JST)
+    start = _parse_point_time(pi.get("start"))
+    end = _parse_point_time(pi.get("end"))
+    permanent = end is None or end.year >= 9999
+    if permanent:
+        if pi.get("status") == "no_rate":
+            return None
+        end = None
+    elif end <= now:
+        return None
+    if start and start > now:
+        return None  # 開始前の倍率はまだ載せない
+    return {"rate": rate, "start": start, "end": end,
+            "permanent": permanent,
+            "pts": point_points(product.get("price"), rate)}
+
+
+def point_qualifies(product, now=None):
+    """ポイント軸の単独掲載に通るか。通れば point_state の dict を返す。"""
+    st = point_state(product, now)
+    if st is None:
+        return None
+    if (product.get("reviewCount") or 0) < MIN_REVIEWS:
+        return None
+    if (product.get("reviewAverage") or 0) < MIN_RATING:
+        return None
+    if FREE_SHIPPING_TAG not in (product.get("tags") or []):
+        return None
+    if st["permanent"]:
+        ok = (st["rate"] >= POINT_MIN_RATE_PERMANENT
+              and st["pts"] >= POINT_MIN_PTS_PERMANENT)
+    else:
+        ok = (st["rate"] >= POINT_MIN_RATE_LIMITED
+              and st["pts"] >= POINT_MIN_PTS_LIMITED)
+    return st if ok else None
+
+
+POINT_DEDUPE_JACCARD = 0.30  # ポイント軸の同一商品判定（価格・倍率一致が前提）
+
+
+def _point_dedupe(cands):
+    """同一商品の二重掲載を防ぐ。価格と倍率が同じでタイトルが似ているものは
+    レビュー最多の1件だけ残す（別ショップが出す同一商品の対策）。
+    価格と倍率の一致が前提なので、閾値はシリーズ圧縮より少し緩くする。"""
+    cands = sorted(cands,
+                   key=lambda c: -(c["product"].get("reviewCount") or 0))
+    kept, grams = [], []
+    for c in cands:
+        p = c["product"]
+        g = bigrams(p.get("title") or "")
+        dup = False
+        for k, kg in zip(kept, grams):
+            kp = k["product"]
+            if (kp.get("price") == p.get("price")
+                    and k["state"]["rate"] == c["state"]["rate"]
+                    and jaccard(g, kg) >= POINT_DEDUPE_JACCARD):
+                dup = True
+                break
+        if not dup:
+            kept.append(c)
+            grams.append(g)
+    return kept
 
 
 # ---------------------------------------------------------------- 構成ルール
@@ -364,12 +476,53 @@ def evaluate(products: list, history: dict):
         })
     caption_needed_out.sort(key=lambda x: -x["drop_pct_vs_median"])
 
+    # ---- ポイント軸（価格軸とは独立の選定。観測枠の商品も対象） -----------
+    point_cands = []
+    for p in products:
+        text = (p.get("title") or "") + (p.get("caption") or "")
+        if hit_keyword(text, SUPPLEMENT_KEYWORDS):
+            continue
+        if hit_keyword(text, INK_KEYWORDS):
+            continue
+        st = point_qualifies(p)
+        if st is not None:
+            point_cands.append({"product": p, "state": st})
+    point_cands = _point_dedupe(point_cands)
+    point_feed, point_caption_needed = [], []
+    for c in point_cands:
+        p, st = c["product"], c["state"]
+        entry = {
+            "id": p["id"], "title": p.get("title"), "shop": p.get("shop"),
+            "category": p.get("category"), "price": p.get("price"),
+            "reviewCount": p.get("reviewCount"),
+            "reviewAverage": p.get("reviewAverage"),
+            "point_rate": st["rate"], "point_pts": st["pts"],
+            "point_start": st["start"].isoformat() if st["start"] else "",
+            "point_end": st["end"].isoformat() if st["end"] else "",
+            "point_permanent": st["permanent"],
+            "caption": p.get("caption"),
+        }
+        if (p.get("caption") or "").strip():
+            point_feed.append(entry)
+            if decisions.get(p["id"], {}).get("outcome") != "feed":
+                decisions[p["id"]] = {"outcome": "point_feed", "detail": {}}
+        else:
+            point_caption_needed.append(entry)
+            if p["id"] not in decisions:
+                decisions[p["id"]] = {"outcome": "point_caption_needed",
+                                      "detail": {}}
+    funnel.append((f"ポイント軸（単独掲載 {len(point_feed)}件 / "
+                   f"キャプション待ち {len(point_caption_needed)}件）",
+                   len(point_feed)))
+
     result = {
         "generated_by": "select_strict.py (dry run)",
         "total_products": total,
         "funnel": [{"step": s, "remaining": n} for s, n in funnel],
         "feed": [feed_entry(c) for c in feed_clusters],
         "caption_needed": caption_needed_out,
+        "point_feed": point_feed,
+        "point_caption_needed": point_caption_needed,
         "excluded": {
             "supplement_count": len(excluded["supplement"]),
             "model_specific_count": len(excluded["model_specific"]),

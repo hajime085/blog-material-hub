@@ -1099,12 +1099,29 @@ def render_stream_card(p, cats, badge, cat_label=None):
     if state == "frozen":
         note = ('<p class="v-note-line">最終確認：%s・その時点の価格です%s</p>'
                 % (_md_label(p.get("lastSeen", "")), ship))
+    elif state == "point":
+        pt = p.get("_point") or {}
+        if pt.get("permanent"):
+            ptxt = "ポイント%d倍・約%spt還元" % (pt.get("rate", 0),
+                                                 yen(pt.get("pts", 0)))
+        else:
+            ptxt = ("ポイント%d倍・約%spt還元（%sまで）"
+                    % (pt.get("rate", 0), yen(pt.get("pts", 0)),
+                       pt.get("end_label", "")))
+        note = ('<p class="v-note-line">%s・%s確認%s</p>'
+                % (ptxt, _md_label(p.get("lastSeen", "")), ship))
     elif state == "listed":
         note = ('<p class="v-note-line">%s確認の価格です%s</p>'
                 % (_md_label(p.get("lastSeen", "")), ship))
     else:
         note = ('<p class="v-note-line">比較元：30日の中央値・%s確認%s</p>'
                 % (_md_label(p.get("lastSeen", "")), ship))
+    # 価格軸の商品でも、有効なポイント倍率があれば小さなバッジを併記する
+    # （両方の軸に通った商品は、両方のバッジを出すのが設計ルール）。
+    pbadge = ""
+    if state != "point" and p.get("_point"):
+        pbadge = ('<span class="v-note-badge v-badge-point">ポイント%d倍</span>'
+                  % p["_point"]["rate"])
     # カード右上の日付は「並びの基準」に合わせる（2026-11-12 修正）。
     # ストリームは掲載日（_listed_on）の新しい順に並ぶので、確認日
     # （lastSeen）を出すと日付がバラバラに飛んで見えた。確認日は
@@ -1120,7 +1137,7 @@ def render_stream_card(p, cats, badge, cat_label=None):
         '<img class="v-card-img" src="{img}" alt="{alt}" loading="lazy">'
         '<div class="v-card-body">'
         '<div class="v-cat-row"><span class="v-cat-label">{label}</span>'
-        '<span class="v-note-badge">{badge}</span>'
+        '<span class="v-note-badge">{badge}</span>{pbadge}'
         '<span class="v-card-date">{date}</span></div>'
         '<h3 class="v-card-title">{title}</h3>'
         '<div class="v-price-row">{price_row}</div>'
@@ -1129,7 +1146,7 @@ def render_stream_card(p, cats, badge, cat_label=None):
         '{note}</div></a>'
     ).format(id=e(p["id"]), img=e(p["image"]), alt=e(p["title"]),
              label=e(cat_label or c.get("short") or c.get("label") or ""),
-             badge=e(badge), date=e(_md_label(date_src)),
+             badge=e(badge), pbadge=pbadge, date=e(_md_label(date_src)),
              title=e(p["title"]), price_row=price_row,
              shop=e(p.get("shop", "楽天市場")), rev=rev, note=note)
 
@@ -1202,7 +1219,7 @@ def render_unit(kind, p, cats, live):
 
 def stream_badge(p):
     """ストリーム方式の状態バッジ。_state が無い商品は「検証済み」。"""
-    return {"deal": "検証済み", "listed": "掲載中",
+    return {"deal": "検証済み", "listed": "掲載中", "point": "ポイント還元",
             "frozen": "最終確認"}.get(p.get("_state"), "検証済み")
 
 
@@ -1391,6 +1408,22 @@ def load_listings():
     return {en["id"]: en for en in doc.get("listings") or []}
 
 
+def point_display(p):
+    """表示用のポイント情報。倍率が今有効なときだけ dict を返す。
+    判定は select_strict.point_state（正本）に寄せる。キーは point_state の
+    dict に、表示用の start_label / end_label（「◯月◯日」）を足したもの。"""
+    import select_strict
+    st = select_strict.point_state(p)
+    if st is None:
+        return None
+    out = dict(st)
+    if st.get("start") is not None:
+        out["start_label"] = "%d月%d日" % (st["start"].month, st["start"].day)
+    if st.get("end") is not None:
+        out["end_label"] = "%d月%d日" % (st["end"].month, st["end"].day)
+    return out
+
+
 def listing_deal(p, history):
     """いま現在も「お得」と言えるか。掲載の門（select_strict のゲート1〜5）と
     同じ物差しで、ビルド時点のプールの価格と価格履歴から判定する。
@@ -1420,6 +1453,14 @@ def listing_products(pool_by_id, listings):
         if live is not None:
             p = dict(live)
             p["_state"] = "deal" if listing_deal(p, history) else "listed"
+            if en.get("axis") == "point":
+                # ポイント軸の掲載は、倍率が今も条件を通っている間だけ
+                # 「ポイント還元」として出す。外れていれば通常の掲載中
+                # 表示に落とす（台帳からの削除は apply_selection の仕事）。
+                import select_strict as _ss_point
+                p["_state"] = ("point" if _ss_point.point_qualifies(p)
+                               else "listed")
+            p["_point"] = point_display(p)
             p["_last_seen"] = p.get("lastSeen") or en.get("last_seen") or ""
         else:
             p = dict(en.get("snapshot") or {})
@@ -1431,6 +1472,7 @@ def listing_products(pool_by_id, listings):
             # lastSeen を差し替えて、既存の描画・鮮度判定にそのまま乗せる。
             p["lastSeen"] = p["_last_seen"]
         p["_listed_on"] = en.get("listed_on") or ""
+        p["_axis"] = en.get("axis") or "price"
         out.append(p)
     return out
 
@@ -2103,6 +2145,47 @@ def render_criteria_block(p):
     products.json と価格履歴（history_facts）の実測だけから作る。
     算出できない項目は数値を出さず、文言のみにする（創作禁止）。
     """
+    if p.get("_axis") == "point" or p.get("_state") == "point":
+        # ポイント軸の商品は、価格の5ゲートではなくポイント側の基準で
+        # 測る。倍率を価格の安さの証明にしないことも、ここで明記する。
+        pt = p.get("_point") or point_display(p) or {}
+        rate = pt.get("rate", 0)
+        pts = pt.get("pts", 0)
+        if pt.get("permanent"):
+            gate1 = "ショップポイントが常時10倍以上"
+            fact1 = "実測：いまの倍率は %d倍です（終了日時の設定がない常時の倍率）" % rate
+            gate2 = "獲得ポイントの目安が500pt以上"
+        else:
+            gate1 = "ショップポイントが期間限定で5倍以上"
+            fact1 = ("実測：いまの倍率は %d倍です（%s〜%sの期間限定）"
+                     % (rate, pt.get("start_label", ""), pt.get("end_label", "")))
+            gate2 = "獲得ポイントの目安が100pt以上"
+        gates = [
+            gate1,
+            gate2,
+            "レビュー100件以上・評価 ★3.8以上",
+            "送料無料で、「なぜお得か」を一言で言える",
+        ]
+        smalls = [
+            fact1,
+            "実測：販売価格 ¥%s に対して約 %spt（税抜価格への付与で計算した目安）" % (
+                yen(p["price"]), yen(pts)),
+            ("実測：評価 ★%s・レビュー %s件" % (
+                e(p["reviewAverage"]), yen(p.get("reviewCount", 0)))
+             if p.get("reviewAverage") else ""),
+            "実測：送料無料です" if free_shipping(p) else "実測：送料は別途かかります",
+        ]
+        rows = "".join(
+            '<div class="v-gate"><span class="v-gate-no">%d</span>'
+            '<span class="v-gate-text">%s%s</span></div>'
+            % (i + 1, g, ("<small>%s</small>" % smalls[i]) if smalls[i] else "")
+            for i, g in enumerate(gates))
+        return ('<h2 class="section-title">掲載基準と、この商品の実測</h2>'
+                '<div class="v-trust">%s'
+                '<p class="v-criteria-def">この商品は<strong>ポイント還元</strong>の'
+                '軸で掲載しています。倍率は価格の安さの証明にはなりません。'
+                '値下がりの軸とは別に、ポイントの還元だけで測っています。</p></div>'
+                % rows)
     f = history_facts(p)
     smalls = ["", "", "", "", ""]
     if f:
@@ -2278,6 +2361,35 @@ def build_products(cfg, base, products, cats):
             desc_block = ('<h2 class="section-title">どんな商品？</h2>'
                           '<div class="prose prose-card">%s%s</div>' % (paras, plist))
 
+        # ポイント情報の表示（2026-11-16）。倍率が今有効な商品だけに出す。
+        # 「実質◯円」とは大きく言わず、販売価格・倍率・獲得ポイント目安・
+        # 差引後の参考価格（◯円相当）を分けて出す（ポイント軸の表示ルール）。
+        point_block = ""
+        pt = p.get("_point")
+        if pt and p.get("_state") != "frozen":
+            ref_price = p["price"] - pt["pts"]
+            if pt.get("permanent"):
+                period = "常時（このショップの通常倍率）"
+            else:
+                period = "%s〜%s" % (pt.get("start_label", ""),
+                                     pt.get("end_label", ""))
+            point_block = (
+                '<div class="point-block">'
+                '<p class="point-block-head">ポイント還元</p>'
+                '<dl class="point-rows">'
+                '<div><dt>販売価格</dt><dd>¥%s</dd></div>'
+                '<div><dt>ショップポイント</dt><dd>%d倍</dd></div>'
+                '<div><dt>獲得ポイント目安</dt><dd>約%spt</dd></div>'
+                '<div><dt>ポイント差引後の参考価格</dt><dd>¥%s相当</dd></div>'
+                '</dl>'
+                '<p class="point-block-period">対象期間：%s</p>'
+                '<p class="point-block-note">ポイントは税抜価格に対して付与されるため、'
+                '獲得ポイントは目安です。付与条件・対象期間・利用条件は'
+                '商品ページで確認してください。</p>'
+                '</div>'
+                % (yen(p["price"]), pt["rate"], yen(pt["pts"]),
+                   yen(ref_price), e(period)))
+
         # 項目の並び（v4で見直し）：「どんな商品？」を仕様表より前に置く。
         # 読む人はまず「何の商品か」を知りたいのであって、表は確かめに来た
         # 人のもの。価格の検証（履歴・基準）はその後に続ける。
@@ -2315,6 +2427,8 @@ def build_products(cfg, base, products, cats):
   </div>
   <p class="pop-note{stale_cls}">{freshness}</p>
 
+  {point_block}
+
   {desc_block}
 
   <h2 class="section-title">商品情報</h2>
@@ -2344,6 +2458,7 @@ def build_products(cfg, base, products, cats):
                if is_stale(p, fetched)
                else "値段は毎日見にいってます。買う前に楽天でも確かめてね（%s時点）" % e(p.get("lastSeen") or "")),
            url=e(p.get("affiliateUrl") or "#"),
+           point_block=point_block,
            spec=spec, hist_block=render_history_block(p),
            criteria_block=render_criteria_block(p),
            arrow=icons.use("arrow-right", "ic-arrow"),

@@ -59,8 +59,8 @@
   "watchFrameMinReviews": 100,
   "watchFrameMinRating": 3.8,
   "watchFramePerCategory": 3,
-  "watchFrameMaxNewPerRun": 10,
-  "watchFrameMaxTotal": 400,
+  "watchFrameMaxNewPerRun": 20,
+  "watchFrameMaxTotal": 800,
   "_watchFrameNote": "観測枠（ウォッチ枠、2026-11-14）。--watch で、値引きの裏付けが取れない新規でも watchFrameMinReviews 件以上・評価 watchFrameMinRating 以上なら「ウォッチ中」として観測に入れる。1回あたり watchFrameMaxNewPerRun 件・カテゴリあたり watchFramePerCategory 件まで、ウォッチ中の総数は watchFrameMaxTotal 件を上限にする。選定には混ざらない。止めるときは環境変数 YASUMIRU_WATCH_FRAME=0。",
   "_hitsNote": "1カテゴリあたり何件まで見るか。APIは1回30件が上限なので、30を超えるぶんはページを送って取る。母数が増えるほど値下がりに出くわす機会も増えるが、そのぶん実行時間も延びる（秒間1リクエストが目安）。",
   "saleKeywords": [
@@ -129,7 +129,7 @@
     "調味料 まとめ買い"
    ],
    "minPrice": 300,
-   "maxPrice": 5000,
+   "maxPrice": 10000,
    "genres": [
     "100227",
     "100316",
@@ -242,7 +242,7 @@
     "スマホアクセサリー まとめ買い"
    ],
    "minPrice": 400,
-   "maxPrice": 3500,
+   "maxPrice": 15000,
    "genres": [
     "211742",
     "565173",

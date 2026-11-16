@@ -20,6 +20,11 @@ apply_selection.py — 掲載台帳（ストリーム方式）の自動メンテ
     (c) 掲載から30日を超えた商品を台帳から外す（期限切れ）
     (d) 価格が戻っても落選はしない。%OFF や「検証済み」の表示を
         外すかどうかは、ビルド時に build.py が現況で判定する。
+    (e) ポイント軸（2026-11-16）: 価格軸とは独立に、ポイント倍率の
+        条件（select_strict.point_qualifies）を通った商品も追加する
+        （台帳では axis="point"）。出口は30日ルールではなく、倍率の
+        終了・条件外れ。両方の軸に通った商品は axis="both" で、
+        出口は価格軸の30日ルールに従う。
 
     watch.yml の順序: 価格を見に行く → 台帳を手入れする（このスクリプト）
                       → サイトを作り直す → 反映する
@@ -146,6 +151,16 @@ def reason_expired(entry: dict, today) -> str:
     listed = parse_date(entry.get("listed_on"))
     age = (today - listed).days if listed else "?"
     return f"掲載から{age}日経過（{entry.get('listed_on')} 掲載、{RETENTION_DAYS}日で引退）"
+
+
+def reason_point_added(entry: dict) -> str:
+    if entry.get("point_permanent"):
+        period = "常時"
+    else:
+        end = (entry.get("point_end") or "")[:10]
+        period = f"{end}まで" if end else ""
+    return (f"ポイント軸で掲載（{entry.get('point_rate')}倍・"
+            f"約{entry.get('point_pts')}pt還元・{period}）")
 
 
 # ---------------------------------------------------------------- 記録まわり
@@ -281,6 +296,24 @@ def run(force: bool, dry_run: bool) -> int:
             mark_changed()
         return 0
 
+    # ---- (c2) ポイント軸の終了（2026-11-16） ------------------------------
+    # ポイント軸の掲載は倍率が生きている間だけ。倍率が終わった・条件を
+    # 外れた・プールから消えて確認できなくなった、のいずれかで外す。
+    # 価格軸（axis 無し/price/both）の30日ルールとは別に処理する。
+    point_expired = []
+    for pid, en in list(entries.items()):
+        if en.get("axis") != "point":
+            continue
+        p = products_by_id.get(pid)
+        if p is None or select_strict.point_qualifies(p) is None:
+            point_expired.append(pid)
+    point_expired_lines = []
+    for pid in point_expired:
+        en = entries.pop(pid)
+        point_expired_lines.append(item_line(
+            "期限切れ", (en.get("snapshot") or {}).get("title"),
+            "ポイント倍率が終了したか、掲載条件（倍率・ポイント目安・品質）を外れたため"))
+
     # ---- (c) 期限切れ ------------------------------------------------------
     expired = []
     for pid, en in list(entries.items()):
@@ -332,43 +365,82 @@ def run(force: bool, dry_run: bool) -> int:
                            f"（テーマ: {feed_by_id[pid].get('theme')}）")
                  for pid in deferred]
 
+    # ---- (a2) ポイント軸の追加（2026-11-16） ------------------------------
+    # 価格軸とは独立の軸。倍率が有効な間だけ載せるので、出口は30日ルール
+    # ではなく倍率の終了（(c2) で処理）。価格軸でも掲載済みの商品は
+    # axis を both にして、倍率の終了日だけを覚える。
+    point_added = []
+    for fe in result.get("point_feed") or []:
+        pid = fe["id"]
+        if pid in entries:
+            en = entries[pid]
+            if en.get("axis") in (None, "price"):
+                en["axis"] = "both"
+            en["point_end"] = fe.get("point_end") or None
+            continue
+        p = products_by_id.get(pid)
+        if p is None:
+            continue
+        entries[pid] = {
+            "id": pid,
+            "listed_on": today.isoformat(),
+            "theme": None,
+            "last_seen": p.get("lastSeen") or today.isoformat(),
+            "snapshot_updated": today.isoformat(),
+            "snapshot": sanitize(p),
+            "axis": "point",
+            "point_end": fe.get("point_end") or None,
+        }
+        point_added.append(pid)
+        added_lines.append(item_line(
+            "追加", fe["title"], reason_point_added(fe)))
+
     # ---- (b) スナップショット更新 ------------------------------------------
     refreshed = 0
     for pid, en in entries.items():
-        if pid in added:
+        if pid in added or pid in point_added:
             continue
         p = products_by_id.get(pid)
         if p is None:
             continue  # プールに無い = 凍結。スナップショットはそのまま
         en["snapshot"] = sanitize(p)
+        if en.get("axis") in ("point", "both"):
+            st = select_strict.point_state(p)
+            en["point_end"] = (st["end"].isoformat()
+                               if st and st["end"] else None)
         en["last_seen"] = p.get("lastSeen") or en.get("last_seen") or ""
         en["snapshot_updated"] = today.isoformat()
         refreshed += 1
 
     caption_note = (f"caption_needed: {len(result['caption_needed'])}件"
                     "（ゲート1〜5通過・キャプションを書けば掲載候補）")
+    point_caption_note = (
+        f"point_caption_needed: {len(result.get('point_caption_needed') or [])}件"
+        "（ポイント軸の条件通過・キャプションを書けば掲載候補）")
 
     print(f"台帳: 現在 {old_count}件 → {len(entries)}件"
-          f"（追加 {len(added)}件 / 次回送り {len(deferred)}件 / "
-          f"期限切れ {len(expired)}件 / "
+          f"（追加 {len(added) + len(point_added)}件 / 次回送り {len(deferred)}件 / "
+          f"期限切れ {len(expired) + len(point_expired)}件 / "
           f"スナップショット更新 {refreshed}件）")
-    for line in added_lines + cap_lines + expired_lines:
+    for line in added_lines + cap_lines + expired_lines + point_expired_lines:
         print("  " + line)
 
     # ---- 記録と書き出し -----------------------------------------------------
     if seeded:
         head = f"## {stamp} — 初期化（curated.json から台帳を起こした。掲載 {len(entries)}件）"
-    elif added or expired:
-        head = (f"## {stamp} — 適用（追加 {len(added)}件／期限切れ {len(expired)}件、"
+    elif added or expired or point_added or point_expired:
+        head = (f"## {stamp} — 適用（追加 {len(added) + len(point_added)}件／"
+                f"期限切れ {len(expired) + len(point_expired)}件、"
                 f"掲載 {old_count}件 → {len(entries)}件）"
                 + (" ※強制適用" if force else ""))
     else:
         head = (f"## {stamp} — 更新（追加・期限切れなし。"
                 f"スナップショット {refreshed}件を最新化、掲載 {len(entries)}件）")
     body = [head, ""]
-    body += added_lines + cap_lines + expired_lines
+    body += added_lines + cap_lines + expired_lines + point_expired_lines
     body.append(f"- スナップショット更新: {refreshed}件")
     body.append("- " + caption_note)
+    body.append("- " + point_caption_note)
     body.append("")
     text = "\n".join(body)
 
@@ -386,24 +458,34 @@ def run(force: bool, dry_run: bool) -> int:
         "history_entries": history_entries,
         "added": added,
         "expired": expired,
+        "point_added": point_added,
+        "point_expired": point_expired,
         "forced": bool(force),
     }
     LISTINGS_PATH.write_text(json.dumps(doc, ensure_ascii=False, indent=2),
                              encoding="utf-8")
     append_log(text)
 
-    summary = [f"台帳: 追加 {len(added)}件／期限切れ {len(expired)}件"
+    summary = [f"台帳: 追加 {len(added) + len(point_added)}件／"
+               f"期限切れ {len(expired) + len(point_expired)}件"
                f"（掲載 {old_count}件 → {len(entries)}件）"]
     for pid in added:
         e = feed_by_id[pid]
         summary.append(f"  + {(e['title'] or '')[:38]}  ¥{yen(e['price'])}"
                        f"（中央値比 -{e['drop_pct_vs_median']}%）")
+    point_by_id = {e["id"]: e for e in result.get("point_feed") or []}
+    for pid in point_added:
+        e = point_by_id[pid]
+        summary.append(f"  + {(e['title'] or '')[:38]}  ¥{yen(e['price'])}"
+                       f"（ポイント{e['point_rate']}倍・約{e['point_pts']}pt）")
     for pid in expired:
         summary.append(f"  − 期限切れ（{RETENTION_DAYS}日経過）")
+    for pid in point_expired:
+        summary.append("  − ポイント軸の掲載終了（倍率終了・条件外）")
     append_run_summary(summary,
-                       retitle=f"auto: 台帳のみ変更（追加{len(added)}件／期限切れ{len(expired)}件）"
-                       if (added or expired) else None)
-    if added or expired:
+                       retitle=f"auto: 台帳のみ変更（追加{len(added) + len(point_added)}件／期限切れ{len(expired) + len(point_expired)}件）"
+                       if (added or expired or point_added or point_expired) else None)
+    if added or expired or point_added or point_expired:
         # 追加・期限切れは「変更なし」で捨てられないようにする。
         # スナップショットだけの更新は、価格側の変更と一緒に流れる。
         mark_changed()
