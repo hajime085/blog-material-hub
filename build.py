@@ -1627,6 +1627,20 @@ def render_threads_section():
     posts = [p for p in (data.get("posts") or []) if p.get("permalink")]
     if not posts:
         return ""
+    # SNSの投稿風デザイン（2026-11-16 furu 指示）：アバター＋名前＋
+    # ハンドル＋日時のヘッダー、本文、下にアクションアイコンの並び。
+    # いいね数など実データの無い数字は出さない（アイコンのみ）。
+    username = data.get("username") or "yasumiru_web"
+    ic = ('<svg class="v-th-ic" viewBox="0 0 24 24" fill="none" '
+          'stroke="currentColor" stroke-width="2" stroke-linecap="round" '
+          'stroke-linejoin="round" aria-hidden="true">%s</svg>')
+    actions = (
+        '<span class="v-th-actions">'
+        + ic % '<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/>'
+        + ic % '<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>'
+        + ic % '<polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>'
+        + ic % '<line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>'
+        + '</span>')
     cards = []
     for p in posts[:6]:
         media = {"IMAGE": "画像つき", "VIDEO": "動画つき"}.get(
@@ -1634,10 +1648,18 @@ def render_threads_section():
         badge = ('<span class="v-note-badge">%s</span>' % media) if media else ""
         cards.append(
             '<a class="v-th-card" href="%s">'
-            '<span class="v-th-meta"><span class="v-th-date">%s</span>%s</span>'
-            '<span class="v-th-text">%s</span></a>'
-            % (e(p["permalink"]), e(_thread_date(p.get("timestamp"))), badge,
-               e(_thread_card_text(p.get("text"))).replace("\n", "<br>")))
+            '<span class="v-th-post">'
+            '<img class="v-th-avatar" src="/assets/img/icon-512.png" alt="">'
+            '<span class="v-th-main">'
+            '<span class="v-th-head"><span class="v-th-name">ヤスミル</span>'
+            '<span class="v-th-handle">@%s</span>'
+            '<span class="v-th-date">%s</span>%s</span>'
+            '<span class="v-th-text">%s</span>%s'
+            '</span></span></a>'
+            % (e(p["permalink"]), e(username),
+               e(_thread_date(p.get("timestamp"))), badge,
+               e(_thread_card_text(p.get("text"))).replace("\n", "<br>"),
+               actions))
     profile = data.get("profile_url") or "https://www.threads.com/@yasumiru_web"
     return ('<section class="v-side-block v-threads">'
             '<div class="v-side-head">Threadsの速報</div>'
@@ -2439,6 +2461,12 @@ def build_products(cfg, base, products, cats):
                 % (yen(pts1), yen(p["price"] - pts1),
                    yen(pts2), yen(p["price"] - pts2),
                    yen(pts3), yen(p["price"] - pts3)))
+            sim_block += (
+                '<p class="point-sim-link">SPU（楽天カードや楽天モバイル'
+                'などで倍率が上がる仕組み）は人によって違うため、この計算'
+                'には含めていません。'
+                '<a href="/guide/rakuten-spu/">SPUの仕組みと上限の解説</a>'
+                'もどうぞ。</p>')
 
         # 項目の並び（v4で見直し）：「どんな商品？」を仕様表より前に置く。
         # 読む人はまず「何の商品か」を知りたいのであって、表は確かめに来た
