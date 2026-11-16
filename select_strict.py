@@ -210,6 +210,42 @@ def point_qualifies(product, now=None):
 
 POINT_DEDUPE_JACCARD = 0.30  # ポイント軸の同一商品判定（価格・倍率一致が前提）
 
+# ポイント軸の「種類」。同じ種類の商品は同時に1件だけ載せる（2026-11-16、
+# furu 指示「同じようなのはいらない」）。タイトルのキーワードで判定し、
+# 上にある種類ほど優先する（自動調理ポットの説明文には「フード
+# プロセッサー」という機能名が混ざるため、順序が要る）。合わなければ
+# None で、種類の縛りはかからない。新しい種類が増えたらここに足す。
+POINT_KINDS = [
+    ("自動調理ポット", ("自動調理ポット", "豆乳メーカー", "スープメーカー")),
+    ("フードプロセッサー", ("フードプロセッサー", "カプセルカッター")),
+    ("ミシン", ("ミシン",)),
+    ("印鑑", ("ネーム印", "浸透印", "印鑑", "はんこ")),
+    ("加湿器", ("加湿器",)),
+    ("電気毛布", ("電気毛布",)),
+    ("モバイルバッテリー", ("モバイルバッテリー",)),
+    ("イヤホン", ("イヤホン",)),
+    ("掃除機", ("掃除機",)),
+    ("炊飯器", ("炊飯器",)),
+    ("電子レンジ", ("電子レンジ", "オーブンレンジ")),
+    ("コーヒーメーカー", ("コーヒーメーカー",)),
+    ("電気ケトル", ("電気ケトル",)),
+    ("空気清浄機", ("空気清浄機",)),
+    ("ドライヤー", ("ドライヤー",)),
+    ("電動歯ブラシ", ("電動歯ブラシ",)),
+    ("体重計", ("体重計", "体組成計")),
+]
+
+
+def point_kind(product):
+    """商品の種類（ポイント軸の重なり判定用）。合わなければ None。
+    表示用タイトルは途中で切れていることがあるので、元のタイトル
+    （rawTitle）も合わせて見る。"""
+    t = (product.get("rawTitle") or "") + (product.get("title") or "")
+    for name, kws in POINT_KINDS:
+        if any(k in t for k in kws):
+            return name
+    return None
+
 
 def _point_dedupe(cands):
     """同一商品の二重掲載を防ぐ。価格と倍率が同じでタイトルが似ているものは
@@ -488,6 +524,20 @@ def evaluate(products: list, history: dict):
         if st is not None:
             point_cands.append({"product": p, "state": st})
     point_cands = _point_dedupe(point_cands)
+    # 種類の重なりを圧縮する。同じ種類は代表1件（レビュー最多、同数なら
+    # ポイント目安の大きい方）だけを残す。
+    by_kind, no_kind = {}, []
+    for c in point_cands:
+        k = point_kind(c["product"])
+        if k is None:
+            no_kind.append(c)
+            continue
+        cur = by_kind.get(k)
+        key = (c["product"].get("reviewCount") or 0, c["state"]["pts"])
+        if cur is None or key > ((cur["product"].get("reviewCount") or 0),
+                                  cur["state"]["pts"]):
+            by_kind[k] = c
+    point_cands = no_kind + list(by_kind.values())
     point_feed, point_caption_needed = [], []
     for c in point_cands:
         p, st = c["product"], c["state"]

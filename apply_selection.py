@@ -370,6 +370,7 @@ def run(force: bool, dry_run: bool) -> int:
     # ではなく倍率の終了（(c2) で処理）。価格軸でも掲載済みの商品は
     # axis を both にして、倍率の終了日だけを覚える。
     point_added = []
+    point_deferred_lines = []
     for fe in result.get("point_feed") or []:
         pid = fe["id"]
         if pid in entries:
@@ -381,6 +382,20 @@ def run(force: bool, dry_run: bool) -> int:
         p = products_by_id.get(pid)
         if p is None:
             continue
+        # 同じ種類がすでに掲載中（どちらの軸でも）なら、代表が入れ替わる
+        # まで見送る。「同じようなのは載せない」ための台帳側の歯止め。
+        kind = select_strict.point_kind(p)
+        if kind:
+            clash = None
+            for epid, een in entries.items():
+                if select_strict.point_kind(een.get("snapshot") or {}) == kind:
+                    clash = epid
+                    break
+            if clash:
+                point_deferred_lines.append(item_line(
+                    "見送り", fe["title"],
+                    f"同じ種類（{kind}）が掲載中のため"))
+                continue
         entries[pid] = {
             "id": pid,
             "listed_on": today.isoformat(),
@@ -422,7 +437,8 @@ def run(force: bool, dry_run: bool) -> int:
           f"（追加 {len(added) + len(point_added)}件 / 次回送り {len(deferred)}件 / "
           f"期限切れ {len(expired) + len(point_expired)}件 / "
           f"スナップショット更新 {refreshed}件）")
-    for line in added_lines + cap_lines + expired_lines + point_expired_lines:
+    for line in (added_lines + cap_lines + expired_lines
+                 + point_expired_lines + point_deferred_lines):
         print("  " + line)
 
     # ---- 記録と書き出し -----------------------------------------------------
@@ -437,7 +453,8 @@ def run(force: bool, dry_run: bool) -> int:
         head = (f"## {stamp} — 更新（追加・期限切れなし。"
                 f"スナップショット {refreshed}件を最新化、掲載 {len(entries)}件）")
     body = [head, ""]
-    body += added_lines + cap_lines + expired_lines + point_expired_lines
+    body += (added_lines + cap_lines + expired_lines
+             + point_expired_lines + point_deferred_lines)
     body.append(f"- スナップショット更新: {refreshed}件")
     body.append("- " + caption_note)
     body.append("- " + point_caption_note)
