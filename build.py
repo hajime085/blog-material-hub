@@ -2464,9 +2464,18 @@ def build_products(cfg, base, products, cats):
             sim_block += (
                 '<p class="point-sim-link">SPU（楽天カードや楽天モバイル'
                 'などで倍率が上がる仕組み）は人によって違うため、この計算'
-                'には含めていません。'
-                '<a href="/guide/rakuten-spu/">SPUの仕組みと上限の解説</a>'
-                'もどうぞ。</p>')
+                'には含めていません。</p>'
+                '<a class="guide-card" href="/guide/rakuten-spu/">'
+                '<img class="guide-card-img" '
+                'src="/assets/img/guide/rakuten-spu-eyecatch.svg" '
+                'alt="楽天SPUの解説記事" loading="lazy">'
+                '<span class="guide-card-body">'
+                '<span class="guide-card-chip">攻略ガイド</span>'
+                '<span class="guide-card-title">楽天SPUとは｜最大18.5倍の'
+                '仕組み・対象サービス一覧と、上限の落とし穴</span>'
+                '<span class="guide-card-note">対象17サービスの倍率・条件・'
+                '月間上限と、期間限定ポイントなどの注意点をまとめました'
+                '</span></span></a>')
 
         # 項目の並び（v4で見直し）：「どんな商品？」を仕様表より前に置く。
         # 読む人はまず「何の商品か」を知りたいのであって、表は確かめに来た
