@@ -61,6 +61,16 @@
   "watchFramePerCategory": 3,
   "watchFrameMaxNewPerRun": 20,
   "watchFrameMaxTotal": 800,
+  "affiliatePatrol": {
+   "_note": "料率上位の巡回（2026-11-17）。--watch で、targets のジャンルを API の sort=-affiliateRate（料率の高い順）で hits 件ずつ見に行き、通常の検査と観測枠に流す。楽天アフィリエイトの注目商品ランキングとほぼ同じ顔ぶれを、ブラウザなしで拾うためのもの。止めるときは環境変数 YASUMIRU_AFFI_PATROL=0。",
+   "hits": 30,
+   "targets": [
+    {"slug": "fashion", "genres": ["100371", "551177"]},
+    {"slug": "food", "genres": ["100227"]},
+    {"slug": "kaden", "genres": ["562637"]},
+    {"slug": "interior", "genres": ["100804"]}
+   ]
+  },
   "_watchFrameNote": "観測枠（ウォッチ枠、2026-11-14）。--watch で、値引きの裏付けが取れない新規でも watchFrameMinReviews 件以上・評価 watchFrameMinRating 以上なら「ウォッチ中」として観測に入れる。1回あたり watchFrameMaxNewPerRun 件・カテゴリあたり watchFramePerCategory 件まで、ウォッチ中の総数は watchFrameMaxTotal 件を上限にする。選定には混ざらない。止めるときは環境変数 YASUMIRU_WATCH_FRAME=0。",
   "_hitsNote": "1カテゴリあたり何件まで見るか。APIは1回30件が上限なので、30を超えるぶんはページを送って取る。母数が増えるほど値下がりに出くわす機会も増えるが、そのぶん実行時間も延びる（秒間1リクエストが目安）。",
   "saleKeywords": [
@@ -268,6 +278,23 @@
     "100371",
     "551177",
     "558885"
+   ],
+   "cadence": "weekly"
+  },
+  {
+   "slug": "interior",
+   "label": "インテリア・寝具・収納",
+   "short": "インテリア",
+   "icon": "home",
+   "keywords": [
+    "毛布 洗える",
+    "収納ボックス 折りたたみ",
+    "布団 シングル"
+   ],
+   "minPrice": 500,
+   "maxPrice": 20000,
+   "genres": [
+    "100804"
    ],
    "cadence": "weekly"
   },

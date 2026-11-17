@@ -2336,6 +2336,37 @@ def main():
     update_probe = (watch and not seed
                     and os.environ.get("YASUMIRU_UPDATE_PROBE") != "0")
 
+    # 料率上位の巡回（2026-11-17、furu 指示）。--watch のときだけ、
+    # 指定ジャンルを「料率の高い順」でも見に行く。楽天アフィリエイトの
+    # 注目商品ランキング（発生報酬の上位）とほぼ同じ顔ぶれが、
+    # API の sort=-affiliateRate で取れるのでブラウザは使わない。
+    # 拾った商品は通常の取り込みと同じ検査を通り、新規は観測枠の
+    # 候補になる（値引きの裏付けが無ければ掲載にはならない）。
+    # 止めるときは環境変数 YASUMIRU_AFFI_PATROL=0。
+    affi_patrol = (watch and not seed
+                   and os.environ.get("YASUMIRU_AFFI_PATROL") != "0")
+    if affi_patrol:
+        affi_cfg = cfg["rakuten"].get("affiliatePatrol") or {}
+        base_by_slug = {c["slug"]: c for c in cfg["categories"]}
+        for target in affi_cfg.get("targets", []):
+            slug = target.get("slug")
+            base = base_by_slug.get(slug)
+            if not base or (only and slug not in only):
+                continue
+            for g in target.get("genres", []):
+                cats.append({
+                    "slug": slug,
+                    "label": "%s（料率上位）" % base["label"],
+                    "genres": [g],
+                    "keywords": [],
+                    "minPrice": base.get("minPrice"),
+                    "maxPrice": base.get("maxPrice"),
+                    "sort": "-affiliateRate",
+                    "saleKeywords": [],
+                    "hits": affi_cfg.get("hits", 30),
+                    "_affiliate_patrol": True,
+                })
+
     def est_off(raw):
         """いまつかんでいる材料で、値引き率を見積もる。
 
@@ -2366,7 +2397,7 @@ def main():
         # 2026-09-06: 10回に2回、ここで例外が出て見張りが失敗していた。
         # 11売場のうち1つが応えないだけで、価格の更新も掲載終了の反映も
         # 全部止まっていた。落ちた売場は次の回に回せばよい。
-        if update_probe:
+        if update_probe and not cat.get("_affiliate_patrol"):
             # 更新順プローブ。通常の取得が価格履歴を書き換える前に見る
             # （前回の観測価格と比べるため）。記録だけが目的なので、
             # ここが失敗しても巡回本体は止めない。
@@ -2381,10 +2412,12 @@ def main():
                 print("  × 更新順プローブ（%s）が失敗しました: %s"
                       % (cat["label"], ex), file=sys.stderr)
         try:
-            raws = sorted(fetch_category(cat, app_id, access_key, aff_id, hits,
-                                         site_url, ng_keyword, sort_by,
-                                         sale_keywords),
-                          key=est_off, reverse=True)
+            raws = sorted(fetch_category(
+                cat, app_id, access_key, aff_id,
+                cat.get("hits") or hits, site_url, ng_keyword,
+                cat.get("sort") or sort_by,
+                cat.get("saleKeywords", sale_keywords)),
+                key=est_off, reverse=True)
         except Exception as ex:                              # noqa: BLE001
             print("  × %s は取れませんでした: %s" % (cat["label"], ex),
                   file=sys.stderr)
