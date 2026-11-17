@@ -1675,7 +1675,8 @@ def watch_shelf_items(products, listed_ids):
     評価3.8以上のもの。サプリ系・型番系は掲載と同じく出さない。
     ここに出すのは「安いと確認できたもの」ではないので、割引の数字は
     一切出さず、観測の事実（観測開始日・観測中の最安）だけを書く。
-    並びはレビュー数の多い順（売れ筋から見張る）。
+    並びは観測を始めた日の新しい順（カード右上の日付と揃える。
+    2026-11-17 furu 指摘でレビュー数順から変更）。同日はレビュー数順。
     """
     import select_strict as ss
     history = price_history()
@@ -1701,7 +1702,8 @@ def watch_shelf_items(products, listed_ids):
         q["_obs_days"] = len({r[0] for r in rows})
         q["_obs_min"] = min(prices) if prices else p.get("price")
         out.append(q)
-    out.sort(key=lambda p: -(p.get("reviewCount") or 0))
+    out.sort(key=lambda p: (p.get("_obs_since") or "",
+                            p.get("reviewCount") or 0), reverse=True)
     return out
 
 
@@ -1787,7 +1789,7 @@ def build_watching(cfg, base, products, cats, pool):
         '通常の掲載に上がります。</li>'
         '<li>価格は見張りのたびに見直しています。「観測中の最安」は、'
         '当サイトが観測を始めてからの最安値です。</li>'
-        '<li>並びはレビュー数の多い順です。</li>'
+        '<li>並びは観測を始めた日の新しい順です。</li>'
         '</ul></div>'
     ).format(ic2=icons.use("info"))
     for page in range(1, total_pages + 1):
