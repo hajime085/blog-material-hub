@@ -1767,22 +1767,16 @@ def render_watch_section(items, cats):
 def build_watching(cfg, base, products, cats, pool):
     """見張り中の一覧ページ（/watching/）。観測枠の商品を、掲載とは
     別の棚として全部見せる。掲載との違いと昇格の条件を明記する。
-    products はサイドバー等の表示用（掲載品）、pool は棚の材料（全プール）。"""
+    products はサイドバー等の表示用（掲載品）、pool は棚の材料（全プール）。
+    1ページ15件（TOPストリームと同じ）のページ送り（2026-11-17 furu 指摘）。"""
     doc = load_listings() or {}
     listed_ids = {en["id"] for en in (doc.get("listings") or [])}
     items = watch_shelf_items(pool, listed_ids)
-    cards = "".join(render_watch_card(p, cats) for p in items)
-    content = (
-        '<section class="page-head wrap-narrow">'
-        '<p class="page-eyebrow">{ic}観測中</p>'
-        '<h1 class="page-title">見張り中</h1>'
-        '<p class="page-lead">掲載の基準はまだ満たしていないけれど、'
-        '価格を見張っている商品の一覧です。</p>'
-        '</section>'
-        '<div class="layout layout-left wrap-wide">'
-        '<div class="layout-main">'
-        '<p class="result-count"><b>{count}</b> 件を観測中</p>'
-        '<div class="v-stream">{cards}</div>'
+    per = TOP_PER_PAGE
+    total_pages = max(1, -(-len(items) // per))
+    wbase = "/watching/"
+    site_url = cfg["site"]["url"].rstrip("/")
+    note = (
         '<div class="watch-note">'
         '<p class="watch-note-head">{ic2}この棚について</p>'
         '<ul>'
@@ -1795,20 +1789,54 @@ def build_watching(cfg, base, products, cats, pool):
         '当サイトが観測を始めてからの最安値です。</li>'
         '<li>並びはレビュー数の多い順です。</li>'
         '</ul></div>'
-        '</div>'
-        '{sidebar}'
-        '</div>'
-    ).format(ic=icons.use("search"), ic2=icons.use("info"),
-             count=len(items), cards=cards,
-             sidebar=render_sidebar(cfg, products, cats))
-    write("watching/index.html", page_shell(
-        cfg, base,
-        title="見張り中｜価格を観測している商品｜%s" % cfg["site"]["name"],
-        desc="掲載の基準はまだ満たしていないけれど、価格を見張っている商品の"
-             "一覧です。基準を満たしたら通常の掲載に上がります。",
-        path="/watching/",
-        content=content,
-        products=products, cats=cats, bodyclass="v11"))
+    ).format(ic2=icons.use("info"))
+    for page in range(1, total_pages + 1):
+        chunk = items[(page - 1) * per: page * per]
+        cards = "".join(render_watch_card(p, cats) for p in chunk)
+        count_line = '<b>%d</b> 件を観測中' % len(items)
+        if page > 1:
+            count_line += '（%d/%dページ）' % (page, total_pages)
+        content = (
+            '<section class="page-head wrap-narrow">'
+            '<p class="page-eyebrow">{ic}観測中</p>'
+            '<h1 class="page-title">見張り中</h1>'
+            '<p class="page-lead">掲載の基準はまだ満たしていないけれど、'
+            '価格を見張っている商品の一覧です。</p>'
+            '</section>'
+            '<div class="layout layout-left wrap-wide">'
+            '<div class="layout-main">'
+            '<p class="result-count">{count}</p>'
+            '<div class="v-stream">{cards}</div>'
+            '{pager}'
+            '{note}'
+            '</div>'
+            '{sidebar}'
+            '</div>'
+        ).format(ic=icons.use("search"),
+                 count=count_line, cards=cards,
+                 pager=render_pager_v11(page, total_pages, wbase, window=2),
+                 note=note if page == 1 else "",
+                 sidebar=render_sidebar(cfg, products, cats))
+        links = ""
+        if page > 1:
+            links += '<link rel="prev" href="%s%s">' % (
+                site_url, wbase if page == 2
+                else "%spage/%d/" % (wbase, page - 1))
+        if page < total_pages:
+            links += '<link rel="next" href="%s%spage/%d/">' % (
+                site_url, wbase, page + 1)
+        title = "見張り中｜価格を観測している商品｜%s" % cfg["site"]["name"]
+        if page > 1:
+            title = "見張り中 %dページ目｜%s" % (page, cfg["site"]["name"])
+        path = wbase if page == 1 else "%spage/%d/" % (wbase, page)
+        out = ("watching/index.html" if page == 1
+               else "watching/page/%d/index.html" % page)
+        write(out, page_shell(
+            cfg, base, title=title,
+            desc="掲載の基準はまだ満たしていないけれど、価格を見張っている商品の"
+                 "一覧です。基準を満たしたら通常の掲載に上がります。",
+            path=path, content=content, jsonld=links,
+            products=products, cats=cats, bodyclass="v11"))
 
 
 TOP_TAB_SCRIPT = (
@@ -1838,25 +1866,37 @@ def render_top_tabs(active):
         for k, label, href in tabs) + TOP_TAB_SCRIPT
 
 
-def render_pager_v11(page, total_pages, base):
+def render_pager_v11(page, total_pages, base, window=None):
     """確定デザインのページャー（四角ボタン、現在ページ赤、前へ/次へ）。
-    総ページ数が1なら出さない。"""
+    総ページ数が1なら出さない。window を渡すと、ページ数が多いときに
+    先頭・末尾と現在ページの前後だけを出し、間は「…」で省略する
+    （既定は従来どおり全ページ表示。見張り中の一覧だけが使う）。"""
     if total_pages <= 1:
         return ""
 
     def url(n):
         return base if n == 1 else "%spage/%d/" % (base, n)
 
+    if window and total_pages > window * 2 + 3:
+        nums = sorted({1, total_pages} |
+                      {n for n in range(page - window, page + window + 1)
+                       if 1 <= n <= total_pages})
+    else:
+        nums = list(range(1, total_pages + 1))
     parts = []
     if page > 1:
         parts.append('<a class="v-pager-btn" href="%s">前へ</a>' % url(page - 1))
     else:
         parts.append('<span class="v-pager-btn v-off">前へ</span>')
-    for n in range(1, total_pages + 1):
+    prev = 0
+    for n in nums:
+        if prev and n - prev > 1:
+            parts.append('<span class="v-pager-btn v-off">…</span>')
         if n == page:
             parts.append('<span class="v-pager-btn v-on">%d</span>' % n)
         else:
             parts.append('<a class="v-pager-btn" href="%s">%d</a>' % (url(n), n))
+        prev = n
     if page < total_pages:
         parts.append('<a class="v-pager-btn" href="%s">次へ</a>' % url(page + 1))
     else:
@@ -3419,6 +3459,10 @@ def build_sitemap(cfg, products, stream_ctx=None):
                      event_lastmod(ev["slug"]), "0.8", "weekly"))
     urls.append((site_url + "/kaimawari/", now, "0.7", "daily"))
     urls.append((site_url + "/watching/", now, "0.6", "daily"))
+    if stream_ctx is not None:
+        n_watch_pages = -(-len(stream_ctx.get("watch_shelf") or []) // TOP_PER_PAGE)
+        for n in range(2, n_watch_pages + 1):
+            urls.append((site_url + "/watching/page/%d/" % n, now, "0.4", "daily"))
     for slug in ("about", "contact", "privacy", "disclaimer", "terms"):
         urls.append((site_url + "/%s/" % slug, now, "0.3", "monthly"))
 
