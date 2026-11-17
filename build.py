@@ -27,7 +27,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 JST = timezone(timedelta(hours=9))
 
 # 生成物。クリーンビルド時にこれらを消す。
-GENERATED_DIRS = ["p", "c", "categories", "page", "off", "guide", "about", "contact", "privacy", "disclaimer", "terms"]
+GENERATED_DIRS = ["p", "c", "categories", "page", "off", "guide", "about", "contact", "privacy", "disclaimer", "terms", "watching"]
 GENERATED_FILES = ["index.html", "404.html", "sitemap.xml", "feed.xml", "robots.txt",
                    "assets/data/feed.json"]
 
@@ -1668,6 +1668,149 @@ def render_threads_section():
             '</section>' % ("".join(cards), e(profile)))
 
 
+def watch_shelf_items(products, listed_ids):
+    """「見張り中」の棚に出す商品（2026-11-17 furu 決定で新設）。
+
+    観測枠（タグ「ウォッチ中」）のうち、画像があり、レビュー100件以上・
+    評価3.8以上のもの。サプリ系・型番系は掲載と同じく出さない。
+    ここに出すのは「安いと確認できたもの」ではないので、割引の数字は
+    一切出さず、観測の事実（観測開始日・観測中の最安）だけを書く。
+    並びはレビュー数の多い順（売れ筋から見張る）。
+    """
+    import select_strict as ss
+    history = price_history()
+    out = []
+    for p in products:
+        if "ウォッチ中" not in (p.get("tags") or []):
+            continue
+        if p["id"] in listed_ids or not p.get("image"):
+            continue
+        if (p.get("reviewCount") or 0) < 100:
+            continue
+        if (p.get("reviewAverage") or 0) < 3.8:
+            continue
+        text = (p.get("title") or "") + (p.get("caption") or "")
+        if ss.hit_keyword(text, ss.SUPPLEMENT_KEYWORDS):
+            continue
+        if ss.hit_keyword(text, ss.INK_KEYWORDS):
+            continue
+        rows = history.get(p["id"]) or []
+        prices = [r[1] for r in rows if r[1]]
+        q = dict(p)
+        q["_obs_since"] = rows[0][0] if rows else (p.get("postedAt") or "")
+        q["_obs_days"] = len({r[0] for r in rows})
+        q["_obs_min"] = min(prices) if prices else p.get("price")
+        out.append(q)
+    out.sort(key=lambda p: -(p.get("reviewCount") or 0))
+    return out
+
+
+def render_watch_card(p, cats):
+    """見張り中カード。掲載カードと違い、割引の主張はしない。
+    商品ページは無いので、リンク先は楽天（アフィリエイトリンク）直行。"""
+    c = cats.get(p["category"], {})
+    rev = ""
+    if p.get("reviewAverage"):
+        rev = ('<span class="v-rev">★★%s（%s件）</span>'
+               % (e(p["reviewAverage"]), yen(p.get("reviewCount", 0))))
+    ship = '・<span class="v-nw">送料無料</span>' if free_shipping(p) else ""
+    obs = ""
+    if p.get("_obs_days", 0) >= 2 and p.get("_obs_min"):
+        if p["price"] == p["_obs_min"]:
+            obs = "・いま観測中でいちばん安い価格"
+        else:
+            obs = "・観測中の最安 ¥%s" % yen(p["_obs_min"])
+    note = ('<p class="v-note-line">%sから観測中%s%s</p>'
+            % (_md_label(p.get("_obs_since", "")), obs, ship))
+    return (
+        '<a class="v-card v-card-watch" href="{url}" target="_blank" '
+        'rel="nofollow sponsored noopener">'
+        '<img class="v-card-img" src="{img}" alt="{alt}" loading="lazy">'
+        '<div class="v-card-body">'
+        '<div class="v-cat-row"><span class="v-cat-label">{label}</span>'
+        '<span class="v-note-badge v-badge-watch">見張り中</span>'
+        '<span class="v-card-date">{date}</span></div>'
+        '<h3 class="v-card-title">{title}</h3>'
+        '<div class="v-price-row"><span class="v-price">¥{price}</span></div>'
+        '<div class="v-card-rule"></div>'
+        '<div class="v-meta-row"><span class="v-shop">{shop}</span>{rev}</div>'
+        '{note}</div></a>'
+    ).format(url=e(p.get("affiliateUrl") or p.get("url") or "#"),
+             img=e(p["image"]), alt=e(p["title"]),
+             label=e(c.get("short") or c.get("label") or ""),
+             date=e(_md_label(p.get("_obs_since", ""))),
+             title=e(p["title"]), price=yen(p["price"]),
+             shop=e(p.get("shop", "楽天市場")), rev=rev, note=note)
+
+
+def render_watch_section(items, cats):
+    """TOP 1ページ目の「見張り中」棚。掲載ストリームの下、Threads欄の上。
+
+    掲載（=推薦）とは別の棚であることが一目で分かるよう、見出しと
+    説明で線を引き、カードのバッジも「見張り中」で統一する。
+    """
+    if not items:
+        return ""
+    cards = "".join(render_watch_card(p, cats) for p in items[:12])
+    return (
+        '<section class="v-watchsec">'
+        '<div class="v-side-head">見張り中'
+        '<span class="v-watchsec-count">%d件を観測しています</span></div>'
+        '<p class="v-watchsec-lead">まだ掲載の基準は満たしていないけれど、'
+        '価格を見張っている商品です。基準を満たしたら、上の掲載に上がります。'
+        'いまの価格は「安い」と確認できたものではありません。</p>'
+        '<div class="v-stream">%s</div>'
+        '<a class="v-watch-more" href="/watching/">見張り中を全部見る（%d件）</a>'
+        '</section>' % (len(items), cards, len(items)))
+
+
+def build_watching(cfg, base, products, cats, pool):
+    """見張り中の一覧ページ（/watching/）。観測枠の商品を、掲載とは
+    別の棚として全部見せる。掲載との違いと昇格の条件を明記する。
+    products はサイドバー等の表示用（掲載品）、pool は棚の材料（全プール）。"""
+    doc = load_listings() or {}
+    listed_ids = {en["id"] for en in (doc.get("listings") or [])}
+    items = watch_shelf_items(pool, listed_ids)
+    cards = "".join(render_watch_card(p, cats) for p in items)
+    content = (
+        '<section class="page-head wrap-narrow">'
+        '<p class="page-eyebrow">{ic}観測中</p>'
+        '<h1 class="page-title">見張り中</h1>'
+        '<p class="page-lead">掲載の基準はまだ満たしていないけれど、'
+        '価格を見張っている商品の一覧です。</p>'
+        '</section>'
+        '<div class="layout layout-left wrap-wide">'
+        '<div class="layout-main">'
+        '<p class="result-count"><b>{count}</b> 件を観測中</p>'
+        '<div class="v-stream">{cards}</div>'
+        '<div class="watch-note">'
+        '<p class="watch-note-head">{ic2}この棚について</p>'
+        '<ul>'
+        '<li>ここに出ているのは「安いと確認できたもの」ではありません。'
+        '値動きを見張っている途中の商品です。</li>'
+        '<li>掲載の基準（価格の履歴30日以上・期間最安・中央値より20%以上安い・'
+        'レビュー100件以上・評価3.8以上・送料無料）を満たしたら、'
+        '通常の掲載に上がります。</li>'
+        '<li>価格は見張りのたびに見直しています。「観測中の最安」は、'
+        '当サイトが観測を始めてからの最安値です。</li>'
+        '<li>並びはレビュー数の多い順です。</li>'
+        '</ul></div>'
+        '</div>'
+        '{sidebar}'
+        '</div>'
+    ).format(ic=icons.use("search"), ic2=icons.use("info"),
+             count=len(items), cards=cards,
+             sidebar=render_sidebar(cfg, products, cats))
+    write("watching/index.html", page_shell(
+        cfg, base,
+        title="見張り中｜価格を観測している商品｜%s" % cfg["site"]["name"],
+        desc="掲載の基準はまだ満たしていないけれど、価格を見張っている商品の"
+             "一覧です。基準を満たしたら通常の掲載に上がります。",
+        path="/watching/",
+        content=content,
+        products=products, cats=cats, bodyclass="v11"))
+
+
 TOP_TAB_SCRIPT = (
     "<script>(function(){var tabs=[].slice.call(document.querySelectorAll('.v-tabs .v-tab'));"
     "if(!tabs.length)return;var topics=null,home=null;"
@@ -1772,6 +1915,8 @@ def _render_top(cfg, base, products, cats, *, units, live, active_tab, page,
         + render_top_tabs(active_tab)
         + '<section class="v-stream" id="stream">%s</section>' % stream
         + render_pager_v11(page, total_pages, pager_base)
+        + (render_watch_section(stream_ctx.get("watch_shelf") or [], cats)
+           if home and page == 1 and stream_ctx else "")
         + (render_threads_section() if home and page == 1 else "")
         + '</div></div></div>'
         + (render_cat_tabs(cats, stream_ctx["total"], page)
@@ -3273,6 +3418,7 @@ def build_sitemap(cfg, products, stream_ctx=None):
         urls.append((site_url + "/event/%s/" % ev["slug"],
                      event_lastmod(ev["slug"]), "0.8", "weekly"))
     urls.append((site_url + "/kaimawari/", now, "0.7", "daily"))
+    urls.append((site_url + "/watching/", now, "0.6", "daily"))
     for slug in ("about", "contact", "privacy", "disclaimer", "terms"):
         urls.append((site_url + "/%s/" % slug, now, "0.3", "monthly"))
 
@@ -3854,6 +4000,9 @@ def main():
             "live": live_listed,
             "new_today": [p for p in listed
                           if p.get("_listed_on") == today_s],
+            "watch_shelf": watch_shelf_items(
+                products,
+                {en["id"] for en in (listings.get("listings") or [])}),
         }
         cfg["_strict"] = True
         checks_products = live_listed
@@ -3873,6 +4022,7 @@ def main():
         build_products(cfg, base, listed, cats)
         build_static_pages(cfg, base, live_listed, cats)
         build_watchlist(cfg, base, live_listed, cats)
+        build_watching(cfg, base, live_listed, cats, products)
         build_kaimawari(cfg, base, live_listed, cats)
         build_postboard(cfg, base, live_listed, cats)
         build_feed_json(cfg, deals, cats)
@@ -3891,6 +4041,7 @@ def main():
         build_products(cfg, base, products, cats)
         build_static_pages(cfg, base, products, cats)
         build_watchlist(cfg, base, products, cats)
+        build_watching(cfg, base, products, cats, products)
         build_kaimawari(cfg, base, products, cats)
         build_postboard(cfg, base, products, cats)
         build_feed_json(cfg, products, cats)

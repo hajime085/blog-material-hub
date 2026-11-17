@@ -3255,6 +3255,15 @@ body{background:#f2f4f8;color:#17181c;font-family:-apple-system,BlinkMacSystemFo
 .v-th-ic{width:17px;height:17px}
 .v-th-more{display:block;margin:0 13px 13px;padding:11px 12px;background:#c83333;color:#fff;font-size:14px;font-weight:800;text-align:center;text-decoration:none;border-radius:2px}
 .v-th-more:hover{opacity:.88}
+/* 見張り中（観測枠の棚、2026-11-17新設）。掲載カードと見分けがつくよう、
+   バッジは黒系、カード地はわずかに灰色にして「まだ推薦ではない」を示す */
+.v-watchsec{margin-top:22px}
+.v-watchsec-count{float:right;font-size:12px;font-weight:700;opacity:.85}
+.v-watchsec-lead{font-size:12.5px;color:#4a4e57;line-height:1.7;margin:10px 2px 12px}
+.v-badge-watch{background:#26292f;color:#fff}
+.v-card-watch{background:#fafbfc}
+.v-watch-more{display:block;margin-top:14px;padding:11px 12px;background:#c83333;color:#fff;font-size:14px;font-weight:800;text-align:center;text-decoration:none;border-radius:2px}
+.v-watch-more:hover{opacity:.88}
 @media (max-width:860px){
   /* スマホは1列に戻す（幅が狭く2列だと1行が短くなりすぎる） */
   .v-th-list{grid-template-columns:1fr}
