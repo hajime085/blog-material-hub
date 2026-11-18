@@ -302,6 +302,18 @@ def link_for(p, site, policy=None):
     return "%s/p/%s/" % (site, p["id"])
 
 
+def _price_line(p, mk):
+    """価格の行。商品名＋現在価格に、必要なら比較価格（いつもの値段）を添える。
+
+    pattern_v4 とツリー型（exp-012）の両方がここを使う。
+    別々に書くと、どちらかだけ直して片方が古いままになる。
+    """
+    line = "%s%s円だって。" % (mk["name"].strip(), yen(p["pr"]))
+    if p.get("lp") and p["lp"] > p["pr"]:
+        line += "いつもは%s円くらいするやつ。" % yen(p["lp"])
+    return line
+
+
 def compose_product(p, site, pr, reply_link=False, ev=None, seq=0, fact=None):
     """商品の投稿文（2026-11-13 の標準形）。
 
@@ -336,10 +348,7 @@ def compose_product(p, site, pr, reply_link=False, ev=None, seq=0, fact=None):
         # 価格の行は、組み立て側が feed の実測で作る。
         # 商品理解の文に金額を書かせないのは、値段が動いたときに
         # 古い金額がそのまま外へ出る事故を防ぐため（2026-08-31）。
-        price = "%s%s円だって。" % (mk["name"].strip(), yen(p["pr"]))
-        if p.get("lp") and p["lp"] > p["pr"]:
-            price += "いつもは%s円くらいするやつ。" % yen(p["lp"])
-        lines.append(price)
+        lines.append(_price_line(p, mk))
 
         lines.append(mk["note"].strip())
         body = "\n".join(lines)
@@ -358,6 +367,101 @@ def compose_product(p, site, pr, reply_link=False, ev=None, seq=0, fact=None):
     # 旧い形の投稿が出る（2026-08-31 に実際に起きた）。
     # 使わなくなった道は残さない。残せば、いつか落ちる。
     return None, None
+
+
+# ---------------------------------------------------- ツリー型の試し（exp-012）
+#
+# 2026-11-18: 別アカウント @hiyoko_web で、親投稿で宿の名前を伏せ、
+# 自分のリプで名前とリンクを明かす形が、通常形より表示が伸びた（親1,455表示）。
+# 同じ骨組みを商品投稿でも確かめる。
+#
+# 材料は pattern_v4 と同じ（hook・name・note・リンク）。
+# 新しい文は作らない。親とリプのどちらに置くかだけを変える。
+#
+#     親  … 【PR】＋ hook だけ（商品名は出さない）
+#     リプ … 価格の行（_price_line） ＋ note ＋ 空行 ＋ リンク
+#
+# config.json の threads.treeTest が false のときは一切さわらない
+# （即時停止スイッチ）。
+
+
+def tree_eligible(p, trig):
+    """この商品を、ツリー型で出してよいか。
+
+    手当たり次第には試さない。伏せる意味が無い商品や、
+    測れない形になる商品は外す。
+    """
+    mk = p.get("mk2") or {}
+    name = (mk.get("name") or "").strip()
+    hook = (mk.get("hook") or "").strip()
+    if not hook or not name:
+        return False
+    if trig:
+        # 再掲（fact つき）は親の1行目が fact で埋まる形なので、
+        # ツリー型の「親は反応だけ」という骨組みと両立しない。
+        return False
+    if name in hook:
+        # 反応の文に商品名がそのまま入っていると、伏せる意味が無い。
+        return False
+    return True
+
+
+def compose_product_tree(p, site, pr):
+    """ツリー型の組み立て。親で名前を伏せ、リプで明かす。
+
+    tree_eligible() で通った商品にだけ使う。
+    """
+    mk = p.get("mk2") or {}
+    parent = pr + mk["hook"].strip()
+    lines = [_price_line(p, mk), mk["note"].strip(), "", link_for(p, site)]
+    return parent, "\n".join(lines)
+
+
+def apply_tree_test(pools, items, trigs, posted, hour, kind, site, pr, th):
+    """商品枠の1つだけを、ツリー型で試す（treeTest が true のときだけ）。
+
+    対象枠は日付の日で決める（偶数日は9時、奇数日は20時）。
+    対象枠の先頭候補（その枠で本来出すはずの商品）が不適格なら、
+    もう一方の枠で、その枠の先頭候補を試す。両方不適格ならその日は
+    全部通常形のまま。
+    どちらの枠が今日の対象かは posted["tree_test"] に日付つきで残し、
+    別プロセス（別の時刻の起動）をまたいで引き継ぐ。
+    """
+    if not th.get("treeTest") or kind != "product" or hour not in (9, 20):
+        return
+    if not items:
+        return
+    now = datetime.now(JST)
+    today = now.strftime("%Y-%m-%d")
+    target = 9 if now.day % 2 == 0 else 20
+    state = posted.setdefault("tree_test", {})
+    if state.get("date") != today:
+        state.clear()
+        state.update({"date": today, "done": False, "target_tried": False})
+    if state.get("done"):
+        return
+    if hour == target:
+        pass                                  # 本来の対象枠
+    elif state.get("target_tried"):
+        pass                                  # 対象枠が不適格だった。ここで試す
+    else:
+        return                                # まだ対象枠の番が来ていない
+
+    p = items[0]
+    eligible = tree_eligible(p, trigs.get(p["id"]))
+    if hour == target:
+        state["target_tried"] = True
+    if not eligible:
+        return
+
+    key = "product:" + p["id"]
+    body, reply = compose_product_tree(p, site, pr)
+    for j, (k2, _pair) in enumerate(pools["product"]):
+        if k2 == key:
+            pools["product"][j] = (k2, (body, reply))
+            break
+    state["done"] = True
+    state["form_key"] = key
 
 
 def compose_guide(g, site, pr, reply_link=False):
@@ -1357,6 +1461,10 @@ def pick(cfg, posted, want, slot_hour=None, live_heads=None):
     if kind not in pools:
         kind = "product"
 
+    # ツリー型の試し（exp-012）。items[0]（この枠で本来出すはずの商品）
+    # だけを見て、不適格ならこの枠はさわらずに通常形のまま出す。
+    apply_tree_test(pools, items, trigs, posted, hour, kind, site, pr, th)
+
     # すでにアカウントに載っているものは、候補の段階で外す。
     #
     # 記録は押せないことがある。押せなければ「まだ出していない」と読んで
@@ -1821,6 +1929,10 @@ def run_once(cfg, posted, slot_hour=None, dry=False, late=False):
              and (x.get("mk2") or {}).get("hook_type") in NEW_HOOK_TYPES else
              "marketing_v2" if x.get("mk2") else "legacy_v1")
             for x in _feed}
+    # ツリー型の試し（exp-012）で出した1件だけ "tree"。pick() の中の
+    # apply_tree_test が、決着したらここに書き残しておく。
+    _tree_state = posted.get("tree_test") or {}
+    tree_form_key = _tree_state.get("form_key") if _tree_state.get("done") else None
     ok = 0
     for key, text, link in picks:
         try:
@@ -1887,6 +1999,8 @@ def run_once(cfg, posted, slot_hour=None, dry=False, late=False):
             "link": ("reply" if link else
                      ("body" if "http" in (text or "") else "none")),
             "link_arm": arms.get(key) if kind == "product" else None,
+            # 親で名前を伏せてリプで明かした1件だけ "tree"、ほかは全部 "flat"。
+            "form": "tree" if key == tree_form_key else "flat",
         })
         ok += 1
         print("  ✅ %s → %s" % (key, pid))
