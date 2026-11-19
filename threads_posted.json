@@ -961,25 +961,10 @@
     "schedule:2026-W46-3",
     "tip:37",
     "tip:20",
-    "tip:38"
+    "tip:38",
+    "feature:cake:2026-11-30"
   ],
   "log": [
-    {
-      "key": "tip:28",
-      "id": "18048412124630636",
-      "at": "2026-10-16 21:31",
-      "kind": "tip",
-      "slot": 21,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
     {
       "key": "tip:34",
       "id": "17939869317380189",
@@ -5696,6 +5681,22 @@
       "at": "2026-11-19 14:20",
       "kind": "tip",
       "slot": 14,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "ask_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "reply",
+      "link_arm": null,
+      "form": "flat"
+    },
+    {
+      "key": "feature:cake:2026-11-30",
+      "id": "18122049074074490",
+      "at": "2026-11-19 17:20",
+      "kind": "feature",
+      "slot": 17,
       "catchup": false,
       "cap": null,
       "hook_type": null,
