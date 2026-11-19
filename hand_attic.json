@@ -9,7 +9,7 @@
     "tags": [
       "送料無料"
     ],
-    "listPrice": 3790,
+    "listPrice": 2199,
     "marketing": {
       "hook_type": "scene",
       "target": "季節を問わずはけるパンツを探している人",
@@ -29,8 +29,8 @@
       "body": "家で洗濯できます。",
       "cta": "none"
     },
-    "pitch_status": "ready",
-    "_stashedAt": "2026-09-28"
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-19"
   },
   "h2brothers:10001880": {
     "caption": "590円の非常用トイレ。日本防災安全協会認証品、レビュー10,734件。",
@@ -9068,13 +9068,14 @@
     ],
     "listPrice": 6980,
     "pitch_status": "pending",
-    "_stashedAt": "2026-09-19"
+    "_stashedAt": "2026-11-19"
   },
   "yamagoiida:10000084": {
     "caption": "6,980円の北欧産骨取りさば1kgが3,490円。有塩、訳あり。",
     "tags": [
       "訳あり"
     ],
+    "listPrice": 6980,
     "marketing": {
       "hook_type": "scene",
       "target": "魚を常備しておきたい人",
@@ -9090,8 +9091,8 @@
       "cta": "save",
       "cta_text": null
     },
-    "pitch_status": "ready",
-    "_stashedAt": "2026-11-11"
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-19"
   },
   "sfd-ymt:10000712": {
     "caption": "2,998円のミョウバン不使用の天然生ウニ100gが1,499円。",
@@ -12571,6 +12572,7 @@
     "_stashedAt": "2026-11-19"
   },
   "d-fit:10008856": {
+    "listPrice": 2400,
     "pitch_status": "pending",
     "_stashedAt": "2026-11-19"
   },
@@ -13445,7 +13447,7 @@
     ],
     "listPrice": 7590,
     "pitch_status": "pending",
-    "_stashedAt": "2026-11-11"
+    "_stashedAt": "2026-11-19"
   },
   "yamagoiida:10000115": {
     "tags": [
@@ -13453,7 +13455,7 @@
     ],
     "listPrice": 7590,
     "pitch_status": "pending",
-    "_stashedAt": "2026-11-11"
+    "_stashedAt": "2026-11-19"
   },
   "yamagoiida:10000095": {
     "tags": [
@@ -14942,6 +14944,7 @@
       "ウォッチ中",
       "送料無料"
     ],
+    "listPrice": 1400,
     "_stashedAt": "2026-11-19"
   },
   "fancl-shop:10009046": {
@@ -15999,11 +16002,17 @@
     "_stashedAt": "2026-11-19"
   },
   "attiree:10000077": {
+    "tags": [
+      "送料無料"
+    ],
     "listPrice": 2980,
     "pitch_status": "pending",
     "_stashedAt": "2026-11-19"
   },
   "attiree:10000093": {
+    "tags": [
+      "送料無料"
+    ],
     "listPrice": 2990,
     "pitch_status": "pending",
     "_stashedAt": "2026-11-19"
@@ -16025,6 +16034,7 @@
       "ウォッチ中",
       "送料無料"
     ],
+    "listPrice": 2380,
     "_stashedAt": "2026-11-19"
   },
   "liquor-boss:10003368": {
@@ -16032,6 +16042,7 @@
       "ウォッチ中",
       "送料無料"
     ],
+    "listPrice": 7998,
     "_stashedAt": "2026-11-19"
   },
   "benri:10006435": {
@@ -16080,6 +16091,7 @@
       "ウォッチ中",
       "送料無料"
     ],
+    "listPrice": 2380,
     "_stashedAt": "2026-11-19"
   },
   "kantolifeshop:10002548": {
@@ -16128,6 +16140,7 @@
       "ウォッチ中",
       "送料無料"
     ],
+    "listPrice": 830,
     "_stashedAt": "2026-11-19"
   },
   "shozankan-cocoil:10000000": {
@@ -16145,6 +16158,174 @@
     "_stashedAt": "2026-11-19"
   },
   "grouport:10000034": {
+    "tags": [
+      "ウォッチ中",
+      "送料無料"
+    ],
+    "_stashedAt": "2026-11-19"
+  },
+  "yamagoiida:10000148": {
+    "tags": [
+      "訳あり"
+    ],
+    "listPrice": 7980,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-19"
+  },
+  "starshipai:10000087": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 8980,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-19"
+  },
+  "rakutensokuhaimart:10020787": {
+    "listPrice": 946,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-19"
+  },
+  "motteru:10000176": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 7980,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-19"
+  },
+  "toyorice:10000262": {
+    "tags": [
+      "ウォッチ中",
+      "送料無料"
+    ],
+    "_stashedAt": "2026-11-19"
+  },
+  "kirara53:10000062": {
+    "tags": [
+      "ウォッチ中",
+      "送料無料"
+    ],
+    "_stashedAt": "2026-11-19"
+  },
+  "liquor-boss:10003787": {
+    "tags": [
+      "ウォッチ中",
+      "送料無料"
+    ],
+    "_stashedAt": "2026-11-19"
+  },
+  "taorunomori:10000609": {
+    "tags": [
+      "ウォッチ中",
+      "送料無料"
+    ],
+    "_stashedAt": "2026-11-19"
+  },
+  "futurebox:10000385": {
+    "tags": [
+      "ウォッチ中",
+      "送料無料"
+    ],
+    "_stashedAt": "2026-11-19"
+  },
+  "oobikiyaking:10059130": {
+    "tags": [
+      "ウォッチ中",
+      "送料無料"
+    ],
+    "_stashedAt": "2026-11-19"
+  },
+  "gbt-dko:10061913": {
+    "tags": [
+      "ウォッチ中",
+      "送料無料"
+    ],
+    "_stashedAt": "2026-11-19"
+  },
+  "daiwasangyou:10000124": {
+    "tags": [
+      "ウォッチ中",
+      "送料無料"
+    ],
+    "_stashedAt": "2026-11-19"
+  },
+  "kobe-beauty-labo:10001630": {
+    "tags": [
+      "ウォッチ中",
+      "送料無料"
+    ],
+    "_stashedAt": "2026-11-19"
+  },
+  "cocodesica:10001919": {
+    "tags": [
+      "ウォッチ中",
+      "送料無料"
+    ],
+    "_stashedAt": "2026-11-19"
+  },
+  "kireispot:10060317": {
+    "tags": [
+      "ウォッチ中"
+    ],
+    "_stashedAt": "2026-11-19"
+  },
+  "cocoiine:10001797": {
+    "tags": [
+      "ウォッチ中",
+      "送料無料"
+    ],
+    "_stashedAt": "2026-11-19"
+  },
+  "cat-land:10026179": {
+    "tags": [
+      "ウォッチ中",
+      "送料無料"
+    ],
+    "_stashedAt": "2026-11-19"
+  },
+  "petworldone:10008295": {
+    "tags": [
+      "ウォッチ中",
+      "送料無料",
+      "まとめ買い"
+    ],
+    "_stashedAt": "2026-11-19"
+  },
+  "moncrest:10001486": {
+    "tags": [
+      "ウォッチ中",
+      "送料無料"
+    ],
+    "_stashedAt": "2026-11-19"
+  },
+  "honest-online:10000583": {
+    "tags": [
+      "ウォッチ中",
+      "送料無料"
+    ],
+    "_stashedAt": "2026-11-19"
+  },
+  "renngekesyousui:10000002": {
+    "tags": [
+      "ウォッチ中"
+    ],
+    "_stashedAt": "2026-11-19"
+  },
+  "toripurussss:10000044": {
+    "tags": [
+      "ウォッチ中",
+      "送料無料"
+    ],
+    "_stashedAt": "2026-11-19"
+  },
+  "tabtab:10003263": {
+    "tags": [
+      "ウォッチ中",
+      "送料無料"
+    ],
+    "_stashedAt": "2026-11-19"
+  },
+  "fukuroyuri:10000142": {
     "tags": [
       "ウォッチ中",
       "送料無料"
