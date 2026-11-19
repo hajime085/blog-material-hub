@@ -233,9 +233,9 @@
           "rate": 1,
           "start": "2026-08-01 15:00",
           "end": "9999-12-31 23:59",
-          "fetchedAt": "2026-11-19T07:27:11",
+          "fetchedAt": "2026-11-19T11:27:39",
           "status": "ok",
-          "checkedAt": "2026-11-19T07:27:11"
+          "checkedAt": "2026-11-19T11:27:39"
         }
       }
     },
@@ -243,8 +243,8 @@
       "id": "r845a962d3",
       "listed_on": "2026-11-10",
       "theme": "food",
-      "last_seen": "2026-11-10",
-      "snapshot_updated": "2026-11-10",
+      "last_seen": "2026-11-19",
+      "snapshot_updated": "2026-11-19",
       "snapshot": {
         "id": "r845a962d3",
         "category": "food",
@@ -258,8 +258,16 @@
         "reviewCount": 21792,
         "itemCode": "meat-21:10000071",
         "genreId": "404951",
-        "startTime": "2026-11-04 09:00",
-        "endTime": "2026-11-11 01:59",
+        "startTime": "2026-11-19 08:00",
+        "endTime": "2026-11-25 01:59",
+        "pointInfo": {
+          "rate": 1,
+          "start": "",
+          "end": "",
+          "fetchedAt": "2026-11-19T11:26:25",
+          "status": "ok",
+          "checkedAt": "2026-11-19T11:26:25"
+        },
         "listPrice": 1460,
         "priceBasis": "history",
         "caption": "1,460円の鶏の炭火焼き100g×3袋が1,000円。国産鶏肉100%。",
@@ -273,10 +281,10 @@
         ],
         "description": "",
         "unitNote": null,
-        "postedAt": "2026-11-04",
-        "bumpedAt": "2026-11-04T11:21:44",
-        "lastSeen": "2026-11-10",
-        "pitch_status": "ready",
+        "postedAt": "2026-11-19",
+        "bumpedAt": "2026-11-19T11:27:27",
+        "lastSeen": "2026-11-19",
+        "pitch_status": "pending",
         "marketing": {
           "hook_type": "count",
           "target": "晩酌のおつまみを探す人",
@@ -579,9 +587,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-19T07:27:37",
+          "fetchedAt": "2026-11-19T11:28:08",
           "status": "ok",
-          "checkedAt": "2026-11-19T07:27:37"
+          "checkedAt": "2026-11-19T11:28:08"
         }
       }
     },
@@ -885,9 +893,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-19T07:30:48",
+          "fetchedAt": "2026-11-19T11:31:37",
           "status": "ok",
-          "checkedAt": "2026-11-19T07:30:48"
+          "checkedAt": "2026-11-19T11:31:37"
         }
       }
     },
@@ -1067,13 +1075,13 @@
       "id": "r8550b30d9",
       "listed_on": "2026-11-11",
       "theme": "food",
-      "last_seen": "2026-11-11",
-      "snapshot_updated": "2026-11-18",
+      "last_seen": "2026-11-19",
+      "snapshot_updated": "2026-11-19",
       "snapshot": {
         "id": "r8550b30d9",
         "category": "food",
         "title": "くまもとラーメン たっぷり 6人前 送料無料 くまもと らーめん 6食セット 生麺 とんこつラーメン…",
-        "rawTitle": "【セールで半額1280円】くまもとラーメン たっぷり 6人前 送料無料 くまもと らーめん 6食セット 生麺 とんこつラーメン 豚骨ラーメン 買い回り 熊本 《3-7営業以内出荷(土日祝日除)》|",
+        "rawTitle": "【セールで半額1280円★2点同時500円オフクーポン】くまもとラーメン たっぷり 6人前 送料無料 くまもと らーめん 6食セット 生麺 とんこつラーメン 豚骨ラーメン 買い回り 熊本 《3-7営業以内出荷(土日祝日除)》|",
         "price": 1280,
         "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/kumamoto-food/cabinet/item/ramen/r_ramen001_15.jpg?_ex=600x600",
         "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00qovc7.jeifo5b6.g00qovc7.jeifpa50/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkumamoto-food%2F10002744%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fkumamoto-food%2Fi%2F10002744%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
@@ -1084,6 +1092,14 @@
         "genreId": "110487",
         "startTime": "",
         "endTime": "",
+        "pointInfo": {
+          "rate": 1,
+          "start": "",
+          "end": "",
+          "fetchedAt": "2026-11-19T11:26:48",
+          "status": "ok",
+          "checkedAt": "2026-11-19T11:26:48"
+        },
         "listPrice": 2560,
         "priceBasis": "history",
         "caption": "2,560円のくまもとラーメン6食分が1,280円。生麺のとんこつ、送料込み。",
@@ -1093,10 +1109,10 @@
         "points": [],
         "description": "",
         "unitNote": null,
-        "postedAt": "2026-11-04",
-        "bumpedAt": "2026-11-04T11:21:44",
-        "lastSeen": "2026-11-11",
-        "pitch_status": "ready",
+        "postedAt": "2026-11-19",
+        "bumpedAt": "2026-11-19T11:27:27",
+        "lastSeen": "2026-11-19",
+        "pitch_status": "pending",
         "marketing": {
           "benefits": [
             "まとめて置いておける"
@@ -1176,11 +1192,13 @@
           "rate": 20,
           "start": "2026-11-19 10:00",
           "end": "2026-11-25 09:59",
-          "fetchedAt": "2026-11-19T07:27:30",
+          "fetchedAt": "2026-11-19T11:28:00",
           "status": "ok",
-          "checkedAt": "2026-11-19T07:27:30"
+          "checkedAt": "2026-11-19T11:28:00"
         }
-      }
+      },
+      "axis": "both",
+      "point_end": "2026-11-25T09:59:00+09:00"
     },
     {
       "id": "r3c9b26fab",
@@ -1240,9 +1258,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-19T07:32:22",
+          "fetchedAt": "2026-11-19T11:33:23",
           "status": "ok",
-          "checkedAt": "2026-11-19T07:32:22"
+          "checkedAt": "2026-11-19T11:33:23"
         }
       }
     },
@@ -1304,9 +1322,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-19T07:27:52",
+          "fetchedAt": "2026-11-19T11:28:26",
           "status": "ok",
-          "checkedAt": "2026-11-19T07:27:52"
+          "checkedAt": "2026-11-19T11:28:26"
         }
       }
     },
@@ -1425,9 +1443,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-19T07:31:04",
+          "fetchedAt": "2026-11-19T11:31:55",
           "status": "ok",
-          "checkedAt": "2026-11-19T07:31:04"
+          "checkedAt": "2026-11-19T11:31:55"
         }
       }
     },
@@ -1488,9 +1506,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-19T07:26:11",
+          "fetchedAt": "2026-11-19T11:26:39",
           "status": "ok",
-          "checkedAt": "2026-11-19T07:26:11"
+          "checkedAt": "2026-11-19T11:26:39"
         }
       }
     },
@@ -1594,9 +1612,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-19T07:31:32",
+          "fetchedAt": "2026-11-19T11:32:29",
           "status": "ok",
-          "checkedAt": "2026-11-19T07:31:32"
+          "checkedAt": "2026-11-19T11:32:29"
         }
       }
     },
@@ -1698,9 +1716,9 @@
           "rate": 10,
           "start": "2025-09-30 13:00",
           "end": "9999-12-31 23:59",
-          "fetchedAt": "2026-11-19T07:27:26",
+          "fetchedAt": "2026-11-19T11:27:56",
           "status": "ok",
-          "checkedAt": "2026-11-19T07:27:26"
+          "checkedAt": "2026-11-19T11:27:56"
         }
       },
       "axis": "point",
@@ -1748,9 +1766,9 @@
           "rate": 10,
           "start": "2026-03-19 13:00",
           "end": "9999-12-31 23:59",
-          "fetchedAt": "2026-11-19T07:27:26",
+          "fetchedAt": "2026-11-19T11:27:56",
           "status": "ok",
-          "checkedAt": "2026-11-19T07:27:26"
+          "checkedAt": "2026-11-19T11:27:56"
         }
       },
       "axis": "point",
@@ -1794,9 +1812,9 @@
           "rate": 5,
           "start": "2026-11-12 15:00",
           "end": "2026-11-19 11:59",
-          "fetchedAt": "2026-11-19T07:27:37",
+          "fetchedAt": "2026-11-19T11:28:08",
           "status": "ok",
-          "checkedAt": "2026-11-19T07:27:37"
+          "checkedAt": "2026-11-19T11:28:08"
         }
       },
       "axis": "point",
@@ -1811,8 +1829,8 @@
       "snapshot": {
         "id": "rc5761547a",
         "category": "beauty",
-        "title": "【2026NEWシリーズ 先行販売開始 】楽天1位 シートマスク 30枚 大容量 VC200…",
-        "rawTitle": "【2026NEWシリーズ！先行販売開始！】楽天1位★シートマスク 30枚 大容量 VC200 ヒト幹細胞 エクソソーム PDRN レチノール 高保湿 マスク フェイスパック 韓国 コスメ フェイスマスク パック 毛穴 顔パック ツヤ EXOSOME RETINOL スキンケア cicibellaシートマスク",
+        "title": "シートマスク 30枚 大容量 日本製 選べる フェイスパック フェイスマスク 顔パック 保湿…",
+        "rawTitle": "【24H限定 最安1点685円】楽天1位★シートマスク 30枚 大容量 日本製 選べる フェイスパック フェイスマスク 顔パック 保湿 ビタミンC VC200 EXOSOME エクソソーム PDRN レチノール ナイアシンアミド ヒアルロン酸 CICA 毛穴 スキンケア エイジングケア 美容液 CICIBELLA",
         "price": 690,
         "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/cicibella-sports/cabinet/zhmm30-7/top4.jpg?_ex=600x600",
         "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00tpvr7.jeifob0f.g00tpvr7.jeifp3fd/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fcicibella-sports%2Fzhmm30%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fcicibella-sports%2Fi%2F10000967%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
@@ -1840,9 +1858,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-19T07:29:53",
+          "fetchedAt": "2026-11-19T11:30:39",
           "status": "ok",
-          "checkedAt": "2026-11-19T07:29:53"
+          "checkedAt": "2026-11-19T11:30:39"
         },
         "captionAuto": true
       }
@@ -1885,9 +1903,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-19T07:29:56",
+          "fetchedAt": "2026-11-19T11:30:42",
           "status": "ok",
-          "checkedAt": "2026-11-19T07:29:56"
+          "checkedAt": "2026-11-19T11:30:42"
         },
         "captionAuto": true
       }
@@ -1952,6 +1970,73 @@
       }
     },
     {
+      "id": "r03b46f609",
+      "listed_on": "2026-11-19",
+      "theme": "food",
+      "last_seen": "2026-11-19",
+      "snapshot_updated": "2026-11-19",
+      "snapshot": {
+        "id": "r03b46f609",
+        "category": "food",
+        "title": "あごだし だしパック 国産 だし 五縁 あご入りだし 出汁パック 送料無料 ダシ つゆ かつお節…",
+        "rawTitle": "【セールで半額1380円★2点同時購入で500円オフクーポン】あごだし だしパック 国産 だし 五縁 あご入りだし 出汁パック 送料無料 ダシ つゆ かつお節 だしの素 出汁 昆布 減塩 あご出汁 買い回り 熊本 楽天スーパーSALE ≪正午までのご注文なら当日出荷≫ |",
+        "price": 1380,
+        "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/kumamoto-food/cabinet/item/artifact/goen/r_goen001_23.jpg?_ex=600x600",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00qovc7.jeifo5b6.g00qovc7.jeifpa50/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkumamoto-food%2F10002290%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fkumamoto-food%2Fi%2F10002290%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
+        "shop": "【 くまもと風土 】",
+        "reviewAverage": 4.65,
+        "reviewCount": 5409,
+        "itemCode": "kumamoto-food:10002290",
+        "genreId": "410995",
+        "startTime": "",
+        "endTime": "",
+        "pointInfo": {
+          "rate": 1,
+          "start": "",
+          "end": "",
+          "fetchedAt": "2026-11-19T11:26:48",
+          "status": "ok",
+          "checkedAt": "2026-11-19T11:26:48"
+        },
+        "listPrice": 2760,
+        "priceBasis": "history",
+        "caption": "2,760円のあご入りだしパックが1,380円。国産、送料込み。",
+        "tags": [
+          "送料無料"
+        ],
+        "points": [
+          "2,760円から1,380円へ",
+          "あご入りの国産だしパック",
+          "送料込み"
+        ],
+        "description": "",
+        "unitNote": null,
+        "postedAt": "2026-11-19",
+        "bumpedAt": "2026-11-19T11:27:27",
+        "lastSeen": "2026-11-19",
+        "pitch_status": "pending",
+        "marketing": {
+          "hook_type": "discovery",
+          "target": "だしを取って料理する人",
+          "problem": "だし取りは手間",
+          "use_case": "毎日の汁物",
+          "features": [
+            "あご入り",
+            "国産",
+            "送料無料",
+            "レビュー5,362件"
+          ],
+          "benefits": [
+            "パックで手軽"
+          ],
+          "hook": "あご（とびうお）入りのだしパックです。",
+          "body": "国産の素材を使っていて、送料込み。\nレビューは5,362件あります。",
+          "cta": "none",
+          "ask": "あごだし、使ったことがある人はいますか？"
+        }
+      }
+    },
+    {
       "id": "r567602096",
       "listed_on": "2026-11-19",
       "theme": "fashion",
@@ -1967,7 +2052,7 @@
         "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00q5017.jeifoa00.g00q5017.jeifpe6d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fpierrot%2Fe1907-022188%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fpierrot%2Fi%2F10013558%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
         "shop": "Pierrot【ピエロ】",
         "reviewAverage": 4.32,
-        "reviewCount": 2979,
+        "reviewCount": 2980,
         "itemCode": "pierrot:10013558",
         "genreId": "206440",
         "startTime": "2026-11-19 17:00",
@@ -1989,27 +2074,24 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-19T07:33:55",
+          "fetchedAt": "2026-11-19T11:33:06",
           "status": "ok",
-          "checkedAt": "2026-11-19T07:33:55"
+          "checkedAt": "2026-11-19T11:33:06"
         },
         "captionAuto": true
       }
     }
   ],
   "automation": {
-    "applied_at": "2026-11-19T07:33:56+09:00",
-    "products_count": 628,
-    "history_entries": 365408,
+    "applied_at": "2026-11-19T11:35:03+09:00",
+    "products_count": 653,
+    "history_entries": 365428,
     "added": [
-      "r567602096"
+      "r03b46f609"
     ],
     "expired": [],
     "point_added": [],
-    "point_expired": [
-      "rcd6b502c1",
-      "rec227a2ec"
-    ],
+    "point_expired": [],
     "forced": false
   }
 }
