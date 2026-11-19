@@ -959,25 +959,10 @@
     "product:rb482690c5",
     "report:2026-11-18",
     "schedule:2026-W46-3",
-    "tip:37"
+    "tip:37",
+    "tip:20"
   ],
   "log": [
-    {
-      "key": "tip:35",
-      "id": "18451009741125528",
-      "at": "2026-10-16 21:10",
-      "kind": "tip",
-      "slot": 21,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
     {
       "key": "tip:10",
       "id": "18504827014102146",
@@ -5694,6 +5679,22 @@
       "at": "2026-11-19 07:20",
       "kind": "tip",
       "slot": 7,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "ask_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "reply",
+      "link_arm": null,
+      "form": "flat"
+    },
+    {
+      "key": "tip:20",
+      "id": "18652606675055967",
+      "at": "2026-11-19 09:20",
+      "kind": "tip",
+      "slot": 9,
       "catchup": false,
       "cap": null,
       "hook_type": null,
