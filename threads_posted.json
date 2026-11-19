@@ -966,25 +966,10 @@
     "tip:09",
     "product:r24bdb7dbc",
     "product:red6052d5f",
-    "product:r841f65348"
+    "product:r841f65348",
+    "product:rb482690c5"
   ],
   "log": [
-    {
-      "key": "tip:26",
-      "id": "18116450753039029",
-      "at": "2026-10-17 00:00",
-      "kind": "tip",
-      "slot": 0,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
     {
       "key": "tip:00",
       "id": "18635311567050228",
@@ -5709,6 +5694,22 @@
       "logic_version": "pattern_v4",
       "link": "reply",
       "link_arm": "direct",
+      "form": "flat"
+    },
+    {
+      "key": "product:rb482690c5",
+      "id": "18094375397231173",
+      "at": "2026-11-19 20:30",
+      "kind": "product",
+      "slot": 20,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "price",
+      "ask_type": null,
+      "category": "kaden",
+      "logic_version": "pattern_v4",
+      "link": "reply",
+      "link_arm": "site",
       "form": "flat"
     }
   ],
