@@ -971,25 +971,10 @@
     "product:r1b657033c",
     "product:rdaba5f8cd",
     "schedule:2026-W46-4",
-    "page:kaimawari:2026-11-19"
+    "page:kaimawari:2026-11-19",
+    "tip:15"
   ],
   "log": [
-    {
-      "key": "tip:20",
-      "id": "18355241086301823",
-      "at": "2026-10-17 13:00",
-      "kind": "tip",
-      "slot": 13,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
     {
       "key": "tip:38",
       "id": "18139796365627486",
@@ -5705,6 +5690,22 @@
       "id": "18105031979635941",
       "at": "2026-11-19 21:10",
       "kind": "page",
+      "slot": 21,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "ask_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "reply",
+      "link_arm": null,
+      "form": "flat"
+    },
+    {
+      "key": "tip:15",
+      "id": "17958980559260738",
+      "at": "2026-11-19 21:20",
+      "kind": "tip",
       "slot": 21,
       "catchup": false,
       "cap": null,
