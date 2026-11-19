@@ -968,25 +968,10 @@
     "product:red6052d5f",
     "product:r841f65348",
     "product:rb482690c5",
-    "product:r1b657033c"
+    "product:r1b657033c",
+    "product:rdaba5f8cd"
   ],
   "log": [
-    {
-      "key": "tip:36",
-      "id": "17961929931252155",
-      "at": "2026-10-17 07:20",
-      "kind": "tip",
-      "slot": 7,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
     {
       "key": "tip:19",
       "id": "18112906724274169",
@@ -5708,6 +5693,22 @@
       "hook_type": "look",
       "ask_type": null,
       "category": "kaden",
+      "logic_version": "pattern_v4",
+      "link": "reply",
+      "link_arm": "site",
+      "form": "flat"
+    },
+    {
+      "key": "product:rdaba5f8cd",
+      "id": "18135270910690784",
+      "at": "2026-11-19 20:50",
+      "kind": "product",
+      "slot": 20,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "price",
+      "ask_type": null,
+      "category": "pc",
       "logic_version": "pattern_v4",
       "link": "reply",
       "link_arm": "site",
