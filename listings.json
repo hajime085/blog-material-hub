@@ -91,9 +91,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T13:31:04",
+          "fetchedAt": "2026-11-20T14:30:43",
           "status": "ok",
-          "checkedAt": "2026-11-20T13:31:04"
+          "checkedAt": "2026-11-20T14:30:43"
         },
         "listPrice": 1500,
         "priceBasis": "history",
@@ -241,9 +241,9 @@
           "rate": 1,
           "start": "2026-08-01 15:00",
           "end": "9999-12-31 23:59",
-          "fetchedAt": "2026-11-20T13:27:42",
+          "fetchedAt": "2026-11-20T14:27:23",
           "status": "ok",
-          "checkedAt": "2026-11-20T13:27:42"
+          "checkedAt": "2026-11-20T14:27:23"
         }
       }
     },
@@ -272,9 +272,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T13:26:31",
+          "fetchedAt": "2026-11-20T14:26:17",
           "status": "ok",
-          "checkedAt": "2026-11-20T13:26:31"
+          "checkedAt": "2026-11-20T14:26:17"
         },
         "listPrice": 1460,
         "priceBasis": "history",
@@ -595,9 +595,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T13:28:11",
+          "fetchedAt": "2026-11-20T14:27:50",
           "status": "ok",
-          "checkedAt": "2026-11-20T13:28:11"
+          "checkedAt": "2026-11-20T14:27:50"
         }
       }
     },
@@ -901,9 +901,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T13:31:46",
+          "fetchedAt": "2026-11-20T14:31:19",
           "status": "ok",
-          "checkedAt": "2026-11-20T13:31:46"
+          "checkedAt": "2026-11-20T14:31:19"
         }
       }
     },
@@ -1104,9 +1104,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T13:26:53",
+          "fetchedAt": "2026-11-20T14:26:38",
           "status": "ok",
-          "checkedAt": "2026-11-20T13:26:53"
+          "checkedAt": "2026-11-20T14:26:38"
         },
         "listPrice": 2560,
         "priceBasis": "history",
@@ -1200,9 +1200,9 @@
           "rate": 20,
           "start": "2026-11-19 10:00",
           "end": "2026-11-25 09:59",
-          "fetchedAt": "2026-11-20T13:28:04",
+          "fetchedAt": "2026-11-20T14:27:43",
           "status": "ok",
-          "checkedAt": "2026-11-20T13:28:04"
+          "checkedAt": "2026-11-20T14:27:43"
         }
       },
       "axis": "both",
@@ -1266,9 +1266,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T13:33:30",
+          "fetchedAt": "2026-11-20T14:32:56",
           "status": "ok",
-          "checkedAt": "2026-11-20T13:33:30"
+          "checkedAt": "2026-11-20T14:32:56"
         }
       }
     },
@@ -1330,9 +1330,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T13:28:28",
+          "fetchedAt": "2026-11-20T14:28:09",
           "status": "ok",
-          "checkedAt": "2026-11-20T13:28:28"
+          "checkedAt": "2026-11-20T14:28:09"
         }
       }
     },
@@ -1447,9 +1447,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T13:32:04",
+          "fetchedAt": "2026-11-20T14:31:36",
           "status": "ok",
-          "checkedAt": "2026-11-20T13:32:04"
+          "checkedAt": "2026-11-20T14:31:36"
         }
       }
     },
@@ -1510,9 +1510,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T13:26:44",
+          "fetchedAt": "2026-11-20T14:26:29",
           "status": "ok",
-          "checkedAt": "2026-11-20T13:26:44"
+          "checkedAt": "2026-11-20T14:26:29"
         }
       }
     },
@@ -1616,9 +1616,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T13:32:35",
+          "fetchedAt": "2026-11-20T14:32:05",
           "status": "ok",
-          "checkedAt": "2026-11-20T13:32:35"
+          "checkedAt": "2026-11-20T14:32:05"
         }
       }
     },
@@ -1720,9 +1720,9 @@
           "rate": 10,
           "start": "2025-09-30 13:00",
           "end": "9999-12-31 23:59",
-          "fetchedAt": "2026-11-20T13:27:59",
+          "fetchedAt": "2026-11-20T14:27:39",
           "status": "ok",
-          "checkedAt": "2026-11-20T13:27:59"
+          "checkedAt": "2026-11-20T14:27:39"
         }
       },
       "axis": "point",
@@ -1770,9 +1770,9 @@
           "rate": 10,
           "start": "2026-03-19 13:00",
           "end": "9999-12-31 23:59",
-          "fetchedAt": "2026-11-20T13:27:59",
+          "fetchedAt": "2026-11-20T14:27:39",
           "status": "ok",
-          "checkedAt": "2026-11-20T13:27:59"
+          "checkedAt": "2026-11-20T14:27:39"
         }
       },
       "axis": "point",
@@ -1816,9 +1816,9 @@
           "rate": 5,
           "start": "2026-11-19 15:00",
           "end": "2026-11-26 11:59",
-          "fetchedAt": "2026-11-20T13:28:11",
+          "fetchedAt": "2026-11-20T14:27:50",
           "status": "ok",
-          "checkedAt": "2026-11-20T13:28:11"
+          "checkedAt": "2026-11-20T14:27:50"
         }
       },
       "axis": "point",
@@ -1862,9 +1862,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T13:30:41",
+          "fetchedAt": "2026-11-20T14:30:21",
           "status": "ok",
-          "checkedAt": "2026-11-20T13:30:41"
+          "checkedAt": "2026-11-20T14:30:21"
         },
         "captionAuto": true
       }
@@ -1907,9 +1907,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T13:30:45",
+          "fetchedAt": "2026-11-20T14:30:24",
           "status": "ok",
-          "checkedAt": "2026-11-20T13:30:45"
+          "checkedAt": "2026-11-20T14:30:24"
         },
         "captionAuto": true
       }
@@ -1998,9 +1998,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T13:26:53",
+          "fetchedAt": "2026-11-20T14:26:38",
           "status": "ok",
-          "checkedAt": "2026-11-20T13:26:53"
+          "checkedAt": "2026-11-20T14:26:38"
         },
         "listPrice": 2760,
         "priceBasis": "history",
@@ -2078,9 +2078,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T13:33:12",
+          "fetchedAt": "2026-11-20T14:32:39",
           "status": "ok",
-          "checkedAt": "2026-11-20T13:33:12"
+          "checkedAt": "2026-11-20T14:32:39"
         },
         "captionAuto": true
       }
@@ -2129,7 +2129,7 @@
           "end": "2026-11-25 01:59",
           "fetchedAt": "2026-11-17T16:27:19",
           "status": "ok",
-          "checkedAt": "2026-11-20T13:27:47"
+          "checkedAt": "2026-11-20T14:27:28"
         }
       },
       "axis": "point",
@@ -2177,9 +2177,9 @@
           "rate": 10,
           "start": "2026-11-19 20:00",
           "end": "2026-11-25 01:59",
-          "fetchedAt": "2026-11-20T13:27:59",
+          "fetchedAt": "2026-11-20T14:27:39",
           "status": "ok",
-          "checkedAt": "2026-11-20T13:27:59"
+          "checkedAt": "2026-11-20T14:27:39"
         }
       },
       "axis": "point",
@@ -2223,9 +2223,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T13:32:03",
+          "fetchedAt": "2026-11-20T14:31:34",
           "status": "ok",
-          "checkedAt": "2026-11-20T13:32:03"
+          "checkedAt": "2026-11-20T14:31:34"
         },
         "captionAuto": true
       }
@@ -2269,9 +2269,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T13:26:57",
+          "fetchedAt": "2026-11-20T14:26:42",
           "status": "ok",
-          "checkedAt": "2026-11-20T13:26:57"
+          "checkedAt": "2026-11-20T14:26:42"
         },
         "captionAuto": true
       }
@@ -2319,9 +2319,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T13:33:38",
+          "fetchedAt": "2026-11-20T14:33:03",
           "status": "ok",
-          "checkedAt": "2026-11-20T13:33:38"
+          "checkedAt": "2026-11-20T14:33:03"
         }
       }
     },
@@ -2363,9 +2363,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T13:28:04",
+          "fetchedAt": "2026-11-20T14:27:43",
           "status": "ok",
-          "checkedAt": "2026-11-20T13:28:04"
+          "checkedAt": "2026-11-20T14:27:43"
         },
         "captionAuto": true
       }
@@ -2395,9 +2395,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T13:33:38",
+          "fetchedAt": "2026-11-20T14:33:03",
           "status": "ok",
-          "checkedAt": "2026-11-20T13:33:38"
+          "checkedAt": "2026-11-20T14:33:03"
         },
         "listPrice": 2199,
         "priceBasis": "history",
@@ -2438,9 +2438,9 @@
     }
   ],
   "automation": {
-    "applied_at": "2026-11-20T13:35:10+09:00",
-    "products_count": 871,
-    "history_entries": 367066,
+    "applied_at": "2026-11-20T14:34:31+09:00",
+    "products_count": 892,
+    "history_entries": 367048,
     "added": [],
     "expired": [],
     "point_added": [],
