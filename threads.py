@@ -379,7 +379,9 @@ def compose_product(p, site, pr, reply_link=False, ev=None, seq=0, fact=None):
 # 新しい文は作らない。親とリプのどちらに置くかだけを変える。
 #
 #     親  … 【PR】＋ hook だけ（商品名は出さない）
-#     リプ … 価格の行（_price_line） ＋ note ＋ 空行 ＋ リンク
+#     リプ … 価格の行（_price_line） ＋ 特徴を短く1行ずつ（最大3行）
+#            ＋ note ＋ 「▼商品ページはここ」 ＋ リンク
+#            （ひよこ・楽天トラベルの型Bの実物の並び。2026-11-20 見直し）
 #
 # config.json の threads.treeTest が false のときは一切さわらない
 # （即時停止スイッチ）。
@@ -410,10 +412,20 @@ def compose_product_tree(p, site, pr):
     """ツリー型の組み立て。親で名前を伏せ、リプで明かす。
 
     tree_eligible() で通った商品にだけ使う。
+    リプの並びは、ひよこ（楽天トラベル）の型Bの実物に寄せる
+    （2026-11-20、furu の指示）：名前と価格を明かし、特徴を
+    短く1行ずつ置いて、一言で締め、案内の一行を置いてから
+    リンクを貼る。特徴は最大3行まで。送料無料は文面に出さない
+    決まり（証拠数字と同じ扱い）なので特徴からも除く。
     """
     mk = p.get("mk2") or {}
     parent = pr + mk["hook"].strip()
-    lines = [_price_line(p, mk), mk["note"].strip(), "", link_for(p, site)]
+    lines = [_price_line(p, mk)]
+    feats = [f.strip() for f in (mk.get("features") or [])
+             if f and f.strip() and "送料無料" not in f]
+    lines += feats[:3]
+    lines.append(mk["note"].strip())
+    lines += ["▼商品ページはここ", link_for(p, site)]
     return parent, "\n".join(lines)
 
 
