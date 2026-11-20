@@ -91,9 +91,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T09:31:01",
+          "fetchedAt": "2026-11-20T11:30:26",
           "status": "ok",
-          "checkedAt": "2026-11-20T09:31:01"
+          "checkedAt": "2026-11-20T11:30:26"
         },
         "listPrice": 1500,
         "priceBasis": "history",
@@ -241,9 +241,9 @@
           "rate": 1,
           "start": "2026-08-01 15:00",
           "end": "9999-12-31 23:59",
-          "fetchedAt": "2026-11-20T09:27:40",
+          "fetchedAt": "2026-11-20T11:27:18",
           "status": "ok",
-          "checkedAt": "2026-11-20T09:27:40"
+          "checkedAt": "2026-11-20T11:27:18"
         }
       }
     },
@@ -272,9 +272,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T09:26:28",
+          "fetchedAt": "2026-11-20T11:26:11",
           "status": "ok",
-          "checkedAt": "2026-11-20T09:26:28"
+          "checkedAt": "2026-11-20T11:26:11"
         },
         "listPrice": 1460,
         "priceBasis": "history",
@@ -595,9 +595,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T09:28:09",
+          "fetchedAt": "2026-11-20T11:27:45",
           "status": "ok",
-          "checkedAt": "2026-11-20T09:28:09"
+          "checkedAt": "2026-11-20T11:27:45"
         }
       }
     },
@@ -901,9 +901,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T09:31:39",
+          "fetchedAt": "2026-11-20T11:31:01",
           "status": "ok",
-          "checkedAt": "2026-11-20T09:31:39"
+          "checkedAt": "2026-11-20T11:31:01"
         }
       }
     },
@@ -1104,9 +1104,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T09:26:51",
+          "fetchedAt": "2026-11-20T11:26:32",
           "status": "ok",
-          "checkedAt": "2026-11-20T09:26:51"
+          "checkedAt": "2026-11-20T11:26:32"
         },
         "listPrice": 2560,
         "priceBasis": "history",
@@ -1200,9 +1200,9 @@
           "rate": 20,
           "start": "2026-11-19 10:00",
           "end": "2026-11-25 09:59",
-          "fetchedAt": "2026-11-20T09:28:01",
+          "fetchedAt": "2026-11-20T11:27:38",
           "status": "ok",
-          "checkedAt": "2026-11-20T09:28:01"
+          "checkedAt": "2026-11-20T11:27:38"
         }
       },
       "axis": "both",
@@ -1266,9 +1266,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T09:33:24",
+          "fetchedAt": "2026-11-20T11:32:40",
           "status": "ok",
-          "checkedAt": "2026-11-20T09:33:24"
+          "checkedAt": "2026-11-20T11:32:40"
         }
       }
     },
@@ -1330,9 +1330,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T09:28:26",
+          "fetchedAt": "2026-11-20T11:28:00",
           "status": "ok",
-          "checkedAt": "2026-11-20T09:28:26"
+          "checkedAt": "2026-11-20T11:28:00"
         }
       }
     },
@@ -1371,9 +1371,6 @@
         "lastSeen": "2026-11-10",
         "pitch_status": "ready",
         "marketing": {
-          "benefits": [
-            "柄とプリーツのある形"
-          ],
           "body": "ジャガード織りの立体柄で、全面プリーツのワイドパンツです。\nウエストはゴム、素材は冷感タイプ。ロング丈です。",
           "features": [
             "ジャガード織りの立体柄",
@@ -1386,10 +1383,9 @@
           "hook": "え、半額になってる…！見逃すとこだった",
           "hook_type": "price",
           "name": "ジャガード柄のワイドパンツ",
-          "note": "ウエストゴムで楽なのに、きちんと見えるやつ",
+          "note": "ウエストゴムで楽なのに、きちんと見えるやつ\nパンツ選び、楽さ重視？見た目重視？",
           "problem": "ウエストゴムのパンツは手抜きに見えがち",
-          "target": "楽なのにきちんと見えるボトムスを探す人",
-          "use_case": "普段着からお出かけまで"
+          "target": "楽なのにきちんと見えるボトムスを探す人"
         }
       }
     },
@@ -1451,9 +1447,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T09:31:57",
+          "fetchedAt": "2026-11-20T11:31:18",
           "status": "ok",
-          "checkedAt": "2026-11-20T09:31:57"
+          "checkedAt": "2026-11-20T11:31:18"
         }
       }
     },
@@ -1514,9 +1510,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T09:26:42",
+          "fetchedAt": "2026-11-20T11:26:23",
           "status": "ok",
-          "checkedAt": "2026-11-20T09:26:42"
+          "checkedAt": "2026-11-20T11:26:23"
         }
       }
     },
@@ -1620,9 +1616,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T09:32:27",
+          "fetchedAt": "2026-11-20T11:31:48",
           "status": "ok",
-          "checkedAt": "2026-11-20T09:32:27"
+          "checkedAt": "2026-11-20T11:31:48"
         }
       }
     },
@@ -1724,9 +1720,9 @@
           "rate": 10,
           "start": "2025-09-30 13:00",
           "end": "9999-12-31 23:59",
-          "fetchedAt": "2026-11-20T09:27:56",
+          "fetchedAt": "2026-11-20T11:27:34",
           "status": "ok",
-          "checkedAt": "2026-11-20T09:27:56"
+          "checkedAt": "2026-11-20T11:27:34"
         }
       },
       "axis": "point",
@@ -1774,9 +1770,9 @@
           "rate": 10,
           "start": "2026-03-19 13:00",
           "end": "9999-12-31 23:59",
-          "fetchedAt": "2026-11-20T09:27:56",
+          "fetchedAt": "2026-11-20T11:27:34",
           "status": "ok",
-          "checkedAt": "2026-11-20T09:27:56"
+          "checkedAt": "2026-11-20T11:27:34"
         }
       },
       "axis": "point",
@@ -1820,9 +1816,9 @@
           "rate": 5,
           "start": "2026-11-19 15:00",
           "end": "2026-11-26 11:59",
-          "fetchedAt": "2026-11-20T09:28:09",
+          "fetchedAt": "2026-11-20T11:27:45",
           "status": "ok",
-          "checkedAt": "2026-11-20T09:28:09"
+          "checkedAt": "2026-11-20T11:27:45"
         }
       },
       "axis": "point",
@@ -1838,8 +1834,8 @@
         "id": "rc5761547a",
         "category": "beauty",
         "title": "シートマスク 30枚 大容量 日本製 選べる フェイスパック フェイスマスク 顔パック 保湿…",
-        "rawTitle": "【24H限定 最安1点685円】楽天1位★シートマスク 30枚 大容量 日本製 選べる フェイスパック フェイスマスク 顔パック 保湿 ビタミンC VC200 EXOSOME エクソソーム PDRN レチノール ナイアシンアミド ヒアルロン酸 CICA 毛穴 スキンケア エイジングケア 美容液 CICIBELLA",
-        "price": 690,
+        "rawTitle": "【BF限定 最安1点690円～】楽天1位★シートマスク 30枚 大容量 日本製 選べる フェイスパック フェイスマスク 顔パック 保湿 ビタミンC VC200 EXOSOME エクソソーム PDRN レチノール ナイアシンアミド ヒアルロン酸 CICA 毛穴 スキンケア エイジングケア 美容液 CICIBELLA",
+        "price": 699,
         "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/cicibella-sports/cabinet/zhmm30-7/top4.jpg?_ex=600x600",
         "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00tpvr7.jeifob0f.g00tpvr7.jeifp3fd/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fcicibella-sports%2Fzhmm30%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fcicibella-sports%2Fi%2F10000967%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
         "shop": "cicibella sports",
@@ -1847,8 +1843,8 @@
         "reviewCount": 2311,
         "itemCode": "cicibella-sports:10000967",
         "genreId": "503020",
-        "startTime": "2026-11-19 10:00",
-        "endTime": "2026-11-20 09:59",
+        "startTime": "2026-11-20 10:00",
+        "endTime": "2026-11-25 23:59",
         "listPrice": 878,
         "priceBasis": "history",
         "caption": "観測35日の中央値878円のところ690円。いまが観測期間の最安値です。",
@@ -1866,9 +1862,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T09:30:40",
+          "fetchedAt": "2026-11-20T11:30:06",
           "status": "ok",
-          "checkedAt": "2026-11-20T09:30:40"
+          "checkedAt": "2026-11-20T11:30:06"
         },
         "captionAuto": true
       }
@@ -1911,9 +1907,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T09:30:43",
+          "fetchedAt": "2026-11-20T11:30:09",
           "status": "ok",
-          "checkedAt": "2026-11-20T09:30:43"
+          "checkedAt": "2026-11-20T11:30:09"
         },
         "captionAuto": true
       }
@@ -2002,9 +1998,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T09:26:51",
+          "fetchedAt": "2026-11-20T11:26:32",
           "status": "ok",
-          "checkedAt": "2026-11-20T09:26:51"
+          "checkedAt": "2026-11-20T11:26:32"
         },
         "listPrice": 2760,
         "priceBasis": "history",
@@ -2082,9 +2078,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T09:33:06",
+          "fetchedAt": "2026-11-20T11:32:23",
           "status": "ok",
-          "checkedAt": "2026-11-20T09:33:06"
+          "checkedAt": "2026-11-20T11:32:23"
         },
         "captionAuto": true
       }
@@ -2133,7 +2129,7 @@
           "end": "2026-11-25 01:59",
           "fetchedAt": "2026-11-17T16:27:19",
           "status": "ok",
-          "checkedAt": "2026-11-20T09:27:45"
+          "checkedAt": "2026-11-20T11:27:22"
         }
       },
       "axis": "point",
@@ -2181,9 +2177,9 @@
           "rate": 10,
           "start": "2026-11-19 20:00",
           "end": "2026-11-25 01:59",
-          "fetchedAt": "2026-11-20T09:27:56",
+          "fetchedAt": "2026-11-20T11:27:34",
           "status": "ok",
-          "checkedAt": "2026-11-20T09:27:56"
+          "checkedAt": "2026-11-20T11:27:34"
         }
       },
       "axis": "point",
@@ -2227,9 +2223,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T09:31:55",
+          "fetchedAt": "2026-11-20T11:31:17",
           "status": "ok",
-          "checkedAt": "2026-11-20T09:31:55"
+          "checkedAt": "2026-11-20T11:31:17"
         },
         "captionAuto": true
       }
@@ -2273,9 +2269,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T09:26:55",
+          "fetchedAt": "2026-11-20T11:26:36",
           "status": "ok",
-          "checkedAt": "2026-11-20T09:26:55"
+          "checkedAt": "2026-11-20T11:26:36"
         },
         "captionAuto": true
       }
@@ -2323,9 +2319,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T09:33:32",
+          "fetchedAt": "2026-11-20T11:32:47",
           "status": "ok",
-          "checkedAt": "2026-11-20T09:33:32"
+          "checkedAt": "2026-11-20T11:32:47"
         }
       }
     },
@@ -2367,9 +2363,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T09:28:01",
+          "fetchedAt": "2026-11-20T11:27:38",
           "status": "ok",
-          "checkedAt": "2026-11-20T09:28:01"
+          "checkedAt": "2026-11-20T11:27:38"
         },
         "captionAuto": true
       }
@@ -2399,9 +2395,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-20T09:33:32",
+          "fetchedAt": "2026-11-20T11:32:47",
           "status": "ok",
-          "checkedAt": "2026-11-20T09:33:32"
+          "checkedAt": "2026-11-20T11:32:47"
         },
         "listPrice": 2199,
         "priceBasis": "history",
@@ -2442,9 +2438,9 @@
     }
   ],
   "automation": {
-    "applied_at": "2026-11-20T09:35:06+09:00",
-    "products_count": 829,
-    "history_entries": 367055,
+    "applied_at": "2026-11-20T11:34:16+09:00",
+    "products_count": 852,
+    "history_entries": 367054,
     "added": [],
     "expired": [],
     "point_added": [],
