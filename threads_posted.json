@@ -979,25 +979,10 @@
     "tip:41",
     "product:r3c9b26fab",
     "tip:43",
-    "tip:01"
+    "tip:01",
+    "tip:24"
   ],
   "log": [
-    {
-      "key": "tip:25",
-      "id": "18387905875231449",
-      "at": "2026-10-17 23:20",
-      "kind": "tip",
-      "slot": 23,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
     {
       "key": "tip:01",
       "id": "18151992448546551",
@@ -5714,6 +5699,22 @@
       "at": "2026-11-20 17:20",
       "kind": "tip",
       "slot": 17,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "ask_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "reply",
+      "link_arm": null,
+      "form": "flat"
+    },
+    {
+      "key": "tip:24",
+      "id": "18350316961257479",
+      "at": "2026-11-20 19:21",
+      "kind": "tip",
+      "slot": 19,
       "catchup": false,
       "cap": null,
       "hook_type": null,
