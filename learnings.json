@@ -1396,7 +1396,7 @@
       "progress": {},
       "note": "exp-010（2026-09-29〜、未決着で終了）の後継。母集団がトークン失効で2つに割れたため、同じ設計で取り直す。",
       "progress_now": {
-        "date": "2026-11-21",
+        "date": "2026-11-22",
         "arms": {
           "direct": {
             "posts": 8,
@@ -1405,8 +1405,8 @@
           },
           "site": {
             "posts": 15,
-            "clicks": 37,
-            "rate": 2.467
+            "clicks": 38,
+            "rate": 2.533
           }
         }
       }
@@ -1423,57 +1423,63 @@
       "note": "型カタログ T3（画像・動画が主役）の検証。前提が整うまで 待ち。始める条件がそろったら status を running にする。 started は登録日（2026-11-10）。実施開始時に実際の開始日へ直す。"
     }
   ],
-  "lastRun": "2026-11-21",
+  "lastRun": "2026-11-22",
   "snapshot": {
-    "date": "2026-11-21",
+    "date": "2026-11-22",
     "posts": 170,
-    "views": 5008,
+    "views": 4691,
     "replies": 2,
     "followers": 72,
     "cuts": {
       "投稿の種類": {
         "tip": {
-          "n": 99,
-          "median": 9,
-          "mean": 23.2,
-          "max": 164
+          "n": 90,
+          "median": 8.0,
+          "mean": 21.0,
+          "max": 155
         },
         "schedule": {
-          "n": 7,
-          "median": 60,
-          "mean": 101.4,
+          "n": 8,
+          "median": 89.0,
+          "mean": 103.5,
           "max": 201
         },
         "feature": {
-          "n": 6,
-          "median": 64.0,
-          "mean": 107.0,
+          "n": 7,
+          "median": 104,
+          "mean": 108.0,
           "max": 337
         },
         "product": {
-          "n": 17,
-          "median": 10,
-          "mean": 24.9,
-          "max": 176
+          "n": 23,
+          "median": 12,
+          "mean": 40.2,
+          "max": 256
         },
         "report": {
           "n": 7,
           "median": 13,
           "mean": 13.9,
           "max": 34
+        },
+        "page": {
+          "n": 1,
+          "median": 4,
+          "mean": 4.0,
+          "max": 4
         }
       },
       "リンクの位置": {
         "none": {
-          "n": 88,
-          "median": 11.5,
-          "mean": 27.6,
+          "n": 71,
+          "median": 12,
+          "mean": 28.0,
           "max": 192
         },
         "reply": {
-          "n": 48,
-          "median": 10.0,
-          "mean": 36.3,
+          "n": 65,
+          "median": 9,
+          "mean": 38.6,
           "max": 337
         }
       },
@@ -1491,24 +1497,24 @@
           "max": 13
         },
         "（なし）": {
-          "n": 8,
-          "median": 9.5,
-          "mean": 21.5,
-          "max": 102
+          "n": 14,
+          "median": 12.5,
+          "mean": 48.1,
+          "max": 256
         }
       },
       "入口の型": {
         "price": {
-          "n": 8,
-          "median": 23.0,
-          "mean": 44.9,
+          "n": 12,
+          "median": 23.5,
+          "mean": 49.3,
           "max": 176
         },
         "look": {
-          "n": 5,
-          "median": 5,
-          "mean": 6.0,
-          "max": 12
+          "n": 6,
+          "median": 7.5,
+          "mean": 7.2,
+          "max": 13
         },
         "count": {
           "n": 2,
@@ -1517,41 +1523,41 @@
           "max": 14
         },
         "scene": {
-          "n": 2,
-          "median": 3.5,
-          "mean": 3.5,
-          "max": 5
+          "n": 3,
+          "median": 5,
+          "mean": 87.7,
+          "max": 256
         }
       },
       "売場": {
         "pc": {
-          "n": 4,
-          "median": 9.5,
-          "mean": 48.8,
-          "max": 176
+          "n": 6,
+          "median": 90.0,
+          "mean": 102.8,
+          "max": 256
         },
         "food": {
-          "n": 3,
-          "median": 10,
-          "mean": 8.0,
+          "n": 4,
+          "median": 7.0,
+          "mean": 7.0,
           "max": 12
         },
         "kitchen": {
-          "n": 2,
-          "median": 0.5,
-          "mean": 0.5,
-          "max": 1
+          "n": 3,
+          "median": 1,
+          "mean": 1.7,
+          "max": 4
         },
         "kaden": {
-          "n": 3,
+          "n": 5,
           "median": 28,
-          "mean": 45.7,
+          "mean": 41.6,
           "max": 102
         },
         "fashion": {
           "n": 4,
-          "median": 17.5,
-          "mean": 15.2,
+          "median": 18.0,
+          "mean": 15.5,
           "max": 24
         },
         "baby-toy": {
@@ -1562,97 +1568,97 @@
         }
       },
       "時刻（豆知識）": {
-        "22": {
-          "n": 6,
-          "median": 34.5,
-          "mean": 44.8,
-          "max": 135
-        },
-        "23": {
-          "n": 6,
-          "median": 22.0,
-          "mean": 19.2,
-          "max": 34
-        },
-        "0": {
-          "n": 7,
-          "median": 41,
-          "mean": 41.0,
-          "max": 78
-        },
         "1": {
-          "n": 7,
-          "median": 32,
-          "mean": 51.6,
-          "max": 164
+          "n": 6,
+          "median": 20.0,
+          "mean": 32.8,
+          "max": 93
         },
         "7": {
           "n": 15,
-          "median": 5,
-          "mean": 9.8,
+          "median": 3,
+          "mean": 9.1,
           "max": 60
         },
         "9": {
           "n": 9,
           "median": 9,
-          "mean": 21.7,
+          "mean": 22.2,
           "max": 134
         },
         "12": {
-          "n": 6,
-          "median": 11.0,
-          "mean": 15.3,
+          "n": 5,
+          "median": 16,
+          "mean": 18.0,
           "max": 51
         },
         "13": {
-          "n": 4,
-          "median": 2.5,
-          "mean": 7.0,
+          "n": 3,
+          "median": 3,
+          "mean": 8.7,
           "max": 23
         },
         "14": {
           "n": 8,
-          "median": 13.0,
-          "mean": 19.2,
+          "median": 5.0,
+          "mean": 16.1,
           "max": 55
         },
         "17": {
-          "n": 7,
-          "median": 8,
-          "mean": 24.7,
+          "n": 6,
+          "median": 9.5,
+          "mean": 28.8,
           "max": 140
         },
         "18": {
-          "n": 5,
-          "median": 6,
-          "mean": 11.0,
-          "max": 38
+          "n": 4,
+          "median": 3.5,
+          "mean": 4.2,
+          "max": 9
         },
         "19": {
           "n": 7,
           "median": 7,
-          "mean": 6.0,
+          "mean": 5.9,
           "max": 10
         },
         "20": {
-          "n": 7,
-          "median": 4,
-          "mean": 33.7,
+          "n": 6,
+          "median": 4.0,
+          "mean": 34.0,
           "max": 155
         },
         "21": {
-          "n": 5,
-          "median": 17,
-          "mean": 29.0,
+          "n": 8,
+          "median": 5.0,
+          "mean": 19.1,
           "max": 90
+        },
+        "22": {
+          "n": 4,
+          "median": 39.5,
+          "mean": 62.0,
+          "max": 135
+        },
+        "23": {
+          "n": 4,
+          "median": 22.0,
+          "mean": 20.8,
+          "max": 34
+        },
+        "0": {
+          "n": 5,
+          "median": 40,
+          "mean": 38.0,
+          "max": 78
         }
       },
       "時刻（商品）": {
         "20": {
-          "n": 6,
-          "median": 18.0,
-          "mean": 42.2,
-          "max": 176
+          "n": 12,
+          "median": 18.5,
+          "mean": 62.9,
+          "max": 256
         },
         "9": {
           "n": 5,
@@ -1676,13 +1682,8 @@
     },
     "linkClicks7d": {
       "direct": 0,
-      "site": 28,
+      "site": 29,
       "byDay": [
-        {
-          "date": "2026-11-14",
-          "direct": 0,
-          "site": 2
-        },
         {
           "date": "2026-11-15",
           "direct": 0,
@@ -1711,7 +1712,12 @@
         {
           "date": "2026-11-20",
           "direct": 0,
-          "site": 26
+          "site": 27
+        },
+        {
+          "date": "2026-11-21",
+          "direct": 0,
+          "site": 3
         }
       ]
     }
