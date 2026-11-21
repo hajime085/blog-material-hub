@@ -70,8 +70,8 @@
       "id": "r1bdf1e95f",
       "listed_on": "2026-11-10",
       "theme": "beauty",
-      "last_seen": "2026-11-21",
-      "snapshot_updated": "2026-11-21",
+      "last_seen": "2026-11-22",
+      "snapshot_updated": "2026-11-22",
       "snapshot": {
         "id": "r1bdf1e95f",
         "category": "beauty",
@@ -91,9 +91,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-21T21:30:35",
+          "fetchedAt": "2026-11-22T00:30:48",
           "status": "ok",
-          "checkedAt": "2026-11-21T21:30:35"
+          "checkedAt": "2026-11-22T00:30:48"
         },
         "listPrice": 1500,
         "priceBasis": "history",
@@ -106,7 +106,7 @@
         "unitNote": null,
         "postedAt": "2026-11-19",
         "bumpedAt": "2026-11-19T20:30:58",
-        "lastSeen": "2026-11-21",
+        "lastSeen": "2026-11-22",
         "pitch_status": "pending",
         "marketing": {
           "hook_type": "count",
@@ -133,7 +133,7 @@
       "listed_on": "2026-11-10",
       "theme": "kaden",
       "last_seen": "2026-11-10",
-      "snapshot_updated": "2026-11-21",
+      "snapshot_updated": "2026-11-22",
       "snapshot": {
         "id": "r6b77c88d6",
         "category": "kaden",
@@ -189,8 +189,8 @@
       "id": "r841f65348",
       "listed_on": "2026-11-10",
       "theme": "kitchen",
-      "last_seen": "2026-11-21",
-      "snapshot_updated": "2026-11-21",
+      "last_seen": "2026-11-22",
+      "snapshot_updated": "2026-11-22",
       "snapshot": {
         "id": "r841f65348",
         "category": "kitchen",
@@ -217,7 +217,7 @@
         "unitNote": null,
         "postedAt": "2026-11-04",
         "bumpedAt": "2026-11-04T16:22:15",
-        "lastSeen": "2026-11-21",
+        "lastSeen": "2026-11-22",
         "pitch_status": "ready",
         "marketing": {
           "benefits": [
@@ -241,9 +241,9 @@
           "rate": 1,
           "start": "2026-08-01 15:00",
           "end": "9999-12-31 23:59",
-          "fetchedAt": "2026-11-21T21:27:24",
+          "fetchedAt": "2026-11-22T00:27:35",
           "status": "ok",
-          "checkedAt": "2026-11-21T21:27:24"
+          "checkedAt": "2026-11-22T00:27:35"
         }
       }
     },
@@ -251,8 +251,8 @@
       "id": "r845a962d3",
       "listed_on": "2026-11-10",
       "theme": "food",
-      "last_seen": "2026-11-21",
-      "snapshot_updated": "2026-11-21",
+      "last_seen": "2026-11-22",
+      "snapshot_updated": "2026-11-22",
       "snapshot": {
         "id": "r845a962d3",
         "category": "food",
@@ -272,9 +272,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-21T21:26:15",
+          "fetchedAt": "2026-11-22T00:26:23",
           "status": "ok",
-          "checkedAt": "2026-11-21T21:26:15"
+          "checkedAt": "2026-11-22T00:26:23"
         },
         "listPrice": 1460,
         "priceBasis": "history",
@@ -291,7 +291,7 @@
         "unitNote": null,
         "postedAt": "2026-11-19",
         "bumpedAt": "2026-11-19T11:27:27",
-        "lastSeen": "2026-11-21",
+        "lastSeen": "2026-11-22",
         "pitch_status": "pending",
         "marketing": {
           "hook_type": "count",
@@ -542,8 +542,8 @@
       "id": "rb482690c5",
       "listed_on": "2026-11-10",
       "theme": "kaden",
-      "last_seen": "2026-11-21",
-      "snapshot_updated": "2026-11-21",
+      "last_seen": "2026-11-22",
+      "snapshot_updated": "2026-11-22",
       "snapshot": {
         "id": "rb482690c5",
         "category": "kaden",
@@ -570,7 +570,7 @@
         "unitNote": null,
         "postedAt": "2026-11-02",
         "bumpedAt": "2026-11-02T11:28:16",
-        "lastSeen": "2026-11-21",
+        "lastSeen": "2026-11-22",
         "pitch_status": "ready",
         "marketing": {
           "benefits": [
@@ -595,9 +595,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-21T21:27:51",
+          "fetchedAt": "2026-11-22T00:28:03",
           "status": "ok",
-          "checkedAt": "2026-11-21T21:27:51"
+          "checkedAt": "2026-11-22T00:28:03"
         }
       }
     },
@@ -605,8 +605,8 @@
       "id": "rc2e11945a",
       "listed_on": "2026-11-10",
       "theme": "baby-toy",
-      "last_seen": "2026-11-21",
-      "snapshot_updated": "2026-11-21",
+      "last_seen": "2026-11-22",
+      "snapshot_updated": "2026-11-22",
       "snapshot": {
         "id": "rc2e11945a",
         "category": "baby-toy",
@@ -626,9 +626,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-21T21:28:08",
+          "fetchedAt": "2026-11-22T00:28:20",
           "status": "ok",
-          "checkedAt": "2026-11-21T21:28:08"
+          "checkedAt": "2026-11-22T00:28:20"
         },
         "listPrice": 1699,
         "priceBasis": "history",
@@ -641,7 +641,7 @@
         "unitNote": null,
         "postedAt": "2026-11-21",
         "bumpedAt": "2026-11-21T18:29:45",
-        "lastSeen": "2026-11-21",
+        "lastSeen": "2026-11-22",
         "pitch_status": "pending",
         "marketing": {
           "benefits": [
@@ -732,7 +732,7 @@
       "listed_on": "2026-11-10",
       "theme": "food",
       "last_seen": "2026-11-15",
-      "snapshot_updated": "2026-11-21",
+      "snapshot_updated": "2026-11-22",
       "snapshot": {
         "id": "rd429b31ad",
         "category": "food",
@@ -849,8 +849,8 @@
       "id": "red6052d5f",
       "listed_on": "2026-11-10",
       "theme": "pc",
-      "last_seen": "2026-11-21",
-      "snapshot_updated": "2026-11-21",
+      "last_seen": "2026-11-22",
+      "snapshot_updated": "2026-11-22",
       "snapshot": {
         "id": "red6052d5f",
         "category": "pc",
@@ -877,7 +877,7 @@
         "unitNote": null,
         "postedAt": "2026-11-07",
         "bumpedAt": "2026-11-07T11:32:18",
-        "lastSeen": "2026-11-21",
+        "lastSeen": "2026-11-22",
         "pitch_status": "ready",
         "marketing": {
           "hook_type": "scene",
@@ -901,9 +901,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-21T21:31:11",
+          "fetchedAt": "2026-11-22T00:31:28",
           "status": "ok",
-          "checkedAt": "2026-11-21T21:31:11"
+          "checkedAt": "2026-11-22T00:31:28"
         }
       }
     },
@@ -1025,7 +1025,7 @@
       "listed_on": "2026-11-11",
       "theme": "food",
       "last_seen": "2026-11-10",
-      "snapshot_updated": "2026-11-21",
+      "snapshot_updated": "2026-11-22",
       "snapshot": {
         "id": "r58b64002e",
         "category": "food",
@@ -1083,8 +1083,8 @@
       "id": "r8550b30d9",
       "listed_on": "2026-11-11",
       "theme": "food",
-      "last_seen": "2026-11-21",
-      "snapshot_updated": "2026-11-21",
+      "last_seen": "2026-11-22",
+      "snapshot_updated": "2026-11-22",
       "snapshot": {
         "id": "r8550b30d9",
         "category": "food",
@@ -1104,9 +1104,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-21T21:26:36",
+          "fetchedAt": "2026-11-22T00:26:46",
           "status": "ok",
-          "checkedAt": "2026-11-21T21:26:36"
+          "checkedAt": "2026-11-22T00:26:46"
         },
         "listPrice": 2560,
         "priceBasis": "history",
@@ -1119,7 +1119,7 @@
         "unitNote": null,
         "postedAt": "2026-11-19",
         "bumpedAt": "2026-11-19T11:27:27",
-        "lastSeen": "2026-11-21",
+        "lastSeen": "2026-11-22",
         "pitch_status": "pending",
         "marketing": {
           "benefits": [
@@ -1146,8 +1146,8 @@
       "id": "r1b657033c",
       "listed_on": "2026-11-12",
       "theme": "kaden",
-      "last_seen": "2026-11-21",
-      "snapshot_updated": "2026-11-21",
+      "last_seen": "2026-11-22",
+      "snapshot_updated": "2026-11-22",
       "snapshot": {
         "id": "r1b657033c",
         "category": "kaden",
@@ -1158,7 +1158,7 @@
         "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00pui97.jeifoa18.g00pui97.jeifp764/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fe-kurashi%2F1338101%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fe-kurashi%2Fi%2F10000628%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
         "shop": "くらしのeショップ",
         "reviewAverage": 4.37,
-        "reviewCount": 4129,
+        "reviewCount": 4130,
         "itemCode": "e-kurashi:10000628",
         "genreId": "208397",
         "startTime": "",
@@ -1174,7 +1174,7 @@
         "unitNote": null,
         "postedAt": "2026-11-12",
         "bumpedAt": "2026-11-12T00:00:00",
-        "lastSeen": "2026-11-21",
+        "lastSeen": "2026-11-22",
         "pitch_status": "ready",
         "captionAuto": true,
         "marketing": {
@@ -1200,9 +1200,9 @@
           "rate": 20,
           "start": "2026-11-19 10:00",
           "end": "2026-11-25 09:59",
-          "fetchedAt": "2026-11-21T21:27:44",
+          "fetchedAt": "2026-11-22T00:27:55",
           "status": "ok",
-          "checkedAt": "2026-11-21T21:27:44"
+          "checkedAt": "2026-11-22T00:27:55"
         }
       },
       "axis": "both",
@@ -1212,8 +1212,8 @@
       "id": "r3c9b26fab",
       "listed_on": "2026-11-12",
       "theme": "fashion",
-      "last_seen": "2026-11-21",
-      "snapshot_updated": "2026-11-21",
+      "last_seen": "2026-11-22",
+      "snapshot_updated": "2026-11-22",
       "snapshot": {
         "id": "r3c9b26fab",
         "category": "fashion",
@@ -1240,7 +1240,7 @@
         "unitNote": null,
         "postedAt": "2026-11-12",
         "bumpedAt": "2026-11-12T00:00:00",
-        "lastSeen": "2026-11-21",
+        "lastSeen": "2026-11-22",
         "pitch_status": "ready",
         "captionAuto": true,
         "marketing": {
@@ -1266,9 +1266,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-21T21:32:49",
+          "fetchedAt": "2026-11-22T00:33:09",
           "status": "ok",
-          "checkedAt": "2026-11-21T21:32:49"
+          "checkedAt": "2026-11-22T00:33:09"
         }
       }
     },
@@ -1276,8 +1276,8 @@
       "id": "r9abca3e30",
       "listed_on": "2026-11-12",
       "theme": "baby-toy",
-      "last_seen": "2026-11-21",
-      "snapshot_updated": "2026-11-21",
+      "last_seen": "2026-11-22",
+      "snapshot_updated": "2026-11-22",
       "snapshot": {
         "id": "r9abca3e30",
         "category": "baby-toy",
@@ -1304,7 +1304,7 @@
         "unitNote": null,
         "postedAt": "2026-11-12",
         "bumpedAt": "2026-11-12T00:00:00",
-        "lastSeen": "2026-11-21",
+        "lastSeen": "2026-11-22",
         "pitch_status": "ready",
         "captionAuto": true,
         "marketing": {
@@ -1330,9 +1330,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-21T21:28:06",
+          "fetchedAt": "2026-11-22T00:28:18",
           "status": "ok",
-          "checkedAt": "2026-11-21T21:28:06"
+          "checkedAt": "2026-11-22T00:28:18"
         }
       }
     },
@@ -1341,7 +1341,7 @@
       "listed_on": "2026-11-12",
       "theme": "fashion",
       "last_seen": "2026-11-10",
-      "snapshot_updated": "2026-11-21",
+      "snapshot_updated": "2026-11-22",
       "snapshot": {
         "id": "rbd40d7c42",
         "category": "fashion",
@@ -1393,8 +1393,8 @@
       "id": "rdaba5f8cd",
       "listed_on": "2026-11-12",
       "theme": "pc",
-      "last_seen": "2026-11-21",
-      "snapshot_updated": "2026-11-21",
+      "last_seen": "2026-11-22",
+      "snapshot_updated": "2026-11-22",
       "snapshot": {
         "id": "rdaba5f8cd",
         "category": "pc",
@@ -1421,7 +1421,7 @@
         "unitNote": null,
         "postedAt": "2026-11-12",
         "bumpedAt": "2026-11-12T00:00:00",
-        "lastSeen": "2026-11-21",
+        "lastSeen": "2026-11-22",
         "pitch_status": "ready",
         "captionAuto": true,
         "marketing": {
@@ -1447,9 +1447,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-21T21:31:29",
+          "fetchedAt": "2026-11-22T00:31:46",
           "status": "ok",
-          "checkedAt": "2026-11-21T21:31:29"
+          "checkedAt": "2026-11-22T00:31:46"
         }
       }
     },
@@ -1457,8 +1457,8 @@
       "id": "r24bdb7dbc",
       "listed_on": "2026-11-13",
       "theme": "food",
-      "last_seen": "2026-11-21",
-      "snapshot_updated": "2026-11-21",
+      "last_seen": "2026-11-22",
+      "snapshot_updated": "2026-11-22",
       "snapshot": {
         "id": "r24bdb7dbc",
         "category": "food",
@@ -1485,7 +1485,7 @@
         "unitNote": null,
         "postedAt": "2026-11-13",
         "bumpedAt": "2026-11-13T00:00:00",
-        "lastSeen": "2026-11-21",
+        "lastSeen": "2026-11-22",
         "pitch_status": "ready",
         "captionAuto": true,
         "marketing": {
@@ -1510,9 +1510,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-21T21:26:28",
+          "fetchedAt": "2026-11-22T00:26:36",
           "status": "ok",
-          "checkedAt": "2026-11-21T21:26:28"
+          "checkedAt": "2026-11-22T00:26:36"
         }
       }
     },
@@ -1520,8 +1520,8 @@
       "id": "r04836f890",
       "listed_on": "2026-11-14",
       "theme": "fashion",
-      "last_seen": "2026-11-21",
-      "snapshot_updated": "2026-11-21",
+      "last_seen": "2026-11-22",
+      "snapshot_updated": "2026-11-22",
       "snapshot": {
         "id": "r04836f890",
         "category": "fashion",
@@ -1532,7 +1532,7 @@
         "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00q8qj7.jeifo2ee.g00q8qj7.jeifpbbc/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdarkangel%2Fto2209-0916%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fdarkangel%2Fi%2F10035705%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
         "shop": "Dark Angel (ダークエンジェル)",
         "reviewAverage": 4.04,
-        "reviewCount": 5798,
+        "reviewCount": 5800,
         "itemCode": "darkangel:10035705",
         "genreId": "206440",
         "startTime": "2026-11-21 10:00",
@@ -1541,9 +1541,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-21T21:32:30",
+          "fetchedAt": "2026-11-22T00:32:49",
           "status": "ok",
-          "checkedAt": "2026-11-21T21:32:30"
+          "checkedAt": "2026-11-22T00:32:49"
         },
         "listPrice": 2399,
         "priceBasis": "history",
@@ -1556,7 +1556,7 @@
         "unitNote": null,
         "postedAt": "2026-11-20",
         "bumpedAt": "2026-11-20T18:33:40",
-        "lastSeen": "2026-11-21",
+        "lastSeen": "2026-11-22",
         "pitch_status": "pending",
         "marketing": {
           "hook_type": "scene",
@@ -1581,8 +1581,8 @@
       "id": "r3e6459925",
       "listed_on": "2026-11-15",
       "theme": "pc",
-      "last_seen": "2026-11-21",
-      "snapshot_updated": "2026-11-21",
+      "last_seen": "2026-11-22",
+      "snapshot_updated": "2026-11-22",
       "snapshot": {
         "id": "r3e6459925",
         "category": "pc",
@@ -1609,16 +1609,16 @@
         "unitNote": null,
         "postedAt": "2026-11-15",
         "bumpedAt": "2026-11-15T00:00:00",
-        "lastSeen": "2026-11-21",
+        "lastSeen": "2026-11-22",
         "pitch_status": "pending",
         "captionAuto": true,
         "pointInfo": {
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-21T21:31:58",
+          "fetchedAt": "2026-11-22T00:32:16",
           "status": "ok",
-          "checkedAt": "2026-11-21T21:31:58"
+          "checkedAt": "2026-11-22T00:32:16"
         }
       }
     },
@@ -1686,8 +1686,8 @@
       "id": "r6dc752387",
       "listed_on": "2026-11-16",
       "theme": null,
-      "last_seen": "2026-11-21",
-      "snapshot_updated": "2026-11-21",
+      "last_seen": "2026-11-22",
+      "snapshot_updated": "2026-11-22",
       "snapshot": {
         "id": "r6dc752387",
         "category": "kaden",
@@ -1698,7 +1698,7 @@
         "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00qb0l7.jeifoe7b.g00qb0l7.jeifp104/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Froomy%2Fwin20oct27h03%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Froomy%2Fi%2F10015766%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
         "shop": "インテリアショップ roomy",
         "reviewAverage": 4.68,
-        "reviewCount": 23136,
+        "reviewCount": 23143,
         "itemCode": "roomy:10015766",
         "genreId": "565076",
         "startTime": "",
@@ -1715,14 +1715,14 @@
         "unitNote": null,
         "postedAt": "2026-11-14",
         "bumpedAt": "2026-11-14T00:00:00",
-        "lastSeen": "2026-11-21",
+        "lastSeen": "2026-11-22",
         "pointInfo": {
           "rate": 10,
           "start": "2025-09-30 13:00",
           "end": "9999-12-31 23:59",
-          "fetchedAt": "2026-11-21T21:27:39",
+          "fetchedAt": "2026-11-22T00:27:51",
           "status": "ok",
-          "checkedAt": "2026-11-21T21:27:39"
+          "checkedAt": "2026-11-22T00:27:51"
         }
       },
       "axis": "point",
@@ -1732,8 +1732,8 @@
       "id": "r6f8e71132",
       "listed_on": "2026-11-16",
       "theme": null,
-      "last_seen": "2026-11-21",
-      "snapshot_updated": "2026-11-21",
+      "last_seen": "2026-11-22",
+      "snapshot_updated": "2026-11-22",
       "snapshot": {
         "id": "r6f8e71132",
         "category": "kaden",
@@ -1762,7 +1762,7 @@
         "description": "recolteのフードプロセッサーです。刻む、混ぜる、砕く、泡立てるなど7つの役目をこなします。\n容量は500ml。大根おろしから離乳食、氷を砕くところまで1台で回せます。",
         "unitNote": null,
         "postedAt": "2026-08-20",
-        "lastSeen": "2026-11-21",
+        "lastSeen": "2026-11-22",
         "startTime": "",
         "endTime": "",
         "bumpedAt": "2026-08-20T00:00:00",
@@ -1770,9 +1770,9 @@
           "rate": 10,
           "start": "2026-03-19 13:00",
           "end": "9999-12-31 23:59",
-          "fetchedAt": "2026-11-21T21:27:39",
+          "fetchedAt": "2026-11-22T00:27:51",
           "status": "ok",
-          "checkedAt": "2026-11-21T21:27:39"
+          "checkedAt": "2026-11-22T00:27:51"
         }
       },
       "axis": "point",
@@ -1782,8 +1782,8 @@
       "id": "r913a8aa80",
       "listed_on": "2026-11-16",
       "theme": null,
-      "last_seen": "2026-11-21",
-      "snapshot_updated": "2026-11-21",
+      "last_seen": "2026-11-22",
+      "snapshot_updated": "2026-11-22",
       "snapshot": {
         "id": "r913a8aa80",
         "category": "kaden",
@@ -1811,14 +1811,14 @@
         "unitNote": null,
         "postedAt": "2026-11-14",
         "bumpedAt": "2026-11-14T00:00:00",
-        "lastSeen": "2026-11-21",
+        "lastSeen": "2026-11-22",
         "pointInfo": {
           "rate": 5,
           "start": "2026-11-19 15:00",
           "end": "2026-11-26 11:59",
-          "fetchedAt": "2026-11-21T21:27:51",
+          "fetchedAt": "2026-11-22T00:28:03",
           "status": "ok",
-          "checkedAt": "2026-11-21T21:27:51"
+          "checkedAt": "2026-11-22T00:28:03"
         }
       },
       "axis": "point",
@@ -1828,8 +1828,8 @@
       "id": "rc5761547a",
       "listed_on": "2026-11-18",
       "theme": "beauty",
-      "last_seen": "2026-11-21",
-      "snapshot_updated": "2026-11-21",
+      "last_seen": "2026-11-22",
+      "snapshot_updated": "2026-11-22",
       "snapshot": {
         "id": "rc5761547a",
         "category": "beauty",
@@ -1839,8 +1839,8 @@
         "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/cicibella-sports/cabinet/zhmm30-7/top4.jpg?_ex=600x600",
         "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00tpvr7.jeifob0f.g00tpvr7.jeifp3fd/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fcicibella-sports%2Fzhmm30%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fcicibella-sports%2Fi%2F10000967%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
         "shop": "cicibella sports",
-        "reviewAverage": 4.48,
-        "reviewCount": 2311,
+        "reviewAverage": 4.47,
+        "reviewCount": 2312,
         "itemCode": "cicibella-sports:10000967",
         "genreId": "503020",
         "startTime": "2026-11-20 10:00",
@@ -1856,15 +1856,15 @@
         "unitNote": null,
         "postedAt": "2026-11-18",
         "bumpedAt": "2026-11-18T00:00:00",
-        "lastSeen": "2026-11-21",
+        "lastSeen": "2026-11-22",
         "pitch_status": "pending",
         "pointInfo": {
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-21T21:30:15",
+          "fetchedAt": "2026-11-22T00:30:27",
           "status": "ok",
-          "checkedAt": "2026-11-21T21:30:15"
+          "checkedAt": "2026-11-22T00:30:27"
         },
         "captionAuto": true
       }
@@ -1873,8 +1873,8 @@
       "id": "rc5eb592e7",
       "listed_on": "2026-11-18",
       "theme": "beauty",
-      "last_seen": "2026-11-21",
-      "snapshot_updated": "2026-11-21",
+      "last_seen": "2026-11-22",
+      "snapshot_updated": "2026-11-22",
       "snapshot": {
         "id": "rc5eb592e7",
         "category": "beauty",
@@ -1901,15 +1901,15 @@
         "unitNote": null,
         "postedAt": "2026-11-18",
         "bumpedAt": "2026-11-18T00:00:00",
-        "lastSeen": "2026-11-21",
+        "lastSeen": "2026-11-22",
         "pitch_status": "pending",
         "pointInfo": {
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-21T21:30:18",
+          "fetchedAt": "2026-11-22T00:30:30",
           "status": "ok",
-          "checkedAt": "2026-11-21T21:30:18"
+          "checkedAt": "2026-11-22T00:30:30"
         },
         "captionAuto": true
       }
@@ -1977,8 +1977,8 @@
       "id": "r03b46f609",
       "listed_on": "2026-11-19",
       "theme": "food",
-      "last_seen": "2026-11-21",
-      "snapshot_updated": "2026-11-21",
+      "last_seen": "2026-11-22",
+      "snapshot_updated": "2026-11-22",
       "snapshot": {
         "id": "r03b46f609",
         "category": "food",
@@ -1998,9 +1998,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-21T21:26:36",
+          "fetchedAt": "2026-11-22T00:26:46",
           "status": "ok",
-          "checkedAt": "2026-11-21T21:26:36"
+          "checkedAt": "2026-11-22T00:26:46"
         },
         "listPrice": 2760,
         "priceBasis": "history",
@@ -2017,7 +2017,7 @@
         "unitNote": null,
         "postedAt": "2026-11-19",
         "bumpedAt": "2026-11-19T11:27:27",
-        "lastSeen": "2026-11-21",
+        "lastSeen": "2026-11-22",
         "pitch_status": "pending",
         "marketing": {
           "hook_type": "discovery",
@@ -2044,8 +2044,8 @@
       "id": "r567602096",
       "listed_on": "2026-11-19",
       "theme": "fashion",
-      "last_seen": "2026-11-21",
-      "snapshot_updated": "2026-11-21",
+      "last_seen": "2026-11-22",
+      "snapshot_updated": "2026-11-22",
       "snapshot": {
         "id": "r567602096",
         "category": "fashion",
@@ -2072,15 +2072,15 @@
         "unitNote": null,
         "postedAt": "2026-11-19",
         "bumpedAt": "2026-11-19T00:00:00",
-        "lastSeen": "2026-11-21",
+        "lastSeen": "2026-11-22",
         "pitch_status": "pending",
         "pointInfo": {
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-21T21:32:33",
+          "fetchedAt": "2026-11-22T00:32:52",
           "status": "ok",
-          "checkedAt": "2026-11-21T21:32:33"
+          "checkedAt": "2026-11-22T00:32:52"
         },
         "captionAuto": true
       }
@@ -2089,8 +2089,8 @@
       "id": "r6753bf0e2",
       "listed_on": "2026-11-19",
       "theme": null,
-      "last_seen": "2026-11-21",
-      "snapshot_updated": "2026-11-21",
+      "last_seen": "2026-11-22",
+      "snapshot_updated": "2026-11-22",
       "snapshot": {
         "id": "r6753bf0e2",
         "category": "kitchen",
@@ -2119,7 +2119,7 @@
         "description": "シヤチハタのキャップレス9です。フタがないので、片手でそのまま押せます。\nキャップは失くすものですし、探す時間もかかります。その両方がなくなります。全26色。",
         "unitNote": null,
         "postedAt": "2026-08-20",
-        "lastSeen": "2026-11-21",
+        "lastSeen": "2026-11-22",
         "startTime": "",
         "endTime": "",
         "bumpedAt": "2026-08-20T00:00:00",
@@ -2129,7 +2129,7 @@
           "end": "2026-11-25 01:59",
           "fetchedAt": "2026-11-17T16:27:19",
           "status": "ok",
-          "checkedAt": "2026-11-21T21:27:28"
+          "checkedAt": "2026-11-22T00:27:39"
         }
       },
       "axis": "point",
@@ -2139,8 +2139,8 @@
       "id": "raee98e060",
       "listed_on": "2026-11-19",
       "theme": null,
-      "last_seen": "2026-11-21",
-      "snapshot_updated": "2026-11-21",
+      "last_seen": "2026-11-22",
+      "snapshot_updated": "2026-11-22",
       "snapshot": {
         "id": "raee98e060",
         "category": "kaden",
@@ -2169,7 +2169,7 @@
         "description": "ストレートとカールの両方に使える2WAYアイロンです。全4色。\nチタニウムのプレートで、海外の電圧にも対応します。1本で済むので、旅行に持っていくものを減らせます。",
         "unitNote": null,
         "postedAt": "2026-08-20",
-        "lastSeen": "2026-11-21",
+        "lastSeen": "2026-11-22",
         "startTime": "",
         "endTime": "",
         "bumpedAt": "2026-08-20T00:00:00",
@@ -2177,9 +2177,9 @@
           "rate": 10,
           "start": "2026-11-19 20:00",
           "end": "2026-11-25 01:59",
-          "fetchedAt": "2026-11-21T21:27:39",
+          "fetchedAt": "2026-11-22T00:27:51",
           "status": "ok",
-          "checkedAt": "2026-11-21T21:27:39"
+          "checkedAt": "2026-11-22T00:27:51"
         }
       },
       "axis": "point",
@@ -2189,8 +2189,8 @@
       "id": "r275ce3ef8",
       "listed_on": "2026-11-20",
       "theme": "pc",
-      "last_seen": "2026-11-21",
-      "snapshot_updated": "2026-11-21",
+      "last_seen": "2026-11-22",
+      "snapshot_updated": "2026-11-22",
       "snapshot": {
         "id": "r275ce3ef8",
         "category": "pc",
@@ -2217,15 +2217,15 @@
         "unitNote": null,
         "postedAt": "2026-11-20",
         "bumpedAt": "2026-11-20T00:00:00",
-        "lastSeen": "2026-11-21",
+        "lastSeen": "2026-11-22",
         "pitch_status": "pending",
         "pointInfo": {
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-21T21:31:27",
+          "fetchedAt": "2026-11-22T00:31:44",
           "status": "ok",
-          "checkedAt": "2026-11-21T21:31:27"
+          "checkedAt": "2026-11-22T00:31:44"
         },
         "captionAuto": true
       }
@@ -2234,8 +2234,8 @@
       "id": "r6a31534cf",
       "listed_on": "2026-11-20",
       "theme": "food",
-      "last_seen": "2026-11-21",
-      "snapshot_updated": "2026-11-21",
+      "last_seen": "2026-11-22",
+      "snapshot_updated": "2026-11-22",
       "snapshot": {
         "id": "r6a31534cf",
         "category": "food",
@@ -2263,15 +2263,15 @@
         "unitNote": null,
         "postedAt": "2026-11-20",
         "bumpedAt": "2026-11-20T00:00:00",
-        "lastSeen": "2026-11-21",
+        "lastSeen": "2026-11-22",
         "pitch_status": "pending",
         "pointInfo": {
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-21T21:26:41",
+          "fetchedAt": "2026-11-22T00:26:50",
           "status": "ok",
-          "checkedAt": "2026-11-21T21:26:41"
+          "checkedAt": "2026-11-22T00:26:50"
         },
         "captionAuto": true
       }
@@ -2329,8 +2329,8 @@
       "id": "ra3cd8a3bb",
       "listed_on": "2026-11-20",
       "theme": "kaden",
-      "last_seen": "2026-11-21",
-      "snapshot_updated": "2026-11-21",
+      "last_seen": "2026-11-22",
+      "snapshot_updated": "2026-11-22",
       "snapshot": {
         "id": "ra3cd8a3bb",
         "category": "kaden",
@@ -2357,15 +2357,15 @@
         "unitNote": null,
         "postedAt": "2026-11-20",
         "bumpedAt": "2026-11-20T00:00:00",
-        "lastSeen": "2026-11-21",
+        "lastSeen": "2026-11-22",
         "pitch_status": "pending",
         "pointInfo": {
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-21T21:27:44",
+          "fetchedAt": "2026-11-22T00:27:55",
           "status": "ok",
-          "checkedAt": "2026-11-21T21:27:44"
+          "checkedAt": "2026-11-22T00:27:55"
         },
         "captionAuto": true
       }
@@ -2374,8 +2374,8 @@
       "id": "rbde6613d0",
       "listed_on": "2026-11-20",
       "theme": "fashion",
-      "last_seen": "2026-11-21",
-      "snapshot_updated": "2026-11-21",
+      "last_seen": "2026-11-22",
+      "snapshot_updated": "2026-11-22",
       "snapshot": {
         "id": "rbde6613d0",
         "category": "fashion",
@@ -2386,7 +2386,7 @@
         "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00q8qj7.jeifo2ee.g00q8qj7.jeifpbbc/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdarkangel%2Fpa2301-3635%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fdarkangel%2Fi%2F10035877%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
         "shop": "Dark Angel (ダークエンジェル)",
         "reviewAverage": 4.26,
-        "reviewCount": 5642,
+        "reviewCount": 5645,
         "itemCode": "darkangel:10035877",
         "genreId": "206440",
         "startTime": "2026-11-21 10:00",
@@ -2395,9 +2395,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-21T21:32:56",
+          "fetchedAt": "2026-11-22T00:33:17",
           "status": "ok",
-          "checkedAt": "2026-11-21T21:32:56"
+          "checkedAt": "2026-11-22T00:33:17"
         },
         "listPrice": 2199,
         "priceBasis": "history",
@@ -2413,7 +2413,7 @@
         "unitNote": null,
         "postedAt": "2026-11-19",
         "bumpedAt": "2026-11-19T16:33:05",
-        "lastSeen": "2026-11-21",
+        "lastSeen": "2026-11-22",
         "pitch_status": "pending",
         "marketing": {
           "hook_type": "scene",
@@ -2438,9 +2438,9 @@
     }
   ],
   "automation": {
-    "applied_at": "2026-11-21T21:34:25+09:00",
-    "products_count": 1078,
-    "history_entries": 368874,
+    "applied_at": "2026-11-22T00:34:48+09:00",
+    "products_count": 1077,
+    "history_entries": 370693,
     "added": [],
     "expired": [],
     "point_added": [],
