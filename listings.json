@@ -91,9 +91,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-22T13:30:43",
+          "fetchedAt": "2026-11-22T16:31:02",
           "status": "ok",
-          "checkedAt": "2026-11-22T13:30:43"
+          "checkedAt": "2026-11-22T16:31:02"
         },
         "listPrice": 1500,
         "priceBasis": "history",
@@ -107,24 +107,20 @@
         "postedAt": "2026-11-19",
         "bumpedAt": "2026-11-19T20:30:58",
         "lastSeen": "2026-11-22",
-        "pitch_status": "pending",
+        "pitch_status": "ready",
         "marketing": {
-          "hook_type": "count",
-          "target": "寝ているときの歯ぎしりが気になる人",
-          "problem": "歯ぎしりや食いしばりが気になる",
-          "use_case": "就寝時",
+          "body": "自分で型を取るタイプで、1箱に2ピース入っています。ケース付き。",
           "features": [
             "簡単型取りタイプ",
             "1箱2ピース",
             "ケース付き"
           ],
-          "benefits": [
-            "自分で型を取って使える"
-          ],
-          "hook": "マウスピースに、レビューが3,135件。",
-          "body": "自分で型を取るタイプで、1箱に2ピース入っています。ケース付き。\nナイトガードとも呼ばれるものです。",
-          "ask": "歯ぎしりを家族に言われたことがある人、何か使っていますか？",
-          "ask_type": "usage"
+          "hook": "朝起きると、あごがだるい日ない？",
+          "hook_type": "scene",
+          "name": "簡単型取りのマウスピース",
+          "note": "自分で型を取るタイプで、1箱2ピース、ケース付き",
+          "problem": "寝ているときの歯ぎしりや食いしばりが気になる",
+          "target": "寝ているときの歯ぎしりが気になる人"
         }
       }
     },
@@ -241,9 +237,9 @@
           "rate": 1,
           "start": "2026-08-01 15:00",
           "end": "9999-12-31 23:59",
-          "fetchedAt": "2026-11-22T13:27:37",
+          "fetchedAt": "2026-11-22T16:27:42",
           "status": "ok",
-          "checkedAt": "2026-11-22T13:27:37"
+          "checkedAt": "2026-11-22T16:27:42"
         }
       }
     },
@@ -272,9 +268,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-22T13:26:29",
+          "fetchedAt": "2026-11-22T16:26:35",
           "status": "ok",
-          "checkedAt": "2026-11-22T13:26:29"
+          "checkedAt": "2026-11-22T16:26:35"
         },
         "listPrice": 1460,
         "priceBasis": "history",
@@ -292,25 +288,21 @@
         "postedAt": "2026-11-19",
         "bumpedAt": "2026-11-19T11:27:27",
         "lastSeen": "2026-11-22",
-        "pitch_status": "pending",
+        "pitch_status": "ready",
         "marketing": {
-          "hook_type": "count",
-          "target": "晩酌のおつまみを探す人",
-          "problem": "おつまみの買い置き",
-          "use_case": "晩酌",
+          "body": "国産鶏肉100%の塩味。100gの個包装が3袋で、レトルトなので常温で置いておけます。",
           "features": [
             "国産鶏肉100%",
             "塩味",
-            "常温保存2年",
-            "個包装100g×3"
+            "100g×3袋の個包装",
+            "常温保存"
           ],
-          "benefits": [
-            "常温で置いておける"
-          ],
-          "hook": "21,792件もレビューがある、鶏の炭火焼き。",
-          "body": "宮崎名物で、国産鶏肉100%の塩味。100gの個包装が3袋です。\nレトルトで、常温で2年もちます。",
-          "ask": "おつまみの買い置き、常温で置けるものにしてますか？",
-          "ask_type": "usage"
+          "hook": "え、宮崎の鶏の炭火焼き、お試しの値段になってる…！",
+          "hook_type": "price",
+          "name": "鶏の炭火焼き お試し3袋",
+          "note": "晩酌のおつまみに、そのまま出せるやつ",
+          "problem": "おつまみの買い置きが切れている",
+          "target": "晩酌のおつまみを探す人"
         }
       }
     },
@@ -595,9 +587,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-22T13:28:05",
+          "fetchedAt": "2026-11-22T16:28:09",
           "status": "ok",
-          "checkedAt": "2026-11-22T13:28:05"
+          "checkedAt": "2026-11-22T16:28:09"
         }
       }
     },
@@ -626,9 +618,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-22T13:28:21",
+          "fetchedAt": "2026-11-22T16:28:28",
           "status": "ok",
-          "checkedAt": "2026-11-22T13:28:21"
+          "checkedAt": "2026-11-22T16:28:28"
         },
         "listPrice": 1699,
         "priceBasis": "history",
@@ -861,7 +853,7 @@
         "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00uhf47.jeifo201.g00uhf47.jeifpbdb/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Faiwo%2Fhyg076-copy%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Faiwo%2Fi%2F10000030%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
         "shop": "EVOPOW JAPAN 楽天市場店",
         "reviewAverage": 4.45,
-        "reviewCount": 565,
+        "reviewCount": 567,
         "itemCode": "aiwo:10000030",
         "genreId": "564277",
         "startTime": "",
@@ -901,9 +893,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-22T13:31:18",
+          "fetchedAt": "2026-11-22T16:31:37",
           "status": "ok",
-          "checkedAt": "2026-11-22T13:31:18"
+          "checkedAt": "2026-11-22T16:31:37"
         }
       }
     },
@@ -1104,9 +1096,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-22T13:26:50",
+          "fetchedAt": "2026-11-22T16:26:56",
           "status": "ok",
-          "checkedAt": "2026-11-22T13:26:50"
+          "checkedAt": "2026-11-22T16:26:56"
         },
         "listPrice": 2560,
         "priceBasis": "history",
@@ -1120,12 +1112,9 @@
         "postedAt": "2026-11-19",
         "bumpedAt": "2026-11-19T11:27:27",
         "lastSeen": "2026-11-22",
-        "pitch_status": "pending",
+        "pitch_status": "ready",
         "marketing": {
-          "benefits": [
-            "まとめて置いておける"
-          ],
-          "body": "熊本のとんこつラーメン、生麺で6食分です。\n食べたい日にすぐ作れる、買い置きの分。送料込み。",
+          "body": "熊本のとんこつラーメン、生麺で6食分です。\n食べたい日にすぐ作れる、買い置きの分",
           "features": [
             "生麺 6食セット",
             "とんこつ",
@@ -1137,8 +1126,7 @@
           "name": "くまもとラーメン",
           "note": "生麺のとんこつ、6食分。食べたい日にすぐ作れる、買い置きのやつ。",
           "problem": "夜、急にとんこつが食べたくなる",
-          "target": "家でラーメンを食べたい人",
-          "use_case": "週末の昼、夜食"
+          "target": "家でラーメンを食べたい人"
         }
       }
     },
@@ -1200,9 +1188,9 @@
           "rate": 20,
           "start": "2026-11-19 10:00",
           "end": "2026-11-25 09:59",
-          "fetchedAt": "2026-11-22T13:27:57",
+          "fetchedAt": "2026-11-22T16:28:02",
           "status": "ok",
-          "checkedAt": "2026-11-22T13:27:57"
+          "checkedAt": "2026-11-22T16:28:02"
         }
       },
       "axis": "both",
@@ -1266,9 +1254,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-22T13:32:55",
+          "fetchedAt": "2026-11-22T16:33:14",
           "status": "ok",
-          "checkedAt": "2026-11-22T13:32:55"
+          "checkedAt": "2026-11-22T16:33:14"
         }
       }
     },
@@ -1330,9 +1318,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-22T13:28:20",
+          "fetchedAt": "2026-11-22T16:28:27",
           "status": "ok",
-          "checkedAt": "2026-11-22T13:28:20"
+          "checkedAt": "2026-11-22T16:28:27"
         }
       }
     },
@@ -1447,9 +1435,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-22T13:31:35",
+          "fetchedAt": "2026-11-22T16:31:54",
           "status": "ok",
-          "checkedAt": "2026-11-22T13:31:35"
+          "checkedAt": "2026-11-22T16:31:54"
         }
       }
     },
@@ -1510,9 +1498,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-22T13:26:42",
+          "fetchedAt": "2026-11-22T16:26:48",
           "status": "ok",
-          "checkedAt": "2026-11-22T13:26:42"
+          "checkedAt": "2026-11-22T16:26:48"
         }
       }
     },
@@ -1541,9 +1529,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-22T13:32:35",
+          "fetchedAt": "2026-11-22T16:32:55",
           "status": "ok",
-          "checkedAt": "2026-11-22T13:32:35"
+          "checkedAt": "2026-11-22T16:32:55"
         },
         "listPrice": 2399,
         "priceBasis": "history",
@@ -1616,9 +1604,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-22T13:32:03",
+          "fetchedAt": "2026-11-22T16:32:23",
           "status": "ok",
-          "checkedAt": "2026-11-22T13:32:03"
+          "checkedAt": "2026-11-22T16:32:23"
         }
       }
     },
@@ -1698,7 +1686,7 @@
         "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00qb0l7.jeifoe7b.g00qb0l7.jeifp104/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Froomy%2Fwin20oct27h03%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Froomy%2Fi%2F10015766%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
         "shop": "インテリアショップ roomy",
         "reviewAverage": 4.68,
-        "reviewCount": 23160,
+        "reviewCount": 23168,
         "itemCode": "roomy:10015766",
         "genreId": "565076",
         "startTime": "",
@@ -1720,9 +1708,9 @@
           "rate": 10,
           "start": "2025-09-30 13:00",
           "end": "9999-12-31 23:59",
-          "fetchedAt": "2026-11-22T13:27:53",
+          "fetchedAt": "2026-11-22T16:27:58",
           "status": "ok",
-          "checkedAt": "2026-11-22T13:27:53"
+          "checkedAt": "2026-11-22T16:27:58"
         }
       },
       "axis": "point",
@@ -1770,9 +1758,9 @@
           "rate": 10,
           "start": "2026-03-19 13:00",
           "end": "9999-12-31 23:59",
-          "fetchedAt": "2026-11-22T13:27:53",
+          "fetchedAt": "2026-11-22T16:27:58",
           "status": "ok",
-          "checkedAt": "2026-11-22T13:27:53"
+          "checkedAt": "2026-11-22T16:27:58"
         }
       },
       "axis": "point",
@@ -1816,9 +1804,9 @@
           "rate": 5,
           "start": "2026-11-19 15:00",
           "end": "2026-11-26 11:59",
-          "fetchedAt": "2026-11-22T13:28:05",
+          "fetchedAt": "2026-11-22T16:28:09",
           "status": "ok",
-          "checkedAt": "2026-11-22T13:28:05"
+          "checkedAt": "2026-11-22T16:28:09"
         }
       },
       "axis": "point",
@@ -1862,9 +1850,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-22T13:30:23",
+          "fetchedAt": "2026-11-22T16:30:43",
           "status": "ok",
-          "checkedAt": "2026-11-22T13:30:23"
+          "checkedAt": "2026-11-22T16:30:43"
         },
         "captionAuto": true
       }
@@ -1902,16 +1890,31 @@
         "postedAt": "2026-11-18",
         "bumpedAt": "2026-11-18T00:00:00",
         "lastSeen": "2026-11-22",
-        "pitch_status": "pending",
+        "pitch_status": "ready",
         "pointInfo": {
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-22T13:30:26",
+          "fetchedAt": "2026-11-22T16:30:46",
           "status": "ok",
-          "checkedAt": "2026-11-22T13:30:26"
+          "checkedAt": "2026-11-22T16:30:46"
         },
-        "captionAuto": true
+        "captionAuto": true,
+        "marketing": {
+          "body": "天然アパタイト配合の粉タイプ。無添加で、55g入りです。",
+          "features": [
+            "天然アパタイト配合",
+            "粉タイプ",
+            "無添加",
+            "55g"
+          ],
+          "hook": "歯の黄ばみ、写真で見ると気になる",
+          "hook_type": "scene",
+          "name": "RUKENのホワイトニング歯磨き粉",
+          "note": "粉タイプで、天然アパタイト配合のやつ",
+          "problem": "歯の黄ばみやヤニが気になる",
+          "target": "歯の着色汚れが気になる人"
+        }
       }
     },
     {
@@ -1998,9 +2001,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-22T13:26:50",
+          "fetchedAt": "2026-11-22T16:26:56",
           "status": "ok",
-          "checkedAt": "2026-11-22T13:26:50"
+          "checkedAt": "2026-11-22T16:26:56"
         },
         "listPrice": 2760,
         "priceBasis": "history",
@@ -2018,25 +2021,21 @@
         "postedAt": "2026-11-19",
         "bumpedAt": "2026-11-19T11:27:27",
         "lastSeen": "2026-11-22",
-        "pitch_status": "pending",
+        "pitch_status": "ready",
         "marketing": {
-          "hook_type": "discovery",
-          "target": "だしを取って料理する人",
-          "problem": "だし取りは手間",
-          "use_case": "毎日の汁物",
+          "body": "国産のあご（とびうお）入りのだしパック。減塩タイプで、パックごと入れて使います。",
           "features": [
-            "あご入り",
-            "国産",
-            "送料無料",
-            "レビュー5,362件"
+            "あご（とびうお）入り",
+            "国産素材",
+            "だしパックタイプ",
+            "減塩"
           ],
-          "benefits": [
-            "パックで手軽"
-          ],
-          "hook": "あご（とびうお）入りのだしパックです。",
-          "body": "国産の素材を使っていて、送料込み。\nレビューは5,362件あります。",
-          "cta": "none",
-          "ask": "あごだし、使ったことがある人はいますか？"
+          "hook": "え、あごだし半額になってる…！",
+          "hook_type": "price",
+          "name": "あご入りだしパック",
+          "note": "毎日の味噌汁や煮物に、そのまま使えるやつ",
+          "problem": "だし取りは手間がかかる",
+          "target": "だしを取って料理する人"
         }
       }
     },
@@ -2073,16 +2072,31 @@
         "postedAt": "2026-11-19",
         "bumpedAt": "2026-11-19T00:00:00",
         "lastSeen": "2026-11-22",
-        "pitch_status": "pending",
+        "pitch_status": "ready",
         "pointInfo": {
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-22T13:32:38",
+          "fetchedAt": "2026-11-22T16:32:58",
           "status": "ok",
-          "checkedAt": "2026-11-22T13:32:38"
+          "checkedAt": "2026-11-22T16:32:58"
         },
-        "captionAuto": true
+        "captionAuto": true,
+        "marketing": {
+          "body": "裏起毛のデニムパンツ。丈は2種類から選べて、ストレッチ入りです。",
+          "features": [
+            "裏起毛",
+            "2つの丈から選べる",
+            "ストレッチデニム",
+            "大きいサイズあり"
+          ],
+          "hook": "え、裏起毛の暖パン下がってる…！",
+          "hook_type": "price",
+          "name": "裏起毛の暖パンツ",
+          "note": "裏が起毛であったかい、冬のデニム",
+          "problem": "冬のデニムは冷たくて寒い",
+          "target": "冬でもデニムをはきたい人"
+        }
       }
     },
     {
@@ -2101,7 +2115,7 @@
         "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00q0207.jeifod2d.g00q0207.jeifp6a9/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fogawahan%2F10002465%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fogawahan%2Fi%2F10002465%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
         "shop": "印鑑はんこ製造直売店@小川祥雲堂",
         "reviewAverage": 4.73,
-        "reviewCount": 28726,
+        "reviewCount": 28725,
         "itemCode": "ogawahan:10002465",
         "genreId": "216081",
         "listPrice": null,
@@ -2129,7 +2143,7 @@
           "end": "2026-11-25 01:59",
           "fetchedAt": "2026-11-17T16:27:19",
           "status": "ok",
-          "checkedAt": "2026-11-22T13:27:41"
+          "checkedAt": "2026-11-22T16:27:47"
         }
       },
       "axis": "point",
@@ -2177,9 +2191,9 @@
           "rate": 10,
           "start": "2026-11-19 20:00",
           "end": "2026-11-25 01:59",
-          "fetchedAt": "2026-11-22T13:27:53",
+          "fetchedAt": "2026-11-22T16:27:58",
           "status": "ok",
-          "checkedAt": "2026-11-22T13:27:53"
+          "checkedAt": "2026-11-22T16:27:58"
         }
       },
       "axis": "point",
@@ -2218,16 +2232,33 @@
         "postedAt": "2026-11-20",
         "bumpedAt": "2026-11-20T00:00:00",
         "lastSeen": "2026-11-22",
-        "pitch_status": "pending",
+        "pitch_status": "ready",
         "pointInfo": {
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-22T13:31:34",
+          "fetchedAt": "2026-11-22T16:31:52",
           "status": "ok",
-          "checkedAt": "2026-11-22T13:31:34"
+          "checkedAt": "2026-11-22T16:31:52"
         },
-        "captionAuto": true
+        "captionAuto": true,
+        "marketing": {
+          "body": "USB-AからUSB-Cのケーブル。温度センサーとケーブルバンド付き、保証は2年です。",
+          "features": [
+            "シリコン素材",
+            "USB-A to USB-C",
+            "長さ1m",
+            "温度センサー",
+            "ケーブルバンド付き",
+            "2年保証"
+          ],
+          "hook": "ケーブルが絡まるの、地味に毎日イライラする",
+          "hook_type": "scene",
+          "name": "MOTTERUのシリコンケーブル",
+          "note": "シリコンでしなやか、絡みにくいやつ。バンド付き",
+          "problem": "ケーブルが絡まって扱いにくい",
+          "target": "充電ケーブルをよく持ち歩く人"
+        }
       }
     },
     {
@@ -2264,16 +2295,31 @@
         "postedAt": "2026-11-20",
         "bumpedAt": "2026-11-20T00:00:00",
         "lastSeen": "2026-11-22",
-        "pitch_status": "pending",
+        "pitch_status": "ready",
         "pointInfo": {
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-22T13:26:54",
+          "fetchedAt": "2026-11-22T16:27:00",
           "status": "ok",
-          "checkedAt": "2026-11-22T13:26:54"
+          "checkedAt": "2026-11-22T16:27:00"
         },
-        "captionAuto": true
+        "captionAuto": true,
+        "marketing": {
+          "body": "玉ねぎ・トマト・しじみなどから3個選べる即席スープ。保存食にもなるタイプです。",
+          "features": [
+            "3個選べる",
+            "玉ねぎ・トマト・しじみ",
+            "即席スープ",
+            "保存食にも"
+          ],
+          "hook": "3個セットのスープって、1個あたり高いと思ってた。調べてみたら違った",
+          "hook_type": "scene",
+          "name": "お好きに3個選べるスープ",
+          "note": "玉ねぎ・トマト・しじみから3個選べるやつ",
+          "problem": "セットのスープは割高だと思っていた",
+          "target": "昼食や非常用にスープを置いておきたい人"
+        }
       }
     },
     {
@@ -2358,16 +2404,31 @@
         "postedAt": "2026-11-20",
         "bumpedAt": "2026-11-20T00:00:00",
         "lastSeen": "2026-11-22",
-        "pitch_status": "pending",
+        "pitch_status": "ready",
         "pointInfo": {
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-22T13:27:57",
+          "fetchedAt": "2026-11-22T16:28:02",
           "status": "ok",
-          "checkedAt": "2026-11-22T13:27:57"
+          "checkedAt": "2026-11-22T16:28:02"
         },
-        "captionAuto": true
+        "captionAuto": true,
+        "marketing": {
+          "body": "プレートが外して洗える着脱式。20穴で、スリムな卓上タイプです。",
+          "features": [
+            "着脱プレート式",
+            "20穴",
+            "スリム・コンパクト",
+            "山善"
+          ],
+          "hook": "え、着脱プレートのたこ焼き器、下がってる…！",
+          "hook_type": "price",
+          "name": "着脱プレート式たこ焼き器",
+          "note": "プレート外して洗えるのが、地味にうれしいやつ",
+          "problem": "たこ焼き器は洗いにくい",
+          "target": "家でたこ焼きを焼きたい人"
+        }
       }
     },
     {
@@ -2438,9 +2499,9 @@
     }
   ],
   "automation": {
-    "applied_at": "2026-11-22T13:34:31+09:00",
-    "products_count": 1077,
-    "history_entries": 370682,
+    "applied_at": "2026-11-22T16:34:55+09:00",
+    "products_count": 1076,
+    "history_entries": 370686,
     "added": [],
     "expired": [],
     "point_added": [],
