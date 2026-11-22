@@ -387,20 +387,19 @@ def compose_product(p, site, pr, reply_link=False, ev=None, seq=0, fact=None):
 # （即時停止スイッチ）。
 
 
-def tree_eligible(p, trig):
+def tree_eligible(p):
     """この商品を、ツリー型で出してよいか。
 
-    手当たり次第には試さない。伏せる意味が無い商品や、
-    測れない形になる商品は外す。
+    手当たり次第には試さない。伏せる意味が無い商品は外す。
+    再掲でもよい。事実の行は親ではなくリプに置くので、
+    親の「反応だけ」という骨組みと両立する（2026-11-22 見直し。
+    以前は再掲を全部外していて、セール期は再掲ばかりになり
+    テストが1本も出なかった）。
     """
     mk = p.get("mk2") or {}
     name = (mk.get("name") or "").strip()
     hook = (mk.get("hook") or "").strip()
     if not hook or not name:
-        return False
-    if trig:
-        # 再掲（fact つき）は親の1行目が fact で埋まる形なので、
-        # ツリー型の「親は反応だけ」という骨組みと両立しない。
         return False
     if name in hook:
         # 反応の文に商品名がそのまま入っていると、伏せる意味が無い。
@@ -408,7 +407,7 @@ def tree_eligible(p, trig):
     return True
 
 
-def compose_product_tree(p, site, pr):
+def compose_product_tree(p, site, pr, fact=None):
     """ツリー型の組み立て。親で名前を伏せ、リプで明かす。
 
     tree_eligible() で通った商品にだけ使う。
@@ -417,10 +416,14 @@ def compose_product_tree(p, site, pr):
     短く1行ずつ置いて、一言で締め、案内の一行を置いてから
     リンクを貼る。特徴は最大3行まで。送料無料は文面に出さない
     決まり（証拠数字と同じ扱い）なので特徴からも除く。
+    再掲の事実（fact）があるときは、価格の行の次に置く。
+    親は反応だけに保ち、事実はリプで明かす側に回す。
     """
     mk = p.get("mk2") or {}
     parent = pr + mk["hook"].strip()
     lines = [_price_line(p, mk)]
+    if fact:
+        lines.append(fact.strip())
     feats = [f.strip() for f in (mk.get("features") or [])
              if f and f.strip() and "送料無料" not in f]
     lines += feats[:3]
@@ -433,15 +436,18 @@ def apply_tree_test(pools, items, trigs, posted, hour, kind, site, pr, th):
     """商品枠の1つだけを、ツリー型で試す（treeTest が true のときだけ）。
 
     対象枠は日付の日で決める（偶数日は9時、奇数日は20時）。
-    対象枠の先頭候補（その枠で本来出すはずの商品）が不適格なら、
-    もう一方の枠で、その枠の先頭候補を試す。両方不適格ならその日は
-    全部通常形のまま。
+    対象枠で出せなければ、もう一方の枠で試す。適格な商品は
+    候補を先頭から順に見て探し、見つけたらその商品を枠の
+    先頭に据えてツリー型で出す（2026-11-22 見直し。以前は
+    先頭候補だけを見て諦めていて、供給が細い時期に
+    テストが1本も出なかった）。
     どちらの枠が今日の対象かは posted["tree_test"] に日付つきで残し、
     別プロセス（別の時刻の起動）をまたいで引き継ぐ。
+    枠の到来の記録は、候補が空のときでも先に行う。
+    そうしないと「対象枠が候補なしで終わった」ことが残らず、
+    もう一方の枠への持ち越しが働かない。
     """
     if not th.get("treeTest") or kind != "product" or hour not in (9, 20):
-        return
-    if not items:
         return
     now = datetime.now(JST)
     today = now.strftime("%Y-%m-%d")
@@ -449,31 +455,33 @@ def apply_tree_test(pools, items, trigs, posted, hour, kind, site, pr, th):
     state = posted.setdefault("tree_test", {})
     if state.get("date") != today:
         state.clear()
-        state.update({"date": today, "done": False, "target_tried": False})
+        # 対象枠がすでに過ぎた時刻に、その日初めて呼ばれた場合は、
+        # 対象枠は「来て終わった」ものとして扱い、残りの枠で試す。
+        state.update({"date": today, "done": False,
+                      "target_tried": hour > target})
     if state.get("done"):
         return
     if hour == target:
-        pass                                  # 本来の対象枠
-    elif state.get("target_tried"):
-        pass                                  # 対象枠が不適格だった。ここで試す
-    else:
-        return                                # まだ対象枠の番が来ていない
-
-    p = items[0]
-    eligible = tree_eligible(p, trigs.get(p["id"]))
-    if hour == target:
         state["target_tried"] = True
-    if not eligible:
+    elif not state.get("target_tried"):
+        return                                # まだ対象枠の番が来ていない
+    if not items:
         return
 
-    key = "product:" + p["id"]
-    body, reply = compose_product_tree(p, site, pr)
-    for j, (k2, _pair) in enumerate(pools["product"]):
-        if k2 == key:
-            pools["product"][j] = (k2, (body, reply))
-            break
-    state["done"] = True
-    state["form_key"] = key
+    for p in items:
+        if not tree_eligible(p):
+            continue
+        key = "product:" + p["id"]
+        body, reply = compose_product_tree(p, site, pr,
+                                           fact=trigs.get(p["id"]))
+        for j, (k2, _pair) in enumerate(pools["product"]):
+            if k2 == key:
+                pools["product"].pop(j)
+                break
+        pools["product"].insert(0, (key, (body, reply)))
+        state["done"] = True
+        state["form_key"] = key
+        return
 
 
 def compose_guide(g, site, pr, reply_link=False):
@@ -576,6 +584,33 @@ def active_event(now=None):
 
 # ---------------------------------------------------------------- リンクなしの投稿
 
+def _tip_stale_by_text(t, today=None):
+    """本文に書かれた日付が過ぎていたら、期限切れとして扱う。
+
+    until の付け忘れで、終わったセールの豆知識が何か月も
+    出続けた事故（2026-11、8月27日の文面が11月に出た）の安全網。
+    日付は「その出来事の日」として読む。2日までは余韻として許す。
+    """
+    if today is None:
+        today = datetime.now(JST).date()
+    text = (t.get("title") or "") + (t.get("body") or "")
+    for m in re.finditer(r"(\d{1,2})月(\d{1,2})日", text):
+        mo, da = int(m.group(1)), int(m.group(2))
+        try:
+            d = datetime(today.year, mo, da).date()
+        except ValueError:
+            continue
+        if (d - today).days > 60:
+            # 年明けに去年の日付を読む場合（12月の文面を1月に読む等）。
+            try:
+                d = datetime(today.year - 1, mo, da).date()
+            except ValueError:
+                continue
+        if (today - d).days >= 2:
+            return True
+    return False
+
+
 def tip_posts():
     """リンクなしの知識。tips.json から読む。
 
@@ -592,7 +627,9 @@ def tip_posts():
              "to": t.get("to", "")}
             for i, t in enumerate(rows) if t.get("title")
             # 日付を書いたものは、その日を過ぎたら出さない（tips.json の until）。
-            and (t.get("until") or "9999") >= datetime.now(JST).strftime("%Y-%m-%d")]
+            and (t.get("until") or "9999") >= datetime.now(JST).strftime("%Y-%m-%d")
+            # until の付け忘れ対策。本文の日付が過ぎていたら出さない。
+            and not _tip_stale_by_text(t)]
 
 
 # 予定の投稿を、次に出すまで何日あけるか。
@@ -1235,7 +1272,7 @@ def feature_posts(site, posted, reply_link=False, now=None, gap_days=3):
 
 # ---------------------------------------------------------------- 選ぶ
 
-def pick(cfg, posted, want, slot_hour=None, live_heads=None):
+def pick(cfg, posted, want, slot_hour=None, live_heads=None, burst=False):
     """今回出すものを選ぶ。
 
     リンクのある投稿とない投稿を交互に出す。
@@ -1267,20 +1304,19 @@ def pick(cfg, posted, want, slot_hour=None, live_heads=None):
     reply_link = placement == "reply"
     # 商品。ここが主役。
     linked = []
-    # 鮮度は「見つけた日」ではなく「確かめた日」で見る。
+    # 鮮度は feed.json の側で担保する。
     #
-    # 掲載中の商品は日が経つほど溜まっていく。見つけた日が古くても、
-    # 見張りが昨日以降に楽天で値段を確かめ直していて、いまも値引きが
-    # 続いているものは古くない。確かめた値段なら出してよい。
-    # ローテーションの再掲も、同じ条件で鮮度を担保する。
+    # feed.json は見張りのたびに作り直され、「いま掲載基準を
+    # 満たしている商品」だけが入る。値段が戻れば次の巡回で
+    # 候補から落ちる。だから、ここで見つけた日（at）や
+    # 確かめた日（ls）をもう一度門にすると、二重の門になって
+    # 供給が枯れるだけになる。
     #
-    # 2026-09-28: 4日の線は「古い値段を新しいふりで流さない」ためだった。
-    # だが見張りは1日4回値段を取り直している。この線のせいで、
-    # 商品理解も値引きもある20件が出番を失い、
-    # 商品の枠が豆知識で埋まっていた（1日12本）。
-    fresh_days = th.get("freshDays", 3)
-    limit = (datetime.now(JST) - timedelta(days=fresh_days)).strftime("%Y-%m-%d")
-    verified = (datetime.now(JST) - timedelta(days=1)).strftime("%Y-%m-%d")
+    # 2026-09-28 に同じ失敗をした（商品の枠が豆知識で埋まった）。
+    # そのとき「確かめた日で見る」ことにしたが、ls は掲載の
+    # 控えの日付で止まる商品があり、2026-11-22 に再発した
+    # （候補ゼロ、商品の枠に豆知識）。ここに残す門は、
+    # セールの終了（et）の確認だけにする。
     now_s = datetime.now(JST).strftime("%Y-%m-%d %H:%M")
     now_dt = datetime.now(JST).replace(tzinfo=None)
     rotation_days = int(th.get("rotationDays", 7))
@@ -1322,11 +1358,6 @@ def pick(cfg, posted, want, slot_hour=None, live_heads=None):
         # どちらも無い商品は、値段を並べるだけになるので出さない。
         if not p.get("cap") and not (p.get("d") or p.get("et")):
             continue
-        if (p.get("at") or "")[:10] < limit:
-            # 見つけたのが古くても、昨日以降に楽天で値段を確かめ直していて、
-            # いまも値引きが続いているものは出してよい（上の鮮度の考え方）。
-            if not (p.get("d") and (p.get("ls") or "") >= verified):
-                continue
         # 終わったセールは出さない。
         # サイトの作り直しから投稿までに終わることがあるので、ここでも見る。
         et = (p.get("et") or "").strip()
@@ -1410,11 +1441,24 @@ def pick(cfg, posted, want, slot_hour=None, live_heads=None):
     # 知識。
     tips = tip_posts()
     fresh = [t for t in tips if t["key"] not in done]
-    if not fresh:
+    # 豆知識の1日上限（2026-11-22、furu の根本見直し）。
+    # 豆知識は出し切らない限り無限に回る唯一の種類で、
+    # 上限が無いと、ほかの種類が枯れた日に全部これで埋まる
+    # （11/20・11/21 は17本中16本が豆知識だった）。
+    # 上限に達した日と、セールの山場（burst）では候補にしない。
+    tip_max = int(th.get("tipDailyMax", 2))
+    today_s = datetime.now(JST).strftime("%Y-%m-%d")
+    tips_today = sum(1 for e in (posted.get("log") or [])
+                     if e.get("kind") == "tip"
+                     and str(e.get("at") or "").startswith(today_s))
+    tip_capped = burst or tips_today >= tip_max
+    if tip_capped:
+        fresh = []
+    if not fresh and not tip_capped:
         # 出し切ったので、いちばん前に出したものから回す
         order = {k: i for i, k in enumerate(posted.get("keys") or [])}
         fresh = sorted(tips, key=lambda t: order.get(t["key"], 0))
-    else:
+    elif fresh:
         # 同じ分野が続かないようにする。買いまわりの話ばかり4本続くと、
         # 読む側からは同じことを言われているようにしか見えない。
         recent = [k for k in (posted.get("keys") or []) if k.startswith("tip:")][-3:]
@@ -1428,7 +1472,7 @@ def pick(cfg, posted, want, slot_hour=None, live_heads=None):
         seq = len([k for k in (posted.get("keys") or []) if k.startswith("tip:")]) + n
         pools["tip"].append((t["key"], compose_plain(t, site, seq)))
     # 観測報告（19時枠の主役）。材料が薄い日は候補が空になり、
-    # 埋め合わせの順で豆知識に落ちる。枠そのものは落とさない。
+    # 埋め合わせの順で告知・特集・商品に落ちる（豆知識では埋めない）。
     for x in report_post(feed, hist_all):
         if x["key"] not in done:
             pools["report"].append((x["key"], compose_plain(x, site)))
@@ -1467,7 +1511,7 @@ def pick(cfg, posted, want, slot_hour=None, live_heads=None):
         kind = "tip"           # 旧設定（plain）の読み替え
     # 19時の枠は、増量の期間を除いて観測報告にする（2026-11-12 furu 承認）。
     # 設定のほうの種類は tip のままにしておき、差し替えはここに閉じる。
-    # 候補が空の日は、埋め合わせの順で豆知識に落ちる。
+    # 候補が空の日は、埋め合わせの順で告知・特集・商品に落ちる。
     if not boost and str(hour) == "19" and kind == "tip":
         kind = "report"
     if kind not in pools:
@@ -1493,17 +1537,20 @@ def pick(cfg, posted, want, slot_hour=None, live_heads=None):
         if gone:
             print("すでに載っているものを%d件、候補から外しました。" % gone)
 
-    # 出すものが無い枠は、ほかの種類で埋める。投稿を落とさない。
-    # 埋める順は種類ごとに決めてある。知識で埋めるのは最後にする
-    # （リンクのある読み物や商品を先に出すため）。
+    # 出すものが無い枠は、ほかの種類で埋める。ただし豆知識では
+    # 埋めない（2026-11-22、furu の根本見直し）。
+    # 「枠を落とさない」ためにいちばん弱い種類で埋め続けると、
+    # アカウント全体が豆知識の列になる。埋める先が無ければ、
+    # その枠は落とすほうがまし（serve が skip として記録する）。
+    # 豆知識は、自分の枠と1日上限の中だけで出す。
     ORDER = {
-        "product": ["product", "feature", "event", "tip"],
+        "product": ["product", "feature", "event"],
         "tip": ["tip", "event", "feature", "product"],
-        "event": ["event", "feature", "product", "tip"],
-        "feature": ["feature", "event", "product", "tip"],
+        "event": ["event", "feature", "product"],
+        "feature": ["feature", "event", "product"],
         # 観測報告は1日1本きりの日付つき投稿なので、
         # ほかの枠の埋め合わせには使わない。自分の枠だけで使う。
-        "report": ["report", "tip", "event", "feature", "product"],
+        "report": ["report", "event", "feature", "product"],
     }
     out = []
     while len(out) < want:
@@ -1832,7 +1879,7 @@ def report():
 
 
 
-def run_once(cfg, posted, slot_hour=None, dry=False, late=False):
+def run_once(cfg, posted, slot_hour=None, dry=False, late=False, burst=False):
     """1件出す。slot_hour を渡すと、その枠の決まりで中身を選ぶ。
 
     (出した数, 理由) を返す。理由は ok / empty / blocked。
@@ -1855,7 +1902,7 @@ def run_once(cfg, posted, slot_hour=None, dry=False, late=False):
             # 黙って進むと、重複よけの材料が無いまま選ぶことになる。
             print("  自分の投稿を見に行けませんでした: %s" % ex,
                   file=sys.stderr)
-    picks = pick(cfg, posted, want, slot_hour, heads)
+    picks = pick(cfg, posted, want, slot_hour, heads, burst=burst)
     if not picks:
         print("出せるものがありません。")
         return 0, "empty"
@@ -2013,6 +2060,8 @@ def run_once(cfg, posted, slot_hour=None, dry=False, late=False):
             "link_arm": arms.get(key) if kind == "product" else None,
             # 親で名前を伏せてリプで明かした1件だけ "tree"、ほかは全部 "flat"。
             "form": "tree" if key == tree_form_key else "flat",
+            # セールの山場（burst）で出したもの。1日の上限を数えるため。
+            "burst": bool(burst),
         })
         ok += 1
         print("  ✅ %s → %s" % (key, pid))
@@ -2148,9 +2197,23 @@ def serve(cfg, until_s=None, window_h=4.0, gap_min=25, max_late_h=3,
         posted = load(STATE, {"keys": [], "log": []}) or {"keys": [], "log": []}
         done = done_slots(posted, t.date())
         if burst_now(t):
+            # 山場でも無制限には出さない。1日の上限（burstDailyMax）を
+            # 数え、達していたら出さずに終わる（2026-11-22）。
+            # 上限が無いころは、候補が枯れたあとも10分ごとに
+            # 豆知識が出続け、1日17本・うち豆知識16本になった。
+            bmax = int((cfg.get("threads") or {}).get("burstDailyMax", 6))
+            btoday = sum(1 for e in (posted.get("log") or [])
+                         if e.get("burst")
+                         and str(e.get("at") or "").startswith(
+                             t.strftime("%Y-%m-%d")))
+            if btoday >= bmax:
+                print("\n── 山場の上限（1日%d本）に達しています。"
+                      "出さずに終わります" % bmax)
+                return
             # 枠を見ずに1本出して終わる。間隔は run_once が守る。
             print("\n── 山場の1本を出します（いま %s）" % t.strftime("%H:%M"))
-            n, why = run_once(cfg, posted, slot_hour=t.hour, dry=dry, late=False)
+            n, why = run_once(cfg, posted, slot_hour=t.hour, dry=dry,
+                              late=False, burst=True)
             if dry:
                 print("（--dry-run なので記録は残しません）")
                 return
