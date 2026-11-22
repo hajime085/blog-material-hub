@@ -1017,22 +1017,6 @@
   ],
   "log": [
     {
-      "key": "tip:38",
-      "id": "18114467492121587",
-      "at": "2026-10-20 13:00",
-      "kind": "tip",
-      "slot": 13,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
-    {
       "key": "tip:09",
       "id": "18229874893335638",
       "at": "2026-10-20 14:20",
@@ -5759,6 +5743,12 @@
       "link_arm": null,
       "form": "flat",
       "burst": false
+    },
+    {
+      "key": "product:r6b77c88d6",
+      "at": "2026-11-22 19:00",
+      "failed": true,
+      "error": "HTTP Error 400: Bad Request"
     }
   ],
   "tree_test": {
