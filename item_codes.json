@@ -150316,5 +150316,1469 @@
   "r26a4e9eba": {
     "code": "fj-market:10012621",
     "category": "interior"
+  },
+  "re9d1ab12e": {
+    "code": "umisachi:10001047",
+    "category": "food"
+  },
+  "rb7a7a35f6": {
+    "code": "umisachi:10001049",
+    "category": "food"
+  },
+  "rafc2f6a8d": {
+    "code": "umisachi:10000924",
+    "category": "food"
+  },
+  "redd1a44c2": {
+    "code": "rakuten24:11330776",
+    "category": "food"
+  },
+  "r314fdbb49": {
+    "code": "lifecreation:10000007",
+    "category": "food"
+  },
+  "r6a195d075": {
+    "code": "soukaidrink:10026899",
+    "category": "food"
+  },
+  "rce2829f86": {
+    "code": "rakuten24:11299472",
+    "category": "food"
+  },
+  "r2239cd0c5": {
+    "code": "rakuten24:11362130",
+    "category": "food"
+  },
+  "r3f888d381": {
+    "code": "rakuten24:11395135",
+    "category": "food"
+  },
+  "rfa5cfd1cd": {
+    "code": "rakuten24:10989459",
+    "category": "food"
+  },
+  "rb023c31b0": {
+    "code": "rakuten24:11320103",
+    "category": "food"
+  },
+  "r1387990b3": {
+    "code": "rakuten24:11198896",
+    "category": "food"
+  },
+  "r835862126": {
+    "code": "rakuten24:11199644",
+    "category": "food"
+  },
+  "r00526d8b3": {
+    "code": "soukaidrink:10022966",
+    "category": "food"
+  },
+  "r90f4a7162": {
+    "code": "soukaidrink:10009594",
+    "category": "food"
+  },
+  "r4eaac2428": {
+    "code": "bigbossshibazaki:10029533",
+    "category": "food"
+  },
+  "r28b578530": {
+    "code": "bigbossshibazaki:10029548",
+    "category": "food"
+  },
+  "r9b00b06fe": {
+    "code": "d-craft:10020634",
+    "category": "food"
+  },
+  "rdd21f7b83": {
+    "code": "bigbossshibazaki:10029104",
+    "category": "food"
+  },
+  "r615c3237f": {
+    "code": "wineuki:10057945",
+    "category": "food"
+  },
+  "r074a342df": {
+    "code": "soukaidrink:10013446",
+    "category": "food"
+  },
+  "r83fb41a74": {
+    "code": "rakuten24:10919439",
+    "category": "food"
+  },
+  "r7fb26e654": {
+    "code": "soukaidrink:10011261",
+    "category": "food"
+  },
+  "rf98b27a8f": {
+    "code": "isekadoyabeer:10000024",
+    "category": "food"
+  },
+  "r6bbe9c047": {
+    "code": "higuchiwine:10015482",
+    "category": "food"
+  },
+  "r42c396825": {
+    "code": "wassys:10133779",
+    "category": "food"
+  },
+  "r5af585d17": {
+    "code": "wassys:10136084",
+    "category": "food"
+  },
+  "re6168d2b3": {
+    "code": "wassys:10125201",
+    "category": "food"
+  },
+  "r3925723fd": {
+    "code": "cosmetque:10011471",
+    "category": "food"
+  },
+  "r4a0643502": {
+    "code": "cosmetque:10011468",
+    "category": "food"
+  },
+  "r42900c406": {
+    "code": "rakuten24:10885907",
+    "category": "food"
+  },
+  "r31910d33b": {
+    "code": "restation:10073011",
+    "category": "food"
+  },
+  "rb52ccb01d": {
+    "code": "restation:10079102",
+    "category": "food"
+  },
+  "r311c0aa4a": {
+    "code": "hokkaido-kaori:10058395",
+    "category": "kitchen"
+  },
+  "rf12c7b4be": {
+    "code": "granire-plus:10013101",
+    "category": "kitchen"
+  },
+  "rb2d5a4218": {
+    "code": "chinavi:10001114",
+    "category": "kitchen"
+  },
+  "re0759d1d0": {
+    "code": "colorfulbox:10146764",
+    "category": "kitchen"
+  },
+  "r050f376cf": {
+    "code": "rakuten24:10573944",
+    "category": "kitchen"
+  },
+  "rfb1a22386": {
+    "code": "zuttonezutto:10000160",
+    "category": "kitchen"
+  },
+  "r45eac7837": {
+    "code": "zuttonezutto:10000249",
+    "category": "kitchen"
+  },
+  "rd6bc6c9fa": {
+    "code": "kenkocom:12221793",
+    "category": "kaden"
+  },
+  "r6b57c1cda": {
+    "code": "auc-gion:10247106",
+    "category": "kaden"
+  },
+  "r377d85a00": {
+    "code": "biccamera:14872998",
+    "category": "kaden"
+  },
+  "r58957f8fd": {
+    "code": "biccamera:13841177",
+    "category": "kaden"
+  },
+  "r1b6822cc6": {
+    "code": "auc-worldichi:10025143",
+    "category": "kaden"
+  },
+  "re3ab01913": {
+    "code": "colorfulbox:10147723",
+    "category": "baby-toy"
+  },
+  "r484e9b408": {
+    "code": "colorfulbox:10147241",
+    "category": "baby-toy"
+  },
+  "rbbaac1974": {
+    "code": "colorfulbox:10136499",
+    "category": "baby-toy"
+  },
+  "r3bc9c7e70": {
+    "code": "travelkeysg:10001200",
+    "category": "baby-toy"
+  },
+  "ra7b4f6e39": {
+    "code": "horiku:10357163",
+    "category": "baby-toy"
+  },
+  "r3ec8bfd85": {
+    "code": "mlinestore:10275479",
+    "category": "baby-toy"
+  },
+  "r2d51d0183": {
+    "code": "ohstore:10706714",
+    "category": "baby-toy"
+  },
+  "rfa4f85053": {
+    "code": "zestnationjapan-2:10198789",
+    "category": "baby-toy"
+  },
+  "r844c5cfe0": {
+    "code": "united-shop01:11081412",
+    "category": "baby-toy"
+  },
+  "rd3307acb1": {
+    "code": "hiro-shop01:10312741",
+    "category": "baby-toy"
+  },
+  "rab9b0d5c3": {
+    "code": "ddiissmm:10048321",
+    "category": "baby-toy"
+  },
+  "r31b2f31b1": {
+    "code": "ddiissmm:10048330",
+    "category": "baby-toy"
+  },
+  "r5af198ff3": {
+    "code": "ddiissmm:10048343",
+    "category": "baby-toy"
+  },
+  "rb68596009": {
+    "code": "ddiissmm:10048336",
+    "category": "baby-toy"
+  },
+  "r66958e94d": {
+    "code": "ddiissmm:10048334",
+    "category": "baby-toy"
+  },
+  "rdacf60328": {
+    "code": "ddiissmm:10048362",
+    "category": "baby-toy"
+  },
+  "r22b28a6fd": {
+    "code": "ddiissmm:10047971",
+    "category": "baby-toy"
+  },
+  "r05d311224": {
+    "code": "negaigoto:10041298",
+    "category": "baby-toy"
+  },
+  "r47d5af669": {
+    "code": "colorfulbox:10102954",
+    "category": "baby-toy"
+  },
+  "r25c7d4710": {
+    "code": "blue-topazs41:10001446",
+    "category": "baby-toy"
+  },
+  "r97b3cf40d": {
+    "code": "708apparel:10008347",
+    "category": "baby-toy"
+  },
+  "r4e6e6980a": {
+    "code": "besttnk:10044748",
+    "category": "baby-toy"
+  },
+  "r6edcdf387": {
+    "code": "lieto813:10093087",
+    "category": "baby-toy"
+  },
+  "r55f9d0b86": {
+    "code": "ecprime500:10203537",
+    "category": "baby-toy"
+  },
+  "rd37fa2a9a": {
+    "code": "natural-living:10022487",
+    "category": "baby-toy"
+  },
+  "re2ac388a2": {
+    "code": "nagomi-pharmacy:10064106",
+    "category": "baby-toy"
+  },
+  "rc71845d00": {
+    "code": "homeystore:10116702",
+    "category": "baby-toy"
+  },
+  "r5e2f870b2": {
+    "code": "haikaraya98:10014890",
+    "category": "baby-toy"
+  },
+  "ra4f5c02dd": {
+    "code": "ecprime500:10203523",
+    "category": "baby-toy"
+  },
+  "rdf62d3fc8": {
+    "code": "shop-tomato:10028011",
+    "category": "baby-toy"
+  },
+  "r108c7ba21": {
+    "code": "shop-tomato:10027056",
+    "category": "baby-toy"
+  },
+  "rd3d9d78c6": {
+    "code": "shoeki-market:10045597",
+    "category": "baby-toy"
+  },
+  "r1e90f0c92": {
+    "code": "utshoppingstore:10021066",
+    "category": "baby-toy"
+  },
+  "r6b721c18e": {
+    "code": "lieto813:10092993",
+    "category": "baby-toy"
+  },
+  "r093cad827": {
+    "code": "utshoppingstore:10020305",
+    "category": "baby-toy"
+  },
+  "r775f78c59": {
+    "code": "teisei20260421:10034462",
+    "category": "baby-toy"
+  },
+  "rb38a60b1a": {
+    "code": "chikyujin1:10009853",
+    "category": "baby-toy"
+  },
+  "ra96d19b4e": {
+    "code": "lalapets:10000002",
+    "category": "pet"
+  },
+  "r99f521c2f": {
+    "code": "youplus-r:10003625",
+    "category": "pet"
+  },
+  "r0df512a76": {
+    "code": "badasai:10005901",
+    "category": "pet"
+  },
+  "rcadfbb327": {
+    "code": "badasai:10005900",
+    "category": "pet"
+  },
+  "redfef52d1": {
+    "code": "badasai:10005899",
+    "category": "pet"
+  },
+  "r0103a1534": {
+    "code": "badasai:10005897",
+    "category": "pet"
+  },
+  "r0f94ac537": {
+    "code": "badasai:10005894",
+    "category": "pet"
+  },
+  "r4f071ad6b": {
+    "code": "badasai:10005892",
+    "category": "pet"
+  },
+  "r6ea651a0b": {
+    "code": "badasai:10005891",
+    "category": "pet"
+  },
+  "ra43896737": {
+    "code": "badasai:10005884",
+    "category": "pet"
+  },
+  "r609da7dfa": {
+    "code": "badasai:10005883",
+    "category": "pet"
+  },
+  "rc377f92d3": {
+    "code": "badasai:10005881",
+    "category": "pet"
+  },
+  "r438390e8a": {
+    "code": "badasai:10005879",
+    "category": "pet"
+  },
+  "r4007ba24e": {
+    "code": "badasai:10005878",
+    "category": "pet"
+  },
+  "rcca81eac1": {
+    "code": "badasai:10005876",
+    "category": "pet"
+  },
+  "r51a63e53b": {
+    "code": "badasai:10005868",
+    "category": "pet"
+  },
+  "r3ff06c804": {
+    "code": "pochibell:10007960",
+    "category": "beauty"
+  },
+  "r057fce94d": {
+    "code": "rakuten24-cosmetics:10043237",
+    "category": "beauty"
+  },
+  "ra7b5e93be": {
+    "code": "deardahliajapanshop:10000009",
+    "category": "beauty"
+  },
+  "r6e3127720": {
+    "code": "rakuten24:11333047",
+    "category": "beauty"
+  },
+  "r2120b485b": {
+    "code": "zagzag:10101045",
+    "category": "beauty"
+  },
+  "r4abb2ed80": {
+    "code": "essence-of-life:10000547",
+    "category": "beauty"
+  },
+  "r0a8dbddca": {
+    "code": "badasai:10005971",
+    "category": "beauty"
+  },
+  "r24d53ff5f": {
+    "code": "rakuten24-cosmetics:10021340",
+    "category": "beauty"
+  },
+  "rb2e398917": {
+    "code": "rakuten24:10568964",
+    "category": "beauty"
+  },
+  "rddaa199fb": {
+    "code": "rakuten24:11297664",
+    "category": "beauty"
+  },
+  "r70a723a55": {
+    "code": "utakatazakka:10741072",
+    "category": "beauty"
+  },
+  "rf991d9a23": {
+    "code": "badasai:10005561",
+    "category": "beauty"
+  },
+  "r3feba1808": {
+    "code": "badasai:10005559",
+    "category": "beauty"
+  },
+  "r8f10f2f5f": {
+    "code": "zagzag:10098627",
+    "category": "beauty"
+  },
+  "r1ba149dcb": {
+    "code": "zagzag:10098621",
+    "category": "beauty"
+  },
+  "rd205dc9a8": {
+    "code": "essence-of-life:10000076",
+    "category": "beauty"
+  },
+  "rfde4e2809": {
+    "code": "fibee-official:10000063",
+    "category": "beauty"
+  },
+  "r823fb81b3": {
+    "code": "rakuten24:11425455",
+    "category": "beauty"
+  },
+  "r76d5b0e88": {
+    "code": "rakuten24:11428593",
+    "category": "beauty"
+  },
+  "r7e8c365ca": {
+    "code": "kenkocom:12221541",
+    "category": "beauty"
+  },
+  "r32407184d": {
+    "code": "kenkocom:12221544",
+    "category": "beauty"
+  },
+  "r235ac7dae": {
+    "code": "rakuten24:11425453",
+    "category": "beauty"
+  },
+  "red122c602": {
+    "code": "kenkocom:12221822",
+    "category": "beauty"
+  },
+  "r03e31a95d": {
+    "code": "rakuten24:11428601",
+    "category": "beauty"
+  },
+  "rccfafc90a": {
+    "code": "kenkocom:12221828",
+    "category": "beauty"
+  },
+  "ra1b823b5d": {
+    "code": "kenkocom:12195502",
+    "category": "beauty"
+  },
+  "rce02bdfb5": {
+    "code": "mahy1:10201014",
+    "category": "pc"
+  },
+  "r568ce817e": {
+    "code": "hakuei8981:10056619",
+    "category": "pc"
+  },
+  "ra7dfefa19": {
+    "code": "kayotoys:10000149",
+    "category": "pc"
+  },
+  "r2de58e7f9": {
+    "code": "biccamera:12332332",
+    "category": "pc"
+  },
+  "r520dccea3": {
+    "code": "auc-worldichi:10033819",
+    "category": "pc"
+  },
+  "rc40d6c50c": {
+    "code": "hemukichi:10005323",
+    "category": "pc"
+  },
+  "re7a042ef0": {
+    "code": "hemukichi:10005315",
+    "category": "pc"
+  },
+  "rb864c903e": {
+    "code": "ddshop:10006297",
+    "category": "pc"
+  },
+  "rb624f2ab0": {
+    "code": "r-style-ra:10035630",
+    "category": "pc"
+  },
+  "rd98346929": {
+    "code": "hemukichi:10005311",
+    "category": "pc"
+  },
+  "rcc9be6a89": {
+    "code": "hemukichi:10005310",
+    "category": "pc"
+  },
+  "r8296a1d30": {
+    "code": "ddshop:10000358",
+    "category": "pc"
+  },
+  "r9f0a3bf97": {
+    "code": "hemukichi:10005302",
+    "category": "pc"
+  },
+  "rda1db199d": {
+    "code": "cuticle:10032238",
+    "category": "pc"
+  },
+  "r3b7954ccc": {
+    "code": "hemukichi:10005296",
+    "category": "pc"
+  },
+  "r758c8f7bd": {
+    "code": "hemukichi:10005295",
+    "category": "pc"
+  },
+  "r3c3027b45": {
+    "code": "hemukichi:10005291",
+    "category": "pc"
+  },
+  "r9686b4a02": {
+    "code": "and-u-online:10019908",
+    "category": "pc"
+  },
+  "ra0594ec13": {
+    "code": "and-u-online:10019887",
+    "category": "pc"
+  },
+  "rf2ef6801f": {
+    "code": "and-u-online:10034926",
+    "category": "pc"
+  },
+  "rfd9771ea0": {
+    "code": "and-u-online:10002246",
+    "category": "pc"
+  },
+  "r24824e6b9": {
+    "code": "and-u-online:10033272",
+    "category": "pc"
+  },
+  "r29ffbb7f9": {
+    "code": "and-u-online:10009795",
+    "category": "pc"
+  },
+  "rb1a3449d5": {
+    "code": "and-u-online:10009872",
+    "category": "pc"
+  },
+  "ref231ea3a": {
+    "code": "and-u-online:10009902",
+    "category": "pc"
+  },
+  "rfcda931c7": {
+    "code": "and-u-online:10034929",
+    "category": "pc"
+  },
+  "r6446b93e9": {
+    "code": "and-u-online:10019825",
+    "category": "pc"
+  },
+  "r5650c7e8c": {
+    "code": "and-u-online:10002276",
+    "category": "pc"
+  },
+  "r56fc8a7ee": {
+    "code": "and-u-online:10009769",
+    "category": "pc"
+  },
+  "r3ae21b73f": {
+    "code": "and-u-online:10034936",
+    "category": "pc"
+  },
+  "r05f61515b": {
+    "code": "and-u-online:10019902",
+    "category": "pc"
+  },
+  "re1fe2960c": {
+    "code": "and-u-online:10019861",
+    "category": "pc"
+  },
+  "rac49b0ae9": {
+    "code": "and-u-online:10034927",
+    "category": "pc"
+  },
+  "rc8157e05c": {
+    "code": "sbyselectlab:10001748",
+    "category": "pc"
+  },
+  "rbaeb0b8c1": {
+    "code": "sbyselectlab:10001743",
+    "category": "pc"
+  },
+  "ra9b1a5385": {
+    "code": "sbyselectlab:10001496",
+    "category": "pc"
+  },
+  "r0b19803cf": {
+    "code": "sbyselectlab:10001413",
+    "category": "pc"
+  },
+  "r13fd482b4": {
+    "code": "pro-taro:10096505",
+    "category": "pc"
+  },
+  "rc553f5501": {
+    "code": "kiraringiftbox:10001834",
+    "category": "pc"
+  },
+  "r9f2609be1": {
+    "code": "hellocase:10003061",
+    "category": "pc"
+  },
+  "r7e78ed2aa": {
+    "code": "hellocase:10002870",
+    "category": "pc"
+  },
+  "rd5dda07d5": {
+    "code": "kiraringiftbox:10001499",
+    "category": "pc"
+  },
+  "r08f7cd0bd": {
+    "code": "youplus-r:10004195",
+    "category": "pc"
+  },
+  "rfe1a301bf": {
+    "code": "hellocase:10002732",
+    "category": "pc"
+  },
+  "r9ef532157": {
+    "code": "ddshop:10009776",
+    "category": "pc"
+  },
+  "r28d81d1a1": {
+    "code": "tales-store:10056722",
+    "category": "pc"
+  },
+  "r2ecdc6b6d": {
+    "code": "your-sales-shop:10028902",
+    "category": "pc"
+  },
+  "rae73c796b": {
+    "code": "and-u-online:10005681",
+    "category": "pc"
+  },
+  "r6c33f4e15": {
+    "code": "denkichiweb:10006776",
+    "category": "pc"
+  },
+  "r891dcabaa": {
+    "code": "cuticle:10027017",
+    "category": "pc"
+  },
+  "r62b661f8d": {
+    "code": "denkichiweb:10015313",
+    "category": "pc"
+  },
+  "r827929ea1": {
+    "code": "cocodecow:10359550",
+    "category": "pc"
+  },
+  "rae2b6c25f": {
+    "code": "cocodecow:10359539",
+    "category": "pc"
+  },
+  "r7cc374f68": {
+    "code": "cocodecow:10359529",
+    "category": "pc"
+  },
+  "r2ac28472d": {
+    "code": "cocodecow:10359520",
+    "category": "pc"
+  },
+  "r8b656e872": {
+    "code": "cocodecow:10359484",
+    "category": "pc"
+  },
+  "r84018b560": {
+    "code": "cocodecow:10359512",
+    "category": "pc"
+  },
+  "r27ef0b713": {
+    "code": "primeplus:10096355",
+    "category": "pc"
+  },
+  "r2376dd05b": {
+    "code": "cocodecow:10359466",
+    "category": "pc"
+  },
+  "rff0d3f01a": {
+    "code": "cocodecow:10391891",
+    "category": "pc"
+  },
+  "re3d48da60": {
+    "code": "cocodecow:10359503",
+    "category": "pc"
+  },
+  "rcb9cde641": {
+    "code": "cocodecow:10391894",
+    "category": "pc"
+  },
+  "rc717ebeee": {
+    "code": "cocodecow:10359477",
+    "category": "pc"
+  },
+  "r83701f495": {
+    "code": "cocodecow:10391892",
+    "category": "pc"
+  },
+  "r8be5965b9": {
+    "code": "cocodecow:10359494",
+    "category": "pc"
+  },
+  "r126e0815c": {
+    "code": "cocodecow:10391890",
+    "category": "pc"
+  },
+  "r580e75bd7": {
+    "code": "cocodecow:10359454",
+    "category": "pc"
+  },
+  "rbb779907b": {
+    "code": "cocodecow:10391893",
+    "category": "pc"
+  },
+  "re6caf1586": {
+    "code": "cocodecow:10359446",
+    "category": "pc"
+  },
+  "r603ea71be": {
+    "code": "cocodecow:10359438",
+    "category": "pc"
+  },
+  "r111e5ea77": {
+    "code": "roiciel:10000265",
+    "category": "pc"
+  },
+  "r4a55f64c8": {
+    "code": "smart-life-gear:10029597",
+    "category": "pc"
+  },
+  "rd156a847f": {
+    "code": "smart-life-gear:10029598",
+    "category": "pc"
+  },
+  "rc6a479521": {
+    "code": "sbyselectlab:10001598",
+    "category": "pc"
+  },
+  "r4b65838dc": {
+    "code": "sbyselectlab:10001597",
+    "category": "pc"
+  },
+  "rcd118a91c": {
+    "code": "sbyselectlab:10001774",
+    "category": "pc"
+  },
+  "rdecb7b995": {
+    "code": "ruowl:10002432",
+    "category": "pc"
+  },
+  "r8e577cdb7": {
+    "code": "ruowl:10002433",
+    "category": "pc"
+  },
+  "re04f002c2": {
+    "code": "ruowl:10002434",
+    "category": "pc"
+  },
+  "r69d3e15f0": {
+    "code": "ruowl:10002435",
+    "category": "pc"
+  },
+  "re5704bc00": {
+    "code": "ruowl:10002436",
+    "category": "pc"
+  },
+  "r90b2003b2": {
+    "code": "sbyselectlab:10001759",
+    "category": "pc"
+  },
+  "rbbc431722": {
+    "code": "sbyselectlab:10001758",
+    "category": "pc"
+  },
+  "rf20fc53d3": {
+    "code": "wakufuri:10000112",
+    "category": "pc"
+  },
+  "rd01219943": {
+    "code": "sbyselectlab:10001763",
+    "category": "pc"
+  },
+  "r366748040": {
+    "code": "sbyselectlab:10001761",
+    "category": "pc"
+  },
+  "rd28746b4f": {
+    "code": "sbyselectlab:10001755",
+    "category": "pc"
+  },
+  "r02b2200aa": {
+    "code": "sbyselectlab:10001813",
+    "category": "pc"
+  },
+  "r7ef3e1a99": {
+    "code": "ruowl:10002481",
+    "category": "pc"
+  },
+  "r3ad4a4e49": {
+    "code": "honeys-online:10040149",
+    "category": "fashion"
+  },
+  "rb736f6344": {
+    "code": "stylife:15240757",
+    "category": "fashion"
+  },
+  "rd8ce6205b": {
+    "code": "stylife:15890486",
+    "category": "fashion"
+  },
+  "rf79161fa5": {
+    "code": "auc-ruirue:10001772",
+    "category": "fashion"
+  },
+  "rf11e61144": {
+    "code": "stylife:15936658",
+    "category": "fashion"
+  },
+  "r7ad92d851": {
+    "code": "753ya:10017838",
+    "category": "fashion"
+  },
+  "r01680f699": {
+    "code": "stylife:15975564",
+    "category": "fashion"
+  },
+  "r409dc2734": {
+    "code": "ohstore:10432655",
+    "category": "fashion"
+  },
+  "rb523d76c1": {
+    "code": "stylife:12801046",
+    "category": "fashion"
+  },
+  "r4e5d3a8fa": {
+    "code": "stylife:14815473",
+    "category": "fashion"
+  },
+  "rca4561b21": {
+    "code": "stylife:15078432",
+    "category": "fashion"
+  },
+  "r517033890": {
+    "code": "nareshop:10020921",
+    "category": "fashion"
+  },
+  "r375561f04": {
+    "code": "lilishop6-store:10661391",
+    "category": "fashion"
+  },
+  "r68554a6a9": {
+    "code": "pertemba:10749873",
+    "category": "fashion"
+  },
+  "r9bbc9d7ce": {
+    "code": "stylife:15244165",
+    "category": "fashion"
+  },
+  "rd83946074": {
+    "code": "stylife:14983504",
+    "category": "fashion"
+  },
+  "rc1db7fa39": {
+    "code": "stylife:14647840",
+    "category": "fashion"
+  },
+  "r165bc7d7b": {
+    "code": "lilishop6-store:10660981",
+    "category": "fashion"
+  },
+  "r2134fd8fa": {
+    "code": "freaks-store:10001913",
+    "category": "fashion"
+  },
+  "r99e78a114": {
+    "code": "lilishop6-store:10660972",
+    "category": "fashion"
+  },
+  "r6e6e5be90": {
+    "code": "stylife:15890612",
+    "category": "fashion"
+  },
+  "rb5e1b371d": {
+    "code": "y-aoyama:10115349",
+    "category": "fashion"
+  },
+  "r7434499ab": {
+    "code": "lightfashion:10000097",
+    "category": "fashion"
+  },
+  "r24f712dc5": {
+    "code": "stylife:14828322",
+    "category": "fashion"
+  },
+  "r006326da5": {
+    "code": "nareshop:10017214",
+    "category": "fashion"
+  },
+  "re7358f763": {
+    "code": "stylife:15249563",
+    "category": "fashion"
+  },
+  "r913bdc3ba": {
+    "code": "pertemba:10824252",
+    "category": "fashion"
+  },
+  "r1995daadc": {
+    "code": "remake-buddy:11005956",
+    "category": "fashion"
+  },
+  "r31dc598b2": {
+    "code": "rushout:10757084",
+    "category": "fashion"
+  },
+  "rf477afcd1": {
+    "code": "nareshop:10017209",
+    "category": "fashion"
+  },
+  "r34beaf2ab": {
+    "code": "digdig:10106399",
+    "category": "fashion"
+  },
+  "r7ed6b23ff": {
+    "code": "lightfashion:10000008",
+    "category": "fashion"
+  },
+  "r5cd76fda5": {
+    "code": "pertemba:10746551",
+    "category": "fashion"
+  },
+  "rcd0564b4c": {
+    "code": "lightfashion:10000004",
+    "category": "fashion"
+  },
+  "r15cb0a074": {
+    "code": "lightfashion:10000003",
+    "category": "fashion"
+  },
+  "r2f8009333": {
+    "code": "tsunagu2017:10243094",
+    "category": "fashion"
+  },
+  "r683587deb": {
+    "code": "lightfashion:10000212",
+    "category": "fashion"
+  },
+  "rd6bd04709": {
+    "code": "lightfashion:10000077",
+    "category": "fashion"
+  },
+  "r1c7a88679": {
+    "code": "lightfashion:10000159",
+    "category": "fashion"
+  },
+  "r6fdacf173": {
+    "code": "kanemorishouji:10029176",
+    "category": "fashion"
+  },
+  "rdce0d8eab": {
+    "code": "kanemorishouji:10029199",
+    "category": "fashion"
+  },
+  "rd15cbd411": {
+    "code": "kanemorishouji:10029177",
+    "category": "fashion"
+  },
+  "r2f8a0e2cf": {
+    "code": "kanemorishouji:10029253",
+    "category": "fashion"
+  },
+  "rdeef41ca0": {
+    "code": "kanemorishouji:10029256",
+    "category": "fashion"
+  },
+  "r9c627e521": {
+    "code": "outletshoes:10016872",
+    "category": "fashion"
+  },
+  "re70bddb43": {
+    "code": "outletshoes:10016854",
+    "category": "fashion"
+  },
+  "rff1108dd5": {
+    "code": "outletshoes:10016604",
+    "category": "fashion"
+  },
+  "r55c83c1d5": {
+    "code": "outletshoes:10016606",
+    "category": "fashion"
+  },
+  "r14deef8bd": {
+    "code": "dandelion:10000510",
+    "category": "fashion"
+  },
+  "r12195aafa": {
+    "code": "outletshoes:10015276",
+    "category": "fashion"
+  },
+  "r008dbb6b8": {
+    "code": "stylife:15917865",
+    "category": "fashion"
+  },
+  "rc1e05a974": {
+    "code": "outletshoes:10015325",
+    "category": "fashion"
+  },
+  "r8264c77f5": {
+    "code": "dandelion:10007812",
+    "category": "fashion"
+  },
+  "r207423034": {
+    "code": "outletshoes:10016541",
+    "category": "fashion"
+  },
+  "r625da04d4": {
+    "code": "outletshoes:10015234",
+    "category": "fashion"
+  },
+  "r014c2bc31": {
+    "code": "outletshoes:10016544",
+    "category": "fashion"
+  },
+  "r2360c8d19": {
+    "code": "dandelion:10015281",
+    "category": "fashion"
+  },
+  "rf561dde46": {
+    "code": "dandelion:10000517",
+    "category": "fashion"
+  },
+  "r8da77495e": {
+    "code": "dandelion:10000523",
+    "category": "fashion"
+  },
+  "rf3f360a9e": {
+    "code": "arukoinu:10003017",
+    "category": "fashion"
+  },
+  "r11a50e1ed": {
+    "code": "outletshoes:10014272",
+    "category": "fashion"
+  },
+  "r73237d113": {
+    "code": "outletshoes:10016758",
+    "category": "fashion"
+  },
+  "r383642b96": {
+    "code": "livingut:10152939",
+    "category": "fashion"
+  },
+  "r7a40671a2": {
+    "code": "livingut:10153626",
+    "category": "fashion"
+  },
+  "r792698e35": {
+    "code": "livingut:10153625",
+    "category": "fashion"
+  },
+  "r063f46eed": {
+    "code": "livingut:10153624",
+    "category": "fashion"
+  },
+  "r676b7064c": {
+    "code": "livingut:10153622",
+    "category": "fashion"
+  },
+  "rc16d5e408": {
+    "code": "stylife:15736045",
+    "category": "fashion"
+  },
+  "r8c40d2b84": {
+    "code": "stylife:14669904",
+    "category": "fashion"
+  },
+  "rd1b246858": {
+    "code": "interior-palette:10141107",
+    "category": "interior"
+  },
+  "r989cee2cf": {
+    "code": "badasai:10005997",
+    "category": "interior"
+  },
+  "r4c8622649": {
+    "code": "badasai:10005995",
+    "category": "interior"
+  },
+  "rb683b0f1b": {
+    "code": "badasai:10005994",
+    "category": "interior"
+  },
+  "r01b2dd9af": {
+    "code": "badasai:10005991",
+    "category": "interior"
+  },
+  "r4f8c44212": {
+    "code": "badasai:10005990",
+    "category": "interior"
+  },
+  "r2603b836c": {
+    "code": "badasai:10005988",
+    "category": "interior"
+  },
+  "r1b66b3470": {
+    "code": "badasai:10005985",
+    "category": "interior"
+  },
+  "rd0bec9bff": {
+    "code": "badasai:10005983",
+    "category": "interior"
+  },
+  "rb057c1d49": {
+    "code": "htdd:10005200",
+    "category": "interior"
+  },
+  "r12cc25eca": {
+    "code": "badasai:10005973",
+    "category": "interior"
+  },
+  "r798ca5ce1": {
+    "code": "badasai:10005970",
+    "category": "interior"
+  },
+  "r8462246b5": {
+    "code": "badasai:10005967",
+    "category": "interior"
+  },
+  "rc011a8d75": {
+    "code": "badasai:10005966",
+    "category": "interior"
+  },
+  "rae7fd8810": {
+    "code": "uuwa:10000160",
+    "category": "interior"
+  },
+  "r5b159f3fe": {
+    "code": "giftman:10323234",
+    "category": "seasonal"
+  },
+  "r71e6bc3ff": {
+    "code": "antina:10024189",
+    "category": "seasonal"
+  },
+  "re12916169": {
+    "code": "rakuten24:11406924",
+    "category": "seasonal"
+  },
+  "r58035c2dc": {
+    "code": "uchipac-shop:10000007",
+    "category": "seasonal"
+  },
+  "r48e8104e6": {
+    "code": "rakuten24:11301715",
+    "category": "seasonal"
+  },
+  "rf5054dd8f": {
+    "code": "rakuten24:11345632",
+    "category": "seasonal"
+  },
+  "r44e45177e": {
+    "code": "rakuten24:11267775",
+    "category": "seasonal"
+  },
+  "r26869196f": {
+    "code": "rakuten24:11340361",
+    "category": "seasonal"
+  },
+  "r331c5cd84": {
+    "code": "soukaidrink:10020450",
+    "category": "seasonal"
+  },
+  "ra0046b14e": {
+    "code": "soukaidrink:10024520",
+    "category": "seasonal"
+  },
+  "r4de0d6ee9": {
+    "code": "shinjushoku:10000053",
+    "category": "seasonal"
+  },
+  "rae8283728": {
+    "code": "shinjushoku:10000037",
+    "category": "seasonal"
+  },
+  "r6d6a4927c": {
+    "code": "ponsshoponline:10000538",
+    "category": "seasonal"
+  },
+  "r88e37a0f9": {
+    "code": "vellysupply:10094568",
+    "category": "seasonal"
+  },
+  "ra5f79c029": {
+    "code": "vellysupply:10094444",
+    "category": "seasonal"
+  },
+  "rcd0603e74": {
+    "code": "vellysupply:10094376",
+    "category": "seasonal"
+  },
+  "ra03bb2fbd": {
+    "code": "vellysupply:10094340",
+    "category": "seasonal"
+  },
+  "rfaf025e75": {
+    "code": "vellysupply:10094357",
+    "category": "seasonal"
+  },
+  "r8d0daca81": {
+    "code": "nikunoyamada:10000355",
+    "category": "seasonal"
+  },
+  "rf0ee997a4": {
+    "code": "ragtag:17286495",
+    "category": "fashion"
+  },
+  "r77230015e": {
+    "code": "rurushop-2:10103113",
+    "category": "fashion"
+  },
+  "r5fcaffc0b": {
+    "code": "shadowtail:11245986",
+    "category": "fashion"
+  },
+  "rb63cf689a": {
+    "code": "toryounosuketto:10055010",
+    "category": "fashion"
+  },
+  "rebb145924": {
+    "code": "hibinokurasinojuzitsu:10007122",
+    "category": "fashion"
+  },
+  "rd66dc3656": {
+    "code": "vectorpremium:19333984",
+    "category": "fashion"
+  },
+  "r487a8bb75": {
+    "code": "ragtag:17292660",
+    "category": "fashion"
+  },
+  "r2fefbb7e4": {
+    "code": "onlinestorerito:10018212",
+    "category": "fashion"
+  },
+  "r122d6a42b": {
+    "code": "styleborn:10019767",
+    "category": "fashion"
+  },
+  "rc7b7116c9": {
+    "code": "rise0729ri:10153338",
+    "category": "fashion"
+  },
+  "ra287c4ac2": {
+    "code": "link-hk:10014739",
+    "category": "fashion"
+  },
+  "rf8fc379d4": {
+    "code": "inokoya:10245629",
+    "category": "fashion"
+  },
+  "r35293737b": {
+    "code": "tsubotsubo:10017137",
+    "category": "fashion"
+  },
+  "r1a828354c": {
+    "code": "lilishop6-store:11147831",
+    "category": "fashion"
+  },
+  "r725c805fc": {
+    "code": "vectorpremium:17781056",
+    "category": "fashion"
+  },
+  "r978e830ca": {
+    "code": "uxcelljapan:11574765",
+    "category": "fashion"
+  },
+  "r24f3c32d1": {
+    "code": "remake-buddy:10282169",
+    "category": "fashion"
+  },
+  "r0c0e54872": {
+    "code": "best-plice-online:10000977",
+    "category": "fashion"
+  },
+  "r9aa9f7f91": {
+    "code": "lifepartnershop:10009140",
+    "category": "fashion"
+  },
+  "r8b45d3ceb": {
+    "code": "s-share-global:11174981",
+    "category": "fashion"
+  },
+  "rd2107cc79": {
+    "code": "e-squ:14197344",
+    "category": "fashion"
+  },
+  "r9c639e804": {
+    "code": "luckyrabbit:10019778",
+    "category": "fashion"
+  },
+  "r8e65ba349": {
+    "code": "harukaze-shop:10024372",
+    "category": "fashion"
+  },
+  "r6b70d4a3d": {
+    "code": "wizshop:10033023",
+    "category": "fashion"
+  },
+  "rd138f2deb": {
+    "code": "umaimon-hunter:10030166",
+    "category": "food"
+  },
+  "r2ba4762b0": {
+    "code": "uzumasa:10056888",
+    "category": "food"
+  },
+  "r294ecc75a": {
+    "code": "getmarket:10000899",
+    "category": "food"
+  },
+  "rc7de1c105": {
+    "code": "hauteproduit:10205688",
+    "category": "kaden"
+  },
+  "r2abe4794b": {
+    "code": "laonschoise:11163987",
+    "category": "kaden"
+  },
+  "rf07b1bd94": {
+    "code": "peacedenki:10008440",
+    "category": "kaden"
+  },
+  "r28190d60e": {
+    "code": "fansfactory:10031139",
+    "category": "interior"
+  },
+  "rffa44cbeb": {
+    "code": "kabekore:10079381",
+    "category": "interior"
+  },
+  "r13d57004d": {
+    "code": "kaden-sakura:10031988",
+    "category": "interior"
+  },
+  "r4ca6b4d27": {
+    "code": "mysco:10100760",
+    "category": "interior"
+  },
+  "r3b3fb4364": {
+    "code": "nicomart1:10035228",
+    "category": "interior"
+  },
+  "r3dc898e76": {
+    "code": "clover8888:10603810",
+    "category": "interior"
+  },
+  "r18b471a6e": {
+    "code": "malsyo:10026588",
+    "category": "interior"
+  },
+  "rfdda018f1": {
+    "code": "yorozuyahonnpo:10005611",
+    "category": "interior"
+  },
+  "rd07efa94e": {
+    "code": "amrie:13616865",
+    "category": "interior"
+  },
+  "r252473741": {
+    "code": "interiorkataoka:15944802",
+    "category": "interior"
+  },
+  "r711113538": {
+    "code": "aiailogistics:10047351",
+    "category": "interior"
+  },
+  "r3e2400491": {
+    "code": "rcmd:36739839",
+    "category": "interior"
+  },
+  "r83e8fbe10": {
+    "code": "kabekore:10205280",
+    "category": "interior"
+  },
+  "r411f0e0db": {
+    "code": "clubestashop:10031144",
+    "category": "interior"
+  },
+  "r553ba145e": {
+    "code": "koufukushop:10042939",
+    "category": "interior"
+  },
+  "rad17ec0fa": {
+    "code": "hareyaonlineshop:10043131",
+    "category": "interior"
+  },
+  "rce3f37461": {
+    "code": "kabekore:11009218",
+    "category": "interior"
+  },
+  "r86ba74d36": {
+    "code": "kabekore:11088455",
+    "category": "interior"
+  },
+  "r39faa87b6": {
+    "code": "dndltd:10038499",
+    "category": "interior"
+  },
+  "rddb2aaecc": {
+    "code": "wagato:10178034",
+    "category": "interior"
   }
 }
