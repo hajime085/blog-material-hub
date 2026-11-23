@@ -433,41 +433,29 @@ def compose_product_tree(p, site, pr, fact=None):
 
 
 def apply_tree_test(pools, items, trigs, posted, hour, kind, site, pr, th):
-    """商品枠の1つだけを、ツリー型で試す（treeTest が true のときだけ）。
+    """商品投稿はツリー型を主形にする（2026-11-23、furu 指示）。
 
-    対象枠は日付の日で決める（偶数日は9時、奇数日は20時）。
-    対象枠で出せなければ、もう一方の枠で試す。適格な商品は
-    候補を先頭から順に見て探し、見つけたらその商品を枠の
-    先頭に据えてツリー型で出す（2026-11-22 見直し。以前は
-    先頭候補だけを見て諦めていて、供給が細い時期に
-    テストが1本も出なかった）。
-    どちらの枠が今日の対象かは posted["tree_test"] に日付つきで残し、
-    別プロセス（別の時刻の起動）をまたいで引き継ぐ。
-    枠の到来の記録は、候補が空のときでも先に行う。
-    そうしないと「対象枠が候補なしで終わった」ことが残らず、
-    もう一方の枠への持ち越しが働かない。
+    親で商品名を伏せて強い反応だけを置き、リプで名前・価格・
+    リンクを明かす形。サイトへ送るよりツリー型のほうが
+    クリックを稼げるという判断で、1日1枠のテストから
+    主形に切り替えた。
+    候補を先頭から順に見て、最初に適格（商品理解がある／
+    反応の文に商品名が入っていない）な商品を、商品プールの
+    先頭に据えてツリー型で出す。商品が埋め合わせで出る枠でも
+    同じにする。適格な商品が無いときは通常形のまま。
+    treeTest が false なら完全に無効（即時停止スイッチ）。
     """
-    if not th.get("treeTest") or kind != "product" or hour not in (9, 20):
+    if not th.get("treeTest"):
         return
-    now = datetime.now(JST)
-    today = now.strftime("%Y-%m-%d")
-    target = 9 if now.day % 2 == 0 else 20
     state = posted.setdefault("tree_test", {})
-    if state.get("date") != today:
-        state.clear()
-        # 対象枠がすでに過ぎた時刻に、その日初めて呼ばれた場合は、
-        # 対象枠は「来て終わった」ものとして扱い、残りの枠で試す。
-        state.update({"date": today, "done": False,
-                      "target_tried": hour > target})
-    if state.get("done"):
-        return
-    if hour == target:
-        state["target_tried"] = True
-    elif not state.get("target_tried"):
-        return                                # まだ対象枠の番が来ていない
+    # この pick でツリー型にしたかどうかは、毎回ここで決め直す。
+    # 前の回の記録が残っていると、通常形で出した投稿を
+    # ツリー型と誤って記録してしまう。
+    state["date"] = datetime.now(JST).strftime("%Y-%m-%d")
+    state["done"] = False
+    state["form_key"] = None
     if not items:
         return
-
     for p in items:
         if not tree_eligible(p):
             continue
