@@ -334,7 +334,7 @@
       },
       "listPrice": 1716,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "観測55日の中央値1,380円のところ1,080円。いまが観測期間の最安値です。",
       "tags": [
         "送料無料"
       ],
@@ -344,7 +344,8 @@
       "postedAt": "2026-11-22",
       "bumpedAt": "2026-11-22T16:32:50",
       "lastSeen": "2026-11-23",
-      "pitch_status": "pending"
+      "pitch_status": "pending",
+      "captionAuto": true
     },
     {
       "id": "rf043ed8eb",
@@ -6215,7 +6216,7 @@
       "endTime": "",
       "listPrice": 1380,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "観測60日の中央値1,280円のところ1,000円。いまが観測期間の最安値です。",
       "points": [],
       "description": "",
       "tags": [
@@ -11809,7 +11810,7 @@
       },
       "listPrice": 3450,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "ブラックフライデー期間はショップポイント10倍。獲得目安は約306ptです。",
       "tags": [
         "ウォッチ中",
         "送料無料"
@@ -11819,7 +11820,8 @@
       "unitNote": null,
       "postedAt": "2026-11-20",
       "bumpedAt": "2026-11-20T00:00:00",
-      "lastSeen": "2026-11-23"
+      "lastSeen": "2026-11-23",
+      "captionAuto": true
     },
     {
       "id": "rde62750e6",
@@ -12540,7 +12542,7 @@
       },
       "listPrice": null,
       "priceBasis": null,
-      "caption": "",
+      "caption": "ブラックフライデー期間はショップポイント5倍。獲得目安は約226ptです。",
       "tags": [
         "ウォッチ中",
         "送料無料"
@@ -12550,7 +12552,8 @@
       "unitNote": null,
       "postedAt": "2026-11-20",
       "bumpedAt": "2026-11-20T00:00:00",
-      "lastSeen": "2026-11-23"
+      "lastSeen": "2026-11-23",
+      "captionAuto": true
     },
     {
       "id": "r6b9c47472",
@@ -18056,7 +18059,7 @@
       },
       "listPrice": 9900,
       "priceBasis": "history",
-      "caption": "",
+      "caption": "ショップポイント10倍が常時つく商品。獲得目安は約720ptです。",
       "tags": [
         "ウォッチ中",
         "送料無料"
@@ -18066,7 +18069,8 @@
       "unitNote": null,
       "postedAt": "2026-11-19",
       "bumpedAt": "2026-11-19T00:00:00",
-      "lastSeen": "2026-11-23"
+      "lastSeen": "2026-11-23",
+      "captionAuto": true
     },
     {
       "id": "rc91c7a080",
@@ -20393,7 +20397,7 @@
       },
       "listPrice": null,
       "priceBasis": null,
-      "caption": "",
+      "caption": "ブラックフライデー期間はショップポイント10倍。獲得目安は約218ptです。",
       "tags": [
         "ウォッチ中",
         "送料無料"
@@ -20403,7 +20407,8 @@
       "unitNote": null,
       "postedAt": "2026-11-18",
       "bumpedAt": "2026-11-18T00:00:00",
-      "lastSeen": "2026-11-23"
+      "lastSeen": "2026-11-23",
+      "captionAuto": true
     },
     {
       "id": "r412ae3a34",
@@ -20430,7 +20435,7 @@
       },
       "listPrice": null,
       "priceBasis": null,
-      "caption": "",
+      "caption": "ブラックフライデー期間はショップポイント5倍。獲得目安は約113ptです。",
       "tags": [
         "ウォッチ中",
         "送料無料"
@@ -20440,7 +20445,8 @@
       "unitNote": null,
       "postedAt": "2026-11-18",
       "bumpedAt": "2026-11-18T00:00:00",
-      "lastSeen": "2026-11-23"
+      "lastSeen": "2026-11-23",
+      "captionAuto": true
     },
     {
       "id": "rdadde1b86",
@@ -24178,7 +24184,7 @@
       },
       "listPrice": null,
       "priceBasis": null,
-      "caption": "",
+      "caption": "ブラックフライデー期間はショップポイント10倍。獲得目安は約440ptです。",
       "tags": [
         "ウォッチ中",
         "送料無料"
@@ -24188,7 +24194,8 @@
       "unitNote": null,
       "postedAt": "2026-11-17",
       "bumpedAt": "2026-11-17T00:00:00",
-      "lastSeen": "2026-11-23"
+      "lastSeen": "2026-11-23",
+      "captionAuto": true
     },
     {
       "id": "rb9dc0fc90",
