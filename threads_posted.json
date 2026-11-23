@@ -1023,25 +1023,10 @@
     "product:r567602096",
     "tip:08",
     "product:rd429b31ad",
-    "schedule:2026-W47-1"
+    "schedule:2026-W47-1",
+    "product:r845a962d3"
   ],
   "log": [
-    {
-      "key": "tip:05",
-      "id": "18115277243333961",
-      "at": "2026-10-21 07:20",
-      "kind": "tip",
-      "slot": 7,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
     {
       "key": "tip:12",
       "id": "18056366102802980",
@@ -5767,6 +5752,23 @@
       "logic_version": null,
       "link": "reply",
       "link_arm": null,
+      "form": "flat",
+      "burst": false
+    },
+    {
+      "key": "product:r845a962d3",
+      "id": "18113044691265372",
+      "at": "2026-11-23 17:21",
+      "kind": "product",
+      "slot": 17,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "price",
+      "ask_type": null,
+      "category": "food",
+      "logic_version": "pattern_v4",
+      "link": "reply",
+      "link_arm": "direct",
       "form": "flat",
       "burst": false
     }
