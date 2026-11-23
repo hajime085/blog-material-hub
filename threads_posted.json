@@ -1025,25 +1025,10 @@
     "product:rd429b31ad",
     "schedule:2026-W47-1",
     "product:r845a962d3",
-    "product:r6a31534cf"
+    "product:r6a31534cf",
+    "product:r6b77c88d6"
   ],
   "log": [
-    {
-      "key": "schedule:2026-W42-3",
-      "id": "18133091467743109",
-      "at": "2026-10-21 13:00",
-      "kind": "schedule",
-      "slot": 13,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
     {
       "key": "tip:02",
       "id": "18139346374640817",
@@ -5767,12 +5752,29 @@
       "link_arm": "site",
       "form": "tree",
       "burst": true
+    },
+    {
+      "key": "product:r6b77c88d6",
+      "id": "17946390333369733",
+      "at": "2026-11-24 07:20",
+      "kind": "product",
+      "slot": 7,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "price",
+      "ask_type": null,
+      "category": "kaden",
+      "logic_version": "pattern_v4",
+      "link": "reply",
+      "link_arm": "site",
+      "form": "tree",
+      "burst": false
     }
   ],
   "tree_test": {
-    "date": "2026-11-23",
+    "date": "2026-11-24",
     "done": true,
     "target_tried": true,
-    "form_key": "product:r6a31534cf"
+    "form_key": "product:r6b77c88d6"
   }
 }
