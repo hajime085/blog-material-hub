@@ -1022,25 +1022,10 @@
     "product:rc5eb592e7",
     "product:r567602096",
     "tip:08",
-    "product:rd429b31ad"
+    "product:rd429b31ad",
+    "schedule:2026-W47-1"
   ],
   "log": [
-    {
-      "key": "tip:24",
-      "id": "18148731412490119",
-      "at": "2026-10-21 01:00",
-      "kind": "tip",
-      "slot": 1,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
     {
       "key": "tip:05",
       "id": "18115277243333961",
@@ -5765,6 +5750,23 @@
       "logic_version": "pattern_v4",
       "link": "reply",
       "link_arm": "site",
+      "form": "flat",
+      "burst": false
+    },
+    {
+      "key": "schedule:2026-W47-1",
+      "id": "18118299614015668",
+      "at": "2026-11-23 14:00",
+      "kind": "schedule",
+      "slot": 14,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "ask_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "reply",
+      "link_arm": null,
       "form": "flat",
       "burst": false
     }
