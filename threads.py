@@ -1525,6 +1525,18 @@ def pick(cfg, posted, want, slot_hour=None, live_heads=None, burst=False):
         if gone:
             print("すでに載っているものを%d件、候補から外しました。" % gone)
 
+    # 期間限定の重点モード（config の focusUntil / focusKinds）。
+    # セールの山場は、出す種類を絞る。プールを空にすれば、
+    # 埋め合わせの順で残った種類に落ちる。期限を過ぎれば
+    # 自動で通常に戻る（2026-11-23、furu 指示：BF期間は
+    # サイト紹介系を止め、お買い得・クーポン系に集中する）。
+    focus_until = th.get("focusUntil") or ""
+    focus_kinds = th.get("focusKinds") or []
+    if focus_kinds and focus_until >= datetime.now(JST).strftime("%Y-%m-%d %H:%M"):
+        for name in ("tip", "feature", "report"):
+            if name not in focus_kinds:
+                pools[name] = []
+
     # 出すものが無い枠は、ほかの種類で埋める。ただし豆知識では
     # 埋めない（2026-11-22、furu の根本見直し）。
     # 「枠を落とさない」ためにいちばん弱い種類で埋め続けると、
