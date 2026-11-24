@@ -1032,25 +1032,10 @@
     "product:r841f65348",
     "product:r24bdb7dbc",
     "product:rb482690c5",
-    "product:red6052d5f"
+    "product:red6052d5f",
+    "product:rdaba5f8cd"
   ],
   "log": [
-    {
-      "key": "tip:27",
-      "id": "17917890057462463",
-      "at": "2026-10-22 01:00",
-      "kind": "tip",
-      "slot": 1,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
     {
       "key": "tip:16",
       "id": "18250189060309487",
@@ -5763,12 +5748,29 @@
       "link_arm": "site",
       "form": "tree",
       "burst": true
+    },
+    {
+      "key": "product:rdaba5f8cd",
+      "id": "18401086624205562",
+      "at": "2026-11-24 21:40",
+      "kind": "product",
+      "slot": 21,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "price",
+      "ask_type": null,
+      "category": "pc",
+      "logic_version": "pattern_v4",
+      "link": "reply",
+      "link_arm": "site",
+      "form": "tree",
+      "burst": true
     }
   ],
   "tree_test": {
     "date": "2026-11-24",
     "done": true,
     "target_tried": true,
-    "form_key": "product:red6052d5f"
+    "form_key": "product:rdaba5f8cd"
   }
 }
