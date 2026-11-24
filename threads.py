@@ -1557,7 +1557,8 @@ def pick(cfg, posted, want, slot_hour=None, live_heads=None, burst=False):
     # 記録に残るので、出るのは1回だけ（キーが done に入る）。
     for k, v in pools["event"]:
         if k.startswith("flash:"):
-            return [(k, v)]
+            body, link = v
+            return [(k, body, link)]
 
     # 出すものが無い枠は、ほかの種類で埋める。ただし豆知識では
     # 埋めない（2026-11-22、furu の根本見直し）。
