@@ -91,9 +91,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-24T16:30:31",
+          "fetchedAt": "2026-11-24T17:31:06",
           "status": "ok",
-          "checkedAt": "2026-11-24T16:30:31"
+          "checkedAt": "2026-11-24T17:31:06"
         },
         "listPrice": 1500,
         "priceBasis": "history",
@@ -229,9 +229,9 @@
           "rate": 1,
           "start": "2026-08-01 15:00",
           "end": "9999-12-31 23:59",
-          "fetchedAt": "2026-11-24T16:27:25",
+          "fetchedAt": "2026-11-24T17:27:39",
           "status": "ok",
-          "checkedAt": "2026-11-24T16:27:25"
+          "checkedAt": "2026-11-24T17:27:39"
         }
       }
     },
@@ -260,9 +260,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-24T16:26:16",
+          "fetchedAt": "2026-11-24T17:26:29",
           "status": "ok",
-          "checkedAt": "2026-11-24T16:26:16"
+          "checkedAt": "2026-11-24T17:26:29"
         },
         "listPrice": 1460,
         "priceBasis": "history",
@@ -575,9 +575,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-24T16:27:52",
+          "fetchedAt": "2026-11-24T17:28:07",
           "status": "ok",
-          "checkedAt": "2026-11-24T16:27:52"
+          "checkedAt": "2026-11-24T17:28:07"
         }
       }
     },
@@ -606,9 +606,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-24T16:28:09",
+          "fetchedAt": "2026-11-24T17:28:26",
           "status": "ok",
-          "checkedAt": "2026-11-24T16:28:09"
+          "checkedAt": "2026-11-24T17:28:26"
         },
         "listPrice": 1699,
         "priceBasis": "history",
@@ -878,9 +878,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-24T16:31:06",
+          "fetchedAt": "2026-11-24T17:31:42",
           "status": "ok",
-          "checkedAt": "2026-11-24T16:31:06"
+          "checkedAt": "2026-11-24T17:31:42"
         }
       }
     },
@@ -1081,9 +1081,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-24T16:26:37",
+          "fetchedAt": "2026-11-24T17:26:51",
           "status": "ok",
-          "checkedAt": "2026-11-24T16:26:37"
+          "checkedAt": "2026-11-24T17:26:51"
         },
         "listPrice": 2560,
         "priceBasis": "history",
@@ -1169,9 +1169,9 @@
           "rate": 20,
           "start": "2026-11-19 10:00",
           "end": "2026-11-25 09:59",
-          "fetchedAt": "2026-11-24T16:27:44",
+          "fetchedAt": "2026-11-24T17:28:00",
           "status": "ok",
-          "checkedAt": "2026-11-24T16:27:44"
+          "checkedAt": "2026-11-24T17:28:00"
         }
       },
       "axis": "both",
@@ -1235,9 +1235,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-24T16:32:43",
+          "fetchedAt": "2026-11-24T17:33:23",
           "status": "ok",
-          "checkedAt": "2026-11-24T16:32:43"
+          "checkedAt": "2026-11-24T17:33:23"
         }
       }
     },
@@ -1299,9 +1299,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-24T16:28:07",
+          "fetchedAt": "2026-11-24T17:28:25",
           "status": "ok",
-          "checkedAt": "2026-11-24T16:28:07"
+          "checkedAt": "2026-11-24T17:28:25"
         }
       }
     },
@@ -1416,9 +1416,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-24T16:31:23",
+          "fetchedAt": "2026-11-24T17:32:00",
           "status": "ok",
-          "checkedAt": "2026-11-24T16:31:23"
+          "checkedAt": "2026-11-24T17:32:00"
         }
       }
     },
@@ -1479,9 +1479,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-24T16:26:29",
+          "fetchedAt": "2026-11-24T17:26:43",
           "status": "ok",
-          "checkedAt": "2026-11-24T16:26:29"
+          "checkedAt": "2026-11-24T17:26:43"
         }
       }
     },
@@ -1611,18 +1611,18 @@
         "itemCode": "darkangel:10036199",
         "genreId": "566028",
         "startTime": "2026-11-25 10:00",
-        "endTime": "2026-11-26 09:00",
+        "endTime": "2026-11-26 09:59",
         "pointInfo": {
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-24T16:32:50",
+          "fetchedAt": "2026-11-24T17:33:31",
           "status": "ok",
-          "checkedAt": "2026-11-24T16:32:50"
+          "checkedAt": "2026-11-24T17:33:31"
         },
         "listPrice": 2799,
         "priceBasis": "history",
-        "caption": "2,799円の裏起毛モックネックニットが1,499円。裏ボアで暖かく、年間ランキング30位に入った定番。送料無料。",
+        "caption": "2,799円の裏起毛モックネックニットが1,480円。裏ボアで暖かく、年間ランキング30位に入った定番。送料無料。",
         "tags": [
           "送料無料"
         ],
@@ -1689,9 +1689,9 @@
           "rate": 10,
           "start": "2025-09-30 13:00",
           "end": "9999-12-31 23:59",
-          "fetchedAt": "2026-11-24T16:27:40",
+          "fetchedAt": "2026-11-24T17:27:55",
           "status": "ok",
-          "checkedAt": "2026-11-24T16:27:40"
+          "checkedAt": "2026-11-24T17:27:55"
         }
       },
       "axis": "point",
@@ -1739,9 +1739,9 @@
           "rate": 10,
           "start": "2026-03-19 13:00",
           "end": "9999-12-31 23:59",
-          "fetchedAt": "2026-11-24T16:27:40",
+          "fetchedAt": "2026-11-24T17:27:55",
           "status": "ok",
-          "checkedAt": "2026-11-24T16:27:40"
+          "checkedAt": "2026-11-24T17:27:55"
         }
       },
       "axis": "point",
@@ -1785,9 +1785,9 @@
           "rate": 5,
           "start": "2026-11-19 15:00",
           "end": "2026-11-26 11:59",
-          "fetchedAt": "2026-11-24T16:27:52",
+          "fetchedAt": "2026-11-24T17:28:07",
           "status": "ok",
-          "checkedAt": "2026-11-24T16:27:52"
+          "checkedAt": "2026-11-24T17:28:07"
         }
       },
       "axis": "point",
@@ -1831,9 +1831,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-24T16:30:12",
+          "fetchedAt": "2026-11-24T17:30:34",
           "status": "ok",
-          "checkedAt": "2026-11-24T16:30:12"
+          "checkedAt": "2026-11-24T17:30:34"
         },
         "captionAuto": true
       }
@@ -1876,9 +1876,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-24T16:30:15",
+          "fetchedAt": "2026-11-24T17:30:37",
           "status": "ok",
-          "checkedAt": "2026-11-24T16:30:15"
+          "checkedAt": "2026-11-24T17:30:37"
         },
         "captionAuto": true,
         "marketing": {
@@ -1982,9 +1982,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-24T16:26:37",
+          "fetchedAt": "2026-11-24T17:26:51",
           "status": "ok",
-          "checkedAt": "2026-11-24T16:26:37"
+          "checkedAt": "2026-11-24T17:26:51"
         },
         "listPrice": 2760,
         "priceBasis": "history",
@@ -2058,9 +2058,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-24T16:32:26",
+          "fetchedAt": "2026-11-24T17:33:06",
           "status": "ok",
-          "checkedAt": "2026-11-24T16:32:26"
+          "checkedAt": "2026-11-24T17:33:06"
         },
         "captionAuto": true,
         "marketing": {
@@ -2124,7 +2124,7 @@
           "end": "2026-11-25 01:59",
           "fetchedAt": "2026-11-17T16:27:19",
           "status": "ok",
-          "checkedAt": "2026-11-24T16:27:29"
+          "checkedAt": "2026-11-24T17:27:44"
         }
       },
       "axis": "point",
@@ -2172,9 +2172,9 @@
           "rate": 10,
           "start": "2026-11-19 20:00",
           "end": "2026-11-25 01:59",
-          "fetchedAt": "2026-11-24T16:27:40",
+          "fetchedAt": "2026-11-24T17:27:55",
           "status": "ok",
-          "checkedAt": "2026-11-24T16:27:40"
+          "checkedAt": "2026-11-24T17:27:55"
         }
       },
       "axis": "point",
@@ -2218,9 +2218,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-24T16:31:21",
+          "fetchedAt": "2026-11-24T17:31:58",
           "status": "ok",
-          "checkedAt": "2026-11-24T16:31:21"
+          "checkedAt": "2026-11-24T17:31:58"
         },
         "captionAuto": true,
         "marketing": {
@@ -2281,9 +2281,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-24T16:26:41",
+          "fetchedAt": "2026-11-24T17:26:56",
           "status": "ok",
-          "checkedAt": "2026-11-24T16:26:41"
+          "checkedAt": "2026-11-24T17:26:56"
         },
         "captionAuto": true,
         "marketing": {
@@ -2346,9 +2346,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-24T16:32:50",
+          "fetchedAt": "2026-11-24T17:33:31",
           "status": "ok",
-          "checkedAt": "2026-11-24T16:32:50"
+          "checkedAt": "2026-11-24T17:33:31"
         },
         "marketing": {
           "body": "カップ付きのキャミソール型インナー。リブ素材で、脇高の作りです。",
@@ -2405,9 +2405,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-24T16:27:44",
+          "fetchedAt": "2026-11-24T17:28:00",
           "status": "ok",
-          "checkedAt": "2026-11-24T16:27:44"
+          "checkedAt": "2026-11-24T17:28:00"
         },
         "captionAuto": true,
         "marketing": {
@@ -2518,9 +2518,9 @@
           "rate": 5,
           "start": "2026-11-19 20:00",
           "end": "2026-11-25 09:59",
-          "fetchedAt": "2026-11-24T16:27:44",
+          "fetchedAt": "2026-11-24T17:28:00",
           "status": "ok",
-          "checkedAt": "2026-11-24T16:27:44"
+          "checkedAt": "2026-11-24T17:28:00"
         },
         "listPrice": null,
         "priceBasis": null,
@@ -2565,9 +2565,9 @@
           "rate": 5,
           "start": "2026-11-19 20:00",
           "end": "2026-11-25 01:59",
-          "fetchedAt": "2026-11-24T16:30:14",
+          "fetchedAt": "2026-11-24T17:30:35",
           "status": "ok",
-          "checkedAt": "2026-11-24T16:30:14"
+          "checkedAt": "2026-11-24T17:30:35"
         },
         "listPrice": null,
         "priceBasis": null,
@@ -2612,9 +2612,9 @@
           "rate": 10,
           "start": "2026-11-19 13:00",
           "end": "2026-11-25 23:59",
-          "fetchedAt": "2026-11-24T16:26:24",
+          "fetchedAt": "2026-11-24T17:26:38",
           "status": "ok",
-          "checkedAt": "2026-11-24T16:26:24"
+          "checkedAt": "2026-11-24T17:26:38"
         },
         "listPrice": 3450,
         "priceBasis": "history",
@@ -2659,9 +2659,9 @@
           "rate": 10,
           "start": "2026-11-19 20:00",
           "end": "2026-11-25 01:59",
-          "fetchedAt": "2026-11-24T16:27:41",
+          "fetchedAt": "2026-11-24T17:27:57",
           "status": "ok",
-          "checkedAt": "2026-11-24T16:27:41"
+          "checkedAt": "2026-11-24T17:27:57"
         },
         "listPrice": null,
         "priceBasis": null,
@@ -2706,9 +2706,9 @@
           "rate": 10,
           "start": "2026-11-19 20:00",
           "end": "2026-11-25 23:59",
-          "fetchedAt": "2026-11-24T16:27:20",
+          "fetchedAt": "2026-11-24T17:27:35",
           "status": "ok",
-          "checkedAt": "2026-11-24T16:27:20"
+          "checkedAt": "2026-11-24T17:27:35"
         },
         "listPrice": null,
         "priceBasis": null,
@@ -2753,9 +2753,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-24T16:31:55",
+          "fetchedAt": "2026-11-24T17:32:33",
           "status": "ok",
-          "checkedAt": "2026-11-24T16:31:55"
+          "checkedAt": "2026-11-24T17:32:33"
         },
         "listPrice": 1716,
         "priceBasis": "history",
@@ -2798,9 +2798,9 @@
           "rate": 10,
           "start": "2025-09-30 13:00",
           "end": "9999-12-31 23:59",
-          "fetchedAt": "2026-11-24T16:27:40",
+          "fetchedAt": "2026-11-24T17:27:55",
           "status": "ok",
-          "checkedAt": "2026-11-24T16:27:40"
+          "checkedAt": "2026-11-24T17:27:55"
         },
         "listPrice": 9900,
         "priceBasis": "history",
@@ -2845,9 +2845,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-24T16:32:28",
+          "fetchedAt": "2026-11-24T17:33:07",
           "status": "ok",
-          "checkedAt": "2026-11-24T16:32:28"
+          "checkedAt": "2026-11-24T17:33:07"
         },
         "listPrice": 2290,
         "priceBasis": "history",
@@ -2887,9 +2887,9 @@
     }
   ],
   "automation": {
-    "applied_at": "2026-11-24T16:34:20+09:00",
-    "products_count": 1078,
-    "history_entries": 374355,
+    "applied_at": "2026-11-24T17:35:07+09:00",
+    "products_count": 1080,
+    "history_entries": 374357,
     "added": [],
     "expired": [],
     "point_added": [],
