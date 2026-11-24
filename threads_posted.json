@@ -1029,25 +1029,10 @@
     "product:r6b77c88d6",
     "product:r83d99a75f",
     "flash:blackcoupon3",
-    "product:r841f65348"
+    "product:r841f65348",
+    "product:r24bdb7dbc"
   ],
   "log": [
-    {
-      "key": "tip:03",
-      "id": "17914055685550269",
-      "at": "2026-10-21 23:20",
-      "kind": "tip",
-      "slot": 22,
-      "catchup": true,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
     {
       "key": "tip:31",
       "id": "17952136731300432",
@@ -5757,12 +5742,29 @@
       "link_arm": "direct",
       "form": "tree",
       "burst": true
+    },
+    {
+      "key": "product:r24bdb7dbc",
+      "id": "17940770280408378",
+      "at": "2026-11-24 21:10",
+      "kind": "product",
+      "slot": 21,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "price",
+      "ask_type": null,
+      "category": "food",
+      "logic_version": "pattern_v4",
+      "link": "reply",
+      "link_arm": "direct",
+      "form": "tree",
+      "burst": true
     }
   ],
   "tree_test": {
     "date": "2026-11-24",
     "done": true,
     "target_tried": true,
-    "form_key": "product:r841f65348"
+    "form_key": "product:r24bdb7dbc"
   }
 }
