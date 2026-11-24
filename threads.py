@@ -497,7 +497,7 @@ def compose_guide(g, site, pr, reply_link=False):
 
 def compose_page(page, site, pr, reply_link=False):
     """セールの案内。理由は compose_guide と同じで、PRは付けない。"""
-    url = "%s%s" % (site, page["path"])
+    url = page.get("url") or "%s%s" % (site, page["path"])
     body = "\n".join([page["title"], "", page["lead"]])
     if reply_link:
         return body, url
@@ -548,6 +548,21 @@ def event_posts(site, ev, n_kaimawari):
                 "1,000円以上かつ送料無料のものだけ%d件集めました。"
                 "別々の店から1つずつ選ぶ組み方も出しています。" % n_kaimawari,
         "path": "/kaimawari/"}]
+    # 期限つきの速報（flash）。先着順のクーポンのように、
+    # 始まった直後に知らせる意味があるものだけを入れる。
+    # 条件は楽天公式で確認できた範囲だけを書く（events.json の
+    # flash に _source で出どころを残す）。期間の外では出さない。
+    now = datetime.now(JST).replace(tzinfo=None)
+    for f in ev.get("flash") or []:
+        try:
+            a = datetime.strptime(f["from"][:16], "%Y-%m-%d %H:%M")
+            b = datetime.strptime(f["until"][:16], "%Y-%m-%d %H:%M")
+        except (ValueError, KeyError, TypeError):
+            continue
+        if a <= now <= b:
+            out.append({"key": "flash:%s" % f["id"],
+                        "title": f["title"], "lead": f["lead"],
+                        "url": f.get("url", "")})
     return out
 
 
@@ -1536,6 +1551,13 @@ def pick(cfg, posted, want, slot_hour=None, live_heads=None, burst=False):
         for name in ("tip", "feature", "report"):
             if name not in focus_kinds:
                 pools[name] = []
+
+    # 期限つきの速報（flash）は、枠の種類より優先して出す。
+    # 先着順のクーポンは、枠の順番を待っていると上限に達してしまう。
+    # 記録に残るので、出るのは1回だけ（キーが done に入る）。
+    for k, v in pools["event"]:
+        if k.startswith("flash:"):
+            return [(k, v)]
 
     # 出すものが無い枠は、ほかの種類で埋める。ただし豆知識では
     # 埋めない（2026-11-22、furu の根本見直し）。
