@@ -38,6 +38,8 @@ GENERATED_FILES = ["index.html", "404.html", "sitemap.xml", "feed.xml", "robots.
 # 特集を足すときは、原本を event_src/ に置いてここに1行足すだけ。
 # sitemap とトップの「特集」欄はこの登録から自動で出る。
 EVENT_PAGES = [
+    {"slug": "seafood", "title": "年末のカニ・海鮮特集",
+     "desc": "カット生ずわい蟹からレビュー3.9万件の骨取りさばまで、レビュー実績と今の価格で選んだ年末年始のカニ・海鮮14選。"},
     {"slug": "osechi", "title": "おせち特集",
      "desc": "早割・予約の締切カレンダーと、レビュー実績で選んだ楽天市場のおせち20選。"},
     {"slug": "cake", "title": "クリスマスケーキ特集",
@@ -900,6 +902,15 @@ STRIP_ORDER = ["kitchen", "kaden", "food", "beauty", "pc", "fashion"]
 # events.json の kind=deadline（deadlineKey = 各エントリの key）から引くので、
 # 締切が過ぎれば表示も消える。
 TOPICS = [
+    {"slug": "seafood", "img": "/assets/img/event/seafood/eyecatch.svg",
+     "imgAlt": "年末のカニ・海鮮特集アイキャッチ｜年末のごちそう、実績で選ぶ",
+     "pos": "0% 18%",
+     "badge": "年末 × カニ・海鮮",
+     "title": "年末のカニ・海鮮｜実績で選ぶ14選",
+     "copy": "カット生ずわい蟹から、レビュー3.9万件の骨取りさば、1万件級の明太子・ネギトロまで。年末年始の食卓用に、実績のある店だけを集めました。",
+     "chips": "採用14件　カニ・骨取り魚・ご飯の供",
+     "deadlineKey": "seafood-none", "chip": False,
+     "revFmt": ""},
     {"slug": "blackfriday", "img": "/assets/img/event/blackfriday/eyecatch.jpg",
      "imgAlt": "ブラックフライデー特集アイキャッチ｜その安さ、本物ですか",
      "pos": "0% 18%",
