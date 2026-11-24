@@ -5791,6 +5791,16 @@
       "catchup": false,
       "link": "none",
       "why": "empty"
+    },
+    {
+      "key": "skip:19",
+      "id": null,
+      "at": "2026-11-24 19:00",
+      "kind": "skip",
+      "slot": 19,
+      "catchup": false,
+      "link": "none",
+      "why": "empty"
     }
   ],
   "tree_test": {
