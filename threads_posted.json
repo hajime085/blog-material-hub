@@ -1031,25 +1031,10 @@
     "flash:blackcoupon3",
     "product:r841f65348",
     "product:r24bdb7dbc",
-    "product:rb482690c5"
+    "product:rb482690c5",
+    "product:red6052d5f"
   ],
   "log": [
-    {
-      "key": "tip:29",
-      "id": "18114251431859393",
-      "at": "2026-10-22 00:20",
-      "kind": "tip",
-      "slot": 0,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
     {
       "key": "tip:27",
       "id": "17917890057462463",
@@ -5761,12 +5746,29 @@
       "link_arm": "site",
       "form": "tree",
       "burst": true
+    },
+    {
+      "key": "product:red6052d5f",
+      "id": "18442880512179589",
+      "at": "2026-11-24 21:31",
+      "kind": "product",
+      "slot": 21,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "ask_type": null,
+      "category": "pc",
+      "logic_version": "pattern_v4",
+      "link": "reply",
+      "link_arm": "site",
+      "form": "tree",
+      "burst": true
     }
   ],
   "tree_test": {
     "date": "2026-11-24",
     "done": true,
     "target_tried": true,
-    "form_key": "product:rb482690c5"
+    "form_key": "product:red6052d5f"
   }
 }
