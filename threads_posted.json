@@ -1028,25 +1028,10 @@
     "product:r6a31534cf",
     "product:r6b77c88d6",
     "product:r83d99a75f",
-    "flash:blackcoupon3"
+    "flash:blackcoupon3",
+    "product:r841f65348"
   ],
   "log": [
-    {
-      "key": "tip:04",
-      "id": "18100197386657316",
-      "at": "2026-10-21 21:00",
-      "kind": "tip",
-      "slot": 21,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
     {
       "key": "tip:03",
       "id": "17914055685550269",
@@ -5754,6 +5739,23 @@
       "link": "reply",
       "link_arm": null,
       "form": "flat",
+      "burst": true
+    },
+    {
+      "key": "product:r841f65348",
+      "id": "18134178184805685",
+      "at": "2026-11-24 21:01",
+      "kind": "product",
+      "slot": 21,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "price",
+      "ask_type": null,
+      "category": "kitchen",
+      "logic_version": "pattern_v4",
+      "link": "reply",
+      "link_arm": "direct",
+      "form": "tree",
       "burst": true
     }
   ],
