@@ -19279,6 +19279,7 @@
     "tags": [
       "ウォッチ中"
     ],
+    "listPrice": 1500,
     "_stashedAt": "2026-11-24"
   },
   "ioroi:10000341": {
@@ -19286,6 +19287,39 @@
       "送料無料"
     ],
     "listPrice": 3350,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-24"
+  },
+  "pierrot:10015114": {
+    "listPrice": 2290,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-24"
+  },
+  "pierrot:10015430": {
+    "listPrice": 2890,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-24"
+  },
+  "pierrot:10016050": {
+    "listPrice": 1990,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-24"
+  },
+  "pierrot:10015115": {
+    "listPrice": 2490,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-24"
+  },
+  "pierrot:10015116": {
+    "listPrice": 2490,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-24"
+  },
+  "darkangel:10036265": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 1999,
     "pitch_status": "pending",
     "_stashedAt": "2026-11-24"
   }
