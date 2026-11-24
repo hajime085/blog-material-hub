@@ -13,9 +13,10 @@ XのAPIは2026年2月から従量課金だけになり、URLを含む投稿は1�
 ・サイトに来てもらえれば、他のものも見てもらえる
 ・楽天はThreadsを認定SNSに入れているので、貼ること自体は問題ない
 
-【PR】は文頭に置く。楽天のガイドラインは
-「一番下に沢山のハッシュタグと合わせて#PR」をNG例として挙げており、
-良い例を「PR表記が上部に位置している」と定めている。
+PR表記は、親投稿の文頭には置かず、リンクを貼る返信に置く
+（2026-11-24、furu の指示）。文頭の【PR】で広告と分かる形は
+反応が鈍く、@hiyoko_web の形（親は反応だけ、PRはリンク側の
+返信で示す）に寄せる。リンクと並べて示すので、隠す形にはしない。
 
 使い方:
     python3 threads.py --dry-run     出すものと文面を見るだけ
@@ -296,10 +297,10 @@ def link_for(p, site, policy=None):
     url = (p.get("url") or "").strip()
     if (link_arm(p, policy) == "direct"
             and url.startswith("https://hb.afl.rakuten.co.jp/")):
-        # 広告であることは親の投稿の【PR】でも示しているが、
-        # リンクだけを見た人にも分かるように、返信にも書く。
         return "※PR\n" + url
-    return "%s/p/%s/" % (site, p["id"])
+    # PR表記はリンクを貼る返信に置く（2026-11-24、furu の指示）。
+    # 親投稿の文頭には置かない。サイト経由のリンクでも同じ。
+    return "※PR\n%s/p/%s/" % (site, p["id"])
 
 
 def _price_line(p, mk):
@@ -321,7 +322,8 @@ def compose_product(p, site, pr, reply_link=False, ev=None, seq=0, fact=None):
     何が効いたのか分からなくなる。変えるのは中身（反応と一言）で、
     骨格は固定する。全体で3〜4行に収める。
 
-        【PR】＋ 反応（hook）     … 価格を見たときの生の反応。口語で短く
+        反応（hook）             … 価格を見たときの生の反応。口語で短く
+                                  （PR表記は文頭に置かず、リンク側の返信に置く）
         商品名＋現在価格         … 組み立て側が feed の実測で作る。
                                    いつもの値段（比較価格）との差が
                                    一言で言えるときだけ添える
@@ -341,9 +343,9 @@ def compose_product(p, site, pr, reply_link=False, ev=None, seq=0, fact=None):
         # 声の調子は、ここで決めてある。
         # 投稿するときに考えると毎回ぶれるし、確かめる機会もない。
         if fact:
-            lines = [pr + fact, mk["hook"]]
+            lines = [fact, mk["hook"]]
         else:
-            lines = [pr + mk["hook"]]
+            lines = [mk["hook"]]
 
         # 価格の行は、組み立て側が feed の実測で作る。
         # 商品理解の文に金額を書かせないのは、値段が動いたときに
@@ -378,9 +380,9 @@ def compose_product(p, site, pr, reply_link=False, ev=None, seq=0, fact=None):
 # 材料は pattern_v4 と同じ（hook・name・note・リンク）。
 # 新しい文は作らない。親とリプのどちらに置くかだけを変える。
 #
-#     親  … 【PR】＋ hook だけ（商品名は出さない）
+#     親  … hook だけ（商品名は出さない。PR表記も置かない）
 #     リプ … 価格の行（_price_line） ＋ 特徴を短く1行ずつ（最大3行）
-#            ＋ note ＋ 「▼商品ページはここ」 ＋ リンク
+#            ＋ note ＋ 「▼商品ページはここ」 ＋ ※PR ＋ リンク
 #            （ひよこ・楽天トラベルの型Bの実物の並び。2026-11-20 見直し）
 #
 # config.json の threads.treeTest が false のときは一切さわらない
@@ -420,7 +422,7 @@ def compose_product_tree(p, site, pr, fact=None):
     親は反応だけに保ち、事実はリプで明かす側に回す。
     """
     mk = p.get("mk2") or {}
-    parent = pr + mk["hook"].strip()
+    parent = mk["hook"].strip()
     lines = [_price_line(p, mk)]
     if fact:
         lines.append(fact.strip())
