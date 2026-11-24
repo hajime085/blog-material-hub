@@ -168,8 +168,8 @@
             "首掛けタイプ",
             "送料無料"
           ],
-          "hook": "え、冷却プレート付きのネッククーラーがこの値段…！",
-          "hook_type": "price",
+          "hook": "手持ち扇風機って、片手が塞がるのが地味に不便で",
+          "hook_type": "scene",
           "name": "冷却プレート付きネッククーラー",
           "note": "冷却プレート付きで、風量は5段階。両手が空く形です。",
           "problem": "手持ち扇風機だと片手が塞がる",
@@ -218,8 +218,8 @@
             "立体感のあるデコシール（ぷっくりシール）",
             "送料無料"
           ],
-          "hook": "え、手帳デコの立体シールがこの値段…！二度見した",
-          "hook_type": "price",
+          "hook": "手帳デコ、シールが途中で無くなって中途半端になるの、あるあるだと思う",
+          "hook_type": "scene",
           "name": "ぷっくりシール",
           "note": "手帳やスマホケースに貼るデコシール。4枚か6枚のセットです。",
           "problem": "デコ用のシールは、枚数が少ないとテーマをそろえる前に終わる",
@@ -229,9 +229,9 @@
           "rate": 1,
           "start": "2026-08-01 15:00",
           "end": "9999-12-31 23:59",
-          "fetchedAt": "2026-11-25T00:27:50",
+          "fetchedAt": "2026-11-25T07:27:31",
           "status": "ok",
-          "checkedAt": "2026-11-25T00:27:50"
+          "checkedAt": "2026-11-25T07:27:31"
         }
       }
     },
@@ -564,8 +564,8 @@
             "薄型・コンパクト",
             "ポーチ付き"
           ],
-          "hook": "え、充電して繰り返し使えるカイロが半額以下になってる…！",
-          "hook_type": "price",
+          "hook": "使い捨てカイロ、毎回ゴミになるのが地味に気になってた",
+          "hook_type": "scene",
           "name": "充電式カイロ",
           "note": "貼らない薄型で、モバイルバッテリーにもなる。ポーチ付きのやつ。",
           "problem": "使い捨てカイロは、買い置きと捨てる手間が毎回かかる",
@@ -575,9 +575,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-25T00:28:18",
+          "fetchedAt": "2026-11-25T07:27:58",
           "status": "ok",
-          "checkedAt": "2026-11-25T00:28:18"
+          "checkedAt": "2026-11-25T07:27:58"
         }
       }
     },
@@ -606,9 +606,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-25T00:28:36",
+          "fetchedAt": "2026-11-25T07:28:15",
           "status": "ok",
-          "checkedAt": "2026-11-25T00:28:36"
+          "checkedAt": "2026-11-25T07:28:15"
         },
         "listPrice": 1699,
         "priceBasis": "history",
@@ -751,8 +751,8 @@
             "5kg入り",
             "ジュース・スムージー用の家庭用"
           ],
-          "hook": "え、サンふじの箱が今こんなに下がってるの…！",
-          "hook_type": "price",
+          "hook": "りんごをジュースにする人、量が要るから箱で買いたくない？",
+          "hook_type": "scene",
           "name": "山形県産のサンふじ",
           "note": "ジュースやスムージー用に出てる家庭用のりんご。5kg入りです。",
           "problem": "ジュース用には、まとまった量のりんごが要る",
@@ -878,9 +878,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-25T00:31:40",
+          "fetchedAt": "2026-11-25T07:31:10",
           "status": "ok",
-          "checkedAt": "2026-11-25T00:31:40"
+          "checkedAt": "2026-11-25T07:31:10"
         }
       }
     },
@@ -1081,9 +1081,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-25T00:27:02",
+          "fetchedAt": "2026-11-25T07:26:45",
           "status": "ok",
-          "checkedAt": "2026-11-25T00:27:02"
+          "checkedAt": "2026-11-25T07:26:45"
         },
         "listPrice": 2560,
         "priceBasis": "history",
@@ -1106,8 +1106,8 @@
             "熊本",
             "送料込み"
           ],
-          "hook": "え、熊本のとんこつ生麺、半額になってる…！買い置きするなら今だ",
-          "hook_type": "price",
+          "hook": "夜、急にとんこつが食べたくなる日に、買い置きがあると助かる",
+          "hook_type": "scene",
           "name": "くまもとラーメン",
           "note": "生麺のとんこつ、6食分。食べたい日にすぐ作れる、買い置きのやつ。",
           "problem": "夜、急にとんこつが食べたくなる",
@@ -1169,9 +1169,9 @@
           "rate": 20,
           "start": "2026-11-19 10:00",
           "end": "2026-11-25 09:59",
-          "fetchedAt": "2026-11-25T00:28:10",
+          "fetchedAt": "2026-11-25T07:27:51",
           "status": "ok",
-          "checkedAt": "2026-11-25T00:28:10"
+          "checkedAt": "2026-11-25T07:27:51"
         }
       },
       "axis": "both",
@@ -1223,8 +1223,8 @@
             "22.0〜25.5cm",
             "ワイズ3E"
           ],
-          "hook": "待って、このパンプス今こんなに下がってるの…！",
-          "hook_type": "price",
+          "hook": "きれいめの靴で歩く日、足が限界になるの私だけ？",
+          "hook_type": "scene",
           "name": "ローヒールのパンプス",
           "note": "ヒールは低めで、サイズは大きめまであり。通勤にも式にもいける形。",
           "problem": "きれいめのパンプスはヒールが高くて歩きにくい",
@@ -1235,9 +1235,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-25T00:33:20",
+          "fetchedAt": "2026-11-25T07:32:44",
           "status": "ok",
-          "checkedAt": "2026-11-25T00:33:20"
+          "checkedAt": "2026-11-25T07:32:44"
         }
       }
     },
@@ -1299,9 +1299,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-25T00:28:34",
+          "fetchedAt": "2026-11-25T07:28:13",
           "status": "ok",
-          "checkedAt": "2026-11-25T00:28:34"
+          "checkedAt": "2026-11-25T07:28:13"
         }
       }
     },
@@ -1349,8 +1349,8 @@
             "ロング丈",
             "送料無料"
           ],
-          "hook": "え、半額になってる…！見逃すとこだった",
-          "hook_type": "price",
+          "hook": "ウエストゴムのパンツって、楽だけど手抜きに見えるのが悩みで",
+          "hook_type": "scene",
           "name": "ジャガード柄のワイドパンツ",
           "note": "ウエストゴムで楽なのに、きちんと見えるやつ\nパンツ選び、楽さ重視？見た目重視？",
           "problem": "ウエストゴムのパンツは手抜きに見えがち",
@@ -1404,8 +1404,8 @@
             "Type-C／Lightning対応",
             "USB両面挿入"
           ],
-          "hook": "え、3本分が1本になってこの値段…！",
-          "hook_type": "price",
+          "hook": "かばんの中で充電ケーブルが絡まってる人、これ1本で済む話",
+          "hook_type": "scene",
           "name": "3in1充電ケーブル",
           "note": "Type-CもLightningもこれ1本。巻き取り式で、さっと出せるやつ。",
           "problem": "端子ごとにケーブルが増えて、かばんの中で絡まる",
@@ -1416,9 +1416,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-25T00:31:58",
+          "fetchedAt": "2026-11-25T07:31:26",
           "status": "ok",
-          "checkedAt": "2026-11-25T00:31:58"
+          "checkedAt": "2026-11-25T07:31:26"
         }
       }
     },
@@ -1467,8 +1467,8 @@
             "飲むタイプ",
             "食品屋が作ったインナービューティ"
           ],
-          "hook": "え、ちょっと待って。飲むエステ、今こんなに下がってたの",
-          "hook_type": "price",
+          "hook": "おうち時間に、ちょっと美容を意識した飲み物を足したい",
+          "hook_type": "scene",
           "name": "美粉屋の飲むエステ",
           "note": "アーユルヴェーダとハーブの飲み物。おうちでゆっくりしたい日に。",
           "problem": "家で手軽に続けられる美容の習慣が欲しい",
@@ -1479,9 +1479,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-25T00:26:53",
+          "fetchedAt": "2026-11-25T07:26:37",
           "status": "ok",
-          "checkedAt": "2026-11-25T00:26:53"
+          "checkedAt": "2026-11-25T07:26:37"
         }
       }
     },
@@ -1607,7 +1607,7 @@
         "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00q8qj7.jeifo2ee.g00q8qj7.jeifpbbc/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdarkangel%2Ftp2308-3791%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fdarkangel%2Fi%2F10036199%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
         "shop": "Dark Angel (ダークエンジェル)",
         "reviewAverage": 4.01,
-        "reviewCount": 4065,
+        "reviewCount": 4066,
         "itemCode": "darkangel:10036199",
         "genreId": "566028",
         "startTime": "2026-11-25 10:00",
@@ -1616,9 +1616,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-25T00:33:28",
+          "fetchedAt": "2026-11-25T07:32:51",
           "status": "ok",
-          "checkedAt": "2026-11-25T00:33:28"
+          "checkedAt": "2026-11-25T07:32:51"
         },
         "listPrice": 2799,
         "priceBasis": "history",
@@ -1667,7 +1667,7 @@
         "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00qb0l7.jeifoe7b.g00qb0l7.jeifp104/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Froomy%2Fwin20oct27h03%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Froomy%2Fi%2F10015766%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
         "shop": "インテリアショップ roomy",
         "reviewAverage": 4.68,
-        "reviewCount": 23288,
+        "reviewCount": 23290,
         "itemCode": "roomy:10015766",
         "genreId": "565076",
         "startTime": "",
@@ -1689,9 +1689,9 @@
           "rate": 10,
           "start": "2025-09-30 13:00",
           "end": "9999-12-31 23:59",
-          "fetchedAt": "2026-11-25T00:28:06",
+          "fetchedAt": "2026-11-25T07:27:46",
           "status": "ok",
-          "checkedAt": "2026-11-25T00:28:06"
+          "checkedAt": "2026-11-25T07:27:46"
         }
       },
       "axis": "point",
@@ -1739,9 +1739,9 @@
           "rate": 10,
           "start": "2026-03-19 13:00",
           "end": "9999-12-31 23:59",
-          "fetchedAt": "2026-11-25T00:28:06",
+          "fetchedAt": "2026-11-25T07:27:46",
           "status": "ok",
-          "checkedAt": "2026-11-25T00:28:06"
+          "checkedAt": "2026-11-25T07:27:46"
         }
       },
       "axis": "point",
@@ -1763,7 +1763,7 @@
         "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00q57p7.jeifo93c.g00q57p7.jeifp069/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmishin-shop%2Fms201%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fmishin-shop%2Fi%2F10000156%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
         "shop": "ミシン買うならミシンジャパン",
         "reviewAverage": 4.56,
-        "reviewCount": 43263,
+        "reviewCount": 43264,
         "itemCode": "mishin-shop:10000156",
         "genreId": "212607",
         "startTime": "",
@@ -1785,9 +1785,9 @@
           "rate": 5,
           "start": "2026-11-19 15:00",
           "end": "2026-11-26 11:59",
-          "fetchedAt": "2026-11-25T00:28:18",
+          "fetchedAt": "2026-11-25T07:27:58",
           "status": "ok",
-          "checkedAt": "2026-11-25T00:28:18"
+          "checkedAt": "2026-11-25T07:27:58"
         }
       },
       "axis": "point",
@@ -1831,9 +1831,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-25T00:30:43",
+          "fetchedAt": "2026-11-25T07:30:15",
           "status": "ok",
-          "checkedAt": "2026-11-25T00:30:43"
+          "checkedAt": "2026-11-25T07:30:15"
         },
         "captionAuto": true
       }
@@ -1876,9 +1876,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-25T00:30:46",
+          "fetchedAt": "2026-11-25T07:30:18",
           "status": "ok",
-          "checkedAt": "2026-11-25T00:30:46"
+          "checkedAt": "2026-11-25T07:30:18"
         },
         "captionAuto": true,
         "marketing": {
@@ -1982,9 +1982,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-25T00:27:02",
+          "fetchedAt": "2026-11-25T07:26:45",
           "status": "ok",
-          "checkedAt": "2026-11-25T00:27:02"
+          "checkedAt": "2026-11-25T07:26:45"
         },
         "listPrice": 2760,
         "priceBasis": "history",
@@ -2011,8 +2011,8 @@
             "だしパックタイプ",
             "減塩"
           ],
-          "hook": "え、あごだし半額になってる…！",
-          "hook_type": "price",
+          "hook": "だし取るの、正直めんどうで顆粒に逃げがちだったけど",
+          "hook_type": "scene",
           "name": "あご入りだしパック",
           "note": "毎日の味噌汁や煮物に、そのまま使えるやつ",
           "problem": "だし取りは手間がかかる",
@@ -2036,7 +2036,7 @@
         "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00q5017.jeifoa00.g00q5017.jeifpe6d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fpierrot%2Fe1907-022188%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fpierrot%2Fi%2F10013558%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
         "shop": "Pierrot【ピエロ】",
         "reviewAverage": 4.32,
-        "reviewCount": 2991,
+        "reviewCount": 2992,
         "itemCode": "pierrot:10013558",
         "genreId": "206440",
         "startTime": "2026-11-19 17:00",
@@ -2058,9 +2058,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-25T00:33:03",
+          "fetchedAt": "2026-11-25T07:32:28",
           "status": "ok",
-          "checkedAt": "2026-11-25T00:33:03"
+          "checkedAt": "2026-11-25T07:32:28"
         },
         "captionAuto": true,
         "marketing": {
@@ -2071,114 +2071,14 @@
             "ストレッチデニム",
             "大きいサイズあり"
           ],
-          "hook": "え、裏起毛の暖パン下がってる…！",
-          "hook_type": "price",
+          "hook": "冬の朝、冷たいデニムに足を通すの、地味に覚悟がいる",
+          "hook_type": "scene",
           "name": "裏起毛の暖パンツ",
           "note": "裏が起毛であったかい、冬のデニム",
           "problem": "冬のデニムは冷たくて寒い",
           "target": "冬でもデニムをはきたい人"
         }
       }
-    },
-    {
-      "id": "r6753bf0e2",
-      "listed_on": "2026-11-19",
-      "theme": null,
-      "last_seen": "2026-11-25",
-      "snapshot_updated": "2026-11-25",
-      "snapshot": {
-        "id": "r6753bf0e2",
-        "category": "kitchen",
-        "title": "クーポン発行中 【楽天ランキング入賞】シヤチハタ キャップレス9 印鑑 ネーム印 はんこ 全26色…",
-        "rawTitle": "エントリーでポイント5倍 3%OFFクーポン発行中 【楽天ランキング入賞】シヤチハタ キャップレス9 印鑑 ネーム印 はんこ 全26色 名前入り スタンプ台不要 フタなし 浸透印 文具女子 個人印鑑 【送料無料】",
-        "price": 1200,
-        "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/ogawahan/cabinet/hituyou2/shachihata/new_capless9/imgrc0192487840.jpg?_ex=600x600",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00q0207.jeifod2d.g00q0207.jeifp6a9/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fogawahan%2F10002465%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fogawahan%2Fi%2F10002465%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
-        "shop": "印鑑はんこ製造直売店@小川祥雲堂",
-        "reviewAverage": 4.73,
-        "reviewCount": 28732,
-        "itemCode": "ogawahan:10002465",
-        "genreId": "216081",
-        "listPrice": null,
-        "priceBasis": null,
-        "caption": "フタのないシャチハタ。キャップを探す時間がなくなって1,200円。",
-        "tags": [
-          "ウォッチ中",
-          "送料無料"
-        ],
-        "points": [
-          "1,200円で送料込み",
-          "フタなし。片手で押せる",
-          "全26色"
-        ],
-        "description": "シヤチハタのキャップレス9です。フタがないので、片手でそのまま押せます。\nキャップは失くすものですし、探す時間もかかります。その両方がなくなります。全26色。",
-        "unitNote": null,
-        "postedAt": "2026-08-20",
-        "lastSeen": "2026-11-25",
-        "startTime": "",
-        "endTime": "",
-        "bumpedAt": "2026-08-20T00:00:00",
-        "pointInfo": {
-          "rate": 11,
-          "start": "2026-11-19 20:00",
-          "end": "2026-11-25 01:59",
-          "fetchedAt": "2026-11-17T16:27:19",
-          "status": "ok",
-          "checkedAt": "2026-11-25T00:27:54"
-        }
-      },
-      "axis": "point",
-      "point_end": "2026-11-25T01:59:00+09:00"
-    },
-    {
-      "id": "raee98e060",
-      "listed_on": "2026-11-19",
-      "theme": null,
-      "last_seen": "2026-11-25",
-      "snapshot_updated": "2026-11-25",
-      "snapshot": {
-        "id": "raee98e060",
-        "category": "kaden",
-        "title": "Agetuya ヘアアイロン Agetuya/アゲツヤ プロ 全4色 ストレート カール 2WAY…",
-        "rawTitle": "【BF期間ポイント10倍】＼レビュー評価★4.45／ Agetuya ヘアアイロン Agetuya/アゲツヤ プロ 全4色 ストレート カール 2WAY 海外対応 チタニウム ヘアアイロン ヘアーアイロン ストレートアイロン カールアイロン 口コミ プロ仕様 【送料無料】【メーカー保証1年】",
-        "price": 3378,
-        "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/rasta/cabinet/10452612/imgrc0120583995.jpg?_ex=600x600",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00q0hw7.jeifo8a3.g00q0hw7.jeifp329/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Frasta%2Fxx00-1962%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Frasta%2Fi%2F10027536%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
-        "shop": "RONNE",
-        "reviewAverage": 4.45,
-        "reviewCount": 11687,
-        "itemCode": "rasta:10027536",
-        "genreId": "562667",
-        "listPrice": 4378,
-        "priceBasis": "history",
-        "caption": "ストレートとカールの2WAY。全4色から選んで4,378円。",
-        "tags": [
-          "ウォッチ中",
-          "送料無料"
-        ],
-        "points": [
-          "4,378円で送料込み",
-          "ストレート・カールの2WAY",
-          "全4色・海外対応"
-        ],
-        "description": "ストレートとカールの両方に使える2WAYアイロンです。全4色。\nチタニウムのプレートで、海外の電圧にも対応します。1本で済むので、旅行に持っていくものを減らせます。",
-        "unitNote": null,
-        "postedAt": "2026-08-20",
-        "lastSeen": "2026-11-25",
-        "startTime": "",
-        "endTime": "",
-        "bumpedAt": "2026-08-20T00:00:00",
-        "pointInfo": {
-          "rate": 10,
-          "start": "2026-11-19 20:00",
-          "end": "2026-11-25 01:59",
-          "fetchedAt": "2026-11-25T00:28:06",
-          "status": "ok",
-          "checkedAt": "2026-11-25T00:28:06"
-        }
-      },
-      "axis": "point",
-      "point_end": "2026-11-25T01:59:00+09:00"
     },
     {
       "id": "r275ce3ef8",
@@ -2218,9 +2118,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-25T00:31:57",
+          "fetchedAt": "2026-11-25T07:31:25",
           "status": "ok",
-          "checkedAt": "2026-11-25T00:31:57"
+          "checkedAt": "2026-11-25T07:31:25"
         },
         "captionAuto": true,
         "marketing": {
@@ -2281,9 +2181,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-25T00:27:06",
+          "fetchedAt": "2026-11-25T07:26:49",
           "status": "ok",
-          "checkedAt": "2026-11-25T00:27:06"
+          "checkedAt": "2026-11-25T07:26:49"
         },
         "captionAuto": true,
         "marketing": {
@@ -2313,13 +2213,13 @@
         "id": "r83d99a75f",
         "category": "fashion",
         "title": "ブラトップ キャミソール タンクトップ カップ付きインナー オールインワンブラトップ…",
-        "rawTitle": "【24%OFF！1990円→1500円★25日01:59迄】＼楽天1位★新色追加／ブラトップ キャミソール タンクトップ カップ付きインナー オールインワンブラトップ リブフィットタンク リブフィットキャミソール ナイトブラ 脇高 脇肉 スッキリ 垂れ胸 産後 寄せ 谷間 ラディアンヌ",
+        "rawTitle": "【24%OFF！1990円→1500円★本日23:59迄】＼楽天1位★新色追加／ブラトップ キャミソール タンクトップ カップ付きインナー オールインワンブラトップ リブフィットタンク リブフィットキャミソール ナイトブラ 脇高 脇肉 スッキリ 垂れ胸 産後 寄せ 谷間 ラディアンヌ",
         "price": 1500,
         "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/radianne/cabinet/mg2/sale/24off_cm26.jpg?_ex=600x600",
         "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00rzxt7.jeifob5f.g00rzxt7.jeifp48b/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fradianne%2Fcm00026%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fradianne%2Fi%2F10000736%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
         "shop": "ラディアンヌ 楽天市場店",
         "reviewAverage": 4.17,
-        "reviewCount": 9651,
+        "reviewCount": 9653,
         "itemCode": "radianne:10000736",
         "genreId": "566018",
         "startTime": "",
@@ -2346,9 +2246,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-25T00:33:28",
+          "fetchedAt": "2026-11-25T07:32:51",
           "status": "ok",
-          "checkedAt": "2026-11-25T00:33:28"
+          "checkedAt": "2026-11-25T07:32:51"
         },
         "marketing": {
           "body": "カップ付きのキャミソール型インナー。リブ素材で、脇高の作りです。",
@@ -2358,8 +2258,8 @@
             "キャミソール型",
             "脇高設計"
           ],
-          "hook": "え、カップ付きのキャミがこの値段…！",
-          "hook_type": "price",
+          "hook": "重ね着なしで1枚で済むインナー、ずっと探してた",
+          "hook_type": "scene",
           "name": "カップ付きブラトップ",
           "note": "1枚で着られる、カップ付きのやつ",
           "problem": "インナーの重ね着が面倒",
@@ -2405,9 +2305,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-25T00:28:10",
+          "fetchedAt": "2026-11-25T07:27:51",
           "status": "ok",
-          "checkedAt": "2026-11-25T00:28:10"
+          "checkedAt": "2026-11-25T07:27:51"
         },
         "captionAuto": true,
         "marketing": {
@@ -2418,8 +2318,8 @@
             "スリム・コンパクト",
             "山善"
           ],
-          "hook": "え、着脱プレートのたこ焼き器、下がってる…！",
-          "hook_type": "price",
+          "hook": "たこ焼き器って、洗うのが面倒で結局使わなくならない？",
+          "hook_type": "scene",
           "name": "着脱プレート式たこ焼き器",
           "note": "プレート外して洗えるのが、地味にうれしいやつ",
           "problem": "たこ焼き器は洗いにくい",
@@ -2518,9 +2418,9 @@
           "rate": 5,
           "start": "2026-11-19 20:00",
           "end": "2026-11-25 09:59",
-          "fetchedAt": "2026-11-25T00:28:10",
+          "fetchedAt": "2026-11-25T07:27:51",
           "status": "ok",
-          "checkedAt": "2026-11-25T00:28:10"
+          "checkedAt": "2026-11-25T07:27:51"
         },
         "listPrice": null,
         "priceBasis": null,
@@ -2563,11 +2463,11 @@
         "endTime": "",
         "pointInfo": {
           "rate": 5,
-          "start": "2026-11-19 20:00",
-          "end": "2026-11-25 01:59",
-          "fetchedAt": "2026-11-25T00:30:44",
+          "start": "2026-11-25 04:00",
+          "end": "2026-11-25 23:59",
+          "fetchedAt": "2026-11-25T07:30:17",
           "status": "ok",
-          "checkedAt": "2026-11-25T00:30:44"
+          "checkedAt": "2026-11-25T07:30:17"
         },
         "listPrice": null,
         "priceBasis": null,
@@ -2585,7 +2485,7 @@
         "captionAuto": true
       },
       "axis": "point",
-      "point_end": "2026-11-25T01:59:00+09:00"
+      "point_end": "2026-11-25T23:59:00+09:00"
     },
     {
       "id": "r72b30e7a7",
@@ -2612,9 +2512,9 @@
           "rate": 10,
           "start": "2026-11-19 13:00",
           "end": "2026-11-25 23:59",
-          "fetchedAt": "2026-11-25T00:26:48",
+          "fetchedAt": "2026-11-25T07:26:33",
           "status": "ok",
-          "checkedAt": "2026-11-25T00:26:48"
+          "checkedAt": "2026-11-25T07:26:33"
         },
         "listPrice": 3450,
         "priceBasis": "history",
@@ -2633,53 +2533,6 @@
       },
       "axis": "point",
       "point_end": "2026-11-25T23:59:00+09:00"
-    },
-    {
-      "id": "r76dc3a529",
-      "listed_on": "2026-11-23",
-      "theme": null,
-      "last_seen": "2026-11-25",
-      "snapshot_updated": "2026-11-25",
-      "snapshot": {
-        "id": "r76dc3a529",
-        "category": "kaden",
-        "title": "公式｜アゲツヤ 年間ランキング入賞 ポータブルミニブラシアイロン ヒートブラシ ブラシアイロン…",
-        "rawTitle": "【BF期間ポイント10倍】公式｜アゲツヤ 年間ランキング入賞 ポータブルミニブラシアイロン ヒートブラシ ブラシアイロン アイロンブラシ 寝癖直し 寝ぐせ直し ストレート 海外対応 コームアイロン ヘアアイロン ミニ MAX210℃ Agetuya",
-        "price": 4840,
-        "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/agetuya/cabinet/itempages/10171218/imgrc0108189791.jpg?_ex=600x600",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00r7n47.jeifoa8f.g00r7n47.jeifpaf1/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fagetuya%2Fcx00-0779%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fagetuya%2Fi%2F10000048%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
-        "shop": "アゲツヤ 公式 Agetuya",
-        "reviewAverage": 4.43,
-        "reviewCount": 6694,
-        "itemCode": "agetuya:10000048",
-        "genreId": "101765",
-        "startTime": "",
-        "endTime": "",
-        "pointInfo": {
-          "rate": 10,
-          "start": "2026-11-19 20:00",
-          "end": "2026-11-25 01:59",
-          "fetchedAt": "2026-11-25T00:28:08",
-          "status": "ok",
-          "checkedAt": "2026-11-25T00:28:08"
-        },
-        "listPrice": null,
-        "priceBasis": null,
-        "caption": "ブラックフライデー期間はショップポイント10倍。獲得目安は約440ptです。",
-        "tags": [
-          "ウォッチ中",
-          "送料無料"
-        ],
-        "points": [],
-        "description": "",
-        "unitNote": null,
-        "postedAt": "2026-11-17",
-        "bumpedAt": "2026-11-17T00:00:00",
-        "lastSeen": "2026-11-25",
-        "captionAuto": true
-      },
-      "axis": "point",
-      "point_end": "2026-11-25T01:59:00+09:00"
     },
     {
       "id": "r9750ed8f6",
@@ -2706,9 +2559,9 @@
           "rate": 10,
           "start": "2026-11-19 20:00",
           "end": "2026-11-25 23:59",
-          "fetchedAt": "2026-11-25T00:27:45",
+          "fetchedAt": "2026-11-25T07:27:27",
           "status": "ok",
-          "checkedAt": "2026-11-25T00:27:45"
+          "checkedAt": "2026-11-25T07:27:27"
         },
         "listPrice": null,
         "priceBasis": null,
@@ -2738,7 +2591,7 @@
         "id": "rc104951b2",
         "category": "pc",
         "title": "Android 充電 シリコンケーブル USB C to C Type-C タイプC 急速充電…",
-        "rawTitle": "【最大21％OFF 11/19 20:00-11/25 01:59】Android 充電 シリコンケーブル USB C to C Type-C タイプC 急速充電 iPhone15 ノートPC macbook PD 100w シリコン 断線 柔らかい 0.15m 0.5m 1m 2m CIO SL30000 デスク 整理 断線しにくい 急速充電 ケーブル タイプC 充電器 急速",
+        "rawTitle": "【最大21％OFF 11/25 03:00-11/25 23:59】Android 充電 シリコンケーブル USB C to C Type-C タイプC 急速充電 iPhone15 ノートPC macbook PD 100w シリコン 断線 柔らかい 0.15m 0.5m 1m 2m CIO SL30000 デスク 整理 断線しにくい 急速充電 ケーブル タイプC 充電器 急速",
         "price": 1080,
         "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/machinoomise/cabinet/item/item02/cio-sl30000-cc.jpg?_ex=600x600",
         "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00swcq7.jeifo47f.g00swcq7.jeifp46b/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmachinoomise%2Fcio-sl30000-cc%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fmachinoomise%2Fi%2F10000654%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
@@ -2747,15 +2600,15 @@
         "reviewCount": 422,
         "itemCode": "machinoomise:10000654",
         "genreId": "564278",
-        "startTime": "2026-11-19 20:00",
-        "endTime": "2026-11-25 01:59",
+        "startTime": "2026-11-25 03:00",
+        "endTime": "2026-11-25 23:59",
         "pointInfo": {
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-25T00:32:32",
+          "fetchedAt": "2026-11-25T07:31:58",
           "status": "ok",
-          "checkedAt": "2026-11-25T00:32:32"
+          "checkedAt": "2026-11-25T07:31:58"
         },
         "listPrice": 1716,
         "priceBasis": "history",
@@ -2769,56 +2622,23 @@
         "postedAt": "2026-11-22",
         "bumpedAt": "2026-11-22T16:32:50",
         "lastSeen": "2026-11-25",
-        "pitch_status": "pending",
-        "captionAuto": true
+        "pitch_status": "ready",
+        "captionAuto": true,
+        "marketing": {
+          "hook_type": "scene",
+          "target": "充電ケーブルがすぐ傷む人",
+          "problem": "ケーブルが硬くて絡まり、被膜が割れて断線しやすい",
+          "hook": "充電ケーブル、気づくと被膜が割れて断線してない？",
+          "name": "シリコンケーブル（Type-C）",
+          "body": "シリコン素材の充電ケーブル。USB Type-C to Cで、急速充電対応です。",
+          "note": "柔らかいシリコン素材で、Type-C同士をつなぐやつ",
+          "features": [
+            "シリコン素材",
+            "USB Type-C to C",
+            "急速充電対応"
+          ]
+        }
       }
-    },
-    {
-      "id": "re79acb81b",
-      "listed_on": "2026-11-23",
-      "theme": null,
-      "last_seen": "2026-11-25",
-      "snapshot_updated": "2026-11-25",
-      "snapshot": {
-        "id": "re79acb81b",
-        "category": "kaden",
-        "title": "【ミトンも選べる特典付き】スチームアイロン ハンガーにかけたまま 衣類スチーマー ハンディスチーマー…",
-        "rawTitle": "【ミトンも選べる特典付き】スチームアイロン ハンガーにかけたまま 衣類スチーマー ハンディスチーマー ハンディアイロン スチーマー 吊るしたまま シワ伸ばし プラスマイナスゼロ アイロン ハンディ ハンディー 除菌 脱臭 コンパクト［ ±0 スタイルスチーマー XRS-D010 ］",
-        "price": 7920,
-        "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/roomy/cabinet/500cart_all/500cart_11g/p10n-4/pmz2041-mt016-1_gt01.jpg?_ex=600x600",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/hgc/g00qb0l7.jeifoe7b.g00qb0l7.jeifp104/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Froomy%2Fpmz19jun27b01%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Froomy%2Fi%2F10016490%2F&rafcid=wsc_i_is_7ab4e8d9-1b30-4f48-9985-839a72b3595d",
-        "shop": "インテリアショップ roomy",
-        "reviewAverage": 4.46,
-        "reviewCount": 9838,
-        "itemCode": "roomy:10016490",
-        "genreId": "565066",
-        "startTime": "2026-11-19 20:00",
-        "endTime": "2026-11-25 01:59",
-        "pointInfo": {
-          "rate": 10,
-          "start": "2025-09-30 13:00",
-          "end": "9999-12-31 23:59",
-          "fetchedAt": "2026-11-25T00:28:06",
-          "status": "ok",
-          "checkedAt": "2026-11-25T00:28:06"
-        },
-        "listPrice": 9900,
-        "priceBasis": "history",
-        "caption": "ショップポイント10倍が常時つく商品。獲得目安は約720ptです。",
-        "tags": [
-          "ウォッチ中",
-          "送料無料"
-        ],
-        "points": [],
-        "description": "",
-        "unitNote": null,
-        "postedAt": "2026-11-19",
-        "bumpedAt": "2026-11-19T00:00:00",
-        "lastSeen": "2026-11-25",
-        "captionAuto": true
-      },
-      "axis": "point",
-      "point_end": null
     },
     {
       "id": "rb1b29fab5",
@@ -2845,9 +2665,9 @@
           "rate": 1,
           "start": "",
           "end": "",
-          "fetchedAt": "2026-11-25T00:33:05",
+          "fetchedAt": "2026-11-25T07:32:30",
           "status": "ok",
-          "checkedAt": "2026-11-25T00:33:05"
+          "checkedAt": "2026-11-25T07:32:30"
         },
         "listPrice": 2290,
         "priceBasis": "history",
@@ -2864,36 +2684,37 @@
         "postedAt": "2026-11-24",
         "bumpedAt": "2026-11-24T00:33:54",
         "lastSeen": "2026-11-25",
-        "pitch_status": "pending",
+        "pitch_status": "ready",
         "marketing": {
           "hook_type": "scene",
-          "target": "秋の部屋着を探している人",
-          "problem": "部屋着のパンツを替えたい",
-          "use_case": "家で過ごす時間",
+          "target": "部屋着のパンツを探している人",
+          "problem": "部屋着のパンツは見た目がだらしなく、宅配の受け取りなどで慌てる",
+          "hook": "部屋着のパンツ、宅配のピンポンで慌てるやつ卒業したい",
+          "name": "ギンガムチェックの部屋着パンツ",
+          "body": "ギンガムチェックの部屋着パンツ。ロング丈とショート丈があります。",
+          "note": "ギンガムチェックで、ロング丈とショート丈があるやつ",
           "features": [
             "ギンガムチェック",
-            "ルームウェア用パンツ",
-            "ロング丈とショート丈"
-          ],
-          "benefits": [
-            "丈を選べる"
-          ],
-          "hook": "秋になると、部屋着のパンツを替えたくなる。",
-          "body": "ギンガムチェックの部屋着用パンツです。\nロング丈とショート丈があります。",
-          "cta": "none",
-          "ask": "部屋着を替えようとしている人、柄物と無地のどちらを選びますか？"
+            "ロング丈・ショート丈",
+            "秋冬向け"
+          ]
         }
       }
     }
   ],
   "automation": {
-    "applied_at": "2026-11-25T00:35:00+09:00",
-    "products_count": 1077,
-    "history_entries": 376188,
+    "applied_at": "2026-11-25T07:34:19+09:00",
+    "products_count": 1053,
+    "history_entries": 376183,
     "added": [],
     "expired": [],
     "point_added": [],
-    "point_expired": [],
+    "point_expired": [
+      "r6753bf0e2",
+      "raee98e060",
+      "r76dc3a529",
+      "re79acb81b"
+    ],
     "forced": false
   }
 }
