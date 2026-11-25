@@ -1377,7 +1377,7 @@
       "target": "direct の1本あたりクリックが site の1.3倍以上なら direct",
       "change": "exp-010 と同じ設計。投稿の組み立ては 2026-11-10 の標準形に統一されているので、リンクの置き方だけが差になる。振り分け（threads.link_arm）も exp-010 と同じ。",
       "metric": "クリック（Threads の insights の link_clicks）",
-      "conclusion": "",
+      "conclusion": "2026-11-25 に決着。direct 17本／0クリック（0.00/本）、site 24本／39クリック（1.63/本）で site の勝ち。furu も同日『サイト経由に固定する』と決定。link_policy は winner=site を読んで全商品サイト経由に揃う。",
       "ab": {
         "field": "link_arm",
         "arms": [
