@@ -1035,25 +1035,10 @@
     "product:red6052d5f",
     "product:rdaba5f8cd",
     "tip:09",
-    "product:rb1b29fab5"
+    "product:rb1b29fab5",
+    "feature:osechi:2026-11-30"
   ],
   "log": [
-    {
-      "key": "tip:30",
-      "id": "18466843714191384",
-      "at": "2026-10-22 12:21",
-      "kind": "tip",
-      "slot": 12,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
     {
       "key": "tip:35",
       "id": "18153651640529684",
@@ -5769,12 +5754,29 @@
       "link_arm": "site",
       "form": "tree",
       "burst": false
+    },
+    {
+      "key": "feature:osechi:2026-11-30",
+      "id": "18089671064334475",
+      "at": "2026-11-25 14:21",
+      "kind": "feature",
+      "slot": 14,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "ask_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "reply",
+      "link_arm": null,
+      "form": "flat",
+      "burst": false
     }
   ],
   "tree_test": {
     "date": "2026-11-25",
     "done": true,
     "target_tried": true,
-    "form_key": "product:rb1b29fab5"
+    "form_key": "product:rc104951b2"
   }
 }
