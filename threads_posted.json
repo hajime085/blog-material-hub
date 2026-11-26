@@ -1041,41 +1041,10 @@
     "feature:cake:2026-11-30",
     "product:rc104951b2",
     "tip:38",
-    "product:r3c9b26fab"
+    "product:r3c9b26fab",
+    "schedule:2026-W47-4"
   ],
   "log": [
-    {
-      "key": "tip:06",
-      "id": "17875664193588153",
-      "at": "2026-10-22 20:00",
-      "kind": "tip",
-      "slot": 20,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
-    {
-      "key": "tip:32",
-      "id": "18084148109334970",
-      "at": "2026-10-22 21:00",
-      "kind": "tip",
-      "slot": 21,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
     {
       "key": "tip:00",
       "id": "18110693789615241",
@@ -5791,6 +5760,23 @@
       "catchup": false,
       "link": "none",
       "why": "empty"
+    },
+    {
+      "key": "schedule:2026-W47-4",
+      "id": "18385273075234878",
+      "at": "2026-11-26 17:21",
+      "kind": "schedule",
+      "slot": 17,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "ask_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "reply",
+      "link_arm": null,
+      "form": "flat",
+      "burst": false
     }
   ],
   "tree_test": {
