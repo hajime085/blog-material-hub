@@ -1042,57 +1042,10 @@
     "product:rc104951b2",
     "tip:38",
     "product:r3c9b26fab",
-    "schedule:2026-W47-4"
+    "schedule:2026-W47-4",
+    "tip:15"
   ],
   "log": [
-    {
-      "key": "tip:00",
-      "id": "18110693789615241",
-      "at": "2026-10-22 23:21",
-      "kind": "tip",
-      "slot": 22,
-      "catchup": true,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
-    {
-      "key": "tip:36",
-      "id": "17977085729932615",
-      "at": "2026-10-22 23:46",
-      "kind": "tip",
-      "slot": 23,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
-    {
-      "key": "tip:19",
-      "id": "17985910209082469",
-      "at": "2026-10-23 00:21",
-      "kind": "tip",
-      "slot": 0,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
     {
       "key": "tip:37",
       "id": "18114973040105160",
@@ -5797,10 +5750,27 @@
       "catchup": false,
       "link": "none",
       "why": "empty"
+    },
+    {
+      "key": "tip:15",
+      "id": "18140131069656136",
+      "at": "2026-11-27 07:21",
+      "kind": "tip",
+      "slot": 7,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "ask_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "reply",
+      "link_arm": null,
+      "form": "flat",
+      "burst": false
     }
   ],
   "tree_test": {
-    "date": "2026-11-26",
+    "date": "2026-11-27",
     "done": false,
     "target_tried": true,
     "form_key": null
