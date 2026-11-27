@@ -1043,57 +1043,10 @@
     "tip:38",
     "product:r3c9b26fab",
     "schedule:2026-W47-4",
-    "tip:15"
+    "tip:15",
+    "schedule:2026-W47-5"
   ],
   "log": [
-    {
-      "key": "tip:37",
-      "id": "18114973040105160",
-      "at": "2026-10-23 01:00",
-      "kind": "tip",
-      "slot": 1,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
-    {
-      "key": "tip:20",
-      "id": "17983231721908571",
-      "at": "2026-10-23 07:21",
-      "kind": "tip",
-      "slot": 7,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
-    {
-      "key": "tip:38",
-      "id": "17926236723201501",
-      "at": "2026-10-23 09:21",
-      "kind": "tip",
-      "slot": 9,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
     {
       "key": "tip:09",
       "id": "17994454155026323",
@@ -5787,6 +5740,23 @@
       "catchup": false,
       "link": "none",
       "why": "empty"
+    },
+    {
+      "key": "schedule:2026-W47-5",
+      "id": "18100211387202070",
+      "at": "2026-11-27 17:21",
+      "kind": "schedule",
+      "slot": 17,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "ask_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "reply",
+      "link_arm": null,
+      "form": "flat",
+      "burst": false
     }
   ],
   "tree_test": {
