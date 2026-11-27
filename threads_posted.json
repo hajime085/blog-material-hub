@@ -5757,6 +5757,26 @@
       "link_arm": null,
       "form": "flat",
       "burst": false
+    },
+    {
+      "key": "skip:19",
+      "id": null,
+      "at": "2026-11-27 19:21",
+      "kind": "skip",
+      "slot": 19,
+      "catchup": false,
+      "link": "none",
+      "why": "empty"
+    },
+    {
+      "key": "skip:20",
+      "id": null,
+      "at": "2026-11-27 20:00",
+      "kind": "skip",
+      "slot": 20,
+      "catchup": false,
+      "link": "none",
+      "why": "empty"
     }
   ],
   "tree_test": {
