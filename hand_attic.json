@@ -19697,7 +19697,6 @@
     "tags": [
       "送料無料"
     ],
-    "listPrice": 8128,
     "pitch_status": "pending",
     "_stashedAt": "2026-11-27"
   },
@@ -20182,6 +20181,35 @@
       "送料無料",
       "まとめ買い",
       "訳あり"
+    ],
+    "_stashedAt": "2026-11-27"
+  },
+  "kurevy-29:10000000": {
+    "tags": [
+      "送料無料"
+    ],
+    "listPrice": 6280,
+    "pitch_status": "pending",
+    "_stashedAt": "2026-11-27"
+  },
+  "masuyone:10000395": {
+    "tags": [
+      "ウォッチ中",
+      "送料無料"
+    ],
+    "_stashedAt": "2026-11-27"
+  },
+  "tamaki-web:10003236": {
+    "tags": [
+      "ウォッチ中",
+      "送料無料"
+    ],
+    "_stashedAt": "2026-11-27"
+  },
+  "jyonetsubatake:10000160": {
+    "tags": [
+      "ウォッチ中",
+      "まとめ買い"
     ],
     "_stashedAt": "2026-11-27"
   }
