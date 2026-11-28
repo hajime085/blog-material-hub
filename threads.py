@@ -539,23 +539,35 @@ def guide_posts(site):
 
 
 def event_posts(site, ev, n_kaimawari):
-    """開催中のセール向け。イベントの外では出さない。"""
-    if not ev:
-        return []
-    out = [{
+    """開催中のセール向け。イベントの外では出さない。
+
+    ただし速報（flash）だけは例外：セール開始前の告知
+    （事前エントリー開始など）も意味があるので、開催中に
+    かかわらず events.json 全体から拾う（2026-11-28 追加。
+    それまでは開催中イベントの flash しか読めず、開始前の
+    告知が出せなかった）。"""
+    out = []
+    if ev:
+        out.append({
         "key": "page:kaimawari:%s" % ev["start"][:10],
         "title": "買いまわりに使えるもの",
         "lead": "1ショップ税込1,000円以上で1カウント。送料は判定に入りません。\n"
                 "1,000円＋送料590円より、1,200円の送料無料のほうが安くて同じ1カウントです。\n"
                 "1,000円以上かつ送料無料のものだけ%d件集めました。"
                 "別々の店から1つずつ選ぶ組み方も出しています。" % n_kaimawari,
-        "path": "/kaimawari/"}]
+        "path": "/kaimawari/"})
     # 期限つきの速報（flash）。先着順のクーポンのように、
     # 始まった直後に知らせる意味があるものだけを入れる。
     # 条件は楽天公式で確認できた範囲だけを書く（events.json の
     # flash に _source で出どころを残す）。期間の外では出さない。
+    # 置き場所は events.json のトップレベルでも、各イベントの
+    # flash でもよい（両方を見る）。
     now = datetime.now(JST).replace(tzinfo=None)
-    for f in ev.get("flash") or []:
+    doc = load("events.json", {}) or {}
+    flashes = list(doc.get("flash") or [])
+    for e in doc.get("events", []):
+        flashes += e.get("flash") or []
+    for f in flashes:
         try:
             a = datetime.strptime(f["from"][:16], "%Y-%m-%d %H:%M")
             b = datetime.strptime(f["until"][:16], "%Y-%m-%d %H:%M")
