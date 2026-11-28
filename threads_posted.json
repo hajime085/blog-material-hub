@@ -1047,25 +1047,10 @@
     "schedule:2026-W47-5",
     "tip:17",
     "product:r8550b30d9",
-    "product:rcff52e306"
+    "product:rcff52e306",
+    "feature:osechi:2026-11-30"
   ],
   "log": [
-    {
-      "key": "tip:41",
-      "id": "17869621863660334",
-      "at": "2026-10-23 19:21",
-      "kind": "tip",
-      "slot": 19,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
     {
       "key": "tip:43",
       "id": "18386941516230092",
@@ -5751,12 +5736,29 @@
       "link_arm": "site",
       "form": "tree",
       "burst": false
+    },
+    {
+      "key": "feature:osechi:2026-11-30",
+      "id": "18142910573497210",
+      "at": "2026-11-28 17:20",
+      "kind": "feature",
+      "slot": 17,
+      "catchup": false,
+      "cap": null,
+      "hook_type": null,
+      "ask_type": null,
+      "category": null,
+      "logic_version": null,
+      "link": "reply",
+      "link_arm": null,
+      "form": "flat",
+      "burst": false
     }
   ],
   "tree_test": {
     "date": "2026-11-28",
     "done": true,
     "target_tried": true,
-    "form_key": "product:rcff52e306"
+    "form_key": "product:rbd40d7c42"
   }
 }
