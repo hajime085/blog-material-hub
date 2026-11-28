@@ -255,7 +255,7 @@
       "postedAt": "2026-11-28",
       "bumpedAt": "2026-11-28T00:00:00",
       "lastSeen": "2026-11-28",
-      "pitch_status": "pending",
+      "pitch_status": "ready",
       "pointInfo": {
         "rate": 1,
         "start": "",
@@ -264,7 +264,21 @@
         "status": "ok",
         "checkedAt": "2026-11-28T07:34:50"
       },
-      "captionAuto": true
+      "captionAuto": true,
+      "marketing": {
+        "hook_type": "scene",
+        "target": "冬でも暖かくて歩きやすい靴を探す人",
+        "problem": "冬の靴は足が冷えるか、歩きにくいかの我慢になりがち",
+        "hook": "冬の靴、足が冷えるのと歩きにくいの、どっちを我慢してる？",
+        "name": "ムートンのモカシン",
+        "body": "気になって調べたメモ。内ボアのムートンモカシンです。\n甲深のフラットタイプで、防寒しながら歩きやすい作り。",
+        "features": [
+          "内ボアであったか",
+          "甲深で歩きやすい",
+          "フラットタイプ"
+        ],
+        "note": "12/11 9:59まで"
+      }
     },
     {
       "id": "r0702d8140",
