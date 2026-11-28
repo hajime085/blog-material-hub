@@ -1046,25 +1046,10 @@
     "tip:15",
     "schedule:2026-W47-5",
     "tip:17",
-    "product:r8550b30d9"
+    "product:r8550b30d9",
+    "product:rcff52e306"
   ],
   "log": [
-    {
-      "key": "tip:23",
-      "id": "18116401820043311",
-      "at": "2026-10-23 18:00",
-      "kind": "tip",
-      "slot": 18,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
     {
       "key": "tip:41",
       "id": "17869621863660334",
@@ -5749,12 +5734,29 @@
       "link_arm": "site",
       "form": "tree",
       "burst": false
+    },
+    {
+      "key": "product:rcff52e306",
+      "id": "18123395578985519",
+      "at": "2026-11-28 14:20",
+      "kind": "product",
+      "slot": 14,
+      "catchup": false,
+      "cap": false,
+      "hook_type": "scene",
+      "ask_type": null,
+      "category": "fashion",
+      "logic_version": "pattern_v4",
+      "link": "reply",
+      "link_arm": "site",
+      "form": "tree",
+      "burst": false
     }
   ],
   "tree_test": {
     "date": "2026-11-28",
     "done": true,
     "target_tried": true,
-    "form_key": "product:r8550b30d9"
+    "form_key": "product:rcff52e306"
   }
 }
