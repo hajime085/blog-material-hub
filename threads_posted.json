@@ -1045,25 +1045,10 @@
     "schedule:2026-W47-4",
     "tip:15",
     "schedule:2026-W47-5",
-    "tip:17"
+    "tip:17",
+    "product:r8550b30d9"
   ],
   "log": [
-    {
-      "key": "tip:11",
-      "id": "18439558285199826",
-      "at": "2026-10-23 17:21",
-      "kind": "tip",
-      "slot": 17,
-      "catchup": false,
-      "cap": null,
-      "hook_type": null,
-      "cta_type": null,
-      "category": null,
-      "logic_version": null,
-      "link": "none",
-      "link_arm": null,
-      "cta_arm": null
-    },
     {
       "key": "tip:23",
       "id": "18116401820043311",
@@ -5746,6 +5731,23 @@
       "link": "reply",
       "link_arm": null,
       "form": "flat",
+      "burst": false
+    },
+    {
+      "key": "product:r8550b30d9",
+      "id": "18176515300462194",
+      "at": "2026-11-28 09:20",
+      "kind": "product",
+      "slot": 9,
+      "catchup": false,
+      "cap": true,
+      "hook_type": "scene",
+      "ask_type": null,
+      "category": "food",
+      "logic_version": "pattern_v4",
+      "link": "reply",
+      "link_arm": "site",
+      "form": "tree",
       "burst": false
     }
   ],
